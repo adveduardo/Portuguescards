@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quiz Master - Eduardo Goulart</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg: #f0f2f5;
@@ -21,6 +22,9 @@
         input[type="number"], input[type="range"] { width: 100%; max-width: 250px; }
         input[type="number"] { padding: 12px; border-radius: 8px; border: 1px solid #ccc; text-align: center; font-size: 18px; }
         
+        /* Quadro de Informativo CSV */
+        .csv-info { background: #fff9db; border: 2px dashed #f1c40f; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; margin-bottom: 15px; color: #856404; }
+
         .preset-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
         .preset-btn { padding: 8px 12px; font-size: 0.9rem; border: 1px solid var(--primary); background: transparent; color: var(--primary); border-radius: 5px; cursor: pointer; }
 
@@ -32,7 +36,7 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; max-width: 1300px; width: 100%; padding: 10px; box-sizing: border-box; }
         .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: clamp(2rem, 5vw, 3.5rem); cursor: pointer; transition: 0.2s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; }
-        .card.used { background: #bdc3c7; box-shadow: 0 6px 0 #95a5a6; cursor: not-allowed; opacity: 0.5; }
+        .card.used { background: #bdc3c7; box-shadow: 0 6px 0 #95a5a6; border: 2px solid #7f8c8d; }
 
         .top-controls { width: 100%; display: flex; justify-content: flex-end; padding-right: 20px; margin-bottom: 10px; }
         .btn-restart { padding: 10px 20px; background: var(--danger); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
@@ -43,6 +47,8 @@
         .opt-btn { padding: 18px; border: 2px solid var(--primary); border-radius: 12px; cursor: pointer; background: white; font-weight: bold; font-size: 1.1rem; }
         .opt-btn.correct { background: var(--success) !important; color: white; }
         .opt-btn.wrong { background: var(--danger) !important; color: white; }
+        
+        .btn-close-modal { margin-top: 15px; padding: 10px 25px; background: #666; color: white; border: none; border-radius: 8px; cursor: pointer; }
 
         .joker-title { color: var(--joker); font-size: 2.5rem; margin-bottom: 10px; }
         .action-btn { padding: 15px 40px; border: none; border-radius: 12px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; font-size: 1.2rem; }
@@ -54,13 +60,20 @@
     <h1 style="color: var(--primary); margin: 0;">🎮 Português</h1>
     <p style="margin: 5px 0 20px 0;">Professor Eduardo Goulart</p>
     
+    <div class="csv-info">
+        <strong>📌 Formato do CSV:</strong><br>
+        Pergunta, Opção A, Opção B, Opção C, Opção D, Letra Correta, Pontos<br><br>
+        <strong>✅ Certo ou Errado:</strong> Deixe as opções C e D vazias.<br>
+        <em>Ex: O Sol é quente, Certo, Errado, , , A, 10</em>
+    </div>
+
     <div class="input-group">
-        <label>Quantidade de Grupos (1-30):</label>
+        <label>Grupos (1-30):</label>
         <input type="number" id="teamCount" value="2" min="1" max="30">
     </div>
 
     <div class="input-group">
-        <label>Quantidade de Cartões:</label>
+        <label>Cartões:</label>
         <input type="number" id="cardCount" value="16" min="1" max="100">
         <div class="preset-btns">
             <button class="preset-btn" onclick="setCards(16)">16</button>
@@ -93,8 +106,8 @@
 
 <div id="modal-overlay">
     <div id="modal">
-        <div id="modal-content">
-            </div>
+        <div id="modal-content"></div>
+        <button id="close-manual" class="btn-close-modal" style="display:none" onclick="closeModal()">Fechar</button>
     </div>
 </div>
 
@@ -103,6 +116,7 @@
     let teams = [];
     let currentTeamIdx = 0;
     let jokerChance = 10;
+    let cardStates = {}; // Armazena se o card foi coringa ou pergunta
 
     function setCards(n) { document.getElementById('cardCount').value = n; }
 
@@ -151,37 +165,66 @@
     }
 
     function handleCardClick(idx, card) {
-        if (card.classList.contains('used')) return;
-        
-        const isJoker = Math.random() * 100 < jokerChance;
         const modal = document.getElementById('modal-content');
+        const closeBtn = document.getElementById('close-manual');
         document.getElementById('modal-overlay').style.display = 'flex';
+        
+        // Se o card já foi usado, apenas mostra o que era e libera o botão fechar
+        if (card.classList.contains('used')) {
+            const state = cardStates[idx];
+            closeBtn.style.display = 'inline-block';
+            if (state.type === 'joker') {
+                modal.innerHTML = `<div class="joker-title">🃏 REABERTO</div><p>Este card foi um Coringa de ${state.val} pontos.</p>`;
+            } else {
+                renderQuestion(idx, true);
+            }
+            return;
+        }
+
+        closeBtn.style.display = 'none';
+        const isJoker = Math.random() * 100 < jokerChance;
 
         if (isJoker) {
             const bonus = [5, 10, 15][Math.floor(Math.random() * 3)];
+            cardStates[idx] = { type: 'joker', val: bonus };
+            
+            // Efeito de Confete
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+
             modal.innerHTML = `
                 <div class="joker-title">🃏 CORINGA!</div>
                 <h2 style="color: #333">Sorte grande!</h2>
-                <p style="font-size: 1.5rem">O ${teams[currentTeamIdx].name} ganhou <b>${bonus} pontos</b> de bônus!</p>
+                <p style="font-size: 1.5rem">O ${teams[currentTeamIdx].name} ganhou <b>${bonus} pontos</b>!</p>
             `;
             teams[currentTeamIdx].score += bonus;
             card.classList.add('used');
             setTimeout(() => closeModal(), 3000);
         } else {
-            const q = questions[idx % questions.length];
-            modal.innerHTML = `
-                <div style="font-weight:bold; color: var(--accent); font-size: 1.2rem;">${q[6] || 10} PONTOS</div>
-                <h2 style="margin: 15px 0;">${q[0]}</h2>
-                <div class="options-grid" id="m-options"></div>
-                <div style="font-size: 1rem; border-top: 1px solid #eee; padding-top: 10px;">Vez do: <b>${teams[currentTeamIdx].name}</b></div>
-            `;
-            const optsContainer = document.getElementById('m-options');
-            ['A','B','C','D'].forEach((l, i) => {
-                const txt = q[i+1] ? q[i+1].trim() : "";
-                if (txt && txt !== "-") {
-                    const btn = document.createElement('button');
-                    btn.className = 'opt-btn';
-                    btn.innerText = `${l}: ${txt}`;
+            cardStates[idx] = { type: 'question' };
+            renderQuestion(idx, false, card);
+        }
+    }
+
+    function renderQuestion(idx, frozen, cardElement) {
+        const q = questions[idx % questions.length];
+        const modal = document.getElementById('modal-content');
+        modal.innerHTML = `
+            <div style="font-weight:bold; color: var(--accent); font-size: 1.2rem;">${q[6] || 10} PONTOS</div>
+            <h2 style="margin: 15px 0;">${q[0]}</h2>
+            <div class="options-grid" id="m-options"></div>
+            ${frozen ? '' : `<div style="font-size: 1rem; border-top: 1px solid #eee; padding-top: 10px;">Vez do: <b>${teams[currentTeamIdx].name}</b></div>`}
+        `;
+        const optsContainer = document.getElementById('m-options');
+        ['A','B','C','D'].forEach((l, i) => {
+            const txt = q[i+1] ? q[i+1].trim() : "";
+            if (txt && txt !== "-") {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = `${l}: ${txt}`;
+                if (frozen) {
+                    btn.style.pointerEvents = 'none';
+                    if (l === q[5].trim()) btn.classList.add('correct');
+                } else {
                     btn.onclick = () => {
                         const btns = document.querySelectorAll('.opt-btn');
                         btns.forEach(b => b.style.pointerEvents = 'none');
@@ -192,21 +235,25 @@
                             btn.classList.add('wrong');
                             btns.forEach(b => { if(b.innerText.startsWith(q[5].trim())) b.classList.add('correct'); });
                         }
-                        card.classList.add('used');
+                        cardElement.classList.add('used');
                         setTimeout(() => closeModal(), 2500);
                     };
-                    optsContainer.appendChild(btn);
                 }
-            });
-        }
+                optsContainer.appendChild(btn);
+            }
+        });
     }
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
-        currentTeamIdx = (currentTeamIdx + 1) % teams.length;
+        // Só passa a vez se não for uma reabertura manual
+        if (document.getElementById('close-manual').style.display === 'none') {
+            currentTeamIdx = (currentTeamIdx + 1) % teams.length;
+        }
         renderScores();
     }
 </script>
 </body>
 </html>
+
 
