@@ -22,36 +22,51 @@
         input[type="number"], input[type="range"] { width: 100%; max-width: 250px; }
         input[type="number"] { padding: 12px; border-radius: 8px; border: 1px solid #ccc; text-align: center; font-size: 18px; }
         
-        /* Quadro de Informativo CSV */
         .csv-info { background: #fff9db; border: 2px dashed #f1c40f; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; margin-bottom: 15px; color: #856404; }
-
         .preset-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
         .preset-btn { padding: 8px 12px; font-size: 0.9rem; border: 1px solid var(--primary); background: transparent; color: var(--primary); border-radius: 5px; cursor: pointer; }
 
         .score-board { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; width: 100%; }
-        .team-card { background: white; padding: 8px; border-radius: 12px; border: 3px solid #ddd; min-width: 65px; text-align: center; transition: 0.3s; }
-        .team-card.active { background: #fffbe6; border-color: var(--accent); transform: scale(1.05); }
-        .group-name { font-size: 0.6rem; font-weight: bold; color: #666; }
-        .group-score { font-size: 1.2rem; font-weight: bold; }
+        .team-card { background: white; padding: 8px; border-radius: 12px; border: 4px solid #ddd; min-width: 65px; text-align: center; transition: 0.3s; position: relative; }
+        .team-card.active { background: #fffbe6; transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 10; }
+        .group-name { font-size: 0.6rem; font-weight: bold; color: #333; text-transform: uppercase; }
+        .group-score { font-size: 1.2rem; font-weight: bold; color: #000; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; max-width: 1300px; width: 100%; padding: 10px; box-sizing: border-box; }
-        .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: clamp(2rem, 5vw, 3.5rem); cursor: pointer; transition: 0.2s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; }
-        .card.used { background: #bdc3c7; box-shadow: 0 6px 0 #95a5a6; border: 2px solid #7f8c8d; }
+        .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: clamp(2rem, 5vw, 3.5rem); cursor: pointer; transition: 0.2s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; border: 5px solid transparent; box-sizing: border-box;}
+        
+        /* Cores de status dos cards */
+        .card.used { cursor: pointer; transform: none; box-shadow: none; opacity: 0.9; }
+        .card.used-correct { background: var(--success); }
+        .card.used-wrong { background: var(--danger); }
+        .card.used-joker { background: var(--joker); }
 
+        /* Controles Superiores e Placar Geral */
         .top-controls { width: 100%; display: flex; justify-content: flex-end; padding-right: 20px; margin-bottom: 10px; }
+        .controls-wrapper { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
         .btn-restart { padding: 10px 20px; background: var(--danger); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .global-stats { background: white; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; color: #555; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
+        /* Modal */
         #modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index:100; justify-content: center; align-items: center; }
         #modal { background: white; padding: 25px; border-radius: 20px; width: 90%; max-width: 600px; text-align: center; position: relative; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
         .opt-btn { padding: 18px; border: 2px solid var(--primary); border-radius: 12px; cursor: pointer; background: white; font-weight: bold; font-size: 1.1rem; }
-        .opt-btn.correct { background: var(--success) !important; color: white; }
-        .opt-btn.wrong { background: var(--danger) !important; color: white; }
+        .opt-btn.correct { background: var(--success) !important; color: white; border-color: #27ae60; }
+        .opt-btn.wrong { background: var(--danger) !important; color: white; border-color: #c0392b; }
         
-        .btn-close-modal { margin-top: 15px; padding: 10px 25px; background: #666; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .btn-continue { margin-top: 15px; padding: 15px 25px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; width: 100%; display: none; box-shadow: 0 4px 0 #3d6dbd; }
+        .btn-continue:active { transform: translateY(2px); box-shadow: none; }
 
         .joker-title { color: var(--joker); font-size: 2.5rem; margin-bottom: 10px; }
         .action-btn { padding: 15px 40px; border: none; border-radius: 12px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; font-size: 1.2rem; }
+        
+        /* Estilos do Botão GPT e Prompt */
+        #GPT { background: #333; color: white; border: none; border-radius: 8px; padding: 10px 20px; font-weight: bold; cursor: pointer; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 8px; }
+        #GPT:hover { background: #555; }
+        #prompt-container { display: none; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; text-align: left; }
+        #prompt-text { width: 100%; height: 120px; font-size: 0.8rem; padding: 10px; border: 1px solid #ccc; border-radius: 5px; resize: none; box-sizing: border-box; font-family: monospace; }
+        .btn-copy { background: var(--success); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
     </style>
 </head>
 <body>
@@ -60,6 +75,22 @@
     <h1 style="color: var(--primary); margin: 0;">🎮 Português</h1>
     <p style="margin: 5px 0 20px 0;">Professor Eduardo Goulart</p>
     
+    <button id="GPT" onclick="togglePrompt()">🤖 Exibir Prompt para IA</button>
+    
+    <div id="prompt-container">
+        <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #555;">Copie o texto abaixo e envie para o ChatGPT ou Gemini junto com as questões da sua prova:</p>
+        <textarea id="prompt-text" readonly>Aja como um assistente de formatação de dados. Eu vou te enviar o texto de uma prova ou lista de exercícios. Sua tarefa é extrair essas questões e formatá-las estritamente em um formato CSV, seguindo exatamente as regras abaixo:
+
+1. A ordem das colunas DEVE ser exatamente: Pergunta, Opção A, Opção B, Opção C, Opção D, Letra Correta, Pontos.
+2. NÃO inclua linha de cabeçalho. Comece direto com as questões.
+3. Para questões de múltipla escolha padrão (4 opções): Preencha todas as opções.
+4. Para questões de "Certo ou Errado" ou "Sim ou Não": Coloque as duas opções na A e B, e deixe as colunas C e D vazias (mantendo as vírgulas).
+5. A Letra Correta deve conter apenas a letra maiúscula (A, B, C ou D).
+6. Atribua o valor de 10 na coluna de Pontos para todas as questões.
+7. Remova quebras de linha de dentro do texto da pergunta ou respostas. Tudo de uma questão deve ficar na mesma linha.</textarea>
+        <button class="btn-copy" onclick="copyPrompt()">COPIAR PROMPT</button>
+    </div>
+
     <div class="csv-info">
         <strong>📌 Formato do CSV:</strong><br>
         Pergunta, Opção A, Opção B, Opção C, Opção D, Letra Correta, Pontos<br><br>
@@ -98,7 +129,13 @@
 
 <div id="game-area" style="display:none; width: 100%;">
     <div class="top-controls">
-        <button class="btn-restart" onclick="location.reload()">REINICIAR</button>
+        <div class="controls-wrapper">
+            <button class="btn-restart" onclick="location.reload()">REINICIAR JOGO</button>
+            <div class="global-stats">
+                GERAL: <span style="color:var(--success)" id="g-correct">0 Certas</span> | 
+                <span style="color:var(--danger)" id="g-wrong">0 Erradas</span>
+            </div>
+        </div>
     </div>
     <div class="score-board" id="score-board"></div>
     <div class="grid" id="grid"></div>
@@ -107,7 +144,7 @@
 <div id="modal-overlay">
     <div id="modal">
         <div id="modal-content"></div>
-        <button id="close-manual" class="btn-close-modal" style="display:none" onclick="closeModal()">Fechar</button>
+        <button id="btn-continue" class="btn-continue">FECHAR E PASSAR A VEZ</button>
     </div>
 </div>
 
@@ -116,7 +153,24 @@
     let teams = [];
     let currentTeamIdx = 0;
     let jokerChance = 10;
-    let cardStates = {}; // Armazena se o card foi coringa ou pergunta
+    let cardStates = {}; 
+    let globalCorrect = 0;
+    let globalWrong = 0;
+
+    /* Funções do Prompt GPT */
+    function togglePrompt() {
+        const container = document.getElementById('prompt-container');
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function copyPrompt() {
+        const textArea = document.getElementById('prompt-text');
+        textArea.select();
+        textArea.setSelectionRange(0, 99999); // Para mobile
+        document.execCommand('copy');
+        alert("Prompt copiado! Cole na IA para gerar suas perguntas.");
+        togglePrompt(); // Esconde a caixa após copiar
+    }
 
     function setCards(n) { document.getElementById('cardCount').value = n; }
 
@@ -137,7 +191,13 @@
             for(let i=0; i<nCards; i++) questions.push([`Questão ${i+1}`, "A", "B", "", "", "A", "10"]);
         }
 
-        teams = Array.from({length: Math.min(nTeams, 30)}, (_, i) => ({ name: `G${i+1}`, score: 0 }));
+        // Criar Grupos com Cores Aleatórias (HSL garante cores vivas e distintas)
+        teams = Array.from({length: Math.min(nTeams, 30)}, (_, i) => ({ 
+            name: `G${i+1}`, 
+            score: 0,
+            color: `hsl(${Math.floor((i * 360) / Math.min(nTeams, 30))}, 80%, 45%)`
+        }));
+        
         renderScores();
 
         const grid = document.getElementById('grid');
@@ -159,6 +219,7 @@
         teams.forEach((t, i) => {
             const div = document.createElement('div');
             div.className = `team-card ${i === currentTeamIdx ? 'active' : ''}`;
+            div.style.borderColor = t.color; // Borda com a cor do grupo
             div.innerHTML = `<div class="group-name">${t.name}</div><div class="group-score">${t.score}</div>`;
             board.appendChild(div);
         });
@@ -166,17 +227,20 @@
 
     function handleCardClick(idx, card) {
         const modal = document.getElementById('modal-content');
-        const closeBtn = document.getElementById('close-manual');
+        const closeBtn = document.getElementById('btn-continue');
         document.getElementById('modal-overlay').style.display = 'flex';
         
-        // Se o card já foi usado, apenas mostra o que era e libera o botão fechar
+        // Se o card já foi aberto antes
         if (card.classList.contains('used')) {
             const state = cardStates[idx];
-            closeBtn.style.display = 'inline-block';
+            closeBtn.style.display = 'block';
+            closeBtn.innerText = "FECHAR (Apenas visualizando)";
+            closeBtn.onclick = () => closeModal(false); // Não passa a vez
+
             if (state.type === 'joker') {
-                modal.innerHTML = `<div class="joker-title">🃏 REABERTO</div><p>Este card foi um Coringa de ${state.val} pontos.</p>`;
+                modal.innerHTML = `<div class="joker-title">🃏 REABERTO</div><p>Este card foi um Coringa de ${state.val} pontos para o <b style="color:${state.color}">${state.team}</b>.</p>`;
             } else {
-                renderQuestion(idx, true);
+                renderQuestion(idx, true, card);
             }
             return;
         }
@@ -186,21 +250,27 @@
 
         if (isJoker) {
             const bonus = [5, 10, 15][Math.floor(Math.random() * 3)];
-            cardStates[idx] = { type: 'joker', val: bonus };
+            cardStates[idx] = { type: 'joker', val: bonus, team: teams[currentTeamIdx].name, color: teams[currentTeamIdx].color };
             
-            // Efeito de Confete
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
 
             modal.innerHTML = `
                 <div class="joker-title">🃏 CORINGA!</div>
                 <h2 style="color: #333">Sorte grande!</h2>
-                <p style="font-size: 1.5rem">O ${teams[currentTeamIdx].name} ganhou <b>${bonus} pontos</b>!</p>
+                <p style="font-size: 1.5rem">O <b style="color:${teams[currentTeamIdx].color}">${teams[currentTeamIdx].name}</b> ganhou <b>${bonus} pontos</b>!</p>
             `;
             teams[currentTeamIdx].score += bonus;
-            card.classList.add('used');
-            setTimeout(() => closeModal(), 3000);
+            card.classList.add('used', 'used-joker');
+            card.style.borderColor = teams[currentTeamIdx].color; // Borda da cor do grupo
+            renderScores();
+
+            // Mostra o botão para fechar e passar a vez
+            closeBtn.style.display = 'block';
+            closeBtn.innerText = "FECHAR E PASSAR A VEZ";
+            closeBtn.onclick = () => closeModal(true);
+
         } else {
-            cardStates[idx] = { type: 'question' };
+            cardStates[idx] = { type: 'question', team: teams[currentTeamIdx].name, color: teams[currentTeamIdx].color };
             renderQuestion(idx, false, card);
         }
     }
@@ -208,11 +278,15 @@
     function renderQuestion(idx, frozen, cardElement) {
         const q = questions[idx % questions.length];
         const modal = document.getElementById('modal-content');
+        const closeBtn = document.getElementById('btn-continue');
+        const stateColor = cardStates[idx].color;
+        const stateTeam = cardStates[idx].team;
+
         modal.innerHTML = `
             <div style="font-weight:bold; color: var(--accent); font-size: 1.2rem;">${q[6] || 10} PONTOS</div>
             <h2 style="margin: 15px 0;">${q[0]}</h2>
             <div class="options-grid" id="m-options"></div>
-            ${frozen ? '' : `<div style="font-size: 1rem; border-top: 1px solid #eee; padding-top: 10px;">Vez do: <b>${teams[currentTeamIdx].name}</b></div>`}
+            <div style="font-size: 1rem; border-top: 1px solid #eee; padding-top: 10px;">Vez do: <b style="color:${stateColor}">${stateTeam}</b></div>
         `;
         const optsContainer = document.getElementById('m-options');
         ['A','B','C','D'].forEach((l, i) => {
@@ -221,6 +295,7 @@
                 const btn = document.createElement('button');
                 btn.className = 'opt-btn';
                 btn.innerText = `${l}: ${txt}`;
+                
                 if (frozen) {
                     btn.style.pointerEvents = 'none';
                     if (l === q[5].trim()) btn.classList.add('correct');
@@ -228,15 +303,33 @@
                     btn.onclick = () => {
                         const btns = document.querySelectorAll('.opt-btn');
                         btns.forEach(b => b.style.pointerEvents = 'none');
-                        if (l === q[5].trim()) {
+                        
+                        const isCorrect = (l === q[5].trim());
+
+                        if (isCorrect) {
                             btn.classList.add('correct');
                             teams[currentTeamIdx].score += parseInt(q[6]||10);
+                            cardElement.classList.add('used', 'used-correct');
+                            globalCorrect++;
                         } else {
                             btn.classList.add('wrong');
                             btns.forEach(b => { if(b.innerText.startsWith(q[5].trim())) b.classList.add('correct'); });
+                            cardElement.classList.add('used', 'used-wrong');
+                            globalWrong++;
                         }
-                        cardElement.classList.add('used');
-                        setTimeout(() => closeModal(), 2500);
+
+                        // Atualiza placar geral
+                        document.getElementById('g-correct').innerText = `${globalCorrect} Certas`;
+                        document.getElementById('g-wrong').innerText = `${globalWrong} Erradas`;
+
+                        // Pinta a borda do cartão com a cor do grupo que respondeu
+                        cardElement.style.borderColor = teams[currentTeamIdx].color;
+                        renderScores();
+
+                        // Revela o botão para o professor avançar quando quiser
+                        closeBtn.style.display = 'block';
+                        closeBtn.innerText = "FECHAR E PASSAR A VEZ";
+                        closeBtn.onclick = () => closeModal(true);
                     };
                 }
                 optsContainer.appendChild(btn);
@@ -244,10 +337,9 @@
         });
     }
 
-    function closeModal() {
+    function closeModal(advanceTurn) {
         document.getElementById('modal-overlay').style.display = 'none';
-        // Só passa a vez se não for uma reabertura manual
-        if (document.getElementById('close-manual').style.display === 'none') {
+        if (advanceTurn) {
             currentTeamIdx = (currentTeamIdx + 1) % teams.length;
         }
         renderScores();
@@ -255,5 +347,6 @@
 </script>
 </body>
 </html>
+
 
 
