@@ -15,6 +15,8 @@
             --joker: #9b59b6;
         }
 
+        /* overscroll-behavior-y: none; bloqueia a puxadinha para atualizar no iPad */
+        html, body { overscroll-behavior-y: none; } 
         body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
         #setup-menu { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
@@ -23,7 +25,8 @@
         
         .csv-info { background: #fff9db; border: 2px dashed #f1c40f; padding: 15px; border-radius: 10px; text-align: left; font-size: 0.85rem; margin-bottom: 15px; color: #856404; }
         .preset-btns { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 5px; }
-        .preset-btn { padding: 8px 12px; font-size: 0.9rem; border: 1px solid var(--primary); background: transparent; color: var(--primary); border-radius: 5px; cursor: pointer; }
+        .preset-btn { padding: 8px 15px; font-size: 1rem; font-weight: bold; border: 2px solid var(--primary); background: transparent; color: var(--primary); border-radius: 8px; cursor: pointer; }
+        .preset-btn:hover { background: var(--primary); color: white; }
 
         .score-board { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; width: 100%; }
         .team-card { background: white; padding: 8px; border-radius: 12px; border: 4px solid #ddd; min-width: 75px; text-align: center; transition: 0.3s; position: relative; }
@@ -53,14 +56,19 @@
         
         .btn-continue { margin-top: 20px; padding: 18px 25px; background: var(--primary); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.2rem; width: 100%; display: none; box-shadow: 0 5px 0 #3d6dbd; }
         
-        /* Cronômetro */
         #timer-display { font-size: 2.5rem; font-weight: bold; color: var(--primary); margin: 10px 0; }
         .timer-warning { color: var(--danger) !important; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        /* Botões Iniciais */
         .action-btn { padding: 15px 40px; border: none; border-radius: 12px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; font-size: 1.3rem; margin: 5px; }
         .resume-btn { background: var(--success); display: none; }
+
+        /* Estilos do Prompt GPT */
+        #GPT { background: #333; color: white; border: none; border-radius: 8px; padding: 10px 20px; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
+        #prompt-container { display: none; background: #f8f9fa; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; text-align: left; }
+        #prompt-text { width: 100%; height: 120px; font-size: 0.8rem; padding: 10px; border: 1px solid #ccc; border-radius: 5px; resize: none; font-family: monospace; }
+        .btn-copy { background: var(--success); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
+        .joker-title { color: var(--joker); font-size: 2.8rem; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -68,6 +76,17 @@
 <div id="setup-menu">
     <h1 style="color: var(--primary); margin: 0;">🎮 Português</h1>
     <p style="margin: 5px 0 20px 0;">Professor Eduardo Goulart</p>
+
+    <button id="GPT" onclick="togglePrompt()">🤖 GPT / GEMINI: Gerar CSV</button>
+    <div id="prompt-container">
+        <textarea id="prompt-text" readonly>Aja como um assistente de formatação. Vou enviar o texto de uma prova. Extraia as questões para o formato CSV seguindo as regras:
+1. Colunas: Pergunta, Opção A, Opção B, Opção C, Opção D, Letra Correta, Pontos.
+2. Sem cabeçalho.
+3. Certo/Errado: Use Opção A e B, deixe C e D vazias.
+4. Pontos: Sempre 10.
+5. Remova quebras de linha dentro do texto.</textarea>
+        <button class="btn-copy" onclick="copyPrompt()">COPIAR PROMPT</button>
+    </div>
     
     <button id="resume-btn" class="action-btn resume-btn" onclick="resumeGame()">▶ CONTINUAR JOGO SALVO</button>
     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
@@ -79,11 +98,11 @@
 
     <div class="input-group">
         <label>Cartões:</label>
-        <input type="number" id="cardCount" value="16" min="1" max="100">
+        <input type="number" id="cardCount" value="15" min="1" max="100">
         <div class="preset-btns">
-            <button class="preset-btn" onclick="setCards(16)">16</button>
-            <button class="preset-btn" onclick="setCards(25)">25</button>
-            <button class="preset-btn" onclick="setCards(36)">36</button>
+            <button class="preset-btn" onclick="setCards(10)">10</button>
+            <button class="preset-btn" onclick="setCards(15)">15</button>
+            <button class="preset-btn" onclick="setCards(20)">20</button>
         </div>
     </div>
 
@@ -128,7 +147,6 @@
 </div>
 
 <script>
-    // Sintetizador de Áudio (Bipes nativos)
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playTone(freq, type, duration, vol=0.1, startTime=0) {
         if(audioCtx.state === 'suspended') audioCtx.resume();
@@ -151,7 +169,6 @@
         buzz: () => { playTone(200, 'sawtooth', 0.8, 0.1); }
     };
 
-    // Variáveis Globais
     let questions = [];
     let teams = [];
     let currentTeamIdx = 0;
@@ -160,19 +177,31 @@
     let globalCorrect = 0;
     let globalWrong = 0;
     let isViewingUsedCard = false;
-    let nCardsGlob = 16;
+    let nCardsGlob = 15;
     let timerValue = 0;
     let currentInterval;
 
-    // Verificar se existe jogo salvo
     if(localStorage.getItem('quizData_Eduardo')) {
         document.getElementById('resume-btn').style.display = 'inline-block';
+    }
+
+    function togglePrompt() {
+        const c = document.getElementById('prompt-container');
+        c.style.display = c.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function copyPrompt() {
+        const t = document.getElementById('prompt-text');
+        t.select();
+        document.execCommand('copy');
+        alert("Prompt copiado!");
+        togglePrompt();
     }
 
     function toggleFullScreen() {
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
             if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
-            else if (document.documentElement.webkitRequestFullscreen) { document.documentElement.webkitRequestFullscreen(); } /* Safari */
+            else if (document.documentElement.webkitRequestFullscreen) { document.documentElement.webkitRequestFullscreen(); } 
         } else {
             if (document.exitFullscreen) { document.exitFullscreen(); }
             else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
@@ -361,7 +390,7 @@
                     if (l === q[5].trim()) btn.classList.add('correct');
                 } else {
                     btn.onclick = () => {
-                        clearInterval(currentInterval); // Para o tempo
+                        clearInterval(currentInterval); 
                         const btns = document.querySelectorAll('.opt-btn');
                         btns.forEach(b => b.style.pointerEvents = 'none');
                         const isCorrect = (l === q[5].trim());
