@@ -21,10 +21,9 @@
         
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
         .copy-hint { position: absolute; right: 10px; top: 5px; color: var(--success); font-size: 0.7rem; font-weight: bold; }
-        .paste-btn { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
+        .btn-aux { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
 
         #global-timer-display { background: var(--danger); color: white; padding: 5px 15px; border-radius: 20px; font-size: 1.2rem; font-weight: bold; min-width: 100px; text-align: center; }
-        input:disabled, select:disabled { opacity: 0.4; cursor: not-allowed; background: #eee !important; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; width: 95%; max-width: 1400px; padding: 20px; }
         .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 400px; }
@@ -62,20 +61,21 @@
         <div id="prompt-container" style="display:none; align-items: center; flex-direction: column;">
             <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
                 <span class="copy-hint">CLIQUE PARA COPIAR</span>
-                Atue como um professor de Português. Gere questões seguindo o formato JSON puro. Misture Múltipla Escolha e V/F. Estrutura: {"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}
+                Atue como um professor de Português. Gere questões seguindo o formato JSON puro. Estrutura: {"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}
             </div>
         </div>
     </div>
 
     <div class="input-group">
         <label>1. Colar Questões (JSON):</label>
-        <button class="paste-btn" onclick="pasteJSON()">📋 Colar</button>
-        <textarea id="jsonInput" placeholder="Cole o código aqui..." style="height: 60px; padding-right: 70px;"></textarea>
+        <button class="btn-aux" onclick="pasteJSON()">📋 Colar</button>
+        <textarea id="jsonInput" placeholder="Cole o código das questões aqui..." style="height: 60px; padding-right: 70px;"></textarea>
     </div>
 
     <div class="input-group">
         <label>2. Nomes dos Grupos (Por vírgula):</label>
-        <textarea id="teamNamesInput" placeholder="Ex: Grupo A, Grupo B, Grupo C..." style="height: 45px; font-size: 14px;"></textarea>
+        <button class="btn-aux" onclick="cleanNames()">✨ Limpar</button>
+        <textarea id="teamNamesInput" placeholder="Ex: 1. João, 2. Maria..." style="height: 45px; font-size: 14px; padding-right: 80px;"></textarea>
     </div>
 
     <div class="input-group">
@@ -133,7 +133,7 @@
 
 <script>
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], tttBoard = Array(9).fill(null);
+    let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, currentStopIdx = 0, tttBoard = Array(9).fill(null);
 
     function formatTimeInput(input) {
         let value = input.value.replace(/\D/g, "");
@@ -143,11 +143,20 @@
 
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; }
     function copyPromptText() {
-        const text = "Atue como um professor de Português. Gere questões seguindo o formato JSON puro. Misture Múltipla Escolha e V/F. Estrutura: {\"q\":\"?\",\"a\":\"A\",\"b\":\"B\",\"c\":\"\",\"d\":\"\",\"correct\":\"A\",\"pts\":10,\"exp\":\"...\"}";
+        const text = "Atue como um professor de Português. Gere questões seguindo o formato JSON puro. Estrutura: {\"q\":\"?\",\"a\":\"A\",\"b\":\"B\",\"c\":\"\",\"d\":\"\",\"correct\":\"A\",\"pts\":10,\"exp\":\"...\"}";
         navigator.clipboard.writeText(text); alert("Prompt copiado!");
     }
 
     async function pasteJSON() { try { const t = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = t; } catch (e) { alert('Erro ao colar.'); } }
+
+    function cleanNames() {
+        const input = document.getElementById('teamNamesInput');
+        // Remove números no início, pontos, traços e limpa espaços extras
+        let names = input.value.split(',').map(n => {
+            return n.replace(/^\d+[\.\-\s]*/, '').trim();
+        }).filter(n => n !== "");
+        input.value = names.join(', ');
+    }
 
     function handleXClick() {
         if (gameMode === 'stop' && confirm("Encerrar jogo agora?")) showFinal();
@@ -159,26 +168,25 @@
         const jokerArea = document.getElementById('joker-area');
         const teamArea = document.getElementById('team-count-area');
         const reboundArea = document.getElementById('rebound-area');
+        const teamInp = document.getElementById('teamCount');
         const jokerInp = document.getElementById('jokerProb');
         const jokerVal = document.getElementById('jokerVal');
-        const teamInp = document.getElementById('teamCount');
         const reboundCb = document.getElementById('reboundCb');
 
-        if(mode === 'stop') {
-            // Oculta completamente os campos no modo STOP
+        if(mode === 'tictactoe') {
+            jokerArea.style.display = 'none';
+            teamArea.style.display = 'none';
+            reboundArea.style.display = 'none';
+            teamInp.value = 2;
+            jokerInp.value = 0;
+            jokerVal.innerText = "0%";
+            reboundCb.checked = false;
+        } else if(mode === 'stop') {
             jokerArea.style.display = 'none';
             teamArea.style.display = 'none';
             reboundArea.style.display = 'none';
             jokerInp.value = 0;
-            jokerVal.innerText = "0%";
             reboundCb.checked = false;
-        } else if(mode === 'tictactoe') {
-            jokerArea.style.display = 'block';
-            teamArea.style.display = 'block';
-            reboundArea.style.display = 'block';
-            teamInp.value = 2; teamInp.disabled = true;
-            jokerInp.value = 0; jokerInp.disabled = true; jokerVal.innerText = "0%";
-            reboundCb.checked = false; reboundCb.disabled = true;
         } else {
             jokerArea.style.display = 'block';
             teamArea.style.display = 'block';
@@ -200,9 +208,7 @@
 
         const customNames = document.getElementById('teamNamesInput').value.split(',').map(n => n.trim()).filter(n => n !== "");
         const inputNum = parseInt(document.getElementById('teamCount').value) || 1;
-        
-        // Se for STOP e não houver nomes personalizados, o padrão é 4 grupos
-        const nTeamsFinal = (gameMode === 'stop' && customNames.length === 0) ? 4 : Math.max(customNames.length, inputNum);
+        const nTeamsFinal = Math.max(customNames.length, inputNum);
         
         teams = [];
         for(let i=0; i < nTeamsFinal; i++) {
