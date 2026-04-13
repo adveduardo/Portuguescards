@@ -19,14 +19,8 @@
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea, input[type="text"] { width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center; }
         
-        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
-        .copy-hint { position: absolute; right: 10px; top: 5px; color: var(--success); font-size: 0.7rem; font-weight: bold; }
-
-        .paste-btn { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
         #global-timer-display { background: var(--danger); color: white; padding: 5px 15px; border-radius: 20px; font-size: 1.2rem; font-weight: bold; min-width: 100px; text-align: center; }
 
-        input:disabled, select:disabled { opacity: 0.4; background: #e9ecef !important; cursor: not-allowed; }
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; width: 100%; max-width: 1200px; padding: 20px; }
         .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 500px; }
         
@@ -40,10 +34,7 @@
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
         #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 700px; text-align: center; max-height: 90vh; overflow-y: auto; position: relative; }
         
-        .close-modal {
-            position: absolute; top: 15px; right: 20px; font-size: 35px; font-weight: bold; cursor: pointer; display: none; transition: 0.3s;
-        }
-
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 35px; font-weight: bold; cursor: pointer; display: none; transition: 0.3s; }
         #modal.stop-mode .close-modal { display: block; color: var(--danger); }
 
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
@@ -66,18 +57,13 @@
     <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
 
     <div class="input-group">
-        <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; width:100%; cursor:pointer;">🤖 ASSISTENTE: GERAR PROMPT</button>
-        <div id="prompt-container" style="display:none; align-items: center; flex-direction: column;">
-            <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
-                Atue como um professor de Português. Gere [ QUANTIDADE ] questões inéditas sobre o tema [INSIRA O TEMA AQUI] seguindo estritamente o formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso (V/F). Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: {"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}
-            </div>
-        </div>
+        <label>1. Colar Questões (JSON):</label>
+        <textarea id="jsonInput" placeholder="Cole o código das questões aqui..." style="height: 60px;"></textarea>
     </div>
 
     <div class="input-group">
-        <label>Colar JSON:</label>
-        <button class="paste-btn" onclick="pasteJSON()">📋 Colar</button>
-        <textarea id="jsonInput" oninput="checkJSONAuto()" placeholder="Cole o código aqui..." style="height: 60px;"></textarea>
+        <label>2. Nomes dos Grupos (Separados por vírgula):</label>
+        <textarea id="teamNamesInput" placeholder="Ex: Panteras, Águias, Tubarões..." style="height: 45px; font-size: 14px;"></textarea>
     </div>
 
     <div class="input-group">
@@ -128,7 +114,6 @@
 <div id="modal-overlay">
     <div id="modal">
         <span class="close-modal" onclick="handleXClick()">&times;</span>
-
         <div id="rebote-msg" style="color:var(--joker); font-weight:bold; margin-bottom:10px; display:none;">🏀 REBOTE!</div>
         <div id="modal-content"></div>
         <div id="exp-box"></div>
@@ -153,55 +138,28 @@
 
     function handleXClick() {
         if (gameMode === 'stop') {
-            if (confirm("Deseja encerrar o jogo agora e ver os resultados?")) {
-                showFinal();
-            } else {
-                closeModal();
-            }
+            if (confirm("Deseja encerrar o jogo agora e ver os resultados?")) showFinal();
+            else closeModal();
         }
-    }
-
-    function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; }
-    function copyPromptText() {
-        const text = "Atue como um professor de Português. Gere [ QUANTIDADE ] questões inéditas sobre o tema [INSIRA O TEMA AQUI] seguindo estritamente o formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso (V/F). Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: {\"q\":\"?\",\"a\":\"A\",\"b\":\"B\",\"c\":\"\",\"d\":\"\",\"correct\":\"A\",\"pts\":10,\"exp\":\"...\"}";
-        navigator.clipboard.writeText(text); alert("Prompt copiado!");
-    }
-
-    async function pasteJSON() { try { const t = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = t; checkJSONAuto(); } catch (e) { alert('Erro ao colar.'); } }
-
-    function checkJSONAuto() {
-        const hasJSON = document.getElementById('jsonInput').value.trim() !== "";
-        const mode = document.getElementById('gameModeSel').value;
-        const isLocked = hasJSON || mode === 'tictactoe' || mode === 'stop';
-        document.getElementById('teamCount').disabled = isLocked;
-        document.getElementById('cardCount').disabled = isLocked;
     }
 
     function handleModeChange() {
         const mode = document.getElementById('gameModeSel').value;
         const extras = document.getElementById('extra-configs');
         const teamInp = document.getElementById('teamCount');
-        const cardInp = document.getElementById('cardCount');
-        const jokerInp = document.getElementById('jokerProb');
         const jokerVal = document.getElementById('jokerVal');
 
         if(mode === 'tictactoe') {
             extras.style.display = 'block';
             teamInp.value = 2; teamInp.disabled = true;
-            cardInp.value = 9; cardInp.disabled = true;
-            jokerInp.value = 0; jokerInp.disabled = true;
+            document.getElementById('jokerProb').value = 0;
             jokerVal.innerText = "0%";
         } else if (mode === 'stop') {
             extras.style.display = 'none';
-            jokerInp.value = 0;
-            jokerVal.innerText = "0%";
         } else {
             extras.style.display = 'block';
-            teamInp.disabled = false; cardInp.disabled = false;
-            jokerInp.value = 15; jokerInp.disabled = false;
-            jokerVal.innerText = "15%";
+            teamInp.disabled = false;
         }
-        checkJSONAuto();
     }
 
     function startGame() {
@@ -214,9 +172,15 @@
         const timeParts = document.getElementById('timeInput').value.split(":");
         totalSecondsLeft = (parseInt(timeParts[0]) * 60) + (parseInt(timeParts[1]) || 0);
 
+        // LÓGICA DE NOMES DOS GRUPOS
         const nTeams = (gameMode === 'stop') ? 4 : parseInt(document.getElementById('teamCount').value);
+        const customNames = document.getElementById('teamNamesInput').value.split(',').map(n => n.trim()).filter(n => n !== "");
+        
         teams = [];
-        for(let i=0; i<nTeams; i++) teams.push({name: `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
+        for(let i=0; i<nTeams; i++) {
+            let name = customNames[i] ? customNames[i] : `Grupo ${i+1}`;
+            teams.push({name: name, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
+        }
 
         startGlobalTimer();
         document.getElementById('setup-menu').style.display = 'none';
@@ -244,8 +208,7 @@
         grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
         const total = gameMode === 'tictactoe' ? 9 : questions.length;
         for(let i=0; i<total; i++) {
-            const card = document.createElement('div');
-            const st = cardStates[i];
+            const card = document.createElement('div'), st = cardStates[i];
             card.className = 'card' + (st ? (st.correct ? ' used-correct' : ' used-wrong') : '');
             card.innerHTML = st ? (st.mark || '') : (i + 1);
             card.onclick = () => { if(!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
@@ -284,12 +247,10 @@
         const q = questions[idx % questions.length];
         const isCorrect = chosen === correct.trim();
         const allBtns = document.querySelectorAll('.opt-btn');
-        const probSurpresa = parseInt(document.getElementById('jokerProb').value);
 
         if(isCorrect) {
             btn.classList.add('correct');
-            let gain = q.pts;
-            if(isReboundActive) gain = Math.floor(gain / 2);
+            let gain = isReboundActive ? Math.floor(q.pts / 2) : q.pts;
             teams[currentTeamIdx].score += gain;
             cardStates[idx] = {correct: true, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅'};
             if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
@@ -316,24 +277,6 @@
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
         allBtns.forEach(b => b.disabled = true);
-    }
-
-    function showSurprise(idx) {
-        const modal = document.getElementById('modal-content');
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'block';
-        const team = teams[currentTeamIdx];
-        const r = Math.random()*100;
-        if(r < 50) {
-            const p = Math.floor(Math.random()*6)+5;
-            modal.innerHTML = `<h1>💣 BOMBA!</h1><span style="font-size:40px; color:var(--danger)">-${p} pts</span>`;
-            team.score -= p; cardStates[idx] = {correct: false, mark: '💣'};
-        } else {
-            const vic = teams.filter((t,i) => i !== currentTeamIdx)[0];
-            modal.innerHTML = `<h1>🥷 ROUBO!</h1><p>${team.name} roubou de ${vic.name}</p>`;
-            vic.score -= 10; team.score += 10; cardStates[idx] = {correct: true, mark: '🥷'};
-        }
-        renderScores();
     }
 
     function closeModal() {
@@ -370,6 +313,7 @@
     }
 
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+    function checkJSONAuto() {}
 </script>
 </body>
 </html>
