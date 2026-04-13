@@ -23,7 +23,7 @@
         
         #global-timer-display { background: var(--danger); color: white; padding: 5px 15px; border-radius: 20px; font-size: 1.2rem; font-weight: bold; min-width: 100px; }
 
-        input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; }
+        input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; background: #e9ecef !important; }
         .config-box { background: var(--bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border); width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; text-align: left; margin: 10px auto; }
         .checkbox-row { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 0.9rem; }
 
@@ -33,7 +33,6 @@
         .card.used { opacity: 0.8; box-shadow: none; }
         .card.used-correct { background: var(--card-bg); color: var(--text); }
         .card.used-wrong { background: var(--danger); color: white; }
-        .card.used-joker { background: var(--joker); color: white; }
 
         .top-controls { width: 100%; display: flex; justify-content: space-between; padding: 10px 20px; align-items: center; }
         .score-board { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; width: 100%; flex-wrap: wrap; }
@@ -45,9 +44,6 @@
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
         .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; }
         .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; }
-        
-        .soundboard { display: flex; gap: 5px; background: rgba(0,0,0,0.1); padding: 5px; border-radius: 10px; }
-        .sfx-btn { background: white; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; padding: 5px 10px; }
     </style>
 </head>
 <body>
@@ -57,9 +53,9 @@
     <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
 
     <div class="input-group">
-        <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; width:100%; cursor:pointer;">🤖 ASSISTENTE: GERAR JSON</button>
+        <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; width:100%; cursor:pointer;">🤖 ASSISTENTE: PROMPT MISTO</button>
         <div id="prompt-container" style="display:none; margin-top:10px; text-align:left; background:var(--bg); padding:10px; border-radius:8px;">
-            <textarea id="prompt-text" readonly style="height:110px; font-size:11px;">Aja como um professor. Gere apenas o JSON puro, sem comentários. Estrutura: [{"q": "Pergunta?", "a": "A", "b": "B", "c": "C", "d": "D", "correct": "A", "pts": 10}]</textarea>
+            <textarea id="prompt-text" readonly style="height:150px; font-size:11px;">Aja como um professor. Gere questões de Morfologia em formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso. Para V/F, use apenas as opções A e B. Entregue APENAS o bloco de código JSON puro. Estrutura: [{"q": "Pergunta?", "a": "A", "b": "B", "c": "C", "d": "D", "correct": "A", "pts": 10}]</textarea>
             <button onclick="copyPrompt()" style="width:100%; background:var(--success); color:white; border:none; padding:8px; border-radius:5px; margin-top:5px;">COPIAR PROMPT</button>
         </div>
     </div>
@@ -67,7 +63,7 @@
     <div class="input-group">
         <label>Colar JSON:</label>
         <button class="paste-btn" onclick="pasteJSON()">📋 Colar</button>
-        <textarea id="jsonInput" placeholder="Clique em colar..." style="height: 50px; padding-right: 70px;"></textarea>
+        <textarea id="jsonInput" oninput="checkJSONAuto()" placeholder="Ao colar, cartões e grupos serão automáticos..." style="height: 50px; padding-right: 70px;"></textarea>
     </div>
 
     <div class="input-group">
@@ -94,18 +90,18 @@
     </div>
 
     <div class="input-group">
-        <label>Quantidade de Grupos (Mínimo):</label>
+        <label id="lblTeam">Grupos:</label>
         <input type="number" id="teamCount" value="2" min="1" max="10">
     </div>
 
     <div class="input-group">
-        <label>Total de Cartões:</label>
+        <label id="lblCard">Total de Cartões:</label>
         <input type="number" id="cardCount" value="15" min="1" max="100">
     </div>
 
     <div class="config-box">
-        <label class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
-        <label class="checkbox-row"><input type="checkbox" id="goldenCb" checked> 👑 Carta Dourada</label>
+        <label id="reboundLabel" class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
+        <label id="goldenLabel" class="checkbox-row"><input type="checkbox" id="goldenCb" checked> 👑 Carta Dourada</label>
     </div>
 
     <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white; font-size:1.2rem; margin-top: 10px;">INICIAR QUIZ</button>
@@ -117,10 +113,6 @@
             <button onclick="toggleDarkMode()">🌙</button>
             <button id="musicToggle" onclick="toggleMusic()">🔊</button>
             <div id="global-timer-display">30:00</div>
-        </div>
-        <div class="soundboard">
-            <button class="sfx-btn" onclick="playSFX('applause')">👏</button>
-            <button class="sfx-btn" onclick="playSFX('tada')">🎺</button>
         </div>
         <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:8px;">SAIR</button>
     </div>
@@ -144,15 +136,52 @@
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-    async function pasteJSON() { try { const text = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = text; } catch (err) { alert('Erro ao colar.'); } }
+    
+    function checkJSONAuto() {
+        const hasJSON = document.getElementById('jsonInput').value.trim() !== "";
+        const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
+        
+        document.getElementById('teamCount').disabled = hasJSON || isTTT;
+        document.getElementById('cardCount').disabled = hasJSON || isTTT;
+        document.getElementById('jokerProb').disabled = hasJSON || isTTT;
+
+        if(hasJSON || isTTT) {
+            document.getElementById('jokerProb').value = 0;
+            document.getElementById('jokerVal').innerText = "0%";
+        }
+    }
+
+    async function pasteJSON() { 
+        try { 
+            const text = await navigator.clipboard.readText(); 
+            document.getElementById('jsonInput').value = text; 
+            checkJSONAuto();
+        } catch (err) { alert('Erro ao colar.'); } 
+    }
 
     function handleModeChange() {
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
+        const teamInp = document.getElementById('teamCount');
+        const cardInp = document.getElementById('cardCount');
+        const surpriseInp = document.getElementById('jokerProb');
+        const reboundCb = document.getElementById('reboundCb');
+        const goldenCb = document.getElementById('goldenCb');
+
         if(isTTT) {
-            document.getElementById('teamCount').value = 2;
-            document.getElementById('cardCount').value = 9;
-            document.getElementById('jokerProb').value = 0;
+            teamInp.value = 2; teamInp.disabled = true;
+            cardInp.value = 9; cardInp.disabled = true;
+            surpriseInp.value = 0; surpriseInp.disabled = true;
             document.getElementById('jokerVal').innerText = "0%";
+            reboundCb.checked = false; reboundCb.disabled = true;
+            goldenCb.checked = false; goldenCb.disabled = true;
+        } else {
+            teamInp.disabled = false;
+            cardInp.disabled = false;
+            surpriseInp.disabled = false;
+            surpriseInp.value = 10;
+            document.getElementById('jokerVal').innerText = "10%";
+            reboundCb.disabled = false; reboundCb.checked = true;
+            goldenCb.disabled = false; goldenCb.checked = true;
         }
     }
 
@@ -175,29 +204,30 @@
     }
     function stopMusic() { musicNodes.forEach(t => clearTimeout(t)); musicNodes = []; }
     function toggleMusic() { isMusicMuted = !isMusicMuted; document.getElementById('musicToggle').innerText = isMusicMuted ? '🔇' : '🔊'; if(isMusicMuted) stopMusic(); else startBackgroundMusic(); }
-    function playSFX(e) {
-        const n = audioCtx.currentTime;
-        if(e === 'applause') for(let i=0; i<15; i++) playNote(Math.random()*800+400, 'sine', n+(i*0.05), 0.1, 0.02);
-        else if(e === 'tada') [440, 554, 659].forEach((f, i) => playNote(f, 'sine', n+(i*0.1), 0.4, 0.1));
-    }
 
     function startGame() {
         if(audioCtx.state === 'suspended') audioCtx.resume();
         const jsonText = document.getElementById('jsonInput').value;
+        
+        gameMode = document.getElementById('gameModeSel').value;
+
         if(jsonText.trim() !== "") {
-            try { questions = JSON.parse(jsonText).map(item => [item.q, item.a, item.b, item.c, item.d, item.correct, item.pts || 10]); }
-            catch(e) { alert("Erro no JSON!"); return; }
+            try { 
+                questions = JSON.parse(jsonText).map(item => [item.q, item.a, item.b, item.c, item.d, item.correct, item.pts || 10]);
+                nCardsGlob = gameMode === 'tictactoe' ? 9 : questions.length;
+            } catch(e) { alert("Erro no JSON!"); return; }
+        } else {
+            nCardsGlob = parseInt(document.getElementById('cardCount').value);
         }
 
         const nameInput = document.getElementById('groupNames').value.trim();
-        const nTeamsInp = parseInt(document.getElementById('teamCount').value);
         let names = nameInput !== "" ? nameInput.split(',').map(n => n.trim()).filter(n => n !== "") : [];
+        const nTeamsInp = parseInt(document.getElementById('teamCount').value);
         const finalCount = Math.max(names.length, nTeamsInp);
+        
         teams = [];
         for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`, shield: false});
 
-        gameMode = document.getElementById('gameModeSel').value;
-        nCardsGlob = parseInt(document.getElementById('cardCount').value);
         surpriseProb = parseInt(document.getElementById('jokerProb').value);
         totalSecondsLeft = parseInt(document.getElementById('globalTimeLimit').value) * 60;
         
@@ -225,7 +255,7 @@
         grid.innerHTML = '';
         for (let i = 0; i < nCardsGlob; i++) {
             const card = document.createElement('div');
-            card.className = 'card' + (cardStates[i] ? ' used ' + (cardStates[i].correct ? 'used-correct' : (cardStates[i].type === 'surprise' ? 'used-joker' : 'used-wrong')) : '');
+            card.className = 'card' + (cardStates[i] ? ' used ' + (cardStates[i].correct ? 'used-correct' : 'used-wrong') : '');
             card.innerHTML = cardStates[i] ? (cardStates[i].mark || '') : (i + 1);
             if(cardStates[i]) card.style.borderColor = cardStates[i].color;
             card.onclick = () => handleCardClick(i, card);
@@ -246,28 +276,8 @@
         card.style.transform = 'rotateY(90deg)';
         setTimeout(() => { 
             card.style.transform = 'rotateY(0deg)'; 
-            if(Math.random() * 100 < surpriseProb) showSurprise(idx, card);
-            else showQuestion(idx);
+            showQuestion(idx);
         }, 200);
-    }
-
-    function showSurprise(idx, card) {
-        const modal = document.getElementById('modal-content');
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'block';
-        const team = teams[currentTeamIdx];
-        const types = ['bomb', 'steal', 'shield'];
-        const type = types[Math.floor(Math.random() * types.length)];
-        let title = "", desc = "", icon = "";
-
-        if(type === 'bomb') { title = "💣 BOMBA!"; icon = "💣"; if(team.shield) { desc = "Protegido!"; team.shield = false; } else { desc = "-10 pontos!"; team.score -= 10; } }
-        else if(type === 'steal') { title = "🥷 ROUBO!"; icon = "🥷"; const v = teams.find((t, i) => i !== currentTeamIdx && t.score > 0); if(v) { v.score -= 10; team.score += 10; desc = "Roubou 10!"; } else desc = "Sem alvo!"; }
-        else { title = "🛡️ ESCUDO!"; icon = "🛡️"; desc = "Proteção!"; team.shield = true; }
-
-        modal.innerHTML = `<h1>${title}</h1><p>${desc}</p>`;
-        cardStates[idx] = {type: 'surprise', correct: false, color: team.color, mark: icon};
-        if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
-        renderScores();
     }
 
     function showQuestion(idx) {
@@ -275,7 +285,17 @@
         const modal = document.getElementById('modal-content');
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-        modal.innerHTML = `<h2>${q[0]}</h2><div class="options-grid">${['A','B','C','D'].map((l, i) => `<button class="opt-btn" onclick="checkAns(this, '${l}', '${q[5]}', ${idx}, ${q[6]})">${l}: ${q[i+1]}</button>`).join('')}</div><p>Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+        
+        const isVF = q[2] === "C" || q[2] === "" || !q[2] || q[1].toLowerCase().includes("falso") || q[1].toLowerCase().includes("verdadeiro");
+
+        modal.innerHTML = `<h2>${q[0]}</h2>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="checkAns(this, 'A', '${q[5]}', ${idx}, ${q[6]})">A: ${q[1]}</button>
+                <button class="opt-btn" onclick="checkAns(this, 'B', '${q[5]}', ${idx}, ${q[6]})">B: ${q[2]}</button>
+                ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q[5]}', ${idx}, ${q[6]})">C: ${q[3]}</button>` : ''}
+                ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'D', '${q[5]}', ${idx}, ${q[6]})">D: ${q[4]}</button>` : ''}
+            </div>
+            <p>Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
     }
 
     function checkAns(btn, chosen, correct, idx, pts) {
@@ -312,7 +332,7 @@
     }
 
     function showFinal() {
-        clearInterval(globalTimerInterval); stopMusic(); playSFX('tada');
+        clearInterval(globalTimerInterval); stopMusic();
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
         document.getElementById('modal-content').innerHTML = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1><button class='action-btn' style='width:100%; margin-top:20px; background:var(--danger);' onclick='location.reload()'>REINICIAR</button>`;
