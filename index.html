@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eduardo Goulart</title>
+    <title>Eduardo Goulart - Quiz Master</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -151,10 +151,33 @@
 
     function cleanNames() {
         const input = document.getElementById('teamNamesInput');
-        // Remove números no início, pontos, traços e limpa espaços extras
-        let names = input.value.split(',').map(n => {
-            return n.replace(/^\d+[\.\-\s]*/, '').trim();
+        let text = input.value;
+        
+        // Se houver quebras de linha (como colado direto de uma lista de chamada)
+        if (text.includes('\n')) {
+            let lines = text.split('\n');
+            let names = [];
+            for (let line of lines) {
+                // Filtra as linhas que começam com "Numero. " (ignora as mensagens de status)
+                let match = line.trim().match(/^\d+\.\s+(.*)/);
+                if (match) {
+                    // Pega o nome completo e divide no primeiro espaço para pegar apenas o Primeiro Nome
+                    let firstName = match[1].trim().split(' ')[0];
+                    names.push(firstName);
+                }
+            }
+            if (names.length > 0) {
+                input.value = names.join(', ');
+                return; // Encerra a função se encontrou a lista em colunas
+            }
+        }
+        
+        // Se a lista já estava separada por vírgulas e o usuário só clicou em limpar novamente
+        let names = text.split(',').map(n => {
+            let clean = n.replace(/^\d+[\.\-\s]*/, '').trim();
+            return clean.split(' ')[0]; // Garante apenas o primeiro nome
         }).filter(n => n !== "");
+        
         input.value = names.join(', ');
     }
 
