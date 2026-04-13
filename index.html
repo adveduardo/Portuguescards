@@ -57,7 +57,7 @@
 <body>
 
 <div id="setup-menu">
-    <h1 style="color: var(--primary); margin: 0;">🎮 Português 🇧🇷</h1>
+    <h1 style="color: var(--primary); margin: 0;">🎮 Português Pro 🇧🇷</h1>
     <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
 
     <div class="input-group">
@@ -83,13 +83,25 @@ Envie apenas o código JSON puro.</textarea>
     </div>
 
     <div class="input-group">
-        <label>Nomes dos Grupos (Opcional - separados por vírgula):</label>
+        <label>Nomes dos Grupos (Opcional - vírgula):</label>
         <textarea id="teamNamesInput" placeholder="Ex: Feras, Sabidos, Turma A..." style="height: 40px;"></textarea>
     </div>
 
     <div class="input-group">
         <label>Tempo da Aula (Minutos):</label>
         <input type="number" id="globalTimeLimit" value="30" min="1" max="120">
+    </div>
+
+    <div class="input-group">
+        <label>🎵 Trilha Sonora:</label>
+        <select id="bgMusic">
+            <option value="none">Silêncio</option>
+            <option value="suspense" selected>Suspense (Tensão)</option>
+            <option value="gameshow">Game Show (Energia)</option>
+            <option value="cyber">Cyberpunk (Ação)</option>
+            <option value="epic">Épico (Solenidade)</option>
+            <option value="relax">Relax (Foco)</option>
+        </select>
     </div>
 
     <div class="input-group">
@@ -158,7 +170,6 @@ Envie apenas o código JSON puro.</textarea>
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
 
-    // ÁUDIO
     function playNote(freq, type, startTime, duration, vol) {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -171,11 +182,27 @@ Envie apenas o código JSON puro.</textarea>
 
     function startBackgroundMusic() {
         stopMusic();
+        const type = document.getElementById('bgMusic').value;
+        if(type === 'none' || isMusicMuted) return;
+        
         const loop = () => {
             if(isMusicMuted) return;
             const now = audioCtx.currentTime;
-            playNote(60, 'sine', now, 0.2, 0.3);
-            playNote(110, 'triangle', now, 2, 0.05);
+            
+            if(type === 'suspense') {
+                playNote(60, 'sine', now, 0.2, 0.3); // Coração
+                playNote(110, 'triangle', now, 2, 0.05); // Drone
+            } else if(type === 'gameshow') {
+                [110, 147, 165, 110].forEach((f, i) => playNote(f, 'square', now + (i*0.5), 0.3, 0.03));
+            } else if(type === 'cyber') {
+                [220, 220, 330, 220].forEach((f, i) => playNote(f, 'sawtooth', now + (i*0.25), 0.1, 0.03));
+            } else if(type === 'epic') {
+                playNote(55, 'sawtooth', now, 2, 0.05);
+                playNote(82, 'sawtooth', now + 1, 1, 0.03);
+            } else if(type === 'relax') {
+                playNote(220, 'sine', now, 2, 0.05);
+                playNote(330, 'sine', now + 1, 2, 0.03);
+            }
             musicNodes.push(setTimeout(loop, 2000));
         };
         loop();
@@ -196,7 +223,6 @@ Envie apenas o código JSON puro.</textarea>
         else if(effect === 'tension') playNote(200, 'sawtooth', now, 1.5, 0.1);
     }
 
-    // LÓGICA
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
     let gameMode = 'classic', isReboundActive = false, tttBoard = Array(9).fill(null), wrongQuestionsLog = [];
 
