@@ -36,8 +36,9 @@
 
         .top-controls { width: 100%; display: flex; justify-content: space-between; padding: 10px 20px; align-items: center; flex-wrap: wrap; gap: 10px; }
         .score-board { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; width: 100%; flex-wrap: wrap; }
-        .team-card { background: var(--card-bg); padding: 10px; border-radius: 10px; border: 3px solid var(--border); min-width: 90px; text-align: center; }
-        .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .team-card { background: var(--card-bg); padding: 10px; border-radius: 10px; border: 3px solid var(--border); min-width: 90px; text-align: center; transition: 0.3s; }
+        .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); background: #fffbe6; }
+        body.dark-mode .team-card.active { background: #2d2d2d; }
 
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
         #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 600px; text-align: center; max-height: 85vh; overflow-y: auto; }
@@ -63,16 +64,7 @@
     <div class="input-group">
         <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; cursor:pointer; width:100%; font-size: 0.8rem;">🤖 ASSISTENTE: GERAR JSON</button>
         <div id="prompt-container" style="display:none; margin-top:10px; text-align:left; background:var(--bg); padding:10px; border-radius:8px;">
-            <textarea id="prompt-text" readonly style="height:120px; font-size:11px;">Aja como um professor e formate as questões no formato JSON para o meu jogo. 
-Siga EXATAMENTE esta estrutura:
-[
-  {
-    "q": "Pergunta aqui?",
-    "a": "Opção A", "b": "Opção B", "c": "Opção C", "d": "Opção D",
-    "correct": "A", "pts": 10
-  }
-]
-Envie apenas o código JSON puro.</textarea>
+            <textarea id="prompt-text" readonly style="height:120px; font-size:11px;">Aja como um professor e formate as questões no formato JSON para o meu jogo. Siga EXATAMENTE esta estrutura: [{"q": "Pergunta?", "a": "A", "b": "B", "c": "C", "d": "D", "correct": "A", "pts": 10}]</textarea>
             <button onclick="copyPrompt()" style="width:100%; margin-top:5px; background:var(--success); color:white; border:none; padding:8px; border-radius:5px; cursor:pointer;">COPIAR PROMPT JSON</button>
         </div>
     </div>
@@ -83,8 +75,13 @@ Envie apenas o código JSON puro.</textarea>
     </div>
 
     <div class="input-group">
-        <label>Nomes dos Grupos (Opcional - vírgula):</label>
-        <textarea id="teamNamesInput" placeholder="Ex: Feras, Sabidos, Turma A..." style="height: 40px;"></textarea>
+        <label>Nomes dos Grupos (Separados por vírgula):</label>
+        <textarea id="teamNamesInput" placeholder="Ex: Feras, Sabidos, Turma A..." style="height: 40px;" oninput="syncTeamCount()"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label id="lblTeam">Quantidade de Grupos (1-10):</label>
+        <input type="number" id="teamCount" value="2" min="1" max="10">
     </div>
 
     <div class="input-group">
@@ -110,11 +107,6 @@ Envie apenas o código JSON puro.</textarea>
             <option value="classic">Modo Padrão</option>
             <option value="tictactoe">Jogo da Velha (3x3)</option>
         </select>
-    </div>
-
-    <div class="input-group">
-        <label id="lblTeam">Quantidade de Grupos (1-10):</label>
-        <input type="number" id="teamCount" value="2" min="1" max="10">
     </div>
 
     <div class="input-group">
@@ -170,6 +162,15 @@ Envie apenas o código JSON puro.</textarea>
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
 
+    // SINCRONIZAÇÃO INTELIGENTE DE GRUPOS
+    function syncTeamCount() {
+        const input = document.getElementById('teamNamesInput').value.trim();
+        if (input !== "") {
+            const count = input.split(',').filter(n => n.trim() !== "").length;
+            document.getElementById('teamCount').value = count;
+        }
+    }
+
     function playNote(freq, type, startTime, duration, vol) {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -184,25 +185,12 @@ Envie apenas o código JSON puro.</textarea>
         stopMusic();
         const type = document.getElementById('bgMusic').value;
         if(type === 'none' || isMusicMuted) return;
-        
         const loop = () => {
             if(isMusicMuted) return;
             const now = audioCtx.currentTime;
-            
-            if(type === 'suspense') {
-                playNote(60, 'sine', now, 0.2, 0.3); // Coração
-                playNote(110, 'triangle', now, 2, 0.05); // Drone
-            } else if(type === 'gameshow') {
-                [110, 147, 165, 110].forEach((f, i) => playNote(f, 'square', now + (i*0.5), 0.3, 0.03));
-            } else if(type === 'cyber') {
-                [220, 220, 330, 220].forEach((f, i) => playNote(f, 'sawtooth', now + (i*0.25), 0.1, 0.03));
-            } else if(type === 'epic') {
-                playNote(55, 'sawtooth', now, 2, 0.05);
-                playNote(82, 'sawtooth', now + 1, 1, 0.03);
-            } else if(type === 'relax') {
-                playNote(220, 'sine', now, 2, 0.05);
-                playNote(330, 'sine', now + 1, 2, 0.03);
-            }
+            if(type === 'suspense') { playNote(60, 'sine', now, 0.2, 0.3); playNote(110, 'triangle', now, 2, 0.05); }
+            else if(type === 'gameshow') { [110, 147, 165, 110].forEach((f, i) => playNote(f, 'square', now + (i*0.5), 0.3, 0.03)); }
+            else if(type === 'cyber') { [220, 220, 330, 220].forEach((f, i) => playNote(f, 'sawtooth', now + (i*0.25), 0.1, 0.03)); }
             musicNodes.push(setTimeout(loop, 2000));
         };
         loop();
@@ -223,21 +211,18 @@ Envie apenas o código JSON puro.</textarea>
         else if(effect === 'tension') playNote(200, 'sawtooth', now, 1.5, 0.1);
     }
 
+    // LÓGICA DO JOGO
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
     let gameMode = 'classic', isReboundActive = false, tttBoard = Array(9).fill(null), wrongQuestionsLog = [];
+    let originalTurnIdx = 0; // Para controlar o Rebote sem quebrar a ordem
 
     function handleModeChange() {
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
-        const teamInp = document.getElementById('teamCount');
-        const cardInp = document.getElementById('cardCount');
-        const surpriseInp = document.getElementById('jokerProb');
         if(isTTT) {
-            teamInp.value = 2; teamInp.disabled = true;
-            cardInp.value = 9; cardInp.disabled = true;
-            surpriseInp.value = 0; surpriseInp.disabled = true;
-            document.getElementById('jokerVal').innerText = "0%";
-        } else {
-            teamInp.disabled = false; cardInp.disabled = false; surpriseInp.disabled = false;
+            document.getElementById('teamCount').value = 2;
+            document.getElementById('cardCount').value = 9;
+            document.getElementById('jokerProb').value = 0;
+            document.getElementById('reboundCb').checked = false;
         }
     }
 
@@ -251,10 +236,12 @@ Envie apenas o código JSON puro.</textarea>
             catch(e) { alert("Erro no JSON!"); return; }
         }
 
-        const nameInput = document.getElementById('teamNamesInput').value;
+        const nameInput = document.getElementById('teamNamesInput').value.trim();
         const nTeamsInp = parseInt(document.getElementById('teamCount').value);
-        if(nameInput.trim() !== "") {
-            teams = nameInput.split(',').map((n, i) => ({name: n.trim(), score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`}));
+        
+        if(nameInput !== "") {
+            const names = nameInput.split(',').map(n => n.trim()).filter(n => n !== "");
+            teams = names.map((n, i) => ({name: n, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`}));
         } else {
             teams = Array.from({length: nTeamsInp}, (_, i) => ({name: `Grupo ${i+1}`, score: 0, color: `hsl(${(i*360)/nTeamsInp}, 70%, 50%)`}));
         }
@@ -305,6 +292,7 @@ Envie apenas o código JSON puro.</textarea>
 
     function handleCardClick(idx, card) {
         if(cardStates[idx]) return;
+        originalTurnIdx = currentTeamIdx; // Salva quem começou a rodada
         card.style.transform = 'rotateY(90deg)';
         setTimeout(() => {
             card.style.transform = 'rotateY(0deg)';
@@ -330,16 +318,24 @@ Envie apenas o código JSON puro.</textarea>
             btn.classList.add('correct'); team.score += pts;
             cardStates[idx] = {correct: true, color: team.color, mark: gameMode === 'tictactoe' ? (currentTeamIdx === 0 ? 'X' : 'O') : '✅'};
             if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+            isReboundActive = false; // Se acertou, encerra ciclo de rebote
             document.getElementById('btn-continue').style.display = 'block';
         } else {
             btn.classList.add('wrong');
             wrongQuestionsLog.push({ q: questions[idx % questions.length][0], a: correct });
+            
             if(document.getElementById('reboundCb').checked && !isReboundActive) {
-                isReboundActive = true; currentTeamIdx = (currentTeamIdx + 1) % teams.length;
-                renderScores(); setTimeout(() => { allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); }, 500);
+                isReboundActive = true; 
+                currentTeamIdx = (currentTeamIdx + 1) % teams.length; // Passa pro próximo
+                renderScores(); 
+                setTimeout(() => { 
+                    allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); 
+                    alert("🏀 REBOTE! Vez do próximo grupo!"); 
+                }, 500);
             } else {
                 cardStates[idx] = {correct: false, color: team.color, mark: '❌'};
-                isReboundActive = false; document.getElementById('btn-continue').style.display = 'block';
+                isReboundActive = false; 
+                document.getElementById('btn-continue').style.display = 'block';
             }
         }
     }
@@ -351,7 +347,10 @@ Envie apenas o código JSON puro.</textarea>
             for (let w of wins) if (tttBoard[w[0]] !== null && tttBoard[w[0]] === tttBoard[w[1]] && tttBoard[w[0]] === tttBoard[w[2]]) { showFinal(); return; }
         }
         if(Object.keys(cardStates).length === nCardsGlob) { showFinal(); return; }
-        if(!isReboundActive) currentTeamIdx = (currentTeamIdx + 1) % teams.length;
+        
+        // Retoma o turno normal a partir de quem começou, garantindo inteligência na ordem
+        currentTeamIdx = (originalTurnIdx + 1) % teams.length;
+        isReboundActive = false;
         renderBoard();
     }
 
@@ -359,7 +358,7 @@ Envie apenas o código JSON puro.</textarea>
         clearInterval(globalTimerInterval); stopMusic(); playSFX('tada');
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
-        document.getElementById('modal-content').innerHTML = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1><hr>${wrongQuestionsLog.map(e => `<div class='report-item'><b>${e.q}</b><br>Correta: ${e.a}</div>`).join('')}<button class='action-btn' style='width:100%; margin-top:20px; background:var(--danger);' onclick='location.reload()'>REINICIAR</button>`;
+        document.getElementById('modal-content').innerHTML = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1><hr>${wrongQuestionsLog.slice(0, 10).map(e => `<div class='report-item'><b>${e.q}</b><br>Correta: ${e.a}</div>`).join('')}<button class='action-btn' style='width:100%; margin-top:20px; background:var(--danger);' onclick='location.reload()'>REINICIAR</button>`;
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
     }
