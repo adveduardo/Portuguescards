@@ -17,160 +17,341 @@
         #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
         .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; }
         label { font-weight: bold; font-size: 0.9rem; }
-        textarea, select, input { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); }
+        input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; }
+        
+        input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; }
+
+        .config-box { background: var(--bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border); width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; text-align: left; margin: 10px auto; }
+        .checkbox-row { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 0.9rem; }
+        .hint { font-size: 0.7rem; color: #666; margin-top: 2px; line-height: 1.1; }
+        body.dark-mode .hint { color: #aaa; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; max-width: 1200px; padding: 20px; }
+        .grid.tictactoe { grid-template-columns: repeat(3, 1fr); max-width: 600px; margin: 0 auto; }
+        
         .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; border: 4px solid transparent; }
-        .card.used { opacity: 0.8; box-shadow: none; }
+        .card.used { opacity: 0.8; box-shadow: none; transform: none !important; }
+        .card.used-correct { background: var(--card-bg); color: var(--text); }
+        .card.used-wrong { background: var(--danger); color: white; }
+
+        .top-controls { width: 100%; display: flex; justify-content: space-between; padding: 10px 20px; }
+        .score-board { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; width: 100%; flex-wrap: wrap; }
+        .team-card { background: var(--card-bg); padding: 10px; border-radius: 10px; border: 3px solid var(--border); min-width: 90px; text-align: center; }
+        .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
-        #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 600px; text-align: center; max-height: 90vh; overflow-y: auto; }
-        
-        /* Estilo da Imagem no Quiz */
-        .quiz-img { max-width: 100%; max-height: 250px; border-radius: 10px; margin-bottom: 15px; border: 2px solid var(--border); object-fit: contain; }
-
+        #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 600px; text-align: center; max-height: 85vh; overflow-y: auto; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; }
+        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; font-size: 1.1rem; }
         .opt-btn.correct { background: var(--success) !important; color: white; }
         .opt-btn.wrong { background: var(--danger) !important; color: white; }
 
-        .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; background: var(--success); color: white; }
+        .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.2s; }
+        .report-item { text-align: left; background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 8px; border-left: 5px solid var(--danger); }
+        
+        /* Soundboard no Rodapé */
+        .soundboard { display: flex; gap: 5px; background: rgba(0,0,0,0.1); padding: 5px; border-radius: 10px; }
+        .sfx-btn { background: white; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; font-size: 1.2rem; padding: 5px 10px; }
+        body.dark-mode .sfx-btn { background: #333; color: white; border-color: #444; }
     </style>
 </head>
 <body>
 
 <div id="setup-menu">
-    <h1>🎮 Quiz Master Pro</h1>
+    <h1 style="color: var(--primary); margin: 0;">🎮 Português Pro 🇧🇷</h1>
+    <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
+
     <div class="input-group">
-        <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; width:100%; cursor:pointer;">🤖 GERAR JSON COM IMAGENS</button>
-        <div id="prompt-container" style="display:none; text-align:left; background:#eee; padding:10px; margin-top:10px; border-radius:8px;">
-            <textarea id="prompt-text" readonly style="height:150px; font-size:11px;">Aja como um professor. Gere questões em JSON. 
-IMPORTANTE: Para cada questão, procure um link de imagem (URL) estável e público (ex: Wikimedia, Unsplash) que sirva de contexto visual e coloque no campo "img".
-Estrutura:
-[
-  {
-    "q": "Sua pergunta?",
-    "a": "Opção A", "b": "Opção B", "c": "Opção C", "d": "Opção D",
-    "correct": "A", "pts": 10,
-    "img": "https://link-da-imagem.jpg"
-  }
-]</textarea>
-            <button onclick="copyPrompt()" style="width:100%; background:var(--primary); color:white; border:none; padding:8px; margin-top:5px; border-radius:5px;">COPIAR PROMPT</button>
-        </div>
+        <label>Colar JSON (Obsidian/Notion):</label>
+        <textarea id="jsonInput" placeholder="Cole o código JSON aqui..." style="height: 60px;"></textarea>
     </div>
 
     <div class="input-group">
-        <label>Colar JSON aqui:</label>
-        <textarea id="jsonInput" placeholder="Cole o código JSON gerado..." style="height: 80px;"></textarea>
+        <label>🎵 Trilha Sonora de Fundo:</label>
+        <select id="bgMusic">
+            <option value="none">Silêncio</option>
+            <option value="suspense" selected>Suspense (Tensão Crescente)</option>
+            <option value="gameshow">Game Show (Energia)</option>
+        </select>
+        <div class="hint">Música gerada automaticamente pelo navegador.</div>
+    </div>
+
+    <div class="input-group">
+        <label id="lblSurprise">Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
+        <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
     </div>
 
     <div class="input-group">
         <label>Modo de Jogo:</label>
-        <select id="gameModeSel">
-            <option value="classic">Padrão</option>
-            <option value="tictactoe">Jogo da Velha</option>
+        <select id="gameModeSel" onchange="handleModeChange()">
+            <option value="classic">Modo Padrão</option>
+            <option value="tictactoe">Jogo da Velha (3x3)</option>
         </select>
     </div>
 
-    <button class="action-btn" onclick="startGame()" style="width:100%;">INICIAR QUIZ</button>
+    <div class="input-group">
+        <label>Grupos (1-10):</label>
+        <input type="number" id="teamCount" value="2" min="1" max="10">
+    </div>
+
+    <div class="config-box">
+        <label id="reboundLabel" class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
+        <label id="goldenLabel" class="checkbox-row"><input type="checkbox" id="goldenCb" checked> 👑 Carta Dourada</label>
+    </div>
+
+    <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white; font-size:1.2rem; margin-top: 10px;">INICIAR QUIZ</button>
 </div>
 
-<div id="game-area" style="display:none; width:100%;">
-    <div id="score-board" style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;"></div>
+<div id="game-area" style="display:none; width: 100%;">
+    <div class="top-controls">
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <button class="btn-fullscreen" onclick="toggleDarkMode()">🌙</button>
+            <button id="musicToggle" class="btn-fullscreen" onclick="toggleMusic()">🔊</button>
+            <div class="soundboard">
+                <button class="sfx-btn" onclick="playSFX('applause')" title="Aplausos">👏</button>
+                <button class="sfx-btn" onclick="playSFX('tada')" title="Fanfarra">🎺</button>
+                <button class="sfx-btn" onclick="playSFX('tension')" title="Tensão">😱</button>
+            </div>
+        </div>
+        <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:8px; cursor:pointer;">REINICIAR</button>
+    </div>
+    <div id="score-board" class="score-board"></div>
     <div id="grid" class="grid"></div>
 </div>
 
 <div id="modal-overlay">
     <div id="modal">
         <div id="modal-content"></div>
-        <button id="btn-continue" class="action-btn" style="display:none; width:100%; margin-top:10px;" onclick="closeModal()">PRÓXIMA RODADA</button>
+        <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white; margin-top:15px;" onclick="closeModal()">CONCLUIR RODADA</button>
     </div>
 </div>
 
 <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let musicNodes = [];
+    let isMusicMuted = false;
+
+    // MOTOR DE ÁUDIO PROCEDURAL
+    function playNote(freq, type, startTime, duration, vol) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(vol, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+        return { osc, gain };
+    }
+
+    function startBackgroundMusic(type) {
+        stopMusic();
+        if(type === 'none' || isMusicMuted) return;
+        
+        const loop = () => {
+            if(isMusicMuted) return;
+            const now = audioCtx.currentTime;
+            if(type === 'suspense') {
+                // Batida de coração profunda
+                playNote(60, 'sine', now, 0.2, 0.3);
+                playNote(60, 'sine', now + 0.3, 0.2, 0.15);
+                // Drone de fundo
+                playNote(110, 'triangle', now, 2, 0.05);
+            } else if(type === 'gameshow') {
+                // Baixo rítmico
+                [110, 147, 165, 110].forEach((f, i) => playNote(f, 'square', now + (i*0.5), 0.3, 0.05));
+            }
+            musicNodes.push(setTimeout(loop, type === 'suspense' ? 2000 : 2000));
+        };
+        loop();
+    }
+
+    function stopMusic() {
+        musicNodes.forEach(t => clearTimeout(t));
+        musicNodes = [];
+    }
+
+    function toggleMusic() {
+        isMusicMuted = !isMusicMuted;
+        document.getElementById('musicToggle').innerText = isMusicMuted ? '🔇' : '🔊';
+        if(isMusicMuted) stopMusic();
+        else startBackgroundMusic(document.getElementById('bgMusic').value);
+    }
+
+    function playSFX(effect) {
+        const now = audioCtx.currentTime;
+        if(effect === 'applause') {
+            for(let i=0; i<20; i++) playNote(Math.random()*1000 + 500, 'noise' in AudioContext ? 'noise' : 'sine', now + (i*0.05), 0.1, 0.02);
+        } else if(effect === 'tada') {
+            [440, 554, 659, 880].forEach((f, i) => playNote(f, 'sine', now + (i*0.1), 0.4, 0.1));
+        } else if(effect === 'tension') {
+            playNote(200, 'sawtooth', now, 1.5, 0.2);
+        }
+    }
+
+    // LÓGICA DO JOGO (Mantendo suas regras anteriores)
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
-    let gameMode = 'classic';
+    let gameMode = 'classic', isReboundActive = false, surpriseProb = 10, tttBoard = Array(9).fill(null);
+    let wrongQuestionsLog = [];
 
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
-    function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado! Cole no Gemini."); }
+    function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
+    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+
+    function handleModeChange() {
+        const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
+        if(isTTT) {
+            document.getElementById('teamCount').value = 2;
+            document.getElementById('jokerProb').value = 0;
+            document.getElementById('jokerVal').innerText = "0%";
+            document.getElementById('reboundCb').checked = false;
+            document.getElementById('goldenCb').checked = false;
+        }
+    }
 
     function startGame() {
+        if(audioCtx.state === 'suspended') audioCtx.resume();
         const jsonText = document.getElementById('jsonInput').value;
         if(jsonText.trim() !== "") {
-            try {
-                // Mapeamos o campo 'img' que vem do JSON
-                questions = JSON.parse(jsonText).map(item => ({
-                    q: item.q, a: item.a, b: item.b, c: item.c, d: item.d, 
-                    correct: item.correct, pts: item.pts || 10, img: item.img || ""
-                }));
-            } catch(e) { alert("Erro no JSON!"); return; }
+            try { questions = JSON.parse(jsonText).map(item => [item.q, item.a, item.b, item.c, item.d, item.correct, item.pts || 10]); }
+            catch(e) { alert("Erro no JSON!"); return; }
         }
-
+        
         gameMode = document.getElementById('gameModeSel').value;
-        nCardsGlob = gameMode === 'tictactoe' ? 9 : (questions.length || 15);
-        teams = [{name: "Grupo 1", score: 0, color: "#5487e3"}, {name: "Grupo 2", score: 0, color: "#ff6b6b"}];
+        const nTeams = parseInt(document.getElementById('teamCount').value);
+        nCardsGlob = gameMode === 'tictactoe' ? 9 : 15;
+        surpriseProb = parseInt(document.getElementById('jokerProb').value);
+
+        if(questions.length === 0) for(let i=0; i<nCardsGlob; i++) questions.push([`Questão ${i+1}?`, "A", "B", "C", "D", "A", 10]);
+
+        teams = Array.from({length: nTeams}, (_, i) => ({name: `Grupo ${i+1}`, score: 0, color: `hsl(${(i*360)/nTeams}, 70%, 50%)`, shield: false}));
         
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
+        startBackgroundMusic(document.getElementById('bgMusic').value);
         renderBoard();
     }
 
     function renderBoard() {
+        renderScores();
         const grid = document.getElementById('grid');
         grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
         grid.innerHTML = '';
         for (let i = 0; i < nCardsGlob; i++) {
             const card = document.createElement('div');
-            card.className = 'card' + (cardStates[i] ? ' used' : '');
-            card.innerHTML = cardStates[i] ? (cardStates[i].correct ? '✅' : '❌') : (i + 1);
-            card.onclick = () => showQuestion(i);
+            card.className = 'card' + (cardStates[i] ? ' used ' + (cardStates[i].correct ? 'used-correct' : (cardStates[i].type === 'surprise' ? 'used-joker' : 'used-wrong')) : '');
+            card.innerHTML = cardStates[i] ? (cardStates[i].mark || '') : (i + 1);
+            if(cardStates[i]) card.style.borderColor = cardStates[i].color;
+            card.onclick = () => handleCardClick(i, card);
             grid.appendChild(card);
         }
-        renderScores();
     }
 
     function renderScores() {
         document.getElementById('score-board').innerHTML = teams.map((t, i) => `
-            <div style="border-bottom: 4px solid ${t.color}; padding: 10px; ${i===currentTeamIdx?'background:#fffbe6':''}">
-                <b>${t.name}</b>: ${t.score} pts
+            <div class="team-card ${i === currentTeamIdx ? 'active' : ''}" style="border-color:${t.color}">
+                <b>${t.name} ${t.shield ? '🛡️' : ''}</b><br><span style="font-size:1.3rem">${t.score}</span>
             </div>
         `).join('');
     }
 
-    function showQuestion(idx) {
+    function handleCardClick(idx, card) {
         if(cardStates[idx]) return;
+        card.style.transform = 'rotateY(90deg)';
+        setTimeout(() => {
+            card.style.transform = 'rotateY(0deg)';
+            if(Math.random() * 100 < surpriseProb) showSurprise(idx, card);
+            else showQuestion(idx);
+        }, 200);
+    }
+
+    function showSurprise(idx, card) {
+        const modal = document.getElementById('modal-content');
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('btn-continue').style.display = 'block';
+        const team = teams[currentTeamIdx];
+        const types = ['bomb', 'steal', 'shield'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        let title = "", desc = "", icon = "";
+
+        if(type === 'bomb') { title = "💣 BOMBA!"; icon = "💣"; if(team.shield) { desc = "Protegido pelo 🛡️!"; team.shield = false; } else { desc = "-10 pontos!"; team.score -= 10; } }
+        else if(type === 'steal') { title = "🥷 ROUBO!"; icon = "🥷"; const victim = teams.find((t, i) => i !== currentTeamIdx && t.score > 0); if(victim) { victim.score -= 10; team.score += 10; desc = "Roubou 10 pts!"; } else desc = "Ninguém para roubar!"; }
+        else { title = "🛡️ ESCUDO!"; icon = "🛡️"; desc = "Proteção ativada!"; team.shield = true; }
+
+        modal.innerHTML = `<h1 style="color:var(--joker)">${title}</h1><p style="font-size:1.2rem">${desc}</p>`;
+        cardStates[idx] = {type: 'surprise', correct: false, color: team.color, mark: icon};
+        if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+        renderScores();
+    }
+
+    function showQuestion(idx) {
         const q = questions[idx % questions.length];
         const modal = document.getElementById('modal-content');
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-
-        // Lógica da Imagem: Se existir link, renderiza a tag <img>
-        let imgHtml = q.img ? `<img src="${q.img}" class="quiz-img" onerror="this.style.display='none'">` : '';
-
         modal.innerHTML = `
-            ${imgHtml}
-            <h2>${q.q}</h2>
-            <div class="options-grid">
-                <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx}, ${q.pts})">A: ${q.a}</button>
-                <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx}, ${q.pts})">B: ${q.b}</button>
-                <button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx}, ${q.pts})">C: ${q.c}</button>
-                <button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx}, ${q.pts})">D: ${q.d}</button>
-            </div>
+            <h2>${q[0]}</h2>
+            <div class="options-grid">${['A','B','C','D'].map((l, i) => `<button class="opt-btn" onclick="checkAns(this, '${l}', '${q[5]}', ${idx}, ${q[6]})">${l}: ${q[i+1]}</button>`).join('')}</div>
+            <p>Vez do: <b>${teams[currentTeamIdx].name}</b></p>
         `;
     }
 
     function checkAns(btn, chosen, correct, idx, pts) {
         const isCorrect = chosen === correct.trim();
-        btn.classList.add(isCorrect ? 'correct' : 'wrong');
-        if(isCorrect) teams[currentTeamIdx].score += pts;
-        cardStates[idx] = {correct: isCorrect};
-        document.getElementById('btn-continue').style.display = 'block';
+        const team = teams[currentTeamIdx];
+        const allBtns = document.querySelectorAll('.opt-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        if(isCorrect) {
+            btn.classList.add('correct');
+            team.score += pts;
+            cardStates[idx] = {correct: true, color: team.color, mark: gameMode === 'tictactoe' ? (currentTeamIdx === 0 ? 'X' : 'O') : '✅'};
+            if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+            document.getElementById('btn-continue').style.display = 'block';
+        } else {
+            btn.classList.add('wrong');
+            if(!wrongQuestionsLog.find(x => x.q === questions[idx % questions.length][0])) {
+                wrongQuestionsLog.push({ q: questions[idx % questions.length][0], a: correct });
+            }
+            if(document.getElementById('reboundCb').checked && !isReboundActive) {
+                isReboundActive = true;
+                currentTeamIdx = (currentTeamIdx + 1) % teams.length;
+                renderScores();
+                setTimeout(() => { allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); alert("🏀 REBOTE!"); }, 500);
+            } else {
+                cardStates[idx] = {correct: false, color: team.color, mark: '❌'};
+                isReboundActive = false;
+                document.getElementById('btn-continue').style.display = 'block';
+            }
+        }
     }
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
+        if(gameMode === 'tictactoe') {
+            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+            for (let w of wins) if (tttBoard[w[0]] !== null && tttBoard[w[0]] === tttBoard[w[1]] && tttBoard[w[0]] === tttBoard[w[2]]) { showFinal(); return; }
+        }
+        if(Object.keys(cardStates).length === nCardsGlob) { showFinal(); return; }
         currentTeamIdx = (currentTeamIdx + 1) % teams.length;
         renderBoard();
+    }
+
+    function showFinal() {
+        stopMusic();
+        playSFX('tada');
+        const sorted = [...teams].sort((a,b) => b.score - a.score);
+        confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
+        document.getElementById('modal-content').innerHTML = `<h1>🏆 FIM!</h1><h2>Vencedor: ${sorted[0].name}</h2><hr>${wrongQuestionsLog.map(e => `<div class='report-item'><b>${e.q}</b><br>Correto: ${e.a}</div>`).join('')}<button class='action-btn' style='width:100%; margin-top:20px; background:var(--danger);' onclick='location.reload()'>NOVO JOGO</button>`;
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('btn-continue').style.display = 'none';
+    }
+
+    function spinRoulette() {
+        const avail = []; for(let i=0; i<nCardsGlob; i++) if(!cardStates[i]) avail.push(i);
+        if(avail.length > 0) handleCardClick(avail[Math.floor(Math.random() * avail.length)], null);
     }
 </script>
 </body>
