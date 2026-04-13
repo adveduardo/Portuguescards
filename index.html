@@ -96,6 +96,10 @@
 
     <div id="extra-configs">
         <div class="input-group">
+            <label id="jokerLabel">Probabilidade Surpresa: <b id="jokerVal">15%</b></label>
+            <input type="range" id="jokerProb" min="0" max="50" value="15" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
+        </div>
+        <div class="input-group">
             <label id="lblTeam">Quantidade de Grupos:</label>
             <input type="number" id="teamCount" value="4">
         </div>
@@ -158,24 +162,46 @@
     }
 
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; }
+    function copyPromptText() {
+        const text = "Atue como um professor de Português. Gere [ QUANTIDADE ] questões inéditas sobre o tema [INSIRA O TEMA AQUI] seguindo estritamente o formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso (V/F). Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: {\"q\":\"?\",\"a\":\"A\",\"b\":\"B\",\"c\":\"\",\"d\":\"\",\"correct\":\"A\",\"pts\":10,\"exp\":\"...\"}";
+        navigator.clipboard.writeText(text); alert("Prompt copiado!");
+    }
+
     async function pasteJSON() { try { const t = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = t; checkJSONAuto(); } catch (e) { alert('Erro ao colar.'); } }
+
+    function checkJSONAuto() {
+        const hasJSON = document.getElementById('jsonInput').value.trim() !== "";
+        const mode = document.getElementById('gameModeSel').value;
+        const isLocked = hasJSON || mode === 'tictactoe' || mode === 'stop';
+        document.getElementById('teamCount').disabled = isLocked;
+        document.getElementById('cardCount').disabled = isLocked;
+    }
 
     function handleModeChange() {
         const mode = document.getElementById('gameModeSel').value;
         const extras = document.getElementById('extra-configs');
         const teamInp = document.getElementById('teamCount');
         const cardInp = document.getElementById('cardCount');
+        const jokerInp = document.getElementById('jokerProb');
+        const jokerVal = document.getElementById('jokerVal');
 
         if(mode === 'tictactoe') {
             extras.style.display = 'block';
             teamInp.value = 2; teamInp.disabled = true;
             cardInp.value = 9; cardInp.disabled = true;
+            jokerInp.value = 0; jokerInp.disabled = true;
+            jokerVal.innerText = "0%";
         } else if (mode === 'stop') {
             extras.style.display = 'none';
+            jokerInp.value = 0;
+            jokerVal.innerText = "0%";
         } else {
             extras.style.display = 'block';
             teamInp.disabled = false; cardInp.disabled = false;
+            jokerInp.value = 15; jokerInp.disabled = false;
+            jokerVal.innerText = "15%";
         }
+        checkJSONAuto();
     }
 
     function startGame() {
@@ -258,10 +284,13 @@
         const q = questions[idx % questions.length];
         const isCorrect = chosen === correct.trim();
         const allBtns = document.querySelectorAll('.opt-btn');
+        const probSurpresa = parseInt(document.getElementById('jokerProb').value);
 
         if(isCorrect) {
             btn.classList.add('correct');
-            teams[currentTeamIdx].score += q.pts;
+            let gain = q.pts;
+            if(isReboundActive) gain = Math.floor(gain / 2);
+            teams[currentTeamIdx].score += gain;
             cardStates[idx] = {correct: true, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅'};
             if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
             quizReport.push({q: q.q, correct: true, ans: chosen, expected: correct, team: teams[currentTeamIdx].name});
@@ -289,6 +318,24 @@
         allBtns.forEach(b => b.disabled = true);
     }
 
+    function showSurprise(idx) {
+        const modal = document.getElementById('modal-content');
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('btn-continue').style.display = 'block';
+        const team = teams[currentTeamIdx];
+        const r = Math.random()*100;
+        if(r < 50) {
+            const p = Math.floor(Math.random()*6)+5;
+            modal.innerHTML = `<h1>💣 BOMBA!</h1><span style="font-size:40px; color:var(--danger)">-${p} pts</span>`;
+            team.score -= p; cardStates[idx] = {correct: false, mark: '💣'};
+        } else {
+            const vic = teams.filter((t,i) => i !== currentTeamIdx)[0];
+            modal.innerHTML = `<h1>🥷 ROUBO!</h1><p>${team.name} roubou de ${vic.name}</p>`;
+            vic.score -= 10; team.score += 10; cardStates[idx] = {correct: true, mark: '🥷'};
+        }
+        renderScores();
+    }
+
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
         if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
@@ -313,7 +360,7 @@
         let h = `<h1>🏆 RESULTADO</h1><div style="background:#eee; padding:15px; border-radius:10px;">`;
         sorted.forEach((t, i) => h += `<p><b>${i+1}º ${t.name}</b>: ${t.score} pts</p>`);
         h += `</div><div style="text-align:left; margin-top:20px;"><h3>📝 Revisão:</h3>`;
-        quizReport.forEach(r => h += `<div class="report-item ${r.correct?'correct-row':'wrong-row'}">${r.correct?'✅':'❌'} ${r.q}<br><small>Gabarito: ${r.expected}</small></div>`);
+        quizReport.forEach(r => h += `<div class="report-item ${r.correct?'correct-row':'wrong-row'}">${r.correct?'✅':'❌'} ${r.q}<br><small>Gabarito: ${r.expected} | Time: ${r.team}</small></div>`);
         h += `</div><button class='action-btn' style='background:var(--danger); color:white; margin-top:20px;' onclick='location.reload()'>REINICIAR</button>`;
         document.getElementById('modal-content').innerHTML = h;
         document.getElementById('exp-box').style.display = 'none';
