@@ -19,6 +19,9 @@
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; }
         
+        /* Estilo para campos desabilitados */
+        input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; }
+
         .config-box { background: var(--bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border); width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; text-align: left; margin: 10px auto; }
         .checkbox-row { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 0.9rem; }
         .hint { font-size: 0.7rem; color: #666; margin-top: 2px; line-height: 1.1; }
@@ -79,9 +82,10 @@ Envie apenas o código JSON puro.</textarea>
         <textarea id="jsonInput" placeholder="Cole aqui o código estruturado..." style="height: 60px;"></textarea>
     </div>
 
-    <div class="input-group">
-        <label>Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
+    <div class="input-group" id="surpriseGroup">
+        <label id="lblSurprise">Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
         <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
+        <div class="hint">Chances de aparecer Bomba, Roubo ou Escudo.</div>
     </div>
 
     <div class="input-group">
@@ -103,8 +107,8 @@ Envie apenas o código JSON puro.</textarea>
     </div>
 
     <div class="config-box">
-        <label><div class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote (Roubo de pontos)</div></label>
-        <label><div class="checkbox-row"><input type="checkbox" id="goldenCb" checked> 👑 Carta Dourada (Aposta)</div></label>
+        <label id="reboundLabel" class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote (Roubo de pontos)</label>
+        <label id="goldenLabel" class="checkbox-row"><input type="checkbox" id="goldenCb" checked> 👑 Carta Dourada (Aposta)</label>
     </div>
 
     <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white; font-size:1.2rem; margin-top: 10px;">INICIAR QUIZ</button>
@@ -138,16 +142,47 @@ Envie apenas o código JSON puro.</textarea>
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
 
+    // DINÂMICA DE BLOQUEIO PARA JOGO DA VELHA
     function handleModeChange() {
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
         const teamInp = document.getElementById('teamCount');
         const cardInp = document.getElementById('cardCount');
+        const surpriseInp = document.getElementById('jokerProb');
+        const surpriseVal = document.getElementById('jokerVal');
+        const reboundCb = document.getElementById('reboundCb');
+        const goldenCb = document.getElementById('goldenCb');
+        const surpriseLbl = document.getElementById('lblSurprise');
+        const reboundLbl = document.getElementById('reboundLabel');
+        const goldenLbl = document.getElementById('goldenLabel');
+
         if(isTTT) {
+            // Configurações para Jogo da Velha
             teamInp.value = 2; teamInp.disabled = true;
             cardInp.value = 9; cardInp.disabled = true;
+            
+            // Zera e Desabilita Surpresa
+            surpriseInp.value = 0; surpriseInp.disabled = true;
+            surpriseVal.innerText = "0%";
+            surpriseLbl.classList.add('disabled-label');
+
+            // Desmarca e Desabilita Extras
+            reboundCb.checked = false; reboundCb.disabled = true;
+            goldenCb.checked = false; goldenCb.disabled = true;
+            reboundLbl.classList.add('disabled-label');
+            goldenLbl.classList.add('disabled-label');
         } else {
+            // Restaura Modo Clássico
             teamInp.disabled = false;
             cardInp.disabled = false;
+            surpriseInp.disabled = false;
+            surpriseInp.value = 10;
+            surpriseVal.innerText = "10%";
+            surpriseLbl.classList.remove('disabled-label');
+
+            reboundCb.checked = true; reboundCb.disabled = false;
+            goldenCb.checked = true; goldenCb.disabled = false;
+            reboundLbl.classList.remove('disabled-label');
+            goldenLbl.classList.remove('disabled-label');
         }
     }
 
@@ -238,10 +273,7 @@ Envie apenas o código JSON puro.</textarea>
 
         modal.innerHTML = `<h1 style="color:var(--joker)">${title}</h1><p style="font-size:1.2rem">${desc}</p>`;
         cardStates[idx] = {type: 'surprise', correct: false, color: team.color, mark: icon};
-        
-        // No Jogo da Velha, carta surpresa marca a casa para o grupo atual
         if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
-
         renderScores();
     }
 
@@ -304,21 +336,11 @@ Envie apenas o código JSON puro.</textarea>
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
-        
-        // Verifica vitória no Jogo da Velha
         if(gameMode === 'tictactoe') {
             const winner = checkTTTWin();
-            if(winner) {
-                showFinalPodium(winner);
-                return;
-            }
+            if(winner) { showFinalPodium(winner); return; }
         }
-
-        // Se ninguém ganhou por linha e as cartas acabaram (ou no modo padrão)
-        if(Object.keys(cardStates).length === nCardsGlob) {
-            showFinalPodium();
-            return;
-        }
+        if(Object.keys(cardStates).length === nCardsGlob) { showFinalPodium(); return; }
 
         currentTeamIdx = (currentTeamIdx + 1) % teams.length;
         renderBoard();
@@ -327,7 +349,6 @@ Envie apenas o código JSON puro.</textarea>
     function showFinalPodium(tttWinner = null) {
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         const finalWinner = tttWinner || sorted[0];
-        
         confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
         
         const modal = document.getElementById('modal-content');
