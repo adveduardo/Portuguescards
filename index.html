@@ -19,11 +19,12 @@
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; }
         
-        .paste-btn { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
-        .hint-text { font-size: 0.75rem; color: #666; margin-top: 4px; max-width: 350px; line-height: 1.2; }
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
+        .copy-hint { position: absolute; right: 10px; top: 5px; color: var(--success); font-size: 0.7rem; font-weight: bold; }
 
-        input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; background: #e9ecef !important; }
-        
+        .paste-btn { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
+        #global-timer-display { background: var(--danger); color: white; padding: 5px 15px; border-radius: 20px; font-size: 1.2rem; font-weight: bold; min-width: 100px; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; max-width: 1200px; padding: 20px; }
         .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 600px; }
         .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; border: 4px solid transparent; }
@@ -35,14 +36,27 @@
         .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
-        #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 600px; text-align: center; }
+        #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 700px; text-align: center; max-height: 90vh; overflow-y: auto; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; }
+        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; transition: 0.2s; }
         .opt-btn.correct { background-color: var(--success) !important; color: white !important; }
         .opt-btn.wrong { background-color: var(--danger) !important; color: white !important; }
 
         #exp-box { margin-top: 15px; padding: 12px; border-radius: 8px; background: #e8f4fd; color: #2c3e50; border-left: 5px solid var(--primary); text-align: left; display: none; font-size: 0.9rem; }
         .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
+        
+        .podium-container { margin-top: 20px; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 12px; }
+        body.dark-mode .podium-container { background: #2a2a2a; }
+        .podium-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ddd; }
+        .rank-2 { color: #95a5a6; } .rank-3 { color: #d35400; }
+
+        /* Estilo do Relatório Final */
+        .report-section { margin-top: 25px; text-align: left; }
+        .report-item { margin-bottom: 12px; padding: 10px; border-radius: 8px; font-size: 0.85rem; border-left: 4px solid #ccc; background: rgba(0,0,0,0.03); }
+        .report-item.correct-row { border-left-color: var(--success); }
+        .report-item.wrong-row { border-left-color: var(--danger); }
+        .report-q { font-weight: bold; display: block; margin-bottom: 4px; }
+        .special-value { font-size: 2.5rem; color: var(--danger); font-weight: bold; display: block; margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -53,9 +67,11 @@
 
     <div class="input-group">
         <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; width:100%; cursor:pointer;">🤖 ASSISTENTE: GERAR PROMPT</button>
-        <div id="prompt-container" style="display:none; margin-top:10px; text-align:left; background:var(--bg); padding:10px; border-radius:8px;">
-            <textarea id="prompt-text" readonly style="height:140px; font-size:11px;">Aja como um professor. Gere questões de Português em JSON puro. Misture Múltipla Escolha e V/F. Para V/F, preencha apenas opções A e B, deixando C e D vazias (""). Use o campo "exp" para um comentário breve. Estrutura: [{"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}]</textarea>
-            <button onclick="copyPrompt()" style="width:100%; background:var(--success); color:white; border:none; padding:8px; border-radius:5px; margin-top:5px;">COPIAR PROMPT</button>
+        <div id="prompt-container" style="display:none; align-items: center; flex-direction: column;">
+            <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
+                <span class="copy-hint">CLIQUE PARA COPIAR</span>
+                Atue como um professor de Português. Gere [ QUANTIDADE ] questões inéditas sobre o tema [INSIRA O TEMA AQUI] seguindo estritamente o formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso (V/F). Regras: 1. Para V/F: use apenas opções A e B, deixando C e D vazias (""). 2. O campo "correct" deve conter apenas a letra da alternativa correta. 3. O campo "exp" deve conter uma explicação breve e pedagógica. Estrutura: {"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}
+            </div>
         </div>
     </div>
 
@@ -63,11 +79,6 @@
         <label>Colar JSON:</label>
         <button class="paste-btn" onclick="pasteJSON()">📋 Colar</button>
         <textarea id="jsonInput" oninput="checkJSONAuto()" placeholder="Cole o código aqui..." style="height: 50px; padding-right: 70px;"></textarea>
-    </div>
-
-    <div class="input-group">
-        <label>Nomes dos Grupos (vírgula):</label>
-        <textarea id="groupNames" placeholder="Ex: Feras, Sabidos..." style="height: 40px;"></textarea>
     </div>
 
     <div class="input-group">
@@ -79,23 +90,22 @@
     </div>
 
     <div class="input-group">
-        <label id="lblSurprise">Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
-        <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
-        <div class="hint-text">💣 <b>Bomba:</b> Perde pontos | 🥷 <b>Roubo:</b> Tira do rival | 👑 <b>Dourada:</b> Pontos x2</div>
+        <label id="jokerLabel">Probabilidade Surpresa: <b id="jokerVal">15%</b></label>
+        <input type="range" id="jokerProb" min="0" max="50" value="15" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
     </div>
 
     <div class="input-group">
-        <label id="lblTeam">Grupos:</label>
-        <input type="number" id="teamCount" value="2" min="1" max="10">
+        <label id="lblTeam">Quantidade de Grupos:</label>
+        <input type="number" id="teamCount" value="4">
     </div>
 
     <div class="input-group">
         <label id="lblCard">Total de Cartões:</label>
-        <input type="number" id="cardCount" value="15" min="1" max="100">
+        <input type="number" id="cardCount" value="15">
     </div>
 
     <div class="config-box">
-        <label class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Rebote Ativado</label>
+        <label class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Ativar Rebote</label>
     </div>
 
     <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white; margin-top: 10px;">INICIAR</button>
@@ -113,21 +123,30 @@
 
 <div id="modal-overlay">
     <div id="modal">
+        <div id="rebote-msg" style="color:var(--joker); font-weight:bold; margin-bottom:10px; display:none;">🏀 REBOTE: VALE METADE DOS PONTOS!</div>
         <div id="modal-content"></div>
         <div id="exp-box"></div>
-        <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white; margin-top:15px;" onclick="closeModal()">PRÓXIMA RODADA</button>
+        <div id="modal-actions" style="margin-top:15px; display:flex; gap:10px; flex-direction:column;">
+            <button id="btn-rebound" class="action-btn" style="display:none; width:100%; background:var(--joker); color:white;">🏀 PASSAR PARA REBOTE</button>
+            <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA RODADA</button>
+        </div>
     </div>
 </div>
 
 <script>
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
-    let gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, surpriseProb = 10, tttBoard = Array(9).fill(null);
+    let gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, surpriseProb = 15, tttBoard = Array(9).fill(null);
+    let quizReport = []; // ARMAZENA O RELATÓRIO FINAL
 
-    function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
-    function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
-    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-    
+    function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; }
+    function copyPromptText() {
+        const text = "Atue como um professor de Português. Gere [ QUANTIDADE ] questões inéditas sobre o tema [INSIRA O TEMA AQUI] seguindo estritamente o formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso (V/F). Regras: 1. Para V/F: use apenas opções A e B, deixando C e D vazias (\"\"). 2. O campo \"correct\" deve conter apenas a letra da alternativa correta. 3. O campo \"exp\" deve conter uma explicação breve e pedagógica. Estrutura: {\"q\":\"?\",\"a\":\"A\",\"b\":\"B\",\"c\":\"\",\"d\":\"\",\"correct\":\"A\",\"pts\":10,\"exp\":\"...\"}";
+        navigator.clipboard.writeText(text); alert("Prompt copiado!");
+    }
+
+    async function pasteJSON() { try { const t = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = t; checkJSONAuto(); } catch (e) { alert('Erro ao colar.'); } }
+
     function checkJSONAuto() {
         const hasJSON = document.getElementById('jsonInput').value.trim() !== "";
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
@@ -135,19 +154,16 @@
         document.getElementById('cardCount').disabled = hasJSON || isTTT;
     }
 
-    async function pasteJSON() { 
-        try { const text = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = text; checkJSONAuto(); } 
-        catch (err) { alert('Erro ao colar.'); } 
-    }
-
     function handleModeChange() {
-        const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
+        const mode = document.getElementById('gameModeSel').value;
+        const isTTT = mode === 'tictactoe';
         if(isTTT) {
             document.getElementById('teamCount').value = 2; document.getElementById('teamCount').disabled = true;
             document.getElementById('cardCount').value = 9; document.getElementById('cardCount').disabled = true;
             document.getElementById('jokerProb').value = 0; document.getElementById('jokerVal').innerText = "0%";
-            document.getElementById('reboundCb').checked = false;
         } else {
+            document.getElementById('teamCount').value = 4; document.getElementById('cardCount').value = 15;
+            document.getElementById('jokerProb').value = 15; document.getElementById('jokerVal').innerText = "15%";
             document.getElementById('teamCount').disabled = false; document.getElementById('cardCount').disabled = false;
         }
     }
@@ -157,21 +173,15 @@
         const jsonText = document.getElementById('jsonInput').value;
         gameMode = document.getElementById('gameModeSel').value;
         if(jsonText.trim() !== "") {
-            try { questions = JSON.parse(jsonText).map(i => ({...i, pts: i.pts || 10, exp: i.exp || "Gabarito confirmado."})); } 
+            try { questions = JSON.parse(jsonText).map(i => ({...i, pts: parseInt(i.pts) || 10, exp: i.exp || "Gabarito confirmado."})); } 
             catch(e) { alert("Erro no JSON!"); return; }
         }
-
-        const nameInput = document.getElementById('groupNames').value.trim();
-        let names = nameInput !== "" ? nameInput.split(',').map(n => n.trim()).filter(n => n !== "") : [];
         const nTeamsInp = parseInt(document.getElementById('teamCount').value);
-        const finalCount = Math.max(names.length, nTeamsInp);
         teams = [];
-        for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
-
+        for(let i=0; i<nTeamsInp; i++) teams.push({name: `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
         nCardsGlob = gameMode === 'tictactoe' ? 9 : (questions.length || 15);
         surpriseProb = parseInt(document.getElementById('jokerProb').value);
         totalSecondsLeft = 30 * 60;
-        
         startGlobalTimer();
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
@@ -181,9 +191,8 @@
     function startGlobalTimer() {
         globalTimerInterval = setInterval(() => {
             totalSecondsLeft--;
-            let mins = Math.floor(totalSecondsLeft / 60);
-            let secs = totalSecondsLeft % 60;
-            document.getElementById('global-timer-display').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            let m = Math.floor(totalSecondsLeft / 60), s = totalSecondsLeft % 60;
+            document.getElementById('global-timer-display').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
             if(totalSecondsLeft <= 0) { clearInterval(globalTimerInterval); showFinal(); }
         }, 1000);
     }
@@ -194,10 +203,9 @@
         grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
         grid.innerHTML = '';
         for (let i = 0; i < nCardsGlob; i++) {
-            const card = document.createElement('div');
-            const st = cardStates[i];
+            const card = document.createElement('div'), st = cardStates[i];
             card.className = 'card' + (st ? (st.correct ? ' used-correct' : ' used-wrong') : '');
-            if(st?.isGolden) card.classList.add('golden');
+            if(st?.isGolden && st.correct) card.classList.add('golden');
             card.innerHTML = st ? (st.mark || '') : (i + 1);
             if(st) card.style.borderColor = st.color;
             card.onclick = () => handleCardClick(i, card);
@@ -224,61 +232,81 @@
         const modal = document.getElementById('modal-content');
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'block';
+        document.getElementById('btn-rebound').style.display = 'none';
         const team = teams[currentTeamIdx];
         if(type === 'bomb') {
-            modal.innerHTML = `<h1>💣 BOMBA!</h1><p>${team.name} perdeu 10 pontos!</p>`;
-            team.score -= 10;
-            cardStates[idx] = {correct: false, color: team.color, mark: '💣'};
+            const penalty = Math.floor(Math.random() * 6) + 5;
+            modal.innerHTML = `<h1>💣 BOMBA!</h1><p>${team.name} foi atingido!</p><span class="special-value">-${penalty} pts</span>`;
+            team.score -= penalty; cardStates[idx] = {correct: false, color: team.color, mark: '💣'};
         } else {
-            const vic = teams.find((t, i) => i !== currentTeamIdx && t.score > 0);
-            modal.innerHTML = `<h1>🥷 ROUBO!</h1><p>${vic ? team.name + ' roubou 10 pts de ' + vic.name : 'Ninguém para roubar...'}</p>`;
-            if(vic) { vic.score -= 10; team.score += 10; }
+            const others = teams.filter((t, i) => i !== currentTeamIdx);
+            const victim = others[Math.floor(Math.random() * others.length)];
+            modal.innerHTML = `<h1>🥷 ROUBO!</h1><p>${team.name} roubou 10 pontos de <b>${victim.name}</b>!</p><span class="special-value" style="color:var(--success)">+10 pts</span>`;
+            victim.score -= 10; team.score += 10;
             cardStates[idx] = {correct: true, color: team.color, mark: '🥷'};
         }
         renderBoard();
     }
 
     function showQuestion(idx, isGolden) {
-        const q = questions[idx % questions.length] || {q:"?",a:"A",b:"B",correct:"A",pts:10,exp:"..."};
-        const modal = document.getElementById('modal-content');
-        const expBox = document.getElementById('exp-box');
+        const qIdx = (questions.length > 0) ? idx % questions.length : null;
+        const q = (qIdx !== null) ? questions[qIdx] : {q:"Questão Exemplo?", a:"A", b:"B", c:"", d:"", correct:"A", pts:10, exp:"Exemplo"};
+        const modal = document.getElementById('modal-content'), expBox = document.getElementById('exp-box');
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
+        document.getElementById('btn-rebound').style.display = 'none';
+        document.getElementById('rebote-msg').style.display = 'none';
         expBox.style.display = 'none';
-        
-        const isVF = !q.c || q.c === "";
+        const isVF = !q.c || q.c.trim() === "";
         modal.innerHTML = `${isGolden ? "<h2 style='color:#f1c40f'>👑 CARTA DOURADA</h2>" : ""}<h2>${q.q}</h2><div class="options-grid">
             <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx}, ${isGolden})">A: ${q.a}</button>
             <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx}, ${isGolden})">B: ${q.b}</button>
             ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx}, ${isGolden})">C: ${q.c}</button>` : ''}
             ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx}, ${isGolden})">D: ${q.d}</button>` : ''}
-        </div><p>Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+        </div><p id="turn-label">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
     }
 
     function checkAns(btn, chosen, correct, idx, isGolden) {
-        const q = questions[idx % questions.length];
-        const isCorrect = chosen === correct.trim();
-        const allBtns = document.querySelectorAll('.opt-btn');
+        const qIdx = (questions.length > 0) ? idx % questions.length : null;
+        const q = (qIdx !== null) ? questions[qIdx] : {pts:10, exp:"Exemplo", correct: "A", c:"", q:"Questão"};
+        const isCorrect = chosen === correct.trim(), allBtns = document.querySelectorAll('.opt-btn');
+        const numOpts = (q.c && q.c.trim() !== "") ? 4 : 2;
 
         if(isCorrect) {
             btn.classList.add('correct');
-            teams[currentTeamIdx].score += isGolden ? q.pts * 2 : q.pts;
+            let gain = isGolden ? q.pts * 2 : q.pts;
+            if(isReboundActive) gain = Math.floor(gain / 2);
+            teams[currentTeamIdx].score += gain;
             cardStates[idx] = {correct: true, color: teams[currentTeamIdx].color, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅', isGolden: isGolden};
             if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+            quizReport.push({q: q.q, correct: true, ans: chosen, expected: correct, team: teams[currentTeamIdx].name});
             showFeedback(q);
+            document.getElementById('btn-continue').style.display = 'block';
+            document.getElementById('btn-rebound').style.display = 'none';
+            allBtns.forEach(b => b.disabled = true);
         } else {
             btn.classList.add('wrong');
-            if(document.getElementById('reboundCb').checked && !isReboundActive) {
-                isReboundActive = true; currentTeamIdx = (currentTeamIdx + 1) % teams.length;
-                renderBoard(); setTimeout(() => { allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); alert("🏀 REBOTE!"); }, 500);
-                return;
+            const rebBtn = document.getElementById('btn-rebound');
+            if(document.getElementById('reboundCb').checked && !isReboundActive && numOpts > 2) {
+                isReboundActive = true;
+                rebBtn.style.display = 'block';
+                allBtns.forEach(b => b.disabled = true);
+                rebBtn.onclick = () => {
+                    currentTeamIdx = (currentTeamIdx + 1) % teams.length;
+                    renderBoard();
+                    document.getElementById('rebote-msg').style.display = 'block';
+                    document.getElementById('turn-label').innerHTML = `Vez de: <b>${teams[currentTeamIdx].name}</b>`;
+                    allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; });
+                    rebBtn.style.display = 'none';
+                };
             } else {
                 if(gameMode !== 'tictactoe') cardStates[idx] = {correct: false, color: teams[currentTeamIdx].color, mark: '❌'};
+                quizReport.push({q: q.q, correct: false, ans: chosen, expected: correct, team: teams[currentTeamIdx].name});
                 showFeedback(q);
+                document.getElementById('btn-continue').style.display = 'block';
+                allBtns.forEach(b => b.disabled = true);
             }
         }
-        document.getElementById('btn-continue').style.display = 'block';
-        allBtns.forEach(b => b.disabled = true);
     }
 
     function showFeedback(q) {
@@ -295,18 +323,43 @@
         }
         if(Object.keys(cardStates).length === nCardsGlob) { showFinal(); return; }
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
-        isReboundActive = false;
-        renderBoard();
+        isReboundActive = false; renderBoard();
     }
 
     function showFinal() {
         clearInterval(globalTimerInterval);
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         confetti({ particleCount: 200, spread: 70 });
-        document.getElementById('modal-content').innerHTML = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1><button class='action-btn' style='background:var(--danger); color:white;' onclick='location.reload()'>REINICIAR</button>`;
+        
+        let finalHtml = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1>`;
+        finalHtml += `<div class="podium-container"><h3>📊 Classificação Final:</h3>`;
+        sorted.forEach((team, index) => {
+            const rankClass = index === 1 ? 'rank-2' : (index === 2 ? 'rank-3' : '');
+            finalHtml += `<div class="podium-item ${rankClass}"><span><b>${index + 1}º</b> ${team.name}</span><span>${team.score} pts</span></div>`;
+        });
+        finalHtml += `</div>`;
+
+        // SEÇÃO DO RELATÓRIO FINAL
+        finalHtml += `<div class="report-section"><h3>📝 Revisão Pedagógica:</h3>`;
+        quizReport.forEach(item => {
+            finalHtml += `
+                <div class="report-item ${item.correct ? 'correct-row' : 'wrong-row'}">
+                    <span class="report-q">${item.correct ? '✅' : '❌'} ${item.q}</span>
+                    <small><b>Grupo:</b> ${item.team} | <b>Resposta:</b> ${item.ans} | <b>Gabarito:</b> ${item.expected}</small>
+                </div>`;
+        });
+        if(quizReport.length === 0) finalHtml += `<p>Nenhuma questão respondida.</p>`;
+        finalHtml += `</div>`;
+
+        finalHtml += `<button class='action-btn' style='background:var(--danger); color:white; margin-top:20px;' onclick='location.reload()'>REINICIAR</button>`;
+        
+        document.getElementById('modal-content').innerHTML = finalHtml;
         document.getElementById('exp-box').style.display = 'none';
+        document.getElementById('btn-continue').style.display = 'none';
         document.getElementById('modal-overlay').style.display = 'flex';
     }
+
+    function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
 </script>
 </body>
 </html>
