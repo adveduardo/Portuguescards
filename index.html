@@ -47,7 +47,6 @@
 
         .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.2s; }
         
-        /* Estilos Relatório */
         .report-item { text-align: left; background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 8px; border-left: 5px solid var(--danger); }
         .report-q { font-weight: bold; color: var(--text); margin-bottom: 3px; }
         .report-a { color: var(--success); font-size: 0.9rem; }
@@ -84,6 +83,7 @@ Envie apenas o código JSON puro.</textarea>
     <div class="input-group">
         <label>Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
         <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
+        <div class="hint">Chances de Bomba, Roubo ou Escudo.</div>
     </div>
 
     <div class="input-group">
@@ -134,7 +134,7 @@ Envie apenas o código JSON puro.</textarea>
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
     let gameMode = 'classic', isReboundActive = false, surpriseProb = 10;
-    let wrongQuestionsLog = []; // Armazena erros para o relatório
+    let wrongQuestionsLog = []; 
 
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
@@ -228,7 +228,7 @@ Envie apenas o código JSON puro.</textarea>
         else if(type === 'steal') { title = "🥷 ROUBO!"; icon = "🥷"; const victim = teams.find((t, i) => i !== currentTeamIdx && t.score > 0); if(victim) { victim.score -= 10; team.score += 10; desc = "Roubou 10 pts!"; } else desc = "Ninguém para roubar!"; }
         else { title = "🛡️ ESCUDO!"; icon = "🛡️"; desc = "Proteção ativada!"; team.shield = true; }
 
-        modal.innerHTML = `<h1 style="color:var(--joker)">${title}</h1><p>${desc}</p>`;
+        modal.innerHTML = `<h1 style="color:var(--joker)">${title}</h1><p style="font-size:1.2rem">${desc}</p>`;
         cardStates[idx] = {type: 'surprise', correct: false, color: team.color, mark: icon};
         renderScores();
     }
@@ -259,7 +259,6 @@ Envie apenas o código JSON puro.</textarea>
             document.getElementById('btn-continue').style.display = 'block';
         } else {
             btn.classList.add('wrong');
-            // Logar erro para o relatório
             if(!wrongQuestionsLog.find(x => x.q === q[0])) {
                 let correctText = q[['A','B','C','D'].indexOf(correct.trim()) + 1];
                 wrongQuestionsLog.push({ q: q[0], a: `${correct.trim()}: ${correctText}` });
