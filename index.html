@@ -19,7 +19,6 @@
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; }
         
-        /* Estilo para campos desabilitados */
         input:disabled, select:disabled, .disabled-label { opacity: 0.4; cursor: not-allowed; }
 
         .config-box { background: var(--bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border); width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; text-align: left; margin: 10px auto; }
@@ -82,6 +81,11 @@ Envie apenas o código JSON puro.</textarea>
         <textarea id="jsonInput" placeholder="Cole aqui o código estruturado..." style="height: 60px;"></textarea>
     </div>
 
+    <div class="input-group">
+        <label>Nomes dos Grupos (separe por vírgula):</label>
+        <textarea id="groupNames" placeholder="Ex: Feras, Sabidos, Elite..." style="height: 40px;"></textarea>
+    </div>
+
     <div class="input-group" id="surpriseGroup">
         <label id="lblSurprise">Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
         <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
@@ -97,7 +101,7 @@ Envie apenas o código JSON puro.</textarea>
     </div>
 
     <div class="input-group">
-        <label id="lblTeam">Grupos (1-10):</label>
+        <label id="lblTeam">Quantidade de Grupos (1-10):</label>
         <input type="number" id="teamCount" value="2" min="1" max="10">
     </div>
 
@@ -142,7 +146,6 @@ Envie apenas o código JSON puro.</textarea>
     function copyPrompt() { const t = document.getElementById('prompt-text'); t.select(); document.execCommand('copy'); alert("Prompt Copiado!"); }
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
 
-    // DINÂMICA DE BLOQUEIO PARA JOGO DA VELHA
     function handleModeChange() {
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
         const teamInp = document.getElementById('teamCount');
@@ -156,29 +159,22 @@ Envie apenas o código JSON puro.</textarea>
         const goldenLbl = document.getElementById('goldenLabel');
 
         if(isTTT) {
-            // Configurações para Jogo da Velha
             teamInp.value = 2; teamInp.disabled = true;
             cardInp.value = 9; cardInp.disabled = true;
-            
-            // Zera e Desabilita Surpresa
             surpriseInp.value = 0; surpriseInp.disabled = true;
             surpriseVal.innerText = "0%";
             surpriseLbl.classList.add('disabled-label');
-
-            // Desmarca e Desabilita Extras
             reboundCb.checked = false; reboundCb.disabled = true;
             goldenCb.checked = false; goldenCb.disabled = true;
             reboundLbl.classList.add('disabled-label');
             goldenLbl.classList.add('disabled-label');
         } else {
-            // Restaura Modo Clássico
             teamInp.disabled = false;
             cardInp.disabled = false;
             surpriseInp.disabled = false;
             surpriseInp.value = 10;
             surpriseVal.innerText = "10%";
             surpriseLbl.classList.remove('disabled-label');
-
             reboundCb.checked = true; reboundCb.disabled = false;
             goldenCb.checked = true; goldenCb.disabled = false;
             reboundLbl.classList.remove('disabled-label');
@@ -196,17 +192,25 @@ Envie apenas o código JSON puro.</textarea>
         }
 
         gameMode = document.getElementById('gameModeSel').value;
-        const nTeams = parseInt(document.getElementById('teamCount').value);
+        
+        // LÓGICA INTELIGENTE DE NOMES DE GRUPOS
+        const namesStr = document.getElementById('groupNames').value;
+        const customNames = namesStr.split(',').map(n => n.trim()).filter(n => n !== "");
+        const nTeamsDesired = parseInt(document.getElementById('teamCount').value);
+        
+        const finalTeamCount = Math.max(customNames.length, nTeamsDesired);
+
+        teams = [];
+        for(let i=1; i<=finalTeamCount; i++) {
+            let name = customNames[i-1] || `Grupo ${i}`;
+            teams.push({name: name, score: 0, color: `hsl(${(i*360)/finalTeamCount}, 70%, 50%)`, shield: false});
+        }
+
         nCardsGlob = parseInt(document.getElementById('cardCount').value);
         surpriseProb = parseInt(document.getElementById('jokerProb').value);
 
         if(questions.length === 0) {
             for(let i=0; i<nCardsGlob; i++) questions.push([`Pergunta Exemplo ${i+1}?`, "Certa", "Errada", "Errada", "Errada", "A", 10]);
-        }
-
-        teams = [];
-        for(let i=1; i<=nTeams; i++) {
-            teams.push({name: `Grupo ${i}`, score: 0, color: `hsl(${(i*360)/nTeams}, 70%, 50%)`, shield: false});
         }
         
         wrongQuestionsLog = [];
