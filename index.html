@@ -31,8 +31,8 @@
         .grid.tictactoe { grid-template-columns: repeat(3, 1fr); max-width: 600px; }
         .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; border: 4px solid transparent; }
         .card.used { opacity: 0.8; box-shadow: none; }
-        .card.used-correct { background: var(--card-bg); color: var(--text); }
-        .card.used-wrong { background: var(--danger); color: white; }
+        .card.used-correct { background: var(--card-bg) !important; color: var(--text) !important; }
+        .card.used-wrong { background: var(--danger) !important; color: white !important; }
 
         .top-controls { width: 100%; display: flex; justify-content: space-between; padding: 10px 20px; align-items: center; }
         .score-board { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; width: 100%; flex-wrap: wrap; }
@@ -42,7 +42,12 @@
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
         #modal { background: var(--card-bg); padding: 25px; border-radius: 20px; width: 100%; max-width: 600px; text-align: center; max-height: 85vh; overflow-y: auto; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; }
+        .opt-btn { padding: 15px; border: 2px solid var(--primary); border-radius: 10px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; transition: background 0.2s, color 0.2s; }
+        
+        /* CORREÇÃO DAS CORES DE FEEDBACK */
+        .opt-btn.correct { background-color: var(--success) !important; color: white !important; border-color: transparent !important; }
+        .opt-btn.wrong { background-color: var(--danger) !important; color: white !important; border-color: transparent !important; }
+
         .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; }
     </style>
 </head>
@@ -140,11 +145,9 @@
     function checkJSONAuto() {
         const hasJSON = document.getElementById('jsonInput').value.trim() !== "";
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
-        
         document.getElementById('teamCount').disabled = hasJSON || isTTT;
         document.getElementById('cardCount').disabled = hasJSON || isTTT;
         document.getElementById('jokerProb').disabled = hasJSON || isTTT;
-
         if(hasJSON || isTTT) {
             document.getElementById('jokerProb').value = 0;
             document.getElementById('jokerVal').innerText = "0%";
@@ -161,27 +164,10 @@
 
     function handleModeChange() {
         const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
-        const teamInp = document.getElementById('teamCount');
-        const cardInp = document.getElementById('cardCount');
-        const surpriseInp = document.getElementById('jokerProb');
-        const reboundCb = document.getElementById('reboundCb');
-        const goldenCb = document.getElementById('goldenCb');
-
         if(isTTT) {
-            teamInp.value = 2; teamInp.disabled = true;
-            cardInp.value = 9; cardInp.disabled = true;
-            surpriseInp.value = 0; surpriseInp.disabled = true;
-            document.getElementById('jokerVal').innerText = "0%";
-            reboundCb.checked = false; reboundCb.disabled = true;
-            goldenCb.checked = false; goldenCb.disabled = true;
-        } else {
-            teamInp.disabled = false;
-            cardInp.disabled = false;
-            surpriseInp.disabled = false;
-            surpriseInp.value = 10;
-            document.getElementById('jokerVal').innerText = "10%";
-            reboundCb.disabled = false; reboundCb.checked = true;
-            goldenCb.disabled = false; goldenCb.checked = true;
+            document.getElementById('teamCount').value = 2;
+            document.getElementById('cardCount').value = 9;
+            document.getElementById('reboundCb').checked = false;
         }
     }
 
@@ -208,9 +194,7 @@
     function startGame() {
         if(audioCtx.state === 'suspended') audioCtx.resume();
         const jsonText = document.getElementById('jsonInput').value;
-        
         gameMode = document.getElementById('gameModeSel').value;
-
         if(jsonText.trim() !== "") {
             try { 
                 questions = JSON.parse(jsonText).map(item => [item.q, item.a, item.b, item.c, item.d, item.correct, item.pts || 10]);
@@ -224,13 +208,11 @@
         let names = nameInput !== "" ? nameInput.split(',').map(n => n.trim()).filter(n => n !== "") : [];
         const nTeamsInp = parseInt(document.getElementById('teamCount').value);
         const finalCount = Math.max(names.length, nTeamsInp);
-        
         teams = [];
         for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`, shield: false});
 
         surpriseProb = parseInt(document.getElementById('jokerProb').value);
         totalSecondsLeft = parseInt(document.getElementById('globalTimeLimit').value) * 60;
-        
         startGlobalTimer();
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
@@ -274,10 +256,7 @@
     function handleCardClick(idx, card) {
         if(cardStates[idx]) return;
         card.style.transform = 'rotateY(90deg)';
-        setTimeout(() => { 
-            card.style.transform = 'rotateY(0deg)'; 
-            showQuestion(idx);
-        }, 200);
+        setTimeout(() => { card.style.transform = 'rotateY(0deg)'; showQuestion(idx); }, 200);
     }
 
     function showQuestion(idx) {
@@ -285,9 +264,7 @@
         const modal = document.getElementById('modal-content');
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-        
         const isVF = q[2] === "C" || q[2] === "" || !q[2] || q[1].toLowerCase().includes("falso") || q[1].toLowerCase().includes("verdadeiro");
-
         modal.innerHTML = `<h2>${q[0]}</h2>
             <div class="options-grid">
                 <button class="opt-btn" onclick="checkAns(this, 'A', '${q[5]}', ${idx}, ${q[6]})">A: ${q[1]}</button>
