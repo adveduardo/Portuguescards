@@ -107,7 +107,7 @@
         <button onclick="togglePrompt()" style="background:transparent; color:var(--text); text-decoration: underline; border:none; cursor:pointer; margin-top:10px; font-size: 0.8rem;">Ver Prompt Manual</button>
         <div id="prompt-container" style="display:none; width: 100%;">
             <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
-                <span id="prompt-text">Atue como um professor de Português. Gere questões inéditas seguindo estritamente o formato JSON puro.</span>
+                <span id="prompt-text">Atue como um professor de Português. Gere 15 questões inéditas sobre o tema [TEMA] seguindo estritamente o formato JSON puro sem formatação markdown. Misture Múltipla Escolha e V/F. Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: [{"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}]</span>
             </div>
         </div>
     </div>
@@ -189,7 +189,7 @@
 
     function updatePromptView() {
         const theme = document.getElementById('themeInput').value || "[TEMA]";
-        const qtd = document.getElementById('qtdInput').value || "15";
+        const qtd = document.getElementById('qtdInput').value || "[QUESTÕES]";
         document.getElementById('prompt-text').innerText = `Atue como um professor de Português. Gere ${qtd} questões inéditas sobre o tema ${theme} seguindo estritamente o formato JSON puro sem formatação markdown. Misture Múltipla Escolha e V/F. Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: [{"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}]`;
     }
 
