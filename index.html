@@ -17,23 +17,23 @@
         #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
         .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; }
         label { font-weight: bold; font-size: 0.9rem; }
-        input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; transition: 0.3s; }
+        input[type="number"], input[type="range"], select, textarea { width: 100%; max-width: 350px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 16px; }
         
-        /* Estilo para campos desabilitados (Cinza) */
-        input:disabled, select:disabled, .disabled-label { opacity: 0.5; background: #e0e0e0 !important; cursor: not-allowed; color: #777 !important; }
-
-        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.8rem; overflow-x: auto; width: 100%; max-width: 400px; position: relative; margin-top: 10px; cursor: pointer; }
+        /* Bloco de Código para o Prompt */
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.8rem; overflow-x: auto; width: 100%; max-width: 400px; position: relative; margin-top: 10px; }
         .copy-hint { position: absolute; right: 10px; top: 5px; color: var(--success); font-size: 0.7rem; font-weight: bold; }
 
         .paste-btn { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
         #global-timer-display { background: var(--danger); color: white; padding: 5px 15px; border-radius: 20px; font-size: 1.2rem; font-weight: bold; min-width: 100px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; width: 100%; max-width: 1200px; padding: 20px; }
-        .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 500px; }
-        
+        input:disabled, select:disabled { opacity: 0.4; background: #e9ecef !important; }
+        .config-box { background: var(--bg); padding: 12px; border-radius: 10px; border: 1px solid var(--border); width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; text-align: left; margin: 10px auto; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; max-width: 1200px; padding: 20px; }
         .card { aspect-ratio: 4/3; background: var(--primary); color: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 6px 0 #3d6dbd; font-weight: bold; border: 4px solid transparent; }
-        .card.used-correct { background: var(--card-bg) !important; color: var(--text) !important; box-shadow: none; }
-        .card.used-wrong { background: var(--danger) !important; color: white !important; box-shadow: none; }
+        .card.used { opacity: 0.8; box-shadow: none; }
+        .card.used-correct { background: var(--card-bg) !important; color: var(--text) !important; }
+        .card.used-wrong { background: var(--danger) !important; color: white !important; }
 
         .team-card { background: var(--card-bg); padding: 10px; border-radius: 10px; border: 3px solid var(--border); min-width: 90px; text-align: center; }
         .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
@@ -46,7 +46,6 @@
         .opt-btn.wrong { background-color: var(--danger) !important; color: white !important; }
         
         #feedback-area { margin-top: 15px; padding: 15px; border-radius: 10px; display: none; background: #e8f4fd; color: #2c3e50; border-left: 5px solid var(--primary); text-align: left; }
-        .action-btn { padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -57,10 +56,10 @@
 
     <div class="input-group">
         <button onclick="togglePrompt()" style="background:#333; color:white; padding:10px; border-radius:8px; border:none; width:100%; cursor:pointer;">🤖 ASSISTENTE: COPIAR PROMPT</button>
-        <div id="prompt-container" style="display:none; align-items: center; flex-direction: column;">
-            <div class="code-block" onclick="copyPromptText()">
+        <div id="prompt-container" style="display:none; margin-top:10px; align-items: center; flex-direction: column;">
+            <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
                 <span class="copy-hint">CLIQUE PARA COPIAR</span>
-                Aja como um professor. Gere questões de [ASSUNTO] em JSON puro. Misture Múltipla Escolha e Verdadeiro ou Falso. Use o campo "exp" para o gabarito comentado. Estrutura: [{"q":"?","a":"A","b":"B","c":"C","d":"D","correct":"A","pts":10,"exp":"..."}]
+                Aja como um professor. Gere questões de [ASSUNTO] em JSON puro. Misture Múltipla Escolha e Verdadeiro ou Falso. Use o campo "exp" para gabarito comentado. Estrutura: [{"q":"?","a":"A","b":"B","c":"C","d":"D","correct":"A","pts":10,"exp":"..."}]
             </div>
         </div>
     </div>
@@ -72,31 +71,25 @@
     </div>
 
     <div class="input-group">
-        <label>Modo de Jogo:</label>
-        <select id="gameModeSel" onchange="handleModeChange()">
-            <option value="classic">Modo Padrão</option>
-            <option value="tictactoe">Jogo da Velha (3x3)</option>
+        <label>Nomes dos Grupos (vírgula):</label>
+        <textarea id="groupNames" placeholder="Time A, Time B..." style="height: 40px;"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Tempo Total (Minutos):</label>
+        <input type="number" id="globalTimeLimit" value="30">
+    </div>
+
+    <div class="input-group">
+        <label>Modo:</label>
+        <select id="gameModeSel">
+            <option value="classic">Padrão</option>
+            <option value="tictactoe">Jogo da Velha</option>
         </select>
     </div>
 
-    <div class="input-group">
-        <label id="lblTeam">Quantidade de Grupos:</label>
-        <input type="number" id="teamCount" value="2" min="1" max="10">
-    </div>
-
-    <div class="input-group">
-        <label id="lblCard">Total de Cartões:</label>
-        <input type="number" id="cardCount" value="15" min="1" max="100">
-    </div>
-
-    <div class="input-group">
-        <label id="lblSurprise">Probabilidade Surpresa: <b id="jokerVal">10%</b></label>
-        <input type="range" id="jokerProb" min="0" max="50" value="10" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
-    </div>
-
-    <div class="input-group">
-        <label>Nomes dos Grupos (vírgula):</label>
-        <textarea id="groupNames" placeholder="Time A, Time B..." style="height: 40px;"></textarea>
+    <div class="config-box">
+        <label class="checkbox-row"><input type="checkbox" id="reboundCb" checked> 🏀 Ativar Rebote</label>
     </div>
 
     <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white; margin-top: 10px;">INICIAR</button>
@@ -104,8 +97,10 @@
 
 <div id="game-area" style="display:none; width: 100%;">
     <div class="top-controls">
-        <button onclick="toggleDarkMode()">🌙</button>
-        <div id="global-timer-display">30:00</div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <button onclick="toggleDarkMode()">🌙</button>
+            <div id="global-timer-display">30:00</div>
+        </div>
         <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:8px;">SAIR</button>
     </div>
     <div id="score-board" class="score-board"></div>
@@ -122,56 +117,35 @@
 
 <script>
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
-    let gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, surpriseProb = 10;
+    let musicNodes = [], isMusicMuted = false, globalTimerInterval, totalSecondsLeft;
+    let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, nCardsGlob = 15;
+    let gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0;
 
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; }
     
     function copyPromptText() {
-        const text = "Aja como um professor. Gere questões de [ASSUNTO] em formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso. Para V/F, use as opções A e B. Adicione o campo 'exp' com um gabarito comentado. Estrutura: [{\"q\": \"Pergunta?\", \"a\": \"Opção A\", \"b\": \"Opção B\", \"c\": \"Opção C\", \"d\": \"Opção D\", \"correct\": \"A\", \"pts\": 10, \"exp\": \"Explicação.\"}]";
+        const text = "Aja como um professor. Gere questões de [INSIRA O ASSUNTO] em formato JSON puro. Misture questões de Múltipla Escolha e Verdadeiro ou Falso. Para V/F, use as opções A e B. Adicione o campo 'exp' com um gabarito comentado. Estrutura: [{\"q\": \"Pergunta?\", \"a\": \"Opção A\", \"b\": \"Opção B\", \"c\": \"Opção C\", \"d\": \"Opção D\", \"correct\": \"A\", \"pts\": 10, \"exp\": \"Explicação.\"}]";
         navigator.clipboard.writeText(text);
-        alert("Prompt copiado!");
+        alert("Prompt copiado com sucesso! Agora é só colar no Gemini.");
     }
 
     async function pasteJSON() { try { const text = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = text; } catch (e) { alert('Erro ao colar.'); } }
-
-    function handleModeChange() {
-        const isTTT = document.getElementById('gameModeSel').value === 'tictactoe';
-        const teamInp = document.getElementById('teamCount');
-        const cardInp = document.getElementById('cardCount');
-        const surpriseInp = document.getElementById('jokerProb');
-
-        if(isTTT) {
-            teamInp.value = 2; teamInp.disabled = true;
-            cardInp.value = 9; cardInp.disabled = true;
-            surpriseInp.value = 0; surpriseInp.disabled = true;
-            document.getElementById('jokerVal').innerText = "0%";
-        } else {
-            teamInp.disabled = false; cardInp.disabled = false; surpriseInp.disabled = false;
-            surpriseInp.value = 10; document.getElementById('jokerVal').innerText = "10%";
-        }
-    }
 
     function startGame() {
         if(audioCtx.state === 'suspended') audioCtx.resume();
         const jsonText = document.getElementById('jsonInput').value;
         if(jsonText.trim() !== "") {
-            try { questions = JSON.parse(jsonText).map(i => ({...i, pts: i.pts || 10, exp: i.exp || "Correto!"})); } 
+            try { questions = JSON.parse(jsonText).map(i => ({...i, pts: i.pts || 10, exp: i.exp || "Gabarito confirmado."})); } 
             catch(e) { alert("Erro no JSON!"); return; }
         }
         
         const nameInput = document.getElementById('groupNames').value.trim();
-        let names = nameInput !== "" ? nameInput.split(',').map(n => n.trim()) : [];
-        const nTeamsInp = parseInt(document.getElementById('teamCount').value);
-        const finalCount = Math.max(names.length, nTeamsInp);
-        
-        teams = [];
-        for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
+        let names = nameInput !== "" ? nameInput.split(',').map(n => n.trim()) : ["Grupo 1", "Grupo 2"];
+        teams = names.map((n, i) => ({name: n, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`}));
 
         gameMode = document.getElementById('gameModeSel').value;
-        nCardsGlob = gameMode === 'tictactoe' ? 9 : (questions.length || 15);
-        surpriseProb = parseInt(document.getElementById('jokerProb').value);
-        totalSecondsLeft = 30 * 60;
+        nCardsGlob = gameMode === 'tictactoe' ? 9 : questions.length || 15;
+        totalSecondsLeft = parseInt(document.getElementById('globalTimeLimit').value) * 60;
         
         startGlobalTimer();
         document.getElementById('setup-menu').style.display = 'none';
@@ -193,12 +167,12 @@
         const sb = document.getElementById('score-board');
         sb.innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}" style="border-color:${t.color}"><b>${t.name}</b><br>${t.score}</div>`).join('');
         const grid = document.getElementById('grid');
-        grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
+        grid.style.gridTemplateColumns = `repeat(${gameMode==='tictactoe'?3:'auto-fit'}, minmax(150px, 1fr))`;
         grid.innerHTML = '';
         for (let i = 0; i < nCardsGlob; i++) {
             const card = document.createElement('div');
-            card.className = 'card' + (cardStates[i] ? (cardStates[i].correct ? ' used-correct' : ' used-wrong') : '');
-            card.innerHTML = cardStates[i] ? (cardStates[i].mark || 'X') : (i + 1);
+            card.className = 'card' + (cardStates[i] ? ' used ' + (cardStates[i].correct ? 'used-correct' : 'used-wrong') : '');
+            card.innerHTML = cardStates[i] ? (cardStates[i].mark || '') : (i + 1);
             if(cardStates[i]) card.style.borderColor = cardStates[i].color;
             card.onclick = () => handleCardClick(i, card);
             grid.appendChild(card);
@@ -209,33 +183,15 @@
         if(cardStates[idx]) return;
         originalTurnIdx = currentTeamIdx;
         card.style.transform = 'rotateY(90deg)';
-        setTimeout(() => { 
-            card.style.transform = 'rotateY(0deg)'; 
-            if(Math.random()*100 < surpriseProb) showSurprise(idx);
-            else showQuestion(idx);
-        }, 200);
-    }
-
-    function showSurprise(idx) {
-        const modal = document.getElementById('modal-content');
-        const feedback = document.getElementById('feedback-area');
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'block';
-        feedback.style.display = 'none';
-        const team = teams[currentTeamIdx];
-        team.score -= 5;
-        modal.innerHTML = `<h1>💥 BOMBA!</h1><p>${team.name} perdeu 5 pontos!</p>`;
-        cardStates[idx] = {correct: false, color: team.color, mark: '💣'};
-        renderBoard();
+        setTimeout(() => { card.style.transform = 'rotateY(0deg)'; showQuestion(idx); }, 200);
     }
 
     function showQuestion(idx) {
         const q = questions[idx % questions.length] || {q:"?",a:"A",b:"B",correct:"A",pts:10,exp:"..."};
         const modal = document.getElementById('modal-content');
-        const feedback = document.getElementById('feedback-area');
+        document.getElementById('feedback-area').style.display = 'none';
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-        feedback.style.display = 'none';
         
         const isVF = !q.c || q.c === "" || q.c === "C";
         modal.innerHTML = `<h2>${q.q}</h2><div class="options-grid">
@@ -250,27 +206,31 @@
         const q = questions[idx % questions.length];
         const isCorrect = chosen === correct.trim();
         const allBtns = document.querySelectorAll('.opt-btn');
+        const feedback = document.getElementById('feedback-area');
 
         if(isCorrect) {
             btn.classList.add('correct');
             teams[currentTeamIdx].score += q.pts;
-            cardStates[idx] = {correct: true, color: teams[currentTeamIdx].color, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅'};
+            cardStates[idx] = {correct: true, color: teams[currentTeamIdx].color, mark: '✅'};
             showFeedback(q);
-            document.getElementById('btn-continue').style.display = 'block';
         } else {
             btn.classList.add('wrong');
-            if(!isReboundActive) {
+            if(document.getElementById('reboundCb').checked && !isReboundActive) {
                 isReboundActive = true;
                 currentTeamIdx = (currentTeamIdx + 1) % teams.length;
                 renderBoard();
-                setTimeout(() => { allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); alert("🏀 REBOTE!"); }, 500);
+                setTimeout(() => { 
+                    allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); 
+                    alert("🏀 REBOTE! Vez do próximo grupo."); 
+                }, 500);
+                return;
             } else {
                 cardStates[idx] = {correct: false, color: teams[currentTeamIdx].color, mark: '❌'};
                 showFeedback(q);
-                document.getElementById('btn-continue').style.display = 'block';
             }
         }
-        if(!isReboundActive || isCorrect) allBtns.forEach(b => b.disabled = true);
+        document.getElementById('btn-continue').style.display = 'block';
+        allBtns.forEach(b => b.disabled = true);
     }
 
     function showFeedback(q) {
@@ -284,25 +244,12 @@
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         isReboundActive = false;
         renderBoard();
-        checkWinner();
-    }
-
-    function checkWinner() {
-        if(gameMode === 'tictactoe') {
-            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-            for(let w of wins) {
-                if(cardStates[w[0]]?.mark && cardStates[w[0]].mark === cardStates[w[1]]?.mark && cardStates[w[0]].mark === cardStates[w[2]]?.mark) showFinal();
-            }
-        }
-        if(Object.keys(cardStates).length === nCardsGlob) showFinal();
     }
 
     function showFinal() {
-        clearInterval(globalTimerInterval);
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         confetti({ particleCount: 200, spread: 70 });
         document.getElementById('modal-content').innerHTML = `<h1>🏆 VENCEDOR: ${sorted[0].name}</h1><button class='action-btn' style='background:var(--danger);' onclick='location.reload()'>REINICIAR</button>`;
-        document.getElementById('feedback-area').style.display = 'none';
         document.getElementById('modal-overlay').style.display = 'flex';
     }
 </script>
