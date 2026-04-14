@@ -6,7 +6,7 @@
     <title>Eduardo Goulart</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Português">
     <meta name="theme-color" content="#f0f2f5">
     
@@ -19,7 +19,20 @@
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
         html { background-color: var(--bg); }
         html, body { overscroll-behavior-y: none; height: 100%; } 
-        body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; transition: 0.3s; padding-top: env(safe-area-inset-top, 20px); }
+        
+        /* MODIFICAÇÃO CSS: Garante que o conteúdo respeite a área do relógio transparente */
+        body { 
+            font-family: 'Arial Rounded MT Bold', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            transition: 0.3s; 
+            padding-top: env(safe-area-inset-top, 20px); 
+        }
 
         /* --- MENU INICIAL ORIGINAL (RIGOROSAMENTE MANTIDO) --- */
         #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
@@ -166,7 +179,6 @@
 
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
-    // Alterado para gerar até o 83.gif
     const gifList = Array.from({length: 83}, (_, i) => `gif/${i+1}.gif`);
 
     function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
@@ -295,7 +307,6 @@
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             btn.classList.add('correct'); teams[currentTeamIdx].score += 10;
             
-            // Lógica do símbolo para Jogo da Velha
             let mark = '✅';
             if(gameMode === 'tictactoe') {
                 mark = currentTeamIdx === 0 ? 'X' : 'O';
