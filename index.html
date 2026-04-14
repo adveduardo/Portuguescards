@@ -71,7 +71,6 @@
         #exp-box { margin-top: 15px; padding: 12px; border-radius: 8px; background: #e8f4fd; color: #2c3e50; border-left: 5px solid var(--primary); text-align: left; display: none; }
         .action-btn { padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.2rem; transition: 0.3s; }
 
-        /* ESTILOS DO PODIUM E RELATÓRIO */
         .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin: 20px 0; height: 160px; }
         .podium-step { width: 100px; text-align: center; border-radius: 10px 10px 0 0; color: #333; font-weight: bold; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); position: relative; }
         .podium-1 { height: 100%; background: linear-gradient(to bottom, #f1c40f, #f39c12); } 
@@ -89,7 +88,6 @@
         .badge-joker { background: var(--joker); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; margin-left: 5px;}
         body.dark-mode .report-item { border-bottom: 1px solid #444; }
 
-        /* ESTILO DOS GIFS */
         .modal-gif { max-width: 100%; max-height: 200px; border-radius: 10px; margin-bottom: 10px; object-fit: contain; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     </style>
 </head>
@@ -207,17 +205,27 @@
     let quizReport = [];
     let useGifs = false;
 
-    // LISTA DE ARQUIVOS DE GIF NA PASTA 'gifs' (Adicione mais números aqui se colocar mais GIFs lá)
+    // LISTA DE ARQUIVOS DE GIF
     const gifList = [
-  'gif/1.gif', 'gif/2.gif', 'gif/3.gif', 'gif/4.gif', 'gif/5.gif',
-  'gif/6.gif', 'gif/7.gif', 'gif/8.gif', 'gif/9.gif', 'gif/10.gif',
-  'gif/11.gif', 'gif/12.gif', 'gif/13.gif', 'gif/14.gif', 'gif/15.gif',
-  'gif/16.gif', 'gif/17.gif', 'gif/18.gif', 'gif/19.gif', 'gif/20.gif',
-  'gif/21.gif', 'gif/22.gif', 'gif/23.gif', 'gif/24.gif', 'gif/25.gif',
-  'gif/26.gif', 'gif/27.gif', 'gif/28.gif', 'gif/29.gif', 'gif/30.gif',
-  'gif/31.gif', 'gif/32.gif', 'gif/33.gif', 'gif/34.gif', 'gif/35.gif',
-  'gif/36.gif', 'gif/37.gif', 'gif/38.gif'
-];
+      'gif/1.gif', 'gif/2.gif', 'gif/3.gif', 'gif/4.gif', 'gif/5.gif',
+      'gif/6.gif', 'gif/7.gif', 'gif/8.gif', 'gif/9.gif', 'gif/10.gif',
+      'gif/11.gif', 'gif/12.gif', 'gif/13.gif', 'gif/14.gif', 'gif/15.gif',
+      'gif/16.gif', 'gif/17.gif', 'gif/18.gif', 'gif/19.gif', 'gif/20.gif',
+      'gif/21.gif', 'gif/22.gif', 'gif/23.gif', 'gif/24.gif', 'gif/25.gif',
+      'gif/26.gif', 'gif/27.gif', 'gif/28.gif', 'gif/29.gif', 'gif/30.gif',
+      'gif/31.gif', 'gif/32.gif', 'gif/33.gif', 'gif/34.gif', 'gif/35.gif',
+      'gif/36.gif', 'gif/37.gif', 'gif/38.gif'
+    ];
+
+    // Lógica para evitar repetição de GIFs (Baralho)
+    let availableGifs = [];
+    function getNextGif() {
+        if (availableGifs.length === 0) {
+            availableGifs = [...gifList].sort(() => Math.random() - 0.5);
+        }
+        return availableGifs.pop();
+    }
+
     function formatTimeInput(input) {
         let value = input.value.replace(/\D/g, "");
         if (value.length > 2) value = value.substring(0, 2) + ":" + value.substring(2, 4);
@@ -233,7 +241,6 @@
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPromptText() { navigator.clipboard.writeText(document.getElementById('prompt-text').innerText); alert("Copiado!"); }
 
-    // COMUNICAÇÃO API
     async function generateWithAPI() {
         const theme = document.getElementById('themeInput').value;
         const qtd = document.getElementById('qtdInput').value;
@@ -302,7 +309,7 @@
     function startGame() {
         try { questions = JSON.parse(document.getElementById('jsonInput').value); } catch(e) { return alert("JSON inválido!"); }
         gameMode = document.getElementById('gameModeSel').value;
-        useGifs = document.getElementById('gifsCb').checked; // Puxa se o botão de GIFs está ativado
+        useGifs = document.getElementById('gifsCb').checked;
 
         const timeParts = document.getElementById('timeInput').value.split(":");
         totalSecondsLeft = (parseInt(timeParts[0]) * 60) + (parseInt(timeParts[1]) || 0);
@@ -320,7 +327,7 @@
         teams = [];
         for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
 
-        quizReport = []; cardStates = {}; currentTeamIdx = 0; currentStopIdx = 0; tttBoard = Array(9).fill(null);
+        quizReport = []; cardStates = {}; currentTeamIdx = 0; currentStopIdx = 0; tttBoard = Array(9).fill(null); availableGifs = [];
         
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
@@ -375,7 +382,7 @@
 
         let gifHTML = '';
         if (useGifs) {
-            const randomGif = gifList[Math.floor(Math.random() * gifList.length)];
+            const randomGif = getNextGif();
             gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
         }
 
@@ -422,7 +429,7 @@
         
         let gifHTML = '';
         if (useGifs) {
-            const randomGif = gifList[Math.floor(Math.random() * gifList.length)];
+            const randomGif = getNextGif();
             gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
         }
 
@@ -482,6 +489,7 @@
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
+        isReboundActive = false; // Reset rebote para próxima rodada
         if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         
