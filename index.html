@@ -88,6 +88,9 @@
         .badge-wrong { background: var(--danger); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; margin-left: 5px;}
         .badge-joker { background: var(--joker); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; margin-left: 5px;}
         body.dark-mode .report-item { border-bottom: 1px solid #444; }
+
+        /* ESTILO DOS GIFS */
+        .modal-gif { max-width: 100%; max-height: 200px; border-radius: 10px; margin-bottom: 10px; object-fit: contain; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -161,8 +164,10 @@
             <label>Quantidade de Grupos:</label>
             <input type="number" id="teamCount" value="4">
         </div>
-        <div class="input-group" id="rebound-area">
-            <label><input type="checkbox" id="reboundCb" checked> 🏀 Ativar Rebote</label>
+        
+        <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px;">
+            <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
+            <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs Divertidos</label>
         </div>
     </div>
 
@@ -200,6 +205,10 @@
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, currentStopIdx = 0, tttBoard = Array(9).fill(null);
     let quizReport = [];
+    let useGifs = false;
+
+    // LISTA DE ARQUIVOS DE GIF NA PASTA 'gifs' (Adicione mais números aqui se colocar mais GIFs lá)
+    const gifList = ['gifs/1.gif', 'gifs/2.gif', 'gifs/3.gif', 'gifs/4.gif', 'gifs/5.gif'];
 
     function formatTimeInput(input) {
         let value = input.value.replace(/\D/g, "");
@@ -285,6 +294,8 @@
     function startGame() {
         try { questions = JSON.parse(document.getElementById('jsonInput').value); } catch(e) { return alert("JSON inválido!"); }
         gameMode = document.getElementById('gameModeSel').value;
+        useGifs = document.getElementById('gifsCb').checked; // Puxa se o botão de GIFs está ativado
+
         const timeParts = document.getElementById('timeInput').value.split(":");
         totalSecondsLeft = (parseInt(timeParts[0]) * 60) + (parseInt(timeParts[1]) || 0);
         
@@ -354,8 +365,15 @@
 
         const s = surprises[Math.floor(Math.random() * surprises.length)];
 
+        let gifHTML = '';
+        if (useGifs) {
+            const randomGif = gifList[Math.floor(Math.random() * gifList.length)];
+            gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
+        }
+
         document.getElementById('modal-content').innerHTML = `
-            <h1 style="color: var(--joker); font-size: 2.5rem; margin-top: 15px;">🃏 CARTA SURPRESA!</h1>
+            ${gifHTML}
+            <h1 style="color: var(--joker); font-size: 2.5rem; margin-top: 5px;">🃏 CARTA SURPRESA!</h1>
             <h2>${s.text}</h2>
             <p>Equipe: <b>${teams[currentTeamIdx].name}</b></p>
         `;
@@ -394,8 +412,16 @@
         if (gameMode === 'stop') modal.classList.add('stop-mode');
         else modal.classList.remove('stop-mode');
         
+        let gifHTML = '';
+        if (useGifs) {
+            const randomGif = gifList[Math.floor(Math.random() * gifList.length)];
+            gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
+        }
+
         const isVF = !q.c;
-        document.getElementById('modal-content').innerHTML = `<h2 style="margin-top: 15px;">${q.q}</h2><div class="options-grid">
+        document.getElementById('modal-content').innerHTML = `
+            ${gifHTML}
+            <h2 style="margin-top: 5px;">${q.q}</h2><div class="options-grid">
             <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button>
             <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>
             ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button><button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>` : ''}
