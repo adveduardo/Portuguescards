@@ -166,7 +166,8 @@
 
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
-    const gifList = Array.from({length: 38}, (_, i) => `gif/${i+1}.gif`);
+    // Alterado para gerar até o 83.gif
+    const gifList = Array.from({length: 83}, (_, i) => `gif/${i+1}.gif`);
 
     function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
     function formatTimeInput(input) { let v = input.value.replace(/\D/g, ""); if (v.length > 2) v = v.substring(0, 2) + ":" + v.substring(2, 4); input.value = v; }
