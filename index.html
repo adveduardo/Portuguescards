@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eduardo Goulart - Quiz Master PRO</title>
+    <title>Eduardo Goulart - Quiz Master</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -11,116 +11,122 @@
             --success: #2ecc71; --joker: #9b59b6; --text: #333; --card-bg: white; --border: #ccc;
         }
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
-        html, body { overscroll-behavior-y: none; height: 100vh; margin: 0; padding: 0; overflow: hidden; } 
+        html, body { overscroll-behavior-y: none; min-height: 100vh; margin: 0; padding: 0; } 
         body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
 
-        /* --- MENU INICIAL ORIGINAL --- */
-        #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; text-align: center; overflow-y: auto; max-height: 90vh; }
+        /* --- MENU INICIAL (ESTRUTURA ORIGINAL PRESERVADA) --- */
+        #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
         .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; }
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea, input[type="text"], input[type="password"] { width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center; }
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
         .btn-aux { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
 
-        /* --- GAME AREA --- */
-        #game-area { display: none; width: 100vw; height: 100vh; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        /* --- ÁREA DE JOGO (MODO PROJETOR - CARDS GIGANTES) --- */
+        #game-area { display: none; width: 100vw; height: 100vh; flex-direction: column; padding: 10px; box-sizing: border-box; overflow: hidden; }
         .game-header { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 5px 15px; }
+        #global-timer-display { display: none; } /* Oculto conforme solicitado */
+        
         #score-board { display: flex; gap: 10px; flex-grow: 1; justify-content: center; }
         .team-card { background: var(--card-bg); padding: 8px 20px; border-radius: 15px; border: 5px solid var(--border); min-width: 140px; text-align: center; font-size: 1.6rem; transition: 0.3s; }
-        .team-card.active { border-color: var(--accent); background: var(--accent); color: #000; transform: scale(1.05); }
+        .team-card.active { border-color: var(--accent); transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.1); background: var(--accent); color: #000; }
 
         .top-btns { display: flex; gap: 10px; }
         .icon-btn { font-size: 1.8rem; background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; cursor: pointer; padding: 5px 15px; }
 
-        /* --- GRID GIGANTE PARA PROJETOR --- */
-        #grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; flex-grow: 1; align-content: center; padding: 10px; }
-        #grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 80vh; margin: 0 auto; }
+        /* GRID QUE OCUPA A TELA QUASE TODA */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; flex-grow: 1; align-content: center; padding: 10px; box-sizing: border-box; }
+        .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 80vh; margin: 0 auto; }
         
-        .card { aspect-ratio: 1/1; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; cursor: pointer; box-shadow: 0 10px 0 #3d6dbd; font-weight: 900; border: 4px solid rgba(255,255,255,0.1); transition: 0.1s; }
-        .card.used-correct { background: var(--card-bg) !important; color: var(--success) !important; border: 10px solid var(--success) !important; box-shadow: none; }
+        /* CARDS GIGANTES */
+        .card { aspect-ratio: 1/1; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; cursor: pointer; transition: 0.1s; box-shadow: 0 10px 0 #3d6dbd; font-weight: 900; border: 4px solid rgba(255,255,255,0.1); }
+        .card.used-correct { background: var(--card-bg) !important; color: var(--success) !important; border: 10px solid var(--success) !important; box-shadow: none; font-size: 6rem; }
         .card.used-wrong { background: var(--danger) !important; color: white !important; box-shadow: none; font-size: 5rem; }
 
-        /* --- MODAL --- */
-        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
-        #modal { background: var(--card-bg); padding: 35px; border-radius: 30px; width: 95%; max-width: 1100px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; }
-        #modal h2 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 20px; }
-        
-        /* BOTÕES DE OPÇÕES COM CORES FIXAS AO CLICAR */
+        /* --- MODAL E ELEMENTOS FINAIS --- */
+        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
+        #modal { background: var(--card-bg); padding: 35px; border-radius: 25px; width: 95%; max-width: 1000px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; }
+        #modal h2 { font-size: 2.8rem; line-height: 1.2; margin-bottom: 15px; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-        .opt-btn { padding: 25px; border: 4px solid var(--primary); border-radius: 15px; font-size: 2rem; font-weight: bold; cursor: pointer; background: var(--card-bg); color: var(--text); transition: 0.2s; }
-        
-        /* Forçar cores mesmo quando disabled */
-        .opt-btn.correct-ans { background-color: var(--success) !important; color: white !important; border-color: #1e8449 !important; }
-        .opt-btn.wrong-ans { background-color: var(--danger) !important; color: white !important; border-color: #c0392b !important; }
+        .opt-btn { padding: 20px; border: 4px solid var(--primary); border-radius: 15px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; font-size: 2.2rem; transition: 0.2s; }
+        .opt-btn.correct-ans { background-color: var(--success) !important; color: white !important; }
+        .opt-btn.wrong-ans { background-color: var(--danger) !important; color: white !important; }
 
-        /* --- RELATÓRIO E PODIUM --- */
-        .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 15px; margin: 20px 0; height: 180px; }
-        .podium-step { width: 120px; text-align: center; border-radius: 15px 15px 0 0; font-weight: bold; position: relative; padding-top: 10px; box-shadow: 0 -4px 15px rgba(0,0,0,0.2); }
-        .podium-1 { height: 100%; background: #f1c40f; font-size: 1.3rem; } 
-        .podium-2 { height: 75%; background: #bdc3c7; font-size: 1.1rem; } 
-        .podium-3 { height: 55%; background: #cd7f32; color: white; font-size: 1rem; }
+        .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin: 20px 0; height: 160px; }
+        .podium-step { width: 100px; text-align: center; border-radius: 10px 10px 0 0; color: #333; font-weight: bold; position: relative; padding-top: 10px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); }
+        .podium-1 { height: 100%; background: #f1c40f; } .podium-2 { height: 75%; background: #bdc3c7; } .podium-3 { height: 55%; background: #cd7f32; color: white; }
         
-        .report-container { max-height: 250px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 12px; border: 2px solid var(--border); margin-top: 20px; }
-        .report-item { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #ccc; font-size: 1rem; }
-        .badge-correct { background: var(--success); color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
-        .badge-wrong { background: var(--danger); color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
-        
-        .action-btn { padding: 20px; border-radius: 15px; border: none; font-size: 1.8rem; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
-        .modal-gif { max-width: 100%; max-height: 220px; border-radius: 15px; margin-bottom: 10px; }
+        .report-container { max-height: 250px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; font-size: 0.95rem; }
+        .report-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+        .badge-correct { background: var(--success); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .badge-wrong { background: var(--danger); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .action-btn { padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.5rem; transition: 0.3s; width: 100%; }
+        .modal-gif { max-width: 100%; max-height: 250px; border-radius: 10px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div id="setup-menu">
-    <h1 style="color: var(--primary); margin: 0; font-size: 2.2rem;">🎮 Quiz Master PRO</h1>
-    <p>Eduardo Goulart - Projetor Mode</p>
+    <h1 style="color: var(--primary); margin: 0;">🎮 Português 🎮</h1>
+    <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
 
-    <div class="input-group" style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 12px; border: 2px dashed var(--joker);">
-        <input type="text" id="themeInput" placeholder="Tema (Ex: Crase)">
-        <input type="number" id="qtdInput" value="15">
+    <div class="input-group" style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 10px; border: 2px dashed var(--joker);">
+        <label style="color: var(--joker); font-size: 1.1rem;">🔮 IA: Gerador Automático</label>
+        <input type="text" id="themeInput" placeholder="Tema (Ex: Verbos)" oninput="updatePromptView()">
+        <input type="number" id="qtdInput" placeholder="Quantidade" value="15" oninput="updatePromptView()">
         <select id="modelSel">
-            <option value="openrouter/free">Auto IA 100% Grátis</option>
-            <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+            <optgroup label="OpenRouter">
+                <option value="openrouter/free">Auto IA 100% Grátis</option>
+                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
+            </optgroup>
         </select>
-        <input type="password" id="apiKeyInput" placeholder="Sua Chave API">
-        <button onclick="generateWithAPI()" id="btn-gerar-ia" style="background:var(--joker); color:white; padding:12px; border:none; border-radius:8px; width:100%; cursor:pointer; font-weight:bold; margin-top:10px;">⚡ GERAR QUESTÕES</button>
+        <input type="password" id="apiKeyInput" placeholder="Sua Chave de API">
+        <button onclick="generateWithAPI()" id="btn-gerar-ia" style="background:var(--joker); color:white; padding:12px; border-radius:8px; width:100%; cursor:pointer; font-weight:bold; margin-top:10px;">⚡ GERAR QUESTÕES COM IA</button>
+        <div id="prompt-container" style="display:none; width: 100%;">
+            <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()"><span id="prompt-text"></span></div>
+        </div>
     </div>
 
     <div class="input-group">
-        <label>Colar JSON:</label>
+        <label>1. Colar Questões (JSON):</label>
         <button class="btn-aux" onclick="pasteJSON()">📋 Colar</button>
         <textarea id="jsonInput" style="height: 60px;"></textarea>
     </div>
 
     <div class="input-group">
-        <label>Nomes das Equipes:</label>
-        <textarea id="teamNamesInput" placeholder="Equipe 1, Equipe 2" style="height: 45px;"></textarea>
+        <label>2. Nomes dos Grupos:</label>
+        <button class="btn-aux" onclick="cleanNames()">✨ Limpar</button>
+        <textarea id="teamNamesInput" style="height: 45px;"></textarea>
     </div>
 
     <div class="input-group">
-        <select id="gameModeSel">
+        <label>Modo de Jogo:</label>
+        <select id="gameModeSel" onchange="handleModeChange()">
             <option value="classic">Modo Padrão</option>
             <option value="tictactoe">Jogo da Velha</option>
         </select>
     </div>
 
-    <div style="display: flex; gap: 20px; justify-content: center; margin: 10px 0;">
-        <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
-        <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label>
+    <div id="extra-configs">
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 10px;">
+            <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
+            <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label>
+        </div>
     </div>
 
-    <button class="action-btn" onclick="startGame()" style="background:var(--success); color:white;">INICIAR JOGO</button>
+    <button class="action-btn" onclick="startGame()" style="background:var(--success); color:white; margin-top:20px;">INICIAR</button>
 </div>
 
 <div id="game-area">
     <div class="game-header">
         <div id="score-board"></div>
         <div class="top-btns">
-            <button class="icon-btn" onclick="toggleFullScreen()" title="Tela Cheia">📺</button>
+            <button class="icon-btn" onclick="toggleFullScreen()">📺</button>
             <button class="icon-btn" onclick="document.body.classList.toggle('dark-mode')">🌙</button>
             <button class="icon-btn" onclick="location.reload()" style="color:var(--danger)">✖</button>
         </div>
     </div>
-    <div id="grid"></div>
+    <div id="grid" class="grid"></div>
 </div>
 
 <div id="modal-overlay">
@@ -128,7 +134,7 @@
         <div id="modal-content"></div>
         <div id="exp-box" style="display:none; padding:15px; background:#e8f4fd; border-radius:10px; margin-top:15px; font-size:1.5rem; text-align:left;"></div>
         <div id="modal-actions" style="margin-top:20px;">
-            <button id="btn-continue" class="action-btn" style="display:none; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA PERGUNTA</button>
+            <button id="btn-continue" class="action-btn" style="display:none; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA</button>
         </div>
     </div>
 </div>
@@ -138,7 +144,9 @@
     const gifList = Array.from({length: 38}, (_, i) => `gif/${i+1}.gif`);
 
     function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+    function updatePromptView() { document.getElementById('prompt-text').innerText = `Gere ${document.getElementById('qtdInput').value} questões de Português sobre ${document.getElementById('themeInput').value} em JSON.`; }
     async function pasteJSON() { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
+    function cleanNames() { let i = document.getElementById('teamNamesInput'); i.value = i.value.split(',').map(n => n.trim().split(' ')[0]).filter(n => n).join(', '); }
 
     async function generateWithAPI() {
         const btn = document.getElementById('btn-gerar-ia'); btn.innerText = "⏳ GERANDO..."; btn.disabled = true;
@@ -146,11 +154,10 @@
             const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${document.getElementById('apiKeyInput').value}` },
-                body: JSON.stringify({ model: document.getElementById('modelSel').value, messages: [{role: "user", content: `Gere ${document.getElementById('qtdInput').value} questões sobre ${document.getElementById('themeInput').value} em JSON: [{"q":"?","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":""}]`}] })
+                body: JSON.stringify({ model: document.getElementById('modelSel').value, messages: [{role: "user", content: document.getElementById('prompt-text').innerText}] })
             });
             const data = await res.json();
             document.getElementById('jsonInput').value = data.choices[0].message.content.replace(/```json|```/g, "").trim();
-            alert("✅ Sucesso!");
         } catch (e) { alert("Erro na API"); }
         btn.innerText = "⚡ GERAR QUESTÕES"; btn.disabled = false;
     }
@@ -167,13 +174,11 @@
     }
 
     function renderBoard() {
-        const grid = document.getElementById('grid');
-        grid.innerHTML = '';
-        grid.className = (gameMode === 'tictactoe') ? 'tictactoe' : '';
+        const grid = document.getElementById('grid'); grid.innerHTML = '';
+        grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
         const total = gameMode === 'tictactoe' ? 9 : questions.length;
         for(let i=0; i<total; i++) {
-            const card = document.createElement('div');
-            const st = cardStates[i];
+            const card = document.createElement('div'), st = cardStates[i];
             card.className = 'card' + (st ? (st.correct ? ' used-correct' : ' used-wrong') : '');
             card.innerHTML = st ? (st.mark || '') : (i + 1);
             card.onclick = () => { if(!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
@@ -183,9 +188,7 @@
     }
 
     function renderScores() {
-        document.getElementById('score-board').innerHTML = teams.map((t, i) => 
-            `<div class="team-card ${i===currentTeamIdx?'active':''}"><b>${t.name}</b><br>${t.score} pts</div>`
-        ).join('');
+        document.getElementById('score-board').innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}"><b>${t.name}</b><br>${t.score} pts</div>`).join('');
     }
 
     function showQuestion(idx) {
@@ -198,29 +201,21 @@
             <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button>
             <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>
             ${q.c ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button><button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>` : ''}
-        </div><p style="font-size:1.5rem">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+        </div>`;
     }
 
     function checkAns(btn, chosen, correct, idx) {
         const isCorrect = chosen === correct.trim();
-        const allBtns = document.querySelectorAll('.opt-btn');
-        
-        // Bloqueia todos os botões
-        allBtns.forEach(b => b.disabled = true);
-
+        document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
         if(isCorrect) {
-            btn.classList.add('correct-ans');
-            teams[currentTeamIdx].score += 10;
+            btn.classList.add('correct-ans'); teams[currentTeamIdx].score += 10;
             cardStates[idx] = { correct: true, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅' };
             if(gameMode==='tictactoe') tttBoard[idx] = currentTeamIdx;
             confetti({ particleCount: 150, spread: 70 });
         } else {
-            btn.classList.add('wrong-ans');
-            cardStates[idx] = { correct: false, mark: '❌' };
+            btn.classList.add('wrong-ans'); cardStates[idx] = { correct: false, mark: '❌' };
         }
-
-        quizReport.push({ team: teams[currentTeamIdx].name, question: questions[idx % questions.length].q, isCorrect, exp: questions[idx % questions.length].exp });
-        
+        quizReport.push({ team: teams[currentTeamIdx].name, question: questions[idx % questions.length].q, isCorrect });
         document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${questions[idx % questions.length].exp}`;
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
@@ -246,11 +241,11 @@
             <div class="podium-step podium-1">${sorted[0]?.name || '-'}<br>${sorted[0]?.score || 0} pts</div>
             <div class="podium-step podium-3">${sorted[2]?.name || '-'}<br>${sorted[2]?.score || 0} pts</div>
         </div>`;
-        let reportHTML = `<div class="report-container">` + quizReport.map(r => `<div class="report-item"><b>${r.team}</b>: ${r.isCorrect ? '<span class="badge-correct">ACERTOU</span>' : '<span class="badge-wrong">ERROU</span>'}<br><small>${r.question}</small></div>`).join('') + `</div>`;
-        document.getElementById('modal-content').innerHTML = `<h1>🏆 RESULTADO 🏆</h1>${podiumHTML}${reportHTML}<button class="action-btn" onclick="location.reload()" style="background:var(--danger); color:white; margin-top:20px;">REINICIAR</button>`;
+        document.getElementById('modal-content').innerHTML = `<h1>🏆 RESULTADO 🏆</h1>${podiumHTML}<button class="action-btn" onclick="location.reload()" style="background:var(--danger); color:white; margin-top:20px;">REINICIAR</button>`;
         document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'none';
     }
+
+    updatePromptView();
 </script>
 </body>
 </html>
