@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Eduardo Goulart - Quiz Master</title>
+    <title>Eduardo Goulart - Quiz Master PRO</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -12,108 +12,57 @@
         }
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
         html, body { overscroll-behavior-y: none; height: 100%; } 
-        body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; transition: 0.3s; }
+        body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
 
-        /* --- MENU INICIAL (MANTIDO) --- */
-        #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
+        /* --- MENU INICIAL (CONFIGURAÇÃO ORIGINAL) --- */
+        #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; text-align: center; }
         .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; }
         label { font-weight: bold; font-size: 0.9rem; }
         input[type="number"], input[type="range"], select, textarea, input[type="text"], input[type="password"] { width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center; }
-        
-        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
+        .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
         .btn-aux { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
 
-        /* --- ÁREA DO JOGO (OTIMIZADA PARA PROJETOR) --- */
+        /* --- ÁREA DO JOGO (OTIMIZADA PROJETOR) --- */
         #game-area { width: 100vw; height: 100vh; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; }
+        #global-timer-display { background: var(--danger); color: white; padding: 10px 40px; border-radius: 50px; font-size: 3rem; font-weight: bold; text-align: center; margin-bottom: 10px; align-self: center; }
         
-        #global-timer-display { background: var(--danger); color: white; padding: 10px 40px; border-radius: 50px; font-size: 3rem; font-weight: bold; text-align: center; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; flex-grow: 1; padding: 10px; box-sizing: border-box; align-content: center; }
+        .grid.tictactoe { grid-template-columns: repeat(3, 1fr) !important; max-width: 85vh; margin: 0 auto; }
         
-        /* GRID GIGANTE */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 20px; 
-            width: 100%; 
-            flex-grow: 1; 
-            padding: 10px;
-            box-sizing: border-box;
-            align-content: center; 
-        }
-
-        .grid.tictactoe { 
-            grid-template-columns: repeat(3, 1fr) !important; 
-            max-width: 85vh; 
-            margin: 0 auto;
-        }
-        
-        /* CARDS GIGANTES */
-        .card { 
-            aspect-ratio: 1/1; 
-            background: var(--primary); 
-            color: white; 
-            border-radius: 20px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 6rem; /* Aumentado de 1.8 para 6 para projetor */
-            cursor: pointer; 
-            transition: transform 0.1s; 
-            box-shadow: 0 10px 0 #3d6dbd; 
-            font-weight: 900; 
-            border: 4px solid rgba(255,255,255,0.2);
-        }
+        .card { aspect-ratio: 1/1; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; cursor: pointer; transition: 0.1s; box-shadow: 0 10px 0 #3d6dbd; font-weight: 900; border: 4px solid rgba(255,255,255,0.2); }
         .card:active { transform: translateY(5px); box-shadow: 0 4px 0 #3d6dbd; }
-        
         .card.used-correct { background: var(--card-bg) !important; color: var(--success) !important; border: 10px solid var(--success) !important; box-shadow: none; font-size: 6rem; }
         .card.used-wrong { background: var(--danger) !important; color: white !important; box-shadow: none; font-size: 5rem; }
 
-        /* PLACAR PARA PROJETOR */
         #score-board { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
-        .team-card { 
-            background: var(--card-bg); 
-            padding: 15px 30px; 
-            border-radius: 20px; 
-            border: 6px solid var(--border); 
-            min-width: 180px; 
-            text-align: center; 
-            font-size: 2rem;
-            transition: 0.3s;
-        }
-        .team-card.active { 
-            border-color: var(--accent); 
-            transform: scale(1.1); 
-            box-shadow: 0 0 30px rgba(241, 196, 15, 0.4); 
-            background: var(--accent);
-            color: #000;
-        }
+        .team-card { background: var(--card-bg); padding: 15px 30px; border-radius: 20px; border: 6px solid var(--border); min-width: 180px; text-align: center; font-size: 2rem; transition: 0.3s; }
+        .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 0 30px rgba(241, 196, 15, 0.4); background: var(--accent); color: #000; }
 
-        /* MODAIS E RELATÓRIO */
-        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
+        /* --- MODAIS --- */
+        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
         #modal { background: var(--card-bg); padding: 35px; border-radius: 30px; width: 95%; max-width: 1100px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; }
-        
         #modal h2 { font-size: 3rem; line-height: 1.1; margin-bottom: 25px; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         .opt-btn { padding: 25px; border: 4px solid var(--primary); border-radius: 15px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; font-size: 2.2rem; }
-        
-        .close-modal { position: absolute; top: -15px; right: -10px; font-size: 28px; font-weight: bold; cursor: pointer; display: none; color: white; background-color: var(--danger); border-radius: 50%; width: 45px; height: 45px; line-height: 40px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 1000; border: 3px solid white; }
-        #modal.stop-mode .close-modal { display: block; }
+        .opt-btn.correct { background: var(--success) !important; color: white !important; }
+        .opt-btn.wrong { background: var(--danger) !important; color: white !important; }
 
-        #exp-box { margin-top: 15px; padding: 20px; border-radius: 15px; background: #e8f4fd; color: #2c3e50; border-left: 10px solid var(--primary); text-align: left; display: none; font-size: 1.8rem; }
+        /* --- PODIUM & RELATÓRIO (ORIGINAL RESTAURADO) --- */
+        .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 15px; margin: 30px 0; height: 200px; }
+        .podium-step { width: 120px; text-align: center; border-radius: 15px 15px 0 0; color: #333; font-weight: bold; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.2); position: relative; }
+        .podium-1 { height: 100%; background: linear-gradient(to bottom, #f1c40f, #f39c12); font-size: 1.4rem; } 
+        .podium-2 { height: 75%; background: linear-gradient(to bottom, #bdc3c7, #95a5a6); font-size: 1.2rem; } 
+        .podium-3 { height: 55%; background: linear-gradient(to bottom, #cd7f32, #a0522d); color: white; font-size: 1.1rem;} 
+        .podium-rank { font-size: 2.5rem; opacity: 0.5; position: absolute; bottom: 5px; width: 100%; text-align: center; }
+
+        .report-container { max-height: 350px; overflow-y: auto; text-align: left; background: var(--bg); padding: 20px; border-radius: 15px; border: 2px solid var(--border); margin-top: 20px; font-size: 1.1rem; }
+        .report-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ccc; line-height: 1.4; }
+        .badge-correct { background: var(--success); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; margin-left: 10px;}
+        .badge-wrong { background: var(--danger); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; margin-left: 10px;}
+        .badge-joker { background: var(--joker); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; margin-left: 10px;}
+
         .action-btn { padding: 20px 40px; border: none; border-radius: 15px; cursor: pointer; font-weight: bold; font-size: 1.8rem; transition: 0.3s; }
-
-        .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin: 20px 0; height: 160px; }
-        .podium-step { width: 100px; text-align: center; border-radius: 10px 10px 0 0; color: #333; font-weight: bold; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); position: relative; }
-        .podium-1 { height: 100%; background: linear-gradient(to bottom, #f1c40f, #f39c12); } 
-        .podium-2 { height: 75%; background: linear-gradient(to bottom, #bdc3c7, #95a5a6); } 
-        .podium-3 { height: 55%; background: linear-gradient(to bottom, #cd7f32, #a0522d); color: white;} 
-        
-        .report-container { max-height: 250px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; font-size: 1rem; }
         .modal-gif { max-width: 100%; max-height: 300px; border-radius: 15px; margin-bottom: 15px; object-fit: contain; }
-
-        @media (max-height: 700px) {
-            .card { font-size: 4rem; }
-            .grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-        }
     </style>
 </head>
 <body>
@@ -124,89 +73,38 @@
 
     <div class="input-group" style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 10px; border: 2px dashed var(--joker);">
         <label style="color: var(--joker); font-size: 1.1rem;">🔮 IA: Gerador Automático</label>
-        <input type="text" id="themeInput" placeholder="Tema (Ex: Verbos)" oninput="updatePromptView()" style="margin-top:10px;">
-        <input type="number" id="qtdInput" placeholder="Quantidade de Questões" value="15" oninput="updatePromptView()" style="margin-top:5px;">
+        <input type="text" id="themeInput" placeholder="Tema (Ex: Verbos)" oninput="updatePromptView()">
+        <input type="number" id="qtdInput" placeholder="Quantidade de Questões" value="15" oninput="updatePromptView()">
         
-        <select id="modelSel" style="margin-top:5px; font-size:14px; background: #eee;">
-            <optgroup label="OpenRouter (Chave sk-or-...)">
-                <option value="openrouter/free">Auto IA 100% Grátis (Nunca Trava)</option>
-                <option value="meta-llama/llama-3.3-70b-instruct:free">Meta LLaMA 3.3 70B (Grátis)</option>
-                <option value="google/gemini-2.5-flash">Gemini 2.5 Flash (via OpenRouter)</option>
-                <option value="openai/gpt-4o-mini">GPT-4o Mini (via OpenRouter)</option>
-            </optgroup>
-            <optgroup label="Google Direto (Chave AI Studio)">
-                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
-            </optgroup>
-            <optgroup label="OpenAI Direto (Chave ChatGPT)">
-                <option value="gpt-4o-mini">ChatGPT (GPT-4o Mini)</option>
-                <option value="gpt-4o">ChatGPT (GPT-4o)</option>
-            </optgroup>
+        <select id="modelSel">
+            <option value="openrouter/free">Auto IA 100% Grátis</option>
+            <option value="google/gemini-2.5-flash">Gemini 2.5 Flash</option>
         </select>
         
-        <input type="password" id="apiKeyInput" placeholder="Sua Chave de API" style="margin-top:5px;">
-        
+        <input type="password" id="apiKeyInput" placeholder="Sua Chave de API">
         <button onclick="generateWithAPI()" id="btn-gerar-ia" style="background:var(--joker); color:white; padding:12px; border-radius:8px; border:none; width:100%; cursor:pointer; margin-top:10px; font-weight:bold;">⚡ GERAR QUESTÕES COM IA</button>
-        
         <button onclick="togglePrompt()" style="background:transparent; color:var(--text); text-decoration: underline; border:none; cursor:pointer; margin-top:10px; font-size: 0.8rem;">Ver Prompt Manual</button>
-        <div id="prompt-container" style="display:none; width: 100%;">
-            <div class="code-block" id="prompt-to-copy" onclick="copyPromptText()">
-                <span id="prompt-text">Atue como um professor de Português. Gere 15 questões inéditas sobre o tema [TEMA] seguindo estritamente o formato JSON puro sem formatação markdown dentro do Code Block do chat. Misture Múltipla Escolha e V/F. Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: [{"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}]</span>
-            </div>
-        </div>
+        <div id="prompt-container" style="display:none; width: 100%;"><div class="code-block" id="prompt-to-copy" onclick="copyPromptText()"><span id="prompt-text"></span></div></div>
     </div>
 
-    <div class="input-group">
-        <label>1. Colar Questões (JSON):</label>
-        <button class="btn-aux" onclick="pasteJSON()">📋 Colar</button>
-        <textarea id="jsonInput" placeholder="Questões aparecerão aqui..." style="height: 60px; padding-right: 70px;"></textarea>
-    </div>
-
-    <div class="input-group">
-        <label>2. Nomes dos Grupos:</label>
-        <button class="btn-aux" onclick="cleanNames()">✨ Limpar</button>
-        <textarea id="teamNamesInput" placeholder="Nome1, Nome2..." style="height: 45px; font-size: 14px; padding-right: 80px;"></textarea>
-    </div>
-
-    <div class="input-group">
-        <label>Modo de Jogo:</label>
-        <select id="gameModeSel" onchange="handleModeChange()">
-            <option value="classic">Modo Padrão</option>
-            <option value="tictactoe">Jogo da Velha</option>
-            <option value="stop">Sequência</option>
-        </select>
-    </div>
-
+    <div class="input-group"><label>Colar JSON:</label><textarea id="jsonInput" style="height: 60px;"></textarea></div>
+    <div class="input-group"><label>Nomes dos Grupos:</label><textarea id="teamNamesInput" style="height: 45px;"></textarea></div>
+    <div class="input-group"><select id="gameModeSel" onchange="handleModeChange()"><option value="classic">Modo Padrão</option><option value="tictactoe">Jogo da Velha</option><option value="stop">Sequência</option></select></div>
+    
     <div id="extra-configs">
-        <div class="input-group" id="joker-area">
-            <label>🎲 Probabilidade Surpresa: <b id="jokerVal">15%</b></label>
-            <input type="range" id="jokerProb" min="0" max="50" value="15" oninput="document.getElementById('jokerVal').innerText = this.value + '%'">
-        </div>
-        <div class="input-group" id="team-count-area">
-            <label>Quantidade de Grupos:</label>
-            <input type="number" id="teamCount" value="4">
-        </div>
-        
-        <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px;">
-            <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
-            <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs Divertidos</label>
-        </div>
+        <div class="input-group"><label>🎲 Probabilidade Surpresa: <b id="jokerVal">15%</b></label><input type="range" id="jokerProb" min="0" max="50" value="15" oninput="document.getElementById('jokerVal').innerText=this.value+'%'"></div>
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 10px;"><label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label><label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label></div>
     </div>
 
-    <div class="input-group">
-        <label>Tempo (MM:SS):</label>
-        <input type="text" id="timeInput" onkeyup="formatTimeInput(this)" value="30:00">
-    </div>
-
+    <div class="input-group"><label>Tempo (MM:SS):</label><input type="text" id="timeInput" onkeyup="formatTimeInput(this)" value="30:00"></div>
     <button class="action-btn" onclick="startGame()" style="width:100%; background:var(--success); color:white;">INICIAR</button>
 </div>
 
 <div id="game-area">
-    <div class="top-controls" style="display: flex; justify-content: space-between; width: 100%; align-items: center; padding: 0 10px;">
+    <div class="top-controls" style="display: flex; justify-content: space-between; width: 100%; padding: 10px 20px; box-sizing: border-box;">
         <button onclick="toggleDarkMode()" style="font-size: 32px; background: none; border: none; cursor:pointer;">🌙</button>
         <div id="global-timer-display">30:00</div>
-        <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:15px 30px; border-radius:15px; font-weight: bold; cursor:pointer; font-size: 1.2rem;">SAIR</button>
+        <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:15px 30px; border-radius:15px; font-weight: bold; font-size: 1.2rem;">SAIR</button>
     </div>
     <div id="score-board"></div>
     <div id="grid" class="grid"></div>
@@ -214,171 +112,71 @@
 
 <div id="modal-overlay">
     <div id="modal">
-        <span class="close-modal" onclick="handleXClick()">&times;</span>
         <div id="modal-content"></div>
         <div id="exp-box"></div>
-        <div id="modal-actions" style="margin-top:20px; display:flex; gap:10px; flex-direction:column;">
-            <button id="btn-rebound" class="action-btn" style="display:none; width:100%; background:var(--joker); color:white;">🏀 REBOTE</button>
-            <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA</button>
+        <div id="modal-actions" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+            <button id="btn-rebound" class="action-btn" style="display:none; background:var(--joker); color:white;">🏀 REBOTE</button>
+            <button id="btn-continue" class="action-btn" style="display:none; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA</button>
         </div>
     </div>
 </div>
 
 <script>
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, currentStopIdx = 0, tttBoard = Array(9).fill(null);
     let quizReport = [];
-    let useGifs = false;
 
-    const gifList = [
-      'gif/1.gif', 'gif/2.gif', 'gif/3.gif', 'gif/4.gif', 'gif/5.gif',
-      'gif/6.gif', 'gif/7.gif', 'gif/8.gif', 'gif/9.gif', 'gif/10.gif',
-      'gif/11.gif', 'gif/12.gif', 'gif/13.gif', 'gif/14.gif', 'gif/15.gif',
-      'gif/16.gif', 'gif/17.gif', 'gif/18.gif', 'gif/19.gif', 'gif/20.gif',
-      'gif/21.gif', 'gif/22.gif', 'gif/23.gif', 'gif/24.gif', 'gif/25.gif',
-      'gif/26.gif', 'gif/27.gif', 'gif/28.gif', 'gif/29.gif', 'gif/30.gif',
-      'gif/31.gif', 'gif/32.gif', 'gif/33.gif', 'gif/34.gif', 'gif/35.gif',
-      'gif/36.gif', 'gif/37.gif', 'gif/38.gif'
-    ];
-
+    const gifList = Array.from({length: 38}, (_, i) => `gif/${i+1}.gif`);
     let availableGifs = [];
-    function getNextGif() {
-        if (availableGifs.length === 0) {
-            availableGifs = [...gifList].sort(() => Math.random() - 0.5);
-        }
-        return availableGifs.pop();
-    }
-
-    function formatTimeInput(input) {
-        let value = input.value.replace(/\D/g, "");
-        if (value.length > 2) value = value.substring(0, 2) + ":" + value.substring(2, 4);
-        input.value = value;
-    }
+    function getNextGif() { if (availableGifs.length === 0) availableGifs = [...gifList].sort(() => Math.random() - 0.5); return availableGifs.pop(); }
 
     function updatePromptView() {
         const theme = document.getElementById('themeInput').value || "[TEMA]";
-        const qtd = document.getElementById('qtdInput').value || "[QUESTÕES]";
-        document.getElementById('prompt-text').innerText = `Atue como um professor de Português. Gere ${qtd} questões inéditas sobre o tema ${theme} seguindo estritamente o formato JSON puro sem formatação markdown dentro do Code Block do chat. Misture Múltipla Escolha e V/F. Regras: 1. Para V/F: use apenas as opções A e B. 2. Gabarito na letra correta. 3. Explicação breve. Estrutura: [{"q":"?","a":"A","b":"B","c":"","d":"","correct":"A","pts":10,"exp":"..."}]`;
+        const qtd = document.getElementById('qtdInput').value || "15";
+        document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${qtd} questões em JSON puro: [{"q":"?","a":"A","b":"B","c":"C","d":"D","correct":"A","pts":10,"exp":"..."}] sobre o tema ${theme}.`;
     }
 
+    function formatTimeInput(input) { let v = input.value.replace(/\D/g, ""); if (v.length > 2) v = v.substring(0, 2) + ":" + v.substring(2, 4); input.value = v; }
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
     function copyPromptText() { navigator.clipboard.writeText(document.getElementById('prompt-text').innerText); alert("Copiado!"); }
 
     async function generateWithAPI() {
-        const theme = document.getElementById('themeInput').value;
-        const qtd = document.getElementById('qtdInput').value;
-        const apiKey = document.getElementById('apiKeyInput').value;
-        const modelName = document.getElementById('modelSel').value;
-        const btn = document.getElementById('btn-gerar-ia');
-
-        if(!theme || !apiKey) return alert("Preencha o Tema e a Chave API!");
-
-        btn.innerText = "⏳ LENDO A MENTE DA IA..."; 
-        btn.disabled = true;
-
-        const prompt = document.getElementById('prompt-text').innerText;
-        let endpoint = "", headers = {}, body = {}, jsonText = "";
-
-        if (modelName.includes("/")) {
-            endpoint = "https://openrouter.ai/api/v1/chat/completions";
-            headers = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}`, "HTTP-Referer": window.location.href, "X-Title": "Quiz Master Eduardo" };
-            body = { model: modelName, messages: [{ role: "user", content: prompt }] };
-        } else if (modelName.startsWith("gemini")) {
-            endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-            headers = { "Content-Type": "application/json" };
-            body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { response_mime_type: "application/json" } };
-        } else if (modelName.startsWith("gpt")) {
-            endpoint = "https://api.openai.com/v1/chat/completions";
-            headers = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` };
-            body = { model: modelName, messages: [{ role: "user", content: prompt }] };
-        }
-
+        const btn = document.getElementById('btn-gerar-ia'); btn.innerText = "⏳ GERANDO..."; btn.disabled = true;
         try {
-            const res = await fetch(endpoint, { method: "POST", headers: headers, body: JSON.stringify(body) });
+            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${document.getElementById('apiKeyInput').value}` },
+                body: JSON.stringify({ model: document.getElementById('modelSel').value, messages: [{ role: "user", content: document.getElementById('prompt-text').innerText }] })
+            });
             const data = await res.json();
-            if(data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-            if (modelName.includes("/") || modelName.startsWith("gpt")) jsonText = data.choices[0].message.content;
-            else jsonText = data.candidates[0].content.parts[0].text;
-
-            jsonText = jsonText.replace(/```json/gi, '').replace(/```/g, '').trim();
-            document.getElementById('jsonInput').value = jsonText;
-            alert("✅ Questões geradas com sucesso pela IA!");
-        } catch (e) {
-            alert("❌ Erro com a IA: " + e.message);
-        } finally {
-            btn.innerText = "⚡ GERAR QUESTÕES COM IA"; btn.disabled = false;
-        }
-    }
-
-    async function pasteJSON() { const t = await navigator.clipboard.readText(); document.getElementById('jsonInput').value = t; }
-
-    function cleanNames() {
-        const input = document.getElementById('teamNamesInput');
-        let lines = input.value.split('\n'), names = [];
-        for (let line of lines) {
-            let match = line.trim().match(/^\d+\.\s+(.*)/);
-            if (match) names.push(match[1].trim().split(' ')[0]);
-        }
-        if (names.length > 0) input.value = names.join(', ');
-        else input.value = input.value.split(',').map(n => n.trim().split(' ')[0]).filter(n => n).join(', ');
-    }
-
-    function handleModeChange() {
-        const mode = document.getElementById('gameModeSel').value;
-        const config = document.getElementById('extra-configs');
-        config.style.display = (mode === 'classic') ? 'block' : 'none';
+            document.getElementById('jsonInput').value = data.choices[0].message.content.replace(/```json|```/g, "").trim();
+            alert("✅ Sucesso!");
+        } catch (e) { alert("Erro na IA!"); }
+        btn.innerText = "⚡ GERAR QUESTÕES COM IA"; btn.disabled = false;
     }
 
     function startGame() {
-        try { questions = JSON.parse(document.getElementById('jsonInput').value); } catch(e) { return alert("JSON inválido!"); }
+        try { questions = JSON.parse(document.getElementById('jsonInput').value); } catch(e) { return alert("JSON Inválido!"); }
         gameMode = document.getElementById('gameModeSel').value;
-        useGifs = document.getElementById('gifsCb').checked;
-
         const timeParts = document.getElementById('timeInput').value.split(":");
         totalSecondsLeft = (parseInt(timeParts[0]) * 60) + (parseInt(timeParts[1]) || 0);
-        
         let names = document.getElementById('teamNamesInput').value.split(',').map(n => n.trim()).filter(n => n);
-        let count = parseInt(document.getElementById('teamCount').value) || 1;
-        
-        if (gameMode === 'tictactoe') {
-            count = 2; 
-            if (names.length > 2) names = names.slice(0, 2); 
-        }
-        
-        const finalCount = gameMode === 'tictactoe' ? 2 : Math.max(names.length, count);
-        
-        teams = [];
-        for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
+        if(names.length === 0) names = ["Grupo 1", "Grupo 2"];
+        teams = names.map((n, i) => ({name: n, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`}));
 
-        quizReport = []; cardStates = {}; currentTeamIdx = 0; currentStopIdx = 0; tttBoard = Array(9).fill(null); availableGifs = [];
-        
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
-        startGlobalTimer();
-        if(gameMode === 'stop') document.getElementById('grid').style.display = 'none', loadStopQuestion();
-        else renderBoard();
-    }
-
-    function startGlobalTimer() {
         globalTimerInterval = setInterval(() => {
             totalSecondsLeft--;
             let m = Math.floor(totalSecondsLeft / 60), s = totalSecondsLeft % 60;
             document.getElementById('global-timer-display').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
             if(totalSecondsLeft <= 0) showFinal();
         }, 1000);
+        renderBoard();
     }
 
-    /* FUNÇÃO RENDERBOARD ATUALIZADA PARA PROJETOR */
     function renderBoard() {
         const grid = document.getElementById('grid'); grid.innerHTML = '';
         grid.className = 'grid ' + (gameMode === 'tictactoe' ? 'tictactoe' : '');
-        
-        if (questions.length > 20 && gameMode !== 'tictactoe') {
-            grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(140px, 1fr))';
-        } else {
-            grid.style.gridTemplateColumns = ''; 
-        }
-
         const total = gameMode === 'tictactoe' ? 9 : questions.length;
         for(let i=0; i<total; i++) {
             const card = document.createElement('div'), st = cardStates[i];
@@ -390,216 +188,97 @@
         renderScores();
     }
 
-    function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
-
-    function triggerSurprise(idx) {
-        const modal = document.getElementById('modal');
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('modal-actions').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'block';
-        document.getElementById('btn-rebound').style.display = 'none';
-        document.getElementById('exp-box').style.display = 'none';
-        modal.classList.remove('stop-mode');
-
-        const bonusPts = Math.floor(Math.random() * 6) + 5; 
-
-        const surprises = [
-            { type: 'bonus', text: `🎉 BÔNUS!<br>Vocês ganharam ${bonusPts} pontos de graça!`, pts: bonusPts, mark: '🎁', isGood: true },
-            { type: 'bomb', text: '💣 BOMBA!<br>Vocês perderam 10 pontos!', pts: -10, mark: '💣', isGood: false },
-            { type: 'skip', text: '⏭️ QUE AZAR!<br>Perderam a vez!', pts: 0, mark: '⏭️', isGood: false }
-        ];
-
-        const s = surprises[Math.floor(Math.random() * surprises.length)];
-
-        let gifHTML = '';
-        if (useGifs) {
-            const randomGif = getNextGif();
-            gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
-        }
-
-        document.getElementById('modal-content').innerHTML = `
-            ${gifHTML}
-            <h1 style="color: var(--joker); font-size: 2.5rem; margin-top: 5px;">🃏 CARTA SURPRESA!</h1>
-            <h2>${s.text}</h2>
-            <p>Equipe: <b>${teams[currentTeamIdx].name}</b></p>
-        `;
-
-        teams[currentTeamIdx].score += s.pts;
-        cardStates[idx] = { correct: s.isGood, mark: s.mark };
-
-        quizReport.push({
-            team: teams[currentTeamIdx].name,
-            question: "🃏 CARTA SURPRESA",
-            chosen: "-",
-            correctLetter: "-",
-            isCorrect: s.isGood,
-            isJoker: true,
-            exp: s.text.replace(/<br>/g, " ")
-        });
+    function renderScores() {
+        document.getElementById('score-board').innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}" style="border-color:${t.color}"><b>${t.name}</b><br>${t.score} pts</div>`).join('');
     }
 
     function showQuestion(idx) {
-        if (gameMode === 'classic') {
-            const prob = parseInt(document.getElementById('jokerProb').value) || 0;
-            const random = Math.floor(Math.random() * 100); 
-            if (random < prob) {
-                triggerSurprise(idx);
-                return;
-            }
-        }
+        const prob = parseInt(document.getElementById('jokerProb').value);
+        if (Math.random()*100 < prob && gameMode === 'classic') { triggerSurprise(idx); return; }
 
         const q = questions[idx % questions.length];
-        const modal = document.getElementById('modal');
         document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('modal-actions').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-        document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
-        if (gameMode === 'stop') modal.classList.add('stop-mode');
-        else modal.classList.remove('stop-mode');
         
-        let gifHTML = '';
-        if (useGifs) {
-            const randomGif = getNextGif();
-            gifHTML = `<img src="${randomGif}" class="modal-gif" onerror="this.style.display='none'">`;
-        }
+        let gifHTML = document.getElementById('gifsCb').checked ? `<img src="${getNextGif()}" class="modal-gif">` : '';
 
-        const isVF = !q.c;
         document.getElementById('modal-content').innerHTML = `
-            ${gifHTML}
-            <h2 style="margin-top: 5px;">${q.q}</h2><div class="options-grid">
+            ${gifHTML}<h2>${q.q}</h2><div class="options-grid">
             <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button>
             <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>
-            ${!isVF ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button><button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>` : ''}
-        </div><p style="font-size: 1.5rem">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+            ${q.c ? `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button><button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>` : ''}
+        </div><p style="font-size:1.5rem">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+    }
+
+    function triggerSurprise(idx) {
+        const bonus = (Math.random() > 0.5 ? 10 : -10);
+        teams[currentTeamIdx].score += bonus;
+        cardStates[idx] = { correct: bonus > 0, mark: '🃏' };
+        quizReport.push({ team: teams[currentTeamIdx].name, question: "SURPRESA 🃏", isJoker: true, isCorrect: bonus > 0, exp: bonus > 0 ? "+10 pontos" : "-10 pontos" });
+        document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('modal-content').innerHTML = `<h1>🃏 SURPRESA!</h1><h2>A equipe ${teams[currentTeamIdx].name} ${bonus > 0 ? 'ganhou' : 'perdeu'} 10 pontos!</h2>`;
+        document.getElementById('btn-continue').style.display = 'block';
     }
 
     function checkAns(btn, chosen, correct, idx) {
         const q = questions[idx % questions.length];
         const isCorrect = chosen === correct.trim();
-        const allBtns = document.querySelectorAll('.opt-btn');
-        
-        quizReport.push({
-            team: teams[currentTeamIdx].name,
-            question: q.q,
-            chosen: chosen,
-            correctLetter: correct.trim(),
-            isCorrect: isCorrect,
-            isJoker: false,
-            exp: q.exp || ""
-        });
+        quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, chosen, correctLetter: correct, isCorrect, isJoker: false, exp: q.exp });
 
         if(isCorrect) {
             btn.classList.add('correct');
-            teams[currentTeamIdx].score += (parseInt(q.pts) || 10);
+            teams[currentTeamIdx].score += 10;
             cardStates[idx] = {correct: true, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅'};
-            if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+            if(gameMode==='tictactoe') tttBoard[idx] = currentTeamIdx;
+            confetti({ particleCount: 150, spread: 70 });
         } else {
             btn.classList.add('wrong');
             cardStates[idx] = {correct: false, mark: '❌'};
-            
-            if(gameMode !== 'stop' && document.getElementById('reboundCb').checked && !isReboundActive) {
-                isReboundActive = true;
-                const rebBtn = document.getElementById('btn-rebound'); rebBtn.style.display = 'block';
-                allBtns.forEach(b => b.disabled = true);
-                rebBtn.onclick = () => { 
-                    currentTeamIdx = (currentTeamIdx + 1) % teams.length; 
-                    renderScores(); 
-                    allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); 
-                    rebBtn.style.display = 'none'; 
-                    document.getElementById('modal-content').querySelector('p b').innerText = teams[currentTeamIdx].name; 
-                };
-                return;
-            }
         }
-        document.getElementById('exp-box').innerHTML = `<b>Resposta Correta: ${correct}</b><br>${q.exp || ""}`;
+        document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${q.exp}`;
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
-        allBtns.forEach(b => b.disabled = true);
+        document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
     }
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
-        isReboundActive = false; 
-        if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
-        currentTeamIdx = (originalTurnIdx + 1) % teams.length;
-        
         if(gameMode === 'tictactoe' && checkWin()) return showFinal();
-        if(Object.keys(cardStates).length === (gameMode === 'tictactoe' ? 9 : questions.length)) return showFinal();
-
+        currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         renderBoard();
+        if(Object.keys(cardStates).length === (gameMode === 'tictactoe' ? 9 : questions.length)) showFinal();
     }
 
-    function handleXClick() { 
-        if (gameMode === 'stop') {
-            clearInterval(globalTimerInterval);
-            document.getElementById('modal-overlay').style.display = 'none';
-            document.getElementById('game-area').style.display = 'none';
-            document.getElementById('setup-menu').style.display = 'block'; 
-            return;
-        }
-        closeModal(); 
-    }
-
-    function renderScores() {
-        document.getElementById('score-board').innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}" style="border-color:${t.color}"><b>${t.name}</b><br>${t.score} pts</div>`).join('');
+    function checkWin() {
+        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        return wins.some(w => tttBoard[w[0]]!==null && tttBoard[w[0]]===tttBoard[w[1]] && tttBoard[w[0]]===tttBoard[w[2]]);
     }
 
     function showFinal() {
         clearInterval(globalTimerInterval);
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         confetti({ particleCount: 200, spread: 70 });
-        
+
         let podiumHTML = '<div class="podium-container">';
         if(sorted[1]) podiumHTML += `<div class="podium-step podium-2"><div class="podium-name">${sorted[1].name}</div><div class="podium-score">${sorted[1].score} pts</div><div class="podium-rank">2</div></div>`;
         if(sorted[0]) podiumHTML += `<div class="podium-step podium-1"><div class="podium-name">${sorted[0].name}</div><div class="podium-score">${sorted[0].score} pts</div><div class="podium-rank">1</div></div>`;
         if(sorted[2]) podiumHTML += `<div class="podium-step podium-3"><div class="podium-name">${sorted[2].name}</div><div class="podium-score">${sorted[2].score} pts</div><div class="podium-rank">3</div></div>`;
         podiumHTML += '</div>';
 
-        let otherTeamsHTML = '';
-        if(sorted.length > 3) {
-            otherTeamsHTML = '<div style="margin-bottom: 20px; font-size: 1.2rem;">' + sorted.slice(3).map((t, i) => `<b>${i+4}º ${t.name}</b>: ${t.score} pts`).join(' | ') + '</div>';
-        }
-
-        let reportHTML = '<div class="report-container"><h3 style="margin-top:0; color:var(--primary);">Relatório de Desempenho</h3>';
-        if(quizReport.length === 0) {
-            reportHTML += '<p>Nenhuma ação foi registrada nesta partida.</p>';
-        } else {
-            quizReport.forEach((item, index) => {
-                let badge = item.isCorrect ? '<span class="badge-correct">ACERTOU</span>' : '<span class="badge-wrong">ERROU</span>';
-                if(item.isJoker) badge = '<span class="badge-joker">SURPRESA</span>';
-
-                reportHTML += `
-                    <div class="report-item">
-                        <b>Rodada ${index + 1}:</b> ${item.question}<br>
-                        <i><b>${item.team}</b> ${item.isJoker ? 'tirou a carta.' : `respondeu: Letra ${item.chosen}`}</i> ${badge}<br>
-                        ${!item.isJoker ? `<b>Gabarito: Letra ${item.correctLetter}</b><br>` : ''}
-                        <span style="color: gray; font-size: 1rem;">${item.exp}</span>
-                    </div>
-                `;
-            });
-        }
+        let reportHTML = '<div class="report-container"><h3>Relatório Final</h3>';
+        quizReport.forEach((r, i) => {
+            let badge = r.isJoker ? '<span class="badge-joker">SURPRESA</span>' : (r.isCorrect ? '<span class="badge-correct">ACERTOU</span>' : '<span class="badge-wrong">ERROU</span>');
+            reportHTML += `<div class="report-item"><b>#${i+1} ${r.team}</b> ${badge}<br>Questão: ${r.question}<br><small>${r.exp}</small></div>`;
+        });
         reportHTML += '</div>';
 
-        document.getElementById('modal-actions').style.display = 'none';
-        document.getElementById('exp-box').style.display = 'none'; 
-
-        const modal = document.getElementById('modal');
-        modal.style.maxWidth = '1100px'; 
-        
-        document.getElementById('modal-content').innerHTML = `
-            <h1 style="color: var(--primary); margin: 0 0 10px 0; font-size: 3rem;">🏆 RESULTADO FINAL 🏆</h1>
-            ${podiumHTML}
-            ${otherTeamsHTML}
-            ${reportHTML}
-            <button class='action-btn' style='background:var(--danger); color:white; margin-top:20px; width:100%;' onclick='location.reload()'>ENCERRAR E REINICIAR</button>
-        `;
-        
+        document.getElementById('modal-content').innerHTML = `<h1 style="font-size:3rem">🏆 FIM DE JOGO 🏆</h1>${podiumHTML}${reportHTML}<button class="action-btn" style="background:var(--danger); color:white; width:100%; margin-top:20px;" onclick="location.reload()">REINICIAR</button>`;
         document.getElementById('modal-overlay').style.display = 'flex';
+        document.getElementById('modal-actions').style.display = 'none';
     }
 
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
-    function checkWin() { const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; return wins.some(w => tttBoard[w[0]]!==null && tttBoard[w[0]]===tttBoard[w[1]] && tttBoard[w[0]]===tttBoard[w[2]]); }
     updatePromptView();
 </script>
 </body>
