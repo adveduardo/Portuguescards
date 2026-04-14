@@ -6,7 +6,7 @@
     <title>Eduardo Goulart</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Português">
     <meta name="theme-color" content="#f0f2f5">
     
@@ -17,12 +17,16 @@
             --success: #2ecc71; --joker: #9b59b6; --text: #333; --card-bg: white; --border: #ccc;
         }
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
-        html { background-color: var(--bg); }
-        html, body { overscroll-behavior-y: none; height: 100%; } 
+        
+        /* MODIFICAÇÃO CSS: Garante que o fundo da barra de status seja o mesmo do app */
+        html, body { 
+            overscroll-behavior-y: none; 
+            height: 100%; 
+            background-color: var(--bg);
+        } 
         
         body { 
             font-family: 'Arial Rounded MT Bold', sans-serif; 
-            background: var(--bg); 
             color: var(--text); 
             margin: 0; 
             display: flex; 
@@ -30,6 +34,7 @@
             align-items: center; 
             min-height: 100vh; 
             transition: 0.3s; 
+            /* Mantém o espaçamento para não colidir com o relógio, mas o fundo é contínuo */
             padding-top: env(safe-area-inset-top, 20px); 
         }
 
@@ -80,7 +85,6 @@
         .report-container { max-height: 200px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; }
         .report-item { margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #ddd; font-size: 0.9rem; }
         
-        /* Ocultar elementos na impressão */
         @media print {
             body * { visibility: hidden; }
             #modal, #modal-content, .report-container, .report-container * { visibility: visible; }
@@ -188,7 +192,6 @@
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
     const gifList = Array.from({length: 83}, (_, i) => `gif/${i+1}.gif`);
 
-    // --- LÓGICA DE PERSISTÊNCIA ---
     function saveGameState() {
         const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport };
         localStorage.setItem('edu_quiz_state', JSON.stringify(state));
@@ -289,7 +292,7 @@
 
     function triggerSurprise(idx) {
         document.getElementById('modal-content').innerHTML = ""; 
-        const bonus = Math.floor(Math.random() * 10) + 1; // Oscila 1-10
+        const bonus = Math.floor(Math.random() * 10) + 1;
         const isPositive = Math.random() > 0.5;
         const finalPoints = isPositive ? bonus : -bonus;
         
@@ -333,7 +336,6 @@
         if(isCorrect) {
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             btn.classList.add('correct'); 
-            // Rebote ganha metade (5), original ganha 10
             const ptsGanhos = isReboundActive ? 5 : 10;
             teams[currentTeamIdx].score += ptsGanhos;
             
@@ -386,7 +388,6 @@
         document.getElementById('exp-box').style.display = 'none';
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         
-        // Lógica de Pódio
         let p1 = [], p2 = [], p3 = [];
         if(sorted.length > 0) {
             let s1 = sorted[0].score;
@@ -443,7 +444,6 @@
 
     function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
     
-    // Inicia verificando se há jogo salvo
     window.onload = () => {
         checkExistingGame();
         updatePromptView();
