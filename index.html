@@ -11,10 +11,10 @@
             --success: #2ecc71; --joker: #9b59b6; --text: #333; --card-bg: white; --border: #ccc;
         }
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
-        html, body { overscroll-behavior-y: none; height: 100%; } 
+        html, body { overscroll-behavior-y: none; } 
         body { font-family: 'Arial Rounded MT Bold', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; transition: 0.3s; }
 
-        /* --- MENU INICIAL (PRESERVADO) --- */
+        /* --- MENU INICIAL (ESTRUTURA ORIGINAL) --- */
         #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin-bottom: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
         .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; }
         label { font-weight: bold; font-size: 0.9rem; }
@@ -23,15 +23,54 @@
         .code-block { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; text-align: left; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; width: 100%; max-width: 450px; position: relative; margin-top: 10px; cursor: pointer; line-height: 1.4; }
         .btn-aux { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
 
-        /* --- ÁREA DE JOGO (MODO PROJETOR) --- */
-        #game-area { width: 100vw; height: 100vh; display: none; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        /* --- ÁREA DE JOGO (MODO PROJETOR - AJUSTADO) --- */
+        #game-area { width: 100vw; height: 100vh; display: none; flex-direction: column; padding: 10px; box-sizing: border-box; }
         
-        #global-timer-display { display: none !important; } /* REMOVIDO POR SOLICITAÇÃO */
-        
+        .top-controls { 
+            display: flex; 
+            justify-content: space-between; 
+            width: 100%; 
+            align-items: center; 
+            margin-bottom: 5px; /* Reduzido para subir o placar */
+            padding: 0 10px;
+        }
+
+        #global-timer-display { display: none !important; }
+
+        #score-board { 
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 10px; 
+            flex-wrap: nowrap; /* Mantém em uma linha */
+            justify-content: center; 
+            padding: 5px; 
+            width: 100%; 
+        }
+
+        .team-card { 
+            background: var(--card-bg); 
+            padding: 8px 15px; 
+            border-radius: 12px; 
+            border: 4px solid var(--border); 
+            min-width: 130px; 
+            text-align: center; 
+            font-size: 1.4rem; /* Legível no projetor */
+            transition: 0.3s;
+        }
+
+        .team-card.active { 
+            border-color: var(--accent); 
+            transform: scale(1.05); 
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
+
+        /* GRID GIGANTE */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 20px; 
+            gap: 15px; 
             width: 100%; 
             flex-grow: 1; 
             padding: 10px;
@@ -41,7 +80,7 @@
 
         .grid.tictactoe { 
             grid-template-columns: repeat(3, 1fr) !important; 
-            max-width: 85vh; 
+            max-width: 80vh; 
             margin: 0 auto;
         }
         
@@ -53,45 +92,35 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 6rem; /* TAMANHO PROJETOR */
+            font-size: 6rem; /* Gigante para projetor */
             cursor: pointer; 
             transition: 0.2s; 
             box-shadow: 0 10px 0 #3d6dbd; 
             font-weight: 900; 
             border: 4px solid rgba(255,255,255,0.1);
         }
+
         .card.used-correct { background: var(--card-bg) !important; color: var(--text) !important; border: 8px solid var(--success) !important; box-shadow: none; font-size: 6rem; }
         .card.used-wrong { background: var(--danger) !important; color: white !important; box-shadow: none; font-size: 5rem; }
-
-        #score-board { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; width: 100%; }
-        .team-card { background: var(--card-bg); padding: 10px 25px; border-radius: 15px; border: 5px solid var(--border); min-width: 140px; text-align: center; font-size: 1.8rem; transition: 0.3s; }
-        .team-card.active { border-color: var(--accent); transform: scale(1.1); box-shadow: 0 4px 20px rgba(0,0,0,0.1); background: var(--accent); color: #000; }
 
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
         #modal { background: var(--card-bg); padding: 40px; border-radius: 30px; width: 95%; max-width: 1100px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; }
         
-        .close-modal { position: absolute; top: -15px; right: -10px; font-size: 28px; font-weight: bold; cursor: pointer; display: none; color: white; background-color: var(--danger); border-radius: 50%; width: 50px; height: 50px; line-height: 45px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 1000; border: 3px solid white; }
-        #modal.stop-mode .close-modal { display: block; }
-
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 30px 0; }
         .opt-btn { padding: 25px; border: 4px solid var(--primary); border-radius: 15px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; font-size: 2rem; }
         .opt-btn.correct { background-color: var(--success) !important; color: white !important; }
         .opt-btn.wrong { background-color: var(--danger) !important; color: white !important; }
 
-        #exp-box { margin-top: 15px; padding: 20px; border-radius: 12px; background: #e8f4fd; color: #2c3e50; border-left: 10px solid var(--primary); text-align: left; display: none; font-size: 1.5rem; }
         .action-btn { padding: 20px 40px; border: none; border-radius: 15px; cursor: pointer; font-weight: bold; font-size: 1.5rem; transition: 0.3s; }
 
         .podium-container { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin: 20px 0; height: 160px; }
-        .podium-step { width: 100px; text-align: center; border-radius: 10px 10px 0 0; color: #333; font-weight: bold; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 10px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); position: relative; }
-        .podium-1 { height: 100%; background: linear-gradient(to bottom, #f1c40f, #f39c12); } 
-        .podium-2 { height: 75%; background: linear-gradient(to bottom, #bdc3c7, #95a5a6); } 
-        .podium-3 { height: 55%; background: linear-gradient(to bottom, #cd7f32, #a0522d); color: white;} 
+        .podium-step { width: 100px; text-align: center; border-radius: 10px 10px 0 0; color: #333; font-weight: bold; position: relative; padding-top: 10px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); }
+        .podium-1 { height: 100%; background: #f1c40f; } .podium-2 { height: 75%; background: #bdc3c7; } .podium-3 { height: 55%; background: #cd7f32; color: white; }
 
         .report-container { max-height: 250px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; font-size: 1rem; }
         .report-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd; }
         .badge-correct { background: var(--success); color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; margin-left: 5px;}
         .badge-wrong { background: var(--danger); color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; margin-left: 5px;}
-        .modal-gif { max-width: 100%; max-height: 250px; border-radius: 15px; margin-bottom: 15px; object-fit: contain; }
     </style>
 </head>
 <body>
@@ -181,10 +210,13 @@
 </div>
 
 <div id="game-area">
-    <div class="top-controls" style="display: flex; justify-content: space-between; width: 100%; align-items: center; margin-bottom: 20px;">
-        <button onclick="toggleDarkMode()" style="font-size: 32px; background: none; border: none; cursor:pointer;">🌙</button>
+    <div class="top-controls">
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button onclick="toggleDarkMode()" style="font-size: 28px; background: none; border: none; cursor:pointer;">🌙</button>
+            <button onclick="toggleFullScreen()" style="font-size: 28px; background: none; border: none; cursor:pointer;" title="Tela Cheia">📺</button>
+        </div>
         <div id="global-timer-display">30:00</div>
-        <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:15px 30px; border-radius:15px; font-weight: bold; cursor:pointer; font-size: 1.2rem;">SAIR</button>
+        <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:12px 25px; border-radius:12px; font-weight: bold; cursor:pointer; font-size: 1.1rem;">SAIR</button>
     </div>
     <div id="score-board"></div>
     <div id="grid" class="grid"></div>
@@ -192,26 +224,27 @@
 
 <div id="modal-overlay">
     <div id="modal">
-        <span class="close-modal" onclick="handleXClick()">&times;</span>
         <div id="modal-content"></div>
-        <div id="exp-box"></div>
+        <div id="exp-box" style="display:none; padding:20px; background:#e8f4fd; border-radius:15px; margin-top:15px; font-size:1.5rem; text-align:left; border-left: 10px solid var(--primary);"></div>
         <div id="modal-actions" style="margin-top:20px; display:flex; gap:10px; flex-direction:column;">
             <button id="btn-rebound" class="action-btn" style="display:none; width:100%; background:var(--joker); color:white;">🏀 REBOTE</button>
-            <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA</button>
+            <button id="btn-continue" class="action-btn" style="display:none; width:100%; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA PERGUNTA</button>
         </div>
     </div>
 </div>
 
 <script>
-    let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, currentStopIdx = 0, tttBoard = Array(9).fill(null);
+    let globalTimerInterval, totalSecondsLeft, questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', isReboundActive = false, originalTurnIdx = 0, tttBoard = Array(9).fill(null);
     let quizReport = [];
-    let useGifs = false;
 
     const gifList = Array.from({length: 38}, (_, i) => `gif/${i+1}.gif`);
-    let availableGifs = [];
-    function getNextGif() {
-        if (availableGifs.length === 0) availableGifs = [...gifList].sort(() => Math.random() - 0.5);
-        return availableGifs.pop();
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
     }
 
     function formatTimeInput(input) {
@@ -237,33 +270,19 @@
         const btn = document.getElementById('btn-gerar-ia');
 
         if(!theme || !apiKey) return alert("Preencha o Tema e a Chave API!");
-        btn.innerText = "⏳ LENDO A MENTE DA IA..."; 
-        btn.disabled = true;
-
-        const prompt = document.getElementById('prompt-text').innerText;
-        let endpoint = "", headers = {}, body = {}, jsonText = "";
-
-        if (modelName.includes("/")) {
-            endpoint = "https://openrouter.ai/api/v1/chat/completions";
-            headers = { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` };
-            body = { model: modelName, messages: [{ role: "user", content: prompt }] };
-        } else {
-            endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-            headers = { "Content-Type": "application/json" };
-            body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { response_mime_type: "application/json" } };
-        }
+        btn.innerText = "⏳ GERANDO..."; btn.disabled = true;
 
         try {
-            const res = await fetch(endpoint, { method: "POST", headers: headers, body: JSON.stringify(body) });
+            const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}` },
+                body: JSON.stringify({ model: modelName, messages: [{ role: "user", content: document.getElementById('prompt-text').innerText }] })
+            });
             const data = await res.json();
-            jsonText = modelName.includes("/") ? data.choices[0].message.content : data.candidates[0].content.parts[0].text;
-            document.getElementById('jsonInput').value = jsonText.replace(/```json/gi, '').replace(/```/g, '').trim();
+            document.getElementById('jsonInput').value = data.choices[0].message.content.replace(/```json|```/g, "").trim();
             alert("✅ Questões geradas!");
-        } catch (e) {
-            alert("❌ Erro com a IA: " + e.message);
-        } finally {
-            btn.innerText = "⚡ GERAR QUESTÕES COM IA"; btn.disabled = false;
-        }
+        } catch (e) { alert("Erro: " + e.message); }
+        btn.innerText = "⚡ GERAR QUESTÕES COM IA"; btn.disabled = false;
     }
 
     async function pasteJSON() { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
@@ -275,37 +294,23 @@
     }
 
     function handleModeChange() {
-        const mode = document.getElementById('gameModeSel').value;
-        document.getElementById('extra-configs').style.display = (mode === 'classic') ? 'block' : 'none';
+        document.getElementById('extra-configs').style.display = (document.getElementById('gameModeSel').value === 'classic') ? 'block' : 'none';
     }
 
     function startGame() {
         try { questions = JSON.parse(document.getElementById('jsonInput').value); } catch(e) { return alert("JSON inválido!"); }
         gameMode = document.getElementById('gameModeSel').value;
-        useGifs = document.getElementById('gifsCb').checked;
-
-        const timeParts = document.getElementById('timeInput').value.split(":");
-        totalSecondsLeft = (parseInt(timeParts[0]) * 60) + (parseInt(timeParts[1]) || 0);
         
         let names = document.getElementById('teamNamesInput').value.split(',').map(n => n.trim()).filter(n => n);
         let count = parseInt(document.getElementById('teamCount').value) || 2;
-        
         const finalCount = gameMode === 'tictactoe' ? 2 : Math.max(names.length, count);
+        
         teams = [];
         for(let i=0; i<finalCount; i++) teams.push({name: names[i] || `Grupo ${i+1}`, score: 0, color: `hsl(${(i*137)%360}, 70%, 50%)`});
 
-        quizReport = []; cardStates = {}; currentTeamIdx = 0; currentStopIdx = 0; tttBoard = Array(9).fill(null); availableGifs = [];
-        
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
-        
-        globalTimerInterval = setInterval(() => {
-            totalSecondsLeft--;
-            if(totalSecondsLeft <= 0) showFinal();
-        }, 1000);
-
-        if(gameMode === 'stop') document.getElementById('grid').style.display = 'none', loadStopQuestion();
-        else renderBoard();
+        renderBoard();
     }
 
     function renderBoard() {
@@ -322,46 +327,17 @@
         renderScores();
     }
 
-    function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
-
-    function triggerSurprise(idx) {
-        const modal = document.getElementById('modal');
-        document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('modal-actions').style.display = 'flex';
-        document.getElementById('btn-continue').style.display = 'block';
-        document.getElementById('btn-rebound').style.display = 'none';
-        document.getElementById('exp-box').style.display = 'none';
-
-        const bonusPts = Math.floor(Math.random() * 6) + 5; 
-        const surprises = [
-            { type: 'bonus', text: `🎉 BÔNUS!<br>Vocês ganharam ${bonusPts} pontos!`, pts: bonusPts, mark: '🎁', isGood: true },
-            { type: 'bomb', text: '💣 BOMBA!<br>Vocês perderam 10 pontos!', pts: -10, mark: '💣', isGood: false },
-            { type: 'skip', text: '⏭️ QUE AZAR!<br>Perderam a vez!', pts: 0, mark: '⏭️', isGood: false }
-        ];
-        const s = surprises[Math.floor(Math.random() * surprises.length)];
-
-        let gifHTML = useGifs ? `<img src="${getNextGif()}" class="modal-gif">` : '';
-        document.getElementById('modal-content').innerHTML = `${gifHTML}<h1 style="color:var(--joker)">🃏 CARTA SURPRESA!</h1><h2>${s.text}</h2><p>Equipe: <b>${teams[currentTeamIdx].name}</b></p>`;
-
-        teams[currentTeamIdx].score += s.pts;
-        cardStates[idx] = { correct: s.isGood, mark: s.mark };
-        quizReport.push({ team: teams[currentTeamIdx].name, question: "🃏 SURPRESA", chosen: "-", correctLetter: "-", isCorrect: s.isGood, isJoker: true, exp: s.text });
+    function renderScores() {
+        document.getElementById('score-board').innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}" style="border-color:${t.color}"><b>${t.name}</b><br>${t.score} pts</div>`).join('');
     }
 
     function showQuestion(idx) {
-        if (gameMode === 'classic') {
-            const prob = parseInt(document.getElementById('jokerProb').value) || 0;
-            if (Math.random() * 100 < prob) { triggerSurprise(idx); return; }
-        }
-
         const q = questions[idx % questions.length];
         document.getElementById('modal-overlay').style.display = 'flex';
-        document.getElementById('modal-actions').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'none';
-        document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
         
-        let gifHTML = useGifs ? `<img src="${getNextGif()}" class="modal-gif">` : '';
+        let gifHTML = document.getElementById('gifsCb').checked ? `<img src="${gifList[Math.floor(Math.random()*gifList.length)]}" class="modal-gif">` : '';
         document.getElementById('modal-content').innerHTML = `${gifHTML}<h2>${q.q}</h2><div class="options-grid">
             <button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button>
             <button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>
@@ -370,68 +346,41 @@
     }
 
     function checkAns(btn, chosen, correct, idx) {
-        const q = questions[idx % questions.length];
         const isCorrect = chosen === correct.trim();
         const allBtns = document.querySelectorAll('.opt-btn');
-        
-        quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, chosen, correctLetter: correct, isCorrect, isJoker: false, exp: q.exp || "" });
+        allBtns.forEach(b => b.disabled = true);
 
         if(isCorrect) {
             btn.classList.add('correct');
-            teams[currentTeamIdx].score += (parseInt(q.pts) || 10);
+            teams[currentTeamIdx].score += 10;
             cardStates[idx] = {correct: true, mark: gameMode==='tictactoe'?(currentTeamIdx===0?'X':'O'):'✅'};
             if(gameMode === 'tictactoe') tttBoard[idx] = currentTeamIdx;
+            confetti({ particleCount: 150, spread: 70 });
         } else {
             btn.classList.add('wrong');
             cardStates[idx] = {correct: false, mark: '❌'};
-            if(gameMode !== 'stop' && document.getElementById('reboundCb').checked && !isReboundActive) {
-                isReboundActive = true;
-                const rebBtn = document.getElementById('btn-rebound'); rebBtn.style.display = 'block';
-                allBtns.forEach(b => b.disabled = true);
-                rebBtn.onclick = () => { 
-                    currentTeamIdx = (currentTeamIdx + 1) % teams.length; 
-                    renderScores(); 
-                    allBtns.forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; }); 
-                    rebBtn.style.display = 'none'; 
-                    document.getElementById('modal-content').querySelector('p b').innerText = teams[currentTeamIdx].name; 
-                };
-                return;
-            }
         }
-        document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${q.exp || ""}`;
+        document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${questions[idx % questions.length].exp}`;
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
-        allBtns.forEach(b => b.disabled = true);
     }
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
-        isReboundActive = false;
-        if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
         if(gameMode === 'tictactoe' && checkWin()) return showFinal();
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
-        if(Object.keys(cardStates).length === (gameMode === 'tictactoe' ? 9 : questions.length)) return showFinal();
         renderBoard();
-    }
-
-    function handleXClick() { closeModal(); }
-
-    function renderScores() {
-        document.getElementById('score-board').innerHTML = teams.map((t, i) => `<div class="team-card ${i===currentTeamIdx?'active':''}" style="border-color:${t.color}"><b>${t.name}</b><br>${t.score} pts</div>`).join('');
+        if(Object.keys(cardStates).length === (gameMode==='tictactoe'?9:questions.length)) showFinal();
     }
 
     function showFinal() {
-        clearInterval(globalTimerInterval);
         const sorted = [...teams].sort((a,b) => b.score - a.score);
-        confetti({ particleCount: 200, spread: 70 });
-        
-        let podiumHTML = '<div class="podium-container">';
-        if(sorted[1]) podiumHTML += `<div class="podium-step podium-2"><div class="podium-name">${sorted[1].name}</div><div class="podium-score">${sorted[1].score} pts</div><div class="podium-rank">2</div></div>`;
-        if(sorted[0]) podiumHTML += `<div class="podium-step podium-1"><div class="podium-name">${sorted[0].name}</div><div class="podium-score">${sorted[0].score} pts</div><div class="podium-rank">1</div></div>`;
-        if(sorted[2]) podiumHTML += `<div class="podium-step podium-3"><div class="podium-name">${sorted[2].name}</div><div class="podium-score">${sorted[2].score} pts</div><div class="podium-rank">3</div></div>`;
-        podiumHTML += '</div>';
-
-        document.getElementById('modal-content').innerHTML = `<h1 style="font-size:3rem">🏆 RESULTADO 🏆</h1>${podiumHTML}<button class='action-btn' style='background:var(--danger); color:white; margin-top:20px; width:100%;' onclick='location.reload()'>REINICIAR</button>`;
+        let podiumHTML = `<div class="podium-container">
+            <div class="podium-step podium-2">${sorted[1]?.name || '-'}<br>${sorted[1]?.score || 0} pts</div>
+            <div class="podium-step podium-1">${sorted[0]?.name || '-'}<br>${sorted[0]?.score || 0} pts</div>
+            <div class="podium-step podium-3">${sorted[2]?.name || '-'}<br>${sorted[2]?.score || 0} pts</div>
+        </div>`;
+        document.getElementById('modal-content').innerHTML = `<h1>🏆 RESULTADO 🏆</h1>${podiumHTML}<button class='action-btn' style='background:var(--danger); color:white; margin-top:20px;' onclick='location.reload()'>REINICIAR</button>`;
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('modal-actions').style.display = 'none';
     }
