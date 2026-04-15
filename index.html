@@ -18,11 +18,11 @@
         }
         body.dark-mode { --bg: #121212; --text: #f0f0f0; --card-bg: #1e1e1e; --border: #333; }
         
-        /* MODIFICAÇÃO CSS: Garante que o fundo da barra de status seja o mesmo do app */
+        /* IMPLEMENTAÇÃO SAFE AREA IPAD */
         html, body { 
             overscroll-behavior-y: none; 
             height: 100%; 
-            background-color: var(--bg);
+            background-color: var(--bg); /* Mantém a cor contínua sob o relógio */
         } 
         
         body { 
@@ -34,7 +34,7 @@
             align-items: center; 
             min-height: 100vh; 
             transition: 0.3s; 
-            /* Mantém o espaçamento para não colidir com o relógio, mas o fundo é contínuo */
+            /* O segredo para não cortar o painel de pontos e grupos no iPad */
             padding-top: env(safe-area-inset-top, 20px); 
         }
 
@@ -348,6 +348,12 @@
             document.getElementById('exp-box').style.display = 'block';
             document.getElementById('btn-continue').style.display = 'block';
             confetti({ particleCount: 150, spread: 70 });
+            
+            // REVISÃO JOGO DA VELHA: Verifica vitória após o acerto
+            if(gameMode === 'tictactoe') {
+                if(verificarVitoriaTTT()) return; // Sai para não rodar o fluxo normal de troca de turno
+            }
+            
         } else {
             btn.classList.add('wrong'); btn.disabled = true;
             if (document.getElementById('reboundCb').checked && !isReboundActive && hasEnoughOptions) {
@@ -370,6 +376,44 @@
             }
         }
         saveGameState();
+    }
+
+    // NOVA FUNÇÃO: VERIFICA VITÓRIA NO JOGO DA VELHA E ENCERRA O RESTANTE
+    function verificarVitoriaTTT() {
+        const combos = [
+            [0,1,2], [3,4,5], [6,7,8], // Horizontais
+            [0,3,6], [1,4,7], [2,5,8], // Verticais
+            [0,4,8], [2,4,6]           // Diagonais
+        ];
+        
+        const markAtual = currentTeamIdx === 0 ? 'X' : 'O';
+        
+        for(let combo of combos) {
+            const [a, b, c] = combo;
+            if(cardStates[a]?.mark === markAtual && cardStates[b]?.mark === markAtual && cardStates[c]?.mark === markAtual) {
+                // GANHOU! +10 pontos e encerra o restante como erro
+                teams[currentTeamIdx].score += 10;
+                encerrarRestanteComoErro();
+                setTimeout(() => { showFinal(); }, 1500);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function encerrarRestanteComoErro() {
+        for(let i=0; i<9; i++) {
+            if(!cardStates[i]) {
+                cardStates[i] = { correct: false, mark: '❌' };
+                quizReport.push({ 
+                    team: "SISTEMA", 
+                    question: questions[i % questions.length].q, 
+                    isCorrect: false, 
+                    correctLetter: "ENCERRADO", 
+                    exp: "Jogo finalizado por vitória na linha." 
+                });
+            }
+        }
     }
 
     function closeModal() {
