@@ -52,10 +52,17 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; flex-grow: 1; align-content: center; padding: 10px; box-sizing: border-box; }
         .grid.ttt-mode { grid-template-columns: repeat(3, 1fr); max-width: 600px; margin: 0 auto; }
+        
+        /* NOVO MODO BATALHA NAVAL 6x6 */
+        .grid.batalha-mode { grid-template-columns: repeat(6, 1fr); max-width: 800px; margin: 0 auto; gap: 10px; }
+        .grid.batalha-mode .card { font-size: 2.2rem; border-radius: 12px; }
 
         .card { aspect-ratio: 1/1; background: var(--primary); color: white; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 6rem; cursor: pointer; transition: 0.2s; box-shadow: 0 10px 0 #3d6dbd; font-weight: 900; border: 4px solid rgba(255,255,255,0.1); }
         .card.used-correct { background: var(--card-bg) !important; box-shadow: none; animation: popSymbol 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .card.used-wrong { background: var(--danger) !important; color: white !important; box-shadow: none; font-size: 5rem; }
+        
+        .card.hit-ship { background: var(--danger) !important; color: white !important; font-size: 3rem !important; border-color: #c0392b; animation: popSymbol 0.4s; }
+        .card.hit-water { background: #3498db !important; color: white !important; font-size: 3rem !important; border-color: #2980b9; animation: popSymbol 0.4s; }
 
         @keyframes popSymbol { from { transform: scale(0); } to { transform: scale(1); } }
         .symbol-x { color: #5487e3; text-shadow: 2px 2px 0px #fff; }
@@ -149,6 +156,7 @@
         <select id="gameModeSel" onchange="handleModeChange()">
             <option value="classic">Modo Padrão</option>
             <option value="tictactoe">Jogo da Velha</option>
+            <option value="batalha">Batalha Naval (6x6)</option>
             <option value="stop">Sequência</option>
         </select>
     </div>
@@ -204,6 +212,7 @@
 
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
+    let fleetData = []; // Para a batalha naval
     
     // --- LISTA DE PRENDAS (5) ---
     const punishmentsList = [
@@ -250,9 +259,44 @@
     }
     // ------------------------
 
+    // --- BATALHA NAVAL LOGIC ---
+    function generateFleet() {
+        fleetData = Array(36).fill('🌊'); 
+        const ships = [3, 2, 2, 1, 1]; // Tamanhos dos navios
+        
+        for(let size of ships) {
+            let placed = false;
+            while(!placed) {
+                let isHorizontal = Math.random() > 0.5;
+                let row = Math.floor(Math.random() * 6);
+                let col = Math.floor(Math.random() * 6);
+                
+                if(isHorizontal && col + size > 6) continue;
+                if(!isHorizontal && row + size > 6) continue;
+                
+                let collision = false;
+                for(let i=0; i<size; i++) {
+                    let r = isHorizontal ? row : row + i;
+                    let c = isHorizontal ? col + i : col;
+                    if(fleetData[r * 6 + c] !== '🌊') collision = true;
+                }
+                
+                if(!collision) {
+                    for(let i=0; i<size; i++) {
+                        let r = isHorizontal ? row : row + i;
+                        let c = isHorizontal ? col + i : col;
+                        fleetData[r * 6 + c] = '🚢';
+                    }
+                    placed = true;
+                }
+            }
+        }
+    }
+    // ------------------------
+
     // --- EXPORTAR E IMPORTAR ESTADO DO JOGO ---
     function exportGame() {
-        saveGameState(); // Garante que o storage tem os dados mais recentes
+        saveGameState(); 
         const stateStr = localStorage.getItem('edu_quiz_state');
         if(!stateStr) return alert("Nada para salvar!");
         
@@ -276,7 +320,7 @@
                 const state = JSON.parse(e.target.result);
                 if(state.questions && state.teams) {
                     localStorage.setItem('edu_quiz_state', JSON.stringify(state));
-                    location.reload(); // Recarrega para o menu detectar o jogo
+                    location.reload(); 
                 } else {
                     alert("Arquivo de progresso inválido ou corrompido.");
                 }
@@ -305,7 +349,7 @@
     }
 
     function saveGameState() {
-        const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport };
+        const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport, fleetData };
         localStorage.setItem('edu_quiz_state', JSON.stringify(state));
     }
 
@@ -319,12 +363,15 @@
         const state = JSON.parse(localStorage.getItem('edu_quiz_state'));
         questions = state.questions; teams = state.teams; currentTeamIdx = state.currentTeamIdx;
         cardStates = state.cardStates; gameMode = state.gameMode; originalTurnIdx = state.originalTurnIdx;
-        currentStopIdx = state.currentStopIdx; quizReport = state.quizReport;
+        currentStopIdx = state.currentStopIdx; quizReport = state.quizReport; 
+        if(state.fleetData) fleetData = state.fleetData;
         
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
+        
         const grid = document.getElementById('grid');
-        if(gameMode === 'tictactoe') grid.classList.add('ttt-mode');
+        if(gameMode === 'tictactoe') grid.className = 'grid ttt-mode';
+        else if(gameMode === 'batalha') grid.className = 'grid batalha-mode';
         
         playSound('lobby');
         
@@ -342,7 +389,7 @@
     function copyPromptText() { navigator.clipboard.writeText(document.getElementById('prompt-text').innerText); alert("Copiado!"); }
     async function pasteJSON() { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
     function cleanNames() { const i = document.getElementById('teamNamesInput'); i.value = i.value.split(',').map(n => n.trim().split(' ')[0]).filter(n => n).join(', '); }
-    function handleModeChange() { document.getElementById('extra-configs').style.display = (document.getElementById('gameModeSel').value === 'classic') ? 'block' : 'none'; }
+    function handleModeChange() { document.getElementById('extra-configs').style.display = (document.getElementById('gameModeSel').value === 'classic' || document.getElementById('gameModeSel').value === 'batalha') ? 'block' : 'none'; }
     function updatePromptView() { document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${document.getElementById('qtdInput').value} questões em JSON: [{"q":"?","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":""}]`; }
 
     async function generateWithAPI() {
@@ -368,8 +415,12 @@
         teams = names.map(name => ({name, score: 0}));
         while(teams.length < finalCount) teams.push({name: `Grupo ${teams.length+1}`, score: 0});
         
+        if(gameMode === 'batalha') generateFleet();
+
         const grid = document.getElementById('grid');
-        if(gameMode === 'tictactoe') grid.classList.add('ttt-mode'); else grid.classList.remove('ttt-mode');
+        if(gameMode === 'tictactoe') grid.className = 'grid ttt-mode'; 
+        else if(gameMode === 'batalha') grid.className = 'grid batalha-mode';
+        else grid.className = 'grid';
         
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
@@ -382,7 +433,9 @@
 
     function renderBoard() {
         const grid = document.getElementById('grid'); grid.innerHTML = '';
-        const total = gameMode === 'tictactoe' ? 9 : questions.length;
+        const total = gameMode === 'tictactoe' ? 9 : (gameMode === 'batalha' ? 36 : questions.length);
+        const rows = ['A','B','C','D','E','F'];
+
         for(let i=0; i<total; i++) {
             const card = document.createElement('div'), st = cardStates[i];
             card.className = 'card' + (st ? (st.correct ? ' used-correct' : ' used-wrong') : '');
@@ -390,8 +443,13 @@
             if (st && st.correct && gameMode === 'tictactoe') {
                 card.innerHTML = st.mark;
                 card.classList.add(st.mark === 'X' ? 'symbol-x' : 'symbol-o');
+            } else if (st && st.correct && gameMode === 'batalha') {
+                card.innerHTML = st.mark;
+                if(st.mark === '💥') card.classList.add('hit-ship');
+                else card.classList.add('hit-water');
             } else {
-                card.innerHTML = st ? (st.mark || '') : (i + 1);
+                let textPadrao = gameMode === 'batalha' ? (rows[Math.floor(i/6)] + ((i%6)+1)) : (i + 1);
+                card.innerHTML = st ? (st.mark || '') : textPadrao;
             }
 
             card.onclick = () => { if(!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
@@ -460,15 +518,30 @@
             playSound('correct');
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             btn.classList.add('correct'); 
-            const ptsGanhos = isReboundActive ? 5 : 10;
-            teams[currentTeamIdx].score += ptsGanhos;
             
+            let ptsGanhos = isReboundActive ? 5 : 10;
             let mark = '✅';
-            if(gameMode === 'tictactoe') mark = currentTeamIdx === 0 ? 'X' : 'O';
+            let msgExtra = "";
             
+            if(gameMode === 'tictactoe') {
+                mark = currentTeamIdx === 0 ? 'X' : 'O';
+            } else if (gameMode === 'batalha') {
+                if(fleetData[idx] === '🚢') {
+                    mark = '💥';
+                    ptsGanhos = isReboundActive ? 15 : 30; 
+                    msgExtra = `<br><b style="color:#c0392b; font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`;
+                } else {
+                    mark = '🌊';
+                    ptsGanhos = isReboundActive ? 5 : 10;
+                    msgExtra = `<br><b style="color:#2980b9; font-size:1.2rem;">🌊 ÁGUA! Nenhuma embarcação aqui. (+${ptsGanhos} pts)</b>`;
+                }
+            }
+            
+            teams[currentTeamIdx].score += ptsGanhos;
             cardStates[idx] = { correct: true, mark: mark };
             quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect, correctLetter: correct, exp: q.exp || "" });
-            document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${q.exp || ""}`;
+            
+            document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b>${msgExtra}<br>${q.exp || ""}`;
             document.getElementById('exp-box').style.display = 'block';
             document.getElementById('btn-continue').style.display = 'block';
             confetti({ particleCount: 150, spread: 70 });
@@ -495,7 +568,6 @@
                 cardStates[idx] = { correct: false, mark: '❌' };
                 quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect: false, correctLetter: correct, exp: q.exp || "" });
                 
-                // --- LÓGICA DAS PRENDAS ---
                 let punishmentHTML = "";
                 const punishCb = document.getElementById('punishCb');
                 if (punishCb && punishCb.checked) {
@@ -555,10 +627,19 @@
         document.getElementById('modal-overlay').style.display = 'none';
         playSound('lobby');
         if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
+        
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         renderBoard();
-        const total = gameMode === 'tictactoe' ? 9 : questions.length;
-        if(Object.keys(cardStates).length === total) showFinal();
+        
+        // Verifica fim do jogo
+        if(gameMode === 'batalha') {
+            let shipsSunk = Object.values(cardStates).filter(s => s.mark === '💥').length;
+            if(shipsSunk === 9 || Object.keys(cardStates).length === 36) return showFinal();
+        } else {
+            const total = gameMode === 'tictactoe' ? 9 : questions.length;
+            if(Object.keys(cardStates).length === total) return showFinal();
+        }
+        
         saveGameState();
     }
 
