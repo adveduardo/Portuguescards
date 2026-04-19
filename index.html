@@ -154,6 +154,7 @@
         <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px;">
             <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
             <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label>
+            <label><input type="checkbox" id="soundCb" onchange="toggleSound()" checked> 🔊 Som</label>
         </div>
     </div>
 
@@ -191,20 +192,53 @@
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
     
-    // Função de Fallback (Tentativa e erro automática para extensões e para números garantidos)
+    // --- SISTEMA DE SOM ---
+    const audioBg = new Audio();
+    let currentAudioType = 'none';
+
+    function playSound(type) {
+        currentAudioType = type;
+        const soundCb = document.getElementById('soundCb');
+        const isEnabled = soundCb && soundCb.checked;
+        
+        if(!isEnabled || type === 'stop') { 
+            audioBg.pause(); 
+            return; 
+        }
+        
+        if(type === 'lobby') {
+            audioBg.src = 'sons/1.mp3'; // Toca no grid
+            audioBg.loop = true;
+        } else if(type === 'question') {
+            audioBg.src = 'sons/2.mp3'; // Toca durante a pergunta (suspense)
+            audioBg.loop = true;
+        } else if(type === 'correct') {
+            audioBg.src = 'sons/3.mp3'; // Certa Resposta
+            audioBg.loop = false;
+        } else if(type === 'wrong') {
+            audioBg.src = 'sons/4.mp3'; // Resposta Errada
+            audioBg.loop = false;
+        }
+        
+        audioBg.play().catch(e => console.log("Áudio bloqueado pelo navegador até o usuário interagir."));
+    }
+
+    function toggleSound() {
+        playSound(currentAudioType);
+    }
+    // ------------------------
+
     function tryNextImage(img, num, step, isFallback = false) {
-        const exts = ['webp', 'png', 'jpg', 'jpeg']; // Extensões que ele vai testar se o .gif falhar
+        const exts = ['webp', 'png', 'jpg', 'jpeg']; 
         if(step < exts.length) {
             img.src = `gif/${num}.${exts[step]}`;
             img.onerror = () => tryNextImage(img, num, step + 1, isFallback); 
         } else {
             if(!isFallback) {
-                // Se o sorteio original falhou, pega uma das 100 primeiras que você garantiu que existem e tenta de novo.
                 const numGarantido = Math.floor(Math.random() * 100) + 1;
                 img.src = `gif/${numGarantido}.gif`;
                 img.onerror = () => tryNextImage(img, numGarantido, 0, true);
             } else {
-                // Trava de segurança: se até o garantido falhar (por ex: pasta não encontrada), esconde a imagem
                 img.style.display = 'none'; 
             }
         }
@@ -231,6 +265,9 @@
         document.getElementById('game-area').style.display = 'flex';
         const grid = document.getElementById('grid');
         if(gameMode === 'tictactoe') grid.classList.add('ttt-mode');
+        
+        playSound('lobby');
+        
         if(gameMode === 'stop') { grid.style.display = 'none'; loadStopQuestion(); } else { renderBoard(); }
     }
 
@@ -276,6 +313,9 @@
         
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
+        
+        playSound('lobby');
+        
         if(gameMode === 'stop') { document.getElementById('grid').style.display = 'none'; loadStopQuestion(); } else { renderBoard(); }
         saveGameState();
     }
@@ -331,6 +371,9 @@
 
     function showQuestion(idx) {
         if (gameMode === 'classic' && Math.random() * 100 < parseInt(document.getElementById('jokerProb').value)) { triggerSurprise(idx); return; }
+        
+        playSound('question');
+        
         isReboundActive = false;
         const q = questions[idx % questions.length];
         document.getElementById('modal-overlay').style.display = 'flex';
@@ -338,7 +381,6 @@
         document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
         
-        // Sorteia de 1 a 500. A tag img já começa tentando .gif e o onerror faz o fallback
         const randNum = Math.floor(Math.random() * 500) + 1;
         let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
         
@@ -355,6 +397,7 @@
         const hasEnoughOptions = q.c !== undefined && q.c !== "";
 
         if(isCorrect) {
+            playSound('correct');
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
             btn.classList.add('correct'); 
             const ptsGanhos = isReboundActive ? 5 : 10;
@@ -375,6 +418,7 @@
             }
             
         } else {
+            playSound('wrong');
             btn.classList.add('wrong'); btn.disabled = true;
             if (document.getElementById('reboundCb').checked && !isReboundActive && hasEnoughOptions) {
                 isReboundActive = true;
@@ -436,6 +480,7 @@
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
+        playSound('lobby');
         if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         renderBoard();
@@ -447,6 +492,7 @@
     function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
 
     function showFinal() {
+        playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         
