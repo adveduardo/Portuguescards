@@ -97,7 +97,12 @@
 
 <div id="setup-menu">
     <h1 style="color: var(--primary); margin: 0;">🎮 Português 🎮</h1>
-    <p style="margin: 5px 0 15px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
+    <p style="margin: 5px 0 5px 0; font-weight: bold;">Prof: Eduardo Goulart</p>
+
+    <div style="display:flex; justify-content:center; margin-bottom:15px;">
+        <button onclick="triggerImport()" style="background:transparent; color:var(--text); border:1px solid var(--border); padding:5px 15px; border-radius:15px; font-size:0.8rem; cursor:pointer; font-weight:bold;">📂 Importar Progresso (.json)</button>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importGame(event)">
+    </div>
 
     <div id="restore-session" style="display:none; background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 2px solid #ffeeba;">
         <p style="margin:0 0 10px 0; color: #856404;">⚠️ Existe um jogo em andamento!</p>
@@ -176,6 +181,7 @@
 <div id="game-area">
     <div class="top-bar">
         <div style="display: flex; gap: 10px;">
+            <button onclick="exportGame()" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Salvar Progresso em JSON">💾</button>
             <button onclick="toggleDarkMode()" style="font-size: 24px; background: none; border: none; cursor:pointer;">🌙</button>
             <button onclick="toggleFullScreen()" style="font-size: 24px; background: none; border: none; cursor:pointer;">📺</button>
         </div>
@@ -241,6 +247,44 @@
 
     function toggleSound() {
         playSound(currentAudioType);
+    }
+    // ------------------------
+
+    // --- EXPORTAR E IMPORTAR ESTADO DO JOGO ---
+    function exportGame() {
+        saveGameState(); // Garante que o storage tem os dados mais recentes
+        const stateStr = localStorage.getItem('edu_quiz_state');
+        if(!stateStr) return alert("Nada para salvar!");
+        
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(stateStr);
+        const dlAnchorElem = document.createElement('a');
+        dlAnchorElem.setAttribute("href", dataStr);
+        dlAnchorElem.setAttribute("download", "progresso_turma.json");
+        dlAnchorElem.click();
+    }
+
+    function triggerImport() {
+        document.getElementById('importFile').click();
+    }
+
+    function importGame(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const state = JSON.parse(e.target.result);
+                if(state.questions && state.teams) {
+                    localStorage.setItem('edu_quiz_state', JSON.stringify(state));
+                    location.reload(); // Recarrega para o menu detectar o jogo
+                } else {
+                    alert("Arquivo de progresso inválido ou corrompido.");
+                }
+            } catch(err) {
+                alert("Erro ao ler o arquivo JSON.");
+            }
+        };
+        reader.readAsText(file);
     }
     // ------------------------
 
