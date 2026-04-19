@@ -190,7 +190,25 @@
 
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
-    const gifList = Array.from({length: 83}, (_, i) => `gif/${i+1}.gif`);
+    
+    // Função de Fallback (Tentativa e erro automática para extensões e para números garantidos)
+    function tryNextImage(img, num, step, isFallback = false) {
+        const exts = ['webp', 'png', 'jpg', 'jpeg']; // Extensões que ele vai testar se o .gif falhar
+        if(step < exts.length) {
+            img.src = `gif/${num}.${exts[step]}`;
+            img.onerror = () => tryNextImage(img, num, step + 1, isFallback); 
+        } else {
+            if(!isFallback) {
+                // Se o sorteio original falhou, pega uma das 100 primeiras que você garantiu que existem e tenta de novo.
+                const numGarantido = Math.floor(Math.random() * 100) + 1;
+                img.src = `gif/${numGarantido}.gif`;
+                img.onerror = () => tryNextImage(img, numGarantido, 0, true);
+            } else {
+                // Trava de segurança: se até o garantido falhar (por ex: pasta não encontrada), esconde a imagem
+                img.style.display = 'none'; 
+            }
+        }
+    }
 
     function saveGameState() {
         const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport };
@@ -319,7 +337,10 @@
         document.getElementById('btn-continue').style.display = 'none';
         document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
-        let gifHTML = document.getElementById('gifsCb').checked ? `<img src="${gifList[Math.floor(Math.random()*gifList.length)]}" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
+        
+        // Sorteia de 1 a 500. A tag img já começa tentando .gif e o onerror faz o fallback
+        const randNum = Math.floor(Math.random() * 500) + 1;
+        let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
         
         let optionsHTML = `<button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button><button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>`;
         if(q.c) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button>`;
@@ -349,9 +370,8 @@
             document.getElementById('btn-continue').style.display = 'block';
             confetti({ particleCount: 150, spread: 70 });
             
-            // REVISÃO JOGO DA VELHA: Verifica vitória após o acerto
             if(gameMode === 'tictactoe') {
-                if(verificarVitoriaTTT()) return; // Sai para não rodar o fluxo normal de troca de turno
+                if(verificarVitoriaTTT()) return; 
             }
             
         } else {
@@ -378,12 +398,11 @@
         saveGameState();
     }
 
-    // NOVA FUNÇÃO: VERIFICA VITÓRIA NO JOGO DA VELHA E ENCERRA O RESTANTE
     function verificarVitoriaTTT() {
         const combos = [
-            [0,1,2], [3,4,5], [6,7,8], // Horizontais
-            [0,3,6], [1,4,7], [2,5,8], // Verticais
-            [0,4,8], [2,4,6]           // Diagonais
+            [0,1,2], [3,4,5], [6,7,8], 
+            [0,3,6], [1,4,7], [2,5,8], 
+            [0,4,8], [2,4,6]           
         ];
         
         const markAtual = currentTeamIdx === 0 ? 'X' : 'O';
@@ -391,7 +410,6 @@
         for(let combo of combos) {
             const [a, b, c] = combo;
             if(cardStates[a]?.mark === markAtual && cardStates[b]?.mark === markAtual && cardStates[c]?.mark === markAtual) {
-                // GANHOU! +10 pontos e encerra o restante como erro
                 teams[currentTeamIdx].score += 10;
                 encerrarRestanteComoErro();
                 setTimeout(() => { showFinal(); }, 1500);
