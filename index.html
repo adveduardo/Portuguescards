@@ -110,10 +110,16 @@
         <input type="text" id="themeInput" placeholder="Tema (Ex: Verbos)" oninput="updatePromptView()" style="margin-top:10px;">
         <input type="number" id="qtdInput" placeholder="Quantidade de Questões" value="15" oninput="updatePromptView()" style="margin-top:5px;">
         <select id="modelSel" style="margin-top:5px; font-size:14px; background: #eee;">
-            <option value="openrouter/free">Auto IA 100% Grátis</option>
-            <option value="google/gemini-2.0-flash">Gemini 2.0 Flash</option>
+            <option value="openrouter/free">Auto IA 100% Grátis (Diversas)</option>
+            <option value="google/gemini-2.0-flash">Google: Gemini 2.0 Flash</option>
+            <option value="google/gemini-1.5-pro">Google: Gemini 1.5 Pro</option>
+            <option value="openai/gpt-4o-mini">OpenAI: GPT-4o Mini</option>
+            <option value="openai/gpt-4o">OpenAI: GPT-4o</option>
+            <option value="anthropic/claude-3-haiku">Anthropic: Claude 3 Haiku</option>
+            <option value="anthropic/claude-3.5-sonnet">Anthropic: Claude 3.5 Sonnet</option>
+            <option value="meta-llama/llama-3-8b-instruct:free">Meta: Llama 3 (Grátis)</option>
         </select>
-        <input type="password" id="apiKeyInput" placeholder="Sua Chave de API" style="margin-top:5px;">
+        <input type="password" id="apiKeyInput" placeholder="Sua Chave de API OpenRouter" style="margin-top:5px;">
         <button onclick="generateWithAPI()" id="btn-gerar-ia" style="background:var(--joker); color:white; padding:12px; border-radius:8px; border:none; width:100%; cursor:pointer; margin-top:10px; font-weight:bold;">⚡ GERAR QUESTÕES ⚡</button>
         <button onclick="togglePrompt()" style="background:transparent; color:var(--text); text-decoration: underline; border:none; cursor:pointer; margin-top:10px; font-size: 0.8rem;">Ver Prompt Manual</button>
         <div id="prompt-container" style="display:none; width: 100%;">
@@ -151,10 +157,11 @@
             <label>Quantidade de Grupos:</label>
             <input type="number" id="teamCount" value="4">
         </div>
-        <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px;">
+        <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px; flex-wrap: wrap;">
             <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
             <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label>
             <label><input type="checkbox" id="soundCb" onchange="toggleSound()" checked> 🔊 Som</label>
+            <label><input type="checkbox" id="punishCb" checked> 🤡 Prendas</label>
         </div>
     </div>
 
@@ -192,6 +199,15 @@
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
     
+    // --- LISTA DE PRENDAS (5) ---
+    const punishmentsList = [
+        "Soletração: O aluno deve soletrar a palavra da resposta certa (ou outra palavra do tema).",
+        "Trava-línguas Nível Hard: Ter 30 segundos para falar sem gaguejar: 'O peito do pé de Pedro é preto' ou 'Num ninho de mafagafos há sete mafagafinhos'.",
+        "Polichinelo Rápido: Pagar 5 polichinelos.",
+        "Equilíbrio: Dar 3 pulinhos de uma perna só.",
+        "Estátua Filosófica: O aluno que deu a resposta errada precisa ficar congelado na pose de 'O Pensador' até terminar a próxima rodada."
+    ];
+
     // --- SISTEMA DE SOM ---
     const audioBg = new Audio();
     let currentAudioType = 'none';
@@ -434,7 +450,20 @@
             } else {
                 cardStates[idx] = { correct: false, mark: '❌' };
                 quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect: false, correctLetter: correct, exp: q.exp || "" });
-                document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${q.exp || ""}`;
+                
+                // --- LÓGICA DAS PRENDAS ---
+                let punishmentHTML = "";
+                const punishCb = document.getElementById('punishCb');
+                if (punishCb && punishCb.checked) {
+                    const randPunish = punishmentsList[Math.floor(Math.random() * punishmentsList.length)];
+                    punishmentHTML = `
+                    <div style="margin-top:15px; padding:15px; background:#fff3cd; border:2px dashed #d39e00; border-radius:10px; color:#856404; text-align:center;">
+                        <b style="font-size:1.1rem;">🚨 HORA DO MICO! 🚨</b><br>
+                        <span style="font-size:1.1rem; margin-top:5px; display:inline-block;">${randPunish}</span>
+                    </div>`;
+                }
+                
+                document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b><br>${q.exp || ""}` + punishmentHTML;
                 document.getElementById('exp-box').style.display = 'block';
                 document.getElementById('btn-continue').style.display = 'block';
             }
