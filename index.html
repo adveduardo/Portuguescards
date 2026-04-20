@@ -74,7 +74,7 @@
         .symbol-o { color: #e67e22; text-shadow: 2px 2px 0px #fff; }
 
         #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
-        #modal { background: var(--card-bg); padding: 30px; border-radius: 25px; width: 95%; max-width: 1050px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; }
+        #modal { background: var(--card-bg); padding: 30px; border-radius: 25px; width: 95%; max-width: 1050px; text-align: center; max-height: 95vh; overflow-y: auto; position: relative; transition: background-color 0.3s; }
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
         .opt-btn { padding: 20px; border: 4px solid var(--primary); border-radius: 15px; background: var(--card-bg); color: var(--text); cursor: pointer; font-weight: bold; font-size: 2rem; }
         .opt-btn.correct { background-color: var(--success) !important; color: white !important; }
@@ -273,6 +273,7 @@
     <div class="top-bar">
         <div style="display: flex; gap: 10px;">
             <button onclick="exportGame()" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Salvar Progresso em JSON">💾</button>
+            <button onclick="toggleGlobalMute()" id="mute-btn-game" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Mutar/Desmutar Som">🔊</button>
             <button onclick="toggleDarkMode()" style="font-size: 24px; background: none; border: none; cursor:pointer;">🌙</button>
             <button onclick="toggleFullScreen()" style="font-size: 24px; background: none; border: none; cursor:pointer;">📺</button>
         </div>
@@ -294,7 +295,8 @@
 </div>
 
 <div id="flashcard-area">
-    <div style="width: 100%; max-width: 600px; display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <div style="width: 100%; max-width: 600px; display: flex; justify-content: flex-end; gap: 15px; margin-bottom: 20px;">
+        <button onclick="toggleGlobalMute()" id="mute-btn-fc" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Mutar/Desmutar Som">🔊</button>
         <button onclick="toggleDarkMode()" style="font-size: 24px; background: none; border: none; cursor:pointer;">🌙</button>
         <button onclick="toggleFullScreen()" style="font-size: 24px; background: none; border: none; cursor:pointer;">📺</button>
     </div>
@@ -372,6 +374,25 @@
 
     function toggleSound() {
         playSound(currentAudioType);
+    }
+    
+    function toggleGlobalMute() {
+        const soundCb = document.getElementById('soundCb');
+        if (soundCb) {
+            soundCb.checked = !soundCb.checked;
+            const icon = soundCb.checked ? '🔊' : '🔇';
+            
+            const btnGame = document.getElementById('mute-btn-game');
+            const btnFc = document.getElementById('mute-btn-fc');
+            if(btnGame) btnGame.innerText = icon;
+            if(btnFc) btnFc.innerText = icon;
+            
+            if(!soundCb.checked) {
+                audioBg.pause();
+            } else {
+                playSound(currentAudioType);
+            }
+        }
     }
     // ------------------------
 
@@ -574,14 +595,6 @@
         renderScores();
     }
 
-    function renderScores() {
-        document.getElementById('score-board').innerHTML = teams.map((t, i) => {
-            let symbol = "";
-            if(gameMode === 'tictactoe') symbol = i === 0 ? " <b style='color:#5487e3'>(X)</b>" : " <b style='color:#e67e22'>(O)</b>";
-            return `<div class="team-card ${i===currentTeamIdx?'active':''}"><b>${t.name}${symbol}</b><br>${t.score} pts</div>`;
-        }).join('');
-    }
-
     function triggerSurprise(idx) {
         document.getElementById('modal-content').innerHTML = ""; 
         const bonus = Math.floor(Math.random() * 10) + 1;
@@ -598,12 +611,29 @@
         document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
         
-        document.getElementById('modal-content').innerHTML = `<h1 style="font-size:5rem;">${emoji}</h1><h1>SURPRESA!</h1><h2 style="font-size:2rem;">${teams[currentTeamIdx].name} ${isPositive ? 'ganhou' : 'perdeu'} ${bonus} pontos!</h2>`;
+        // --- NOVO: Lógica visual para perda de pontos (Fundo Vermelho + Título) ---
+        const modalEl = document.getElementById('modal');
+        let tituloModal = isPositive ? "SURPRESA BOA!" : "💥 DEU RUIM! 💥";
+        
+        if (!isPositive) {
+            modalEl.style.backgroundColor = "var(--danger)";
+            modalEl.style.color = "white";
+        } else {
+            modalEl.style.backgroundColor = ""; // Reseta para usar o CSS natural do tema (Claro/Escuro)
+            modalEl.style.color = "";
+        }
+
+        document.getElementById('modal-content').innerHTML = `<h1 style="font-size:5rem; margin-bottom:10px;">${emoji}</h1><h1 style="margin-top:0;">${tituloModal}</h1><h2 style="font-size:2rem;">${teams[currentTeamIdx].name} ${isPositive ? 'ganhou' : 'perdeu'} ${bonus} pontos!</h2>`;
+        
         if(isPositive) confetti({ particleCount: 150, spread: 70 });
         saveGameState();
     }
 
     function showQuestion(idx) {
+        // Garantir que o modal não continue vermelho se a rodada anterior foi um mico
+        document.getElementById('modal').style.backgroundColor = "";
+        document.getElementById('modal').style.color = "";
+
         if (gameMode === 'classic' && Math.random() * 100 < parseInt(document.getElementById('jokerProb').value)) { triggerSurprise(idx); return; }
         
         playSound('question');
@@ -644,7 +674,7 @@
             } else if (gameMode === 'batalha') {
                 if(fleetData[idx] === '🚢') {
                     mark = '💥';
-                    ptsGanhos = 15; // ALTERADO DE 30 PARA 15 PONTOS CONFORME PEDIDO
+                    ptsGanhos = 15; // MANTIDO 15 PONTOS COMO PEDIDO
                     msgExtra = `<br><b style="color:#c0392b; font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`;
                 } else {
                     mark = '🌊';
@@ -762,6 +792,10 @@
     function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
 
     function showFinal() {
+        // Garantir modal limpo no final
+        document.getElementById('modal').style.backgroundColor = "";
+        document.getElementById('modal').style.color = "";
+
         playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
         const sorted = [...teams].sort((a,b) => b.score - a.score);
@@ -869,7 +903,6 @@
         document.getElementById('fc-options').style.display = 'none';
         document.getElementById('fc-answer').innerHTML = respostaFinal;
         
-        // Botões de avaliação movidos para baixo e organizados visualmente
         let expOriginal = q.exp ? `<i>Explicação:</i><br>${q.exp}` : "";
         let botoesAvaliacao = `
             <div class="fc-feedback-coords" onclick="event.stopPropagation()" style="margin-top: 35px; width: 100%; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
