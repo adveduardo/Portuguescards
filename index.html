@@ -644,7 +644,7 @@
             } else if (gameMode === 'batalha') {
                 if(fleetData[idx] === '🚢') {
                     mark = '💥';
-                    ptsGanhos = isReboundActive ? 15 : 30; 
+                    ptsGanhos = 15; // ALTERADO DE 30 PARA 15 PONTOS CONFORME PEDIDO
                     msgExtra = `<br><b style="color:#c0392b; font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`;
                 } else {
                     mark = '🌊';
@@ -869,12 +869,21 @@
         document.getElementById('fc-options').style.display = 'none';
         document.getElementById('fc-answer').innerHTML = respostaFinal;
         
-        // Botões de avaliação inseridos de forma isolada na explicação
+        // Botões de avaliação movidos para baixo e organizados visualmente
         let expOriginal = q.exp ? `<i>Explicação:</i><br>${q.exp}` : "";
         let botoesAvaliacao = `
-            <div class="fc-feedback-coords" onclick="event.stopPropagation()">
-                <button class="btn-fc-eval hard" onclick="avaliarFC(true)" title="Achei Difícil">❌</button>
-                <button class="btn-fc-eval easy" onclick="avaliarFC(false)" title="Achei Fácil">✅</button>
+            <div class="fc-feedback-coords" onclick="event.stopPropagation()" style="margin-top: 35px; width: 100%; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
+                <div style="display: flex; gap: 30px; justify-content: center;">
+                    <button class="btn-fc-eval hard" onclick="avaliarFC(true)" title="Achei Difícil (Seta Baixo)" style="display:flex;flex-direction:column;align-items:center;padding:10px 25px;">
+                        ❌ <span style="font-size:0.9rem; font-weight:bold; margin-top:5px; color:var(--text);">Difícil (⬇)</span>
+                    </button>
+                    <button class="btn-fc-eval easy" onclick="avaliarFC(false)" title="Achei Fácil (Seta Cima)" style="display:flex;flex-direction:column;align-items:center;padding:10px 25px;">
+                        ✅ <span style="font-size:0.9rem; font-weight:bold; margin-top:5px; color:var(--text);">Fácil (⬆)</span>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-top: 15px; font-weight: normal;">
+                    Navegar: ⬅ ➡ | Revisar: ESPAÇO
+                </p>
             </div>`;
         
         document.getElementById('fc-exp').innerHTML = expOriginal + botoesAvaliacao;
@@ -928,6 +937,45 @@
             renderFC();
         }
     }
+
+    // --- CONTROLES DE TECLADO PARA FLASHCARDS ---
+    document.addEventListener('keydown', function(e) {
+        const fcArea = document.getElementById('flashcard-area');
+        if (fcArea && fcArea.style.display === 'flex') {
+            const isFlipped = document.getElementById('flash-card-element').classList.contains('is-flipped');
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevFC();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextFC();
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    if(isFlipped) avaliarFC(false); // Fácil
+                    break;
+                case 'ArrowDown':
+                    e.preventDefault();
+                    if(isFlipped) avaliarFC(true); // Difícil
+                    break;
+                case ' ':
+                case 'Spacebar':
+                    e.preventDefault();
+                    let btnRev = document.getElementById('btn-revisar-fc');
+                    // Se o botão de revisar existe e está visível, o Espaço clica nele
+                    if (btnRev && btnRev.style.display === 'block') {
+                        btnRev.click();
+                    } else if (!isFlipped) {
+                        // Se não tem revisão ativa, o espaço vira a carta
+                        document.getElementById('flash-card-element').classList.add('is-flipped');
+                    }
+                    break;
+            }
+        }
+    });
 </script>
 </body>
 </html>
