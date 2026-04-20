@@ -295,7 +295,7 @@
             <div class="card__face card__face--back">
                 <small style="color: rgba(255,255,255,0.8); font-weight: bold; margin-bottom: 10px; display: block;">RESPOSTA</small>
                 <h2 id="fc-answer" style="font-size: 2.2rem; margin: 0;"></h2>
-                <div id="fc-options" style="margin-top: 15px; text-align: left; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 10px; width: 100%;"></div>
+                <div id="fc-options" style="margin-top: 15px; text-align: left; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 10px; width: 100%; display: none;"></div>
                 <p id="fc-exp" style="font-size: 1.1rem; margin-top:15px; line-height: 1.4;"></p>
             </div>
         </div>
@@ -837,23 +837,28 @@
         // Lê a pergunta
         document.getElementById('fc-question').innerText = q.q || q.pergunta || "Pergunta não encontrada";
         
-        let opts = "";
         let respostaFinal = "";
 
-        // Verifica se é o formato Múltipla Escolha (tem correct e alternativas)
+        // Verifica se é o formato Múltipla Escolha (tem a chave correct)
         if (q.correct && q.b) {
-            opts = `<p><b>A:</b> ${q.a}</p><p><b>B:</b> ${q.b}</p>`;
-            if(q.c) opts += `<p><b>C:</b> ${q.c}</p>`;
-            if(q.d) opts += `<p><b>D:</b> ${q.d}</p>`;
-            respostaFinal = `Gabarito: ${q.correct}`;
+            // Identifica qual letra é a certa (A, B, C ou D)
+            let letraCorreta = q.correct.trim().toLowerCase(); 
+            // Pega o texto da alternativa que for a certa
+            let textoCorreto = q[letraCorreta] || ""; 
+            
+            // Monta a string final com a letra e a resposta escondendo as erradas
+            respostaFinal = `Gabarito: ${q.correct.toUpperCase()}<br><span style="font-size: 1.5rem; font-weight: normal;">${textoCorreto}</span>`;
         } 
         // Se for um JSON "Normal/Direto"
         else {
             respostaFinal = q.resposta || q.a || q.answer || "Resposta não definida";
         }
         
-        document.getElementById('fc-options').innerHTML = opts;
-        document.getElementById('fc-answer').innerText = respostaFinal;
+        // Garante que o painel escuro das opções antigas não apareça
+        document.getElementById('fc-options').style.display = 'none';
+        
+        // Imprime apenas a resposta correta no h2
+        document.getElementById('fc-answer').innerHTML = respostaFinal;
         document.getElementById('fc-exp').innerHTML = q.exp ? `<i>Explicação:</i><br>${q.exp}` : "";
         document.getElementById('fc-counter').innerText = `${currentFCIdx + 1} / ${questions.length}`;
     }
