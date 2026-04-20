@@ -834,14 +834,26 @@
         const card = document.getElementById('flash-card-element');
         card.classList.remove('is-flipped'); 
 
-        document.getElementById('fc-question').innerText = q.q;
+        // Lê a pergunta
+        document.getElementById('fc-question').innerText = q.q || q.pergunta || "Pergunta não encontrada";
         
-        let opts = `<p><b>A:</b> ${q.a}</p><p><b>B:</b> ${q.b}</p>`;
-        if(q.c) opts += `<p><b>C:</b> ${q.c}</p>`;
-        if(q.d) opts += `<p><b>D:</b> ${q.d}</p>`;
+        let opts = "";
+        let respostaFinal = "";
+
+        // Verifica se é o formato Múltipla Escolha (tem correct e alternativas)
+        if (q.correct && q.b) {
+            opts = `<p><b>A:</b> ${q.a}</p><p><b>B:</b> ${q.b}</p>`;
+            if(q.c) opts += `<p><b>C:</b> ${q.c}</p>`;
+            if(q.d) opts += `<p><b>D:</b> ${q.d}</p>`;
+            respostaFinal = `Gabarito: ${q.correct}`;
+        } 
+        // Se for um JSON "Normal/Direto"
+        else {
+            respostaFinal = q.resposta || q.a || q.answer || "Resposta não definida";
+        }
         
         document.getElementById('fc-options').innerHTML = opts;
-        document.getElementById('fc-answer').innerText = `Gabarito: ${q.correct}`;
+        document.getElementById('fc-answer').innerText = respostaFinal;
         document.getElementById('fc-exp').innerHTML = q.exp ? `<i>Explicação:</i><br>${q.exp}` : "";
         document.getElementById('fc-counter').innerText = `${currentFCIdx + 1} / ${questions.length}`;
     }
