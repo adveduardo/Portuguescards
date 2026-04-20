@@ -332,10 +332,9 @@
     // --- VARIÁVEIS NOVAS DOS FLASHCARDS ---
     let difficultFC = [];
     
-    // --- LISTA DE PRENDAS (5) ---
+    // --- LISTA DE PRENDAS (AGORA SEM O TRAVA-LÍNGUAS) ---
     const punishmentsList = [
         "Soletração: O aluno deve soletrar a palavra da resposta certa (ou outra palavra do tema).",
-        "Trava-línguas Nível Hard: Ter 30 segundos para falar sem gaguejar: 'O peito do pé de Pedro é preto' ou 'Num ninho de mafagafos há sete mafagafinhos'.",
         "Polichinelo Rápido: Pagar 5 polichinelos.",
         "Equilíbrio: Dar 3 pulinhos de uma perna só.",
         "Estátua Filosófica: O aluno que deu a resposta errada precisa ficar congelado na pose de 'O Pensador' até terminar a próxima rodada."
@@ -613,7 +612,7 @@
         
         // --- NOVO: Lógica visual para perda de pontos (Fundo Vermelho + Título) ---
         const modalEl = document.getElementById('modal');
-        let tituloModal = isPositive ? "SURPRESA BOA!" : "💥 DEU RUIM! 💥";
+        let tituloModal = isPositive ? "SURPRESA BOA!" : "VIXE, DEU RUIM! 💥";
         
         if (!isPositive) {
             modalEl.style.backgroundColor = "var(--danger)";
