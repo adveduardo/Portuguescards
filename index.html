@@ -39,9 +39,14 @@
         }
 
         #setup-menu { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); margin: 20px; text-align: center; border-top: 10px solid var(--primary); width: 90%; max-width: 600px; }
-        .input-group { margin: 12px 0; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; }
+        
+        /* MODIFICAÇÃO DO CSS PARA ALINHAMENTO DO BLOCO ROXO */
+        .input-group { margin: 12px auto; display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; position: relative; box-sizing: border-box; }
         label { font-weight: bold; font-size: 0.9rem; }
-        input[type="number"], input[type="range"], select, textarea, input[type="text"], input[type="password"] { width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center; }
+        input[type="number"], input[type="range"], select, textarea, input[type="text"], input[type="password"] { box-sizing: border-box; width: 100%; max-width: 350px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text); font-size: 18px; text-align: center; }
+        .input-group button[id="btn-gerar-ia"] { box-sizing: border-box; max-width: 350px; margin-left: auto; margin-right: auto; }
+        /* ------------------------------------------------ */
+
         .btn-aux { position: absolute; right: 10px; top: 35px; background: var(--primary); color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; z-index: 5; }
 
         #game-area { width: 100vw; height: 100vh; display: none; flex-direction: column; padding: 10px; box-sizing: border-box; }
