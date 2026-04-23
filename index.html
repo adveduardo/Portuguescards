@@ -255,8 +255,8 @@
         <div style="display: flex; gap: 15px; justify-content: center; width: 100%; margin-top: 10px; flex-wrap: wrap;">
             <label><input type="checkbox" id="reboundCb" checked> 🏀 Rebote</label>
             <label><input type="checkbox" id="gifsCb" checked> 🎬 GIFs</label>
-            <label><input type="checkbox" id="soundCb" onchange="toggleSound()" checked> 🔊 Som</label>
-            <label><input type="checkbox" id="punishCb" checked> 🤡 Mico</label>
+            <label><input type="checkbox" id="soundCb" onchange="toggleSound()"> 🔊 Som</label>
+            <label><input type="checkbox" id="punishCb"> 🤡 Mico</label>
         </div>
     </div>
 
@@ -567,6 +567,21 @@
         saveGameState();
     }
 
+    // --- NOVA FUNÇÃO ADICIONADA: RENDERIZAR PONTOS ---
+    function renderScores() {
+        const board = document.getElementById('score-board');
+        if(!board) return;
+        board.innerHTML = '';
+        teams.forEach((team, index) => {
+            const card = document.createElement('div');
+            // Destaca o grupo ativo no momento
+            card.className = 'team-card' + (index === currentTeamIdx ? ' active' : '');
+            card.innerHTML = `${team.name}: <b>${team.score}</b>`;
+            board.appendChild(card);
+        });
+    }
+    // -------------------------------------------------
+
     function renderBoard() {
         const grid = document.getElementById('grid'); grid.innerHTML = '';
         const total = gameMode === 'tictactoe' ? 9 : (gameMode === 'batalha' ? 36 : questions.length);
@@ -591,6 +606,8 @@
             card.onclick = () => { if(!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
             grid.appendChild(card);
         }
+        
+        // Chamada da função que estava faltando
         renderScores();
     }
 
@@ -610,7 +627,6 @@
         document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
         
-        // --- NOVO: Lógica visual para perda de pontos (Fundo Vermelho + Título) ---
         const modalEl = document.getElementById('modal');
         let tituloModal = isPositive ? "SURPRESA BOA!" : "VIXE, DEU RUIM! 💥";
         
@@ -618,7 +634,7 @@
             modalEl.style.backgroundColor = "var(--danger)";
             modalEl.style.color = "white";
         } else {
-            modalEl.style.backgroundColor = ""; // Reseta para usar o CSS natural do tema (Claro/Escuro)
+            modalEl.style.backgroundColor = ""; 
             modalEl.style.color = "";
         }
 
@@ -629,7 +645,6 @@
     }
 
     function showQuestion(idx) {
-        // Garantir que o modal não continue vermelho se a rodada anterior foi um mico
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
 
@@ -673,7 +688,7 @@
             } else if (gameMode === 'batalha') {
                 if(fleetData[idx] === '🚢') {
                     mark = '💥';
-                    ptsGanhos = 15; // MANTIDO 15 PONTOS COMO PEDIDO
+                    ptsGanhos = 15; 
                     msgExtra = `<br><b style="color:#c0392b; font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`;
                 } else {
                     mark = '🌊';
@@ -776,7 +791,6 @@
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         renderBoard();
         
-        // Verifica fim do jogo
         if(gameMode === 'batalha') {
             let shipsSunk = Object.values(cardStates).filter(s => s.mark === '💥').length;
             if(shipsSunk === 9 || Object.keys(cardStates).length === 36) return showFinal();
@@ -791,7 +805,6 @@
     function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
 
     function showFinal() {
-        // Garantir modal limpo no final
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
 
