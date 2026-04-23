@@ -254,6 +254,7 @@
             <option value="tictactoe">Jogo da Velha</option>
             <option value="batalha">Batalha Naval (6x6)</option>
             <option value="stop">Sequência</option>
+            <option value="redacao">Temas de Redação</option>
         </select>
     </div>
 
@@ -530,7 +531,12 @@
     function copyPromptText() { navigator.clipboard.writeText(document.getElementById('prompt-text').innerText); alert("Copiado!"); }
     async function pasteJSON() { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
     function cleanNames() { const i = document.getElementById('teamNamesInput'); i.value = i.value.split(',').map(n => n.trim().split(' ')[0]).filter(n => n).join(', '); }
-    function handleModeChange() { document.getElementById('extra-configs').style.display = (document.getElementById('gameModeSel').value === 'classic' || document.getElementById('gameModeSel').value === 'batalha') ? 'block' : 'none'; }
+    
+    function handleModeChange() { 
+        const mode = document.getElementById('gameModeSel').value;
+        document.getElementById('extra-configs').style.display = (mode === 'classic' || mode === 'batalha' || mode === 'redacao') ? 'block' : 'none'; 
+    }
+    
     function updatePromptView() { document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${document.getElementById('qtdInput').value} questões em JSON: [{"q":"?","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":""}]`; }
 
     async function generateWithAPI() {
@@ -576,6 +582,10 @@
         const board = document.getElementById('score-board');
         if(!board) return;
         board.innerHTML = '';
+        
+        // Esconde o painel de pontuação caso seja Modo Redação
+        if (gameMode === 'redacao') return; 
+        
         teams.forEach((team, index) => {
             const card = document.createElement('div');
             card.className = 'team-card' + (index === currentTeamIdx ? ' active' : '');
@@ -645,6 +655,26 @@
         saveGameState();
     }
 
+    // Função ajustada para o Modo Redação: Sem times e sem pontuação
+    function confirmRedacao(btn, idx) {
+        playSound('correct');
+        btn.disabled = true;
+        btn.innerText = "✓ Tema Marcado como Visto";
+        btn.classList.add('correct');
+        
+        cardStates[idx] = { correct: true, mark: '📝' }; 
+        
+        const q = questions[idx % questions.length];
+        quizReport.push({ team: "Geral", question: "REDAÇÃO: " + q.q, isCorrect: true, correctLetter: "-", exp: "Tema visualizado" });
+        
+        document.getElementById('exp-box').innerHTML = `<b style="color: var(--success);">Tema concluído!</b>`;
+        document.getElementById('exp-box').style.display = 'block';
+        document.getElementById('btn-continue').style.display = 'block';
+        
+        confetti({ particleCount: 150, spread: 70 });
+        saveGameState();
+    }
+
     function showQuestion(idx) {
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
@@ -663,6 +693,23 @@
         const randNum = Math.floor(Math.random() * 500) + 1;
         let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
         
+        // --- LÓGICA DO NOVO MODO DE REDAÇÃO ---
+        if (gameMode === 'redacao') {
+            document.getElementById('modal-content').innerHTML = `
+                ${gifHTML}
+                <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO</h3>
+                <h2 style="font-size:2rem;">${q.q}</h2>
+                ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent);">${q.exp}</p>` : ''}
+                <div style="margin-top: 25px;">
+                    <button class="opt-btn" style="width: 100%; border-color: var(--success);" onclick="confirmRedacao(this, ${idx})">
+                        Marcar Tema Como Visto ✓
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        // ----------------------------------------
+
         let optionsHTML = `<button class="opt-btn" onclick="checkAns(this, 'A', '${q.correct}', ${idx})">A: ${q.a}</button><button class="opt-btn" onclick="checkAns(this, 'B', '${q.correct}', ${idx})">B: ${q.b}</button>`;
         if(q.c) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button>`;
         if(q.d) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>`;
@@ -811,6 +858,28 @@
 
         playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
+        
+        // --- TELA FINAL EXCLUSIVA PARA MODO REDAÇÃO ---
+        if (gameMode === 'redacao') {
+            let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
+
+            document.getElementById('modal-content').innerHTML = `
+                <h1>✍️ TODOS OS TEMAS CONCLUÍDOS ✍️</h1>
+                <h3>Relatório de Temas Abertos</h3>
+                ${reportHTML}
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px;">
+                    <button class="action-btn" onclick="copyReport()" style="background:var(--primary); color:white; font-size:1rem;">📋 Copiar Temas</button>
+                    <button class="action-btn" onclick="window.print()" style="background:var(--joker); color:white; font-size:1rem;">🖨️ Imprimir/PDF</button>
+                </div>
+                <button class="action-btn" onclick="restartGame()" style="background:var(--danger); color:white; margin-top:10px;">REINICIAR TUDO</button>
+            `;
+            document.getElementById('modal-overlay').style.display = 'flex';
+            document.getElementById('btn-continue').style.display = 'none';
+            clearStorage();
+            return;
+        }
+        // ----------------------------------------------
+
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         
         let p1 = [], p2 = [], p3 = [];
@@ -856,8 +925,13 @@
         clearStorage();
     }
 
+    // Função de cópia ajustada para considerar o modo Redação
     function copyReport() {
-        const text = quizReport.map(r => `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}`).join('\n');
+        const text = quizReport.map(r => {
+            if (gameMode === 'redacao') return `TEMA: ${r.question.replace('REDAÇÃO: ', '')}`;
+            return `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}`;
+        }).join('\n');
+        
         navigator.clipboard.writeText("RELATÓRIO DE AULA - PROF. EDUARDO\n\n" + text);
         alert("Copiado para a área de transferência!");
     }
