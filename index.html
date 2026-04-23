@@ -120,7 +120,8 @@
         .scene {
             width: 100%;
             max-width: 600px;
-            height: 450px; /* Levemente mais alto para as opções */
+            height: 65vh; /* Altura responsiva melhorada para não dar barra de rolagem */
+            min-height: 450px;
             perspective: 1000px;
         }
 
@@ -146,21 +147,30 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 25px;
+            padding: 30px;
             box-sizing: border-box;
             border-radius: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
             border: 5px solid var(--primary);
-            overflow-y: auto; /* Permite rolar internamente se for muito grande */
-            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
-            word-wrap: break-word; /* Força quebra de linha longa */
+            
+            /* BLOQUEIO DE ROLAGENS INDESEJADAS */
+            overflow-x: hidden !important; 
+            overflow-y: auto; 
+            scrollbar-width: none; /* Esconde barra no Firefox */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Esconde barra de rolagem no Chrome/Safari (iOS) */
+        .card__face::-webkit-scrollbar {
+            display: none;
         }
 
         .card__face--front {
             background: var(--card-bg);
             color: var(--text);
-            justify-content: flex-start; /* Alinha do topo para baixo para caber as opções */
+            justify-content: flex-start; /* Alinha para cima para as alternativas caberem perfeitamente */
         }
 
         .card__face--back {
@@ -184,29 +194,6 @@
         .btn-fc-eval.hard { border-bottom: 5px solid var(--danger); }
         .btn-fc-eval.easy { border-bottom: 5px solid var(--success); }
         .btn-revisar { background: var(--accent) !important; color: #000 !important; margin-top: 15px; display: none; width: 100%; max-width: 300px; margin-left: auto; margin-right: auto; }
-        
-        /* Ajuste do container das opções para quebrar o texto e não vazar */
-        .fc-options-container {
-            text-align: left; 
-            font-size: 0.95rem; 
-            margin-top: 15px; 
-            background: rgba(0,0,0,0.1); /* Verso escuro */
-            padding: 12px; 
-            border-radius: 10px; 
-            width: 100%; 
-            box-sizing: border-box;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        /* Variante clara para usar na frente (card branco) */
-        .card__face--front .fc-options-container {
-            background: rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-            color: var(--text);
-            margin-top: 20px;
-        }
-        
     </style>
 </head>
 <body>
@@ -331,19 +318,14 @@
     <div class="scene">
         <div class="flash-card" id="flash-card-element" onclick="this.classList.toggle('is-flipped')">
             <div class="card__face card__face--front">
-                <small style="color: var(--primary); font-weight: bold; margin-bottom: 10px; display: block; flex-shrink: 0;">PERGUNTA (Toque para girar)</small>
-                <div id="fc-question-container" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%;">
-                    <h2 id="fc-question" style="font-size: 1.5rem; margin: 0;"></h2>
-                    <div id="fc-options-front" style="display: none;"></div>
-                </div>
+                <small style="color: var(--primary); font-weight: bold; margin-bottom: 15px; display: block; flex-shrink: 0;">PERGUNTA (Toque para girar)</small>
+                <h2 id="fc-question" style="font-size: 1.6rem; margin: 0; width: 100%;"></h2>
             </div>
             <div class="card__face card__face--back">
                 <small style="color: rgba(255,255,255,0.8); font-weight: bold; margin-bottom: 10px; display: block; flex-shrink: 0;">RESPOSTA</small>
-                <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; width: 100%; text-align: center;">
-                    <h2 id="fc-answer" style="font-size: 1.8rem; margin: 0;"></h2>
-                    <div id="fc-options-back" style="display: none;"></div>
-                    <p id="fc-exp" style="font-size: 1.1rem; margin-top:15px; line-height: 1.4;"></p>
-                </div>
+                <h2 id="fc-answer" style="font-size: 2.2rem; margin: 0; width: 100%;"></h2>
+                <div id="fc-options" style="display: none;"></div>
+                <p id="fc-exp" style="font-size: 1.1rem; margin-top:15px; width: 100%;"></p>
             </div>
         </div>
     </div>
@@ -359,12 +341,9 @@
 
 <script>
     let questions = [], teams = [], currentTeamIdx = 0, cardStates = {}, gameMode = 'classic', originalTurnIdx = 0, currentStopIdx = 0, quizReport = [], isReboundActive = false;
-    let fleetData = []; // Para a batalha naval
-    
-    // --- VARIÁVEIS NOVAS DOS FLASHCARDS ---
+    let fleetData = []; 
     let difficultFC = [];
     
-    // --- LISTA DE PRENDAS (AGORA SEM O TRAVA-LÍNGUAS) ---
     const punishmentsList = [
         "Soletração: O aluno deve soletrar a palavra da resposta certa (ou outra palavra do tema).",
         "Polichinelo Rápido: Pagar 5 polichinelos.",
@@ -372,7 +351,6 @@
         "Estátua Filosófica: O aluno que deu a resposta errada precisa ficar congelado na pose de 'O Pensador' até terminar a próxima rodada."
     ];
 
-    // --- SISTEMA DE SOM ---
     const audioBg = new Audio();
     let currentAudioType = 'none';
 
@@ -387,16 +365,16 @@
         }
         
         if(type === 'lobby') {
-            audioBg.src = 'sons/1.mp3'; // Toca no grid
+            audioBg.src = 'sons/1.mp3'; 
             audioBg.loop = true;
         } else if(type === 'question') {
-            audioBg.src = 'sons/2.mp3'; // Toca durante a pergunta (suspense)
+            audioBg.src = 'sons/2.mp3'; 
             audioBg.loop = true;
         } else if(type === 'correct') {
-            audioBg.src = 'sons/3.mp3'; // Certa Resposta
+            audioBg.src = 'sons/3.mp3'; 
             audioBg.loop = false;
         } else if(type === 'wrong') {
-            audioBg.src = 'sons/4.mp3'; // Resposta Errada
+            audioBg.src = 'sons/4.mp3'; 
             audioBg.loop = false;
         }
         
@@ -425,12 +403,10 @@
             }
         }
     }
-    // ------------------------
 
-    // --- BATALHA NAVAL LOGIC ---
     function generateFleet() {
         fleetData = Array(36).fill('🌊'); 
-        const ships = [3, 2, 2, 1, 1]; // Tamanhos dos navios
+        const ships = [3, 2, 2, 1, 1]; 
         
         for(let size of ships) {
             let placed = false;
@@ -460,9 +436,7 @@
             }
         }
     }
-    // ------------------------
 
-    // --- EXPORTAR E IMPORTAR ESTADO DO JOGO ---
     function exportGame() {
         saveGameState(); 
         const stateStr = localStorage.getItem('edu_quiz_state');
@@ -498,7 +472,6 @@
         };
         reader.readAsText(file);
     }
-    // ------------------------
 
     function tryNextImage(img, num, step, isFallback = false) {
         const exts = ['webp', 'png', 'jpg', 'jpeg']; 
@@ -901,7 +874,6 @@
         updatePromptView();
     }
 
-    // --- FUNÇÕES DOS FLASHCARDS COM AVALIAÇÃO FÁCIL/DIFÍCIL ---
     let currentFCIdx = 0;
 
     function startFlashcards() {
@@ -927,72 +899,66 @@
         const card = document.getElementById('flash-card-element');
         card.classList.remove('is-flipped'); 
 
-        document.getElementById('fc-question').innerText = q.q || q.pergunta || "Pergunta não encontrada";
+        let perguntaText = q.q || q.pergunta || "Pergunta não encontrada";
         
         let respostaFinal = "";
         let optionsHTML_Front = "";
         let optionsHTML_Back = "";
 
-        // Lógica Inteligente: Verifica se a questão tem alternativas (A, B, C...)
         if (q.a || q.b || q.c || q.d) {
             let letraCorreta = q.correct ? q.correct.trim().toUpperCase() : "A";
-            // Busca o texto da alternativa correta
             let textoCorreto = q[letraCorreta.toLowerCase()] || q[letraCorreta] || "";
             
-            respostaFinal = `<span style="font-size: 1.2rem; color: rgba(255,255,255,0.9);">Gabarito: <b>${letraCorreta}</b></span><br>
-                             <span style="font-size: 1.5rem; font-weight: bold; color: #f1c40f;">${textoCorreto}</span>`;
-            
-            // Monta as opções (Sem destacar a certa) para a FRENTE
-            optionsHTML_Front = `<div class="fc-options-container">`;
+            // FRENTE DO CARD (Injetado dentro do H2 para não depender do HTML base do usuário)
+            optionsHTML_Front = `<div style="text-align: left; font-size: 1.1rem; margin-top: 20px; font-weight: normal; width: 100%; box-sizing: border-box; word-wrap: break-word;">`;
             ['A', 'B', 'C', 'D'].forEach(opt => {
                 let textoOpt = q[opt.toLowerCase()] || q[opt];
                 if (textoOpt) {
-                    optionsHTML_Front += `<div style="margin-bottom:5px;">${opt}) ${textoOpt}</div>`;
+                    optionsHTML_Front += `<div style="margin-bottom:8px; line-height: 1.3;"><b>${opt})</b> ${textoOpt}</div>`;
                 }
             });
             optionsHTML_Front += `</div>`;
             
-            // Monta as opções (Destacando a certa) para o VERSO
-            optionsHTML_Back = `<div class="fc-options-container" style="background: rgba(0,0,0,0.2); border: none; color: white;">`;
+            perguntaText += optionsHTML_Front;
+
+            // VERSO DO CARD
+            respostaFinal = `<span style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Gabarito: <b>${letraCorreta}</b></span><br>
+                             <span style="font-size: 1.3rem; font-weight: bold; color: #f1c40f;">${textoCorreto}</span>`;
+            
+            optionsHTML_Back = `<div style="text-align: left; font-size: 0.95rem; margin-top: 15px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; width: 100%; box-sizing: border-box; max-width: 100%; word-wrap: break-word; line-height: 1.3;">`;
             ['A', 'B', 'C', 'D'].forEach(opt => {
                 let textoOpt = q[opt.toLowerCase()] || q[opt];
                 if (textoOpt) {
                     let isCorrect = opt === letraCorreta;
-                    optionsHTML_Back += `<div style="margin-bottom:5px; ${isCorrect ? 'color:#2ecc71; font-weight:900;' : 'opacity:0.7;'}">
+                    optionsHTML_Back += `<div style="margin-bottom:5px; ${isCorrect ? 'color:#2ecc71; font-weight:900;' : 'opacity:0.8;'}">
                                         ${opt}) ${textoOpt} ${isCorrect ? ' ✓' : ''}
                                     </div>`;
                 }
             });
             optionsHTML_Back += `</div>`;
             
-            document.getElementById('fc-options-front').innerHTML = optionsHTML_Front;
-            document.getElementById('fc-options-front').style.display = 'block';
-            
-            document.getElementById('fc-options-back').innerHTML = optionsHTML_Back;
-            document.getElementById('fc-options-back').style.display = 'block';
-            
+            document.getElementById('fc-options').innerHTML = optionsHTML_Back;
+            document.getElementById('fc-options').style.display = 'block';
         } 
         else {
-            // Caso seja uma pergunta direta/dissertativa
             respostaFinal = q.resposta || q.answer || "Resposta não definida";
-            document.getElementById('fc-options-front').style.display = 'none';
-            document.getElementById('fc-options-back').style.display = 'none';
+            document.getElementById('fc-options').style.display = 'none';
         }
         
+        document.getElementById('fc-question').innerHTML = perguntaText;
         document.getElementById('fc-answer').innerHTML = respostaFinal;
         
-        // Exibição da explicação pedagógica
-        let expOriginal = q.exp ? `<div style="margin-top:10px; font-style: italic; font-size: 1rem; border-top: 1px dashed rgba(255,255,255,0.4); padding-top: 10px;">Explicação: ${q.exp}</div>` : "";
+        let expOriginal = q.exp ? `<div style="margin-top:10px; font-style: italic; font-size: 0.95rem; border-top: 1px dashed rgba(255,255,255,0.4); padding-top: 10px; line-height: 1.3;">Explicação: ${q.exp}</div>` : "";
         
         let botoesAvaliacao = `
-            <div class="fc-feedback-coords" onclick="event.stopPropagation()" style="margin-top: 20px; width: 100%; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
-                <div style="display: flex; gap: 30px; justify-content: center;">
-                    <button class="btn-fc-eval hard" onclick="avaliarFC(true)" title="Achei Difícil" style="display:flex;flex-direction:column;align-items:center;padding:10px 25px; background: rgba(255,255,255,0.1); border-radius: 12px; border: none; cursor: pointer;">
-                        <span style="font-size: 1.8rem;">❌</span>
+            <div class="fc-feedback-coords" onclick="event.stopPropagation()" style="margin-top: 15px; width: 100%; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px;">
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <button class="btn-fc-eval hard" onclick="avaliarFC(true)" title="Achei Difícil" style="display:flex;flex-direction:column;align-items:center;padding:10px 20px; background: rgba(255,255,255,0.1); border-radius: 12px; border: none; cursor: pointer;">
+                        <span style="font-size: 1.5rem;">❌</span>
                         <span style="font-size:0.8rem; font-weight:bold; margin-top:5px; color:white;">Difícil (⬇)</span>
                     </button>
-                    <button class="btn-fc-eval easy" onclick="avaliarFC(false)" title="Achei Fácil" style="display:flex;flex-direction:column;align-items:center;padding:10px 25px; background: rgba(255,255,255,0.1); border-radius: 12px; border: none; cursor: pointer;">
-                        <span style="font-size: 1.8rem;">✅</span>
+                    <button class="btn-fc-eval easy" onclick="avaliarFC(false)" title="Achei Fácil" style="display:flex;flex-direction:column;align-items:center;padding:10px 20px; background: rgba(255,255,255,0.1); border-radius: 12px; border: none; cursor: pointer;">
+                        <span style="font-size: 1.5rem;">✅</span>
                         <span style="font-size:0.8rem; font-weight:bold; margin-top:5px; color:white;">Fácil (⬆)</span>
                     </button>
                 </div>
@@ -1050,7 +1016,6 @@
         }
     }
 
-    // --- CONTROLES DE TECLADO PARA FLASHCARDS ---
     document.addEventListener('keydown', function(e) {
         const fcArea = document.getElementById('flashcard-area');
         if (fcArea && fcArea.style.display === 'flex') {
@@ -1067,21 +1032,19 @@
                     break;
                 case 'ArrowUp':
                     e.preventDefault();
-                    if(isFlipped) avaliarFC(false); // Fácil
+                    if(isFlipped) avaliarFC(false); 
                     break;
                 case 'ArrowDown':
                     e.preventDefault();
-                    if(isFlipped) avaliarFC(true); // Difícil
+                    if(isFlipped) avaliarFC(true); 
                     break;
                 case ' ':
                 case 'Spacebar':
                     e.preventDefault();
                     let btnRev = document.getElementById('btn-revisar-fc');
-                    // Se o botão de revisar existe e está visível, o Espaço clica nele
                     if (btnRev && btnRev.style.display === 'block') {
                         btnRev.click();
                     } else if (!isFlipped) {
-                        // Se não tem revisão ativa, o espaço vira a carta
                         document.getElementById('flash-card-element').classList.add('is-flipped');
                     }
                     break;
