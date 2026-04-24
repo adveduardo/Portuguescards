@@ -89,57 +89,20 @@
         .all-teams-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.05); border-radius: 15px; }
         .team-rank-item { font-size: 1rem; padding: 5px; border-bottom: 1px solid #ccc; }
 
-        .report-container { max-height: 200px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; }
-        .report-item { margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #ddd; font-size: 0.9rem; }
+        .report-container { max-height: 350px; overflow-y: auto; text-align: left; background: var(--bg); padding: 15px; border-radius: 10px; border: 1px solid var(--border); margin-top: 15px; }
+        .report-item { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #ddd; font-size: 1rem; line-height: 1.4;}
         
-        /* ========================================================
-           NOVA ESTRUTURA BLINDADA PARA IMPRESSÃO EM A4 (FULL WIDTH) 
-           ======================================================== */
+        /* IMPRESSÃO BLINDADA EM A4 (FULL WIDTH) */
         @media print {
             @page { margin: 1.5cm; }
-            
-            /* Esconde absolutamente tudo do jogo na hora de imprimir */
             body > *:not(#print-section) { display: none !important; }
-
-            /* Remove cores e flexbox do body que espremiam o conteúdo */
-            html, body { 
-                display: block !important; 
-                background: white !important; 
-                height: auto !important; 
-                margin: 0 !important; 
-                padding: 0 !important; 
-                width: 100% !important;
-            }
-
-            /* Configura a "folha" virtual criada exclusivamente para o PDF */
-            #print-section { 
-                display: block !important; 
-                width: 100% !important; 
-                background: white !important; 
-                color: black !important; 
-                font-family: Arial, sans-serif !important;
-                position: absolute !important;
-                top: 0 !important;
-                left: 0 !important;
-            }
-
-            /* Força renderização do preto no branco para textos coloridos */
+            html, body { display: block !important; background: white !important; height: auto !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+            #print-section { display: block !important; width: 100% !important; background: white !important; color: black !important; font-family: Arial, sans-serif !important; position: absolute !important; top: 0 !important; left: 0 !important; }
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
 
         /* --- ESTILOS DOS FLASHCARDS --- */
-        #flashcard-area {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100vw;
-            height: 100vh;
-            background: var(--bg);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
+        #flashcard-area { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; background: var(--bg); padding: 20px; box-sizing: border-box; }
         .scene { width: 100%; max-width: 600px; height: 65vh; min-height: 450px; perspective: 1000px; }
         .flash-card { width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
         .flash-card.is-flipped { transform: rotateY(180deg); }
@@ -148,7 +111,6 @@
         .card__face--front { background: var(--card-bg); color: var(--text); justify-content: flex-start; }
         .card__face--back { background: var(--primary); color: white; transform: rotateY(180deg); justify-content: flex-start; }
         .nav-controls { margin-top: 30px; display: flex; gap: 20px; align-items: center; }
-
         .fc-feedback-coords { display: flex; gap: 20px; margin-top: 20px; justify-content: center; }
         .btn-fc-eval { font-size: 2.5rem; padding: 10px 20px; border-radius: 15px; border: none; cursor: pointer; transition: 0.2s; background: rgba(0,0,0,0.1); }
         .btn-fc-eval:active { transform: scale(0.9); }
@@ -560,7 +522,9 @@
         teams[currentTeamIdx].score += finalPoints;
         const emoji = isPositive ? '🥳' : '🥺';
         cardStates[idx] = { correct: isPositive, mark: emoji };
-        quizReport.push({ team: teams[currentTeamIdx].name, question: "SURPRESA", isCorrect: isPositive, correctLetter: "-", exp: isPositive ? `Ganhou ${bonus} pontos!` : `Perdeu ${bonus} pontos!` });
+        
+        // Salva surpresa no report
+        quizReport.push({ team: teams[currentTeamIdx].name, question: "SURPRESA", isCorrect: isPositive, correctLetter: "-", correctText: "", exp: isPositive ? `Ganhou ${bonus} pontos!` : `Perdeu ${bonus} pontos!` });
         
         document.getElementById('modal-overlay').style.display = 'flex';
         document.getElementById('btn-continue').style.display = 'block';
@@ -589,7 +553,8 @@
         cardStates[idx] = { correct: true, mark: '📝', studentName: studentName }; 
         
         const q = questions[idx % questions.length];
-        quizReport.push({ team: studentName, question: "REDAÇÃO: " + q.q, isCorrect: true, correctLetter: "-", exp: "Tema visualizado" });
+        // Salva redacao com explicacao se tiver
+        quizReport.push({ team: studentName, question: "REDAÇÃO: " + q.q, isCorrect: true, correctLetter: "-", correctText: "", exp: q.exp || "" });
         
         document.getElementById('exp-box').innerHTML = `<b style="color: var(--success);">Tema atribuído a: ${studentName}</b>`;
         document.getElementById('exp-box').style.display = 'block';
@@ -659,6 +624,10 @@
         const isCorrect = chosen.trim().toUpperCase() === correct.trim().toUpperCase();
         const q = questions[idx % questions.length];
         const hasEnoughOptions = q.c !== undefined && q.c !== "";
+        
+        // Pega o texto da alternativa correta
+        const correctKey = correct ? correct.trim().toLowerCase() : "";
+        const correctText = q[correctKey] || "";
 
         if(isCorrect) {
             playSound('correct');
@@ -677,7 +646,9 @@
             
             teams[currentTeamIdx].score += ptsGanhos;
             cardStates[idx] = { correct: true, mark: mark };
-            quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect, correctLetter: correct, exp: q.exp || "" });
+            
+            // Adicionado correctText no relatorio
+            quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect: true, correctLetter: correct, correctText: correctText, exp: q.exp || "" });
             
             document.getElementById('exp-box').innerHTML = `<b>Resposta: ${correct}</b>${msgExtra}<br>${q.exp || ""}`;
             document.getElementById('exp-box').style.display = 'block';
@@ -701,7 +672,8 @@
                 };
             } else {
                 cardStates[idx] = { correct: false, mark: '❌' };
-                quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect: false, correctLetter: correct, exp: q.exp || "" });
+                // Adicionado correctText no relatorio
+                quizReport.push({ team: teams[currentTeamIdx].name, question: q.q, isCorrect: false, correctLetter: correct, correctText: correctText, exp: q.exp || "" });
                 let punishmentHTML = "";
                 const punishCb = document.getElementById('punishCb');
                 if (punishCb && punishCb.checked) {
@@ -735,7 +707,8 @@
         for(let i=0; i<9; i++) {
             if(!cardStates[i]) {
                 cardStates[i] = { correct: false, mark: '❌' };
-                quizReport.push({ team: "SISTEMA", question: questions[i % questions.length].q, isCorrect: false, correctLetter: "ENCERRADO", exp: "Jogo finalizado por vitória na linha." });
+                const qErr = questions[i % questions.length];
+                quizReport.push({ team: "SISTEMA", question: qErr.q, isCorrect: false, correctLetter: "ENCERRADO", correctText: "", exp: "Jogo finalizado por vitória na linha." });
             }
         }
     }
@@ -760,23 +733,13 @@
 
     function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
 
-    // ========================================================
-    // LÓGICA DEFINITIVA DE IMPRESSÃO
-    // ========================================================
     function printCustomReport() {
-        // Pega o conteúdo que nós geramos invisível
         const printContent = document.getElementById('hidden-print-data').innerHTML;
-        
-        // Cria uma camada totalmente nova por cima de tudo para a impressora ler
         const printWindow = document.createElement('div');
         printWindow.id = 'print-section';
         printWindow.innerHTML = printContent;
         document.body.appendChild(printWindow);
-        
-        // Chama a tela de impressão
         window.print();
-        
-        // Destrói a camada depois que fechar a janela, voltando o jogo ao normal
         setTimeout(() => {
             if (document.getElementById('print-section')) {
                 document.body.removeChild(printWindow);
@@ -792,7 +755,7 @@
         
         const hoje = new Date().toLocaleDateString('pt-BR');
         
-        // --- 1. GERA A FOLHA DE IMPRESSÃO LIMPA, ESCONDIDA NO CÓDIGO ---
+        // --- 1. GERA A FOLHA DE IMPRESSÃO (AGORA COM RESPOSTAS COMPLETAS E JUSTIFICATIVAS) ---
         let rawPrintHTML = `
             <div style="width: 100%; text-align: left; background: white; color: black; font-family: Arial, sans-serif;">
                 <h2 style="text-align: center; font-size: 24pt; margin-bottom: 10px; text-transform: uppercase;">
@@ -821,26 +784,38 @@
                     ${sorted.map((t, i) => `<div style="margin-bottom: 5px;">#${i+1} <b>${t.name}</b>: ${t.score} pts</div>`).join('')}
                 </div>
                 <hr style="border-top: 1px solid #ccc; margin-bottom: 15px;">
-                <h3 style="margin-bottom: 10px; font-size: 14pt;">Relatório Pedagógico:</h3>
+                <h3 style="margin-bottom: 10px; font-size: 14pt;">Relatório Pedagógico e Gabarito:</h3>
             `;
         }
 
         rawPrintHTML += `<div style="width: 100%;">`;
         
         quizReport.forEach(r => {
-            let text = gameMode === 'redacao' ? 
-                `<b>ALUNO:</b> ${r.team}<br><b>TEMA:</b> ${r.question.replace('REDAÇÃO: ', '')}` : 
-                `<b>${r.team}</b>: ${r.isCorrect ? '<span style="color: green;">ACERTOU</span>' : '<span style="color: red;">ERROU</span>'}<br><small style="font-size: 11pt;">Q: ${r.question} | Gab: ${r.correctLetter}</small>`;
-            
-            rawPrintHTML += `<div style="border-bottom: 1px solid #ccc; font-size: 14pt; padding: 12px 0; page-break-inside: avoid; width: 100%;">${text}</div>`;
+            let text = "";
+            if (gameMode === 'redacao') {
+                text = `<b>ALUNO:</b> ${r.team}<br><b>TEMA:</b> ${r.question.replace('REDAÇÃO: ', '')}`;
+                if(r.exp) text += `<br><b>Instruções/Justificativa:</b> ${r.exp}`;
+            } else if (r.question === "SURPRESA") {
+                text = `<b>${r.team}</b>: ${r.isCorrect ? '<span style="color: green;">SORTE</span>' : '<span style="color: red;">AZAR</span>'}<br><b>EVENTO SURPRESA:</b> ${r.exp}`;
+            } else if (r.correctLetter === "ENCERRADO") {
+                text = `<b>${r.team}</b>: ENCERRADO<br><b>Q:</b> ${r.question}`;
+            } else {
+                text = `<b>${r.team}</b>: ${r.isCorrect ? '<span style="color: green;">ACERTOU</span>' : '<span style="color: red;">ERROU</span>'}<br>
+                        <div style="margin-top: 6px;"><b>Pergunta:</b> ${r.question}</div>
+                        <div style="margin-top: 4px; color: #2c3e50;"><b>Resposta Correta:</b> (${r.correctLetter}) ${r.correctText || ''}</div>`;
+                if (r.exp) {
+                    text += `<div style="margin-top: 4px; font-style: italic; color: #555;"><b>Justificativa:</b> ${r.exp}</div>`;
+                }
+            }
+            rawPrintHTML += `<div style="border-bottom: 1px solid #ccc; font-size: 12pt; padding: 12px 0; page-break-inside: avoid; width: 100%; line-height: 1.4;">${text}</div>`;
         });
         
         rawPrintHTML += `</div></div>`;
         document.getElementById('hidden-print-data').innerHTML = rawPrintHTML;
 
-        // --- 2. GERA A TELA BONITA QUE FICA NO SEU IPAD (VISUAL DO JOGO) ---
+        // --- 2. GERA A TELA BONITA NO IPAD (VISUAL DO JOGO COM JUSTIFICATIVAS) ---
         if (gameMode === 'redacao') {
-            let reportHTML = `<div class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
+            let reportHTML = `<div class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO:</b> ${r.team} <br><b>TEMA:</b> ${r.question.replace('REDAÇÃO: ', '')}${r.exp ? `<br><span style="color: #666; font-size: 0.9em;"><i>${r.exp}</i></span>` : ''}</div>`).join('') + `</div>`;
 
             document.getElementById('modal-content').innerHTML = `
                 <h1>✍️ TODOS OS TEMAS CONCLUÍDOS ✍️</h1>
@@ -861,17 +836,12 @@
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         let p1 = [], p2 = [], p3 = [];
         if(sorted.length > 0) {
-            let s1 = sorted[0].score;
-            p1 = sorted.filter(t => t.score === s1);
+            let s1 = sorted[0].score; p1 = sorted.filter(t => t.score === s1);
             let remaining = sorted.filter(t => t.score < s1);
             if(remaining.length > 0) {
-                let s2 = remaining[0].score;
-                p2 = remaining.filter(t => t.score === s2);
+                let s2 = remaining[0].score; p2 = remaining.filter(t => t.score === s2);
                 let remaining2 = remaining.filter(t => t.score < s2);
-                if(remaining2.length > 0) {
-                    let s3 = remaining2[0].score;
-                    p3 = remaining2.filter(t => t.score === s3);
-                }
+                if(remaining2.length > 0) { let s3 = remaining2[0].score; p3 = remaining2.filter(t => t.score === s3); }
             }
         }
 
@@ -882,7 +852,16 @@
 
         let podiumHTML = `<div class="podium-container">${renderPodiumStep(p2, 'podium-2')}${renderPodiumStep(p1, 'podium-1')}${renderPodiumStep(p3, 'podium-3')}</div>`;
         let allTeamsHTML = `<div class="all-teams-list">` + sorted.map((t, i) => `<div class="team-rank-item">#${i+1} <b>${t.name}</b>: ${t.score}p</div>`).join('') + `</div>`;
-        let reportHTML = `<div class="report-container">` + quizReport.map(r => `<div class="report-item"><b>${r.team}</b>: ${r.isCorrect ? 'ACERTOU' : 'ERROU'}<br><small>Q: ${r.question} | Gab: ${r.correctLetter}</small></div>`).join('') + `</div>`;
+        
+        let reportHTML = `<div class="report-container">` + quizReport.map(r => {
+            if (r.question === "SURPRESA") return `<div class="report-item"><b>${r.team}</b>: SURPRESA<br><small>${r.exp}</small></div>`;
+            return `<div class="report-item">
+                        <b>${r.team}</b>: ${r.isCorrect ? '<span style="color: var(--success); font-weight: bold;">ACERTOU</span>' : '<span style="color: var(--danger); font-weight: bold;">ERROU</span>'}<br>
+                        <b>Q:</b> ${r.question}<br>
+                        <b>Gab:</b> ${r.correctLetter}${r.correctText ? ' - ' + r.correctText : ''}
+                        ${r.exp ? `<br><span style="color: #666; font-size: 0.9em;"><i>Justificativa: ${r.exp}</i></span>` : ''}
+                    </div>`;
+        }).join('') + `</div>`;
 
         document.getElementById('modal-content').innerHTML = `
             <h1>🏆 RESULTADO FINAL 🏆</h1>
@@ -904,9 +883,9 @@
 
     function copyReport() {
         const text = quizReport.map(r => {
-            if (gameMode === 'redacao') return `ALUNO: ${r.team} | TEMA: ${r.question.replace('REDAÇÃO: ', '')}`;
-            return `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}`;
-        }).join('\n');
+            if (gameMode === 'redacao') return `ALUNO: ${r.team} | TEMA: ${r.question.replace('REDAÇÃO: ', '')}\nInstruções: ${r.exp}`;
+            return `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}\nGabarito: ${r.correctLetter} - ${r.correctText}\nJustificativa: ${r.exp}`;
+        }).join('\n\n');
         
         navigator.clipboard.writeText("RELATÓRIO DE AULA - PROF. EDUARDO\n\n" + text);
         alert("Copiado para a área de transferência!");
