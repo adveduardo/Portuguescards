@@ -615,7 +615,13 @@
                 card.innerHTML = st ? (st.mark || '') : textPadrao;
             }
 
-            card.onclick = () => { if(!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
+            // MODIFICAÇÃO: Permite reabrir se for Modo Redação
+            card.onclick = () => { 
+                if(!cardStates[i] || gameMode === 'redacao') { 
+                    originalTurnIdx = currentTeamIdx; 
+                    showQuestion(i); 
+                } 
+            };
             grid.appendChild(card);
         }
         
@@ -655,19 +661,24 @@
         saveGameState();
     }
 
-    // Função ajustada para o Modo Redação: Sem times e sem pontuação
+    // MODIFICAÇÃO: Inserido o resgate do nome do Aluno no Modo Redação
     function confirmRedacao(btn, idx) {
+        let studentNameInput = document.getElementById('studentNameInput');
+        let studentName = studentNameInput ? studentNameInput.value.trim() : "";
+        if (!studentName) studentName = "Aluno não identificado";
+
         playSound('correct');
         btn.disabled = true;
         btn.innerText = "✓ Tema Marcado como Visto";
         btn.classList.add('correct');
         
-        cardStates[idx] = { correct: true, mark: '📝' }; 
+        cardStates[idx] = { correct: true, mark: '📝', studentName: studentName }; 
         
         const q = questions[idx % questions.length];
-        quizReport.push({ team: "Geral", question: "REDAÇÃO: " + q.q, isCorrect: true, correctLetter: "-", exp: "Tema visualizado" });
+        // Registra o nome do aluno no relatório
+        quizReport.push({ team: studentName, question: "REDAÇÃO: " + q.q, isCorrect: true, correctLetter: "-", exp: "Tema visualizado" });
         
-        document.getElementById('exp-box').innerHTML = `<b style="color: var(--success);">Tema concluído!</b>`;
+        document.getElementById('exp-box').innerHTML = `<b style="color: var(--success);">Tema atribuído a: ${studentName}</b>`;
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
         
@@ -679,7 +690,7 @@
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
 
-        if (gameMode === 'classic' && Math.random() * 100 < parseInt(document.getElementById('jokerProb').value)) { triggerSurprise(idx); return; }
+        if (gameMode === 'classic' && !cardStates[idx] && Math.random() * 100 < parseInt(document.getElementById('jokerProb').value)) { triggerSurprise(idx); return; }
         
         playSound('question');
         
@@ -693,20 +704,45 @@
         const randNum = Math.floor(Math.random() * 500) + 1;
         let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
         
-        // --- LÓGICA DO NOVO MODO DE REDAÇÃO ---
+        // --- MODIFICAÇÃO: LÓGICA DO NOVO MODO DE REDAÇÃO COM REVISÃO E INPUT ---
         if (gameMode === 'redacao') {
-            document.getElementById('modal-content').innerHTML = `
-                ${gifHTML}
-                <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO</h3>
-                <h2 style="font-size:2rem;">${q.q}</h2>
-                ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent);">${q.exp}</p>` : ''}
-                <div style="margin-top: 25px;">
-                    <button class="opt-btn" style="width: 100%; border-color: var(--success);" onclick="confirmRedacao(this, ${idx})">
-                        Marcar Tema Como Visto ✓
-                    </button>
-                </div>
-            `;
-            return;
+            if (cardStates[idx]) {
+                // TEMA JÁ FOI ABERTO ANTES (REVISÃO)
+                let studentName = cardStates[idx].studentName || "Geral";
+                document.getElementById('modal-content').innerHTML = `
+                    <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO (Revisão)</h3>
+                    <h2 style="font-size:2rem;">${q.q}</h2>
+                    <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; margin-top:15px;">
+                        <b style="font-size: 1.2rem;">Aluno:</b> <span style="font-size: 1.2rem; color: var(--accent); font-weight: bold;">${studentName}</span>
+                    </div>
+                    ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent); margin-top: 15px;">${q.exp}</p>` : ''}
+                    <div style="margin-top: 25px;">
+                        <button class="opt-btn" style="width: 100%; background: var(--primary); color: white;" onclick="closeModal()">
+                            Fechar Revisão
+                        </button>
+                    </div>
+                `;
+                return;
+            } else {
+                // TEMA NOVO, AINDA NÃO ABERTO
+                document.getElementById('modal-content').innerHTML = `
+                    ${gifHTML}
+                    <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO</h3>
+                    <h2 style="font-size:2rem;">${q.q}</h2>
+                    ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent);">${q.exp}</p>` : ''}
+                    
+                    <div style="margin-top: 20px;">
+                        <input type="text" id="studentNameInput" placeholder="Digite o nome do aluno..." style="width: 100%; max-width: 400px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); font-size: 1.2rem; text-align: center; margin-bottom: 15px;">
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <button class="opt-btn" style="width: 100%; border-color: var(--success);" onclick="confirmRedacao(this, ${idx})">
+                            Atribuir Tema e Concluir ✓
+                        </button>
+                    </div>
+                `;
+                return;
+            }
         }
         // ----------------------------------------
 
@@ -859,13 +895,13 @@
         playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
         
-        // --- TELA FINAL EXCLUSIVA PARA MODO REDAÇÃO ---
+        // --- MODIFICAÇÃO: TELA FINAL EXCLUSIVA PARA MODO REDAÇÃO ---
         if (gameMode === 'redacao') {
-            let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
+            let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
 
             document.getElementById('modal-content').innerHTML = `
                 <h1>✍️ TODOS OS TEMAS CONCLUÍDOS ✍️</h1>
-                <h3>Relatório de Temas Abertos</h3>
+                <h3>Relatório de Temas por Aluno</h3>
                 ${reportHTML}
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px;">
                     <button class="action-btn" onclick="copyReport()" style="background:var(--primary); color:white; font-size:1rem;">📋 Copiar Temas</button>
@@ -925,10 +961,10 @@
         clearStorage();
     }
 
-    // Função de cópia ajustada para considerar o modo Redação
+    // MODIFICAÇÃO: Função de cópia ajustada para considerar o modo Redação e trazer o Aluno
     function copyReport() {
         const text = quizReport.map(r => {
-            if (gameMode === 'redacao') return `TEMA: ${r.question.replace('REDAÇÃO: ', '')}`;
+            if (gameMode === 'redacao') return `ALUNO: ${r.team} | TEMA: ${r.question.replace('REDAÇÃO: ', '')}`;
             return `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}`;
         }).join('\n');
         
