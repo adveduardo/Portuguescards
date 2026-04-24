@@ -100,26 +100,84 @@
         /* Ocultado na tela normal, visível apenas na impressão */
         .print-header-only { display: none; }
 
-        /* MODIFICAÇÕES DE FORMATAÇÃO EXCLUSIVAS PARA IMPRESSÃO / PDF */
+        /* MODIFICAÇÕES ROBUSTAS PARA IMPRESSÃO EM A4 */
         @media print {
-            body { background: white !important; }
-            body * { visibility: hidden; }
-            #modal, #modal-content, #modal-content * { visibility: visible; }
+            /* Oculta tudo que não for o overlay do modal */
+            body > *:not(#modal-overlay) { display: none !important; }
+
+            /* Reseta o fundo e retira margens/paddings do body */
+            html, body { 
+                background: white !important; 
+                height: auto !important; 
+                margin: 0 !important; 
+                padding: 0 !important; 
+            }
+
+            /* Quebra o flexbox do overlay para ele começar do topo */
+            #modal-overlay { 
+                position: static !important; 
+                display: block !important; 
+                background: none !important; 
+                padding: 0 !important; 
+            }
+
+            /* Transforma a caixa do modal numa página lisa, sem bordas ou fundo */
+            #modal { 
+                position: static !important; 
+                background: white !important; 
+                color: black !important; 
+                padding: 0 !important; 
+                box-shadow: none !important; 
+                width: 100% !important; 
+                max-width: 100% !important; 
+                margin: 0 !important; 
+                border: none !important;
+                border-radius: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                transform: none !important;
+            }
+
+            /* Garante que o conteúdo textual apareça */
+            #modal-content, .report-container, .print-header-only, .report-item { 
+                visibility: visible !important; 
+                display: block !important; 
+            }
+
+            /* Esconde as coisas visuais e botões */
+            .hide-on-print, .action-btn, #btn-continue, #score-board, .top-bar { 
+                display: none !important; 
+            }
             
-            /* Remove fundos escuros e bordas para o PDF ficar limpo */
-            #modal { position: absolute; left: 0; top: 0; width: 100%; background: white !important; color: black !important; padding: 0 !important; box-shadow: none !important; }
+            /* Formatação bonita do cabeçalho */
+            .print-header-only { 
+                text-align: left; 
+                color: black; 
+                margin-bottom: 20px; 
+                font-family: Arial, sans-serif; 
+            }
             
-            /* Esconde botões e títulos grandes na hora de imprimir */
-            .hide-on-print { display: none !important; }
+            /* Remove a caixa cinza/branca e barra de rolagem da lista */
+            .report-container { 
+                max-height: none !important; 
+                overflow: visible !important; 
+                border: none !important; 
+                background: white !important; 
+                padding: 0 !important; 
+                margin: 0 !important; 
+            }
             
-            /* Mostra o cabeçalho bonitinho formatado */
-            .print-header-only { display: block !important; text-align: center; color: black; margin-bottom: 20px; font-family: 'Arial', sans-serif; }
-            
-            /* Formata a lista para não quebrar a página na metade do nome do aluno e remove a barra de rolagem */
-            .report-container { max-height: none !important; overflow: visible !important; border: none !important; background: white !important; padding: 0 !important; margin: 0 !important; }
-            .report-item { page-break-inside: avoid; border-bottom: 1px solid #ccc !important; font-size: 12pt !important; padding: 10px 0 !important; color: black !important; }
-            
-            /* Força renderização exata das cores no iPadOS e Chrome */
+            /* Aumenta a fonte e formata os itens do relatório */
+            .report-item { 
+                page-break-inside: avoid; 
+                border-bottom: 1px solid #ccc !important; 
+                font-size: 14pt !important; 
+                padding: 15px 0 !important; 
+                color: black !important; 
+                text-align: left !important;
+            }
+
+            /* Força cores exatas (preto no branco) */
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
 
@@ -603,7 +661,6 @@
         if(!board) return;
         board.innerHTML = '';
         
-        // Esconde o painel de pontuação caso seja Modo Redação
         if (gameMode === 'redacao') return; 
         
         teams.forEach((team, index) => {
@@ -725,13 +782,13 @@
             if (cardStates[idx]) {
                 let studentName = cardStates[idx].studentName || "Geral";
                 document.getElementById('modal-content').innerHTML = `
-                    <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO (Revisão)</h3>
-                    <h2 style="font-size:2rem;">${q.q}</h2>
-                    <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; margin-top:15px;">
+                    <h3 class="hide-on-print" style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO (Revisão)</h3>
+                    <h2 class="hide-on-print" style="font-size:2rem;">${q.q}</h2>
+                    <div class="hide-on-print" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; margin-top:15px;">
                         <b style="font-size: 1.2rem;">Aluno:</b> <span style="font-size: 1.2rem; color: var(--accent); font-weight: bold;">${studentName}</span>
                     </div>
-                    ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent); margin-top: 15px;">${q.exp}</p>` : ''}
-                    <div style="margin-top: 25px;">
+                    ${q.exp ? `<p class="hide-on-print" style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent); margin-top: 15px;">${q.exp}</p>` : ''}
+                    <div class="hide-on-print" style="margin-top: 25px;">
                         <button class="opt-btn" style="width: 100%; background: var(--primary); color: white;" onclick="closeModal()">
                             Fechar Revisão
                         </button>
@@ -741,15 +798,15 @@
             } else {
                 document.getElementById('modal-content').innerHTML = `
                     ${gifHTML}
-                    <h3 style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO</h3>
-                    <h2 style="font-size:2rem;">${q.q}</h2>
-                    ${q.exp ? `<p style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent);">${q.exp}</p>` : ''}
+                    <h3 class="hide-on-print" style="color: var(--primary); margin-bottom: 5px;">✍️ TEMA DE REDAÇÃO</h3>
+                    <h2 class="hide-on-print" style="font-size:2rem;">${q.q}</h2>
+                    ${q.exp ? `<p class="hide-on-print" style="font-size:1.1rem; color: var(--text); background: rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; text-align: left; border-left: 5px solid var(--accent);">${q.exp}</p>` : ''}
                     
-                    <div style="margin-top: 20px;">
+                    <div class="hide-on-print" style="margin-top: 20px;">
                         <input type="text" id="studentNameInput" placeholder="Digite o nome do aluno..." style="width: 100%; max-width: 400px; padding: 12px; border-radius: 8px; border: 2px solid var(--border); font-size: 1.2rem; text-align: center; margin-bottom: 15px;">
                     </div>
 
-                    <div style="margin-top: 10px;">
+                    <div class="hide-on-print" style="margin-top: 10px;">
                         <button class="opt-btn" style="width: 100%; border-color: var(--success);" onclick="confirmRedacao(this, ${idx})">
                             Atribuir Tema e Concluir ✓
                         </button>
@@ -763,7 +820,7 @@
         if(q.c) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button>`;
         if(q.d) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>`;
 
-        document.getElementById('modal-content').innerHTML = `${gifHTML}<h2 style="font-size:2.2rem;">${q.q}</h2><div class="options-grid">${optionsHTML}</div><p id="turn-display">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+        document.getElementById('modal-content').innerHTML = `${gifHTML}<h2 class="hide-on-print" style="font-size:2.2rem;">${q.q}</h2><div class="options-grid hide-on-print">${optionsHTML}</div><p class="hide-on-print" id="turn-display">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
     }
 
     function checkAns(btn, chosen, correct, idx) {
@@ -901,7 +958,6 @@
 
     function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
 
-    // --- MODIFICAÇÃO: CABEÇALHO DE IMPRESSÃO ---
     function showFinal() {
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
@@ -909,13 +965,11 @@
         playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
         
-        // Data formatada para exibir no relatório
         const hoje = new Date().toLocaleDateString('pt-BR');
         
         if (gameMode === 'redacao') {
             let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
 
-            // Cabeçalho que só aparece quando clica em Imprimir/PDF
             const printHeader = `
                 <div class="print-header-only">
                     <h2 style="margin:0;">Temas de Redação</h2>
@@ -969,7 +1023,6 @@
         let allTeamsHTML = `<div class="all-teams-list">` + sorted.map((t, i) => `<div class="team-rank-item">#${i+1} <b>${t.name}</b>: ${t.score}p</div>`).join('') + `</div>`;
         let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>${r.team}</b>: ${r.isCorrect ? 'ACERTOU' : 'ERROU'}<br><small>Q: ${r.question} | Gab: ${r.correctLetter}</small></div>`).join('') + `</div>`;
 
-        // Cabeçalho de impressão para os outros modos de jogo
         const printHeader = `
             <div class="print-header-only">
                 <h2 style="margin:0;">Relatório de Atividade</h2>
