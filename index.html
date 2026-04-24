@@ -29,7 +29,7 @@
             font-family: 'Arial Rounded MT Bold', sans-serif; 
             color: var(--text); 
             margin: 0; 
-            display: flex; 
+            display: flex; /* Isso causava o problema na impressão */
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh; 
@@ -100,16 +100,13 @@
         /* Ocultado na tela normal, visível apenas na impressão */
         .print-header-only { display: none; }
 
-        /* MODIFICAÇÕES ROBUSTAS PARA IMPRESSÃO EM A4 (MARGEM A MARGEM) */
+        /* ======== SOLUÇÃO DEFINITIVA PARA IMPRESSÃO EM A4 ======== */
         @media print {
-            /* Define a margem limpa da folha A4 */
             @page { margin: 1.5cm; }
             
-            /* Oculta tudo que não for o overlay do modal */
-            body > *:not(#modal-overlay) { display: none !important; }
-
-            /* Reseta o fundo e retira margens/paddings limitadores */
+            /* 1. MATA O FLEXBOX DO BODY QUE ESTAVA ESMAGANDO O CONTEÚDO */
             html, body { 
+                display: block !important; 
                 background: white !important; 
                 height: auto !important; 
                 margin: 0 !important; 
@@ -117,45 +114,48 @@
                 width: 100% !important;
             }
 
-            /* Quebra o posicionamento para ele começar exatamente no topo da folha */
+            /* 2. ESCONDE TUDO QUE NÃO SEJA O RELATÓRIO */
+            body > *:not(#modal-overlay) { display: none !important; }
+
+            /* 3. LIBERA O OVERLAY PARA OCUPAR A FOLHA TODA */
             #modal-overlay { 
-                position: absolute !important; 
-                top: 0 !important;
-                left: 0 !important;
+                position: relative !important; 
                 display: block !important; 
                 background: white !important; 
                 padding: 0 !important; 
                 width: 100% !important;
             }
 
-            /* Transforma a caixa do modal numa página lisa, ocupando 100% do papel */
+            /* 4. TIRA TODAS AS TRAVAS DE LARGURA DO MODAL E ALINHA À ESQUERDA */
             #modal { 
-                position: static !important; 
+                position: relative !important; 
                 background: white !important; 
                 color: black !important; 
                 padding: 0 !important; 
                 box-shadow: none !important; 
                 width: 100% !important; 
-                max-width: 100% !important; 
+                max-width: none !important; /* Aqui estava o gargalo */
                 margin: 0 !important; 
                 border: none !important;
                 border-radius: 0 !important;
                 max-height: none !important;
                 overflow: visible !important;
                 transform: none !important;
+                text-align: left !important;
             }
 
             #modal-content {
                 width: 100% !important;
-                max-width: 100% !important;
+                max-width: none !important;
+                text-align: left !important;
             }
 
-            /* Esconde as coisas visuais da tela e botões */
+            /* 5. ESCONDE BOTÕES E TÍTULOS GIGANTES */
             .hide-on-print, .action-btn, #btn-continue, #score-board, .top-bar, .nav-controls { 
                 display: none !important; 
             }
             
-            /* Mostra e formata o cabeçalho ocupando 100% da largura */
+            /* 6. FORMATA O CABEÇALHO PARA PEGAR A FOLHA DE PONTA A PONTA */
             .print-header-only { 
                 display: block !important; 
                 width: 100% !important;
@@ -164,7 +164,7 @@
                 margin-bottom: 25px !important;
             }
             
-            /* Tira a restrição de tamanho da caixa do relatório */
+            /* 7. SOLTA A LISTA DE QUESTÕES */
             .report-container { 
                 max-height: none !important; 
                 overflow: visible !important; 
@@ -176,19 +176,19 @@
                 display: block !important;
             }
             
-            /* Aumenta a fonte e faz os itens irem de ponta a ponta na folha */
+            /* 8. FORMATA CADA ITEM DA LISTA BEM DISTRIBUÍDO */
             .report-item { 
                 page-break-inside: avoid; 
                 border-bottom: 1px solid #ccc !important; 
-                font-size: 13pt !important; 
-                padding: 12px 0 !important; 
+                font-size: 14pt !important; 
+                padding: 15px 0 !important; 
                 color: black !important; 
                 text-align: left !important;
                 width: 100% !important;
                 display: block !important;
             }
 
-            /* Força cores exatas (preto no branco) */
+            /* Força renderização do preto no branco */
             * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
 
@@ -981,14 +981,15 @@
         if (gameMode === 'redacao') {
             let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
 
-            // CABEÇALHO FORMATADO E HARMONIZADO PARA IMPRESSÃO
+            // CABEÇALHO COM TAMANHO TOTAL E LINHA DE PONTA A PONTA
             const printHeader = `
-                <div class="print-header-only">
-                    <h2 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-size: 24pt; text-transform: uppercase;">Temas de Redação</h2>
-                    <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 20px;">
+                <div class="print-header-only" style="width: 100%;">
+                    <h2 style="text-align: center; font-size: 24pt; margin-bottom: 10px; text-transform: uppercase;">Temas de Redação</h2>
+                    <hr style="border: 1px solid black; margin-bottom: 15px; width: 100%;">
+                    <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 30px;">
                         <div style="text-align: left;">
-                            <div>Prof: Eduardo Goulart</div>
-                            <div style="margin-top: 5px;">Disciplina: Português</div>
+                            <div style="margin-bottom: 5px;">Prof: Eduardo Goulart</div>
+                            <div>Disciplina: Português</div>
                         </div>
                         <div style="text-align: right;">
                             <div>Data: ${hoje}</div>
@@ -1041,14 +1042,15 @@
         let allTeamsHTML = `<div class="all-teams-list">` + sorted.map((t, i) => `<div class="team-rank-item">#${i+1} <b>${t.name}</b>: ${t.score}p</div>`).join('') + `</div>`;
         let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>${r.team}</b>: ${r.isCorrect ? 'ACERTOU' : 'ERROU'}<br><small>Q: ${r.question} | Gab: ${r.correctLetter}</small></div>`).join('') + `</div>`;
 
-        // CABEÇALHO FORMATADO PARA OUTROS MODOS
+        // CABEÇALHO PARA OS OUTROS MODOS
         const printHeader = `
-            <div class="print-header-only">
-                <h2 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-size: 24pt; text-transform: uppercase;">Relatório de Atividade</h2>
-                <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 20px;">
+            <div class="print-header-only" style="width: 100%;">
+                <h2 style="text-align: center; font-size: 24pt; margin-bottom: 10px; text-transform: uppercase;">Relatório de Atividade</h2>
+                <hr style="border: 1px solid black; margin-bottom: 15px; width: 100%;">
+                <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 30px;">
                     <div style="text-align: left;">
-                        <div>Prof: Eduardo Goulart</div>
-                        <div style="margin-top: 5px;">Disciplina: Português</div>
+                        <div style="margin-bottom: 5px;">Prof: Eduardo Goulart</div>
+                        <div>Disciplina: Português</div>
                     </div>
                     <div style="text-align: right;">
                         <div>Data: ${hoje}</div>
