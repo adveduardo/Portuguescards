@@ -291,6 +291,7 @@
             <button onclick="toggleGlobalMute()" id="mute-btn-game" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Mutar/Desmutar Som">🔊</button>
             <button onclick="toggleDarkMode()" style="font-size: 24px; background: none; border: none; cursor:pointer;">🌙</button>
             <button onclick="toggleFullScreen()" style="font-size: 24px; background: none; border: none; cursor:pointer;">📺</button>
+            <button onclick="if(confirm('Deseja encerrar o jogo agora e gerar o relatório?')) showFinal()" style="font-size: 24px; background: none; border: none; cursor:pointer;" title="Encerrar Jogo e Gerar Relatório">📊</button>
         </div>
         <div id="score-board"></div>
         <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight: bold; cursor:pointer;">SAIR</button>
@@ -661,7 +662,6 @@
         saveGameState();
     }
 
-    // MODIFICAÇÃO: Inserido o resgate do nome do Aluno no Modo Redação
     function confirmRedacao(btn, idx) {
         let studentNameInput = document.getElementById('studentNameInput');
         let studentName = studentNameInput ? studentNameInput.value.trim() : "";
@@ -704,7 +704,7 @@
         const randNum = Math.floor(Math.random() * 500) + 1;
         let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:10px;">` : '';
         
-        // --- MODIFICAÇÃO: LÓGICA DO NOVO MODO DE REDAÇÃO COM REVISÃO E INPUT ---
+        // --- LÓGICA DO NOVO MODO DE REDAÇÃO COM REVISÃO E INPUT ---
         if (gameMode === 'redacao') {
             if (cardStates[idx]) {
                 // TEMA JÁ FOI ABERTO ANTES (REVISÃO)
@@ -895,7 +895,6 @@
         playSound('stop');
         document.getElementById('exp-box').style.display = 'none';
         
-        // --- MODIFICAÇÃO: TELA FINAL EXCLUSIVA PARA MODO REDAÇÃO ---
         if (gameMode === 'redacao') {
             let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
 
@@ -914,7 +913,6 @@
             clearStorage();
             return;
         }
-        // ----------------------------------------------
 
         const sorted = [...teams].sort((a,b) => b.score - a.score);
         
@@ -961,7 +959,6 @@
         clearStorage();
     }
 
-    // MODIFICAÇÃO: Função de cópia ajustada para considerar o modo Redação e trazer o Aluno
     function copyReport() {
         const text = quizReport.map(r => {
             if (gameMode === 'redacao') return `ALUNO: ${r.team} | TEMA: ${r.question.replace('REDAÇÃO: ', '')}`;
@@ -1008,10 +1005,8 @@
         const card = document.getElementById('flash-card-element');
         const wasFlipped = card.classList.contains('is-flipped');
 
-        // Retira a classe imediatamente para iniciar a animação de desvirar
         card.classList.remove('is-flipped');
 
-        // Encapsulamos toda a sua lógica original de atualização de tela em uma função
         const atualizarConteudo = () => {
             const q = questions[currentFCIdx];
             let perguntaText = q.q || q.pergunta || "Pergunta não encontrada";
@@ -1024,7 +1019,6 @@
                 let letraCorreta = q.correct ? q.correct.trim().toUpperCase() : "A";
                 let textoCorreto = q[letraCorreta.toLowerCase()] || q[letraCorreta] || "";
                 
-                // FRENTE DO CARD (Injetado dentro do H2 para não depender do HTML base do usuário)
                 optionsHTML_Front = `<div style="text-align: left; font-size: 1.1rem; margin-top: 20px; font-weight: normal; width: 100%; box-sizing: border-box; word-wrap: break-word;">`;
                 ['A', 'B', 'C', 'D'].forEach(opt => {
                     let textoOpt = q[opt.toLowerCase()] || q[opt];
@@ -1036,7 +1030,6 @@
                 
                 perguntaText += optionsHTML_Front;
 
-                // VERSO DO CARD
                 respostaFinal = `<span style="font-size: 1.1rem; color: rgba(255,255,255,0.9);">Gabarito: <b>${letraCorreta}</b></span><br>
                                  <span style="font-size: 1.3rem; font-weight: bold; color: #f1c40f;">${textoCorreto}</span>`;
                 
@@ -1085,8 +1078,6 @@
             checkFCEnd();
         };
 
-        // Se a carta estiver virada, esperamos 300ms (metade do tempo da animação CSS)
-        // para renderizar a próxima. Se não estiver, muda na hora.
         if (wasFlipped) {
             setTimeout(atualizarConteudo, 300);
         } else {
