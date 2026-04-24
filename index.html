@@ -100,28 +100,35 @@
         /* Ocultado na tela normal, visível apenas na impressão */
         .print-header-only { display: none; }
 
-        /* MODIFICAÇÕES ROBUSTAS PARA IMPRESSÃO EM A4 */
+        /* MODIFICAÇÕES ROBUSTAS PARA IMPRESSÃO EM A4 (MARGEM A MARGEM) */
         @media print {
+            /* Define a margem limpa da folha A4 */
+            @page { margin: 1.5cm; }
+            
             /* Oculta tudo que não for o overlay do modal */
             body > *:not(#modal-overlay) { display: none !important; }
 
-            /* Reseta o fundo e retira margens/paddings do body */
+            /* Reseta o fundo e retira margens/paddings limitadores */
             html, body { 
                 background: white !important; 
                 height: auto !important; 
                 margin: 0 !important; 
                 padding: 0 !important; 
+                width: 100% !important;
             }
 
-            /* Quebra o flexbox do overlay para ele começar do topo */
+            /* Quebra o posicionamento para ele começar exatamente no topo da folha */
             #modal-overlay { 
-                position: static !important; 
+                position: absolute !important; 
+                top: 0 !important;
+                left: 0 !important;
                 display: block !important; 
-                background: none !important; 
+                background: white !important; 
                 padding: 0 !important; 
+                width: 100% !important;
             }
 
-            /* Transforma a caixa do modal numa página lisa, sem bordas ou fundo */
+            /* Transforma a caixa do modal numa página lisa, ocupando 100% do papel */
             #modal { 
                 position: static !important; 
                 background: white !important; 
@@ -138,26 +145,26 @@
                 transform: none !important;
             }
 
-            /* Garante que o conteúdo textual apareça */
-            #modal-content, .report-container, .print-header-only, .report-item { 
-                visibility: visible !important; 
-                display: block !important; 
+            #modal-content {
+                width: 100% !important;
+                max-width: 100% !important;
             }
 
-            /* Esconde as coisas visuais e botões */
-            .hide-on-print, .action-btn, #btn-continue, #score-board, .top-bar { 
+            /* Esconde as coisas visuais da tela e botões */
+            .hide-on-print, .action-btn, #btn-continue, #score-board, .top-bar, .nav-controls { 
                 display: none !important; 
             }
             
-            /* Formatação bonita do cabeçalho */
+            /* Mostra e formata o cabeçalho ocupando 100% da largura */
             .print-header-only { 
-                text-align: left; 
+                display: block !important; 
+                width: 100% !important;
                 color: black; 
-                margin-bottom: 20px; 
                 font-family: Arial, sans-serif; 
+                margin-bottom: 25px !important;
             }
             
-            /* Remove a caixa cinza/branca e barra de rolagem da lista */
+            /* Tira a restrição de tamanho da caixa do relatório */
             .report-container { 
                 max-height: none !important; 
                 overflow: visible !important; 
@@ -165,16 +172,20 @@
                 background: white !important; 
                 padding: 0 !important; 
                 margin: 0 !important; 
+                width: 100% !important;
+                display: block !important;
             }
             
-            /* Aumenta a fonte e formata os itens do relatório */
+            /* Aumenta a fonte e faz os itens irem de ponta a ponta na folha */
             .report-item { 
                 page-break-inside: avoid; 
                 border-bottom: 1px solid #ccc !important; 
-                font-size: 14pt !important; 
-                padding: 15px 0 !important; 
+                font-size: 13pt !important; 
+                padding: 12px 0 !important; 
                 color: black !important; 
                 text-align: left !important;
+                width: 100% !important;
+                display: block !important;
             }
 
             /* Força cores exatas (preto no branco) */
@@ -970,12 +981,19 @@
         if (gameMode === 'redacao') {
             let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>ALUNO</b>: ${r.team} <br><b>TEMA</b>: ${r.question.replace('REDAÇÃO: ', '')}</div>`).join('') + `</div>`;
 
+            // CABEÇALHO FORMATADO E HARMONIZADO PARA IMPRESSÃO
             const printHeader = `
                 <div class="print-header-only">
-                    <h2 style="margin:0;">Temas de Redação</h2>
-                    <h3 style="margin:5px 0;">Prof: Eduardo Goulart</h3>
-                    <p style="margin:5px 0;">Data: ${hoje}</p>
-                    <hr style="border-top: 2px solid #000; margin: 15px 0;">
+                    <h2 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-size: 24pt; text-transform: uppercase;">Temas de Redação</h2>
+                    <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 20px;">
+                        <div style="text-align: left;">
+                            <div>Prof: Eduardo Goulart</div>
+                            <div style="margin-top: 5px;">Disciplina: Português</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div>Data: ${hoje}</div>
+                        </div>
+                    </div>
                 </div>
             `;
 
@@ -1023,12 +1041,19 @@
         let allTeamsHTML = `<div class="all-teams-list">` + sorted.map((t, i) => `<div class="team-rank-item">#${i+1} <b>${t.name}</b>: ${t.score}p</div>`).join('') + `</div>`;
         let reportHTML = `<div id="printable-report" class="report-container">` + quizReport.map(r => `<div class="report-item"><b>${r.team}</b>: ${r.isCorrect ? 'ACERTOU' : 'ERROU'}<br><small>Q: ${r.question} | Gab: ${r.correctLetter}</small></div>`).join('') + `</div>`;
 
+        // CABEÇALHO FORMATADO PARA OUTROS MODOS
         const printHeader = `
             <div class="print-header-only">
-                <h2 style="margin:0;">Relatório de Atividade</h2>
-                <h3 style="margin:5px 0;">Prof: Eduardo Goulart</h3>
-                <p style="margin:5px 0;">Data: ${hoje}</p>
-                <hr style="border-top: 2px solid #000; margin: 15px 0;">
+                <h2 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; font-size: 24pt; text-transform: uppercase;">Relatório de Atividade</h2>
+                <div style="display: flex; justify-content: space-between; font-size: 14pt; font-weight: bold; margin-bottom: 20px;">
+                    <div style="text-align: left;">
+                        <div>Prof: Eduardo Goulart</div>
+                        <div style="margin-top: 5px;">Disciplina: Português</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div>Data: ${hoje}</div>
+                    </div>
+                </div>
             </div>
         `;
 
