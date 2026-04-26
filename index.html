@@ -564,6 +564,24 @@
         saveGameState();
     }
 
+    function toggleTexto() {
+        const qView = document.getElementById('question-view');
+        const tView = document.getElementById('text-view');
+        const btn = document.getElementById('btn-toggle-texto');
+        
+        if (qView.style.display === 'none') {
+            qView.style.display = 'block';
+            tView.style.display = 'none';
+            btn.innerHTML = '📖 VER TEXTO BASE';
+            btn.style.background = '#34495e';
+        } else {
+            qView.style.display = 'none';
+            tView.style.display = 'block';
+            btn.innerHTML = '🔙 VOLTAR PARA A PERGUNTA';
+            btn.style.background = 'var(--primary)';
+        }
+    }
+
     function showQuestion(idx) {
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
@@ -617,7 +635,21 @@
         if(q.c) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'C', '${q.correct}', ${idx})">C: ${q.c}</button>`;
         if(q.d) optionsHTML += `<button class="opt-btn" onclick="checkAns(this, 'D', '${q.correct}', ${idx})">D: ${q.d}</button>`;
 
-        document.getElementById('modal-content').innerHTML = `${gifHTML}<h2 style="font-size:2.2rem;">${q.q}</h2><div class="options-grid">${optionsHTML}</div><p id="turn-display">Vez de: <b>${teams[currentTeamIdx].name}</b></p>`;
+        let btnTextoHTML = q.texto ? `<button class="action-btn" id="btn-toggle-texto" style="background:#34495e; color:white; margin-bottom:15px; width:100%; box-shadow: 0 4px 0 #2c3e50;" onclick="toggleTexto()">📖 VER TEXTO BASE</button>` : '';
+        let textoConteudo = q.texto ? q.texto.replace(/\n/g, '<br>') : '';
+
+        document.getElementById('modal-content').innerHTML = `
+            ${btnTextoHTML}
+            <div id="question-view">
+                ${gifHTML}
+                <h2 style="font-size:2.2rem;">${q.q}</h2>
+                <div class="options-grid">${optionsHTML}</div>
+                <p id="turn-display">Vez de: <b>${teams[currentTeamIdx].name}</b></p>
+            </div>
+            <div id="text-view" style="display:none; text-align:left; font-size: 1.4rem; line-height: 1.6; background: rgba(0,0,0,0.05); padding: 20px; border-radius: 10px; max-height: 55vh; overflow-y: auto; border-left: 5px solid var(--primary);">
+                ${textoConteudo}
+            </div>
+        `;
     }
 
     function checkAns(btn, chosen, correct, idx) {
