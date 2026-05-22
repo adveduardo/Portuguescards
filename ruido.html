@@ -41,9 +41,26 @@
         .noise-level { height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; display: flex; }
         .noise-level-fill { height: 100%; width: 0%; background: #50c878; transition: width 0.1s ease-out, background-color 0.2s; }
 
-        /* Personagem Central */
-        .character-container { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; }
-        .character-container img { width: 350px; height: 350px; object-fit: contain; transition: transform 0.2s; }
+        /* Personagem Central - CORRIGIDO */
+        .character-container { 
+            position: absolute; 
+            bottom: 50px; 
+            left: 0; 
+            width: 100%; 
+            display: flex; 
+            justify-content: center; /* Garante que fique no meio exato da tela */
+            align-items: flex-end;
+            z-index: 5; 
+            pointer-events: none; /* Evita que a imagem bloqueie cliques */
+        }
+        
+        .character-container img { 
+            width: 480px; /* Aumentado de 350px para 480px */
+            height: 480px; 
+            object-fit: contain; 
+            transition: transform 0.15s ease-out; 
+            transform-origin: bottom center; /* Faz ele crescer para cima, não para os lados */
+        }
 
         /* Overlay Inicial */
         #startOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
@@ -131,7 +148,7 @@
         };
 
         // Variáveis Globais
-        let currentCharacter = 'monstro'; // Inicia com o monstro
+        let currentCharacter = 'monstro';
         let currentImageIndex = 0;
         let smoothedVolume = 0;
         let audioContext;
@@ -144,10 +161,9 @@
         let isCountdown = false;
         let goalSeconds = 0;
 
-        // Trocar de personagem pelo Menu Dropdown
+        // Trocar de personagem
         document.getElementById('character-select').addEventListener('change', function(e) {
             currentCharacter = e.target.value;
-            // Atualiza a imagem imediatamente para a mesma posição de ruído
             document.getElementById('character-img').src = characterImages[currentCharacter][currentImageIndex];
         });
 
@@ -207,9 +223,11 @@
                 this.style.background = '#50c878'; 
                 audioContext.suspend(); 
                 
-                // Zera visualmente a barra e o personagem
+                // Força o reset absoluto visual e lógico
                 document.getElementById('noise-bar').style.width = '0%';
+                currentImageIndex = 0;
                 document.getElementById('character-img').src = characterImages[currentCharacter][0];
+                document.getElementById('character-img').style.transform = `scale(1)`;
                 smoothedVolume = 0;
             }
         });
@@ -269,14 +287,17 @@
 
                     // Atualiza Personagem
                     let newImageIndex = Math.floor(smoothedVolume / 10);
+                    
+                    // FILTRO DE SILÊNCIO: Se o volume for menor que 5%, força a imagem zero (dormindo)
+                    if (smoothedVolume < 5) newImageIndex = 0;
                     if (newImageIndex > 9) newImageIndex = 9;
                     if (newImageIndex < 0) newImageIndex = 0;
 
                     if (newImageIndex !== currentImageIndex) {
                         currentImageIndex = newImageIndex;
-                        // Puxa a imagem correta baseada no animal selecionado e no índice de ruído
                         characterImg.src = characterImages[currentCharacter][currentImageIndex];
-                        characterImg.style.transform = `translateX(-50%) scale(${1 + (currentImageIndex * 0.02)})`;
+                        // Animação ajustada (apenas escala para não sair do centro)
+                        characterImg.style.transform = `scale(${1 + (currentImageIndex * 0.03)})`;
                     }
 
                     requestAnimationFrame(analisarAudio);
