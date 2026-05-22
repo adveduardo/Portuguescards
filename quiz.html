@@ -610,7 +610,7 @@
         let count = parseInt(document.getElementById('teamCount').value) || 2;
         const finalCount = gameMode === 'tictactoe' ? 2 : Math.max(names.length, count);
         teams = names.map(name => ({name, score: 0}));
-        while(teams.length < finalCount) teams.push({name: Grupo ${teams.length+1}, score: 0});
+        while(teams.length < finalCount) teams.push({name: `Grupo ${teams.length+1}`, score: 0});
         
         if(gameMode === 'batalha') generateFleet();
         
