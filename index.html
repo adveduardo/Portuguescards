@@ -33,6 +33,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
 
         #top-bar label { 
@@ -42,7 +43,7 @@
         }
 
         select {
-            padding: 12px 20px; 
+            padding: 10px 15px; 
             border-radius: 10px; 
             font-size: 16px; 
             font-weight: bold; 
@@ -58,6 +59,50 @@
         select:hover { 
             transform: translateY(-2px); 
             box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4); 
+        }
+
+        /* Botão para ocultar a barra */
+        .hide-btn {
+            background: transparent;
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hide-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* Botão flutuante para mostrar a barra novamente */
+        #show-menu-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2000;
+            font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: none; /* Escondido por padrão */
+            transition: transform 0.2s;
+        }
+
+        #show-menu-btn:hover {
+            transform: scale(1.1);
+            background: rgba(59, 130, 246, 0.8);
         }
 
         /* Tela de Boas-vindas */
@@ -133,6 +178,8 @@
 </head>
 <body>
 
+    <button id="show-menu-btn" onclick="toggleTopBar()" title="Mostrar Menu do Painel">⚙️</button>
+
     <div id="top-bar">
         <label>Painel de Aula:</label>
         <select id="tool-selector" onchange="changeTool()">
@@ -140,6 +187,7 @@
             <option value="ruido.html">🔊 Medidor de Ruído</option>
             <option value="quiz.html">🎮 Jogo de Português</option>
         </select>
+        <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
     </div>
 
     <div id="welcome-screen">
@@ -157,22 +205,36 @@
     <iframe id="app-frame" src=""></iframe>
 
     <script>
+        // Função para trocar a ferramenta
         function changeTool() {
             const selector = document.getElementById('tool-selector');
             const iframe = document.getElementById('app-frame');
             const welcome = document.getElementById('welcome-screen');
             
-            // Se escolher a Tela Inicial (valor vazio)
             if (selector.value === "") {
                 iframe.style.display = "none";
                 iframe.src = "";
                 welcome.style.display = "flex";
-            } 
-            // Se escolher uma das ferramentas
-            else {
+            } else {
                 welcome.style.display = "none";
                 iframe.style.display = "block";
                 iframe.src = selector.value;
+            }
+        }
+
+        // Função para Esconder/Mostrar a barra do topo
+        function toggleTopBar() {
+            const topBar = document.getElementById('top-bar');
+            const showBtn = document.getElementById('show-menu-btn');
+
+            if (topBar.style.display === 'none') {
+                // Se a barra estiver escondida, mostre ela
+                topBar.style.display = 'flex';
+                showBtn.style.display = 'none';
+            } else {
+                // Se a barra estiver visível, esconda ela
+                topBar.style.display = 'none';
+                showBtn.style.display = 'block';
             }
         }
     </script>
