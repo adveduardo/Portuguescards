@@ -5,87 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Professor - Eduardo</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
         }
 
-        body {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: #0f172a; /* Fundo escuro neutro */
-            overflow: hidden;
+        body { 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            overflow: hidden; 
+            color: #f8fafc; 
         }
 
-        /* Barra de Navegação no Topo */
+        /* Barra de Navegação */
         #top-bar {
-            background: #1e293b;
-            padding: 12px 20px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        #top-bar label {
-            color: #f8fafc;
-            font-size: 16px;
-            font-weight: bold;
+        #top-bar label { 
+            font-size: 16px; 
+            font-weight: bold; 
+            color: #cbd5e1; 
         }
 
         select {
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 12px 20px; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: bold; 
             cursor: pointer;
-            background: #3b82f6;
-            color: white;
-            border: 2px solid #60a5fa;
-            outline: none;
-        }
-
-        select:hover {
-            background: #2563eb;
-        }
-
-        /* A "janela" que vai carregar os outros sites */
-        iframe {
-            flex-grow: 1;
-            width: 100%;
-            height: 100%;
+            background: linear-gradient(135deg, #3b82f6, #2563eb); 
+            color: white; 
             border: none;
-            background-color: white; /* Cor de fundo caso demore a carregar */
+            outline: none; 
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); 
+            transition: 0.2s;
+        }
+
+        select:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4); 
+        }
+
+        /* Tela de Boas-vindas */
+        #welcome-screen {
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 20px;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 24px;
+            padding: 50px; 
+            max-width: 600px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: fadeUp 0.6s ease;
+        }
+
+        .welcome-card h1 { 
+            color: #60a5fa; 
+            font-size: 2.5rem; 
+            margin-bottom: 15px; 
+        }
+
+        .welcome-card p { 
+            font-size: 1.2rem; 
+            color: #cbd5e1; 
+            line-height: 1.6; 
+            margin-bottom: 25px; 
+        }
+
+        .icon-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-top: 20px; 
+        }
+
+        .icon-box { 
+            background: rgba(255,255,255,0.1); 
+            padding: 20px; 
+            border-radius: 16px; 
+            font-size: 2rem; 
+            transition: 0.3s; 
+        }
+
+        .icon-box:hover { 
+            background: rgba(255,255,255,0.2); 
+            transform: translateY(-5px); 
+        }
+
+        /* Iframe */
+        iframe {
+            flex-grow: 1; 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            background-color: transparent; 
+            display: none;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
     <div id="top-bar">
-        <label>Selecione a Ferramenta:</label>
+        <label>Painel de Aula:</label>
         <select id="tool-selector" onchange="changeTool()">
-            <option value="ruido.html">🔊 Medidor de Ruído (Monstro/Capivara)</option>
-            <option value="quiz.html">🎮 Jogo de Português (Prof. Eduardo)</option>
+            <option value="">🏠 Tela Inicial</option>
+            <option value="ruido.html">🔊 Medidor de Ruído</option>
+            <option value="quiz.html">🎮 Jogo de Português</option>
         </select>
     </div>
 
-    <iframe id="app-frame" src="ruido.html"></iframe>
+    <div id="welcome-screen">
+        <div class="welcome-card">
+            <h1>Olá, Professor! 👋</h1>
+            <p>Seu painel interativo está pronto. Selecione a atividade que deseja usar no menu acima para começar a aula.</p>
+            <div class="icon-grid">
+                <div class="icon-box" title="Controle a turma">🔊</div>
+                <div class="icon-box" title="Engaje os alunos">🎮</div>
+                <div class="icon-box" title="Avalie e brinque">📝</div>
+            </div>
+        </div>
+    </div>
+
+    <iframe id="app-frame" src=""></iframe>
 
     <script>
-        // Função que troca o site dentro do iframe baseado na seleção
         function changeTool() {
             const selector = document.getElementById('tool-selector');
             const iframe = document.getElementById('app-frame');
+            const welcome = document.getElementById('welcome-screen');
             
-            // Troca o endereço do iframe para o valor selecionado
-            iframe.src = selector.value;
+            // Se escolher a Tela Inicial (valor vazio)
+            if (selector.value === "") {
+                iframe.style.display = "none";
+                iframe.src = "";
+                welcome.style.display = "flex";
+            } 
+            // Se escolher uma das ferramentas
+            else {
+                welcome.style.display = "none";
+                iframe.style.display = "block";
+                iframe.src = selector.value;
+            }
         }
     </script>
-
 </body>
 </html>
