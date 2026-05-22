@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medidor de Ruído</title>
+    <title>Medidor de Ruído de 12 Níveis</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: linear-gradient(180deg, #32115e 0%, #5d2294 50%, #46147a 100%); height: 100vh; overflow: hidden; color: #333; position: relative; }
@@ -41,25 +41,25 @@
         .noise-level { height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; display: flex; }
         .noise-level-fill { height: 100%; width: 0%; background: #50c878; transition: width 0.1s ease-out, background-color 0.2s; }
 
-        /* Personagem Central - CORRIGIDO */
+        /* Personagem Central */
         .character-container { 
             position: absolute; 
             bottom: 50px; 
             left: 0; 
             width: 100%; 
             display: flex; 
-            justify-content: center; /* Garante que fique no meio exato da tela */
+            justify-content: center; 
             align-items: flex-end;
             z-index: 5; 
-            pointer-events: none; /* Evita que a imagem bloqueie cliques */
+            pointer-events: none; 
         }
         
         .character-container img { 
-            width: 480px; /* Aumentado de 350px para 480px */
+            width: 480px; 
             height: 480px; 
             object-fit: contain; 
             transition: transform 0.15s ease-out; 
-            transform-origin: bottom center; /* Faz ele crescer para cima, não para os lados */
+            transform-origin: bottom center; 
         }
 
         /* Overlay Inicial */
@@ -115,35 +115,21 @@
     </div>
 
     <div class="character-container">
-        <img id="character-img" src="imagens/monstro/0.png" alt="Personagem">
+        <img id="character-img" src="imagens/monstro/1.png" alt="Personagem">
     </div>
 
     <script>
-        // Dicionário com as imagens de cada personagem
+        // --- CONFIGURAÇÃO DAS 12 IMAGENS (AGORA DE 1 a 12) ---
         const characterImages = {
             monstro: [
-                "imagens/monstro/0.png", 
-                "imagens/monstro/1.png",            
-                "imagens/monstro/2.png",            
-                "imagens/monstro/3.png",            
-                "imagens/monstro/4.png",            
-                "imagens/monstro/5.png",            
-                "imagens/monstro/6.png",            
-                "imagens/monstro/7.png",            
-                "imagens/monstro/8.png",            
-                "imagens/monstro/9.png"
+                "imagens/monstro/1.png", "imagens/monstro/2.png", "imagens/monstro/3.png", "imagens/monstro/4.png",
+                "imagens/monstro/5.png", "imagens/monstro/6.png", "imagens/monstro/7.png", "imagens/monstro/8.png",
+                "imagens/monstro/9.png", "imagens/monstro/10.png", "imagens/monstro/11.png", "imagens/monstro/12.png"
             ],
             capivara: [
-                "imagens/capivara/0.png", 
-                "imagens/capivara/1.png",            
-                "imagens/capivara/2.png",            
-                "imagens/capivara/3.png",            
-                "imagens/capivara/4.png",            
-                "imagens/capivara/5.png",            
-                "imagens/capivara/6.png",            
-                "imagens/capivara/7.png",            
-                "imagens/capivara/8.png",            
-                "imagens/capivara/9.png"
+                "imagens/capivara/1.png", "imagens/capivara/2.png", "imagens/capivara/3.png", "imagens/capivara/4.png",
+                "imagens/capivara/5.png", "imagens/capivara/6.png", "imagens/capivara/7.png", "imagens/capivara/8.png",
+                "imagens/capivara/9.png", "imagens/capivara/10.png", "imagens/capivara/11.png", "imagens/capivara/12.png"
             ]
         };
 
@@ -174,7 +160,7 @@
             document.getElementById('timer').innerText = `${mins}:${secs}`;
         }
 
-        // Lógica de avanço ou recuo do tempo
+        // Lógica de tempo
         function runTimerLogic() {
             if (!isRunning) return;
             
@@ -186,20 +172,20 @@
             updateTimerDisplay();
         }
 
-        // Eventos dos Botões de Tempo
+        // Eventos de Tempo
         document.getElementById('btn-reset').addEventListener('click', () => {
             seconds = isCountdown ? goalSeconds : 0;
             updateTimerDisplay();
         });
 
         document.getElementById('btn-goal').addEventListener('click', () => {
-            let userInput = prompt("Digite o tempo da meta em minutos (ex: 5).\nDeixe em branco para voltar ao cronômetro normal:");
+            let userInput = prompt("Tempo em minutos (ex: 5). Branco para cronômetro normal:");
             
             if (userInput !== null && userInput.trim() !== "" && !isNaN(userInput) && userInput > 0) {
                 isCountdown = true;
                 goalSeconds = Math.floor(parseFloat(userInput) * 60);
                 seconds = goalSeconds;
-                document.getElementById('mode-text').innerText = "Modo Contagem Regressiva";
+                document.getElementById('mode-text').innerText = "Meta: " + userInput + " min";
             } else {
                 isCountdown = false;
                 seconds = 0;
@@ -223,16 +209,17 @@
                 this.style.background = '#50c878'; 
                 audioContext.suspend(); 
                 
-                // Força o reset absoluto visual e lógico
+                // Reset visual e lógico
                 document.getElementById('noise-bar').style.width = '0%';
                 currentImageIndex = 0;
+                // Volta para a imagem de índice 0 (que agora é a 1.png)
                 document.getElementById('character-img').src = characterImages[currentCharacter][0];
                 document.getElementById('character-img').style.transform = `scale(1)`;
                 smoothedVolume = 0;
             }
         });
 
-        // Atalho de Teclado (Barra de Espaço)
+        // Atalho (Espaço)
         document.addEventListener('keydown', function(event) {
             if (event.code === 'Space') {
                 event.preventDefault(); 
@@ -240,7 +227,7 @@
             }
         });
 
-        // Função Principal (Inicia Áudio)
+        // Função Principal
         async function iniciarApp() {
             document.getElementById('startOverlay').style.display = 'none';
             isRunning = true;
@@ -276,27 +263,22 @@
                     let sensitivity = parseFloat(sensitivitySlider.value);
                     let volumePercent = Math.min(((rawVolume * sensitivity) / 100) * 100, 100);
 
-                    // Suavização
                     smoothedVolume = (smoothedVolume * 0.85) + (volumePercent * 0.15);
 
-                    // Atualiza Barra
                     noiseBar.style.width = smoothedVolume + '%';
                     if(smoothedVolume > 80) noiseBar.style.background = '#f05a5b';
                     else if(smoothedVolume > 50) noiseBar.style.background = '#ffb74d';
                     else noiseBar.style.background = '#50c878';
 
-                    // Atualiza Personagem
-                    let newImageIndex = Math.floor(smoothedVolume / 10);
+                    let newImageIndex = Math.floor(smoothedVolume / (100 / 12));
                     
-                    // FILTRO DE SILÊNCIO: Se o volume for menor que 5%, força a imagem zero (dormindo)
-                    if (smoothedVolume < 5) newImageIndex = 0;
-                    if (newImageIndex > 9) newImageIndex = 9;
+                    if (smoothedVolume < 4) newImageIndex = 0; // Índice 0 é o arquivo 1.png
+                    if (newImageIndex > 11) newImageIndex = 11; // Índice 11 é o arquivo 12.png
                     if (newImageIndex < 0) newImageIndex = 0;
 
                     if (newImageIndex !== currentImageIndex) {
                         currentImageIndex = newImageIndex;
                         characterImg.src = characterImages[currentCharacter][currentImageIndex];
-                        // Animação ajustada (apenas escala para não sair do centro)
                         characterImg.style.transform = `scale(${1 + (currentImageIndex * 0.03)})`;
                     }
 
