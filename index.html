@@ -5,135 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Professor - Eduardo</title>
     <style>
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { height: 100vh; display: flex; flex-direction: column; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); overflow: hidden; }
 
-        body { 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
-            overflow: hidden; 
-        }
-
-        /* Barra de Navegação - Agora mais fina e clara */
+        /* Barra de Navegação */
         #top-bar {
-            background: rgba(255, 255, 255, 0.95); /* Fundo branco levemente transparente */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 6px 20px; /* Reduzi bastante para a barra ficar fina */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            border-bottom: 1px solid #cbd5e1;
-            transition: all 0.3s ease;
+            padding: 6px 20px;
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 1000;
+            border-bottom: 1px solid #cbd5e1; transition: all 0.3s ease;
         }
 
-        #top-bar label { 
-            font-size: 15px; 
-            font-weight: bold; 
-            color: #000000; /* Letras Pretas */
-        }
+        #top-bar label { font-size: 15px; font-weight: bold; color: #000000; }
 
         select {
-            padding: 6px 12px; /* Menor para não esticar a barra */
-            border-radius: 6px; 
-            font-size: 15px; 
-            font-weight: bold; 
-            cursor: pointer;
-            background: #f1f5f9; /* Fundo cinza bem clarinho */
-            color: #000000; /* Letras pretas */
-            border: 1px solid #94a3b8;
-            outline: none; 
-            transition: 0.2s;
+            padding: 6px 12px; border-radius: 6px; font-size: 15px; font-weight: bold; 
+            cursor: pointer; background: #f1f5f9; color: #000000; 
+            border: 1px solid #94a3b8; outline: none; transition: 0.2s;
         }
+        select:hover { background: #e2e8f0; }
 
-        select:hover { 
-            background: #e2e8f0; 
-        }
-
-        /* Botão para ocultar a barra */
         .hide-btn {
-            background: #ffffff;
-            color: #000000; /* Letras pretas */
-            border: 1px solid #94a3b8;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
+            background: #ffffff; color: #000000; border: 1px solid #94a3b8;
+            padding: 6px 12px; border-radius: 6px; cursor: pointer;
+            font-weight: bold; transition: 0.2s; display: flex; align-items: center; gap: 5px; font-size: 14px;
         }
+        .hide-btn:hover { background: #e2e8f0; }
 
-        .hide-btn:hover {
-            background: #e2e8f0;
-        }
-
-        /* Botão flutuante (Engrenagem) para mostrar a barra novamente */
         #show-menu-btn {
-            position: fixed;
-            top: 8px;
-            right: 15px;
-            background: #ffffff;
-            border: 1px solid #94a3b8;
-            color: #000000;
-            padding: 8px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 2000;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            display: none; /* Escondido por padrão */
-            transition: transform 0.2s;
+            position: fixed; top: 8px; right: 15px; background: #ffffff;
+            border: 1px solid #94a3b8; color: #000000; padding: 8px; border-radius: 50%;
+            cursor: pointer; z-index: 2000; font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: none; transition: transform 0.2s;
         }
+        #show-menu-btn:hover { transform: scale(1.1); background: #f1f5f9; }
 
-        #show-menu-btn:hover {
-            transform: scale(1.1);
-            background: #f1f5f9;
-        }
-
-        /* Tela de Boas-vindas */
         #welcome-screen {
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            padding: 20px;
+            flex-grow: 1; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; padding: 20px;
         }
 
         .welcome-card {
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 24px;
-            padding: 50px; 
-            max-width: 600px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
+            padding: 50px; max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); color: #f8fafc;
         }
-
         .welcome-card h1 { color: #60a5fa; margin-bottom: 15px; }
         .welcome-card p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
 
         /* Iframe */
         iframe {
-            flex-grow: 1; 
-            width: 100%; 
-            height: 100%; 
-            border: none; 
-            background-color: transparent; 
-            display: none;
+            flex-grow: 1; width: 100%; height: 100%; border: none; 
+            background-color: transparent; display: none;
         }
     </style>
 </head>
@@ -158,10 +83,9 @@
         </div>
     </div>
 
-    <iframe id="app-frame" src=""></iframe>
+    <iframe id="app-frame" src="" allow="microphone; autoplay"></iframe>
 
     <script>
-        // Função para trocar a ferramenta
         function changeTool() {
             const selector = document.getElementById('tool-selector');
             const iframe = document.getElementById('app-frame');
@@ -178,17 +102,14 @@
             }
         }
 
-        // Função para Esconder/Mostrar a barra do topo
         function toggleTopBar() {
             const topBar = document.getElementById('top-bar');
             const showBtn = document.getElementById('show-menu-btn');
 
             if (topBar.style.display === 'none') {
-                // Mostra a barra
                 topBar.style.display = 'flex';
                 showBtn.style.display = 'none';
             } else {
-                // Esconde a barra
                 topBar.style.display = 'none';
                 showBtn.style.display = 'block';
             }
