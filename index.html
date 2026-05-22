@@ -18,78 +18,87 @@
             flex-direction: column; 
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
             overflow: hidden; 
-            color: #f8fafc; 
         }
 
-        /* Menu Flutuante (Ocupa o mínimo de espaço) */
-        #floating-menu {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(30, 41, 59, 0.9);
+        /* Barra de Navegação - Agora mais fina e clara */
+        #top-bar {
+            background: rgba(255, 255, 255, 0.95); /* Fundo branco levemente transparente */
             backdrop-filter: blur(10px);
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 6px 20px; /* Reduzi bastante para a barra ficar fina */
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 2000;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-bottom: 1px solid #cbd5e1;
+            transition: all 0.3s ease;
         }
 
-        #floating-menu label { 
-            font-size: 14px; 
+        #top-bar label { 
+            font-size: 15px; 
             font-weight: bold; 
-            color: #cbd5e1; 
+            color: #000000; /* Letras Pretas */
         }
 
         select {
-            padding: 5px 10px; 
-            border-radius: 8px; 
-            font-size: 14px; 
+            padding: 6px 12px; /* Menor para não esticar a barra */
+            border-radius: 6px; 
+            font-size: 15px; 
             font-weight: bold; 
             cursor: pointer;
-            background: #3b82f6; 
-            color: white; 
-            border: none;
+            background: #f1f5f9; /* Fundo cinza bem clarinho */
+            color: #000000; /* Letras pretas */
+            border: 1px solid #94a3b8;
             outline: none; 
+            transition: 0.2s;
         }
 
-        .close-btn {
-            background: #ef476f;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
+        select:hover { 
+            background: #e2e8f0; 
+        }
+
+        /* Botão para ocultar a barra */
+        .hide-btn {
+            background: #ffffff;
+            color: #000000; /* Letras pretas */
+            border: 1px solid #94a3b8;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            transition: 0.2s;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 5px;
+            font-size: 14px;
         }
 
-        /* Botão para mostrar o menu novamente (Escondido no canto superior esquerdo) */
+        .hide-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* Botão flutuante (Engrenagem) para mostrar a barra novamente */
         #show-menu-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 8px;
+            position: fixed;
+            top: 8px;
+            right: 15px;
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            color: #000000;
+            padding: 8px;
+            border-radius: 50%;
             cursor: pointer;
-            z-index: 2001;
-            font-size: 16px;
-            display: none; /* Só aparece quando o menu principal some */
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
+            z-index: 2000;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none; /* Escondido por padrão */
+            transition: transform 0.2s;
+        }
+
+        #show-menu-btn:hover {
+            transform: scale(1.1);
+            background: #f1f5f9;
         }
 
         /* Tela de Boas-vindas */
@@ -111,49 +120,48 @@
             padding: 50px; 
             max-width: 600px; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            color: #f8fafc;
         }
 
         .welcome-card h1 { color: #60a5fa; margin-bottom: 15px; }
         .welcome-card p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
 
-        /* Iframe ocupa a tela toda */
+        /* Iframe */
         iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw; 
-            height: 100vh; 
+            flex-grow: 1; 
+            width: 100%; 
+            height: 100%; 
             border: none; 
             background-color: transparent; 
             display: none;
-            z-index: 10;
         }
     </style>
 </head>
 <body>
 
-    <button id="show-menu-btn" onclick="toggleMenu()" title="Trocar Ferramenta">⚙️</button>
+    <button id="show-menu-btn" onclick="toggleTopBar()" title="Mostrar Menu do Painel">⚙️</button>
 
-    <div id="floating-menu">
-        <label>Painel:</label>
+    <div id="top-bar">
+        <label>Painel de Aula:</label>
         <select id="tool-selector" onchange="changeTool()">
-            <option value="">🏠 Início</option>
-            <option value="ruido.html">🔊 Ruído</option>
-            <option value="quiz.html">🎮 Português</option>
+            <option value="">🏠 Tela Inicial</option>
+            <option value="ruido.html">🔊 Medidor de Ruído</option>
+            <option value="quiz.html">🎮 Jogo de Português</option>
         </select>
-        <button class="close-btn" onclick="toggleMenu()" title="Esconder Menu">X</button>
+        <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
     </div>
 
     <div id="welcome-screen">
         <div class="welcome-card">
             <h1>Olá, Professor! 👋</h1>
-            <p>Selecione a atividade no menu superior flutuante. Você pode fechá-lo para limpar a tela e reabri-lo na engrenagem no canto superior esquerdo.</p>
+            <p>Seu painel interativo está pronto. Selecione a atividade que deseja usar no menu acima para começar a aula.</p>
         </div>
     </div>
 
     <iframe id="app-frame" src=""></iframe>
 
     <script>
+        // Função para trocar a ferramenta
         function changeTool() {
             const selector = document.getElementById('tool-selector');
             const iframe = document.getElementById('app-frame');
@@ -170,16 +178,19 @@
             }
         }
 
-        function toggleMenu() {
-            const menu = document.getElementById('floating-menu');
+        // Função para Esconder/Mostrar a barra do topo
+        function toggleTopBar() {
+            const topBar = document.getElementById('top-bar');
             const showBtn = document.getElementById('show-menu-btn');
 
-            if (menu.style.display === 'none') {
-                menu.style.display = 'flex';
+            if (topBar.style.display === 'none') {
+                // Mostra a barra
+                topBar.style.display = 'flex';
                 showBtn.style.display = 'none';
             } else {
-                menu.style.display = 'none';
-                showBtn.style.display = 'flex';
+                // Esconde a barra
+                topBar.style.display = 'none';
+                showBtn.style.display = 'block';
             }
         }
     </script>
