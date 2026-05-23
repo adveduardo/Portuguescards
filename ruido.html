@@ -136,6 +136,10 @@
         // Variáveis Globais
         let currentCharacter = 'monstro';
         let currentImageIndex = 0;
+        let targetImageIndex = 0;        // índice desejado baseado no volume
+        let lastSpriteChangeTime = 0;
+        const SPRITE_CHANGE_DELAY_MS = 250;  // tempo mínimo entre trocas (mais lento e natural)
+        
         let smoothedVolume = 0;
         let audioContext;
         let analyser;
@@ -212,7 +216,7 @@
                 // Reset visual e lógico
                 document.getElementById('noise-bar').style.width = '0%';
                 currentImageIndex = 0;
-                // Volta para a imagem de índice 0 (que agora é a 1.png)
+                targetImageIndex = 0;
                 document.getElementById('character-img').src = characterImages[currentCharacter][0];
                 document.getElementById('character-img').style.transform = `scale(1)`;
                 smoothedVolume = 0;
@@ -270,16 +274,27 @@
                     else if(smoothedVolume > 50) noiseBar.style.background = '#ffb74d';
                     else noiseBar.style.background = '#50c878';
 
-                    let newImageIndex = Math.floor(smoothedVolume / (100 / 12));
+                    // Calcula o índice alvo baseado no volume (0 a 11)
+                    let newTargetIndex = Math.floor(smoothedVolume / (100 / 12));
+                    if (smoothedVolume < 4) newTargetIndex = 0;
+                    if (newTargetIndex > 11) newTargetIndex = 11;
+                    if (newTargetIndex < 0) newTargetIndex = 0;
                     
-                    if (smoothedVolume < 4) newImageIndex = 0; // Índice 0 é o arquivo 1.png
-                    if (newImageIndex > 11) newImageIndex = 11; // Índice 11 é o arquivo 12.png
-                    if (newImageIndex < 0) newImageIndex = 0;
-
-                    if (newImageIndex !== currentImageIndex) {
-                        currentImageIndex = newImageIndex;
+                    targetImageIndex = newTargetIndex;
+                    
+                    // --- Troca mais lenta e natural: só muda o sprite após um delay e se o índice alvo for diferente do atual ---
+                    const now = Date.now();
+                    if (targetImageIndex !== currentImageIndex && (now - lastSpriteChangeTime) >= SPRITE_CHANGE_DELAY_MS) {
+                        // Move o índice atual em direção ao alvo (apenas 1 passo por vez)
+                        if (targetImageIndex > currentImageIndex) {
+                            currentImageIndex++;
+                        } else if (targetImageIndex < currentImageIndex) {
+                            currentImageIndex--;
+                        }
+                        // Atualiza a imagem e o scale
                         characterImg.src = characterImages[currentCharacter][currentImageIndex];
                         characterImg.style.transform = `scale(${1 + (currentImageIndex * 0.03)})`;
+                        lastSpriteChangeTime = now;
                     }
 
                     requestAnimationFrame(analisarAudio);
