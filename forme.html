@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forme a Palavra</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a;--roxo:#8e44ad}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;user-select:none;-webkit-user-select:none}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .wrap{width:100%;max-width:960px;display:flex;flex-direction:column;align-items:center}
+  .topo{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin:4px 0}
+  .topo select{font:inherit;font-size:1.05rem;padding:8px;border-radius:12px;border:2px solid #ccd;font-weight:bold}
+  #placar{background:#fff;border-radius:999px;padding:8px 16px;font-weight:bold;font-size:1.15rem;box-shadow:0 3px 0 #0001}
+  #figura{font-size:clamp(5rem,18vw,9rem);line-height:1.1;margin:6px 0;cursor:pointer;transition:transform .2s}
+  #figura:active{transform:scale(.92)}
+  #semFigura{font-size:1.2rem;background:#fff;border-radius:16px;padding:16px 22px;margin:10px 0;box-shadow:0 3px 0 #0001}
+  #escrita{font-size:clamp(1.3rem,4vw,2rem);font-weight:bold;letter-spacing:3px;opacity:.55;min-height:1.3em;text-transform:uppercase}
+  #slots{display:flex;gap:clamp(6px,1.5vw,14px);flex-wrap:wrap;justify-content:center;margin:12px 0;min-height:clamp(70px,13vw,104px)}
+  .slot{min-width:clamp(70px,14vw,120px);height:clamp(70px,13vw,104px);border:4px dashed #9aa6bf;border-radius:18px;background:#ffffff88;
+    display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
+  .slot.alvo{background:#fff6cc;border-color:var(--amarelo)}
+  .slot.certo{border:4px solid var(--verde);background:#e3f8ea}
+  .slot.errado{border:4px solid var(--vermelho);background:#ffe3e3;animation:tremer .4s}
+  @keyframes tremer{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  #pecas{display:flex;gap:clamp(8px,1.6vw,16px);flex-wrap:wrap;justify-content:center;margin:12px 0;min-height:clamp(70px,13vw,104px)}
+  .peca{min-width:clamp(70px,14vw,120px);height:clamp(64px,12vw,96px);padding:0 14px;border-radius:18px;background:var(--azul);color:#fff;
+    font-size:clamp(1.8rem,5.5vw,3rem);font-weight:bold;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 0 #1b5fbf;cursor:grab;touch-action:none;text-transform:lowercase}
+  .slot .peca{box-shadow:0 4px 0 #1b5fbf}
+  .peca.flutuando{position:fixed;z-index:30;pointer-events:none;transform:scale(1.1) rotate(-3deg);box-shadow:0 12px 20px #0004;cursor:grabbing}
+  .peca.fantasma{opacity:.25}
+  #msg{font-size:clamp(1.4rem,4.5vw,2.2rem);font-weight:bold;min-height:1.4em;text-align:center}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #btnNova{background:var(--amarelo)}
+  .opcoes{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  .opcoes summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  .opcoes label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  .opcoes input[type=checkbox]{width:22px;height:22px}
+  .opcoes select{font:inherit;padding:6px;border-radius:10px}
+  .dica{font-size:.95rem;opacity:.75;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🧩 Forme a Palavra</h1>
+
+  <div class="topo">
+    <select id="categoria" aria-label="Categoria"></select>
+    <div id="placar">⭐ 0</div>
+  </div>
+
+  <div id="figura" title="Toque para ouvir"></div>
+  <div id="escrita"></div>
+  <div id="slots"></div>
+  <div id="msg"></div>
+  <div id="pecas"></div>
+  <div class="dica">Arraste as sílabas para os espaços (ou toque nelas). Toque numa sílaba já colocada para devolvê-la.</div>
+
+  <div class="acoes">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnSilabas">🐢 Ouvir as sílabas</button>
+    <button id="btnLimpar">↩️ Recomeçar</button>
+    <button id="btnNova">🎲 Nova palavra</button>
+  </div>
+
+  <details class="opcoes">
+    <summary>⚙️ Opções (professor)</summary>
+    <label><input type="checkbox" id="chkEscrita"> Mostrar a palavra escrita como dica</label>
+    <label>Sílabas "intrusas" (para dificultar):
+      <select id="extras"><option value="0" selected>nenhuma</option><option value="1">1</option><option value="2">2</option></select>
+    </label>
+    <label><input type="checkbox" id="chkFalarInicio" checked> Falar a palavra quando ela aparecer</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </details>
+
+  <details class="pp-painel" id="painelLista"></details>
+</div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+
+let item = null, colocadas = [], pontos = 0, fila = [], resolvido = false;
+let idPeca = 0;
+
+function listaValida(){
+  return P.lista($('categoria').value).filter(i => i.silabas && i.silabas.length >= 2);
+}
+function novaPalavra(){
+  const lista = listaValida();
+  if (!lista.length){
+    const prop = $('categoria').value === 'propria';
+    P.avisar(prop ? 'Sua lista está vazia ou sem sílabas (use hífen: ca-va-lo).' : 'Nenhuma palavra nesta categoria.');
+    if (prop) $('painelLista').open = true;
+    return;
+  }
+  fila = fila.filter(i => lista.includes(i));
+  if (!fila.length) fila = P.embaralhar(lista);
+  if (item && fila.length > 1 && fila[0] === item) fila.push(fila.shift());
+  item = fila.shift();
+  resolvido = false;
+  colocadas = item.silabas.map(() => null);
+
+  // peças: sílabas da palavra + intrusas
+  let pecas = item.silabas.map(s => ({id: ++idPeca, s}));
+  const n = +$('extras').value;
+  if (n){
+    const todas = P.BANCO.flatMap(i => i.silabas || []).filter(s => !item.silabas.includes(s));
+    P.embaralhar([...new Set(todas)]).slice(0, n).forEach(s => pecas.push({id: ++idPeca, s}));
+  }
+  // embaralha garantindo que não fique já na ordem certa
+  let emb, tentativas = 0;
+  do { emb = P.embaralhar(pecas); tentativas++; }
+  while (tentativas < 20 && emb.slice(0, item.silabas.length).map(p => p.s).join('') === item.silabas.join(''));
+  estoque = emb;
+
+  $('msg').textContent = '';
+  if (item.emoji){ $('figura').textContent = item.emoji; $('figura').hidden = false; }
+  else { $('figura').textContent = '🔊'; }
+  render();
+  if ($('chkFalarInicio').checked) setTimeout(() => P.falar(item.palavra), 250);
+}
+let estoque = [];
+
+function criarPeca(p){
+  const d = document.createElement('div');
+  d.className = 'peca'; d.textContent = p.s; d.dataset.id = p.id;
+  d.addEventListener('pointerdown', e => iniciarArraste(e, p, d));
+  return d;
+}
+function render(){
+  $('escrita').textContent = $('chkEscrita').checked ? item.palavra : '';
+  const slots = $('slots'); slots.innerHTML = '';
+  colocadas.forEach((p, i) => {
+    const s = document.createElement('div'); s.className = 'slot'; s.dataset.i = i;
+    if (p) s.appendChild(criarPeca(p));
+    slots.appendChild(s);
+  });
+  const box = $('pecas'); box.innerHTML = '';
+  estoque.forEach(p => { if (!colocadas.includes(p)) box.appendChild(criarPeca(p)); });
+}
+
+// ---------- Arrastar / tocar ----------
+let arr = null;
+function iniciarArraste(e, p, el){
+  if (resolvido) return;
+  e.preventDefault();
+  const r = el.getBoundingClientRect();
+  arr = {p, el, x0: e.clientX, y0: e.clientY, dx: e.clientX - r.left, dy: e.clientY - r.top, moveu: false, clone: null, w: r.width, h: r.height, alvo: null};
+  el.setPointerCapture && el.setPointerCapture(e.pointerId);
+  el.addEventListener('pointermove', mover);
+  el.addEventListener('pointerup', soltar);
+  el.addEventListener('pointercancel', cancelar);
+}
+function mover(e){
+  if (!arr) return;
+  if (!arr.moveu && Math.hypot(e.clientX - arr.x0, e.clientY - arr.y0) < 8) return;
+  if (!arr.moveu){
+    arr.moveu = true;
+    arr.clone = arr.el.cloneNode(true);
+    arr.clone.classList.add('flutuando');
+    arr.clone.style.width = arr.w + 'px'; arr.clone.style.height = arr.h + 'px';
+    document.body.appendChild(arr.clone);
+    arr.el.classList.add('fantasma');
+  }
+  arr.clone.style.left = (e.clientX - arr.dx) + 'px';
+  arr.clone.style.top = (e.clientY - arr.dy) + 'px';
+  const alvo = slotEm(e.clientX, e.clientY);
+  document.querySelectorAll('.slot.alvo').forEach(s => s.classList.remove('alvo'));
+  if (alvo) alvo.classList.add('alvo');
+  arr.alvo = alvo;
+}
+function slotEm(x, y){
+  const els = document.elementsFromPoint(x, y);
+  const s = els.find(el => el.classList && el.classList.contains('slot'));
+  if (s) return s;
+  // tolerância: slot mais próximo num raio pequeno
+  let melhor = null, dist = 70;
+  document.querySelectorAll('.slot').forEach(sl => {
+    const r = sl.getBoundingClientRect();
+    const d = Math.hypot(x - (r.left + r.width / 2), y - (r.top + r.height / 2));
+    if (d < dist){ dist = d; melhor = sl; }
+  });
+  return melhor;
+}
+function limparArraste(){
+  if (!arr) return;
+  arr.el.removeEventListener('pointermove', mover);
+  arr.el.removeEventListener('pointerup', soltar);
+  arr.el.removeEventListener('pointercancel', cancelar);
+  if (arr.clone) arr.clone.remove();
+  arr.el.classList.remove('fantasma');
+  document.querySelectorAll('.slot.alvo').forEach(s => s.classList.remove('alvo'));
+  arr = null;
+}
+function cancelar(){ limparArraste(); }
+function soltar(e){
+  if (!arr) return;
+  const {p, moveu} = arr;
+  const naSlot = colocadas.indexOf(p);
+  if (!moveu){
+    // toque: se está no estoque vai para o primeiro espaço vazio; se está num espaço, volta
+    limparArraste();
+    if (naSlot >= 0) colocadas[naSlot] = null;
+    else { const v = colocadas.indexOf(null); if (v >= 0) colocadas[v] = p; }
+    P.somClique(); render(); conferir(); return;
+  }
+  const alvo = arr.alvo;
+  limparArraste();
+  if (alvo){
+    const i = +alvo.dataset.i;
+    const ocupante = colocadas[i];
+    if (naSlot >= 0) colocadas[naSlot] = ocupante;   // troca de lugar
+    colocadas[i] = p;
+    P.somClique();
+  } else if (naSlot >= 0){
+    colocadas[naSlot] = null;  // arrastou para fora: devolve
+  }
+  render(); conferir();
+}
+
+// ---------- Conferência ----------
+function conferir(){
+  if (colocadas.includes(null)) return;
+  const certo = colocadas.every((p, i) => p.s === item.silabas[i]);
+  const slots = document.querySelectorAll('.slot');
+  if (certo){
+    resolvido = true;
+    slots.forEach(s => s.classList.add('certo'));
+    pontos++; $('placar').textContent = '⭐ ' + pontos;
+    $('msg').innerHTML = `🎉 <span style="color:var(--verde)">${item.silabas.join(' - ').toUpperCase()}</span>`;
+    $('escrita').textContent = item.palavra;
+    P.somAcerto(); P.confete(); P.falar(item.palavra);
+    setTimeout(() => { if (resolvido) novaPalavra(); }, 2600);
+  } else {
+    colocadas.forEach((p, i) => { if (p.s !== item.silabas[i]) slots[i].classList.add('errado'); });
+    $('msg').textContent = '🤔 Quase! Leia de novo e troque as sílabas vermelhas.';
+    P.somErro();
+  }
+}
+
+// ---------- Botões ----------
+$('btnNova').onclick = novaPalavra;
+$('btnLimpar').onclick = () => { if (!item || resolvido) return; colocadas = colocadas.map(() => null); $('msg').textContent = ''; render(); };
+$('btnOuvir').onclick = () => item && P.falar(item.palavra);
+$('figura').onclick = () => item && P.falar(item.palavra);
+$('btnSilabas').onclick = () => item && P.falarSilabas(item);
+$('categoria').onchange = () => { fila = []; novaPalavra(); };
+$('extras').onchange = novaPalavra;
+$('chkEscrita').onchange = () => item && render();
+$('chkSom').onchange = () => P.som = $('chkSom').checked;
+
+P.preencherCategorias($('categoria'), {exigirSilabas: true});
+P.montarPainelLista($('painelLista'), {exigirSilabas: true, aoMudar: () => P.preencherCategorias($('categoria'), {exigirSilabas: true})});
+novaPalavra();
+</script>
+</body>
+</html>

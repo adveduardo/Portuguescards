@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forca de Palavras</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;user-select:none}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  button:disabled{cursor:default}
+  .wrap{width:100%;max-width:960px;display:flex;flex-direction:column;align-items:center}
+  .topo{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin:4px 0}
+  .topo select{font:inherit;font-size:1.05rem;padding:8px;border-radius:12px;border:2px solid #ccd;font-weight:bold}
+  #placar{background:#fff;border-radius:999px;padding:8px 16px;font-weight:bold;font-size:1.15rem;box-shadow:0 3px 0 #0001}
+  #baloes{font-size:clamp(2.2rem,7vw,3.6rem);letter-spacing:4px;min-height:1.3em;margin:6px 0;text-align:center}
+  #baloes span{display:inline-block;transition:transform .3s,opacity .3s}
+  #baloes span.estourou{transform:scale(.6);opacity:.35}
+  #vidas{font-size:1rem;opacity:.8}
+  #dica{background:#fff;border-radius:18px;padding:8px 18px;margin:6px 0;font-size:1.15rem;text-align:center;min-height:1.6em;box-shadow:0 3px 0 #0001}
+  #dica .emoji{font-size:2.6rem;vertical-align:middle}
+  #palavra{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(6px,1.2vw,12px);margin:14px 0}
+  .letra{width:clamp(38px,8vw,70px);height:clamp(50px,10vw,86px);border-bottom:5px solid var(--texto);display:flex;align-items:flex-end;justify-content:center;
+    font-size:clamp(2rem,6.5vw,3.8rem);font-weight:bold;text-transform:uppercase;line-height:1.1}
+  .letra.espaco{border-bottom:none;width:clamp(14px,3vw,30px)}
+  .letra.revelada{animation:pop .3s}
+  .letra.perdida{color:var(--vermelho)}
+  @keyframes pop{50%{transform:scale(1.3)}}
+  #teclado{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;width:min(96vw,760px);margin:8px 0}
+  #teclado button{padding:0;height:clamp(46px,8vw,62px);font-size:clamp(1.3rem,3.6vw,1.9rem);border-radius:12px}
+  #teclado button.certa{background:var(--verde);color:#fff}
+  #teclado button.errada{background:#c8ccd6;color:#fff}
+  #msg{font-size:clamp(1.4rem,4.5vw,2.2rem);font-weight:bold;min-height:1.4em;text-align:center}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #btnNova{background:var(--amarelo)}
+  .opcoes{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  .opcoes summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  .opcoes label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  .opcoes input[type=checkbox]{width:22px;height:22px}
+  .opcoes select{font:inherit;padding:6px;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔤 Forca de Palavras</h1>
+
+  <div class="topo">
+    <select id="categoria" aria-label="Categoria"></select>
+    <div id="placar">⭐ 0</div>
+  </div>
+
+  <div id="baloes"></div>
+  <div id="vidas"></div>
+  <div id="dica"></div>
+  <div id="palavra"></div>
+  <div id="msg"></div>
+  <div id="teclado"></div>
+
+  <div class="acoes">
+    <button id="btnNova">🎲 Nova palavra</button>
+    <button id="btnDica">💡 Dica</button>
+    <button id="btnOuvir">🔊 Ouvir a palavra</button>
+  </div>
+
+  <details class="opcoes">
+    <summary>⚙️ Opções (professor)</summary>
+    <label>Chances:
+      <select id="chances"><option>4</option><option selected>6</option><option>8</option><option>10</option></select>
+    </label>
+    <label><input type="checkbox" id="chkFigura" checked> Mostrar a figura desde o início</label>
+    <label><input type="checkbox" id="chkPrimeira"> Já mostrar a primeira letra</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p style="font-size:.92rem;opacity:.8">As letras com acento aparecem ao tocar a letra sem acento (A revela Á, Ã, Â; C revela Ç). Também dá para usar o teclado do computador.</p>
+  </details>
+
+  <details class="pp-painel" id="painelLista"></details>
+</div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+const LETRAS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const base = c => c.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
+
+let item = null, chars = [], tentadas = new Set(), erros = 0, maxErros = 6, fim = false, pontos = 0, dicaUsada = false, fila = [];
+
+function novaPalavra(){
+  const cat = $('categoria').value;
+  const lista = P.lista(cat).filter(i => /^[\p{L} ]+$/u.test(i.palavra) && i.palavra.length >= 2);
+  if (!lista.length){
+    P.avisar(cat === 'propria' ? 'Sua lista está vazia. Abra "Minha lista" abaixo.' : 'Nenhuma palavra nesta categoria.');
+    if (cat === 'propria') $('painelLista').open = true;
+    return;
+  }
+  // evita repetir até passar por todas
+  fila = fila.filter(i => lista.includes(i));
+  if (!fila.length) fila = P.embaralhar(lista);
+  if (item && fila.length > 1 && fila[0] === item) fila.push(fila.shift());
+  item = fila.shift();
+  chars = Array.from(item.palavra);
+  tentadas = new Set(); erros = 0; fim = false; dicaUsada = false;
+  maxErros = +$('chances').value;
+  if ($('chkPrimeira').checked) tentadas.add(base(chars[0]));
+  $('msg').textContent = '';
+  montarTeclado(); render(true);
+}
+
+function montarTeclado(){
+  const t = $('teclado'); t.innerHTML = '';
+  LETRAS.forEach(L => {
+    const b = document.createElement('button'); b.textContent = L; b.dataset.l = L;
+    b.onclick = () => tentar(L);
+    t.appendChild(b);
+  });
+  atualizarTeclado();
+}
+function atualizarTeclado(){
+  const alvo = new Set(chars.map(base));
+  document.querySelectorAll('#teclado button').forEach(b => {
+    const L = b.dataset.l, usada = tentadas.has(L);
+    b.disabled = usada || fim;
+    b.className = usada ? (alvo.has(L) ? 'certa' : 'errada') : '';
+  });
+}
+
+function render(nova){
+  const pal = $('palavra'); pal.innerHTML = '';
+  chars.forEach(c => {
+    const d = document.createElement('div');
+    if (c === ' '){ d.className = 'letra espaco'; pal.appendChild(d); return; }
+    const visivel = tentadas.has(base(c));
+    d.className = 'letra' + (visivel && !nova ? ' revelada' : '') + (!visivel && fim ? ' perdida' : '');
+    d.textContent = visivel || fim ? c : '';
+    pal.appendChild(d);
+  });
+  // balões
+  const b = $('baloes'); b.innerHTML = '';
+  for (let i = 0; i < maxErros; i++){
+    const s = document.createElement('span');
+    s.textContent = i < maxErros - erros ? '🎈' : '💥';
+    if (i >= maxErros - erros) s.className = 'estourou';
+    b.appendChild(s);
+  }
+  $('vidas').textContent = fim ? '' : `Chances: ${maxErros - erros}`;
+  // dica
+  const mostraFig = $('chkFigura').checked || dicaUsada || fim;
+  const partes = [];
+  if (mostraFig && item.emoji) partes.push(`<span class="emoji">${escapar(item.emoji)}</span>`);
+  partes.push(`${chars.filter(c => c !== ' ').length} letras`);
+  if (item.silabas && (dicaUsada || fim)) partes.push(`${item.silabas.length} sílabas`);
+  if (item.dica && (dicaUsada || fim)) partes.push(escapar(item.dica));
+  $('dica').innerHTML = partes.join(' • ');
+  atualizarTeclado();
+  $('btnOuvir').style.opacity = fim ? 1 : .5;
+}
+const escapar = t => t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function tentar(L){
+  if (fim || tentadas.has(L) || !item) return;
+  tentadas.add(L);
+  const acertou = chars.some(c => base(c) === L);
+  if (acertou) P.tom(700, .1, 'triangle', .14);
+  else { erros++; P.tom(200, .25, 'sawtooth', .07); }
+  const ganhou = chars.every(c => c === ' ' || tentadas.has(base(c)));
+  if (ganhou){
+    fim = true; pontos++; $('placar').textContent = '⭐ ' + pontos;
+    $('msg').innerHTML = `🎉 Muito bem! <span style="color:var(--verde)">${item.palavra.toUpperCase()}</span>`;
+    P.somAcerto(); P.confete(); P.falar(item.palavra);
+  } else if (erros >= maxErros){
+    fim = true;
+    $('msg').innerHTML = `😅 Era: <span style="color:var(--vermelho)">${item.palavra.toUpperCase()}</span>`;
+    P.somErro(); P.falar('A palavra era ' + item.palavra);
+  }
+  render(false);
+}
+
+$('btnNova').onclick = novaPalavra;
+$('btnDica').onclick = () => {
+  if (!item || fim) return;
+  dicaUsada = true;
+  // revela uma letra que ainda não apareceu
+  const faltam = [...new Set(chars.filter(c => c !== ' ' && !tentadas.has(base(c))).map(base))];
+  if (faltam.length > 1) tentar(faltam[Math.floor(Math.random() * faltam.length)]);
+  else render(false);
+};
+$('btnOuvir').onclick = () => { if (!item) return; if (!fim) return P.avisar('A palavra pode ser ouvida quando a rodada terminar 😉'); P.falar(item.palavra); };
+$('categoria').onchange = novaPalavra;
+$('chances').onchange = novaPalavra;
+$('chkFigura').onchange = () => item && render(false);
+$('chkSom').onchange = () => P.som = $('chkSom').checked;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  const L = base(e.key || '');
+  if (L.length === 1 && L >= 'A' && L <= 'Z') tentar(L);
+  if (e.key === 'Enter' && fim) novaPalavra();
+});
+
+P.preencherCategorias($('categoria'));
+P.montarPainelLista($('painelLista'), {aoMudar: () => P.preencherCategorias($('categoria'))});
+novaPalavra();
+</script>
+</body>
+</html>

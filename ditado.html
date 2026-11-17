@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ditado Falado</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;user-select:none}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  button:disabled{opacity:.45;cursor:default}
+  .wrap{width:100%;max-width:1000px;display:flex;flex-direction:column;align-items:center}
+  .cartao{background:#fff;border-radius:24px;padding:16px 20px;box-shadow:0 5px 0 #0001;width:min(94vw,760px);margin:8px 0}
+  .cartao label{display:flex;align-items:center;gap:10px;margin:10px 0;font-size:1.1rem;flex-wrap:wrap}
+  .cartao select{font:inherit;font-size:1.05rem;padding:7px;border-radius:12px;border:2px solid #ccd}
+  .cartao input[type=checkbox]{width:22px;height:22px}
+  #btnComecar{background:var(--verde);color:#fff;font-size:1.4rem;padding:16px 30px;margin-top:6px}
+  /* Durante o ditado */
+  #numero{font-size:clamp(5rem,22vw,11rem);font-weight:bold;line-height:1;color:var(--azul);margin:4px 0;text-shadow:0 6px 0 #0001}
+  #de{font-size:clamp(1.1rem,3vw,1.5rem);opacity:.75}
+  #figuraDitado{font-size:clamp(3rem,10vw,5rem);min-height:1.2em;margin:4px 0}
+  #barra{width:min(90vw,600px);height:14px;background:#fff;border-radius:999px;overflow:hidden;margin:10px 0;box-shadow:inset 0 2px 4px #0002}
+  #barraFill{height:100%;width:0;background:var(--azul);transition:width .3s}
+  .grandes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+  .grandes button{font-size:1.35rem;padding:16px 24px}
+  #btnProxima{background:var(--amarelo)}
+  #btnRepetir{background:var(--azul);color:#fff}
+  #falando{font-size:1.4rem;min-height:1.6em;color:var(--azul);font-weight:bold}
+  /* Correção */
+  #lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px;width:100%;margin:10px 0}
+  .linha{background:#fff;border-radius:18px;padding:10px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 0 #0001;cursor:pointer;animation:entrar .35s backwards}
+  @keyframes entrar{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
+  .linha .n{background:var(--azul);color:#fff;border-radius:50%;min-width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem}
+  .linha .p{font-size:clamp(1.6rem,4.5vw,2.3rem);font-weight:bold;flex:1;word-break:break-word}
+  .linha .s{display:block;font-size:1rem;font-weight:normal;opacity:.65;letter-spacing:1px}
+  .linha .e{font-size:2rem}
+  .dica{font-size:.95rem;opacity:.75;text-align:center}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔊 Ditado Falado</h1>
+
+  <!-- 1) Preparação -->
+  <section id="telaConfig" class="cartao">
+    <label>Palavras de:
+      <select id="categoria"></select>
+    </label>
+    <label>Quantidade:
+      <select id="quantidade"><option>5</option><option selected>10</option><option>15</option><option>20</option><option value="0">todas da lista</option></select>
+    </label>
+    <label>Velocidade da voz:
+      <select id="velocidade"><option value="0.6">🐢 bem devagar</option><option value="0.75" selected>🙂 devagar</option><option value="0.9">🐇 normal</option></select>
+    </label>
+    <label>Cada palavra é falada:
+      <select id="repeticoes"><option value="1">1 vez</option><option value="2" selected>2 vezes</option><option value="3">3 vezes</option></select>
+    </label>
+    <label><input type="checkbox" id="chkOrdem" checked> Sortear a ordem das palavras</label>
+    <label><input type="checkbox" id="chkFigura"> Mostrar a figura como dica (ditado mais fácil)</label>
+    <label><input type="checkbox" id="chkSilabas"> Falar também separando as sílabas</label>
+    <label><input type="checkbox" id="chkAuto"> Avançar sozinho a cada
+      <select id="intervalo"><option value="10">10 s</option><option value="15" selected>15 s</option><option value="20">20 s</option><option value="30">30 s</option></select>
+    </label>
+    <div style="text-align:center"><button id="btnComecar">▶️ Começar ditado</button></div>
+    <p class="dica">As crianças escrevem no caderno. No final aparece a correção com todas as palavras.</p>
+  </section>
+
+  <!-- 2) Ditado -->
+  <section id="telaDitado" hidden style="display:flex;flex-direction:column;align-items:center;width:100%">
+    <div id="numero">1</div>
+    <div id="de">palavra 1 de 10</div>
+    <div id="figuraDitado"></div>
+    <div id="falando"></div>
+    <div id="barra"><div id="barraFill"></div></div>
+    <div class="grandes">
+      <button id="btnAnterior">⬅️ Anterior</button>
+      <button id="btnRepetir">🔁 Repetir</button>
+      <button id="btnProxima">Próxima ➡️</button>
+    </div>
+    <div class="grandes">
+      <button id="btnPausar">⏸️ Pausar</button>
+      <button id="btnCorrigir">✅ Ir para a correção</button>
+      <button id="btnSair">✖️ Encerrar</button>
+    </div>
+  </section>
+
+  <!-- 3) Correção -->
+  <section id="telaCorrecao" hidden style="display:flex;flex-direction:column;align-items:center;width:100%">
+    <h2 style="margin:6px 0">✅ Correção</h2>
+    <p class="dica">Toque numa palavra para ouvi-la de novo.</p>
+    <div id="lista"></div>
+    <div class="grandes">
+      <button id="btnRefazer">🔁 Refazer o mesmo ditado</button>
+      <button id="btnNovo">🆕 Novo ditado</button>
+      <button id="btnSalvarDitado">💾 Salvar este ditado (JSON)</button>
+    </div>
+  </section>
+
+  <details class="pp-painel" id="painelLista"></details>
+</div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+
+let itens = [], idx = 0, timerAuto = null, pausado = false, sessao = 0;
+
+function tela(nome){
+  ['telaConfig','telaDitado','telaCorrecao'].forEach(t => $(t).hidden = t !== nome);
+  $('painelLista').hidden = nome !== 'telaConfig';
+}
+
+function comecar(lista){
+  if (!lista){
+    const cat = $('categoria').value;
+    let base = P.lista(cat);
+    if (!base.length){
+      P.avisar(cat === 'propria' ? 'Sua lista está vazia. Abra "Minha lista" abaixo.' : 'Nenhuma palavra nesta categoria.');
+      if (cat === 'propria') $('painelLista').open = true;
+      return;
+    }
+    if ($('chkOrdem').checked) base = P.embaralhar(base);
+    const q = +$('quantidade').value;
+    lista = q ? base.slice(0, q) : base;
+  }
+  itens = lista; idx = 0; pausado = false; sessao++;
+  tela('telaDitado');
+  mostrar();
+}
+
+function mostrar(){
+  clearTimeout(timerAuto);
+  const it = itens[idx];
+  $('numero').textContent = idx + 1;
+  $('de').textContent = `palavra ${idx + 1} de ${itens.length}`;
+  $('figuraDitado').textContent = $('chkFigura').checked ? (it.emoji || '') : '';
+  $('barraFill').style.width = ((idx + 1) / itens.length * 100) + '%';
+  $('btnAnterior').disabled = idx === 0;
+  $('btnProxima').textContent = idx === itens.length - 1 ? 'Terminar ✅' : 'Próxima ➡️';
+  $('btnPausar').hidden = !$('chkAuto').checked;
+  $('btnPausar').textContent = pausado ? '▶️ Continuar' : '⏸️ Pausar';
+  P.tom(660, .12, 'triangle', .12);
+  setTimeout(() => ditar(it, sessao, idx), 450);
+}
+
+// Fala a palavra N vezes (com pausa), opcionalmente com as sílabas
+function ditar(it, s, i){
+  if (s !== sessao || i !== idx) return;
+  const vezes = +$('repeticoes').value, rate = +$('velocidade').value;
+  const falas = [];
+  for (let k = 0; k < vezes; k++) falas.push(it.palavra);
+  if ($('chkSilabas').checked && it.silabas) falas.splice(1, 0, it.silabas.join(', '));
+  let k = 0;
+  $('falando').textContent = '🗣️ ouvindo…';
+  (function prox(){
+    if (s !== sessao || i !== idx) return;
+    if (k >= falas.length){ $('falando').textContent = '✏️ escreva no caderno'; agendarAuto(); return; }
+    const texto = falas[k++];
+    // segue quando a voz terminar (ou por tempo, se o navegador não avisar o fim)
+    let feito = false;
+    const seguir = () => { if (feito) return; feito = true; setTimeout(prox, 1100); };
+    P.falar(texto, {rate: texto.includes(',') ? Math.min(rate, .65) : rate, aoTerminar: seguir});
+    setTimeout(seguir, 2500 + texto.length * 220 / rate);
+  })();
+}
+function agendarAuto(){
+  clearTimeout(timerAuto);
+  if ($('chkAuto').checked && !pausado) timerAuto = setTimeout(proxima, +$('intervalo').value * 1000);
+}
+function proxima(){
+  if (idx < itens.length - 1){ idx++; sessao++; mostrar(); }
+  else corrigir();
+}
+function corrigir(){
+  clearTimeout(timerAuto); sessao++;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  tela('telaCorrecao');
+  const l = $('lista'); l.innerHTML = '';
+  itens.forEach((it, i) => {
+    const d = document.createElement('div'); d.className = 'linha'; d.style.animationDelay = (i * .06) + 's';
+    const n = document.createElement('div'); n.className = 'n'; n.textContent = i + 1;
+    const p = document.createElement('div'); p.className = 'p'; p.textContent = it.palavra;
+    if (it.silabas){ const s = document.createElement('span'); s.className = 's'; s.textContent = it.silabas.join(' - '); p.appendChild(s); }
+    const e = document.createElement('div'); e.className = 'e'; e.textContent = it.emoji || '';
+    d.append(n, p, e);
+    d.onclick = () => P.falar(it.palavra, {rate: +$('velocidade').value});
+    l.appendChild(d);
+  });
+  P.somAcerto();
+}
+
+// ---------- Botões ----------
+$('btnComecar').onclick = () => comecar();
+$('btnProxima').onclick = proxima;
+$('btnAnterior').onclick = () => { if (idx > 0){ idx--; sessao++; mostrar(); } };
+$('btnRepetir').onclick = () => { clearTimeout(timerAuto); sessao++; ditar(itens[idx], sessao, idx); };
+$('btnPausar').onclick = () => {
+  pausado = !pausado;
+  $('btnPausar').textContent = pausado ? '▶️ Continuar' : '⏸️ Pausar';
+  if (pausado) clearTimeout(timerAuto); else agendarAuto();
+};
+$('btnCorrigir').onclick = () => { if (confirm('Ir para a correção agora?')) corrigir(); };
+$('btnSair').onclick = () => {
+  if (!confirm('Encerrar o ditado?')) return;
+  clearTimeout(timerAuto); sessao++;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  tela('telaConfig');
+};
+$('btnRefazer').onclick = () => comecar(itens.slice());
+$('btnNovo').onclick = () => tela('telaConfig');
+$('btnSalvarDitado').onclick = () => P.baixar('ditado.json', {
+  titulo: 'Ditado',
+  palavras: itens.map(i => { const o = {palavra: i.palavra}; if (i.silabas) o.silabas = i.silabas.join('-'); if (i.emoji) o.emoji = i.emoji; return o; })
+});
+document.addEventListener('keydown', e => {
+  if ($('telaDitado').hidden || ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowRight' || e.code === 'Space'){ e.preventDefault(); proxima(); }
+  if (e.key === 'ArrowLeft') $('btnAnterior').click();
+  if (e.key === 'r' || e.key === 'R') $('btnRepetir').click();
+});
+
+P.preencherCategorias($('categoria'));
+P.montarPainelLista($('painelLista'), {aoMudar: () => P.preencherCategorias($('categoria'))});
+tela('telaConfig');
+</script>
+</body>
+</html>

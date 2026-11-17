@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leitura com Destaque</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--amarelo:#ffe066;--fonte:46px}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .wrap{width:100%;max-width:1200px;display:flex;flex-direction:column;align-items:center}
+  .barra{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;background:#fff;border-radius:20px;padding:10px 14px;box-shadow:0 4px 0 #0001;margin:4px 0}
+  .barra label{display:flex;align-items:center;gap:6px;font-weight:bold}
+  .barra input[type=range]{width:130px}
+  .barra select{font:inherit;padding:6px;border-radius:10px;border:2px solid #ccd}
+  #btnPlay{background:var(--verde);color:#fff;font-size:1.25rem;min-width:150px}
+  #btnPlay.pausar{background:#f1c40f;color:var(--texto)}
+  #titulo{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:bold;margin:10px 0 0;text-align:center}
+  #texto{background:#fffdf6;border-radius:24px;padding:clamp(16px,3vw,36px);margin:10px 0;width:100%;box-shadow:0 6px 0 #0001;
+    font-size:var(--fonte);line-height:1.75;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;max-height:68vh;overflow-y:auto;scroll-behavior:smooth}
+  #texto.maiusculas{text-transform:uppercase}
+  .w{border-radius:10px;padding:0 4px;margin:0 -2px;cursor:pointer;transition:background .15s,color .15s,opacity .2s}
+  .w:hover{background:#eef3ff}
+  .w.lida{opacity:.38}
+  .w.atual{background:var(--amarelo);box-shadow:0 0 0 4px var(--amarelo);opacity:1}
+  #texto.semEsmaecer .w.lida{opacity:1}
+  #progresso{width:100%;height:10px;background:#fff;border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 4px #0002}
+  #progFill{height:100%;width:0;background:var(--azul);transition:width .2s}
+  #info{font-size:1rem;opacity:.8;margin:6px 0;text-align:center}
+  details{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(96vw,960px)}
+  summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  details label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  details input[type=checkbox]{width:22px;height:22px}
+  details input[type=text]{font:inherit;font-size:1.05rem;padding:8px;border-radius:10px;border:2px solid #ccd;width:min(100%,460px)}
+  textarea{width:100%;min-height:180px;font:inherit;font-size:1.05rem;padding:10px;border-radius:12px;border:2px solid #ccd;resize:vertical}
+  .acoes{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .acoes button{font-size:.95rem;padding:9px 12px}
+  .dica{font-size:.92rem;opacity:.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📖 Leitura com Destaque</h1>
+
+  <div class="barra">
+    <button id="btnPlay">▶️ Ler</button>
+    <button id="btnVoltar" title="Voltar ao início">⏮️ Início</button>
+    <button id="btnAnt" title="Palavra anterior">⬅️</button>
+    <button id="btnProx" title="Próxima palavra">➡️</button>
+    <label>🐢 <input type="range" id="ppm" min="15" max="180" step="5" value="50"> 🐇 <span id="ppmTxt">50</span> palavras/min</label>
+    <label>🔠 <input type="range" id="tamanho" min="22" max="96" step="2" value="46"></label>
+    <label><input type="checkbox" id="chkVoz"> 🔊 Ler em voz alta</label>
+  </div>
+
+  <div id="titulo"></div>
+  <div id="texto" aria-live="off"></div>
+  <div id="progresso"><div id="progFill"></div></div>
+  <div id="info">Toque em qualquer palavra para começar dali. Tecla <b>espaço</b> = ler / pausar.</div>
+
+  <details id="painelTexto">
+    <summary>✏️ Escolher ou colar um texto</summary>
+    <label>Textos prontos:
+      <select id="exemplos">
+        <option value="">— escolha —</option>
+      </select>
+    </label>
+    <label>Título: <input type="text" id="inTitulo" placeholder="(opcional)"></label>
+    <textarea id="inTexto" placeholder="Cole ou digite o texto aqui…"></textarea>
+    <div class="acoes">
+      <button id="btnUsar">✅ Usar este texto</button>
+      <button id="btnAbrir">📂 Abrir arquivo (.txt ou .json)</button>
+      <button id="btnSalvar">💾 Salvar texto (JSON)</button>
+    </div>
+    <input type="file" id="arquivo" accept=".txt,.json,text/plain,application/json" hidden>
+    <p class="dica">JSON aceito: <code>{"titulo": "O gato Tito", "texto": "Tito é um gato…"}</code>. O último texto usado fica salvo neste navegador.</p>
+  </details>
+
+  <details>
+    <summary>⚙️ Opções de leitura</summary>
+    <label><input type="checkbox" id="chkPausas" checked> Pausar um pouco mais na vírgula e no ponto</label>
+    <label><input type="checkbox" id="chkEsmaecer" checked> Deixar mais clarinhas as palavras já lidas</label>
+    <label><input type="checkbox" id="chkMaiusculas"> Mostrar tudo em LETRA DE FORMA (maiúsculas)</label>
+    <label><input type="checkbox" id="chkLongas" checked> Dar mais tempo para palavras compridas</label>
+    <p class="dica">Com "Ler em voz alta" ligado, o destaque acompanha a voz do computador (a velocidade da voz segue o controle 🐢/🐇). Sem a voz, o destaque anda no ritmo escolhido para a turma ler junto.</p>
+  </details>
+</div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+const CHAVE = 'painel_leitura';
+
+const EXEMPLOS = [
+  {titulo:'O gato Tito', texto:'Tito é um gato pequeno e muito curioso. Ele gosta de pular na janela para ver os passarinhos.\n\nUm dia, Tito viu uma borboleta azul e correu pelo jardim. A borboleta voou alto, e Tito ficou olhando para o céu. Que gato sonhador!'},
+  {titulo:'Dia de chuva', texto:'Pingo, pingo, pingo! A chuva chegou na escola. As crianças olharam pela janela e viram poças no pátio.\n\nQuando a chuva parou, apareceu um arco-íris colorido. Todos bateram palmas de alegria.'},
+  {titulo:'O lanche da Lua', texto:'Lua adora a hora do lanche. Hoje ela trouxe banana, pão e suco de laranja.\n\nO amigo Caio esqueceu a lancheira em casa. Lua dividiu o pão com ele. Os dois riram e comeram juntos. Dividir é muito bom!'},
+  {titulo:'A semente', texto:'Bia plantou uma semente num vaso. Todo dia ela colocava um pouco de água e deixava o vaso no sol.\n\nDepois de uma semana, nasceu um brotinho verde. Bia ficou muito feliz e deu um nome para a plantinha: Feijãozinho!'}
+];
+
+let palavras = [];   // {el, inicio, fim, texto}
+let atual = -1, rodando = false, timer = null, usandoVoz = false, sessaoVoz = 0;
+let textoAtual = '', tituloAtual = '';
+
+// ---------- Montagem do texto ----------
+function montar(texto, titulo){
+  parar();
+  textoAtual = texto; tituloAtual = titulo || '';
+  $('titulo').textContent = tituloAtual;
+  const box = $('texto'); box.innerHTML = ''; palavras = [];
+  const re = /\S+/g; let m, ultimo = 0;
+  while ((m = re.exec(texto))){
+    const entre = texto.slice(ultimo, m.index);
+    adicionarEspaco(box, entre);
+    const s = document.createElement('span'); s.className = 'w'; s.textContent = m[0];
+    const i = palavras.length; s.onclick = () => irPara(i, true);
+    box.appendChild(s);
+    palavras.push({el: s, inicio: m.index, fim: m.index + m[0].length, texto: m[0]});
+    ultimo = m.index + m[0].length;
+  }
+  atual = -1; atualizarDestaque();
+  P.guardar(CHAVE, {titulo: tituloAtual, texto});
+}
+function adicionarEspaco(box, entre){
+  if (!entre) return;
+  const partes = entre.split('\n');
+  partes.forEach((p, k) => {
+    if (k > 0) box.appendChild(document.createElement('br'));
+    if (p) box.appendChild(document.createTextNode(' '));
+  });
+}
+
+function atualizarDestaque(){
+  palavras.forEach((p, i) => {
+    p.el.classList.toggle('lida', i < atual);
+    p.el.classList.toggle('atual', i === atual);
+  });
+  $('progFill').style.width = palavras.length ? ((atual + 1) / palavras.length * 100) + '%' : '0';
+  const el = palavras[atual] && palavras[atual].el;
+  if (el){
+    const box = $('texto'), r = el.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.top < b.top + 20 || r.bottom > b.bottom - 20) box.scrollTop += (r.top - b.top) - b.height / 3;
+  }
+}
+
+// ---------- Ritmo (sem voz) ----------
+function duracao(i){
+  const ppm = +$('ppm').value;
+  let ms = 60000 / ppm;
+  const w = palavras[i].texto;
+  if ($('chkLongas').checked){ const n = w.replace(/[^\p{L}]/gu, '').length; if (n > 6) ms *= 1 + (n - 6) * .08; }
+  if ($('chkPausas').checked){
+    if (/[.!?…]["”')]*$/.test(w)) ms *= 2;
+    else if (/[,;:]["”')]*$/.test(w)) ms *= 1.5;
+  }
+  return ms;
+}
+function passo(){
+  if (!rodando) return;
+  if (atual >= palavras.length - 1){ terminar(); return; }
+  atual++; atualizarDestaque();
+  timer = setTimeout(passo, duracao(atual));
+}
+
+// ---------- Voz ----------
+function lerComVoz(desde){
+  usandoVoz = true; const s = ++sessaoVoz;
+  const inicio = palavras[desde].inicio;
+  const trecho = textoAtual.slice(inicio);
+  const rate = Math.max(.5, Math.min(1.6, +$('ppm').value / 110));
+  let recebeuLimite = false;
+  P.falar(trecho, {
+    rate,
+    aoLimite: ev => {
+      if (s !== sessaoVoz || ev.name === 'sentence') return;
+      recebeuLimite = true;
+      const pos = inicio + ev.charIndex;
+      let i = palavras.findIndex(p => p.fim > pos);
+      if (i >= 0 && i !== atual){ atual = i; atualizarDestaque(); }
+    },
+    aoTerminar: () => { if (s === sessaoVoz && rodando) terminar(); }
+  });
+  // se o navegador não informa as palavras faladas, o destaque anda pelo ritmo
+  setTimeout(() => {
+    if (s === sessaoVoz && rodando && !recebeuLimite){ usandoVoz = false; clearTimeout(timer); timer = setTimeout(passo, 0); }
+  }, 1500);
+}
+
+// ---------- Controles ----------
+function tocar(){
+  if (!palavras.length) return;
+  if (atual >= palavras.length - 1) atual = -1;
+  rodando = true;
+  $('btnPlay').textContent = '⏸️ Pausar'; $('btnPlay').classList.add('pausar');
+  if ($('chkVoz').checked && 'speechSynthesis' in window){
+    const desde = Math.max(0, atual);
+    atual = desde; atualizarDestaque();
+    lerComVoz(desde);
+  } else {
+    usandoVoz = false;
+    if (atual < 0){ atual = 0; atualizarDestaque(); timer = setTimeout(passo, duracao(0)); }
+    else passo();
+  }
+}
+function parar(){
+  rodando = false; clearTimeout(timer); sessaoVoz++;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  $('btnPlay').textContent = '▶️ Ler'; $('btnPlay').classList.remove('pausar');
+}
+function terminar(){
+  parar();
+  atual = palavras.length - 1; atualizarDestaque();
+  $('btnPlay').textContent = '🔁 Ler de novo';
+  P.somAcerto();
+}
+function irPara(i, comecar){
+  const estava = rodando;
+  parar();
+  atual = Math.max(-1, Math.min(palavras.length - 1, i));
+  atualizarDestaque();
+  if (comecar || estava){
+    if (!$('chkVoz').checked){ rodando = true; $('btnPlay').textContent = '⏸️ Pausar'; $('btnPlay').classList.add('pausar'); timer = setTimeout(passo, duracao(Math.max(0, atual))); }
+    else tocar();
+  }
+}
+
+$('btnPlay').onclick = () => rodando ? parar() : tocar();
+$('btnVoltar').onclick = () => { parar(); atual = -1; atualizarDestaque(); $('texto').scrollTop = 0; };
+$('btnAnt').onclick = () => irPara(atual - 1, false);
+$('btnProx').onclick = () => irPara(atual + 1, false);
+$('ppm').oninput = () => { $('ppmTxt').textContent = $('ppm').value; };
+$('ppm').onchange = () => { if (rodando && usandoVoz){ parar(); tocar(); } };
+$('tamanho').oninput = () => document.documentElement.style.setProperty('--fonte', $('tamanho').value + 'px');
+$('chkVoz').onchange = () => { if (rodando){ parar(); tocar(); } };
+$('chkEsmaecer').onchange = () => $('texto').classList.toggle('semEsmaecer', !$('chkEsmaecer').checked);
+$('chkMaiusculas').onchange = () => $('texto').classList.toggle('maiusculas', $('chkMaiusculas').checked);
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  if (e.code === 'Space'){ e.preventDefault(); $('btnPlay').click(); }
+  if (e.key === 'ArrowRight') $('btnProx').click();
+  if (e.key === 'ArrowLeft') $('btnAnt').click();
+});
+
+// Painel de texto
+EXEMPLOS.forEach((ex, i) => { const o = document.createElement('option'); o.value = i; o.textContent = ex.titulo; $('exemplos').appendChild(o); });
+$('exemplos').onchange = () => {
+  const ex = EXEMPLOS[+$('exemplos').value]; if (!ex) return;
+  $('inTitulo').value = ex.titulo; $('inTexto').value = ex.texto;
+  montar(ex.texto, ex.titulo);
+};
+$('btnUsar').onclick = () => {
+  const t = $('inTexto').value.trim();
+  if (!t) return P.avisar('Cole ou digite um texto primeiro.');
+  montar(t, $('inTitulo').value.trim());
+  P.avisar('✅ Texto pronto para ler');
+  $('painelTexto').open = false;
+};
+$('btnAbrir').onclick = () => $('arquivo').click();
+$('arquivo').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    let titulo = f.name.replace(/\.[^.]+$/, ''), texto = String(r.result);
+    try{ const d = JSON.parse(texto); if (d && d.texto){ texto = String(d.texto); titulo = d.titulo || titulo; } }catch(err){}
+    $('inTitulo').value = titulo; $('inTexto').value = texto.trim();
+    montar(texto.trim(), titulo);
+  };
+  r.readAsText(f); e.target.value = '';
+};
+$('btnSalvar').onclick = () => {
+  if (!textoAtual) return P.avisar('Não há texto para salvar.');
+  P.baixar((tituloAtual || 'texto').replace(/[^\w-]+/g, '_') + '.json', {titulo: tituloAtual, texto: textoAtual});
+};
+
+// Início
+const salvo = P.ler(CHAVE);
+const inicial = salvo && salvo.texto ? salvo : EXEMPLOS[0];
+$('inTitulo').value = inicial.titulo || ''; $('inTexto').value = inicial.texto;
+montar(inicial.texto, inicial.titulo);
+</script>
+</body>
+</html>

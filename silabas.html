@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Separação de Sílabas</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;user-select:none;-webkit-user-select:none}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .wrap{width:100%;max-width:1000px;display:flex;flex-direction:column;align-items:center}
+  .topo{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin:4px 0}
+  .topo select{font:inherit;font-size:1.05rem;padding:8px;border-radius:12px;border:2px solid #ccd;font-weight:bold}
+  #placar{background:#fff;border-radius:999px;padding:8px 16px;font-weight:bold;font-size:1.15rem;box-shadow:0 3px 0 #0001}
+  #figura{font-size:clamp(4rem,14vw,7rem);line-height:1.1;margin:4px 0;cursor:pointer;min-height:1em}
+  .instr{font-size:1.15rem;text-align:center;margin:4px 0}
+  #palavra{display:flex;align-items:stretch;justify-content:center;flex-wrap:nowrap;background:#fff;border-radius:24px;padding:14px clamp(8px,2vw,20px);
+    margin:10px 0;box-shadow:0 5px 0 #0001;max-width:100%;overflow-x:auto}
+  .ch{font-size:clamp(2.4rem,9vw,5.2rem);font-weight:bold;line-height:1.2;padding:0 1px;text-transform:lowercase;transition:color .3s}
+  .corte{width:clamp(18px,3.6vw,34px);display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:10px;position:relative}
+  .corte::before{content:"";width:4px;height:60%;border-radius:2px;background:#dfe4ee;transition:all .15s}
+  .corte:hover::before{background:#b7c2d8}
+  .corte.ativo::before{background:var(--azul);width:6px;height:90%}
+  .corte.certo::before{background:var(--verde)}
+  .corte.errado::before{background:var(--vermelho)}
+  .corte.faltou::before{background:transparent;border:3px dashed var(--vermelho);width:0;height:80%}
+  #contador{font-size:1.2rem;font-weight:bold;margin:4px 0}
+  #msg{font-size:clamp(1.3rem,4.2vw,2rem);font-weight:bold;min-height:1.4em;text-align:center}
+  #resposta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:6px 0;min-height:10px}
+  .sil{color:#fff;border-radius:14px;padding:6px 16px;font-size:clamp(1.6rem,5vw,2.6rem);font-weight:bold;box-shadow:0 4px 0 #0002;animation:pop .35s backwards}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #btnConferir{background:var(--verde);color:#fff;font-size:1.25rem}
+  #btnNova{background:var(--amarelo)}
+  .opcoes{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  .opcoes summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  .opcoes label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  .opcoes input[type=checkbox]{width:22px;height:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>✍️ Separação de Sílabas</h1>
+
+  <div class="topo">
+    <select id="categoria" aria-label="Categoria"></select>
+    <div id="placar">⭐ 0</div>
+  </div>
+
+  <div id="figura" title="Toque para ouvir"></div>
+  <div class="instr">Toque <b>entre as letras</b> para cortar a palavra em sílabas ✂️</div>
+  <div id="palavra"></div>
+  <div id="contador"></div>
+  <div id="msg"></div>
+  <div id="resposta"></div>
+
+  <div class="acoes">
+    <button id="btnConferir">✅ Conferir</button>
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnBater">👏 Bater palmas</button>
+    <button id="btnNova">🎲 Nova palavra</button>
+  </div>
+
+  <details class="opcoes">
+    <summary>⚙️ Opções (professor)</summary>
+    <label><input type="checkbox" id="chkContador" checked> Mostrar quantas sílabas a criança já marcou</label>
+    <label><input type="checkbox" id="chkFalarInicio" checked> Falar a palavra quando ela aparecer</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p style="font-size:.92rem;opacity:.8">"Bater palmas" fala a palavra sílaba por sílaba, devagar, para a turma acompanhar batendo palmas.</p>
+  </details>
+
+  <details class="pp-painel" id="painelLista"></details>
+</div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+const CORES = ['#e74c3c','#2f80ed','#27ae60','#f39c12','#8e44ad','#16a085','#d35400'];
+
+let item = null, letras = [], cortes = new Set(), corretos = new Set(), pontos = 0, fila = [], resolvido = false, tentativas = 0;
+
+function novaPalavra(){
+  const lista = P.lista($('categoria').value).filter(i => i.silabas && i.silabas.length >= 2 && !i.palavra.includes(' '));
+  if (!lista.length){
+    const prop = $('categoria').value === 'propria';
+    P.avisar(prop ? 'Sua lista está vazia ou sem sílabas (use hífen: ca-va-lo).' : 'Nenhuma palavra nesta categoria.');
+    if (prop) $('painelLista').open = true;
+    return;
+  }
+  fila = fila.filter(i => lista.includes(i));
+  if (!fila.length) fila = P.embaralhar(lista);
+  if (item && fila.length > 1 && fila[0] === item) fila.push(fila.shift());
+  item = fila.shift();
+  letras = Array.from(item.silabas.join(''));
+  // posições corretas de corte: depois do índice (fim de cada sílaba exceto a última)
+  corretos = new Set(); let pos = 0;
+  item.silabas.slice(0, -1).forEach(s => { pos += Array.from(s).length; corretos.add(pos - 1); });
+  cortes = new Set(); resolvido = false; tentativas = 0;
+  $('msg').textContent = ''; $('resposta').innerHTML = '';
+  $('figura').textContent = item.emoji || '🔊';
+  render();
+  if ($('chkFalarInicio').checked) setTimeout(() => P.falar(item.palavra), 250);
+}
+
+function render(marcar){
+  const box = $('palavra'); box.innerHTML = '';
+  let sil = 0;
+  letras.forEach((c, i) => {
+    const s = document.createElement('span'); s.className = 'ch'; s.textContent = c;
+    if (resolvido) s.style.color = CORES[sil % CORES.length];
+    box.appendChild(s);
+    if (corretos.has(i)) sil++;
+    if (i < letras.length - 1){
+      const k = document.createElement('div'); k.className = 'corte';
+      if (cortes.has(i)) k.classList.add('ativo');
+      if (marcar){
+        if (cortes.has(i)) k.classList.add(corretos.has(i) ? 'certo' : 'errado');
+        else if (corretos.has(i) && tentativas >= 2) k.classList.add('faltou');
+      }
+      k.onclick = () => {
+        if (resolvido) return;
+        cortes.has(i) ? cortes.delete(i) : cortes.add(i);
+        P.somClique(); $('msg').textContent = ''; render();
+      };
+      box.appendChild(k);
+    }
+  });
+  const n = cortes.size + 1;
+  $('contador').textContent = $('chkContador').checked || resolvido ? `${n} sílaba${n === 1 ? '' : 's'} marcada${n === 1 ? '' : 's'}` : '';
+}
+
+function partesMarcadas(){
+  const out = []; let atual = '';
+  letras.forEach((c, i) => { atual += c; if (cortes.has(i)){ out.push(atual); atual = ''; } });
+  out.push(atual); return out;
+}
+
+function conferir(){
+  if (!item || resolvido) return;
+  const certo = cortes.size === corretos.size && [...cortes].every(i => corretos.has(i));
+  if (certo){
+    resolvido = true; pontos++; $('placar').textContent = '⭐ ' + pontos;
+    render(true);
+    $('msg').innerHTML = `🎉 Isso! <b>${item.silabas.length}</b> sílabas`;
+    mostrarResposta();
+    P.somAcerto(); P.confete(); P.falarSilabas(item);
+  } else {
+    tentativas++;
+    render(true);
+    const marcadas = partesMarcadas().length;
+    let dica;
+    if (marcadas < item.silabas.length) dica = 'Faltam cortes. Fale a palavra batendo palmas 👏';
+    else if (marcadas > item.silabas.length) dica = 'Cortes demais! Cada sílaba precisa de uma vogal.';
+    else dica = 'O número está certo, mas algum corte está no lugar errado.';
+    $('msg').innerHTML = '🤔 ' + dica + (tentativas >= 2 ? '<br><small>Os tracejados vermelhos mostram onde faltou cortar.</small>' : '');
+    P.somErro();
+  }
+}
+function mostrarResposta(){
+  const r = $('resposta'); r.innerHTML = '';
+  item.silabas.forEach((s, i) => {
+    const d = document.createElement('div'); d.className = 'sil'; d.textContent = s;
+    d.style.background = CORES[i % CORES.length]; d.style.animationDelay = (i * .15) + 's';
+    r.appendChild(d);
+  });
+}
+
+$('btnConferir').onclick = conferir;
+$('btnNova').onclick = novaPalavra;
+$('btnOuvir').onclick = () => item && P.falar(item.palavra);
+$('figura').onclick = () => item && P.falar(item.palavra);
+$('btnBater').onclick = () => {
+  if (!item) return;
+  // fala sílaba por sílaba com uma pausa e um "toc" a cada sílaba
+  const sil = item.silabas; let i = 0;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  (function proxima(){
+    if (i >= sil.length) return;
+    P.tom(1000, .05, 'square', .06);
+    const s = sil[i++];
+    let feito = false;
+    const seguir = () => { if (feito) return; feito = true; setTimeout(proxima, 350); };
+    P.falar(s, {rate: .6, aoTerminar: seguir});
+    setTimeout(seguir, 1800);
+  })();
+};
+$('categoria').onchange = () => { fila = []; novaPalavra(); };
+$('chkContador').onchange = () => item && render();
+$('chkSom').onchange = () => P.som = $('chkSom').checked;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  if (e.key === 'Enter'){ resolvido ? novaPalavra() : conferir(); }
+});
+
+P.preencherCategorias($('categoria'), {exigirSilabas: true});
+P.montarPainelLista($('painelLista'), {exigirSilabas: true, aoMudar: () => P.preencherCategorias($('categoria'), {exigirSilabas: true})});
+novaPalavra();
+</script>
+</body>
+</html>
