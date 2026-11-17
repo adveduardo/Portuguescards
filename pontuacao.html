@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pontuação Viva</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .barraEquipes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0}
+  .chipEq{color:#fff;border-radius:16px;padding:6px 14px;font-weight:bold;font-size:1.2rem;opacity:.55;transition:all .3s;box-shadow:0 3px 0 #0002}
+  .chipEq.davez{opacity:1;transform:scale(1.12);box-shadow:0 0 0 4px #fff,0 0 0 8px var(--amarelo)}
+  .chipEq b{margin-left:6px;background:#fff3;border-radius:10px;padding:0 8px}
+  #contador{text-align:center;opacity:.7}
+  #cartaoFrase{background:#fffdf6;border-radius:30px;padding:18px 26px;margin:10px auto;max-width:1150px;text-align:center;box-shadow:0 8px 0 #0001}
+  #img{font-size:clamp(3.5rem,9vw,6rem);line-height:1.1}
+  #frase{font-size:clamp(2rem,5.4vw,4rem);font-weight:bold;line-height:1.3}
+  #lacuna{display:inline-block;min-width:1.1em;border-bottom:6px dashed #9aa6bf;color:var(--azul);margin-left:4px;text-align:center}
+  #lacuna.certa{color:var(--verde);border-bottom-color:var(--verde)}
+  #lacuna.errada{color:var(--vermelho);border-bottom-color:var(--vermelho)}
+  #pergunta{text-align:center;font-size:clamp(1.2rem,2.8vw,1.7rem);font-weight:bold;margin:8px 0}
+  #sinais{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:8px auto}
+  .sinal{background:#fff;border-radius:24px;padding:12px;text-align:center;cursor:pointer;box-shadow:0 6px 0 #0002;border:4px solid transparent;transition:transform .2s}
+  .sinal:hover{transform:translateY(-3px)}
+  .sinal .s{font-size:clamp(4rem,10vw,7rem);font-weight:bold;line-height:1}
+  .sinal .n{font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:bold}
+  .sinal .ouvir{margin-top:8px;font-size:1rem;padding:8px 14px}
+  .sinal.ok{border-color:var(--verde);background:#e3f8ea}
+  .sinal.nao{border-color:var(--vermelho);background:#ffe3e3}
+  .sinal.apagado{opacity:.4}
+  #explica{text-align:center;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:bold;min-height:1.5em;margin:6px 0}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>❓ Pontuação Viva</h1>
+  <div class="cartao">
+    <h2>1. Frases (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes:
+      <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select>
+    </label>
+    <label>Quantas frases: <select id="selQtd"><option value="10" selected>10</option><option value="15">15</option><option value="20">20</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkLerTres" checked> Ler a frase com os três sinais antes de responder</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">O computador lê com entonações diferentes: a pergunta sobe no final, a exclamação é mais animada. A diferença depende da voz do navegador. No Chrome e no Edge costuma ficar bem clara.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="cartaoFrase"><div id="img"></div><div id="frase"></div></div>
+  <div id="pergunta">Qual sinal termina esta frase?</div>
+  <div id="sinais">
+    <div class="sinal" data-s="."><div class="s">.</div><div class="n">Ponto final</div><div class="dica">informação</div><button class="ouvir">🔊 Ouvir</button></div>
+    <div class="sinal" data-s="?"><div class="s">?</div><div class="n">Interrogação</div><div class="dica">pergunta</div><button class="ouvir">🔊 Ouvir</button></div>
+    <div class="sinal" data-s="!"><div class="s">!</div><div class="n">Exclamação</div><div class="dica">emoção</div><button class="ouvir">🔊 Ouvir</button></div>
+  </div>
+  <div id="explica"></div>
+  <div class="linha">
+    <button id="btnTres">🔊 Ouvir os três jeitos</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima frase</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const EQUIPES = [{nome:'Leões',emoji:'🦁',cor:'#e74c3c'},{nome:'Golfinhos',emoji:'🐬',cor:'#2f80ed'},{nome:'Papagaios',emoji:'🦜',cor:'#27ae60'},{nome:'Abelhas',emoji:'🐝',cor:'#e6a800'}];
+const NOMES = {'.': 'ponto final', '?': 'ponto de interrogação', '!': 'ponto de exclamação'};
+let dados = null, fila = [], atual = null, n = 0, total = 0, equipes = [], vez = 0, respondido = false, acertosTurma = 0;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.frases)) return null;
+  const frases = d.frases.filter(f => f && f.texto && f.correta).map(f => ({
+    texto: String(f.texto).replace(/[.?!…]+\s*$/, ''),
+    corretas: (Array.isArray(f.correta) ? f.correta : [f.correta]).map(String).filter(s => ['.', '?', '!'].includes(s)),
+    explica: f.explica ? String(f.explica) : '', imagem: f.imagem || ''
+  })).filter(f => f.corretas.length);
+  return frases.length ? {titulo: d.titulo || 'Pontuação', frases} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada frase precisa de "texto" e "correta" (".", "?" ou "!").');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.frases.length} frases` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'pontuacao', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/pontuacao-padrao.json', 'modelo-pontuacao.json');
+
+// voz com entonação diferente para cada sinal
+let vozPt = null;
+function escolherVoz(){ if ('speechSynthesis' in window){ const vs = speechSynthesis.getVoices(); vozPt = vs.find(v => /pt[-_]BR/i.test(v.lang)) || vs.find(v => /^pt/i.test(v.lang)) || null; } }
+if ('speechSynthesis' in window){ escolherVoz(); speechSynthesis.onvoiceschanged = escolherVoz; }
+function falarCom(sinal, aoTerminar){
+  if (!('speechSynthesis' in window)){ if (aoTerminar) aoTerminar(); return; }
+  const u = new SpeechSynthesisUtterance(atual.texto + sinal);
+  u.lang = 'pt-BR'; if (vozPt) u.voice = vozPt;
+  u.rate = sinal === '!' ? 1.05 : 0.9; u.pitch = sinal === '!' ? 1.4 : sinal === '?' ? 1.15 : 0.95; u.volume = 1;
+  let feito = false; const seguir = () => { if (!feito){ feito = true; if (aoTerminar) aoTerminar(); } };
+  u.onend = seguir; setTimeout(seguir, 1500 + atual.texto.length * 90);
+  speechSynthesis.speak(u);
+}
+function lerTres(){
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const ordem = ['.', '?', '!']; let i = 0;
+  const marcar = s => document.querySelectorAll('.sinal').forEach(el => el.style.transform = el.dataset.s === s ? 'scale(1.06)' : '');
+  (function prox(){
+    if (i >= ordem.length){ marcar(''); return; }
+    const s = ordem[i++]; marcar(s); $('lacuna').textContent = s;
+    falarCom(s, () => setTimeout(() => { if (!respondido) $('lacuna').textContent = ' '; prox(); }, 450));
+  })();
+}
+
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON de frases.');
+  AV.som = $('chkSom').checked;
+  const q = +$('selQtd').value;
+  fila = embaralhar(dados.frases); if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0; vez = 0; acertosTurma = 0;
+  const ne = +$('selEquipes').value;
+  equipes = ne ? EQUIPES.slice(0, ne).map(e => Object.assign({pontos: 0}, e)) : [];
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+function desenharEquipes(){
+  $('barraEquipes').innerHTML = equipes.length
+    ? equipes.map((e, i) => `<span class="chipEq ${i === vez ? 'davez' : ''}" style="background:${e.cor}">${e.emoji} ${AV.esc(e.nome)}<b>${e.pontos}</b></span>`).join('')
+    : `<span class="chipEq davez" style="background:var(--texto)">👩‍🏫 Turma toda<b>${acertosTurma}</b></span>`;
+}
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; respondido = false;
+  desenharEquipes();
+  $('contador').textContent = `Frase ${n} de ${total}`;
+  $('img').textContent = atual.imagem;
+  $('frase').innerHTML = `${AV.esc(atual.texto)}<span id="lacuna"> </span>`;
+  $('pergunta').textContent = (equipes.length ? `${equipes[vez].emoji} ${equipes[vez].nome}: ` : '') + 'Qual sinal termina esta frase?';
+  document.querySelectorAll('.sinal').forEach(el => el.className = 'sinal');
+  $('explica').textContent = ''; $('btnProxima').hidden = true;
+  if ($('chkLerTres').checked) setTimeout(lerTres, 400);
+}
+function responder(s){
+  if (respondido) return;
+  respondido = true;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  const certo = atual.corretas.includes(s);
+  document.querySelectorAll('.sinal').forEach(el => {
+    el.style.transform = '';
+    if (atual.corretas.includes(el.dataset.s)) el.classList.add('ok');
+    else if (el.dataset.s === s) el.classList.add('nao');
+    else el.classList.add('apagado');
+  });
+  const lac = $('lacuna');
+  lac.textContent = certo ? s : atual.corretas[0]; lac.className = certo ? 'certa' : 'errada';
+  if (certo){ if (equipes.length) equipes[vez].pontos++; else acertosTurma++; AV.fanfarra(); AV.confete(); }
+  else AV.erro();
+  $('explica').textContent = (certo ? '✅ Isso! ' : `❌ O certo é ${atual.corretas.map(c => NOMES[c]).join(' ou ')}. `) + atual.explica;
+  falarCom(certo ? s : atual.corretas[0]);
+  $('btnProxima').hidden = false;
+  $('btnProxima').textContent = fila.length ? '➡️ Próxima frase' : '🏆 Ver resultado';
+  desenharEquipes();
+}
+function fim(){
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  AV.mostrarTela('tFim');
+  if (equipes.length){
+    const g = {}, tot = {};
+    equipes.forEach((e, i) => { g['e' + i] = e; tot['e' + i] = e.pontos; });
+    AV.desenharRanking($('ranking'), g, tot, null, true);
+  } else {
+    $('ranking').innerHTML = `<div class="linhaRank campeao"><span class="pos">⭐</span><span class="nomeRank">Turma toda</span><span class="pts">${acertosTurma} de ${total}</span></div>`;
+  }
+  AV.fanfarra(); AV.confete();
+}
+document.querySelectorAll('.sinal').forEach(el => {
+  el.onclick = () => responder(el.dataset.s);
+  el.querySelector('.ouvir').onclick = e => { e.stopPropagation(); if (window.speechSynthesis) speechSynthesis.cancel(); const s = el.dataset.s; if (!respondido) $('lacuna').textContent = s; falarCom(s, () => { if (!respondido) $('lacuna').textContent = ' '; }); };
+});
+$('btnComecar').onclick = comecar;
+$('btnTres').onclick = lerTres;
+$('btnProxima').onclick = () => { if (equipes.length) vez = (vez + 1) % equipes.length; proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || ['INPUT','SELECT'].includes(e.target.tagName)) return;
+  if (['.', '?', '!'].includes(e.key)) responder(e.key);
+  if (e.key === 'Enter' && respondido) $('btnProxima').click();
+});
+</script>
+</body>
+</html>

@@ -42,7 +42,36 @@ const BRUTO = [
   // Corpo e outras com CH / LH / NH
   ['o-lho','👁️','corpo'], ['u-nha','💅','corpo'], ['bo-ca','👄','corpo'], ['den-te','🦷','corpo'],
   ['de-do','☝️','corpo'], ['o-re-lha','👂','corpo'], ['na-riz','👃','corpo'], ['bra-ço','💪','corpo'],
-  ['so-nho','💭','corpo'], ['ba-nho','🛀','corpo'], ['chu-vei-ro','🚿','coisas'], ['co-zi-nha','🍳','coisas']
+  ['so-nho','💭','corpo'], ['ba-nho','🛀','corpo'], ['chu-vei-ro','🚿','coisas'], ['co-zi-nha','🍳','coisas'],
+  // --- ampliação ---
+  ['ca-me-lo','🐪','animais'], ['lo-bo','🐺','animais'], ['ra-po-sa','🦊','animais'], ['pan-da','🐼','animais'],
+  ['co-a-la','🐨','animais'], ['es-qui-lo','🐿️','animais'], ['mor-ce-go','🦇','animais'], ['fla-min-go','🦩','animais'],
+  ['pa-pa-gai-o','🦜','animais'], ['pa-vão','🦚','animais'], ['cis-ne','🦢','animais'], ['pom-ba','🕊️','animais'],
+  ['á-gui-a','🦅','animais'], ['for-mi-ga','🐜','animais'], ['jo-a-ni-nha','🐞','animais'], ['gri-lo','🦗','animais'],
+  ['mos-qui-to','🦟','animais'], ['ca-ran-gue-jo','🦀','animais'], ['ca-ma-rão','🦐','animais'], ['lu-la','🦑','animais'],
+  ['tu-ba-rão','🦈','animais'], ['gol-fi-nho','🐬','animais'], ['fo-ca','🦭','animais'], ['lon-tra','🦦','animais'],
+  ['hi-po-pó-ta-mo','🦛','animais'], ['ri-no-ce-ron-te','🦏','animais'], ['go-ri-la','🦍','animais'], ['bú-fa-lo','🐃','animais'],
+  ['ca-bra','🐐','animais'], ['ve-a-do','🦌','animais'], ['lei-tão','🐖','animais'], ['pin-ti-nho','🐤','animais'],
+  ['ba-ta-ta','🥔','frutas'], ['ce-bo-la','🧅','frutas'], ['pi-men-ta','🌶️','frutas'], ['pe-pi-no','🥒','frutas'],
+  ['bró-co-lis','🥦','frutas'], ['co-gu-me-lo','🍄','frutas'], ['o-vo','🥚','frutas'], ['lei-te','🥛','frutas'],
+  ['so-pa','🍲','frutas'], ['piz-za','🍕','frutas'], ['sor-ve-te','🍦','frutas'], ['bis-coi-to','🍪','frutas'],
+  ['ham-búr-guer','🍔','frutas'], ['sal-si-cha','🌭','frutas'], ['ar-roz','🍚','frutas'], ['ca-fé','☕','frutas'],
+  ['su-co','🧃','frutas'], ['ki-wi','🥝','frutas'], ['a-zei-to-na','🫒','frutas'], ['pão-zi-nho','🥖','frutas'],
+  ['ca-dei-ra','🪑','coisas'], ['por-ta','🚪','coisas'], ['ja-ne-la','🪟','coisas'], ['lâm-pa-da','💡','coisas'],
+  ['ve-la','🕯️','coisas'], ['ces-ta','🧺','coisas'], ['vas-sou-ra','🧹','coisas'], ['tam-bor','🥁','coisas'],
+  ['trom-pe-te','🎺','coisas'], ['mi-cro-fo-ne','🎤','coisas'], ['câ-me-ra','📷','coisas'], ['com-pu-ta-dor','💻','coisas'],
+  ['te-le-vi-são','📺','coisas'], ['rá-dio','📻','coisas'], ['bo-né','🧢','coisas'], ['mei-a','🧦','coisas'],
+  ['lu-va','🧤','coisas'], ['cal-ça','👖','coisas'], ['ves-ti-do','👗','coisas'], ['sa-pa-ti-lha','🩰','coisas'],
+  ['ti-jo-lo','🧱','coisas'], ['ân-co-ra','⚓','coisas'], ['ô-ni-bus','🚌','coisas'], ['mo-to','🏍️','coisas'],
+  ['he-li-cóp-te-ro','🚁','coisas'], ['na-vi-o','🚢','coisas'], ['tra-tor','🚜','coisas'], ['am-bu-lân-cia','🚑','coisas'],
+  ['pi-pa','🪁','coisas'], ['ur-si-nho','🧸','coisas'], ['es-pe-lho','🪞','coisas'], ['es-co-va','🪥','coisas'],
+  ['sa-bo-ne-te','🧼','coisas'], ['ca-ne-ca','☕','coisas'], ['ma-la','🧳','coisas'], ['cha-lei-ra','🫖','coisas'],
+  ['pi-nhei-ro','🌲','natureza'], ['rai-o','⚡','natureza'], ['ven-to','🌬️','natureza'], ['pe-dra','🪨','natureza'],
+  ['co-me-ta','☄️','natureza'], ['pla-ne-ta','🪐','natureza'], ['ter-ra','🌍','natureza'], ['i-lha','🏝️','natureza'],
+  ['gi-ras-sol','🌻','natureza'], ['ro-sa','🌹','natureza'], ['tu-li-pa','🌷','natureza'], ['con-cha','🐚','natureza'],
+  ['ca-be-lo','💇','corpo'], ['lín-gua','👅','corpo'], ['os-so','🦴','corpo'], ['co-ra-ção','❤️','corpo'],
+  ['cé-re-bro','🧠','corpo'], ['pul-mão','🫁','corpo'], ['pé','🦶','corpo'], ['mão','✋','corpo'],
+  ['pão','🍞','frutas'], ['mel','🍯','frutas'], ['trem','🚆','coisas'], ['mar','🌊','natureza']
 ];
 
 const CATEGORIAS = {

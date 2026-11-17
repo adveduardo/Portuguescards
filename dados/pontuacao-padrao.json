@@ -1,0 +1,191 @@
+{
+  "titulo": "Pontuação viva (modelo)",
+  "frases": [
+    {
+      "texto": "Você quer brincar comigo",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🧸"
+    },
+    {
+      "texto": "Hoje é segunda-feira",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "📅"
+    },
+    {
+      "texto": "Que bolo delicioso",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🎂"
+    },
+    {
+      "texto": "Socorro, o gato subiu na árvore",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🐱"
+    },
+    {
+      "texto": "Onde está o meu lápis",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "✏️"
+    },
+    {
+      "texto": "O cachorro dorme no tapete",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🐶"
+    },
+    {
+      "texto": "Parabéns pelo seu aniversário",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🎉"
+    },
+    {
+      "texto": "Qual é a sua cor favorita",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🎨"
+    },
+    {
+      "texto": "A escola fica perto da praça",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🏫"
+    },
+    {
+      "texto": "Que susto você me deu",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "😱"
+    },
+    {
+      "texto": "Quantos anos você tem",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🔢"
+    },
+    {
+      "texto": "Eu gosto de comer frutas",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🍎"
+    },
+    {
+      "texto": "Cuidado com o degrau",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "⚠️"
+    },
+    {
+      "texto": "Por que o céu é azul",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🌤️"
+    },
+    {
+      "texto": "Minha mãe trabalha no hospital",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🏥"
+    },
+    {
+      "texto": "Oba, hoje tem recreio",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🤸"
+    },
+    {
+      "texto": "Quem comeu o último biscoito",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🍪"
+    },
+    {
+      "texto": "Os peixes vivem na água",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🐟"
+    },
+    {
+      "texto": "Que frio",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🥶"
+    },
+    {
+      "texto": "Você viu o meu caderno",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "📓"
+    },
+    {
+      "texto": "A lua apareceu no céu",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🌙"
+    },
+    {
+      "texto": "Viva, ganhamos o jogo",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🏆"
+    },
+    {
+      "texto": "Como você se chama",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🙋"
+    },
+    {
+      "texto": "O ônibus chegou atrasado",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🚌"
+    },
+    {
+      "texto": "Ai, machuquei o dedo",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🤕"
+    },
+    {
+      "texto": "Quando vai ser a festa",
+      "correta": "?",
+      "explica": "É uma pergunta.",
+      "imagem": "🎈"
+    },
+    {
+      "texto": "As flores do jardim são amarelas",
+      "correta": ".",
+      "explica": "É uma informação: conta alguma coisa.",
+      "imagem": "🌼"
+    },
+    {
+      "texto": "Que desenho lindo",
+      "correta": "!",
+      "explica": "Mostra emoção: alegria, susto, surpresa ou um pedido forte.",
+      "imagem": "🖼️"
+    },
+    {
+      "texto": "Vamos ao parque amanhã",
+      "correta": [
+        "?",
+        "!"
+      ],
+      "explica": "Pode ser um convite em forma de pergunta (?) ou uma frase animada (!). As duas estão certas!",
+      "imagem": "🌳"
+    },
+    {
+      "texto": "Eu adoro ler histórias",
+      "correta": [
+        ".",
+        "!"
+      ],
+      "explica": "Pode ser só uma informação (.) ou mostrar muita alegria (!). As duas estão certas!",
+      "imagem": "📚"
+    }
+  ]
+}

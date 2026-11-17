@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dados de Histórias</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topo{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+  #inicio{background:#fff;border-radius:18px;padding:10px 20px;font-size:clamp(1.3rem,3.2vw,2rem);font-weight:bold;box-shadow:0 4px 0 #0001;text-align:center;margin:8px auto;max-width:1100px}
+  #inicio small{display:block;font-size:.95rem;opacity:.6;font-weight:normal}
+  #mesa{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:14px auto;max-width:1300px}
+  .dado{width:clamp(150px,18vw,230px);background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 8px 0 #0002;cursor:pointer;position:relative;transition:transform .2s}
+  .dado:hover{transform:translateY(-3px)}
+  .dado .cab{color:#fff;font-weight:bold;font-size:1.2rem;padding:8px;text-align:center}
+  .dado .face{padding:14px 10px 18px;text-align:center}
+  .dado .emo{font-size:clamp(4rem,8vw,6.5rem);line-height:1.1;display:block}
+  .dado .txt{font-size:clamp(1.05rem,1.8vw,1.4rem);font-weight:bold;min-height:2.6em;display:flex;align-items:center;justify-content:center}
+  .dado.rolando .emo{animation:girar .15s infinite}
+  @keyframes girar{0%{transform:rotate(-12deg) scale(.95)}50%{transform:rotate(12deg) scale(1.05)}100%{transform:rotate(-12deg) scale(.95)}}
+  .dado .cadeado{position:absolute;top:6px;right:8px;font-size:1.3rem;background:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px #0003}
+  .dado.travado{outline:5px solid var(--amarelo)}
+  #btnRolar{font-size:1.6rem;padding:16px 38px;background:var(--amarelo);color:var(--texto)}
+  .conectivos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0}
+  .conectivos span{background:#fff;border-radius:999px;padding:6px 14px;font-weight:bold;box-shadow:0 2px 0 #0001}
+  #relogio{font-family:"Courier New",monospace;font-size:2rem;font-weight:bold;background:#fff;border-radius:14px;padding:4px 16px;box-shadow:0 3px 0 #0001}
+  #relogio.fim{background:var(--vermelho);color:#fff}
+  details.cartao{max-width:900px;margin:12px auto}
+  details.cartao summary{font-weight:bold;cursor:pointer;font-size:1.1rem}
+  #escolhaDados{display:flex;flex-wrap:wrap;gap:4px 18px}
+</style>
+</head>
+<body>
+<div class="topo">
+  <h1 style="margin:4px 0">🎲 Dados de Histórias</h1>
+  <div class="linha" style="margin:0">
+    <select id="selTempo" title="Tempo para escrever">
+      <option value="0">⏱️ sem cronômetro</option><option value="180">3 min</option><option value="300">5 min</option>
+      <option value="600">10 min</option><option value="900">15 min</option><option value="1200">20 min</option>
+    </select>
+    <button id="btnTempo">▶️ Cronômetro</button>
+    <span id="relogio" hidden>0:00</span>
+  </div>
+</div>
+
+<div id="inicio">Role os dados para começar! <small>Toque num dado para rolar só ele • segure (ou clique com o botão direito) para travar</small></div>
+<div id="mesa"></div>
+
+<div class="linha">
+  <button id="btnRolar">🎲 Rolar os dados</button>
+  <button id="btnLer">🔊 Ler em voz alta</button>
+  <button id="btnInicio">✨ Outro começo</button>
+</div>
+<div class="dica" style="text-align:center">Palavras que ajudam a contar a história:</div>
+<div class="conectivos" id="conectivos"></div>
+
+<details class="cartao" id="config">
+  <summary>⚙️ Configurações (professor)</summary>
+  <label>Dados: <select id="selArquivo"></select></label>
+  <div class="linha" style="justify-content:flex-start">
+    <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+    <button id="btnModelo">📄 Baixar o modelo</button>
+  </div>
+  <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+  <div id="infoJson" class="dica"></div>
+  <p><b>Quais dados usar:</b></p>
+  <div id="escolhaDados"></div>
+  <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+</details>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+let dados = null, faces = [], travados = new Set(), inicioAtual = '', timer = null, fimTempo = 0;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.dados)) return null;
+  const lista = d.dados.map((x, i) => ({
+    nome: String(x.nome || 'Dado ' + (i + 1)), cor: x.cor || ['#e74c3c','#2f80ed','#27ae60','#8e44ad','#f39c12','#16a085'][i % 6],
+    faces: (Array.isArray(x.faces) ? x.faces : []).map(f => typeof f === 'string' ? {emoji: '', texto: f} : {emoji: f.emoji || '', texto: String(f.texto || '')}).filter(f => f.texto || f.emoji)
+  })).filter(x => x.faces.length);
+  if (!lista.length) return null;
+  return {titulo: d.titulo || 'Dados de histórias', dados: lista,
+    inicios: Array.isArray(d.inicios) && d.inicios.length ? d.inicios : ['Era uma vez...'],
+    conectivos: Array.isArray(d.conectivos) ? d.conectivos : []};
+}
+function carregar(d, origem){
+  const n = normalizar(d);
+  if (!n) return AV.avisar('JSON inválido: falta a lista "dados" com "faces".');
+  dados = n; travados = new Set();
+  $('infoJson').textContent = `${n.titulo} • ${n.dados.length} dados: ` + n.dados.map(x => `${x.nome} (${x.faces.length})`).join(', ') + (origem ? ` • ${origem}` : '');
+  $('escolhaDados').innerHTML = n.dados.map((x, i) => `<label><input type="checkbox" data-i="${i}" checked> ${AV.esc(x.nome)}</label>`).join('');
+  $('escolhaDados').querySelectorAll('input').forEach(c => c.onchange = () => { faces = []; desenhar(); });
+  $('conectivos').innerHTML = n.conectivos.map(c => `<span>${AV.esc(c)}</span>`).join('');
+  faces = []; desenhar();
+}
+AV.prepararSeletorJson({tipo: 'historias', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/historias-padrao.json', 'modelo-dados-de-historias.json');
+
+const ativos = () => [...$('escolhaDados').querySelectorAll('input:checked')].map(c => +c.dataset.i);
+const sortear = i => { const f = dados.dados[i].faces; return f[Math.floor(Math.random() * f.length)]; };
+function desenhar(){
+  if (!dados) return;
+  const mesa = $('mesa'); mesa.innerHTML = '';
+  ativos().forEach(i => {
+    const d = dados.dados[i], f = faces[i];
+    const el = document.createElement('div'); el.className = 'dado' + (travados.has(i) ? ' travado' : ''); el.id = 'dado' + i;
+    el.innerHTML = `<div class="cab" style="background:${d.cor}">${AV.esc(d.nome)}</div>
+      <div class="face"><span class="emo">${f ? AV.esc(f.emoji || '🎲') : '❔'}</span><div class="txt">${f ? AV.esc(f.texto) : '...'}</div></div>
+      ${travados.has(i) ? '<span class="cadeado">🔒</span>' : ''}`;
+    el.onclick = () => rolar([i]);
+    el.oncontextmenu = e => { e.preventDefault(); travar(i); };
+    let segurar; el.ontouchstart = () => { segurar = setTimeout(() => travar(i), 600); }; el.ontouchend = () => clearTimeout(segurar);
+    mesa.appendChild(el);
+  });
+}
+function travar(i){ travados.has(i) ? travados.delete(i) : travados.add(i); AV.tom(travados.has(i) ? 500 : 800, .08); desenhar(); }
+function rolar(quais){
+  if (!dados) return;
+  const lista = (quais || ativos().filter(i => !travados.has(i)));
+  if (!lista.length) return AV.avisar('Todos os dados estão travados 🔒');
+  lista.forEach(i => { const el = $('dado' + i); if (el) el.classList.add('rolando'); });
+  let passo = 0;
+  const giro = setInterval(() => {
+    lista.forEach(i => {
+      const el = $('dado' + i); if (!el) return;
+      const f = sortear(i);
+      el.querySelector('.emo').textContent = f.emoji || '🎲'; el.querySelector('.txt').textContent = f.texto;
+    });
+    AV.tique();
+    if (++passo >= 12){
+      clearInterval(giro);
+      lista.forEach(i => { let f; do { f = sortear(i); } while (dados.dados[i].faces.length > 1 && faces[i] && f.texto === faces[i].texto); faces[i] = f; });
+      if (!quais || quais.length > 1 || !inicioAtual) novoInicio();
+      desenhar();
+      AV.fanfarra();
+    }
+  }, 80);
+}
+function novoInicio(){
+  const l = dados.inicios; let n;
+  do { n = l[Math.floor(Math.random() * l.length)]; } while (l.length > 1 && n === inicioAtual);
+  inicioAtual = n;
+  $('inicio').innerHTML = `${AV.esc(n)} <small>Inventem uma história com todos os elementos dos dados!</small>`;
+}
+function lerEmVozAlta(){
+  const partes = ativos().filter(i => faces[i]).map(i => `${dados.dados[i].nome}: ${faces[i].texto}.`);
+  if (!partes.length) return AV.avisar('Role os dados primeiro.');
+  AV.falar(`${inicioAtual} ${partes.join(' ')} Agora é com vocês!`);
+}
+function cronometro(){
+  clearInterval(timer);
+  const s = +$('selTempo').value;
+  if (!s){ $('relogio').hidden = true; return AV.avisar('Escolha um tempo no seletor ao lado.'); }
+  fimTempo = Date.now() + s * 1000; $('relogio').hidden = false; $('relogio').classList.remove('fim');
+  const tique = () => {
+    const r = Math.max(0, Math.ceil((fimTempo - Date.now()) / 1000));
+    $('relogio').textContent = AV.mmss(r);
+    if (!r){ clearInterval(timer); $('relogio').classList.add('fim'); AV.sirene(); AV.falar('Acabou o tempo! Hora de compartilhar as histórias.'); }
+  };
+  tique(); timer = setInterval(tique, 500);
+}
+$('btnRolar').onclick = () => rolar();
+$('btnLer').onclick = lerEmVozAlta;
+$('btnInicio').onclick = () => dados && novoInicio();
+$('btnTempo').onclick = cronometro;
+$('chkSom').onchange = () => AV.som = $('chkSom').checked;
+document.addEventListener('keydown', e => { if (e.code === 'Space' && !['INPUT','SELECT'].includes(e.target.tagName)){ e.preventDefault(); rolar(); } });
+</script>
+</body>
+</html>

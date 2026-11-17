@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escolha o Caminho</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topoHist{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  #cartaoParte{background:#fffdf6;border-radius:30px;padding:18px 28px;box-shadow:0 8px 0 #0001;margin:10px auto;max-width:1100px;text-align:center}
+  #imgParte{font-size:clamp(4rem,11vw,7rem);line-height:1.1}
+  #textoParte{font-size:clamp(1.5rem,3.6vw,2.5rem);font-weight:bold;line-height:1.35;margin:6px 0}
+  #pergunta{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:10px 0 4px;text-align:center}
+  #opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:14px;max-width:1100px;margin:8px auto}
+  .op{border-radius:22px;color:#fff;padding:14px 20px;text-align:left;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;box-shadow:0 6px 0 #0002;
+    position:relative;overflow:hidden;cursor:pointer;transition:transform .3s,opacity .3s;border:none;width:100%}
+  .op .barra{position:absolute;left:0;top:0;bottom:0;background:#ffffff38;transition:width .4s}
+  .op .conteudo{position:relative;display:flex;align-items:center;gap:12px}
+  .op .l{background:#fff3;border-radius:12px;min-width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+  .op .votos{margin-left:auto;font-size:1.3rem;white-space:nowrap}
+  .op.vencedora{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde);transform:scale(1.02)}
+  .op.perdeu{opacity:.35}
+  .op0{background:#e74c3c}.op1{background:#2f80ed}.op2{background:#f39c12}.op3{background:#27ae60}
+  #statusVoto{text-align:center;font-size:1.2rem;font-weight:bold;min-height:1.5em}
+  #trilhaCaminho{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  #trilhaCaminho span{background:#fff;border-radius:999px;padding:6px 14px;font-weight:bold;box-shadow:0 2px 0 #0001}
+</style>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🔀 Escolha o Caminho da História</h1>
+  <div class="cartao">
+    <h2>1. História (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Como a turma vota</h2>
+    <label><input type="radio" name="voto" value="ipads" checked> 📱 Cada equipe vota no seu iPad</label>
+    <label><input type="radio" name="voto" value="mao"> ✋ Levantando a mão (o professor clica na opção mais votada)</label>
+    <label><input type="checkbox" id="chkLer" checked> Ler cada parte da história em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <button id="btnCriar" class="principal">▶️ Começar</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">📖 Começar a história</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ HISTÓRIA ============ -->
+<section id="tHistoria" class="tela">
+  <div class="topoHist">
+    <h2 id="tituloHist" style="margin:4px 0;text-align:left"></h2>
+    <div class="dica" id="infoSala"></div>
+  </div>
+  <div id="cartaoParte">
+    <div id="imgParte"></div>
+    <div id="textoParte"></div>
+  </div>
+  <div id="pergunta">O que acontece agora? 🤔</div>
+  <div id="opcoes"></div>
+  <div id="statusVoto"></div>
+  <div class="linha" id="acoesVoto">
+    <button id="btnOuvir">🔊 Ouvir de novo</button>
+    <button id="btnEncerrarVoto" class="principal">✅ Encerrar a votação</button>
+    <button id="btnContinuar" class="principal" hidden>➡️ Continuar a história</button>
+  </div>
+  <div id="blocoFim" hidden style="text-align:center">
+    <h2>📖 Fim! O caminho que a turma escolheu:</h2>
+    <div id="trilhaCaminho"></div>
+    <div class="linha">
+      <button id="btnLerTudo" class="principal">📖 Ler a história completa</button>
+      <button id="btnRecomecar">🔁 Começar de novo</button>
+      <button id="btnEncerrar2">✖️ Sair</button>
+    </div>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const LETRAS = ['A', 'B', 'C', 'D'];
+
+let hist = null, comIpads = true, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let parteAtual = null, rodada = 0, votando = false, caminho = [], textosLidos = [], timerAuto = null;
+
+// ---------- JSON ----------
+function normalizar(d){
+  if (!d || !d.partes || typeof d.partes !== 'object') return null;
+  const partes = {};
+  Object.keys(d.partes).forEach(id => {
+    const p = d.partes[id]; if (!p || !p.texto) return;
+    partes[id] = {texto: String(p.texto), imagem: p.imagem || '', opcoes: (Array.isArray(p.opcoes) ? p.opcoes : []).slice(0, 4).filter(o => o && o.texto && o.vai).map(o => ({texto: String(o.texto), vai: String(o.vai)}))};
+  });
+  const inicio = d.inicio && partes[d.inicio] ? d.inicio : Object.keys(partes)[0];
+  if (!inicio) return null;
+  const quebradas = [];
+  Object.keys(partes).forEach(id => partes[id].opcoes.forEach(o => { if (!partes[o.vai]) quebradas.push(`${id} → ${o.vai}`); }));
+  return {titulo: d.titulo || 'História', inicio, partes, quebradas,
+    finais: Object.keys(partes).filter(id => !partes[id].opcoes.length).length};
+}
+function carregar(d, origem){
+  const h = normalizar(d);
+  if (!h) return AV.avisar('JSON inválido: confira "inicio" e "partes".');
+  hist = h;
+  $('infoJson').innerHTML = `<b>${AV.esc(h.titulo)}</b> • ${Object.keys(h.partes).length} partes • ${h.finais} finais diferentes` +
+    (h.quebradas.length ? ` • ⚠️ caminhos que levam a partes que não existem: ${AV.esc(h.quebradas.join(', '))}` : '') + (origem ? ` • ${AV.esc(origem)}` : '');
+}
+AV.prepararSeletorJson({tipo: 'caminho', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/caminho-padrao.json', 'modelo-escolha-o-caminho.json');
+document.querySelectorAll('input[name=voto]').forEach(r => r.onchange = () => { $('painelConexao').hidden = r.value !== 'ipads' || !r.checked; });
+
+// ---------- Início ----------
+$('btnCriar').onclick = () => {
+  if (!hist) return AV.avisar('Carregue um JSON de história.');
+  AV.som = $('chkSom').checked;
+  comIpads = document.querySelector('input[name=voto]:checked').value === 'ipads';
+  if (!comIpads){ comecarHistoria(); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'caminho', estado: {fase: 'espera', titulo: hist.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    $('tituloSala').textContent = '📖 ' + hist.titulo;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config:'tConfig', sala:'tSala', historia:'tHistoria'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'historia' && comIpads && votando) mostrarVotos();
+}
+function votosAtuais(){ return ((arvore.votos || {})['r' + rodada]) || {}; }
+
+// ---------- História ----------
+function comecarHistoria(){
+  caminho = []; textosLidos = []; rodada = 0;
+  $('tituloHist').textContent = '📖 ' + hist.titulo;
+  $('infoSala').textContent = comIpads ? `Sala ${sala}` : '';
+  irPara('historia');
+  mostrarParte(hist.inicio);
+}
+function mostrarParte(id){
+  parteAtual = id; rodada++;
+  const p = hist.partes[id];
+  textosLidos.push(p.texto);
+  $('imgParte').textContent = p.imagem; $('textoParte').textContent = p.texto;
+  const fim = !p.opcoes.length;
+  $('pergunta').hidden = fim; $('opcoes').hidden = fim; $('statusVoto').hidden = fim; $('acoesVoto').hidden = fim;
+  $('blocoFim').hidden = !fim;
+  if ($('chkLer').checked) AV.falar(p.texto + (fim ? '' : ' O que acontece agora?'));
+  if (fim){
+    votando = false;
+    $('trilhaCaminho').innerHTML = caminho.map((c, i) => `<span>${i + 1}. ${AV.esc(c)}</span>`).join(' ➜ ');
+    if (comIpads) Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', titulo: hist.titulo, texto: p.texto, imagem: p.imagem});
+    AV.fanfarra(); AV.confete();
+    return;
+  }
+  $('opcoes').innerHTML = p.opcoes.map((o, i) => `<button class="op op${i}" data-i="${i}"><span class="barra" style="width:0"></span>
+    <span class="conteudo"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o.texto)}</span><span class="votos"></span></span></button>`).join('');
+  $('opcoes').querySelectorAll('.op').forEach(b => b.onclick = () => { if (!votando) return; if (!comIpads || confirm(`Escolher "${p.opcoes[+b.dataset.i].texto}"?`)) escolher(+b.dataset.i, comIpads ? 'professor' : 'mao'); });
+  $('btnContinuar').hidden = true; $('btnEncerrarVoto').hidden = !comIpads;
+  votando = true;
+  if (comIpads){
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'votacao', rodada, titulo: hist.titulo, parte: id, texto: p.texto, imagem: p.imagem, opcoes: p.opcoes.map(o => o.texto)});
+    mostrarVotos();
+  } else $('statusVoto').textContent = '✋ Quem vota na A? E na B? Clique na opção mais votada.';
+  AV.tom(660, .12); AV.tom(880, .15, 'triangle', .14, .12);
+}
+function mostrarVotos(){
+  const p = hist.partes[parteAtual], g = grupos(), ids = AV.ordemGrupos(g), v = votosAtuais();
+  const cont = p.opcoes.map(() => []);
+  ids.forEach(id => { const i = v[id]; if (typeof i === 'number' && cont[i]) cont[i].push(g[id].emoji); });
+  const total = ids.filter(id => typeof v[id] === 'number').length;
+  document.querySelectorAll('#opcoes .op').forEach((el, i) => {
+    el.querySelector('.barra').style.width = (total ? cont[i].length / total * 100 : 0) + '%';
+    el.querySelector('.votos').textContent = cont[i].length ? `${cont[i].join(' ')} (${cont[i].length})` : '';
+  });
+  $('statusVoto').textContent = ids.length ? `🗳️ ${total} de ${ids.length} equipes votaram` + (total < ids.length ? ' • esperando…' : ' • todas votaram!') : 'Nenhuma equipe na sala: clique na opção escolhida.';
+  clearTimeout(timerAuto);
+  if (ids.length && total === ids.length) timerAuto = setTimeout(() => { if (votando) encerrarVotacao(); }, 1500);
+}
+function encerrarVotacao(){
+  const p = hist.partes[parteAtual], ids = AV.ordemGrupos(grupos()), v = votosAtuais();
+  const cont = p.opcoes.map(() => 0);
+  ids.forEach(id => { if (typeof v[id] === 'number' && v[id] < cont.length) cont[v[id]]++; });
+  const max = Math.max(...cont);
+  if (!max) return AV.avisar('Ninguém votou ainda. Espere os votos ou clique na opção escolhida.');
+  const empatadas = cont.map((c, i) => c === max ? i : -1).filter(i => i >= 0);
+  const vencedora = empatadas[Math.floor(Math.random() * empatadas.length)];
+  escolher(vencedora, empatadas.length > 1 ? 'empate' : 'votos');
+}
+function escolher(i, motivo){
+  if (!votando) return;
+  votando = false; clearTimeout(timerAuto);
+  const p = hist.partes[parteAtual];
+  caminho.push(p.opcoes[i].texto);
+  document.querySelectorAll('#opcoes .op').forEach((el, k) => el.classList.add(k === i ? 'vencedora' : 'perdeu'));
+  const msg = motivo === 'empate' ? `🎲 Empate! O sorteio escolheu: ${p.opcoes[i].texto}` : `✅ A turma escolheu: ${p.opcoes[i].texto}`;
+  $('statusVoto').textContent = msg;
+  AV.fanfarra(); AV.falar(msg.replace(/^\S+\s/, ''));
+  if (comIpads) Rede.gravar(`salas/${sala}/estado`, {fase: 'resultado', rodada, titulo: hist.titulo, escolhida: i, textoEscolhido: p.opcoes[i].texto, empate: motivo === 'empate'});
+  $('btnEncerrarVoto').hidden = true; $('btnContinuar').hidden = false;
+  $('btnContinuar').onclick = () => mostrarParte(p.opcoes[i].vai);
+}
+$('btnComecar').onclick = () => { if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou. Começar mesmo assim?')) return; comecarHistoria(); };
+$('btnEncerrarVoto').onclick = encerrarVotacao;
+$('btnOuvir').onclick = () => AV.falar(hist.partes[parteAtual].texto);
+$('btnLerTudo').onclick = () => AV.falar(textosLidos.join(' '));
+$('btnRecomecar').onclick = () => { if (comIpads) Rede.apagar(`salas/${sala}/votos`); comecarHistoria(); };
+function encerrar(){
+  if (comIpads && sala){
+    if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+    if (ouvinte) ouvinte.fechar();
+    Rede.apagar('salas/' + sala);
+  }
+  sala = null; arvore = {}; votando = false; clearTimeout(timerAuto);
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

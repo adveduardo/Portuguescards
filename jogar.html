@@ -118,6 +118,12 @@
   .dicaDesenho{font-size:14px;opacity:.7}
   .botoesAtor{margin-top:12px;font-size:0}
   .botoesAtor button{width:46%;margin:0 2%;font-size:28px;padding:18px 0}
+  /* ESCOLHA O CAMINHO */
+  #camTexto{font-size:22px;font-weight:bold;line-height:1.35}
+  .camOp{display:block;width:100%;margin:12px 0;font-size:26px;color:#fff;padding:18px;text-align:left}
+  .camOp.escolhida{outline:6px solid #243049}
+  .camOp.outra{opacity:.5}
+  #camStatus{font-weight:bold;color:#1e7a43;font-size:18px}
 </style>
 </head>
 <body>
@@ -208,6 +214,16 @@
   </div>
 </section>
 
+<!-- 8) ESCOLHA O CAMINHO -->
+<section class="tela" id="tCaminho">
+  <div class="topo" id="topoCaminho"><span class="nome"></span><span class="info"></span></div>
+  <div id="camImagem" class="grande-emoji" style="font-size:80px"></div>
+  <div id="camTexto" class="caixa"></div>
+  <h2>Qual caminho a sua equipe escolhe?</h2>
+  <div id="camOpcoes" style="max-width:700px;margin:0 auto"></div>
+  <p id="camStatus"></p>
+</section>
+
 <script src="rede.js"></script>
 <script>
 (function(){
@@ -291,7 +307,7 @@ function fecharOuvintes(){
 }
 function comecarAOuvir(){
   fecharOuvintes();
-  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null;
+  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null;
   Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo);
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
@@ -336,6 +352,7 @@ function renderizar(){
   if (jogo === 'stop') renderStop();
   else if (jogo === 'escape') renderEscape();
   else if (jogo === 'mimica') renderMimica();
+  else if (jogo === 'caminho') renderCaminho();
   else renderQuiz();
 }
 
@@ -827,6 +844,48 @@ function enviarTraco(){
   $('mimPular').onclick = function(){ acaoMimica('pular'); };
   window.addEventListener('resize', function(){ if (mim.vez && estado && estado.modo === 'desenho') prepararCanvas(); }, false);
 })();
+
+// ================= ESCOLHA O CAMINHO =================
+var cam = {rodada: null, voto: null};
+function renderCaminho(){
+  var f = estado.fase;
+  if (f === 'votacao'){
+    if (cam.rodada !== estado.rodada){ cam.rodada = estado.rodada; cam.voto = null; montarVotacao(); }
+  } else if (f === 'resultado'){
+    var votou = cam.rodada === estado.rodada && cam.voto !== null;
+    telaEspera((estado.empate ? '🎲 Empate! O sorteio escolheu:' : '✅ A turma escolheu:') + '<br>' + esc(estado.textoEscolhido || ''),
+      !votou ? 'Olhem o telão 👀' : (cam.voto === estado.escolhida ? 'Foi o caminho que vocês votaram! 🎉' : 'Não foi o voto de vocês, mas a história continua! 📖'));
+  } else if (f === 'fim'){
+    cam.rodada = null;
+    telaEspera('📖 Fim da história!', 'Olhem o telão para ver o caminho que a turma escolheu 👀');
+  } else {
+    cam.rodada = null;
+    telaEspera(estado.titulo ? '📖 ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
+  }
+}
+function montarVotacao(){
+  mostrar('tCaminho'); pintarTopo('topoCaminho', '');
+  $('camImagem').innerHTML = esc(estado.imagem || '');
+  $('camTexto').innerHTML = esc(estado.texto || '');
+  var ops = Rede.lista(estado.opcoes), h = '', i;
+  for (i = 0; i < ops.length; i++) h += '<button class="camOp op' + i + '" data-i="' + i + '">' + LETRAS[i] + ') ' + esc(ops[i]) + '</button>';
+  $('camOpcoes').innerHTML = h; $('camStatus').innerHTML = '';
+  var bs = $('camOpcoes').querySelectorAll('button');
+  for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ votar(+this.getAttribute('data-i')); };
+  var r = estado.rodada;
+  Rede.ler('salas/' + sala + '/votos/r' + r + '/' + eq.id, function(err, v){ if (typeof v === 'number' && cam.rodada === r) marcarVoto(v); });
+}
+function votar(i){
+  if (!estado || estado.fase !== 'votacao') return;
+  Rede.gravar('salas/' + sala + '/votos/r' + estado.rodada + '/' + eq.id, i);
+  marcarVoto(i); vibrar();
+}
+function marcarVoto(i){
+  cam.voto = i;
+  var bs = $('camOpcoes').querySelectorAll('button');
+  for (var k = 0; k < bs.length; k++) bs[k].className = 'camOp op' + k + (k === i ? ' escolhida' : ' outra');
+  $('camStatus').innerHTML = '✅ Voto enviado! Vocês podem trocar até o professor encerrar a votação.';
+}
 
 // ---------------- Botões ----------------
 $('btnEntrar').onclick = entrar;

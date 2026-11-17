@@ -10,11 +10,11 @@
     },
     {
       "nome": "Animal",
-      "respostas": ["abelha", "águia", "anta", "arara", "avestruz", "baleia", "burro", "boi", "borboleta", "besouro", "cachorro", "cavalo", "cobra", "coelho", "coruja", "camelo", "dromedário", "dinossauro", "elefante", "ema", "esquilo", "foca", "formiga", "flamingo", "galinha", "gato", "girafa", "gorila", "golfinho", "hipopótamo", "hiena", "iguana", "jacaré", "jabuti", "javali", "joaninha", "leão", "lobo", "lagarto", "lontra", "macaco", "minhoca", "morcego", "mosca", "naja", "onça", "ovelha", "orca", "pato", "peixe", "pinguim", "porco", "pombo", "rato", "raposa", "rinoceronte", "sapo", "siri", "sabiá", "tatu", "tigre", "tartaruga", "tubarão", "tucano", "urso", "urubu", "vaca", "veado", "zebra"]
+      "respostas": ["abelha", "águia", "anta", "arara", "avestruz", "baleia", "burro", "boi", "borboleta", "besouro", "cachorro", "cavalo", "cobra", "coelho", "coruja", "camelo", "dromedário", "dinossauro", "elefante", "ema", "esquilo", "foca", "formiga", "flamingo", "galinha", "gato", "girafa", "gorila", "golfinho", "hipopótamo", "hiena", "iguana", "jacaré", "jabuti", "javali", "joaninha", "leão", "lobo", "lagarto", "lontra", "macaco", "minhoca", "morcego", "mosca", "naja", "onça", "ovelha", "orca", "pato", "peixe", "pinguim", "porco", "pombo", "rato", "raposa", "rinoceronte", "sapo", "siri", "sabiá", "tatu", "tigre", "tartaruga", "tubarão", "tucano", "urso", "urubu", "vaca", "veado", "zebra", "alce", "búfalo", "canguru", "coala", "hamster", "lhama", "leopardo", "lula", "mosquito", "ouriço", "pavão", "polvo", "quati", "sardinha", "tamanduá", "texugo", "vespa"]
     },
     {
       "nome": "Fruta",
-      "respostas": ["abacate", "abacaxi", "acerola", "amora", "ameixa", "banana", "cacau", "caju", "carambola", "cereja", "coco", "damasco", "figo", "framboesa", "goiaba", "graviola", "groselha", "jabuticaba", "jaca", "kiwi", "laranja", "limão", "lichia", "maçã", "mamão", "manga", "maracujá", "melancia", "melão", "morango", "nectarina", "pera", "pêssego", "pitanga", "pitaya", "romã", "tangerina", "tamarindo", "uva", "umbu"]
+      "respostas": ["abacate", "abacaxi", "acerola", "amora", "ameixa", "banana", "cacau", "caju", "carambola", "cereja", "coco", "damasco", "figo", "framboesa", "goiaba", "graviola", "groselha", "jabuticaba", "jaca", "kiwi", "laranja", "limão", "lichia", "maçã", "mamão", "manga", "maracujá", "melancia", "melão", "morango", "nectarina", "pera", "pêssego", "pitanga", "pitaya", "romã", "tangerina", "tamarindo", "uva", "umbu", "abiu", "açaí", "bacuri", "cupuaçu", "caqui", "jambo", "mangaba", "physalis", "seriguela"]
     },
     {
       "nome": "Cor",
@@ -22,11 +22,19 @@
     },
     {
       "nome": "Objeto",
-      "respostas": ["agulha", "anel", "apontador", "bola", "borracha", "balde", "bolsa", "caneta", "cadeira", "caderno", "chave", "colher", "copo", "dado", "escova", "espelho", "faca", "garfo", "garrafa", "guarda-chuva", "ioiô", "ímã", "jarra", "lápis", "livro", "lanterna", "mesa", "mochila", "martelo", "novelo", "óculos", "panela", "pente", "prato", "régua", "relógio", "sofá", "sapato", "tesoura", "tijolo", "telefone", "travesseiro", "uniforme", "vassoura", "vaso", "violão"]
+      "respostas": ["agulha", "anel", "apontador", "bola", "borracha", "balde", "bolsa", "caneta", "cadeira", "caderno", "chave", "colher", "copo", "dado", "escova", "espelho", "faca", "garfo", "garrafa", "guarda-chuva", "ioiô", "ímã", "jarra", "lápis", "livro", "lanterna", "mesa", "mochila", "martelo", "novelo", "óculos", "panela", "pente", "prato", "régua", "relógio", "sofá", "sapato", "tesoura", "tijolo", "telefone", "travesseiro", "uniforme", "vassoura", "vaso", "violão", "almofada", "abajur", "balança", "bacia", "cabide", "controle", "dedal", "escada", "fita", "lixeira", "mala", "navalha", "pincel", "quadro", "rádio", "tapete", "xícara"]
     },
     {
       "nome": "Comida",
-      "respostas": ["arroz", "bolo", "biscoito", "batata", "brigadeiro", "cuscuz", "coxinha", "chocolate", "doce", "empada", "esfirra", "farofa", "feijão", "frango", "gelatina", "hambúrguer", "iogurte", "lasanha", "macarrão", "mingau", "nhoque", "omelete", "ovo", "pão", "pastel", "pizza", "pipoca", "queijo", "quindim", "risoto", "salada", "sopa", "sorvete", "sanduíche", "tapioca", "torta", "vatapá"]
+      "respostas": ["arroz", "bolo", "biscoito", "batata", "brigadeiro", "cuscuz", "coxinha", "chocolate", "doce", "empada", "esfirra", "farofa", "feijão", "frango", "gelatina", "hambúrguer", "iogurte", "lasanha", "macarrão", "mingau", "nhoque", "omelete", "ovo", "pão", "pastel", "pizza", "pipoca", "queijo", "quindim", "risoto", "salada", "sopa", "sorvete", "sanduíche", "tapioca", "torta", "vatapá", "bife", "canjica", "cocada", "dobradinha", "goiabada", "jujuba", "mousse", "pamonha", "panqueca", "paçoca", "quiche", "rabanada", "strogonoff"]
+    },
+    {
+      "nome": "Profissão",
+      "respostas": ["advogado", "arquiteto", "astronauta", "bombeiro", "cabeleireiro", "carteiro", "cozinheiro", "dentista", "eletricista", "enfermeiro", "engenheiro", "escritor", "faxineiro", "fotógrafo", "garçom", "jardineiro", "jornalista", "juiz", "lixeiro", "médico", "motorista", "músico", "nutricionista", "oculista", "padeiro", "pedreiro", "pintor", "piloto", "policial", "professor", "químico", "recepcionista", "sapateiro", "secretário", "taxista", "veterinário", "zelador"]
+    },
+    {
+      "nome": "Transporte",
+      "respostas": ["avião", "ambulância", "barco", "balão", "bicicleta", "bonde", "caminhão", "canoa", "carro", "carroça", "charrete", "foguete", "helicóptero", "iate", "jangada", "jet-ski", "lancha", "metrô", "moto", "navio", "ônibus", "patinete", "patins", "skate", "submarino", "táxi", "trator", "trem", "triciclo", "van"]
     }
   ]
 }

@@ -15,7 +15,15 @@
       "Leia em voz alta: Minha mãe fez um bolo de chocolate.",
       "Leia em voz alta: O macaco subiu na árvore.",
       "Leia em voz alta: A tartaruga anda devagar.",
-      "Leia em voz alta: O vento levou a pipa."
+      "Leia em voz alta: O vento levou a pipa.",
+      "Leia em voz alta: O coelho comeu a cenoura.",
+      "Leia em voz alta: A chuva molhou o jardim.",
+      "Leia em voz alta: O avião voa muito alto.",
+      "Leia em voz alta: Meu gato gosta de leite.",
+      "Leia em voz alta: A estrela brilha no céu.",
+      "Leia em voz alta: O peixe nada no rio.",
+      "Leia em voz alta: A vovó contou uma história.",
+      "Leia em voz alta: O sorvete derreteu no sol."
     ],
     "soletrar": [
       {
@@ -77,6 +85,46 @@
         "texto": "Ouça e soletre a palavra.",
         "falar": "banana",
         "resposta": "B-A-N-A-N-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "galinha",
+        "resposta": "G-A-L-I-N-H-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "cenoura",
+        "resposta": "C-E-N-O-U-R-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "peixe",
+        "resposta": "P-E-I-X-E"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "livro",
+        "resposta": "L-I-V-R-O"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "cadeira",
+        "resposta": "C-A-D-E-I-R-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "estrela",
+        "resposta": "E-S-T-R-E-L-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "macaco",
+        "resposta": "M-A-C-A-C-O"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "panela",
+        "resposta": "P-A-N-E-L-A"
       }
     ],
     "rimar": [
@@ -127,6 +175,38 @@
       {
         "texto": "Fale uma palavra que rima com LEÃO.",
         "resposta": "Exemplos: feijão, botão, sabão"
+      },
+      {
+        "texto": "Fale uma palavra que rima com MEL.",
+        "resposta": "Exemplos: papel, anel, pastel"
+      },
+      {
+        "texto": "Fale uma palavra que rima com LUA.",
+        "resposta": "Exemplos: rua, sua, tua"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CAMA.",
+        "resposta": "Exemplos: lama, chama, fama"
+      },
+      {
+        "texto": "Fale uma palavra que rima com DADO.",
+        "resposta": "Exemplos: lado, gado, telhado"
+      },
+      {
+        "texto": "Fale uma palavra que rima com PIPOCA.",
+        "resposta": "Exemplos: minhoca, toca, foca"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CARRO.",
+        "resposta": "Exemplos: barro, jarro, esbarro"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CHÃO.",
+        "resposta": "Exemplos: mão, pão, feijão"
+      },
+      {
+        "texto": "Fale uma palavra que rima com PATO.",
+        "resposta": "Exemplos: gato, rato, sapato"
       }
     ],
     "silabas": [
@@ -177,6 +257,38 @@
       {
         "texto": "Separe as sílabas de PÁSSARO.",
         "resposta": "pás-sa-ro (3)"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra ABACAXI?",
+        "resposta": "4: a-ba-ca-xi"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra FLOR?",
+        "resposta": "1: flor"
+      },
+      {
+        "texto": "Separe as sílabas de GALINHA batendo palmas.",
+        "resposta": "ga-li-nha (3)"
+      },
+      {
+        "texto": "Qual é a primeira sílaba de MACACO?",
+        "resposta": "ma"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra TATU?",
+        "resposta": "2: ta-tu"
+      },
+      {
+        "texto": "Separe as sílabas de PASSARINHO.",
+        "resposta": "pas-sa-ri-nho (4)"
+      },
+      {
+        "texto": "Qual é a última sílaba de BANANA?",
+        "resposta": "na"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra HIPOPÓTAMO?",
+        "resposta": "5: hi-po-pó-ta-mo"
       }
     ],
     "escrever": [
@@ -219,6 +331,46 @@
         "texto": "Ouça e escreva a palavra no quadro.",
         "falar": "coelho",
         "resposta": "coelho"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "borboleta",
+        "resposta": "borboleta"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "chocolate",
+        "resposta": "chocolate"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "sapato",
+        "resposta": "sapato"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "janela",
+        "resposta": "janela"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "galinha",
+        "resposta": "galinha"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "telefone",
+        "resposta": "telefone"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "caderno",
+        "resposta": "caderno"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "morango",
+        "resposta": "morango"
       }
     ]
   }

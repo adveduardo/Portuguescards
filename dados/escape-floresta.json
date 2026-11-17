@@ -1,0 +1,70 @@
+{
+  "titulo": "O Segredo da Floresta Encantada",
+  "historia": "O guardião da floresta escondeu a saída atrás de um portão mágico. Resolvam os 6 desafios para descobrir o código e voltar para casa antes do anoitecer!",
+  "tempo": 1200,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Qual animal vive na floresta e tem o nome escrito com NH?",
+      "imagem": "🌳",
+      "opcoes": [
+        "galinha",
+        "aranha",
+        "coelho",
+        "sapo"
+      ],
+      "correta": "aranha",
+      "dica": "Ela tece teias!"
+    },
+    {
+      "pergunta": "Escreva o plural de ÁRVORE.",
+      "imagem": "🌲",
+      "resposta": [
+        "árvores"
+      ],
+      "dica": "Uma árvore, duas..."
+    },
+    {
+      "pergunta": "Qual palavra é o contrário de ESCURO?",
+      "imagem": "🌙",
+      "opcoes": [
+        "claro",
+        "noite",
+        "preto",
+        "sombra"
+      ],
+      "correta": "claro"
+    },
+    {
+      "pergunta": "Quantas letras tem a palavra FLORESTA? Escreva o número.",
+      "imagem": "🔢",
+      "resposta": [
+        "8",
+        "oito"
+      ],
+      "dica": "Conte devagar: F-L-O-R-E-S-T-A."
+    },
+    {
+      "pergunta": "Qual palavra rima com FLORESTA?",
+      "imagem": "🌳",
+      "opcoes": [
+        "festa",
+        "bola",
+        "pato",
+        "rio"
+      ],
+      "correta": "festa",
+      "dica": "Procure a palavra que termina com -ESTA."
+    },
+    {
+      "pergunta": "Escreva a palavra que falta: O coelho tem orelhas ______ (o contrário de curtas).",
+      "imagem": "🐰",
+      "resposta": [
+        "compridas",
+        "longas",
+        "grandes"
+      ],
+      "dica": "O contrário de curtas."
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detetive das Palavras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .barraEquipes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0}
+  .chipEq{color:#fff;border-radius:16px;padding:6px 14px;font-weight:bold;font-size:1.2rem;opacity:.55;transition:all .3s;box-shadow:0 3px 0 #0002}
+  .chipEq.davez{opacity:1;transform:scale(1.12);box-shadow:0 0 0 4px #fff,0 0 0 8px var(--amarelo)}
+  .chipEq b{margin-left:6px;background:#fff3;border-radius:10px;padding:0 8px}
+  #instrucao{text-align:center;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:bold;margin:10px 0}
+  #frase{background:#fffdf6;border-radius:28px;padding:22px 26px;margin:10px auto;max-width:1150px;text-align:center;box-shadow:0 8px 0 #0001;line-height:1.9}
+  .palavra{display:inline-block;font-size:clamp(1.8rem,4.6vw,3.3rem);font-weight:bold;padding:2px 12px;margin:2px;border-radius:14px;cursor:pointer;border:none;background:transparent;color:var(--texto);font-family:inherit;transition:background .2s}
+  .palavra:hover{background:#eef3ff}
+  .palavra.achada{background:var(--amarelo)}
+  .palavra.certa{background:#d9f5e3;color:#1e7a43;animation:tremer .4s}
+  .palavra.corrigida{background:#d9f5e3;color:#1e7a43}
+  @keyframes tremer{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  #opcoes{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:10px 0}
+  #opcoes button{font-size:clamp(1.5rem,3.6vw,2.4rem);padding:14px 30px;min-width:180px}
+  #opcoes button.ok{background:var(--verde);color:#fff}
+  #opcoes button.nao{background:var(--vermelho);color:#fff}
+  #resultado{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;min-height:1.5em}
+  #contador{text-align:center;opacity:.7}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🕵️ Detetive das Palavras</h1>
+  <div class="cartao">
+    <h2>1. Frases (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes:
+      <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2" selected>2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select>
+    </label>
+    <label>Quantas frases: <select id="selQtd"><option value="10" selected>10</option><option value="15">15</option><option value="20">20</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Pontos: achou a palavra errada na 1ª tentativa = 1 ponto • escolheu a escrita certa = mais 1 ponto.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="instrucao">🔍 Encontre a palavra escrita errado!</div>
+  <div id="frase"></div>
+  <div id="opcoes"></div>
+  <div id="resultado"></div>
+  <div class="linha">
+    <button id="btnOuvir" hidden>🔊 Ouvir a frase certa</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima frase</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const EQUIPES = [{nome:'Leões',emoji:'🦁',cor:'#e74c3c'},{nome:'Golfinhos',emoji:'🐬',cor:'#2f80ed'},{nome:'Papagaios',emoji:'🦜',cor:'#27ae60'},{nome:'Abelhas',emoji:'🐝',cor:'#e6a800'}];
+const limpar = t => String(t).replace(/[.,!?;:"“”()…]/g, '');
+let dados = null, fila = [], atual = null, n = 0, total = 0, equipes = [], vez = 0, tentativas = 0, etapa = 'achar', acertosTurma = 0;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.frases)) return null;
+  const frases = d.frases.filter(f => f && f.frase && f.errada && f.correta).map(f => {
+    const ops = Array.isArray(f.opcoes) && f.opcoes.length ? f.opcoes.map(String) : [String(f.correta)];
+    if (!ops.includes(String(f.correta))) ops.unshift(String(f.correta));
+    return {frase: String(f.frase), errada: String(f.errada), correta: String(f.correta), opcoes: ops.slice(0, 4)};
+  }).filter(f => f.frase.split(/\s+/).some(t => limpar(t) === f.errada));
+  return frases.length ? {titulo: d.titulo || 'Detetive', frases, ignoradas: d.frases.length - frases.length} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada frase precisa de "frase", "errada" (igual a uma palavra da frase) e "correta".');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.frases.length} frases` + (x.ignoradas ? ` • ⚠️ ${x.ignoradas} ignorada(s): a palavra "errada" não aparece igual na frase` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'detetive', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/detetive-padrao.json', 'modelo-detetive.json');
+
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON de frases.');
+  AV.som = $('chkSom').checked;
+  const q = +$('selQtd').value;
+  fila = embaralhar(dados.frases); if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0; vez = 0; acertosTurma = 0;
+  const ne = +$('selEquipes').value;
+  equipes = ne ? EQUIPES.slice(0, ne).map(e => Object.assign({pontos: 0}, e)) : [];
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+function desenharEquipes(){
+  $('barraEquipes').innerHTML = equipes.length
+    ? equipes.map((e, i) => `<span class="chipEq ${i === vez ? 'davez' : ''}" style="background:${e.cor}">${e.emoji} ${AV.esc(e.nome)}<b>${e.pontos}</b></span>`).join('')
+    : `<span class="chipEq davez" style="background:var(--texto)">👩‍🏫 Turma toda<b>${acertosTurma}</b></span>`;
+}
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; tentativas = 0; etapa = 'achar';
+  desenharEquipes();
+  $('contador').textContent = `Frase ${n} de ${total}`;
+  $('instrucao').textContent = (equipes.length ? `${equipes[vez].emoji} ${equipes[vez].nome}: ` : '') + '🔍 Encontre a palavra escrita errado!';
+  $('frase').innerHTML = atual.frase.split(/\s+/).map((t, i) => `<button class="palavra" data-i="${i}">${AV.esc(t)}</button>`).join(' ');
+  $('frase').querySelectorAll('.palavra').forEach(b => b.onclick = () => tocarPalavra(b));
+  $('opcoes').innerHTML = ''; $('resultado').textContent = '';
+  $('btnProxima').hidden = true; $('btnOuvir').hidden = true;
+  AV.tom(660, .1);
+}
+function tocarPalavra(b){
+  if (etapa !== 'achar') return;
+  if (limpar(b.textContent) === atual.errada){
+    b.classList.add('achada');
+    if (tentativas === 0) pontuar(1);
+    AV.tom(880, .15, 'triangle', .15);
+    pedirCorrecao(tentativas === 0 ? '🎯 Achou! +1 ponto. ' : '🎯 Achou! ');
+  } else {
+    tentativas++;
+    b.classList.add('certa'); setTimeout(() => b.classList.remove('certa'), 900);
+    AV.erro();
+    if (tentativas >= 2){
+      const alvo = [...$('frase').querySelectorAll('.palavra')].find(x => limpar(x.textContent) === atual.errada);
+      if (alvo) alvo.classList.add('achada');
+      pedirCorrecao('🕵️ A palavra errada era esta. ');
+    } else $('resultado').textContent = 'Essa palavra está escrita certo! Tentem outra.';
+  }
+}
+function pedirCorrecao(prefixo){
+  etapa = 'corrigir';
+  $('instrucao').textContent = prefixo + 'Agora: como se escreve certo?';
+  $('resultado').textContent = '';
+  $('opcoes').innerHTML = embaralhar(atual.opcoes).map(o => `<button data-o="${AV.esc(o)}">${AV.esc(o)}</button>`).join('');
+  $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => corrigir(b));
+}
+function corrigir(b){
+  if (etapa !== 'corrigir') return;
+  etapa = 'feito';
+  const certo = b.dataset.o === atual.correta;
+  $('opcoes').querySelectorAll('button').forEach(x => { if (x.dataset.o === atual.correta) x.classList.add('ok'); else if (x === b) x.classList.add('nao'); x.disabled = true; });
+  const alvo = [...$('frase').querySelectorAll('.palavra')].find(x => limpar(x.textContent) === atual.errada);
+  if (alvo){ alvo.textContent = alvo.textContent.replace(atual.errada, atual.correta); alvo.classList.remove('achada'); alvo.classList.add('corrigida'); }
+  if (certo){ pontuar(1); AV.fanfarra(); AV.confete(); $('resultado').textContent = `✅ Isso! Escreve-se "${atual.correta}".`; }
+  else { AV.erro(); $('resultado').textContent = `❌ O certo é "${atual.correta}".`; }
+  $('instrucao').textContent = '';
+  $('btnProxima').hidden = false; $('btnOuvir').hidden = false;
+  $('btnProxima').textContent = fila.length ? '➡️ Próxima frase' : '🏆 Ver resultado';
+  desenharEquipes();
+}
+function pontuar(p){ if (equipes.length) equipes[vez].pontos += p; else acertosTurma += p; desenharEquipes(); }
+function fim(){
+  AV.mostrarTela('tFim');
+  if (equipes.length){
+    const g = {}, tot = {};
+    equipes.forEach((e, i) => { g['e' + i] = e; tot['e' + i] = e.pontos; });
+    AV.desenharRanking($('ranking'), g, tot, null, true);
+    $('tituloFim').textContent = '🏆 Resultado dos detetives';
+  } else {
+    $('ranking').innerHTML = `<div class="linhaRank campeao"><span class="pos">🕵️</span><span class="nomeRank">Turma toda</span><span class="pts">${acertosTurma} de ${total * 2}</span></div>`;
+    $('tituloFim').textContent = '🏆 Muito bem, detetives!';
+  }
+  AV.fanfarra(); AV.confete();
+}
+$('btnComecar').onclick = comecar;
+$('btnProxima').onclick = () => { if (equipes.length) vez = (vez + 1) % equipes.length; proxima(); };
+$('btnOuvir').onclick = () => AV.falar(atual.frase.split(/\s+/).map(t => limpar(t) === atual.errada ? t.replace(atual.errada, atual.correta) : t).join(' '));
+$('btnSair').onclick = () => { if (confirm('Terminar o jogo e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

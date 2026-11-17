@@ -1,0 +1,136 @@
+{
+  "titulo": "A caixa misteriosa do quintal",
+  "inicio": "inicio",
+  "partes": {
+    "inicio": {
+      "imagem": "📦",
+      "texto": "Ana e o cachorro Bolinha encontraram uma caixa misteriosa no quintal. Ela fazia um barulho estranho: tic, tic, tic!",
+      "opcoes": [
+        {
+          "texto": "Abrir a caixa",
+          "vai": "abrir"
+        },
+        {
+          "texto": "Chamar a vovó",
+          "vai": "vovo"
+        }
+      ]
+    },
+    "abrir": {
+      "imagem": "🐦",
+      "texto": "Ana abriu a caixa devagar... e um passarinho azul saiu voando! Ele deixou cair um mapa no chão.",
+      "opcoes": [
+        {
+          "texto": "Seguir o mapa",
+          "vai": "mapa"
+        },
+        {
+          "texto": "Seguir o passarinho",
+          "vai": "passarinho"
+        }
+      ]
+    },
+    "vovo": {
+      "imagem": "👵",
+      "texto": "A vovó colocou os óculos e disse: — Essa caixa era do seu avô! Dentro tem uma chave dourada.",
+      "opcoes": [
+        {
+          "texto": "Procurar a porta da chave",
+          "vai": "porao"
+        },
+        {
+          "texto": "Guardar a chave no bolso e ir brincar",
+          "vai": "brincar"
+        }
+      ]
+    },
+    "mapa": {
+      "imagem": "🗺️",
+      "texto": "O mapa mostrava um X embaixo da árvore grande. Bolinha começou a cavar sem parar!",
+      "opcoes": [
+        {
+          "texto": "Cavar junto com o Bolinha",
+          "vai": "tesouro"
+        },
+        {
+          "texto": "Chamar os amigos para ajudar",
+          "vai": "amigos"
+        }
+      ]
+    },
+    "passarinho": {
+      "imagem": "⛲",
+      "texto": "O passarinho voou até a praça e pousou numa fonte. Perto dali, um menino chorava.",
+      "opcoes": [
+        {
+          "texto": "Perguntar o que aconteceu",
+          "vai": "menino"
+        },
+        {
+          "texto": "Oferecer o lanche para ele",
+          "vai": "lanche"
+        }
+      ]
+    },
+    "porao": {
+      "imagem": "🚪",
+      "texto": "A chave abriu uma portinha no porão! Lá dentro havia uma bicicleta antiga e muitos livros empoeirados.",
+      "opcoes": [
+        {
+          "texto": "Consertar a bicicleta",
+          "vai": "bicicleta"
+        },
+        {
+          "texto": "Ler os livros",
+          "vai": "livros"
+        }
+      ]
+    },
+    "brincar": {
+      "imagem": "🐶",
+      "texto": "Ana foi brincar, mas a chave caiu do bolso, e o Bolinha saiu correndo com ela na boca!",
+      "opcoes": [
+        {
+          "texto": "Correr atrás do Bolinha",
+          "vai": "perseguicao"
+        },
+        {
+          "texto": "Oferecer um biscoito ao Bolinha",
+          "vai": "biscoito"
+        }
+      ]
+    },
+    "tesouro": {
+      "imagem": "🎉",
+      "texto": "Vocês encontraram uma lata cheia de figurinhas e fotos antigas da família. Que tesouro! FIM."
+    },
+    "amigos": {
+      "imagem": "⏳",
+      "texto": "Os amigos chegaram com pás e baldes. Juntos, encontraram uma cápsula do tempo com cartas de crianças de muitos anos atrás! FIM."
+    },
+    "menino": {
+      "imagem": "🤝",
+      "texto": "O menino tinha perdido o seu passarinho, o Azulão. Era o mesmo da caixa! Ele ficou tão feliz que virou o melhor amigo da Ana. FIM."
+    },
+    "lanche": {
+      "imagem": "🥪",
+      "texto": "Ana dividiu o lanche, e o menino sorriu. Ele era novo na cidade, e os dois passaram a tarde brincando. FIM."
+    },
+    "bicicleta": {
+      "imagem": "🚲",
+      "texto": "Com a ajuda da vovó, Ana consertou a bicicleta e deu uma volta no quarteirão, com o Bolinha correndo atrás. FIM."
+    },
+    "livros": {
+      "imagem": "📚",
+      "texto": "Dentro de um livro, Ana encontrou um bilhete do avô: “Quem ler estes livros vai viver mil aventuras.” E ela leu até dormir! FIM."
+    },
+    "perseguicao": {
+      "imagem": "🍂",
+      "texto": "Ana correu, correu... e caiu num monte de folhas! O Bolinha voltou, lambeu o rosto dela e devolveu a chave. FIM."
+    },
+    "biscoito": {
+      "imagem": "🍪",
+      "texto": "O Bolinha trocou a chave pelo biscoito na hora. Esperto, né? Ana guardou a chave numa caixinha bem segura. FIM."
+    }
+  }
+}

@@ -27,12 +27,40 @@
     {
       "arquivo": "escape-padrao.json",
       "titulo": "Fuga da Biblioteca Encantada (modelo)"
+    },
+    {
+      "arquivo": "escape-floresta.json",
+      "titulo": "O Segredo da Floresta Encantada"
     }
   ],
   "mimica": [
     {
       "arquivo": "mimica-padrao.json",
       "titulo": "Mímica e desenho (modelo)"
+    }
+  ],
+  "historias": [
+    {
+      "arquivo": "historias-padrao.json",
+      "titulo": "Dados de histórias (modelo)"
+    }
+  ],
+  "caminho": [
+    {
+      "arquivo": "caminho-padrao.json",
+      "titulo": "A caixa misteriosa do quintal (modelo)"
+    }
+  ],
+  "detetive": [
+    {
+      "arquivo": "detetive-padrao.json",
+      "titulo": "Detetive das palavras (modelo)"
+    }
+  ],
+  "pontuacao": [
+    {
+      "arquivo": "pontuacao-padrao.json",
+      "titulo": "Pontuação viva (modelo)"
     }
   ]
 }

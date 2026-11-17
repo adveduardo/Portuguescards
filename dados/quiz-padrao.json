@@ -5,63 +5,331 @@
     {
       "pergunta": "Qual palavra tem 3 sílabas?",
       "imagem": "🔢",
-      "opcoes": ["sol", "casa", "janela", "flor"],
+      "opcoes": [
+        "sol",
+        "casa",
+        "janela",
+        "flor"
+      ],
       "correta": "janela"
     },
     {
       "pergunta": "Qual é o plural de PÃO?",
       "imagem": "🍞",
-      "opcoes": ["pãos", "pães", "pãoes", "pãeses"],
+      "opcoes": [
+        "pãos",
+        "pães",
+        "pãoes",
+        "pãeses"
+      ],
       "correta": "pães"
     },
     {
       "pergunta": "Qual é o contrário de ALTO?",
       "imagem": "🦒",
-      "opcoes": ["grande", "baixo", "largo", "forte"],
+      "opcoes": [
+        "grande",
+        "baixo",
+        "largo",
+        "forte"
+      ],
       "correta": "baixo"
     },
     {
       "pergunta": "Qual palavra está escrita corretamente?",
       "imagem": "✏️",
-      "opcoes": ["caza", "cassa", "casa", "kasa"],
+      "opcoes": [
+        "caza",
+        "cassa",
+        "casa",
+        "kasa"
+      ],
       "correta": "casa"
     },
     {
       "pergunta": "Com que letra começa a palavra GALINHA?",
       "imagem": "🐔",
-      "opcoes": ["J", "G", "C", "L"],
+      "opcoes": [
+        "J",
+        "G",
+        "C",
+        "L"
+      ],
       "correta": "G"
     },
     {
       "pergunta": "Qual palavra tem o dígrafo NH?",
       "imagem": "🕷️",
-      "opcoes": ["aranha", "areia", "arara", "anel"],
+      "opcoes": [
+        "aranha",
+        "areia",
+        "arara",
+        "anel"
+      ],
       "correta": "aranha"
     },
     {
       "pergunta": "Quantas letras tem a palavra ESCOLA?",
       "imagem": "🏫",
-      "opcoes": ["5", "6", "7", "8"],
+      "opcoes": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
       "correta": "6"
     },
     {
       "pergunta": "Os nomes de pessoas começam com letra maiúscula.",
       "imagem": "🔠",
-      "opcoes": ["Verdadeiro", "Falso"],
+      "opcoes": [
+        "Verdadeiro",
+        "Falso"
+      ],
       "correta": "Verdadeiro"
     },
     {
       "pergunta": "Qual palavra rima com GATO?",
       "imagem": "🐱",
-      "opcoes": ["pato", "gola", "bola", "gelo"],
+      "opcoes": [
+        "pato",
+        "gola",
+        "bola",
+        "gelo"
+      ],
       "correta": "pato"
     },
     {
       "pergunta": "Qual destas palavras é o nome de um animal?",
       "imagem": "🐾",
-      "opcoes": ["mesa", "tatu", "lápis", "bolo"],
+      "opcoes": [
+        "mesa",
+        "tatu",
+        "lápis",
+        "bolo"
+      ],
       "correta": "tatu",
       "tempo": 15
+    },
+    {
+      "pergunta": "Qual palavra começa com a mesma letra de BOLA?",
+      "imagem": "⚽",
+      "opcoes": [
+        "casa",
+        "bota",
+        "dado",
+        "pato"
+      ],
+      "correta": "bota"
+    },
+    {
+      "pergunta": "Qual é o plural de ANIMAL?",
+      "imagem": "🐾",
+      "opcoes": [
+        "animals",
+        "animais",
+        "animaes",
+        "animalzes"
+      ],
+      "correta": "animais"
+    },
+    {
+      "pergunta": "Qual palavra tem o dígrafo CH?",
+      "imagem": "🔑",
+      "opcoes": [
+        "cama",
+        "chave",
+        "casa",
+        "cola"
+      ],
+      "correta": "chave"
+    },
+    {
+      "pergunta": "Qual é o feminino de GATO?",
+      "imagem": "🐱",
+      "opcoes": [
+        "gata",
+        "gatão",
+        "gatos",
+        "gatona"
+      ],
+      "correta": "gata"
+    },
+    {
+      "pergunta": "Quantas sílabas tem a palavra JACARÉ?",
+      "imagem": "🐊",
+      "opcoes": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correta": "3"
+    },
+    {
+      "pergunta": "Qual é o contrário de FELIZ?",
+      "imagem": "😊",
+      "opcoes": [
+        "alegre",
+        "triste",
+        "contente",
+        "animado"
+      ],
+      "correta": "triste"
+    },
+    {
+      "pergunta": "Qual palavra está escrita corretamente?",
+      "imagem": "☕",
+      "opcoes": [
+        "xícara",
+        "chícara",
+        "xícarra",
+        "xicra"
+      ],
+      "correta": "xícara"
+    },
+    {
+      "pergunta": "Qual destas palavras é uma ação (verbo)?",
+      "imagem": "🏃",
+      "opcoes": [
+        "correr",
+        "mesa",
+        "azul",
+        "feliz"
+      ],
+      "correta": "correr"
+    },
+    {
+      "pergunta": "Qual é o diminutivo de CASA?",
+      "imagem": "🏠",
+      "opcoes": [
+        "casona",
+        "casinha",
+        "casarão",
+        "casas"
+      ],
+      "correta": "casinha"
+    },
+    {
+      "pergunta": "Qual palavra rima com MÃO?",
+      "imagem": "✋",
+      "opcoes": [
+        "pé",
+        "pão",
+        "sol",
+        "mar"
+      ],
+      "correta": "pão"
+    },
+    {
+      "pergunta": "Qual palavra tem 2 sílabas?",
+      "imagem": "🔢",
+      "opcoes": [
+        "borboleta",
+        "sapo",
+        "elefante",
+        "sol"
+      ],
+      "correta": "sapo"
+    },
+    {
+      "pergunta": "Em qual palavra a letra S tem som de Z?",
+      "imagem": "🐍",
+      "opcoes": [
+        "sapo",
+        "casa",
+        "sol",
+        "sala"
+      ],
+      "correta": "casa"
+    },
+    {
+      "pergunta": "Qual é a forma correta?",
+      "imagem": "🪺",
+      "opcoes": [
+        "ninho",
+        "nilho",
+        "ninio",
+        "nino"
+      ],
+      "correta": "ninho"
+    },
+    {
+      "pergunta": "Qual palavra completa a frase: As meninas ___ felizes.",
+      "imagem": "👧",
+      "opcoes": [
+        "está",
+        "estão",
+        "estamos",
+        "estou"
+      ],
+      "correta": "estão"
+    },
+    {
+      "pergunta": "Qual é o plural de LÁPIS?",
+      "imagem": "✏️",
+      "opcoes": [
+        "lápis",
+        "lápiss",
+        "lápises",
+        "lápiz"
+      ],
+      "correta": "lápis"
+    },
+    {
+      "pergunta": "Para que serve o ponto de interrogação?",
+      "imagem": "❓",
+      "opcoes": [
+        "Para fazer perguntas",
+        "Para mostrar alegria",
+        "Para terminar avisos",
+        "Para separar palavras"
+      ],
+      "correta": "Para fazer perguntas"
+    },
+    {
+      "pergunta": "Qual é o coletivo de PEIXES?",
+      "imagem": "🐟",
+      "opcoes": [
+        "cardume",
+        "rebanho",
+        "matilha",
+        "enxame"
+      ],
+      "correta": "cardume"
+    },
+    {
+      "pergunta": "Qual é o coletivo de ABELHAS?",
+      "imagem": "🐝",
+      "opcoes": [
+        "enxame",
+        "cardume",
+        "alcateia",
+        "manada"
+      ],
+      "correta": "enxame"
+    },
+    {
+      "pergunta": "Qual é o contrário de RÁPIDO?",
+      "imagem": "🐢",
+      "opcoes": [
+        "veloz",
+        "lento",
+        "ligeiro",
+        "ágil"
+      ],
+      "correta": "lento"
+    },
+    {
+      "pergunta": "Qual letra vem depois do P no alfabeto?",
+      "imagem": "🔤",
+      "opcoes": [
+        "O",
+        "Q",
+        "R",
+        "S"
+      ],
+      "correta": "Q"
     }
   ]
 }
