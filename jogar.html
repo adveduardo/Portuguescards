@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jogar">
+<meta name="theme-color" content="#243049">
+<link rel="manifest" href="jogar.webmanifest">
+<link rel="apple-touch-icon" href="jogar-icone.png">
+<title>Jogar – Painel de Aula</title>
+<!--
+  Tela dos grupos (iPads). Escrita em JavaScript antigo (ES5) e CSS sem
+  "grid" nem variáveis, para funcionar no iPad mini 1 (iOS 9) e no mini 2 (iOS 12).
+-->
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+  html,body{margin:0;padding:0;height:100%}
+  body{font-family:"Trebuchet MS","Helvetica Neue",Helvetica,Arial,sans-serif;color:#243049;
+    background:#d6f0ff;background:-webkit-linear-gradient(160deg,#fff4d6,#d6f0ff);background:linear-gradient(160deg,#fff4d6,#d6f0ff);
+    -webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%}
+  .tela{display:none;min-height:100%;padding:16px 16px 30px;text-align:center}
+  .tela.ativa{display:block}
+  h1{font-size:30px;margin:10px 0}
+  h2{font-size:24px;margin:8px 0}
+  p{font-size:18px}
+  button{font-family:inherit;font-weight:bold;border:none;border-radius:16px;padding:14px 20px;font-size:20px;
+    background:#fff;color:#243049;box-shadow:0 4px 0 rgba(0,0,0,.15);cursor:pointer;-webkit-appearance:none}
+  button:active{-webkit-transform:translateY(3px);transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
+  button[disabled]{opacity:.4}
+  .verde{background:#27ae60;color:#fff}
+  .amarelo{background:#ffd54a}
+  .vermelho{background:#e74c3c;color:#fff}
+  .pequeno{font-size:15px;padding:8px 14px}
+  .caixa{background:#fff;border-radius:22px;padding:16px;margin:12px auto;max-width:680px;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  #codigo{font-size:54px;width:260px;text-align:center;letter-spacing:12px;border:4px solid #c9d2e3;border-radius:18px;padding:8px;font-weight:bold;font-family:inherit;color:#243049}
+  #erro{color:#e74c3c;font-weight:bold;min-height:24px;font-size:18px}
+  #aviso{background:#fff3cd;color:#7a5b00;border-radius:12px;padding:8px 12px;font-size:15px;margin:8px auto;max-width:680px;display:none}
+  #conexao{position:fixed;top:6px;right:8px;font-size:13px;background:#e74c3c;color:#fff;border-radius:10px;padding:4px 10px;display:none;z-index:9}
+
+  /* escolha de equipe */
+  .equipes{text-align:center;margin:10px auto;max-width:720px}
+  .equipe{display:inline-block;width:200px;margin:8px;padding:18px 10px;color:#fff;font-size:22px;vertical-align:top}
+  .equipe .e{display:block;font-size:56px;line-height:1.1}
+  .equipe.ocupada{opacity:.3}
+
+  /* topo durante o jogo */
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;
+    -webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;color:#fff;border-radius:16px;padding:8px 14px;margin-bottom:10px}
+  .topo .nome{font-size:22px;font-weight:bold}
+  .topo .info{font-size:18px}
+  .grande-emoji{font-size:110px;line-height:1.1;margin:10px 0}
+
+  /* STOP */
+  #letra{display:inline-block;background:#243049;color:#fff;border-radius:22px;font-size:78px;font-weight:bold;width:120px;height:120px;line-height:120px;margin:4px 0}
+  #tempoStop{font-size:22px;font-weight:bold;margin:6px 0}
+  .campo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;
+    background:#fff;border-radius:16px;margin:10px auto;max-width:700px;padding:6px 12px;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .campo label{width:140px;text-align:left;font-weight:bold;font-size:20px;-webkit-flex-shrink:0;flex-shrink:0}
+  .campo input{-webkit-box-flex:1;-webkit-flex:1;flex:1;font-size:24px;padding:10px;border:3px solid #dfe4ee;border-radius:12px;font-family:inherit;color:#243049;min-width:0;-webkit-appearance:none}
+  .campo input:focus{border-color:#2f80ed;outline:none}
+  .campo.ok input{border-color:#27ae60}
+  #btnStop{font-size:40px;padding:16px 50px;margin:14px 0;background:#e74c3c;color:#fff;letter-spacing:4px}
+  #travaStop{font-size:28px;font-weight:bold;color:#e74c3c;margin:10px 0}
+  .linhaPontos{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;
+    background:#fff;border-radius:12px;margin:6px auto;max-width:620px;padding:10px 14px;font-size:20px}
+  .linhaPontos b{min-width:60px;text-align:right}
+
+  /* QUIZ */
+  #numQuiz{font-size:20px;font-weight:bold;margin:4px 0 10px}
+  #textoPergunta{font-size:24px;font-weight:bold;margin:4px auto 12px;max-width:700px}
+  .opcoes{text-align:center;font-size:0}
+  .op{display:inline-block;width:47%;margin:1.2%;height:150px;color:#fff;font-size:26px;vertical-align:top;padding:8px;line-height:1.15;
+    border-radius:20px;overflow:hidden}
+  .op .l{display:block;font-size:56px;line-height:1}
+  .op0{background:#e74c3c} .op1{background:#2f80ed} .op2{background:#f39c12} .op3{background:#27ae60}
+  .resultado{font-size:40px;font-weight:bold;margin:10px 0}
+  .placa{display:inline-block;background:#fff;border-radius:18px;padding:12px 22px;margin:8px;font-size:20px;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+  .placa b{display:block;font-size:40px}
+</style>
+</head>
+<body>
+<div id="conexao">⚠️ reconectando…</div>
+
+<!-- 1) Código da sala -->
+<section class="tela ativa" id="tEntrar">
+  <h1>🎮 Entrar no jogo</h1>
+  <div id="aviso"></div>
+  <div class="caixa">
+    <p>Digite o <b>código da sala</b> que aparece no telão:</p>
+    <input id="codigo" type="tel" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="0000">
+    <div id="erro"></div>
+    <button class="verde" id="btnEntrar" style="font-size:26px;padding:16px 40px">Entrar ➡️</button>
+  </div>
+  <p style="font-size:15px;opacity:.7">Dica: no iPad, toque em <b>Compartilhar → Adicionar à Tela de Início</b> para abrir como aplicativo.</p>
+</section>
+
+<!-- 2) Escolha da equipe -->
+<section class="tela" id="tEquipe">
+  <h1>Escolham a sua equipe</h1>
+  <div class="equipes" id="listaEquipes"></div>
+  <button class="pequeno" id="btnVoltarCodigo">⬅️ Outro código</button>
+</section>
+
+<!-- 3) Aguardando -->
+<section class="tela" id="tEspera">
+  <div class="topo" id="topoEspera"><span class="nome"></span><span class="info"></span></div>
+  <div class="grande-emoji" id="emojiEspera"></div>
+  <h2 id="msgEspera">Aguardando o professor começar…</h2>
+  <p id="subEspera" style="opacity:.75">Olhem para o telão 👀</p>
+  <div id="pontosEspera"></div>
+  <button class="pequeno" id="btnSair" style="margin-top:30px">Sair da sala</button>
+</section>
+
+<!-- 4) STOP -->
+<section class="tela" id="tStop">
+  <div class="topo" id="topoStop"><span class="nome"></span><span class="info" id="rodadaStop"></span></div>
+  <div>Letra:</div>
+  <div id="letra">?</div>
+  <div id="tempoStop"></div>
+  <div id="campos"></div>
+  <div id="travaStop"></div>
+  <button id="btnStop" disabled>STOP!</button>
+  <p id="dicaStop" style="font-size:15px;opacity:.7">O botão STOP libera quando todos os campos estiverem preenchidos.</p>
+</section>
+
+<!-- 5) QUIZ -->
+<section class="tela" id="tQuiz">
+  <div class="topo" id="topoQuiz"><span class="nome"></span><span class="info" id="pontosQuiz"></span></div>
+  <div id="numQuiz"></div>
+  <div id="textoPergunta"></div>
+  <div class="opcoes" id="opcoesQuiz"></div>
+  <div id="esperaQuiz" style="display:none">
+    <div class="grande-emoji" id="escolhaQuiz"></div>
+    <h2>Resposta enviada! ✅</h2>
+    <p>Aguardem os outros grupos…</p>
+  </div>
+  <div id="resultadoQuiz" style="display:none"></div>
+</section>
+
+<script src="rede.js"></script>
+<script>
+(function(){
+'use strict';
+var $ = function(id){ return document.getElementById(id); };
+var LETRAS = ['A','B','C','D'];
+
+var sala = null, eq = null, jogo = null;
+var ouvEstado = null, ouvGrupos = null, ouvMeuGrupo = null;
+var estado = null;
+var dispositivo = lerLS('jogar_dispositivo');
+if (!dispositivo){ dispositivo = 'd' + Math.random().toString(36).slice(2, 10); gravarLS('jogar_dispositivo', dispositivo); }
+
+function lerLS(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function gravarLS(k, v){ try{ if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); }catch(e){} }
+function mostrar(id){
+  var ts = document.querySelectorAll('.tela');
+  for (var i = 0; i < ts.length; i++) ts[i].className = 'tela' + (ts[i].id === id ? ' ativa' : '');
+  window.scrollTo(0, 0);
+}
+function esc(t){ return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function pintarTopo(id, info){
+  var t = $(id); t.style.background = eq.cor;
+  t.querySelector('.nome').innerHTML = esc(eq.emoji + ' ' + eq.nome);
+  if (info !== undefined) t.querySelector('.info').innerHTML = esc(info);
+}
+function vibrar(){ try{ navigator.vibrate && navigator.vibrate(60); }catch(e){} }
+function equipePorId(id){ for (var i = 0; i < Rede.EQUIPES.length; i++) if (Rede.EQUIPES[i].id === id) return Rede.EQUIPES[i]; return null; }
+
+Rede.aoMudarConexao = function(ok){ $('conexao').style.display = ok ? 'none' : 'block'; };
+
+// ---------------- Entrar ----------------
+function entrar(){
+  var c = $('codigo').value.replace(/\D/g, '');
+  if (c.length !== 4){ $('erro').innerHTML = 'O código tem 4 números.'; return; }
+  $('erro').innerHTML = 'Procurando…';
+  Rede.ler('salas/' + c + '/jogo', function(err, j){
+    if (err){ $('erro').innerHTML = 'Sem conexão com a internet. Tente de novo.'; return; }
+    if (!j){ $('erro').innerHTML = 'Sala não encontrada. Confira o código no telão.'; return; }
+    $('erro').innerHTML = '';
+    sala = c; jogo = j;
+    escolherEquipe();
+  });
+}
+function escolherEquipe(){
+  mostrar('tEquipe');
+  fecharOuvintes();
+  ouvGrupos = Rede.ouvir('salas/' + sala + '/grupos', function(grupos){
+    grupos = grupos || {};
+    var html = '';
+    for (var i = 0; i < Rede.EQUIPES.length; i++){
+      var e = Rede.EQUIPES[i], g = grupos[e.id];
+      var ocupada = g && g.dispositivo !== dispositivo;
+      html += '<button class="equipe' + (ocupada ? ' ocupada' : '') + '" data-id="' + e.id + '"' + (ocupada ? ' disabled' : '') +
+        ' style="background:' + e.cor + '"><span class="e">' + e.emoji + '</span>' + esc(e.nome) + (ocupada ? '<br><small>já escolhida</small>' : '') + '</button>';
+    }
+    $('listaEquipes').innerHTML = html;
+    var bs = $('listaEquipes').querySelectorAll('button');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ entrarComEquipe(this.getAttribute('data-id')); };
+  });
+}
+function entrarComEquipe(id){
+  var e = equipePorId(id); if (!e) return;
+  Rede.ler('salas/' + sala + '/grupos/' + id, function(err, g){
+    if (err) return alert('Sem conexão. Tente de novo.');
+    if (g && g.dispositivo !== dispositivo) return alert('Essa equipe já foi escolhida por outro grupo.');
+    Rede.gravar('salas/' + sala + '/grupos/' + id, {nome: e.nome, emoji: e.emoji, cor: e.cor, dispositivo: dispositivo, entrou: Rede.TS}, function(err2){
+      if (err2) return alert('Não foi possível entrar. Tente de novo.');
+      eq = e;
+      gravarLS('jogar_sessao', JSON.stringify({sala: sala, eq: id, jogo: jogo}));
+      comecarAOuvir();
+    });
+  });
+}
+function fecharOuvintes(){
+  if (ouvEstado){ ouvEstado.fechar(); ouvEstado = null; }
+  if (ouvGrupos){ ouvGrupos.fechar(); ouvGrupos = null; }
+  if (ouvMeuGrupo){ ouvMeuGrupo.fechar(); ouvMeuGrupo = null; }
+}
+function comecarAOuvir(){
+  fecharOuvintes();
+  estado = null; stopRodada = null; quizN = null;
+  telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
+  ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
+    if (g === null && eq){
+      // removido pelo professor (ou sala encerrada)
+      Rede.ler('salas/' + sala + '/jogo', function(err, j){
+        if (!err && !j){ sair('A sala foi encerrada pelo professor.'); }
+        else if (!err){ alert('O professor tirou a sua equipe. Escolham de novo.'); eq = null; escolherEquipe(); }
+      });
+    }
+  });
+  ouvEstado = Rede.ouvir('salas/' + sala + '/estado', function(s){ estado = s || {fase: 'espera'}; renderizar(); });
+}
+function sair(msg){
+  fecharOuvintes();
+  if (sala && eq && msg === undefined) Rede.apagar('salas/' + sala + '/grupos/' + eq.id);
+  gravarLS('jogar_sessao', null);
+  sala = null; eq = null; estado = null;
+  mostrar('tEntrar');
+  $('erro').innerHTML = msg ? esc(msg) : '';
+}
+function telaEspera(msg, sub, extraHtml){
+  mostrar('tEspera');
+  pintarTopo('topoEspera', 'Sala ' + sala);
+  $('emojiEspera').innerHTML = eq.emoji;
+  $('msgEspera').innerHTML = msg;
+  $('subEspera').innerHTML = sub || '';
+  $('pontosEspera').innerHTML = extraHtml || '';
+}
+
+// ---------------- Roteador ----------------
+function renderizar(){
+  if (!estado || !eq) return;
+  if (jogo === 'stop') renderStop();
+  else renderQuiz();
+}
+
+// ================= STOP =================
+var stopRodada = null, timerRascunho = null, travado = false, timerRelogio = null, fimLocal = 0;
+function renderStop(){
+  var f = estado.fase;
+  if (f === 'jogando'){
+    if (stopRodada !== estado.rodada) montarStop();
+    else if (travado) destravar();
+  } else if (f === 'stop' || f === 'correcao'){
+    if (stopRodada === estado.rodada && !travado) travar(f === 'stop' ? (estado.quemNome ? 'STOP de ' + estado.quemNome + '! ✋' : 'STOP! ✋') : 'Tempo! ✋');
+    else if (stopRodada !== estado.rodada) telaEspera('Correção no telão 👀', 'Aguardem a próxima rodada');
+    if (f === 'correcao' && stopRodada === estado.rodada) $('travaStop').innerHTML = 'Correção no telão 👀';
+  } else if (f === 'placar'){
+    clearInterval(timerRelogio);
+    var d = Rede.lista((estado.detalhes || {})[eq.id]);
+    var html = '';
+    for (var i = 0; i < d.length; i++){
+      html += '<div class="linhaPontos"><span>' + esc(d[i].c) + ': <i>' + (d[i].r ? esc(d[i].r) : '—') + '</i></span><b>' + d[i].p + '</b></div>';
+    }
+    var tot = (estado.totais || {})[eq.id] || 0, pr = (estado.pontosRodada || {})[eq.id] || 0;
+    telaEspera('Rodada ' + estado.rodada + ': +' + pr + ' pontos', 'Total: <b>' + tot + '</b> pontos', html);
+  } else if (f === 'fim'){
+    clearInterval(timerRelogio);
+    var pos = (estado.posicoes || {})[eq.id];
+    telaEspera(pos === 1 ? '🏆 Vocês venceram!' : 'Fim de jogo!', 'Total: <b>' + ((estado.totais || {})[eq.id] || 0) + '</b> pontos' + (pos ? ' • ' + pos + 'º lugar' : ''));
+  } else {
+    clearInterval(timerRelogio);
+    telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
+  }
+}
+function montarStop(){
+  stopRodada = estado.rodada; travado = false;
+  mostrar('tStop');
+  pintarTopo('topoStop', 'Rodada ' + estado.rodada);
+  $('letra').innerHTML = esc(estado.letra);
+  $('travaStop').innerHTML = '';
+  $('btnStop').style.display = ''; $('dicaStop').style.display = '';
+  var cats = Rede.lista(estado.categorias), html = '';
+  for (var i = 0; i < cats.length; i++){
+    html += '<div class="campo"><label for="c' + i + '">' + esc(cats[i]) + '</label>' +
+      '<input id="c' + i + '" data-i="' + i + '" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="' + esc(estado.letra) + '…"></div>';
+  }
+  $('campos').innerHTML = html;
+  var ins = $('campos').querySelectorAll('input');
+  for (var k = 0; k < ins.length; k++){
+    ins[k].oninput = aoDigitar;
+    ins[k].onkeydown = function(ev){ if (ev.keyCode === 13){ var n = $('c' + (+this.getAttribute('data-i') + 1)); if (n) n.focus(); else this.blur(); } };
+  }
+  // recupera rascunho (se recarregou a página)
+  Rede.ler(caminhoResp(), function(err, r){
+    if (r){ for (var c in r) if (r.hasOwnProperty(c) && $(c)) $(c).value = r[c]; aoDigitar(true); }
+  });
+  // relógio
+  clearInterval(timerRelogio);
+  fimLocal = estado.tempo ? Date.now() + estado.tempo * 1000 : 0;
+  $('tempoStop').innerHTML = '';
+  if (fimLocal) timerRelogio = setInterval(function(){
+    var s = Math.max(0, Math.round((fimLocal - Date.now()) / 1000));
+    $('tempoStop').innerHTML = '⏳ ' + Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
+    if (!s) clearInterval(timerRelogio);
+  }, 500);
+}
+function caminhoResp(){ return 'salas/' + sala + '/respostas/r' + stopRodada + '/' + eq.id; }
+function lerCampos(){
+  var o = {}, ins = $('campos').querySelectorAll('input');
+  for (var i = 0; i < ins.length; i++) o[ins[i].id] = ins[i].value.replace(/^\s+|\s+$/g, '');
+  return o;
+}
+function aoDigitar(semSalvar){
+  var ins = $('campos').querySelectorAll('input'), todos = true;
+  for (var i = 0; i < ins.length; i++){
+    var v = ins[i].value.replace(/^\s+|\s+$/g, '');
+    ins[i].parentNode.className = 'campo' + (v ? ' ok' : '');
+    if (!v) todos = false;
+  }
+  $('btnStop').disabled = !todos || travado;
+  if (semSalvar === true) return;
+  clearTimeout(timerRascunho);
+  timerRascunho = setTimeout(salvarRespostas, 700);
+}
+function salvarRespostas(cb){
+  clearTimeout(timerRascunho);
+  if (!sala || !eq || stopRodada === null) return;
+  Rede.gravar(caminhoResp(), lerCampos(), cb);
+}
+function travar(msg){
+  travado = true;
+  salvarRespostas();
+  var ins = $('campos').querySelectorAll('input');
+  for (var i = 0; i < ins.length; i++){ ins[i].disabled = true; ins[i].blur(); }
+  $('btnStop').disabled = true; $('btnStop').style.display = 'none'; $('dicaStop').style.display = 'none';
+  $('travaStop').innerHTML = esc(msg) + '<br><span style="font-size:20px;color:#243049">Lápis para baixo! Olhem o telão.</span>';
+  clearInterval(timerRelogio);
+  vibrar();
+}
+function destravar(){
+  travado = false;
+  var ins = $('campos').querySelectorAll('input');
+  for (var i = 0; i < ins.length; i++) ins[i].disabled = false;
+  $('btnStop').style.display = ''; $('dicaStop').style.display = '';
+  $('travaStop').innerHTML = '';
+  aoDigitar(true);
+}
+$('btnStop').onclick = function(){
+  if (travado) return;
+  travado = true; $('btnStop').disabled = true;
+  salvarRespostas(function(){
+    Rede.gravar('salas/' + sala + '/stop', {eq: eq.id, rodada: stopRodada, t: Rede.TS});
+  });
+  travar('Vocês pediram STOP! ✋');
+};
+
+// ================= QUIZ =================
+var quizN = null, respondeu = false;
+function renderQuiz(){
+  var f = estado.fase;
+  var total = (estado.totais || {})[eq.id] || 0;
+  if (f === 'pergunta'){
+    if (quizN !== estado.n) montarPergunta();
+  } else if (f === 'resultado'){
+    var r = (estado.resultados || {})[eq.id];
+    mostrar('tQuiz');
+    pintarTopo('topoQuiz', '⭐ ' + total);
+    $('opcoesQuiz').style.display = 'none'; $('esperaQuiz').style.display = 'none';
+    $('textoPergunta').innerHTML = ''; $('numQuiz').innerHTML = 'Pergunta ' + estado.n + ' de ' + estado.total;
+    var html;
+    if (!r || r.respondeu === false) html = '<div class="grande-emoji">⏰</div><div class="resultado">Não deu tempo!</div>';
+    else if (r.certo) html = '<div class="grande-emoji">🎉</div><div class="resultado" style="color:#27ae60">Acertou! +' + r.pontos + '</div>';
+    else html = '<div class="grande-emoji">😕</div><div class="resultado" style="color:#e74c3c">Não foi dessa vez</div>';
+    html += '<div class="placa">Pontos<b>' + total + '</b></div>';
+    if (r && r.posicao) html += '<div class="placa">Posição<b>' + r.posicao + 'º</b></div>';
+    $('resultadoQuiz').innerHTML = html; $('resultadoQuiz').style.display = 'block';
+    vibrar();
+  } else if (f === 'fim'){
+    var pos = (estado.posicoes || {})[eq.id];
+    telaEspera(pos === 1 ? '🏆 Vocês venceram!' : 'Fim do quiz!', '<b>' + total + '</b> pontos' + (pos ? ' • ' + pos + 'º lugar' : ''));
+  } else {
+    quizN = null;
+    telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
+  }
+}
+function montarPergunta(){
+  quizN = estado.n; respondeu = false;
+  mostrar('tQuiz');
+  pintarTopo('topoQuiz', '⭐ ' + ((estado.totais || {})[eq.id] || 0));
+  $('numQuiz').innerHTML = 'Pergunta ' + estado.n + ' de ' + estado.total;
+  $('textoPergunta').innerHTML = estado.textoNosTablets ? esc(estado.pergunta) : '';
+  $('esperaQuiz').style.display = 'none'; $('resultadoQuiz').style.display = 'none';
+  var ops = Rede.lista(estado.opcoes), html = '';
+  for (var i = 0; i < ops.length; i++){
+    html += '<button class="op op' + i + '" data-i="' + i + '"><span class="l">' + LETRAS[i] + '</span>' + (estado.textoNosTablets ? esc(ops[i]) : '') + '</button>';
+  }
+  var box = $('opcoesQuiz'); box.innerHTML = html; box.style.display = 'block';
+  var bs = box.querySelectorAll('button');
+  for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ responder(+this.getAttribute('data-i')); };
+  // já respondeu antes de recarregar?
+  Rede.ler('salas/' + sala + '/respostas/q' + quizN + '/' + eq.id, function(err, r){ if (r && quizN === estado.n) mostrarEnviada(r.o); });
+}
+function responder(i){
+  if (respondeu || !estado || estado.fase !== 'pergunta') return;
+  respondeu = true; vibrar();
+  Rede.gravar('salas/' + sala + '/respostas/q' + quizN + '/' + eq.id, {o: i, t: Rede.TS}, function(err){
+    if (err){ respondeu = false; alert('Não foi possível enviar. Toque de novo.'); return; }
+  });
+  mostrarEnviada(i);
+}
+function mostrarEnviada(i){
+  respondeu = true;
+  $('opcoesQuiz').style.display = 'none';
+  $('escolhaQuiz').innerHTML = '<span class="op op' + i + '" style="display:inline-block;width:150px;height:150px;line-height:134px;font-size:90px">' + LETRAS[i] + '</span>';
+  $('esperaQuiz').style.display = 'block';
+}
+
+// ---------------- Botões ----------------
+$('btnEntrar').onclick = entrar;
+$('codigo').onkeydown = function(e){ if (e.keyCode === 13) entrar(); };
+$('btnVoltarCodigo').onclick = function(){ fecharOuvintes(); sala = null; mostrar('tEntrar'); };
+$('btnSair').onclick = function(){ if (confirm('Sair da sala?')) sair(); };
+
+// ---------------- Início ----------------
+Rede.iniciar(function(modo){
+  if (modo === 'local'){
+    $('aviso').style.display = 'block';
+    $('aviso').innerHTML = '⚠️ <b>Modo teste:</b> o banco de dados ainda não foi configurado. Assim, o jogo só funciona entre abas deste mesmo aparelho.';
+  }
+  var m = location.search.match(/[?&]sala=(\d{4})/);
+  if (m) $('codigo').value = m[1];
+  // reconecta automaticamente se a página foi recarregada
+  var s = null; try{ s = JSON.parse(lerLS('jogar_sessao')); }catch(e){}
+  if (s && s.sala && s.eq){
+    Rede.ler('salas/' + s.sala + '/grupos/' + s.eq, function(err, g){
+      if (!err && g && g.dispositivo === dispositivo){
+        sala = s.sala; jogo = s.jogo; eq = equipePorId(s.eq);
+        if (eq) comecarAOuvir();
+      } else if (!err) gravarLS('jogar_sessao', null);
+    });
+  }
+});
+})();
+</script>
+</body>
+</html>

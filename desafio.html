@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz ao Vivo – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topoPergunta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .contadorCirculo{width:clamp(80px,12vw,120px);height:clamp(80px,12vw,120px);border-radius:50%;background:var(--texto);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:bold;box-shadow:0 6px 0 #0002}
+  .contadorCirculo.pouco{background:var(--vermelho);animation:pulsar .5s infinite alternate}
+  @keyframes pulsar{to{transform:scale(1.08)}}
+  .respondidos{background:#fff;border-radius:18px;padding:8px 16px;font-weight:bold;font-size:1.2rem;text-align:center;box-shadow:0 4px 0 #0001}
+  .respondidos b{display:block;font-size:2.2rem}
+  #textoPergunta{background:#fff;border-radius:26px;padding:16px 24px;margin:10px 0;text-align:center;font-size:clamp(1.6rem,4.2vw,2.8rem);font-weight:bold;box-shadow:0 6px 0 #0001}
+  #imagemPergunta{font-size:clamp(4rem,12vw,8rem);text-align:center;line-height:1.1;min-height:.2em}
+  #opcoes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+  .opcao{border-radius:22px;color:#fff;padding:16px 20px;font-size:clamp(1.3rem,3.4vw,2.2rem);font-weight:bold;display:flex;align-items:center;gap:16px;
+    box-shadow:0 6px 0 #0002;transition:opacity .3s,transform .3s;min-height:90px}
+  .opcao .l{background:#fff3;border-radius:14px;min-width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:2.2rem}
+  .opcao .quem{margin-left:auto;font-size:1.6rem;letter-spacing:2px}
+  .opcao.apagada{opacity:.28;transform:scale(.97)}
+  .opcao.certa{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde);transform:scale(1.02)}
+  .op0{background:#e74c3c} .op1{background:#2f80ed} .op2{background:#f39c12} .op3{background:#27ae60}
+  #gruposResp{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+  #gruposResp span{font-size:2rem;opacity:.25;transition:opacity .3s,transform .3s}
+  #gruposResp span.ok{opacity:1;transform:scale(1.15)}
+  .podio{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin:20px 0}
+  .degrau{background:#fff;border-radius:20px 20px 0 0;width:min(26vw,220px);text-align:center;padding:12px;box-shadow:0 6px 0 #0001;animation:subir .8s backwards}
+  .degrau .e{font-size:3.4rem}
+  .degrau .n{font-size:1.4rem;font-weight:bold}
+  .degrau .p{font-size:2rem;font-weight:bold}
+  @keyframes subir{from{transform:translateY(80px);opacity:0}}
+</style>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🏆 Quiz ao Vivo (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+
+  <div class="cartao">
+    <h2>1. Perguntas (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+
+  <div class="cartao">
+    <h2>2. Opções</h2>
+    <label><input type="checkbox" id="chkTexto" checked> Mostrar a pergunta e as alternativas também nos iPads</label>
+    <label><input type="checkbox" id="chkEmbaralhar"> Embaralhar a ordem das perguntas</label>
+    <label><input type="checkbox" id="chkEmbaralharOp"> Embaralhar as alternativas</label>
+    <label>Tempo por pergunta:
+      <select id="selTempo">
+        <option value="json" selected>o que está no JSON</option>
+        <option value="10">10 s</option><option value="20">20 s</option><option value="30">30 s</option><option value="60">60 s</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Pontos: resposta certa vale de 500 a 1000 (quanto mais rápida, mais pontos). Errada ou sem resposta = 0.</p>
+  </div>
+
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div>
+      <div class="dica">Nos iPads, abram:</div>
+      <div id="urlJogar" class="url"></div>
+    </div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloQuiz"></h2>
+  <h2>Grupos que entraram</h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">▶️ Começar o quiz</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ PERGUNTA ============ -->
+<section id="tPergunta" class="tela">
+  <div class="topoPergunta">
+    <div class="respondidos">Pergunta<b id="numPergunta">1/10</b></div>
+    <div id="contador" class="contadorCirculo">20</div>
+    <div class="respondidos">Responderam<b id="nRespostas">0/0</b></div>
+  </div>
+  <div id="textoPergunta"></div>
+  <div id="imagemPergunta"></div>
+  <div id="gruposResp"></div>
+  <div id="opcoes"></div>
+  <div class="linha">
+    <button id="btnEncerrarPergunta">⏭️ Encerrar a pergunta agora</button>
+    <button id="btnPlacar" class="principal" hidden>📊 Ver placar</button>
+  </div>
+</section>
+
+<!-- ============ PLACAR ============ -->
+<section id="tPlacar" class="tela">
+  <h1 id="tituloPlacar">Placar</h1>
+  <div id="podio" class="podio"></div>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha">
+    <button id="btnProxima" class="principal">➡️ Próxima pergunta</button>
+    <button id="btnEncerrar2" hidden>✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const LETRAS = ['A', 'B', 'C', 'D'];
+
+let quiz = null, perguntas = [], n = 0;
+let sala = null, arvore = {}, ouvinte = null;
+let totais = {}, fase = 'config', timer = null, fimPergunta = 0, encerrada = false, tempoAtual = 20;
+
+// ---------- JSON ----------
+function normalizarQuiz(d){
+  if (!d || !Array.isArray(d.perguntas)) return null;
+  const padrao = +d.tempoPadrao || 20;
+  const lista = [];
+  d.perguntas.forEach((p, i) => {
+    if (!p || !p.pergunta || !Array.isArray(p.opcoes)) return;
+    const opcoes = p.opcoes.slice(0, 4).map(String);
+    if (opcoes.length < 2) return;
+    let correta = -1;
+    if (typeof p.correta === 'number') correta = p.correta;
+    else if (p.correta != null){
+      const alvo = Rede.normalizar(p.correta);
+      correta = opcoes.findIndex(o => Rede.normalizar(o) === alvo);
+      if (correta < 0 && /^[A-Da-d]$/.test(String(p.correta))) correta = 'abcd'.indexOf(String(p.correta).toLowerCase());
+    }
+    if (correta < 0 || correta >= opcoes.length){ console.warn('Pergunta sem resposta correta válida:', p); return; }
+    lista.push({pergunta: String(p.pergunta), opcoes, correta, imagem: p.imagem || '', tempo: +p.tempo || padrao});
+  });
+  return {titulo: d.titulo || 'Quiz', perguntas: lista, ignoradas: d.perguntas.length - lista.length};
+}
+function carregar(d, origem){
+  const q = normalizarQuiz(d);
+  if (!q || !q.perguntas.length){ AV.avisar('JSON inválido: confira "perguntas", "opcoes" e "correta".'); return; }
+  quiz = q;
+  $('infoJson').textContent = `${q.titulo} • ${q.perguntas.length} perguntas` + (q.ignoradas ? ` • ${q.ignoradas} ignorada(s) por erro no JSON` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'quiz', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/quiz-padrao.json', 'modelo-quiz.json');
+
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// ---------- Sala ----------
+$('btnCriar').onclick = () => {
+  if (!quiz) return AV.avisar('Carregue um JSON de perguntas.');
+  AV.som = $('chkSom').checked;
+  perguntas = $('chkEmbaralhar').checked ? embaralhar(quiz.perguntas) : quiz.perguntas.slice();
+  if ($('chkEmbaralharOp').checked){
+    perguntas = perguntas.map(p => {
+      const ordem = embaralhar(p.opcoes.map((_, i) => i));
+      return {...p, opcoes: ordem.map(i => p.opcoes[i]), correta: ordem.indexOf(p.correta)};
+    });
+  }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'quiz', estado: {fase: 'espera'}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo; n = 0; totais = {};
+    $('codigoSala').textContent = codigo;
+    $('urlJogar').textContent = AV.urlJogar();
+    $('tituloQuiz').textContent = `${quiz.titulo} • ${perguntas.length} perguntas`;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config:'tConfig', sala:'tSala', pergunta:'tPergunta', placar:'tPlacar'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = Object.keys(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} grupo${ids.length > 1 ? 's' : ''} pronto${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'pergunta' && !encerrada){
+    const resp = respostasAtuais();
+    const nr = ids.filter(id => resp[id]).length;
+    $('nRespostas').textContent = `${nr}/${ids.length}`;
+    $('gruposResp').innerHTML = ids.map(id => `<span class="${resp[id] ? 'ok' : ''}" title="${AV.esc(g[id].nome)}">${AV.esc(g[id].emoji)}</span>`).join('');
+    if (ids.length && nr === ids.length) encerrarPergunta();
+  }
+}
+function respostasAtuais(){ return ((arvore.respostas || {})['q' + n]) || {}; }
+
+// ---------- Perguntas ----------
+function mostrarPergunta(){
+  const p = perguntas[n - 1];
+  encerrada = false;
+  tempoAtual = $('selTempo').value === 'json' ? p.tempo : +$('selTempo').value;
+  irPara('pergunta');
+  $('numPergunta').textContent = `${n}/${perguntas.length}`;
+  $('textoPergunta').textContent = p.pergunta;
+  $('imagemPergunta').textContent = p.imagem;
+  $('opcoes').innerHTML = p.opcoes.map((o, i) => `<div class="opcao op${i}"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o)}</span><span class="quem"></span></div>`).join('');
+  $('btnEncerrarPergunta').hidden = false; $('btnPlacar').hidden = true;
+  Rede.gravar(`salas/${sala}/estado`, {
+    fase: 'pergunta', n, total: perguntas.length, opcoes: p.opcoes, pergunta: p.pergunta,
+    textoNosTablets: $('chkTexto').checked, tempo: tempoAtual, inicio: Rede.TS, totais
+  });
+  AV.tom(660, .15); AV.tom(990, .2, 'triangle', .15, .15);
+  AV.falar(p.pergunta);
+  clearInterval(timer);
+  fimPergunta = Date.now() + tempoAtual * 1000;
+  const atualizar = () => {
+    const s = Math.max(0, Math.ceil((fimPergunta - Date.now()) / 1000));
+    $('contador').textContent = s;
+    $('contador').classList.toggle('pouco', s <= 5);
+    if (s <= 5 && s > 0) AV.tique();
+    if (!s) encerrarPergunta();
+  };
+  atualizar(); timer = setInterval(atualizar, 1000);
+  aoMudar();
+}
+function encerrarPergunta(){
+  if (encerrada) return;
+  encerrada = true; clearInterval(timer);
+  $('contador').classList.remove('pouco');
+  $('btnEncerrarPergunta').hidden = true;
+  // espera um instante para chegarem respostas do último segundo
+  setTimeout(() => Rede.ler(`salas/${sala}`, (err, v) => { if (v) arvore = v; calcularResultado(); }), 1200);
+}
+function calcularResultado(){
+  const p = perguntas[n - 1], g = grupos(), ids = Object.keys(g), resp = respostasAtuais();
+  const inicio = (arvore.estado && typeof arvore.estado.inicio === 'number') ? arvore.estado.inicio : null;
+  const resultados = {}, porOpcao = p.opcoes.map(() => []);
+  ids.forEach(id => {
+    const r = resp[id];
+    if (!r){ resultados[id] = {respondeu: false, certo: false, pontos: 0}; return; }
+    const certo = r.o === p.correta;
+    let pontos = 0;
+    if (certo){
+      const decorrido = inicio && typeof r.t === 'number' ? Math.max(0, r.t - inicio) : 0;
+      const frac = Math.min(1, decorrido / (tempoAtual * 1000));
+      pontos = Math.round(1000 - 500 * frac);
+    }
+    totais[id] = (totais[id] || 0) + pontos;
+    resultados[id] = {respondeu: true, certo, pontos};
+    if (porOpcao[r.o]) porOpcao[r.o].push(g[id].emoji);
+  });
+  ids.forEach(id => { if (totais[id] == null) totais[id] = 0; });
+  const pos = AV.posicoes(totais);
+  ids.forEach(id => { resultados[id].posicao = pos[id]; });
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'resultado', n, total: perguntas.length, correta: p.correta, resultados, totais});
+  // mostra a resposta certa no telão
+  document.querySelectorAll('.opcao').forEach((el, i) => {
+    el.classList.add(i === p.correta ? 'certa' : 'apagada');
+    el.querySelector('.quem').textContent = porOpcao[i].join(' ');
+  });
+  const acertos = ids.filter(id => resultados[id].certo).length;
+  AV.falar(`A resposta certa é ${LETRAS[p.correta]}: ${p.opcoes[p.correta]}.`);
+  if (acertos) AV.fanfarra(); else AV.erro();
+  $('btnPlacar').hidden = false;
+  $('btnPlacar').textContent = n < perguntas.length ? '📊 Ver placar' : '🏆 Resultado final';
+}
+function mostrarPlacar(){
+  const ultima = n >= perguntas.length;
+  irPara('placar');
+  const g = grupos();
+  $('podio').innerHTML = '';
+  if (ultima){
+    $('tituloPlacar').textContent = '🏆 Resultado final';
+    const pos = AV.posicoes(totais);
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', totais, posicoes: pos});
+    const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]).slice(0, 3);
+    const alturas = ['200px', '150px', '110px'], ordemVisual = [1, 0, 2];
+    $('podio').innerHTML = ordemVisual.filter(i => ord[i]).map(i => {
+      const id = ord[i], gg = g[id] || {emoji: '❔', nome: id, cor: '#999'};
+      return `<div class="degrau" style="height:${alturas[i]};border-top:10px solid ${gg.cor};animation-delay:${(2 - i) * .4}s">
+        <div class="e">${['🥇','🥈','🥉'][i]} ${AV.esc(gg.emoji)}</div><div class="n">${AV.esc(gg.nome)}</div><div class="p">${totais[id]}</div></div>`;
+    }).join('');
+    $('ranking').innerHTML = '';
+    AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 700);
+    $('btnProxima').hidden = true; $('btnEncerrar2').hidden = false;
+  } else {
+    $('tituloPlacar').textContent = `Placar depois da pergunta ${n}`;
+    const ultimos = {};
+    const est = arvore.estado || {};
+    Object.keys(est.resultados || {}).forEach(id => ultimos[id] = est.resultados[id].pontos);
+    AV.desenharRanking($('ranking'), g, totais, ultimos);
+    $('btnProxima').hidden = false; $('btnEncerrar2').hidden = true;
+  }
+}
+
+$('btnComecar').onclick = () => {
+  if (!Object.keys(grupos()).length && !confirm('Nenhum grupo entrou ainda. Começar mesmo assim?')) return;
+  n = 1; mostrarPergunta();
+};
+$('btnEncerrarPergunta').onclick = encerrarPergunta;
+$('btnPlacar').onclick = mostrarPlacar;
+$('btnProxima').onclick = () => { n++; mostrarPergunta(); };
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  clearInterval(timer);
+  if (ouvinte) ouvinte.fechar();
+  if (sala) Rede.apagar('salas/' + sala);
+  sala = null; arvore = {};
+  $('btnProxima').hidden = false; $('btnEncerrar2').hidden = true;
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

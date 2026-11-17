@@ -1,0 +1,11 @@
+{
+  "name": "Jogar – Painel de Aula",
+  "short_name": "Jogar",
+  "start_url": "jogar.html",
+  "display": "standalone",
+  "background_color": "#d6f0ff",
+  "theme_color": "#243049",
+  "icons": [
+    { "src": "jogar-icone.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

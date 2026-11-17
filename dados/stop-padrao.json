@@ -1,0 +1,32 @@
+{
+  "titulo": "Stop clássico (modelo)",
+  "letras": "ABCDEFGHIJLMNOPRSTUV",
+  "tempo": 180,
+  "pontos": { "unica": 10, "repetida": 5 },
+  "categorias": [
+    {
+      "nome": "Nome",
+      "respostas": ["Ana", "Alice", "Arthur", "Antônio", "Bruno", "Beatriz", "Bernardo", "Bianca", "Carlos", "Camila", "Clara", "Caio", "Davi", "Daniel", "Diana", "Eduardo", "Eduarda", "Elisa", "Enzo", "Fernanda", "Felipe", "Fábio", "Gabriel", "Gabriela", "Giovana", "Heitor", "Helena", "Hugo", "Isabela", "Igor", "Isadora", "Ícaro", "João", "Júlia", "Joana", "Laura", "Lucas", "Luíza", "Leonardo", "Maria", "Miguel", "Mateus", "Manuela", "Nicolas", "Natália", "Noah", "Olívia", "Otávio", "Pedro", "Paula", "Rafael", "Rafaela", "Sofia", "Samuel", "Sara", "Tiago", "Tânia", "Theo", "Úrsula", "Ulisses", "Valentina", "Vitor", "Vinícius"]
+    },
+    {
+      "nome": "Animal",
+      "respostas": ["abelha", "águia", "anta", "arara", "avestruz", "baleia", "burro", "boi", "borboleta", "besouro", "cachorro", "cavalo", "cobra", "coelho", "coruja", "camelo", "dromedário", "dinossauro", "elefante", "ema", "esquilo", "foca", "formiga", "flamingo", "galinha", "gato", "girafa", "gorila", "golfinho", "hipopótamo", "hiena", "iguana", "jacaré", "jabuti", "javali", "joaninha", "leão", "lobo", "lagarto", "lontra", "macaco", "minhoca", "morcego", "mosca", "naja", "onça", "ovelha", "orca", "pato", "peixe", "pinguim", "porco", "pombo", "rato", "raposa", "rinoceronte", "sapo", "siri", "sabiá", "tatu", "tigre", "tartaruga", "tubarão", "tucano", "urso", "urubu", "vaca", "veado", "zebra"]
+    },
+    {
+      "nome": "Fruta",
+      "respostas": ["abacate", "abacaxi", "acerola", "amora", "ameixa", "banana", "cacau", "caju", "carambola", "cereja", "coco", "damasco", "figo", "framboesa", "goiaba", "graviola", "groselha", "jabuticaba", "jaca", "kiwi", "laranja", "limão", "lichia", "maçã", "mamão", "manga", "maracujá", "melancia", "melão", "morango", "nectarina", "pera", "pêssego", "pitanga", "pitaya", "romã", "tangerina", "tamarindo", "uva", "umbu"]
+    },
+    {
+      "nome": "Cor",
+      "respostas": ["amarelo", "azul", "anil", "bege", "branco", "bordô", "cinza", "creme", "dourado", "laranja", "lilás", "marrom", "magenta", "preto", "prata", "rosa", "roxo", "salmão", "turquesa", "verde", "vermelho", "violeta", "vinho", "ocre", "índigo", "caramelo"]
+    },
+    {
+      "nome": "Objeto",
+      "respostas": ["agulha", "anel", "apontador", "bola", "borracha", "balde", "bolsa", "caneta", "cadeira", "caderno", "chave", "colher", "copo", "dado", "escova", "espelho", "faca", "garfo", "garrafa", "guarda-chuva", "ioiô", "ímã", "jarra", "lápis", "livro", "lanterna", "mesa", "mochila", "martelo", "novelo", "óculos", "panela", "pente", "prato", "régua", "relógio", "sofá", "sapato", "tesoura", "tijolo", "telefone", "travesseiro", "uniforme", "vassoura", "vaso", "violão"]
+    },
+    {
+      "nome": "Comida",
+      "respostas": ["arroz", "bolo", "biscoito", "batata", "brigadeiro", "cuscuz", "coxinha", "chocolate", "doce", "empada", "esfirra", "farofa", "feijão", "frango", "gelatina", "hambúrguer", "iogurte", "lasanha", "macarrão", "mingau", "nhoque", "omelete", "ovo", "pão", "pastel", "pizza", "pipoca", "queijo", "quindim", "risoto", "salada", "sopa", "sorvete", "sanduíche", "tapioca", "torta", "vatapá"]
+    }
+  ]
+}

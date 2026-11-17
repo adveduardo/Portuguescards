@@ -1,0 +1,67 @@
+{
+  "titulo": "Quiz de Português (modelo)",
+  "tempoPadrao": 20,
+  "perguntas": [
+    {
+      "pergunta": "Qual palavra tem 3 sílabas?",
+      "imagem": "🔢",
+      "opcoes": ["sol", "casa", "janela", "flor"],
+      "correta": "janela"
+    },
+    {
+      "pergunta": "Qual é o plural de PÃO?",
+      "imagem": "🍞",
+      "opcoes": ["pãos", "pães", "pãoes", "pãeses"],
+      "correta": "pães"
+    },
+    {
+      "pergunta": "Qual é o contrário de ALTO?",
+      "imagem": "🦒",
+      "opcoes": ["grande", "baixo", "largo", "forte"],
+      "correta": "baixo"
+    },
+    {
+      "pergunta": "Qual palavra está escrita corretamente?",
+      "imagem": "✏️",
+      "opcoes": ["caza", "cassa", "casa", "kasa"],
+      "correta": "casa"
+    },
+    {
+      "pergunta": "Com que letra começa a palavra GALINHA?",
+      "imagem": "🐔",
+      "opcoes": ["J", "G", "C", "L"],
+      "correta": "G"
+    },
+    {
+      "pergunta": "Qual palavra tem o dígrafo NH?",
+      "imagem": "🕷️",
+      "opcoes": ["aranha", "areia", "arara", "anel"],
+      "correta": "aranha"
+    },
+    {
+      "pergunta": "Quantas letras tem a palavra ESCOLA?",
+      "imagem": "🏫",
+      "opcoes": ["5", "6", "7", "8"],
+      "correta": "6"
+    },
+    {
+      "pergunta": "Os nomes de pessoas começam com letra maiúscula.",
+      "imagem": "🔠",
+      "opcoes": ["Verdadeiro", "Falso"],
+      "correta": "Verdadeiro"
+    },
+    {
+      "pergunta": "Qual palavra rima com GATO?",
+      "imagem": "🐱",
+      "opcoes": ["pato", "gola", "bola", "gelo"],
+      "correta": "pato"
+    },
+    {
+      "pergunta": "Qual destas palavras é o nome de um animal?",
+      "imagem": "🐾",
+      "opcoes": ["mesa", "tatu", "lápis", "bolo"],
+      "correta": "tatu",
+      "tempo": 15
+    }
+  ]
+}

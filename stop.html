@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #letraGrande{font-size:clamp(7rem,22vw,14rem);font-weight:bold;line-height:1;color:#fff;background:var(--texto);border-radius:36px;
+    width:clamp(10rem,30vw,19rem);height:clamp(10rem,30vw,19rem);display:flex;align-items:center;justify-content:center;margin:6px auto;box-shadow:0 10px 0 #0002}
+  #letraGrande.girando{background:#5b6680}
+  .catsRodada{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  .catsRodada span{background:#fff;border-radius:999px;padding:8px 16px;font-weight:bold;font-size:1.2rem;box-shadow:0 3px 0 #0001}
+  .progressoGrupos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+  .pg{background:#fff;border-radius:18px;padding:10px 16px;min-width:180px;box-shadow:0 4px 0 #0001;text-align:center}
+  .pg .barra{height:14px;background:#e9edf5;border-radius:999px;overflow:hidden;margin-top:6px}
+  .pg .barra div{height:100%;transition:width .3s}
+  #relogioStop{font-size:clamp(2rem,6vw,3.4rem);font-weight:bold;font-family:"Courier New",monospace}
+  #faixaStop{font-size:clamp(3rem,12vw,8rem);font-weight:bold;color:#fff;background:var(--vermelho);border-radius:30px;padding:10px 40px;letter-spacing:8px;animation:pulsar .4s 4 alternate}
+  @keyframes pulsar{to{transform:scale(1.08)}}
+  /* tabela de correção */
+  .tabela{border-collapse:separate;border-spacing:6px;margin:8px auto;max-width:100%}
+  .tabela th{font-size:1.05rem;padding:6px 10px;border-radius:12px;color:#fff}
+  .tabela th.cat{background:var(--texto);text-align:left}
+  .tabela td{background:#fff;border-radius:12px;padding:8px 10px;font-size:1.15rem;font-weight:bold;cursor:pointer;min-width:120px;position:relative;box-shadow:0 2px 0 #0001}
+  .tabela td small{position:absolute;top:3px;right:6px;font-size:.8rem;opacity:.8}
+  .tabela td.valida{background:#d9f5e3}
+  .tabela td.duvida{background:#fff3c4}
+  .tabela td.invalida{background:#ffd9d9;text-decoration:line-through;color:#a33}
+  .tabela td.vazia{background:#eef0f4;color:#9aa2b5;cursor:default}
+  .tabela td.total{background:var(--texto);color:#fff;font-size:1.4rem;text-align:center;cursor:default}
+  .legenda{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.95rem;margin:4px 0}
+  .legenda span{padding:3px 10px;border-radius:8px}
+</style>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🛑 Stop (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+
+  <div class="cartao">
+    <h2>1. Lista de categorias (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <div id="listaCats" class="catsEscolha"></div>
+  </div>
+
+  <div class="cartao">
+    <h2>2. Regras</h2>
+    <label>Tempo de cada rodada:
+      <select id="selTempo">
+        <option value="0">sem limite (só o botão STOP)</option>
+        <option value="60">1 minuto</option><option value="120">2 minutos</option>
+        <option value="180" selected>3 minutos</option><option value="300">5 minutos</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Pontos: resposta válida que só um grupo escreveu = <b id="ptUnica">10</b> • válida repetida = <b id="ptRep">5</b> • vazia ou errada = 0.</p>
+  </div>
+
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA DE ESPERA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div>
+      <div class="dica">Nos iPads, abram:</div>
+      <div id="urlJogar" class="url"></div>
+    </div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloEspera">Grupos que entraram</h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnRodada" class="principal">🎲 Sortear letra e começar</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+  <div id="placarSala"></div>
+</section>
+
+<!-- ============ RODADA ============ -->
+<section id="tRodada" class="tela">
+  <div class="linha" style="justify-content:space-between">
+    <div class="dica" id="infoRodada"></div>
+    <div id="relogioStop"></div>
+    <div class="dica">Sala <b id="codigoSala2"></b></div>
+  </div>
+  <div id="letraGrande">?</div>
+  <div class="catsRodada" id="catsRodada"></div>
+  <div class="progressoGrupos" id="progressoGrupos"></div>
+  <div id="faixaStopBox" style="text-align:center;min-height:10px"></div>
+  <div class="linha">
+    <button id="btnStopProf" class="vermelho">✋ STOP (professor)</button>
+  </div>
+</section>
+
+<!-- ============ CORREÇÃO ============ -->
+<section id="tCorrecao" class="tela">
+  <h1 id="tituloCorrecao">Correção</h1>
+  <div class="legenda">
+    <span style="background:#d9f5e3">✔ válida (está na lista)</span>
+    <span style="background:#fff3c4">? confira (não está na lista, mas vale)</span>
+    <span style="background:#ffd9d9">✖ não vale</span>
+    <span style="background:#eef0f4">— vazia</span>
+  </div>
+  <p class="dica" style="text-align:center">Toque numa resposta para mudar entre <b>vale</b> e <b>não vale</b>. Repetidas valem metade.</p>
+  <div style="overflow-x:auto"><table class="tabela" id="tabela"></table></div>
+  <div class="linha">
+    <button id="btnConfirmar" class="principal">✅ Confirmar pontos</button>
+  </div>
+</section>
+
+<!-- ============ PLACAR ============ -->
+<section id="tPlacar" class="tela">
+  <h1 id="tituloPlacar">Placar</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha">
+    <button id="btnProxima" class="principal">🎲 Próxima rodada</button>
+    <button id="btnFim">🏁 Terminar o jogo</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+
+let dados = null;          // JSON carregado
+let catsAtivas = [];       // categorias escolhidas
+let sala = null, arvore = {}, ouvinte = null;
+let rodada = 0, letra = '', letrasUsadas = [], totais = {}, fimRodada = 0, timerRel = null;
+let fase = 'config', correcao = null;
+
+// ---------- JSON ----------
+function carregarDados(d, origem){
+  if (!d || !Array.isArray(d.categorias) || !d.categorias.length){ AV.avisar('JSON inválido: falta a lista "categorias".'); return; }
+  dados = {
+    titulo: d.titulo || 'Stop',
+    letras: String(d.letras || 'ABCDEFGHIJLMNOPRSTUV').toUpperCase().replace(/[^A-Z]/g, ''),
+    tempo: +d.tempo || 0,
+    pontos: {unica: +(d.pontos && d.pontos.unica) || 10, repetida: +(d.pontos && d.pontos.repetida) || 5},
+    categorias: d.categorias.map(c => typeof c === 'string' ? {nome: c, respostas: []} : {nome: String(c.nome || ''), respostas: Array.isArray(c.respostas) ? c.respostas : []}).filter(c => c.nome)
+  };
+  $('infoJson').textContent = `${dados.titulo} • ${dados.categorias.length} categorias • letras: ${dados.letras}` + (origem ? ` • ${origem}` : '');
+  $('ptUnica').textContent = dados.pontos.unica; $('ptRep').textContent = dados.pontos.repetida;
+  if ([...$('selTempo').options].some(o => +o.value === dados.tempo)) $('selTempo').value = dados.tempo;
+  const box = $('listaCats'); box.innerHTML = '';
+  dados.categorias.forEach((c, i) => {
+    const l = document.createElement('label');
+    l.innerHTML = `<input type="checkbox" data-i="${i}" ${i < 6 ? 'checked' : ''}> ${AV.esc(c.nome)} <small>(${c.respostas.length} respostas na lista)</small>`;
+    box.appendChild(l);
+  });
+}
+AV.prepararSeletorJson({
+  tipo: 'stop', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'),
+  aoCarregar: carregarDados
+});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/stop-padrao.json', 'modelo-stop.json');
+
+// ---------- Criar sala ----------
+$('btnCriar').onclick = () => {
+  if (!dados) return AV.avisar('Carregue um JSON de categorias.');
+  catsAtivas = [...document.querySelectorAll('#listaCats input:checked')].map(i => dados.categorias[+i.dataset.i]);
+  if (!catsAtivas.length) return AV.avisar('Escolha pelo menos uma categoria.');
+  AV.som = $('chkSom').checked;
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'stop', estado: {fase: 'espera'}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo; rodada = 0; totais = {}; letrasUsadas = [];
+    $('codigoSala').textContent = codigo; $('codigoSala2').textContent = codigo;
+    $('urlJogar').textContent = AV.urlJogar();
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+
+function grupos(){ return arvore.grupos || {}; }
+function aoMudar(){
+  if (fase === 'sala') AV.desenharGrupos($('gruposSala'), grupos(), id => Rede.apagar(`salas/${sala}/grupos/${id}`), totais);
+  const n = Object.keys(grupos()).length;
+  $('dicaGrupos').textContent = n ? `${n} grupo${n > 1 ? 's' : ''} pronto${n > 1 ? 's' : ''}.` : 'Esperando os grupos entrarem…';
+  if (fase === 'rodada'){
+    desenharProgresso();
+    const s = arvore.stop;
+    if (s && s.rodada === rodada && !pedidoStop) pedirStop(s.eq);
+  }
+}
+function irPara(f){
+  fase = f;
+  AV.mostrarTela({config:'tConfig', sala:'tSala', rodada:'tRodada', correcao:'tCorrecao', placar:'tPlacar'}[f]);
+  if (f === 'sala'){
+    $('tituloEspera').textContent = rodada ? 'Grupos na sala' : 'Grupos que entraram';
+    $('btnRodada').textContent = rodada ? '🎲 Sortear letra da próxima rodada' : '🎲 Sortear letra e começar';
+    aoMudar();
+  }
+}
+
+// ---------- Rodada ----------
+let pedidoStop = false;
+function novaRodada(){
+  if (!Object.keys(grupos()).length && !confirm('Nenhum grupo entrou ainda. Começar mesmo assim?')) return;
+  let disponiveis = dados.letras.split('').filter(l => !letrasUsadas.includes(l));
+  if (!disponiveis.length){ letrasUsadas = []; disponiveis = dados.letras.split(''); }
+  letra = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+  letrasUsadas.push(letra);
+  rodada++; pedidoStop = false;
+  irPara('rodada');
+  $('infoRodada').textContent = `Rodada ${rodada}`;
+  $('faixaStopBox').innerHTML = ''; $('relogioStop').textContent = '';
+  $('catsRodada').innerHTML = catsAtivas.map(c => `<span>${AV.esc(c.nome)}</span>`).join('');
+  $('btnStopProf').disabled = true;
+  // animação da letra
+  const el = $('letraGrande'); el.classList.add('girando');
+  let passos = 0, atraso = 60;
+  (function girar(){
+    if (passos++ < 22){
+      el.textContent = dados.letras[Math.floor(Math.random() * dados.letras.length)];
+      AV.tom(500 + passos * 25, .05, 'square', .05);
+      atraso *= 1.1; setTimeout(girar, atraso);
+    } else {
+      el.textContent = letra; el.classList.remove('girando');
+      AV.fanfarra(); AV.falar('Letra ' + letra);
+      comecarRodada();
+    }
+  })();
+}
+function comecarRodada(){
+  const tempo = +$('selTempo').value;
+  Rede.apagar(`salas/${sala}/stop`);
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'jogando', rodada, letra, categorias: catsAtivas.map(c => c.nome), tempo, inicio: Rede.TS});
+  $('btnStopProf').disabled = false;
+  clearInterval(timerRel);
+  fimRodada = tempo ? Date.now() + tempo * 1000 : 0;
+  if (fimRodada) timerRel = setInterval(() => {
+    const s = Math.max(0, Math.round((fimRodada - Date.now()) / 1000));
+    $('relogioStop').textContent = '⏳ ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    $('relogioStop').style.color = s <= 10 ? 'var(--vermelho)' : '';
+    if (s <= 10 && s > 0) AV.tom(900, .05, 'square', .05);
+    if (!s){ clearInterval(timerRel); if (!pedidoStop) pedirStop('tempo'); }
+  }, 1000);
+  desenharProgresso();
+}
+function desenharProgresso(){
+  const resp = ((arvore.respostas || {})['r' + rodada]) || {};
+  const g = grupos();
+  $('progressoGrupos').innerHTML = Object.keys(g).map(id => {
+    const r = resp[id] || {};
+    const n = catsAtivas.filter((_, i) => (r['c' + i] || '').trim()).length;
+    const pct = Math.round(n / catsAtivas.length * 100);
+    return `<div class="pg"><b>${AV.esc(g[id].emoji + ' ' + g[id].nome)}</b><div>${n} de ${catsAtivas.length}</div>
+      <div class="barra"><div style="width:${pct}%;background:${g[id].cor}"></div></div></div>`;
+  }).join('');
+}
+function pedirStop(quem){
+  if (pedidoStop) return;
+  pedidoStop = true; clearInterval(timerRel);
+  $('btnStopProf').disabled = true;
+  const g = grupos()[quem];
+  const quemNome = quem === 'tempo' ? 'Tempo esgotado' : quem === 'professor' ? 'Professor' : (g ? g.emoji + ' ' + g.nome : 'Um grupo');
+  Rede.atualizar(`salas/${sala}/estado`, {fase: 'stop', quem, quemNome});
+  $('faixaStopBox').innerHTML = `<div id="faixaStop">STOP!</div><h2>${AV.esc(quemNome)}</h2><p class="dica">Recolhendo as respostas…</p>`;
+  AV.sirene(); AV.falar(quem === 'tempo' ? 'Acabou o tempo!' : 'Stop!');
+  // espera os iPads enviarem as últimas respostas
+  setTimeout(() => Rede.ler(`salas/${sala}/respostas/r${rodada}`, (err, r) => montarCorrecao(r || {})), 3500);
+}
+$('btnStopProf').onclick = () => pedirStop('professor');
+$('btnRodada').onclick = novaRodada;
+$('btnProxima').onclick = novaRodada;
+
+// ---------- Correção ----------
+function montarCorrecao(resp){
+  Rede.atualizar(`salas/${sala}/estado`, {fase: 'correcao'});
+  const g = grupos();
+  const ids = Object.keys(g).filter(id => resp[id] || true);
+  const L = Rede.normalizar(letra);
+  correcao = {ids, celulas: {}};
+  catsAtivas.forEach((c, ci) => {
+    const conhecidas = new Set(c.respostas.map(Rede.normalizar));
+    ids.forEach(id => {
+      const texto = ((resp[id] || {})['c' + ci] || '').trim();
+      const n = Rede.normalizar(texto);
+      let st = 'vazia';
+      if (n){
+        if (n[0] !== L) st = 'invalida';
+        else st = conhecidas.has(n) ? 'valida' : 'duvida';
+      }
+      correcao.celulas[ci + '|' + id] = {texto, n, st};
+    });
+  });
+  $('tituloCorrecao').textContent = `Correção – Rodada ${rodada} – Letra ${letra}`;
+  desenharCorrecao();
+  irPara('correcao');
+}
+function pontosCelula(ci, id){
+  const c = correcao.celulas[ci + '|' + id];
+  if (c.st === 'vazia' || c.st === 'invalida') return 0;
+  const iguais = correcao.ids.filter(o => { const x = correcao.celulas[ci + '|' + o]; return x.n === c.n && (x.st === 'valida' || x.st === 'duvida'); }).length;
+  return iguais > 1 ? dados.pontos.repetida : dados.pontos.unica;
+}
+function desenharCorrecao(){
+  const g = grupos(), ids = correcao.ids;
+  let html = '<tr><th></th>' + ids.map(id => `<th style="background:${g[id] ? g[id].cor : '#999'}">${AV.esc(g[id] ? g[id].emoji + ' ' + g[id].nome : id)}</th>`).join('') + '</tr>';
+  catsAtivas.forEach((c, ci) => {
+    html += `<tr><th class="cat">${AV.esc(c.nome)}</th>`;
+    ids.forEach(id => {
+      const cel = correcao.celulas[ci + '|' + id];
+      const p = pontosCelula(ci, id);
+      html += `<td class="${cel.st}" data-k="${ci}|${id}">${cel.texto ? AV.esc(cel.texto) : '—'}<small>${cel.st === 'vazia' ? '' : p}</small></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '<tr><th class="cat">TOTAL</th>' + ids.map(id => `<td class="total">${catsAtivas.reduce((s, _, ci) => s + pontosCelula(ci, id), 0)}</td>`).join('') + '</tr>';
+  $('tabela').innerHTML = html;
+  $('tabela').querySelectorAll('td[data-k]').forEach(td => td.onclick = () => {
+    const cel = correcao.celulas[td.dataset.k];
+    if (cel.st === 'vazia') return;
+    cel.st = cel.st === 'invalida' ? (cel.antes || 'duvida') : (cel.antes = cel.st, 'invalida');
+    AV.tom(cel.st === 'invalida' ? 300 : 700, .08, 'triangle', .1);
+    desenharCorrecao();
+  });
+}
+$('btnConfirmar').onclick = () => {
+  const g = grupos(), pontosRodada = {}, detalhes = {};
+  correcao.ids.forEach(id => {
+    let soma = 0; detalhes[id] = [];
+    catsAtivas.forEach((c, ci) => {
+      const p = pontosCelula(ci, id); soma += p;
+      detalhes[id].push({c: c.nome, r: correcao.celulas[ci + '|' + id].texto, p});
+    });
+    pontosRodada[id] = soma;
+    totais[id] = (totais[id] || 0) + soma;
+  });
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'placar', rodada, pontosRodada, totais, detalhes});
+  $('tituloPlacar').textContent = `Placar depois da rodada ${rodada}`;
+  AV.desenharRanking($('ranking'), g, totais, pontosRodada);
+  AV.fanfarra(); AV.confete();
+  irPara('placar');
+};
+$('btnFim').onclick = () => {
+  const posicoes = AV.posicoes(totais);
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', totais, posicoes});
+  $('tituloPlacar').textContent = '🏆 Resultado final';
+  AV.desenharRanking($('ranking'), grupos(), totais, null, true);
+  AV.fanfarra(); AV.confete(); AV.confete();
+  $('btnProxima').hidden = true; $('btnFim').hidden = true;
+  const b = document.createElement('button'); b.textContent = '✖️ Encerrar sala'; b.onclick = encerrar; b.id = 'btnEncerrarFim';
+  $('btnFim').parentNode.appendChild(b);
+};
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  clearInterval(timerRel);
+  if (ouvinte) ouvinte.fechar();
+  if (sala) Rede.apagar('salas/' + sala);
+  sala = null; arvore = {};
+  $('btnProxima').hidden = false; $('btnFim').hidden = false;
+  const b = $('btnEncerrarFim'); if (b) b.remove();
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+
+// ---------- Início ----------
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>
