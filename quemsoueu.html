@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Quem Sou Eu? – Animais</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a;--roxo:#7b4bd1;--tam:120px}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;padding:8px 10px 6px;
+    user-select:none;-webkit-user-select:none}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:14px;padding:10px 14px;font-size:1rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  button:disabled{opacity:.45;cursor:default}
+  [hidden]{display:none !important}
+  h1{font-size:clamp(1.3rem,3.5vw,2rem);margin:4px 0;text-align:center}
+
+  /* ---------- Tela inicial ---------- */
+  #telaInicio{max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+  .cartao{background:#fff;border-radius:22px;padding:14px 20px;box-shadow:0 5px 0 #0001;width:100%;margin:8px 0}
+  .cartao h2{margin:4px 0 8px;font-size:1.2rem}
+  .cartao label{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:1.08rem;flex-wrap:wrap}
+  .cartao select{font:inherit;font-size:1.05rem;padding:6px;border-radius:10px;border:2px solid #ccd}
+  .cartao input[type=checkbox],.cartao input[type=radio]{width:22px;height:22px}
+  .modo{display:flex;gap:10px;flex-wrap:wrap}
+  .modo label{flex:1;min-width:230px;border:3px solid #e3e7f0;border-radius:16px;padding:10px 12px;margin:0;cursor:pointer;align-items:flex-start}
+  .modo label:has(input:checked){border-color:var(--azul);background:#eef4ff}
+  .modo small{display:block;font-size:.9rem;opacity:.75;font-weight:normal}
+  #btnIniciar{background:var(--verde);color:#fff;font-size:1.4rem;padding:14px 30px;margin:8px 0}
+  .dica{font-size:.93rem;opacity:.75}
+
+  /* ---------- Jogo ---------- */
+  #telaJogo{display:flex;gap:12px;align-items:flex-start}
+  #areaGrade{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}
+  #faixa{font-size:clamp(1.05rem,2.6vw,1.5rem);font-weight:bold;text-align:center;background:#fff;border-radius:16px;padding:8px 16px;margin-bottom:8px;box-shadow:0 3px 0 #0001}
+  #faixa.segredo{background:var(--roxo);color:#fff}
+  #faixa.chute{background:var(--amarelo)}
+  #grade{display:grid;gap:8px;justify-content:center}
+  .carta{width:var(--tam);height:calc(var(--tam) * 1.12);background:#fff;border-radius:calc(var(--tam) * .14);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;
+    box-shadow:0 4px 0 #0002;transition:transform .25s,background .25s,opacity .25s;overflow:hidden}
+  .carta .emo{font-size:calc(var(--tam) * .58);line-height:1.05}
+  .carta img{width:82%;height:68%;object-fit:cover;border-radius:10px;pointer-events:none}
+  .carta .nome{font-size:max(10px,calc(var(--tam) * .13));font-weight:bold;text-align:center;line-height:1.1;padding:0 3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .semNomes .carta .nome{display:none}
+  .carta.virada{background:#8a94ab;transform:scale(.92)}
+  .carta.virada .emo,.carta.virada img,.carta.virada .nome{opacity:.22;filter:grayscale(1)}
+  .carta.virada::after{content:"✖";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:calc(var(--tam) * .6);color:#ffffffdd;font-weight:bold}
+  /* Fase secreta: NENHUM retorno visual ao tocar */
+  #grade.secreto, #grade.secreto *{cursor:none !important}
+  #grade.secreto .carta{transition:none}
+  #grade.chute .carta:not(.virada){box-shadow:0 0 0 3px var(--amarelo),0 4px 0 #0002}
+
+  #painel{width:340px;flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+  .placa{background:#fff;border-radius:18px;padding:10px 12px;box-shadow:0 4px 0 #0001}
+  .contadores{display:flex;gap:8px}
+  .contadores div{flex:1;text-align:center;background:#f3f6fc;border-radius:12px;padding:6px}
+  .contadores b{display:block;font-size:2rem;line-height:1.1}
+  #perguntas{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  #perguntas button{text-align:left;font-size:.88rem;padding:7px 8px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1.15;box-shadow:0 3px 0 #0002}
+  #perguntas button .r{font-size:.85rem;border-radius:8px;padding:2px 8px;color:#fff}
+  #perguntas button .r.sim{background:var(--verde)} #perguntas button .r.nao{background:var(--vermelho)}
+  #painel .grandes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  #painel .grandes button{font-size:.92rem;padding:9px 8px}
+  #painel .grandes #btnChutar{background:var(--amarelo);font-size:1.1rem;grid-column:1 / -1}
+  #historico{font-size:.9rem;max-height:110px;overflow:auto}
+  #historico div{padding:3px 0;border-bottom:1px dashed #e3e6ee}
+  .titPainel{font-weight:bold;margin:2px 0 6px}
+  @media (max-width:900px){ #telaJogo{flex-direction:column;align-items:stretch} #painel{width:100%} #perguntas{display:grid;grid-template-columns:1fr 1fr} }
+
+  /* ---------- Avisos grandes ---------- */
+  #modal{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
+  #modalCaixa{background:#fff;border-radius:28px;padding:22px 30px;text-align:center;max-width:min(92vw,620px);box-shadow:0 20px 50px #0005;animation:aparecer .25s}
+  @keyframes aparecer{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+  #modalCaixa .grande{font-size:clamp(4rem,14vw,8rem);line-height:1.1}
+  #modalCaixa .titulo{font-size:clamp(1.4rem,4.5vw,2.4rem);font-weight:bold;margin:6px 0}
+  #modalCaixa .sub{font-size:1.15rem;opacity:.8;margin:4px 0 12px}
+  #modalCaixa .resp{font-size:clamp(3rem,11vw,6rem);font-weight:bold}
+  #modalCaixa .botoes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+</style>
+</head>
+<body>
+
+<!-- ================= TELA INICIAL ================= -->
+<section id="telaInicio">
+  <h1>🕵️ Quem Sou Eu? – Animais</h1>
+
+  <div class="cartao">
+    <h2>1. Quem guarda o segredo?</h2>
+    <div class="modo">
+      <label><input type="radio" name="modo" value="aluno" checked>
+        <span>🤫 Um aluno escolhe em segredo<small>O aluno toca no animal no tablet. Nada muda na tela, então a turma no projetor não descobre qual foi.</small></span></label>
+      <label><input type="radio" name="modo" value="computador">
+        <span>🤖 O computador sorteia<small>Ninguém sabe o animal. A turma toda tenta descobrir fazendo as perguntas.</small></span></label>
+    </div>
+  </div>
+
+  <div class="cartao">
+    <h2>2. Tabuleiro</h2>
+    <label>Quantidade de animais:
+      <select id="quantidade">
+        <option value="12">12 (fácil)</option>
+        <option value="20">20</option>
+        <option value="24" selected>24</option>
+        <option value="30">30</option>
+        <option value="40">40 (difícil)</option>
+        <option value="999">Todos</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="chkNomes" checked> Mostrar o nome embaixo de cada animal</label>
+    <label><input type="checkbox" id="chkAuto" checked> Nas perguntas prontas, virar sozinho os animais que não servem</label>
+    <label><input type="checkbox" id="chkVoz" checked> Falar as respostas (Sim / Não)</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+
+  <div class="cartao">
+    <h2>3. Imagens</h2>
+    <label><input type="radio" name="imagens" value="animais" checked> 🐾 Animais do jogo (<span id="totalAnimais"></span> animais)</label>
+    <label><input type="radio" name="imagens" value="proprias"> 📷 Minhas imagens
+      <button id="btnImagens" type="button">Escolher imagens…</button> <span id="qtdImagens" class="dica"></span></label>
+    <input type="file" id="arquivoImagens" accept="image/*" multiple hidden>
+    <p class="dica">Com imagens próprias, o nome do arquivo vira o nome da carta (ex.: <b>tamanduá.jpg</b>). As perguntas prontas não funcionam com elas: o aluno do segredo responde em voz alta. As imagens não ficam salvas e precisam ser escolhidas de novo depois de recarregar a página.</p>
+  </div>
+
+  <button id="btnIniciar">▶️ Começar partida</button>
+  <p class="dica" style="text-align:center">Dica: para dar a vez a todos os alunos (20 a 30), cada partida pode ter um "guardião do segredo" diferente. O histórico mostra quantas perguntas cada rodada precisou.</p>
+</section>
+
+<!-- ================= JOGO ================= -->
+<section id="telaJogo" hidden>
+  <div id="areaGrade">
+    <div id="faixa"></div>
+    <div id="grade"></div>
+  </div>
+
+  <aside id="painel">
+    <div class="placa contadores">
+      <div>❓ Perguntas<b id="nPerguntas">0</b></div>
+      <div>🐾 Restam<b id="nRestam">0</b></div>
+    </div>
+
+    <div class="placa" id="placaPerguntas">
+      <div class="titPainel">Perguntas prontas (o jogo responde):</div>
+      <div id="perguntas"></div>
+    </div>
+
+    <div class="placa grandes">
+      <button id="btnLivre">🗣️ Pergunta em voz alta (+1)</button>
+      <button id="btnChutar">🎯 Chutar o animal</button>
+      <button id="btnRevelar">🏳️ Revelar o segredo</button>
+      <button id="btnNova">🔄 Nova partida</button>
+    </div>
+
+    <div class="placa">
+      <div class="titPainel">📜 Rodadas</div>
+      <div id="historico"><span class="dica">Nenhuma rodada ainda.</span></div>
+    </div>
+  </aside>
+</section>
+
+<div id="modal" hidden><div id="modalCaixa"></div></div>
+
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const P = window.Palavras;
+
+/* Características:
+   p = tem penas      l = tem pelos       e = tem escamas     v = voa
+   a = vive na água (ou passa muito tempo nela)               q = tem 4 patas
+   d = vive na fazenda ou em casa com as pessoas              g = maior que uma pessoa adulta
+   i = é um inseto    c = tem chifres     o = põe ovos
+   z = tem listras    w = tem asas */
+const ANIMAIS = [
+  ['🐶','Cachorro','lqd'], ['🐱','Gato','lqd'], ['🐭','Rato','lq'], ['🐹','Hamster','lqd'],
+  ['🐰','Coelho','lqd'], ['🦊','Raposa','lq'], ['🐻','Urso','lqg'], ['🐼','Panda','lqg'],
+  ['🐨','Coala','lq'], ['🐯','Tigre','lqgz'], ['🦁','Leão','lqg'], ['🐮','Vaca','lqdgc'],
+  ['🐷','Porco','lqd'], ['🐵','Macaco','l'], ['🐴','Cavalo','lqdg'], ['🦓','Zebra','lqgz'],
+  ['🦒','Girafa','lqgc'], ['🐘','Elefante','qg'], ['🦏','Rinoceronte','qgc'], ['🦛','Hipopótamo','qga'],
+  ['🐪','Camelo','lqg'], ['🐑','Ovelha','lqd'], ['🐐','Cabra','lqdc'], ['🦌','Veado','lqc'],
+  ['🐿️','Esquilo','lq'], ['🦇','Morcego','lvw'], ['🐺','Lobo','lq'], ['🦝','Guaxinim','lq'],
+  ['🦘','Canguru','l'], ['🦥','Preguiça','l'], ['🐋','Baleia','ag'], ['🐬','Golfinho','ag'],
+  ['🦭','Foca','la'], ['🦦','Lontra','lqa'], ['🦫','Castor','lqa'],
+  ['🐔','Galinha','pdow'], ['🐧','Pinguim','paow'], ['🐦','Passarinho','pvow'], ['🦆','Pato','pvadow'],
+  ['🦅','Águia','pvow'], ['🦉','Coruja','pvow'], ['🦜','Papagaio','pvow'], ['🦩','Flamingo','pvaow'],
+  ['🦚','Pavão','pvow'], ['🦢','Cisne','pvaow'], ['🦃','Peru','pdow'], ['🕊️','Pomba','pvow'],
+  ['🐊','Jacaré','eaqgo'], ['🐢','Tartaruga','eqoa'], ['🐍','Cobra','eo'], ['🦎','Lagarto','eqo'],
+  ['🐸','Sapo','aqo'], ['🐟','Peixe','eao'], ['🐠','Peixe-palhaço','eaoz'], ['🦈','Tubarão','eag'],
+  ['🐙','Polvo','ao'], ['🦀','Caranguejo','ao'], ['🦑','Lula','ao'], ['🦐','Camarão','ao'],
+  ['🐌','Caracol','o'], ['🐝','Abelha','ivozw'], ['🦋','Borboleta','ivow'], ['🐞','Joaninha','ivow'],
+  ['🐜','Formiga','io'], ['🦗','Grilo','iow'], ['🪲','Besouro','ivow'], ['🦟','Mosquito','ivow'],
+  ['🪰','Mosca','ivow'], ['🕷️','Aranha','o'], ['🦂','Escorpião','']
+].map(([emo, nome, t]) => ({emo, nome, t: new Set(t.split(''))}));
+
+const PERGUNTAS = [
+  {k:'p', t:'🪶 Tem penas?'},       {k:'l', t:'🐾 Tem pelos?'},
+  {k:'e', t:'🐟 Tem escamas?'},     {k:'v', t:'🕊️ Voa?'},             {k:'w', t:'🦅 Tem asas?'},
+  {k:'a', t:'💧 Vive na água?',     falado:'Vive na água ou passa muito tempo nela?'},
+  {k:'q', t:'🦵 Tem 4 patas?'},
+  {k:'d', t:'🏡 Vive com pessoas ou na fazenda?'},
+  {k:'g', t:'📏 É maior que uma pessoa?', falado:'É maior que uma pessoa adulta?'},
+  {k:'i', t:'🐜 É um inseto?'},     {k:'c', t:'🦌 Tem chifres?'},
+  {k:'o', t:'🥚 Põe ovos?'},        {k:'z', t:'🦓 Tem listras?'}
+];
+
+let imagensProprias = [];   // {src, nome}
+let cartas = [];            // itens do tabuleiro
+let viradas = new Set();
+let segredo = -1;           // índice em cartas
+let fase = 'inicio';        // inicio | segredo | jogo | fim
+let modo = 'aluno';
+let nPerguntas = 0, respondidas = {}, modoChute = false, rodada = 0;
+const historico = [];
+
+$('totalAnimais').textContent = ANIMAIS.length;
+
+// ---------- Utilidades ----------
+const radio = n => document.querySelector(`input[name=${n}]:checked`).value;
+function falar(t){ if ($('chkVoz').checked) P.falar(t, {rate: .9}); }
+function modal(html, {fecharEm, aoFechar, fecharAoTocar = true} = {}){
+  $('modalCaixa').innerHTML = html;
+  $('modal').hidden = false;
+  const fechar = () => { if ($('modal').hidden) return; $('modal').hidden = true; clearTimeout(t); aoFechar && aoFechar(); };
+  let t = fecharEm ? setTimeout(fechar, fecharEm) : null;
+  $('modal').onclick = e => { if (fecharAoTocar && (e.target === $('modal') || e.target.closest('[data-fechar]') || !e.target.closest('button'))) fechar(); };
+  return fechar;
+}
+const temAtributos = () => cartas.length && !cartas[0].src;
+
+// ---------- Montagem do tabuleiro ----------
+function iniciar(){
+  P.som = $('chkSom').checked;
+  modo = radio('modo');
+  const fonte = radio('imagens') === 'proprias' ? imagensProprias : ANIMAIS;
+  if (fonte.length < 4){
+    P.avisar(radio('imagens') === 'proprias' ? 'Escolha pelo menos 4 imagens.' : 'Poucos animais.');
+    return;
+  }
+  const qtd = Math.min(+$('quantidade').value, fonte.length);
+  cartas = P.embaralhar(fonte).slice(0, qtd);
+  viradas = new Set(); segredo = -1; nPerguntas = 0; respondidas = {}; modoChute = false;
+  rodada++;
+  $('telaInicio').hidden = true; $('telaJogo').hidden = false;
+  document.body.classList.toggle('semNomes', !$('chkNomes').checked);
+  montarGrade();
+  montarPerguntas();
+  if (modo === 'aluno') faseSegredo();
+  else { segredo = Math.floor(Math.random() * cartas.length); faseJogo(); falar('Já escolhi um animal. Descubram qual é!'); }
+}
+
+function montarGrade(){
+  const g = $('grade'); g.innerHTML = '';
+  cartas.forEach((c, i) => {
+    const d = document.createElement('div'); d.className = 'carta'; d.dataset.i = i;
+    if (c.src){ const im = document.createElement('img'); im.src = c.src; im.alt = ''; d.appendChild(im); }
+    else { const e = document.createElement('div'); e.className = 'emo'; e.textContent = c.emo; d.appendChild(e); }
+    const n = document.createElement('div'); n.className = 'nome'; n.textContent = c.nome; d.appendChild(n);
+    d.addEventListener('click', () => tocarCarta(i));
+    g.appendChild(d);
+  });
+  ajustarGrade();
+}
+
+// Calcula o maior tamanho de carta que cabe na tela sem rolar
+function ajustarGrade(){
+  const g = $('grade'); if ($('telaJogo').hidden) return;
+  const n = cartas.length, gap = 8;
+  const W = $('areaGrade').clientWidth;
+  window.scrollTo(0, 0);
+  const topo = g.getBoundingClientRect().top;
+  const H = Math.max(320, window.innerHeight - topo - 14);
+  let melhor = {s: 0, c: 1};
+  for (let c = 1; c <= n; c++){
+    const r = Math.ceil(n / c);
+    const w = (W - (c - 1) * gap) / c;
+    const h = ((H - (r - 1) * gap) / r) / 1.12;
+    const s = Math.min(w, h);
+    if (s > melhor.s) melhor = {s, c};
+  }
+  const s = Math.max(58, Math.floor(Math.min(melhor.s, 190)));
+  const cols = Math.max(1, Math.min(n, Math.floor((W + gap) / (s + gap))));
+  g.style.gridTemplateColumns = `repeat(${cols}, ${s}px)`;
+  document.documentElement.style.setProperty('--tam', s + 'px');
+}
+window.addEventListener('resize', ajustarGrade);
+
+function montarPerguntas(){
+  const box = $('perguntas'); box.innerHTML = '';
+  $('placaPerguntas').hidden = !temAtributos();
+  PERGUNTAS.forEach(q => {
+    const b = document.createElement('button'); b.dataset.k = q.k;
+    b.innerHTML = `<span>${q.t}</span>`;
+    b.onclick = () => perguntar(q, b);
+    box.appendChild(b);
+  });
+}
+
+// ---------- Fases ----------
+function faseSegredo(){
+  fase = 'segredo';
+  $('grade').classList.add('secreto');
+  $('faixa').className = 'segredo';
+  $('faixa').textContent = '🤫 Guardião do segredo: toque no SEU animal. Turma: não olhe para o tablet!';
+  $('painel').style.visibility = 'hidden';
+  requestAnimationFrame(ajustarGrade);
+  falar('Guardião do segredo, escolha o seu animal.');
+}
+function faseJogo(){
+  fase = 'jogo';
+  $('grade').classList.remove('secreto');
+  $('painel').style.visibility = '';
+  atualizar();
+}
+function atualizar(){
+  $('nPerguntas').textContent = nPerguntas;
+  $('nRestam').textContent = cartas.length - viradas.size;
+  document.querySelectorAll('.carta').forEach(el => el.classList.toggle('virada', viradas.has(+el.dataset.i)));
+  $('grade').classList.toggle('chute', modoChute);
+  if (fase === 'jogo'){
+    $('faixa').className = modoChute ? 'chute' : '';
+    $('faixa').textContent = modoChute
+      ? '🎯 Toque no animal que vocês acham que é o segredo'
+      : (modo === 'aluno' ? '❓ Façam perguntas de SIM ou NÃO ao guardião do segredo' : '❓ Façam perguntas para descobrir o animal sorteado')
+        + ' • toque nas cartas para virar';
+  }
+  $('btnChutar').textContent = modoChute ? '✖️ Cancelar chute' : '🎯 Chutar o animal';
+  requestAnimationFrame(ajustarGrade);
+}
+
+// ---------- Toques nas cartas ----------
+function tocarCarta(i){
+  if (!$('modal').hidden) return;
+  if (fase === 'segredo'){
+    // Sem nenhum efeito visual na carta: vai direto para a tela de confirmação
+    segredo = i;
+    P.somClique();
+    modal(`<div class="grande">🔒</div>
+      <div class="titulo">Segredo guardado!</div>
+      <div class="sub">Guardião: lembre bem do seu animal e não conte para ninguém 🤐</div>
+      <div class="botoes">
+        <button id="mComecar" style="background:var(--verde);color:#fff;font-size:1.2rem">▶️ Começar as perguntas</button>
+        <button id="mDeNovo">↩️ Escolher de novo</button>
+      </div>`, {fecharAoTocar: false});
+    $('mComecar').onclick = () => { $('modal').hidden = true; faseJogo(); falar('Podem começar as perguntas!'); };
+    $('mDeNovo').onclick = () => { $('modal').hidden = true; segredo = -1; };
+    return;
+  }
+  if (fase !== 'jogo') return;
+  if (modoChute){ chutar(i); return; }
+  viradas.has(i) ? viradas.delete(i) : viradas.add(i);
+  P.tom(viradas.has(i) ? 500 : 750, .07, 'triangle', .1);
+  atualizar();
+  if (cartas.length - viradas.size === 1) P.avisar('Só sobrou um! Usem 🎯 Chutar para conferir.');
+}
+
+// ---------- Perguntas ----------
+function perguntar(q, botao){
+  if (fase !== 'jogo' || segredo < 0) return;
+  modoChute = false;
+  const sim = cartas[segredo].t.has(q.k);
+  if (!(q.k in respondidas)){ nPerguntas++; respondidas[q.k] = sim; }
+  botao.innerHTML = `<span>${q.t}</span><span class="r ${sim ? 'sim' : 'nao'}">${sim ? 'SIM' : 'NÃO'}</span>`;
+  botao.disabled = true;
+  sim ? P.tom(880, .18, 'triangle', .15) : P.tom(260, .25, 'triangle', .15);
+  falar((q.falado || q.t.replace(/^\S+\s/, '')) + ' ' + (sim ? 'Sim!' : 'Não!'));
+  modal(`<div class="titulo">${q.t}</div>
+    <div class="resp" style="color:${sim ? 'var(--verde)' : 'var(--vermelho)'}">${sim ? 'SIM ✅' : 'NÃO ❌'}</div>`,
+    {fecharEm: 2200, aoFechar: () => {
+      if ($('chkAuto').checked){
+        cartas.forEach((c, i) => { if (c.t.has(q.k) !== sim) viradas.add(i); });
+      }
+      atualizar();
+    }});
+}
+
+// ---------- Chute / revelar ----------
+function chutar(i){
+  modoChute = false;
+  const c = cartas[i];
+  if (i === segredo){
+    fim(true);
+  } else {
+    nPerguntas++;
+    viradas.add(i);
+    P.somErro();
+    falar(`Não é ${c.nome}!`);
+    modal(`<div class="grande">${figura(c)}</div><div class="titulo" style="color:var(--vermelho)">Não é ${escapar(c.nome)}!</div>
+      <div class="sub">Continuem perguntando 😉 (o chute errado conta como pergunta)</div>`, {fecharEm: 2200});
+    atualizar();
+  }
+}
+function fim(acertou){
+  fase = 'fim'; modoChute = false;
+  const c = cartas[segredo];
+  cartas.forEach((_, i) => { if (i !== segredo) viradas.add(i); });
+  viradas.delete(segredo);
+  atualizar();
+  const linha = `Rodada ${rodada}: ${c.emo || '🖼️'} ${c.nome} — ${acertou ? `acertaram com ${nPerguntas} pergunta${nPerguntas === 1 ? '' : 's'}` : 'segredo revelado'}`;
+  historico.unshift(linha);
+  $('historico').innerHTML = historico.map(h => `<div>${escapar(h)}</div>`).join('');
+  if (acertou){ P.somAcerto(); P.confete(); falar(`Acertaram! Era ${c.nome}!`); }
+  else falar(`O segredo era ${c.nome}.`);
+  $('faixa').className = '';
+  $('faixa').textContent = acertou ? `🎉 Acertaram! Era ${c.nome}` : `O segredo era ${c.nome}`;
+  modal(`<div class="grande">${figura(c)}</div>
+    <div class="titulo">${acertou ? '🎉 Acertaram!' : '🏳️ O segredo era…'}</div>
+    <div class="titulo" style="color:var(--azul)">${escapar(c.nome)}</div>
+    <div class="sub">${acertou ? `Descobriram com <b>${nPerguntas}</b> pergunta${nPerguntas === 1 ? '' : 's'}.` : ''}</div>
+    <div class="botoes"><button id="mNova" style="background:var(--verde);color:#fff">🔄 Nova partida</button><button data-fechar>Ver o tabuleiro</button></div>`);
+  $('mNova').onclick = () => { $('modal').hidden = true; iniciar(); };
+}
+function figura(c){ return c.src ? `<img src="${c.src}" alt="" style="max-width:min(60vw,260px);max-height:34vh;border-radius:18px">` : c.emo; }
+const escapar = t => String(t).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+
+// ---------- Botões ----------
+$('btnIniciar').onclick = iniciar;
+$('btnLivre').onclick = () => { if (fase !== 'jogo') return; nPerguntas++; P.somClique(); atualizar(); };
+$('btnChutar').onclick = () => { if (fase !== 'jogo') return; modoChute = !modoChute; atualizar(); };
+$('btnRevelar').onclick = () => { if (fase !== 'jogo') return; if (confirm('Revelar o animal secreto?')) fim(false); };
+$('btnNova').onclick = () => {
+  if (fase === 'jogo' && !confirm('Começar uma nova partida?')) return;
+  $('telaJogo').hidden = true; $('telaInicio').hidden = false; fase = 'inicio'; window.scrollTo(0, 0);
+};
+$('btnImagens').onclick = () => $('arquivoImagens').click();
+$('arquivoImagens').onchange = e => {
+  const fs = [...e.target.files].filter(f => f.type.startsWith('image/'));
+  imagensProprias.forEach(i => URL.revokeObjectURL(i.src));
+  imagensProprias = fs.map(f => ({
+    src: URL.createObjectURL(f),
+    nome: f.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim()
+  }));
+  $('qtdImagens').textContent = imagensProprias.length ? `${imagensProprias.length} imagens escolhidas` : '';
+  if (imagensProprias.length) document.querySelector('input[name=imagens][value=proprias]').checked = true;
+  e.target.value = '';
+};
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('modal').hidden && fase !== 'segredo') $('modal').hidden = true; });
+</script>
+</body>
+</html>
