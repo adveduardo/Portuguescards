@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formador de Grupos</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .wrap{width:100%;max-width:1100px;display:flex;flex-direction:column;align-items:center}
+  .controles{background:#fff;border-radius:20px;padding:12px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;box-shadow:0 4px 0 #0001}
+  .controles select,.controles input{font:inherit;font-size:1.15rem;padding:6px 8px;border-radius:10px;border:2px solid #ccd}
+  .controles input[type=number]{width:72px;text-align:center}
+  #btnFormar{background:var(--amarelo);font-size:1.3rem;padding:14px 26px}
+  #info{margin:8px 0;font-size:1.05rem;text-align:center}
+  #grupos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;width:100%;margin:10px 0}
+  .grupo{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 0 #0001;animation:entrar .4s backwards}
+  @keyframes entrar{from{transform:scale(.6) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+  .grupo h2{margin:0;padding:10px 14px;color:#fff;font-size:1.35rem;display:flex;justify-content:space-between;align-items:center}
+  .grupo h2 small{font-size:.9rem;opacity:.9}
+  .grupo ul{list-style:none;margin:0;padding:8px 14px 12px}
+  .grupo li{padding:6px 0;font-size:1.2rem;font-weight:bold;border-bottom:1px dashed #e3e6ee}
+  .grupo li:last-child{border-bottom:none}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  .chip{background:#fff;border-radius:999px;padding:7px 13px;font-weight:bold;box-shadow:0 2px 0 #0001;cursor:pointer}
+  .chip.ausente{background:#ffe1e1;color:#b55;opacity:.8}
+  .chip.ausente::before{content:"🚫 "}
+  .dica{font-size:.95rem;opacity:.75;text-align:center}
+  details{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  textarea{width:100%;min-height:160px;font:inherit;font-size:1rem;padding:10px;border-radius:12px;border:2px solid #ccd;resize:vertical}
+  pre{background:#243049;color:#7CFFB2;border-radius:10px;padding:10px;font-size:.85rem;overflow:auto;white-space:pre-wrap}
+  #aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#243049;color:#fff;padding:10px 18px;border-radius:12px;
+    opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+  #aviso.mostrar{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>👥 Formador de Grupos</h1>
+
+  <div class="controles">
+    <select id="criterio">
+      <option value="tamanho">Alunos por grupo</option>
+      <option value="quantidade">Número de grupos</option>
+    </select>
+    <input type="number" id="numero" min="1" max="50" value="4">
+    <select id="nomes">
+      <option value="numeros">Grupo 1, 2, 3…</option>
+      <option value="animais">🦁 Animais</option>
+      <option value="cores">🎨 Cores</option>
+      <option value="frutas">🍎 Frutas</option>
+    </select>
+    <button id="btnFormar">🔀 Formar grupos</button>
+  </div>
+
+  <div id="info"></div>
+  <div id="grupos"></div>
+
+  <div class="acoes" id="acoesResultado" hidden>
+    <button id="btnPlacar">⭐ Enviar para o Placar</button>
+    <button id="btnCopiar">📋 Copiar texto</button>
+    <button id="btnExportarGrupos">💾 Salvar grupos (JSON)</button>
+  </div>
+
+  <details id="painelPresenca">
+    <summary>✅ Presença (toque para marcar ausentes)</summary>
+    <div id="chips"></div>
+  </details>
+
+  <details id="painelLista">
+    <summary>📋 Lista da turma (digitar ou importar JSON)</summary>
+    <p>Digite <b>um nome por linha</b> ou cole um <b>JSON</b>:</p>
+    <textarea id="txtLista" placeholder="Ana&#10;Bruno&#10;Carla&#10;..."></textarea>
+    <div class="acoes">
+      <button id="btnUsar">✅ Usar esta lista</button>
+      <button id="btnImportar">📂 Abrir arquivo JSON</button>
+      <button id="btnExportar">💾 Salvar lista em JSON</button>
+      <button id="btnModelo">📄 Baixar modelo</button>
+    </div>
+    <input type="file" id="arquivo" accept=".json,.txt,application/json,text/plain" hidden>
+    <p class="dica">A lista fica salva neste navegador e é a mesma usada pelo <b>Sorteador de Alunos</b>.</p>
+    <p>Formato do JSON:</p>
+    <pre>{
+  "turma": "3º Ano A",
+  "alunos": ["Ana", "Bruno", "Carla"]
+}</pre>
+  </details>
+</div>
+<div id="aviso"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const CHAVE = 'painel_turma';
+const CORES = ['#e74c3c','#2f80ed','#27ae60','#f39c12','#8e44ad','#16a085','#d35400','#c2185b','#2c3e50','#7cb342','#0097a7','#6d4c41'];
+const NOMES = {
+  animais:['🦁 Leões','🐯 Tigres','🐻 Ursos','🦊 Raposas','🐼 Pandas','🐸 Sapos','🦉 Corujas','🐬 Golfinhos','🦒 Girafas','🐢 Tartarugas','🐝 Abelhas','🦜 Papagaios'],
+  cores:['🔴 Vermelho','🔵 Azul','🟢 Verde','🟠 Laranja','🟣 Roxo','🩵 Turquesa','🟤 Marrom','🩷 Rosa','⚫ Preto','🟡 Amarelo','⚪ Branco','🩶 Cinza'],
+  frutas:['🍎 Maçãs','🍌 Bananas','🍇 Uvas','🍓 Morangos','🍍 Abacaxis','🍉 Melancias','🥭 Mangas','🍊 Laranjas','🍐 Peras','🥝 Kiwis','🍒 Cerejas','🍋 Limões']
+};
+
+// ---------- Armazenamento ----------
+const guardar = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+const ler = k => { try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } };
+
+// ---------- Leitura de lista (JSON ou texto) ----------
+function nomeDe(x){
+  if (typeof x === 'string') return x;
+  if (x && typeof x === 'object') return x.nome || x.name || x.aluno || '';
+  return '';
+}
+function limpar(arr){
+  const vistos = new Set(), out = [];
+  arr.forEach(n => { n = String(n).trim(); if (n && !vistos.has(n.toLowerCase())){ vistos.add(n.toLowerCase()); out.push(n); } });
+  return out;
+}
+function interpretarLista(texto){
+  texto = (texto || '').trim();
+  if (!texto) return {turma:'', alunos:[]};
+  try{
+    const d = JSON.parse(texto);
+    let arr = Array.isArray(d) ? d : (d.alunos || d.nomes || d.estudantes || d.lista || []);
+    if (!Array.isArray(d) && !arr.length && Array.isArray(d.grupos)) arr = d.grupos.flatMap(g => g.alunos || []);
+    return {turma: Array.isArray(d) ? '' : (d.turma || ''), alunos: limpar(arr.map(nomeDe))};
+  }catch(e){
+    return {turma:'', alunos: limpar(texto.split(/\r?\n|;/))};
+  }
+}
+function baixar(nome, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+let timerAviso;
+function avisar(t){ const a = $('aviso'); a.textContent = t; a.classList.add('mostrar'); clearTimeout(timerAviso); timerAviso = setTimeout(() => a.classList.remove('mostrar'), 2400); }
+
+// ---------- Som ----------
+let ac;
+function tom(freq, dur = .12, tipo = 'triangle', vol = .14, atraso = 0){
+  try{
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === 'suspended') ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + atraso;
+    o.type = tipo; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
+    o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + dur);
+  }catch(e){}
+}
+
+// ---------- Estado ----------
+let turma = '', alunos = [], ausentes = new Set(), grupos = [];
+
+function salvarTurma(){
+  // preserva campos usados por outras ferramentas
+  const atual = ler(CHAVE) || {};
+  guardar(CHAVE, Object.assign(atual, {turma, alunos, ausentes:[...ausentes]}));
+}
+function carregar(){
+  const d = ler(CHAVE);
+  if (d && Array.isArray(d.alunos)){
+    turma = d.turma || ''; alunos = limpar(d.alunos);
+    ausentes = new Set((d.ausentes || []).filter(n => alunos.includes(n)));
+  }
+  $('txtLista').value = alunos.join('\n');
+  const g = ler('painel_grupos');
+  if (g && Array.isArray(g.grupos)) grupos = g.grupos;
+}
+const presentes = () => alunos.filter(n => !ausentes.has(n));
+
+function renderChips(){
+  const c = $('chips'); c.innerHTML = '';
+  alunos.forEach(n => {
+    const s = document.createElement('span');
+    s.className = 'chip' + (ausentes.has(n) ? ' ausente' : '');
+    s.textContent = n;
+    s.onclick = () => { ausentes.has(n) ? ausentes.delete(n) : ausentes.add(n); salvarTurma(); renderChips(); renderInfo(); };
+    c.appendChild(s);
+  });
+}
+function renderInfo(){
+  const p = presentes().length;
+  if (!alunos.length){ $('info').textContent = 'Carregue a lista da turma abaixo ⬇️'; $('painelLista').open = true; return; }
+  const n = Math.max(1, +$('numero').value || 1);
+  const qtd = $('criterio').value === 'tamanho' ? Math.ceil(p / n) : Math.min(n, p);
+  $('info').textContent = `${turma ? turma + ' • ' : ''}${p} alunos presentes → ${qtd} grupo${qtd === 1 ? '' : 's'}`;
+}
+function renderGrupos(animar){
+  const box = $('grupos'); box.innerHTML = '';
+  grupos.forEach((g, i) => {
+    const d = document.createElement('div'); d.className = 'grupo';
+    if (animar) d.style.animationDelay = (i * .12) + 's'; else d.style.animation = 'none';
+    const h = document.createElement('h2'); h.style.background = g.cor;
+    h.textContent = g.nome;
+    const sm = document.createElement('small'); sm.textContent = g.alunos.length + ' alunos'; h.appendChild(sm);
+    const ul = document.createElement('ul');
+    g.alunos.forEach(n => { const li = document.createElement('li'); li.textContent = n; ul.appendChild(li); });
+    d.append(h, ul); box.appendChild(d);
+  });
+  $('acoesResultado').hidden = !grupos.length;
+}
+
+// ---------- Formar grupos ----------
+function embaralhar(a){
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function formar(){
+  const lista = presentes();
+  if (lista.length < 2){ avisar('É preciso pelo menos 2 alunos presentes.'); return; }
+  const n = Math.max(1, +$('numero').value || 1);
+  let qtd = $('criterio').value === 'tamanho' ? Math.ceil(lista.length / n) : n;
+  qtd = Math.max(1, Math.min(qtd, lista.length));
+  const nomes = NOMES[$('nomes').value];
+  grupos = Array.from({length:qtd}, (_, i) => ({
+    nome: nomes ? (nomes[i] || 'Grupo ' + (i + 1)) : 'Grupo ' + (i + 1),
+    cor: CORES[i % CORES.length], alunos: []
+  }));
+  embaralhar(lista).forEach((nome, i) => grupos[i % qtd].alunos.push(nome));   // distribui de forma equilibrada
+  guardar('painel_grupos', {turma, grupos});
+  renderGrupos(true);
+  grupos.forEach((_, i) => tom(400 + i * 70, .12, 'triangle', .12, i * .12));
+}
+
+// ---------- Botões ----------
+$('btnFormar').onclick = formar;
+['criterio','numero'].forEach(id => $(id).oninput = renderInfo);
+$('btnPlacar').onclick = () => {
+  const equipes = grupos.map(g => ({nome: g.nome, cor: g.cor, pontos: 0, alunos: g.alunos}));
+  guardar('painel_equipes_importar', {equipes, quando: Date.now()});
+  avisar('✅ Grupos enviados! Abra o "Placar de Equipes" no menu e toque em "Usar grupos".');
+};
+$('btnCopiar').onclick = async () => {
+  const txt = grupos.map(g => `${g.nome}: ${g.alunos.join(', ')}`).join('\n');
+  try{ await navigator.clipboard.writeText(txt); avisar('📋 Texto copiado!'); }
+  catch(e){ prompt('Copie o texto abaixo:', txt); }
+};
+$('btnExportarGrupos').onclick = () => baixar('grupos.json', {turma, grupos});
+function usarLista(dados){
+  if (!dados.alunos.length){ avisar('Nenhum nome encontrado na lista.'); return; }
+  turma = dados.turma || turma; alunos = dados.alunos;
+  ausentes = new Set([...ausentes].filter(n => alunos.includes(n)));
+  $('txtLista').value = alunos.join('\n');
+  salvarTurma(); renderChips(); renderInfo();
+  avisar(`✅ ${alunos.length} alunos carregados`);
+}
+$('btnUsar').onclick = () => usarLista(interpretarLista($('txtLista').value));
+$('btnImportar').onclick = () => $('arquivo').click();
+$('arquivo').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => usarLista(interpretarLista(r.result));
+  r.readAsText(f); e.target.value = '';
+};
+$('btnExportar').onclick = () => {
+  if (!alunos.length) return avisar('A lista está vazia.');
+  baixar(`turma${turma ? '-' + turma.replace(/[^\w-]+/g,'_') : ''}.json`, {turma, alunos});
+};
+$('btnModelo').onclick = () => baixar('modelo-turma.json', {turma:'3º Ano A', alunos:['Ana','Bruno','Carla','Davi','Eduarda','Felipe','Gabi','Heitor']});
+
+carregar(); renderChips(); renderInfo(); renderGrupos(false);
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semáforo da Turma</title>
+<style>
+  :root{--texto:#243049;--verde:#2ecc71;--amarelo:#f1c40f;--vermelho:#e74c3c}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:#1e293b;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;
+    transition:background .4s;user-select:none}
+  body.verde{background:linear-gradient(160deg,#0f3d26,#14532d)}
+  body.amarelo{background:linear-gradient(160deg,#4a3b05,#713f12)}
+  body.vermelho{background:linear-gradient(160deg,#4c0d0d,#7f1d1d)}
+  body.alerta{animation:alerta .25s 6 alternate}
+  @keyframes alerta{from{background:#7f1d1d}to{background:#ff3b3b}}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0;color:#fff}
+  .palco{display:flex;gap:clamp(16px,4vw,48px);align-items:center;justify-content:center;flex-wrap:wrap;width:100%;max-width:1000px}
+  .semaforo{background:#111827;border-radius:clamp(30px,6vh,60px);padding:clamp(12px,2.2vh,22px);display:flex;flex-direction:column;
+    gap:clamp(10px,2vh,20px);box-shadow:0 10px 30px #0008, inset 0 0 0 6px #374151}
+  .luz{width:min(28vw,19vh,170px);aspect-ratio:1;border-radius:50%;border:none;padding:0;cursor:pointer;
+    background:#2b2f38;box-shadow:inset 0 6px 14px #0009;transition:all .25s}
+  .luz:active{transform:scale(.96)}
+  .luz.verde.acesa{background:radial-gradient(circle at 35% 35%,#a7ffcb,var(--verde) 55%,#16803f);box-shadow:0 0 50px var(--verde),0 0 100px #2ecc7188}
+  .luz.amarelo.acesa{background:radial-gradient(circle at 35% 35%,#fff6b0,var(--amarelo) 55%,#b8900a);box-shadow:0 0 50px var(--amarelo),0 0 100px #f1c40f88}
+  .luz.vermelho.acesa{background:radial-gradient(circle at 35% 35%,#ffc0b8,var(--vermelho) 55%,#9b2317);box-shadow:0 0 50px var(--vermelho),0 0 100px #e74c3c88}
+  .lado{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:440px;text-align:center}
+  #emoji{font-size:clamp(4rem,14vw,8rem);line-height:1}
+  #mensagem{font-size:clamp(1.8rem,6vw,3.4rem);font-weight:bold;color:#fff;text-shadow:0 3px 0 #0005}
+  #sub{font-size:clamp(1rem,2.5vw,1.3rem);color:#e5e7eb}
+  button.btn{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0004;transition:transform .08s,box-shadow .08s}
+  button.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #0004}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+  #btnAlerta{background:#ff5252;color:#fff;font-size:1.3rem;padding:14px 24px}
+  details{background:#ffffffee;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,640px)}
+  summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  details label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  details input[type=checkbox]{width:22px;height:22px}
+  details select,details input[type=range]{font:inherit}
+  .medidor{width:100%;height:22px;background:#e5e7eb;border-radius:999px;overflow:hidden;position:relative;margin:6px 0}
+  #nivelFill{height:100%;width:0;background:var(--verde);transition:width .1s}
+  .marca{position:absolute;top:0;bottom:0;width:3px;background:#243049}
+  .dica{font-size:.92rem;opacity:.75}
+</style>
+</head>
+<body class="verde">
+  <h1>🚦 Semáforo da Turma</h1>
+
+  <div class="palco">
+    <div class="semaforo">
+      <button class="luz vermelho" data-cor="vermelho" aria-label="Vermelho: silêncio"></button>
+      <button class="luz amarelo" data-cor="amarelo" aria-label="Amarelo: falar baixo"></button>
+      <button class="luz verde acesa" data-cor="verde" aria-label="Verde: pode conversar"></button>
+    </div>
+    <div class="lado">
+      <div id="emoji">😄</div>
+      <div id="mensagem">Pode conversar</div>
+      <div id="sub">Converse com calma com os colegas</div>
+    </div>
+  </div>
+
+  <div class="acoes">
+    <button class="btn" data-cor="verde">🟢 Conversar</button>
+    <button class="btn" data-cor="amarelo">🟡 Falar baixo</button>
+    <button class="btn" data-cor="vermelho">🔴 Silêncio</button>
+    <button class="btn" id="btnAlerta">🔔 Alerta!</button>
+  </div>
+
+  <details id="config">
+    <summary>⚙️ Configurações (professor)</summary>
+    <label>Som de alerta:
+      <select id="tipoSom">
+        <option value="sirene">🚨 Sirene</option>
+        <option value="apito">📯 Apito</option>
+        <option value="sino">🔔 Sino</option>
+        <option value="buzina">📢 Buzina</option>
+      </select>
+      <button class="btn" id="btnTestar" style="padding:6px 12px">▶️ Testar</button>
+    </label>
+    <label>Volume: <input type="range" id="volume" min="0.05" max="1" step="0.05" value="0.6"></label>
+    <label><input type="checkbox" id="chkSomTroca" checked> Tocar som ao trocar de cor</label>
+    <label><input type="checkbox" id="chkVoz" checked> Falar a mensagem (ex.: "Silêncio, por favor!")</label>
+    <label><input type="checkbox" id="chkLembrete"> No vermelho, repetir o alerta a cada
+      <select id="intervalo"><option value="15">15 s</option><option value="30" selected>30 s</option><option value="60">1 min</option></select>
+    </label>
+    <hr>
+    <label><input type="checkbox" id="chkMic"> 🎤 Modo automático (usa o microfone para trocar a cor sozinho)</label>
+    <div id="micArea" hidden>
+      <div class="medidor"><div id="nivelFill"></div><div class="marca" id="marcaA"></div><div class="marca" id="marcaV"></div></div>
+      <label>Amarelo a partir de: <input type="range" id="limA" min="5" max="95" value="40"> <span id="vA">40</span></label>
+      <label>Vermelho a partir de: <input type="range" id="limV" min="10" max="100" value="65"> <span id="vV">65</span></label>
+      <label>Sensibilidade: <input type="range" id="sens" min="1" max="10" value="5"></label>
+      <p class="dica">No vermelho automático o alerta toca (no máximo a cada 8 segundos). A luz volta a ficar mais calma quando a turma fica em silêncio por alguns segundos.</p>
+    </div>
+    <p class="dica">Atalhos de teclado: <b>1</b> verde, <b>2</b> amarelo, <b>3</b> vermelho, <b>A</b> alerta.</p>
+  </details>
+
+<script>
+const $ = id => document.getElementById(id);
+const ESTADOS = {
+  verde:   {emoji:'😄', msg:'Pode conversar', sub:'Converse com calma com os colegas', voz:'Podem conversar com calma.'},
+  amarelo: {emoji:'🤫', msg:'Fale baixinho', sub:'Use a voz de biblioteca', voz:'Atenção! Falem baixinho.'},
+  vermelho:{emoji:'🙊', msg:'Silêncio!', sub:'Agora é hora de ficar em silêncio', voz:'Silêncio, por favor!'}
+};
+let cor = 'verde', timerLembrete = null;
+
+// ---------- Sons ----------
+let ac;
+function audio(){
+  ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+  if (ac.state === 'suspended') ac.resume();
+  return ac;
+}
+function tom(freq, dur, tipo = 'sine', vol = .2, atraso = 0, freqFim){
+  try{
+    const a = audio(), o = a.createOscillator(), g = a.createGain(), t0 = a.currentTime + atraso;
+    const v = vol * +$('volume').value;
+    o.type = tipo; o.frequency.setValueAtTime(freq, t0);
+    if (freqFim) o.frequency.linearRampToValueAtTime(freqFim, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(v, .0002), t0 + .02);
+    g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    o.connect(g).connect(a.destination); o.start(t0); o.stop(t0 + dur + .02);
+  }catch(e){}
+}
+const SONS = {
+  sirene(){ for (let i = 0; i < 3; i++){ tom(600, .45, 'sawtooth', .25, i * .9, 1300); tom(1300, .45, 'sawtooth', .25, i * .9 + .45, 600); } },
+  apito(){ tom(2600, .25, 'sine', .4, 0, 2900); tom(2600, .7, 'sine', .4, .35, 2800); },
+  sino(){ [0, .5, 1].forEach(d => { tom(1318, 1.2, 'sine', .35, d); tom(2637, .8, 'sine', .12, d); }); },
+  buzina(){ tom(220, .6, 'square', .3, 0); tom(277, .6, 'square', .2, 0); tom(220, .9, 'square', .3, .75); tom(277, .9, 'square', .2, .75); }
+};
+function tocarAlerta(){
+  SONS[$('tipoSom').value]();
+  document.body.classList.remove('alerta'); void document.body.offsetWidth; document.body.classList.add('alerta');
+  setTimeout(() => document.body.classList.remove('alerta'), 1600);
+}
+const somTroca = {
+  verde(){ [523, 659, 784].forEach((f, i) => tom(f, .25, 'triangle', .25, i * .12)); },
+  amarelo(){ tom(880, .3, 'triangle', .3); tom(660, .4, 'triangle', .3, .3); },
+  vermelho(){ tocarAlerta(); }
+};
+function falar(t){
+  if (!$('chkVoz').checked || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = .95;
+  const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+  if (v) u.voice = v;
+  setTimeout(() => speechSynthesis.speak(u), cor === 'vermelho' ? 1500 : 500);
+}
+
+// ---------- Troca de cor ----------
+function mudar(nova, comSom = true){
+  const mudou = nova !== cor;
+  cor = nova;
+  document.body.className = nova;
+  document.querySelectorAll('.luz').forEach(l => l.classList.toggle('acesa', l.dataset.cor === nova));
+  const e = ESTADOS[nova];
+  $('emoji').textContent = e.emoji; $('mensagem').textContent = e.msg; $('sub').textContent = e.sub;
+  if (comSom && (mudou || nova === 'vermelho')){
+    if (nova === 'vermelho' || $('chkSomTroca').checked) somTroca[nova]();
+    falar(e.voz);
+  }
+  configurarLembrete();
+}
+function configurarLembrete(){
+  clearInterval(timerLembrete); timerLembrete = null;
+  if (cor === 'vermelho' && $('chkLembrete').checked)
+    timerLembrete = setInterval(() => { tocarAlerta(); falar(ESTADOS.vermelho.voz); }, +$('intervalo').value * 1000);
+}
+
+document.querySelectorAll('[data-cor]').forEach(b => b.onclick = () => mudar(b.dataset.cor));
+$('btnAlerta').onclick = () => { tocarAlerta(); falar(ESTADOS[cor === 'verde' ? 'amarelo' : cor].voz); };
+$('btnTestar').onclick = tocarAlerta;
+$('chkLembrete').onchange = configurarLembrete;
+$('intervalo').onchange = configurarLembrete;
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+  if (e.key === '1') mudar('verde');
+  if (e.key === '2') mudar('amarelo');
+  if (e.key === '3') mudar('vermelho');
+  if (e.key === 'a' || e.key === 'A') $('btnAlerta').click();
+});
+if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+
+// ---------- Modo automático (microfone) ----------
+let stream = null, analisador = null, dados = null, rafMic = null;
+let nivelSuave = 0, ultimoAlertaAuto = 0, desdeCalmo = 0;
+function atualizarMarcas(){
+  let a = +$('limA').value, v = +$('limV').value;
+  if (v <= a){ v = Math.min(100, a + 5); $('limV').value = v; }
+  $('vA').textContent = a; $('vV').textContent = v;
+  $('marcaA').style.left = a + '%'; $('marcaV').style.left = v + '%';
+}
+['limA','limV'].forEach(id => $(id).oninput = atualizarMarcas);
+atualizarMarcas();
+
+async function ligarMic(){
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false, noiseSuppression:false, autoGainControl:false}});
+  }catch(e){
+    alert('Não foi possível acessar o microfone. Verifique a permissão do navegador.');
+    $('chkMic').checked = false; return;
+  }
+  const a = audio();
+  analisador = a.createAnalyser(); analisador.fftSize = 1024;
+  a.createMediaStreamSource(stream).connect(analisador);
+  dados = new Float32Array(analisador.fftSize);
+  $('micArea').hidden = false;
+  let ultimo = performance.now();
+  (function loop(agora){
+    rafMic = requestAnimationFrame(loop);
+    const dt = (agora || performance.now()) - ultimo; ultimo = agora || performance.now();
+    analisador.getFloatTimeDomainData(dados);
+    let soma = 0; for (const x of dados) soma += x * x;
+    const rms = Math.sqrt(soma / dados.length);
+    const db = 20 * Math.log10(rms + 1e-8);              // ~ -90 (silêncio) a 0
+    const sens = +$('sens').value;
+    const nivel = Math.max(0, Math.min(100, (db + 60 + sens * 3) * 2.2));
+    nivelSuave += (nivel - nivelSuave) * (nivel > nivelSuave ? .25 : .04);
+    $('nivelFill').style.width = nivelSuave + '%';
+    const limA = +$('limA').value, limV = +$('limV').value;
+    $('nivelFill').style.background = nivelSuave >= limV ? 'var(--vermelho)' : nivelSuave >= limA ? 'var(--amarelo)' : 'var(--verde)';
+    const alvo = nivelSuave >= limV ? 'vermelho' : nivelSuave >= limA ? 'amarelo' : 'verde';
+    const ordem = {verde:0, amarelo:1, vermelho:2};
+    if (ordem[alvo] > ordem[cor]){
+      desdeCalmo = 0;
+      if (alvo === 'vermelho'){
+        const agoraMs = Date.now();
+        const tocar = agoraMs - ultimoAlertaAuto > 8000;
+        if (tocar) ultimoAlertaAuto = agoraMs;
+        mudar('vermelho', tocar);
+      } else mudar(alvo);
+    } else if (ordem[alvo] < ordem[cor]){
+      desdeCalmo += dt;
+      if (desdeCalmo > 4000){ desdeCalmo = 0; mudar(cor === 'vermelho' ? 'amarelo' : 'verde', false); }
+    } else {
+      desdeCalmo = 0;
+      if (cor === 'vermelho' && Date.now() - ultimoAlertaAuto > 8000){ ultimoAlertaAuto = Date.now(); tocarAlerta(); }
+    }
+  })();
+}
+function desligarMic(){
+  cancelAnimationFrame(rafMic);
+  if (stream) stream.getTracks().forEach(t => t.stop());
+  stream = null; $('micArea').hidden = true; $('nivelFill').style.width = '0';
+}
+$('chkMic').onchange = () => $('chkMic').checked ? ligarMic() : desligarMic();
+</script>
+</body>
+</html>

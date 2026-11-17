@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorteador de Alunos</title>
+<style>
+  :root{--texto:#243049;--azul:#2f80ed;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  button:disabled{opacity:.5;cursor:default}
+  .wrap{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center}
+  #palco{width:min(94vw,800px);min-height:clamp(140px,28vh,260px);background:#fff;border-radius:28px;
+    display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;margin:8px 0;
+    box-shadow:0 6px 0 #0001;font-size:clamp(2.2rem,9vw,5rem);font-weight:bold;word-break:break-word;transition:transform .2s}
+  #palco.girando{color:#8a93a8}
+  #palco.sorteado{color:var(--azul);transform:scale(1.04)}
+  #info{font-size:1.1rem;margin:4px 0;text-align:center}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #btnSortear{background:var(--amarelo);font-size:1.5rem;padding:16px 34px}
+  #chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0;width:min(94vw,860px)}
+  .chip{background:#fff;border-radius:999px;padding:8px 14px;font-weight:bold;box-shadow:0 2px 0 #0001;cursor:pointer;font-size:1rem}
+  .chip.foi{background:#dfe4ec;color:#8a93a8;text-decoration:line-through}
+  .chip.ausente{background:#ffe1e1;color:#b55;opacity:.8}
+  .chip.ausente::before{content:"🚫 "}
+  .chip.atual{background:var(--azul);color:#fff}
+  .dica{font-size:.95rem;opacity:.75;text-align:center}
+  details{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  textarea{width:100%;min-height:160px;font:inherit;font-size:1rem;padding:10px;border-radius:12px;border:2px solid #ccd;resize:vertical}
+  .opcoes label{display:flex;align-items:center;gap:8px;margin:6px 0}
+  .opcoes input[type=checkbox]{width:22px;height:22px}
+  pre{background:#243049;color:#7CFFB2;border-radius:10px;padding:10px;font-size:.85rem;overflow:auto;white-space:pre-wrap}
+  #aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#243049;color:#fff;padding:10px 18px;border-radius:12px;
+    opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+  #aviso.mostrar{opacity:1}
+  .confete{position:fixed;font-size:28px;pointer-events:none;z-index:8;animation:voar 1.4s ease-out forwards}
+  @keyframes voar{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎲 Sorteador de Alunos</h1>
+
+  <div id="palco">Carregue a turma ⬇️</div>
+  <div id="info"></div>
+
+  <div class="acoes">
+    <button id="btnSortear">🎲 Sortear</button>
+    <button id="btnNovaRodada">🔄 Nova rodada</button>
+  </div>
+
+  <div id="chips"></div>
+  <div class="dica">Toque no nome de um aluno para marcá-lo como <b>ausente</b> (ele não será sorteado).</div>
+
+  <details id="painelLista">
+    <summary>📋 Lista da turma (digitar ou importar JSON)</summary>
+    <p>Digite <b>um nome por linha</b> ou cole um <b>JSON</b>:</p>
+    <textarea id="txtLista" placeholder="Ana&#10;Bruno&#10;Carla&#10;..."></textarea>
+    <div class="acoes">
+      <button id="btnUsar">✅ Usar esta lista</button>
+      <button id="btnImportar">📂 Abrir arquivo JSON</button>
+      <button id="btnExportar">💾 Salvar lista em JSON</button>
+      <button id="btnModelo">📄 Baixar modelo</button>
+    </div>
+    <input type="file" id="arquivo" accept=".json,.txt,application/json,text/plain" hidden>
+    <div class="opcoes">
+      <label><input type="checkbox" id="chkRepetir"> Permitir repetir nomes (não risca quem já foi)</label>
+      <label><input type="checkbox" id="chkFalar" checked> Falar o nome sorteado</label>
+      <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    </div>
+    <p class="dica">A lista fica salva neste navegador e também é usada pelo <b>Formador de Grupos</b>.</p>
+    <p>Formato do JSON:</p>
+    <pre>{
+  "turma": "3º Ano A",
+  "alunos": ["Ana", "Bruno", "Carla"]
+}</pre>
+  </details>
+</div>
+<div id="aviso"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const CHAVE = 'painel_turma';
+
+// ---------- Armazenamento ----------
+const guardar = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+const ler = k => { try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } };
+
+// ---------- Leitura de lista (JSON ou texto) ----------
+function nomeDe(x){
+  if (typeof x === 'string') return x;
+  if (x && typeof x === 'object') return x.nome || x.name || x.aluno || '';
+  return '';
+}
+function interpretarLista(texto){
+  texto = (texto || '').trim();
+  if (!texto) return {turma:'', alunos:[]};
+  try{
+    const d = JSON.parse(texto);
+    let arr = Array.isArray(d) ? d : (d.alunos || d.nomes || d.estudantes || d.lista || []);
+    if (!Array.isArray(d) && !arr.length && Array.isArray(d.grupos)) arr = d.grupos.flatMap(g => g.alunos || []);
+    return {turma: Array.isArray(d) ? '' : (d.turma || ''), alunos: limpar(arr.map(nomeDe))};
+  }catch(e){
+    return {turma:'', alunos: limpar(texto.split(/\r?\n|;/))};
+  }
+}
+function limpar(arr){
+  const vistos = new Set(), out = [];
+  arr.forEach(n => { n = String(n).trim(); if (n && !vistos.has(n.toLowerCase())){ vistos.add(n.toLowerCase()); out.push(n); } });
+  return out;
+}
+function baixar(nome, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+let timerAviso;
+function avisar(t){ const a = $('aviso'); a.textContent = t; a.classList.add('mostrar'); clearTimeout(timerAviso); timerAviso = setTimeout(() => a.classList.remove('mostrar'), 2200); }
+
+// ---------- Sons e voz ----------
+let ac;
+function tom(freq, dur = .1, tipo = 'triangle', vol = .12, atraso = 0){
+  if (!$('chkSom').checked) return;
+  try{
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === 'suspended') ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + atraso;
+    o.type = tipo; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
+    o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + dur);
+  }catch(e){}
+}
+const somTick = () => tom(1200, .03, 'square', .04);
+const somFim = () => [523,659,784,1047].forEach((f,i) => tom(f, .2, 'triangle', .16, i * .09));
+function falar(t){
+  if (!$('chkFalar').checked || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = .9;
+  const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith('pt'));
+  if (v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+function confete(){
+  const itens = ['⭐','🎉','✨','🌟','🎈'];
+  for (let i = 0; i < 24; i++){
+    const s = document.createElement('span'); s.className = 'confete'; s.textContent = itens[i % itens.length];
+    s.style.left = '50%'; s.style.top = '30%';
+    s.style.setProperty('--dx', (Math.random()*600-300)+'px'); s.style.setProperty('--dy', (Math.random()*500-250)+'px');
+    s.style.setProperty('--rot', (Math.random()*720-360)+'deg');
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1500);
+  }
+}
+
+// ---------- Estado ----------
+let turma = '', alunos = [], jaFoi = new Set(), ausentes = new Set(), atual = null, girando = false;
+
+function salvar(){ guardar(CHAVE, {turma, alunos, ausentes:[...ausentes]}); guardar('painel_sorteador_foi', [...jaFoi]); }
+function carregar(){
+  const d = ler(CHAVE);
+  if (d && Array.isArray(d.alunos)){
+    turma = d.turma || ''; alunos = limpar(d.alunos);
+    ausentes = new Set((d.ausentes || []).filter(n => alunos.includes(n)));
+  }
+  const f = ler('painel_sorteador_foi');
+  if (Array.isArray(f)) jaFoi = new Set(f.filter(n => alunos.includes(n)));
+  $('txtLista').value = alunos.join('\n');
+}
+function disponiveis(){
+  return alunos.filter(n => !ausentes.has(n) && ($('chkRepetir').checked || !jaFoi.has(n)));
+}
+function render(){
+  const c = $('chips'); c.innerHTML = '';
+  alunos.forEach(n => {
+    const s = document.createElement('span');
+    s.className = 'chip' + (ausentes.has(n) ? ' ausente' : jaFoi.has(n) && !$('chkRepetir').checked ? ' foi' : '') + (n === atual ? ' atual' : '');
+    s.textContent = n;
+    s.onclick = () => { if (girando) return; ausentes.has(n) ? ausentes.delete(n) : ausentes.add(n); salvar(); render(); };
+    c.appendChild(s);
+  });
+  const presentes = alunos.length - ausentes.size, faltam = disponiveis().length;
+  $('info').textContent = alunos.length
+    ? `${turma ? turma + ' • ' : ''}${presentes} presentes • ${$('chkRepetir').checked ? 'sorteio livre' : 'faltam ' + faltam}`
+    : '';
+  $('btnSortear').disabled = girando || !faltam;
+  if (!alunos.length){ $('palco').textContent = 'Carregue a turma ⬇️'; $('palco').className = ''; $('painelLista').open = true; }
+  else if (!faltam && !girando && !$('chkRepetir').checked && atual === null){ $('palco').textContent = 'Todos já foram! 🎉'; }
+}
+
+// ---------- Sorteio ----------
+function sortear(){
+  const lista = disponiveis();
+  if (!lista.length || girando) return;
+  girando = true; atual = null; render();
+  const escolhido = lista[Math.floor(Math.random() * lista.length)];
+  const palco = $('palco'); palco.className = 'girando';
+  const pool = lista.length > 1 ? lista : alunos.filter(n => !ausentes.has(n));
+  let passo = 0, total = 20 + Math.floor(Math.random() * 5), atraso = 50, ultimo = '';
+  (function rodar(){
+    if (passo < total){
+      let n; do { n = pool[Math.floor(Math.random() * pool.length)]; } while (pool.length > 1 && n === ultimo);
+      ultimo = n; palco.textContent = n; somTick();
+      passo++; atraso *= 1.09;
+      setTimeout(rodar, atraso);
+    } else {
+      palco.textContent = escolhido; palco.className = 'sorteado';
+      atual = escolhido; jaFoi.add(escolhido); girando = false;
+      salvar(); render(); somFim(); confete(); falar(escolhido);
+      if (!$('chkRepetir').checked && !disponiveis().length) setTimeout(() => avisar('Todos os presentes já foram sorteados! Use "Nova rodada".'), 1500);
+    }
+  })();
+}
+function novaRodada(){
+  if (girando) return;
+  jaFoi.clear(); atual = null; salvar();
+  $('palco').className = ''; $('palco').textContent = alunos.length ? 'Pronto para sortear!' : 'Carregue a turma ⬇️';
+  render();
+}
+function usarLista(dados){
+  if (!dados.alunos.length){ avisar('Nenhum nome encontrado na lista.'); return; }
+  turma = dados.turma || turma; alunos = dados.alunos;
+  ausentes = new Set([...ausentes].filter(n => alunos.includes(n)));
+  jaFoi = new Set([...jaFoi].filter(n => alunos.includes(n)));
+  atual = null; $('txtLista').value = alunos.join('\n');
+  salvar(); $('palco').className = ''; $('palco').textContent = 'Pronto para sortear!';
+  render(); avisar(`✅ ${alunos.length} alunos carregados`);
+}
+
+// ---------- Botões ----------
+$('btnSortear').onclick = sortear;
+$('btnNovaRodada').onclick = novaRodada;
+$('btnUsar').onclick = () => usarLista(interpretarLista($('txtLista').value));
+$('btnImportar').onclick = () => $('arquivo').click();
+$('arquivo').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => usarLista(interpretarLista(r.result));
+  r.readAsText(f); e.target.value = '';
+};
+$('btnExportar').onclick = () => {
+  if (!alunos.length) return avisar('A lista está vazia.');
+  baixar(`turma${turma ? '-' + turma.replace(/[^\w-]+/g,'_') : ''}.json`, {turma, alunos});
+};
+$('btnModelo').onclick = () => baixar('modelo-turma.json', {turma:'3º Ano A', alunos:['Ana','Bruno','Carla','Davi','Eduarda']});
+$('chkRepetir').onchange = render;
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space' || e.key === 'Enter'){ e.preventDefault(); sortear(); }
+});
+if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+
+carregar();
+if (alunos.length) $('palco').textContent = 'Pronto para sortear!';
+render();
+</script>
+</body>
+</html>

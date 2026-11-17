@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Placar de Equipes</title>
+<style>
+  :root{--texto:#243049;--verde:#27ae60;--vermelho:#e74c3c;--amarelo:#ffd54a}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;min-height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:var(--texto);
+    background:linear-gradient(160deg,#fff4d6,#d6f0ff);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;user-select:none}
+  h1{font-size:clamp(1.3rem,4vw,2rem);margin:6px 0}
+  button{font:inherit;font-weight:bold;border:none;cursor:pointer;border-radius:16px;padding:12px 16px;font-size:1.05rem;
+    background:#fff;color:var(--texto);box-shadow:0 4px 0 #0002;transition:transform .08s,box-shadow .08s}
+  button:active{transform:translateY(3px);box-shadow:0 1px 0 #0002}
+  .wrap{width:100%;max-width:1200px;display:flex;flex-direction:column;align-items:center}
+  #equipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px;width:100%;margin:10px 0}
+  .equipe{border-radius:26px;color:#fff;padding:14px;display:flex;flex-direction:column;align-items:center;gap:8px;
+    box-shadow:0 6px 0 #0002;position:relative;transition:transform .2s}
+  .equipe.lider{transform:scale(1.03)}
+  .coroa{position:absolute;top:-22px;font-size:2.4rem;filter:drop-shadow(0 3px 2px #0004)}
+  .nome{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:bold;text-align:center;cursor:text;text-shadow:0 2px 0 #0003;word-break:break-word;
+    border-radius:10px;padding:2px 8px;outline:none}
+  .nome:focus{background:#fff3;box-shadow:0 0 0 2px #fff8}
+  .pontos{font-size:clamp(3.5rem,11vw,6.5rem);font-weight:bold;line-height:1;font-family:"Courier New",monospace;text-shadow:0 4px 0 #0003}
+  .pontos.pulo{animation:pulo .35s}
+  @keyframes pulo{50%{transform:scale(1.25)}}
+  .botoes{display:flex;gap:10px;width:100%}
+  .botoes button{flex:1;font-size:clamp(1.6rem,4vw,2.2rem);padding:14px 0;color:var(--texto)}
+  .botoes .mais{background:#fff}
+  .botoes .menos{background:#ffffffaa}
+  .extra{display:flex;gap:8px}
+  .extra button{font-size:.95rem;padding:6px 12px;background:#ffffff33;color:#fff;box-shadow:none}
+  .membros{font-size:.9rem;opacity:.9;text-align:center}
+  .acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+  #btnUsarGrupos{background:var(--amarelo)}
+  details{background:#ffffffcc;border-radius:16px;padding:8px 14px;margin-top:10px;width:min(94vw,860px)}
+  summary{font-weight:bold;cursor:pointer;padding:4px 0;font-size:1.1rem}
+  details label{display:flex;align-items:center;gap:8px;margin:8px 0;flex-wrap:wrap}
+  details input[type=text],details input[type=number],details select{font:inherit;font-size:1.05rem;padding:6px 8px;border-radius:10px;border:2px solid #ccd}
+  details input[type=color]{width:46px;height:38px;border:none;background:none}
+  details input[type=checkbox]{width:22px;height:22px}
+  textarea{width:100%;min-height:120px;font:inherit;font-size:1rem;padding:10px;border-radius:12px;border:2px solid #ccd;resize:vertical}
+  pre{background:#243049;color:#7CFFB2;border-radius:10px;padding:10px;font-size:.85rem;overflow:auto;white-space:pre-wrap}
+  .dica{font-size:.95rem;opacity:.75;text-align:center}
+  #vazio{background:#fff;border-radius:20px;padding:24px;text-align:center;font-size:1.2rem;margin:12px 0}
+  #aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#243049;color:#fff;padding:10px 18px;border-radius:12px;
+    opacity:0;transition:opacity .3s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+  #aviso.mostrar{opacity:1}
+  .confete{position:fixed;font-size:28px;pointer-events:none;z-index:8;animation:voar 1.4s ease-out forwards}
+  @keyframes voar{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⭐ Placar de Equipes</h1>
+
+  <div class="acoes">
+    <button id="btnUsarGrupos" hidden>👥 Usar grupos do Formador</button>
+    <button id="btnDesfazer">↩️ Desfazer</button>
+    <button id="btnZerar">🔄 Zerar pontos</button>
+    <button id="btnCampeao">🏆 Mostrar vencedor</button>
+  </div>
+
+  <div id="vazio" hidden>Nenhuma equipe ainda.<br>Crie as equipes nas configurações abaixo ⬇️</div>
+  <div id="equipes"></div>
+  <p class="dica">Toque no nome da equipe para editar. Atalhos: teclas <b>1–9</b> dão +1 ponto para a equipe correspondente.</p>
+
+  <details id="config">
+    <summary>⚙️ Equipes (criar manualmente ou importar JSON)</summary>
+
+    <label>Criar rápido:
+      <select id="qtdRapida"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>8</option></select>
+      equipes com nomes de
+      <select id="temaRapido">
+        <option value="animais">🦁 animais</option>
+        <option value="cores">🎨 cores</option>
+        <option value="letras">🔤 letras (A, B, C…)</option>
+      </select>
+      <button id="btnCriarRapido">✨ Criar</button>
+    </label>
+    <hr>
+    <label>Adicionar uma equipe:
+      <input type="text" id="novoNome" placeholder="Nome da equipe" maxlength="40">
+      <input type="color" id="novaCor" value="#2f80ed">
+      <button id="btnAdicionar">➕ Adicionar</button>
+    </label>
+    <label>Botão extra de pontos:
+      <select id="extraValor"><option value="0">nenhum</option><option value="2">+2 / −2</option><option value="5" selected>+5 / −5</option><option value="10">+10 / −10</option></select>
+    </label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <hr>
+    <p>Importar: digite <b>um nome de equipe por linha</b> ou cole um <b>JSON</b>:</p>
+    <textarea id="txtEquipes" placeholder="Leões&#10;Tigres&#10;Ursos"></textarea>
+    <div class="acoes">
+      <button id="btnUsarTexto">✅ Usar estas equipes</button>
+      <button id="btnImportar">📂 Abrir arquivo JSON</button>
+      <button id="btnExportar">💾 Salvar placar (JSON)</button>
+      <button id="btnModelo">📄 Baixar modelo</button>
+    </div>
+    <input type="file" id="arquivo" accept=".json,.txt,application/json,text/plain" hidden>
+    <p>Formato do JSON (a cor e os pontos são opcionais):</p>
+    <pre>{
+  "equipes": [
+    { "nome": "Leões",  "cor": "#e74c3c", "pontos": 0 },
+    { "nome": "Tigres", "cor": "#2f80ed", "pontos": 0 }
+  ]
+}</pre>
+    <p class="dica">O placar é salvo automaticamente neste navegador. Também aceita o arquivo "grupos.json" do Formador de Grupos.</p>
+  </details>
+</div>
+<div id="aviso"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const CHAVE = 'painel_placar';
+const CORES = ['#e74c3c','#2f80ed','#27ae60','#f39c12','#8e44ad','#16a085','#d35400','#c2185b','#2c3e50','#7cb342','#0097a7','#6d4c41'];
+const TEMAS = {
+  animais:['🦁 Leões','🐯 Tigres','🐻 Ursos','🦊 Raposas','🐼 Pandas','🐸 Sapos','🦉 Corujas','🐬 Golfinhos'],
+  cores:['🔴 Vermelho','🔵 Azul','🟢 Verde','🟠 Laranja','🟣 Roxo','🩵 Turquesa','🟤 Marrom','🩷 Rosa'],
+  letras:['Equipe A','Equipe B','Equipe C','Equipe D','Equipe E','Equipe F','Equipe G','Equipe H']
+};
+const COR_TEMA_CORES = ['#e74c3c','#2f80ed','#27ae60','#f39c12','#8e44ad','#16a085','#8d6e63','#ec407a'];
+
+// ---------- Armazenamento ----------
+const guardar = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+const ler = k => { try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } };
+function baixar(nome, obj){
+  const blob = new Blob([JSON.stringify(obj, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = nome;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+let timerAviso;
+function avisar(t){ const a = $('aviso'); a.textContent = t; a.classList.add('mostrar'); clearTimeout(timerAviso); timerAviso = setTimeout(() => a.classList.remove('mostrar'), 2400); }
+
+// ---------- Sons ----------
+let ac;
+function tom(freq, dur = .12, tipo = 'triangle', vol = .15, atraso = 0){
+  if (!$('chkSom').checked) return;
+  try{
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === 'suspended') ac.resume();
+    const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + atraso;
+    o.type = tipo; o.frequency.value = freq;
+    g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
+    o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + dur);
+  }catch(e){}
+}
+const somMais = () => { tom(660, .1); tom(990, .15, 'triangle', .15, .08); };
+const somMenos = () => { tom(330, .15, 'sawtooth', .07); tom(250, .2, 'sawtooth', .07, .1); };
+const somVitoria = () => [523,659,784,1047,784,1047].forEach((f,i) => tom(f, .22, 'triangle', .18, i * .13));
+function confete(){
+  const itens = ['⭐','🎉','✨','🌟','🎈','🏆'];
+  for (let i = 0; i < 36; i++){
+    const s = document.createElement('span'); s.className = 'confete'; s.textContent = itens[i % itens.length];
+    s.style.left = '50%'; s.style.top = '35%';
+    s.style.setProperty('--dx', (Math.random()*800-400)+'px'); s.style.setProperty('--dy', (Math.random()*600-300)+'px');
+    s.style.setProperty('--rot', (Math.random()*720-360)+'deg');
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1500);
+  }
+}
+
+// ---------- Leitura (JSON ou texto) ----------
+function interpretarEquipes(texto){
+  texto = (texto || '').trim();
+  if (!texto) return [];
+  let arr;
+  try{
+    const d = JSON.parse(texto);
+    arr = Array.isArray(d) ? d : (d.equipes || d.times || d.grupos || []);
+  }catch(e){
+    arr = texto.split(/\r?\n|;/);
+  }
+  return normalizar(arr);
+}
+function normalizar(arr){
+  const out = [];
+  (arr || []).forEach((x, i) => {
+    let e = typeof x === 'string' ? {nome: x} : (x && typeof x === 'object' ? x : null);
+    if (!e) return;
+    const nome = String(e.nome || e.name || e.time || '').trim();
+    if (!nome) return;
+    out.push({
+      nome,
+      cor: /^#[0-9a-f]{3,8}$/i.test(e.cor || '') ? e.cor : CORES[out.length % CORES.length],
+      pontos: Number.isFinite(+e.pontos) ? Math.round(+e.pontos) : 0,
+      alunos: Array.isArray(e.alunos) ? e.alunos.map(String) : []
+    });
+  });
+  return out;
+}
+
+// ---------- Estado ----------
+let equipes = [], historico = [];
+
+function salvar(){ guardar(CHAVE, {equipes}); }
+function lembrar(){ historico.push(JSON.stringify(equipes)); if (historico.length > 50) historico.shift(); }
+
+function render(){
+  const box = $('equipes'); box.innerHTML = '';
+  $('vazio').hidden = equipes.length > 0;
+  if (!equipes.length) $('config').open = true;
+  const max = Math.max(...equipes.map(e => e.pontos));
+  const lideres = equipes.filter(e => e.pontos === max).length;
+  const extra = +$('extraValor').value;
+  equipes.forEach((e, i) => {
+    const d = document.createElement('div');
+    d.className = 'equipe' + (max > 0 && lideres === 1 && e.pontos === max ? ' lider' : '');
+    d.style.background = e.cor;
+    if (max > 0 && e.pontos === max){ const c = document.createElement('div'); c.className = 'coroa'; c.textContent = '👑'; d.appendChild(c); }
+
+    const nome = document.createElement('div'); nome.className = 'nome'; nome.textContent = e.nome;
+    nome.contentEditable = 'true'; nome.spellcheck = false;
+    nome.onkeydown = ev => { if (ev.key === 'Enter'){ ev.preventDefault(); nome.blur(); } };
+    nome.onblur = () => { const t = nome.textContent.trim(); if (t && t !== e.nome){ lembrar(); e.nome = t; salvar(); } else nome.textContent = e.nome; };
+
+    const pts = document.createElement('div'); pts.className = 'pontos'; pts.textContent = e.pontos; pts.id = 'pts' + i;
+
+    const bot = document.createElement('div'); bot.className = 'botoes';
+    const menos = document.createElement('button'); menos.className = 'menos'; menos.textContent = '−1'; menos.onclick = () => somar(i, -1);
+    const mais = document.createElement('button'); mais.className = 'mais'; mais.textContent = '+1'; mais.onclick = () => somar(i, 1);
+    bot.append(menos, mais);
+
+    const ex = document.createElement('div'); ex.className = 'extra';
+    if (extra){
+      const bm = document.createElement('button'); bm.textContent = '−' + extra; bm.onclick = () => somar(i, -extra);
+      const bp = document.createElement('button'); bp.textContent = '+' + extra; bp.onclick = () => somar(i, extra);
+      ex.append(bm, bp);
+    }
+    const rem = document.createElement('button'); rem.textContent = '🗑️'; rem.title = 'Remover equipe';
+    rem.onclick = () => { if (confirm(`Remover a equipe "${e.nome}"?`)){ lembrar(); equipes.splice(i, 1); salvar(); render(); } };
+    ex.appendChild(rem);
+
+    d.append(nome, pts, bot, ex);
+    if (e.alunos && e.alunos.length){ const m = document.createElement('div'); m.className = 'membros'; m.textContent = e.alunos.join(', '); d.appendChild(m); }
+    box.appendChild(d);
+  });
+  $('btnUsarGrupos').hidden = !ler('painel_equipes_importar');
+}
+function somar(i, v){
+  if (!equipes[i]) return;
+  lembrar();
+  equipes[i].pontos += v;
+  salvar(); render();
+  const p = $('pts' + i); if (p){ p.classList.remove('pulo'); void p.offsetWidth; p.classList.add('pulo'); }
+  v > 0 ? somMais() : somMenos();
+}
+function definirEquipes(lista, msg){
+  if (!lista.length){ avisar('Nenhuma equipe encontrada.'); return; }
+  if (equipes.length) lembrar();
+  equipes = lista; salvar(); render();
+  $('txtEquipes').value = equipes.map(e => e.nome).join('\n');
+  avisar(msg || `✅ ${equipes.length} equipes prontas`);
+}
+
+// ---------- Botões ----------
+$('btnCriarRapido').onclick = () => {
+  const n = +$('qtdRapida').value, tema = $('temaRapido').value;
+  const cores = tema === 'cores' ? COR_TEMA_CORES : CORES;
+  definirEquipes(TEMAS[tema].slice(0, n).map((nome, i) => ({nome, cor: cores[i], pontos: 0, alunos: []})));
+};
+$('btnAdicionar').onclick = () => {
+  const nome = $('novoNome').value.trim();
+  if (!nome) return avisar('Digite o nome da equipe.');
+  lembrar();
+  equipes.push({nome, cor: $('novaCor').value, pontos: 0, alunos: []});
+  $('novoNome').value = '';
+  $('novaCor').value = CORES[equipes.length % CORES.length];
+  salvar(); render();
+};
+$('novoNome').onkeydown = e => { if (e.key === 'Enter') $('btnAdicionar').click(); };
+$('btnUsarTexto').onclick = () => definirEquipes(interpretarEquipes($('txtEquipes').value));
+$('btnImportar').onclick = () => $('arquivo').click();
+$('arquivo').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => definirEquipes(interpretarEquipes(r.result));
+  r.readAsText(f); e.target.value = '';
+};
+$('btnExportar').onclick = () => {
+  if (!equipes.length) return avisar('Não há equipes para salvar.');
+  baixar('placar.json', {equipes});
+};
+$('btnModelo').onclick = () => baixar('modelo-equipes.json', {equipes:[
+  {nome:'Leões', cor:'#e74c3c', pontos:0}, {nome:'Tigres', cor:'#2f80ed', pontos:0},
+  {nome:'Ursos', cor:'#27ae60', pontos:0}, {nome:'Raposas', cor:'#f39c12', pontos:0}
+]});
+$('btnUsarGrupos').onclick = () => {
+  const d = ler('painel_equipes_importar');
+  if (!d || !Array.isArray(d.equipes)) return;
+  if (equipes.length && !confirm('Substituir as equipes atuais pelos grupos do Formador?')) return;
+  definirEquipes(normalizar(d.equipes), '✅ Grupos importados do Formador');
+  try{ localStorage.removeItem('painel_equipes_importar'); }catch(e){}
+  render();
+};
+$('btnDesfazer').onclick = () => {
+  if (!historico.length) return avisar('Nada para desfazer.');
+  equipes = JSON.parse(historico.pop()); salvar(); render();
+};
+$('btnZerar').onclick = () => {
+  if (!equipes.length || !confirm('Zerar os pontos de todas as equipes?')) return;
+  lembrar(); equipes.forEach(e => e.pontos = 0); salvar(); render();
+};
+$('btnCampeao').onclick = () => {
+  if (!equipes.length) return;
+  const max = Math.max(...equipes.map(e => e.pontos));
+  const venc = equipes.filter(e => e.pontos === max);
+  somVitoria(); confete();
+  avisar(venc.length === 1 ? `🏆 Vencedor: ${venc[0].nome} com ${max} pontos!` : `🤝 Empate entre ${venc.map(e => e.nome).join(' e ')} (${max} pontos)!`);
+};
+$('extraValor').onchange = render;
+document.addEventListener('keydown', e => {
+  if (e.target.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+  const n = parseInt(e.key, 10);
+  if (n >= 1 && n <= 9) somar(n - 1, 1);
+});
+
+// ---------- Início ----------
+const salvo = ler(CHAVE);
+if (salvo && Array.isArray(salvo.equipes)) equipes = normalizar(salvo.equipes);
+$('txtEquipes').value = equipes.map(e => e.nome).join('\n');
+render();
+</script>
+</body>
+</html>
