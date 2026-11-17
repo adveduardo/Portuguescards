@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Respiração e Calma</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;color:#eef3ff;overflow:hidden;
+    background:linear-gradient(180deg,#1b2a4e 0%,#2d3f73 55%,#4a5f9e 100%);display:flex;flex-direction:column;align-items:center}
+  .estrela{position:fixed;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.5;animation:brilhar 4s infinite alternate}
+  @keyframes brilhar{from{opacity:.15}to{opacity:.8}}
+  h1{font-size:clamp(1.3rem,3.5vw,2rem);margin:12px 0 0;font-weight:normal;letter-spacing:1px;z-index:1}
+  #palco{flex:1;display:flex;align-items:center;justify-content:center;width:100%;position:relative;min-height:0}
+  #anel{position:absolute;width:min(70vh,80vw);height:min(70vh,80vw);border-radius:50%;border:3px dashed #ffffff33}
+  #bola{width:min(70vh,80vw);height:min(70vh,80vw);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 30%,#bfe6ff,#6fb7ff 45%,#4b7bec 75%,#3b5bdb);
+    box-shadow:0 0 60px #7fc8ff88,0 0 140px #7fc8ff44;transform:scale(.45);transition-property:transform;transition-timing-function:ease-in-out}
+  #bola.flor{background:radial-gradient(circle at 35% 30%,#ffe3f1,#ff9ccc 45%,#f06595 75%,#d6336c);box-shadow:0 0 60px #ff9ccc88,0 0 140px #ff9ccc44}
+  #bola.sol{background:radial-gradient(circle at 35% 30%,#fff7cc,#ffd43b 45%,#fcc419 75%,#f59f00);box-shadow:0 0 60px #ffd43b88,0 0 140px #ffd43b44}
+  #figura{font-size:min(22vh,24vw);line-height:1;transition:transform .5s}
+  #fase{font-size:clamp(1.6rem,6vh,3.4rem);font-weight:bold;color:#fff;text-shadow:0 2px 8px #0005;margin-top:4px}
+  #conta{font-size:clamp(2rem,9vh,5rem);font-weight:bold;color:#fff;text-shadow:0 2px 8px #0005;line-height:1}
+  #mensagem{font-size:clamp(1.2rem,3.5vh,1.8rem);text-align:center;min-height:1.4em;margin:6px 16px;z-index:1}
+  .controles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;padding:10px 12px 14px;z-index:1}
+  button,select{font:inherit;font-weight:bold;border:none;border-radius:14px;padding:10px 16px;font-size:1rem;cursor:pointer;background:#ffffff22;color:#fff}
+  select option{color:#243049}
+  button:hover,select:hover{background:#ffffff33}
+  #btnIniciar{background:#69db7c;color:#14361f;font-size:1.25rem;padding:12px 28px}
+  #btnIniciar.pausar{background:#ffd43b;color:#3d2c00}
+  label{display:flex;align-items:center;gap:6px;font-size:.95rem}
+  input[type=checkbox]{width:20px;height:20px}
+  #tempoRestante{font-size:1rem;opacity:.8;min-width:60px}
+</style>
+</head>
+<body>
+<h1>🧘 Respiração e Calma</h1>
+<div id="palco">
+  <div id="anel"></div>
+  <div id="bola"><div id="figura">🎈</div><div id="fase">Vamos respirar?</div><div id="conta"></div></div>
+</div>
+<div id="mensagem">Sentem confortáveis, costas retas e mãos na barriga. 😊</div>
+<div class="controles">
+  <button id="btnIniciar">▶️ Começar</button>
+  <select id="padrao" title="Ritmo da respiração">
+    <option value="4,0,4,0">🌬️ Simples: inspira 4, solta 4</option>
+    <option value="4,2,6,0" selected>😌 Relaxar: inspira 4, segura 2, solta 6</option>
+    <option value="4,4,4,4">🟦 Quadrado: 4, segura 4, 4, segura 4</option>
+    <option value="3,0,3,0">🐇 Curtinha: inspira 3, solta 3</option>
+    <option value="5,0,5,0">🐢 Bem devagar: inspira 5, solta 5</option>
+  </select>
+  <select id="duracao" title="Duração">
+    <option value="60">1 minuto</option>
+    <option value="120" selected>2 minutos</option>
+    <option value="180">3 minutos</option>
+    <option value="300">5 minutos</option>
+    <option value="0">sem parar</option>
+  </select>
+  <select id="tema" title="Figura">
+    <option value="balao">🎈 Balão</option>
+    <option value="flor">🌸 Flor</option>
+    <option value="sol">☀️ Sol</option>
+    <option value="nada">⚪ Só o círculo</option>
+  </select>
+  <select id="som" title="Som">
+    <option value="mar" selected>🌊 Som do mar</option>
+    <option value="musica">🎵 Música suave</option>
+    <option value="sino">🔔 Sino em cada fase</option>
+    <option value="nenhum">🔕 Sem som</option>
+  </select>
+  <label><input type="checkbox" id="chkVoz" checked> Voz guiando</label>
+  <span id="tempoRestante"></span>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const FIGURAS = {balao: '🎈', flor: '🌸', sol: '☀️', nada: ''};
+const FINAIS = ['Muito bem! Agora estamos calmos e prontos para aprender. 😊', 'Que tranquilidade! Vocês respiraram muito bem. 🌟', 'Corpo calmo, cabeça leve. Vamos continuar! 💙'];
+
+// estrelas de fundo
+for (let i = 0; i < 40; i++){
+  const s = document.createElement('div'); s.className = 'estrela';
+  s.style.left = Math.random() * 100 + 'vw'; s.style.top = Math.random() * 55 + 'vh';
+  s.style.animationDelay = (Math.random() * 4) + 's';
+  document.body.appendChild(s);
+}
+
+// ---------- Som ----------
+let ac = null, mestre = null, mar = null, pad = null;
+function ctx(){
+  ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+  if (ac.state === 'suspended') ac.resume();
+  if (!mestre){ mestre = ac.createGain(); mestre.gain.value = 0.9; mestre.connect(ac.destination); }
+  return ac;
+}
+function ruidoMarrom(){
+  const b = ac.createBuffer(1, ac.sampleRate * 4, ac.sampleRate), d = b.getChannelData(0);
+  let ultimo = 0;
+  for (let i = 0; i < d.length; i++){ const w = Math.random() * 2 - 1; ultimo = (ultimo + 0.02 * w) / 1.02; d[i] = ultimo * 3.5; }
+  return b;
+}
+function ligarMar(){
+  ctx();
+  const s = ac.createBufferSource(); s.buffer = ruidoMarrom(); s.loop = true;
+  const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 400;
+  const g = ac.createGain(); g.gain.value = 0.15;
+  s.connect(f); f.connect(g); g.connect(mestre); s.start();
+  mar = {s, f, g};
+}
+function ligarMusica(){
+  ctx();
+  const g = ac.createGain(); g.gain.value = 0.0001; g.connect(mestre);
+  g.gain.exponentialRampToValueAtTime(0.06, ac.currentTime + 2);
+  const notas = [261.63, 329.63, 392.0, 493.88]; // Dó maior com sétima
+  const oscs = notas.map((f, i) => {
+    const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+    const lfo = ac.createOscillator(), lg = ac.createGain(); lfo.frequency.value = 0.1 + i * 0.03; lg.gain.value = 2;
+    lfo.connect(lg); lg.connect(o.frequency); lfo.start();
+    o.connect(g); o.start(); return {o, lfo};
+  });
+  pad = {g, oscs};
+}
+function desligarSons(){
+  if (mar){ const m = mar; m.g.gain.setTargetAtTime(0, ac.currentTime, 0.3); setTimeout(() => m.s.stop(), 1500); mar = null; }
+  if (pad){ const p = pad; p.g.gain.setTargetAtTime(0, ac.currentTime, 0.4); setTimeout(() => p.oscs.forEach(x => { x.o.stop(); x.lfo.stop(); }), 2000); pad = null; }
+}
+function sino(freq, vol = 0.25, dur = 2.5){
+  if (!ac) return;
+  const t = ac.currentTime;
+  [1, 2.01].forEach((m, i) => {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'sine'; o.frequency.value = freq * m;
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol / (i + 1), t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(mestre); o.start(t); o.stop(t + dur + 0.05);
+  });
+}
+// o som acompanha cada fase (o mar "vem" quando inspira e "vai" quando solta o ar)
+function somDaFase(nome, dur){
+  const tipo = $('som').value;
+  if (!ac) return;
+  const t = ac.currentTime;
+  if (tipo === 'mar' && mar){
+    const alvoG = nome === 'inspire' ? 0.5 : nome === 'solte' ? 0.12 : null;
+    const alvoF = nome === 'inspire' ? 1100 : nome === 'solte' ? 350 : null;
+    if (alvoG !== null){
+      mar.g.gain.cancelScheduledValues(t); mar.g.gain.setValueAtTime(mar.g.gain.value, t); mar.g.gain.linearRampToValueAtTime(alvoG, t + dur);
+      mar.f.frequency.cancelScheduledValues(t); mar.f.frequency.setValueAtTime(mar.f.frequency.value, t); mar.f.frequency.linearRampToValueAtTime(alvoF, t + dur);
+    }
+  }
+  if (tipo === 'musica' && pad){
+    const alvo = nome === 'inspire' ? 0.09 : nome === 'solte' ? 0.04 : null;
+    if (alvo !== null){ pad.g.gain.cancelScheduledValues(t); pad.g.gain.setValueAtTime(pad.g.gain.value, t); pad.g.gain.linearRampToValueAtTime(alvo, t + dur); }
+  }
+  if (tipo === 'sino') sino(nome === 'inspire' ? 528 : nome === 'solte' ? 396 : 440, 0.22, Math.min(3, dur));
+}
+function falar(t){
+  if (!$('chkVoz').checked || !('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = 0.8; u.pitch = 1;
+  const v = speechSynthesis.getVoices().find(v => /^pt/i.test(v.lang)); if (v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+
+// ---------- Respiração ----------
+const NOMES = {inspire: 'Inspire', segure: 'Segure', solte: 'Solte o ar'};
+const VOZ = {inspire: 'Inspire', segure: 'Segure', solte: 'Solte devagar'};
+let rodando = false, timers = [], fimEm = 0, timerRestante = null, idxFase = 0, fases = [];
+
+function montarFases(){
+  const [a, b, c, d] = $('padrao').value.split(',').map(Number);
+  const f = [{nome: 'inspire', dur: a}];
+  if (b) f.push({nome: 'segure', dur: b, cheio: true});
+  f.push({nome: 'solte', dur: c});
+  if (d) f.push({nome: 'segure', dur: d, cheio: false});
+  return f;
+}
+function limparTimers(){ timers.forEach(clearTimeout); timers = []; }
+function aplicarTema(){
+  const t = $('tema').value;
+  $('figura').textContent = FIGURAS[t];
+  $('bola').className = t === 'flor' ? 'flor' : t === 'sol' ? 'sol' : '';
+}
+function iniciar(){
+  ctx();
+  rodando = true;
+  fases = montarFases(); idxFase = 0;
+  $('btnIniciar').textContent = '⏸️ Parar'; $('btnIniciar').classList.add('pausar');
+  $('mensagem').textContent = 'Siga o círculo com a sua respiração…';
+  desligarSons();
+  if ($('som').value === 'mar') ligarMar();
+  if ($('som').value === 'musica') ligarMusica();
+  const dur = +$('duracao').value;
+  fimEm = dur ? Date.now() + dur * 1000 : 0;
+  clearInterval(timerRestante);
+  timerRestante = setInterval(mostrarRestante, 500); mostrarRestante();
+  proximaFase();
+}
+function mostrarRestante(){
+  if (!fimEm){ $('tempoRestante').textContent = ''; return; }
+  const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
+  $('tempoRestante').textContent = '⏳ ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+}
+function proximaFase(){
+  if (!rodando) return;
+  // termina ao completar o ciclo depois do tempo escolhido
+  if (fimEm && idxFase === 0 && Date.now() >= fimEm - 500) return terminar();
+  const f = fases[idxFase];
+  const bola = $('bola');
+  bola.style.transitionDuration = f.dur + 's';
+  if (f.nome === 'inspire') bola.style.transform = 'scale(1)';
+  if (f.nome === 'solte') bola.style.transform = 'scale(.45)';
+  $('figura').style.transform = f.nome === 'segure' ? 'scale(1.06)' : 'scale(1)';
+  $('fase').textContent = NOMES[f.nome];
+  falar(VOZ[f.nome]);
+  somDaFase(f.nome, f.dur);
+  for (let s = 0; s < f.dur; s++){
+    timers.push(setTimeout(() => { if (rodando) $('conta').textContent = f.dur - s; }, s * 1000));
+  }
+  timers.push(setTimeout(() => { idxFase = (idxFase + 1) % fases.length; proximaFase(); }, f.dur * 1000));
+}
+function parar(mensagem){
+  rodando = false; limparTimers(); clearInterval(timerRestante);
+  desligarSons();
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  $('bola').style.transitionDuration = '1.5s'; $('bola').style.transform = 'scale(.45)';
+  $('btnIniciar').textContent = '▶️ Começar'; $('btnIniciar').classList.remove('pausar');
+  $('conta').textContent = ''; $('tempoRestante').textContent = '';
+  $('fase').textContent = 'Vamos respirar?';
+  if (mensagem) $('mensagem').textContent = mensagem;
+}
+function terminar(){
+  const msg = FINAIS[Math.floor(Math.random() * FINAIS.length)];
+  parar(msg);
+  $('fase').textContent = 'Muito bem! 🌟';
+  if (ac){ sino(528, 0.25, 3); setTimeout(() => sino(660, 0.2, 3), 400); setTimeout(() => sino(792, 0.18, 3.5), 800); }
+  falar(msg.replace(/[^\p{L}\p{N}\s.,!]/gu, ''));
+}
+
+$('btnIniciar').onclick = () => rodando ? parar('Quando quiser, é só começar de novo. 😊') : iniciar();
+$('tema').onchange = aplicarTema;
+['padrao', 'som'].forEach(id => $(id).onchange = () => { if (rodando){ parar(); iniciar(); } });
+document.addEventListener('keydown', e => { if (e.code === 'Space' && e.target.tagName !== 'SELECT'){ e.preventDefault(); $('btnIniciar').click(); } });
+if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+aplicarTema();
+</script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+{
+  "titulo": "Trilha das palavras (modelo)",
+  "casas": 30,
+  "especiais": true,
+  "desafios": {
+    "ler": [
+      "Leia em voz alta: O sapo pulou na lagoa.",
+      "Leia em voz alta: A menina comeu uma maçã vermelha.",
+      "Leia em voz alta: O cachorro late para o carteiro.",
+      "Leia em voz alta: Hoje o dia está ensolarado.",
+      "Leia em voz alta: A galinha botou um ovo.",
+      "Leia em voz alta: Eu gosto de brincar no parque.",
+      "Leia em voz alta: O pato nada no lago azul.",
+      "Leia em voz alta: A bola caiu no telhado.",
+      "Leia em voz alta: Minha mãe fez um bolo de chocolate.",
+      "Leia em voz alta: O macaco subiu na árvore.",
+      "Leia em voz alta: A tartaruga anda devagar.",
+      "Leia em voz alta: O vento levou a pipa."
+    ],
+    "soletrar": [
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "cavalo",
+        "resposta": "C-A-V-A-L-O"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "boneca",
+        "resposta": "B-O-N-E-C-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "janela",
+        "resposta": "J-A-N-E-L-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "escola",
+        "resposta": "E-S-C-O-L-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "girafa",
+        "resposta": "G-I-R-A-F-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "chuva",
+        "resposta": "C-H-U-V-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "pipoca",
+        "resposta": "P-I-P-O-C-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "sapato",
+        "resposta": "S-A-P-A-T-O"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "tomate",
+        "resposta": "T-O-M-A-T-E"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "folha",
+        "resposta": "F-O-L-H-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "mochila",
+        "resposta": "M-O-C-H-I-L-A"
+      },
+      {
+        "texto": "Ouça e soletre a palavra.",
+        "falar": "banana",
+        "resposta": "B-A-N-A-N-A"
+      }
+    ],
+    "rimar": [
+      {
+        "texto": "Fale uma palavra que rima com PÃO.",
+        "resposta": "Exemplos: mão, chão, limão"
+      },
+      {
+        "texto": "Fale uma palavra que rima com GATO.",
+        "resposta": "Exemplos: pato, sapato, rato"
+      },
+      {
+        "texto": "Fale uma palavra que rima com JANELA.",
+        "resposta": "Exemplos: panela, canela, vela"
+      },
+      {
+        "texto": "Fale uma palavra que rima com BOLA.",
+        "resposta": "Exemplos: cola, mola, sacola"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CORAÇÃO.",
+        "resposta": "Exemplos: avião, balão, mão"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CANETA.",
+        "resposta": "Exemplos: borboleta, chupeta, bicicleta"
+      },
+      {
+        "texto": "Fale uma palavra que rima com SOL.",
+        "resposta": "Exemplos: anzol, farol, caracol"
+      },
+      {
+        "texto": "Fale uma palavra que rima com FLOR.",
+        "resposta": "Exemplos: cor, amor, calor"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CHAPÉU.",
+        "resposta": "Exemplos: céu, véu, troféu"
+      },
+      {
+        "texto": "Fale uma palavra que rima com MACACO.",
+        "resposta": "Exemplos: buraco, saco, fraco"
+      },
+      {
+        "texto": "Fale uma palavra que rima com CANECA.",
+        "resposta": "Exemplos: boneca, peteca, sapeca"
+      },
+      {
+        "texto": "Fale uma palavra que rima com LEÃO.",
+        "resposta": "Exemplos: feijão, botão, sabão"
+      }
+    ],
+    "silabas": [
+      {
+        "texto": "Quantas sílabas tem a palavra BORBOLETA?",
+        "resposta": "4: bor-bo-le-ta"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra SOL?",
+        "resposta": "1: sol"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra CASA?",
+        "resposta": "2: ca-sa"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra MACACO?",
+        "resposta": "3: ma-ca-co"
+      },
+      {
+        "texto": "Separe as sílabas de PIPOCA batendo palmas.",
+        "resposta": "pi-po-ca (3)"
+      },
+      {
+        "texto": "Separe as sílabas de CHOCOLATE batendo palmas.",
+        "resposta": "cho-co-la-te (4)"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra ELEFANTE?",
+        "resposta": "4: e-le-fan-te"
+      },
+      {
+        "texto": "Qual é a primeira sílaba de JANELA?",
+        "resposta": "ja"
+      },
+      {
+        "texto": "Qual é a última sílaba de SAPATO?",
+        "resposta": "to"
+      },
+      {
+        "texto": "Quantas sílabas tem a palavra PÃO?",
+        "resposta": "1: pão"
+      },
+      {
+        "texto": "Separe as sílabas de CARRO.",
+        "resposta": "car-ro (2)"
+      },
+      {
+        "texto": "Separe as sílabas de PÁSSARO.",
+        "resposta": "pás-sa-ro (3)"
+      }
+    ],
+    "escrever": [
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "girafa",
+        "resposta": "girafa"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "chuva",
+        "resposta": "chuva"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "palhaço",
+        "resposta": "palhaço"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "cenoura",
+        "resposta": "cenoura"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "abacaxi",
+        "resposta": "abacaxi"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "sorvete",
+        "resposta": "sorvete"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "tesoura",
+        "resposta": "tesoura"
+      },
+      {
+        "texto": "Ouça e escreva a palavra no quadro.",
+        "falar": "coelho",
+        "resposta": "coelho"
+      }
+    ]
+  }
+}

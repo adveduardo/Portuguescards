@@ -79,6 +79,45 @@
   .resultado{font-size:40px;font-weight:bold;margin:10px 0}
   .placa{display:inline-block;background:#fff;border-radius:18px;padding:12px 22px;margin:8px;font-size:20px;box-shadow:0 3px 0 rgba(0,0,0,.08)}
   .placa b{display:block;font-size:40px}
+
+  /* ESCAPE ROOM */
+  .escTitulo{font-size:22px;font-weight:bold;margin:2px 0 6px}
+  .cadeado{display:inline-block;background:#243049;border-radius:20px;padding:10px 14px;margin:6px 0}
+  .cadeado .ico{font-size:40px;vertical-align:middle;margin-right:6px}
+  .cadeado .slot{display:inline-block;width:52px;height:66px;line-height:66px;margin:0 3px;border-radius:12px;background:#3d4966;color:#fff;font-size:40px;font-weight:bold;vertical-align:middle}
+  .cadeado .slot.ok{background:#ffd54a;color:#243049}
+  .cadeado .slot.novo{-webkit-animation:pulo .6s;animation:pulo .6s}
+  @-webkit-keyframes pulo{50%{-webkit-transform:scale(1.35)}}
+  @keyframes pulo{50%{transform:scale(1.35)}}
+  .banner{display:none;border-radius:14px;padding:10px 14px;margin:6px auto;max-width:680px;font-size:20px;font-weight:bold;background:#d9f5e3;color:#1e7a43}
+  .escNum{font-size:16px;opacity:.7;font-weight:bold}
+  .escImagem{font-size:64px;line-height:1.1}
+  .escPergunta{font-size:26px;font-weight:bold;margin:8px 0 14px}
+  .escOp{display:block;width:100%;margin:10px 0;font-size:24px;background:#eef3ff}
+  .escOp.errada{background:#ffd9d9;color:#a33}
+  .escInput{font-size:28px;padding:10px;width:85%;border:3px solid #dfe4ee;border-radius:14px;text-align:center;font-family:inherit;color:#243049;-webkit-appearance:none}
+  #escFeedback{min-height:28px;margin-top:10px;font-size:20px;font-weight:bold;color:#e74c3c}
+  .escDica{color:#7a5b00;font-weight:normal}
+  #escVisor span{display:inline-block;width:50px;height:64px;line-height:64px;margin:4px;border-bottom:4px solid #243049;font-size:42px;font-weight:bold}
+  .teclado{max-width:420px;margin:10px auto 0;font-size:0}
+  .teclado button{width:30%;margin:1.5%;font-size:34px;padding:14px 0}
+  .tremer{-webkit-animation:tremer .4s;animation:tremer .4s}
+  @-webkit-keyframes tremer{25%{-webkit-transform:translateX(-10px)}75%{-webkit-transform:translateX(10px)}}
+  @keyframes tremer{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+
+  /* MÍMICA E DESENHO */
+  .aviso-secreto{background:#fff3cd;color:#7a5b00;border-radius:12px;padding:6px 12px;font-size:16px;font-weight:bold;display:inline-block;margin-bottom:4px}
+  #mimPalavra{font-size:60px;font-weight:bold;margin:16px 0 4px;word-wrap:break-word;line-height:1.1}
+  #mimPalavra.pequena{font-size:30px;margin:4px 0}
+  #mimCategoria{font-size:22px;opacity:.75;margin-bottom:8px}
+  #mimCanvas{background:#fff;border-radius:16px;box-shadow:0 3px 0 rgba(0,0,0,.12);display:block;margin:0 auto;touch-action:none;-ms-touch-action:none}
+  .paleta{margin:8px 0}
+  .paleta button[data-cor]{width:46px;height:46px;border-radius:50%;padding:0;margin:3px;border:4px solid #fff;vertical-align:middle;font-size:20px}
+  .paleta button[data-cor].ativa{border-color:#243049}
+  .paleta .pequeno{vertical-align:middle;margin:3px}
+  .dicaDesenho{font-size:14px;opacity:.7}
+  .botoesAtor{margin-top:12px;font-size:0}
+  .botoesAtor button{width:46%;margin:0 2%;font-size:28px;padding:18px 0}
 </style>
 </head>
 <body>
@@ -138,6 +177,35 @@
     <p>Aguardem os outros grupos…</p>
   </div>
   <div id="resultadoQuiz" style="display:none"></div>
+</section>
+
+<!-- 6) ESCAPE ROOM -->
+<section class="tela" id="tEscape">
+  <div class="topo" id="topoEscape"><span class="nome"></span><span class="info" id="escRelogio"></span></div>
+  <div id="escTitulo" class="escTitulo"></div>
+  <div class="cadeado" id="escCadeado"></div>
+  <div id="escBanner" class="banner"></div>
+  <div class="caixa" id="escCartao"></div>
+</section>
+
+<!-- 7) MÍMICA E DESENHO (só aparece no iPad da equipe da vez) -->
+<section class="tela" id="tMimica">
+  <div class="topo" id="topoMimica"><span class="nome"></span><span class="info" id="mimRelogio"></span></div>
+  <div class="aviso-secreto">🤫 Não mostre esta tela para ninguém!</div>
+  <div id="mimPalavra"></div>
+  <div id="mimCategoria"></div>
+  <div id="mimAreaDesenho">
+    <canvas id="mimCanvas"></canvas>
+    <div class="paleta" id="mimPaleta">
+      <button data-cor="#243049" style="background:#243049" class="ativa"></button><button data-cor="#e74c3c" style="background:#e74c3c"></button><button data-cor="#2f80ed" style="background:#2f80ed"></button><button data-cor="#27ae60" style="background:#27ae60"></button><button data-cor="#f39c12" style="background:#f39c12"></button><button data-cor="#8e44ad" style="background:#8e44ad"></button><button data-cor="#ffffff" style="background:#fff" title="Borracha">🧽</button>
+      <button class="pequeno" id="mimDesfazer">↩️ Desfazer</button>
+      <button class="pequeno" id="mimLimpar">🗑️ Limpar</button>
+    </div>
+    <div class="dicaDesenho">Desenhe sem escrever letras nem números!</div>
+  </div>
+  <div class="botoesAtor">
+    <button class="verde" id="mimAcertou">✅ Acertaram!</button><button class="amarelo" id="mimPular">⏭️ Pular</button>
+  </div>
 </section>
 
 <script src="rede.js"></script>
@@ -218,18 +286,29 @@ function fecharOuvintes(){
   if (ouvEstado){ ouvEstado.fechar(); ouvEstado = null; }
   if (ouvGrupos){ ouvGrupos.fechar(); ouvGrupos = null; }
   if (ouvMeuGrupo){ ouvMeuGrupo.fechar(); ouvMeuGrupo = null; }
+  pararMimica();
+  pararRelogioEscape();
 }
 function comecarAOuvir(){
   fecharOuvintes();
-  estado = null; stopRodada = null; quizN = null;
+  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null;
+  Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo);
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
     if (g === null && eq){
-      // removido pelo professor (ou sala encerrada)
-      Rede.ler('salas/' + sala + '/jogo', function(err, j){
-        if (!err && !j){ sair('A sala foi encerrada pelo professor.'); }
-        else if (!err){ alert('O professor tirou a sua equipe. Escolham de novo.'); eq = null; escolherEquipe(); }
-      });
+      // removido pelo professor ou sala encerrada: espera um instante e confere de novo
+      var salaAtual = sala, eqAtual = eq;
+      setTimeout(function(){
+        if (sala !== salaAtual || eq !== eqAtual) return;
+        Rede.ler('salas/' + sala + '/jogo', function(err, j){
+          if (err || sala !== salaAtual || eq !== eqAtual) return;
+          if (!j) return sair('A sala foi encerrada pelo professor.');
+          Rede.ler('salas/' + sala + '/grupos/' + eq.id, function(err2, g2){
+            if (err2 || g2 || sala !== salaAtual || eq !== eqAtual) return;
+            alert('O professor tirou a sua equipe. Escolham de novo.'); eq = null; escolherEquipe();
+          });
+        });
+      }, 700);
     }
   });
   ouvEstado = Rede.ouvir('salas/' + sala + '/estado', function(s){ estado = s || {fase: 'espera'}; renderizar(); });
@@ -255,6 +334,8 @@ function telaEspera(msg, sub, extraHtml){
 function renderizar(){
   if (!estado || !eq) return;
   if (jogo === 'stop') renderStop();
+  else if (jogo === 'escape') renderEscape();
+  else if (jogo === 'mimica') renderMimica();
   else renderQuiz();
 }
 
@@ -429,6 +510,323 @@ function mostrarEnviada(i){
   $('escolhaQuiz').innerHTML = '<span class="op op' + i + '" style="display:inline-block;width:150px;height:150px;line-height:134px;font-size:90px">' + LETRAS[i] + '</span>';
   $('esperaQuiz').style.display = 'block';
 }
+
+// ================= ESCAPE ROOM =================
+var fuga = {rodada: null, prog: null, desafios: [], timer: null, erros: 0, digitado: '', bloqueado: false, timerBanner: null};
+function mmss(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60); }
+function caminhoFuga(){ return 'salas/' + sala + '/progresso/' + eq.id; }
+function embaralharLista(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function renderEscape(){
+  var f = estado.fase;
+  if (f === 'jogando'){
+    if (fuga.rodada !== estado.rodada) iniciarEscape();
+  } else if (f === 'fim'){
+    pararRelogioEscape(); fuga.rodada = null;
+    var r = (estado.ranking || {})[eq.id] || {};
+    telaEspera(r.escapou ? '🔓 Vocês escaparam!' : '⏰ O tempo acabou!',
+      (r.pos ? '<b>' + r.pos + 'º lugar</b> • ' : '') + (r.escapou && r.tempoTxt ? 'tempo: ' + esc(r.tempoTxt) : (r.resolvidos || 0) + ' desafios resolvidos'));
+  } else {
+    pararRelogioEscape(); fuga.rodada = null;
+    telaEspera(estado.titulo ? '🔐 ' + esc(estado.titulo) : 'Aguardando o professor começar…', estado.historia ? esc(estado.historia) : 'Olhem para o telão 👀');
+  }
+}
+function iniciarEscape(){
+  var rodadaAtual = estado.rodada;
+  fuga.rodada = rodadaAtual; fuga.desafios = Rede.lista(estado.desafios);
+  fuga.erros = 0; fuga.digitado = ''; fuga.bloqueado = false; fuga.prog = null;
+  mostrar('tEscape');
+  pintarTopo('topoEscape', '');
+  $('escTitulo').innerHTML = '🔐 ' + esc(estado.titulo || 'Escape room');
+  $('escCadeado').innerHTML = ''; $('escBanner').style.display = 'none';
+  $('escCartao').innerHTML = '<p>Abrindo a missão…</p>';
+  iniciarRelogioEscape();
+  var n = fuga.desafios.length;
+  Rede.ler(caminhoFuga(), function(err, p){
+    if (fuga.rodada !== rodadaAtual) return;
+    if (p && p.rodada === rodadaAtual && p.codigo){
+      p.ordem = Rede.lista(p.ordem); fuga.prog = p;
+    } else {
+      var fixo = String(estado.codigoFixo || '').replace(/\D/g, ''), codigo = '', ordem = [], i;
+      for (i = 0; i < n; i++){ codigo += fixo.length === n ? fixo.charAt(i) : String(Math.floor(Math.random() * 10)); ordem.push(i); }
+      if (estado.embaralhar) ordem = embaralharLista(ordem);
+      fuga.prog = {rodada: rodadaAtual, resolvidos: 0, erros: 0, escapou: false, codigo: codigo, ordem: ordem};
+      Rede.gravar(caminhoFuga(), fuga.prog);
+    }
+    desenharEscape(false);
+  });
+}
+function desenharEscape(animar){
+  var p = fuga.prog, n = fuga.desafios.length, i;
+  var html = '<span class="ico">' + (p.escapou ? '🔓' : '🔒') + '</span>';
+  for (i = 0; i < n; i++){
+    var ok = i < p.resolvidos;
+    html += '<span class="slot' + (ok ? ' ok' : '') + (animar && i === p.resolvidos - 1 ? ' novo' : '') + '">' + (ok ? p.codigo.charAt(i) : '?') + '</span>';
+  }
+  $('escCadeado').innerHTML = html;
+  var c = $('escCartao');
+  if (p.escapou){ c.innerHTML = '<div class="grande-emoji">🔓🎉</div><h2>Vocês escaparam!</h2><p>Aguardem as outras equipes e olhem o telão 👀</p>'; return; }
+  if (p.resolvidos >= n){ desenharTeclado(); return; }
+  var d = fuga.desafios[p.ordem[p.resolvidos]];
+  var h = '<div class="escNum">Desafio ' + (p.resolvidos + 1) + ' de ' + n + '</div>';
+  if (d.imagem) h += '<div class="escImagem">' + esc(d.imagem) + '</div>';
+  h += '<div class="escPergunta">' + esc(d.pergunta) + '</div>';
+  var ops = Rede.lista(d.opcoes);
+  if (ops.length){
+    for (i = 0; i < ops.length; i++) h += '<button class="escOp" data-i="' + i + '">' + esc(ops[i]) + '</button>';
+  } else {
+    h += '<input id="escResposta" class="escInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Digite a resposta">' +
+      '<br><button class="verde" id="escConferir" style="margin-top:12px">Conferir ✅</button>';
+  }
+  h += '<div id="escFeedback"></div>';
+  c.innerHTML = h;
+  var bs = c.querySelectorAll('.escOp');
+  for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ conferirFuga(+this.getAttribute('data-i'), this); };
+  if ($('escConferir')){
+    $('escConferir').onclick = function(){ conferirFuga($('escResposta').value); };
+    $('escResposta').onkeydown = function(e){ if (e.keyCode === 13) conferirFuga(this.value); };
+  }
+}
+function conferirFuga(valor, botao){
+  if (fuga.bloqueado || !fuga.prog || fuga.prog.escapou) return;
+  var p = fuga.prog, d = fuga.desafios[p.ordem[p.resolvidos]], certo = false, i;
+  if (Rede.lista(d.opcoes).length) certo = valor === d.correta;
+  else {
+    var r = Rede.normalizar(valor), rs = Rede.lista(d.respostas);
+    if (!r) return;
+    for (i = 0; i < rs.length; i++) if (rs[i] === r) certo = true;
+  }
+  if (certo){
+    p.resolvidos++; fuga.erros = 0;
+    Rede.atualizar(caminhoFuga(), {resolvidos: p.resolvidos, t: Rede.TS});
+    vibrar();
+    desenharEscape(true);
+    mostrarBanner(p.resolvidos >= fuga.desafios.length ? '🔑 Último número descoberto: <b>' + p.codigo.charAt(p.resolvidos - 1) + '</b>' : '✅ Certo! Mais um número do cadeado: <b>' + p.codigo.charAt(p.resolvidos - 1) + '</b>');
+  } else {
+    fuga.erros++; p.erros = (p.erros || 0) + 1;
+    Rede.atualizar(caminhoFuga(), {erros: p.erros});
+    vibrar();
+    if (botao){ botao.disabled = true; botao.className += ' errada'; }
+    tremer($('escCartao'));
+    fuga.bloqueado = true;
+    var seg = 3, dica = d.dica ? '<br><span class="escDica">💡 Dica: ' + esc(d.dica) + '</span>' : '';
+    var fb = $('escFeedback');
+    fb.innerHTML = '❌ Ainda não… esperem ' + seg + ' s' + dica;
+    var it = setInterval(function(){
+      seg--;
+      if (!$('escFeedback')){ clearInterval(it); fuga.bloqueado = false; return; }
+      if (seg > 0){ $('escFeedback').innerHTML = '❌ Ainda não… esperem ' + seg + ' s' + dica; return; }
+      clearInterval(it); fuga.bloqueado = false;
+      $('escFeedback').innerHTML = '❌ Ainda não. Tentem de novo!' + dica;
+      if ($('escResposta')){ $('escResposta').value = ''; }
+    }, 1000);
+  }
+}
+function desenharTeclado(){
+  var h = '<h2>🔑 Vocês descobriram todos os números!</h2><p>Digitem o código do cadeado para escapar:</p><div id="escVisor"></div><div class="teclado">';
+  var teclas = ['1','2','3','4','5','6','7','8','9','⌫','0','🔓'];
+  for (var i = 0; i < teclas.length; i++) h += '<button data-t="' + teclas[i] + '"' + (teclas[i] === '🔓' ? ' class="verde"' : '') + '>' + teclas[i] + '</button>';
+  h += '</div><div id="escFeedback"></div>';
+  $('escCartao').innerHTML = h;
+  atualizarVisor();
+  var bs = $('escCartao').querySelectorAll('.teclado button');
+  for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){
+    var t = this.getAttribute('data-t'), n = fuga.desafios.length;
+    if (t === '⌫') fuga.digitado = fuga.digitado.slice(0, -1);
+    else if (t === '🔓') return tentarAbrir();
+    else if (fuga.digitado.length < n) fuga.digitado += t;
+    $('escFeedback').innerHTML = '';
+    atualizarVisor();
+  };
+}
+function atualizarVisor(){
+  var n = fuga.desafios.length, h = '';
+  for (var i = 0; i < n; i++) h += '<span>' + (fuga.digitado.charAt(i) || '_') + '</span>';
+  $('escVisor').innerHTML = h;
+}
+function tentarAbrir(){
+  if (fuga.digitado === fuga.prog.codigo){
+    fuga.prog.escapou = true;
+    Rede.atualizar(caminhoFuga(), {escapou: true, tEscapou: Rede.TS});
+    vibrar(); desenharEscape(false);
+  } else {
+    fuga.digitado = ''; atualizarVisor();
+    $('escFeedback').innerHTML = '❌ Código errado! Confiram os números do cadeado lá em cima.';
+    tremer($('escCartao')); vibrar();
+  }
+}
+function tremer(el){ el.className = el.className.replace(/ ?tremer/g, '') + ' tremer'; setTimeout(function(){ el.className = el.className.replace(/ ?tremer/g, ''); }, 450); }
+function mostrarBanner(html){
+  var b = $('escBanner'); b.innerHTML = html; b.style.display = 'block';
+  clearTimeout(fuga.timerBanner); fuga.timerBanner = setTimeout(function(){ b.style.display = 'none'; }, 3500);
+}
+function iniciarRelogioEscape(){ pararRelogioEscape(); fuga.timer = setInterval(atualizarRelogioEscape, 1000); atualizarRelogioEscape(); }
+function pararRelogioEscape(){ if (fuga.timer){ clearInterval(fuga.timer); fuga.timer = null; } }
+function atualizarRelogioEscape(){
+  if (!estado || typeof estado.inicio !== 'number' || !estado.tempo){ $('escRelogio').innerHTML = ''; return; }
+  var s = (estado.inicio + estado.tempo * 1000 - Rede.agora()) / 1000;
+  $('escRelogio').innerHTML = '⏳ ' + mmss(s);
+}
+
+// ================= MÍMICA E DESENHO =================
+var mim = {vez: null, ouvSeg: null, seg: null, timer: null, aguardando: false, timerAguardo: null,
+  tracos: {}, ordem: [], traco: null, idTraco: null, cor: '#243049', timerEnvio: null, ctx: null, escala: 1};
+function renderMimica(){
+  var f = estado.fase, souAtor = estado.eq === eq.id;
+  var nomeEq = esc((estado.emojiEq || '') + ' ' + (estado.nomeEq || ''));
+  var modoTxt = estado.modo === 'desenho' ? '✏️ Desenho' : '🎭 Mímica';
+  if (f === 'vez' && souAtor){ if (mim.vez !== estado.vez) iniciarVezAtor(); return; }
+  pararMimica();
+  if (f === 'preparar' && souAtor){
+    telaEspera('🌟 É a vez de vocês!', '<b>' + modoTxt + '</b><br>Escolham quem vai ' + (estado.modo === 'desenho' ? 'desenhar' : 'fazer a mímica') +
+      '. Só essa pessoa pode olhar o iPad! 🤫<br>Esperem o professor começar a vez.');
+  } else if (f === 'preparar' || f === 'vez'){
+    telaEspera('Vez da equipe ' + nomeEq, modoTxt + ' • Olhem para o telão 👀');
+  } else if (f === 'fimVez'){
+    var tot = (estado.totais || {})[eq.id] || 0;
+    telaEspera('⏰ Fim da vez de ' + nomeEq, (souAtor ? 'Vocês acertaram <b>' + (estado.acertos || 0) + '</b>! ' : '') + 'Pontos da sua equipe: <b>' + tot + '</b>');
+  } else if (f === 'fim'){
+    var pos = (estado.posicoes || {})[eq.id];
+    telaEspera(pos === 1 ? '🏆 Vocês venceram!' : 'Fim de jogo!', '<b>' + ((estado.totais || {})[eq.id] || 0) + '</b> pontos' + (pos ? ' • ' + pos + 'º lugar' : ''));
+  } else {
+    telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
+  }
+}
+function pararMimica(){
+  if (mim.ouvSeg){ mim.ouvSeg.fechar(); mim.ouvSeg = null; }
+  if (mim.timer){ clearInterval(mim.timer); mim.timer = null; }
+  mim.vez = null; mim.seg = null; mim.traco = null;
+}
+function iniciarVezAtor(){
+  pararMimica();
+  mim.vez = estado.vez;
+  var desenho = estado.modo === 'desenho';
+  mostrar('tMimica');
+  pintarTopo('topoMimica', '');
+  $('mimAreaDesenho').style.display = desenho ? 'block' : 'none';
+  $('mimPalavra').className = desenho ? 'pequena' : '';
+  $('mimPalavra').innerHTML = 'Preparando a palavra…'; $('mimCategoria').innerHTML = '';
+  $('mimAcertou').disabled = true; $('mimPular').disabled = true;
+  if (desenho){ limparCanvasLocal(); prepararCanvas(); }
+  mim.ouvSeg = Rede.ouvir('salas/' + sala + '/segredo/' + eq.id, function(s){
+    if (!s || !mim.vez) return;
+    var nova = !mim.seg || mim.seg.n !== s.n;
+    mim.seg = s; mim.aguardando = false; clearTimeout(mim.timerAguardo);
+    mostrarPalavra();
+    if (nova){ vibrar(); if (estado.modo === 'desenho') limparCanvasLocal(); }
+  });
+  mim.timer = setInterval(relogioMimica, 500); relogioMimica();
+}
+function mostrarPalavra(){
+  if (!mim.seg) return;
+  $('mimPalavra').innerHTML = (estado.modo === 'desenho' ? 'Desenhe: ' : '') + esc(String(mim.seg.palavra).toUpperCase());
+  $('mimCategoria').innerHTML = mim.seg.categoria ? '(' + esc(mim.seg.categoria) + ')' : '';
+  $('mimAcertou').disabled = false; $('mimPular').disabled = false;
+}
+function relogioMimica(){
+  if (!estado || typeof estado.inicio !== 'number' || !estado.tempo){ $('mimRelogio').innerHTML = ''; return; }
+  var s = (estado.inicio + estado.tempo * 1000 - Rede.agora()) / 1000;
+  $('mimRelogio').innerHTML = '⏳ ' + mmss(s);
+}
+function acaoMimica(tipo){
+  if (!mim.seg || mim.aguardando) return;
+  mim.aguardando = true;
+  $('mimAcertou').disabled = true; $('mimPular').disabled = true;
+  Rede.gravar('salas/' + sala + '/acao', {id: 'a' + Date.now() + Math.random().toString(36).slice(2, 6), eq: eq.id, tipo: tipo, n: mim.seg.n});
+  $('mimPalavra').innerHTML = tipo === 'acertou' ? '🎉 Boa! Próxima palavra…' : '⏭️ Próxima palavra…';
+  $('mimCategoria').innerHTML = '';
+  clearTimeout(mim.timerAguardo);
+  mim.timerAguardo = setTimeout(function(){ if (mim.aguardando){ mim.aguardando = false; mostrarPalavra(); } }, 4000);
+}
+// ----- desenho (coordenadas de 0 a 1000 × 0 a 750, proporção 4:3) -----
+function prepararCanvas(){
+  var cv = $('mimCanvas');
+  var largura = Math.min(document.documentElement.clientWidth - 32, 900);
+  var w = Math.min(largura, (window.innerHeight - 360) * 4 / 3);
+  if (w < 280) w = Math.min(largura, 280);
+  cv.style.width = Math.floor(w) + 'px'; cv.style.height = Math.floor(w * 3 / 4) + 'px';
+  var dpr = window.devicePixelRatio || 1;
+  cv.width = Math.floor(w * dpr); cv.height = Math.floor(w * 3 / 4 * dpr);
+  mim.escala = cv.width / 1000;
+  mim.ctx = cv.getContext('2d');
+  redesenhar();
+}
+function limparCanvasLocal(){ mim.tracos = {}; mim.ordem = []; mim.traco = null; redesenhar(); }
+function redesenhar(){
+  if (!mim.ctx) return;
+  var cv = $('mimCanvas'); mim.ctx.clearRect(0, 0, cv.width, cv.height);
+  for (var i = 0; i < mim.ordem.length; i++){ var t = mim.tracos[mim.ordem[i]]; if (t) desenharTraco(t); }
+}
+function desenharTraco(t){
+  var g = mim.ctx, k = mim.escala, p = t.p;
+  g.strokeStyle = t.c; g.lineWidth = t.w * k; g.lineCap = 'round'; g.lineJoin = 'round';
+  g.beginPath(); g.moveTo(p[0] * k, p[1] * k);
+  if (p.length === 2) g.lineTo(p[0] * k + 0.1, p[1] * k);
+  for (var i = 2; i < p.length; i += 2) g.lineTo(p[i] * k, p[i + 1] * k);
+  g.stroke();
+}
+function pontoDe(e){
+  var cv = $('mimCanvas'), r = cv.getBoundingClientRect();
+  var t = (e.touches && e.touches.length) ? e.touches[0] : ((e.changedTouches && e.changedTouches.length) ? e.changedTouches[0] : e);
+  var x = Math.round((t.clientX - r.left) / r.width * 1000), y = Math.round((t.clientY - r.top) / r.height * 750);
+  return [Math.max(0, Math.min(1000, x)), Math.max(0, Math.min(750, y))];
+}
+function comecarTraco(e){
+  if (!mim.seg || mim.aguardando) return;
+  e.preventDefault();
+  var p = pontoDe(e);
+  mim.idTraco = 't' + Date.now() + Math.random().toString(36).slice(2, 5);
+  mim.traco = {c: mim.cor, w: mim.cor === '#ffffff' ? 34 : 9, p: [p[0], p[1]]};
+  mim.tracos[mim.idTraco] = mim.traco; mim.ordem.push(mim.idTraco);
+  desenharTraco(mim.traco);
+  agendarEnvio();
+}
+function moverTraco(e){
+  if (!mim.traco) return;
+  e.preventDefault();
+  var p = pontoDe(e), t = mim.traco.p, lx = t[t.length - 2], ly = t[t.length - 1];
+  if (Math.abs(p[0] - lx) + Math.abs(p[1] - ly) < 4) return;
+  t.push(p[0], p[1]);
+  var g = mim.ctx, k = mim.escala;
+  g.strokeStyle = mim.traco.c; g.lineWidth = mim.traco.w * k; g.lineCap = 'round'; g.lineJoin = 'round';
+  g.beginPath(); g.moveTo(lx * k, ly * k); g.lineTo(p[0] * k, p[1] * k); g.stroke();
+  agendarEnvio();
+}
+function terminarTraco(e){
+  if (!mim.traco) return;
+  if (e && e.cancelable) e.preventDefault();
+  enviarTraco();
+  mim.traco = null;
+}
+function agendarEnvio(){ if (!mim.timerEnvio) mim.timerEnvio = setTimeout(enviarTraco, 250); }
+function enviarTraco(){
+  clearTimeout(mim.timerEnvio); mim.timerEnvio = null;
+  if (!sala || !mim.idTraco || !mim.tracos[mim.idTraco]) return;
+  Rede.gravar('salas/' + sala + '/desenho/' + mim.idTraco, mim.tracos[mim.idTraco]);
+}
+(function(){
+  var cv = $('mimCanvas');
+  cv.addEventListener('touchstart', comecarTraco, false);
+  cv.addEventListener('touchmove', moverTraco, false);
+  cv.addEventListener('touchend', terminarTraco, false);
+  cv.addEventListener('touchcancel', terminarTraco, false);
+  cv.addEventListener('mousedown', comecarTraco, false);
+  cv.addEventListener('mousemove', moverTraco, false);
+  window.addEventListener('mouseup', function(){ terminarTraco(); }, false);
+  var cores = $('mimPaleta').querySelectorAll('button[data-cor]');
+  for (var i = 0; i < cores.length; i++) cores[i].onclick = function(){
+    for (var k = 0; k < cores.length; k++) cores[k].className = '';
+    this.className = 'ativa'; mim.cor = this.getAttribute('data-cor');
+  };
+  $('mimDesfazer').onclick = function(){
+    var id = mim.ordem.pop(); if (!id) return;
+    delete mim.tracos[id]; redesenhar();
+    Rede.apagar('salas/' + sala + '/desenho/' + id);
+  };
+  $('mimLimpar').onclick = function(){ limparCanvasLocal(); Rede.apagar('salas/' + sala + '/desenho'); };
+  $('mimAcertou').onclick = function(){ acaoMimica('acertou'); };
+  $('mimPular').onclick = function(){ acaoMimica('pular'); };
+  window.addEventListener('resize', function(){ if (mim.vez && estado && estado.modo === 'desenho') prepararCanvas(); }, false);
+})();
 
 // ---------------- Botões ----------------
 $('btnEntrar').onclick = entrar;

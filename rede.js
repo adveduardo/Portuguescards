@@ -162,45 +162,89 @@ function ouvirFirebase(path, cb){
 // =========================================================================
 // MODO TESTE (localStorage, só no mesmo navegador)
 // =========================================================================
-var CHAVE_LOCAL = 'rede_teste_db';
+// Cada caminho gravado vira uma entrada própria no localStorage ("rt|salas/1234/estado"...).
+// Assim, duas abas gravando caminhos diferentes ao mesmo tempo não apagam o trabalho uma da outra
+// (o mesmo comportamento do Firebase).
+var PREFIXO = 'rt|';
 var ouvintesLocais = [];
-function lerLocal(){ try{ return JSON.parse(localStorage.getItem(CHAVE_LOCAL)) || {}; }catch(e){ return {}; } }
-function salvarLocal(db){
-  try{ localStorage.setItem(CHAVE_LOCAL, JSON.stringify(db)); }catch(e){}
-  avisarLocais();
+try{ localStorage.removeItem('rede_teste_db'); }catch(e){}   // formato antigo
+function chavesLocais(){
+  var out = [];
+  try{
+    for (var i = 0; i < localStorage.length; i++){
+      var k = localStorage.key(i);
+      if (k && k.indexOf(PREFIXO) === 0) out.push(k.slice(PREFIXO.length));
+    }
+  }catch(e){}
+  return out;
+}
+function relacionado(k, path){   // k é ancestral, igual ou descendente de path
+  if (!path) return true;
+  return k === path || k.indexOf(path + '/') === 0 || path.indexOf(k + '/') === 0;
+}
+function profundidade(k){ return k ? k.split('/').length : 0; }
+function lerLocalCaminho(path){
+  path = partes(path).join('/');
+  var ks = chavesLocais().filter(function(k){ return relacionado(k, path); });
+  ks.sort(function(a, b){ return profundidade(a) - profundidade(b); });
+  var arvore = {};
+  for (var i = 0; i < ks.length; i++){
+    var v = null;
+    try{ v = JSON.parse(localStorage.getItem(PREFIXO + ks[i])); }catch(e){}
+    arvore = gravarCaminho(arvore, ks[i], v === undefined ? null : v) || {};
+  }
+  return lerCaminho(arvore, path);
+}
+function gravarLocalCaminho(path, valor){
+  path = partes(path).join('/');
+  var ks = chavesLocais(), temAncestral = false, remover = [];
+  for (var i = 0; i < ks.length; i++){
+    var k = ks[i];
+    if (k === path || k.indexOf(path + '/') === 0) remover.push(k);
+    else if (path.indexOf(k + '/') === 0) temAncestral = true;
+  }
+  // apaga primeiro as entradas mais "altas" (ex.: a sala inteira antes dos grupos)
+  remover.sort(function(a, b){ return profundidade(a) - profundidade(b); });
+  for (var j = 0; j < remover.length; j++){ try{ localStorage.removeItem(PREFIXO + remover[j]); }catch(e){} }
+  try{
+    if (valor !== null && valor !== undefined) localStorage.setItem(PREFIXO + path, JSON.stringify(valor));
+    else if (temAncestral) localStorage.setItem(PREFIXO + path, 'null');   // marca "apagado" sobre um valor antigo
+  }catch(e){}
 }
 function avisarLocais(){
-  var db = lerLocal();
   for (var i = 0; i < ouvintesLocais.length; i++){
     var o = ouvintesLocais[i];
-    var v = lerCaminho(db, o.path), s = JSON.stringify(v);
+    var v = lerLocalCaminho(o.path), s = JSON.stringify(v);
     if (s !== o.ultimo){ o.ultimo = s; (function(f, val){ setTimeout(function(){ f(val); }, 0); })(o.cb, copiar(v)); }
   }
 }
-window.addEventListener('storage', function(e){ if (e.key === CHAVE_LOCAL) avisarLocais(); });
+window.addEventListener('storage', function(e){ if (!e.key || e.key.indexOf(PREFIXO) === 0) avisarLocais(); });
 
 // =========================================================================
 // API PÚBLICA
 // =========================================================================
 Rede.ler = function(path, cb){
   if (Rede.modo === 'firebase') return req('GET', path, undefined, cb);
-  setTimeout(function(){ cb && cb(null, copiar(lerCaminho(lerLocal(), path))); }, 0);
+  setTimeout(function(){ if (cb) cb(null, copiar(lerLocalCaminho(path))); }, 0);
 };
 Rede.gravar = function(path, valor, cb){        // substitui
   if (Rede.modo === 'firebase') return req('PUT', path, valor, cb);
-  var db = lerLocal(); db = gravarCaminho(db, path, resolverTS(copiar(valor))) || {};
-  salvarLocal(db); setTimeout(function(){ cb && cb(null); }, 0);
+  gravarLocalCaminho(path, resolverTS(copiar(valor)));
+  avisarLocais(); setTimeout(function(){ if (cb) cb(null); }, 0);
 };
 Rede.atualizar = function(path, obj, cb){       // mescla campos
   if (Rede.modo === 'firebase') return req('PATCH', path, obj, cb);
-  var db = lerLocal(), base = partes(path).join('/');
-  for (var k in obj) if (obj.hasOwnProperty(k)) db = gravarCaminho(db, (base ? base + '/' : '') + k, resolverTS(copiar(obj[k]))) || {};
-  salvarLocal(db); setTimeout(function(){ cb && cb(null); }, 0);
+  var base = partes(path).join('/'), ks = [];
+  for (var k in obj) if (obj.hasOwnProperty(k)) ks.push(k);
+  // "fase" por último: quem estiver ouvindo já encontra os outros campos prontos
+  ks.sort(function(a, b){ return (a === 'fase') - (b === 'fase'); });
+  for (var i = 0; i < ks.length; i++) gravarLocalCaminho((base ? base + '/' : '') + ks[i], resolverTS(copiar(obj[ks[i]])));
+  avisarLocais(); setTimeout(function(){ if (cb) cb(null); }, 0);
 };
 Rede.apagar = function(path, cb){
   if (Rede.modo === 'firebase') return req('DELETE', path, undefined, cb);
-  var db = lerLocal(); db = gravarCaminho(db, path, null) || {};
-  salvarLocal(db); setTimeout(function(){ cb && cb(null); }, 0);
+  gravarLocalCaminho(path, null);
+  avisarLocais(); setTimeout(function(){ if (cb) cb(null); }, 0);
 };
 Rede.ouvir = function(path, cb){                // cb(valorCompleto) a cada mudança
   if (Rede.modo === 'firebase') return ouvirFirebase(path, cb);
@@ -223,6 +267,26 @@ Rede.novaSala = function(dados, cb){
     });
   })();
 };
+
+// Mede a diferença entre o relógio deste aparelho e o do servidor (em ms).
+// Assim o telão e os iPads mostram o mesmo cronômetro, mesmo com relógios diferentes.
+Rede.offset = 0;
+Rede.medirRelogio = function(caminho, cb){
+  if (Rede.modo !== 'firebase'){ Rede.offset = 0; if (cb) cb(0); return; }
+  var t0 = Date.now();
+  req('PUT', caminho, Rede.TS, function(err, v){
+    if (err){ if (cb) cb(Rede.offset); return; }
+    var terminar = function(valor){
+      var t1 = Date.now();
+      if (typeof valor === 'number') Rede.offset = valor - Math.round((t0 + t1) / 2);
+      if (cb) cb(Rede.offset);
+    };
+    if (typeof v === 'number') terminar(v);
+    else req('GET', caminho, undefined, function(e2, v2){ terminar(e2 ? null : v2); });
+  });
+};
+// Horário "do servidor" calculado neste aparelho
+Rede.agora = function(){ return Date.now() + Rede.offset; };
 
 // Equipes prontas para os grupos escolherem
 Rede.EQUIPES = [

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  body.escuro{background:radial-gradient(circle at 50% 0%,#3b2f63,#1d1838 70%);color:#f3eefe}
+  body.escuro h1,body.escuro h2{color:#fff}
+  .topoJogo{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  #relogio{font-family:"Courier New",monospace;font-weight:bold;font-size:clamp(3rem,10vw,6.5rem);background:#000a;color:#ff5c5c;border-radius:22px;padding:4px 26px;
+    letter-spacing:4px;text-shadow:0 0 18px #ff3b3b;box-shadow:inset 0 0 0 4px #ff5c5c55}
+  #relogio.pouco{animation:piscar 1s infinite}
+  @keyframes piscar{50%{opacity:.45}}
+  #historiaJogo{font-size:1.15rem;opacity:.9;max-width:900px;margin:6px auto;text-align:center}
+  #cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;margin:12px 0}
+  .cartaoEq{background:#ffffff14;border-radius:24px;overflow:hidden;box-shadow:0 6px 0 #0004;border:3px solid transparent;transition:transform .3s}
+  .cartaoEq.escapou{border-color:#69db7c;background:#69db7c26;transform:scale(1.02)}
+  .cartaoEq .cab{padding:10px 16px;font-size:1.6rem;font-weight:bold;color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .cartaoEq .corpo{padding:12px 16px 16px;text-align:center}
+  .cadeado{display:inline-flex;gap:8px;background:#0007;border-radius:18px;padding:10px 14px;align-items:center}
+  .cadeado .ico{font-size:2.6rem}
+  .cadeado .slot{width:54px;height:66px;border-radius:12px;background:#ffffff1f;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold}
+  .cadeado .slot.ok{background:#ffd54a;color:#243049;animation:pop .4s}
+  @keyframes pop{50%{transform:scale(1.25)}}
+  .statusEq{font-size:1.2rem;margin-top:10px}
+  .statusEq b{font-size:1.5rem}
+  .barraEq{height:14px;background:#ffffff22;border-radius:999px;overflow:hidden;margin-top:8px}
+  .barraEq div{height:100%;transition:width .5s}
+  body.escuro .linhaRank{background:#ffffff14;color:#fff}
+  body.escuro .linhaRank.campeao{background:#69db7c33}
+  body.escuro button:not(.principal):not(.vermelho){background:#ffffff22;color:#fff;box-shadow:0 4px 0 #0005}
+  body.escuro .dica{color:#ddd}
+</style>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🔐 Escape Room (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+  <div class="cartao">
+    <h2>1. Missão (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Regras</h2>
+    <label>Tempo para escapar:
+      <select id="selTempo">
+        <option value="json" selected>o que está no JSON</option>
+        <option value="300">5 minutos</option><option value="600">10 minutos</option><option value="900">15 minutos</option>
+        <option value="1200">20 minutos</option><option value="1800">30 minutos</option>
+      </select>
+    </label>
+    <label><input type="checkbox" id="chkEmbaralhar" checked> Ordem dos desafios diferente em cada equipe (dificulta copiar)</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Cada desafio resolvido mostra um número do cadeado no iPad da equipe. No telão aparece só o progresso, nunca os números.
+      Errou? O iPad espera 3 segundos antes de deixar tentar de novo, e mostra a dica (se houver).</p>
+  </div>
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <p id="historiaSala" style="text-align:center;font-size:1.2rem;max-width:900px;margin:6px auto"></p>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">🔐 Trancar a porta e começar!</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ JOGO ============ -->
+<section id="tJogo" class="tela">
+  <div class="topoJogo">
+    <div><h1 id="tituloJogo" style="text-align:left"></h1><div class="dica">Sala <b id="codigoSala2"></b></div></div>
+    <div id="relogio">15:00</div>
+    <div class="linha" style="margin:0">
+      <button id="btnMais">➕ 1 minuto</button>
+      <button id="btnEncerrarJogo">⏹️ Encerrar agora</button>
+    </div>
+  </div>
+  <div id="historiaJogo"></div>
+  <div id="cartoes"></div>
+</section>
+
+<!-- ============ FIM ============ -->
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏁 Fim da missão</h1>
+  <div id="rankingFim" class="ranking"></div>
+  <div class="linha">
+    <button id="btnDeNovo" class="principal">🔁 Jogar de novo (mesma sala)</button>
+    <button id="btnEncerrar2">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+
+let missao = null, sala = null, arvore = {}, ouvinte = null;
+let fase = 'config', rodada = 0, timer = null, tempoTotal = 900, inicioLocal = 0, escaparam = new Set(), encerrando = false;
+
+// ---------- JSON ----------
+function normalizar(d){
+  if (!d || !Array.isArray(d.desafios)) return null;
+  const desafios = [];
+  d.desafios.forEach(x => {
+    if (!x || !x.pergunta) return;
+    const base = {pergunta: String(x.pergunta), imagem: x.imagem || '', dica: x.dica ? String(x.dica) : ''};
+    if (Array.isArray(x.opcoes) && x.opcoes.length >= 2){
+      const opcoes = x.opcoes.slice(0, 6).map(String);
+      let c = typeof x.correta === 'number' ? x.correta : opcoes.findIndex(o => Rede.normalizar(o) === Rede.normalizar(x.correta));
+      if (c < 0 || c >= opcoes.length) return;
+      desafios.push(Object.assign(base, {opcoes, correta: c}));
+    } else if (x.resposta != null){
+      const respostas = (Array.isArray(x.resposta) ? x.resposta : [x.resposta]).map(Rede.normalizar).filter(Boolean);
+      if (respostas.length) desafios.push(Object.assign(base, {respostas}));
+    }
+  });
+  if (!desafios.length) return null;
+  const codigo = String(d.codigo || '').replace(/\D/g, '');
+  return {titulo: d.titulo || 'Escape room', historia: d.historia || '', tempo: +d.tempo || 900,
+    codigo: codigo.length === desafios.length ? codigo : '', codigoInvalido: !!codigo && codigo.length !== desafios.length,
+    desafios, ignorados: d.desafios.length - desafios.length};
+}
+function carregar(d, origem){
+  const m = normalizar(d);
+  if (!m) return AV.avisar('JSON inválido: confira "desafios", "opcoes"/"correta" ou "resposta".');
+  missao = m;
+  $('infoJson').innerHTML = `<b>${AV.esc(m.titulo)}</b> • ${m.desafios.length} desafios (código de ${m.desafios.length} números) • ${AV.mmss(m.tempo)} min` +
+    (m.codigo ? ' • código fixo do cadeado definido no JSON' : ' • código sorteado para cada equipe') +
+    (m.codigoInvalido ? ' • ⚠️ o "codigo" do JSON precisa ter um número para cada desafio, então será sorteado' : '') +
+    (m.ignorados ? ` • ⚠️ ${m.ignorados} desafio(s) ignorado(s) por erro no JSON` : '') + (origem ? ` • ${AV.esc(origem)}` : '');
+}
+AV.prepararSeletorJson({tipo: 'escape', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/escape-padrao.json', 'modelo-escape-room.json');
+
+// ---------- Sala ----------
+$('btnCriar').onclick = () => {
+  if (!missao) return AV.avisar('Carregue um JSON de missão.');
+  AV.som = $('chkSom').checked;
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'escape', estado: {fase: 'espera', titulo: missao.titulo, historia: missao.historia}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo; rodada = 0;
+    Rede.medirRelogio(`salas/${sala}/relogio/projetor`);
+    $('codigoSala').textContent = codigo; $('codigoSala2').textContent = codigo;
+    $('urlJogar').textContent = AV.urlJogar();
+    $('tituloSala').textContent = '🔐 ' + missao.titulo;
+    $('historiaSala').textContent = missao.historia;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function progresso(id){ const p = (arvore.progresso || {})[id]; return p && p.rodada === rodada ? p : null; }
+function irPara(f){
+  fase = f;
+  document.body.classList.toggle('escuro', f === 'jogo' || f === 'fim');
+  AV.mostrarTela({config:'tConfig', sala:'tSala', jogo:'tJogo', fim:'tFim'}[f]);
+  aoMudar();
+}
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'jogo'){
+    desenharCartoes(g, ids);
+    // alguém acabou de escapar?
+    ids.forEach(id => {
+      const p = progresso(id);
+      if (p && p.escapou && !escaparam.has(id)){
+        escaparam.add(id);
+        AV.fanfarra(); AV.confete();
+        AV.avisar(`🔓 ${g[id].emoji} ${g[id].nome} escaparam!`);
+        AV.falar(`${g[id].nome} escaparam!`);
+      }
+    });
+    if (ids.length && ids.every(id => (progresso(id) || {}).escapou) && !encerrando){
+      encerrando = true; setTimeout(() => encerrarJogo(), 2500);
+    }
+  }
+}
+function inicioServidor(){ const e = arvore.estado || {}; return typeof e.inicio === 'number' && e.rodada === rodada ? e.inicio : null; }
+function restante(){
+  const ini = inicioServidor();
+  const decorrido = ini ? Rede.agora() - ini : Date.now() - inicioLocal;
+  return tempoTotal * 1000 - decorrido;
+}
+function tempoDeFuga(p){
+  const ini = inicioServidor();
+  return ini && typeof p.tEscapou === 'number' ? Math.max(0, (p.tEscapou - ini) / 1000) : null;
+}
+function desenharCartoes(g, ids){
+  const n = missao.desafios.length;
+  $('cartoes').innerHTML = ids.map(id => {
+    const e = g[id], p = progresso(id) || {resolvidos: 0, erros: 0};
+    const r = Math.min(n, p.resolvidos || 0), t = p.escapou ? tempoDeFuga(p) : null;
+    const slots = Array.from({length: n}, (_, i) => `<div class="slot ${i < r ? 'ok' : ''}">${i < r ? '✓' : '?'}</div>`).join('');
+    return `<div class="cartaoEq ${p.escapou ? 'escapou' : ''}">
+      <div class="cab" style="background:${e.cor}"><span>${AV.esc(e.emoji + ' ' + e.nome)}</span><span>${p.escapou ? '🔓' : '🔒'}</span></div>
+      <div class="corpo">
+        <div class="cadeado"><span class="ico">${p.escapou ? '🔓' : '🔒'}</span>${slots}</div>
+        <div class="statusEq">${p.escapou ? `<b>🎉 ESCAPARAM${t != null ? ' em ' + AV.mmss(t) : ''}!</b>` : r >= n ? '<b>🔑 Digitando o código…</b>' : `<b>${r}</b> de ${n} desafios • ${p.erros || 0} erro${p.erros === 1 ? '' : 's'}`}</div>
+        <div class="barraEq"><div style="width:${(p.escapou ? 1 : r / (n + 1)) * 100}%;background:${e.cor}"></div></div>
+      </div></div>`;
+  }).join('') || '<p class="dica" style="text-align:center">Nenhuma equipe na sala.</p>';
+}
+
+// ---------- Jogo ----------
+function comecar(){
+  if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou ainda. Começar mesmo assim?')) return;
+  rodada++; escaparam = new Set(); encerrando = false;
+  tempoTotal = $('selTempo').value === 'json' ? missao.tempo : +$('selTempo').value;
+  inicioLocal = Date.now();
+  $('tituloJogo').textContent = '🔐 ' + missao.titulo;
+  $('historiaJogo').textContent = missao.historia;
+  Rede.apagar(`salas/${sala}/progresso`, () => {
+    Rede.gravar(`salas/${sala}/estado`, {
+      fase: 'jogando', rodada, titulo: missao.titulo, historia: missao.historia, tempo: tempoTotal, inicio: Rede.TS,
+      desafios: missao.desafios, codigoFixo: missao.codigo || '', embaralhar: $('chkEmbaralhar').checked
+    });
+  });
+  irPara('jogo');
+  AV.sirene(); AV.falar('A porta foi trancada! Resolvam os desafios para escapar!');
+  clearInterval(timer);
+  timer = setInterval(tique, 500); tique();
+}
+let ultimoSegundo = null;
+function tique(){
+  const ms = restante(), s = Math.max(0, Math.ceil(ms / 1000));
+  $('relogio').textContent = AV.mmss(s);
+  $('relogio').classList.toggle('pouco', s <= 60);
+  if (s !== ultimoSegundo){
+    ultimoSegundo = s;
+    if (s <= 10 && s > 0) AV.tique();
+    if (s === 60) AV.falar('Falta um minuto!');
+  }
+  if (s <= 0 && !encerrando){ encerrando = true; encerrarJogo(); }
+}
+function encerrarJogo(){
+  clearInterval(timer);
+  Rede.ler(`salas/${sala}`, (err, v) => {
+    if (v) arvore = v;
+    const g = grupos(), ids = AV.ordemGrupos(g), n = missao.desafios.length;
+    const lista = ids.map(id => { const p = progresso(id) || {}; return {id, escapou: !!p.escapou, t: p.escapou ? tempoDeFuga(p) : null, r: Math.min(n, p.resolvidos || 0), erros: p.erros || 0}; });
+    lista.sort((a, b) => (b.escapou - a.escapou) || (a.escapou ? (a.t || 0) - (b.t || 0) : (b.r - a.r) || (a.erros - b.erros)));
+    const ranking = {};
+    lista.forEach((x, i) => ranking[x.id] = {pos: i + 1, escapou: x.escapou, tempoTxt: x.t != null ? AV.mmss(x.t) : '', resolvidos: x.r});
+    Rede.atualizar(`salas/${sala}/estado`, {fase: 'fim', ranking});
+    $('tituloFim').textContent = lista.some(x => x.escapou) ? '🏁 Fim da missão!' : '⏰ O tempo acabou!';
+    $('rankingFim').innerHTML = lista.map((x, i) => {
+      const e = g[x.id] || {nome: x.id, emoji: '❔', cor: '#999'};
+      const resultado = x.escapou ? '🔓 ' + (x.t != null ? AV.mmss(x.t) : '') : `${x.r}/${n} 🔒`;
+      return `<div class="linhaRank ${i === 0 && x.escapou ? 'campeao' : ''}" style="animation-delay:${i * .15}s">
+        <span class="pos">${['🥇','🥈','🥉'][i] || (i + 1) + 'º'}</span><span class="nomeRank">${AV.esc(e.emoji + ' ' + e.nome)}</span>
+        <span class="barraRank"><span style="width:${(x.escapou ? 1 : x.r / (n + 1)) * 100}%;background:${e.cor}"></span></span>
+        <span class="pts" style="font-size:1.3rem">${resultado}</span></div>`;
+    }).join('');
+    irPara('fim');
+    if (lista.some(x => x.escapou)){ AV.fanfarra(); AV.confete(); } else AV.erro();
+  });
+}
+$('btnComecar').onclick = comecar;
+$('btnMais').onclick = () => { tempoTotal += 60; Rede.atualizar(`salas/${sala}/estado`, {tempo: tempoTotal}); AV.avisar('➕ 1 minuto a mais!'); encerrando = false; tique(); };
+$('btnEncerrarJogo').onclick = () => { if (confirm('Encerrar a missão agora?')){ encerrando = true; encerrarJogo(); } };
+$('btnDeNovo').onclick = () => {
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'espera', titulo: missao.titulo, historia: missao.historia});
+  irPara('sala');
+};
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  clearInterval(timer);
+  if (ouvinte) ouvinte.fechar();
+  if (sala) Rede.apagar('salas/' + sala);
+  sala = null; arvore = {};
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

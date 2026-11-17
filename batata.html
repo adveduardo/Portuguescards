@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batata Quente</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  body{overflow-x:hidden}
+  .barraTopo{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+  #placarTurma{background:#fff;border-radius:999px;padding:8px 18px;font-weight:bold;font-size:1.2rem;box-shadow:0 3px 0 #0001}
+  .palco{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 190px);text-align:center;position:relative}
+  #areaBatata{position:relative;display:inline-block}
+  #batata{font-size:clamp(9rem,34vh,19rem);line-height:1;display:inline-block;user-select:none;transition:filter .4s}
+  #batata.tremendo{animation:tremer var(--vel,.5s) infinite}
+  @keyframes tremer{0%{transform:rotate(-8deg)}25%{transform:rotate(7deg) translateY(-14px)}50%{transform:rotate(-5deg)}75%{transform:rotate(8deg) translateY(-7px)}100%{transform:rotate(-8deg)}}
+  .vapor{position:absolute;font-size:3rem;animation:subir 1.6s linear forwards;pointer-events:none}
+  @keyframes subir{from{transform:translateY(0) scale(.6);opacity:.9}to{transform:translateY(-170px) scale(1.4);opacity:0}}
+  #status{font-size:clamp(1.6rem,4.5vw,3rem);font-weight:bold;margin:10px 0;min-height:1.3em}
+  #btnPassar{font-size:clamp(1.4rem,3.5vw,2.2rem);padding:18px 40px}
+  #queimou{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:25;
+    background:radial-gradient(circle,#ffdd55,#ff5a1f 60%,#b8250a);color:#fff;font-size:clamp(3rem,12vw,9rem);font-weight:bold;text-shadow:0 6px 0 #0004;text-align:center}
+  #queimou small{font-size:clamp(1.3rem,4vw,2.6rem)}
+  #queimou.ativo{animation:flash .22s 4 alternate}
+  @keyframes flash{to{filter:brightness(1.45)}}
+  #cartao{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
+  #cartaoCaixa{background:#fff;border-radius:30px;padding:22px 30px;max-width:min(94vw,920px);width:100%;text-align:center;box-shadow:0 20px 60px #0006;animation:aparecer .3s}
+  @keyframes aparecer{from{transform:scale(.5);opacity:0}}
+  #cartaoImagem{font-size:clamp(3rem,9vw,5rem);line-height:1.1}
+  #cartaoPergunta{font-size:clamp(1.7rem,4.5vw,3rem);font-weight:bold;margin:8px 0}
+  #cartaoOpcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  #cartaoOpcoes div{border-radius:16px;padding:12px;color:#fff;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:bold}
+  #cartaoResposta{font-size:clamp(1.4rem,3.6vw,2.2rem);font-weight:bold;color:var(--verde);min-height:1.4em;margin:8px 0}
+  .op0{background:#e74c3c}.op1{background:#2f80ed}.op2{background:#f39c12}.op3{background:#27ae60}
+  details.cartao{max-width:900px;margin:10px auto}
+  details.cartao summary{font-weight:bold;cursor:pointer;font-size:1.1rem}
+</style>
+</head>
+<body>
+<div class="barraTopo">
+  <h1 style="margin:4px 0">🥔 Batata Quente</h1>
+  <div id="placarTurma">✅ Acertos da turma: 0 de 0</div>
+</div>
+
+<div class="palco">
+  <div id="areaBatata"><span id="batata">🥔</span></div>
+  <div id="status">Formem uma roda e peguem a "batata" (uma bola)!</div>
+  <div class="linha">
+    <button id="btnPassar" class="principal">▶️ Passar a batata</button>
+    <button id="btnParar" hidden>✋ Parar agora</button>
+  </div>
+  <p class="dica">Tecla <b>espaço</b>: começar. A música para sozinha num momento surpresa.</p>
+</div>
+
+<details class="cartao" id="config">
+  <summary>⚙️ Configurações (professor)</summary>
+  <label>Perguntas: <select id="selArquivo"></select></label>
+  <div class="linha" style="justify-content:flex-start">
+    <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+    <button id="btnModelo">📄 Baixar o modelo</button>
+  </div>
+  <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+  <div id="infoJson" class="dica"></div>
+  <hr>
+  <label>A música para depois de:
+    <select id="selTempo">
+      <option value="5-12">5 a 12 segundos (rápido)</option>
+      <option value="8-20" selected>8 a 20 segundos</option>
+      <option value="15-35">15 a 35 segundos (longo)</option>
+    </select>
+  </label>
+  <label>Música:
+    <select id="selMusica">
+      <option value="gerada">🎵 Música do jogo</option>
+      <option value="arquivo">📁 Uma música do meu computador</option>
+    </select>
+    <button id="btnArquivoMusica" hidden>Escolher música…</button> <span id="nomeMusica" class="dica"></span>
+  </label>
+  <input type="file" id="arquivoMusica" accept="audio/*" hidden>
+  <label><input type="checkbox" id="chkAcelerar" checked> A música fica mais rápida enquanto toca</label>
+  <label>Volume: <input type="range" id="volume" min="0.05" max="1" step="0.05" value="0.6"></label>
+  <label><input type="checkbox" id="chkVoz" checked> Ler a pergunta em voz alta</label>
+  <p class="dica">Também aceita os arquivos do Quiz ao Vivo. Com alternativas, elas aparecem no cartão.</p>
+</details>
+
+<div id="queimou" hidden>💥 QUEIMOU! 🔥<small>Quem está com a batata responde!</small></div>
+
+<div id="cartao" hidden>
+  <div id="cartaoCaixa">
+    <div id="cartaoImagem"></div>
+    <div id="cartaoPergunta"></div>
+    <div id="cartaoOpcoes"></div>
+    <div id="cartaoResposta"></div>
+    <div class="linha">
+      <button id="btnResposta">👁️ Mostrar resposta</button>
+      <button id="btnOutra">🔄 Outra pergunta</button>
+    </div>
+    <div class="linha">
+      <button id="btnAcertou" class="principal">✅ Acertou</button>
+      <button id="btnErrou" class="vermelho">❌ Errou</button>
+    </div>
+  </div>
+</div>
+
+<audio id="audioProprio" preload="auto"></audio>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const LETRAS = ['A', 'B', 'C', 'D'];
+
+let dados = null, fila = [], atual = null, acertos = 0, total = 0;
+let fase = 'parada', inicio = 0, fimEm = 0, maxT = 0, raf = null;
+
+// ---------- Perguntas (JSON) ----------
+function normalizar(d){
+  if (!d || !Array.isArray(d.perguntas)) return null;
+  const lista = d.perguntas.map(p => {
+    if (typeof p === 'string') return {pergunta: p, opcoes: [], resposta: ''};
+    if (!p || !p.pergunta) return null;
+    const opcoes = Array.isArray(p.opcoes) ? p.opcoes.slice(0, 4).map(String) : [];
+    let resposta = p.resposta != null ? (Array.isArray(p.resposta) ? p.resposta.join(' / ') : String(p.resposta)) : '';
+    if (!resposta && p.correta != null){
+      if (typeof p.correta === 'number' && opcoes[p.correta] != null) resposta = LETRAS[p.correta] + ') ' + opcoes[p.correta];
+      else resposta = String(p.correta);
+    }
+    return {pergunta: String(p.pergunta), opcoes, resposta, imagem: p.imagem || ''};
+  }).filter(Boolean);
+  return lista.length ? {titulo: d.titulo || 'Perguntas', perguntas: lista} : null;
+}
+function carregar(d, origem){
+  const n = normalizar(d);
+  if (!n) return AV.avisar('JSON inválido: falta a lista "perguntas".');
+  dados = n; fila = [];
+  $('infoJson').textContent = `${n.titulo} • ${n.perguntas.length} perguntas` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipos: ['batata', 'quiz'], select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/batata-padrao.json', 'modelo-batata-quente.json');
+function proximaPergunta(){
+  if (!fila.length){
+    fila = dados.perguntas.slice();
+    for (let i = fila.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [fila[i], fila[j]] = [fila[j], fila[i]]; }
+    if (atual && fila.length > 1 && fila[fila.length - 1] === atual) fila.unshift(fila.pop());
+  }
+  return fila.pop();
+}
+
+// ---------- Música do jogo (gerada, melodia original) ----------
+const Musica = (() => {
+  let ac = null, saida = null, timer = null, passo = 0, proxima = 0, bpm = 132, ruido = null, acelerar = true;
+  // 32 colcheias (notas MIDI; 0 = pausa). Acordes: Dó – Sol – Lá menor – Fá
+  const MEL = [72,76,79,76, 74,76,72,0,  71,74,79,74, 72,74,71,0,  69,72,76,72, 74,76,77,76,  77,76,74,72, 74,71,72,0];
+  const BAIXO = [48,48,55,55, 43,43,50,50, 45,45,52,52, 41,41,48,48];
+  const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+  function ctx(){
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state === 'suspended') ac.resume();
+    if (!ruido){
+      ruido = ac.createBuffer(1, ac.sampleRate, ac.sampleRate);
+      const d = ruido.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    }
+    return ac;
+  }
+  function nota(f, t, dur, tipo, vol){
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = tipo; o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(saida); o.start(t); o.stop(t + dur + 0.02);
+  }
+  function bumbo(t){
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+    g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+    o.connect(g); g.connect(saida); o.start(t); o.stop(t + 0.16);
+  }
+  function chimbal(t, vol){
+    const s = ac.createBufferSource(); s.buffer = ruido;
+    const f = ac.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 7000;
+    const g = ac.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+    s.connect(f); f.connect(g); g.connect(saida); s.start(t, Math.random() * 0.5); s.stop(t + 0.06);
+  }
+  function agendar(){
+    while (proxima < ac.currentTime + 0.12){
+      const colcheia = 60 / bpm / 2;
+      const m = MEL[passo];
+      if (m) nota(hz(m), proxima, colcheia * 0.9, 'square', 0.07);
+      if (passo % 2 === 0) nota(hz(BAIXO[passo / 2]), proxima, colcheia * 1.8, 'triangle', 0.2);
+      if (passo % 4 === 0) bumbo(proxima);
+      chimbal(proxima, passo % 2 ? 0.03 : 0.06);
+      proxima += colcheia;
+      passo = (passo + 1) % MEL.length;
+      if (passo === 0 && acelerar) bpm = Math.min(210, bpm * 1.07);
+    }
+  }
+  return {
+    tocar(volume, acel){
+      ctx(); bpm = 132; passo = 0; acelerar = acel;
+      saida = ac.createGain(); saida.gain.value = volume; saida.connect(ac.destination);
+      proxima = ac.currentTime + 0.06;
+      clearInterval(timer); timer = setInterval(agendar, 25); agendar();
+    },
+    parar(){
+      clearInterval(timer); timer = null;
+      if (saida){
+        const s = saida, t = ac.currentTime;
+        s.gain.cancelScheduledValues(t); s.gain.setValueAtTime(s.gain.value, t); s.gain.linearRampToValueAtTime(0, t + 0.03);
+        setTimeout(() => s.disconnect(), 300); saida = null;
+      }
+    },
+    volume(v){ if (saida) saida.gain.value = v; },
+    explosao(vol){
+      ctx(); const t = ac.currentTime;
+      const out = ac.createGain(); out.gain.value = vol; out.connect(ac.destination);
+      const s = ac.createBufferSource(); s.buffer = ruido;
+      const f = ac.createBiquadFilter(); f.type = 'lowpass'; f.frequency.setValueAtTime(3000, t); f.frequency.exponentialRampToValueAtTime(80, t + 0.9);
+      const g = ac.createGain(); g.gain.setValueAtTime(0.9, t); g.gain.exponentialRampToValueAtTime(0.001, t + 1);
+      s.connect(f); f.connect(g); g.connect(out); s.start(t); s.stop(t + 1);
+      const o = ac.createOscillator(), g2 = ac.createGain();
+      o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(30, t + 0.6);
+      g2.gain.setValueAtTime(0.7, t); g2.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+      o.connect(g2); g2.connect(out); o.start(t); o.stop(t + 0.7);
+    }
+  };
+})();
+
+// Música do computador do professor (opcional)
+const audio = $('audioProprio');
+let temArquivo = false;
+$('selMusica').onchange = () => { $('btnArquivoMusica').hidden = $('selMusica').value !== 'arquivo'; if ($('selMusica').value === 'arquivo' && !temArquivo) $('arquivoMusica').click(); };
+$('btnArquivoMusica').onclick = () => $('arquivoMusica').click();
+$('arquivoMusica').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  if (audio.src) URL.revokeObjectURL(audio.src);
+  audio.src = URL.createObjectURL(f); audio.loop = true; temArquivo = true;
+  $('nomeMusica').textContent = f.name;
+  e.target.value = '';
+};
+const usarArquivo = () => $('selMusica').value === 'arquivo' && temArquivo;
+function tocarMusica(){
+  const v = +$('volume').value;
+  if (usarArquivo()){ audio.volume = v; audio.playbackRate = 1; audio.play().catch(() => AV.avisar('Não foi possível tocar a música escolhida.')); }
+  else Musica.tocar(v * 0.8, $('chkAcelerar').checked);
+}
+function pararMusica(){ if (usarArquivo()) audio.pause(); Musica.parar(); }
+$('volume').oninput = () => { Musica.volume(+$('volume').value * 0.8); audio.volume = +$('volume').value; };
+
+// ---------- Jogo ----------
+function passar(){
+  if (fase === 'tocando') return;
+  if (!dados) return AV.avisar('Carregue um arquivo de perguntas nas configurações.');
+  $('config').open = false;
+  const [a, b] = $('selTempo').value.split('-').map(Number);
+  const segundos = a + Math.random() * (b - a);
+  maxT = b; inicio = performance.now(); fimEm = inicio + segundos * 1000;
+  fase = 'tocando';
+  tocarMusica();
+  $('btnPassar').hidden = true; $('btnParar').hidden = false;
+  $('status').textContent = 'Passem a batata! 🥔💨';
+  $('batata').textContent = '🥔';
+  $('batata').classList.add('tremendo');
+  cancelAnimationFrame(raf); laco();
+}
+function laco(){
+  const agora = performance.now();
+  // o "calor" sobe com o tempo máximo, sem revelar quando a música vai parar
+  const calor = Math.min(1, (agora - inicio) / (maxT * 1000));
+  $('batata').style.setProperty('--vel', (0.55 - calor * 0.38).toFixed(2) + 's');
+  $('batata').style.filter = `drop-shadow(0 0 ${12 + calor * 50}px rgba(255,${Math.round(150 - calor * 120)},0,${(0.35 + calor * 0.6).toFixed(2)}))`;
+  if (usarArquivo() && $('chkAcelerar').checked) audio.playbackRate = 1 + calor * 0.25;
+  if (Math.random() < 0.02 + calor * 0.07) vapor();
+  if (agora >= fimEm) return queimar();
+  raf = requestAnimationFrame(laco);
+}
+function vapor(){
+  const s = document.createElement('span'); s.className = 'vapor'; s.textContent = Math.random() < .5 ? '♨️' : '💨';
+  s.style.left = (20 + Math.random() * 60) + '%'; s.style.top = '0';
+  $('areaBatata').appendChild(s); setTimeout(() => s.remove(), 1700);
+}
+function queimar(){
+  if (fase !== 'tocando') return;
+  fase = 'queimou';
+  cancelAnimationFrame(raf);
+  pararMusica();
+  Musica.explosao(+$('volume').value);
+  $('batata').classList.remove('tremendo');
+  $('batata').style.filter = '';
+  $('batata').textContent = '💥';
+  $('btnParar').hidden = true;
+  $('status').textContent = 'Queimou!';
+  const q = $('queimou'); q.hidden = false; q.classList.remove('ativo'); void q.offsetWidth; q.classList.add('ativo');
+  setTimeout(() => { q.hidden = true; mostrarPergunta(); }, 1800);
+}
+function mostrarPergunta(trocar){
+  atual = proximaPergunta();
+  $('cartaoImagem').textContent = atual.imagem;
+  $('cartaoPergunta').textContent = atual.pergunta;
+  $('cartaoOpcoes').innerHTML = atual.opcoes.map((o, i) => `<div class="op${i}">${LETRAS[i]}) ${AV.esc(o)}</div>`).join('');
+  $('cartaoResposta').textContent = '';
+  $('btnResposta').hidden = !atual.resposta;
+  $('cartao').hidden = false;
+  if ($('chkVoz').checked) AV.falar(atual.pergunta + (atual.opcoes.length ? ' ' + atual.opcoes.map((o, i) => LETRAS[i] + ': ' + o).join('. ') : ''));
+  if (!trocar) AV.tom(880, .15, 'triangle', .15);
+}
+function finalizar(acertou){
+  total++; if (acertou) acertos++;
+  $('placarTurma').textContent = `✅ Acertos da turma: ${acertos} de ${total}`;
+  $('cartao').hidden = true;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (acertou){ AV.fanfarra(); AV.confete(); $('status').textContent = 'Muito bem! 🎉'; }
+  else { AV.erro(); $('status').textContent = 'Quase! Na próxima vai 💪'; }
+  $('batata').textContent = '🥔';
+  fase = 'parada';
+  $('btnPassar').hidden = false; $('btnPassar').textContent = '▶️ Passar a batata de novo';
+}
+
+$('btnPassar').onclick = passar;
+$('btnParar').onclick = () => { fimEm = 0; };
+$('btnResposta').onclick = () => { $('cartaoResposta').textContent = '💡 ' + atual.resposta; };
+$('btnOutra').onclick = () => mostrarPergunta(true);
+$('btnAcertou').onclick = () => finalizar(true);
+$('btnErrou').onclick = () => finalizar(false);
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.code === 'Space'){
+    e.preventDefault();
+    if (fase === 'parada') passar();
+    else if (!$('cartao').hidden && atual && atual.resposta) $('btnResposta').click();
+  }
+});
+</script>
+</body>
+</html>

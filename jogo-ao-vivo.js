@@ -63,8 +63,9 @@ AV.baixarArquivo = (url, nome) => {
     document.body.appendChild(a); a.click(); a.remove();
   }).catch(() => AV.avisar('Não foi possível baixar o modelo.'));
 };
-AV.prepararSeletorJson = ({tipo, select, botaoAbrir, input, aoCarregar}) => {
-  const CHAVE = 'aovivo_json_' + tipo;
+AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar}) => {
+  const listaTipos = tipos || [tipo];
+  const CHAVE = 'aovivo_json_' + listaTipos[0];
   const carregarUrl = arq => fetch('dados/' + arq + '?v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); })
     .then(d => aoCarregar(d)).catch(() => AV.avisar('Não foi possível abrir dados/' + arq));
   const opcaoLocal = () => {
@@ -80,9 +81,12 @@ AV.prepararSeletorJson = ({tipo, select, botaoAbrir, input, aoCarregar}) => {
     } else carregarUrl(select.value);
   };
   fetch('dados/indice.json?v=' + Date.now()).then(r => r.json()).then(ind => {
-    (ind[tipo] || []).forEach(e => { const o = document.createElement('option'); o.value = e.arquivo; o.textContent = e.titulo || e.arquivo; select.appendChild(o); });
+    listaTipos.forEach(t => (ind[t] || []).forEach(e => {
+      if (select.querySelector(`option[value="${e.arquivo}"]`)) return;
+      const o = document.createElement('option'); o.value = e.arquivo; o.textContent = e.titulo || e.arquivo; select.appendChild(o);
+    }));
   }).catch(() => {
-    const o = document.createElement('option'); o.value = tipo + '-padrao.json'; o.textContent = 'Modelo padrão'; select.appendChild(o);
+    const o = document.createElement('option'); o.value = listaTipos[0] + '-padrao.json'; o.textContent = 'Modelo padrão'; select.appendChild(o);
   }).finally(() => {
     opcaoLocal();
     if (select.options.length) select.onchange();
@@ -119,6 +123,10 @@ AV.desenharGrupos = (el, grupos, aoRemover, totais) => {
     el.appendChild(d);
   });
 };
+// Grupos na ordem em que entraram na sala
+AV.ordemGrupos = grupos => Object.keys(grupos || {}).sort((a, b) => ((grupos[a].entrou || 0) - (grupos[b].entrou || 0)));
+AV.mmss = s => { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
 AV.posicoes = totais => {
   const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]);
   const pos = {}; let ult = null, p = 0;

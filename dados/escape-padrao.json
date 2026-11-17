@@ -1,0 +1,55 @@
+{
+  "titulo": "Fuga da Biblioteca Encantada",
+  "historia": "Uma bruxa trancou a turma dentro da biblioteca! Cada desafio resolvido revela um número do cadeado. Descubram todos os números e digitem o código para escapar.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Qual palavra está escrita corretamente?",
+      "imagem": "🌧️",
+      "opcoes": [
+        "xuva",
+        "chuva",
+        "chuvah"
+      ],
+      "correta": "chuva",
+      "dica": "Pense no CH de CHAVE."
+    },
+    {
+      "pergunta": "Escreva o plural de FLOR.",
+      "imagem": "🌸",
+      "resposta": [
+        "flores"
+      ],
+      "dica": "Uma flor, duas..."
+    },
+    {
+      "pergunta": "Quantas sílabas tem a palavra BORBOLETA? Escreva o número.",
+      "imagem": "🦋",
+      "resposta": [
+        "4",
+        "quatro"
+      ],
+      "dica": "Bata palmas: bor-bo-le-ta."
+    },
+    {
+      "pergunta": "Qual destas palavras rima com JANELA?",
+      "imagem": "🪟",
+      "opcoes": [
+        "panela",
+        "sapato",
+        "cadeira",
+        "jardim"
+      ],
+      "correta": "panela"
+    },
+    {
+      "pergunta": "Coloque em ordem alfabética e escreva a PRIMEIRA palavra: uva, abacaxi, morango.",
+      "imagem": "🔤",
+      "resposta": [
+        "abacaxi"
+      ],
+      "dica": "Qual letra vem primeiro no alfabeto: U, A ou M?"
+    }
+  ]
+}

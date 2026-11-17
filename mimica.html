@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mímica e Desenho – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .faixaVez{color:#fff;border-radius:22px;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:0 5px 0 #0002}
+  .faixaVez .nome{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:bold}
+  .faixaVez .info{font-size:1.2rem;opacity:.95}
+  #telaPreparar{text-align:center}
+  #telaPreparar .grande{font-size:clamp(5rem,16vw,10rem);line-height:1.1}
+  #telaPreparar .modo{font-size:clamp(2rem,6vw,4rem);font-weight:bold;margin:6px 0}
+  #areaVez{display:flex;gap:16px;align-items:stretch;margin-top:12px}
+  #ladoEsq{flex:1;min-width:0;display:flex;align-items:center;justify-content:center}
+  #ladoDir{width:340px;flex-shrink:0;display:flex;flex-direction:column;gap:12px}
+  .placa{background:#fff;border-radius:20px;padding:12px 16px;box-shadow:0 4px 0 #0001;text-align:center}
+  #relogio{width:clamp(150px,22vw,260px);height:clamp(150px,22vw,260px);border-radius:50%;background:var(--texto);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:clamp(3.5rem,9vw,6.5rem);font-weight:bold;box-shadow:0 8px 0 #0002;margin:auto}
+  #relogio.pouco{background:var(--vermelho);animation:pulsar .5s infinite alternate}
+  @keyframes pulsar{to{transform:scale(1.06)}}
+  #relogioPeq{font-size:3rem;font-weight:bold;font-family:"Courier New",monospace}
+  #relogioPeq.pouco{color:var(--vermelho)}
+  .modoGrande{font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;margin-top:14px;text-align:center}
+  #categoria{font-size:1.4rem}
+  #acertosVez{font-size:3rem;font-weight:bold;color:var(--verde);line-height:1}
+  #btnAcertou{font-size:1.5rem;padding:16px}
+  #roubo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  #roubo button{padding:6px 10px;font-size:1.1rem}
+  #espelho{background:#fff;border-radius:20px;box-shadow:0 6px 0 #0002;display:block;max-width:100%}
+  .listaPalavras{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+  .listaPalavras span{background:#fff;border-radius:14px;padding:8px 14px;font-size:1.4rem;font-weight:bold;box-shadow:0 3px 0 #0001}
+  .listaPalavras span.ok{background:#d9f5e3}
+  .listaPalavras span.nao{background:#eef0f4;color:#8a93a8;text-decoration:line-through}
+  .listaPalavras span.roubo{background:#fff3c4}
+  @media (max-width:900px){ #areaVez{flex-direction:column} #ladoDir{width:100%} }
+</style>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🎭 Mímica e Desenho (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+  <div class="cartao">
+    <h2>1. Palavras (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Regras</h2>
+    <label>Modo:
+      <select id="selModo">
+        <option value="alternar" selected>🎭✏️ Alternar mímica e desenho</option>
+        <option value="sortear">🎲 Sortear a cada vez</option>
+        <option value="mimica">🎭 Só mímica</option>
+        <option value="desenho">✏️ Só desenho (no iPad, aparece no telão)</option>
+      </select>
+    </label>
+    <label>Tempo de cada vez:
+      <select id="selTempo">
+        <option value="json" selected>o que está no JSON</option>
+        <option value="30">30 s</option><option value="45">45 s</option><option value="60">1 min</option><option value="90">1 min e 30 s</option><option value="120">2 min</option>
+      </select>
+    </label>
+    <label>Cada equipe joga:
+      <select id="selRodadas"><option value="1">1 vez</option><option value="2" selected>2 vezes</option><option value="3">3 vezes</option><option value="4">4 vezes</option></select>
+    </label>
+    <label><input type="checkbox" id="chkCategoria" checked> Mostrar a categoria no telão como dica (ex.: "animal")</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Na vez de cada equipe, a palavra aparece <b>só no iPad dela</b>. A turma da equipe tenta adivinhar quantas palavras conseguir no tempo.
+      Cada acerto vale 1 ponto. Se outra equipe adivinhar primeiro, você pode dar o ponto para ela.</p>
+  </div>
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2>Equipes que entraram</h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">▶️ Começar o jogo</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ VEZ ============ -->
+<section id="tVez" class="tela">
+  <div class="faixaVez" id="faixaVez"><span class="nome" id="nomeVez"></span><span class="info" id="infoVez"></span></div>
+
+  <div id="telaPreparar">
+    <div class="grande" id="emojiPreparar"></div>
+    <div class="modo" id="modoPreparar"></div>
+    <p style="font-size:1.4rem">Escolham quem vai <b id="verboPreparar">fazer a mímica</b>. Só essa pessoa pode olhar o iPad da equipe! 🤫</p>
+    <button id="btnComecarVez" class="principal" style="font-size:1.6rem;padding:18px 36px">▶️ Começar a vez</button>
+  </div>
+
+  <div id="telaJogando" hidden>
+    <div id="areaVez">
+      <div id="ladoEsq">
+        <div id="blocoMimica"><div id="relogio">60</div><div class="modoGrande">🎭 MÍMICA</div></div>
+        <canvas id="espelho" hidden></canvas>
+      </div>
+      <div id="ladoDir">
+        <div class="placa" id="placaRelogioPeq" hidden><div id="relogioPeq">1:00</div></div>
+        <div class="placa"><div id="categoria"></div></div>
+        <div class="placa">Acertos nesta vez<div id="acertosVez">0</div></div>
+        <button id="btnAcertou" class="principal">✅ Acertaram!</button>
+        <button id="btnPular">⏭️ Pular palavra</button>
+        <div class="placa"><div class="dica">Outra equipe acertou primeiro?</div><div id="roubo"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="telaFimVez" hidden style="text-align:center">
+    <h1 id="tituloFimVez">⏰ Tempo!</h1>
+    <div class="listaPalavras" id="palavrasVez"></div>
+    <div id="rankingVez" class="ranking"></div>
+    <button id="btnProximaVez" class="principal" style="font-size:1.4rem">➡️ Próxima vez</button>
+  </div>
+</section>
+
+<!-- ============ FIM ============ -->
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado final</h1>
+  <div id="rankingFim" class="ranking"></div>
+  <div class="linha">
+    <button id="btnDeNovo" class="principal">🔁 Jogar de novo (mesma sala)</button>
+    <button id="btnEncerrar2">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const MODOS = {mimica: {nome: '🎭 Mímica', verbo: 'fazer a mímica'}, desenho: {nome: '✏️ Desenho', verbo: 'desenhar no iPad'}};
+
+let lista = null, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let turnos = [], vezIdx = -1, eqAtual = null, modoAtual = 'mimica', usadas = new Set();
+let palavraAtual = null, nPalavra = 0, acertosVez = 0, palavrasVez = [], totais = {};
+let tempoVez = 60, timer = null, inicioLocal = 0, ultimaAcao = null, vezEncerrada = true;
+
+// ---------- JSON ----------
+function normalizar(d){
+  if (!d || !Array.isArray(d.palavras)) return null;
+  const palavras = d.palavras.map(x => {
+    if (typeof x === 'string') return {palavra: x.trim(), categoria: '', modo: ''};
+    if (!x || !x.palavra) return null;
+    const modo = Rede.normalizar(x.modo || '');
+    return {palavra: String(x.palavra).trim(), categoria: x.categoria ? String(x.categoria) : '', modo: modo === 'mimica' || modo === 'desenho' ? modo : ''};
+  }).filter(p => p && p.palavra);
+  return palavras.length ? {titulo: d.titulo || 'Palavras', tempo: +d.tempo || 60, palavras} : null;
+}
+function carregar(d, origem){
+  const n = normalizar(d);
+  if (!n) return AV.avisar('JSON inválido: falta a lista "palavras".');
+  lista = n; usadas = new Set();
+  const m = n.palavras.filter(p => p.modo !== 'desenho').length, de = n.palavras.filter(p => p.modo !== 'mimica').length;
+  $('infoJson').textContent = `${n.titulo} • ${n.palavras.length} palavras (${m} servem para mímica, ${de} para desenho) • ${n.tempo} s por vez` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'mimica', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/mimica-padrao.json', 'modelo-mimica.json');
+
+// ---------- Sala ----------
+$('btnCriar').onclick = () => {
+  if (!lista) return AV.avisar('Carregue um JSON de palavras.');
+  AV.som = $('chkSom').checked;
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'mimica', estado: {fase: 'espera'}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo; totais = {};
+    Rede.medirRelogio(`salas/${sala}/relogio/projetor`);
+    $('codigoSala').textContent = codigo;
+    $('urlJogar').textContent = AV.urlJogar();
+    ouvinte = Rede.ouvir('salas/' + sala, v => {
+      arvore = v || {};
+      if (ultimaAcao === null) ultimaAcao = (arvore.acao || {}).id || '';
+      aoMudar();
+    });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config:'tConfig', sala:'tSala', vez:'tVez', fim:'tFim'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`), totais);
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  // ação vinda do iPad do ator (acertou / pular)
+  const a = arvore.acao;
+  if (a && a.id && a.id !== ultimaAcao){
+    ultimaAcao = a.id;
+    if (a.eq === eqAtual) processarAcao(a.tipo, a.n);
+  }
+  if (fase === 'vez' && modoAtual === 'desenho' && !vezEncerrada) desenharEspelho();
+}
+
+// ---------- Turnos ----------
+function comecarJogo(){
+  const ids = AV.ordemGrupos(grupos());
+  if (!ids.length) return AV.avisar('Nenhuma equipe entrou ainda.');
+  const rodadas = +$('selRodadas').value;
+  turnos = []; for (let r = 0; r < rodadas; r++) turnos.push(...ids);
+  vezIdx = -1; totais = {}; ids.forEach(id => totais[id] = 0);
+  tempoVez = $('selTempo').value === 'json' ? lista.tempo : +$('selTempo').value;
+  proximaVez();
+}
+function escolherModo(){
+  const m = $('selModo').value;
+  if (m === 'mimica' || m === 'desenho') return m;
+  if (m === 'sortear') return Math.random() < .5 ? 'mimica' : 'desenho';
+  return vezIdx % 2 === 0 ? 'mimica' : 'desenho';
+}
+function dadosEquipe(id){ const e = grupos()[id] || {nome: id, emoji: '❔', cor: '#888'}; return {eq: id, nomeEq: e.nome, emojiEq: e.emoji, corEq: e.cor}; }
+function proximaVez(){
+  vezEncerrada = true; clearInterval(timer);
+  do { vezIdx++; } while (vezIdx < turnos.length && !grupos()[turnos[vezIdx]]);
+  if (vezIdx >= turnos.length) return fimDoJogo();
+  eqAtual = turnos[vezIdx]; modoAtual = escolherModo();
+  const d = dadosEquipe(eqAtual);
+  Rede.gravar(`salas/${sala}/estado`, Object.assign({fase: 'preparar', modo: modoAtual, vez: vezIdx + 1, totalVezes: turnos.length, totais}, d));
+  irPara('vez');
+  pintarFaixa(d);
+  $('telaPreparar').hidden = false; $('telaJogando').hidden = true; $('telaFimVez').hidden = true;
+  $('emojiPreparar').textContent = d.emojiEq;
+  $('modoPreparar').textContent = MODOS[modoAtual].nome;
+  $('verboPreparar').textContent = MODOS[modoAtual].verbo;
+  $('btnComecarVez').textContent = `▶️ Começar a vez (${tempoVez} s)`;
+  AV.falar(`Vez de ${d.nomeEq}. ${modoAtual === 'mimica' ? 'Mímica' : 'Desenho'}!`);
+}
+function pintarFaixa(d){
+  $('faixaVez').style.background = d.corEq;
+  $('nomeVez').textContent = `${d.emojiEq} ${d.nomeEq}`;
+  $('infoVez').textContent = `Vez ${vezIdx + 1} de ${turnos.length} • ${MODOS[modoAtual].nome}`;
+}
+function comecarVez(){
+  acertosVez = 0; palavrasVez = []; vezEncerrada = false;
+  $('telaPreparar').hidden = true; $('telaJogando').hidden = false; $('telaFimVez').hidden = true;
+  const desenho = modoAtual === 'desenho';
+  $('blocoMimica').hidden = desenho; $('espelho').hidden = !desenho; $('placaRelogioPeq').hidden = !desenho;
+  $('acertosVez').textContent = '0';
+  const g = grupos();
+  $('roubo').innerHTML = AV.ordemGrupos(g).filter(id => id !== eqAtual).map(id => `<button data-id="${id}" style="background:${g[id].cor};color:#fff">${AV.esc(g[id].emoji + ' ' + g[id].nome)}</button>`).join('');
+  $('roubo').querySelectorAll('button').forEach(b => b.onclick = () => processarAcao('roubo', nPalavra, b.dataset.id));
+  inicioLocal = Date.now();
+  novaPalavra(true);
+  Rede.gravar(`salas/${sala}/estado`, Object.assign({fase: 'vez', modo: modoAtual, vez: vezIdx + 1, totalVezes: turnos.length, tempo: tempoVez, inicio: Rede.TS,
+    acertos: 0, categoria: mostrarCategoria(), totais}, dadosEquipe(eqAtual)));
+  if (desenho) ajustarEspelho();
+  AV.tom(660, .15); AV.tom(990, .2, 'triangle', .15, .15);
+  clearInterval(timer); timer = setInterval(tique, 250); tique();
+}
+const mostrarCategoria = () => $('chkCategoria').checked && palavraAtual ? palavraAtual.categoria : '';
+function sortearPalavra(){
+  const serve = p => !p.modo || p.modo === modoAtual;
+  let opcoes = lista.palavras.filter(p => serve(p) && !usadas.has(p.palavra));
+  if (!opcoes.length){ lista.palavras.filter(serve).forEach(p => usadas.delete(p.palavra)); opcoes = lista.palavras.filter(serve); }
+  if (!opcoes.length) opcoes = lista.palavras;
+  const p = opcoes[Math.floor(Math.random() * opcoes.length)];
+  usadas.add(p.palavra);
+  return p;
+}
+function novaPalavra(primeira){
+  palavraAtual = sortearPalavra(); nPalavra++;
+  // a palavra vai só para o iPad da equipe da vez
+  Rede.gravar(`salas/${sala}/segredo/${eqAtual}`, {palavra: palavraAtual.palavra, categoria: palavraAtual.categoria, modo: modoAtual, n: nPalavra});
+  Rede.apagar(`salas/${sala}/desenho`);
+  $('categoria').innerHTML = mostrarCategoria() ? `Dica: <b>${AV.esc(palavraAtual.categoria)}</b>` : '<span class="dica">Palavra secreta no iPad da equipe 🤫</span>';
+  if (!primeira) Rede.atualizar(`salas/${sala}/estado`, {acertos: acertosVez, categoria: mostrarCategoria(), totais});
+  limparEspelho();
+}
+function processarAcao(tipo, n, outraEquipe){
+  if (fase !== 'vez' || vezEncerrada || n !== nPalavra) return;
+  if (tipo === 'acertou'){
+    acertosVez++; totais[eqAtual] = (totais[eqAtual] || 0) + 1;
+    palavrasVez.push({p: palavraAtual.palavra, st: 'ok'});
+    AV.fanfarra();
+  } else if (tipo === 'roubo' && outraEquipe){
+    totais[outraEquipe] = (totais[outraEquipe] || 0) + 1;
+    palavrasVez.push({p: palavraAtual.palavra, st: 'roubo', por: outraEquipe});
+    AV.tom(700, .15, 'triangle', .15); AV.tom(900, .2, 'triangle', .15, .12);
+    const g = grupos()[outraEquipe]; if (g) AV.avisar(`⭐ Ponto para ${g.emoji} ${g.nome}!`);
+  } else {
+    palavrasVez.push({p: palavraAtual.palavra, st: 'nao'});
+    AV.tom(330, .12, 'triangle', .12);
+  }
+  $('acertosVez').textContent = acertosVez;
+  novaPalavra(false);
+}
+function restante(){
+  const e = arvore.estado || {};
+  const ini = e.fase === 'vez' && e.vez === vezIdx + 1 && typeof e.inicio === 'number' ? e.inicio : null;
+  return tempoVez * 1000 - (ini ? Rede.agora() - ini : Date.now() - inicioLocal);
+}
+let ultimoSeg = null;
+function tique(){
+  const s = Math.max(0, Math.ceil(restante() / 1000));
+  $('relogio').textContent = s; $('relogioPeq').textContent = AV.mmss(s);
+  $('relogio').classList.toggle('pouco', s <= 10); $('relogioPeq').classList.toggle('pouco', s <= 10);
+  if (s !== ultimoSeg){ ultimoSeg = s; if (s <= 5 && s > 0) AV.tique(); }
+  if (s <= 0) fimDaVez();
+}
+function fimDaVez(){
+  if (vezEncerrada) return;
+  vezEncerrada = true; clearInterval(timer);
+  palavrasVez.push({p: palavraAtual.palavra, st: 'nao'});
+  Rede.apagar(`salas/${sala}/segredo/${eqAtual}`);
+  AV.sirene();
+  const d = dadosEquipe(eqAtual);
+  Rede.gravar(`salas/${sala}/estado`, Object.assign({fase: 'fimVez', modo: modoAtual, vez: vezIdx + 1, totalVezes: turnos.length, acertos: acertosVez, totais,
+    palavras: palavrasVez.map(x => ({p: x.p, st: x.st}))}, d));
+  $('telaJogando').hidden = true; $('telaFimVez').hidden = false;
+  $('tituloFimVez').textContent = `⏰ Tempo! ${d.emojiEq} ${d.nomeEq} acertaram ${acertosVez} palavra${acertosVez === 1 ? '' : 's'}`;
+  const g = grupos();
+  $('palavrasVez').innerHTML = palavrasVez.map(x => `<span class="${x.st}">${x.st === 'ok' ? '✅' : x.st === 'roubo' ? '⭐' : '⏭️'} ${AV.esc(x.p)}${x.st === 'roubo' && g[x.por] ? ' ' + AV.esc(g[x.por].emoji) : ''}</span>`).join('');
+  AV.desenharRanking($('rankingVez'), g, totais);
+  const ultima = vezIdx >= turnos.length - 1;
+  $('btnProximaVez').textContent = ultima ? '🏆 Ver resultado final' : '➡️ Próxima vez';
+}
+function fimDoJogo(){
+  vezEncerrada = true; clearInterval(timer);
+  const posicoes = AV.posicoes(totais);
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', totais, posicoes});
+  irPara('fim');
+  AV.desenharRanking($('rankingFim'), grupos(), totais, null, true);
+  AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 700);
+}
+
+// ---------- Espelho do desenho ----------
+const PROP = 3 / 4; // o desenho do iPad é 4:3 (coordenadas de 0 a 1000 × 0 a 750)
+function ajustarEspelho(){
+  const c = $('espelho'), box = $('ladoEsq');
+  const w = Math.min(box.clientWidth, (window.innerHeight - c.getBoundingClientRect().top - 20) / PROP);
+  const css = Math.max(320, Math.floor(w));
+  c.style.width = css + 'px'; c.style.height = Math.floor(css * PROP) + 'px';
+  const dpr = window.devicePixelRatio || 1;
+  c.width = Math.floor(css * dpr); c.height = Math.floor(css * PROP * dpr);
+  desenharEspelho();
+}
+function limparEspelho(){ const c = $('espelho'); c.getContext('2d').clearRect(0, 0, c.width, c.height); }
+function desenharEspelho(){
+  const c = $('espelho'), g = c.getContext('2d');
+  g.clearRect(0, 0, c.width, c.height);
+  const k = c.width / 1000;
+  const tracos = (arvore.desenho || {});
+  Object.keys(tracos).sort().forEach(id => {
+    const t = tracos[id]; const p = Rede.lista(t.p);
+    if (p.length < 2) return;
+    g.strokeStyle = t.c || '#243049'; g.lineWidth = (t.w || 8) * k; g.lineCap = 'round'; g.lineJoin = 'round';
+    g.beginPath(); g.moveTo(p[0] * k, p[1] * k);
+    if (p.length === 2) g.lineTo(p[0] * k + .1, p[1] * k);
+    for (let i = 2; i < p.length; i += 2) g.lineTo(p[i] * k, p[i + 1] * k);
+    g.stroke();
+  });
+}
+window.addEventListener('resize', () => { if (fase === 'vez' && modoAtual === 'desenho' && !$('espelho').hidden) ajustarEspelho(); });
+
+// ---------- Botões ----------
+$('btnComecar').onclick = comecarJogo;
+$('btnComecarVez').onclick = comecarVez;
+$('btnAcertou').onclick = () => processarAcao('acertou', nPalavra);
+$('btnPular').onclick = () => processarAcao('pular', nPalavra);
+$('btnProximaVez').onclick = proximaVez;
+$('btnDeNovo').onclick = () => { Rede.gravar(`salas/${sala}/estado`, {fase: 'espera'}); totais = {}; irPara('sala'); };
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  clearInterval(timer); vezEncerrada = true;
+  if (ouvinte) ouvinte.fechar();
+  if (sala) Rede.apagar('salas/' + sala);
+  sala = null; arvore = {}; ultimaAcao = null;
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+document.addEventListener('keydown', e => {
+  if (fase !== 'vez' || vezEncerrada || ['INPUT', 'SELECT'].includes(e.target.tagName)) return;
+  if (e.key === 'Enter'){ e.preventDefault(); $('btnAcertou').click(); }
+});
+
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

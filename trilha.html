@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trilha das Palavras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  body{padding:8px 10px 10px}
+  /* ---------- configuração ---------- */
+  .equipesConfig{display:flex;flex-direction:column;gap:6px}
+  .equipesConfig .linhaEq{display:flex;align-items:center;gap:8px}
+  .equipesConfig .linhaEq span{font-size:1.8rem;width:44px;text-align:center;border-radius:12px}
+  .equipesConfig input{flex:1;max-width:260px}
+  /* ---------- jogo ---------- */
+  #tJogo.ativa{display:flex;gap:12px;align-items:flex-start;max-width:none}
+  #areaTabuleiro{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center}
+  #tabuleiro{display:grid;gap:6px;justify-content:center}
+  .casa{border-radius:14px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 4px 0 #0002;overflow:hidden;transition:transform .2s,box-shadow .2s}
+  .casa .num{position:absolute;top:3px;left:6px;font-size:max(10px,calc(var(--t) * .14));font-weight:bold;opacity:.85}
+  .casa .ico{font-size:calc(var(--t) * .38);line-height:1}
+  .casa .rot{font-size:max(9px,calc(var(--t) * .12));font-weight:bold;text-align:center;line-height:1.05;padding:0 2px}
+  .casa.marcada{transform:scale(1.08);box-shadow:0 0 0 5px #fff,0 0 0 9px var(--amarelo)}
+  .casa .peoes{position:absolute;inset:0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;align-content:flex-end;padding:2px;gap:1px;pointer-events:none}
+  .peao{width:calc(var(--t) * .36);height:calc(var(--t) * .36);border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;
+    font-size:calc(var(--t) * .22);box-shadow:0 3px 6px #0006;transition:transform .2s}
+  .peao.davez{animation:pulso .8s infinite alternate}
+  @keyframes pulso{to{transform:scale(1.18)}}
+  #painel{width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:10px}
+  .placa{background:#fff;border-radius:18px;padding:12px;box-shadow:0 4px 0 #0001}
+  #vezDe{color:#fff;border-radius:16px;padding:10px;text-align:center;font-size:1.5rem;font-weight:bold}
+  #vezDe small{display:block;font-size:.9rem;opacity:.9;font-weight:normal}
+  #dado{width:120px;height:120px;margin:4px auto 10px;background:#fff;border:4px solid #243049;border-radius:22px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:12px;box-shadow:0 6px 0 #0002}
+  #dado.rolando{animation:rolar .12s infinite}
+  @keyframes rolar{0%{transform:rotate(0)}50%{transform:rotate(14deg) scale(1.05)}100%{transform:rotate(-14deg)}}
+  #dado i{display:block;width:22px;height:22px;border-radius:50%;margin:auto;background:transparent}
+  #dado i.p{background:#243049}
+  #btnDado{width:100%;font-size:1.4rem;background:var(--amarelo)}
+  #listaEquipes div{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed #e3e6ee;font-weight:bold}
+  #listaEquipes div:last-child{border-bottom:none}
+  #listaEquipes .bolinha{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  #listaEquipes .casaN{margin-left:auto;opacity:.7;font-weight:normal}
+  #legenda{display:flex;flex-wrap:wrap;gap:4px}
+  #legenda span{border-radius:8px;padding:2px 8px;color:#fff;font-size:.85rem;font-weight:bold}
+  @media (max-width:900px){ #tJogo.ativa{flex-direction:column;align-items:stretch} #painel{width:100%} }
+  /* ---------- cartão de desafio / avisos ---------- */
+  .sobreposicao{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
+  .caixa{background:#fff;border-radius:28px;max-width:min(94vw,880px);width:100%;text-align:center;box-shadow:0 20px 60px #0006;overflow:hidden;animation:aparecer .3s}
+  @keyframes aparecer{from{transform:scale(.5);opacity:0}}
+  .caixa .cab{color:#fff;padding:12px 18px;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:bold}
+  .caixa .corpo{padding:16px 24px 20px}
+  #textoDesafio{font-size:clamp(1.7rem,4.4vw,3rem);font-weight:bold;margin:8px 0}
+  #respostaDesafio{font-size:clamp(1.3rem,3.4vw,2rem);font-weight:bold;color:var(--verde);min-height:1.3em}
+  #aviso{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);background:#fff;border-radius:26px;padding:20px 34px;font-size:clamp(1.8rem,5vw,3.2rem);
+    font-weight:bold;box-shadow:0 20px 60px #0005;z-index:22;text-align:center;animation:aparecer .3s}
+</style>
+</head>
+<body>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🎲 Trilha das Palavras</h1>
+  <div class="cartao" id="cartaoContinuar" hidden>
+    <h2>Partida salva</h2>
+    <p id="infoSalva" class="dica"></p>
+    <div class="linha" style="justify-content:flex-start"><button id="btnContinuar" class="principal">▶️ Continuar a partida</button></div>
+  </div>
+  <div class="cartao">
+    <h2>1. Desafios (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Equipes</h2>
+    <label>Quantidade:
+      <select id="qtdEquipes"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select>
+    </label>
+    <div class="equipesConfig" id="equipesConfig"></div>
+  </div>
+  <div class="cartao">
+    <h2>3. Regras</h2>
+    <label>Tamanho da trilha:
+      <select id="tamanho"><option value="20">20 casas (curta)</option><option value="30" selected>30 casas</option><option value="40">40 casas (longa)</option></select>
+    </label>
+    <label><input type="checkbox" id="chkEspeciais" checked> Casas especiais (⭐ avance 2, 🍌 volte 2, 🔁 jogue de novo)</label>
+    <label><input type="checkbox" id="chkVoltar" checked> Errou o desafio? Volta para a casa onde estava</label>
+    <label><input type="checkbox" id="chkVoz" checked> Ler os desafios em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar a partida</button>
+</section>
+
+<!-- ============ JOGO ============ -->
+<section id="tJogo" class="tela">
+  <div id="areaTabuleiro"><div id="tabuleiro"></div></div>
+  <aside id="painel">
+    <div id="vezDe"></div>
+    <div class="placa">
+      <div id="dado"></div>
+      <button id="btnDado">🎲 Jogar o dado</button>
+      <p class="dica" style="text-align:center;margin:6px 0 0">ou tecla <b>espaço</b></p>
+    </div>
+    <div class="placa"><div id="listaEquipes"></div></div>
+    <div class="placa"><div id="legenda"></div></div>
+    <button id="btnNova">⚙️ Nova partida</button>
+  </aside>
+</section>
+
+<!-- Cartão do desafio -->
+<div class="sobreposicao" id="cartaoDesafio" hidden>
+  <div class="caixa">
+    <div class="cab" id="cabDesafio"></div>
+    <div class="corpo">
+      <div id="equipeDesafio" class="dica"></div>
+      <div id="textoDesafio"></div>
+      <div class="linha"><button id="btnOuvir" hidden>🔊 Ouvir a palavra</button><button id="btnResposta">👁️ Ver resposta</button><button id="btnTrocar">🔄 Trocar desafio</button></div>
+      <div id="respostaDesafio"></div>
+      <div class="linha">
+        <button id="btnAcertou" class="principal">✅ Acertou</button>
+        <button id="btnErrou" class="vermelho">❌ Errou</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vitória -->
+<div class="sobreposicao" id="telaVitoria" hidden>
+  <div class="caixa"><div class="corpo">
+    <div style="font-size:5rem" id="emojiVitoria">🏆</div>
+    <h1 id="tituloVitoria"></h1>
+    <div id="rankingFinal" class="ranking"></div>
+    <div class="linha"><button id="btnRevanche" class="principal">🔁 Jogar de novo</button><button id="btnConfigurar">⚙️ Configurar</button></div>
+  </div></div>
+</div>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const CHAVE = 'trilha_partida';
+const PRESETS = [
+  {nome:'Leões', emoji:'🦁', cor:'#e74c3c'}, {nome:'Golfinhos', emoji:'🐬', cor:'#2f80ed'},
+  {nome:'Papagaios', emoji:'🦜', cor:'#27ae60'}, {nome:'Abelhas', emoji:'🐝', cor:'#e6a800'},
+  {nome:'Raposas', emoji:'🦊', cor:'#e67e22'}, {nome:'Pandas', emoji:'🐼', cor:'#8e44ad'}
+];
+const TIPOS_PADRAO = {
+  ler:      {nome:'Leitura',  emoji:'📖', cor:'#2f80ed'},
+  soletrar: {nome:'Soletrar', emoji:'🔤', cor:'#8e44ad'},
+  rimar:    {nome:'Rima',     emoji:'🎵', cor:'#e67e22'},
+  silabas:  {nome:'Sílabas',  emoji:'✂️', cor:'#16a085'},
+  escrever: {nome:'Escrever', emoji:'✏️', cor:'#c0392b'}
+};
+const PALETA = ['#d35400','#2c3e50','#7cb342','#0097a7','#c2185b','#6d4c41'];
+const ESPECIAIS = {
+  avance: {nome:'Avance 2',      emoji:'⭐', cor:'#e1b12c'},
+  volte:  {nome:'Volte 2',       emoji:'🍌', cor:'#7f8c8d'},
+  denovo: {nome:'Jogue de novo', emoji:'🔁', cor:'#20bf6b'}
+};
+const PIPS = {1:[5], 2:[1,9], 3:[1,5,9], 4:[1,3,7,9], 5:[1,3,5,7,9], 6:[1,3,4,6,7,9]};
+
+let dados = null, jogo = null, ocupado = false, desafioAtual = null;
+const espera = ms => new Promise(r => setTimeout(r, ms));
+
+// ---------- JSON ----------
+function normalizar(d){
+  if (!d || typeof d.desafios !== 'object' || Array.isArray(d.desafios)) return null;
+  const tipos = {}, desafios = {};
+  let k = 0;
+  Object.keys(d.desafios).forEach(id => {
+    const lista = (Array.isArray(d.desafios[id]) ? d.desafios[id] : []).map(x => {
+      if (typeof x === 'string') return {texto: x, resposta: '', falar: ''};
+      if (!x || !x.texto) return null;
+      return {texto: String(x.texto), resposta: x.resposta != null ? String(x.resposta) : '', falar: x.falar ? String(x.falar) : ''};
+    }).filter(Boolean);
+    if (!lista.length) return;
+    tipos[id] = Object.assign({}, TIPOS_PADRAO[id] || {nome: id.charAt(0).toUpperCase() + id.slice(1), emoji: '❓', cor: PALETA[k++ % PALETA.length]}, (d.tipos || {})[id] || {});
+    desafios[id] = lista;
+  });
+  if (!Object.keys(tipos).length) return null;
+  return {titulo: d.titulo || 'Trilha', casas: +d.casas || 30, especiais: d.especiais !== false, tipos, desafios};
+}
+function carregar(d, origem){
+  const n = normalizar(d);
+  if (!n) return AV.avisar('JSON inválido: falta o grupo "desafios".');
+  dados = n;
+  const total = Object.values(n.desafios).reduce((s, l) => s + l.length, 0);
+  $('infoJson').textContent = `${n.titulo} • ${total} desafios: ` + Object.keys(n.tipos).map(t => `${n.tipos[t].emoji} ${n.tipos[t].nome} (${n.desafios[t].length})`).join(', ') + (origem ? ` • ${origem}` : '');
+  if ([...$('tamanho').options].some(o => +o.value === n.casas)) $('tamanho').value = n.casas;
+  $('chkEspeciais').checked = n.especiais;
+}
+AV.prepararSeletorJson({tipo: 'trilha', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/trilha-padrao.json', 'modelo-trilha.json');
+
+function montarConfigEquipes(){
+  const n = +$('qtdEquipes').value, box = $('equipesConfig');
+  const nomes = [...box.querySelectorAll('input')].map(i => i.value);
+  box.innerHTML = '';
+  for (let i = 0; i < n; i++){
+    const p = PRESETS[i];
+    const d = document.createElement('div'); d.className = 'linhaEq';
+    d.innerHTML = `<span style="background:${p.cor}">${p.emoji}</span><input type="text" maxlength="20" value="${AV.esc(nomes[i] || p.nome)}">`;
+    box.appendChild(d);
+  }
+}
+$('qtdEquipes').onchange = montarConfigEquipes;
+montarConfigEquipes();
+
+// ---------- Tabuleiro ----------
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function gerarCasas(N, especiais){
+  const casas = new Array(N + 1).fill(null);
+  casas[0] = {t: 'inicio'}; casas[N] = {t: 'chegada'};
+  if (especiais){
+    const qtd = Math.round((N - 1) * 0.15), pos = [];
+    let tent = 0;
+    while (pos.length < qtd && tent++ < 1000){
+      const p = 3 + Math.floor(Math.random() * (N - 5));
+      if (pos.every(q => Math.abs(q - p) >= 3)) pos.push(p);
+    }
+    const tiposEsp = embaralhar(['avance', 'volte', 'denovo']);
+    pos.sort((a, b) => a - b).forEach((p, i) => { casas[p] = {t: tiposEsp[i % 3]}; });
+  }
+  let seq = [];
+  for (let i = 1; i < N; i++){
+    if (casas[i]) continue;
+    if (!seq.length) seq = embaralhar(Object.keys(dados.tipos));
+    casas[i] = {t: seq.pop(), desafio: true};
+  }
+  return casas;
+}
+function infoCasa(c){
+  if (c.t === 'inicio') return {nome: 'Início', emoji: '🚩', cor: '#243049'};
+  if (c.t === 'chegada') return {nome: 'Chegada', emoji: '🏁', cor: '#243049'};
+  return ESPECIAIS[c.t] || jogo.tipos[c.t] || {nome: c.t, emoji: '❓', cor: '#999'};
+}
+function desenharTabuleiro(){
+  const N = jogo.N, total = N + 1, gap = 6, tab = $('tabuleiro');
+  const W = $('areaTabuleiro').clientWidth;
+  const H = Math.max(300, window.innerHeight - tab.getBoundingClientRect().top - 12);
+  let melhor = {t: 0, c: 6};
+  for (let c = 4; c <= 14; c++){
+    const r = Math.ceil(total / c);
+    const t = Math.min((W - (c - 1) * gap) / c, (H - (r - 1) * gap) / r);
+    if (t > melhor.t) melhor = {t, c};
+  }
+  const C = melhor.c, t = Math.floor(Math.min(melhor.t, 130));
+  tab.style.gridTemplateColumns = `repeat(${C}, ${t}px)`;
+  tab.style.gridAutoRows = t + 'px';
+  tab.style.setProperty('--t', t + 'px');
+  tab.innerHTML = '';
+  jogo.casas.forEach((c, i) => {
+    const info = infoCasa(c), linha = Math.floor(i / C), col = linha % 2 === 0 ? i % C : C - 1 - (i % C);
+    const d = document.createElement('div'); d.className = 'casa'; d.id = 'casa' + i;
+    d.style.background = info.cor; d.style.gridRow = linha + 1; d.style.gridColumn = col + 1;
+    d.innerHTML = `<span class="num">${i}</span><span class="ico">${info.emoji}</span><span class="rot">${AV.esc(info.nome)}</span><div class="peoes"></div>`;
+    tab.appendChild(d);
+  });
+  desenharPeoes();
+}
+function desenharPeoes(){
+  document.querySelectorAll('.casa .peoes').forEach(p => p.innerHTML = '');
+  jogo.equipes.forEach((e, i) => {
+    const alvo = document.querySelector(`#casa${e.pos} .peoes`); if (!alvo) return;
+    const p = document.createElement('div'); p.className = 'peao' + (i === jogo.vez ? ' davez' : '');
+    p.style.background = e.cor; p.textContent = e.emoji; p.title = e.nome;
+    alvo.appendChild(p);
+  });
+  desenharPainel();
+}
+function desenharPainel(){
+  const e = jogo.equipes[jogo.vez];
+  $('vezDe').style.background = e.cor;
+  $('vezDe').innerHTML = `<small>Vez de</small>${AV.esc(e.emoji + ' ' + e.nome)}`;
+  const ord = jogo.equipes.map((x, i) => ({x, i})).sort((a, b) => b.x.pos - a.x.pos);
+  $('listaEquipes').innerHTML = ord.map(({x, i}) => `<div style="${i === jogo.vez ? 'color:' + x.cor : ''}"><span class="bolinha" style="background:${x.cor}">${x.emoji}</span>${AV.esc(x.nome)}<span class="casaN">casa ${x.pos}</span></div>`).join('');
+  $('legenda').innerHTML = Object.values(jogo.tipos).concat(jogo.especiais ? Object.values(ESPECIAIS) : []).map(t => `<span style="background:${t.cor}">${t.emoji} ${AV.esc(t.nome)}</span>`).join('');
+  $('btnDado').disabled = ocupado;
+}
+function desenharDado(v){ $('dado').innerHTML = Array.from({length: 9}, (_, k) => `<i class="${PIPS[v].includes(k + 1) ? 'p' : ''}"></i>`).join(''); }
+window.addEventListener('resize', () => { if (jogo && !$('tJogo').hidden && $('tJogo').classList.contains('ativa')) desenharTabuleiro(); });
+
+// ---------- Partida ----------
+function salvar(){ try{ localStorage.setItem(CHAVE, JSON.stringify(jogo)); }catch(e){} }
+function novaPartida(mesmasEquipes){
+  if (!dados) return AV.avisar('Carregue um arquivo de desafios.');
+  const N = +$('tamanho').value;
+  const equipes = mesmasEquipes && jogo ? jogo.equipes.map(e => ({nome: e.nome, emoji: e.emoji, cor: e.cor, pos: 0}))
+    : [...$('equipesConfig').querySelectorAll('input')].map((inp, i) => ({nome: inp.value.trim() || PRESETS[i].nome, emoji: PRESETS[i].emoji, cor: PRESETS[i].cor, pos: 0}));
+  jogo = {
+    N, titulo: dados.titulo, tipos: dados.tipos, desafios: dados.desafios, especiais: $('chkEspeciais').checked,
+    voltar: $('chkVoltar').checked, voz: $('chkVoz').checked,
+    casas: null, equipes, vez: 0, filas: {}, terminou: false
+  };
+  jogo.casas = gerarCasas(N, jogo.especiais);
+  AV.som = $('chkSom').checked;
+  iniciarTela();
+}
+function iniciarTela(){
+  ocupado = false;
+  AV.mostrarTela('tJogo');
+  desenharDado(1);
+  desenharTabuleiro();
+  salvar();
+}
+async function jogarDado(){
+  if (ocupado || !jogo || jogo.terminou) return;
+  ocupado = true; desenharPainel();
+  const dado = $('dado'); dado.classList.add('rolando');
+  for (let i = 0; i < 12; i++){ desenharDado(1 + Math.floor(Math.random() * 6)); AV.tique(); await espera(70 + i * 8); }
+  const v = 1 + Math.floor(Math.random() * 6);
+  dado.classList.remove('rolando'); desenharDado(v);
+  AV.tom(700, .15, 'triangle', .15);
+  if (jogo.voz) AV.falar(String(v));
+  await espera(500);
+  const e = jogo.equipes[jogo.vez];
+  e.antes = e.pos;
+  await mover(e, Math.min(jogo.N, e.pos + v));
+  await chegouNaCasa(e);
+}
+async function mover(e, destino){
+  const passo = destino > e.pos ? 1 : -1;
+  while (e.pos !== destino){
+    e.pos += passo;
+    desenharPeoes();
+    const c = $('casa' + e.pos); if (c){ c.classList.add('marcada'); setTimeout(() => c.classList.remove('marcada'), 260); }
+    AV.tom(passo > 0 ? 520 + e.pos * 8 : 400 - e.pos * 4, .08, 'triangle', .12);
+    await espera(280);
+  }
+  salvar();
+}
+async function chegouNaCasa(e){
+  if (e.pos >= jogo.N) return vitoria(e);
+  const c = jogo.casas[e.pos];
+  if (c.desafio) return mostrarDesafio(e, c.t);
+  if (c.t === 'avance'){ await aviso('⭐ Avance 2 casas!'); await mover(e, Math.min(jogo.N, e.pos + 2)); if (e.pos >= jogo.N) return vitoria(e); return proximaVez(); }
+  if (c.t === 'volte'){ await aviso('🍌 Escorregou! Volte 2 casas.'); await mover(e, Math.max(0, e.pos - 2)); return proximaVez(); }
+  if (c.t === 'denovo'){ await aviso('🔁 Jogue de novo!'); ocupado = false; desenharPeoes(); salvar(); return; }
+  proximaVez();
+}
+function aviso(texto){
+  return new Promise(r => {
+    const d = document.createElement('div'); d.id = 'aviso'; d.textContent = texto; document.body.appendChild(d);
+    AV.tom(880, .12, 'triangle', .14); AV.tom(1100, .15, 'triangle', .14, .12);
+    if (jogo.voz) AV.falar(texto.replace(/^\S+\s/, ''));
+    setTimeout(() => { d.remove(); r(); }, 1700);
+  });
+}
+function sortearDesafio(tipo){
+  const filas = jogo.filas;
+  if (!filas[tipo] || !filas[tipo].length) filas[tipo] = embaralhar(jogo.desafios[tipo].map((_, i) => i));
+  return jogo.desafios[tipo][filas[tipo].pop()];
+}
+function mostrarDesafio(e, tipo, trocar){
+  const info = jogo.tipos[tipo];
+  desafioAtual = {e, tipo, d: sortearDesafio(tipo)};
+  $('cabDesafio').style.background = info.cor;
+  $('cabDesafio').textContent = `${info.emoji} ${info.nome}`;
+  $('equipeDesafio').innerHTML = `Desafio para <b style="color:${e.cor}">${AV.esc(e.emoji + ' ' + e.nome)}</b>`;
+  $('textoDesafio').textContent = desafioAtual.d.texto;
+  $('respostaDesafio').textContent = '';
+  $('btnResposta').hidden = !desafioAtual.d.resposta;
+  $('btnOuvir').hidden = !desafioAtual.d.falar;
+  $('cartaoDesafio').hidden = false;
+  if (!trocar) AV.tom(660, .12, 'triangle', .14);
+  if (jogo.voz) AV.falar(desafioAtual.d.texto + (desafioAtual.d.falar ? ' ' + desafioAtual.d.falar : ''));
+  else if (desafioAtual.d.falar) AV.falar(desafioAtual.d.falar);
+  salvar();
+}
+async function respondeu(acertou){
+  if (!desafioAtual) return;
+  const e = desafioAtual.e;
+  desafioAtual = null;
+  $('cartaoDesafio').hidden = true;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (acertou){ AV.fanfarra(); await aviso('✅ Muito bem!'); }
+  else {
+    AV.erro();
+    if (jogo.voltar && e.antes != null && e.antes !== e.pos){ await aviso('❌ Que pena! Volte para onde estava.'); await mover(e, e.antes); }
+    else await aviso('❌ Não foi dessa vez!');
+  }
+  proximaVez();
+}
+function proximaVez(){
+  jogo.vez = (jogo.vez + 1) % jogo.equipes.length;
+  ocupado = false;
+  desenharPeoes(); salvar();
+}
+function vitoria(e){
+  jogo.terminou = true; ocupado = false; salvar();
+  AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 600);
+  if (jogo.voz) AV.falar(`${e.nome} venceu!`);
+  $('emojiVitoria').textContent = '🏆 ' + e.emoji;
+  $('tituloVitoria').textContent = `${e.nome} chegou primeiro!`;
+  const ord = jogo.equipes.slice().sort((a, b) => b.pos - a.pos);
+  $('rankingFinal').innerHTML = ord.map((x, i) => `<div class="linhaRank ${i === 0 ? 'campeao' : ''}" style="animation-delay:${i * .12}s">
+    <span class="pos">${['🥇','🥈','🥉'][i] || (i + 1) + 'º'}</span><span class="nomeRank">${AV.esc(x.emoji + ' ' + x.nome)}</span>
+    <span class="barraRank"><span style="width:${x.pos / jogo.N * 100}%;background:${x.cor}"></span></span><span class="pts">${x.pos}</span></div>`).join('');
+  $('telaVitoria').hidden = false;
+}
+
+// ---------- Botões ----------
+$('btnComecar').onclick = () => novaPartida(false);
+$('btnDado').onclick = jogarDado;
+$('btnAcertou').onclick = () => respondeu(true);
+$('btnErrou').onclick = () => respondeu(false);
+$('btnResposta').onclick = () => { if (desafioAtual) $('respostaDesafio').textContent = '💡 ' + desafioAtual.d.resposta; };
+$('btnOuvir').onclick = () => { if (desafioAtual) AV.falar(desafioAtual.d.falar); };
+$('btnTrocar').onclick = () => { if (desafioAtual) mostrarDesafio(desafioAtual.e, desafioAtual.tipo, true); };
+$('btnNova').onclick = () => { if (confirm('Sair desta partida e voltar para as configurações?')){ AV.mostrarTela('tConfig'); verificarSalva(); } };
+$('btnRevanche').onclick = () => { $('telaVitoria').hidden = true; if (!dados){ dados = {titulo: jogo.titulo, tipos: jogo.tipos, desafios: jogo.desafios}; } novaPartida(true); };
+$('btnConfigurar').onclick = () => { $('telaVitoria').hidden = true; AV.mostrarTela('tConfig'); verificarSalva(); };
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.code === 'Space' && $('tJogo').classList.contains('ativa') && $('cartaoDesafio').hidden && $('telaVitoria').hidden){ e.preventDefault(); jogarDado(); }
+});
+
+// ---------- Partida salva ----------
+function verificarSalva(){
+  let s = null; try{ s = JSON.parse(localStorage.getItem(CHAVE)); }catch(e){}
+  if (s && !s.terminou && s.casas && s.equipes){
+    $('cartaoContinuar').hidden = false;
+    $('infoSalva').textContent = `${s.titulo} • ` + s.equipes.map(e => `${e.emoji} ${e.nome}: casa ${e.pos}`).join(' • ');
+    $('btnContinuar').onclick = () => { jogo = s; AV.som = $('chkSom').checked; iniciarTela(); };
+  } else $('cartaoContinuar').hidden = true;
+}
+verificarSalva();
+</script>
+</body>
+</html>

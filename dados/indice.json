@@ -1,8 +1,38 @@
 {
   "quiz": [
-    { "arquivo": "quiz-padrao.json", "titulo": "Quiz de Português (modelo)" }
+    {
+      "arquivo": "quiz-padrao.json",
+      "titulo": "Quiz de Português (modelo)"
+    }
   ],
   "stop": [
-    { "arquivo": "stop-padrao.json", "titulo": "Stop clássico (modelo)" }
+    {
+      "arquivo": "stop-padrao.json",
+      "titulo": "Stop clássico (modelo)"
+    }
+  ],
+  "batata": [
+    {
+      "arquivo": "batata-padrao.json",
+      "titulo": "Batata quente (modelo)"
+    }
+  ],
+  "trilha": [
+    {
+      "arquivo": "trilha-padrao.json",
+      "titulo": "Trilha das palavras (modelo)"
+    }
+  ],
+  "escape": [
+    {
+      "arquivo": "escape-padrao.json",
+      "titulo": "Fuga da Biblioteca Encantada (modelo)"
+    }
+  ],
+  "mimica": [
+    {
+      "arquivo": "mimica-padrao.json",
+      "titulo": "Mímica e desenho (modelo)"
+    }
   ]
 }
