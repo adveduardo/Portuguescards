@@ -71,6 +71,75 @@ AV.confete = () => {
   }
 };
 
+// ---------- copiar e colar JSON ----------
+(() => {
+  const css = document.createElement('style');
+  css.textContent = `
+    #avCaixaJson{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:60;padding:14px}
+    #avCaixaJson.mostrar{display:flex}
+    #avCaixaJson .avCaixa{background:#fff;color:#243049;border-radius:22px;padding:16px 20px;width:min(920px,100%);max-height:94vh;display:flex;flex-direction:column;box-shadow:0 10px 30px #0005}
+    #avCaixaJson h2{margin:0 0 4px;text-align:left}
+    #avCaixaJson .avCaixaDica{margin:0 0 8px;opacity:.8}
+    #avCaixaJson textarea{flex:1;min-height:320px;font-family:Consolas,"Courier New",monospace;font-size:.95rem;border:2px solid #ccd;border-radius:12px;padding:10px;resize:vertical;width:100%;box-sizing:border-box}
+    #avCaixaJson .avCaixaMsg{min-height:1.4em;margin:8px 0 2px;font-weight:bold}
+    #avCaixaJson .avCaixaMsg.erro{color:#c0392b}
+    #avCaixaJson .linha{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:6px}`;
+  document.head.appendChild(css);
+})();
+// Copia um texto; se o navegador não deixar, mostra o texto numa caixa para copiar à mão
+AV.copiarTexto = (texto, aviso = '📋 Copiado!') => {
+  const semApi = () => {
+    const t = document.createElement('textarea'); t.value = texto; t.setAttribute('readonly', '');
+    t.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(t); t.select();
+    let ok = false; try{ ok = document.execCommand('copy'); }catch(e){}
+    t.remove(); return ok;
+  };
+  const mostrar = () => AV.abrirCaixaJson({titulo: '📋 Copie o texto abaixo', dica: 'O navegador não deixou copiar sozinho. Selecione tudo (Ctrl+A) e copie (Ctrl+C).', texto, soLeitura: true});
+  if (navigator.clipboard && window.isSecureContext)
+    navigator.clipboard.writeText(texto).then(() => AV.avisar(aviso)).catch(() => { if (semApi()) AV.avisar(aviso); else mostrar(); });
+  else if (semApi()) AV.avisar(aviso); else mostrar();
+};
+// Lê o JSON colado: aceita o texto com ```json em volta (como as IAs respondem) e aspas “curvas” do Word
+AV.lerJSONColado = texto => {
+  let t = String(texto || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
+  const tentar = s => { try{ return {ok: true, d: JSON.parse(s)}; }catch(e){ return {ok: false, e}; } };
+  let r = tentar(t);
+  if (!r.ok){
+    const ini = t.search(/[[{]/), fim = Math.max(t.lastIndexOf('}'), t.lastIndexOf(']'));
+    if (ini >= 0 && fim > ini){ const r2 = tentar(t.slice(ini, fim + 1)); if (r2.ok) return r2.d; }
+    const r3 = tentar(t.replace(/[“”„]/g, '"').replace(/[‘’]/g, "'")); if (r3.ok) return r3.d;
+    const m = /position (\d+)/.exec(r.e.message) || /line (\d+)/.exec(r.e.message);
+    const linha = m ? (/line/.test(m[0]) ? +m[1] : t.slice(0, +m[1]).split('\n').length) : 0;
+    throw new Error((linha ? `O JSON tem um erro perto da linha ${linha}. ` : 'Esse texto não é um JSON válido. ') + 'Confira as vírgulas, as aspas e as chaves { }.');
+  }
+  return r.d;
+};
+AV.abrirCaixaJson = ({titulo, dica = '', texto = '', soLeitura = false, aoUsar}) => {
+  let c = document.getElementById('avCaixaJson');
+  if (!c){
+    c = document.createElement('div'); c.id = 'avCaixaJson';
+    c.innerHTML = `<div class="avCaixa"><h2></h2><p class="avCaixaDica"></p><textarea spellcheck="false"></textarea><div class="avCaixaMsg"></div>
+      <div class="linha"><button type="button" class="avCopiar">📋 Copiar</button><button type="button" class="avFechar">Fechar</button><button type="button" class="principal avUsar">✅ Usar este JSON</button></div></div>`;
+    document.body.appendChild(c);
+    c.addEventListener('click', e => { if (e.target === c) c.classList.remove('mostrar'); });
+    c.querySelector('.avFechar').onclick = () => c.classList.remove('mostrar');
+  }
+  const ta = c.querySelector('textarea'), msg = c.querySelector('.avCaixaMsg');
+  c.querySelector('h2').textContent = titulo; c.querySelector('.avCaixaDica').textContent = dica;
+  ta.value = texto; ta.readOnly = soLeitura; msg.textContent = ''; msg.className = 'avCaixaMsg';
+  c.querySelector('.avUsar').hidden = soLeitura;
+  c.querySelector('.avCopiar').hidden = !soLeitura;
+  c.querySelector('.avCopiar').onclick = () => { ta.select(); let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} msg.textContent = ok ? '📋 Copiado!' : 'Use Ctrl+C para copiar o texto selecionado.'; };
+  c.querySelector('.avUsar').onclick = () => {
+    let d;
+    try{ d = AV.lerJSONColado(ta.value); }catch(e){ msg.textContent = '❌ ' + e.message; msg.className = 'avCaixaMsg erro'; return; }
+    c.classList.remove('mostrar');
+    if (aoUsar) aoUsar(d);
+  };
+  c.classList.add('mostrar');
+  setTimeout(() => { ta.focus(); if (soLeitura) ta.select(); }, 50);
+};
+
 // ---------- arquivos JSON ----------
 AV.baixarArquivo = (url, nome) => {
   fetch(url).then(r => r.blob()).then(b => {
@@ -79,7 +148,8 @@ AV.baixarArquivo = (url, nome) => {
   }).catch(() => AV.avisar('Não foi possível baixar o modelo.'));
 };
 AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar: aoCarregarOriginal}) => {
-  const aoCarregar = (d, origem) => { AV.idioma = d && typeof d.idioma === 'string' && d.idioma ? d.idioma : 'pt-BR'; return aoCarregarOriginal(d, origem); };
+  let ultimo = null;   // o último JSON carregado (para copiar quando não houver modelo)
+  const aoCarregar = (d, origem) => { ultimo = d; AV.idioma = d && typeof d.idioma === 'string' && d.idioma ? d.idioma : 'pt-BR'; return aoCarregarOriginal(d, origem); };
   const listaTipos = tipos || [tipo];
   const CHAVE = 'aovivo_json_' + listaTipos[0];
   const carregarUrl = arq => fetch('dados/' + arq + '?v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); })
@@ -115,20 +185,47 @@ AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar: a
     }
     if (select.options.length) select.onchange();
   });
+  // JSON aberto do computador ou colado: fica guardado neste navegador como "📂 ..."
+  const usarObjeto = (d, origem) => {
+    try{ localStorage.setItem(CHAVE, JSON.stringify(d)); }catch(err){}
+    opcaoLocal(); select.value = '__local';
+    aoCarregar(d, origem);
+  };
   botaoAbrir.onclick = () => input.click();
   input.onchange = e => {
     const f = e.target.files[0]; if (!f) return;
     const r = new FileReader();
     r.onload = () => {
-      try{
-        const d = JSON.parse(r.result);
-        try{ localStorage.setItem(CHAVE, JSON.stringify(d)); }catch(err){}
-        opcaoLocal(); select.value = '__local';
-        aoCarregar(d, f.name);
-      }catch(err){ AV.avisar('Esse arquivo não é um JSON válido.'); }
+      let d;
+      try{ d = JSON.parse(r.result); }catch(err){ return AV.avisar('Esse arquivo não é um JSON válido.'); }
+      usarObjeto(d, f.name);
     };
     r.readAsText(f); e.target.value = '';
   };
+  // 📋 Colar JSON (copiado de um e-mail, de um documento ou de uma IA)
+  if (!botaoAbrir.parentNode.querySelector('.avBtnColar')){
+    const bc = document.createElement('button'); bc.type = 'button'; bc.className = 'avBtnColar'; bc.textContent = '📋 Colar JSON';
+    botaoAbrir.insertAdjacentElement('afterend', bc);
+    bc.onclick = () => AV.abrirCaixaJson({titulo: '📋 Colar JSON',
+      dica: 'Cole aqui o JSON (Ctrl+V, ou toque e segure → Colar) e clique em "Usar este JSON". Ele fica guardado neste navegador.',
+      aoUsar: d => { usarObjeto(d, 'JSON colado'); AV.avisar('✅ JSON colado e carregado.'); }});
+  }
+  // 📋 Copiar o modelo: ao lado de "Baixar o modelo", copia o mesmo arquivo do modelo
+  const bm = document.getElementById('btnModelo');
+  if (bm && !document.getElementById('avBtnCopiarModelo')){
+    const bcm = document.createElement('button'); bcm.type = 'button'; bcm.id = 'avBtnCopiarModelo'; bcm.textContent = '📋 Copiar o modelo';
+    bm.insertAdjacentElement('afterend', bcm);
+    const AVISO = '📋 Modelo copiado! Cole num editor de texto (ou numa IA), troque o conteúdo e depois use "📋 Colar JSON".';
+    bcm.onclick = () => {
+      let url = null; const original = AV.baixarArquivo;
+      AV.baixarArquivo = u => { url = u; };            // descobre qual arquivo o "Baixar o modelo" usaria
+      try{ if (bm.onclick) bm.onclick(); }catch(e){} finally { AV.baixarArquivo = original; }
+      const copiarUltimo = () => ultimo ? AV.copiarTexto(JSON.stringify(ultimo, null, 2), AVISO) : AV.avisar('Carregue um JSON primeiro.');
+      if (!url) return copiarUltimo();
+      fetch(url + (url.includes('?') ? '&' : '?') + 'v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.text(); })
+        .then(t => AV.copiarTexto(t.trim(), AVISO)).catch(copiarUltimo);
+    };
+  }
 };
 
 // ---------- grupos e placar ----------

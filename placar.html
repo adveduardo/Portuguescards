@@ -100,6 +100,7 @@
       <button id="btnImportar">📂 Abrir arquivo JSON</button>
       <button id="btnExportar">💾 Salvar placar (JSON)</button>
       <button id="btnModelo">📄 Baixar modelo</button>
+      <button id="btnCopiarModelo">📋 Copiar modelo</button>
     </div>
     <input type="file" id="arquivo" accept=".json,.txt,application/json,text/plain" hidden>
     <p>Formato do JSON (a cor e os pontos são opcionais):</p>
@@ -286,10 +287,18 @@ $('btnExportar').onclick = () => {
   if (!equipes.length) return avisar('Não há equipes para salvar.');
   baixar('placar.json', {equipes});
 };
-$('btnModelo').onclick = () => baixar('modelo-equipes.json', {equipes:[
+const MODELO = {equipes:[
   {nome:'Leões', cor:'#e74c3c', pontos:0}, {nome:'Tigres', cor:'#2f80ed', pontos:0},
   {nome:'Ursos', cor:'#27ae60', pontos:0}, {nome:'Raposas', cor:'#f39c12', pontos:0}
-]});
+]};
+function copiarTexto(texto){
+  const semApi = () => { const t = document.createElement('textarea'); t.value = texto; t.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(t); t.select(); let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} t.remove(); return ok; };
+  const fim = ok => { if (ok) avisar('📋 Modelo copiado! Edite e cole na caixa de texto acima.'); else window.prompt('Copie o modelo (Ctrl+C):', texto); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(() => fim(true)).catch(() => fim(semApi()));
+  else fim(semApi());
+}
+$('btnModelo').onclick = () => baixar('modelo-equipes.json', MODELO);
+$('btnCopiarModelo').onclick = () => copiarTexto(JSON.stringify(MODELO, null, 2));
 $('btnUsarGrupos').onclick = () => {
   const d = ler('painel_equipes_importar');
   if (!d || !Array.isArray(d.equipes)) return;

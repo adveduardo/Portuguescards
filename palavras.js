@@ -276,7 +276,7 @@ function preencherCategorias(select, opcoes = {}){
 function montarPainelLista(el, {exigirSilabas = false, aoMudar} = {}){
   el.innerHTML = `
     <summary>📂 Minha lista de palavras (digitar ou importar JSON)</summary>
-    <p>Digite <b>uma palavra por linha</b>. ${exigirSilabas ? 'Nesta atividade, <b>separe as sílabas com hífen</b> (ex.: <b>ca-va-lo</b>).' : 'Pode separar as sílabas com hífen (ex.: <b>ca-va-lo</b>).'}
+    <p>Digite <b>uma palavra por linha</b> ou <b>cole aqui um JSON</b> (por exemplo, o modelo copiado e editado). ${exigirSilabas ? 'Nesta atividade, <b>separe as sílabas com hífen</b> (ex.: <b>ca-va-lo</b>).' : 'Pode separar as sílabas com hífen (ex.: <b>ca-va-lo</b>).'}
     Para colocar uma figura, use o JSON.</p>
     <textarea class="pp-txt" placeholder="ca-va-lo&#10;ja-ne-la&#10;bor-bo-le-ta"></textarea>
     <div class="pp-acoes">
@@ -284,6 +284,7 @@ function montarPainelLista(el, {exigirSilabas = false, aoMudar} = {}){
       <button type="button" class="pp-abrir">📂 Abrir arquivo JSON</button>
       <button type="button" class="pp-salvar">💾 Salvar lista (JSON)</button>
       <button type="button" class="pp-modelo">📄 Baixar modelo</button>
+      <button type="button" class="pp-copiar">📋 Copiar modelo</button>
       <button type="button" class="pp-limpar">🗑️ Apagar lista</button>
     </div>
     <input type="file" class="pp-arquivo" accept=".json,.txt,application/json,text/plain" hidden>
@@ -333,7 +334,7 @@ function montarPainelLista(el, {exigirSilabas = false, aoMudar} = {}){
     if (!p.itens.length) return avisar('A lista está vazia.');
     baixar('minhas-palavras.json', paraJSON(p.itens, (ler(CHAVE_PROPRIA) || {}).titulo));
   };
-  q('.pp-modelo').onclick = () => baixar('modelo-palavras.json', {
+  const MODELO_LISTA = {
     titulo: 'Palavras da semana',
     palavras: [
       {palavra:'cavalo', silabas:'ca-va-lo', emoji:'🐴'},
@@ -341,7 +342,15 @@ function montarPainelLista(el, {exigirSilabas = false, aoMudar} = {}){
       {palavra:'chocolate', silabas:'cho-co-la-te', emoji:'🍫'},
       'bor-bo-le-ta', 'pa-lha-ço'
     ]
-  });
+  };
+  q('.pp-modelo').onclick = () => baixar('modelo-palavras.json', MODELO_LISTA);
+  q('.pp-copiar').onclick = () => {
+    const texto = JSON.stringify(MODELO_LISTA, null, 2);
+    const semApi = () => { const t = document.createElement('textarea'); t.value = texto; t.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(t); t.select(); let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} t.remove(); return ok; };
+    const fim = ok => { if (ok) avisar('📋 Modelo copiado! Edite e cole na caixa acima.'); else { q('.pp-txt').value = texto; avisar('O modelo está na caixa: selecione e copie.'); } };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(() => fim(true)).catch(() => fim(semApi()));
+    else fim(semApi());
+  };
   q('.pp-limpar').onclick = () => {
     if (!confirm('Apagar a sua lista de palavras deste navegador?')) return;
     try{ localStorage.removeItem(CHAVE_PROPRIA); }catch(e){}

@@ -1,0 +1,115 @@
+{
+  "titulo": "Cestos: classe variável ou invariável?",
+  "cestos": [
+    {
+      "id": "var",
+      "nome": "Variável (muda de forma)",
+      "emoji": "🔄",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "inv",
+      "nome": "Invariável (não muda)",
+      "emoji": "🧱",
+      "cor": "#795548"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "menino",
+      "cesto": "var"
+    },
+    {
+      "palavra": "bonita",
+      "cesto": "var"
+    },
+    {
+      "palavra": "cantar",
+      "cesto": "var"
+    },
+    {
+      "palavra": "nós",
+      "cesto": "var"
+    },
+    {
+      "palavra": "dois",
+      "cesto": "var"
+    },
+    {
+      "palavra": "os",
+      "cesto": "var"
+    },
+    {
+      "palavra": "livro",
+      "cesto": "var"
+    },
+    {
+      "palavra": "alegre",
+      "cesto": "var"
+    },
+    {
+      "palavra": "correram",
+      "cesto": "var"
+    },
+    {
+      "palavra": "ela",
+      "cesto": "var"
+    },
+    {
+      "palavra": "primeiro",
+      "cesto": "var"
+    },
+    {
+      "palavra": "aquele",
+      "cesto": "var"
+    },
+    {
+      "palavra": "hoje",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "com",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "mas",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "ai!",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "sempre",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "de",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "porque",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "oba!",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "aqui",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "sem",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "embora",
+      "cesto": "inv"
+    },
+    {
+      "palavra": "nunca",
+      "cesto": "inv"
+    }
+  ]
+}

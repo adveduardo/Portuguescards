@@ -1,0 +1,293 @@
+{
+  "titulo": "A mesma palavra, classes diferentes",
+  "emoji": "🔀",
+  "instrucao": "Nesta frase, qual é a classe da palavra destacada?",
+  "rodadas": [
+    {
+      "destaque": "O [canto] da sala está sujo.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CANTO dá nome a um lugar da sala: substantivo."
+    },
+    {
+      "destaque": "Eu [canto] no coral da escola.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CANTO é a ação de cantar (eu canto, tu cantas): verbo."
+    },
+    {
+      "destaque": "O [doce] de leite acabou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo O, DOCE dá nome a uma comida: substantivo."
+    },
+    {
+      "destaque": "Que sorriso [doce]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Verbo",
+        "Advérbio"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DOCE caracteriza o sorriso: adjetivo."
+    },
+    {
+      "destaque": "Um [jovem] pediu ajuda.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo",
+        "Pronome"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo UM, JOVEM é o nome de quem pediu: substantivo."
+    },
+    {
+      "destaque": "Ele é um professor [jovem].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "JOVEM caracteriza o professor: adjetivo."
+    },
+    {
+      "destaque": "Ela fala [alto].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Advérbio",
+      "explica": "ALTO mostra o modo de falar e não varia (elas falam alto): advérbio."
+    },
+    {
+      "destaque": "O prédio é [alto].",
+      "opcoes": [
+        "Adjetivo",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ALTO caracteriza o prédio e varia (a casa é alta): adjetivo."
+    },
+    {
+      "destaque": "Ele chegou [tarde].",
+      "opcoes": [
+        "Advérbio",
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Advérbio",
+      "explica": "TARDE indica o tempo da ação: advérbio."
+    },
+    {
+      "destaque": "A [tarde] estava fria.",
+      "opcoes": [
+        "Substantivo",
+        "Advérbio",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo A, TARDE dá nome a uma parte do dia: substantivo."
+    },
+    {
+      "destaque": "[Se] chover, não vou.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Preposição",
+        "Advérbio"
+      ],
+      "correta": "Conjunção",
+      "explica": "SE liga as orações com ideia de condição: conjunção."
+    },
+    {
+      "destaque": "Ele [se] machucou.",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Preposição",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "SE retoma o próprio sujeito (ele machucou a si mesmo): pronome."
+    },
+    {
+      "destaque": "Eu [como] arroz todo dia.",
+      "opcoes": [
+        "Verbo",
+        "Conjunção",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Verbo",
+      "explica": "COMO, aqui, é o verbo COMER (eu como, tu comes): verbo."
+    },
+    {
+      "destaque": "Fiz o bolo [como] você ensinou.",
+      "opcoes": [
+        "Conjunção",
+        "Verbo",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "COMO liga duas orações com ideia de conformidade (do jeito que): conjunção."
+    },
+    {
+      "destaque": "O [olhar] dela era triste.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo O, OLHAR vira nome: substantivo."
+    },
+    {
+      "destaque": "Vou [olhar] a vitrine.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "OLHAR é a ação: verbo."
+    },
+    {
+      "destaque": "Comi [meio] bolo.",
+      "opcoes": [
+        "Numeral",
+        "Advérbio",
+        "Adjetivo",
+        "Pronome"
+      ],
+      "correta": "Numeral",
+      "explica": "MEIO indica a metade de algo: numeral."
+    },
+    {
+      "destaque": "Ela está [meio] cansada.",
+      "opcoes": [
+        "Advérbio",
+        "Numeral",
+        "Adjetivo",
+        "Pronome"
+      ],
+      "correta": "Advérbio",
+      "explica": "MEIO intensifica o adjetivo CANSADA (um pouco) e não varia: advérbio."
+    },
+    {
+      "destaque": "[Só] ele veio.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Pronome",
+        "Numeral"
+      ],
+      "correta": "Advérbio",
+      "explica": "SÓ quer dizer SOMENTE: advérbio."
+    },
+    {
+      "destaque": "Ela ficou [só] em casa.",
+      "opcoes": [
+        "Adjetivo",
+        "Advérbio",
+        "Pronome",
+        "Numeral"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SÓ quer dizer SOZINHA e varia (eles ficaram sós): adjetivo."
+    },
+    {
+      "destaque": "O [amanhã] ninguém conhece.",
+      "opcoes": [
+        "Substantivo",
+        "Advérbio",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo O, AMANHÃ vira nome (o futuro): substantivo."
+    },
+    {
+      "destaque": "Volto [amanhã].",
+      "opcoes": [
+        "Advérbio",
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Advérbio",
+      "explica": "AMANHÃ indica o tempo da ação: advérbio."
+    },
+    {
+      "destaque": "Eles [andam] muito.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ANDAM é ação: verbo."
+    },
+    {
+      "destaque": "O [andar] de cima é meu.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "Com o artigo O, ANDAR dá nome a um piso do prédio: substantivo."
+    },
+    {
+      "destaque": "Ela é [bastante] estudiosa.",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Advérbio",
+      "explica": "BASTANTE intensifica o adjetivo ESTUDIOSA (muito) e não varia: advérbio."
+    },
+    {
+      "destaque": "Tenho [bastantes] amigos.",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "BASTANTES acompanha AMIGOS e varia (muitos): pronome indefinido."
+    }
+  ]
+}

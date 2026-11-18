@@ -70,6 +70,7 @@
       <button id="btnImportar">📂 Abrir arquivo JSON</button>
       <button id="btnExportar">💾 Salvar lista em JSON</button>
       <button id="btnModelo">📄 Baixar modelo</button>
+      <button id="btnCopiarModelo">📋 Copiar modelo</button>
     </div>
     <input type="file" id="arquivo" accept=".json,.txt,application/json,text/plain" hidden>
     <div class="opcoes">
@@ -251,7 +252,15 @@ $('btnExportar').onclick = () => {
   if (!alunos.length) return avisar('A lista está vazia.');
   baixar(`turma${turma ? '-' + turma.replace(/[^\w-]+/g,'_') : ''}.json`, {turma, alunos});
 };
-$('btnModelo').onclick = () => baixar('modelo-turma.json', {turma:'3º Ano A', alunos:['Ana','Bruno','Carla','Davi','Eduarda']});
+const MODELO = {turma:'3º Ano A', alunos:['Ana','Bruno','Carla','Davi','Eduarda']};
+function copiarTexto(texto){
+  const semApi = () => { const t = document.createElement('textarea'); t.value = texto; t.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(t); t.select(); let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} t.remove(); return ok; };
+  const fim = ok => { if (ok) avisar('📋 Modelo copiado! Edite e cole na caixa de texto acima.'); else window.prompt('Copie o modelo (Ctrl+C):', texto); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(() => fim(true)).catch(() => fim(semApi()));
+  else fim(semApi());
+}
+$('btnModelo').onclick = () => baixar('modelo-turma.json', MODELO);
+$('btnCopiarModelo').onclick = () => copiarTexto(JSON.stringify(MODELO, null, 2));
 $('chkRepetir').onchange = render;
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;

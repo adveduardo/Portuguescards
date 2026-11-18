@@ -9,7 +9,10 @@ const CLASSES = {
   t: {id: 'artigo',      nome: 'Artigo', plural: 'Artigos',      cor: '#8e44ad', emoji: '🔹', def: 'Vem antes do substantivo: o, a, os, as, um, uma.'},
   p: {id: 'pronome',     nome: 'Pronome', plural: 'Pronomes',     cor: '#e67e22', emoji: '🙋', def: 'Substitui ou acompanha o nome: eu, ele, nós, meu, este.'},
   n: {id: 'numeral',     nome: 'Numeral', plural: 'Numerais',     cor: '#16a085', emoji: '🔢', def: 'Indica quantidade ou ordem: dois, dez, primeiro.'},
-  d: {id: 'adverbio',    nome: 'Advérbio', plural: 'Advérbios',    cor: '#c2185b', emoji: '⏱️', def: 'Indica tempo, lugar, modo ou intensidade: ontem, aqui, devagar.'}
+  d: {id: 'adverbio',    nome: 'Advérbio', plural: 'Advérbios',    cor: '#c2185b', emoji: '⏱️', def: 'Indica tempo, lugar, modo ou intensidade: ontem, aqui, devagar.'},
+  r: {id: 'preposicao',  nome: 'Preposição', plural: 'Preposições', cor: '#795548', emoji: '🔗', def: 'Liga duas palavras: de, em, para, com, sem, por.'},
+  c: {id: 'conjuncao',   nome: 'Conjunção', plural: 'Conjunções',   cor: '#546e7a', emoji: '➕', def: 'Liga orações ou termos: e, mas, porque, quando, se.'},
+  i: {id: 'interjeicao', nome: 'Interjeição', plural: 'Interjeições', cor: '#b7791f', emoji: '😮', def: 'Expressa emoção ou sentimento: oba!, ai!, ufa!, psiu!'}
 };
 const BASICO = ['s', 'a', 'v'];
 const sem = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');

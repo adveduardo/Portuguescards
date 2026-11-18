@@ -558,7 +558,27 @@
   "morfo-classifique": [
     {
       "arquivo": "morfo-classes.json",
-      "titulo": "Classes de palavras (modelo)"
+      "titulo": "Classes de palavras: as 10 classes (modelo)"
+    },
+    {
+      "arquivo": "morfo-classes-basico.json",
+      "titulo": "Básico com figuras: substantivo, adjetivo e verbo"
+    },
+    {
+      "arquivo": "morfo-classes-frase.json",
+      "titulo": "Classifique a palavra na frase"
+    },
+    {
+      "arquivo": "morfo-classes-mudam.json",
+      "titulo": "A mesma palavra, classes diferentes"
+    },
+    {
+      "arquivo": "morfo-classes-invariaveis.json",
+      "titulo": "As classes invariáveis: advérbio, preposição, conjunção e interjeição"
+    },
+    {
+      "arquivo": "morfo-classes-eja.json",
+      "titulo": "Palavras do dia a dia (EJA)"
     }
   ],
   "morfo-cestos": [
@@ -681,6 +701,10 @@
     {
       "arquivo": "alfa-cestos-inicial.json",
       "titulo": "Cestos: com que letra começa? (alfabetização)"
+    },
+    {
+      "arquivo": "morfo-cestos-variaveis.json",
+      "titulo": "Cestos: classe variável ou invariável?"
     }
   ],
   "morfo-frases": [

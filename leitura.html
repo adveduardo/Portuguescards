@@ -77,6 +77,7 @@
     <div class="acoes">
       <button id="btnUsar">✅ Usar este texto</button>
       <button id="btnAbrir">📂 Abrir arquivo (.txt ou .json)</button>
+      <button id="btnCopiarModelo">📋 Copiar modelo (JSON)</button>
       <button id="btnSalvar">💾 Salvar texto (JSON)</button>
     </div>
     <input type="file" id="arquivo" accept=".txt,.json,text/plain,application/json" hidden>
@@ -261,13 +262,22 @@ $('exemplos').onchange = () => {
   montar(ex.texto, ex.titulo);
 };
 $('btnUsar').onclick = () => {
-  const t = $('inTexto').value.trim();
+  let t = $('inTexto').value.trim();
   if (!t) return P.avisar('Cole ou digite um texto primeiro.');
+  // também aceita um JSON colado: {"titulo": "...", "texto": "..."}
+  if (/^[\[{]/.test(t)){ try{ const d = JSON.parse(t); if (d && d.texto){ t = String(d.texto).trim(); if (d.titulo) $('inTitulo').value = d.titulo; $('inTexto').value = t; } }catch(err){} }
   montar(t, $('inTitulo').value.trim());
   P.avisar('✅ Texto pronto para ler');
   $('painelTexto').open = false;
 };
 $('btnAbrir').onclick = () => $('arquivo').click();
+$('btnCopiarModelo').onclick = () => {
+  const texto = JSON.stringify({titulo: 'Título do texto', texto: 'Escreva ou cole aqui o texto que a turma vai ler.'}, null, 2);
+  const semApi = () => { const t = document.createElement('textarea'); t.value = texto; t.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(t); t.select(); let ok = false; try{ ok = document.execCommand('copy'); }catch(e){} t.remove(); return ok; };
+  const fim = ok => { if (ok) P.avisar('📋 Modelo copiado! Edite e cole na caixa de texto.'); else window.prompt('Copie o modelo (Ctrl+C):', texto); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(() => fim(true)).catch(() => fim(semApi()));
+  else fim(semApi());
+};
 $('arquivo').onchange = e => {
   const f = e.target.files[0]; if (!f) return;
   const r = new FileReader();
