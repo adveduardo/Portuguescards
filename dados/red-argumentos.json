@@ -1,0 +1,175 @@
+{
+  "titulo": "Que tipo de argumento é este?",
+  "emoji": "🧩",
+  "instrucao": "Que tipo de argumento foi usado?",
+  "rodadas": [
+    {
+      "destaque": "Segundo o filósofo Aristóteles, o ser humano é um animal político.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Autoridade",
+      "explica": "Argumento de autoridade: cita um especialista, autor ou instituição respeitada.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "De acordo com a Organização Mundial da Saúde, a depressão é uma das principais causas de incapacidade no mundo.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Autoridade",
+      "explica": "Argumento de autoridade: cita um especialista, autor ou instituição respeitada.",
+      "imagem": "🩺"
+    },
+    {
+      "destaque": "Uma pesquisa feita na escola com 200 alunos revelou que 60% dormem menos de 7 horas por noite.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Dados / estatística",
+      "explica": "Argumento de dados / estatística: usa números e pesquisas.",
+      "imagem": "📊"
+    },
+    {
+      "destaque": "Dados do IBGE mostram que o celular é o principal aparelho usado pelos brasileiros para acessar a internet.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Dados / estatística",
+      "explica": "Argumento de dados / estatística: usa números e pesquisas.",
+      "imagem": "📱"
+    },
+    {
+      "destaque": "Na Finlândia, por exemplo, a valorização dos professores está entre as bases do sucesso educacional.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Exemplificação",
+      "explica": "Argumento de exemplificação: apresenta um caso concreto.",
+      "imagem": "🇫🇮"
+    },
+    {
+      "destaque": "Uma escola de Pernambuco, por exemplo, reduziu a evasão ao criar aulas de robótica.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Exemplificação",
+      "explica": "Argumento de exemplificação: apresenta um caso concreto.",
+      "imagem": "🤖"
+    },
+    {
+      "destaque": "Como o transporte público é caro e lento, muitos optam pelo carro, o que aumenta os congestionamentos.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Causa e consequência",
+      "explica": "Argumento de causa e consequência: mostra o que provoca o problema e o que ele causa.",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "O desmatamento reduz as chuvas, o que prejudica a agricultura.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Causa e consequência",
+      "explica": "Argumento de causa e consequência: mostra o que provoca o problema e o que ele causa.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "Assim como uma planta precisa de água, a democracia precisa da participação dos cidadãos.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Comparação",
+      "explica": "Argumento de comparação: aproxima duas situações para mostrar semelhança ou diferença.",
+      "imagem": "🌱"
+    },
+    {
+      "destaque": "Enquanto o Japão investe em trens de alta velocidade, o Brasil ainda depende quase só das rodovias.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Comparação",
+      "explica": "Argumento de comparação: aproxima duas situações para mostrar semelhança ou diferença.",
+      "imagem": "🚄"
+    },
+    {
+      "destaque": "É verdade que a tecnologia aproxima as pessoas; no entanto, o uso excessivo pode isolar os jovens.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Contra-argumentação",
+      "explica": "Argumento de contra-argumentação: admite a ideia contrária e depois a refuta.",
+      "imagem": "🤳"
+    },
+    {
+      "destaque": "Há quem diga que a leitura está em extinção; contudo, nunca se publicaram tantos livros quanto hoje.",
+      "opcoes": [
+        "Autoridade",
+        "Dados / estatística",
+        "Exemplificação",
+        "Causa e consequência",
+        "Comparação",
+        "Contra-argumentação"
+      ],
+      "correta": "Contra-argumentação",
+      "explica": "Argumento de contra-argumentação: admite a ideia contrária e depois a refuta.",
+      "imagem": "📚"
+    }
+  ]
+}

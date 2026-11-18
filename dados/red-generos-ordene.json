@@ -1,0 +1,61 @@
+{
+  "titulo": "Monte o texto formal",
+  "sequencias": [
+    {
+      "titulo": "Monte o e-mail formal",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Assunto: Solicitação de declaração escolar",
+        "Prezada senhora diretora,",
+        "Meu nome é João Silva, aluno do 2º ano da EJA.",
+        "Venho solicitar uma declaração de matrícula para apresentar no meu trabalho.",
+        "Agradeço desde já a atenção.",
+        "Atenciosamente,",
+        "João Silva"
+      ],
+      "explica": "Assunto → saudação → apresentação → pedido → agradecimento → despedida → assinatura."
+    },
+    {
+      "titulo": "Monte o requerimento",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Ilustríssimo Senhor Diretor da Escola Estadual Esperança,",
+        "Maria Souza, aluna da turma 3A,",
+        "vem requerer a segunda via do seu histórico escolar,",
+        "por ter perdido o documento original.",
+        "Nestes termos, pede deferimento.",
+        "São Paulo, 10 de março.",
+        "Maria Souza"
+      ],
+      "explica": "Vocativo → identificação → pedido → justificativa → fecho → local e data → assinatura."
+    },
+    {
+      "titulo": "Monte o currículo",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Dados pessoais (nome, telefone, e-mail)",
+        "Objetivo (vaga desejada)",
+        "Formação escolar",
+        "Experiência profissional",
+        "Cursos e qualificações"
+      ],
+      "explica": "A ordem mais comum dos itens de um currículo."
+    },
+    {
+      "titulo": "Monte a carta pessoal",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Local e data",
+        "Saudação (Querida Ana,)",
+        "Corpo da carta",
+        "Despedida (Um abraço,)",
+        "Assinatura"
+      ],
+      "explica": "Estrutura da carta pessoal."
+    }
+  ]
+}

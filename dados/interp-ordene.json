@@ -1,0 +1,65 @@
+{
+  "titulo": "Ordene o texto",
+  "sequencias": [
+    {
+      "titulo": "Ordene a notícia",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Um incêndio atingiu uma loja no centro da cidade.",
+        "O fogo começou por volta das 3h da madrugada.",
+        "Os bombeiros controlaram as chamas em uma hora.",
+        "Ninguém ficou ferido."
+      ],
+      "explica": "Primeiro o fato principal; depois os detalhes; por fim, as consequências."
+    },
+    {
+      "titulo": "Ordene a história",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Era uma vez um menino que tinha medo do escuro.",
+        "Certa noite, a luz da casa acabou e ele ouviu um barulho.",
+        "Ele pegou a lanterna e descobriu que o barulho era só o gato.",
+        "Desde então, ele dorme tranquilo."
+      ],
+      "explica": "Situação inicial → conflito → clímax → desfecho."
+    },
+    {
+      "titulo": "Ordene a receita",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Separe os ingredientes.",
+        "Bata os ovos com o açúcar.",
+        "Acrescente a farinha e misture.",
+        "Leve ao forno por 40 minutos."
+      ],
+      "explica": "O modo de preparo segue a ordem das ações."
+    },
+    {
+      "titulo": "Ordene a fábula",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "A cigarra cantava enquanto a formiga trabalhava.",
+        "Chegou o inverno, e a cigarra ficou sem comida.",
+        "Ela foi pedir ajuda à formiga.",
+        "A formiga ensinou que é preciso se preparar para o futuro."
+      ],
+      "explica": "Fábula: situação, problema, encontro e moral."
+    },
+    {
+      "titulo": "Ordene o parágrafo argumentativo",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "A leitura é fundamental para a formação dos jovens.",
+        "Isso porque ela amplia o vocabulário e a capacidade de argumentar.",
+        "Quem lê com frequência costuma escrever com mais clareza.",
+        "Portanto, incentivar a leitura deve ser prioridade nas escolas."
+      ],
+      "explica": "Ideia principal → explicação → exemplo/reforço → conclusão."
+    }
+  ]
+}

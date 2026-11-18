@@ -1,0 +1,151 @@
+{
+  "titulo": "Sentido da palavra no contexto",
+  "emoji": "🔍",
+  "instrucao": "O que significa a palavra destacada nesta frase?",
+  "rodadas": [
+    {
+      "destaque": "Depois da notícia, ele ficou [arrasado].",
+      "opcoes": [
+        "muito triste",
+        "muito feliz",
+        "cansado de andar",
+        "atrasado"
+      ],
+      "correta": "muito triste",
+      "explica": "Arrasado = abatido, muito triste (sentido figurado).",
+      "imagem": "😞"
+    },
+    {
+      "destaque": "A prova estava uma [moleza].",
+      "opcoes": [
+        "muito fácil",
+        "muito mole",
+        "muito longa",
+        "muito difícil"
+      ],
+      "correta": "muito fácil",
+      "explica": "Moleza = coisa fácil (linguagem informal).",
+      "imagem": "😎"
+    },
+    {
+      "destaque": "O ônibus estava [abarrotado] de gente.",
+      "opcoes": [
+        "cheio demais",
+        "vazio",
+        "atrasado",
+        "quebrado"
+      ],
+      "correta": "cheio demais",
+      "explica": "Abarrotado = lotado, cheio até não caber mais.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "Ela [driblou] as dificuldades e se formou.",
+      "opcoes": [
+        "superou, contornou",
+        "chutou com força",
+        "esqueceu",
+        "aumentou"
+      ],
+      "correta": "superou, contornou",
+      "explica": "Sentido figurado: escapar dos obstáculos, como um jogador que passa pelo adversário.",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "O atacante [driblou] o zagueiro e fez o gol.",
+      "opcoes": [
+        "passou pelo adversário com a bola",
+        "superou um problema",
+        "machucou",
+        "conversou"
+      ],
+      "correta": "passou pelo adversário com a bola",
+      "explica": "Sentido literal, do futebol.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "O técnico deu um [puxão de orelha] no time.",
+      "opcoes": [
+        "chamou a atenção, deu uma bronca",
+        "puxou a orelha de verdade",
+        "deu um presente",
+        "fez um elogio"
+      ],
+      "correta": "chamou a atenção, deu uma bronca",
+      "explica": "Expressão figurada: repreender.",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "Aquele comentário foi muito [pesado].",
+      "opcoes": [
+        "ofensivo, grosseiro",
+        "de muitos quilos",
+        "engraçado",
+        "curto"
+      ],
+      "correta": "ofensivo, grosseiro",
+      "explica": "Pesado, aqui, é sentido figurado.",
+      "imagem": "💬"
+    },
+    {
+      "destaque": "A mala estava [pesada].",
+      "opcoes": [
+        "com muito peso",
+        "ofensiva",
+        "triste",
+        "colorida"
+      ],
+      "correta": "com muito peso",
+      "explica": "Sentido literal (denotativo).",
+      "imagem": "🧳"
+    },
+    {
+      "destaque": "O político tem um passado [nebuloso].",
+      "opcoes": [
+        "pouco claro, suspeito",
+        "cheio de nuvens",
+        "muito famoso",
+        "bonito"
+      ],
+      "correta": "pouco claro, suspeito",
+      "explica": "Nebuloso = obscuro, cheio de dúvidas (sentido figurado).",
+      "imagem": "🌫️"
+    },
+    {
+      "destaque": "Os preços [dispararam] no mercado.",
+      "opcoes": [
+        "subiram muito",
+        "caíram muito",
+        "ficaram iguais",
+        "foram tirados"
+      ],
+      "correta": "subiram muito",
+      "explica": "Disparar = aumentar muito e rápido.",
+      "imagem": "📈"
+    },
+    {
+      "destaque": "Minha avó tem um coração de [ouro].",
+      "opcoes": [
+        "é muito bondosa",
+        "é muito rica",
+        "está doente",
+        "é muito brava"
+      ],
+      "correta": "é muito bondosa",
+      "explica": "Coração de ouro = pessoa muito boa (metáfora).",
+      "imagem": "💛"
+    },
+    {
+      "destaque": "Ele [engoliu sapo] para não perder o emprego.",
+      "opcoes": [
+        "aguentou algo desagradável calado",
+        "comeu um animal",
+        "pediu demissão",
+        "gritou com o chefe"
+      ],
+      "correta": "aguentou algo desagradável calado",
+      "explica": "Expressão idiomática: suportar uma situação ruim sem reclamar.",
+      "imagem": "🐸"
+    }
+  ]
+}

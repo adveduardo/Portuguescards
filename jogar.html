@@ -118,6 +118,17 @@
   .dicaDesenho{font-size:14px;opacity:.7}
   .botoesAtor{margin-top:12px;font-size:0}
   .botoesAtor button{width:46%;margin:0 2%;font-size:28px;padding:18px 0}
+
+  /* ESCRITA EM EQUIPE */
+  input,textarea{-webkit-user-select:text;user-select:text}
+  #escrTarefa{font-size:16px;opacity:.75;font-weight:bold}
+  #escrTitulo{font-size:26px;font-weight:bold;margin:4px 0}
+  #escrInstrucao{font-size:19px;margin:6px auto;max-width:700px}
+  #escrContexto{font-size:20px;font-style:italic;text-align:left;border-left:6px solid #2f80ed}
+  #escrTexto{display:block;width:100%;max-width:700px;margin:8px auto;min-height:220px;font-size:22px;line-height:1.4;padding:12px;
+    border:3px solid #dfe4ee;border-radius:14px;font-family:inherit;color:#243049;-webkit-appearance:none;text-align:left}
+  #escrTexto:focus{border-color:#2f80ed;outline:none}
+  #escrInfo{font-size:16px;opacity:.75;margin-bottom:8px}
   /* ESCOLHA O CAMINHO */
   #camTexto{font-size:22px;font-weight:bold;line-height:1.35}
   .camOp{display:block;width:100%;margin:12px 0;font-size:26px;color:#fff;padding:18px;text-align:left}
@@ -219,9 +230,21 @@
   <div class="topo" id="topoCaminho"><span class="nome"></span><span class="info"></span></div>
   <div id="camImagem" class="grande-emoji" style="font-size:80px"></div>
   <div id="camTexto" class="caixa"></div>
-  <h2>Qual caminho a sua equipe escolhe?</h2>
+  <h2 id="camPergunta">Qual caminho a sua equipe escolhe?</h2>
   <div id="camOpcoes" style="max-width:700px;margin:0 auto"></div>
   <p id="camStatus"></p>
+</section>
+
+<!-- 9) ESCRITA EM EQUIPE -->
+<section class="tela" id="tEscrita">
+  <div class="topo" id="topoEscrita"><span class="nome"></span><span class="info" id="escrTempo"></span></div>
+  <div id="escrTarefa"></div>
+  <div id="escrTitulo"></div>
+  <div id="escrInstrucao"></div>
+  <div id="escrContexto" class="caixa"></div>
+  <textarea id="escrTexto" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" placeholder="Escrevam aqui…"></textarea>
+  <div id="escrInfo"></div>
+  <button class="verde" id="escrEnviar">Enviar ✅</button>
 </section>
 
 <script src="rede.js"></script>
@@ -304,10 +327,11 @@ function fecharOuvintes(){
   if (ouvMeuGrupo){ ouvMeuGrupo.fechar(); ouvMeuGrupo = null; }
   pararMimica();
   pararRelogioEscape();
+  pararRelogioEscrita();
 }
 function comecarAOuvir(){
   fecharOuvintes();
-  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null;
+  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null;
   Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo);
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
@@ -348,11 +372,13 @@ function telaEspera(msg, sub, extraHtml){
 
 // ---------------- Roteador ----------------
 function renderizar(){
-  if (!estado || !eq) return;
+  // ignora estados incompletos (sem "fase"), que podem aparecer no meio de uma gravação
+  if (!estado || !eq || !estado.fase) return;
   if (jogo === 'stop') renderStop();
   else if (jogo === 'escape') renderEscape();
   else if (jogo === 'mimica') renderMimica();
   else if (jogo === 'caminho') renderCaminho();
+  else if (jogo === 'escrita') renderEscrita();
   else renderQuiz();
 }
 
@@ -853,13 +879,12 @@ function renderCaminho(){
     if (cam.rodada !== estado.rodada){ cam.rodada = estado.rodada; cam.voto = null; montarVotacao(); }
   } else if (f === 'resultado'){
     var votou = cam.rodada === estado.rodada && cam.voto !== null;
-    telaEspera((estado.empate ? '🎲 Empate! O sorteio escolheu:' : '✅ A turma escolheu:') + '<br>' + esc(estado.textoEscolhido || ''),
-      !votou ? 'Olhem o telão 👀' : (cam.voto === estado.escolhida ? 'Foi o caminho que vocês votaram! 🎉' : 'Não foi o voto de vocês, mas a história continua! 📖'));
+    telaEspera((estado.rotulo ? esc(estado.rotulo) : (estado.empate ? '🎲 Empate! O sorteio escolheu:' : '✅ A turma escolheu:')) + '<br>' + esc(estado.textoEscolhido || ''),
+      !votou ? 'Olhem o telão 👀' : (cam.voto === estado.escolhida ? esc(estado.msgAcerto || 'Foi o caminho que vocês votaram! 🎉') : esc(estado.msgErro || 'Não foi o voto de vocês, mas a história continua! 📖')));
   } else if (f === 'fim'){
     cam.rodada = null;
-    telaEspera('📖 Fim da história!', 'Olhem o telão para ver o caminho que a turma escolheu 👀');
+    telaEspera(estado.msgFim ? esc(estado.msgFim) : '📖 Fim da história!', estado.subFim ? esc(estado.subFim) : 'Olhem o telão para ver o caminho que a turma escolheu 👀');
   } else {
-    cam.rodada = null;
     telaEspera(estado.titulo ? '📖 ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
   }
 }
@@ -867,6 +892,7 @@ function montarVotacao(){
   mostrar('tCaminho'); pintarTopo('topoCaminho', '');
   $('camImagem').innerHTML = esc(estado.imagem || '');
   $('camTexto').innerHTML = esc(estado.texto || '');
+  $('camPergunta').innerHTML = esc(estado.pergunta || 'Qual caminho a sua equipe escolhe?');
   var ops = Rede.lista(estado.opcoes), h = '', i;
   for (i = 0; i < ops.length; i++) h += '<button class="camOp op' + i + '" data-i="' + i + '">' + LETRAS[i] + ') ' + esc(ops[i]) + '</button>';
   $('camOpcoes').innerHTML = h; $('camStatus').innerHTML = '';
@@ -886,6 +912,95 @@ function marcarVoto(i){
   for (var k = 0; k < bs.length; k++) bs[k].className = 'camOp op' + k + (k === i ? ' escolhida' : ' outra');
   $('camStatus').innerHTML = '✅ Voto enviado! Vocês podem trocar até o professor encerrar a votação.';
 }
+
+// ================= ESCRITA EM EQUIPE =================
+var escr = {rodada: null, tarefas: [], i: 0, salvos: {}, timer: null, timerSalvar: null, fim: 0, extra: 0};
+function renderEscrita(){
+  var f = estado.fase;
+  if (f === 'escrevendo'){
+    if (escr.rodada !== estado.rodada) iniciarEscrita();
+    else if ((estado.extra || 0) !== escr.extra && escr.fim){
+      // o professor deu mais tempo
+      escr.fim = Math.max(escr.fim, Date.now()) + ((estado.extra || 0) - escr.extra) * 1000; escr.extra = estado.extra || 0;
+      if (!escr.timer) escr.timer = setInterval(relogioEscrita, 500);
+      relogioEscrita();
+    }
+    return;
+  }
+  if (f === 'recolhendo'){
+    if (escr.rodada === estado.rodada && escr.i < escr.tarefas.length) salvarEscrita(false);
+    pararRelogioEscrita();
+    telaEspera('⏰ Tempo!', 'Recolhendo os textos… olhem o telão 👀');
+    return;
+  }
+  pararRelogioEscrita(); escr.rodada = null;
+  if (f === 'lendo') telaEspera('📖 Hora da leitura!', 'Olhem o telão para ver os textos da turma 👀');
+  else telaEspera(estado.titulo ? '✍️ ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
+}
+function caminhoEscrita(){ return 'salas/' + sala + '/escrita/r' + escr.rodada + '/' + eq.id; }
+function iniciarEscrita(){
+  var r = estado.rodada;
+  escr.rodada = r; escr.i = 0; escr.salvos = {};
+  escr.tarefas = Rede.lista((estado.tarefas || {})[eq.id]);
+  pararRelogioEscrita();
+  if (!escr.tarefas.length){ telaEspera('Nesta rodada a sua equipe descansa 😌', 'Acompanhem os colegas pelo telão 👀'); return; }
+  escr.extra = estado.extra || 0;
+  escr.fim = estado.tempo ? Date.now() + (estado.tempo + escr.extra) * 1000 : 0;
+  if (escr.fim) escr.timer = setInterval(relogioEscrita, 500);
+  telaEspera('✍️ Preparando a folha…', '');
+  Rede.ler(caminhoEscrita(), function(err, salvos){
+    if (escr.rodada !== r) return;
+    escr.salvos = salvos || {};
+    while (escr.i < escr.tarefas.length && escr.salvos[escr.tarefas[escr.i].id] && escr.salvos[escr.tarefas[escr.i].id].enviado) escr.i++;
+    mostrarTarefaEscrita();
+  });
+}
+function mostrarTarefaEscrita(){
+  if (escr.i >= escr.tarefas.length){
+    telaEspera('✅ Texto enviado!', 'Aguardem as outras equipes e olhem o telão 👀', '<button id="escrEditar" class="pequeno">✏️ Quero editar mais um pouco</button>');
+    var b = $('escrEditar');
+    if (b) b.onclick = function(){ escr.i = escr.tarefas.length - 1; mostrarTarefaEscrita(); salvarEscrita(false); };
+    return;
+  }
+  var t = escr.tarefas[escr.i], salvo = escr.salvos[t.id];
+  mostrar('tEscrita'); pintarTopo('topoEscrita');
+  $('escrTarefa').innerHTML = escr.tarefas.length > 1 ? 'Parte ' + (escr.i + 1) + ' de ' + escr.tarefas.length : '';
+  $('escrTitulo').innerHTML = esc(t.titulo || '');
+  $('escrInstrucao').innerHTML = esc(t.instrucao || '');
+  $('escrContexto').innerHTML = t.contexto ? esc(t.contexto) : '';
+  $('escrContexto').style.display = t.contexto ? '' : 'none';
+  $('escrTexto').value = salvo && salvo.texto ? salvo.texto : '';
+  $('escrEnviar').disabled = false;
+  contarPalavras(); relogioEscrita();
+}
+function contarPalavras(){
+  var v = $('escrTexto').value.replace(/^\s+|\s+$/g, ''), n = v ? v.split(/\s+/).length : 0;
+  $('escrInfo').innerHTML = n + (n === 1 ? ' palavra' : ' palavras') + ' • o rascunho é salvo sozinho';
+}
+function salvarEscrita(enviado, cb){
+  if (escr.timerSalvar){ clearTimeout(escr.timerSalvar); escr.timerSalvar = null; }
+  if (!sala || !eq || escr.rodada === null || escr.i >= escr.tarefas.length){ if (cb) cb(); return; }
+  var t = escr.tarefas[escr.i], dado = {texto: $('escrTexto').value, enviado: !!enviado};
+  escr.salvos[t.id] = dado;
+  Rede.gravar(caminhoEscrita() + '/' + t.id, dado, cb);
+}
+function relogioEscrita(){
+  if (!escr.fim){ $('escrTempo').innerHTML = ''; return; }
+  var s = Math.max(0, Math.round((escr.fim - Date.now()) / 1000));
+  $('escrTempo').innerHTML = s ? '⏳ ' + mmss(s) : '⏰ Tempo! Enviem o texto';
+  if (!s && escr.timer){ clearInterval(escr.timer); escr.timer = null; vibrar(); }
+}
+function pararRelogioEscrita(){ if (escr.timer){ clearInterval(escr.timer); escr.timer = null; } }
+$('escrTexto').oninput = function(){
+  contarPalavras();
+  if (escr.timerSalvar) clearTimeout(escr.timerSalvar);
+  escr.timerSalvar = setTimeout(function(){ salvarEscrita(false); }, 700);
+};
+$('escrEnviar').onclick = function(){
+  if (!$('escrTexto').value.replace(/^\s+|\s+$/g, '')){ alert('Escrevam alguma coisa antes de enviar 🙂'); return; }
+  $('escrEnviar').disabled = true;
+  salvarEscrita(true, function(){ escr.i++; vibrar(); mostrarTarefaEscrita(); });
+};
 
 // ---------------- Botões ----------------
 $('btnEntrar').onclick = entrar;

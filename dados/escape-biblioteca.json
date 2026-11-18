@@ -1,0 +1,72 @@
+{
+  "titulo": "O Mistério da Biblioteca",
+  "historia": "A bibliotecária sumiu e deixou pistas escritas pela biblioteca. Leiam com atenção: cada pista interpretada revela um número do cadeado da sala secreta.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Pista 1: \"O livro que você procura não está no começo nem no fim da estante, mas exatamente no meio.\" A estante tem 9 livros. Escreva o número da posição do livro.",
+      "imagem": "📚",
+      "resposta": [
+        "5",
+        "quinto",
+        "quinta"
+      ],
+      "dica": "Com 9 livros, quantos ficam de cada lado do livro do meio?"
+    },
+    {
+      "pergunta": "Pista 2: \"Não sou o menor, mas sou maior que o vermelho. O azul é o menor de todos.\" Há um livro azul, um vermelho e um verde. Qual é o MAIOR?",
+      "imagem": "📗",
+      "opcoes": [
+        "o verde",
+        "o vermelho",
+        "o azul"
+      ],
+      "correta": "o verde",
+      "dica": "Se o azul é o menor e quem fala é maior que o vermelho…"
+    },
+    {
+      "pergunta": "Pista 3: \"Quem lê nunca está sozinho.\" O que a frase quer dizer?",
+      "imagem": "💭",
+      "opcoes": [
+        "a leitura faz companhia",
+        "é proibido ler sozinho",
+        "os livros falam de verdade"
+      ],
+      "correta": "a leitura faz companhia",
+      "dica": "Pense no sentido figurado."
+    },
+    {
+      "pergunta": "Pista 4: \"Entrei na biblioteca às 14h e saí uma hora e meia depois.\" A que horas a pessoa saiu? (escreva assim: 15h30)",
+      "imagem": "⏰",
+      "resposta": [
+        "15h30",
+        "1530",
+        "15 30",
+        "15h30min",
+        "3 e meia"
+      ],
+      "dica": "14h + 1h30 = ?"
+    },
+    {
+      "pergunta": "Pista 5: \"Estou no livro cujo título é o contrário de guerra.\" Escreva o título.",
+      "imagem": "🕊️",
+      "resposta": [
+        "paz",
+        "a paz"
+      ],
+      "dica": "Antônimo de guerra."
+    },
+    {
+      "pergunta": "Pista 6: \"A chave está com quem cuida dos livros todos os dias, mas não é a pessoa que sumiu.\" Quem guarda a chave?",
+      "imagem": "🔑",
+      "opcoes": [
+        "o ajudante da biblioteca",
+        "a bibliotecária que sumiu",
+        "o diretor"
+      ],
+      "correta": "o ajudante da biblioteca",
+      "dica": "Quem cuida dos livros todo dia… menos a bibliotecária."
+    }
+  ]
+}

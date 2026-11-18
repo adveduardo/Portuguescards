@@ -1,0 +1,115 @@
+{
+  "titulo": "Discurso direto e indireto",
+  "emoji": "💬",
+  "instrucao": "Escolha a resposta correta",
+  "rodadas": [
+    {
+      "destaque": "— Estou cansado — disse Pedro.",
+      "opcoes": [
+        "Pedro disse que estava cansado.",
+        "Pedro disse que estou cansado.",
+        "Pedro disse: estava cansado."
+      ],
+      "correta": "Pedro disse que estava cansado.",
+      "explica": "No indireto, o presente (estou) vai para o pretérito imperfeito (estava) e entra o QUE.",
+      "imagem": "😴",
+      "enunciado": "Como fica no discurso indireto?"
+    },
+    {
+      "destaque": "— Vou viajar amanhã — afirmou Ana.",
+      "opcoes": [
+        "Ana afirmou que viajaria no dia seguinte.",
+        "Ana afirmou que vou viajar amanhã.",
+        "Ana afirmou que viajou ontem."
+      ],
+      "correta": "Ana afirmou que viajaria no dia seguinte.",
+      "explica": "VOU VIAJAR vira VIAJARIA, e AMANHÃ vira NO DIA SEGUINTE.",
+      "imagem": "🧳",
+      "enunciado": "Como fica no discurso indireto?"
+    },
+    {
+      "destaque": "— Você fez a lição? — perguntou a professora.",
+      "opcoes": [
+        "A professora perguntou se ele tinha feito a lição.",
+        "A professora perguntou você fez a lição.",
+        "A professora perguntou que fez a lição."
+      ],
+      "correta": "A professora perguntou se ele tinha feito a lição.",
+      "explica": "Pergunta de sim/não, no indireto, é introduzida por SE.",
+      "imagem": "📝",
+      "enunciado": "Como fica no discurso indireto?"
+    },
+    {
+      "destaque": "— Feche a porta! — ordenou o pai.",
+      "opcoes": [
+        "O pai ordenou que o filho fechasse a porta.",
+        "O pai ordenou feche a porta.",
+        "O pai ordenou que fecha a porta."
+      ],
+      "correta": "O pai ordenou que o filho fechasse a porta.",
+      "explica": "O imperativo (feche) vira subjuntivo (fechasse).",
+      "imagem": "🚪",
+      "enunciado": "Como fica no discurso indireto?"
+    },
+    {
+      "destaque": "Maria disse que estava com fome.",
+      "opcoes": [
+        "— Estou com fome — disse Maria.",
+        "— Estava com fome — disse Maria.",
+        "— Ela está com fome — disse Maria."
+      ],
+      "correta": "— Estou com fome — disse Maria.",
+      "explica": "No direto, a personagem fala com as próprias palavras, no presente e em 1ª pessoa.",
+      "imagem": "🍽️",
+      "enunciado": "Como fica no discurso direto?"
+    },
+    {
+      "destaque": "O menino perguntou onde ficava a biblioteca.",
+      "opcoes": [
+        "— Onde fica a biblioteca? — perguntou o menino.",
+        "— A biblioteca fica onde — perguntou o menino.",
+        "— Onde ele ficava a biblioteca? — perguntou o menino."
+      ],
+      "correta": "— Onde fica a biblioteca? — perguntou o menino.",
+      "explica": "No direto, a pergunta aparece com ponto de interrogação, no presente.",
+      "imagem": "📚",
+      "enunciado": "Como fica no discurso direto?"
+    },
+    {
+      "destaque": "— Que dia lindo! — exclamou a menina.",
+      "opcoes": [
+        "Discurso direto",
+        "Discurso indireto",
+        "Discurso indireto livre"
+      ],
+      "correta": "Discurso direto",
+      "explica": "Discurso direto: a fala da personagem aparece exatamente como foi dita, com travessão.",
+      "imagem": "☀️",
+      "enunciado": "Que tipo de discurso é este?"
+    },
+    {
+      "destaque": "A menina exclamou que o dia estava lindo.",
+      "opcoes": [
+        "Discurso direto",
+        "Discurso indireto",
+        "Discurso indireto livre"
+      ],
+      "correta": "Discurso indireto",
+      "explica": "Discurso indireto: o narrador conta, com as palavras dele, o que a personagem disse.",
+      "imagem": "☀️",
+      "enunciado": "Que tipo de discurso é este?"
+    },
+    {
+      "destaque": "A menina olhou pela janela. Que dia lindo! Iria à praia, com certeza.",
+      "opcoes": [
+        "Discurso direto",
+        "Discurso indireto",
+        "Discurso indireto livre"
+      ],
+      "correta": "Discurso indireto livre",
+      "explica": "Indireto livre: a voz da personagem se mistura à do narrador, sem travessão nem verbo de fala.",
+      "imagem": "🏖️",
+      "enunciado": "Que tipo de discurso é este?"
+    }
+  ]
+}

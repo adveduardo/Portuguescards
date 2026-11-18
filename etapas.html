@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leitura em Etapas</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topoEt{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  #lidos{max-width:1100px;margin:6px auto}
+  .lido{background:#fff;border-radius:16px;padding:8px 16px;margin:6px 0;font-size:clamp(1rem,2vw,1.25rem);opacity:.75;line-height:1.45}
+  #cartaoEtapa{background:#fffdf6;border-radius:30px;padding:18px 28px;box-shadow:0 8px 0 #0001;margin:10px auto;max-width:1100px}
+  #imgEtapa{font-size:clamp(3rem,9vw,5.5rem);line-height:1.1;text-align:center}
+  #textoEtapa{font-size:clamp(1.3rem,3vw,2.1rem);line-height:1.45;white-space:pre-line}
+  #perguntaEt{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:bold;text-align:center;margin:10px 0 4px}
+  #opcoesEt{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:14px;max-width:1100px;margin:8px auto}
+  .op{border-radius:22px;color:#fff;padding:14px 20px;text-align:left;font-size:clamp(1.15rem,2.6vw,1.7rem);font-weight:bold;box-shadow:0 6px 0 #0002;
+    position:relative;overflow:hidden;cursor:pointer;transition:transform .3s,opacity .3s;border:none;width:100%}
+  .op .barra{position:absolute;left:0;top:0;bottom:0;background:#ffffff38;transition:width .4s}
+  .op .conteudo{position:relative;display:flex;align-items:center;gap:12px}
+  .op .l{background:#fff3;border-radius:12px;min-width:46px;height:46px;display:flex;align-items:center;justify-content:center}
+  .op .votos{margin-left:auto;font-size:1.2rem;white-space:nowrap}
+  .op.certa{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde);transform:scale(1.02)}
+  .op.outra{opacity:.35}
+  .op0{background:#e74c3c}.op1{background:#2f80ed}.op2{background:#f39c12}.op3{background:#27ae60}
+  #statusEt{text-align:center;font-size:1.2rem;font-weight:bold;min-height:1.5em}
+  #explicaEt{text-align:center;font-size:clamp(1.1rem,2.2vw,1.4rem);max-width:1000px;margin:6px auto;min-height:1.4em}
+  #placarEt{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0}
+  .chipPts{color:#fff;border-radius:16px;padding:6px 14px;font-weight:bold;font-size:1.1rem;box-shadow:0 3px 0 #0002}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🔮 Leitura em Etapas</h1>
+  <div class="cartao">
+    <h2>1. Texto (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Como a turma dá o palpite</h2>
+    <label><input type="radio" name="voto" value="ipads" checked> 📱 Cada equipe vota no seu iPad (quem acerta a previsão ganha ponto)</label>
+    <label><input type="radio" name="voto" value="mao"> ✋ Levantando a mão (sem pontos)</label>
+    <label><input type="checkbox" id="chkLer" checked> Ler cada parte em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">O texto aparece aos poucos. A cada pausa, a turma prevê o que vai acontecer usando as pistas do texto. Depois o telão revela o que de fato aconteceu.</p>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <button id="btnCriar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">📖 Começar a leitura</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<section id="tLeitura" class="tela">
+  <div class="topoEt">
+    <h2 id="tituloEt" style="margin:4px 0;text-align:left"></h2>
+    <div class="dica" id="infoEt"></div>
+  </div>
+  <div id="placarEt"></div>
+  <details id="blocoLidos" style="max-width:1100px;margin:0 auto"><summary>📜 Partes já lidas</summary><div id="lidos"></div></details>
+  <div id="cartaoEtapa"><div id="imgEtapa"></div><div id="textoEtapa"></div></div>
+  <div id="perguntaEt"></div>
+  <div id="opcoesEt"></div>
+  <div id="statusEt"></div>
+  <div id="explicaEt"></div>
+  <div class="linha" id="acoesEt">
+    <button id="btnOuvir">🔊 Ouvir de novo</button>
+    <button id="btnRevelar" class="principal">👀 Revelar o que aconteceu</button>
+    <button id="btnContinuar" class="principal" hidden>➡️ Continuar a leitura</button>
+  </div>
+  <div id="blocoFim" hidden style="text-align:center">
+    <h2>📖 Fim do texto!</h2>
+    <div id="rankingEt" class="ranking"></div>
+    <div class="linha">
+      <button id="btnLerTudo" class="principal">📖 Ler o texto completo</button>
+      <button id="btnRecomecar">🔁 Começar de novo</button>
+      <button id="btnEncerrar2">✖️ Sair</button>
+    </div>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const LETRAS = ['A', 'B', 'C', 'D'];
+let txt = null, comIpads = true, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let idx = 0, rodada = 0, votando = false, pontos = {}, timerAuto = null;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.etapas)) return null;
+  const etapas = d.etapas.filter(e => e && e.texto).map(e => {
+    const opcoes = (Array.isArray(e.opcoes) ? e.opcoes : []).slice(0, 4).map(String);
+    const correta = typeof e.correta === 'number' ? e.correta : opcoes.indexOf(String(e.correta));
+    return {texto: String(e.texto), imagem: e.imagem || '', pergunta: String(e.pergunta || 'O que vai acontecer agora?'),
+      opcoes: correta >= 0 && correta < opcoes.length ? opcoes : [], correta, explica: String(e.explica || '')};
+  });
+  return etapas.length ? {titulo: d.titulo || 'Texto', imagem: d.imagem || '', etapas, previsoes: etapas.filter(e => e.opcoes.length).length} : null;
+}
+function carregar(d, origem){
+  const t = normalizar(d);
+  if (!t) return AV.avisar('JSON inválido: falta a lista "etapas" (cada uma com "texto").');
+  txt = t;
+  $('infoJson').innerHTML = `<b>${AV.esc(t.titulo)}</b> • ${t.etapas.length} partes • ${t.previsoes} previsões` + (origem ? ` • ${AV.esc(origem)}` : '');
+}
+AV.prepararSeletorJson({tipo: 'etapas', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/etapas-bilhete.json', 'modelo-leitura-em-etapas.json');
+document.querySelectorAll('input[name=voto]').forEach(r => r.onchange = () => { $('painelConexao').hidden = r.value !== 'ipads' || !r.checked; });
+
+$('btnCriar').onclick = () => {
+  if (!txt) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  comIpads = document.querySelector('input[name=voto]:checked').value === 'ipads';
+  if (!comIpads){ comecar(); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'caminho', estado: {fase: 'espera', titulo: txt.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    $('tituloSala').textContent = '🔮 ' + txt.titulo;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', leitura: 'tLeitura'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'leitura' && comIpads && votando) mostrarVotos();
+}
+function votosAtuais(){ return ((arvore.votos || {})['r' + rodada]) || {}; }
+function desenharPlacar(){
+  if (!comIpads){ $('placarEt').innerHTML = ''; return; }
+  const g = grupos();
+  $('placarEt').innerHTML = AV.ordemGrupos(g).map(id => `<span class="chipPts" style="background:${g[id].cor}">${AV.esc(g[id].emoji)} ${pontos[id] || 0}</span>`).join('');
+}
+
+function comecar(){
+  idx = 0; pontos = {};
+  $('tituloEt').textContent = '🔮 ' + txt.titulo;
+  $('infoEt').textContent = comIpads ? `Sala ${sala}` : '';
+  $('lidos').innerHTML = ''; $('blocoLidos').hidden = true;
+  irPara('leitura'); mostrarEtapa();
+}
+function mostrarEtapa(){
+  const e = txt.etapas[idx]; rodada++;
+  $('imgEtapa').textContent = e.imagem || (idx === 0 ? txt.imagem : '');
+  $('textoEtapa').textContent = e.texto;
+  const fim = idx === txt.etapas.length - 1, temPergunta = e.opcoes.length > 0 && !fim;
+  $('perguntaEt').hidden = $('opcoesEt').hidden = !temPergunta;
+  $('statusEt').textContent = ''; $('explicaEt').textContent = '';
+  $('btnRevelar').hidden = !temPergunta; $('btnContinuar').hidden = temPergunta || fim;
+  $('acoesEt').hidden = false; $('blocoFim').hidden = true;
+  desenharPlacar();
+  if ($('chkLer').checked) AV.falar(e.texto + (temPergunta ? ' ' + e.pergunta : ''));
+  if (fim) return terminar();
+  if (!temPergunta){
+    votando = false;
+    if (comIpads) Rede.gravar(`salas/${sala}/estado`, {fase: 'espera', titulo: txt.titulo});
+    $('btnContinuar').onclick = avancar;
+    return;
+  }
+  $('perguntaEt').textContent = '🔮 ' + e.pergunta;
+  $('opcoesEt').innerHTML = e.opcoes.map((o, i) => `<button class="op op${i}" data-i="${i}"><span class="barra" style="width:0"></span>
+    <span class="conteudo"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o)}</span><span class="votos"></span></span></button>`).join('');
+  votando = true;
+  if (comIpads){
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'votacao', rodada, titulo: txt.titulo, texto: e.texto, imagem: e.imagem || '', opcoes: e.opcoes, pergunta: '🔮 ' + e.pergunta});
+    mostrarVotos();
+  } else $('statusEt').textContent = '✋ Quem acha que é a A? E a B? Depois clique em "Revelar".';
+  AV.tom(660, .12); AV.tom(880, .15, 'triangle', .14, .12);
+}
+function mostrarVotos(){
+  const e = txt.etapas[idx], g = grupos(), ids = AV.ordemGrupos(g), v = votosAtuais();
+  const cont = e.opcoes.map(() => []);
+  ids.forEach(id => { const i = v[id]; if (typeof i === 'number' && cont[i]) cont[i].push(g[id].emoji); });
+  const total = ids.filter(id => typeof v[id] === 'number').length;
+  document.querySelectorAll('#opcoesEt .op').forEach((el, i) => {
+    el.querySelector('.barra').style.width = (total ? cont[i].length / total * 100 : 0) + '%';
+    el.querySelector('.votos').textContent = cont[i].length ? `${cont[i].join(' ')} (${cont[i].length})` : '';
+  });
+  $('statusEt').textContent = ids.length ? `🗳️ ${total} de ${ids.length} equipes deram o palpite` + (total < ids.length ? ' • esperando…' : ' • todas votaram!') : 'Nenhuma equipe na sala.';
+}
+function revelar(){
+  if (!votando) return;
+  votando = false; clearTimeout(timerAuto);
+  const e = txt.etapas[idx], v = votosAtuais(), g = grupos();
+  const acertaram = comIpads ? AV.ordemGrupos(g).filter(id => v[id] === e.correta) : [];
+  acertaram.forEach(id => { pontos[id] = (pontos[id] || 0) + 1; });
+  document.querySelectorAll('#opcoesEt .op').forEach((el, k) => el.classList.add(k === e.correta ? 'certa' : 'outra'));
+  $('statusEt').textContent = comIpads ? (acertaram.length ? `🎯 Acertaram a previsão: ${acertaram.map(id => g[id].emoji).join(' ')} (+1 ponto)` : '🤔 Ninguém acertou desta vez!') : '';
+  $('explicaEt').textContent = e.explica ? '🔎 ' + e.explica : '';
+  if (comIpads) Rede.gravar(`salas/${sala}/estado`, {fase: 'resultado', rodada, titulo: txt.titulo, escolhida: e.correta, textoEscolhido: e.opcoes[e.correta],
+    rotulo: '📖 No texto, aconteceu:', msgAcerto: 'Vocês acertaram a previsão! +1 ponto 🎉', msgErro: 'Não foi dessa vez. Usem as pistas do texto! 🔎'});
+  AV.fanfarra(); if (e.explica) AV.falar(e.explica);
+  desenharPlacar();
+  $('btnRevelar').hidden = true; $('btnContinuar').hidden = false; $('btnContinuar').onclick = avancar;
+}
+function avancar(){
+  const e = txt.etapas[idx];
+  $('lidos').innerHTML += `<div class="lido">${AV.esc(e.texto)}</div>`; $('blocoLidos').hidden = false;
+  idx++; mostrarEtapa();
+}
+function terminar(){
+  votando = false;
+  $('acoesEt').hidden = true; $('blocoFim').hidden = false;
+  if (comIpads){
+    const g = grupos(), tot = {}; AV.ordemGrupos(g).forEach(id => { tot[id] = pontos[id] || 0; });
+    AV.desenharRanking($('rankingEt'), g, tot, null, true);
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', titulo: txt.titulo, msgFim: '📖 Fim do texto!', subFim: 'Olhem o telão para ver quem mais acertou as previsões 👀'});
+  } else $('rankingEt').innerHTML = '';
+  AV.fanfarra(); AV.confete();
+}
+$('btnComecar').onclick = () => { if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou. Começar mesmo assim?')) return; comecar(); };
+$('btnRevelar').onclick = revelar;
+$('btnOuvir').onclick = () => AV.falar(txt.etapas[idx].texto);
+$('btnLerTudo').onclick = () => AV.falar(txt.etapas.map(e => e.texto).join(' '));
+$('btnRecomecar').onclick = () => { if (comIpads) Rede.apagar(`salas/${sala}/votos`); comecar(); };
+function encerrar(){
+  if (comIpads && sala){
+    if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+    if (ouvinte) ouvinte.fechar();
+    Rede.apagar('salas/' + sala);
+  }
+  sala = null; arvore = {}; votando = false;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar; $('btnEncerrar2').onclick = encerrar;
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

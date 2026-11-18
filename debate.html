@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debate</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #temaBox{background:#fffdf6;border-radius:26px;padding:14px 24px;box-shadow:0 6px 0 #0001;margin:8px auto;max-width:1150px;text-align:center}
+  #temaImg{font-size:clamp(2.5rem,7vw,4.5rem);line-height:1.1}
+  #temaTexto{font-size:clamp(1.4rem,3.2vw,2.3rem);font-weight:bold;line-height:1.3}
+  #temaContexto{font-size:clamp(1rem,2vw,1.3rem);margin-top:6px}
+  .lados{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1150px;margin:10px auto}
+  .lado{border-radius:24px;color:#fff;padding:14px 18px;box-shadow:0 6px 0 #0002;transition:transform .3s,opacity .3s}
+  .lado h3{margin:0 0 4px;font-size:clamp(1.2rem,2.6vw,1.7rem)}
+  .lado p{margin:0;font-size:clamp(1.05rem,2.2vw,1.45rem);font-weight:bold}
+  .lado.A{background:#2f80ed}.lado.B{background:#e67e22}
+  .lado.vez{transform:scale(1.03);box-shadow:0 0 0 6px #fff,0 0 0 12px var(--amarelo)}
+  .lado.espera{opacity:.45}
+  #falaAtual{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;margin:6px 0}
+  #relogioDeb{text-align:center;font-size:clamp(3rem,10vw,6rem);font-weight:bold;font-variant-numeric:tabular-nums;line-height:1}
+  #relogioDeb.acabou{color:var(--vermelho);animation:pulsar 1s infinite}
+  @keyframes pulsar{50%{transform:scale(1.06)}}
+  #etapasDeb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+  #etapasDeb span{background:#fff;border-radius:999px;padding:5px 12px;font-weight:bold;font-size:.95rem;opacity:.5}
+  #etapasDeb span.atual{opacity:1;box-shadow:0 0 0 3px var(--amarelo)}
+  #etapasDeb span.feita{opacity:.85;text-decoration:line-through}
+  #dicasDeb{max-width:1150px;margin:8px auto;font-size:1.05rem;text-align:center}
+  #votacaoDeb{max-width:1150px;margin:10px auto;text-align:center}
+  #votacaoDeb h2{margin:6px 0}
+  .opVoto{border:none;border-radius:22px;color:#fff;padding:14px 20px;font-size:clamp(1.2rem,2.6vw,1.7rem);font-weight:bold;box-shadow:0 6px 0 #0002;
+    position:relative;overflow:hidden;width:100%;text-align:left;margin:6px 0;cursor:pointer}
+  .opVoto .barra{position:absolute;left:0;top:0;bottom:0;background:#ffffff38;transition:width .4s}
+  .opVoto .conteudo{position:relative;display:flex;gap:12px;align-items:center}
+  .opVoto .votos{margin-left:auto;white-space:nowrap;font-size:1.2rem}
+  .opVoto.v0{background:#2f80ed}.opVoto.v1{background:#e67e22}
+  .opVoto.vencedora{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde)}
+  #statusVoto{font-size:1.2rem;font-weight:bold;min-height:1.5em}
+  #comparacao{font-size:1.3rem;font-weight:bold;margin:8px 0}
+  @media (max-width:700px){.lados{grid-template-columns:1fr}}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🗣️ Debate com Votação</h1>
+  <div class="cartao">
+    <h2>1. Temas (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <label>Tema: <select id="selTema"></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Tempo de cada fala</h2>
+    <label>Abertura: <select id="tAbertura"><option value="60">1 min</option><option value="90">1 min 30</option><option value="120" selected>2 min</option><option value="180">3 min</option></select></label>
+    <label>Réplica: <select id="tReplica"><option value="60">1 min</option><option value="90" selected>1 min 30</option><option value="120">2 min</option></select></label>
+    <label>Considerações finais: <select id="tFinal"><option value="45">45 s</option><option value="60" selected>1 min</option><option value="90">1 min 30</option></select></label>
+  </div>
+  <div class="cartao">
+    <h2>3. Votação</h2>
+    <label><input type="radio" name="voto" value="ipads" checked> 📱 Cada equipe vota no seu iPad</label>
+    <label><input type="radio" name="voto" value="mao"> ✋ Levantando a mão (o professor clica no lado mais votado)</label>
+    <label><input type="checkbox" id="chkAntes" checked> Votar também ANTES do debate (para ver quem mudou de opinião)</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Divida a turma em dois lados (A e B). As equipes dos iPads são o júri: votam no lado que apresentou os melhores argumentos.</p>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <button id="btnCriar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">🗣️ Começar o debate</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<section id="tDebate" class="tela">
+  <div id="temaBox"><div id="temaImg"></div><div id="temaTexto"></div><div id="temaContexto" class="dica"></div></div>
+  <div class="lados">
+    <div class="lado A" id="ladoA"><h3>🅰️ Lado A</h3><p id="textoA"></p></div>
+    <div class="lado B" id="ladoB"><h3>🅱️ Lado B</h3><p id="textoB"></p></div>
+  </div>
+  <div id="etapasDeb"></div>
+  <div id="blocoFala">
+    <div id="falaAtual"></div>
+    <div id="relogioDeb"></div>
+    <div class="linha">
+      <button id="btnPlay" class="principal">▶️ Iniciar a fala</button>
+      <button id="btnMais">➕ 30 s</button>
+      <button id="btnProxFala">⏭️ Próxima fala</button>
+    </div>
+    <div id="dicasDeb" class="dica">💡 Bons argumentos usam <b>dados</b>, <b>exemplos</b>, <b>leis</b> e <b>especialistas</b>. Respondam ao argumento do outro lado, nunca à pessoa. Respeitem o tempo!</div>
+  </div>
+  <div id="votacaoDeb" hidden>
+    <h2 id="tituloVoto"></h2>
+    <div id="opcoesVoto"></div>
+    <div id="statusVoto"></div>
+    <div id="comparacao"></div>
+    <div class="linha">
+      <button id="btnEncerrarVoto" class="principal">✅ Encerrar a votação</button>
+      <button id="btnSeguir" class="principal" hidden>➡️ Continuar</button>
+    </div>
+  </div>
+  <div class="linha" id="acoesFim" hidden>
+    <button id="btnNovoTema">🔁 Outro tema</button>
+    <button id="btnEncerrar2">✖️ Encerrar</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+let dados = null, comIpads = true, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let tema = null, falas = [], fIdx = 0, restante = 0, rodando = false, ultimoTick = 0, timer = null, rodada = 0, votando = null, resultadoAntes = null;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.temas)) return null;
+  const temas = d.temas.filter(t => t && t.tema && t.ladoA && t.ladoB).map(t => ({tema: String(t.tema), ladoA: String(t.ladoA), ladoB: String(t.ladoB), imagem: t.imagem || '🗣️', contexto: String(t.contexto || '')}));
+  return temas.length ? {titulo: d.titulo || 'Debate', temas} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada tema precisa de "tema", "ladoA" e "ladoB".');
+  dados = x;
+  $('selTema').innerHTML = '<option value="-1">🎲 Sortear um tema</option>' + x.temas.map((t, i) => `<option value="${i}">${AV.esc(t.imagem + ' ' + t.tema)}</option>`).join('');
+  $('infoJson').textContent = `${x.titulo} • ${x.temas.length} temas` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'debate', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/debate-padrao.json', 'modelo-debate.json');
+document.querySelectorAll('input[name=voto]').forEach(r => r.onchange = () => { $('painelConexao').hidden = r.value !== 'ipads' || !r.checked; });
+
+$('btnCriar').onclick = () => {
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  comIpads = document.querySelector('input[name=voto]:checked').value === 'ipads';
+  if (!comIpads){ comecar(); return; }
+  if (sala){ irPara('sala'); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'caminho', estado: {fase: 'espera', titulo: dados.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    $('tituloSala').textContent = '🗣️ ' + dados.titulo;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', debate: 'tDebate'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'debate' && comIpads && votando) mostrarVotos();
+}
+function estadoIpads(e){ if (comIpads && sala) Rede.gravar(`salas/${sala}/estado`, e); }
+
+function comecar(){
+  const sel = +$('selTema').value;
+  tema = dados.temas[sel >= 0 ? sel : Math.floor(Math.random() * dados.temas.length)];
+  const a = +$('tAbertura').value, r = +$('tReplica').value, f = +$('tFinal').value;
+  falas = [{lado: 'A', nome: 'Abertura do Lado A', t: a}, {lado: 'B', nome: 'Abertura do Lado B', t: a},
+           {lado: 'A', nome: 'Réplica do Lado A', t: r}, {lado: 'B', nome: 'Réplica do Lado B', t: r},
+           {lado: 'A', nome: 'Considerações finais do Lado A', t: f}, {lado: 'B', nome: 'Considerações finais do Lado B', t: f}];
+  fIdx = 0; resultadoAntes = null;
+  $('temaImg').textContent = tema.imagem; $('temaTexto').textContent = tema.tema; $('temaContexto').textContent = tema.contexto;
+  $('textoA').textContent = tema.ladoA; $('textoB').textContent = tema.ladoB;
+  $('acoesFim').hidden = true; $('comparacao').textContent = '';
+  irPara('debate');
+  if ($('chkAntes').checked) abrirVotacao('antes'); else iniciarFalas();
+}
+function iniciarFalas(){
+  $('votacaoDeb').hidden = true; $('blocoFala').hidden = false;
+  estadoIpads({fase: 'espera', titulo: 'Debate: ' + tema.tema});
+  prepararFala();
+}
+function prepararFala(){
+  const f = falas[fIdx];
+  restante = f.t; rodando = false;
+  $('etapasDeb').innerHTML = falas.map((x, i) => `<span class="${i === fIdx ? 'atual' : i < fIdx ? 'feita' : ''}">${x.lado === 'A' ? '🅰️' : '🅱️'} ${AV.esc(x.nome.replace(/ do Lado [AB]$/, ''))}</span>`).join('');
+  $('falaAtual').textContent = (f.lado === 'A' ? '🅰️ ' : '🅱️ ') + f.nome;
+  $('ladoA').className = 'lado A ' + (f.lado === 'A' ? 'vez' : 'espera');
+  $('ladoB').className = 'lado B ' + (f.lado === 'B' ? 'vez' : 'espera');
+  $('btnPlay').textContent = '▶️ Iniciar a fala';
+  $('btnProxFala').textContent = fIdx + 1 < falas.length ? '⏭️ Próxima fala' : '🗳️ Ir para a votação';
+  desenharRelogio();
+}
+function desenharRelogio(){
+  $('relogioDeb').textContent = restante > 0 ? AV.mmss(restante) : '⏰ Tempo!';
+  $('relogioDeb').classList.toggle('acabou', restante <= 0);
+}
+function tick(){
+  if (!rodando) return;
+  const agora = Date.now(); restante -= (agora - ultimoTick) / 1000; ultimoTick = agora;
+  if (restante <= 10 && restante > 0 && Math.ceil(restante) !== Math.ceil(restante + .25)) AV.tique();
+  if (restante <= 0){ restante = 0; rodando = false; clearInterval(timer); AV.sirene(); $('btnPlay').textContent = '▶️ Iniciar a fala'; }
+  desenharRelogio();
+}
+$('btnPlay').onclick = () => {
+  if (restante <= 0) return;
+  rodando = !rodando;
+  if (rodando){ ultimoTick = Date.now(); clearInterval(timer); timer = setInterval(tick, 250); AV.tom(660, .12); }
+  else clearInterval(timer);
+  $('btnPlay').textContent = rodando ? '⏸️ Pausar' : '▶️ Continuar a fala';
+};
+$('btnMais').onclick = () => { restante += 30; desenharRelogio(); };
+$('btnProxFala').onclick = () => {
+  rodando = false; clearInterval(timer);
+  if (fIdx + 1 < falas.length){ fIdx++; prepararFala(); }
+  else abrirVotacao('depois');
+};
+
+// ---------- Votação ----------
+function opcoesVoto(){ return ['Lado A: ' + tema.ladoA, 'Lado B: ' + tema.ladoB]; }
+function abrirVotacao(qual){
+  votando = qual; rodada++;
+  $('blocoFala').hidden = true; $('votacaoDeb').hidden = false;
+  $('ladoA').className = 'lado A'; $('ladoB').className = 'lado B';
+  const pergunta = qual === 'antes' ? 'Antes do debate: com qual lado vocês concordam?' : 'Qual lado apresentou os MELHORES ARGUMENTOS?';
+  $('tituloVoto').textContent = (qual === 'antes' ? '📊 ' : '🏆 ') + pergunta;
+  $('opcoesVoto').innerHTML = opcoesVoto().map((o, i) => `<button class="opVoto v${i}" data-i="${i}"><span class="barra" style="width:0"></span><span class="conteudo"><span>${AV.esc(o)}</span><span class="votos"></span></span></button>`).join('');
+  $('opcoesVoto').querySelectorAll('.opVoto').forEach(b => b.onclick = () => { if (votando && !comIpads) fecharVotacao([+b.dataset.i === 0 ? 1 : 0, +b.dataset.i === 1 ? 1 : 0], true); });
+  $('btnEncerrarVoto').hidden = !comIpads; $('btnSeguir').hidden = true;
+  $('statusVoto').textContent = comIpads ? '' : '✋ Levantem a mão! Depois clique no lado mais votado.';
+  if (comIpads){ estadoIpads({fase: 'votacao', rodada, titulo: 'Debate: ' + tema.tema, texto: tema.tema, imagem: tema.imagem, opcoes: opcoesVoto(), pergunta}); mostrarVotos(); }
+  AV.tom(660, .12); AV.tom(880, .15, 'triangle', .14, .12);
+}
+function votosAtuais(){ return ((arvore.votos || {})['r' + rodada]) || {}; }
+function contagem(){
+  const g = grupos(), ids = AV.ordemGrupos(g), v = votosAtuais(), cont = [[], []];
+  ids.forEach(id => { const i = v[id]; if (i === 0 || i === 1) cont[i].push(g[id].emoji); });
+  return {cont, ids, total: cont[0].length + cont[1].length};
+}
+function mostrarVotos(){
+  const {cont, ids, total} = contagem();
+  document.querySelectorAll('#opcoesVoto .opVoto').forEach((el, i) => {
+    el.querySelector('.barra').style.width = (total ? cont[i].length / total * 100 : 0) + '%';
+    el.querySelector('.votos').textContent = cont[i].length ? `${cont[i].join(' ')} (${cont[i].length})` : '';
+  });
+  $('statusVoto').textContent = ids.length ? `🗳️ ${total} de ${ids.length} equipes votaram` + (total < ids.length ? ' • esperando…' : ' • todas votaram!') : 'Nenhuma equipe na sala.';
+}
+$('btnEncerrarVoto').onclick = () => { const {cont, total} = contagem(); if (!total) return AV.avisar('Ninguém votou ainda.'); fecharVotacao([cont[0].length, cont[1].length]); };
+function fecharVotacao(n, porMao){
+  const qual = votando; votando = null;
+  const venc = n[0] === n[1] ? -1 : (n[0] > n[1] ? 0 : 1);
+  document.querySelectorAll('#opcoesVoto .opVoto').forEach((el, i) => { if (i === venc) el.classList.add('vencedora'); });
+  const nomeVenc = venc < 0 ? 'Empate!' : (venc === 0 ? '🅰️ Lado A' : '🅱️ Lado B');
+  if (qual === 'antes'){
+    resultadoAntes = porMao ? null : n;
+    $('statusVoto').textContent = porMao ? 'Opinião inicial registrada!' : `📊 Antes do debate: A ${n[0]} × ${n[1]} B`;
+    estadoIpads({fase: 'resultado', rodada, escolhida: venc, textoEscolhido: venc < 0 ? 'Empate' : opcoesVoto()[venc], rotulo: '📊 Antes do debate, a maioria concorda com:', msgAcerto: 'Agora prestem atenção nos argumentos! 👂', msgErro: 'Agora prestem atenção nos argumentos! 👂'});
+    $('btnEncerrarVoto').hidden = true; $('btnSeguir').hidden = false; $('btnSeguir').textContent = '🗣️ Começar as falas'; $('btnSeguir').onclick = iniciarFalas;
+  } else {
+    $('statusVoto').textContent = venc < 0 ? '🤝 Empate! Os dois lados argumentaram bem.' : `🏆 Melhores argumentos: ${nomeVenc}` + (porMao ? '' : ` (A ${n[0]} × ${n[1]} B)`);
+    if (resultadoAntes) $('comparacao').textContent = `Antes: A ${resultadoAntes[0]} × ${resultadoAntes[1]} B  ➜  Depois: A ${n[0]} × ${n[1]} B` +
+      (resultadoAntes[0] !== n[0] ? ' • houve mudança de opinião! 🔄' : '');
+    estadoIpads({fase: 'resultado', rodada, escolhida: venc, textoEscolhido: venc < 0 ? 'Empate!' : opcoesVoto()[venc], rotulo: '🏆 Melhores argumentos:', msgAcerto: 'O lado em que vocês votaram venceu! 🎉', msgErro: 'Vocês votaram no outro lado. Debate é assim! 🤝'});
+    $('btnEncerrarVoto').hidden = true; $('btnSeguir').hidden = true; $('acoesFim').hidden = false;
+    AV.fanfarra(); AV.confete();
+  }
+}
+$('btnComecar').onclick = () => { if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou. Começar mesmo assim?')) return; comecar(); };
+$('btnNovoTema').onclick = () => { if (comIpads && sala) Rede.apagar(`salas/${sala}/votos`); irPara('config'); $('btnCriar').textContent = '▶️ Começar com outro tema'; };
+function encerrar(){
+  if (comIpads && sala){
+    if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+    if (ouvinte) ouvinte.fechar();
+    Rede.apagar('salas/' + sala);
+  }
+  sala = null; arvore = {}; votando = null; rodando = false; clearInterval(timer);
+  $('btnCriar').textContent = '▶️ Começar';
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar; $('btnEncerrar2').onclick = encerrar;
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marque no Texto</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #perguntaMq{font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;text-align:center;margin:6px auto 8px;max-width:1100px}
+  #folhaMq{background:#fffdf6;border-radius:24px;padding:16px 26px;box-shadow:0 6px 0 #0001;margin:6px auto;max-width:1100px;text-align:left}
+  #folhaMq h2{text-align:center;margin:0 0 8px}
+  #folhaMq p{font-size:clamp(1.15rem,2.5vw,1.65rem);line-height:1.7;margin:0 0 12px}
+  .frase{cursor:pointer;border-radius:8px;padding:2px 3px;transition:background .2s;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .frase:hover{background:#ffe9a8}
+  .frase.certa{background:#b9f0cf;box-shadow:0 0 0 2px var(--verde)}
+  .frase.errada{background:#ffc9c9;text-decoration:line-through}
+  .frase.mostrar{background:#b9f0cf;box-shadow:0 0 0 2px var(--verde);animation:piscaMq 1s 2}
+  @keyframes piscaMq{50%{background:#fff}}
+  #explicaMq{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1000px;margin:8px auto;min-height:1.4em}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🖍️ Marque no Texto</h1>
+  <div class="cartao">
+    <h2>1. Textos (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label><input type="checkbox" id="chkVoz" checked> Ler a pergunta em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">A pergunta aparece em cima do texto. A turma toca na <b>frase do texto que comprova a resposta</b>. Acertou de primeira = 2 pontos; na segunda = 1 ponto.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="barraEquipes" class="barraEquipes"></div>
+  <div class="dica" id="contadorMq" style="text-align:center"></div>
+  <div id="perguntaMq"></div>
+  <div id="folhaMq"></div>
+  <div id="explicaMq"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir a pergunta</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, tentativas = 0, resolvido = false;
+
+const limpo = t => String(t).replace(/\s+/g, ' ').trim().toLowerCase();
+// divide o texto em parágrafos e frases
+function frasesDe(texto){
+  return String(texto).split(/\n+/).map(p => p.trim()).filter(Boolean)
+    .map(p => p.match(/[^.!?…]+(?:[.!?…]+["”»)]*|$)/g).map(f => f.trim()).filter(Boolean));
+}
+function normalizar(d){
+  if (!d || !Array.isArray(d.textos)) return null;
+  const textos = d.textos.filter(t => t && t.texto && Array.isArray(t.perguntas)).map(t => ({
+    titulo: String(t.titulo || ''), imagem: t.imagem || '', paragrafos: frasesDe(t.texto),
+    perguntas: t.perguntas.filter(q => q && q.pergunta && q.evidencia).map(q => ({pergunta: String(q.pergunta), evidencia: String(q.evidencia), explica: String(q.explica || '')}))
+  })).filter(t => t.perguntas.length);
+  return textos.length ? {titulo: d.titulo || 'Marque no texto', textos} : null;
+}
+function prova(frase, evid){ const f = limpo(frase), e = limpo(evid); return f.includes(e) || e.includes(f); }
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada texto precisa de "texto" e "perguntas" (com "pergunta" e "evidencia").');
+  dados = x;
+  // confere se cada evidência aparece no texto
+  let quebradas = 0;
+  x.textos.forEach(t => t.perguntas.forEach(q => { if (!t.paragrafos.flat().some(f => prova(f, q.evidencia))) quebradas++; }));
+  const nq = x.textos.reduce((s, t) => s + t.perguntas.length, 0);
+  $('infoJson').textContent = `${x.titulo} • ${x.textos.length} textos • ${nq} perguntas` + (quebradas ? ` • ⚠️ ${quebradas} evidência(s) não encontrada(s) no texto` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'marque', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/marque-padrao.json', 'modelo-marque-no-texto.json');
+
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  fila = [];
+  dados.textos.forEach(t => t.perguntas.forEach(q => fila.push({t, q})));
+  total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+function proxima(){
+  if (!fila.length) return fim();
+  if (n > 0) placar.proxima();
+  atual = fila.shift(); n++; tentativas = 0; resolvido = false;
+  $('contadorMq').textContent = `${n} de ${total}`;
+  $('perguntaMq').textContent = placar.prefixo() + '❓ ' + atual.q.pergunta;
+  const t = atual.t;
+  let k = 0;
+  $('folhaMq').innerHTML = (t.titulo ? `<h2>${AV.esc(t.imagem)} ${AV.esc(t.titulo)}</h2>` : '') +
+    t.paragrafos.map(p => '<p>' + p.map(f => `<span class="frase" data-k="${k++}">${AV.esc(f)}</span>`).join(' ') + '</p>').join('');
+  $('folhaMq').querySelectorAll('.frase').forEach(s => s.onclick = () => tocar(s));
+  $('explicaMq').textContent = '👆 Toque na frase do texto que comprova a resposta.';
+  $('btnProxima').hidden = true;
+  if ($('chkVoz').checked) AV.falar(atual.q.pergunta);
+}
+function tocar(s){
+  if (resolvido || s.classList.contains('errada')) return;
+  if (prova(s.textContent, atual.q.evidencia)){
+    resolvido = true; s.classList.add('certa');
+    const pts = tentativas === 0 ? 2 : 1; placar.pontuar(pts);
+    $('explicaMq').textContent = `✅ Isso! +${pts} ponto${pts > 1 ? 's' : ''}. ${atual.q.explica}`;
+    AV.fanfarra(); AV.confete(); if ($('chkVoz').checked && atual.q.explica) AV.falar(atual.q.explica);
+    terminarPergunta();
+  } else {
+    tentativas++; s.classList.add('errada'); AV.erro();
+    if (tentativas >= 2){
+      resolvido = true;
+      $('folhaMq').querySelectorAll('.frase').forEach(x => { if (prova(x.textContent, atual.q.evidencia)) x.classList.add('mostrar'); });
+      $('explicaMq').textContent = '💡 A prova está na frase destacada. ' + atual.q.explica;
+      terminarPergunta();
+    } else $('explicaMq').textContent = '❌ Essa frase não comprova a resposta. Tentem outra!';
+  }
+}
+function terminarPergunta(){ $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado'; }
+function fim(){ placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnProxima').onclick = proxima;
+$('btnOuvir').onclick = () => atual && AV.falar(atual.q.pergunta);
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

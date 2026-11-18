@@ -1,0 +1,137 @@
+{
+  "titulo": "Interpretação de textos do dia a dia (EJA)",
+  "emoji": "🧾",
+  "instrucao": "Leia o documento e responda",
+  "rodadas": [
+    {
+      "destaque": "Até quando a conta deve ser paga sem multa?",
+      "opcoes": [
+        "15 de junho",
+        "31 de maio",
+        "15 de maio",
+        "em 210 dias"
+      ],
+      "correta": "15 de junho",
+      "explica": "O vencimento é 15/06.",
+      "imagem": "📅",
+      "texto": "CONTA DE ENERGIA — Mês de referência: maio\nConsumo: 210 kWh\nValor a pagar: R$ 168,40\nVencimento: 15/06\nBandeira tarifária: AMARELA (custo extra por kWh consumido)\nApós o vencimento: multa de 2% + juros"
+    },
+    {
+      "destaque": "A bandeira amarela indica que:",
+      "opcoes": [
+        "a energia ficou um pouco mais cara naquele mês",
+        "a conta está atrasada",
+        "o consumo foi zero",
+        "houve desconto"
+      ],
+      "correta": "a energia ficou um pouco mais cara naquele mês",
+      "explica": "O próprio documento explica: custo extra por kWh consumido.",
+      "imagem": "🟡",
+      "texto": "CONTA DE ENERGIA — Mês de referência: maio\nConsumo: 210 kWh\nValor a pagar: R$ 168,40\nVencimento: 15/06\nBandeira tarifária: AMARELA (custo extra por kWh consumido)\nApós o vencimento: multa de 2% + juros"
+    },
+    {
+      "destaque": "Se a conta for paga depois do vencimento:",
+      "opcoes": [
+        "haverá multa e juros",
+        "o valor diminui",
+        "não muda nada",
+        "a conta é cancelada"
+      ],
+      "correta": "haverá multa e juros",
+      "explica": "\"Após o vencimento: multa de 2% + juros.\"",
+      "imagem": "⚠️",
+      "texto": "CONTA DE ENERGIA — Mês de referência: maio\nConsumo: 210 kWh\nValor a pagar: R$ 168,40\nVencimento: 15/06\nBandeira tarifária: AMARELA (custo extra por kWh consumido)\nApós o vencimento: multa de 2% + juros"
+    },
+    {
+      "destaque": "Para concorrer à vaga, é OBRIGATÓRIO:",
+      "opcoes": [
+        "ter o ensino fundamental completo",
+        "ter 6 meses de experiência",
+        "trabalhar aos domingos",
+        "ter carro"
+      ],
+      "correta": "ter o ensino fundamental completo",
+      "explica": "A experiência é \"desejável\" (ajuda, mas não é exigida).",
+      "imagem": "👩‍🍳",
+      "texto": "VAGA: Auxiliar de cozinha\nRequisitos: ensino fundamental completo; experiência de 6 meses (desejável)\nHorário: segunda a sábado, das 7h às 15h\nSalário: R$ 1.800 + vale-transporte + refeição\nInteressados: enviar currículo para o e-mail do restaurante até 20/08"
+    },
+    {
+      "destaque": "A palavra \"desejável\" indica que a experiência:",
+      "opcoes": [
+        "ajuda, mas não é obrigatória",
+        "é obrigatória",
+        "é proibida",
+        "precisa ser de 2 anos"
+      ],
+      "correta": "ajuda, mas não é obrigatória",
+      "explica": "Desejável = seria bom ter.",
+      "imagem": "🤔",
+      "texto": "VAGA: Auxiliar de cozinha\nRequisitos: ensino fundamental completo; experiência de 6 meses (desejável)\nHorário: segunda a sábado, das 7h às 15h\nSalário: R$ 1.800 + vale-transporte + refeição\nInteressados: enviar currículo para o e-mail do restaurante até 20/08"
+    },
+    {
+      "destaque": "Como o candidato deve se inscrever?",
+      "opcoes": [
+        "enviando o currículo por e-mail até 20/08",
+        "indo ao restaurante no sábado",
+        "ligando para o gerente",
+        "pelo aplicativo do banco"
+      ],
+      "correta": "enviando o currículo por e-mail até 20/08",
+      "explica": "\"Interessados: enviar currículo para o e-mail do restaurante até 20/08.\"",
+      "imagem": "📧",
+      "texto": "VAGA: Auxiliar de cozinha\nRequisitos: ensino fundamental completo; experiência de 6 meses (desejável)\nHorário: segunda a sábado, das 7h às 15h\nSalário: R$ 1.800 + vale-transporte + refeição\nInteressados: enviar currículo para o e-mail do restaurante até 20/08"
+    },
+    {
+      "destaque": "Se o aluguel for pago no dia 10, o inquilino pagará:",
+      "opcoes": [
+        "R$ 990,00 (com multa de 10%)",
+        "R$ 900,00",
+        "R$ 810,00",
+        "R$ 1.800,00"
+      ],
+      "correta": "R$ 990,00 (com multa de 10%)",
+      "explica": "10% de 900 = 90. 900 + 90 = 990.",
+      "imagem": "🏠",
+      "texto": "CLÁUSULA 3ª — O aluguel mensal é de R$ 900,00, a ser pago até o dia 5 de cada mês.\nCLÁUSULA 4ª — O atraso no pagamento implicará multa de 10% sobre o valor do aluguel.\nCLÁUSULA 7ª — É proibido sublocar o imóvel sem autorização por escrito do proprietário."
+    },
+    {
+      "destaque": "\"Sublocar\" significa:",
+      "opcoes": [
+        "alugar o imóvel para outra pessoa",
+        "vender o imóvel",
+        "reformar o imóvel",
+        "sair do imóvel"
+      ],
+      "correta": "alugar o imóvel para outra pessoa",
+      "explica": "SUB + LOCAR: quem já aluga passa a alugar para outra pessoa.",
+      "imagem": "🔑",
+      "texto": "CLÁUSULA 3ª — O aluguel mensal é de R$ 900,00, a ser pago até o dia 5 de cada mês.\nCLÁUSULA 4ª — O atraso no pagamento implicará multa de 10% sobre o valor do aluguel.\nCLÁUSULA 7ª — É proibido sublocar o imóvel sem autorização por escrito do proprietário."
+    },
+    {
+      "destaque": "Quantos comprimidos um adulto pode tomar, no máximo, por dia?",
+      "opcoes": [
+        "4",
+        "6",
+        "1",
+        "24"
+      ],
+      "correta": "4",
+      "explica": "\"Não ultrapasse 4 comprimidos por dia.\"",
+      "imagem": "💊",
+      "texto": "INDICAÇÕES: alívio de dores de cabeça e febre.\nPOSOLOGIA: adultos, 1 comprimido a cada 6 horas. Não ultrapasse 4 comprimidos por dia.\nCONTRAINDICAÇÕES: pessoas com problemas no fígado.\nATENÇÃO: mantenha fora do alcance de crianças."
+    },
+    {
+      "destaque": "Quem NÃO deve usar o remédio?",
+      "opcoes": [
+        "pessoas com problemas no fígado",
+        "adultos com febre",
+        "pessoas com dor de cabeça",
+        "quem toma a cada 6 horas"
+      ],
+      "correta": "pessoas com problemas no fígado",
+      "explica": "Contraindicação = quem não deve usar.",
+      "imagem": "🚫",
+      "texto": "INDICAÇÕES: alívio de dores de cabeça e febre.\nPOSOLOGIA: adultos, 1 comprimido a cada 6 horas. Não ultrapasse 4 comprimidos por dia.\nCONTRAINDICAÇÕES: pessoas com problemas no fígado.\nATENÇÃO: mantenha fora do alcance de crianças."
+    }
+  ]
+}

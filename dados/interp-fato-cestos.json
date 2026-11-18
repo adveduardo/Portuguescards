@@ -1,0 +1,67 @@
+{
+  "titulo": "Cestos: fato ou opinião",
+  "cestos": [
+    {
+      "id": "fato",
+      "nome": "Fato",
+      "emoji": "📏",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "opiniao",
+      "nome": "Opinião",
+      "emoji": "💭",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "O Brasil tem 26 estados e o Distrito Federal.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "A água ferve a 100 °C ao nível do mar.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "A escola abriu inscrições para o curso de informática.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "A vacina passou por testes antes de ser aprovada.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "A partida terminou 2 a 1.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "A biblioteca fecha às 18h.",
+      "cesto": "fato"
+    },
+    {
+      "palavra": "O Rio de Janeiro é a cidade mais bonita do mundo.",
+      "cesto": "opiniao"
+    },
+    {
+      "palavra": "Este é o melhor filme do ano.",
+      "cesto": "opiniao"
+    },
+    {
+      "palavra": "Estudar de manhã é muito mais fácil.",
+      "cesto": "opiniao"
+    },
+    {
+      "palavra": "Todo adolescente é preguiçoso.",
+      "cesto": "opiniao"
+    },
+    {
+      "palavra": "A comida da cantina está deliciosa hoje.",
+      "cesto": "opiniao"
+    },
+    {
+      "palavra": "Matemática é a matéria mais chata.",
+      "cesto": "opiniao"
+    }
+  ]
+}

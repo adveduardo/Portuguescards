@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escrita em Equipe</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topoEscr{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  #propostaBox{background:#fffdf6;border-radius:24px;padding:14px 24px;box-shadow:0 6px 0 #0001;margin:8px auto;max-width:1100px;text-align:center}
+  #propostaBox .img{font-size:clamp(2.5rem,7vw,4.5rem);line-height:1.1}
+  #propostaTexto{font-size:clamp(1.3rem,3vw,2.1rem);font-weight:bold;line-height:1.35}
+  #relogioEscr{font-size:clamp(2.5rem,8vw,5rem);font-weight:bold;text-align:center;font-variant-numeric:tabular-nums}
+  #relogioEscr.acabou{color:var(--vermelho);animation:pulsar 1s infinite}
+  @keyframes pulsar{50%{transform:scale(1.06)}}
+  #statusEquipes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+  .stEq{color:#fff;border-radius:18px;padding:10px 16px;font-weight:bold;font-size:1.2rem;box-shadow:0 4px 0 #0002;min-width:170px;text-align:center}
+  .stEq small{display:block;font-size:.95rem;opacity:.95;font-weight:normal}
+  .stEq.enviou{outline:4px solid #fff;box-shadow:0 0 0 8px var(--verde)}
+  #folha{background:#fffdf6;border-radius:24px;padding:18px 28px;box-shadow:0 6px 0 #0001;margin:10px auto;max-width:1100px;text-align:left}
+  #folha h2{text-align:center;margin:0 0 10px}
+  .trecho{border-left:8px solid #ccd;border-radius:10px;padding:8px 14px;margin:8px 0;font-size:clamp(1.15rem,2.4vw,1.6rem);line-height:1.5;background:#fff;white-space:pre-line}
+  .trecho .autor{display:inline-block;color:#fff;border-radius:999px;padding:1px 10px;font-size:.85rem;font-weight:bold;margin-bottom:4px}
+  .trecho.inicio{background:#f1f3f8;font-style:italic}
+  .trecho.vazio{opacity:.5;font-style:italic}
+  .trecho .parte{display:block;font-weight:bold;font-size:.95rem;opacity:.7;text-transform:uppercase;letter-spacing:.5px}
+  .alternativa{margin-left:28px;opacity:.92}
+  #navLeitura{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+  #contLeitura{font-weight:bold;font-size:1.2rem}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>✍️ Escrita em Equipe</h1>
+  <div class="cartao">
+    <h2>1. Atividade (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <label>Proposta: <select id="selProposta"></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Tempo</h2>
+    <label>Tempo de cada rodada:
+      <select id="selTempo"><option value="180">3 min</option><option value="300">5 min</option><option value="480">8 min</option><option value="600">10 min</option><option value="900">15 min</option><option value="1200">20 min</option><option value="0">sem limite</option></select>
+    </label>
+    <label id="blocoRodadas">Rodadas (história em corrente):
+      <select id="selRodadas"><option value="0">uma por equipe</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>
+    </label>
+    <p class="dica" id="explicaModo"></p>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <p class="dica" style="text-align:center">Esta atividade precisa dos iPads ou Chromebooks: cada equipe escreve no seu aparelho.</p>
+  <button id="btnCriar" class="principal">▶️ Criar a sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">✍️ Começar a escrever</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ ESCRITA ============ -->
+<section id="tEscrita" class="tela">
+  <div class="topoEscr">
+    <h2 id="tituloEscr" style="margin:4px 0;text-align:left"></h2>
+    <div class="dica" id="infoEscr"></div>
+  </div>
+  <div id="propostaBox"><div class="img" id="propostaImg"></div><div id="propostaTexto"></div><p class="dica" id="propostaDica"></p></div>
+  <div id="relogioEscr"></div>
+  <div id="statusEquipes"></div>
+  <div class="linha">
+    <button id="btnMaisTempo">➕ 1 min</button>
+    <button id="btnRecolher" class="principal">⏭️ Recolher os textos</button>
+    <button id="btnEncerrar2">✖️ Encerrar</button>
+  </div>
+</section>
+
+<!-- ============ LEITURA ============ -->
+<section id="tLeitura" class="tela">
+  <div id="folha"></div>
+  <div id="navLeitura">
+    <button id="btnAnterior">◀️ Anterior</button>
+    <span id="contLeitura"></span>
+    <button id="btnProximo">Próximo ▶️</button>
+  </div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ler em voz alta</button>
+    <button id="btnBaixar">💾 Baixar todos os textos</button>
+    <button id="btnNova">🔁 Nova atividade</button>
+    <button id="btnEncerrar3">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+
+let dados = null, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let atividade = null;          // {modo, proposta, equipes, rodadasTotal, k, textos, tempo}
+let rodadaGlobal = 0, fimRodada = 0, extra = 0, timer = null, avisouFim = false, leituraIdx = 0;
+
+// ---------- JSON ----------
+function normalizar(d){
+  if (!d || !Array.isArray(d.propostas) || !d.propostas.length) return null;
+  const modo = d.modo === 'partes' ? 'partes' : 'corrente';
+  const propostas = d.propostas.map(p => typeof p === 'string' ? {texto: p} : p).filter(p => p && (p.texto || p.inicio || p.tema))
+    .map(p => ({titulo: String(p.titulo || ''), texto: String(p.texto || p.inicio || p.tema), imagem: p.imagem || '', apoio: p.apoio ? String(p.apoio) : ''}));
+  const partes = (Array.isArray(d.partes) && d.partes.length ? d.partes : [
+    {titulo: 'Introdução', instrucao: 'Apresentem o tema e a tese (a opinião que será defendida).'},
+    {titulo: 'Desenvolvimento 1', instrucao: 'Defendam a tese com um argumento e um repertório (dado, lei, fato, autor...).'},
+    {titulo: 'Desenvolvimento 2', instrucao: 'Apresentem outro argumento, com exemplo ou repertório.'},
+    {titulo: 'Conclusão', instrucao: 'Retomem a tese e façam uma proposta de intervenção: agente, ação, modo, finalidade e detalhamento.'}])
+    .map((p, i) => ({id: 'p' + i, titulo: String(p.titulo || 'Parte ' + (i + 1)), instrucao: String(p.instrucao || '')}));
+  if (!propostas.length) return null;
+  return {titulo: d.titulo || 'Escrita em equipe', modo, propostas, partes, tempo: +d.tempo || 300,
+    instrucao: d.instrucao || 'Continuem a história em 2 a 4 frases. Vocês só podem ver o último trecho!',
+    instrucaoFinal: d.instrucaoFinal || 'Esta é a última rodada: escrevam o FINAL da história!'};
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: falta a lista "propostas".');
+  dados = x;
+  $('selProposta').innerHTML = '<option value="-1">🎲 Sortear uma proposta</option>' +
+    x.propostas.map((p, i) => `<option value="${i}">${AV.esc((p.imagem ? p.imagem + ' ' : '') + (p.titulo || p.texto).slice(0, 80))}</option>`).join('');
+  const t = [...$('selTempo').options].find(o => +o.value === x.tempo); if (t) $('selTempo').value = t.value;
+  $('blocoRodadas').hidden = x.modo !== 'corrente';
+  $('explicaModo').textContent = x.modo === 'corrente'
+    ? '🔗 História em corrente: todas as histórias começam do mesmo início. A cada rodada, cada equipe continua uma história diferente, vendo só o último trecho dela. No final, o telão revela as histórias completas.'
+    : `🧩 Texto a várias mãos: cada equipe escreve uma parte do mesmo texto (${x.partes.map(p => p.titulo).join(', ')}). No final, o telão monta o texto completo.`;
+  $('infoJson').textContent = `${x.titulo} • ${x.propostas.length} propostas • ${x.modo === 'corrente' ? 'história em corrente' : 'texto a várias mãos'}` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'escrita', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/escrita-padrao.json', 'modelo-escrita-em-equipe.json');
+
+// ---------- Sala ----------
+$('btnCriar').onclick = () => {
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  if (sala){ irPara('sala'); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'escrita', estado: {fase: 'espera', titulo: dados.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){
+  fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', escrita: 'tEscrita', leitura: 'tLeitura'}[f]);
+  if (f === 'sala'){ $('tituloSala').textContent = '✍️ ' + dados.titulo; Rede.gravar(`salas/${sala}/estado`, {fase: 'espera', titulo: dados.titulo}); }
+  aoMudar();
+}
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'escrita') desenharStatus();
+}
+
+// ---------- Atividade ----------
+function ultimoTrecho(t){
+  const frases = String(t).trim().split(/(?<=[.!?…])\s+/).filter(Boolean);
+  let u = frases.length ? frases[frases.length - 1] : String(t).trim();
+  if (u.length > 240) u = u.slice(-240);
+  return '… ' + u;
+}
+function equipeInfo(id){ return grupos()[id] || (Rede.EQUIPES.find(e => e.id === id)) || {nome: id, emoji: '✏️', cor: '#7f8c8d'}; }
+
+$('btnComecar').onclick = () => {
+  const ids = AV.ordemGrupos(grupos());
+  if (!ids.length) return AV.avisar('Nenhuma equipe entrou ainda. Peça para os grupos entrarem com o código da sala.');
+  const sel = +$('selProposta').value;
+  const proposta = dados.propostas[sel >= 0 ? sel : Math.floor(Math.random() * dados.propostas.length)];
+  const n = ids.length;
+  atividade = {modo: dados.modo, proposta, equipes: ids, k: 0, tempo: +$('selTempo').value,
+    rodadasTotal: dados.modo === 'corrente' ? (+$('selRodadas').value || n) : 1,
+    textos: dados.modo === 'corrente' ? ids.map((id, j) => ({titulo: `História ${j + 1}`, trechos: []})) : null};
+  $('tituloEscr').textContent = '✍️ ' + dados.titulo;
+  $('propostaImg').textContent = proposta.imagem;
+  $('propostaTexto').textContent = (dados.modo === 'corrente' ? 'Início: ' : 'Tema: ') + proposta.texto;
+  $('propostaDica').textContent = proposta.apoio || (dados.modo === 'corrente' ? 'Cada equipe só vê o último trecho da história que recebeu!' : '');
+  irPara('escrita');
+  iniciarRodada();
+};
+function tarefasDaRodada(){
+  const a = atividade, ids = a.equipes, n = ids.length, t = {};
+  if (a.modo === 'corrente'){
+    ids.forEach((id, i) => {
+      const j = (i + a.k) % n, h = a.textos[j];
+      const ultimo = h.trechos.length ? h.trechos[h.trechos.length - 1].texto : '';
+      const final = a.k === a.rodadasTotal - 1 && a.rodadasTotal > 1;
+      t[id] = [{id: 'h' + j, titulo: `📖 ${h.titulo}`, instrucao: a.k === 0 ? 'Comecem a história a partir deste início (2 a 4 frases).' : (final ? dados.instrucaoFinal : dados.instrucao),
+        contexto: a.k === 0 || !ultimo ? a.proposta.texto : ultimoTrecho(ultimo)}];
+    });
+  } else {
+    const P = dados.partes.length;
+    ids.forEach(id => { t[id] = []; });
+    dados.partes.forEach((p, i) => t[ids[i % n]].push({id: p.id, titulo: p.titulo, instrucao: p.instrucao, contexto: 'Tema: ' + a.proposta.texto + (a.proposta.apoio ? '\n' + a.proposta.apoio : '')}));
+    // mais equipes do que partes: as que sobrarem escrevem uma versão alternativa
+    ids.forEach((id, i) => { if (i >= P){ const p = dados.partes[i % P]; t[id].push({id: p.id, titulo: p.titulo + ' (outra versão)', instrucao: p.instrucao, contexto: 'Tema: ' + a.proposta.texto}); } });
+  }
+  return t;
+}
+function iniciarRodada(){
+  rodadaGlobal++; extra = 0; avisouFim = false;
+  const a = atividade;
+  a.tarefas = tarefasDaRodada();
+  $('infoEscr').textContent = `Sala ${sala}` + (a.modo === 'corrente' ? ` • Rodada ${a.k + 1} de ${a.rodadasTotal}` : '');
+  $('btnRecolher').textContent = a.k + 1 >= a.rodadasTotal ? '📖 Recolher e ler os textos' : '⏭️ Recolher e ir para a próxima rodada';
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'escrevendo', rodada: rodadaGlobal, titulo: dados.titulo, tempo: a.tempo, extra: 0, tarefas: a.tarefas});
+  fimRodada = a.tempo ? Date.now() + a.tempo * 1000 : 0;
+  clearInterval(timer); timer = setInterval(relogio, 250); relogio();
+  AV.tom(660, .12); AV.tom(880, .15, 'triangle', .14, .12);
+  desenharStatus();
+}
+function relogio(){
+  const el = $('relogioEscr');
+  if (!fimRodada){ el.textContent = '⏳ sem limite de tempo'; el.classList.remove('acabou'); return; }
+  const s = Math.max(0, (fimRodada - Date.now()) / 1000);
+  el.textContent = s > 0 ? '⏳ ' + AV.mmss(s) : '⏰ Tempo!';
+  el.classList.toggle('acabou', s <= 0);
+  if (s <= 0 && !avisouFim){ avisouFim = true; AV.sirene(); }
+}
+function rascunhos(){ return ((arvore.escrita || {})['r' + rodadaGlobal]) || {}; }
+function desenharStatus(){
+  if (!atividade || !atividade.tarefas) return;
+  const r = rascunhos();
+  let enviaram = 0;
+  const ids = atividade.equipes;
+  $('statusEquipes').innerHTML = ids.map(id => {
+    const g = equipeInfo(id), tarefas = atividade.tarefas[id] || [], meu = r[id] || {};
+    const env = tarefas.length && tarefas.every(t => meu[t.id] && meu[t.id].enviado);
+    if (env) enviaram++;
+    const palavras = tarefas.reduce((s, t) => s + ((meu[t.id] && meu[t.id].texto || '').trim().split(/\s+/).filter(Boolean).length), 0);
+    const tarefa = tarefas.map(t => t.titulo.replace(/^📖 /, '')).join(' + ');
+    return `<div class="stEq ${env ? 'enviou' : ''}" style="background:${g.cor}">${AV.esc(g.emoji + ' ' + g.nome)}<small>${AV.esc(tarefa)}</small><small>${env ? '✅ enviou' : '✍️ escrevendo'} • ${palavras} palavra${palavras === 1 ? '' : 's'}</small></div>`;
+  }).join('');
+  if (enviaram === ids.length && ids.length) $('relogioEscr').textContent = '✅ Todas as equipes enviaram!';
+}
+$('btnMaisTempo').onclick = () => {
+  if (!atividade || !atividade.tempo) return;
+  extra += 60; fimRodada = Math.max(fimRodada, Date.now()) + 60000; avisouFim = false;
+  Rede.atualizar(`salas/${sala}/estado`, {extra});
+  relogio();
+};
+$('btnRecolher').onclick = () => {
+  if (!atividade) return;
+  const r = rascunhos(), faltam = atividade.equipes.filter(id => !(atividade.tarefas[id] || []).every(t => r[id] && r[id][t.id] && r[id][t.id].enviado));
+  if (faltam.length && !confirm(`${faltam.length} equipe(s) ainda não enviaram. Recolher o que já escreveram?`)) return;
+  $('btnRecolher').disabled = true;
+  Rede.atualizar(`salas/${sala}/estado`, {fase: 'recolhendo'});
+  $('relogioEscr').textContent = '📥 Recolhendo os textos…';
+  clearInterval(timer);
+  // espera os iPads salvarem o último rascunho
+  setTimeout(() => Rede.ler(`salas/${sala}/escrita/r${rodadaGlobal}`, (err, v) => {
+    $('btnRecolher').disabled = false;
+    guardarRodada(v || {});
+    atividade.k++;
+    if (atividade.k < atividade.rodadasTotal) iniciarRodada();
+    else abrirLeitura();
+  }), 1800);
+};
+function guardarRodada(v){
+  const a = atividade;
+  if (a.modo === 'corrente'){
+    a.equipes.forEach(id => (a.tarefas[id] || []).forEach(t => {
+      const j = +t.id.slice(1), texto = ((v[id] || {})[t.id] || {}).texto || '';
+      a.textos[j].trechos.push({eq: id, texto: texto.trim()});
+    }));
+  } else {
+    a.redacao = dados.partes.map(p => ({titulo: p.titulo, versoes: []}));
+    a.equipes.forEach(id => (a.tarefas[id] || []).forEach(t => {
+      const i = dados.partes.findIndex(p => p.id === t.id), texto = ((v[id] || {})[t.id] || {}).texto || '';
+      if (i >= 0) a.redacao[i].versoes.push({eq: id, texto: texto.trim()});
+    }));
+  }
+}
+
+// ---------- Leitura ----------
+function textosProntos(){
+  const a = atividade;
+  if (a.modo === 'corrente') return a.textos.map(h => ({titulo: h.titulo, blocos: [{inicio: true, texto: a.proposta.texto}].concat(h.trechos.map(t => ({eq: t.eq, texto: t.texto})))}));
+  const blocos = [];
+  a.redacao.forEach(p => p.versoes.forEach((v, i) => blocos.push({parte: p.titulo + (i ? ' (outra versão)' : ''), eq: v.eq, texto: v.texto, alternativa: i > 0})));
+  return [{titulo: 'Tema: ' + a.proposta.texto, blocos}];
+}
+function abrirLeitura(){
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'lendo', titulo: dados.titulo});
+  leituraIdx = 0; irPara('leitura'); desenharLeitura();
+  AV.fanfarra(); AV.confete();
+}
+function desenharLeitura(){
+  const ts = textosProntos(), t = ts[leituraIdx];
+  $('folha').innerHTML = `<h2>${AV.esc(t.titulo)}</h2>` + t.blocos.map(b => {
+    if (b.inicio) return `<div class="trecho inicio"><span class="parte">Início</span>${AV.esc(b.texto)}</div>`;
+    const g = equipeInfo(b.eq);
+    return `<div class="trecho ${b.texto ? '' : 'vazio'} ${b.alternativa ? 'alternativa' : ''}" style="border-left-color:${g.cor}">` +
+      (b.parte ? `<span class="parte">${AV.esc(b.parte)}</span>` : '') +
+      `<span class="autor" style="background:${g.cor}">${AV.esc(g.emoji + ' ' + g.nome)}</span><br>${b.texto ? AV.esc(b.texto) : '(a equipe não escreveu nada)'}</div>`;
+  }).join('');
+  $('contLeitura').textContent = ts.length > 1 ? `${leituraIdx + 1} de ${ts.length}` : '';
+  $('btnAnterior').hidden = $('btnProximo').hidden = ts.length < 2;
+}
+$('btnAnterior').onclick = () => { const n = textosProntos().length; leituraIdx = (leituraIdx - 1 + n) % n; desenharLeitura(); };
+$('btnProximo').onclick = () => { const n = textosProntos().length; leituraIdx = (leituraIdx + 1) % n; desenharLeitura(); };
+$('btnOuvir').onclick = () => { const t = textosProntos()[leituraIdx]; AV.falar(t.blocos.map(b => b.texto).filter(Boolean).join(' ')); };
+$('btnBaixar').onclick = () => {
+  const linhas = [dados.titulo, ''];
+  textosProntos().forEach(t => {
+    linhas.push('== ' + t.titulo + ' ==');
+    t.blocos.forEach(b => linhas.push((b.inicio ? '[Início] ' : `[${b.parte ? b.parte + ' – ' : ''}${equipeInfo(b.eq).nome}] `) + (b.texto || '(vazio)')));
+    linhas.push('');
+  });
+  const url = URL.createObjectURL(new Blob([linhas.join('\n')], {type: 'text/plain;charset=utf-8'}));
+  const a = document.createElement('a'); a.href = url; a.download = 'textos-da-turma.txt'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+};
+$('btnNova').onclick = () => { atividade = null; clearInterval(timer); irPara('config'); $('btnCriar').textContent = '▶️ Voltar para a sala'; };
+
+function encerrar(){
+  if (sala){
+    if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+    if (ouvinte) ouvinte.fechar();
+    Rede.apagar('salas/' + sala);
+  }
+  sala = null; arvore = {}; atividade = null; clearInterval(timer);
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  $('btnCriar').textContent = '▶️ Criar a sala';
+  irPara('config');
+}
+$('btnEncerrar').onclick = encerrar; $('btnEncerrar2').onclick = encerrar; $('btnEncerrar3').onclick = encerrar;
+
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "titulo": "Abordou, tangenciou ou fugiu do tema?",
+  "emoji": "🎯",
+  "instrucao": "A tese aborda o tema?",
+  "rodadas": [
+    {
+      "destaque": "Tese: A falta de acessibilidade e o preconceito nas empresas dificultam a contratação de pessoas com deficiência.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Abordou o tema",
+      "explica": "Abordou o tema: trata exatamente do recorte proposto.",
+      "imagem": "♿",
+      "texto": "Tema: Desafios para a inclusão de pessoas com deficiência no mercado de trabalho"
+    },
+    {
+      "destaque": "Tese: A inclusão de alunos com deficiência nas escolas ainda é um grande desafio.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Tangenciou o tema",
+      "explica": "Tangenciou o tema: fala do assunto geral, mas deixa de lado o recorte do tema (perde pontos na competência 2).",
+      "imagem": "🏫",
+      "texto": "Tema: Desafios para a inclusão de pessoas com deficiência no mercado de trabalho"
+    },
+    {
+      "destaque": "Tese: O desemprego no Brasil é causado principalmente pelas crises econômicas.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Tangenciou o tema",
+      "explica": "Tangenciou o tema: fala do assunto geral, mas deixa de lado o recorte do tema (perde pontos na competência 2).",
+      "imagem": "📉",
+      "texto": "Tema: Desafios para a inclusão de pessoas com deficiência no mercado de trabalho"
+    },
+    {
+      "destaque": "Tese: Os Jogos Olímpicos movimentam a economia das cidades que os recebem.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Fugiu do tema",
+      "explica": "Fugiu do tema: trata de outro assunto (a redação recebe nota zero).",
+      "imagem": "🏅",
+      "texto": "Tema: Desafios para a inclusão de pessoas com deficiência no mercado de trabalho"
+    },
+    {
+      "destaque": "Tese: A fome no Brasil exige políticas de renda e o combate ao desperdício de alimentos.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Abordou o tema",
+      "explica": "Abordou o tema: trata exatamente do recorte proposto.",
+      "imagem": "🍞",
+      "texto": "Tema: Caminhos para combater a insegurança alimentar no Brasil"
+    },
+    {
+      "destaque": "Tese: A alimentação saudável é importante para a saúde de todos.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Tangenciou o tema",
+      "explica": "Tangenciou o tema: fala do assunto geral, mas deixa de lado o recorte do tema (perde pontos na competência 2).",
+      "imagem": "🥗",
+      "texto": "Tema: Caminhos para combater a insegurança alimentar no Brasil"
+    },
+    {
+      "destaque": "Tese: O futebol é a maior paixão nacional.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Fugiu do tema",
+      "explica": "Fugiu do tema: trata de outro assunto (a redação recebe nota zero).",
+      "imagem": "⚽",
+      "texto": "Tema: Caminhos para combater a insegurança alimentar no Brasil"
+    },
+    {
+      "destaque": "Tese: As notícias falsas nas redes sociais ameaçam a saúde pública e a democracia.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Abordou o tema",
+      "explica": "Abordou o tema: trata exatamente do recorte proposto.",
+      "imagem": "📰",
+      "texto": "Tema: Os impactos da desinformação nas redes sociais"
+    },
+    {
+      "destaque": "Tese: A internet trouxe muitas facilidades para a vida moderna.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Tangenciou o tema",
+      "explica": "Tangenciou o tema: fala do assunto geral, mas deixa de lado o recorte do tema (perde pontos na competência 2).",
+      "imagem": "💻",
+      "texto": "Tema: Os impactos da desinformação nas redes sociais"
+    },
+    {
+      "destaque": "Tese: A culinária baiana é uma das mais ricas do país.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Fugiu do tema",
+      "explica": "Fugiu do tema: trata de outro assunto (a redação recebe nota zero).",
+      "imagem": "🍲",
+      "texto": "Tema: Os impactos da desinformação nas redes sociais"
+    },
+    {
+      "destaque": "Tese: O abandono e o preconceito contra os idosos revelam a falta de valorização dessa população.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Abordou o tema",
+      "explica": "Abordou o tema: trata exatamente do recorte proposto.",
+      "imagem": "👵",
+      "texto": "Tema: A valorização da pessoa idosa na sociedade brasileira"
+    },
+    {
+      "destaque": "Tese: Os jovens brasileiros precisam de mais oportunidades de emprego.",
+      "opcoes": [
+        "Abordou o tema",
+        "Tangenciou o tema",
+        "Fugiu do tema"
+      ],
+      "correta": "Fugiu do tema",
+      "explica": "Fugiu do tema: trata de outro assunto (a redação recebe nota zero).",
+      "imagem": "👩‍🎓",
+      "texto": "Tema: A valorização da pessoa idosa na sociedade brasileira"
+    }
+  ]
+}

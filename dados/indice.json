@@ -39,6 +39,10 @@
     {
       "arquivo": "quiz-invariaveis.json",
       "titulo": "Quiz das classes invariáveis"
+    },
+    {
+      "arquivo": "quiz-proverbios.json",
+      "titulo": "Quiz dos provérbios"
     }
   ],
   "stop": [
@@ -163,6 +167,10 @@
     {
       "arquivo": "escape-conectivos.json",
       "titulo": "Fuga da Fábrica de Conectivos"
+    },
+    {
+      "arquivo": "escape-biblioteca.json",
+      "titulo": "O Mistério da Biblioteca"
     }
   ],
   "mimica": [
@@ -211,6 +219,10 @@
     {
       "arquivo": "historias-conectivos.json",
       "titulo": "Dado dos conectivos"
+    },
+    {
+      "arquivo": "historias-narrativa.json",
+      "titulo": "Gerador de narrativa (6º ao 9º ano)"
     }
   ],
   "caminho": [
@@ -255,6 +267,10 @@
     {
       "arquivo": "detetive-preposicoes.json",
       "titulo": "Detetive das preposições"
+    },
+    {
+      "arquivo": "detetive-redacao.json",
+      "titulo": "Detetive da redação"
     }
   ],
   "pontuacao": [
@@ -309,6 +325,10 @@
     {
       "arquivo": "inv-cestos.json",
       "titulo": "Cestos das classes invariáveis"
+    },
+    {
+      "arquivo": "interp-fato-cestos.json",
+      "titulo": "Cestos: fato ou opinião"
     }
   ],
   "morfo-frases": [
@@ -447,6 +467,22 @@
     {
       "arquivo": "num-ordene.json",
       "titulo": "Ordene os numerais"
+    },
+    {
+      "arquivo": "interp-ordene.json",
+      "titulo": "Ordene o texto"
+    },
+    {
+      "arquivo": "red-paragrafo-ordene.json",
+      "titulo": "Monte o parágrafo dissertativo"
+    },
+    {
+      "arquivo": "red-narrativa-ordene.json",
+      "titulo": "Estrutura da narrativa"
+    },
+    {
+      "arquivo": "red-generos-ordene.json",
+      "titulo": "Monte o texto formal"
     }
   ],
   "morfo-onde": [
@@ -515,6 +551,10 @@
     {
       "arquivo": "conj-texto.json",
       "titulo": "Arrume o texto (sem \"e aí\")"
+    },
+    {
+      "arquivo": "red-texto.json",
+      "titulo": "Arrume o parágrafo (sem repetição)"
     }
   ],
   "morfo-perto": [
@@ -747,6 +787,118 @@
     {
       "arquivo": "inv-varia.json",
       "titulo": "Varia ou não varia?"
+    }
+  ],
+  "escolha-interp": [
+    {
+      "arquivo": "interp-6a9.json",
+      "titulo": "Interpretação de texto (6º ao 9º ano)"
+    },
+    {
+      "arquivo": "interp-enem.json",
+      "titulo": "Interpretação de texto (Ensino Médio / ENEM)"
+    },
+    {
+      "arquivo": "interp-eja.json",
+      "titulo": "Interpretação de textos do dia a dia (EJA)"
+    },
+    {
+      "arquivo": "interp-inferencia.json",
+      "titulo": "Está escrito, dá para deduzir ou não dá para afirmar?"
+    },
+    {
+      "arquivo": "interp-fato-opiniao.json",
+      "titulo": "Fato ou opinião?"
+    },
+    {
+      "arquivo": "interp-ideia.json",
+      "titulo": "Ideia principal e título"
+    },
+    {
+      "arquivo": "interp-sentido.json",
+      "titulo": "Sentido da palavra no contexto"
+    },
+    {
+      "arquivo": "interp-referencia.json",
+      "titulo": "A quem a palavra se refere?"
+    },
+    {
+      "arquivo": "interp-humor.json",
+      "titulo": "Por que é engraçado?"
+    },
+    {
+      "arquivo": "interp-proverbios.json",
+      "titulo": "O que quer dizer o provérbio?"
+    }
+  ],
+  "escolha-red": [
+    {
+      "arquivo": "red-tese.json",
+      "titulo": "Isso é uma tese?"
+    },
+    {
+      "arquivo": "red-argumentos.json",
+      "titulo": "Que tipo de argumento é este?"
+    },
+    {
+      "arquivo": "red-tema.json",
+      "titulo": "Abordou, tangenciou ou fugiu do tema?"
+    },
+    {
+      "arquivo": "red-repertorio.json",
+      "titulo": "Qual repertório combina com o tema?"
+    },
+    {
+      "arquivo": "red-intervencao-falta.json",
+      "titulo": "O que falta nesta proposta de intervenção?"
+    },
+    {
+      "arquivo": "red-formal.json",
+      "titulo": "Formal ou informal?"
+    },
+    {
+      "arquivo": "red-discurso.json",
+      "titulo": "Discurso direto e indireto"
+    },
+    {
+      "arquivo": "red-narrativa.json",
+      "titulo": "Elementos da narrativa"
+    },
+    {
+      "arquivo": "red-avalie.json",
+      "titulo": "Avalie a redação"
+    }
+  ],
+  "marque": [
+    {
+      "arquivo": "marque-padrao.json",
+      "titulo": "Marque no texto (modelo)"
+    }
+  ],
+  "etapas": [
+    {
+      "arquivo": "etapas-bilhete.json",
+      "titulo": "O bilhete na mochila"
+    },
+    {
+      "arquivo": "etapas-entrevista.json",
+      "titulo": "A entrevista de emprego"
+    }
+  ],
+  "escrita": [
+    {
+      "arquivo": "escrita-padrao.json",
+      "titulo": "História em corrente"
+    },
+    {
+      "arquivo": "escrita-redacao.json",
+      "titulo": "Redação a várias mãos (ENEM)"
+    }
+  ],
+  "debate": [
+    {
+      "arquivo": "debate-padrao.json",
+      "titulo": "Debates para a sala"
     }
   ]
 }

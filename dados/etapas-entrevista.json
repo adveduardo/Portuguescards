@@ -1,0 +1,49 @@
+{
+  "titulo": "A entrevista de emprego",
+  "imagem": "💼",
+  "etapas": [
+    {
+      "texto": "Rosa tinha uma entrevista de emprego às nove horas. Saiu de casa cedo, mas o ônibus quebrou no meio do caminho. Faltavam vinte minutos para as nove.",
+      "imagem": "🚌",
+      "pergunta": "O que Rosa provavelmente vai fazer?",
+      "opcoes": [
+        "desistir e voltar para casa",
+        "procurar outra forma de chegar e avisar a empresa",
+        "esperar o conserto do ônibus",
+        "remarcar para o mês seguinte"
+      ],
+      "correta": 1,
+      "explica": "Rosa saiu cedo: isso mostra que ela se importa com a entrevista. A tendência é que ela tente resolver o problema."
+    },
+    {
+      "texto": "Rosa ligou para a empresa, explicou o que tinha acontecido e pegou um mototáxi. Chegou às nove e cinco, sem fôlego. A recepcionista pediu que ela aguardasse.",
+      "imagem": "🏍️",
+      "pergunta": "Como você acha que o entrevistador vai reagir ao atraso?",
+      "opcoes": [
+        "vai dispensá-la na hora",
+        "vai valorizar o fato de ela ter avisado",
+        "vai rir dela",
+        "não vai notar"
+      ],
+      "correta": 1,
+      "explica": "Avisar antes demonstra responsabilidade, algo valorizado em qualquer emprego."
+    },
+    {
+      "texto": "— A senhora foi a única candidata que ligou avisando — disse o entrevistador. — Isso diz muito sobre uma pessoa. Conte-me sobre a sua experiência.",
+      "imagem": "🤝",
+      "pergunta": "Qual deve ser o desfecho da história?",
+      "opcoes": [
+        "Rosa consegue a vaga",
+        "a empresa fecha",
+        "Rosa desiste da vaga",
+        "o ônibus volta a funcionar"
+      ],
+      "correta": 0,
+      "explica": "O elogio do entrevistador antecipa um final positivo."
+    },
+    {
+      "texto": "Uma semana depois, Rosa começou no novo emprego. No primeiro dia, saiu de casa uma hora mais cedo, só por garantia.",
+      "imagem": "😄"
+    }
+  ]
+}

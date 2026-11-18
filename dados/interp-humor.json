@@ -1,0 +1,98 @@
+{
+  "titulo": "Por que é engraçado?",
+  "emoji": "😂",
+  "instrucao": "Leia e responda: de onde vem o humor?",
+  "rodadas": [
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "o garçom trata a mosca como se fosse algo bom",
+        "a sopa estava fria",
+        "o cliente queria outra sopa",
+        "o garçom não ouviu o cliente"
+      ],
+      "correta": "o garçom trata a mosca como se fosse algo bom",
+      "explica": "Quebra de expectativa: o garçom age como se a mosca fosse um privilégio.",
+      "imagem": "🪰",
+      "texto": "— Garçom, tem uma mosca na minha sopa!\n— Fale baixo, senão todo mundo vai querer uma."
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "do duplo sentido de \"letras\": cartas e livros",
+        "Joãozinho não sabe ler",
+        "a professora errou a pergunta",
+        "o correio fica perto da escola"
+      ],
+      "correta": "do duplo sentido de \"letras\": cartas e livros",
+      "explica": "Ambiguidade: no correio há cartas; na biblioteca, livros. Os dois têm \"muitas letras\".",
+      "imagem": "✉️",
+      "texto": "A professora pergunta: — Joãozinho, me diga dois lugares que têm muitas letras.\n— O correio e a biblioteca!"
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "o filho não entende a lição que o pai queria dar",
+        "o pai mente sobre a idade",
+        "a escola era perto",
+        "o filho também anda 5 km"
+      ],
+      "correta": "o filho não entende a lição que o pai queria dar",
+      "explica": "O pai queria mostrar esforço; o filho tira outra conclusão. É a quebra de expectativa.",
+      "imagem": "🚶",
+      "texto": "Quadrinho 1: o pai diz ao filho: — Na sua idade, eu andava 5 km para ir à escola!\nQuadrinho 2: o filho responde: — Nossa, pai, você morava longe, hein?"
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "a \"promoção\" não dá nenhuma vantagem",
+        "a loja está fechada",
+        "os produtos são de graça",
+        "o cartaz está escrito errado"
+      ],
+      "correta": "a \"promoção\" não dá nenhuma vantagem",
+      "explica": "Ironia: chamar de promoção algo que custa o preço normal.",
+      "imagem": "🏷️",
+      "texto": "Cartaz numa loja: \"PROMOÇÃO: leve 3 e pague 3!\""
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "o médico também ignora o paciente",
+        "o médico está doente",
+        "o paciente é famoso",
+        "não havia outros pacientes"
+      ],
+      "correta": "o médico também ignora o paciente",
+      "explica": "O médico faz exatamente aquilo de que o paciente se queixa.",
+      "imagem": "🩺",
+      "texto": "— Doutor, todo mundo me ignora.\n— Próximo!"
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "do duplo sentido de \"problemas\"",
+        "livros não ficam tristes",
+        "a matemática é difícil",
+        "o livro estava rasgado"
+      ],
+      "correta": "do duplo sentido de \"problemas\"",
+      "explica": "\"Problemas\" de matemática × problemas da vida.",
+      "imagem": "📘",
+      "texto": "Por que o livro de matemática estava triste? Porque tinha muitos problemas."
+    },
+    {
+      "destaque": "De onde vem o humor?",
+      "opcoes": [
+        "o menino se denuncia sem que ninguém pergunte",
+        "a mãe quebrou o vaso",
+        "o vaso não quebrou",
+        "o menino estava doente"
+      ],
+      "correta": "o menino se denuncia sem que ninguém pergunte",
+      "explica": "Ao negar sem ser acusado, ele mostra que sabe o que aconteceu.",
+      "imagem": "🏺",
+      "texto": "O menino entra correndo na sala: — Mãe, não fui eu que quebrei o vaso!\nA mãe: — Mas eu nem perguntei nada…"
+    }
+  ]
+}

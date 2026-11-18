@@ -1,0 +1,97 @@
+{
+  "titulo": "Avalie a redação",
+  "emoji": "🔍",
+  "instrucao": "Leia o trecho e avalie",
+  "rodadas": [
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "C1 – Norma-padrão",
+      "explica": "Há vários erros de concordância (mulheres sofre, as pessoa não denuncia, as mulher merece): competência 1.",
+      "imagem": "✏️",
+      "texto": "Tema: A violência contra a mulher no Brasil.\nA violência contra a mulher é um problema no Brasil. Muitas mulheres sofre violência todo dia e as pessoa não denuncia. Isso é muito grave e precisa acabar logo pois as mulher merece respeito."
+    },
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "C2 – Tema e tipo textual",
+      "explica": "O texto é uma narrativa, e não um texto dissertativo-argumentativo: competência 2.",
+      "imagem": "📖",
+      "texto": "Tema: Os impactos das redes sociais na saúde mental dos jovens.\nEra uma vez uma menina chamada Júlia que usava o celular o dia inteiro. Um dia, ela ficou triste porque ninguém curtiu sua foto. Então, sua mãe conversou com ela..."
+    },
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "C3 – Argumentação",
+      "explica": "As ideias são soltas e até se contradizem: não há um projeto de texto que defenda a tese (competência 3).",
+      "imagem": "🧩",
+      "texto": "Tema: O incentivo à leitura no Brasil.\nA leitura é importante. Muitos brasileiros não leem. Ler é chato para alguns jovens, então talvez nem precise incentivar. Mas também é bom ler. Os livros são caros, e os celulares também. Cada um faz o que quiser."
+    },
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "C4 – Coesão",
+      "explica": "Repetição excessiva e frases sem conectivos: falta coesão (competência 4).",
+      "imagem": "🔗",
+      "texto": "Tema: O uso da internet pelos jovens.\nA internet tem coisas boas. A internet tem coisas ruins. A internet é usada por jovens. A internet precisa de cuidado. Os jovens usam a internet."
+    },
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "C5 – Proposta de intervenção",
+      "explica": "A proposta é vaga: não diz o que fazer, como, nem para quê (competência 5).",
+      "imagem": "🛠️",
+      "texto": "Tema: A fome no Brasil.\nPortanto, conclui-se que o governo deve fazer alguma coisa para resolver o problema da fome, porque a fome é ruim e ninguém gosta de passar fome."
+    },
+    {
+      "destaque": "Qual competência está mais fraca neste trecho?",
+      "opcoes": [
+        "C1 – Norma-padrão",
+        "C2 – Tema e tipo textual",
+        "C3 – Argumentação",
+        "C4 – Coesão",
+        "C5 – Proposta de intervenção",
+        "Nenhuma: o trecho está adequado"
+      ],
+      "correta": "Nenhuma: o trecho está adequado",
+      "explica": "O trecho tem norma-padrão, coesão, argumento e uma proposta completa.",
+      "imagem": "✅",
+      "texto": "Tema: Os desafios da mobilidade urbana.\nOs brasileiros que vivem nas grandes cidades perdem horas no trânsito todos os dias. Isso ocorre, sobretudo, pela priorização do transporte individual. Desse modo, é fundamental que o Ministério das Cidades, responsável pela política urbana, amplie o transporte público por meio de investimentos em metrô e corredores de ônibus, a fim de reduzir os congestionamentos."
+    }
+  ]
+}

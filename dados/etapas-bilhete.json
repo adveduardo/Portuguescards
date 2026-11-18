@@ -1,0 +1,49 @@
+{
+  "titulo": "O bilhete na mochila",
+  "imagem": "✉️",
+  "etapas": [
+    {
+      "texto": "Na segunda-feira, Lia abriu a mochila e encontrou um bilhete dobrado em quatro. Não tinha assinatura. Só dizia: \"Olhe embaixo da terceira carteira da fila da janela.\"",
+      "imagem": "✉️",
+      "pergunta": "O que você acha que Lia vai encontrar?",
+      "opcoes": [
+        "um presente de aniversário",
+        "uma pista para outro bilhete",
+        "a prova da semana",
+        "um celular perdido"
+      ],
+      "correta": 1,
+      "explica": "Um bilhete que manda procurar em outro lugar sugere um jogo de pistas: uma caça ao tesouro."
+    },
+    {
+      "texto": "Embaixo da carteira, presa com fita, havia outra folha: \"Muito bem! Agora vá até o lugar onde as histórias dormem na estante.\" Lia sorriu: alguém estava brincando de caça ao tesouro.",
+      "imagem": "🔎",
+      "pergunta": "Para onde Lia vai agora?",
+      "opcoes": [
+        "para a biblioteca",
+        "para a cantina",
+        "para a quadra",
+        "para casa"
+      ],
+      "correta": 0,
+      "explica": "\"O lugar onde as histórias dormem na estante\" é uma forma figurada de falar da biblioteca."
+    },
+    {
+      "texto": "Na biblioteca, entre dois livros de aventura, estava o último bilhete: \"Hoje faz um ano que você chegou à nossa escola. Vire-se!\" Lia se virou devagar.",
+      "imagem": "📚",
+      "pergunta": "O que Lia viu ao se virar?",
+      "opcoes": [
+        "a diretora brava",
+        "os colegas com uma surpresa",
+        "um cachorro",
+        "ninguém"
+      ],
+      "correta": 1,
+      "explica": "O bilhete fala de uma data especial (\"faz um ano\"): pista de uma comemoração."
+    },
+    {
+      "texto": "Lá estavam os colegas da turma, segurando um cartaz: \"Feliz 1 ano com a gente!\". Lia, que no ano anterior não conhecia ninguém naquela cidade, agora tinha amigos de verdade.",
+      "imagem": "🎉"
+    }
+  ]
+}

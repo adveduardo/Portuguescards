@@ -1,0 +1,137 @@
+{
+  "titulo": "A quem a palavra se refere?",
+  "emoji": "🔗",
+  "instrucao": "Leia o texto e responda",
+  "rodadas": [
+    {
+      "destaque": "No texto, \"a primeira\" se refere a:",
+      "opcoes": [
+        "Ana",
+        "Beatriz",
+        "a vizinha de Ana",
+        "a corrida"
+      ],
+      "correta": "Ana",
+      "explica": "\"A primeira\" retoma o primeiro nome citado: Ana.",
+      "imagem": "🏃‍♀️",
+      "texto": "Ana e Beatriz são vizinhas. Todos os dias, a primeira acorda cedo para correr no parque; a segunda prefere caminhar à noite. Elas só se encontram nos fins de semana."
+    },
+    {
+      "destaque": "\"A segunda\" se refere a:",
+      "opcoes": [
+        "Beatriz",
+        "Ana",
+        "a noite",
+        "a caminhada"
+      ],
+      "correta": "Beatriz",
+      "explica": "\"A segunda\" retoma o segundo nome citado: Beatriz.",
+      "imagem": "🚶‍♀️",
+      "texto": "Ana e Beatriz são vizinhas. Todos os dias, a primeira acorda cedo para correr no parque; a segunda prefere caminhar à noite. Elas só se encontram nos fins de semana."
+    },
+    {
+      "destaque": "\"Elas\" retoma:",
+      "opcoes": [
+        "Ana e Beatriz",
+        "as noites",
+        "as vizinhas de Ana",
+        "as corridas"
+      ],
+      "correta": "Ana e Beatriz",
+      "explica": "O pronome retoma as duas personagens.",
+      "imagem": "👭",
+      "texto": "Ana e Beatriz são vizinhas. Todos os dias, a primeira acorda cedo para correr no parque; a segunda prefere caminhar à noite. Elas só se encontram nos fins de semana."
+    },
+    {
+      "destaque": "\"O animal\" retoma:",
+      "opcoes": [
+        "o cachorro de Pedro",
+        "Pedro",
+        "o dono",
+        "a escola"
+      ],
+      "correta": "o cachorro de Pedro",
+      "explica": "Retomada por um termo mais geral (hiperônimo): cachorro → animal.",
+      "imagem": "🐕",
+      "texto": "O cachorro de Pedro fugiu ontem. O animal só foi encontrado à noite, perto da escola, onde costumava esperar o dono."
+    },
+    {
+      "destaque": "No texto, \"o dono\" é:",
+      "opcoes": [
+        "Pedro",
+        "o porteiro da escola",
+        "um vizinho",
+        "o próprio cachorro"
+      ],
+      "correta": "Pedro",
+      "explica": "O cachorro é de Pedro: ele é o dono.",
+      "imagem": "👦",
+      "texto": "O cachorro de Pedro fugiu ontem. O animal só foi encontrado à noite, perto da escola, onde costumava esperar o dono."
+    },
+    {
+      "destaque": "\"Onde\" se refere a:",
+      "opcoes": [
+        "perto da escola",
+        "a casa de Pedro",
+        "a noite",
+        "ontem"
+      ],
+      "correta": "perto da escola",
+      "explica": "ONDE retoma o lugar citado antes.",
+      "imagem": "🏫",
+      "texto": "O cachorro de Pedro fugiu ontem. O animal só foi encontrado à noite, perto da escola, onde costumava esperar o dono."
+    },
+    {
+      "destaque": "\"A obra\" refere-se a:",
+      "opcoes": [
+        "a construção da creche",
+        "a prefeitura",
+        "o mês de março",
+        "o bairro"
+      ],
+      "correta": "a construção da creche",
+      "explica": "Retomada por uma palavra de sentido mais geral.",
+      "imagem": "🏗️",
+      "texto": "A prefeitura anunciou a construção de uma creche no bairro. A obra deve começar em março. Os moradores comemoraram a notícia, pois esperavam por isso havia anos."
+    },
+    {
+      "destaque": "\"Isso\" retoma:",
+      "opcoes": [
+        "a construção da creche",
+        "o mês de março",
+        "os moradores",
+        "a prefeitura"
+      ],
+      "correta": "a construção da creche",
+      "explica": "Os moradores esperavam pela creche havia anos.",
+      "imagem": "🎉",
+      "texto": "A prefeitura anunciou a construção de uma creche no bairro. A obra deve começar em março. Os moradores comemoraram a notícia, pois esperavam por isso havia anos."
+    },
+    {
+      "destaque": "\"O autor de Dom Casmurro\" retoma:",
+      "opcoes": [
+        "Machado de Assis",
+        "um escritor desconhecido",
+        "a Academia Brasileira de Letras",
+        "Dom Casmurro"
+      ],
+      "correta": "Machado de Assis",
+      "explica": "Retomada por uma expressão que identifica a pessoa (sem repetir o nome).",
+      "imagem": "📚",
+      "texto": "Machado de Assis é considerado um dos maiores escritores brasileiros. O autor de Dom Casmurro fundou a Academia Brasileira de Letras e foi seu primeiro presidente."
+    },
+    {
+      "destaque": "Em \"foi seu primeiro presidente\", \"seu\" se refere a:",
+      "opcoes": [
+        "a Academia Brasileira de Letras",
+        "Machado de Assis",
+        "Dom Casmurro",
+        "os escritores brasileiros"
+      ],
+      "correta": "a Academia Brasileira de Letras",
+      "explica": "Ele foi o primeiro presidente DA ACADEMIA.",
+      "imagem": "🏛️",
+      "texto": "Machado de Assis é considerado um dos maiores escritores brasileiros. O autor de Dom Casmurro fundou a Academia Brasileira de Letras e foi seu primeiro presidente."
+    }
+  ]
+}

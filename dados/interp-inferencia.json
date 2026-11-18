@@ -1,0 +1,163 @@
+{
+  "titulo": "Está escrito, dá para deduzir ou não dá para afirmar?",
+  "emoji": "🧠",
+  "instrucao": "Sobre o texto, esta afirmação…",
+  "rodadas": [
+    {
+      "destaque": "Marina tirou os tênis na porta.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "✍️ Está escrito no texto",
+      "explica": "Está escrito no texto: a informação aparece no texto.",
+      "imagem": "👟",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Marina chegou em casa encharcada, tirou os tênis na porta e correu para o chuveiro. Na sala, o guarda-chuva continuava pendurado no cabide."
+    },
+    {
+      "destaque": "Estava chovendo quando Marina voltou para casa.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🧠 Dá para deduzir",
+      "explica": "Dá para deduzir: o texto não diz diretamente, mas as pistas permitem concluir (inferência).",
+      "imagem": "🌧️",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Marina chegou em casa encharcada, tirou os tênis na porta e correu para o chuveiro. Na sala, o guarda-chuva continuava pendurado no cabide."
+    },
+    {
+      "destaque": "Marina esqueceu o guarda-chuva em casa.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🧠 Dá para deduzir",
+      "explica": "Dá para deduzir: o texto não diz diretamente, mas as pistas permitem concluir (inferência).",
+      "imagem": "☂️",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Marina chegou em casa encharcada, tirou os tênis na porta e correu para o chuveiro. Na sala, o guarda-chuva continuava pendurado no cabide."
+    },
+    {
+      "destaque": "Marina estava voltando da escola.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🚫 Não dá para afirmar",
+      "explica": "Não dá para afirmar: o texto não traz pistas suficientes: seria inventar.",
+      "imagem": "🏫",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Marina chegou em casa encharcada, tirou os tênis na porta e correu para o chuveiro. Na sala, o guarda-chuva continuava pendurado no cabide."
+    },
+    {
+      "destaque": "Marina pegou um resfriado.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🚫 Não dá para afirmar",
+      "explica": "Não dá para afirmar: o texto não traz pistas suficientes: seria inventar.",
+      "imagem": "🤧",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Marina chegou em casa encharcada, tirou os tênis na porta e correu para o chuveiro. Na sala, o guarda-chuva continuava pendurado no cabide."
+    },
+    {
+      "destaque": "O casal esperou quarenta minutos por uma mesa.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "✍️ Está escrito no texto",
+      "explica": "Está escrito no texto: a informação aparece no texto.",
+      "imagem": "⏳",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "O restaurante estava lotado. Mesmo assim, o casal esperou quarenta minutos por uma mesa e saiu de lá dizendo que voltaria na semana seguinte."
+    },
+    {
+      "destaque": "O casal gostou do restaurante.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🧠 Dá para deduzir",
+      "explica": "Dá para deduzir: o texto não diz diretamente, mas as pistas permitem concluir (inferência).",
+      "imagem": "🍽️",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "O restaurante estava lotado. Mesmo assim, o casal esperou quarenta minutos por uma mesa e saiu de lá dizendo que voltaria na semana seguinte."
+    },
+    {
+      "destaque": "O restaurante é o mais caro da cidade.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🚫 Não dá para afirmar",
+      "explica": "Não dá para afirmar: o texto não traz pistas suficientes: seria inventar.",
+      "imagem": "💰",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "O restaurante estava lotado. Mesmo assim, o casal esperou quarenta minutos por uma mesa e saiu de lá dizendo que voltaria na semana seguinte."
+    },
+    {
+      "destaque": "A biblioteca passou a abrir aos sábados.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "✍️ Está escrito no texto",
+      "explica": "Está escrito no texto: a informação aparece no texto.",
+      "imagem": "📚",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Depois da reforma, a biblioteca da escola passou a abrir também aos sábados. Desde então, o número de empréstimos de livros dobrou."
+    },
+    {
+      "destaque": "Abrir aos sábados ajudou a aumentar os empréstimos.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🧠 Dá para deduzir",
+      "explica": "Dá para deduzir: o texto não diz diretamente, mas as pistas permitem concluir (inferência).",
+      "imagem": "📈",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Depois da reforma, a biblioteca da escola passou a abrir também aos sábados. Desde então, o número de empréstimos de livros dobrou."
+    },
+    {
+      "destaque": "A reforma custou muito dinheiro.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🚫 Não dá para afirmar",
+      "explica": "Não dá para afirmar: o texto não traz pistas suficientes: seria inventar.",
+      "imagem": "🏗️",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Depois da reforma, a biblioteca da escola passou a abrir também aos sábados. Desde então, o número de empréstimos de livros dobrou."
+    },
+    {
+      "destaque": "Os alunos agora leem mais de dez livros por mês.",
+      "opcoes": [
+        "✍️ Está escrito no texto",
+        "🧠 Dá para deduzir",
+        "🚫 Não dá para afirmar"
+      ],
+      "correta": "🚫 Não dá para afirmar",
+      "explica": "Não dá para afirmar: o texto não traz pistas suficientes: seria inventar.",
+      "imagem": "📖",
+      "enunciado": "Sobre o texto, esta afirmação…",
+      "texto": "Depois da reforma, a biblioteca da escola passou a abrir também aos sábados. Desde então, o número de empréstimos de livros dobrou."
+    }
+  ]
+}
