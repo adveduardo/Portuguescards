@@ -1,0 +1,65 @@
+{
+  "titulo": "O Mistério do Acento Grave",
+  "historia": "Alguém roubou todos os acentos graves da cidade e as placas ficaram confusas! Descubram onde a crase deve voltar para abrir o cofre com os acentos.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Placa 1: \"Vire ___ direita.\"",
+      "imagem": "↪️",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "dica": "Vire AO lado direito → À direita."
+    },
+    {
+      "pergunta": "Placa 2: \"Proibido andar ___ cavalo.\" Escreva a ou à.",
+      "imagem": "🐎",
+      "resposta": [
+        "a"
+      ],
+      "dica": "Cavalo é masculino."
+    },
+    {
+      "pergunta": "Placa 3: \"Aberto das 8h ___ 18h.\"",
+      "imagem": "🕗",
+      "opcoes": [
+        "às",
+        "as",
+        "a"
+      ],
+      "correta": "às",
+      "dica": "Das 8h às 18h: horas determinadas."
+    },
+    {
+      "pergunta": "Placa 4: \"Vende-se ___ prazo.\" Escreva a ou à.",
+      "imagem": "🏷️",
+      "resposta": [
+        "a"
+      ],
+      "dica": "Prazo é masculino."
+    },
+    {
+      "pergunta": "Placa 5: \"Bem-vindo ___ Bahia!\"",
+      "imagem": "🌴",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "dica": "Volto DA Bahia."
+    },
+    {
+      "pergunta": "Placa 6: \"Entregue ___ ela este bilhete.\"",
+      "imagem": "✉️",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "dica": "Antes de pronome pessoal não há crase."
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "titulo": "Regência nominal: certo ou errado?",
+  "emoji": "🧐",
+  "instrucao": "A frase segue a norma-padrão?",
+  "rodadas": [
+    {
+      "destaque": "É preferível estudar do que trabalhar.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "PREFERÍVEL pede A: é preferível estudar A trabalhar.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Sou favorável ao projeto.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "FAVORÁVEL A algo.",
+      "imagem": "👍"
+    },
+    {
+      "destaque": "Ele é fiel com os amigos.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "FIEL A alguém: fiel aos amigos.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "A decisão foi contrária com a lei.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "CONTRÁRIO A algo: contrária à lei.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "O remédio é nocivo à saúde.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "NOCIVO A algo.",
+      "imagem": "💊"
+    },
+    {
+      "destaque": "O prédio é acessível a cadeirantes.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "ACESSÍVEL A alguém.",
+      "imagem": "♿"
+    },
+    {
+      "destaque": "Ele é capaz em resolver o problema.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "CAPAZ DE algo: capaz de resolver.",
+      "imagem": "🧩"
+    },
+    {
+      "destaque": "Tenho orgulho de você.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "ORGULHO DE alguém.",
+      "imagem": "🥹"
+    },
+    {
+      "destaque": "O horário é compatível com o meu.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "COMPATÍVEL COM algo.",
+      "imagem": "🗓️"
+    },
+    {
+      "destaque": "Ele é doutor de Linguística.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "DOUTOR EM uma área.",
+      "imagem": "🎓"
+    }
+  ]
+}

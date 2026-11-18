@@ -27,6 +27,44 @@
         }
         select:hover { background: #e2e8f0; }
 
+        /* Menu de atividades em árvore (abre e fecha os grupos) */
+        #tool-selector { display: none; }
+        #menu-btn {
+            padding: 6px 12px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer;
+            background: #f1f5f9; color: #000; border: 1px solid #94a3b8; max-width: min(520px, 60vw);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        #menu-btn:hover { background: #e2e8f0; }
+        #menu-painel {
+            display: none; position: fixed; z-index: 3000; top: 48px; left: 50%; transform: translateX(-50%);
+            width: min(660px, 96vw); max-height: calc(100vh - 60px); overflow: auto; background: #fff; color: #0f172a;
+            border: 1px solid #94a3b8; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.35); padding: 10px;
+        }
+        #menu-painel.aberto { display: block; }
+        #menu-busca { width: 100%; padding: 9px 12px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 10px; margin-bottom: 8px; outline: none; }
+        #menu-busca:focus { border-color: #3b82f6; }
+        .m-acoes { display: flex; gap: 8px; margin-bottom: 6px; }
+        .m-acoes button { flex: 1; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 8px; padding: 5px; font-size: 13px; font-weight: bold; cursor: pointer; color: #0f172a; }
+        .m-grupo > .m-cab, .m-item {
+            display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; border: none; background: none; cursor: pointer;
+            font-size: 15px; color: #0f172a; padding: 7px 8px; border-radius: 8px;
+        }
+        .m-grupo > .m-cab { font-weight: bold; }
+        .m-grupo > .m-cab:hover, .m-item:hover { background: #eef2ff; }
+        .m-sinal { display: inline-flex; width: 22px; height: 22px; align-items: center; justify-content: center; flex-shrink: 0;
+            border-radius: 6px; background: #e2e8f0; font-weight: bold; font-size: 15px; }
+        .m-filhos { display: none; margin-left: 16px; border-left: 2px solid #e2e8f0; padding-left: 6px; }
+        .m-grupo.aberto > .m-filhos { display: block; }
+        .m-item { font-weight: normal; padding-left: 12px; }
+        .m-item.ativo { background: #dbeafe; font-weight: bold; }
+        .m-caminho { display: block; font-size: 12px; color: #64748b; }
+        .m-vazio { padding: 10px; color: #64748b; }
+        @media (max-width: 700px) {
+            #top-bar { flex-wrap: wrap; gap: 6px; padding: 6px 8px; }
+            #top-bar label { display: none; }
+            #menu-btn { flex: 1 1 100%; max-width: 100%; }
+        }
+
         .hide-btn {
             background: #ffffff; color: #000000; border: 1px solid #94a3b8;
             padding: 6px 12px; border-radius: 6px; cursor: pointer;
@@ -68,6 +106,7 @@
 
     <div id="top-bar">
         <label>Painel de Aula:</label>
+        <button id="menu-btn" type="button" onclick="abrirMenu()" title="Escolher a atividade">🏠 Tela Inicial ▾</button>
         <select id="tool-selector" onchange="changeTool()">
             <option value="">🏠 Tela Inicial</option>
             <option value="quiz.html">🃏 PortuguêsCards (Jogo de Português)</option>
@@ -268,7 +307,7 @@
                 <option value="batata.html?arquivo=batata-invariaveis.json">🥔 Batata Quente das invariáveis</option>
                 <option value="trilha.html?arquivo=trilha-invariaveis.json">🎲 Trilha das invariáveis</option>
             </optgroup>
-            <optgroup label="📘 Português › Sintaxe (8º e 9º ano)">
+            <optgroup label="📘 Português › Sintaxe › Revisão geral (8º e 9º ano)">
                 <option value="morfo-pinte.html?arquivo=sint-pinte.json">🎨 Pinte os termos da oração</option>
                 <option value="morfo-escolha.html?arquivo=sint-sujeito.json">👤 Tipos de sujeito</option>
                 <option value="morfo-escolha.html?arquivo=sint-termos.json">🧩 Termos da oração</option>
@@ -335,7 +374,36 @@
                 <option value="batata.html?arquivo=batata-periodo.json">🥔 Batata Quente do período composto</option>
                 <option value="trilha.html?arquivo=trilha-periodo.json">🎲 Trilha do período composto</option>
             </optgroup>
-            <optgroup label="🎓 Português › Ensino Médio / ENEM">
+            <optgroup label="📘 Português › Sintaxe › Regência">
+                <option value="morfo-escolha.html?arquivo=rg-verbal-prep.json">🧭 Regência verbal: que preposição o verbo pede?</option>
+                <option value="morfo-escolha.html?arquivo=rg-sentido.json">🔀 A regência muda o sentido (assistir, aspirar, visar…)</option>
+                <option value="morfo-escolha.html?arquivo=rg-certo-errado.json">🧐 Regência verbal: certo ou errado?</option>
+                <option value="morfo-escolha.html?arquivo=rg-relativo.json">🔁 Regência e pronome relativo (a que, de que, em quem…)</option>
+                <option value="morfo-escolha.html?arquivo=sint-regencia.json">🧭 Regência verbal: complete a frase</option>
+                <option value="morfo-cestos.html?arquivo=rg-cestos.json">🧺 Cestos: transitivo direto ou indireto?</option>
+                <option value="morfo-escolha.html?arquivo=rg-nominal.json">🧷 Regência nominal: que preposição o nome pede?</option>
+                <option value="morfo-escolha.html?arquivo=rg-nominal-ce.json">🧐 Regência nominal: certo ou errado?</option>
+                <option value="detetive.html?arquivo=detetive-regencia.json">🕵️ Detetive da regência</option>
+                <option value="escape.html?arquivo=escape-regencia.json">🔐 O Labirinto da Regência (com iPads)</option>
+                <option value="desafio.html?arquivo=quiz-regencia.json">🏆 Quiz ao Vivo de regência (com iPads)</option>
+                <option value="batata.html?arquivo=batata-regencia.json">🥔 Batata Quente da regência</option>
+                <option value="trilha.html?arquivo=trilha-regencia.json">🎲 Trilha da regência</option>
+            </optgroup>
+            <optgroup label="📘 Português › Sintaxe › Crase">
+                <option value="morfo-escolha.html?arquivo=cr-tipo.json">🚦 Crase obrigatória, facultativa ou proibida?</option>
+                <option value="morfo-escolha.html?arquivo=cr-ocorre.json">✅ Casos em que ocorre a crase</option>
+                <option value="morfo-escolha.html?arquivo=cr-proibida.json">🚫 Casos em que não ocorre crase (por quê?)</option>
+                <option value="morfo-escolha.html?arquivo=cr-lugares.json">🗺️ Crase com nomes de lugares (vou e volto)</option>
+                <option value="morfo-escolha.html?arquivo=cr-locucoes.json">🗣️ Crase nas expressões do dia a dia</option>
+                <option value="morfo-escolha.html?arquivo=sint-crase.json">🔤 Crase: complete a frase</option>
+                <option value="morfo-cestos.html?arquivo=cr-cestos.json">🧺 Cestos: com crase ou sem crase?</option>
+                <option value="detetive.html?arquivo=detetive-crase.json">🕵️ Detetive da crase</option>
+                <option value="escape.html?arquivo=escape-crase.json">🔐 O Mistério do Acento Grave (com iPads)</option>
+                <option value="desafio.html?arquivo=quiz-crase.json">🏆 Quiz ao Vivo da crase (com iPads)</option>
+                <option value="batata.html?arquivo=batata-crase.json">🥔 Batata Quente da crase</option>
+                <option value="trilha.html?arquivo=trilha-crase.json">🎲 Trilha da crase</option>
+            </optgroup>
+            <optgroup label="📘 Português › 🎓 Ensino Médio / ENEM">
                 <option value="morfo-escolha.html?arquivo=em-figuras-1.json">🎭 Figuras de linguagem I</option>
                 <option value="morfo-escolha.html?arquivo=em-figuras-2.json">🎼 Figuras de linguagem II (som e construção)</option>
                 <option value="morfo-escolha.html?arquivo=em-funcoes.json">📡 Funções da linguagem</option>
@@ -384,6 +452,12 @@
         <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
     </div>
 
+    <div id="menu-painel" role="dialog" aria-label="Atividades">
+        <input id="menu-busca" type="search" placeholder="🔎 Buscar atividade (ex.: crase, verbo, quiz…)" autocomplete="off" oninput="desenharMenu()">
+        <div class="m-acoes"><button type="button" onclick="expandirTudo(true)">➕ Abrir todos</button><button type="button" onclick="expandirTudo(false)">➖ Fechar todos</button></div>
+        <div id="menu-arvore"></div>
+    </div>
+
     <div id="welcome-screen">
         <div class="welcome-card">
             <h1>Olá, Professor! 👋</h1>
@@ -418,7 +492,94 @@
         }
         try { if (localStorage.getItem('painel_visual') === 'infantil') document.getElementById('visual-selector').value = 'infantil'; } catch (e) {}
 
+        // ---------- Menu em árvore: monta a partir das opções do seletor ----------
+        const MENU = {itens: [], filhos: [], abertos: new Set()};
+        function semAcento(t) { return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+        function montarArvore() {
+            const sel = document.getElementById('tool-selector');
+            const raiz = {itens: [], filhos: [], mapa: {}};
+            for (const el of sel.children) {
+                if (el.tagName === 'OPTION') { raiz.itens.push({valor: el.value, texto: el.textContent, caminho: ''}); continue; }
+                const partes = el.label.split(' › ');
+                let no = raiz, chave = '';
+                partes.forEach(p => {
+                    chave += (chave ? ' › ' : '') + p;
+                    if (!no.mapa[p]) { const novo = {nome: p, chave, itens: [], filhos: [], mapa: {}}; no.mapa[p] = novo; no.filhos.push(novo); }
+                    no = no.mapa[p];
+                });
+                for (const op of el.children) no.itens.push({valor: op.value, texto: op.textContent, caminho: el.label});
+            }
+            MENU.raiz = raiz;
+        }
+        function itemHtml(it, comCaminho) {
+            const sel = document.getElementById('tool-selector');
+            const ativo = it.valor === sel.value ? ' ativo' : '';
+            return `<button type="button" class="m-item${ativo}" data-v="${it.valor.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">` +
+                `<span>${it.texto}${comCaminho && it.caminho ? `<span class="m-caminho">${it.caminho}</span>` : ''}</span></button>`;
+        }
+        function grupoHtml(no) {
+            const aberto = MENU.abertos.has(no.chave);
+            return `<div class="m-grupo${aberto ? ' aberto' : ''}" data-k="${no.chave}"><button type="button" class="m-cab"><span class="m-sinal">${aberto ? '−' : '+'}</span><span>${no.nome}</span></button>` +
+                `<div class="m-filhos">${no.itens.map(i => itemHtml(i)).join('')}${no.filhos.map(grupoHtml).join('')}</div></div>`;
+        }
+        function desenharMenu() {
+            const busca = semAcento(document.getElementById('menu-busca').value.trim());
+            const arv = document.getElementById('menu-arvore');
+            if (busca) {
+                const achados = [];
+                (function percorrer(no) { no.itens.forEach(i => { if (semAcento(i.texto + ' ' + i.caminho).includes(busca)) achados.push(i); }); no.filhos.forEach(percorrer); })(MENU.raiz);
+                arv.innerHTML = achados.length ? achados.map(i => itemHtml(i, true)).join('') : '<div class="m-vazio">Nenhuma atividade encontrada.</div>';
+            } else {
+                arv.innerHTML = MENU.raiz.itens.map(i => itemHtml(i)).join('') + MENU.raiz.filhos.map(grupoHtml).join('');
+            }
+            arv.querySelectorAll('.m-cab').forEach(b => b.onclick = () => {
+                const k = b.parentNode.dataset.k;
+                MENU.abertos.has(k) ? MENU.abertos.delete(k) : MENU.abertos.add(k);
+                desenharMenu();
+            });
+            arv.querySelectorAll('.m-item').forEach(b => b.onclick = () => escolherAtividade(b.dataset.v));
+        }
+        function expandirTudo(abrir) {
+            MENU.abertos.clear();
+            if (abrir) (function percorrer(no) { no.filhos.forEach(f => { MENU.abertos.add(f.chave); percorrer(f); }); })(MENU.raiz);
+            document.getElementById('menu-busca').value = '';
+            desenharMenu();
+        }
+        function atualizarBotaoMenu() {
+            const sel = document.getElementById('tool-selector');
+            const op = sel.options[sel.selectedIndex];
+            document.getElementById('menu-btn').textContent = (op ? op.textContent : '🏠 Tela Inicial') + ' ▾';
+        }
+        function escolherAtividade(valor) {
+            const sel = document.getElementById('tool-selector');
+            sel.value = valor;
+            changeTool();
+            atualizarBotaoMenu();
+            fecharMenu();
+        }
+        function abrirMenu() {
+            const p = document.getElementById('menu-painel');
+            if (p.classList.contains('aberto')) return fecharMenu();
+            const barra = document.getElementById('top-bar');
+            p.style.top = (barra.offsetHeight + 4) + 'px';
+            p.classList.add('aberto');
+            desenharMenu();
+            document.getElementById('menu-busca').focus();
+        }
+        function fecharMenu() { document.getElementById('menu-painel').classList.remove('aberto'); }
+        // cliques dentro do painel não contam como "clique fora" (o menu se redesenha ao abrir um grupo)
+        document.getElementById('menu-painel').addEventListener('click', e => e.stopPropagation());
+        document.addEventListener('click', e => {
+            const p = document.getElementById('menu-painel');
+            if (p.classList.contains('aberto') && e.target.id !== 'menu-btn') fecharMenu();
+        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharMenu(); });
+        document.getElementById('tool-selector').addEventListener('change', atualizarBotaoMenu);
+        montarArvore();
+        atualizarBotaoMenu();
+
         function toggleTopBar() {
+            fecharMenu();
             const topBar = document.getElementById('top-bar');
             const showBtn = document.getElementById('show-menu-btn');
 

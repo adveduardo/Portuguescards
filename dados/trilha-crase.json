@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da crase",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "ocorre": {
+      "nome": "Ocorre",
+      "emoji": "✅",
+      "cor": "#27ae60"
+    },
+    "proibida": {
+      "nome": "Proibida",
+      "emoji": "🚫",
+      "cor": "#e74c3c"
+    },
+    "facultativa": {
+      "nome": "Facultativa",
+      "emoji": "🤷",
+      "cor": "#f39c12"
+    },
+    "lugares": {
+      "nome": "Lugares",
+      "emoji": "🗺️",
+      "cor": "#2f80ed"
+    },
+    "expressoes": {
+      "nome": "Expressões",
+      "emoji": "🗣️",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "ocorre": [
+      {
+        "texto": "Complete: Vou ___ farmácia.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Saí ___ cinco horas.",
+        "resposta": "às"
+      },
+      {
+        "texto": "Complete: Refiro-me ___ aquela.",
+        "resposta": "àquela"
+      },
+      {
+        "texto": "Complete: Bife ___ milanesa.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Obedeço ___ regras.",
+        "resposta": "às"
+      },
+      {
+        "texto": "Complete: Assisti ___ novela.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Fui ___ reunião.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Dei o livro ___ professora.",
+        "resposta": "à"
+      }
+    ],
+    "proibida": [
+      {
+        "texto": "Por que não há crase? Fui a pé.",
+        "resposta": "palavra masculina"
+      },
+      {
+        "texto": "Por que não há crase? Começou a chorar.",
+        "resposta": "verbo"
+      },
+      {
+        "texto": "Por que não há crase? Falei a ela.",
+        "resposta": "pronome pessoal"
+      },
+      {
+        "texto": "Por que não há crase? Cheguei a uma conclusão.",
+        "resposta": "artigo indefinido"
+      },
+      {
+        "texto": "Por que não há crase? Cara a cara.",
+        "resposta": "palavras repetidas"
+      },
+      {
+        "texto": "Por que não há crase? Vou a Recife.",
+        "resposta": "cidade sem artigo"
+      },
+      {
+        "texto": "Por que não há crase? Comprei a prazo.",
+        "resposta": "palavra masculina"
+      },
+      {
+        "texto": "Por que não há crase? Escrevi a Vossa Senhoria.",
+        "resposta": "pronome de tratamento"
+      }
+    ],
+    "facultativa": [
+      {
+        "texto": "Crase facultativa? Dei o livro a minha irmã.",
+        "resposta": "sim (possessivo feminino)"
+      },
+      {
+        "texto": "Crase facultativa? Fui até a praia.",
+        "resposta": "sim (depois de ATÉ)"
+      },
+      {
+        "texto": "Crase facultativa? Contei a Maria.",
+        "resposta": "sim (nome de mulher)"
+      },
+      {
+        "texto": "Crase facultativa? Vou a escola.",
+        "resposta": "não: é obrigatória (à)"
+      },
+      {
+        "texto": "Crase facultativa? Fui a pé.",
+        "resposta": "não: é proibida"
+      },
+      {
+        "texto": "Diga os 3 casos facultativos",
+        "resposta": "possessivo feminino, nome de mulher, depois de ATÉ"
+      },
+      {
+        "texto": "Crase facultativa? Escrevi a sua mãe.",
+        "resposta": "sim (possessivo feminino)"
+      },
+      {
+        "texto": "Crase facultativa? Saí às duas.",
+        "resposta": "não: é obrigatória"
+      }
+    ],
+    "lugares": [
+      {
+        "texto": "Complete: Vou ___ Bahia.",
+        "resposta": "à (volto da)"
+      },
+      {
+        "texto": "Complete: Vou ___ Recife.",
+        "resposta": "a (volto de)"
+      },
+      {
+        "texto": "Complete: Vou ___ Itália.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Vou ___ Portugal.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Complete: Vou ___ Paraíba.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Vou ___ Roma.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Complete: Vou ___ Roma antiga.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Vou ___ Japão.",
+        "resposta": "ao"
+      }
+    ],
+    "expressoes": [
+      {
+        "texto": "Complete: Saí ___ pressas.",
+        "resposta": "às"
+      },
+      {
+        "texto": "Complete: Fique ___ vontade.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Paguei ___ vista.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Paguei ___ prazo.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Complete: ___ vezes eu durmo cedo.",
+        "resposta": "Às"
+      },
+      {
+        "texto": "Complete: ___ partir de hoje.",
+        "resposta": "A"
+      },
+      {
+        "texto": "Complete: Ficou ___ toa.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Cheguei ___ meio-dia.",
+        "resposta": "ao"
+      }
+    ]
+  }
+}

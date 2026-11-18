@@ -1,0 +1,99 @@
+{
+  "titulo": "Cestos: transitivo direto ou indireto? (norma-padrão)",
+  "cestos": [
+    {
+      "id": "vtd",
+      "nome": "Transitivo direto (sem preposição)",
+      "emoji": "🎯",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "vti",
+      "nome": "Transitivo indireto (com preposição)",
+      "emoji": "↪️",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "namorar",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "implicar (acarretar)",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "visitar",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "ajudar",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "convidar",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "abraçar",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "esquecer (sem pronome)",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "assistir (dar assistência)",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "visar (mirar)",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "aspirar (respirar)",
+      "cesto": "vtd"
+    },
+    {
+      "palavra": "assistir (ver)",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "aspirar (desejar)",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "visar (objetivar)",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "obedecer",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "desobedecer",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "simpatizar",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "gostar",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "precisar",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "lembrar-se",
+      "cesto": "vti"
+    },
+    {
+      "palavra": "confiar",
+      "cesto": "vti"
+    }
+  ]
+}

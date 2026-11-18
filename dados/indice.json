@@ -51,6 +51,14 @@
     {
       "arquivo": "quiz-periodo.json",
       "titulo": "Quiz do período composto"
+    },
+    {
+      "arquivo": "quiz-regencia.json",
+      "titulo": "Quiz de regência"
+    },
+    {
+      "arquivo": "quiz-crase.json",
+      "titulo": "Quiz da crase"
     }
   ],
   "stop": [
@@ -115,6 +123,14 @@
     {
       "arquivo": "batata-periodo.json",
       "titulo": "Batata quente do período composto"
+    },
+    {
+      "arquivo": "batata-regencia.json",
+      "titulo": "Batata quente da regência"
+    },
+    {
+      "arquivo": "batata-crase.json",
+      "titulo": "Batata quente da crase"
     }
   ],
   "trilha": [
@@ -165,6 +181,14 @@
     {
       "arquivo": "trilha-periodo.json",
       "titulo": "Trilha do período composto"
+    },
+    {
+      "arquivo": "trilha-regencia.json",
+      "titulo": "Trilha da regência"
+    },
+    {
+      "arquivo": "trilha-crase.json",
+      "titulo": "Trilha da crase"
     }
   ],
   "escape": [
@@ -203,6 +227,14 @@
     {
       "arquivo": "escape-periodo.json",
       "titulo": "O Cofre do Período Composto"
+    },
+    {
+      "arquivo": "escape-regencia.json",
+      "titulo": "O Labirinto da Regência"
+    },
+    {
+      "arquivo": "escape-crase.json",
+      "titulo": "O Mistério do Acento Grave"
     }
   ],
   "mimica": [
@@ -303,6 +335,14 @@
     {
       "arquivo": "detetive-redacao.json",
       "titulo": "Detetive da redação"
+    },
+    {
+      "arquivo": "detetive-regencia.json",
+      "titulo": "Detetive da regência"
+    },
+    {
+      "arquivo": "detetive-crase.json",
+      "titulo": "Detetive da crase"
     }
   ],
   "pontuacao": [
@@ -369,6 +409,14 @@
     {
       "arquivo": "pc-cestos.json",
       "titulo": "Cestos dos conectivos do período composto"
+    },
+    {
+      "arquivo": "rg-cestos.json",
+      "titulo": "Cestos: transitivo direto ou indireto? (norma-padrão)"
+    },
+    {
+      "arquivo": "cr-cestos.json",
+      "titulo": "Cestos: com crase ou sem crase?"
     }
   ],
   "morfo-frases": [
@@ -1065,6 +1113,54 @@
     {
       "arquivo": "pc-tipo-sub.json",
       "titulo": "Substantiva, adjetiva ou adverbial?"
+    }
+  ],
+  "escolha-rg": [
+    {
+      "arquivo": "rg-certo-errado.json",
+      "titulo": "Regência verbal: certo ou errado?"
+    },
+    {
+      "arquivo": "rg-nominal-ce.json",
+      "titulo": "Regência nominal: certo ou errado?"
+    },
+    {
+      "arquivo": "rg-nominal.json",
+      "titulo": "Regência nominal: que preposição o nome pede?"
+    },
+    {
+      "arquivo": "rg-relativo.json",
+      "titulo": "Regência e pronome relativo"
+    },
+    {
+      "arquivo": "rg-sentido.json",
+      "titulo": "A regência muda o sentido"
+    },
+    {
+      "arquivo": "rg-verbal-prep.json",
+      "titulo": "Que preposição o verbo pede?"
+    }
+  ],
+  "escolha-cr": [
+    {
+      "arquivo": "cr-locucoes.json",
+      "titulo": "Crase nas expressões do dia a dia"
+    },
+    {
+      "arquivo": "cr-lugares.json",
+      "titulo": "Crase com nomes de lugares (vou e volto)"
+    },
+    {
+      "arquivo": "cr-ocorre.json",
+      "titulo": "Casos em que ocorre a crase"
+    },
+    {
+      "arquivo": "cr-proibida.json",
+      "titulo": "Casos em que não ocorre crase"
+    },
+    {
+      "arquivo": "cr-tipo.json",
+      "titulo": "Crase: obrigatória, facultativa ou proibida?"
     }
   ]
 }

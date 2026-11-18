@@ -1,0 +1,69 @@
+{
+  "titulo": "O Labirinto da Regência",
+  "historia": "Vocês entraram no labirinto e só saem se cada verbo e cada nome encontrarem a preposição certa. Cada acerto revela um número do código da saída!",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Porta 1: \"Assisti ___ filme ontem.\"",
+      "imagem": "🚪",
+      "opcoes": [
+        "ao",
+        "o",
+        "no"
+      ],
+      "correta": "ao",
+      "dica": "Assistir, no sentido de ver, pede a preposição A."
+    },
+    {
+      "pergunta": "Porta 2: escreva a preposição que falta: \"Sou favorável ___ proposta.\"",
+      "imagem": "👍",
+      "resposta": [
+        "à",
+        "a"
+      ],
+      "dica": "Favorável A + a proposta."
+    },
+    {
+      "pergunta": "Porta 3: Qual frase está na norma-padrão?",
+      "imagem": "💑",
+      "opcoes": [
+        "Pedro namora Ana.",
+        "Pedro namora com Ana."
+      ],
+      "correta": "Pedro namora Ana.",
+      "dica": "Namorar é transitivo direto."
+    },
+    {
+      "pergunta": "Porta 4: escreva o que completa: \"O cargo ___ aspiro é o de diretor.\" (duas palavras)",
+      "imagem": "💼",
+      "resposta": [
+        "a que",
+        "ao qual"
+      ],
+      "dica": "Aspirar A algo."
+    },
+    {
+      "pergunta": "Porta 5: \"Prefiro estudar ___ trabalhar.\"",
+      "imagem": "📚",
+      "opcoes": [
+        "a",
+        "do que",
+        "que"
+      ],
+      "correta": "a",
+      "dica": "Preferir algo A algo."
+    },
+    {
+      "pergunta": "Porta 6: \"O médico assistiu o paciente.\" O que o médico fez?",
+      "imagem": "🩺",
+      "opcoes": [
+        "deu assistência",
+        "viu na televisão",
+        "foi embora"
+      ],
+      "correta": "deu assistência",
+      "dica": "Assistir alguém, sem preposição."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "titulo": "Cestos: com crase ou sem crase?",
+  "cestos": [
+    {
+      "id": "com",
+      "nome": "À (com crase)",
+      "emoji": "✅",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "sem",
+      "nome": "A (sem crase)",
+      "emoji": "🚫",
+      "cor": "#e74c3c"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "Saí __ noite",
+      "cesto": "com"
+    },
+    {
+      "palavra": "__ vezes eu canto",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Pago __ vista",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Fique __ vontade",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Vou __ praia",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Bife __ milanesa",
+      "cesto": "com"
+    },
+    {
+      "palavra": "__ medida que cresce",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Chegou __ uma hora",
+      "cesto": "com"
+    },
+    {
+      "palavra": "Fui __ pé",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Andei __ cavalo",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "__ partir de hoje",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Comprei __ prazo",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Gota __ gota",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Falei __ ela",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Começou __ chover",
+      "cesto": "sem"
+    },
+    {
+      "palavra": "Vou __ Recife",
+      "cesto": "sem"
+    }
+  ]
+}

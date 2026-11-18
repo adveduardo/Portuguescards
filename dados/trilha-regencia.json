@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da regência",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "verbal": {
+      "nome": "Verbal",
+      "emoji": "🧭",
+      "cor": "#2f80ed"
+    },
+    "nominal": {
+      "nome": "Nominal",
+      "emoji": "🧷",
+      "cor": "#16a085"
+    },
+    "sentido": {
+      "nome": "Sentido",
+      "emoji": "🔀",
+      "cor": "#8e44ad"
+    },
+    "relativo": {
+      "nome": "Relativo",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    },
+    "corrija": {
+      "nome": "Corrija",
+      "emoji": "🕵️",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "verbal": [
+      {
+        "texto": "Complete: Assisti ___ show.",
+        "resposta": "ao"
+      },
+      {
+        "texto": "Complete: Obedeço ___ pais.",
+        "resposta": "aos"
+      },
+      {
+        "texto": "Complete: Aspiro ___ cargo.",
+        "resposta": "ao"
+      },
+      {
+        "texto": "Complete: Prefiro mar ___ montanha.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Cheguei ___ cidade.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: Paguei ___ dentista.",
+        "resposta": "ao"
+      },
+      {
+        "texto": "Complete: Lembrei-me ___ você.",
+        "resposta": "de"
+      },
+      {
+        "texto": "Complete: Simpatizo ___ ele.",
+        "resposta": "com"
+      }
+    ],
+    "nominal": [
+      {
+        "texto": "Complete: favorável ___ ideia",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: fiel ___ time",
+        "resposta": "ao"
+      },
+      {
+        "texto": "Complete: capaz ___ vencer",
+        "resposta": "de"
+      },
+      {
+        "texto": "Complete: nocivo ___ saúde",
+        "resposta": "à"
+      },
+      {
+        "texto": "Complete: ansioso ___ férias",
+        "resposta": "pelas"
+      },
+      {
+        "texto": "Complete: compatível ___ você",
+        "resposta": "com"
+      },
+      {
+        "texto": "Complete: doutor ___ Letras",
+        "resposta": "em"
+      },
+      {
+        "texto": "Complete: preferível ___ isso",
+        "resposta": "a"
+      }
+    ],
+    "sentido": [
+      {
+        "texto": "O que significa: assistir o doente?",
+        "resposta": "dar assistência"
+      },
+      {
+        "texto": "O que significa: assistir ao jogo?",
+        "resposta": "ver"
+      },
+      {
+        "texto": "O que significa: aspirar o perfume?",
+        "resposta": "respirar"
+      },
+      {
+        "texto": "O que significa: aspirar ao cargo?",
+        "resposta": "desejar"
+      },
+      {
+        "texto": "O que significa: visar o cheque?",
+        "resposta": "assinar, dar o visto"
+      },
+      {
+        "texto": "O que significa: visar ao lucro?",
+        "resposta": "ter como objetivo"
+      },
+      {
+        "texto": "O que significa: agradar ao público?",
+        "resposta": "satisfazer"
+      },
+      {
+        "texto": "O que significa: agradar o bebê?",
+        "resposta": "fazer carinho"
+      }
+    ],
+    "relativo": [
+      {
+        "texto": "Complete: O livro ___ preciso",
+        "resposta": "de que"
+      },
+      {
+        "texto": "Complete: A rua ___ moro",
+        "resposta": "em que / onde"
+      },
+      {
+        "texto": "Complete: O cargo ___ aspiro",
+        "resposta": "a que"
+      },
+      {
+        "texto": "Complete: A amiga ___ confio",
+        "resposta": "em quem"
+      },
+      {
+        "texto": "Complete: O filme ___ assisti",
+        "resposta": "a que"
+      },
+      {
+        "texto": "Complete: O colega ___ simpatizo",
+        "resposta": "com quem"
+      },
+      {
+        "texto": "Complete: O fato ___ me lembrei",
+        "resposta": "de que"
+      },
+      {
+        "texto": "Complete: As regras ___ obedeço",
+        "resposta": "a que"
+      }
+    ],
+    "corrija": [
+      {
+        "texto": "Corrija: Assisti o filme.",
+        "resposta": "Assisti ao filme."
+      },
+      {
+        "texto": "Corrija: Vou na praia.",
+        "resposta": "Vou à praia."
+      },
+      {
+        "texto": "Corrija: Namoro com ele.",
+        "resposta": "Namoro-o."
+      },
+      {
+        "texto": "Corrija: Prefiro mais doce do que salgado.",
+        "resposta": "Prefiro doce a salgado."
+      },
+      {
+        "texto": "Corrija: Obedeça os sinais.",
+        "resposta": "Obedeça aos sinais."
+      },
+      {
+        "texto": "Corrija: Esqueci do caderno.",
+        "resposta": "Esqueci o caderno."
+      },
+      {
+        "texto": "Corrija: Simpatizei-me com ela.",
+        "resposta": "Simpatizei com ela."
+      },
+      {
+        "texto": "Corrija: Ele é fiel com a esposa.",
+        "resposta": "Ele é fiel à esposa."
+      }
+    ]
+  }
+}
