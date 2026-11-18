@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha dos advérbios",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "tempo": {
+      "nome": "Tempo",
+      "emoji": "⏰",
+      "cor": "#e67e22"
+    },
+    "lugar": {
+      "nome": "Lugar",
+      "emoji": "📍",
+      "cor": "#2f80ed"
+    },
+    "modo": {
+      "nome": "Modo",
+      "emoji": "🎭",
+      "cor": "#27ae60"
+    },
+    "intensidade": {
+      "nome": "Intensidade",
+      "emoji": "🌡️",
+      "cor": "#c2185b"
+    },
+    "mente": {
+      "nome": "-MENTE",
+      "emoji": "✨",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "tempo": [
+      {
+        "texto": "Complete com um advérbio de tempo: ___ eu fui à praia.",
+        "resposta": "Ontem"
+      },
+      {
+        "texto": "Diga o contrário de CEDO.",
+        "resposta": "tarde"
+      },
+      {
+        "texto": "Fale uma frase com HOJE.",
+        "resposta": "Exemplo: Hoje está calor."
+      },
+      {
+        "texto": "Quando você dorme? Responda com um advérbio.",
+        "resposta": "à noite, cedo, tarde"
+      },
+      {
+        "texto": "Diga o contrário de ANTES.",
+        "resposta": "depois"
+      },
+      {
+        "texto": "Diga o contrário de SEMPRE.",
+        "resposta": "nunca"
+      },
+      {
+        "texto": "Complete: ___ vai ser meu aniversário.",
+        "resposta": "amanhã, logo"
+      },
+      {
+        "texto": "Diga um advérbio de tempo que comece com A.",
+        "resposta": "agora, amanhã, antes, ainda"
+      }
+    ],
+    "lugar": [
+      {
+        "texto": "Diga o contrário de PERTO.",
+        "resposta": "longe"
+      },
+      {
+        "texto": "Diga o contrário de DENTRO.",
+        "resposta": "fora"
+      },
+      {
+        "texto": "Diga o contrário de EM CIMA.",
+        "resposta": "embaixo"
+      },
+      {
+        "texto": "Onde está o seu lápis? Responda com um advérbio.",
+        "resposta": "aqui, ali"
+      },
+      {
+        "texto": "Fale uma frase com LÁ.",
+        "resposta": "Exemplo: A bola está lá."
+      },
+      {
+        "texto": "Diga o contrário de AQUI.",
+        "resposta": "lá, ali"
+      },
+      {
+        "texto": "Diga o contrário de NA FRENTE.",
+        "resposta": "atrás"
+      },
+      {
+        "texto": "Complete: O gato subiu ___ do telhado.",
+        "resposta": "em cima"
+      }
+    ],
+    "modo": [
+      {
+        "texto": "Como a tartaruga anda?",
+        "resposta": "devagar, lentamente"
+      },
+      {
+        "texto": "Como o coelho corre?",
+        "resposta": "depressa, rapidamente"
+      },
+      {
+        "texto": "Diga o contrário de BEM.",
+        "resposta": "mal"
+      },
+      {
+        "texto": "Diga o contrário de DEVAGAR.",
+        "resposta": "depressa"
+      },
+      {
+        "texto": "Como devemos falar na biblioteca?",
+        "resposta": "baixinho, silenciosamente"
+      },
+      {
+        "texto": "Faça a mímica de \"andar cuidadosamente\".",
+        "resposta": "A turma confere!"
+      },
+      {
+        "texto": "Complete: Ela canta muito ___ (bem ou bom?).",
+        "resposta": "bem"
+      },
+      {
+        "texto": "Complete: Ele dormiu ___ (mal ou mau?).",
+        "resposta": "mal"
+      }
+    ],
+    "intensidade": [
+      {
+        "texto": "Diga o contrário de MUITO.",
+        "resposta": "pouco"
+      },
+      {
+        "texto": "Complete: Estou ___ cansado.",
+        "resposta": "muito, bastante, pouco"
+      },
+      {
+        "texto": "Qual é o advérbio de intensidade em \"Ele comeu demais\"?",
+        "resposta": "demais"
+      },
+      {
+        "texto": "Fale uma frase com BASTANTE.",
+        "resposta": "Exemplo: Estudei bastante."
+      },
+      {
+        "texto": "O que é mais: POUCO ou MUITO?",
+        "resposta": "muito"
+      },
+      {
+        "texto": "Complete: O bolo estava ___ gostoso.",
+        "resposta": "muito, tão, bem"
+      },
+      {
+        "texto": "Diga um advérbio de intensidade.",
+        "resposta": "muito, pouco, bastante, tão, demais"
+      },
+      {
+        "texto": "Em \"Ela é tão gentil\", qual é o advérbio de intensidade?",
+        "resposta": "tão"
+      }
+    ],
+    "mente": [
+      {
+        "texto": "Transforme em advérbio: CALMA.",
+        "resposta": "calmamente"
+      },
+      {
+        "texto": "Transforme em advérbio: ALEGRE.",
+        "resposta": "alegremente"
+      },
+      {
+        "texto": "Transforme em advérbio: TRISTE.",
+        "resposta": "tristemente"
+      },
+      {
+        "texto": "Transforme em advérbio: RÁPIDA.",
+        "resposta": "rapidamente"
+      },
+      {
+        "texto": "Transforme em advérbio: FÁCIL.",
+        "resposta": "facilmente"
+      },
+      {
+        "texto": "Transforme em advérbio: CUIDADOSA.",
+        "resposta": "cuidadosamente"
+      },
+      {
+        "texto": "Transforme em advérbio: GENTIL.",
+        "resposta": "gentilmente"
+      },
+      {
+        "texto": "Transforme em advérbio: CARINHOSA.",
+        "resposta": "carinhosamente"
+      }
+    ]
+  }
+}

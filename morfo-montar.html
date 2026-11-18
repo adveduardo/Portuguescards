@@ -81,7 +81,7 @@ let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, colo
 function carregar(d, origem){
   if (!d || !Array.isArray(d.palavras)) return AV.avisar('JSON inválido: falta a lista "palavras".');
   const palavras = d.palavras.filter(p => p && p.palavra && Array.isArray(p.partes) && p.partes.length >= 2 && p.dica)
-    .map(p => ({palavra: String(p.palavra), partes: p.partes.map(String), dica: String(p.dica), imagem: p.imagem || '', explica: p.explica || ''}));
+    .map(p => ({palavra: String(p.palavra), partes: p.partes.map(String), dica: String(p.dica), imagem: p.imagem || '', explica: p.explica || '', distratores: (p.distratores || []).map(String)}));
   if (!palavras.length) return AV.avisar('Nenhuma palavra válida (cada uma precisa de "palavra", "partes" e "dica").');
   dados = {titulo: d.titulo || 'Monte a palavra', palavras, extras: Array.isArray(d.pecasExtras) ? d.pecasExtras.map(String) : []};
   $('infoJson').textContent = `${dados.titulo} • ${palavras.length} palavras` + (origem ? ` • ${origem}` : '');
@@ -104,7 +104,9 @@ function proxima(){
   colocadas = atual.partes.map(() => null);
   // peças: as certas + algumas de outras palavras ou da lista de extras
   const outras = [...new Set(dados.extras.concat(dados.palavras.flatMap(p => p.partes)))].filter(x => !atual.partes.includes(x));
-  pecas = M.embaralhar(atual.partes.concat(M.embaralhar(outras).slice(0, +$('selExtras').value))).map((t, i) => ({t, i}));
+  const proprios = atual.distratores.filter(x => !atual.partes.includes(x));
+  const resto = M.embaralhar(outras.filter(x => !proprios.includes(x))).slice(0, Math.max(0, +$('selExtras').value - proprios.length));
+  pecas = M.embaralhar(atual.partes.concat(proprios, resto)).map((t, i) => ({t, i}));
   $('contador').textContent = `${placar.prefixo()}Palavra ${n} de ${total}`;
   $('img').textContent = atual.imagem;
   $('dica').innerHTML = `${AV.esc(atual.dica)}<small>Monte a palavra com ${atual.partes.length} peças</small>`;

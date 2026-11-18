@@ -82,11 +82,22 @@ const AV = window.AoVivo, M = window.Morfo, C = M.CLASSES;
 let palavras = null, ativas = [], placar = null, fila = [], atual = null, rodadasRestantes = 0, acertosRodada = 0;
 let timer = null, fimEm = 0, quedaTimer = null, ocupado = false, jogando = false;
 
+let CATS = C;   // cestos: classes de palavras ou categorias próprias do JSON ("cestos")
+const CORES_CESTO = ['#e67e22', '#2f80ed', '#27ae60', '#c2185b', '#8e44ad', '#16a085', '#e74c3c'];
 function carregar(d, origem){
   if (!d || !Array.isArray(d.palavras)) return AV.avisar('JSON inválido: falta a lista "palavras" com "classe".');
-  palavras = d.palavras.map(p => ({palavra: String(p.palavra || ''), classe: M.codigo(p.classe)})).filter(p => p.palavra && p.classe);
-  const presentes = [...new Set(palavras.map(p => p.classe))];
-  M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  if (Array.isArray(d.cestos) && d.cestos.length){
+    CATS = {};
+    d.cestos.forEach((c, i) => { const id = String(c.id || c.nome); CATS[id] = {nome: String(c.nome || id), cor: c.cor || CORES_CESTO[i % CORES_CESTO.length], emoji: c.emoji || '🧺', padrao: c.padrao !== false}; });
+    palavras = d.palavras.map(p => ({palavra: String(p.palavra || ''), classe: String(p.cesto || p.classe || '')})).filter(p => p.palavra && CATS[p.classe]);
+    $('escolhaClasses').innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:4px 16px">' + Object.keys(CATS).map(id =>
+      `<label style="margin:2px 0"><input type="checkbox" data-c="${AV.esc(id)}" ${CATS[id].padrao ? 'checked' : ''}> <span style="background:${CATS[id].cor};color:#fff;border-radius:8px;padding:2px 8px;font-weight:bold">${CATS[id].emoji} ${AV.esc(CATS[id].nome)}</span></label>`).join('') + '</div>';
+  } else {
+    CATS = C;
+    palavras = d.palavras.map(p => ({palavra: String(p.palavra || ''), classe: M.codigo(p.classe)})).filter(p => p.palavra && p.classe);
+    const presentes = [...new Set(palavras.map(p => p.classe))];
+    M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  }
   $('infoJson').textContent = `${d.titulo || 'Palavras'} • ${palavras.length} palavras` + (origem ? ` • ${origem}` : '');
 }
 AV.prepararSeletorJson({tipo: 'morfo-cestos', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
@@ -100,7 +111,7 @@ function comecar(){
   AV.som = $('chkSom').checked;
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
   rodadasRestantes = Math.max(1, placar.equipes.length) * +$('selRodadas').value;
-  $('cestos').innerHTML = ativas.map(c => `<div class="cesto" data-c="${c}" style="background:${C[c].cor}"><span class="e">🧺</span>${C[c].nome}<small>${C[c].emoji}</small></div>`).join('');
+  $('cestos').innerHTML = ativas.map(c => `<div class="cesto" data-c="${c}" style="background:${CATS[c].cor}"><span class="e">🧺</span>${AV.esc(CATS[c].nome)}<small>${CATS[c].emoji}</small></div>`).join('');
   $('cestos').querySelectorAll('.cesto').forEach(el => el.onclick = () => { if (atual && !ocupado && !arr) soltarEm(el.dataset.c); });
   AV.mostrarTela('tJogo');
   anunciarVez();

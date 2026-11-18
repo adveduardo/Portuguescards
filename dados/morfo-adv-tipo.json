@@ -1,0 +1,352 @@
+{
+  "titulo": "Que tipo de advérbio?",
+  "emoji": "🏷️",
+  "instrucao": "Que tipo de advérbio é a palavra destacada?",
+  "rodadas": [
+    {
+      "destaque": "[Ontem] fui ao cinema.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Tempo",
+      "explica": "Advérbio de tempo: indica quando algo acontece.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Volte [amanhã].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Tempo",
+      "explica": "Advérbio de tempo: indica quando algo acontece.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "[Agora] vamos lanchar.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Tempo",
+      "explica": "Advérbio de tempo: indica quando algo acontece.",
+      "imagem": "🥪"
+    },
+    {
+      "destaque": "Cheguei [cedo] à escola.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Tempo",
+      "explica": "Advérbio de tempo: indica quando algo acontece.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "O gato está [aqui].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Lugar",
+      "explica": "Advérbio de lugar: indica onde.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "Moro [longe] do centro.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Lugar",
+      "explica": "Advérbio de lugar: indica onde.",
+      "imagem": "🏡"
+    },
+    {
+      "destaque": "O brinquedo está [ali].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Lugar",
+      "explica": "Advérbio de lugar: indica onde.",
+      "imagem": "🧸"
+    },
+    {
+      "destaque": "A bola está [dentro] da caixa.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Lugar",
+      "explica": "Advérbio de lugar: indica onde.",
+      "imagem": "📦"
+    },
+    {
+      "destaque": "A lesma anda [devagar].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Modo",
+      "explica": "Advérbio de modo: indica como.",
+      "imagem": "🐌"
+    },
+    {
+      "destaque": "Ela dança [bem].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Modo",
+      "explica": "Advérbio de modo: indica como.",
+      "imagem": "💃"
+    },
+    {
+      "destaque": "Ele respondeu [calmamente].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Modo",
+      "explica": "Advérbio de modo: indica como.",
+      "imagem": "😌"
+    },
+    {
+      "destaque": "Saímos [depressa].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Modo",
+      "explica": "Advérbio de modo: indica como.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Estou [muito] feliz.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Intensidade",
+      "explica": "Advérbio de intensidade: indica quanto (mais forte ou mais fraco).",
+      "imagem": "😄"
+    },
+    {
+      "destaque": "Comi [pouco] no almoço.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Intensidade",
+      "explica": "Advérbio de intensidade: indica quanto (mais forte ou mais fraco).",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "O filme foi [bastante] engraçado.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Intensidade",
+      "explica": "Advérbio de intensidade: indica quanto (mais forte ou mais fraco).",
+      "imagem": "😂"
+    },
+    {
+      "destaque": "Ele falou [demais].",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Intensidade",
+      "explica": "Advérbio de intensidade: indica quanto (mais forte ou mais fraco).",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Eu [não] gosto de jiló.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Negação",
+      "explica": "Advérbio de negação: nega, diz que não.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "[Sim], eu vou à festa.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Afirmação",
+      "explica": "Advérbio de afirmação: confirma, diz que sim com certeza.",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "[Certamente] vamos vencer!",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Afirmação",
+      "explica": "Advérbio de afirmação: confirma, diz que sim com certeza.",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "Ela [realmente] gostou do presente.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Afirmação",
+      "explica": "Advérbio de afirmação: confirma, diz que sim com certeza.",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "[Talvez] chova hoje.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Dúvida",
+      "explica": "Advérbio de dúvida: mostra que não temos certeza.",
+      "imagem": "🌦️"
+    },
+    {
+      "destaque": "[Provavelmente] ele vem amanhã.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Dúvida",
+      "explica": "Advérbio de dúvida: mostra que não temos certeza.",
+      "imagem": "🤔"
+    },
+    {
+      "destaque": "[Possivelmente] a loja está fechada.",
+      "opcoes": [
+        "Tempo",
+        "Lugar",
+        "Modo",
+        "Intensidade",
+        "Negação",
+        "Afirmação",
+        "Dúvida"
+      ],
+      "correta": "Dúvida",
+      "explica": "Advérbio de dúvida: mostra que não temos certeza.",
+      "imagem": "🏪"
+    }
+  ]
+}

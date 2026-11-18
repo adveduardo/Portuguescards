@@ -1,0 +1,220 @@
+{
+  "titulo": "Cestos dos advérbios",
+  "cestos": [
+    {
+      "id": "tempo",
+      "nome": "Tempo",
+      "emoji": "⏰",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "lugar",
+      "nome": "Lugar",
+      "emoji": "📍",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "modo",
+      "nome": "Modo",
+      "emoji": "🎭",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "intensidade",
+      "nome": "Intensidade",
+      "emoji": "🌡️",
+      "cor": "#c2185b"
+    },
+    {
+      "id": "negacao",
+      "nome": "Negação",
+      "emoji": "🚫",
+      "cor": "#7f8c8d",
+      "padrao": false
+    },
+    {
+      "id": "afirmacao",
+      "nome": "Afirmação",
+      "emoji": "✅",
+      "cor": "#16a085",
+      "padrao": false
+    },
+    {
+      "id": "duvida",
+      "nome": "Dúvida",
+      "emoji": "🤔",
+      "cor": "#8e44ad",
+      "padrao": false
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "ontem",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "hoje",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "amanhã",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "agora",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "cedo",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "depois",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "antes",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "já",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "ainda",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "sempre",
+      "cesto": "tempo"
+    },
+    {
+      "palavra": "aqui",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "ali",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "lá",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "longe",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "perto",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "dentro",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "fora",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "acima",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "abaixo",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "atrás",
+      "cesto": "lugar"
+    },
+    {
+      "palavra": "devagar",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "depressa",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "bem",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "mal",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "assim",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "calmamente",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "alegremente",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "rapidamente",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "baixinho",
+      "cesto": "modo"
+    },
+    {
+      "palavra": "muito",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "pouco",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "bastante",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "demais",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "tão",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "quase",
+      "cesto": "intensidade"
+    },
+    {
+      "palavra": "não",
+      "cesto": "negacao"
+    },
+    {
+      "palavra": "sim",
+      "cesto": "afirmacao"
+    },
+    {
+      "palavra": "certamente",
+      "cesto": "afirmacao"
+    },
+    {
+      "palavra": "realmente",
+      "cesto": "afirmacao"
+    },
+    {
+      "palavra": "talvez",
+      "cesto": "duvida"
+    },
+    {
+      "palavra": "provavelmente",
+      "cesto": "duvida"
+    },
+    {
+      "palavra": "possivelmente",
+      "cesto": "duvida"
+    }
+  ]
+}

@@ -7,6 +7,10 @@
     {
       "arquivo": "quiz-morfologia.json",
       "titulo": "Quiz de morfologia"
+    },
+    {
+      "arquivo": "quiz-adverbios.json",
+      "titulo": "Quiz dos advérbios"
     }
   ],
   "stop": [
@@ -27,6 +31,10 @@
     {
       "arquivo": "batata-morfologia.json",
       "titulo": "Batata quente de morfologia"
+    },
+    {
+      "arquivo": "batata-adverbios.json",
+      "titulo": "Batata quente dos advérbios"
     }
   ],
   "trilha": [
@@ -37,6 +45,10 @@
     {
       "arquivo": "trilha-morfologia.json",
       "titulo": "Trilha da morfologia"
+    },
+    {
+      "arquivo": "trilha-adverbios.json",
+      "titulo": "Trilha dos advérbios"
     }
   ],
   "escape": [
@@ -53,12 +65,20 @@
     {
       "arquivo": "mimica-padrao.json",
       "titulo": "Mímica e desenho (modelo)"
+    },
+    {
+      "arquivo": "mimica-adverbios.json",
+      "titulo": "Mímica dos advérbios de modo"
     }
   ],
   "historias": [
     {
       "arquivo": "historias-padrao.json",
       "titulo": "Dados de histórias (modelo)"
+    },
+    {
+      "arquivo": "historias-turbine.json",
+      "titulo": "Turbine a frase (advérbios)"
     }
   ],
   "caminho": [
@@ -75,6 +95,10 @@
     {
       "arquivo": "detetive-concordancia.json",
       "titulo": "Detetive da concordância"
+    },
+    {
+      "arquivo": "detetive-bem-mal.json",
+      "titulo": "Detetive do bem e do mal"
     }
   ],
   "pontuacao": [
@@ -93,12 +117,20 @@
     {
       "arquivo": "morfo-classes.json",
       "titulo": "Classes de palavras (modelo)"
+    },
+    {
+      "arquivo": "morfo-adv-cestos.json",
+      "titulo": "Cestos dos advérbios"
     }
   ],
   "morfo-frases": [
     {
       "arquivo": "morfo-frases.json",
       "titulo": "Frases para pintar (modelo)"
+    },
+    {
+      "arquivo": "morfo-adv-frases.json",
+      "titulo": "Caça aos advérbios"
     }
   ],
   "morfo-plural": [
@@ -135,12 +167,68 @@
     {
       "arquivo": "morfo-montar.json",
       "titulo": "Monte a palavra (modelo)"
+    },
+    {
+      "arquivo": "morfo-adv-mente.json",
+      "titulo": "Fábrica do -MENTE"
     }
   ],
   "morfo-familia": [
     {
       "arquivo": "morfo-familia.json",
       "titulo": "Família de palavras (modelo)"
+    }
+  ],
+  "morfo-adv-pergunta": [
+    {
+      "arquivo": "morfo-adv-pergunta.json",
+      "titulo": "Pergunte ao verbo (modelo)"
+    }
+  ],
+  "morfo-adv-tipo": [
+    {
+      "arquivo": "morfo-adv-tipo.json",
+      "titulo": "Que tipo de advérbio? (modelo)"
+    }
+  ],
+  "morfo-adv-adjetivo": [
+    {
+      "arquivo": "morfo-adv-adjetivo.json",
+      "titulo": "Adjetivo ou advérbio? (modelo)"
+    }
+  ],
+  "morfo-adv-locucao": [
+    {
+      "arquivo": "morfo-adv-locucao.json",
+      "titulo": "Locução adverbial (modelo)"
+    }
+  ],
+  "morfo-adv-complete": [
+    {
+      "arquivo": "morfo-adv-complete.json",
+      "titulo": "Complete com o advérbio (modelo)"
+    }
+  ],
+  "morfo-adv-opostos": [
+    {
+      "arquivo": "morfo-adv-opostos.json",
+      "titulo": "Advérbios opostos (modelo)"
+    }
+  ],
+  "morfo-ordene": [
+    {
+      "arquivo": "morfo-adv-linha-tempo.json",
+      "titulo": "Linha do tempo dos advérbios (modelo)"
+    },
+    {
+      "arquivo": "morfo-adv-intensidade.json",
+      "titulo": "Termômetro da intensidade (modelo)"
+    }
+  ],
+  "morfo-onde": [
+    {
+      "arquivo": "morfo-onde.json",
+      "titulo": "Onde está o bicho? (modelo)"
     }
   ]
 }

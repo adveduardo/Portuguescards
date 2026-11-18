@@ -1,0 +1,213 @@
+{
+  "titulo": "Onde está o bicho?",
+  "rodadas": [
+    {
+      "objeto": "mesa",
+      "posicao": "em cima",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "em cima da mesa",
+        "embaixo da mesa",
+        "ao lado da mesa"
+      ],
+      "correta": "em cima da mesa",
+      "explica": "EM CIMA é uma locução adverbial de lugar: diz ONDE o gato está."
+    },
+    {
+      "objeto": "mesa",
+      "posicao": "embaixo",
+      "animal": "🐶",
+      "nome": "o cachorro",
+      "opcoes": [
+        "embaixo da mesa",
+        "em cima da mesa",
+        "dentro da mesa"
+      ],
+      "correta": "embaixo da mesa",
+      "explica": "EMBAIXO é advérbio de lugar: diz ONDE o cachorro está."
+    },
+    {
+      "objeto": "mesa",
+      "posicao": "ao lado",
+      "animal": "🐰",
+      "nome": "o coelho",
+      "opcoes": [
+        "ao lado da mesa",
+        "embaixo da mesa",
+        "em cima da mesa"
+      ],
+      "correta": "ao lado da mesa",
+      "explica": "AO LADO é uma locução adverbial de lugar: diz ONDE o coelho está."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "dentro",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "dentro da caixa",
+        "fora da caixa",
+        "embaixo da caixa"
+      ],
+      "correta": "dentro da caixa",
+      "explica": "DENTRO é advérbio de lugar: diz ONDE o gato está."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "fora",
+      "animal": "🐸",
+      "nome": "o sapo",
+      "opcoes": [
+        "fora da caixa",
+        "dentro da caixa",
+        "em cima da caixa"
+      ],
+      "correta": "fora da caixa",
+      "explica": "FORA é advérbio de lugar: o contrário de DENTRO."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "em cima",
+      "animal": "🐭",
+      "nome": "o rato",
+      "opcoes": [
+        "em cima da caixa",
+        "dentro da caixa",
+        "embaixo da caixa"
+      ],
+      "correta": "em cima da caixa",
+      "explica": "EM CIMA é uma locução adverbial de lugar: diz ONDE o rato está."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "atras",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "atrás da árvore",
+        "na frente da árvore",
+        "em cima da árvore"
+      ],
+      "correta": "atrás da árvore",
+      "explica": "ATRÁS é advérbio de lugar: o gato está escondido!"
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "frente",
+      "animal": "🐶",
+      "nome": "o cachorro",
+      "opcoes": [
+        "na frente da árvore",
+        "atrás da árvore",
+        "dentro da árvore"
+      ],
+      "correta": "na frente da árvore",
+      "explica": "NA FRENTE é uma locução adverbial de lugar: diz ONDE o cachorro está."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "em cima",
+      "animal": "🐿️",
+      "nome": "o esquilo",
+      "opcoes": [
+        "em cima da árvore",
+        "embaixo da árvore",
+        "atrás da árvore"
+      ],
+      "correta": "em cima da árvore",
+      "explica": "EM CIMA é uma locução adverbial de lugar: diz ONDE o esquilo está."
+    },
+    {
+      "objeto": "casa",
+      "posicao": "perto",
+      "animal": "🐶",
+      "nome": "o cachorro",
+      "opcoes": [
+        "perto da casa",
+        "longe da casa",
+        "dentro da casa"
+      ],
+      "correta": "perto da casa",
+      "explica": "PERTO é advérbio de lugar."
+    },
+    {
+      "objeto": "casa",
+      "posicao": "longe",
+      "animal": "🐄",
+      "nome": "a vaca",
+      "opcoes": [
+        "longe da casa",
+        "perto da casa",
+        "em cima da casa"
+      ],
+      "correta": "longe da casa",
+      "explica": "LONGE é advérbio de lugar: o contrário de PERTO."
+    },
+    {
+      "objeto": "caixas",
+      "posicao": "entre",
+      "animal": "🐰",
+      "nome": "o coelho",
+      "opcoes": [
+        "entre as caixas",
+        "dentro das caixas",
+        "em cima das caixas"
+      ],
+      "correta": "entre as caixas",
+      "explica": "ENTRE mostra que o coelho está no meio das duas caixas."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "dentro",
+      "animal": "🐶",
+      "nome": "o cachorro",
+      "opcoes": [
+        "dentro da caixa",
+        "atrás da caixa",
+        "longe da caixa"
+      ],
+      "correta": "dentro da caixa",
+      "explica": "DENTRO é advérbio de lugar."
+    },
+    {
+      "objeto": "mesa",
+      "posicao": "embaixo",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "embaixo da mesa",
+        "em cima da mesa",
+        "longe da mesa"
+      ],
+      "correta": "embaixo da mesa",
+      "explica": "EMBAIXO é advérbio de lugar: o contrário de EM CIMA."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "atras",
+      "animal": "🐰",
+      "nome": "o coelho",
+      "opcoes": [
+        "atrás da árvore",
+        "na frente da árvore",
+        "longe da árvore"
+      ],
+      "correta": "atrás da árvore",
+      "explica": "ATRÁS é advérbio de lugar: o contrário de NA FRENTE."
+    },
+    {
+      "objeto": "casa",
+      "posicao": "longe",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "longe da casa",
+        "perto da casa",
+        "dentro da casa"
+      ],
+      "correta": "longe da casa",
+      "explica": "LONGE é advérbio de lugar."
+    }
+  ]
+}

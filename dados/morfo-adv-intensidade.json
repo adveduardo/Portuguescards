@@ -1,0 +1,65 @@
+{
+  "titulo": "Termômetro da intensidade",
+  "sequencias": [
+    {
+      "titulo": "Estou cansado...",
+      "esquerda": "🧊 menos",
+      "direita": "mais 🔥",
+      "itens": [
+        "nada",
+        "pouco",
+        "muito",
+        "demais"
+      ],
+      "explica": "Os advérbios de intensidade deixam a frase mais fraca ou mais forte: pouco cansado, muito cansado..."
+    },
+    {
+      "titulo": "Com que frequência?",
+      "esquerda": "🧊 menos vezes",
+      "direita": "mais vezes 🔥",
+      "itens": [
+        "nunca",
+        "às vezes",
+        "quase sempre",
+        "sempre"
+      ],
+      "explica": "NUNCA é nenhuma vez; SEMPRE é todas as vezes."
+    },
+    {
+      "titulo": "Qual a distância?",
+      "esquerda": "📍 mais perto",
+      "direita": "mais longe 🗺️",
+      "itens": [
+        "aqui",
+        "perto",
+        "longe",
+        "muito longe"
+      ],
+      "explica": "MUITO deixa o advérbio LONGE ainda mais forte."
+    },
+    {
+      "titulo": "Qual a velocidade?",
+      "esquerda": "🐢 mais lento",
+      "direita": "mais rápido 🐇",
+      "itens": [
+        "devagarinho",
+        "devagar",
+        "depressa",
+        "muito depressa"
+      ],
+      "explica": "O diminutivo (devagarinho) e o MUITO mudam a intensidade."
+    },
+    {
+      "titulo": "Quanto ele comeu?",
+      "esquerda": "🧊 menos",
+      "direita": "mais 🔥",
+      "itens": [
+        "quase nada",
+        "pouco",
+        "bastante",
+        "demais"
+      ],
+      "explica": "DEMAIS é mais do que o necessário!"
+    }
+  ]
+}

@@ -170,6 +170,8 @@ function carregar(d, origem){
   if (!n) return AV.avisar('JSON inválido: falta a lista "palavras".');
   lista = n; usadas = new Set();
   const m = n.palavras.filter(p => p.modo !== 'desenho').length, de = n.palavras.filter(p => p.modo !== 'mimica').length;
+  // se o arquivo só tem palavras de um tipo, já deixa o modo certo escolhido
+  if (!de && m) $('selModo').value = 'mimica'; else if (!m && de) $('selModo').value = 'desenho';
   $('infoJson').textContent = `${n.titulo} • ${n.palavras.length} palavras (${m} servem para mímica, ${de} para desenho) • ${n.tempo} s por vez` + (origem ? ` • ${origem}` : '');
 }
 AV.prepararSeletorJson({tipo: 'mimica', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});

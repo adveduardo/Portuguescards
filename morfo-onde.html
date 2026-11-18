@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onde está o bicho?</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #pergunta{text-align:center;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:bold;margin:4px 0}
+  #cena{position:relative;width:min(92vw,100vh,860px);aspect-ratio:16/8;margin:8px auto;border-radius:26px;overflow:hidden;
+    background:linear-gradient(180deg,#bfe6ff 0%,#e3f4ff 70%);box-shadow:0 8px 0 #0002;--u:9px}
+  #cena .chao{position:absolute;left:0;right:0;bottom:0;height:14%;background:linear-gradient(180deg,#8fd18f,#6fbf73)}
+  #cena .el{position:absolute;transform:translateX(-50%);line-height:1}
+  .tampo{background:#a0673a;border-radius:6px;box-shadow:0 4px 0 #7a4b27}
+  .perna{background:#7a4b27;border-radius:3px}
+  .caixaFundo{background:#b9844d;border-radius:4px 4px 0 0}
+  .caixaFrente{background:linear-gradient(180deg,#d9a066,#c48a52);border-radius:4px;box-shadow:inset 0 0 0 3px #a0673a}
+  #opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;max-width:1000px;margin:10px auto}
+  #opcoes button{font-size:clamp(1.3rem,3vw,2rem);padding:16px 12px;color:#fff;border-radius:20px}
+  #opcoes button.ok{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde)}
+  #opcoes button.nao{opacity:.45;text-decoration:line-through}
+  #opcoes button.apagado{opacity:.3}
+  #explica{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🐱 Onde está o bicho?</h1>
+  <div class="cartao">
+    <h2>1. Cenas (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <p class="dica">Objetos que a cena sabe desenhar: <b>mesa</b> (em cima, embaixo, ao lado), <b>caixa</b> (dentro, fora, em cima), <b>caixas</b> (entre),
+      <b>arvore</b> (atras, frente, em cima) e <b>casa</b> (perto, longe).</p>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="pergunta"></div>
+  <div id="cena"></div>
+  <div id="opcoes"></div>
+  <div id="explica"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60'];
+// Posição do bicho em cada cena: x = centro (% da largura), y = base (% da altura), t = tamanho, z = camada
+const POS = {
+  'mesa|em cima':  {x: 50, y: 49, t: 11, z: 5},
+  'mesa|embaixo':  {x: 50, y: 13, t: 10, z: 5},
+  'mesa|ao lado':  {x: 80, y: 13, t: 11, z: 5},
+  'caixa|dentro':  {x: 50, y: 28, t: 11, z: 2},
+  'caixa|fora':    {x: 80, y: 13, t: 11, z: 5},
+  'caixa|em cima': {x: 50, y: 42, t: 11, z: 5},
+  'caixas|entre':  {x: 50, y: 13, t: 11, z: 5},
+  'arvore|atras':  {x: 71, y: 44, t: 10, z: 1},
+  'arvore|frente': {x: 50, y: 10, t: 14, z: 5},
+  'arvore|em cima':{x: 47, y: 84, t: 8,  z: 5},
+  'casa|perto':    {x: 40, y: 13, t: 11, z: 5},
+  'casa|longe':    {x: 88, y: 30, t: 5,  z: 5}
+};
+function Rede_sem(t){ return String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim(); }
+let rodadas = null, fila = [], atual = null, n = 0, total = 0, placar = null, respondido = false;
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.rodadas)) return AV.avisar('JSON inválido: falta a lista "rodadas".');
+  rodadas = d.rodadas.map(r => {
+    if (!r || !Array.isArray(r.opcoes) || !r.correta) return null;
+    const k = Rede_sem(r.objeto) + '|' + Rede_sem(r.posicao).replace('atrás', 'atras').replace('na frente', 'frente');
+    if (!POS[k] || !r.opcoes.includes(r.correta)) return null;
+    return {k, objeto: Rede_sem(r.objeto), animal: r.animal || '🐱', nome: r.nome || 'o gato', opcoes: r.opcoes.map(String), correta: String(r.correta), explica: r.explica || ''};
+  }).filter(Boolean);
+  $('infoJson').textContent = `${d.titulo || 'Cenas'} • ${rodadas.length} cenas` + (rodadas.length < d.rodadas.length ? ` • ⚠️ ${d.rodadas.length - rodadas.length} ignorada(s): objeto ou posição que a cena não sabe desenhar` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-onde', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-onde.json', 'modelo-onde-esta.json');
+
+// ---------- desenho da cena ----------
+function el(cls, css, txt){ const d = document.createElement('div'); d.className = 'el ' + (cls || ''); Object.assign(d.style, css); if (txt) d.textContent = txt; $('cena').appendChild(d); return d; }
+function desenharCena(){
+  const c = $('cena'); c.innerHTML = '<div class="chao"></div>';
+  c.style.setProperty('--u', (c.clientWidth / 100) + 'px');
+  const o = atual.objeto;
+  if (o === 'mesa'){
+    el('tampo', {left: '50%', bottom: '45%', width: '40%', height: '4%', zIndex: 3});
+    el('perna', {left: '34%', bottom: '13%', width: '2.5%', height: '32%', zIndex: 3});
+    el('perna', {left: '66%', bottom: '13%', width: '2.5%', height: '32%', zIndex: 3});
+  } else if (o === 'caixa' || o === 'caixas'){
+    const xs = o === 'caixa' ? [50] : [22, 78];
+    xs.forEach(x => {
+      el('caixaFundo', {left: x + '%', bottom: '13%', width: '28%', height: '30%', zIndex: 1});
+      el('caixaFrente', {left: x + '%', bottom: '13%', width: '30%', height: '22%', zIndex: 3});
+    });
+  } else if (o === 'arvore'){
+    el('', {left: '50%', bottom: '11%', fontSize: 'calc(var(--u) * 42)', zIndex: 3}, '🌳');
+  } else if (o === 'casa'){
+    el('', {left: '17%', bottom: '11%', fontSize: 'calc(var(--u) * 26)', zIndex: 3}, '🏠');
+    el('', {left: '93%', bottom: '28%', fontSize: 'calc(var(--u) * 6)', zIndex: 1}, '🌲');
+  }
+  const p = POS[atual.k];
+  el('', {left: p.x + '%', bottom: p.y + '%', fontSize: `calc(var(--u) * ${p.t})`, zIndex: p.z}, atual.animal);
+}
+window.addEventListener('resize', () => { if (atual && $('tJogo').classList.contains('ativa')) desenharCena(); });
+
+// ---------- jogo ----------
+function comecar(){
+  if (!rodadas || !rodadas.length) return AV.avisar('Carregue um JSON de cenas.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(rodadas); total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+const pergunta = () => `Onde está ${atual.nome}?`;
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; respondido = false;
+  $('contador').textContent = `Cena ${n} de ${total}`;
+  $('pergunta').textContent = placar.prefixo() + pergunta();
+  desenharCena();
+  $('opcoes').innerHTML = M.embaralhar(atual.opcoes).map((o, i) => `<button data-o="${AV.esc(o)}" style="background:${CORES[i % 4]}">${AV.esc(o)}</button>`).join('');
+  $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+  $('explica').textContent = ''; $('btnProxima').hidden = true;
+  if (AV.som) AV.falar(pergunta());
+}
+function responder(b){
+  if (respondido) return;
+  respondido = true;
+  const certo = b.dataset.o === atual.correta;
+  $('opcoes').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.o === atual.correta ? 'ok' : x === b ? 'nao' : 'apagado'));
+  if (certo){ placar.pontuar(1); AV.fanfarra(); AV.confete(); } else AV.erro();
+  const frase = `${atual.nome.charAt(0).toUpperCase() + atual.nome.slice(1)} está ${atual.correta}.`;
+  $('explica').textContent = (certo ? '✅ Isso! ' : '❌ ') + frase + ' ' + atual.explica;
+  if (AV.som) AV.falar(frase);
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking'), total); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnOuvir').onclick = () => atual && AV.falar(pergunta());
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

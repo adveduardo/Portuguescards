@@ -1,0 +1,235 @@
+{
+  "titulo": "Adjetivo ou advérbio?",
+  "emoji": "⚖️",
+  "instrucao": "A palavra destacada é adjetivo ou advérbio?",
+  "rodadas": [
+    {
+      "destaque": "O prédio é [alto].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "ALTO diz como é o prédio: adjetivo.",
+      "imagem": "🏢"
+    },
+    {
+      "destaque": "O pássaro voou [alto].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "ALTO diz como o pássaro voou: advérbio.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "Comprei um carro [rápido].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "RÁPIDO diz como é o carro: adjetivo.",
+      "imagem": "🏎️"
+    },
+    {
+      "destaque": "O menino correu [rápido].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "RÁPIDO diz como ele correu: advérbio.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Ela tem a voz [baixa].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "BAIXA diz como é a voz: adjetivo.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Ela falou [baixo].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "BAIXO diz como ela falou: advérbio.",
+      "imagem": "🤫"
+    },
+    {
+      "destaque": "O pão está [duro].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "DURO diz como está o pão: adjetivo.",
+      "imagem": "🥖"
+    },
+    {
+      "destaque": "O pedreiro trabalha [duro].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "DURO diz como ele trabalha: advérbio.",
+      "imagem": "🧱"
+    },
+    {
+      "destaque": "Que vestido [bonito]!",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "BONITO diz como é o vestido: adjetivo.",
+      "imagem": "👗"
+    },
+    {
+      "destaque": "Ela canta [bonito].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "BONITO aqui diz como ela canta: advérbio.",
+      "imagem": "🎤"
+    },
+    {
+      "destaque": "O filme é [bom].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "BOM diz como é o filme: adjetivo.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Ele jogou [bem].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "BEM diz como ele jogou: advérbio.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "O lobo [mau] fugiu.",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Adjetivo (diz como é o nome)",
+      "explica": "MAU diz como é o lobo: adjetivo.",
+      "imagem": "🐺"
+    },
+    {
+      "destaque": "Ele dormiu [mal].",
+      "opcoes": [
+        "Adjetivo (diz como é o nome)",
+        "Advérbio (diz como acontece)"
+      ],
+      "correta": "Advérbio (diz como acontece)",
+      "explica": "MAL diz como ele dormiu: advérbio.",
+      "imagem": "😫"
+    },
+    {
+      "destaque": "Ela canta muito ___.",
+      "opcoes": [
+        "bem",
+        "bom"
+      ],
+      "correta": "bem",
+      "explica": "BEM é advérbio (como se faz). BOM é adjetivo (como algo é). O contrário de BEM é MAL; o de BOM é MAU.",
+      "imagem": "🎤",
+      "enunciado": "Complete com BEM ou BOM:"
+    },
+    {
+      "destaque": "Esse bolo está muito ___.",
+      "opcoes": [
+        "bom",
+        "bem"
+      ],
+      "correta": "bom",
+      "explica": "BEM é advérbio (como se faz). BOM é adjetivo (como algo é). O contrário de BEM é MAL; o de BOM é MAU.",
+      "imagem": "🎂",
+      "enunciado": "Complete com BEM ou BOM:"
+    },
+    {
+      "destaque": "Fui ___ na prova, tirei 10!",
+      "opcoes": [
+        "bem",
+        "bom"
+      ],
+      "correta": "bem",
+      "explica": "BEM é advérbio (como se faz). BOM é adjetivo (como algo é). O contrário de BEM é MAL; o de BOM é MAU.",
+      "imagem": "💯",
+      "enunciado": "Complete com BEM ou BOM:"
+    },
+    {
+      "destaque": "O dia está ___ para passear.",
+      "opcoes": [
+        "bom",
+        "bem"
+      ],
+      "correta": "bom",
+      "explica": "BEM é advérbio (como se faz). BOM é adjetivo (como algo é). O contrário de BEM é MAL; o de BOM é MAU.",
+      "imagem": "☀️",
+      "enunciado": "Complete com BEM ou BOM:"
+    },
+    {
+      "destaque": "O time jogou ___ ontem.",
+      "opcoes": [
+        "mal",
+        "mau"
+      ],
+      "correta": "mal",
+      "explica": "MAL é o contrário de BEM (advérbio). MAU é o contrário de BOM (adjetivo).",
+      "imagem": "😞",
+      "enunciado": "Complete com MAL ou MAU:"
+    },
+    {
+      "destaque": "O vilão era muito ___.",
+      "opcoes": [
+        "mau",
+        "mal"
+      ],
+      "correta": "mau",
+      "explica": "MAL é o contrário de BEM (advérbio). MAU é o contrário de BOM (adjetivo).",
+      "imagem": "🦹",
+      "enunciado": "Complete com MAL ou MAU:"
+    },
+    {
+      "destaque": "Não seja ___ com seu irmão.",
+      "opcoes": [
+        "mau",
+        "mal"
+      ],
+      "correta": "mau",
+      "explica": "MAL é o contrário de BEM (advérbio). MAU é o contrário de BOM (adjetivo).",
+      "imagem": "👦",
+      "enunciado": "Complete com MAL ou MAU:"
+    },
+    {
+      "destaque": "A planta cresceu ___ porque faltou água.",
+      "opcoes": [
+        "mal",
+        "mau"
+      ],
+      "correta": "mal",
+      "explica": "MAL é o contrário de BEM (advérbio). MAU é o contrário de BOM (adjetivo).",
+      "imagem": "🥀",
+      "enunciado": "Complete com MAL ou MAU:"
+    }
+  ]
+}

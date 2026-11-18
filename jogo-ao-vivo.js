@@ -89,6 +89,14 @@ AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar}) 
     const o = document.createElement('option'); o.value = listaTipos[0] + '-padrao.json'; o.textContent = 'Modelo padrão'; select.appendChild(o);
   }).finally(() => {
     opcaoLocal();
+    // o endereço pode pedir um arquivo específico: jogo.html?arquivo=nome.json
+    const pedido = new URLSearchParams(location.search).get('arquivo');
+    if (pedido && /^[\w.-]+\.json$/.test(pedido)){
+      if (!select.querySelector(`option[value="${pedido}"]`)){
+        const o = document.createElement('option'); o.value = pedido; o.textContent = pedido; select.appendChild(o);
+      }
+      select.value = pedido;
+    }
     if (select.options.length) select.onchange();
   });
   botaoAbrir.onclick = () => input.click();

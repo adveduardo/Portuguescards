@@ -79,7 +79,13 @@ const JOGOS = {
   feminino:    {tipo: 'morfo-feminino',    arquivo: 'morfo-feminino.json',    titulo: 'Masculino e feminino',     emoji: '👫'},
   grau:        {tipo: 'morfo-grau',        arquivo: 'morfo-grau.json',        titulo: 'Diminutivo e aumentativo', emoji: '🔎'},
   tempos:      {tipo: 'morfo-tempos',      arquivo: 'morfo-tempos.json',      titulo: 'Ontem, hoje, amanhã',      emoji: '🕰️'},
-  conjugacao:  {tipo: 'morfo-conjugacao',  arquivo: 'morfo-conjugacao.json',  titulo: 'Quem faz a ação?',         emoji: '🙋'}
+  conjugacao:  {tipo: 'morfo-conjugacao',  arquivo: 'morfo-conjugacao.json',  titulo: 'Quem faz a ação?',         emoji: '🙋'},
+  'adv-pergunta': {tipo: 'morfo-adv-pergunta', arquivo: 'morfo-adv-pergunta.json', titulo: 'Pergunte ao verbo',          emoji: '❓'},
+  'adv-tipo':     {tipo: 'morfo-adv-tipo',     arquivo: 'morfo-adv-tipo.json',     titulo: 'Que tipo de advérbio?',      emoji: '🏷️'},
+  'adv-adjetivo': {tipo: 'morfo-adv-adjetivo', arquivo: 'morfo-adv-adjetivo.json', titulo: 'Adjetivo ou advérbio?',      emoji: '⚖️'},
+  'adv-locucao':  {tipo: 'morfo-adv-locucao',  arquivo: 'morfo-adv-locucao.json',  titulo: 'Locução adverbial',          emoji: '🔁'},
+  'adv-complete': {tipo: 'morfo-adv-complete', arquivo: 'morfo-adv-complete.json', titulo: 'Complete com o advérbio',    emoji: '✏️'},
+  'adv-opostos':  {tipo: 'morfo-adv-opostos',  arquivo: 'morfo-adv-opostos.json',  titulo: 'Advérbios opostos',          emoji: '↔️'}
 };
 const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60', '#8e44ad', '#16a085', '#c2185b'];
 const jogo = JOGOS[M.param('jogo')] || JOGOS.classifique;
@@ -98,7 +104,7 @@ function normalizar(d){
   if (!Array.isArray(d.rodadas)) return null;
   const rodadas = d.rodadas.map(r => {
     if (!r || !r.destaque || !Array.isArray(r.opcoes)) return null;
-    const opcoes = r.opcoes.slice(0, 6).map(String);
+    const opcoes = r.opcoes.slice(0, 8).map(String);
     const correta = typeof r.correta === 'number' ? opcoes[r.correta] : String(r.correta);
     if (!opcoes.includes(correta)) return null;
     return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || ''};

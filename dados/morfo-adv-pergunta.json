@@ -1,0 +1,247 @@
+{
+  "titulo": "Pergunte ao verbo",
+  "emoji": "❓",
+  "instrucao": "O advérbio destacado responde a qual pergunta?",
+  "rodadas": [
+    {
+      "destaque": "O gato dormiu [ali].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "ALI diz ONDE: advérbio de lugar.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "Nós chegamos [cedo].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quando? (tempo)",
+      "explica": "CEDO diz QUANDO: advérbio de tempo.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "A tartaruga anda [devagar].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Como? (modo)",
+      "explica": "DEVAGAR diz COMO: advérbio de modo.",
+      "imagem": "🐢"
+    },
+    {
+      "destaque": "Ela comeu [muito].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quanto? (intensidade)",
+      "explica": "MUITO diz QUANTO: advérbio de intensidade.",
+      "imagem": "🍝"
+    },
+    {
+      "destaque": "[Amanhã] vamos ao parque.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quando? (tempo)",
+      "explica": "AMANHÃ diz QUANDO: advérbio de tempo.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "O cachorro latiu [lá fora].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "LÁ FORA diz ONDE: advérbio de lugar.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "O menino falou [baixinho].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Como? (modo)",
+      "explica": "BAIXINHO diz COMO: advérbio de modo.",
+      "imagem": "🤫"
+    },
+    {
+      "destaque": "Eu dormi [pouco].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quanto? (intensidade)",
+      "explica": "POUCO diz QUANTO: advérbio de intensidade.",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "A professora explicou [bem].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Como? (modo)",
+      "explica": "BEM diz COMO: advérbio de modo.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "[Ontem] choveu.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quando? (tempo)",
+      "explica": "ONTEM diz QUANDO: advérbio de tempo.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Os livros estão [aqui].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "AQUI diz ONDE: advérbio de lugar.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Ele correu [rapidamente].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Como? (modo)",
+      "explica": "RAPIDAMENTE diz COMO: advérbio de modo.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Estou [bastante] cansado.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quanto? (intensidade)",
+      "explica": "BASTANTE diz QUANTO: advérbio de intensidade.",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "A festa será [hoje].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quando? (tempo)",
+      "explica": "HOJE diz QUANDO: advérbio de tempo.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Moro [perto] da escola.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "PERTO diz ONDE: advérbio de lugar.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "O bebê sorriu [alegremente].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Como? (modo)",
+      "explica": "ALEGREMENTE diz COMO: advérbio de modo.",
+      "imagem": "👶"
+    },
+    {
+      "destaque": "A vovó mora [longe].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "LONGE diz ONDE: advérbio de lugar.",
+      "imagem": "👵"
+    },
+    {
+      "destaque": "Ele estudou [demais].",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quanto? (intensidade)",
+      "explica": "DEMAIS diz QUANTO: advérbio de intensidade.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "[Agora] é hora do lanche.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Quando? (tempo)",
+      "explica": "AGORA diz QUANDO: advérbio de tempo.",
+      "imagem": "🥪"
+    },
+    {
+      "destaque": "A bola caiu [embaixo] da mesa.",
+      "opcoes": [
+        "Quando? (tempo)",
+        "Onde? (lugar)",
+        "Como? (modo)",
+        "Quanto? (intensidade)"
+      ],
+      "correta": "Onde? (lugar)",
+      "explica": "EMBAIXO diz ONDE: advérbio de lugar.",
+      "imagem": "⚽"
+    }
+  ]
+}
