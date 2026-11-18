@@ -1,0 +1,127 @@
+{
+  "titulo": "Verbo de ligação ou significativo?",
+  "emoji": "🔗",
+  "instrucao": "O verbo destacado é de ligação ou significativo?",
+  "rodadas": [
+    {
+      "destaque": "Ela [anda] triste.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "ANDAR = estar: liga o sujeito à característica (triste).",
+      "imagem": "😔"
+    },
+    {
+      "destaque": "Ela [anda] rápido.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo significativo",
+      "explica": "ANDAR = caminhar: indica ação.",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "O menino [ficou] nervoso.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "FICAR = tornar-se: liga o sujeito a um estado.",
+      "imagem": "😬"
+    },
+    {
+      "destaque": "O menino [ficou] em casa.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo significativo",
+      "explica": "FICAR = permanecer em um lugar: verbo significativo (intransitivo).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "A água [está] gelada.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "ESTAR + característica: verbo de ligação.",
+      "imagem": "🧊"
+    },
+    {
+      "destaque": "A água [está] na geladeira.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo significativo",
+      "explica": "ESTAR + lugar: indica localização, não característica.",
+      "imagem": "🥤"
+    },
+    {
+      "destaque": "Ele [continua] doente.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "CONTINUAR + estado: verbo de ligação.",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "Ele [continua] o trabalho amanhã.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo significativo",
+      "explica": "CONTINUAR algo = prosseguir: verbo transitivo direto.",
+      "imagem": "🛠️"
+    },
+    {
+      "destaque": "A criança [parece] cansada.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "PARECER é sempre um bom exemplo de verbo de ligação.",
+      "imagem": "😪"
+    },
+    {
+      "destaque": "Maria [virou] professora.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "VIRAR = tornar-se: verbo de ligação.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "Maria [virou] a página.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo significativo",
+      "explica": "VIRAR algo = mudar de posição: verbo significativo.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "Nós [permanecemos] calmos.",
+      "opcoes": [
+        "Verbo de ligação",
+        "Verbo significativo"
+      ],
+      "correta": "Verbo de ligação",
+      "explica": "PERMANECER + estado: verbo de ligação.",
+      "imagem": "🧘"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "titulo": "Orações coordenadas",
+  "emoji": "🔗",
+  "instrucao": "Como se classifica a oração coordenada destacada?",
+  "rodadas": [
+    {
+      "destaque": "Abri a porta, [acendi a luz], sentei no sofá.",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Assindética",
+      "explica": "Coordenada assindética: não tem conjunção; as orações ficam lado a lado, separadas por vírgula.",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "Estudou muito [e passou].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética aditiva",
+      "explica": "Coordenada sindética aditiva: soma ideias (e, nem, não só… mas também).",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "Estudou muito, [mas não passou].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética adversativa",
+      "explica": "Coordenada sindética adversativa: opõe ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "😕"
+    },
+    {
+      "destaque": "Ou você estuda, [ou trabalha].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética alternativa",
+      "explica": "Coordenada sindética alternativa: alterna ideias (ou… ou, ora… ora).",
+      "imagem": "🔀"
+    },
+    {
+      "destaque": "Choveu muito; [portanto, o jogo foi adiado].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética conclusiva",
+      "explica": "Coordenada sindética conclusiva: conclui (portanto, logo, por isso, pois depois do verbo).",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "Leve o casaco, [pois está frio].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética explicativa",
+      "explica": "Coordenada sindética explicativa: explica, justifica (pois, porque, que).",
+      "imagem": "🧥"
+    },
+    {
+      "destaque": "Não estudou [nem fez a tarefa].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética aditiva",
+      "explica": "Coordenada sindética aditiva: soma ideias (e, nem, não só… mas também).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Ele é rico, [porém não é feliz].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética adversativa",
+      "explica": "Coordenada sindética adversativa: opõe ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "[Ora ri], ora chora.",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética alternativa",
+      "explica": "Coordenada sindética alternativa: alterna ideias (ou… ou, ora… ora).",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "Penso, [logo existo]. (Descartes)",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética conclusiva",
+      "explica": "Coordenada sindética conclusiva: conclui (portanto, logo, por isso, pois depois do verbo).",
+      "imagem": "🤔"
+    },
+    {
+      "destaque": "Fale baixo, [que o bebê está dormindo].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética explicativa",
+      "explica": "Coordenada sindética explicativa: explica, justifica (pois, porque, que).",
+      "imagem": "👶"
+    },
+    {
+      "destaque": "[Cheguei cedo], encontrei a sala vazia.",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Assindética",
+      "explica": "Coordenada assindética: não tem conjunção; as orações ficam lado a lado, separadas por vírgula.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Não só canta, [como também dança].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética aditiva",
+      "explica": "Coordenada sindética aditiva: soma ideias (e, nem, não só… mas também).",
+      "imagem": "💃"
+    },
+    {
+      "destaque": "Tentei; [contudo, não consegui].",
+      "opcoes": [
+        "Assindética",
+        "Sindética aditiva",
+        "Sindética adversativa",
+        "Sindética alternativa",
+        "Sindética conclusiva",
+        "Sindética explicativa"
+      ],
+      "correta": "Sindética adversativa",
+      "explica": "Coordenada sindética adversativa: opõe ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "🙁"
+    }
+  ]
+}

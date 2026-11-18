@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da análise sintática",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "sujeito": {
+      "nome": "Sujeito",
+      "emoji": "👤",
+      "cor": "#2f80ed"
+    },
+    "predicado": {
+      "nome": "Predicado",
+      "emoji": "📢",
+      "cor": "#e74c3c"
+    },
+    "integrante": {
+      "nome": "Integrantes",
+      "emoji": "🧩",
+      "cor": "#27ae60"
+    },
+    "acessorio": {
+      "nome": "Acessórios",
+      "emoji": "🎨",
+      "cor": "#8e44ad"
+    },
+    "vocativo": {
+      "nome": "Aposto e vocativo",
+      "emoji": "📣",
+      "cor": "#00838f"
+    }
+  },
+  "desafios": {
+    "sujeito": [
+      {
+        "texto": "Qual é o sujeito de: \"Chegaram as cartas\"?",
+        "resposta": "as cartas"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Choveu ontem\"?",
+        "resposta": "não há (oração sem sujeito)"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Vendemos a casa\"?",
+        "resposta": "nós (oculto)"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Roubaram o carro\"?",
+        "resposta": "indeterminado"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Ana e Bia saíram\"?",
+        "resposta": "Ana e Bia (composto)"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Faltam dois alunos\"?",
+        "resposta": "dois alunos"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Existem regras\"?",
+        "resposta": "regras"
+      },
+      {
+        "texto": "Qual é o sujeito de: \"Há regras\"?",
+        "resposta": "não há (oração sem sujeito)"
+      }
+    ],
+    "predicado": [
+      {
+        "texto": "Que tipo de predicado tem: \"Ela estudou\"?",
+        "resposta": "verbal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"Ela está feliz\"?",
+        "resposta": "nominal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"Ela saiu feliz\"?",
+        "resposta": "verbo-nominal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"O céu ficou cinza\"?",
+        "resposta": "nominal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"Comprei pão\"?",
+        "resposta": "verbal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"Acharam o filme ótimo\"?",
+        "resposta": "verbo-nominal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"Ele parece cansado\"?",
+        "resposta": "nominal"
+      },
+      {
+        "texto": "Que tipo de predicado tem: \"O time voltou campeão\"?",
+        "resposta": "verbo-nominal"
+      }
+    ],
+    "integrante": [
+      {
+        "texto": "Qual é a função de \"um livro\" em: Li um livro.",
+        "resposta": "objeto direto"
+      },
+      {
+        "texto": "Qual é a função de \"de ajuda\" em: Preciso de ajuda.",
+        "resposta": "objeto indireto"
+      },
+      {
+        "texto": "Qual é a função de \"do escuro\" em: Tenho medo do escuro.",
+        "resposta": "complemento nominal"
+      },
+      {
+        "texto": "Qual é a função de \"pela polícia\" em: Foi preso pela polícia.",
+        "resposta": "agente da passiva"
+      },
+      {
+        "texto": "Qual é a função de \"aos pais\" em: Obedeça aos pais.",
+        "resposta": "objeto indireto"
+      },
+      {
+        "texto": "Qual é a função de \"ao projeto\" em: Sou favorável ao projeto.",
+        "resposta": "complemento nominal"
+      },
+      {
+        "texto": "Qual é a função de \"lhe\" em: Entreguei-lhe a carta.",
+        "resposta": "objeto indireto"
+      },
+      {
+        "texto": "Qual é a função de \"o\" em: Encontrei-o.",
+        "resposta": "objeto direto"
+      }
+    ],
+    "acessorio": [
+      {
+        "texto": "Qual é a função de \"ontem\" em: Saí ontem.",
+        "resposta": "adjunto adverbial de tempo"
+      },
+      {
+        "texto": "Qual é a função de \"dedicados\" em: Os alunos dedicados passaram.",
+        "resposta": "adjunto adnominal"
+      },
+      {
+        "texto": "Qual é a função de \"de madeira\" em: Uma mesa de madeira.",
+        "resposta": "adjunto adnominal"
+      },
+      {
+        "texto": "Qual é a função de \"com calma\" em: Falou com calma.",
+        "resposta": "adjunto adverbial de modo"
+      },
+      {
+        "texto": "Qual é a função de \"de frio\" em: Tremia de frio.",
+        "resposta": "adjunto adverbial de causa"
+      },
+      {
+        "texto": "Qual é a função de \"Os\" em: Os alunos saíram.",
+        "resposta": "adjunto adnominal"
+      },
+      {
+        "texto": "Qual é a função de \"muito\" em: Correu muito.",
+        "resposta": "adjunto adverbial de intensidade"
+      },
+      {
+        "texto": "Qual é a função de \"da festa\" em: Os convidados da festa chegaram.",
+        "resposta": "adjunto adnominal"
+      }
+    ],
+    "vocativo": [
+      {
+        "texto": "Qual é a função de \"João\" em: João, venha cá!",
+        "resposta": "vocativo"
+      },
+      {
+        "texto": "Qual é a função de \"a capital\" em: Brasília, a capital, é moderna.",
+        "resposta": "aposto explicativo"
+      },
+      {
+        "texto": "Qual é a função de \"Drummond\" em: O poeta Drummond nasceu em Itabira.",
+        "resposta": "aposto especificativo"
+      },
+      {
+        "texto": "Qual é a função de \"tudo\" em: Pão, leite, café, tudo acabou.",
+        "resposta": "aposto resumitivo"
+      },
+      {
+        "texto": "Qual é a função de \"Senhores\" em: Senhores, sentem-se!",
+        "resposta": "vocativo"
+      },
+      {
+        "texto": "Qual é a função de \"de São Paulo\" em: A cidade de São Paulo é enorme.",
+        "resposta": "aposto especificativo"
+      },
+      {
+        "texto": "Qual é a função de \"minha amiga\" em: Ana, minha amiga, chegou.",
+        "resposta": "aposto explicativo"
+      },
+      {
+        "texto": "Qual é a função de \"Pedro\" em: Pedro, o aluno novo, chegou.",
+        "resposta": "sujeito"
+      }
+    ]
+  }
+}

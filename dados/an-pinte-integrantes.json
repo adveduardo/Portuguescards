@@ -1,0 +1,78 @@
+{
+  "titulo": "Pinte: sujeito, verbo e termos integrantes",
+  "categorias": [
+    {
+      "id": "suj",
+      "nome": "Sujeito",
+      "plural": "Sujeitos",
+      "cor": "#2f80ed",
+      "emoji": "👤",
+      "def": "de quem se fala; concorda com o verbo"
+    },
+    {
+      "id": "vb",
+      "nome": "Verbo",
+      "plural": "Verbos",
+      "cor": "#e74c3c",
+      "emoji": "⚡",
+      "def": "verbo ou locução verbal"
+    },
+    {
+      "id": "od",
+      "nome": "Objeto direto",
+      "plural": "Objetos diretos",
+      "cor": "#27ae60",
+      "emoji": "🎯",
+      "def": "completa o verbo sem preposição obrigatória"
+    },
+    {
+      "id": "oi",
+      "nome": "Objeto indireto",
+      "plural": "Objetos indiretos",
+      "cor": "#e67e22",
+      "emoji": "↪️",
+      "def": "completa o verbo com preposição"
+    },
+    {
+      "id": "cn",
+      "nome": "Complemento nominal",
+      "plural": "Complementos nominais",
+      "cor": "#16a085",
+      "emoji": "🧷",
+      "def": "completa o sentido de um nome (substantivo, adjetivo ou advérbio)"
+    },
+    {
+      "id": "ag",
+      "nome": "Agente da passiva",
+      "plural": "Agentes da passiva",
+      "cor": "#795548",
+      "emoji": "🛠️",
+      "def": "pratica a ação na voz passiva (por/pelo)"
+    },
+    {
+      "id": "pred",
+      "nome": "Predicativo",
+      "plural": "Predicativos",
+      "cor": "#c2185b",
+      "emoji": "🏷️",
+      "def": "característica do sujeito ou do objeto"
+    }
+  ],
+  "como_marcar": "palavra/id com os ids suj, vb, od, oi, cn, ag, pred",
+  "frases": [
+    "Os/suj alunos/suj entregaram/vb os/od trabalhos/od à/oi professora/oi.",
+    "Nós/suj precisamos/vb de/oi silêncio/oi.",
+    "O/suj muro/suj foi/vb pintado/vb pelos/ag voluntários/ag.",
+    "A/suj criança/suj tem/vb medo/od do/cn escuro/cn.",
+    "Ela/suj parece/vb cansada/pred.",
+    "O/suj livro/suj foi/vb escrito/vb por/ag Machado/ag de/ag Assis/ag.",
+    "O/suj público/suj ficou/vb satisfeito/pred com/cn o/cn show/cn.",
+    "Eu/suj confio/vb em/oi você/oi.",
+    "Os/suj jurados/suj consideraram/vb o/od filme/od excelente/pred.",
+    "A/suj obediência/suj às/cn leis/cn é/vb necessária/pred.",
+    "Os/suj vizinhos/suj foram/vb avisados/vb pela/ag polícia/ag.",
+    "Ela/suj é/vb favorável/pred à/cn mudança/cn.",
+    "Pedro/suj gosta/vb de/oi futebol/oi.",
+    "Os/suj alunos/suj elegeram/vb Ana/od representante/pred."
+  ]
+}

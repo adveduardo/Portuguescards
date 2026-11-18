@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha do período composto",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "coord": {
+      "nome": "Coordenadas",
+      "emoji": "🔗",
+      "cor": "#16a085"
+    },
+    "subst": {
+      "nome": "Substantivas",
+      "emoji": "📦",
+      "cor": "#2f80ed"
+    },
+    "adj": {
+      "nome": "Adjetivas",
+      "emoji": "🎨",
+      "cor": "#8e44ad"
+    },
+    "adv": {
+      "nome": "Adverbiais",
+      "emoji": "🕒",
+      "cor": "#e67e22"
+    },
+    "red": {
+      "nome": "Reduzidas",
+      "emoji": "✂️",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "coord": [
+      {
+        "texto": "Classifique a coordenada: \"…e passou\"",
+        "resposta": "sindética aditiva"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…mas não passou\"",
+        "resposta": "sindética adversativa"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…ou trabalha\"",
+        "resposta": "sindética alternativa"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…portanto, ficou em casa\"",
+        "resposta": "sindética conclusiva"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…pois está frio\"",
+        "resposta": "sindética explicativa"
+      },
+      {
+        "texto": "Classifique a coordenada: \"Cheguei, vi, venci\"",
+        "resposta": "assindéticas"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…nem fez a tarefa\"",
+        "resposta": "sindética aditiva"
+      },
+      {
+        "texto": "Classifique a coordenada: \"…logo existo\"",
+        "resposta": "sindética conclusiva"
+      }
+    ],
+    "subst": [
+      {
+        "texto": "Classifique a substantiva: \"É bom [que venha]\"",
+        "resposta": "subjetiva"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Quero [que venha]\"",
+        "resposta": "objetiva direta"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Gosto [de que me ouçam]\"",
+        "resposta": "objetiva indireta"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Tenho medo [de que chova]\"",
+        "resposta": "completiva nominal"
+      },
+      {
+        "texto": "Classifique a substantiva: \"A verdade é [que errei]\"",
+        "resposta": "predicativa"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Peço uma coisa: [que estudem]\"",
+        "resposta": "apositiva"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Não sei [se vou]\"",
+        "resposta": "objetiva direta"
+      },
+      {
+        "texto": "Classifique a substantiva: \"Convém [que saiamos]\"",
+        "resposta": "subjetiva"
+      }
+    ],
+    "adj": [
+      {
+        "texto": "Restritiva ou explicativa: O Sol, que é uma estrela, brilha.",
+        "resposta": "explicativa"
+      },
+      {
+        "texto": "Restritiva ou explicativa: Os alunos que estudaram passaram.",
+        "resposta": "restritiva"
+      },
+      {
+        "texto": "Complete: A casa ___ moro é antiga.",
+        "resposta": "onde / em que"
+      },
+      {
+        "texto": "Complete: O autor ___ livro li morreu.",
+        "resposta": "cujo"
+      },
+      {
+        "texto": "Complete: O filme ___ assisti foi bom.",
+        "resposta": "a que / ao qual"
+      },
+      {
+        "texto": "Complete: A amiga ___ confio chegou.",
+        "resposta": "em quem"
+      },
+      {
+        "texto": "Que palavra introduz a adjetiva?",
+        "resposta": "pronome relativo"
+      },
+      {
+        "texto": "Qual adjetiva leva vírgulas?",
+        "resposta": "a explicativa"
+      }
+    ],
+    "adv": [
+      {
+        "texto": "Classifique a adverbial: \"Embora chova…\"",
+        "resposta": "concessiva"
+      },
+      {
+        "texto": "Classifique a adverbial: \"Se chover…\"",
+        "resposta": "condicional"
+      },
+      {
+        "texto": "Classifique a adverbial: \"Quando chegar…\"",
+        "resposta": "temporal"
+      },
+      {
+        "texto": "Classifique a adverbial: \"Como estava cansado…\"",
+        "resposta": "causal"
+      },
+      {
+        "texto": "Classifique a adverbial: \"…para que passasse\"",
+        "resposta": "final"
+      },
+      {
+        "texto": "Classifique a adverbial: \"…tanto que adoeceu\"",
+        "resposta": "consecutiva"
+      },
+      {
+        "texto": "Classifique a adverbial: \"À medida que lia…\"",
+        "resposta": "proporcional"
+      },
+      {
+        "texto": "Classifique a adverbial: \"Conforme combinamos…\"",
+        "resposta": "conformativa"
+      }
+    ],
+    "red": [
+      {
+        "texto": "Que tipo de reduzida: Ao sair…",
+        "resposta": "de infinitivo"
+      },
+      {
+        "texto": "Que tipo de reduzida: Saindo cedo…",
+        "resposta": "de gerúndio"
+      },
+      {
+        "texto": "Que tipo de reduzida: Feita a tarefa…",
+        "resposta": "de particípio"
+      },
+      {
+        "texto": "Desenvolva: Ao chegar, liguei.",
+        "resposta": "Quando cheguei, liguei."
+      },
+      {
+        "texto": "Desenvolva: Apesar de cansado, foi.",
+        "resposta": "Embora estivesse cansado, foi."
+      },
+      {
+        "texto": "Desenvolva: Estudou para passar.",
+        "resposta": "Estudou para que passasse."
+      },
+      {
+        "texto": "Desenvolva: Por ser tarde, saí.",
+        "resposta": "Como era tarde, saí."
+      },
+      {
+        "texto": "O que falta na oração reduzida?",
+        "resposta": "o conectivo (conjunção ou pronome relativo)"
+      }
+    ]
+  }
+}

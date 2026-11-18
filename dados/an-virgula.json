@@ -1,0 +1,117 @@
+{
+  "titulo": "Vírgula no aposto e no vocativo",
+  "emoji": "✒️",
+  "instrucao": "A pontuação está certa?",
+  "rodadas": [
+    {
+      "destaque": "Maria, a diretora, chegou cedo.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "✅ Pontuação certa",
+      "explica": "O aposto explicativo fica entre vírgulas.",
+      "imagem": "👩‍💼"
+    },
+    {
+      "destaque": "Maria a diretora chegou cedo.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "Faltaram as vírgulas do aposto explicativo: Maria, a diretora, chegou cedo.",
+      "imagem": "👩‍💼"
+    },
+    {
+      "destaque": "Pedro venha cá!",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "O vocativo deve ser separado por vírgula: Pedro, venha cá!",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "Bom dia, professora!",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "✅ Pontuação certa",
+      "explica": "Vocativo separado por vírgula.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "O poeta, Drummond, nasceu em Itabira.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "Aposto especificativo NÃO leva vírgula: O poeta Drummond nasceu em Itabira.",
+      "imagem": "✒️"
+    },
+    {
+      "destaque": "Obrigado, meu amigo.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "✅ Pontuação certa",
+      "explica": "Vocativo separado por vírgula.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "A cidade, de São Paulo, é enorme.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "\"De São Paulo\" especifica a cidade: sem vírgulas.",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "Brasília, a capital do país, foi inaugurada em 1960.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "✅ Pontuação certa",
+      "explica": "Aposto explicativo entre vírgulas.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "Pelé o Rei do Futebol, encerrou a carreira em 1977.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "Faltou a vírgula antes do aposto: Pelé, o Rei do Futebol, encerrou…",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "Atenção, alunos: a prova vai começar.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "✅ Pontuação certa",
+      "explica": "\"Alunos\" é vocativo, separado por vírgula.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Os alunos, da escola, fizeram a prova.",
+      "opcoes": [
+        "✅ Pontuação certa",
+        "❌ Pontuação errada"
+      ],
+      "correta": "❌ Pontuação errada",
+      "explica": "\"Da escola\" é adjunto adnominal: não se separa do núcleo por vírgulas.",
+      "imagem": "🏫"
+    }
+  ]
+}

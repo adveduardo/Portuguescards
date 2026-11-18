@@ -1,0 +1,66 @@
+{
+  "titulo": "O Laboratório da Oração",
+  "historia": "As orações do laboratório foram desmontadas e a porta trancou! Cada termo identificado revela um número do código. Analisem com cuidado para escapar.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Experimento 1: \"Chegaram os resultados do teste.\" Escreva o núcleo do sujeito.",
+      "imagem": "🧪",
+      "resposta": [
+        "resultados"
+      ],
+      "dica": "O que chegou? Os resultados… qual é a palavra principal?"
+    },
+    {
+      "pergunta": "Experimento 2: \"Há muitos frascos na mesa.\" Qual é o tipo de sujeito?",
+      "imagem": "⚗️",
+      "opcoes": [
+        "Oração sem sujeito",
+        "Sujeito simples",
+        "Sujeito oculto"
+      ],
+      "correta": "Oração sem sujeito",
+      "dica": "HAVER no sentido de existir é impessoal."
+    },
+    {
+      "pergunta": "Experimento 3: \"O cientista tem medo de explosões.\" Qual é a função de \"de explosões\"?",
+      "imagem": "💥",
+      "opcoes": [
+        "Complemento nominal",
+        "Objeto indireto",
+        "Adjunto adverbial"
+      ],
+      "correta": "Complemento nominal",
+      "dica": "Completa o substantivo MEDO."
+    },
+    {
+      "pergunta": "Experimento 4: escreva o pronome que substitui \"aos alunos\" em \"Entreguei os jalecos aos alunos\".",
+      "imagem": "🥼",
+      "resposta": [
+        "lhes"
+      ],
+      "dica": "Objeto indireto no plural."
+    },
+    {
+      "pergunta": "Experimento 5: \"A fórmula foi descoberta pela doutora Lia.\" Qual é a função de \"pela doutora Lia\"?",
+      "imagem": "👩‍🔬",
+      "opcoes": [
+        "Agente da passiva",
+        "Objeto indireto",
+        "Sujeito"
+      ],
+      "correta": "Agente da passiva",
+      "dica": "Quem praticou a ação na voz passiva?"
+    },
+    {
+      "pergunta": "Experimento 6: \"Lia, a cientista-chefe, ficou orgulhosa.\" Escreva o tipo de predicado (verbal, nominal ou verbo-nominal).",
+      "imagem": "🏆",
+      "resposta": [
+        "nominal",
+        "predicado nominal"
+      ],
+      "dica": "FICAR, aqui, é verbo de ligação."
+    }
+  ]
+}

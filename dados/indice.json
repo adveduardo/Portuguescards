@@ -43,6 +43,14 @@
     {
       "arquivo": "quiz-proverbios.json",
       "titulo": "Quiz dos provérbios"
+    },
+    {
+      "arquivo": "quiz-analise.json",
+      "titulo": "Quiz de análise sintática"
+    },
+    {
+      "arquivo": "quiz-periodo.json",
+      "titulo": "Quiz do período composto"
     }
   ],
   "stop": [
@@ -99,6 +107,14 @@
     {
       "arquivo": "batata-invariaveis.json",
       "titulo": "Batata quente das invariáveis"
+    },
+    {
+      "arquivo": "batata-analise.json",
+      "titulo": "Batata quente da análise sintática"
+    },
+    {
+      "arquivo": "batata-periodo.json",
+      "titulo": "Batata quente do período composto"
     }
   ],
   "trilha": [
@@ -141,6 +157,14 @@
     {
       "arquivo": "trilha-invariaveis.json",
       "titulo": "Trilha das invariáveis"
+    },
+    {
+      "arquivo": "trilha-analise.json",
+      "titulo": "Trilha da análise sintática"
+    },
+    {
+      "arquivo": "trilha-periodo.json",
+      "titulo": "Trilha do período composto"
     }
   ],
   "escape": [
@@ -171,6 +195,14 @@
     {
       "arquivo": "escape-biblioteca.json",
       "titulo": "O Mistério da Biblioteca"
+    },
+    {
+      "arquivo": "escape-analise.json",
+      "titulo": "O Laboratório da Oração"
+    },
+    {
+      "arquivo": "escape-periodo.json",
+      "titulo": "O Cofre do Período Composto"
     }
   ],
   "mimica": [
@@ -329,6 +361,14 @@
     {
       "arquivo": "interp-fato-cestos.json",
       "titulo": "Cestos: fato ou opinião"
+    },
+    {
+      "arquivo": "an-cestos.json",
+      "titulo": "Cestos dos termos da oração"
+    },
+    {
+      "arquivo": "pc-cestos.json",
+      "titulo": "Cestos dos conectivos do período composto"
     }
   ],
   "morfo-frases": [
@@ -351,6 +391,18 @@
     {
       "arquivo": "inv-frases.json",
       "titulo": "Pinte as classes invariáveis"
+    },
+    {
+      "arquivo": "an-pinte-integrantes.json",
+      "titulo": "Pinte: sujeito, verbo e termos integrantes"
+    },
+    {
+      "arquivo": "an-pinte-acessorios.json",
+      "titulo": "Pinte: termos acessórios e vocativo"
+    },
+    {
+      "arquivo": "pc-pinte.json",
+      "titulo": "Pinte: oração principal, subordinada e conectivo"
     }
   ],
   "morfo-plural": [
@@ -483,6 +535,14 @@
     {
       "arquivo": "red-generos-ordene.json",
       "titulo": "Monte o texto formal"
+    },
+    {
+      "arquivo": "an-ordem.json",
+      "titulo": "Ordem direta da oração"
+    },
+    {
+      "arquivo": "pc-ordene.json",
+      "titulo": "Monte o período"
     }
   ],
   "morfo-onde": [
@@ -899,6 +959,112 @@
     {
       "arquivo": "debate-padrao.json",
       "titulo": "Debates para a sala"
+    }
+  ],
+  "analise": [
+    {
+      "arquivo": "analise-padrao.json",
+      "titulo": "Raio-X da oração (modelo)"
+    },
+    {
+      "arquivo": "analise-periodo.json",
+      "titulo": "Raio-X do período composto"
+    }
+  ],
+  "escolha-an": [
+    {
+      "arquivo": "an-adjunto-adnominal.json",
+      "titulo": "Adjunto adnominal"
+    },
+    {
+      "arquivo": "an-adjunto-adverbial.json",
+      "titulo": "Adjunto adverbial: que circunstância?"
+    },
+    {
+      "arquivo": "an-agente.json",
+      "titulo": "Agente da passiva e vozes verbais"
+    },
+    {
+      "arquivo": "an-aposto-vocativo.json",
+      "titulo": "Aposto, vocativo ou sujeito?"
+    },
+    {
+      "arquivo": "an-aposto.json",
+      "titulo": "Tipos de aposto"
+    },
+    {
+      "arquivo": "an-cn-aa.json",
+      "titulo": "Complemento nominal ou adjunto adnominal?"
+    },
+    {
+      "arquivo": "an-integrantes.json",
+      "titulo": "Termos integrantes da oração"
+    },
+    {
+      "arquivo": "an-nucleo.json",
+      "titulo": "Núcleo do sujeito e do objeto"
+    },
+    {
+      "arquivo": "an-obliquos.json",
+      "titulo": "O, A ou LHE?"
+    },
+    {
+      "arquivo": "an-predicado.json",
+      "titulo": "Tipos de predicado"
+    },
+    {
+      "arquivo": "an-predicativo.json",
+      "titulo": "Predicativo do sujeito ou do objeto?"
+    },
+    {
+      "arquivo": "an-sujeito-qual.json",
+      "titulo": "Qual é o sujeito?"
+    },
+    {
+      "arquivo": "an-virgula.json",
+      "titulo": "Vírgula no aposto e no vocativo"
+    },
+    {
+      "arquivo": "an-vl.json",
+      "titulo": "Verbo de ligação ou significativo?"
+    }
+  ],
+  "escolha-pc": [
+    {
+      "arquivo": "pc-adjetivas.json",
+      "titulo": "Adjetivas: restritiva ou explicativa?"
+    },
+    {
+      "arquivo": "pc-adverbiais.json",
+      "titulo": "Orações subordinadas adverbiais"
+    },
+    {
+      "arquivo": "pc-coord-sub.json",
+      "titulo": "Coordenação ou subordinação?"
+    },
+    {
+      "arquivo": "pc-coordenadas.json",
+      "titulo": "Orações coordenadas"
+    },
+    {
+      "arquivo": "pc-reduzidas-desenvolver.json",
+      "titulo": "Desenvolva a oração reduzida"
+    },
+    {
+      "arquivo": "pc-reduzidas.json",
+      "titulo": "Orações reduzidas"
+    },
+    {
+      "arquivo": "pc-relativo-unir.json",
+      "titulo": "Una as orações com o pronome relativo"
+    },
+    {
+      "arquivo": "pc-substantivas.json",
+      "titulo": "Orações subordinadas substantivas"
+    },
+    {
+      "arquivo": "pc-tipo-sub.json",
+      "titulo": "Substantiva, adjetiva ou adverbial?"
     }
   ]
 }

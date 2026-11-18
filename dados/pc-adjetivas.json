@@ -1,0 +1,129 @@
+{
+  "titulo": "Adjetivas: restritiva ou explicativa?",
+  "emoji": "🎨",
+  "instrucao": "Como se classifica a oração adjetiva destacada?",
+  "rodadas": [
+    {
+      "destaque": "Os alunos [que estudaram] passaram.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Restritiva",
+      "explica": "Adjetiva restritiva: sem vírgulas: restringe, separa um grupo dentro do todo.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Os alunos, [que estudaram], passaram.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Explicativa",
+      "explica": "Adjetiva explicativa: entre vírgulas: acrescenta uma informação sobre o termo, sem restringi-lo.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "O Sol, [que é uma estrela], ilumina a Terra.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Explicativa",
+      "explica": "Adjetiva explicativa: entre vírgulas: acrescenta uma informação sobre o termo, sem restringi-lo.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "O livro [que você me emprestou] é ótimo.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Restritiva",
+      "explica": "Adjetiva restritiva: sem vírgulas: restringe, separa um grupo dentro do todo.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Machado de Assis, [que escreveu Dom Casmurro], nasceu no Rio.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Explicativa",
+      "explica": "Adjetiva explicativa: entre vírgulas: acrescenta uma informação sobre o termo, sem restringi-lo.",
+      "imagem": "✒️"
+    },
+    {
+      "destaque": "A cidade [onde nasci] é pequena.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Restritiva",
+      "explica": "Adjetiva restritiva: sem vírgulas: restringe, separa um grupo dentro do todo.",
+      "imagem": "🏘️"
+    },
+    {
+      "destaque": "O ser humano, [que é mortal], busca a eternidade.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Explicativa",
+      "explica": "Adjetiva explicativa: entre vírgulas: acrescenta uma informação sobre o termo, sem restringi-lo.",
+      "imagem": "⏳"
+    },
+    {
+      "destaque": "As pessoas [que chegaram atrasadas] não entraram.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Restritiva",
+      "explica": "Adjetiva restritiva: sem vírgulas: restringe, separa um grupo dentro do todo.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "Minha mãe, [que mora em Recife], vem me visitar.",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Explicativa",
+      "explica": "Adjetiva explicativa: entre vírgulas: acrescenta uma informação sobre o termo, sem restringi-lo.",
+      "imagem": "👩"
+    },
+    {
+      "destaque": "Conheci o rapaz [cujo pai é piloto].",
+      "opcoes": [
+        "Restritiva",
+        "Explicativa"
+      ],
+      "correta": "Restritiva",
+      "explica": "Adjetiva restritiva: sem vírgulas: restringe, separa um grupo dentro do todo.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Os alunos que estudaram passaram.",
+      "opcoes": [
+        "Só passaram os alunos que estudaram.",
+        "Todos os alunos estudaram e passaram."
+      ],
+      "correta": "Só passaram os alunos que estudaram.",
+      "explica": "Sem vírgulas, a oração restringe: alguns alunos estudaram (e passaram), outros não.",
+      "imagem": "🤔",
+      "enunciado": "O que a frase quer dizer?"
+    },
+    {
+      "destaque": "Os alunos, que estudaram, passaram.",
+      "opcoes": [
+        "Todos os alunos estudaram e passaram.",
+        "Só passaram os alunos que estudaram."
+      ],
+      "correta": "Todos os alunos estudaram e passaram.",
+      "explica": "Com vírgulas, a oração explica: todos os alunos estudaram.",
+      "imagem": "🤔",
+      "enunciado": "O que a frase quer dizer?"
+    }
+  ]
+}

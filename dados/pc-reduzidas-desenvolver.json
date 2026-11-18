@@ -1,0 +1,95 @@
+{
+  "titulo": "Desenvolva a oração reduzida",
+  "emoji": "🔓",
+  "instrucao": "Qual é a forma desenvolvida, com o mesmo sentido?",
+  "rodadas": [
+    {
+      "destaque": "Ao sair de casa, tranquei a porta.",
+      "opcoes": [
+        "Quando saí de casa, tranquei a porta.",
+        "Embora saísse de casa, tranquei a porta.",
+        "Se sair de casa, tranquei a porta."
+      ],
+      "correta": "Quando saí de casa, tranquei a porta.",
+      "explica": "AO + infinitivo indica tempo: QUANDO saí…",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "Terminada a aula, os alunos saíram.",
+      "opcoes": [
+        "Quando a aula terminou, os alunos saíram.",
+        "Para que a aula terminasse, os alunos saíram.",
+        "Embora a aula terminasse, os alunos saíram."
+      ],
+      "correta": "Quando a aula terminou, os alunos saíram.",
+      "explica": "Reduzida de particípio com valor de tempo.",
+      "imagem": "🔔"
+    },
+    {
+      "destaque": "Saindo cedo, você evita o trânsito.",
+      "opcoes": [
+        "Se você sair cedo, evita o trânsito.",
+        "Embora você saia cedo, evita o trânsito.",
+        "Para que você saia cedo, evita o trânsito."
+      ],
+      "correta": "Se você sair cedo, evita o trânsito.",
+      "explica": "Aqui o gerúndio tem valor de condição: SE você sair…",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "É importante estudar todos os dias.",
+      "opcoes": [
+        "É importante que estudemos todos os dias.",
+        "É importante quando estudamos todos os dias.",
+        "É importante embora estudemos todos os dias."
+      ],
+      "correta": "É importante que estudemos todos os dias.",
+      "explica": "Reduzida substantiva subjetiva: É importante QUE…",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Apesar de estar cansado, foi à festa.",
+      "opcoes": [
+        "Embora estivesse cansado, foi à festa.",
+        "Porque estava cansado, foi à festa.",
+        "Se estivesse cansado, foi à festa."
+      ],
+      "correta": "Embora estivesse cansado, foi à festa.",
+      "explica": "APESAR DE + infinitivo indica concessão: EMBORA…",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Por ser inteligente, resolveu o problema.",
+      "opcoes": [
+        "Como era inteligente, resolveu o problema.",
+        "Embora fosse inteligente, resolveu o problema.",
+        "Para que fosse inteligente, resolveu o problema."
+      ],
+      "correta": "Como era inteligente, resolveu o problema.",
+      "explica": "POR + infinitivo indica causa: COMO era…",
+      "imagem": "🧠"
+    },
+    {
+      "destaque": "Estudou para passar no concurso.",
+      "opcoes": [
+        "Estudou para que passasse no concurso.",
+        "Estudou embora passasse no concurso.",
+        "Estudou porque passou no concurso."
+      ],
+      "correta": "Estudou para que passasse no concurso.",
+      "explica": "PARA + infinitivo indica finalidade: PARA QUE…",
+      "imagem": "🎯"
+    },
+    {
+      "destaque": "Vi as crianças brincando no parque.",
+      "opcoes": [
+        "Vi as crianças que brincavam no parque.",
+        "Vi as crianças embora brincassem no parque.",
+        "Vi as crianças para que brincassem no parque."
+      ],
+      "correta": "Vi as crianças que brincavam no parque.",
+      "explica": "Aqui o gerúndio caracteriza CRIANÇAS: equivale a uma adjetiva (que brincavam).",
+      "imagem": "🛝"
+    }
+  ]
+}

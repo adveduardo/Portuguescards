@@ -1,0 +1,161 @@
+{
+  "titulo": "O, A ou LHE?",
+  "emoji": "🔄",
+  "instrucao": "Que pronome oblíquo substitui o termo destacado?",
+  "rodadas": [
+    {
+      "destaque": "Encontrei [o professor] na rua.",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "o",
+      "explica": "Encontrei-o: objeto direto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Entreguei o livro [à professora].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "lhe",
+      "explica": "Entreguei-lhe o livro: objeto indireto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Visitamos [as primas] ontem.",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "as",
+      "explica": "Visitamo-las: objeto direto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "👭"
+    },
+    {
+      "destaque": "Obedeça [aos seus pais].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "lhes",
+      "explica": "Obedeça-lhes: objeto indireto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "👪"
+    },
+    {
+      "destaque": "Convidei [a vizinha] para a festa.",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "a",
+      "explica": "Convidei-a: objeto direto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Paguei [ao funcionário].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "lhe",
+      "explica": "Pagar A alguém: paguei-lhe. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "Comprei [os ingressos].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "os",
+      "explica": "Comprei-os: objeto direto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🎟️"
+    },
+    {
+      "destaque": "Telefonei [aos amigos].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "lhes",
+      "explica": "Telefonar A alguém: telefonei-lhes. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "Ajudei [o irmão] na tarefa.",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "o",
+      "explica": "AJUDAR é transitivo direto: ajudei-o. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Respondi [ao professor].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "lhe",
+      "explica": "Responder A alguém: respondi-lhe. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "Abracei [as crianças].",
+      "opcoes": [
+        "o",
+        "a",
+        "os",
+        "as",
+        "lhe",
+        "lhes"
+      ],
+      "correta": "as",
+      "explica": "Abracei-as: objeto direto. Lembrete: O, A, OS, AS = objeto direto; LHE, LHES = objeto indireto (a ele, a ela).",
+      "imagem": "🤗"
+    }
+  ]
+}

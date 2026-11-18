@@ -1,0 +1,238 @@
+{
+  "titulo": "Raio-X do período composto",
+  "oracoes": [
+    {
+      "frase": "Espero que você venha à festa.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal.",
+          "resposta": "Espero",
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "A oração principal não começa com conectivo: ESPERO."
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "que você venha à festa",
+          "cor": "#2f80ed",
+          "termo": "Subordinada substantiva objetiva direta",
+          "explica": "Espero o quê? Espero ISSO: a oração é objeto direto do verbo ESPERAR."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "que",
+          "cor": "#e74c3c",
+          "termo": "Conjunção integrante",
+          "explica": "QUE integrante: introduz oração substantiva."
+        }
+      ]
+    },
+    {
+      "frase": "Os alunos que estudaram passaram na prova.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal (ela está \"partida\" em duas partes).",
+          "resposta": [
+            "Os alunos",
+            "passaram na prova"
+          ],
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "A principal é \"Os alunos passaram na prova\"; a subordinada está intercalada no meio dela."
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "que estudaram",
+          "cor": "#8e44ad",
+          "termo": "Subordinada adjetiva restritiva",
+          "explica": "Caracteriza ALUNOS como um adjetivo (os alunos estudiosos). Sem vírgulas: restringe, só os que estudaram."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "que",
+          "cor": "#e74c3c",
+          "termo": "Pronome relativo",
+          "explica": "QUE relativo: retoma ALUNOS (= os quais)."
+        }
+      ]
+    },
+    {
+      "frase": "Quando a chuva parou, as crianças saíram.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal.",
+          "resposta": "as crianças saíram",
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "Tem sentido completo e não começa com conectivo."
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "Quando a chuva parou",
+          "cor": "#e67e22",
+          "termo": "Subordinada adverbial temporal",
+          "explica": "Indica QUANDO as crianças saíram: funciona como um advérbio de tempo."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "Quando",
+          "cor": "#e74c3c",
+          "termo": "Conjunção temporal",
+          "explica": "QUANDO introduz oração adverbial temporal."
+        }
+      ]
+    },
+    {
+      "frase": "Estudei muito, mas não passei.",
+      "passos": [
+        {
+          "pergunta": "Marquem a primeira oração coordenada (sem conjunção).",
+          "resposta": "Estudei muito",
+          "cor": "#16a085",
+          "termo": "Coordenada assindética",
+          "explica": "Assindética = sem conjunção (síndeto)."
+        },
+        {
+          "pergunta": "Marquem a oração que começa com conjunção.",
+          "resposta": "mas não passei",
+          "cor": "#16a085",
+          "termo": "Coordenada sindética adversativa",
+          "explica": "Sindética = com conjunção. MAS indica oposição."
+        },
+        {
+          "pergunta": "Marquem a conjunção.",
+          "resposta": "mas",
+          "cor": "#e74c3c",
+          "termo": "Conjunção adversativa",
+          "explica": "MAS, PORÉM, CONTUDO, TODAVIA, ENTRETANTO: adversativas."
+        }
+      ]
+    },
+    {
+      "frase": "Ao sair da escola, Pedro encontrou o primo.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal.",
+          "resposta": "Pedro encontrou o primo",
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "Tem verbo flexionado (encontrou) e sentido completo."
+        },
+        {
+          "pergunta": "Marquem a oração reduzida.",
+          "resposta": "Ao sair da escola",
+          "cor": "#c2185b",
+          "termo": "Reduzida de infinitivo (temporal)",
+          "explica": "Verbo no infinitivo e sem conjunção. Desenvolvida: Quando saiu da escola…"
+        }
+      ]
+    },
+    {
+      "frase": "É importante que todos participem.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal.",
+          "resposta": "É importante",
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "A principal não tem sujeito próprio: o sujeito dela é a oração subordinada!"
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "que todos participem",
+          "cor": "#2f80ed",
+          "termo": "Subordinada substantiva subjetiva",
+          "explica": "O que é importante? Que todos participem = ISSO é importante. A oração é sujeito."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "que",
+          "cor": "#e74c3c",
+          "termo": "Conjunção integrante",
+          "explica": "QUE integrante."
+        }
+      ]
+    },
+    {
+      "frase": "Brasília, que é a capital do país, foi inaugurada em 1960.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal (ela está partida).",
+          "resposta": [
+            "Brasília",
+            "foi inaugurada em 1960"
+          ],
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "Brasília foi inaugurada em 1960."
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "que é a capital do país",
+          "cor": "#8e44ad",
+          "termo": "Subordinada adjetiva explicativa",
+          "explica": "Entre vírgulas, acrescenta uma explicação sobre Brasília (que só existe uma)."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "que",
+          "cor": "#e74c3c",
+          "termo": "Pronome relativo",
+          "explica": "Retoma BRASÍLIA (= a qual)."
+        }
+      ]
+    },
+    {
+      "frase": "Choveu tanto que a rua alagou.",
+      "passos": [
+        {
+          "pergunta": "Marquem a oração principal.",
+          "resposta": "Choveu tanto",
+          "cor": "#2c3e50",
+          "termo": "Oração principal",
+          "explica": "Repare na palavra TANTO: ela anuncia uma consequência."
+        },
+        {
+          "pergunta": "Marquem a oração subordinada.",
+          "resposta": "que a rua alagou",
+          "cor": "#e67e22",
+          "termo": "Subordinada adverbial consecutiva",
+          "explica": "Indica a consequência da chuva intensa (tanto… que)."
+        },
+        {
+          "pergunta": "Marquem o conectivo.",
+          "resposta": "que",
+          "cor": "#e74c3c",
+          "termo": "Conjunção consecutiva",
+          "explica": "TÃO/TANTO/TAL… QUE: conjunção consecutiva."
+        }
+      ]
+    },
+    {
+      "frase": "Leve o casaco, pois está frio.",
+      "passos": [
+        {
+          "pergunta": "Marquem a primeira oração.",
+          "resposta": "Leve o casaco",
+          "cor": "#16a085",
+          "termo": "Coordenada assindética",
+          "explica": "Não começa com conjunção."
+        },
+        {
+          "pergunta": "Marquem a oração com conjunção.",
+          "resposta": "pois está frio",
+          "cor": "#16a085",
+          "termo": "Coordenada sindética explicativa",
+          "explica": "Justifica a ordem dada antes (= porque)."
+        },
+        {
+          "pergunta": "Marquem a conjunção.",
+          "resposta": "pois",
+          "cor": "#e74c3c",
+          "termo": "Conjunção explicativa",
+          "explica": "POIS, antes do verbo, é explicativa."
+        }
+      ]
+    }
+  ]
+}

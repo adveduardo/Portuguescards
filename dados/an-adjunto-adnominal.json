@@ -1,0 +1,151 @@
+{
+  "titulo": "Adjunto adnominal",
+  "emoji": "🎨",
+  "instrucao": "Como se classifica o termo destacado?",
+  "rodadas": [
+    {
+      "destaque": "[Os] alunos chegaram.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "É um artigo acompanhando o núcleo ALUNOS. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Os alunos [dedicados] passaram.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Adjetivo dentro do sujeito, ao lado do núcleo. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Os alunos estão [dedicados].",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Predicativo do sujeito",
+      "explica": "Ligado ao sujeito pelo verbo de ligação ESTAR.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "[Minha] irmã viajou.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Pronome possessivo acompanhando o substantivo. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "[Dois] cachorros latiam.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Numeral acompanhando o substantivo. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "Comprei uma mesa [de vidro].",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Locução adjetiva (de vidro = vítrea), indicando matéria. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "🪟"
+    },
+    {
+      "destaque": "Os [alunos] da escola chegaram.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Núcleo do termo",
+      "explica": "É a palavra principal do sujeito.",
+      "imagem": "🧑‍🎓"
+    },
+    {
+      "destaque": "Tenho medo [de cobras].",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Complemento nominal",
+      "explica": "Completa o sentido do substantivo abstrato MEDO.",
+      "imagem": "🐍"
+    },
+    {
+      "destaque": "[Aquele] menino é meu primo.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Pronome demonstrativo acompanhando o substantivo. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "A menina [bonita] sorriu.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Adjunto adnominal",
+      "explica": "Adjetivo junto do núcleo, dentro do sujeito. O adjunto adnominal acompanha um substantivo: pode ser artigo, adjetivo, locução adjetiva, pronome ou numeral.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "A menina é [bonita].",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Predicativo do sujeito",
+      "explica": "Ligado ao sujeito pelo verbo de ligação SER.",
+      "imagem": "🪞"
+    },
+    {
+      "destaque": "A [casa] de praia foi vendida.",
+      "opcoes": [
+        "Adjunto adnominal",
+        "Predicativo do sujeito",
+        "Núcleo do termo",
+        "Complemento nominal"
+      ],
+      "correta": "Núcleo do termo",
+      "explica": "O que foi vendido? A casa (núcleo).",
+      "imagem": "🏖️"
+    }
+  ]
+}

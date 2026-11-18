@@ -1,0 +1,166 @@
+{
+  "titulo": "Quiz de análise sintática",
+  "tempoPadrao": 25,
+  "perguntas": [
+    {
+      "pergunta": "Em \"Chegaram os convidados\", o sujeito é:",
+      "imagem": "🎉",
+      "opcoes": [
+        "os convidados",
+        "oculto",
+        "indeterminado",
+        "inexistente"
+      ],
+      "correta": "os convidados"
+    },
+    {
+      "pergunta": "Em \"Há muitas pessoas na fila\", o sujeito é:",
+      "imagem": "🧍",
+      "opcoes": [
+        "inexistente",
+        "muitas pessoas",
+        "oculto",
+        "a fila"
+      ],
+      "correta": "inexistente"
+    },
+    {
+      "pergunta": "Em \"Ela parece cansada\", o predicado é:",
+      "imagem": "🥱",
+      "opcoes": [
+        "nominal",
+        "verbal",
+        "verbo-nominal"
+      ],
+      "correta": "nominal"
+    },
+    {
+      "pergunta": "Em \"Ela chegou cansada\", o predicado é:",
+      "imagem": "🚶",
+      "opcoes": [
+        "verbo-nominal",
+        "nominal",
+        "verbal"
+      ],
+      "correta": "verbo-nominal"
+    },
+    {
+      "pergunta": "Em \"Tenho medo do escuro\", DO ESCURO é:",
+      "imagem": "🌑",
+      "opcoes": [
+        "complemento nominal",
+        "objeto indireto",
+        "adjunto adnominal",
+        "adjunto adverbial"
+      ],
+      "correta": "complemento nominal"
+    },
+    {
+      "pergunta": "Em \"O muro foi pintado pelos voluntários\", PELOS VOLUNTÁRIOS é:",
+      "imagem": "🧱",
+      "opcoes": [
+        "agente da passiva",
+        "objeto indireto",
+        "adjunto adverbial",
+        "sujeito"
+      ],
+      "correta": "agente da passiva"
+    },
+    {
+      "pergunta": "Em \"Entreguei-lhe o livro\", LHE é:",
+      "imagem": "📕",
+      "opcoes": [
+        "objeto indireto",
+        "objeto direto",
+        "sujeito",
+        "adjunto adnominal"
+      ],
+      "correta": "objeto indireto"
+    },
+    {
+      "pergunta": "Em \"Pedro, venha cá\", PEDRO é:",
+      "imagem": "📣",
+      "opcoes": [
+        "vocativo",
+        "sujeito",
+        "aposto",
+        "objeto direto"
+      ],
+      "correta": "vocativo"
+    },
+    {
+      "pergunta": "Em \"O poeta Drummond nasceu em Itabira\", DRUMMOND é aposto:",
+      "imagem": "✒️",
+      "opcoes": [
+        "especificativo",
+        "explicativo",
+        "enumerativo",
+        "resumitivo"
+      ],
+      "correta": "especificativo"
+    },
+    {
+      "pergunta": "Em \"A invenção do rádio\", DO RÁDIO é:",
+      "imagem": "📻",
+      "opcoes": [
+        "complemento nominal",
+        "adjunto adnominal",
+        "objeto indireto"
+      ],
+      "correta": "complemento nominal"
+    },
+    {
+      "pergunta": "Em \"O amor de mãe\", DE MÃE é:",
+      "imagem": "🤱",
+      "opcoes": [
+        "adjunto adnominal",
+        "complemento nominal",
+        "objeto indireto"
+      ],
+      "correta": "adjunto adnominal"
+    },
+    {
+      "pergunta": "Em \"Saí de madrugada\", DE MADRUGADA indica:",
+      "imagem": "🌙",
+      "opcoes": [
+        "tempo",
+        "lugar",
+        "modo",
+        "causa"
+      ],
+      "correta": "tempo"
+    },
+    {
+      "pergunta": "Em \"Elegeram Ana representante\", REPRESENTANTE é:",
+      "imagem": "🗳️",
+      "opcoes": [
+        "predicativo do objeto",
+        "predicativo do sujeito",
+        "aposto",
+        "objeto direto"
+      ],
+      "correta": "predicativo do objeto"
+    },
+    {
+      "pergunta": "Qual destes é termo ESSENCIAL da oração?",
+      "imagem": "⭐",
+      "opcoes": [
+        "sujeito",
+        "aposto",
+        "adjunto adverbial",
+        "vocativo"
+      ],
+      "correta": "sujeito"
+    },
+    {
+      "pergunta": "Em \"Os alunos dedicados passaram\", DEDICADOS é:",
+      "imagem": "📚",
+      "opcoes": [
+        "adjunto adnominal",
+        "predicativo do sujeito",
+        "núcleo do sujeito"
+      ],
+      "correta": "adjunto adnominal"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "titulo": "Ordem direta da oração",
+  "sequencias": [
+    {
+      "titulo": "Ordem direta",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Os alunos",
+        "entregaram",
+        "os trabalhos",
+        "à professora."
+      ],
+      "explica": "Sujeito → verbo → objeto direto → objeto indireto."
+    },
+    {
+      "titulo": "Ordem direta",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "A menina",
+        "comprou",
+        "um presente",
+        "para a mãe."
+      ],
+      "explica": "Sujeito → verbo → objeto direto → complemento."
+    },
+    {
+      "titulo": "Ordem direta (voz passiva)",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "O muro",
+        "foi pintado",
+        "pelos voluntários."
+      ],
+      "explica": "Sujeito paciente → locução verbal → agente da passiva."
+    },
+    {
+      "titulo": "Ordem direta (predicado nominal)",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Maria",
+        "parece",
+        "cansada."
+      ],
+      "explica": "Sujeito → verbo de ligação → predicativo do sujeito."
+    },
+    {
+      "titulo": "Coloque na ordem direta: \"Chegaram cedo os convidados.\"",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "Os convidados",
+        "chegaram",
+        "cedo."
+      ],
+      "explica": "Sujeito → verbo → adjunto adverbial."
+    },
+    {
+      "titulo": "Coloque na ordem direta: \"Por causa da chuva, ficou alagada a cidade.\"",
+      "esquerda": "começo",
+      "direita": "fim",
+      "itens": [
+        "A cidade",
+        "ficou",
+        "alagada",
+        "por causa da chuva."
+      ],
+      "explica": "Sujeito → verbo de ligação → predicativo → adjunto adverbial."
+    }
+  ]
+}

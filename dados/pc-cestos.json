@@ -1,0 +1,129 @@
+{
+  "titulo": "Cestos dos conectivos do período composto",
+  "cestos": [
+    {
+      "id": "coord",
+      "nome": "Conjunção coordenativa",
+      "emoji": "🔗",
+      "cor": "#16a085"
+    },
+    {
+      "id": "adv",
+      "nome": "Conjunção subordinativa adverbial",
+      "emoji": "🕒",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "rel",
+      "nome": "Pronome relativo",
+      "emoji": "🎨",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "e",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "nem",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "mas",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "porém",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "contudo",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "ou",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "ora… ora",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "portanto",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "logo",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "por isso",
+      "cesto": "coord"
+    },
+    {
+      "palavra": "embora",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "caso",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "já que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "visto que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "para que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "a fim de que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "conforme",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "à medida que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "assim que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "desde que",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "o qual",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "a qual",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "cujo",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "cujas",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "onde",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "os quais",
+      "cesto": "rel"
+    }
+  ]
+}

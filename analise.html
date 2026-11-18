@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raio-X da Oração</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #perguntaAn{font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:bold;text-align:center;margin:6px auto 4px;max-width:1150px}
+  #passoAn{text-align:center;font-weight:bold;opacity:.7}
+  #fraseAn{background:#fffdf6;border-radius:26px;padding:22px 20px;box-shadow:0 6px 0 #0001;margin:10px auto;max-width:1150px;
+    display:flex;flex-wrap:wrap;gap:10px 8px;justify-content:center;align-items:flex-start}
+  .tk{border:none;border-radius:14px;padding:8px 14px;font-size:clamp(1.4rem,3.4vw,2.5rem);font-weight:bold;background:#fff;color:var(--texto);
+    box-shadow:0 4px 0 #0002;cursor:pointer;transition:transform .15s,background .2s;position:relative;font-family:inherit}
+  .tk.sel{outline:4px solid var(--amarelo);transform:translateY(-4px)}
+  .tk.feito{color:#fff}
+  .tk.mostrar{animation:piscaAn 1s 2}
+  @keyframes piscaAn{50%{transform:scale(1.12)}}
+  .tk small{display:block;font-size:.75rem;font-weight:bold;opacity:.95;margin-top:2px}
+  #explicaAn{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1050px;margin:6px auto;min-height:1.4em}
+  #legendaAn{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:1150px;margin:8px auto}
+  .chipT{color:#fff;border-radius:14px;padding:6px 12px;font-weight:bold;font-size:1rem;box-shadow:0 3px 0 #0002}
+  .chipT i{font-style:normal;font-weight:normal;opacity:.95}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🔬 Raio-X da Oração</h1>
+  <div class="cartao">
+    <h2>1. Orações (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Orações: <select id="selQtd"><option value="0">todas</option><option value="3">3</option><option value="5" selected>5</option><option value="8">8</option></select></label>
+    <label><input type="checkbox" id="chkOrdem"> Manter a ordem do arquivo (da mais fácil para a mais difícil)</label>
+    <label><input type="checkbox" id="chkVoz" checked> Ler a pergunta em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">A oração aparece no telão. A cada passo (o verbo, o sujeito, os complementos, os adjuntos…), a equipe da vez toca nas palavras do termo pedido e clica em <b>Conferir</b>. Cada termo encontrado ganha uma cor: no fim, a oração fica toda analisada. Acertou de primeira = 2 pontos; na segunda = 1.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="barraEquipes" class="barraEquipes"></div>
+  <div id="passoAn"></div>
+  <div id="perguntaAn"></div>
+  <div id="fraseAn"></div>
+  <div id="explicaAn"></div>
+  <div class="linha">
+    <button id="btnLimpar">🧽 Limpar seleção</button>
+    <button id="btnConferir" class="principal">✅ Conferir</button>
+    <button id="btnProximo" class="principal" hidden>➡️ Próximo passo</button>
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+  <div id="legendaAn"></div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+// cores de cada tipo de termo (o JSON pode trazer "cor" própria)
+const TIPOS = {
+  vb:   {nome: 'Verbo', cor: '#e74c3c'},          suj:  {nome: 'Sujeito', cor: '#2f80ed'},
+  od:   {nome: 'Objeto direto', cor: '#27ae60'},  oi:   {nome: 'Objeto indireto', cor: '#e67e22'},
+  cn:   {nome: 'Complemento nominal', cor: '#16a085'}, ag: {nome: 'Agente da passiva', cor: '#795548'},
+  pred: {nome: 'Predicativo', cor: '#c2185b'},    adn:  {nome: 'Adjunto adnominal', cor: '#8e44ad'},
+  adv:  {nome: 'Adjunto adverbial', cor: '#b7950b'}, apo: {nome: 'Aposto', cor: '#546e7a'},
+  voc:  {nome: 'Vocativo', cor: '#00838f'},       pv:   {nome: 'Predicado', cor: '#34495e'}
+};
+const limpar = t => String(t).toLowerCase().replace(/[.,!?;:"“”()…—]/g, '').trim();
+let resolvidos = [], dados = null, fila = [], oracao = null, passo = 0, tokens = [], sel = new Set(), tentativas = 0, resolvido = false, placar = null, total = 0, feitas = 0, pontosMax = 0;
+
+function indicesDe(toks, resposta){
+  const limpos = toks.map(limpar), partes = (Array.isArray(resposta) ? resposta : [resposta]).map(p => String(p).split(/\s+/).map(limpar).filter(Boolean));
+  const idx = [];
+  for (const p of partes){
+    let achou = -1;
+    for (let i = 0; i + p.length <= limpos.length && achou < 0; i++) if (p.every((w, k) => limpos[i + k] === w)) achou = i;
+    if (achou < 0) return null;
+    for (let k = 0; k < p.length; k++) idx.push(achou + k);
+  }
+  return idx;
+}
+function normalizar(d){
+  if (!d || !Array.isArray(d.oracoes)) return null;
+  let quebrados = 0;
+  const oracoes = d.oracoes.filter(o => o && o.frase && Array.isArray(o.passos)).map(o => {
+    const toks = String(o.frase).split(/\s+/).filter(Boolean);
+    const passos = o.passos.filter(p => p && p.pergunta && p.resposta).map(p => {
+      const idx = indicesDe(toks, p.resposta);
+      if (!idx){ quebrados++; return null; }
+      const t = TIPOS[p.tipo] || {};
+      return {pergunta: String(p.pergunta), idx, termo: String(p.termo || t.nome || ''), cor: p.cor || t.cor || '#7f8c8d', explica: String(p.explica || '')};
+    }).filter(Boolean);
+    return {frase: String(o.frase), toks, passos};
+  }).filter(o => o.passos.length);
+  return oracoes.length ? {titulo: d.titulo || 'Raio-X da oração', oracoes, quebrados} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada oração precisa de "frase" e "passos" (com "pergunta" e "resposta").');
+  dados = x;
+  const np = x.oracoes.reduce((s, o) => s + o.passos.length, 0);
+  $('infoJson').textContent = `${x.titulo} • ${x.oracoes.length} orações • ${np} passos` + (x.quebrados ? ` • ⚠️ ${x.quebrados} passo(s) ignorado(s): a resposta não aparece igual na frase` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'analise', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/analise-padrao.json', 'modelo-raio-x-da-oracao.json');
+
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  fila = $('chkOrdem').checked ? dados.oracoes.slice() : M.embaralhar(dados.oracoes);
+  const q = +$('selQtd').value; if (q) fila = fila.slice(0, q);
+  total = fila.length; feitas = 0; pontosMax = fila.reduce((s, o) => s + o.passos.length * 2, 0);
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo');
+  proximaOracao();
+}
+function proximaOracao(){
+  if (!fila.length) return fim();
+  oracao = fila.shift(); feitas++; passo = 0;
+  tokens = oracao.toks.map(t => ({t, cor: null, rotulo: ''})); resolvidos = [];
+  $('legendaAn').innerHTML = '';
+  mostrarPasso();
+}
+function desenharFrase(){
+  $('fraseAn').innerHTML = tokens.map((k, i) => `<button class="tk ${k.cor ? 'feito' : ''} ${sel.has(i) ? 'sel' : ''}" data-i="${i}" style="${k.cor ? 'background:' + k.cor : ''}">${AV.esc(k.t)}${k.rotulo ? `<small>${AV.esc(k.rotulo)}</small>` : ''}</button>`).join('');
+  $('fraseAn').querySelectorAll('.tk').forEach(b => b.onclick = () => {
+    if (resolvido) return;
+    const i = +b.dataset.i; sel.has(i) ? sel.delete(i) : sel.add(i); AV.tom(700, .05); desenharFrase();
+  });
+}
+function mostrarPasso(){
+  const p = oracao.passos[passo];
+  sel = new Set(); tentativas = 0; resolvido = false;
+  $('passoAn').textContent = `Oração ${feitas} de ${total} • passo ${passo + 1} de ${oracao.passos.length}`;
+  $('perguntaAn').textContent = placar.prefixo() + '❓ ' + p.pergunta;
+  $('explicaAn').textContent = '👆 Toquem nas palavras do termo e cliquem em Conferir.';
+  $('btnConferir').hidden = false; $('btnLimpar').hidden = false; $('btnProximo').hidden = true;
+  desenharFrase();
+  if ($('chkVoz').checked) AV.falar(p.pergunta);
+}
+function pintar(p){
+  // o termo mais recente fica com a cor; o rótulo de cada termo vai na primeira palavra que ainda mostra a cor dele
+  resolvidos.push(p);
+  p.idx.forEach(i => { tokens[i].cor = p.cor; });
+  tokens.forEach(t => { t.rotulo = ''; });
+  resolvidos.forEach((r, n) => {
+    const meus = r.idx.filter(i => resolvidos.slice(n + 1).every(x => !x.idx.includes(i)));
+    if (meus.length) tokens[meus[0]].rotulo = r.termo;
+  });
+  $('legendaAn').innerHTML += `<span class="chipT" style="background:${p.cor}">${AV.esc(p.termo)}: <i>${AV.esc(p.idx.map(i => oracao.toks[i]).join(' ').replace(/[,;:.!?…]+$/, ''))}</i></span>`;
+}
+function conferir(){
+  if (resolvido) return;
+  const p = oracao.passos[passo], certo = new Set(p.idx);
+  if (!sel.size) return AV.avisar('Toquem nas palavras primeiro.');
+  const igual = sel.size === certo.size && [...sel].every(i => certo.has(i));
+  if (igual){
+    resolvido = true; sel = new Set();
+    const pts = tentativas === 0 ? 2 : 1; placar.pontuar(pts);
+    pintar(p); desenharFrase();
+    $('explicaAn').textContent = `✅ Isso! +${pts} ponto${pts > 1 ? 's' : ''}. ${p.explica}`;
+    AV.fanfarra(); if ($('chkVoz').checked && p.explica) AV.falar(p.explica);
+    terminarPasso();
+  } else {
+    tentativas++; AV.erro();
+    const sub = [...sel].every(i => certo.has(i)), sobre = [...certo].every(i => sel.has(i));
+    const msg = sub ? 'Quase! Faltam palavras nesse termo.' : sobre ? 'Quase! Vocês marcaram palavras a mais.' : 'Esse não é o termo pedido.';
+    sel = new Set();
+    if (tentativas >= 2){
+      resolvido = true; pintar(p); desenharFrase();
+      p.idx.forEach(i => { const b = $('fraseAn').querySelector(`.tk[data-i="${i}"]`); if (b) b.classList.add('mostrar'); });
+      $('explicaAn').textContent = `💡 ${msg} A resposta está destacada. ${p.explica}`;
+      terminarPasso();
+    } else { $('explicaAn').textContent = `❌ ${msg} Tentem de novo!`; desenharFrase(); }
+  }
+}
+function terminarPasso(){
+  $('btnConferir').hidden = true; $('btnLimpar').hidden = true; $('btnProximo').hidden = false;
+  const ultimo = passo + 1 >= oracao.passos.length;
+  $('btnProximo').textContent = !ultimo ? '➡️ Próximo passo' : (fila.length ? '🔬 Próxima oração' : '🏆 Ver resultado');
+  if (ultimo){ $('perguntaAn').textContent = '🔬 Análise completa!'; AV.confete(); }
+}
+$('btnProximo').onclick = () => {
+  placar.proxima();
+  if (passo + 1 < oracao.passos.length){ passo++; mostrarPasso(); }
+  else proximaOracao();
+};
+function fim(){ placar.ranking($('ranking'), pontosMax); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnConferir').onclick = conferir;
+$('btnLimpar').onclick = () => { sel = new Set(); desenharFrase(); };
+$('btnOuvir').onclick = () => oracao && AV.falar(oracao.frase + '. ' + oracao.passos[passo].pergunta);
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

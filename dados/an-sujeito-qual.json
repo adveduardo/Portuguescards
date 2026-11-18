@@ -1,0 +1,151 @@
+{
+  "titulo": "Qual é o sujeito?",
+  "emoji": "👤",
+  "instrucao": "Qual é o sujeito da oração?",
+  "rodadas": [
+    {
+      "destaque": "Chegaram os convidados.",
+      "opcoes": [
+        "os convidados",
+        "Chegaram",
+        "não há sujeito",
+        "sujeito oculto"
+      ],
+      "correta": "os convidados",
+      "explica": "Sujeito posposto (depois do verbo). Pergunte ao verbo: QUEM ou O QUE + verbo? O sujeito concorda com o verbo.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Na festa, dançaram as crianças da vila.",
+      "opcoes": [
+        "as crianças da vila",
+        "Na festa",
+        "a vila",
+        "sujeito oculto"
+      ],
+      "correta": "as crianças da vila",
+      "explica": "Ordem direta: As crianças da vila dançaram na festa.",
+      "imagem": "💃"
+    },
+    {
+      "destaque": "Faltam três dias para as férias.",
+      "opcoes": [
+        "três dias",
+        "as férias",
+        "não há sujeito",
+        "sujeito indeterminado"
+      ],
+      "correta": "três dias",
+      "explica": "O que falta? Três dias. Por isso o verbo está no plural (faltam).",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Choveu durante a noite.",
+      "opcoes": [
+        "não há sujeito (oração sem sujeito)",
+        "a noite",
+        "sujeito oculto",
+        "sujeito indeterminado"
+      ],
+      "correta": "não há sujeito (oração sem sujeito)",
+      "explica": "Fenômeno da natureza: verbo impessoal, oração sem sujeito.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Os livros da biblioteca foram doados.",
+      "opcoes": [
+        "Os livros da biblioteca",
+        "a biblioteca",
+        "não há sujeito",
+        "sujeito indeterminado"
+      ],
+      "correta": "Os livros da biblioteca",
+      "explica": "Sujeito paciente (voz passiva). Núcleo: LIVROS.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Estudamos muito para a prova.",
+      "opcoes": [
+        "nós (sujeito oculto)",
+        "a prova",
+        "muito",
+        "sujeito indeterminado"
+      ],
+      "correta": "nós (sujeito oculto)",
+      "explica": "A terminação -MOS indica o sujeito: nós.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Ocorreram muitos acidentes na estrada.",
+      "opcoes": [
+        "muitos acidentes",
+        "a estrada",
+        "não há sujeito",
+        "sujeito oculto"
+      ],
+      "correta": "muitos acidentes",
+      "explica": "O que ocorreu? Muitos acidentes.",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "Agradou a todos o discurso do diretor.",
+      "opcoes": [
+        "o discurso do diretor",
+        "todos",
+        "o diretor",
+        "sujeito oculto"
+      ],
+      "correta": "o discurso do diretor",
+      "explica": "O que agradou? O discurso do diretor.",
+      "imagem": "🎤"
+    },
+    {
+      "destaque": "Bateram à porta.",
+      "opcoes": [
+        "sujeito indeterminado",
+        "a porta",
+        "eles (sujeito oculto)",
+        "não há sujeito"
+      ],
+      "correta": "sujeito indeterminado",
+      "explica": "Verbo na 3ª pessoa do plural sem indicar quem: sujeito indeterminado.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "Sobraram alguns pedaços de bolo.",
+      "opcoes": [
+        "alguns pedaços de bolo",
+        "bolo",
+        "não há sujeito",
+        "sujeito indeterminado"
+      ],
+      "correta": "alguns pedaços de bolo",
+      "explica": "O que sobrou? Alguns pedaços de bolo.",
+      "imagem": "🍰"
+    },
+    {
+      "destaque": "Existem muitas dúvidas sobre o assunto.",
+      "opcoes": [
+        "muitas dúvidas",
+        "o assunto",
+        "não há sujeito",
+        "sujeito oculto"
+      ],
+      "correta": "muitas dúvidas",
+      "explica": "EXISTIR é pessoal: o sujeito é muitas dúvidas (diferente de HAVER, que é impessoal).",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Há muitas dúvidas sobre o assunto.",
+      "opcoes": [
+        "não há sujeito (oração sem sujeito)",
+        "muitas dúvidas",
+        "o assunto",
+        "sujeito indeterminado"
+      ],
+      "correta": "não há sujeito (oração sem sujeito)",
+      "explica": "HAVER no sentido de existir é impessoal: oração sem sujeito. \"Muitas dúvidas\" é objeto direto.",
+      "imagem": "🤔"
+    }
+  ]
+}

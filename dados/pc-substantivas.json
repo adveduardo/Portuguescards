@@ -1,0 +1,203 @@
+{
+  "titulo": "Orações subordinadas substantivas",
+  "emoji": "📦",
+  "instrucao": "Como se classifica a oração substantiva destacada?",
+  "rodadas": [
+    {
+      "destaque": "É importante [que você estude].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Subjetiva",
+      "explica": "Substantiva subjetiva: é o SUJEITO da oração principal (É importante ISSO).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Espero [que você venha].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Objetiva direta",
+      "explica": "Substantiva objetiva direta: é OBJETO DIRETO do verbo da principal (Espero ISSO).",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "Lembrei-me [de que tinha prova].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Objetiva indireta",
+      "explica": "Substantiva objetiva indireta: é OBJETO INDIRETO, com preposição (Lembrei-me DISSO).",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Tenho medo [de que chova].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Completiva nominal",
+      "explica": "Substantiva completiva nominal: COMPLETA UM NOME da principal, com preposição (Tenho medo DISSO).",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "A verdade é [que ninguém sabia].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Predicativa",
+      "explica": "Substantiva predicativa: é PREDICATIVO, depois do verbo de ligação (A verdade é ISSO).",
+      "imagem": "🤫"
+    },
+    {
+      "destaque": "Só quero uma coisa: [que você seja feliz].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Apositiva",
+      "explica": "Substantiva apositiva: é APOSTO, geralmente depois de dois-pontos.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "Convém [que todos cheguem cedo].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Subjetiva",
+      "explica": "Substantiva subjetiva: é o SUJEITO da oração principal (É importante ISSO).",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Não sei [se ele vem].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Objetiva direta",
+      "explica": "Substantiva objetiva direta: é OBJETO DIRETO do verbo da principal (Espero ISSO).",
+      "imagem": "🤷"
+    },
+    {
+      "destaque": "Tenho certeza [de que vamos vencer].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Completiva nominal",
+      "explica": "Substantiva completiva nominal: COMPLETA UM NOME da principal, com preposição (Tenho medo DISSO).",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "O problema é [que não há dinheiro].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Predicativa",
+      "explica": "Substantiva predicativa: é PREDICATIVO, depois do verbo de ligação (A verdade é ISSO).",
+      "imagem": "💸"
+    },
+    {
+      "destaque": "Necessito [de que me ajudem].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Objetiva indireta",
+      "explica": "Substantiva objetiva indireta: é OBJETO INDIRETO, com preposição (Lembrei-me DISSO).",
+      "imagem": "🆘"
+    },
+    {
+      "destaque": "Desejo apenas isto: [que todos se respeitem].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Apositiva",
+      "explica": "Substantiva apositiva: é APOSTO, geralmente depois de dois-pontos.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Sabe-se [que o planeta está aquecendo].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Subjetiva",
+      "explica": "Substantiva subjetiva: é o SUJEITO da oração principal (É importante ISSO).",
+      "imagem": "🌍"
+    },
+    {
+      "destaque": "Perguntei [se havia vagas].",
+      "opcoes": [
+        "Subjetiva",
+        "Objetiva direta",
+        "Objetiva indireta",
+        "Completiva nominal",
+        "Predicativa",
+        "Apositiva"
+      ],
+      "correta": "Objetiva direta",
+      "explica": "Substantiva objetiva direta: é OBJETO DIRETO do verbo da principal (Espero ISSO).",
+      "imagem": "💼"
+    }
+  ]
+}

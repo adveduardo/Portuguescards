@@ -1,0 +1,103 @@
+{
+  "titulo": "Cestos dos termos da oração",
+  "cestos": [
+    {
+      "id": "ess",
+      "nome": "Termos essenciais",
+      "emoji": "⭐",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "int",
+      "nome": "Termos integrantes",
+      "emoji": "🧩",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "ace",
+      "nome": "Termos acessórios",
+      "emoji": "🎨",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "ind",
+      "nome": "Termo independente",
+      "emoji": "📣",
+      "cor": "#00838f"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "Sujeito",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "Predicado",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "de quem se diz algo",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "o que se declara sobre o sujeito",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "Objeto direto",
+      "cesto": "int"
+    },
+    {
+      "palavra": "Objeto indireto",
+      "cesto": "int"
+    },
+    {
+      "palavra": "Complemento nominal",
+      "cesto": "int"
+    },
+    {
+      "palavra": "Agente da passiva",
+      "cesto": "int"
+    },
+    {
+      "palavra": "completa o sentido de um verbo",
+      "cesto": "int"
+    },
+    {
+      "palavra": "completa o sentido de um nome",
+      "cesto": "int"
+    },
+    {
+      "palavra": "Adjunto adnominal",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "Adjunto adverbial",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "Aposto",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "indica uma circunstância",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "caracteriza um substantivo",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "explica outro termo",
+      "cesto": "ace"
+    },
+    {
+      "palavra": "Vocativo",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "chama o ouvinte",
+      "cesto": "ind"
+    }
+  ]
+}

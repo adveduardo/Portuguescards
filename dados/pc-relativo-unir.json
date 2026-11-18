@@ -1,0 +1,95 @@
+{
+  "titulo": "Una as orações com o pronome relativo",
+  "emoji": "🔁",
+  "instrucao": "Qual período une as duas orações corretamente?",
+  "rodadas": [
+    {
+      "destaque": "Conheci um rapaz. O pai do rapaz é piloto.",
+      "opcoes": [
+        "Conheci um rapaz cujo pai é piloto.",
+        "Conheci um rapaz que o pai é piloto.",
+        "Conheci um rapaz onde o pai é piloto."
+      ],
+      "correta": "Conheci um rapaz cujo pai é piloto.",
+      "explica": "CUJO indica posse (o pai do rapaz) e não aceita artigo depois.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Esta é a cidade. Nasci nesta cidade.",
+      "opcoes": [
+        "Esta é a cidade onde nasci.",
+        "Esta é a cidade que nasci.",
+        "Esta é a cidade cuja nasci."
+      ],
+      "correta": "Esta é a cidade onde nasci.",
+      "explica": "Quem nasce, nasce EM um lugar: onde (ou em que).",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "Li o livro. Você me falou do livro.",
+      "opcoes": [
+        "Li o livro de que você me falou.",
+        "Li o livro que você me falou.",
+        "Li o livro cujo você me falou."
+      ],
+      "correta": "Li o livro de que você me falou.",
+      "explica": "Quem fala, fala DE algo: de que (ou do qual).",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "Este é o professor. Gosto muito do professor.",
+      "opcoes": [
+        "Este é o professor de quem gosto muito.",
+        "Este é o professor que gosto muito.",
+        "Este é o professor cujo gosto muito."
+      ],
+      "correta": "Este é o professor de quem gosto muito.",
+      "explica": "Quem gosta, gosta DE alguém: de quem.",
+      "imagem": "👨‍🏫"
+    },
+    {
+      "destaque": "Visitei a escola. Estudei na escola.",
+      "opcoes": [
+        "Visitei a escola em que estudei.",
+        "Visitei a escola que estudei.",
+        "Visitei a escola cuja estudei."
+      ],
+      "correta": "Visitei a escola em que estudei.",
+      "explica": "Quem estuda, estuda EM um lugar: em que (ou onde).",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "A casa é antiga. As janelas da casa são azuis.",
+      "opcoes": [
+        "A casa cujas janelas são azuis é antiga.",
+        "A casa que as janelas são azuis é antiga.",
+        "A casa cujas as janelas são azuis é antiga."
+      ],
+      "correta": "A casa cujas janelas são azuis é antiga.",
+      "explica": "CUJAS concorda com janelas e não leva artigo depois.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "O filme foi ótimo. Assisti ao filme ontem.",
+      "opcoes": [
+        "O filme a que assisti ontem foi ótimo.",
+        "O filme que assisti ontem foi ótimo.",
+        "O filme cujo assisti ontem foi ótimo."
+      ],
+      "correta": "O filme a que assisti ontem foi ótimo.",
+      "explica": "Quem assiste (vê), assiste A algo: a que (ou ao qual).",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Encontrei a amiga. Confio muito nessa amiga.",
+      "opcoes": [
+        "Encontrei a amiga em quem confio muito.",
+        "Encontrei a amiga que confio muito.",
+        "Encontrei a amiga cuja confio muito."
+      ],
+      "correta": "Encontrei a amiga em quem confio muito.",
+      "explica": "Quem confia, confia EM alguém: em quem.",
+      "imagem": "🤝"
+    }
+  ]
+}

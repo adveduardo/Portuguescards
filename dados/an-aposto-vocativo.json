@@ -1,0 +1,128 @@
+{
+  "titulo": "Aposto, vocativo ou sujeito?",
+  "emoji": "📣",
+  "instrucao": "Como se classifica o termo destacado?",
+  "rodadas": [
+    {
+      "destaque": "[Pedro], venha cá!",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama o ouvinte; fica separado por vírgula e não faz parte da estrutura da oração.",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "[Pedro], o aluno novo, chegou.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Sujeito",
+      "explica": "Sujeito: é de quem se diz algo e concorda com o verbo.",
+      "imagem": "🧑‍🎓"
+    },
+    {
+      "destaque": "Pedro, [o aluno novo], chegou.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Aposto",
+      "explica": "Aposto: explica ou especifica outro termo.",
+      "imagem": "🧑‍🎓"
+    },
+    {
+      "destaque": "[Senhores], silêncio, por favor!",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama o ouvinte; fica separado por vírgula e não faz parte da estrutura da oração.",
+      "imagem": "🤫"
+    },
+    {
+      "destaque": "Ana, [minha vizinha], adora gatos.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Aposto",
+      "explica": "Aposto: explica ou especifica outro termo.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "Ouça, [meu filho], o que eu digo.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama o ouvinte; fica separado por vírgula e não faz parte da estrutura da oração.",
+      "imagem": "👂"
+    },
+    {
+      "destaque": "[Meu filho] ouviu o conselho.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Sujeito",
+      "explica": "Sujeito: é de quem se diz algo e concorda com o verbo.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "[Ó mar salgado], quanto do teu sal são lágrimas de Portugal! (Fernando Pessoa)",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama o ouvinte; fica separado por vírgula e não faz parte da estrutura da oração.",
+      "imagem": "🌊"
+    },
+    {
+      "destaque": "Brasil, [meu país], tem muitas belezas.",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Aposto",
+      "explica": "Aposto: explica ou especifica outro termo.",
+      "imagem": "🇧🇷"
+    },
+    {
+      "destaque": "Professor, [o senhor] pode repetir?",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Sujeito",
+      "explica": "Sujeito: é de quem se diz algo e concorda com o verbo.",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "[Professor], o senhor pode repetir?",
+      "opcoes": [
+        "Aposto",
+        "Vocativo",
+        "Sujeito"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama o ouvinte; fica separado por vírgula e não faz parte da estrutura da oração.",
+      "imagem": "🙋"
+    }
+  ]
+}

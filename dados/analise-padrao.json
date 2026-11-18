@@ -1,0 +1,328 @@
+{
+  "titulo": "Raio-X da oração (modelo)",
+  "oracoes": [
+    {
+      "frase": "Os alunos entregaram os trabalhos à professora.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "entregaram",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "ENTREGAR é transitivo direto e indireto: quem entrega, entrega algo a alguém."
+        },
+        {
+          "pergunta": "Quem entregou? Marquem o sujeito.",
+          "resposta": "Os alunos",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Sujeito simples, com núcleo ALUNOS. Ele concorda com o verbo (alunos entregaram)."
+        },
+        {
+          "pergunta": "Entregaram o quê? Marquem o objeto direto.",
+          "resposta": "os trabalhos",
+          "tipo": "od",
+          "termo": "Objeto direto",
+          "explica": "Completa o verbo sem preposição obrigatória."
+        },
+        {
+          "pergunta": "Entregaram a quem? Marquem o objeto indireto.",
+          "resposta": "à professora",
+          "tipo": "oi",
+          "termo": "Objeto indireto",
+          "explica": "Completa o verbo com preposição (a + a = à)."
+        }
+      ]
+    },
+    {
+      "frase": "Ontem, a menina tímida leu um livro de aventuras.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "leu",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "LER, aqui, é transitivo direto."
+        },
+        {
+          "pergunta": "Quem leu? Marquem o sujeito inteiro.",
+          "resposta": "a menina tímida",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Núcleo do sujeito: MENINA."
+        },
+        {
+          "pergunta": "Leu o quê? Marquem o objeto direto.",
+          "resposta": "um livro de aventuras",
+          "tipo": "od",
+          "termo": "Objeto direto",
+          "explica": "Núcleo do objeto direto: LIVRO."
+        },
+        {
+          "pergunta": "Quando? Marquem o adjunto adverbial.",
+          "resposta": "Ontem",
+          "tipo": "adv",
+          "termo": "Adjunto adverbial de tempo",
+          "explica": "Indica a circunstância de tempo. Deslocado para o início, vem separado por vírgula."
+        },
+        {
+          "pergunta": "Que palavra caracteriza \"menina\"? Marquem o adjunto adnominal.",
+          "resposta": "tímida",
+          "tipo": "adn",
+          "termo": "Adjunto adnominal",
+          "explica": "Adjetivo que acompanha o núcleo do sujeito, dentro do próprio sujeito."
+        }
+      ]
+    },
+    {
+      "frase": "Maria, a nova diretora, parece preocupada.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "parece",
+          "tipo": "vb",
+          "termo": "Verbo de ligação",
+          "explica": "PARECER liga o sujeito a uma característica: é verbo de ligação."
+        },
+        {
+          "pergunta": "Marquem o sujeito.",
+          "resposta": "Maria",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "De quem se diz que parece preocupada? Maria."
+        },
+        {
+          "pergunta": "Que termo explica quem é Maria? Marquem o aposto.",
+          "resposta": "a nova diretora",
+          "tipo": "apo",
+          "termo": "Aposto explicativo",
+          "explica": "Aposto explicativo: vem entre vírgulas e explica o termo anterior."
+        },
+        {
+          "pergunta": "Marquem a característica atribuída ao sujeito.",
+          "resposta": "preocupada",
+          "tipo": "pred",
+          "termo": "Predicativo do sujeito",
+          "explica": "Ligado ao sujeito pelo verbo de ligação: predicado nominal."
+        }
+      ]
+    },
+    {
+      "frase": "Pedro, feche a janela.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "feche",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "Verbo no imperativo. O sujeito é oculto (você)."
+        },
+        {
+          "pergunta": "Quem está sendo chamado? Marquem o vocativo.",
+          "resposta": "Pedro",
+          "tipo": "voc",
+          "termo": "Vocativo",
+          "explica": "Vocativo: chama o ouvinte. Não é o sujeito! O sujeito de \"feche\" é \"você\", oculto."
+        },
+        {
+          "pergunta": "Feche o quê? Marquem o objeto direto.",
+          "resposta": "a janela",
+          "tipo": "od",
+          "termo": "Objeto direto",
+          "explica": "Completa o verbo transitivo direto FECHAR."
+        }
+      ]
+    },
+    {
+      "frase": "O muro foi pintado pelos voluntários.",
+      "passos": [
+        {
+          "pergunta": "Qual é a locução verbal?",
+          "resposta": "foi pintado",
+          "tipo": "vb",
+          "termo": "Locução verbal (voz passiva)",
+          "explica": "SER + particípio: voz passiva analítica."
+        },
+        {
+          "pergunta": "Marquem o sujeito.",
+          "resposta": "O muro",
+          "tipo": "suj",
+          "termo": "Sujeito paciente",
+          "explica": "Na voz passiva, o sujeito SOFRE a ação: o muro não pintou nada, ele foi pintado."
+        },
+        {
+          "pergunta": "Quem praticou a ação? Marquem o agente da passiva.",
+          "resposta": "pelos voluntários",
+          "tipo": "ag",
+          "termo": "Agente da passiva",
+          "explica": "Na voz ativa, o agente vira sujeito: Os voluntários pintaram o muro."
+        }
+      ]
+    },
+    {
+      "frase": "Os moradores tinham medo da enchente.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "tinham",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "TER, aqui, é transitivo direto."
+        },
+        {
+          "pergunta": "Marquem o sujeito.",
+          "resposta": "Os moradores",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Núcleo: MORADORES."
+        },
+        {
+          "pergunta": "Tinham o quê? Marquem o objeto direto inteiro.",
+          "resposta": "medo da enchente",
+          "tipo": "od",
+          "termo": "Objeto direto",
+          "explica": "Núcleo do objeto direto: MEDO."
+        },
+        {
+          "pergunta": "Medo de quê? Marquem o complemento nominal.",
+          "resposta": "da enchente",
+          "tipo": "cn",
+          "termo": "Complemento nominal",
+          "explica": "Completa o sentido do nome MEDO (substantivo abstrato), com preposição."
+        }
+      ]
+    },
+    {
+      "frase": "Os jurados consideraram o filme excelente.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "consideraram",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "CONSIDERAR, aqui, é transitivo direto."
+        },
+        {
+          "pergunta": "Marquem o sujeito.",
+          "resposta": "Os jurados",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Quem considerou? Os jurados."
+        },
+        {
+          "pergunta": "Consideraram o quê? Marquem o objeto direto.",
+          "resposta": "o filme",
+          "tipo": "od",
+          "termo": "Objeto direto",
+          "explica": "Teste: Consideraram-NO excelente."
+        },
+        {
+          "pergunta": "Marquem a característica atribuída ao objeto.",
+          "resposta": "excelente",
+          "tipo": "pred",
+          "termo": "Predicativo do objeto",
+          "explica": "Atribui uma característica ao objeto direto: predicado verbo-nominal."
+        }
+      ]
+    },
+    {
+      "frase": "Chegaram cedo os convidados da festa.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "Chegaram",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "CHEGAR é intransitivo."
+        },
+        {
+          "pergunta": "Quem chegou? Marquem o sujeito (está depois do verbo!).",
+          "resposta": "os convidados da festa",
+          "tipo": "suj",
+          "termo": "Sujeito posposto",
+          "explica": "Na ordem direta: Os convidados da festa chegaram cedo."
+        },
+        {
+          "pergunta": "Quando chegaram? Marquem o adjunto adverbial.",
+          "resposta": "cedo",
+          "tipo": "adv",
+          "termo": "Adjunto adverbial de tempo",
+          "explica": "Indica quando a ação aconteceu."
+        },
+        {
+          "pergunta": "Que convidados? Marquem o adjunto adnominal formado por locução.",
+          "resposta": "da festa",
+          "tipo": "adn",
+          "termo": "Adjunto adnominal",
+          "explica": "Locução adjetiva que caracteriza CONVIDADOS."
+        }
+      ]
+    },
+    {
+      "frase": "A população confia no trabalho dos bombeiros.",
+      "passos": [
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "confia",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "CONFIAR é transitivo indireto: quem confia, confia EM algo."
+        },
+        {
+          "pergunta": "Marquem o sujeito.",
+          "resposta": "A população",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Núcleo: POPULAÇÃO."
+        },
+        {
+          "pergunta": "Confia em quê? Marquem o objeto indireto inteiro.",
+          "resposta": "no trabalho dos bombeiros",
+          "tipo": "oi",
+          "termo": "Objeto indireto",
+          "explica": "Começa com preposição (em + o = no)."
+        },
+        {
+          "pergunta": "De quem é o trabalho? Marquem o adjunto adnominal.",
+          "resposta": "dos bombeiros",
+          "tipo": "adn",
+          "termo": "Adjunto adnominal",
+          "explica": "Os bombeiros PRATICAM o trabalho (são agentes): adjunto adnominal, e não complemento nominal."
+        }
+      ]
+    },
+    {
+      "frase": "Senhores passageiros, o voo atrasou por causa da chuva.",
+      "passos": [
+        {
+          "pergunta": "Quem está sendo chamado? Marquem o vocativo.",
+          "resposta": "Senhores passageiros",
+          "tipo": "voc",
+          "termo": "Vocativo",
+          "explica": "O vocativo chama o ouvinte e fica separado por vírgula."
+        },
+        {
+          "pergunta": "Qual é o verbo?",
+          "resposta": "atrasou",
+          "tipo": "vb",
+          "termo": "Verbo",
+          "explica": "ATRASAR, aqui, é intransitivo."
+        },
+        {
+          "pergunta": "O que atrasou? Marquem o sujeito.",
+          "resposta": "o voo",
+          "tipo": "suj",
+          "termo": "Sujeito simples",
+          "explica": "Núcleo: VOO."
+        },
+        {
+          "pergunta": "Por que atrasou? Marquem o adjunto adverbial.",
+          "resposta": "por causa da chuva",
+          "tipo": "adv",
+          "termo": "Adjunto adverbial de causa",
+          "explica": "Indica o motivo do atraso."
+        }
+      ]
+    }
+  ]
+}

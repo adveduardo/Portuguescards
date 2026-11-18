@@ -1,0 +1,137 @@
+{
+  "titulo": "Agente da passiva e vozes verbais",
+  "emoji": "🔁",
+  "instrucao": "Responda",
+  "rodadas": [
+    {
+      "destaque": "A ponte foi construída pelos engenheiros.",
+      "opcoes": [
+        "pelos engenheiros",
+        "A ponte",
+        "foi construída",
+        "não há agente"
+      ],
+      "correta": "pelos engenheiros",
+      "explica": "O agente da passiva pratica a ação e vem com POR/PELO/PELA.",
+      "imagem": "🌉",
+      "enunciado": "Qual é o agente da passiva?"
+    },
+    {
+      "destaque": "O suspeito foi visto por uma testemunha.",
+      "opcoes": [
+        "por uma testemunha",
+        "O suspeito",
+        "foi visto",
+        "não há agente"
+      ],
+      "correta": "por uma testemunha",
+      "explica": "Quem viu? Uma testemunha: agente da passiva.",
+      "imagem": "🕵️",
+      "enunciado": "Qual é o agente da passiva?"
+    },
+    {
+      "destaque": "As provas foram corrigidas.",
+      "opcoes": [
+        "não há agente da passiva",
+        "As provas",
+        "foram corrigidas",
+        "o professor"
+      ],
+      "correta": "não há agente da passiva",
+      "explica": "A oração está na voz passiva, mas não diz quem corrigiu: o agente não aparece.",
+      "imagem": "📝",
+      "enunciado": "Qual é o agente da passiva?"
+    },
+    {
+      "destaque": "O muro foi pintado pelos voluntários.",
+      "opcoes": [
+        "paciente (sofre a ação)",
+        "agente (pratica a ação)",
+        "oculto",
+        "indeterminado"
+      ],
+      "correta": "paciente (sofre a ação)",
+      "explica": "Na voz passiva, o sujeito sofre a ação.",
+      "imagem": "🧱",
+      "enunciado": "Na voz passiva, o sujeito \"O muro\" é:"
+    },
+    {
+      "destaque": "A polícia prendeu o ladrão.",
+      "opcoes": [
+        "O ladrão foi preso pela polícia.",
+        "O ladrão prendeu a polícia.",
+        "A polícia foi presa pelo ladrão.",
+        "O ladrão foi prender a polícia."
+      ],
+      "correta": "O ladrão foi preso pela polícia.",
+      "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente.",
+      "imagem": "🚓",
+      "enunciado": "Como fica na voz passiva?"
+    },
+    {
+      "destaque": "Machado de Assis escreveu Dom Casmurro.",
+      "opcoes": [
+        "Dom Casmurro foi escrito por Machado de Assis.",
+        "Machado de Assis foi escrito por Dom Casmurro.",
+        "Dom Casmurro escreveu Machado de Assis.",
+        "Dom Casmurro foi escrever Machado de Assis."
+      ],
+      "correta": "Dom Casmurro foi escrito por Machado de Assis.",
+      "explica": "SER + particípio, mantendo o tempo verbal (escreveu → foi escrito).",
+      "imagem": "📚",
+      "enunciado": "Como fica na voz passiva?"
+    },
+    {
+      "destaque": "Os alunos plantaram as árvores.",
+      "opcoes": [
+        "As árvores foram plantadas pelos alunos.",
+        "As árvores plantaram os alunos.",
+        "Os alunos foram plantados pelas árvores.",
+        "As árvores foram plantar os alunos."
+      ],
+      "correta": "As árvores foram plantadas pelos alunos.",
+      "explica": "O particípio concorda com o novo sujeito (árvores plantadAS).",
+      "imagem": "🌳",
+      "enunciado": "Como fica na voz passiva?"
+    },
+    {
+      "destaque": "O bolo foi feito pela vovó.",
+      "opcoes": [
+        "A vovó fez o bolo.",
+        "O bolo fez a vovó.",
+        "A vovó foi feita pelo bolo.",
+        "O bolo foi fazer a vovó."
+      ],
+      "correta": "A vovó fez o bolo.",
+      "explica": "O agente da passiva vira sujeito da ativa.",
+      "imagem": "🎂",
+      "enunciado": "Como fica na voz ativa?"
+    },
+    {
+      "destaque": "O jogo será transmitido pela TV.",
+      "opcoes": [
+        "A TV transmitirá o jogo.",
+        "A TV transmitiu o jogo.",
+        "O jogo transmitirá a TV.",
+        "A TV transmite o jogo."
+      ],
+      "correta": "A TV transmitirá o jogo.",
+      "explica": "SERÁ transmitido (futuro) → TRANSMITIRÁ (futuro): o tempo verbal se mantém.",
+      "imagem": "📺",
+      "enunciado": "Como fica na voz ativa?"
+    },
+    {
+      "destaque": "A carta foi entregue pelo carteiro.",
+      "opcoes": [
+        "O carteiro entregou a carta.",
+        "A carta entregou o carteiro.",
+        "O carteiro foi entregue pela carta.",
+        "O carteiro entrega a carta."
+      ],
+      "correta": "O carteiro entregou a carta.",
+      "explica": "FOI entregue (pretérito perfeito) → ENTREGOU.",
+      "imagem": "✉️",
+      "enunciado": "Como fica na voz ativa?"
+    }
+  ]
+}

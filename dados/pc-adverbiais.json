@@ -1,0 +1,199 @@
+{
+  "titulo": "Orações subordinadas adverbiais",
+  "emoji": "🕒",
+  "instrucao": "Como se classifica a oração adverbial destacada?",
+  "rodadas": [
+    {
+      "destaque": "[Como estava cansado], dormiu cedo.",
+      "opcoes": [
+        "Causal",
+        "Comparativa",
+        "Conformativa",
+        "Temporal"
+      ],
+      "correta": "Causal",
+      "explica": "Adverbial causal: indica a causa (porque, como, já que, visto que).",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "Falou tão alto [que todos ouviram].",
+      "opcoes": [
+        "Consecutiva",
+        "Comparativa",
+        "Causal",
+        "Final"
+      ],
+      "correta": "Consecutiva",
+      "explica": "Adverbial consecutiva: indica a consequência (tão/tanto… que).",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Ele corre [como um atleta corre].",
+      "opcoes": [
+        "Comparativa",
+        "Conformativa",
+        "Causal",
+        "Consecutiva"
+      ],
+      "correta": "Comparativa",
+      "explica": "Adverbial comparativa: faz uma comparação (como, mais… do que).",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "[Embora estivesse doente], foi trabalhar.",
+      "opcoes": [
+        "Concessiva",
+        "Condicional",
+        "Causal",
+        "Temporal"
+      ],
+      "correta": "Concessiva",
+      "explica": "Adverbial concessiva: admite um fato contrário que não impede a ação (embora, ainda que, mesmo que).",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "[Caso chova], ficaremos em casa.",
+      "opcoes": [
+        "Condicional",
+        "Concessiva",
+        "Temporal",
+        "Final"
+      ],
+      "correta": "Condicional",
+      "explica": "Adverbial condicional: indica uma condição (se, caso, desde que).",
+      "imagem": "☔"
+    },
+    {
+      "destaque": "Fiz o bolo [conforme a receita mandava].",
+      "opcoes": [
+        "Conformativa",
+        "Comparativa",
+        "Final",
+        "Proporcional"
+      ],
+      "correta": "Conformativa",
+      "explica": "Adverbial conformativa: indica conformidade (conforme, segundo, como).",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "Estudou [para que pudesse passar].",
+      "opcoes": [
+        "Final",
+        "Causal",
+        "Consecutiva",
+        "Condicional"
+      ],
+      "correta": "Final",
+      "explica": "Adverbial final: indica a finalidade (para que, a fim de que).",
+      "imagem": "🎯"
+    },
+    {
+      "destaque": "[À medida que estudava], aprendia mais.",
+      "opcoes": [
+        "Proporcional",
+        "Temporal",
+        "Conformativa",
+        "Causal"
+      ],
+      "correta": "Proporcional",
+      "explica": "Adverbial proporcional: indica proporção (à medida que, à proporção que, quanto mais… mais).",
+      "imagem": "📈"
+    },
+    {
+      "destaque": "[Assim que o sinal tocou], saímos.",
+      "opcoes": [
+        "Temporal",
+        "Proporcional",
+        "Causal",
+        "Condicional"
+      ],
+      "correta": "Temporal",
+      "explica": "Adverbial temporal: indica o tempo (quando, assim que, enquanto).",
+      "imagem": "🔔"
+    },
+    {
+      "destaque": "[Visto que não houve quórum], a reunião foi adiada.",
+      "opcoes": [
+        "Causal",
+        "Concessiva",
+        "Conformativa",
+        "Final"
+      ],
+      "correta": "Causal",
+      "explica": "Adverbial causal: indica a causa (porque, como, já que, visto que).",
+      "imagem": "🗓️"
+    },
+    {
+      "destaque": "[Ainda que me peçam], não vou desistir.",
+      "opcoes": [
+        "Concessiva",
+        "Condicional",
+        "Final",
+        "Comparativa"
+      ],
+      "correta": "Concessiva",
+      "explica": "Adverbial concessiva: admite um fato contrário que não impede a ação (embora, ainda que, mesmo que).",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "[Quanto mais leio], mais aprendo.",
+      "opcoes": [
+        "Proporcional",
+        "Comparativa",
+        "Temporal",
+        "Consecutiva"
+      ],
+      "correta": "Proporcional",
+      "explica": "Adverbial proporcional: indica proporção (à medida que, à proporção que, quanto mais… mais).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "[Segundo informou o jornal], o preço vai subir.",
+      "opcoes": [
+        "Conformativa",
+        "Causal",
+        "Condicional",
+        "Temporal"
+      ],
+      "correta": "Conformativa",
+      "explica": "Adverbial conformativa: indica conformidade (conforme, segundo, como).",
+      "imagem": "📰"
+    },
+    {
+      "destaque": "[Desde que você estude], passará.",
+      "opcoes": [
+        "Condicional",
+        "Temporal",
+        "Causal",
+        "Concessiva"
+      ],
+      "correta": "Condicional",
+      "explica": "Adverbial condicional: indica uma condição (se, caso, desde que).",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Trabalhou tanto [que adoeceu].",
+      "opcoes": [
+        "Consecutiva",
+        "Causal",
+        "Final",
+        "Comparativa"
+      ],
+      "correta": "Consecutiva",
+      "explica": "Adverbial consecutiva: indica a consequência (tão/tanto… que).",
+      "imagem": "🤕"
+    },
+    {
+      "destaque": "[Enquanto você dormia], eu estudava.",
+      "opcoes": [
+        "Temporal",
+        "Proporcional",
+        "Concessiva",
+        "Comparativa"
+      ],
+      "correta": "Temporal",
+      "explica": "Adverbial temporal: indica o tempo (quando, assim que, enquanto).",
+      "imagem": "🌙"
+    }
+  ]
+}

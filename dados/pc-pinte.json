@@ -1,0 +1,44 @@
+{
+  "titulo": "Pinte: oração principal, subordinada e conectivo",
+  "categorias": [
+    {
+      "id": "princ",
+      "nome": "Oração principal",
+      "plural": "Orações principais",
+      "cor": "#2c3e50",
+      "emoji": "🏠",
+      "def": "a oração que tem outra dependendo dela"
+    },
+    {
+      "id": "sub",
+      "nome": "Oração subordinada",
+      "plural": "Orações subordinadas",
+      "cor": "#27ae60",
+      "emoji": "🔗",
+      "def": "depende da principal (funciona como termo dela)"
+    },
+    {
+      "id": "con",
+      "nome": "Conectivo",
+      "plural": "Conectivos",
+      "cor": "#e74c3c",
+      "emoji": "🧷",
+      "def": "conjunção ou pronome relativo que introduz a subordinada"
+    }
+  ],
+  "como_marcar": "palavra/id com princ, sub ou con",
+  "frases": [
+    "Espero/princ que/con você/sub venha/sub à/sub festa/sub.",
+    "Os/princ alunos/princ que/con estudaram/sub passaram/princ na/princ prova/princ.",
+    "Quando/con a/sub chuva/sub parou/sub, as/princ crianças/princ saíram/princ.",
+    "É/princ importante/princ que/con todos/sub participem/sub.",
+    "Não/princ sei/princ se/con ele/sub virá/sub.",
+    "Embora/con estivesse/sub cansado/sub, ele/princ foi/princ à/princ festa/princ.",
+    "A/princ cidade/princ onde/con nasci/sub é/princ pequena/princ.",
+    "Saí/princ cedo/princ para/con que/con chegasse/sub a/sub tempo/sub.",
+    "Se/con chover/sub, o/princ jogo/princ será/princ adiado/princ.",
+    "Choveu/princ tanto/princ que/con a/sub rua/sub alagou/sub.",
+    "Ele/princ disse/princ que/con viria/sub.",
+    "Tenho/princ medo/princ de/con que/con chova/sub."
+  ]
+}

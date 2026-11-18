@@ -1,0 +1,175 @@
+{
+  "titulo": "Termos integrantes da oração",
+  "emoji": "🧩",
+  "instrucao": "Qual é a função do termo destacado?",
+  "rodadas": [
+    {
+      "destaque": "Comprei [um livro].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto direto",
+      "explica": "Objeto direto: completa um VERBO, sem preposição obrigatória.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Preciso [de ajuda].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa um VERBO, com preposição.",
+      "imagem": "🆘"
+    },
+    {
+      "destaque": "Tenho medo [do escuro].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Complemento nominal",
+      "explica": "Complemento nominal: completa um NOME (substantivo abstrato, adjetivo ou advérbio), com preposição.",
+      "imagem": "🌑"
+    },
+    {
+      "destaque": "O livro foi escrito [por Machado de Assis].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Agente da passiva",
+      "explica": "Agente da passiva: pratica a ação na voz passiva (por, pelo, pela).",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "Ela é fiel [aos amigos].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Complemento nominal",
+      "explica": "Complemento nominal: completa um NOME (substantivo abstrato, adjetivo ou advérbio), com preposição.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Obedeça [aos pais].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa um VERBO, com preposição.",
+      "imagem": "👪"
+    },
+    {
+      "destaque": "A casa foi construída [pelos moradores].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Agente da passiva",
+      "explica": "Agente da passiva: pratica a ação na voz passiva (por, pelo, pela).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Vi [o filme] ontem.",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto direto",
+      "explica": "Objeto direto: completa um VERBO, sem preposição obrigatória.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "A leitura [de jornais] informa.",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Complemento nominal",
+      "explica": "Complemento nominal: completa um NOME (substantivo abstrato, adjetivo ou advérbio), com preposição.",
+      "imagem": "📰"
+    },
+    {
+      "destaque": "Entreguei o convite [a Pedro].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa um VERBO, com preposição.",
+      "imagem": "💌"
+    },
+    {
+      "destaque": "Estamos certos [da vitória].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Complemento nominal",
+      "explica": "Complemento nominal: completa um NOME (substantivo abstrato, adjetivo ou advérbio), com preposição.",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "Os ladrões foram presos [pela polícia].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Agente da passiva",
+      "explica": "Agente da passiva: pratica a ação na voz passiva (por, pelo, pela).",
+      "imagem": "🚓"
+    },
+    {
+      "destaque": "Assisti [ao jogo].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa um VERBO, com preposição.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "A turma fez [uma festa].",
+      "opcoes": [
+        "Objeto direto",
+        "Objeto indireto",
+        "Complemento nominal",
+        "Agente da passiva"
+      ],
+      "correta": "Objeto direto",
+      "explica": "Objeto direto: completa um VERBO, sem preposição obrigatória.",
+      "imagem": "🎉"
+    }
+  ]
+}

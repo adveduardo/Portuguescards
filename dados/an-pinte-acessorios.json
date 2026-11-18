@@ -1,0 +1,52 @@
+{
+  "titulo": "Pinte: termos acessórios e vocativo",
+  "categorias": [
+    {
+      "id": "adn",
+      "nome": "Adjunto adnominal",
+      "plural": "Adjuntos adnominais",
+      "cor": "#8e44ad",
+      "emoji": "🎨",
+      "def": "acompanha e caracteriza um substantivo (artigo, adjetivo, pronome, numeral, locução)"
+    },
+    {
+      "id": "adv",
+      "nome": "Adjunto adverbial",
+      "plural": "Adjuntos adverbiais",
+      "cor": "#b7950b",
+      "emoji": "🕒",
+      "def": "indica circunstância: tempo, lugar, modo, causa..."
+    },
+    {
+      "id": "apo",
+      "nome": "Aposto",
+      "plural": "Apostos",
+      "cor": "#546e7a",
+      "emoji": "📌",
+      "def": "explica, especifica, enumera ou resume outro termo"
+    },
+    {
+      "id": "voc",
+      "nome": "Vocativo",
+      "plural": "Vocativos",
+      "cor": "#00838f",
+      "emoji": "📣",
+      "def": "chama o ouvinte"
+    }
+  ],
+  "como_marcar": "palavra/id com os ids adn, adv, apo, voc. Núcleos e outros termos ficam sem marca.",
+  "frases": [
+    "Ontem/adv o/adn menino estudou muito/adv.",
+    "Maria, a/apo vizinha/apo do/apo lado/apo, viajou ontem/adv.",
+    "Pedro/voc, venha aqui/adv!",
+    "Os/adn meus/adn amigos chegaram cedo/adv.",
+    "Senhores/voc passageiros/voc, o/adn avião vai pousar logo/adv.",
+    "A/adn casa de/adn madeira/adn caiu com/adv o/adv vento/adv.",
+    "Brasília, a/apo capital/apo do/apo país/apo, fica no/adv Centro-Oeste/adv.",
+    "Professora/voc, eu não/adv entendi a/adn questão.",
+    "Duas/adn alunas dedicadas/adn ganharam o/adn prêmio ontem/adv.",
+    "Frutas, verduras e legumes, tudo/apo estava fresco.",
+    "Meu/adn irmão mora longe/adv.",
+    "O/adn poeta Drummond/apo nasceu em/adv Itabira/adv."
+  ]
+}

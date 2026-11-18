@@ -1,0 +1,65 @@
+{
+  "titulo": "O Cofre do Período Composto",
+  "historia": "O cofre da biblioteca só abre para quem entende como as orações se ligam. Classifiquem cada período para descobrir o código!",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Cadeado 1: \"Estudei muito, mas não passei.\" O período é composto por…",
+      "imagem": "🔐",
+      "opcoes": [
+        "coordenação",
+        "subordinação"
+      ],
+      "correta": "coordenação",
+      "dica": "As duas orações têm sentido próprio."
+    },
+    {
+      "pergunta": "Cadeado 2: escreva o pronome relativo que completa: \"O escritor ___ obra estudamos era baiano.\"",
+      "imagem": "📚",
+      "resposta": [
+        "cuja"
+      ],
+      "dica": "Indica posse (a obra do escritor) e concorda com OBRA."
+    },
+    {
+      "pergunta": "Cadeado 3: \"É fundamental que todos leiam.\" A subordinada é substantiva…",
+      "imagem": "📖",
+      "opcoes": [
+        "subjetiva",
+        "objetiva direta",
+        "predicativa"
+      ],
+      "correta": "subjetiva",
+      "dica": "ISSO é fundamental: a oração é o sujeito."
+    },
+    {
+      "pergunta": "Cadeado 4: \"Embora fosse tarde, continuamos.\" Escreva o tipo da oração adverbial.",
+      "imagem": "🌙",
+      "resposta": [
+        "concessiva",
+        "adverbial concessiva"
+      ],
+      "dica": "EMBORA admite um obstáculo que não impede a ação."
+    },
+    {
+      "pergunta": "Cadeado 5: \"Os livros, que estavam velhos, foram doados.\" A adjetiva é…",
+      "imagem": "📦",
+      "opcoes": [
+        "explicativa",
+        "restritiva"
+      ],
+      "correta": "explicativa",
+      "dica": "Está entre vírgulas: todos os livros estavam velhos."
+    },
+    {
+      "pergunta": "Cadeado 6: \"Terminada a reunião, saímos.\" Escreva a forma nominal do verbo da oração reduzida.",
+      "imagem": "🔑",
+      "resposta": [
+        "particípio",
+        "participio"
+      ],
+      "dica": "TERMINADA termina em -ada."
+    }
+  ]
+}
