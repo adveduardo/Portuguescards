@@ -70,31 +70,28 @@
         <label>Painel de Aula:</label>
         <select id="tool-selector" onchange="changeTool()">
             <option value="">🏠 Tela Inicial</option>
-            <option value="ruido.html">🔊 Medidor de Ruído</option>
-            <option value="quiz.html">🎮 Jogo de Português</option>
-            <option value="relogio.html">⏰ Relógio Mágico</option>
-            <option value="timer.html">⏳ Cronômetro Visual</option>
-            <option value="sorteador.html">🎲 Sorteador de Alunos</option>
-            <option value="semaforo.html">🚦 Semáforo da Turma</option>
-            <option value="grupos.html">👥 Formador de Grupos</option>
-            <option value="placar.html">⭐ Placar de Equipes</option>
-            <option value="forca.html">🔤 Forca de Palavras</option>
-            <option value="leitura.html">📖 Leitura com Destaque</option>
-            <option value="forme.html">🧩 Forme a Palavra</option>
-            <option value="silabas.html">✍️ Separação de Sílabas</option>
-            <option value="ditado.html">🔊 Ditado Falado</option>
-            <option value="quemsoueu.html">🕵️ Quem Sou Eu? (animais)</option>
-            <option value="stop.html">🛑 Stop (com iPads)</option>
-            <option value="desafio.html">🏆 Quiz ao Vivo (com iPads)</option>
-            <option value="batata.html">🥔 Batata Quente</option>
-            <option value="trilha.html">🎲 Trilha das Palavras</option>
-            <option value="escape.html">🔐 Escape Room (com iPads)</option>
-            <option value="mimica.html">🎭 Mímica e Desenho (com iPads)</option>
-            <option value="respiracao.html">🧘 Respiração e Calma</option>
-            <option value="historias.html">🎲 Dados de Histórias</option>
-            <option value="caminho.html">🔀 Escolha o Caminho (votação)</option>
-            <option value="detetive.html">🕵️ Detetive das Palavras</option>
-            <option value="pontuacao.html">❓ Pontuação Viva</option>
+            <optgroup label="🧰 Ferramentas da sala">
+                <option value="ruido.html">🔊 Medidor de Ruído</option>
+                <option value="semaforo.html">🚦 Semáforo da Turma</option>
+                <option value="respiracao.html">🧘 Respiração e Calma</option>
+                <option value="timer.html">⏳ Cronômetro Visual</option>
+                <option value="sorteador.html">🎲 Sorteador de Alunos</option>
+                <option value="grupos.html">👥 Formador de Grupos</option>
+                <option value="placar.html">⭐ Placar de Equipes</option>
+            </optgroup>
+            <optgroup label="🔤 Alfabetização">
+                <option value="forca.html">🔤 Forca de Palavras</option>
+                <option value="forme.html">🧩 Forme a Palavra</option>
+                <option value="silabas.html">✍️ Separação de Sílabas</option>
+                <option value="ditado.html">🔊 Ditado Falado</option>
+            </optgroup>
+            <optgroup label="📖 Leitura e escrita">
+                <option value="leitura.html">📖 Leitura com Destaque</option>
+                <option value="historias.html">🎲 Dados de Histórias</option>
+                <option value="caminho.html">🔀 Escolha o Caminho (votação)</option>
+                <option value="detetive.html">🕵️ Detetive das Palavras</option>
+                <option value="pontuacao.html">❓ Pontuação Viva</option>
+            </optgroup>
             <optgroup label="📚 Morfologia">
                 <option value="morfo-escolha.html?jogo=classifique">🏷️ Classifique a palavra</option>
                 <option value="morfo-pinte.html">🎨 Pinte a frase</option>
@@ -107,6 +104,21 @@
                 <option value="morfo-familia.html">🌳 Família de palavras</option>
                 <option value="morfo-escolha.html?jogo=tempos">🕰️ Ontem, hoje, amanhã (tempos verbais)</option>
                 <option value="morfo-escolha.html?jogo=conjugacao">🙋 Quem faz a ação? (conjugação)</option>
+            </optgroup>
+            <optgroup label="🎉 Jogos para a turma">
+                <option value="quiz.html">🎮 Jogo de Português</option>
+                <option value="quemsoueu.html">🕵️ Quem Sou Eu? (animais)</option>
+                <option value="batata.html">🥔 Batata Quente</option>
+                <option value="trilha.html">🎲 Trilha das Palavras</option>
+            </optgroup>
+            <optgroup label="📱 Jogos com iPads">
+                <option value="stop.html">🛑 Stop (com iPads)</option>
+                <option value="desafio.html">🏆 Quiz ao Vivo (com iPads)</option>
+                <option value="escape.html">🔐 Escape Room (com iPads)</option>
+                <option value="mimica.html">🎭 Mímica e Desenho (com iPads)</option>
+            </optgroup>
+            <optgroup label="🔢 Matemática">
+                <option value="relogio.html">⏰ Relógio Mágico</option>
             </optgroup>
         </select>
         <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
