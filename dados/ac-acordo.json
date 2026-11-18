@@ -1,0 +1,167 @@
+{
+  "titulo": "Acentuação depois do Acordo Ortográfico",
+  "emoji": "📗",
+  "instrucao": "Qual é a grafia correta hoje?",
+  "rodadas": [
+    {
+      "destaque": "Tive uma ótima ___.",
+      "opcoes": [
+        "ideia",
+        "idéia"
+      ],
+      "correta": "ideia",
+      "explica": "Paroxítona com ditongo aberto EI perdeu o acento.",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "Foi um gesto ___.",
+      "opcoes": [
+        "heroico",
+        "heróico"
+      ],
+      "correta": "heroico",
+      "explica": "Paroxítona com ditongo aberto OI perdeu o acento.",
+      "imagem": "🦸"
+    },
+    {
+      "destaque": "O ___ atrasou.",
+      "opcoes": [
+        "voo",
+        "vôo"
+      ],
+      "correta": "voo",
+      "explica": "OO não leva mais acento: voo, enjoo, abençoo.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Eles ___ muito.",
+      "opcoes": [
+        "leem",
+        "lêem"
+      ],
+      "correta": "leem",
+      "explica": "EEM não leva mais acento: leem, creem, veem.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "O guarda ___ o trânsito.",
+      "opcoes": [
+        "para",
+        "pára"
+      ],
+      "correta": "para",
+      "explica": "PARA (verbo) perdeu o acento diferencial.",
+      "imagem": "🚦"
+    },
+    {
+      "destaque": "Que ___ esse desenho!",
+      "opcoes": [
+        "feiura",
+        "feiúra"
+      ],
+      "correta": "feiura",
+      "explica": "U tônico depois de ditongo, em paroxítona, perdeu o acento.",
+      "imagem": "👹"
+    },
+    {
+      "destaque": "A ___ votou o projeto.",
+      "opcoes": [
+        "assembleia",
+        "assembléia"
+      ],
+      "correta": "assembleia",
+      "explica": "Ditongo aberto EI em paroxítona: sem acento.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "Ganhei uma ___.",
+      "opcoes": [
+        "joia",
+        "jóia"
+      ],
+      "correta": "joia",
+      "explica": "Ditongo aberto OI em paroxítona: sem acento.",
+      "imagem": "💍"
+    },
+    {
+      "destaque": "O ___ salvou a cidade.",
+      "opcoes": [
+        "herói",
+        "heroi"
+      ],
+      "correta": "herói",
+      "explica": "Em OXÍTONA o ditongo aberto ÓI continua com acento!",
+      "imagem": "🦸"
+    },
+    {
+      "destaque": "Organizei os ___.",
+      "opcoes": [
+        "papéis",
+        "papeis"
+      ],
+      "correta": "papéis",
+      "explica": "Em OXÍTONA o ditongo aberto ÉI continua com acento!",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "Ontem ele não ___ vir.",
+      "opcoes": [
+        "pôde",
+        "pode"
+      ],
+      "correta": "pôde",
+      "explica": "PÔDE (passado) mantém o acento diferencial.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Vou ___ a mesa.",
+      "opcoes": [
+        "pôr",
+        "por"
+      ],
+      "correta": "pôr",
+      "explica": "PÔR (verbo) mantém o acento diferencial.",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "Eles ___ razão.",
+      "opcoes": [
+        "têm",
+        "tem"
+      ],
+      "correta": "têm",
+      "explica": "TÊM (plural de ter) leva circunflexo.",
+      "imagem": "👍"
+    },
+    {
+      "destaque": "Eles ___ amanhã.",
+      "opcoes": [
+        "vêm",
+        "vem"
+      ],
+      "correta": "vêm",
+      "explica": "VÊM (plural de vir) leva circunflexo.",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Comi ___ no almoço.",
+      "opcoes": [
+        "linguiça",
+        "lingüiça"
+      ],
+      "correta": "linguiça",
+      "explica": "O trema foi abolido (só fica em nomes estrangeiros, como Müller).",
+      "imagem": "🌭"
+    },
+    {
+      "destaque": "Fique ___.",
+      "opcoes": [
+        "tranquilo",
+        "tranqüilo"
+      ],
+      "correta": "tranquilo",
+      "explica": "Sem trema desde o Acordo.",
+      "imagem": "😌"
+    }
+  ]
+}

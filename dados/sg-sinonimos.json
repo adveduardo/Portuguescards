@@ -1,0 +1,151 @@
+{
+  "titulo": "Qual é o sinônimo?",
+  "emoji": "🟰",
+  "instrucao": "Qual palavra tem sentido parecido (sinônimo)?",
+  "rodadas": [
+    {
+      "destaque": "FELIZ",
+      "opcoes": [
+        "contente",
+        "triste",
+        "zangado",
+        "cansado"
+      ],
+      "correta": "contente",
+      "explica": "Sinônimos têm sentido semelhante.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "RÁPIDO",
+      "opcoes": [
+        "veloz",
+        "lento",
+        "pesado",
+        "calmo"
+      ],
+      "correta": "veloz",
+      "explica": "Rápido = veloz.",
+      "imagem": "🏎️"
+    },
+    {
+      "destaque": "BONITO",
+      "opcoes": [
+        "belo",
+        "feio",
+        "grande",
+        "escuro"
+      ],
+      "correta": "belo",
+      "explica": "Bonito = belo.",
+      "imagem": "🌸"
+    },
+    {
+      "destaque": "COMEÇAR",
+      "opcoes": [
+        "iniciar",
+        "terminar",
+        "parar",
+        "desistir"
+      ],
+      "correta": "iniciar",
+      "explica": "Começar = iniciar.",
+      "imagem": "▶️"
+    },
+    {
+      "destaque": "DIFÍCIL",
+      "opcoes": [
+        "complicado",
+        "simples",
+        "fácil",
+        "leve"
+      ],
+      "correta": "complicado",
+      "explica": "Difícil = complicado.",
+      "imagem": "🧩"
+    },
+    {
+      "destaque": "AJUDAR",
+      "opcoes": [
+        "auxiliar",
+        "atrapalhar",
+        "abandonar",
+        "esquecer"
+      ],
+      "correta": "auxiliar",
+      "explica": "Ajudar = auxiliar.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "MORAR",
+      "opcoes": [
+        "residir",
+        "viajar",
+        "fugir",
+        "visitar"
+      ],
+      "correta": "residir",
+      "explica": "Morar = residir.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "MEDO",
+      "opcoes": [
+        "pavor",
+        "coragem",
+        "alegria",
+        "calma"
+      ],
+      "correta": "pavor",
+      "explica": "Medo = pavor, temor.",
+      "imagem": "😱"
+    },
+    {
+      "destaque": "CASA",
+      "opcoes": [
+        "lar",
+        "rua",
+        "escola",
+        "loja"
+      ],
+      "correta": "lar",
+      "explica": "Casa = lar, moradia.",
+      "imagem": "🏡"
+    },
+    {
+      "destaque": "TRISTE",
+      "opcoes": [
+        "abatido",
+        "alegre",
+        "animado",
+        "eufórico"
+      ],
+      "correta": "abatido",
+      "explica": "Triste = abatido.",
+      "imagem": "😢"
+    },
+    {
+      "destaque": "FALAR",
+      "opcoes": [
+        "dizer",
+        "calar",
+        "ouvir",
+        "escrever"
+      ],
+      "correta": "dizer",
+      "explica": "Falar = dizer.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "ENORME",
+      "opcoes": [
+        "gigantesco",
+        "minúsculo",
+        "pequeno",
+        "baixo"
+      ],
+      "correta": "gigantesco",
+      "explica": "Enorme = gigantesco.",
+      "imagem": "🐘"
+    }
+  ]
+}

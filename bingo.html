@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bingo</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #chamadaBg{background:#243049;color:#fff;border-radius:28px;padding:18px 26px;margin:10px auto;max-width:1100px;text-align:center;box-shadow:0 8px 0 #0002}
+  #chamadaBg small{display:block;opacity:.75;font-size:1.1rem}
+  #chamadaTexto{font-size:clamp(2rem,6vw,4.2rem);font-weight:bold;line-height:1.15}
+  #historicoBg{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:1100px;margin:6px auto}
+  #historicoBg span{background:#fff;border-radius:999px;padding:4px 12px;font-size:.95rem;box-shadow:0 2px 0 #0001}
+  #equipesBg{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+  .eqBg{color:#fff;border-radius:18px;padding:10px 16px;font-weight:bold;font-size:1.2rem;min-width:160px;text-align:center;box-shadow:0 4px 0 #0002}
+  .eqBg small{display:block;font-weight:normal;font-size:1rem}
+  #vencedorBg{background:#fffdf6;border-radius:26px;padding:16px;margin:10px auto;max-width:900px;text-align:center;box-shadow:0 6px 0 #0001}
+  #vencedorBg h2{font-size:clamp(1.8rem,5vw,3rem);margin:4px 0}
+  .cartelaV{display:grid;gap:8px;margin:10px auto;max-width:620px}
+  .cartelaV div{background:#eef1f6;border-radius:12px;padding:8px;font-weight:bold;font-size:1.05rem}
+  .cartelaV div.m{background:var(--verde);color:#fff}
+  .cartelaV div small{display:block;font-weight:normal;font-size:.8rem}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🎱 Bingo das Palavras</h1>
+  <div class="cartao">
+    <h2>1. Bingo (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Como jogar</h2>
+    <label><input type="radio" name="modo" value="ipads" checked> 📱 Cada equipe joga no seu iPad ou Chromebook (a cartela aparece no aparelho)</label>
+    <label><input type="radio" name="modo" value="papel"> 🖨️ Cartelas impressas (só o projetor: o telão faz as chamadas)</label>
+    <label>Tamanho da cartela: <select id="selTamanho"><option value="3">3 × 3 (9 palavras)</option><option value="4">4 × 4 (16 palavras)</option></select></label>
+    <label><input type="checkbox" id="chkLer" checked> Ler as chamadas em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">A cada chamada (ex.: "palavra proparoxítona"), a equipe marca UMA palavra da cartela que combine com ela. Errou? Fica sem marcar até a próxima chamada. Completou uma linha, coluna ou diagonal: BINGO!</p>
+    <div class="linha" style="justify-content:flex-start">
+      <label>Cartelas para imprimir: <select id="selQtdImp"><option value="10">10</option><option value="20">20</option><option value="30" selected>30</option><option value="40">40</option></select></label>
+      <button id="btnImprimir">🖨️ Gerar cartelas para imprimir</button>
+    </div>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <button id="btnCriar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">🎱 Distribuir as cartelas e começar</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<section id="tJogo" class="tela">
+  <h2 id="tituloJogo" style="margin:4px 0"></h2>
+  <div id="chamadaBg"><small id="numChamada"></small><div id="chamadaTexto">Clique em "Próxima chamada" para começar</div></div>
+  <div id="historicoBg"></div>
+  <div id="equipesBg"></div>
+  <div id="vencedorBg" hidden></div>
+  <div class="linha">
+    <button id="btnChamar" class="principal">📣 Próxima chamada</button>
+    <button id="btnOuvirBg">🔊 Repetir</button>
+    <button id="btnFim">🏁 Encerrar o bingo</button>
+    <button id="btnNova">🔁 Nova partida</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+let dados = null, comIpads = true, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let rodada = 0, cartelas = {}, n = 0, chamadaAtual = null, historico = [], vencedores = [], pausado = false;
+
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function normalizar(d){
+  if (!d || !Array.isArray(d.chamadas) || !Array.isArray(d.palavras)) return null;
+  const chamadas = d.chamadas.filter(c => c && c.id && c.texto).map(c => ({id: String(c.id), texto: String(c.texto)}));
+  const ids = new Set(chamadas.map(c => c.id));
+  const palavras = d.palavras.map(w => typeof w === 'string' ? null : w).filter(w => w && w.p && Array.isArray(w.t))
+    .map(w => ({p: String(w.p), t: w.t.map(String).filter(t => ids.has(t))})).filter(w => w.t.length);
+  return chamadas.length >= 2 && palavras.length >= 9 ? {titulo: d.titulo || 'Bingo', chamadas, palavras} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: precisa de "chamadas" (id e texto) e de pelo menos 9 "palavras" (p e t).');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.chamadas.length} chamadas • ${x.palavras.length} palavras` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'bingo', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/bingo-fonologia.json', 'modelo-bingo.json');
+document.querySelectorAll('input[name=modo]').forEach(r => r.onchange = () => { $('painelConexao').hidden = r.value !== 'ipads' || !r.checked; });
+
+// ---------- Cartelas ----------
+function novaCartela(t){ return embaralhar(dados.palavras).slice(0, t * t); }
+$('btnImprimir').onclick = () => {
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  const t = +$('selTamanho').value, qtd = +$('selQtdImp').value;
+  const cards = Array.from({length: qtd}, (_, k) => {
+    const c = novaCartela(t);
+    return `<div class="card"><div class="tit">🎱 ${AV.esc(dados.titulo)} <span>Cartela ${k + 1}</span></div><table>` +
+      Array.from({length: t}, (_, l) => '<tr>' + c.slice(l * t, l * t + t).map(w => `<td>${AV.esc(w.p)}</td>`).join('') + '</tr>').join('') +
+      '</table><div class="nome">Nome(s): ______________________</div></div>';
+  }).join('');
+  const w = window.open('', '_blank');
+  if (!w) return AV.avisar('O navegador bloqueou a janela. Permita pop-ups para este site.');
+  w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Cartelas – ${AV.esc(dados.titulo)}</title><style>
+    body{font-family:Arial,sans-serif;margin:10mm}.grade{display:grid;grid-template-columns:1fr 1fr;gap:8mm}
+    .card{border:2px solid #333;border-radius:8px;padding:4mm;break-inside:avoid}.tit{font-weight:bold;margin-bottom:3mm;display:flex;justify-content:space-between}
+    table{width:100%;border-collapse:collapse}td{border:1.5px solid #333;height:${t === 3 ? 22 : 16}mm;text-align:center;font-size:${t === 3 ? 15 : 12}pt;font-weight:bold;width:${100 / t}%}
+    .nome{margin-top:3mm;font-size:10pt}@media print{button{display:none}}</style></head><body>
+    <button onclick="print()" style="font-size:16px;padding:8px 16px;margin-bottom:10px">🖨️ Imprimir</button>
+    <div class="grade">${cards}</div></body></html>`);
+  w.document.close();
+};
+
+// ---------- Sala ----------
+$('btnCriar').onclick = () => {
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  comIpads = document.querySelector('input[name=modo]:checked').value === 'ipads';
+  if (!comIpads){ comecar(); return; }
+  if (sala){ irPara('sala'); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'bingo', estado: {fase: 'espera', titulo: dados.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    $('tituloSala').textContent = '🎱 ' + dados.titulo;
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function irPara(f){ fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', jogo: 'tJogo'}[f]); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'jogo' && comIpads){ desenharEquipes(); verificarBingo(); }
+}
+
+// ---------- Jogo ----------
+function comecar(){
+  rodada++; n = 0; chamadaAtual = null; historico = []; vencedores = []; pausado = false; cartelas = {};
+  const t = +$('selTamanho').value;
+  $('tituloJogo').textContent = '🎱 ' + dados.titulo + (comIpads ? ` • Sala ${sala}` : ' • cartelas impressas');
+  $('numChamada').textContent = ''; $('chamadaTexto').textContent = 'Clique em "Próxima chamada" para começar';
+  $('historicoBg').innerHTML = ''; $('vencedorBg').hidden = true; $('btnChamar').disabled = false;
+  if (comIpads){
+    AV.ordemGrupos(grupos()).forEach(id => { cartelas[id] = novaCartela(t); });
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'jogando', rodada, titulo: dados.titulo, tamanho: t, cartelas, chamada: null});
+  }
+  irPara('jogo');
+}
+function bingoDe(id){ const b = (arvore.bingo || {})[id]; return b && b.rodada === rodada ? b : null; }
+function marcadasDe(id){ const b = bingoDe(id); return b ? (b.marcas || {}) : {}; }
+function escolherChamada(){
+  const ultimos = historico.slice(-2).map(h => h.id);
+  let cands = dados.chamadas.filter(c => !ultimos.includes(c.id));
+  if (!cands.length) cands = dados.chamadas.slice();
+  if (comIpads && Object.keys(cartelas).length){
+    // prefere chamadas que ainda servem para alguma palavra não marcada nas cartelas
+    const uteis = cands.filter(c => Object.keys(cartelas).some(id => cartelas[id].some((w, i) => !marcadasDe(id)['c' + i] && w.t.includes(c.id))));
+    if (uteis.length) cands = uteis;
+  }
+  return cands[Math.floor(Math.random() * cands.length)];
+}
+function chamar(){
+  if (pausado) return;
+  const c = escolherChamada(); n++;
+  chamadaAtual = {n, id: c.id, texto: c.texto};
+  historico.push(chamadaAtual);
+  $('numChamada').textContent = `Chamada ${n}`;
+  $('chamadaTexto').textContent = c.texto;
+  $('historicoBg').innerHTML = historico.slice(0, -1).reverse().slice(0, 14).map(h => `<span>${h.n}. ${AV.esc(h.texto)}</span>`).join('');
+  if (comIpads) Rede.atualizar(`salas/${sala}/estado`, {chamada: chamadaAtual});
+  AV.tom(660, .12); AV.tom(990, .18, 'triangle', .15, .12);
+  if ($('chkLer').checked) AV.falar(c.texto);
+  desenharEquipes();
+}
+function desenharEquipes(){
+  if (!comIpads){ $('equipesBg').innerHTML = ''; return; }
+  const g = grupos();
+  $('equipesBg').innerHTML = Object.keys(cartelas).map(id => {
+    const e = g[id] || Rede.EQUIPES.find(x => x.id === id) || {nome: id, emoji: '', cor: '#777'}, b = bingoDe(id) || {};
+    const m = b.marcas || {}, qtd = Object.values(m).filter(Boolean).length;
+    const nesta = chamadaAtual ? (Object.values(m).includes(chamadaAtual.n) ? '✅ marcou' : b.travadoN === chamadaAtual.n ? '❌ errou' : '⏳ pensando') : '';
+    return `<div class="eqBg" style="background:${e.cor}">${AV.esc(e.emoji + ' ' + e.nome)}<small>${qtd} marcada${qtd === 1 ? '' : 's'}${b.bingo ? ' • 🎉 BINGO!' : ''}</small><small>${nesta}</small></div>`;
+  }).join('');
+}
+function verificarBingo(){
+  const novos = Object.keys(cartelas).filter(id => { const b = bingoDe(id); return b && b.bingo && !vencedores.includes(id); })
+    .sort((a, b) => (bingoDe(a).bingo || 0) - (bingoDe(b).bingo || 0));
+  if (!novos.length) return;
+  novos.forEach(id => vencedores.push(id));
+  mostrarVencedor(novos[0]);
+}
+function mostrarVencedor(id){
+  pausado = true; $('btnChamar').disabled = true;
+  const g = grupos(), e = g[id] || {nome: id, emoji: '🎱'}, t = Math.sqrt(cartelas[id].length), m = marcadasDe(id);
+  const pos = vencedores.indexOf(id) + 1;
+  $('vencedorBg').hidden = false;
+  $('vencedorBg').innerHTML = `<h2>🏆 BINGO ${pos > 1 ? `(${pos}º lugar) ` : ''}dos ${AV.esc(e.emoji + ' ' + e.nome)}!</h2><p class="dica">Confiram a cartela: cada palavra verde foi marcada numa chamada.</p>` +
+    `<div class="cartelaV" style="grid-template-columns:repeat(${t},1fr)">` + cartelas[id].map((w, i) => {
+      const k = m['c' + i], h = k ? historico.find(x => x.n === k) : null;
+      return `<div class="${k ? 'm' : ''}">${AV.esc(w.p)}${h ? `<small>${h.n}. ${AV.esc(h.texto)}</small>` : ''}</div>`;
+    }).join('') + '</div><div class="linha"><button id="btnContinuar">▶️ Continuar valendo o próximo lugar</button><button id="btnFim2" class="principal">🏁 Encerrar</button></div>';
+  $('btnContinuar').onclick = () => { pausado = false; $('btnChamar').disabled = false; $('vencedorBg').hidden = true; };
+  $('btnFim2').onclick = encerrarBingo;
+  AV.fanfarra(); AV.confete(); AV.falar('Bingo! ' + e.nome);
+}
+function encerrarBingo(){
+  if (comIpads){
+    const v = {}; vencedores.forEach((id, i) => { v[id] = i + 1; });
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', titulo: dados.titulo, vencedores: v});
+  }
+  pausado = true; $('btnChamar').disabled = true;
+  $('chamadaTexto').textContent = vencedores.length ? '🏁 Fim! Parabéns aos vencedores!' : '🏁 Fim do bingo!';
+  $('numChamada').textContent = '';
+}
+$('btnComecar').onclick = () => { if (!Object.keys(grupos()).length) return AV.avisar('Nenhuma equipe entrou. Peça para os grupos entrarem com o código.'); comecar(); };
+$('btnChamar').onclick = chamar;
+$('btnNova').onclick = () => { if (confirm('Começar uma nova partida com cartelas novas?')) comecar(); };
+$('btnOuvirBg').onclick = () => chamadaAtual && AV.falar(chamadaAtual.texto);
+$('btnFim').onclick = () => { if (confirm('Encerrar o bingo?')) encerrarBingo(); };
+$('btnEncerrar').onclick = () => {
+  if (sala){ if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return; if (ouvinte) ouvinte.fechar(); Rede.apagar('salas/' + sala); }
+  sala = null; arvore = {}; irPara('config');
+};
+AV.iniciarConexao($('painelConexao'));
+</script>
+</body>
+</html>

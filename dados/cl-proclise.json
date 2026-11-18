@@ -1,0 +1,127 @@
+{
+  "titulo": "Ocorrências da próclise",
+  "emoji": "⬅️",
+  "instrucao": "Escolha a frase correta",
+  "rodadas": [
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Não me disseram nada.",
+        "Não disseram-me nada."
+      ],
+      "correta": "Não me disseram nada.",
+      "explica": "Palavras negativas atraem o pronome: próclise.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Sempre te ajudo.",
+        "Sempre ajudo-te."
+      ],
+      "correta": "Sempre te ajudo.",
+      "explica": "Advérbios atraem o pronome.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Quem te contou?",
+        "Quem contou-te?"
+      ],
+      "correta": "Quem te contou?",
+      "explica": "Pronomes interrogativos atraem o pronome.",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "O livro que me emprestaste é ótimo.",
+        "O livro que emprestaste-me é ótimo."
+      ],
+      "correta": "O livro que me emprestaste é ótimo.",
+      "explica": "Pronomes relativos atraem o pronome.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Alguém me ligou.",
+        "Alguém ligou-me."
+      ],
+      "correta": "Alguém me ligou.",
+      "explica": "Pronomes indefinidos atraem o pronome.",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Espero que se divirtam.",
+        "Espero que divirtam-se."
+      ],
+      "correta": "Espero que se divirtam.",
+      "explica": "Conjunções subordinativas atraem o pronome.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Deus te abençoe!",
+        "Deus abençoe-te!"
+      ],
+      "correta": "Deus te abençoe!",
+      "explica": "Frases que expressam desejo (optativas) pedem próclise.",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Em se tratando de saúde, todo cuidado é pouco.",
+        "Em tratando-se de saúde, todo cuidado é pouco."
+      ],
+      "correta": "Em se tratando de saúde, todo cuidado é pouco.",
+      "explica": "EM + gerúndio: próclise.",
+      "imagem": "🩺"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Tudo se resolveu.",
+        "Tudo resolveu-se."
+      ],
+      "correta": "Tudo se resolveu.",
+      "explica": "TUDO (indefinido) atrai o pronome.",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Quando nos viu, sorriu.",
+        "Quando viu-nos, sorriu."
+      ],
+      "correta": "Quando nos viu, sorriu.",
+      "explica": "Conjunção subordinativa (quando) atrai o pronome.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Aqui se fala português.",
+        "Aqui fala-se português."
+      ],
+      "correta": "Aqui se fala português.",
+      "explica": "Advérbio (aqui) atrai o pronome.",
+      "imagem": "🇧🇷"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Como te chamas?",
+        "Como chamas-te?"
+      ],
+      "correta": "Como te chamas?",
+      "explica": "Advérbio interrogativo atrai o pronome.",
+      "imagem": "🙋"
+    }
+  ]
+}

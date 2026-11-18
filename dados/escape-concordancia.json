@@ -1,0 +1,65 @@
+{
+  "titulo": "O Tribunal da Concordância",
+  "historia": "Os verbos e os adjetivos brigaram e foram parar no tribunal! Julguem cada caso com a forma correta para descobrir o código e encerrar a sessão.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Caso 1: \"___ muitas provas contra o réu.\"",
+      "imagem": "⚖️",
+      "opcoes": [
+        "Havia",
+        "Haviam"
+      ],
+      "correta": "Havia",
+      "dica": "Haver = existir: singular."
+    },
+    {
+      "pergunta": "Caso 2: escreva a forma certa de FAZER — \"___ três anos que o caso começou.\"",
+      "imagem": "📅",
+      "resposta": [
+        "faz"
+      ],
+      "dica": "Fazer + tempo é impessoal."
+    },
+    {
+      "pergunta": "Caso 3: \"É ___ a entrada de celulares no tribunal.\"",
+      "imagem": "📵",
+      "opcoes": [
+        "proibida",
+        "proibido"
+      ],
+      "correta": "proibida",
+      "dica": "Tem artigo (A entrada)."
+    },
+    {
+      "pergunta": "Caso 4: escreva — \"___ casas do réu.\" (vender + se)",
+      "imagem": "🏠",
+      "resposta": [
+        "vendem-se",
+        "vendem se"
+      ],
+      "dica": "Casas são vendidas: plural."
+    },
+    {
+      "pergunta": "Caso 5: \"A juíza ficou ___ preocupada.\"",
+      "imagem": "👩‍⚖️",
+      "opcoes": [
+        "meio",
+        "meia"
+      ],
+      "correta": "meio",
+      "dica": "Um pouco preocupada: advérbio."
+    },
+    {
+      "pergunta": "Caso 6: \"Os Estados Unidos ___ o país do réu.\"",
+      "imagem": "🗽",
+      "opcoes": [
+        "são",
+        "é"
+      ],
+      "correta": "são",
+      "dica": "Nome no plural com artigo."
+    }
+  ]
+}

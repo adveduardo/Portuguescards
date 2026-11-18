@@ -1,0 +1,70 @@
+{
+  "titulo": "O Labirinto dos Pronomes Perdidos",
+  "historia": "Os pronomes oblíquos se perderam no labirinto: alguns foram parar antes do verbo, outros no meio, outros depois! Coloquem cada um no lugar certo para descobrir o código da saída.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Porta 1: Qual está na norma-padrão?",
+      "imagem": "🚪",
+      "opcoes": [
+        "Não me deixe aqui.",
+        "Não deixe-me aqui."
+      ],
+      "correta": "Não me deixe aqui.",
+      "dica": "NÃO atrai o pronome."
+    },
+    {
+      "pergunta": "Porta 2: escreva junto — entregarei + te (sem palavra atrativa).",
+      "imagem": "📦",
+      "resposta": [
+        "entregar-te-ei"
+      ],
+      "dica": "Futuro do presente: mesóclise."
+    },
+    {
+      "pergunta": "Porta 3: \"Diga-me o caminho.\" Que colocação é essa?",
+      "imagem": "🗺️",
+      "opcoes": [
+        "Ênclise",
+        "Próclise",
+        "Mesóclise"
+      ],
+      "correta": "Ênclise",
+      "dica": "Pronome depois do verbo."
+    },
+    {
+      "pergunta": "Porta 4: escreva — fazer + o =",
+      "imagem": "🛠️",
+      "resposta": [
+        "fazê-lo",
+        "faze-lo",
+        "fazelo",
+        "fazê lo"
+      ],
+      "dica": "O R cai e o pronome vira LO."
+    },
+    {
+      "pergunta": "Porta 5: Qual está ERRADA?",
+      "imagem": "❌",
+      "opcoes": [
+        "Tenho esforçado-me.",
+        "Tenho-me esforçado.",
+        "Quero ver-te."
+      ],
+      "correta": "Tenho esforçado-me.",
+      "dica": "Nunca depois do particípio."
+    },
+    {
+      "pergunta": "Porta 6: \"Deus te abençoe.\" Por que a próclise?",
+      "imagem": "🙏",
+      "opcoes": [
+        "Frase de desejo",
+        "Palavra negativa",
+        "Início de frase"
+      ],
+      "correta": "Frase de desejo",
+      "dica": "É um desejo, um voto."
+    }
+  ]
+}

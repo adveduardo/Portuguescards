@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da fonologia",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "fonema": {
+      "nome": "Fonemas",
+      "emoji": "🔊",
+      "cor": "#2f80ed"
+    },
+    "encontro": {
+      "nome": "Encontros",
+      "emoji": "🤝",
+      "cor": "#e67e22"
+    },
+    "silaba": {
+      "nome": "Separação",
+      "emoji": "✂️",
+      "cor": "#27ae60"
+    },
+    "tonica": {
+      "nome": "Tônica",
+      "emoji": "🎯",
+      "cor": "#c2185b"
+    },
+    "digrafo": {
+      "nome": "Dígrafos",
+      "emoji": "🔗",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "fonema": [
+      {
+        "texto": "Quantos fonemas tem \"chuva\"?",
+        "resposta": "4"
+      },
+      {
+        "texto": "Quantos fonemas tem \"táxi\"?",
+        "resposta": "5"
+      },
+      {
+        "texto": "Quantos fonemas tem \"hoje\"?",
+        "resposta": "3"
+      },
+      {
+        "texto": "Quantos fonemas tem \"carro\"?",
+        "resposta": "4"
+      },
+      {
+        "texto": "Quantos fonemas tem \"casa\"?",
+        "resposta": "4"
+      },
+      {
+        "texto": "Quantos fonemas tem \"ninho\"?",
+        "resposta": "4"
+      },
+      {
+        "texto": "Quantos fonemas tem \"fixo\"?",
+        "resposta": "5"
+      },
+      {
+        "texto": "Quantos fonemas tem \"hora\"?",
+        "resposta": "3"
+      }
+    ],
+    "encontro": [
+      {
+        "texto": "Ditongo, tritongo ou hiato: pai?",
+        "resposta": "ditongo"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: saúde?",
+        "resposta": "hiato"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: Paraguai?",
+        "resposta": "tritongo"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: lua?",
+        "resposta": "hiato"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: céu?",
+        "resposta": "ditongo"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: iguais?",
+        "resposta": "tritongo"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: poeta?",
+        "resposta": "hiato"
+      },
+      {
+        "texto": "Ditongo, tritongo ou hiato: boi?",
+        "resposta": "ditongo"
+      }
+    ],
+    "silaba": [
+      {
+        "texto": "Separe: pássaro",
+        "resposta": "pás-sa-ro"
+      },
+      {
+        "texto": "Separe: carro",
+        "resposta": "car-ro"
+      },
+      {
+        "texto": "Separe: piano",
+        "resposta": "pi-a-no"
+      },
+      {
+        "texto": "Separe: nascer",
+        "resposta": "nas-cer"
+      },
+      {
+        "texto": "Separe: advogado",
+        "resposta": "ad-vo-ga-do"
+      },
+      {
+        "texto": "Separe: coelho",
+        "resposta": "co-e-lho"
+      },
+      {
+        "texto": "Separe: exceção",
+        "resposta": "ex-ce-ção"
+      },
+      {
+        "texto": "Separe: caatinga",
+        "resposta": "ca-a-tin-ga"
+      }
+    ],
+    "tonica": [
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: café?",
+        "resposta": "oxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: mesa?",
+        "resposta": "paroxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: música?",
+        "resposta": "proparoxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: jacaré?",
+        "resposta": "oxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: caderno?",
+        "resposta": "paroxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: árvore?",
+        "resposta": "proparoxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: amor?",
+        "resposta": "oxítona"
+      },
+      {
+        "texto": "Oxítona, paroxítona ou proparoxítona: fácil?",
+        "resposta": "paroxítona"
+      }
+    ],
+    "digrafo": [
+      {
+        "texto": "Dígrafo ou encontro consonantal: chuva (ch)?",
+        "resposta": "dígrafo"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: prato (pr)?",
+        "resposta": "encontro consonantal"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: ninho (nh)?",
+        "resposta": "dígrafo"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: blusa (bl)?",
+        "resposta": "encontro consonantal"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: carro (rr)?",
+        "resposta": "dígrafo"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: livro (vr)?",
+        "resposta": "encontro consonantal"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: queijo (qu)?",
+        "resposta": "dígrafo"
+      },
+      {
+        "texto": "Dígrafo ou encontro consonantal: flor (fl)?",
+        "resposta": "encontro consonantal"
+      }
+    ]
+  }
+}

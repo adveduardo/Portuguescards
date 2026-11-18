@@ -1,0 +1,150 @@
+{
+  "titulo": "Vogal, semivogal ou consoante?",
+  "modo": "pintar",
+  "categorias": [
+    {
+      "id": "V",
+      "nome": "Vogal",
+      "cor": "#e74c3c",
+      "def": "som principal da sílaba"
+    },
+    {
+      "id": "S",
+      "nome": "Semivogal",
+      "cor": "#e67e22",
+      "def": "i ou u ao lado de uma vogal, mais fraco (ditongo/tritongo)"
+    },
+    {
+      "id": "C",
+      "nome": "Consoante",
+      "cor": "#2f80ed",
+      "def": "som que precisa da vogal para formar sílaba"
+    }
+  ],
+  "instrucao": "Pintem cada letra: vogal, semivogal ou consoante.",
+  "palavras": [
+    {
+      "palavra": "pai",
+      "tipos": [
+        "C",
+        "V",
+        "S"
+      ],
+      "explica": "A é a vogal; I é semivogal (ditongo AI)."
+    },
+    {
+      "palavra": "boi",
+      "tipos": [
+        "C",
+        "V",
+        "S"
+      ],
+      "explica": "Ditongo OI: O vogal, I semivogal."
+    },
+    {
+      "palavra": "céu",
+      "tipos": [
+        "C",
+        "V",
+        "S"
+      ],
+      "explica": "Ditongo ÉU: É vogal, U semivogal."
+    },
+    {
+      "palavra": "saúde",
+      "tipos": [
+        "C",
+        "V",
+        "V",
+        "C",
+        "V"
+      ],
+      "explica": "A-Ú é hiato: as duas são vogais, em sílabas diferentes (sa-ú-de)."
+    },
+    {
+      "palavra": "lua",
+      "tipos": [
+        "C",
+        "V",
+        "V"
+      ],
+      "explica": "Hiato U-A: lu-a. Duas vogais."
+    },
+    {
+      "palavra": "rio",
+      "tipos": [
+        "C",
+        "V",
+        "V"
+      ],
+      "explica": "Hiato I-O: ri-o."
+    },
+    {
+      "palavra": "água",
+      "tipos": [
+        "V",
+        "C",
+        "S",
+        "V"
+      ],
+      "explica": "Á-gua: no ditongo UA, o U é semivogal."
+    },
+    {
+      "palavra": "quatro",
+      "tipos": [
+        "C",
+        "S",
+        "V",
+        "C",
+        "C",
+        "V"
+      ],
+      "explica": "QUA: o U soa fraco (semivogal). TR é encontro de consoantes."
+    },
+    {
+      "palavra": "ouro",
+      "tipos": [
+        "V",
+        "S",
+        "C",
+        "V"
+      ],
+      "explica": "Ditongo OU: O vogal, U semivogal."
+    },
+    {
+      "palavra": "Paraguai",
+      "tipos": [
+        "C",
+        "V",
+        "C",
+        "V",
+        "C",
+        "S",
+        "V",
+        "S"
+      ],
+      "explica": "UAI é tritongo: U e I são semivogais, A é a vogal."
+    },
+    {
+      "palavra": "iguais",
+      "tipos": [
+        "V",
+        "C",
+        "S",
+        "V",
+        "S",
+        "C"
+      ],
+      "explica": "I-guais: no tritongo UAI, U e I são semivogais."
+    },
+    {
+      "palavra": "mãe",
+      "tipos": [
+        "C",
+        "V",
+        "S"
+      ],
+      "explica": "Ditongo nasal ÃE: Ã vogal, E semivogal."
+    }
+  ]
+}

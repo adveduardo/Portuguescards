@@ -1,0 +1,391 @@
+{
+  "titulo": "Por que tem acento?",
+  "emoji": "📐",
+  "instrucao": "Que regra explica o acento desta palavra?",
+  "rodadas": [
+    {
+      "destaque": "lâmpada",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Proparoxítona (todas)",
+      "explica": "lâmpada: proparoxítona (todas).",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "música",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Proparoxítona (todas)",
+      "explica": "música: proparoxítona (todas).",
+      "imagem": "🎵"
+    },
+    {
+      "destaque": "café",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Oxítona em A, E, O, EM",
+      "explica": "café: oxítona em a, e, o, em.",
+      "imagem": "☕"
+    },
+    {
+      "destaque": "você",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Oxítona em A, E, O, EM",
+      "explica": "você: oxítona em a, e, o, em.",
+      "imagem": "🫵"
+    },
+    {
+      "destaque": "parabéns",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Oxítona em A, E, O, EM",
+      "explica": "parabéns: oxítona em a, e, o, em.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "fácil",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em L, N, R, X, PS",
+      "explica": "fácil: paroxítona em l, n, r, x, ps.",
+      "imagem": "😎"
+    },
+    {
+      "destaque": "açúcar",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em L, N, R, X, PS",
+      "explica": "açúcar: paroxítona em l, n, r, x, ps.",
+      "imagem": "🍬"
+    },
+    {
+      "destaque": "tórax",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em L, N, R, X, PS",
+      "explica": "tórax: paroxítona em l, n, r, x, ps.",
+      "imagem": "🫁"
+    },
+    {
+      "destaque": "bíceps",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em L, N, R, X, PS",
+      "explica": "bíceps: paroxítona em l, n, r, x, ps.",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "história",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em ditongo",
+      "explica": "história: paroxítona em ditongo.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "água",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em ditongo",
+      "explica": "água: paroxítona em ditongo.",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "série",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em ditongo",
+      "explica": "série: paroxítona em ditongo.",
+      "imagem": "📺"
+    },
+    {
+      "destaque": "órfã",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em Ã, ÃO, I(S), US, UM",
+      "explica": "órfã: paroxítona em ã, ão, i(s), us, um.",
+      "imagem": "🧒"
+    },
+    {
+      "destaque": "lápis",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em Ã, ÃO, I(S), US, UM",
+      "explica": "lápis: paroxítona em ã, ão, i(s), us, um.",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "vírus",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em Ã, ÃO, I(S), US, UM",
+      "explica": "vírus: paroxítona em ã, ão, i(s), us, um.",
+      "imagem": "🦠"
+    },
+    {
+      "destaque": "álbum",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Paroxítona em Ã, ÃO, I(S), US, UM",
+      "explica": "álbum: paroxítona em ã, ão, i(s), us, um.",
+      "imagem": "📷"
+    },
+    {
+      "destaque": "pé",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Monossílabo tônico em A, E, O",
+      "explica": "pé: monossílabo tônico em a, e, o.",
+      "imagem": "🦶"
+    },
+    {
+      "destaque": "já",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Monossílabo tônico em A, E, O",
+      "explica": "já: monossílabo tônico em a, e, o.",
+      "imagem": "⏱️"
+    },
+    {
+      "destaque": "saúde",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Hiato com I ou U tônico",
+      "explica": "saúde: hiato com i ou u tônico.",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "país",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Hiato com I ou U tônico",
+      "explica": "país: hiato com i ou u tônico.",
+      "imagem": "🗺️"
+    },
+    {
+      "destaque": "baú",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Hiato com I ou U tônico",
+      "explica": "baú: hiato com i ou u tônico.",
+      "imagem": "🧳"
+    },
+    {
+      "destaque": "herói",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)",
+      "explica": "herói: ditongo aberto éi, éu, ói (oxítonas e monossílabos).",
+      "imagem": "🦸"
+    },
+    {
+      "destaque": "papéis",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)",
+      "explica": "papéis: ditongo aberto éi, éu, ói (oxítonas e monossílabos).",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "céu",
+      "opcoes": [
+        "Proparoxítona (todas)",
+        "Oxítona em A, E, O, EM",
+        "Paroxítona em L, N, R, X, PS",
+        "Paroxítona em ditongo",
+        "Paroxítona em Ã, ÃO, I(S), US, UM",
+        "Monossílabo tônico em A, E, O",
+        "Hiato com I ou U tônico",
+        "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)"
+      ],
+      "correta": "Ditongo aberto ÉI, ÉU, ÓI (oxítonas e monossílabos)",
+      "explica": "céu: ditongo aberto éi, éu, ói (oxítonas e monossílabos).",
+      "imagem": "☁️"
+    }
+  ]
+}

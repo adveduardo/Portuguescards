@@ -1,0 +1,91 @@
+{
+  "titulo": "Dado da significação",
+  "dados": [
+    {
+      "nome": "Palavra",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "😊",
+          "texto": "alegre"
+        },
+        {
+          "emoji": "🏎️",
+          "texto": "rápido"
+        },
+        {
+          "emoji": "▶️",
+          "texto": "começar"
+        },
+        {
+          "emoji": "☀️",
+          "texto": "claro"
+        },
+        {
+          "emoji": "🔥",
+          "texto": "quente"
+        },
+        {
+          "emoji": "🎁",
+          "texto": "generoso"
+        },
+        {
+          "emoji": "🗣️",
+          "texto": "falar"
+        },
+        {
+          "emoji": "🚉",
+          "texto": "chegar"
+        },
+        {
+          "emoji": "📏",
+          "texto": "alto"
+        },
+        {
+          "emoji": "🦁",
+          "texto": "coragem"
+        }
+      ]
+    },
+    {
+      "nome": "Desafio",
+      "cor": "#8e44ad",
+      "faces": [
+        {
+          "emoji": "🟰",
+          "texto": "diga um sinônimo"
+        },
+        {
+          "emoji": "↔️",
+          "texto": "diga um antônimo"
+        },
+        {
+          "emoji": "✍️",
+          "texto": "faça uma frase"
+        },
+        {
+          "emoji": "🌳",
+          "texto": "diga uma palavra da mesma família"
+        },
+        {
+          "emoji": "🎭",
+          "texto": "use em sentido figurado"
+        },
+        {
+          "emoji": "➖",
+          "texto": "forme o antônimo com prefixo (in-, des-, i-), se der"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Quem responde primeiro ganha o ponto!",
+    "A equipe da vez responde em 20 segundos.",
+    "Escrevam a resposta no caderno."
+  ],
+  "conectivos": [
+    "Sinônimo: sentido parecido",
+    "Antônimo: sentido oposto",
+    "Sentido figurado: \"coração de pedra\""
+  ]
+}

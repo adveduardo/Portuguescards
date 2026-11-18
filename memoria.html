@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jogo da Memória</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #vezMm{font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;text-align:center;margin:4px 0}
+  #grade{display:grid;gap:10px;margin:8px auto;max-width:1200px;padding:0 8px}
+  .carta{perspective:800px;aspect-ratio:4/3;cursor:pointer;border:none;background:none;padding:0}
+  .carta .dentro{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+  .carta.virada .dentro{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    box-shadow:0 5px 0 #0002;padding:6px;text-align:center;font-weight:bold;line-height:1.15}
+  .face.verso{background:linear-gradient(135deg,#2f80ed,#8e44ad);color:#fff;font-size:clamp(1.6rem,4vw,2.6rem)}
+  .face.frente{background:#fff;color:var(--texto);transform:rotateY(180deg)}
+  .carta.achada .face.frente{color:#fff}
+  #explicaMm{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1050px;margin:6px auto;min-height:1.4em}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🧠 Jogo da Memória</h1>
+  <div class="cartao">
+    <h2>1. Pares (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2" selected>2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Pares na mesa: <select id="selPares"><option value="6">6 pares (12 cartas)</option><option value="8" selected>8 pares (16 cartas)</option><option value="10">10 pares (20 cartas)</option><option value="12">12 pares (24 cartas)</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">A equipe da vez vira duas cartas. Se formarem um par, ganha 1 ponto e joga de novo; se não, as cartas voltam e passa a vez.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="barraEquipes" class="barraEquipes"></div>
+  <div id="vezMm"></div>
+  <div id="grade"></div>
+  <div id="explicaMm"></div>
+  <div class="linha"><button id="btnSair">⏹️ Terminar</button></div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+let dados = null, cartas = [], viradas = [], travado = false, achados = 0, totalPares = 0, placar = null;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.pares)) return null;
+  const pares = d.pares.map(p => Array.isArray(p) ? {a: p[0], b: p[1], explica: p[2] || ''} : p)
+    .filter(p => p && p.a && p.b).map(p => ({a: String(p.a), b: String(p.b), explica: String(p.explica || '')}));
+  return pares.length >= 3 ? {titulo: d.titulo || 'Jogo da memória', relacao: String(d.relacao || 'par'), pares} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: falta a lista "pares" (pelo menos 3), cada um com "a" e "b".');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.pares.length} pares (${x.relacao})` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'memoria', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/memoria-sinonimos.json', 'modelo-jogo-da-memoria.json');
+
+function tamanhoFonte(t){ const n = t.length; return n <= 8 ? 'clamp(1.2rem,2.8vw,2.1rem)' : n <= 16 ? 'clamp(1rem,2.2vw,1.6rem)' : n <= 30 ? 'clamp(.85rem,1.7vw,1.2rem)' : 'clamp(.75rem,1.4vw,1rem)'; }
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  const escolhidos = M.embaralhar(dados.pares).slice(0, +$('selPares').value);
+  totalPares = escolhidos.length; achados = 0; viradas = []; travado = false;
+  cartas = M.embaralhar(escolhidos.flatMap((p, i) => [{par: i, texto: p.a, explica: p.explica}, {par: i, texto: p.b, explica: p.explica}]));
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  const colunas = cartas.length <= 12 ? 4 : cartas.length <= 16 ? 4 : cartas.length <= 20 ? 5 : 6;
+  $('grade').style.gridTemplateColumns = `repeat(${colunas}, 1fr)`;
+  $('grade').style.maxWidth = (colunas * 200) + 'px';
+  $('grade').innerHTML = cartas.map((c, i) => `<button class="carta" data-i="${i}"><div class="dentro"><div class="face verso">❓</div><div class="face frente" style="font-size:${tamanhoFonte(c.texto)}">${AV.esc(c.texto)}</div></div></button>`).join('');
+  $('grade').querySelectorAll('.carta').forEach(b => b.onclick = () => virar(+b.dataset.i, b));
+  $('explicaMm').textContent = `Encontrem os pares de ${dados.relacao}!`;
+  AV.mostrarTela('tJogo'); vez();
+}
+function vez(){ $('vezMm').textContent = placar.prefixo() ? `👉 Vez de ${placar.prefixo().replace(/: $/, '')}` : '👉 Virem duas cartas'; }
+function virar(i, b){
+  if (travado || b.classList.contains('virada')) return;
+  b.classList.add('virada'); viradas.push({i, b}); AV.tom(600, .05);
+  if (viradas.length < 2) return;
+  travado = true;
+  const [x, y] = viradas;
+  if (cartas[x.i].par === cartas[y.i].par){
+    achados++;
+    const eq = placar.equipes.length ? placar.equipes[placar.vez] : null, cor = eq ? eq.cor : '#27ae60';
+    [x.b, y.b].forEach(c => { c.classList.add('achada'); c.querySelector('.frente').style.background = cor; });
+    placar.pontuar(1); AV.fanfarra();
+    $('explicaMm').textContent = `✅ Par encontrado: ${cartas[x.i].texto} ↔ ${cartas[y.i].texto}. ${cartas[x.i].explica}`;
+    viradas = []; travado = false;
+    if (achados === totalPares) setTimeout(fim, 1400); else vez();
+  } else {
+    AV.erro();
+    $('explicaMm').textContent = '❌ Não formam par. Guardem onde elas estão!';
+    setTimeout(() => { x.b.classList.remove('virada'); y.b.classList.remove('virada'); viradas = []; travado = false; placar.proxima(); vez(); }, 1500);
+  }
+}
+function fim(){ placar.ranking($('ranking'), totalPares); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

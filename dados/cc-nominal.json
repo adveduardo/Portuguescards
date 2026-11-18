@@ -1,0 +1,167 @@
+{
+  "titulo": "Concordância nominal",
+  "emoji": "🤝",
+  "instrucao": "Complete com a forma correta",
+  "rodadas": [
+    {
+      "destaque": "É ___ a entrada de estranhos.",
+      "opcoes": [
+        "proibida",
+        "proibido"
+      ],
+      "correta": "proibida",
+      "explica": "Com artigo (A entrada), o adjetivo concorda: é proibida a entrada.",
+      "imagem": "🚫"
+    },
+    {
+      "destaque": "É ___ entrada de estranhos.",
+      "opcoes": [
+        "proibido",
+        "proibida"
+      ],
+      "correta": "proibido",
+      "explica": "Sem artigo, a expressão fica invariável: é proibido entrada.",
+      "imagem": "🚫"
+    },
+    {
+      "destaque": "A água é ___ para a saúde.",
+      "opcoes": [
+        "boa",
+        "bom"
+      ],
+      "correta": "boa",
+      "explica": "Com artigo (A água), concorda: é boa.",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "Água é ___ para a saúde.",
+      "opcoes": [
+        "bom",
+        "boa"
+      ],
+      "correta": "bom",
+      "explica": "Sem artigo, fica no masculino singular: água é bom.",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "Ela estava ___ cansada.",
+      "opcoes": [
+        "meio",
+        "meia"
+      ],
+      "correta": "meio",
+      "explica": "MEIO = um pouco (advérbio): não varia.",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "Comi ___ pizza.",
+      "opcoes": [
+        "meia",
+        "meio"
+      ],
+      "correta": "meia",
+      "explica": "MEIA = metade (numeral): concorda com pizza.",
+      "imagem": "🍕"
+    },
+    {
+      "destaque": "Seguem ___ os documentos.",
+      "opcoes": [
+        "anexos",
+        "anexo"
+      ],
+      "correta": "anexos",
+      "explica": "ANEXO concorda com o substantivo: anexos.",
+      "imagem": "📎"
+    },
+    {
+      "destaque": "Elas ___ fizeram o bolo.",
+      "opcoes": [
+        "mesmas",
+        "mesmo"
+      ],
+      "correta": "mesmas",
+      "explica": "MESMO (= próprio) concorda: elas mesmas.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "Havia ___ pessoas na fila.",
+      "opcoes": [
+        "bastantes",
+        "bastante"
+      ],
+      "correta": "bastantes",
+      "explica": "Antes de substantivo (= muitas), concorda: bastantes pessoas.",
+      "imagem": "👥"
+    },
+    {
+      "destaque": "Elas estudaram ___.",
+      "opcoes": [
+        "bastante",
+        "bastantes"
+      ],
+      "correta": "bastante",
+      "explica": "Modificando o verbo, é advérbio: invariável.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "\"Muito ___\", disse a aluna.",
+      "opcoes": [
+        "obrigada",
+        "obrigado"
+      ],
+      "correta": "obrigada",
+      "explica": "OBRIGADO concorda com quem fala: a aluna diz obrigada.",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "Estamos ___ com a loja.",
+      "opcoes": [
+        "quites",
+        "quite"
+      ],
+      "correta": "quites",
+      "explica": "QUITE concorda: estou quite, estamos quites.",
+      "imagem": "🧾"
+    },
+    {
+      "destaque": "As crianças ficaram ___ em casa.",
+      "opcoes": [
+        "sós",
+        "só"
+      ],
+      "correta": "sós",
+      "explica": "SÓ = sozinho: concorda (sós).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Os documentos seguem ___.",
+      "opcoes": [
+        "inclusos",
+        "incluso"
+      ],
+      "correta": "inclusos",
+      "explica": "INCLUSO concorda com o substantivo.",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "Escolheu ___ hora e lugar.",
+      "opcoes": [
+        "má",
+        "maus"
+      ],
+      "correta": "má",
+      "explica": "Adjetivo ANTES de vários substantivos concorda com o mais próximo: má hora e lugar.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Havia ___ alunos hoje.",
+      "opcoes": [
+        "menos",
+        "menas"
+      ],
+      "correta": "menos",
+      "explica": "MENOS é invariável: \"menas\" não existe.",
+      "imagem": "📉"
+    }
+  ]
+}

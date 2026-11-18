@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da colocação pronominal",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "pro": {
+      "nome": "Próclise",
+      "emoji": "⬅️",
+      "cor": "#2f80ed"
+    },
+    "meso": {
+      "nome": "Mesóclise",
+      "emoji": "↔️",
+      "cor": "#8e44ad"
+    },
+    "en": {
+      "nome": "Ênclise",
+      "emoji": "➡️",
+      "cor": "#27ae60"
+    },
+    "forma": {
+      "nome": "Formas",
+      "emoji": "🧩",
+      "cor": "#e67e22"
+    },
+    "loc": {
+      "nome": "Locuções",
+      "emoji": "🔗",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "pro": [
+      {
+        "texto": "Coloque o pronome: Não ___ viram (me)",
+        "resposta": "Não me viram."
+      },
+      {
+        "texto": "Coloque o pronome: Quem ___ ligou? (te)",
+        "resposta": "Quem te ligou?"
+      },
+      {
+        "texto": "Coloque o pronome: Sempre ___ ajudo (o)",
+        "resposta": "Sempre o ajudo."
+      },
+      {
+        "texto": "Coloque o pronome: Alguém ___ chamou (nos)",
+        "resposta": "Alguém nos chamou."
+      },
+      {
+        "texto": "Coloque o pronome: Espero que ___ divirtam (se)",
+        "resposta": "Espero que se divirtam."
+      },
+      {
+        "texto": "Coloque o pronome: Deus ___ proteja (te)",
+        "resposta": "Deus te proteja."
+      },
+      {
+        "texto": "Coloque o pronome: Aqui ___ fala (se)",
+        "resposta": "Aqui se fala."
+      },
+      {
+        "texto": "Coloque o pronome: Tudo ___ resolveu (se)",
+        "resposta": "Tudo se resolveu."
+      }
+    ],
+    "meso": [
+      {
+        "texto": "Coloque o pronome: Entregarei ___ (te)",
+        "resposta": "Entregar-te-ei"
+      },
+      {
+        "texto": "Coloque o pronome: Faria ___ (lhe)",
+        "resposta": "Far-lhe-ia"
+      },
+      {
+        "texto": "Coloque o pronome: Diria ___ (se)",
+        "resposta": "Dir-se-ia"
+      },
+      {
+        "texto": "Coloque o pronome: Encontraremos ___ (o)",
+        "resposta": "Encontrá-lo-emos"
+      },
+      {
+        "texto": "Coloque o pronome: Convidaria ___ (a)",
+        "resposta": "Convidá-la-ia"
+      },
+      {
+        "texto": "Coloque o pronome: Realizará ___ (se)",
+        "resposta": "Realizar-se-á"
+      },
+      {
+        "texto": "Coloque o pronome: Darei ___ (te)",
+        "resposta": "Dar-te-ei"
+      },
+      {
+        "texto": "Coloque o pronome: Contaria ___ (lhe)",
+        "resposta": "Contar-lhe-ia"
+      }
+    ],
+    "en": [
+      {
+        "texto": "Coloque o pronome: Diga ___ (me)",
+        "resposta": "Diga-me"
+      },
+      {
+        "texto": "Coloque o pronome: Levantei ___ (me)",
+        "resposta": "Levantei-me"
+      },
+      {
+        "texto": "Coloque o pronome: Sente ___ (se)",
+        "resposta": "Sente-se"
+      },
+      {
+        "texto": "Coloque o pronome: Entreguei ___ (lhe)",
+        "resposta": "Entreguei-lhe"
+      },
+      {
+        "texto": "Coloque o pronome: Convidaram ___ (nos)",
+        "resposta": "Convidaram-nos"
+      },
+      {
+        "texto": "Coloque o pronome: Deixando ___ (nos)",
+        "resposta": "deixando-nos"
+      },
+      {
+        "texto": "Coloque o pronome: Vendem ___ casas (se)",
+        "resposta": "Vendem-se"
+      },
+      {
+        "texto": "Coloque o pronome: Empreste ___ (me)",
+        "resposta": "Empreste-me"
+      }
+    ],
+    "forma": [
+      {
+        "texto": "Junte: fazer + o",
+        "resposta": "fazê-lo"
+      },
+      {
+        "texto": "Junte: vender + a",
+        "resposta": "vendê-la"
+      },
+      {
+        "texto": "Junte: partir + o",
+        "resposta": "parti-lo"
+      },
+      {
+        "texto": "Junte: fiz + o",
+        "resposta": "fi-lo"
+      },
+      {
+        "texto": "Junte: viram + o",
+        "resposta": "viram-no"
+      },
+      {
+        "texto": "Junte: põe + o",
+        "resposta": "põe-no"
+      },
+      {
+        "texto": "Junte: comprei + a",
+        "resposta": "comprei-a"
+      },
+      {
+        "texto": "Junte: amar + o",
+        "resposta": "amá-lo"
+      }
+    ],
+    "loc": [
+      {
+        "texto": "Certo ou errado? Quero ver-te.",
+        "resposta": "certo"
+      },
+      {
+        "texto": "Certo ou errado? Tenho esforçado-me.",
+        "resposta": "errado"
+      },
+      {
+        "texto": "Certo ou errado? Tenho-me esforçado.",
+        "resposta": "certo"
+      },
+      {
+        "texto": "Certo ou errado? Vou-me embora.",
+        "resposta": "certo"
+      },
+      {
+        "texto": "Certo ou errado? Havia esquecido-se.",
+        "resposta": "errado"
+      },
+      {
+        "texto": "Certo ou errado? Devem preparar-se.",
+        "resposta": "certo"
+      },
+      {
+        "texto": "Certo ou errado? Estou esperando-te.",
+        "resposta": "certo"
+      },
+      {
+        "texto": "Certo ou errado? Tinha avisado-me.",
+        "resposta": "errado"
+      }
+    ]
+  }
+}

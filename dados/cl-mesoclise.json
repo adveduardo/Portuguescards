@@ -1,0 +1,87 @@
+{
+  "titulo": "Ocorrência da mesóclise",
+  "emoji": "↔️",
+  "instrucao": "Escolha a frase correta",
+  "rodadas": [
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Entregar-te-ei o livro amanhã.",
+        "Entregarei-te o livro amanhã."
+      ],
+      "correta": "Entregar-te-ei o livro amanhã.",
+      "explica": "Futuro do presente, sem palavra atrativa: mesóclise (o pronome no meio do verbo).",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Far-lhe-ia um favor.",
+        "Faria-lhe um favor."
+      ],
+      "correta": "Far-lhe-ia um favor.",
+      "explica": "Futuro do pretérito, sem palavra atrativa: mesóclise.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Dir-se-ia que ele estava cansado.",
+        "Diria-se que ele estava cansado."
+      ],
+      "correta": "Dir-se-ia que ele estava cansado.",
+      "explica": "Futuro do pretérito: dir-se-ia.",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Não te entregarei o livro.",
+        "Não entregar-te-ei o livro."
+      ],
+      "correta": "Não te entregarei o livro.",
+      "explica": "Com palavra atrativa (não), a próclise vence a mesóclise.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Encontrá-lo-emos na praça.",
+        "Encontraremos-o na praça."
+      ],
+      "correta": "Encontrá-lo-emos na praça.",
+      "explica": "Mesóclise com O depois de R: encontrar + o + emos = encontrá-lo-emos.",
+      "imagem": "📍"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Convidá-la-ia para a festa.",
+        "Convidaria-a para a festa."
+      ],
+      "correta": "Convidá-la-ia para a festa.",
+      "explica": "Mesóclise: convidar + a + ia = convidá-la-ia.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Ninguém te dirá a verdade.",
+        "Ninguém dir-te-á a verdade."
+      ],
+      "correta": "Ninguém te dirá a verdade.",
+      "explica": "NINGUÉM atrai o pronome: próclise.",
+      "imagem": "🤐"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Realizar-se-á a reunião amanhã.",
+        "Realizará-se a reunião amanhã."
+      ],
+      "correta": "Realizar-se-á a reunião amanhã.",
+      "explica": "Futuro no início da frase: mesóclise.",
+      "imagem": "🗓️"
+    }
+  ]
+}

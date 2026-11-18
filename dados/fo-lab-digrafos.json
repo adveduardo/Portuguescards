@@ -1,0 +1,255 @@
+{
+  "titulo": "Dígrafo ou encontro consonantal?",
+  "modo": "pintar",
+  "categorias": [
+    {
+      "id": "dig",
+      "nome": "Dígrafo",
+      "cor": "#e74c3c",
+      "def": "duas letras, UM som (ch, lh, nh, rr, ss, sc, qu, gu)"
+    },
+    {
+      "id": "ec",
+      "nome": "Encontro consonantal",
+      "cor": "#2f80ed",
+      "def": "duas consoantes, cada uma com seu som (pr, bl, tr…)"
+    }
+  ],
+  "instrucao": "Pintem os dígrafos e os encontros consonantais. As outras letras ficam sem cor.",
+  "palavras": [
+    {
+      "palavra": "chuva",
+      "partes": [
+        "ch",
+        "u",
+        "v",
+        "a"
+      ],
+      "tipos": [
+        "dig",
+        "",
+        "",
+        ""
+      ],
+      "explica": "CH: duas letras e um só som."
+    },
+    {
+      "palavra": "carro",
+      "partes": [
+        "c",
+        "a",
+        "rr",
+        "o"
+      ],
+      "tipos": [
+        "",
+        "",
+        "dig",
+        ""
+      ],
+      "explica": "RR: dígrafo."
+    },
+    {
+      "palavra": "prato",
+      "partes": [
+        "pr",
+        "a",
+        "t",
+        "o"
+      ],
+      "tipos": [
+        "ec",
+        "",
+        "",
+        ""
+      ],
+      "explica": "PR: as duas consoantes soam."
+    },
+    {
+      "palavra": "ninho",
+      "partes": [
+        "n",
+        "i",
+        "nh",
+        "o"
+      ],
+      "tipos": [
+        "",
+        "",
+        "dig",
+        ""
+      ],
+      "explica": "NH: dígrafo."
+    },
+    {
+      "palavra": "blusa",
+      "partes": [
+        "bl",
+        "u",
+        "s",
+        "a"
+      ],
+      "tipos": [
+        "ec",
+        "",
+        "",
+        ""
+      ],
+      "explica": "BL: encontro consonantal."
+    },
+    {
+      "palavra": "pássaro",
+      "partes": [
+        "p",
+        "á",
+        "ss",
+        "a",
+        "r",
+        "o"
+      ],
+      "tipos": [
+        "",
+        "",
+        "dig",
+        "",
+        "",
+        ""
+      ],
+      "explica": "SS: dígrafo."
+    },
+    {
+      "palavra": "queijo",
+      "partes": [
+        "qu",
+        "e",
+        "i",
+        "j",
+        "o"
+      ],
+      "tipos": [
+        "dig",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "explica": "QU: o U não soa, então é dígrafo."
+    },
+    {
+      "palavra": "livro",
+      "partes": [
+        "l",
+        "i",
+        "vr",
+        "o"
+      ],
+      "tipos": [
+        "",
+        "",
+        "ec",
+        ""
+      ],
+      "explica": "VR: encontro consonantal."
+    },
+    {
+      "palavra": "palha",
+      "partes": [
+        "p",
+        "a",
+        "lh",
+        "a"
+      ],
+      "tipos": [
+        "",
+        "",
+        "dig",
+        ""
+      ],
+      "explica": "LH: dígrafo."
+    },
+    {
+      "palavra": "flor",
+      "partes": [
+        "fl",
+        "o",
+        "r"
+      ],
+      "tipos": [
+        "ec",
+        "",
+        ""
+      ],
+      "explica": "FL: encontro consonantal."
+    },
+    {
+      "palavra": "nascer",
+      "partes": [
+        "n",
+        "a",
+        "sc",
+        "e",
+        "r"
+      ],
+      "tipos": [
+        "",
+        "",
+        "dig",
+        "",
+        ""
+      ],
+      "explica": "SC (antes de E): dígrafo."
+    },
+    {
+      "palavra": "guerra",
+      "partes": [
+        "gu",
+        "e",
+        "rr",
+        "a"
+      ],
+      "tipos": [
+        "dig",
+        "",
+        "dig",
+        ""
+      ],
+      "explica": "GU (U mudo) e RR: dois dígrafos!"
+    },
+    {
+      "palavra": "trigo",
+      "partes": [
+        "tr",
+        "i",
+        "g",
+        "o"
+      ],
+      "tipos": [
+        "ec",
+        "",
+        "",
+        ""
+      ],
+      "explica": "TR: encontro consonantal."
+    },
+    {
+      "palavra": "fábrica",
+      "partes": [
+        "f",
+        "á",
+        "br",
+        "i",
+        "c",
+        "a"
+      ],
+      "tipos": [
+        "",
+        "",
+        "ec",
+        "",
+        "",
+        ""
+      ],
+      "explica": "BR: encontro consonantal."
+    }
+  ]
+}

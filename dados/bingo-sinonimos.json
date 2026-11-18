@@ -1,0 +1,217 @@
+{
+  "titulo": "Bingo dos sinônimos e antônimos",
+  "chamadas": [
+    {
+      "id": "feliz",
+      "texto": "Sinônimo de FELIZ"
+    },
+    {
+      "id": "bonito",
+      "texto": "Sinônimo de BONITO"
+    },
+    {
+      "id": "rapido",
+      "texto": "Sinônimo de RÁPIDO"
+    },
+    {
+      "id": "alto",
+      "texto": "Antônimo de ALTO"
+    },
+    {
+      "id": "cheio",
+      "texto": "Antônimo de CHEIO"
+    },
+    {
+      "id": "comecar",
+      "texto": "Sinônimo de COMEÇAR"
+    },
+    {
+      "id": "ganhar",
+      "texto": "Antônimo de GANHAR"
+    },
+    {
+      "id": "medo",
+      "texto": "Sinônimo de MEDO"
+    },
+    {
+      "id": "antigo",
+      "texto": "Antônimo de ANTIGO"
+    },
+    {
+      "id": "casa",
+      "texto": "Sinônimo de CASA"
+    },
+    {
+      "id": "claro",
+      "texto": "Antônimo de CLARO"
+    },
+    {
+      "id": "triste",
+      "texto": "Sinônimo de TRISTE"
+    },
+    {
+      "id": "entrada",
+      "texto": "Antônimo de ENTRADA"
+    },
+    {
+      "id": "corajoso",
+      "texto": "Antônimo de CORAJOSO"
+    },
+    {
+      "id": "ajudar",
+      "texto": "Sinônimo de AJUDAR"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "contente",
+      "t": [
+        "feliz"
+      ]
+    },
+    {
+      "p": "alegre",
+      "t": [
+        "feliz"
+      ]
+    },
+    {
+      "p": "belo",
+      "t": [
+        "bonito"
+      ]
+    },
+    {
+      "p": "lindo",
+      "t": [
+        "bonito"
+      ]
+    },
+    {
+      "p": "veloz",
+      "t": [
+        "rapido"
+      ]
+    },
+    {
+      "p": "ligeiro",
+      "t": [
+        "rapido"
+      ]
+    },
+    {
+      "p": "baixo",
+      "t": [
+        "alto"
+      ]
+    },
+    {
+      "p": "vazio",
+      "t": [
+        "cheio"
+      ]
+    },
+    {
+      "p": "iniciar",
+      "t": [
+        "comecar"
+      ]
+    },
+    {
+      "p": "principiar",
+      "t": [
+        "comecar"
+      ]
+    },
+    {
+      "p": "perder",
+      "t": [
+        "ganhar"
+      ]
+    },
+    {
+      "p": "pavor",
+      "t": [
+        "medo"
+      ]
+    },
+    {
+      "p": "temor",
+      "t": [
+        "medo"
+      ]
+    },
+    {
+      "p": "moderno",
+      "t": [
+        "antigo"
+      ]
+    },
+    {
+      "p": "novo",
+      "t": [
+        "antigo"
+      ]
+    },
+    {
+      "p": "lar",
+      "t": [
+        "casa"
+      ]
+    },
+    {
+      "p": "moradia",
+      "t": [
+        "casa"
+      ]
+    },
+    {
+      "p": "escuro",
+      "t": [
+        "claro"
+      ]
+    },
+    {
+      "p": "abatido",
+      "t": [
+        "triste"
+      ]
+    },
+    {
+      "p": "melancólico",
+      "t": [
+        "triste"
+      ]
+    },
+    {
+      "p": "saída",
+      "t": [
+        "entrada"
+      ]
+    },
+    {
+      "p": "covarde",
+      "t": [
+        "corajoso"
+      ]
+    },
+    {
+      "p": "medroso",
+      "t": [
+        "corajoso"
+      ]
+    },
+    {
+      "p": "auxiliar",
+      "t": [
+        "ajudar"
+      ]
+    },
+    {
+      "p": "socorrer",
+      "t": [
+        "ajudar"
+      ]
+    }
+  ]
+}

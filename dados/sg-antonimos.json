@@ -1,0 +1,151 @@
+{
+  "titulo": "Qual é o antônimo?",
+  "emoji": "↔️",
+  "instrucao": "Qual palavra tem sentido contrário (antônimo)?",
+  "rodadas": [
+    {
+      "destaque": "ALTO",
+      "opcoes": [
+        "baixo",
+        "grande",
+        "comprido",
+        "elevado"
+      ],
+      "correta": "baixo",
+      "explica": "Antônimos têm sentido oposto.",
+      "imagem": "📏"
+    },
+    {
+      "destaque": "GENEROSO",
+      "opcoes": [
+        "egoísta",
+        "bondoso",
+        "gentil",
+        "caridoso"
+      ],
+      "correta": "egoísta",
+      "explica": "Generoso × egoísta.",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "ACEITAR",
+      "opcoes": [
+        "recusar",
+        "concordar",
+        "receber",
+        "admitir"
+      ],
+      "correta": "recusar",
+      "explica": "Aceitar × recusar.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "GANHAR",
+      "opcoes": [
+        "perder",
+        "vencer",
+        "conquistar",
+        "obter"
+      ],
+      "correta": "perder",
+      "explica": "Ganhar × perder.",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "CEDO",
+      "opcoes": [
+        "tarde",
+        "logo",
+        "agora",
+        "antes"
+      ],
+      "correta": "tarde",
+      "explica": "Cedo × tarde.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "ANTIGO",
+      "opcoes": [
+        "moderno",
+        "velho",
+        "idoso",
+        "antiquado"
+      ],
+      "correta": "moderno",
+      "explica": "Antigo × moderno.",
+      "imagem": "🏺"
+    },
+    {
+      "destaque": "CLARO",
+      "opcoes": [
+        "escuro",
+        "iluminado",
+        "brilhante",
+        "límpido"
+      ],
+      "correta": "escuro",
+      "explica": "Claro × escuro.",
+      "imagem": "🌗"
+    },
+    {
+      "destaque": "CHEGAR",
+      "opcoes": [
+        "partir",
+        "vir",
+        "aparecer",
+        "surgir"
+      ],
+      "correta": "partir",
+      "explica": "Chegar × partir.",
+      "imagem": "🚉"
+    },
+    {
+      "destaque": "CHEIO",
+      "opcoes": [
+        "vazio",
+        "lotado",
+        "repleto",
+        "farto"
+      ],
+      "correta": "vazio",
+      "explica": "Cheio × vazio.",
+      "imagem": "🥛"
+    },
+    {
+      "destaque": "LEGAL (DE ACORDO COM A LEI)",
+      "opcoes": [
+        "ilegal",
+        "lícito",
+        "permitido",
+        "correto"
+      ],
+      "correta": "ilegal",
+      "explica": "Prefixo de negação: legal × ilegal.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "HONESTO",
+      "opcoes": [
+        "desonesto",
+        "sincero",
+        "correto",
+        "justo"
+      ],
+      "correta": "desonesto",
+      "explica": "Prefixo DES-: honesto × desonesto.",
+      "imagem": "🤥"
+    },
+    {
+      "destaque": "CORAGEM",
+      "opcoes": [
+        "covardia",
+        "bravura",
+        "ousadia",
+        "valentia"
+      ],
+      "correta": "covardia",
+      "explica": "Coragem × covardia.",
+      "imagem": "🦁"
+    }
+  ]
+}

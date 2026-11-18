@@ -1,0 +1,83 @@
+{
+  "titulo": "Cestos: verbo no singular ou no plural?",
+  "cestos": [
+    {
+      "id": "sing",
+      "nome": "Singular",
+      "emoji": "1️⃣",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "plu",
+      "nome": "Plural",
+      "emoji": "👥",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "(haver) __ muitos alunos",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "(fazer) __ dez anos",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "(precisar-se) __ de ajuda",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "(ser) __ uma hora",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "Mais de um aluno (faltar)",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "Cada um dos alunos (sair)",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "A gente (ir)",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "O povo (pedir)",
+      "cesto": "sing"
+    },
+    {
+      "palavra": "(existir) __ muitos alunos",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "(faltar) __ dez minutos",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "(vender-se) __ casas",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "(ser) __ duas horas",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "Mais de dez alunos (faltar)",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "Os Estados Unidos (ser)",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "Eu e ela (ir)",
+      "cesto": "plu"
+    },
+    {
+      "palavra": "(chegar) __ os convidados",
+      "cesto": "plu"
+    }
+  ]
+}

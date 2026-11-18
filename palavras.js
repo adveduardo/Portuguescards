@@ -154,8 +154,12 @@ function propria(){
 }
 function salvarPropria(itens, titulo){ guardar(CHAVE_PROPRIA, paraJSON(itens, titulo)); }
 
+// Lista pronta pedida pelo endereço: pagina.html?lista=arquivo.json (arquivo na pasta dados/)
+let listaUrl = null;
+const selectsCategoria = [];
 function lista(cat){
   if (cat === 'propria') return propria().itens;
+  if (cat === 'url') return listaUrl ? listaUrl.itens.slice() : [];
   if (!cat || cat === 'todas') return BANCO.slice();
   return BANCO.filter(i => i.cats.has(cat));
 }
@@ -239,9 +243,16 @@ function confete(){
 }
 
 // ---------- Seletor de categoria ----------
-function preencherCategorias(select, {exigirSilabas = false, incluir} = {}){
+function preencherCategorias(select, opcoes = {}){
+  const {exigirSilabas = false, incluir} = opcoes;
+  if (!selectsCategoria.some(x => x.select === select)) selectsCategoria.push({select, opcoes});
   const atual = select.value;
   select.innerHTML = '';
+  if (listaUrl){
+    const o = document.createElement('option'); o.value = 'url';
+    o.textContent = '📄 ' + (listaUrl.titulo || 'Lista da atividade') + ` (${listaUrl.itens.length})`;
+    select.appendChild(o);
+  }
   const chaves = incluir || Object.keys(CATEGORIAS);
   chaves.forEach(k => {
     if (k === 'propria'){
@@ -344,6 +355,21 @@ css.textContent = `
   .pp-acoes button{font-size:.95rem !important;padding:9px 12px !important}
   .pp-dica{font-size:.92rem;opacity:.8}`;
 document.head.appendChild(css);
+
+(function carregarListaDoEndereco(){
+  const arq = new URLSearchParams(location.search).get('lista');
+  if (!arq || !/^[\w.-]+\.json$/.test(arq)) return;
+  fetch('dados/' + arq + '?v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); }).then(d => {
+    const x = interpretar(JSON.stringify(d));
+    if (!x.itens.length) return;
+    listaUrl = x;
+    selectsCategoria.forEach(({select, opcoes}) => {
+      preencherCategorias(select, opcoes);
+      select.value = 'url';
+      select.dispatchEvent(new Event('change'));
+    });
+  }).catch(() => avisar('Não foi possível abrir a lista dados/' + arq));
+})();
 
 window.Palavras = {
   BANCO, CATEGORIAS, lista, propria, interpretar, embaralhar, baixar, avisar,

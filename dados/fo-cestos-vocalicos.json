@@ -1,0 +1,113 @@
+{
+  "titulo": "Cestos: ditongo, tritongo ou hiato?",
+  "cestos": [
+    {
+      "id": "dit",
+      "nome": "Ditongo",
+      "emoji": "2️⃣",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "tri",
+      "nome": "Tritongo",
+      "emoji": "3️⃣",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "hia",
+      "nome": "Hiato",
+      "emoji": "↔️",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "pai",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "mãe",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "céu",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "boi",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "cadeira",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "noite",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "pão",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "herói",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "água",
+      "cesto": "dit"
+    },
+    {
+      "palavra": "Paraguai",
+      "cesto": "tri"
+    },
+    {
+      "palavra": "iguais",
+      "cesto": "tri"
+    },
+    {
+      "palavra": "saguão",
+      "cesto": "tri"
+    },
+    {
+      "palavra": "quaisquer",
+      "cesto": "tri"
+    },
+    {
+      "palavra": "enxaguou",
+      "cesto": "tri"
+    },
+    {
+      "palavra": "saúde",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "lua",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "rio",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "poeta",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "país",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "baú",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "coelho",
+      "cesto": "hia"
+    },
+    {
+      "palavra": "piano",
+      "cesto": "hia"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "titulo": "Separação silábica",
+  "emoji": "✂️",
+  "instrucao": "Qual separação está correta?",
+  "rodadas": [
+    {
+      "destaque": "pássaro",
+      "opcoes": [
+        "pás-sa-ro",
+        "pá-ssa-ro",
+        "pás-sar-o"
+      ],
+      "correta": "pás-sa-ro",
+      "explica": "SS e RR se separam: pás-sa-ro.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "carro",
+      "opcoes": [
+        "car-ro",
+        "ca-rro",
+        "carr-o"
+      ],
+      "correta": "car-ro",
+      "explica": "RR se separa: car-ro.",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "saúde",
+      "opcoes": [
+        "sa-ú-de",
+        "saú-de",
+        "sa-úde"
+      ],
+      "correta": "sa-ú-de",
+      "explica": "Hiato se separa: sa-ú-de.",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "advogado",
+      "opcoes": [
+        "ad-vo-ga-do",
+        "a-dvo-ga-do",
+        "adv-o-ga-do"
+      ],
+      "correta": "ad-vo-ga-do",
+      "explica": "Consoante sem vogal fica na sílaba anterior: ad-vo-ga-do.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "nascer",
+      "opcoes": [
+        "nas-cer",
+        "na-scer",
+        "nasc-er"
+      ],
+      "correta": "nas-cer",
+      "explica": "SC se separa: nas-cer.",
+      "imagem": "🌅"
+    },
+    {
+      "destaque": "piano",
+      "opcoes": [
+        "pi-a-no",
+        "pia-no",
+        "p-ia-no"
+      ],
+      "correta": "pi-a-no",
+      "explica": "Hiato: pi-a-no.",
+      "imagem": "🎹"
+    },
+    {
+      "destaque": "subsolo",
+      "opcoes": [
+        "sub-so-lo",
+        "su-bso-lo",
+        "subs-o-lo"
+      ],
+      "correta": "sub-so-lo",
+      "explica": "Sub-so-lo.",
+      "imagem": "🏗️"
+    },
+    {
+      "destaque": "psicologia",
+      "opcoes": [
+        "psi-co-lo-gi-a",
+        "p-si-co-lo-gia",
+        "psi-co-lo-gia"
+      ],
+      "correta": "psi-co-lo-gi-a",
+      "explica": "PS inicial fica junto; GI-A é hiato: psi-co-lo-gi-a.",
+      "imagem": "🧠"
+    },
+    {
+      "destaque": "Paraguai",
+      "opcoes": [
+        "Pa-ra-guai",
+        "Pa-ra-gu-ai",
+        "Par-a-guai"
+      ],
+      "correta": "Pa-ra-guai",
+      "explica": "Tritongo não se separa: Pa-ra-guai.",
+      "imagem": "🇵🇾"
+    },
+    {
+      "destaque": "exceção",
+      "opcoes": [
+        "ex-ce-ção",
+        "e-xce-ção",
+        "exc-e-ção"
+      ],
+      "correta": "ex-ce-ção",
+      "explica": "XC se separa: ex-ce-ção.",
+      "imagem": "⚠️"
+    },
+    {
+      "destaque": "ritmo",
+      "opcoes": [
+        "rit-mo",
+        "ri-tmo",
+        "ritm-o"
+      ],
+      "correta": "rit-mo",
+      "explica": "Rit-mo.",
+      "imagem": "🥁"
+    },
+    {
+      "destaque": "coelho",
+      "opcoes": [
+        "co-e-lho",
+        "coe-lho",
+        "co-el-ho"
+      ],
+      "correta": "co-e-lho",
+      "explica": "Hiato O-E e dígrafo LH inteiro: co-e-lho.",
+      "imagem": "🐰"
+    },
+    {
+      "destaque": "caatinga",
+      "opcoes": [
+        "ca-a-tin-ga",
+        "caa-tin-ga",
+        "ca-at-in-ga"
+      ],
+      "correta": "ca-a-tin-ga",
+      "explica": "Vogais iguais se separam: ca-a-tin-ga.",
+      "imagem": "🌵"
+    },
+    {
+      "destaque": "chuva",
+      "opcoes": [
+        "chu-va",
+        "c-hu-va",
+        "chuv-a"
+      ],
+      "correta": "chu-va",
+      "explica": "Dígrafo CH não se separa: chu-va.",
+      "imagem": "🌧️"
+    }
+  ]
+}

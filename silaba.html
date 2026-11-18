@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sílaba Tônica</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #perguntaSl{font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;text-align:center;margin:6px auto}
+  #silabasSl{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:18px auto;max-width:1150px}
+  .sl{border:none;border-radius:20px;background:#fff;color:var(--texto);font-size:clamp(2.2rem,7vw,5rem);font-weight:bold;padding:14px 22px;
+    box-shadow:0 6px 0 #0002;cursor:pointer;font-family:inherit;transition:transform .2s,background .2s}
+  .sl.tonica{background:var(--verde);color:#fff;transform:translateY(-10px) scale(1.08)}
+  .sl.errada{background:#ffc9c9;animation:tremeSl .4s}
+  .sl.apagada{opacity:.45}
+  @keyframes tremeSl{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  #classesSl{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:8px 0}
+  #classesSl button{color:#fff;font-size:clamp(1.2rem,2.6vw,1.7rem);padding:14px 22px}
+  #classesSl button.ok{outline:5px solid #fff;box-shadow:0 0 0 10px var(--verde)}
+  #classesSl button.nao{opacity:.35}
+  #explicaSl{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1050px;margin:8px auto;min-height:1.4em}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🎯 Sílaba Tônica</h1>
+  <div class="cartao">
+    <h2>1. Palavras (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Palavras: <select id="selQtd"><option value="8">8</option><option value="12" selected>12</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkFalar" checked> Ler a palavra em voz alta (ajuda a ouvir a sílaba forte)</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">1º passo: tocar na sílaba mais forte (tônica). 2º passo: classificar a palavra. Cada passo certo de primeira vale 1 ponto.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="barraEquipes" class="barraEquipes"></div>
+  <div class="dica" id="contadorSl" style="text-align:center"></div>
+  <div id="perguntaSl"></div>
+  <div id="silabasSl"></div>
+  <div id="classesSl"></div>
+  <div id="explicaSl"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const CORES = ['#e74c3c', '#2f80ed', '#27ae60', '#e67e22'];
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, etapa = 'tonica', erros = 0;
+
+function classeAuto(p){
+  if (p.silabas.length === 1) return 'Monossílabo tônico';
+  const d = p.silabas.length - 1 - p.tonica;
+  return d === 0 ? 'Oxítona' : d === 1 ? 'Paroxítona' : 'Proparoxítona';
+}
+function normalizar(d){
+  if (!d || !Array.isArray(d.palavras)) return null;
+  const palavras = d.palavras.filter(p => p && Array.isArray(p.silabas) && p.silabas.length && Number.isInteger(p.tonica) && p.tonica >= 0 && p.tonica < p.silabas.length)
+    .map(p => ({silabas: p.silabas.map(String), tonica: p.tonica, explica: String(p.explica || '')}));
+  palavras.forEach(p => { p.palavra = p.silabas.join(''); p.classe = classeAuto(p); });
+  const classes = Array.isArray(d.classes) && d.classes.length ? d.classes.map(String) : ['Oxítona', 'Paroxítona', 'Proparoxítona'];
+  return palavras.length ? {titulo: d.titulo || 'Sílaba tônica', palavras, classes} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada palavra precisa de "silabas" e "tonica" (posição da sílaba forte, começando em 0).');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.palavras.length} palavras` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'silaba', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/fo-tonica.json', 'modelo-silaba-tonica.json');
+
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(dados.palavras); const q = +$('selQtd').value; if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+function proxima(){
+  if (!fila.length) return fim();
+  if (n > 0) placar.proxima();
+  atual = fila.shift(); n++; etapa = 'tonica'; erros = 0;
+  $('contadorSl').textContent = `${n} de ${total}`;
+  $('perguntaSl').textContent = placar.prefixo() + '👆 Toquem na sílaba mais forte (tônica)';
+  $('silabasSl').innerHTML = atual.silabas.map((s, i) => `<button class="sl" data-i="${i}">${AV.esc(s)}</button>`).join('');
+  $('silabasSl').querySelectorAll('.sl').forEach(b => b.onclick = () => tocarSilaba(+b.dataset.i, b));
+  $('classesSl').innerHTML = ''; $('explicaSl').textContent = ''; $('btnProxima').hidden = true;
+  if ($('chkFalar').checked) AV.falar(atual.palavra);
+}
+function marcarTonica(){
+  $('silabasSl').querySelectorAll('.sl').forEach((b, i) => { b.classList.remove('errada'); b.classList.add(i === atual.tonica ? 'tonica' : 'apagada'); });
+}
+function tocarSilaba(i, b){
+  if (etapa !== 'tonica' || b.classList.contains('errada')) return;
+  if (i === atual.tonica){
+    if (erros === 0){ placar.pontuar(1); $('explicaSl').textContent = '✅ Isso! +1 ponto.'; } else $('explicaSl').textContent = '✅ Agora sim!';
+    AV.tom(880, .15); marcarTonica(); mostrarClasses();
+  } else {
+    erros++; b.classList.add('errada'); AV.erro();
+    if (erros >= 2){ marcarTonica(); $('explicaSl').textContent = `💡 A sílaba tônica é "${atual.silabas[atual.tonica]}".`; mostrarClasses(); }
+    else $('explicaSl').textContent = '❌ Não é essa. Falem a palavra devagar e tentem de novo!';
+  }
+}
+function mostrarClasses(){
+  etapa = 'classe'; erros = 0;
+  $('perguntaSl').textContent = placar.prefixo() + '🏷️ Como se classifica esta palavra?';
+  const classes = atual.classe === 'Monossílabo tônico' && !dados.classes.includes('Monossílabo tônico') ? dados.classes.concat(['Monossílabo tônico']) : dados.classes;
+  $('classesSl').innerHTML = classes.map((c, i) => `<button data-c="${AV.esc(c)}" style="background:${CORES[i % CORES.length]}">${AV.esc(c)}</button>`).join('');
+  $('classesSl').querySelectorAll('button').forEach(b => b.onclick = () => classificar(b));
+}
+function classificar(b){
+  if (etapa !== 'classe') return;
+  const certo = b.dataset.c === atual.classe;
+  if (certo || erros >= 1){
+    etapa = 'fim';
+    if (certo && erros === 0){ placar.pontuar(1); AV.fanfarra(); AV.confete(); }
+    $('classesSl').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.c === atual.classe ? 'ok' : 'nao'));
+    const regra = {Oxítona: 'a sílaba tônica é a última.', Paroxítona: 'a sílaba tônica é a penúltima.', Proparoxítona: 'a sílaba tônica é a antepenúltima.', 'Monossílabo tônico': 'tem uma sílaba só, pronunciada com força.'}[atual.classe] || '';
+    $('explicaSl').textContent = (certo ? (erros === 0 ? '✅ Isso! +1 ponto. ' : '✅ Agora sim! ') : `❌ É ${atual.classe.toLowerCase()}. `) + `${atual.classe}: ${regra} ${atual.explica}`;
+    if (!certo) AV.erro();
+    $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+  } else { erros++; b.classList.add('nao'); AV.erro(); $('explicaSl').textContent = '❌ Contem as sílabas de trás para a frente: última, penúltima, antepenúltima…'; }
+}
+function fim(){ placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnProxima').onclick = proxima;
+$('btnOuvir').onclick = () => atual && AV.falar(atual.palavra);
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

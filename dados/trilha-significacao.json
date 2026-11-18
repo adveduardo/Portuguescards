@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha das palavras e sentidos",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "sin": {
+      "nome": "Sinônimo",
+      "emoji": "🟰",
+      "cor": "#2f80ed"
+    },
+    "ant": {
+      "nome": "Antônimo",
+      "emoji": "↔️",
+      "cor": "#e74c3c"
+    },
+    "hom": {
+      "nome": "Homônimo",
+      "emoji": "👯",
+      "cor": "#8e44ad"
+    },
+    "par": {
+      "nome": "Parônimo",
+      "emoji": "🪞",
+      "cor": "#16a085"
+    },
+    "acento": {
+      "nome": "Acento",
+      "emoji": "´",
+      "cor": "#e67e22"
+    }
+  },
+  "desafios": {
+    "sin": [
+      {
+        "texto": "Diga um sinônimo de FELIZ",
+        "resposta": "contente, alegre"
+      },
+      {
+        "texto": "Diga um sinônimo de RÁPIDO",
+        "resposta": "veloz"
+      },
+      {
+        "texto": "Diga um sinônimo de BONITO",
+        "resposta": "belo, lindo"
+      },
+      {
+        "texto": "Diga um sinônimo de CASA",
+        "resposta": "lar, moradia"
+      },
+      {
+        "texto": "Diga um sinônimo de MEDO",
+        "resposta": "pavor, temor"
+      },
+      {
+        "texto": "Diga um sinônimo de AJUDAR",
+        "resposta": "auxiliar"
+      },
+      {
+        "texto": "Diga um sinônimo de MORAR",
+        "resposta": "residir"
+      },
+      {
+        "texto": "Diga um sinônimo de ENORME",
+        "resposta": "gigantesco"
+      }
+    ],
+    "ant": [
+      {
+        "texto": "Diga um antônimo de ALTO",
+        "resposta": "baixo"
+      },
+      {
+        "texto": "Diga um antônimo de CHEIO",
+        "resposta": "vazio"
+      },
+      {
+        "texto": "Diga um antônimo de GANHAR",
+        "resposta": "perder"
+      },
+      {
+        "texto": "Diga um antônimo de CEDO",
+        "resposta": "tarde"
+      },
+      {
+        "texto": "Diga um antônimo de CLARO",
+        "resposta": "escuro"
+      },
+      {
+        "texto": "Diga um antônimo de ANTIGO",
+        "resposta": "moderno"
+      },
+      {
+        "texto": "Diga um antônimo de ENTRADA",
+        "resposta": "saída"
+      },
+      {
+        "texto": "Diga um antônimo de CORAGEM",
+        "resposta": "covardia"
+      }
+    ],
+    "hom": [
+      {
+        "texto": "Complete: O preso voltou para a ___ (cela/sela)",
+        "resposta": "cela"
+      },
+      {
+        "texto": "Complete: O ___ do carro ficou caro (concerto/conserto)",
+        "resposta": "conserto"
+      },
+      {
+        "texto": "Complete: A ___ de cinema (sessão/seção)",
+        "resposta": "sessão"
+      },
+      {
+        "texto": "Complete: Bom ___ (censo/senso)",
+        "resposta": "senso"
+      },
+      {
+        "texto": "Complete: ___ a luz (acender/ascender)",
+        "resposta": "acender"
+      },
+      {
+        "texto": "Complete: ___ animais (caçar/cassar)",
+        "resposta": "caçar"
+      },
+      {
+        "texto": "Complete: O ___ da cadeira (acento/assento)",
+        "resposta": "assento"
+      },
+      {
+        "texto": "Complete: ___ o mandato (caçar/cassar)",
+        "resposta": "cassar"
+      }
+    ],
+    "par": [
+      {
+        "texto": "Complete: Dois metros de ___ (comprimento/cumprimento)",
+        "resposta": "comprimento"
+      },
+      {
+        "texto": "Complete: Agiu com ___ (descrição/discrição)",
+        "resposta": "discrição"
+      },
+      {
+        "texto": "Complete: Perigo ___ (iminente/eminente)",
+        "resposta": "iminente"
+      },
+      {
+        "texto": "Complete: Pego em ___ (flagrante/fragrante)",
+        "resposta": "flagrante"
+      },
+      {
+        "texto": "Complete: O ___ na avenida (tráfego/tráfico)",
+        "resposta": "tráfego"
+      },
+      {
+        "texto": "Complete: Cumpriu o ___ (mandato/mandado)",
+        "resposta": "mandato"
+      },
+      {
+        "texto": "Complete: O juiz ___ o réu (absolveu/absorveu)",
+        "resposta": "absolveu"
+      },
+      {
+        "texto": "Complete: Guardar na ___ (despensa/dispensa)",
+        "resposta": "despensa"
+      }
+    ],
+    "acento": [
+      {
+        "texto": "Tem acento? ideia",
+        "resposta": "não"
+      },
+      {
+        "texto": "Tem acento? herói",
+        "resposta": "sim"
+      },
+      {
+        "texto": "Tem acento? voo",
+        "resposta": "não"
+      },
+      {
+        "texto": "Tem acento? juiz",
+        "resposta": "não"
+      },
+      {
+        "texto": "Tem acento? juízes",
+        "resposta": "sim"
+      },
+      {
+        "texto": "Tem acento? item",
+        "resposta": "não"
+      },
+      {
+        "texto": "Tem acento? hífen",
+        "resposta": "sim"
+      },
+      {
+        "texto": "Tem acento? saúde",
+        "resposta": "sim"
+      }
+    ]
+  }
+}

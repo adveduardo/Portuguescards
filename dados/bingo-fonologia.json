@@ -1,0 +1,356 @@
+{
+  "titulo": "Bingo da fonologia",
+  "chamadas": [
+    {
+      "id": "prop",
+      "texto": "Palavra proparoxítona"
+    },
+    {
+      "id": "parox",
+      "texto": "Palavra paroxítona"
+    },
+    {
+      "id": "oxi",
+      "texto": "Palavra oxítona"
+    },
+    {
+      "id": "mono",
+      "texto": "Monossílabo"
+    },
+    {
+      "id": "dig",
+      "texto": "Palavra com dígrafo"
+    },
+    {
+      "id": "ec",
+      "texto": "Palavra com encontro consonantal"
+    },
+    {
+      "id": "dit",
+      "texto": "Palavra com ditongo"
+    },
+    {
+      "id": "hia",
+      "texto": "Palavra com hiato"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "pássaro",
+      "t": [
+        "prop",
+        "dig"
+      ]
+    },
+    {
+      "p": "música",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "fósforo",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "árvore",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "médico",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "sábado",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "pêssego",
+      "t": [
+        "prop",
+        "dig"
+      ]
+    },
+    {
+      "p": "máquina",
+      "t": [
+        "prop",
+        "dig"
+      ]
+    },
+    {
+      "p": "fábrica",
+      "t": [
+        "prop",
+        "ec"
+      ]
+    },
+    {
+      "p": "ônibus",
+      "t": [
+        "prop"
+      ]
+    },
+    {
+      "p": "chuva",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "carro",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "livro",
+      "t": [
+        "parox",
+        "ec"
+      ]
+    },
+    {
+      "p": "prato",
+      "t": [
+        "parox",
+        "ec"
+      ]
+    },
+    {
+      "p": "cadeira",
+      "t": [
+        "parox",
+        "dit"
+      ]
+    },
+    {
+      "p": "saúde",
+      "t": [
+        "parox",
+        "hia"
+      ]
+    },
+    {
+      "p": "poeta",
+      "t": [
+        "parox",
+        "hia"
+      ]
+    },
+    {
+      "p": "ninho",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "palha",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "blusa",
+      "t": [
+        "parox",
+        "ec"
+      ]
+    },
+    {
+      "p": "água",
+      "t": [
+        "parox",
+        "dit"
+      ]
+    },
+    {
+      "p": "quilo",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "guitarra",
+      "t": [
+        "parox",
+        "dig"
+      ]
+    },
+    {
+      "p": "lua",
+      "t": [
+        "parox",
+        "hia"
+      ]
+    },
+    {
+      "p": "piano",
+      "t": [
+        "parox",
+        "hia"
+      ]
+    },
+    {
+      "p": "clube",
+      "t": [
+        "parox",
+        "ec"
+      ]
+    },
+    {
+      "p": "fruta",
+      "t": [
+        "parox",
+        "ec"
+      ]
+    },
+    {
+      "p": "café",
+      "t": [
+        "oxi"
+      ]
+    },
+    {
+      "p": "jacaré",
+      "t": [
+        "oxi"
+      ]
+    },
+    {
+      "p": "país",
+      "t": [
+        "oxi",
+        "hia"
+      ]
+    },
+    {
+      "p": "baú",
+      "t": [
+        "oxi",
+        "hia"
+      ]
+    },
+    {
+      "p": "herói",
+      "t": [
+        "oxi",
+        "dit"
+      ]
+    },
+    {
+      "p": "chapéu",
+      "t": [
+        "oxi",
+        "dit",
+        "dig"
+      ]
+    },
+    {
+      "p": "trator",
+      "t": [
+        "oxi",
+        "ec"
+      ]
+    },
+    {
+      "p": "dragão",
+      "t": [
+        "oxi",
+        "ec",
+        "dit"
+      ]
+    },
+    {
+      "p": "maracujá",
+      "t": [
+        "oxi"
+      ]
+    },
+    {
+      "p": "sofá",
+      "t": [
+        "oxi"
+      ]
+    },
+    {
+      "p": "urubu",
+      "t": [
+        "oxi"
+      ]
+    },
+    {
+      "p": "sol",
+      "t": [
+        "mono"
+      ]
+    },
+    {
+      "p": "pão",
+      "t": [
+        "mono",
+        "dit"
+      ]
+    },
+    {
+      "p": "mãe",
+      "t": [
+        "mono",
+        "dit"
+      ]
+    },
+    {
+      "p": "flor",
+      "t": [
+        "mono",
+        "ec"
+      ]
+    },
+    {
+      "p": "chá",
+      "t": [
+        "mono",
+        "dig"
+      ]
+    },
+    {
+      "p": "rei",
+      "t": [
+        "mono",
+        "dit"
+      ]
+    },
+    {
+      "p": "boi",
+      "t": [
+        "mono",
+        "dit"
+      ]
+    },
+    {
+      "p": "mar",
+      "t": [
+        "mono"
+      ]
+    },
+    {
+      "p": "pé",
+      "t": [
+        "mono"
+      ]
+    }
+  ]
+}

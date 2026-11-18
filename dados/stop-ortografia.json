@@ -1,0 +1,138 @@
+{
+  "titulo": "Stop da ortografia",
+  "letras": "ABCDEFGILMPRST",
+  "tempo": 150,
+  "pontos": {
+    "unica": 10,
+    "repetida": 5
+  },
+  "categorias": [
+    {
+      "nome": "Palavra com X",
+      "respostas": [
+        "abacaxi",
+        "baixo",
+        "bexiga",
+        "caixa",
+        "deixar",
+        "enxada",
+        "faixa",
+        "graxa",
+        "lixo",
+        "mexer",
+        "peixe",
+        "roxo",
+        "taxa"
+      ]
+    },
+    {
+      "nome": "Palavra com CH",
+      "respostas": [
+        "achar",
+        "bicho",
+        "chuva",
+        "cachorro",
+        "chave",
+        "fechar",
+        "galocha",
+        "inchar",
+        "lancha",
+        "mochila",
+        "pichação",
+        "rachar",
+        "salsicha",
+        "tocha"
+      ]
+    },
+    {
+      "nome": "Palavra com Ç",
+      "respostas": [
+        "abraço",
+        "berço",
+        "caça",
+        "cabeça",
+        "doença",
+        "esperança",
+        "força",
+        "graça",
+        "laço",
+        "moça",
+        "onça",
+        "paçoca",
+        "roça",
+        "taça"
+      ]
+    },
+    {
+      "nome": "Palavra com SS",
+      "respostas": [
+        "assar",
+        "bússola",
+        "cassino",
+        "depressa",
+        "escassez",
+        "girassol",
+        "massa",
+        "nosso",
+        "osso",
+        "passeio",
+        "russo",
+        "sessão",
+        "tosse"
+      ]
+    },
+    {
+      "nome": "Palavra com Z",
+      "respostas": [
+        "azul",
+        "beleza",
+        "cozinha",
+        "dezena",
+        "feliz",
+        "gaze",
+        "luz",
+        "moleza",
+        "nariz",
+        "prazer",
+        "raiz",
+        "sozinho",
+        "tristeza",
+        "zebra"
+      ]
+    },
+    {
+      "nome": "Palavra com LH ou NH",
+      "respostas": [
+        "abelha",
+        "banho",
+        "colher",
+        "dinheiro",
+        "espelho",
+        "filho",
+        "galinha",
+        "ilha",
+        "linha",
+        "milho",
+        "ninho",
+        "palha",
+        "rainha",
+        "telha"
+      ]
+    },
+    {
+      "nome": "Palavra com hífen",
+      "respostas": [
+        "arco-íris",
+        "bem-vindo",
+        "couve-flor",
+        "guarda-chuva",
+        "micro-ondas",
+        "pós-graduação",
+        "segunda-feira",
+        "super-herói",
+        "tico-tico",
+        "vice-diretor"
+      ]
+    }
+  ]
+}

@@ -129,6 +129,17 @@
     border:3px solid #dfe4ee;border-radius:14px;font-family:inherit;color:#243049;-webkit-appearance:none;text-align:left}
   #escrTexto:focus{border-color:#2f80ed;outline:none}
   #escrInfo{font-size:16px;opacity:.75;margin-bottom:8px}
+
+  /* BINGO */
+  #bgChamada{background:#243049;color:#fff;font-size:26px;font-weight:bold}
+  #bgChamada small{display:block;font-size:15px;font-weight:normal;opacity:.8}
+  #bgCartela{max-width:660px;margin:10px auto;font-size:0}
+  .bgCel{display:inline-block;vertical-align:top;margin:1%;height:104px;border-radius:16px;background:#fff;color:#243049;font-size:21px;font-weight:bold;
+    padding:6px;line-height:1.15;word-wrap:break-word;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+  .bgCel.t3{width:31.3%} .bgCel.t4{width:23%;font-size:18px;height:92px}
+  .bgCel.marcada{background:#27ae60;color:#fff}
+  #bgMsg{font-size:20px;font-weight:bold;min-height:28px;margin-top:6px}
+  .bgGrito{font-size:64px;font-weight:bold;color:#e74c3c;margin:6px 0}
   /* ESCOLHA O CAMINHO */
   #camTexto{font-size:22px;font-weight:bold;line-height:1.35}
   .camOp{display:block;width:100%;margin:12px 0;font-size:26px;color:#fff;padding:18px;text-align:left}
@@ -235,6 +246,14 @@
   <p id="camStatus"></p>
 </section>
 
+<!-- 10) BINGO -->
+<section class="tela" id="tBingo">
+  <div class="topo" id="topoBingo"><span class="nome"></span><span class="info" id="bgInfo"></span></div>
+  <div id="bgChamada" class="caixa"></div>
+  <div id="bgCartela"></div>
+  <div id="bgMsg"></div>
+</section>
+
 <!-- 9) ESCRITA EM EQUIPE -->
 <section class="tela" id="tEscrita">
   <div class="topo" id="topoEscrita"><span class="nome"></span><span class="info" id="escrTempo"></span></div>
@@ -331,7 +350,7 @@ function fecharOuvintes(){
 }
 function comecarAOuvir(){
   fecharOuvintes();
-  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null;
+  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null; bg.rodada = null;
   Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo);
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
@@ -379,6 +398,7 @@ function renderizar(){
   else if (jogo === 'mimica') renderMimica();
   else if (jogo === 'caminho') renderCaminho();
   else if (jogo === 'escrita') renderEscrita();
+  else if (jogo === 'bingo') renderBingo();
   else renderQuiz();
 }
 
@@ -1001,6 +1021,95 @@ $('escrEnviar').onclick = function(){
   $('escrEnviar').disabled = true;
   salvarEscrita(true, function(){ escr.i++; vibrar(); mostrarTarefaEscrita(); });
 };
+
+// ================= BINGO =================
+var bg = {rodada: null, cartela: [], tamanho: 3, marcas: {}, travadoN: null, bingo: false};
+function renderBingo(){
+  var f = estado.fase;
+  if (f === 'jogando'){
+    if (bg.rodada !== estado.rodada) iniciarBingo();
+    else atualizarChamadaBingo();
+  } else if (f === 'fim'){
+    bg.rodada = null;
+    var pos = (estado.vencedores || {})[eq.id];
+    telaEspera(pos ? '🏆 ' + pos + 'º lugar no BINGO!' : '🎱 Fim do bingo!', 'Olhem o telão 👀');
+  } else {
+    bg.rodada = null;
+    telaEspera(estado.titulo ? '🎱 ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
+  }
+}
+function caminhoBingo(){ return 'salas/' + sala + '/bingo/' + eq.id; }
+function iniciarBingo(){
+  var r = estado.rodada;
+  bg.rodada = r; bg.marcas = {}; bg.travadoN = null; bg.bingo = false;
+  bg.cartela = Rede.lista((estado.cartelas || {})[eq.id]);
+  bg.tamanho = estado.tamanho === 4 ? 4 : 3;
+  if (!bg.cartela.length){ telaEspera('A sua equipe entrou depois do início 😅', 'Esperem a próxima partida e olhem o telão 👀'); return; }
+  mostrar('tBingo'); pintarTopo('topoBingo', '');
+  desenharCartela(); atualizarChamadaBingo();
+  Rede.ler(caminhoBingo(), function(err, v){
+    if (bg.rodada !== r || !v || v.rodada !== r) return;
+    bg.marcas = v.marcas || {}; bg.travadoN = v.travadoN || null; bg.bingo = !!v.bingo;
+    desenharCartela(); atualizarChamadaBingo();
+  });
+}
+function desenharCartela(){
+  var h = '', i;
+  for (i = 0; i < bg.cartela.length; i++){
+    h += '<button class="bgCel t' + bg.tamanho + (bg.marcas['c' + i] ? ' marcada' : '') + '" data-i="' + i + '">' + esc(bg.cartela[i].p) + '</button>';
+  }
+  $('bgCartela').innerHTML = h;
+  var bs = $('bgCartela').querySelectorAll('.bgCel');
+  for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ marcarBingo(+this.getAttribute('data-i'), this); };
+  var n = 0, k; for (k in bg.marcas) if (bg.marcas.hasOwnProperty(k) && bg.marcas[k]) n++;
+  $('bgInfo').innerHTML = n + ' marcada' + (n === 1 ? '' : 's');
+}
+function marcouNaChamada(n){ for (var k in bg.marcas) if (bg.marcas.hasOwnProperty(k) && bg.marcas[k] === n) return true; return false; }
+function atualizarChamadaBingo(){
+  var ch = estado.chamada;
+  $('bgChamada').innerHTML = ch ? '📣 ' + esc(ch.texto) + '<small>Chamada ' + ch.n + '</small>' : 'Aguardem a primeira chamada… 👀';
+  if (bg.bingo){ $('bgMsg').innerHTML = '<div class="bgGrito">BINGO! 🎉</div>Avisem o professor e olhem o telão!'; return; }
+  if (!ch) $('bgMsg').innerHTML = '';
+  else if (marcouNaChamada(ch.n)) $('bgMsg').innerHTML = '✅ Marcado! Aguardem a próxima chamada.';
+  else if (bg.travadoN === ch.n) $('bgMsg').innerHTML = '❌ Vocês erraram nesta chamada. Aguardem a próxima.';
+  else $('bgMsg').innerHTML = 'Toquem em UMA palavra da cartela que combine com a chamada.';
+}
+function linhaBingo(){
+  var t = bg.tamanho, i, j, ok;
+  function m(l, c){ return !!bg.marcas['c' + (l * t + c)]; }
+  for (i = 0; i < t; i++){ ok = true; for (j = 0; j < t; j++) if (!m(i, j)) ok = false; if (ok) return true; }
+  for (j = 0; j < t; j++){ ok = true; for (i = 0; i < t; i++) if (!m(i, j)) ok = false; if (ok) return true; }
+  ok = true; for (i = 0; i < t; i++) if (!m(i, i)) ok = false; if (ok) return true;
+  ok = true; for (i = 0; i < t; i++) if (!m(i, t - 1 - i)) ok = false;
+  return ok;
+}
+function salvarBingo(novoBingo){
+  var n = 0, k; for (k in bg.marcas) if (bg.marcas.hasOwnProperty(k) && bg.marcas[k]) n++;
+  var dado = {rodada: bg.rodada, marcas: bg.marcas, travadoN: bg.travadoN || 0, marcadas: n};
+  if (novoBingo) dado.bingo = Rede.TS;
+  if (novoBingo || !bg.bingo) Rede.gravar(caminhoBingo(), dado);
+}
+function marcarBingo(i, el){
+  var ch = estado.chamada;
+  if (bg.bingo || !ch || bg.marcas['c' + i]) return;
+  if (marcouNaChamada(ch.n) || bg.travadoN === ch.n){ tremer($('bgMsg')); return; }
+  var tags = Rede.lista(bg.cartela[i].t), certo = false;
+  for (var k = 0; k < tags.length; k++) if (tags[k] === ch.id) certo = true;
+  if (certo){
+    bg.marcas['c' + i] = ch.n; vibrar();
+    var fez = linhaBingo();
+    if (fez) bg.bingo = true;
+    salvarBingo(fez);
+  } else {
+    bg.travadoN = ch.n; tremer(el); vibrar();
+    salvarBingo(false);
+    $('bgMsg').innerHTML = '❌ "' + esc(bg.cartela[i].p) + '" não combina com a chamada.';
+    desenharCartela();
+    setTimeout(atualizarChamadaBingo, 1800);
+    return;
+  }
+  desenharCartela(); atualizarChamadaBingo();
+}
 
 // ---------------- Botões ----------------
 $('btnEntrar').onclick = entrar;

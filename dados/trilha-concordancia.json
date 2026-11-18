@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da concordância",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "nominal": {
+      "nome": "Nominal",
+      "emoji": "🎨",
+      "cor": "#27ae60"
+    },
+    "verbal": {
+      "nome": "Verbal",
+      "emoji": "🗣️",
+      "cor": "#2f80ed"
+    },
+    "impessoal": {
+      "nome": "Haver e fazer",
+      "emoji": "⚙️",
+      "cor": "#8e44ad"
+    },
+    "se": {
+      "nome": "Verbo + SE",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    },
+    "especial": {
+      "nome": "Casos especiais",
+      "emoji": "🧩",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "nominal": [
+      {
+        "texto": "Complete: Ela está ___ triste (meio)",
+        "resposta": "meio"
+      },
+      {
+        "texto": "Complete: ___ hora (meio)",
+        "resposta": "meia"
+      },
+      {
+        "texto": "Complete: Seguem ___ as notas (anexo)",
+        "resposta": "anexas"
+      },
+      {
+        "texto": "Complete: Elas ___ (mesmo)",
+        "resposta": "mesmas"
+      },
+      {
+        "texto": "Complete: ___ pessoas (bastante)",
+        "resposta": "bastantes"
+      },
+      {
+        "texto": "Complete: Muito ___ (ela diz)",
+        "resposta": "obrigada"
+      },
+      {
+        "texto": "Complete: É ___ a entrada",
+        "resposta": "proibida"
+      },
+      {
+        "texto": "Complete: Água é ___ (bom)",
+        "resposta": "bom"
+      }
+    ],
+    "verbal": [
+      {
+        "texto": "Complete: ___ os alunos (chegar)",
+        "resposta": "Chegaram"
+      },
+      {
+        "texto": "Complete: Eu e ele ___ (sair)",
+        "resposta": "saímos"
+      },
+      {
+        "texto": "Complete: A gente ___ (ir)",
+        "resposta": "vai"
+      },
+      {
+        "texto": "Complete: O povo ___ (pedir)",
+        "resposta": "pede"
+      },
+      {
+        "texto": "Complete: ___ dez minutos (faltar)",
+        "resposta": "Faltam"
+      },
+      {
+        "texto": "Complete: Fui eu que ___ (fazer)",
+        "resposta": "fiz"
+      },
+      {
+        "texto": "Complete: Vossa Excelência ___ (ter)",
+        "resposta": "tem"
+      },
+      {
+        "texto": "Complete: ___ ingressos (sobrar)",
+        "resposta": "Sobraram"
+      }
+    ],
+    "impessoal": [
+      {
+        "texto": "Complete: ___ muitos alunos (haver)",
+        "resposta": "Havia / Há"
+      },
+      {
+        "texto": "Complete: ___ dois anos (fazer)",
+        "resposta": "Faz"
+      },
+      {
+        "texto": "Complete: Deve ___ vagas (haver)",
+        "resposta": "haver"
+      },
+      {
+        "texto": "Complete: ___ vagas (existir)",
+        "resposta": "Existem"
+      },
+      {
+        "texto": "Complete: ___ frio (fazer)",
+        "resposta": "Faz"
+      },
+      {
+        "texto": "Complete: Vai ___ provas (haver)",
+        "resposta": "haver"
+      },
+      {
+        "texto": "Complete: ___ dias (fazer)",
+        "resposta": "Faz"
+      },
+      {
+        "texto": "Complete: ___ problemas (haver)",
+        "resposta": "Há"
+      }
+    ],
+    "se": [
+      {
+        "texto": "Complete: ___ casas (vender)",
+        "resposta": "Vendem-se"
+      },
+      {
+        "texto": "Complete: ___ de ajuda (precisar)",
+        "resposta": "Precisa-se"
+      },
+      {
+        "texto": "Complete: ___ quartos (alugar)",
+        "resposta": "Alugam-se"
+      },
+      {
+        "texto": "Complete: ___ bem aqui (viver)",
+        "resposta": "Vive-se"
+      },
+      {
+        "texto": "Complete: ___ sapatos (consertar)",
+        "resposta": "Consertam-se"
+      },
+      {
+        "texto": "Complete: ___ de professores (necessitar)",
+        "resposta": "Necessita-se"
+      },
+      {
+        "texto": "Complete: ___ apartamentos (vender)",
+        "resposta": "Vendem-se"
+      },
+      {
+        "texto": "Complete: ___ em você (confiar)",
+        "resposta": "Confia-se"
+      }
+    ],
+    "especial": [
+      {
+        "texto": "Complete: ___ duas horas (ser)",
+        "resposta": "São"
+      },
+      {
+        "texto": "Complete: ___ uma hora (ser)",
+        "resposta": "É"
+      },
+      {
+        "texto": "Complete: Mais de dez ___ (faltar)",
+        "resposta": "faltaram"
+      },
+      {
+        "texto": "Complete: Mais de um ___ (faltar)",
+        "resposta": "faltou"
+      },
+      {
+        "texto": "Complete: Cada um ___ (sair)",
+        "resposta": "saiu"
+      },
+      {
+        "texto": "Complete: Nenhum de nós ___ (saber)",
+        "resposta": "sabia"
+      },
+      {
+        "texto": "Complete: Os Andes ___ (ficar)",
+        "resposta": "ficam"
+      },
+      {
+        "texto": "Complete: Tudo ___ no lugar (estar)",
+        "resposta": "estava"
+      }
+    ]
+  }
+}

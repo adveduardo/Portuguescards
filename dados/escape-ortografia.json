@@ -1,0 +1,66 @@
+{
+  "titulo": "A Fábrica de Letras",
+  "historia": "As máquinas da Fábrica de Letras estão trocando X por CH e S por Z! Consertem cada palavra para descobrir o código e sair da fábrica.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Máquina 1: complete — en___ada (ferramenta de capinar).",
+      "imagem": "⛏️",
+      "opcoes": [
+        "x",
+        "ch"
+      ],
+      "correta": "x",
+      "dica": "Depois de EN- inicial, usa-se X."
+    },
+    {
+      "pergunta": "Máquina 2: escreva corretamente a palavra que a máquina escreveu como \"excessão\".",
+      "imagem": "⚠️",
+      "resposta": [
+        "exceção",
+        "excecao"
+      ],
+      "dica": "Tem Ç."
+    },
+    {
+      "pergunta": "Máquina 3: complete — anali___ar.",
+      "imagem": "🔬",
+      "opcoes": [
+        "s",
+        "z"
+      ],
+      "correta": "s",
+      "dica": "Vem de ANÁLISE."
+    },
+    {
+      "pergunta": "Máquina 4: como se escreve micro + ondas?",
+      "imagem": "📡",
+      "opcoes": [
+        "micro-ondas",
+        "microondas",
+        "micro ondas"
+      ],
+      "correta": "micro-ondas",
+      "dica": "Vogais iguais: hífen."
+    },
+    {
+      "pergunta": "Máquina 5: escreva o substantivo — Fizemos uma linda via___em.",
+      "imagem": "🧳",
+      "resposta": [
+        "viagem"
+      ],
+      "dica": "Substantivos em -AGEM usam G."
+    },
+    {
+      "pergunta": "Máquina 6: complete — bele___a.",
+      "imagem": "🌸",
+      "opcoes": [
+        "z",
+        "s"
+      ],
+      "correta": "z",
+      "dica": "Belo → bel-EZA."
+    }
+  ]
+}

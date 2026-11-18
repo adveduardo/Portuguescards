@@ -1,0 +1,158 @@
+{
+  "titulo": "Quiz de fonologia",
+  "tempoPadrao": 20,
+  "perguntas": [
+    {
+      "pergunta": "Quantos fonemas tem \"chuva\"?",
+      "imagem": "🌧️",
+      "opcoes": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "correta": "4"
+    },
+    {
+      "pergunta": "Quantos fonemas tem \"táxi\"?",
+      "imagem": "🚕",
+      "opcoes": [
+        "5",
+        "4",
+        "3",
+        "6"
+      ],
+      "correta": "5"
+    },
+    {
+      "pergunta": "Em \"pássaro\", SS é:",
+      "imagem": "🐦",
+      "opcoes": [
+        "dígrafo",
+        "encontro consonantal",
+        "ditongo"
+      ],
+      "correta": "dígrafo"
+    },
+    {
+      "pergunta": "Em \"prato\", PR é:",
+      "imagem": "🍽️",
+      "opcoes": [
+        "encontro consonantal",
+        "dígrafo",
+        "hiato"
+      ],
+      "correta": "encontro consonantal"
+    },
+    {
+      "pergunta": "\"Saúde\" tem:",
+      "imagem": "💪",
+      "opcoes": [
+        "hiato",
+        "ditongo",
+        "tritongo"
+      ],
+      "correta": "hiato"
+    },
+    {
+      "pergunta": "\"Paraguai\" tem:",
+      "imagem": "🇵🇾",
+      "opcoes": [
+        "tritongo",
+        "ditongo",
+        "hiato"
+      ],
+      "correta": "tritongo"
+    },
+    {
+      "pergunta": "\"Café\" é:",
+      "imagem": "☕",
+      "opcoes": [
+        "oxítona",
+        "paroxítona",
+        "proparoxítona"
+      ],
+      "correta": "oxítona"
+    },
+    {
+      "pergunta": "\"Música\" é:",
+      "imagem": "🎵",
+      "opcoes": [
+        "proparoxítona",
+        "paroxítona",
+        "oxítona"
+      ],
+      "correta": "proparoxítona"
+    },
+    {
+      "pergunta": "\"Mesa\" é:",
+      "imagem": "🪑",
+      "opcoes": [
+        "paroxítona",
+        "oxítona",
+        "proparoxítona"
+      ],
+      "correta": "paroxítona"
+    },
+    {
+      "pergunta": "Separação correta:",
+      "imagem": "🚗",
+      "opcoes": [
+        "car-ro",
+        "ca-rro",
+        "carr-o"
+      ],
+      "correta": "car-ro"
+    },
+    {
+      "pergunta": "Separação correta:",
+      "imagem": "💪",
+      "opcoes": [
+        "sa-ú-de",
+        "saú-de",
+        "sa-úde"
+      ],
+      "correta": "sa-ú-de"
+    },
+    {
+      "pergunta": "Pronúncia correta:",
+      "imagem": "✍️",
+      "opcoes": [
+        "ru-BRI-ca",
+        "RÚ-bri-ca"
+      ],
+      "correta": "ru-BRI-ca"
+    },
+    {
+      "pergunta": "Em \"pai\", a letra I é:",
+      "imagem": "👨",
+      "opcoes": [
+        "semivogal",
+        "vogal",
+        "consoante"
+      ],
+      "correta": "semivogal"
+    },
+    {
+      "pergunta": "Qual monossílabo é tônico?",
+      "imagem": "🦶",
+      "opcoes": [
+        "pé",
+        "de",
+        "o",
+        "lhe"
+      ],
+      "correta": "pé"
+    },
+    {
+      "pergunta": "Em \"hora\", o H:",
+      "imagem": "⏰",
+      "opcoes": [
+        "não tem som",
+        "tem som de R",
+        "tem som de A"
+      ],
+      "correta": "não tem som"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "titulo": "Cestos: dígrafo ou encontro consonantal?",
+  "cestos": [
+    {
+      "id": "dig",
+      "nome": "Dígrafo",
+      "emoji": "🔗",
+      "cor": "#e74c3c"
+    },
+    {
+      "id": "ec",
+      "nome": "Encontro consonantal",
+      "emoji": "🤝",
+      "cor": "#2f80ed"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "chuva",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "carro",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "ninho",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "palha",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "pássaro",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "nascer",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "queijo",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "guerra",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "chave",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "milho",
+      "cesto": "dig"
+    },
+    {
+      "palavra": "prato",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "blusa",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "livro",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "flor",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "trigo",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "clube",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "grito",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "atleta",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "pneu",
+      "cesto": "ec"
+    },
+    {
+      "palavra": "fruta",
+      "cesto": "ec"
+    }
+  ]
+}

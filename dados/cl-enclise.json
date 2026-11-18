@@ -1,0 +1,87 @@
+{
+  "titulo": "Ocorrências da ênclise",
+  "emoji": "➡️",
+  "instrucao": "Escolha a frase correta",
+  "rodadas": [
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Diga-me a verdade.",
+        "Me diga a verdade."
+      ],
+      "correta": "Diga-me a verdade.",
+      "explica": "Na norma-padrão não se inicia frase com pronome oblíquo; imperativo afirmativo pede ênclise. (Na fala, \"me diga\" é comum.)",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Entreguei-lhe o documento.",
+        "Lhe entreguei o documento."
+      ],
+      "correta": "Entreguei-lhe o documento.",
+      "explica": "Verbo no início, sem palavra atrativa: ênclise.",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Sente-se, por favor.",
+        "Se sente, por favor."
+      ],
+      "correta": "Sente-se, por favor.",
+      "explica": "Imperativo afirmativo: ênclise.",
+      "imagem": "🪑"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Saiu, deixando-nos preocupados.",
+        "Saiu, nos deixando preocupados."
+      ],
+      "correta": "Saiu, deixando-nos preocupados.",
+      "explica": "Gerúndio (sem EM): ênclise.",
+      "imagem": "😟"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Levantei-me cedo.",
+        "Me levantei cedo."
+      ],
+      "correta": "Levantei-me cedo.",
+      "explica": "Início de frase: ênclise.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Convidaram-nos para a festa.",
+        "Nos convidaram para a festa."
+      ],
+      "correta": "Convidaram-nos para a festa.",
+      "explica": "Início de frase: ênclise.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "É preciso encontrá-lo.",
+        "É preciso encontrar-lo."
+      ],
+      "correta": "É preciso encontrá-lo.",
+      "explica": "Infinitivo terminado em R + O: some o R e entra LO (encontrá-lo).",
+      "imagem": "🔎"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Vendo-o triste, abracei-o.",
+        "O vendo triste, o abracei."
+      ],
+      "correta": "Vendo-o triste, abracei-o.",
+      "explica": "Gerúndio e verbo no início de oração: ênclise.",
+      "imagem": "🤗"
+    }
+  ]
+}

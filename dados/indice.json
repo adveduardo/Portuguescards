@@ -59,6 +59,30 @@
     {
       "arquivo": "quiz-crase.json",
       "titulo": "Quiz da crase"
+    },
+    {
+      "arquivo": "quiz-fonologia.json",
+      "titulo": "Quiz de fonologia"
+    },
+    {
+      "arquivo": "quiz-ortografia.json",
+      "titulo": "Quiz da ortografia"
+    },
+    {
+      "arquivo": "quiz-acentuacao.json",
+      "titulo": "Corrida do acento"
+    },
+    {
+      "arquivo": "quiz-significacao.json",
+      "titulo": "Quiz da significação das palavras"
+    },
+    {
+      "arquivo": "quiz-concordancia.json",
+      "titulo": "Quiz da concordância"
+    },
+    {
+      "arquivo": "quiz-colocacao.json",
+      "titulo": "Quiz da colocação pronominal"
     }
   ],
   "stop": [
@@ -73,6 +97,10 @@
     {
       "arquivo": "stop-em.json",
       "titulo": "Stop do Ensino Médio"
+    },
+    {
+      "arquivo": "stop-ortografia.json",
+      "titulo": "Stop da ortografia"
     }
   ],
   "batata": [
@@ -131,6 +159,30 @@
     {
       "arquivo": "batata-crase.json",
       "titulo": "Batata quente da crase"
+    },
+    {
+      "arquivo": "batata-fonologia.json",
+      "titulo": "Batata quente da fonologia"
+    },
+    {
+      "arquivo": "batata-ortografia.json",
+      "titulo": "Batata quente da ortografia"
+    },
+    {
+      "arquivo": "batata-acentuacao.json",
+      "titulo": "Batata quente da acentuação"
+    },
+    {
+      "arquivo": "batata-significacao.json",
+      "titulo": "Batata quente da significação"
+    },
+    {
+      "arquivo": "batata-concordancia.json",
+      "titulo": "Batata quente da concordância"
+    },
+    {
+      "arquivo": "batata-colocacao.json",
+      "titulo": "Batata quente da colocação pronominal"
     }
   ],
   "trilha": [
@@ -189,6 +241,22 @@
     {
       "arquivo": "trilha-crase.json",
       "titulo": "Trilha da crase"
+    },
+    {
+      "arquivo": "trilha-fonologia.json",
+      "titulo": "Trilha da fonologia"
+    },
+    {
+      "arquivo": "trilha-significacao.json",
+      "titulo": "Trilha das palavras e sentidos"
+    },
+    {
+      "arquivo": "trilha-concordancia.json",
+      "titulo": "Trilha da concordância"
+    },
+    {
+      "arquivo": "trilha-colocacao.json",
+      "titulo": "Trilha da colocação pronominal"
     }
   ],
   "escape": [
@@ -235,6 +303,22 @@
     {
       "arquivo": "escape-crase.json",
       "titulo": "O Mistério do Acento Grave"
+    },
+    {
+      "arquivo": "escape-ortografia.json",
+      "titulo": "A Fábrica de Letras"
+    },
+    {
+      "arquivo": "escape-significacao.json",
+      "titulo": "O Dicionário Amaldiçoado"
+    },
+    {
+      "arquivo": "escape-concordancia.json",
+      "titulo": "O Tribunal da Concordância"
+    },
+    {
+      "arquivo": "escape-colocacao.json",
+      "titulo": "O Labirinto dos Pronomes Perdidos"
     }
   ],
   "mimica": [
@@ -287,6 +371,10 @@
     {
       "arquivo": "historias-narrativa.json",
       "titulo": "Gerador de narrativa (6º ao 9º ano)"
+    },
+    {
+      "arquivo": "historias-significacao.json",
+      "titulo": "Dado da significação"
     }
   ],
   "caminho": [
@@ -343,6 +431,26 @@
     {
       "arquivo": "detetive-crase.json",
       "titulo": "Detetive da crase"
+    },
+    {
+      "arquivo": "detetive-ortografia.json",
+      "titulo": "Detetive da ortografia"
+    },
+    {
+      "arquivo": "detetive-acentuacao.json",
+      "titulo": "Detetive da acentuação"
+    },
+    {
+      "arquivo": "detetive-significacao.json",
+      "titulo": "Detetive dos homônimos e parônimos"
+    },
+    {
+      "arquivo": "detetive-concordancia-verbal.json",
+      "titulo": "Detetive da concordância verbal"
+    },
+    {
+      "arquivo": "detetive-colocacao.json",
+      "titulo": "Detetive da colocação pronominal"
     }
   ],
   "pontuacao": [
@@ -417,6 +525,26 @@
     {
       "arquivo": "cr-cestos.json",
       "titulo": "Cestos: com crase ou sem crase?"
+    },
+    {
+      "arquivo": "fo-cestos-vocalicos.json",
+      "titulo": "Cestos: ditongo, tritongo ou hiato?"
+    },
+    {
+      "arquivo": "fo-cestos-consonantais.json",
+      "titulo": "Cestos: dígrafo ou encontro consonantal?"
+    },
+    {
+      "arquivo": "or-cestos-xch.json",
+      "titulo": "Cestos: X ou CH?"
+    },
+    {
+      "arquivo": "or-cestos-sz.json",
+      "titulo": "Cestos: S ou Z?"
+    },
+    {
+      "arquivo": "cc-cestos.json",
+      "titulo": "Cestos: verbo no singular ou no plural?"
     }
   ],
   "morfo-frases": [
@@ -1161,6 +1289,172 @@
     {
       "arquivo": "cr-tipo.json",
       "titulo": "Crase: obrigatória, facultativa ou proibida?"
+    }
+  ],
+  "letras": [
+    {
+      "arquivo": "fo-lab-letras.json",
+      "titulo": "Vogal, semivogal ou consoante?"
+    },
+    {
+      "arquivo": "fo-lab-digrafos.json",
+      "titulo": "Dígrafo ou encontro consonantal?"
+    },
+    {
+      "arquivo": "ac-lab.json",
+      "titulo": "Acentue a palavra"
+    }
+  ],
+  "silaba": [
+    {
+      "arquivo": "fo-tonica.json",
+      "titulo": "Sílaba tônica: oxítona, paroxítona ou proparoxítona?"
+    }
+  ],
+  "memoria": [
+    {
+      "arquivo": "memoria-sinonimos.json",
+      "titulo": "Memória dos sinônimos"
+    },
+    {
+      "arquivo": "memoria-antonimos.json",
+      "titulo": "Memória dos antônimos"
+    },
+    {
+      "arquivo": "memoria-homonimos.json",
+      "titulo": "Memória dos homônimos e parônimos"
+    }
+  ],
+  "bingo": [
+    {
+      "arquivo": "bingo-fonologia.json",
+      "titulo": "Bingo da fonologia"
+    },
+    {
+      "arquivo": "bingo-sinonimos.json",
+      "titulo": "Bingo dos sinônimos e antônimos"
+    }
+  ],
+  "escolha-fo": [
+    {
+      "arquivo": "fo-fonemas.json",
+      "titulo": "Letras × fonemas"
+    },
+    {
+      "arquivo": "fo-monossilabos.json",
+      "titulo": "Monossílabo tônico ou átono?"
+    },
+    {
+      "arquivo": "fo-separacao.json",
+      "titulo": "Separação silábica"
+    }
+  ],
+  "escolha-or": [
+    {
+      "arquivo": "or-hifen.json",
+      "titulo": "Com hífen, junto ou separado?"
+    },
+    {
+      "arquivo": "or-letras.json",
+      "titulo": "Complete com a letra certa"
+    },
+    {
+      "arquivo": "or-regras.json",
+      "titulo": "Por que se escreve assim?"
+    }
+  ],
+  "escolha-ac": [
+    {
+      "arquivo": "ac-acordo.json",
+      "titulo": "Acentuação depois do Acordo Ortográfico"
+    },
+    {
+      "arquivo": "ac-regras.json",
+      "titulo": "Por que tem acento?"
+    }
+  ],
+  "escolha-sg": [
+    {
+      "arquivo": "sg-antonimos.json",
+      "titulo": "Qual é o antônimo?"
+    },
+    {
+      "arquivo": "sg-homonimos-tipos.json",
+      "titulo": "Perfeitos, homófonos ou homógrafos?"
+    },
+    {
+      "arquivo": "sg-homonimos.json",
+      "titulo": "Homônimos: qual completa a frase?"
+    },
+    {
+      "arquivo": "sg-paronimos.json",
+      "titulo": "Parônimos: qual completa a frase?"
+    },
+    {
+      "arquivo": "sg-sinonimos.json",
+      "titulo": "Qual é o sinônimo?"
+    }
+  ],
+  "listas": [
+    {
+      "arquivo": "lista-separacao.json",
+      "titulo": "Separação silábica (nível difícil)"
+    },
+    {
+      "arquivo": "lista-ortografia.json",
+      "titulo": "Ortografia: X, CH, S, Z, Ç, SS, G, J"
+    },
+    {
+      "arquivo": "lista-acentuacao.json",
+      "titulo": "Acentuação: palavras para o ditado"
+    }
+  ],
+  "escolha-cc": [
+    {
+      "arquivo": "cc-gerais.json",
+      "titulo": "Ocorrências gerais de concordância verbal"
+    },
+    {
+      "arquivo": "cc-nominal.json",
+      "titulo": "Concordância nominal"
+    },
+    {
+      "arquivo": "cc-outras.json",
+      "titulo": "Outras ocorrências de concordância verbal"
+    },
+    {
+      "arquivo": "cc-verbal.json",
+      "titulo": "Concordância verbal: o básico"
+    }
+  ],
+  "escolha-cl": [
+    {
+      "arquivo": "cl-enclise.json",
+      "titulo": "Ocorrências da ênclise"
+    },
+    {
+      "arquivo": "cl-formas.json",
+      "titulo": "Junte o verbo e o pronome"
+    },
+    {
+      "arquivo": "cl-locucoes.json",
+      "titulo": "Pronomes átonos nas locuções verbais"
+    },
+    {
+      "arquivo": "cl-mesoclise.json",
+      "titulo": "Ocorrência da mesóclise"
+    },
+    {
+      "arquivo": "cl-motivo.json",
+      "titulo": "Por que a próclise é obrigatória?"
+    },
+    {
+      "arquivo": "cl-proclise.json",
+      "titulo": "Ocorrências da próclise"
+    },
+    {
+      "arquivo": "cl-tipo.json",
+      "titulo": "Próclise, mesóclise ou ênclise?"
     }
   ]
 }

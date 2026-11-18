@@ -1,0 +1,147 @@
+{
+  "titulo": "Monossílabo tônico ou átono?",
+  "emoji": "🔈",
+  "instrucao": "O monossílabo destacado é tônico ou átono?",
+  "rodadas": [
+    {
+      "destaque": "Machuquei o [pé].",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "PÉ tem som forte e sentido próprio: tônico.",
+      "imagem": "🦶"
+    },
+    {
+      "destaque": "O livro [de] Ana.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "DE (preposição) é fraco, apoia-se na palavra seguinte: átono.",
+      "imagem": "📘"
+    },
+    {
+      "destaque": "Vamos ao [mar].",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "MAR é forte: tônico.",
+      "imagem": "🌊"
+    },
+    {
+      "destaque": "[O] menino chegou.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "O artigo O é átono.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "Acho [que] vai chover.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "QUE (conjunção) é átono.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Você saiu por [quê]?",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "No fim da frase, QUÊ é tônico (e leva acento).",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Quero ir, [mas] estou cansado.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "MAS (conjunção) é átono.",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "Elas não são [más].",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "MÁS (adjetivo, de mau) é tônico.",
+      "imagem": "😈"
+    },
+    {
+      "destaque": "Vou [pôr] a mesa.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "PÔR (verbo) é tônico e tem acento diferencial.",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "Passei [por] ali.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "POR (preposição) é átono.",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Eu [lhe] dei um presente.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "LHE (pronome oblíquo) é átono.",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "Isso é para [nós].",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "NÓS (pronome reto) é tônico.",
+      "imagem": "👫"
+    },
+    {
+      "destaque": "Ele [nos] ajudou.",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo átono",
+      "explica": "NOS (pronome oblíquo) é átono.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Ela disse [sim].",
+      "opcoes": [
+        "Monossílabo tônico",
+        "Monossílabo átono"
+      ],
+      "correta": "Monossílabo tônico",
+      "explica": "SIM é tônico.",
+      "imagem": "✅"
+    }
+  ]
+}

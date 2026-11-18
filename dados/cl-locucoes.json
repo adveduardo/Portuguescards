@@ -1,0 +1,117 @@
+{
+  "titulo": "Pronomes átonos nas locuções verbais",
+  "emoji": "🔗",
+  "instrucao": "A colocação do pronome está certa?",
+  "rodadas": [
+    {
+      "destaque": "Quero ver-te amanhã.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Infinitivo: o pronome pode vir depois dele (ver-te).",
+      "imagem": "👀"
+    },
+    {
+      "destaque": "Quero te ver amanhã.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Também é aceito: pronome entre o auxiliar e o infinitivo (muito usado no Brasil).",
+      "imagem": "👀"
+    },
+    {
+      "destaque": "Tenho-me esforçado muito.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Com particípio, o pronome vai junto do auxiliar (tenho-me).",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "Tenho esforçado-me muito.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "NUNCA se coloca o pronome depois do particípio.",
+      "imagem": "❌"
+    },
+    {
+      "destaque": "Havia-se esquecido do compromisso.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Pronome ligado ao auxiliar.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Havia esquecido-se do compromisso.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "Nunca ênclise ao particípio.",
+      "imagem": "❌"
+    },
+    {
+      "destaque": "Os alunos devem preparar-se para a prova.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Infinitivo: ênclise permitida.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Não quero te incomodar.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Correto (e também: não te quero incomodar / não quero incomodar-te).",
+      "imagem": "🙊"
+    },
+    {
+      "destaque": "Estou esperando-te há horas.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Gerúndio: ênclise permitida.",
+      "imagem": "⏳"
+    },
+    {
+      "destaque": "Ele tinha avisado-me antes.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "❌ Errado",
+      "explica": "Nunca ênclise ao particípio (avisado-me).",
+      "imagem": "❌"
+    },
+    {
+      "destaque": "Vou-me embora amanhã.",
+      "opcoes": [
+        "✅ Certo",
+        "❌ Errado"
+      ],
+      "correta": "✅ Certo",
+      "explica": "Ênclise ao auxiliar: correto.",
+      "imagem": "🚶"
+    }
+  ]
+}

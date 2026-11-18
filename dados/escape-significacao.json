@@ -1,0 +1,67 @@
+{
+  "titulo": "O Dicionário Amaldiçoado",
+  "historia": "Um feitiço embaralhou os sentidos das palavras do dicionário! Escolham a palavra certa em cada página para quebrar a maldição e descobrir o código.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Página 1: \"O ___ da orquestra emocionou a plateia.\"",
+      "imagem": "🎻",
+      "opcoes": [
+        "concerto",
+        "conserto"
+      ],
+      "correta": "concerto",
+      "dica": "Música, não reparo."
+    },
+    {
+      "pergunta": "Página 2: escreva o antônimo de CHEIO.",
+      "imagem": "🥛",
+      "resposta": [
+        "vazio"
+      ],
+      "dica": "O copo sem nada está…"
+    },
+    {
+      "pergunta": "Página 3: \"O perigo era ___.\" (prestes a acontecer)",
+      "imagem": "⚠️",
+      "opcoes": [
+        "iminente",
+        "eminente"
+      ],
+      "correta": "iminente",
+      "dica": "Com I: está para acontecer."
+    },
+    {
+      "pergunta": "Página 4: escreva um sinônimo de LAR.",
+      "imagem": "🏠",
+      "resposta": [
+        "casa",
+        "moradia",
+        "residência",
+        "residencia"
+      ],
+      "dica": "Onde moramos."
+    },
+    {
+      "pergunta": "Página 5: Cela e sela são…",
+      "imagem": "🔒",
+      "opcoes": [
+        "homófonos",
+        "homógrafos",
+        "antônimos"
+      ],
+      "correta": "homófonos",
+      "dica": "Mesmo som, escrita diferente."
+    },
+    {
+      "pergunta": "Página 6: escreva a palavra certa — O ___ de carros na avenida está lento. (tráfego/tráfico)",
+      "imagem": "🚗",
+      "resposta": [
+        "tráfego",
+        "trafego"
+      ],
+      "dica": "Trânsito de veículos."
+    }
+  ]
+}

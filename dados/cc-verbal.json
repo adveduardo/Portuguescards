@@ -1,0 +1,127 @@
+{
+  "titulo": "Concordância verbal: o básico",
+  "emoji": "🗣️",
+  "instrucao": "Complete com a forma verbal correta",
+  "rodadas": [
+    {
+      "destaque": "___ os convidados da festa.",
+      "opcoes": [
+        "Chegaram",
+        "Chegou"
+      ],
+      "correta": "Chegaram",
+      "explica": "Sujeito depois do verbo também concorda: os convidados chegaram.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Eu e você ___ amigos.",
+      "opcoes": [
+        "somos",
+        "são"
+      ],
+      "correta": "somos",
+      "explica": "Sujeito composto com EU: 1ª pessoa do plural (nós).",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Eu e meus pais ___ à praia.",
+      "opcoes": [
+        "fomos",
+        "foram"
+      ],
+      "correta": "fomos",
+      "explica": "EU + outros = NÓS: fomos.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "Tu e eu ___ juntos.",
+      "opcoes": [
+        "venceremos",
+        "vencerão"
+      ],
+      "correta": "venceremos",
+      "explica": "Com EU no sujeito composto, o verbo vai para NÓS.",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "___ dez minutos para o fim da aula.",
+      "opcoes": [
+        "Faltam",
+        "Falta"
+      ],
+      "correta": "Faltam",
+      "explica": "O que falta? Dez minutos: plural.",
+      "imagem": "⏳"
+    },
+    {
+      "destaque": "___ muitos ingressos para o show.",
+      "opcoes": [
+        "Sobraram",
+        "Sobrou"
+      ],
+      "correta": "Sobraram",
+      "explica": "O que sobrou? Muitos ingressos: plural.",
+      "imagem": "🎟️"
+    },
+    {
+      "destaque": "O povo ___ mudanças.",
+      "opcoes": [
+        "pede",
+        "pedem"
+      ],
+      "correta": "pede",
+      "explica": "Coletivo no singular (povo) pede verbo no singular.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "A multidão ___ o cantor.",
+      "opcoes": [
+        "aplaudiu",
+        "aplaudiram"
+      ],
+      "correta": "aplaudiu",
+      "explica": "Coletivo sozinho: verbo no singular.",
+      "imagem": "👏"
+    },
+    {
+      "destaque": "A gente ___ ao cinema hoje.",
+      "opcoes": [
+        "vai",
+        "vamos"
+      ],
+      "correta": "vai",
+      "explica": "A GENTE leva o verbo para a 3ª pessoa do singular.",
+      "imagem": "🍿"
+    },
+    {
+      "destaque": "Vossa Excelência ___ razão.",
+      "opcoes": [
+        "tem",
+        "tendes"
+      ],
+      "correta": "tem",
+      "explica": "Pronomes de tratamento levam o verbo para a 3ª pessoa.",
+      "imagem": "🎩"
+    },
+    {
+      "destaque": "Pedro ou Paulo ___ eleito presidente do grêmio.",
+      "opcoes": [
+        "será",
+        "serão"
+      ],
+      "correta": "será",
+      "explica": "OU com ideia de exclusão (só um pode ser eleito): singular.",
+      "imagem": "🗳️"
+    },
+    {
+      "destaque": "Fui eu que ___ o bolo.",
+      "opcoes": [
+        "fiz",
+        "fez"
+      ],
+      "correta": "fiz",
+      "explica": "Com QUE, o verbo concorda com o antecedente (eu).",
+      "imagem": "🎂"
+    }
+  ]
+}

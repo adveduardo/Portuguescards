@@ -1,0 +1,205 @@
+{
+  "titulo": "Com hífen, junto ou separado?",
+  "emoji": "➖",
+  "instrucao": "Como se escreve hoje (Acordo Ortográfico)?",
+  "rodadas": [
+    {
+      "destaque": "micro + ondas",
+      "opcoes": [
+        "micro-ondas",
+        "microondas",
+        "micro ondas"
+      ],
+      "correta": "micro-ondas",
+      "explica": "Prefixo terminado na mesma vogal com que começa a palavra seguinte: hífen.",
+      "imagem": "📡"
+    },
+    {
+      "destaque": "auto + escola",
+      "opcoes": [
+        "autoescola",
+        "auto-escola",
+        "auto escola"
+      ],
+      "correta": "autoescola",
+      "explica": "Vogais diferentes: tudo junto.",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "anti + social",
+      "opcoes": [
+        "antissocial",
+        "anti-social",
+        "antisocial"
+      ],
+      "correta": "antissocial",
+      "explica": "Prefixo terminado em vogal + palavra com S: junta e dobra o S.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "contra + regra",
+      "opcoes": [
+        "contrarregra",
+        "contra-regra",
+        "contraregra"
+      ],
+      "correta": "contrarregra",
+      "explica": "Prefixo terminado em vogal + palavra com R: junta e dobra o R.",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "dia a dia",
+      "opcoes": [
+        "dia a dia",
+        "dia-a-dia",
+        "diaadia"
+      ],
+      "correta": "dia a dia",
+      "explica": "Depois do Acordo, locuções como \"dia a dia\" ficam sem hífen.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "bem + vindo",
+      "opcoes": [
+        "bem-vindo",
+        "benvindo",
+        "bem vindo"
+      ],
+      "correta": "bem-vindo",
+      "explica": "BEM-VINDO mantém o hífen.",
+      "imagem": "🤗"
+    },
+    {
+      "destaque": "guarda + chuva",
+      "opcoes": [
+        "guarda-chuva",
+        "guardachuva",
+        "guarda chuva"
+      ],
+      "correta": "guarda-chuva",
+      "explica": "Substantivo composto (verbo + substantivo): hífen.",
+      "imagem": "☂️"
+    },
+    {
+      "destaque": "gira + sol",
+      "opcoes": [
+        "girassol",
+        "gira-sol",
+        "girasol"
+      ],
+      "correta": "girassol",
+      "explica": "Perdeu a noção de composição: junto, com SS.",
+      "imagem": "🌻"
+    },
+    {
+      "destaque": "manda + chuva",
+      "opcoes": [
+        "mandachuva",
+        "manda-chuva",
+        "manda chuva"
+      ],
+      "correta": "mandachuva",
+      "explica": "Perdeu a noção de composição: tudo junto.",
+      "imagem": "🎩"
+    },
+    {
+      "destaque": "super + homem",
+      "opcoes": [
+        "super-homem",
+        "superhomem",
+        "super homem"
+      ],
+      "correta": "super-homem",
+      "explica": "Palavra iniciada por H depois do prefixo: hífen.",
+      "imagem": "🦸"
+    },
+    {
+      "destaque": "ex + aluno",
+      "opcoes": [
+        "ex-aluno",
+        "exaluno",
+        "ex aluno"
+      ],
+      "correta": "ex-aluno",
+      "explica": "O prefixo EX- (anterior) sempre pede hífen.",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "pós + graduação",
+      "opcoes": [
+        "pós-graduação",
+        "pósgraduação",
+        "pós graduação"
+      ],
+      "correta": "pós-graduação",
+      "explica": "PÓS-, PRÉ- e PRÓ- acentuados pedem hífen.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "vice + diretor",
+      "opcoes": [
+        "vice-diretor",
+        "vicediretor",
+        "vice diretor"
+      ],
+      "correta": "vice-diretor",
+      "explica": "VICE- sempre pede hífen.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "anti + inflamatório",
+      "opcoes": [
+        "anti-inflamatório",
+        "antiinflamatório",
+        "antinflamatório"
+      ],
+      "correta": "anti-inflamatório",
+      "explica": "Vogais iguais: hífen.",
+      "imagem": "💊"
+    },
+    {
+      "destaque": "semi + árido",
+      "opcoes": [
+        "semiárido",
+        "semi-árido",
+        "semiarido"
+      ],
+      "correta": "semiárido",
+      "explica": "Vogais diferentes: junto (e o acento continua).",
+      "imagem": "🌵"
+    },
+    {
+      "destaque": "inter + racial",
+      "opcoes": [
+        "inter-racial",
+        "interracial",
+        "interacial"
+      ],
+      "correta": "inter-racial",
+      "explica": "Prefixo terminado em R + palavra com R: hífen.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "co + autor",
+      "opcoes": [
+        "coautor",
+        "co-autor",
+        "co autor"
+      ],
+      "correta": "coautor",
+      "explica": "O prefixo CO- se junta à palavra seguinte.",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "pé de moleque",
+      "opcoes": [
+        "pé de moleque",
+        "pé-de-moleque",
+        "pédemoleque"
+      ],
+      "correta": "pé de moleque",
+      "explica": "Compostos com elemento de ligação (de) ficam sem hífen, salvo exceções como água-de-colônia.",
+      "imagem": "🍬"
+    }
+  ]
+}

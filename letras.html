@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratório de Letras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #instrucaoLt{font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;text-align:center;margin:6px auto;max-width:1100px}
+  #dicaLt{text-align:center;font-size:clamp(1rem,2.2vw,1.4rem);min-height:1.3em;opacity:.85}
+  #ferramentas{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0}
+  #ferramentas button{color:#fff;font-size:clamp(1rem,2.2vw,1.4rem);padding:10px 16px}
+  #ferramentas button.ativa{outline:5px solid var(--amarelo);transform:scale(1.06)}
+  #ferramentas button.borracha{background:#fff;color:var(--texto)}
+  #palavraLt{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px auto;max-width:1150px}
+  .lt{min-width:clamp(56px,9vw,110px);height:clamp(70px,12vw,140px);border:none;border-radius:18px;background:#fff;color:var(--texto);
+    font-size:clamp(2.4rem,7vw,5.5rem);font-weight:bold;box-shadow:0 6px 0 #0002;cursor:pointer;font-family:inherit;padding:0 12px;position:relative;transition:transform .15s}
+  .lt.pintada{color:#fff}
+  .lt.errada{animation:tremeLt .4s}
+  .lt.certa::after{content:'✓';position:absolute;top:2px;right:8px;font-size:1rem}
+  @keyframes tremeLt{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  #legendaLt{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0}
+  #legendaLt span{border-radius:12px;padding:4px 12px;color:#fff;font-weight:bold;font-size:.95rem}
+  #explicaLt{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1050px;margin:8px auto;min-height:1.4em}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🔬 Laboratório de Letras</h1>
+  <div class="cartao">
+    <h2>1. Atividade (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Palavras: <select id="selQtd"><option value="8">8</option><option value="12" selected>12</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica" id="explicaModo"></p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="barraEquipes" class="barraEquipes"></div>
+  <div class="dica" id="contadorLt" style="text-align:center"></div>
+  <div id="instrucaoLt"></div>
+  <div id="dicaLt"></div>
+  <div id="ferramentas"></div>
+  <div id="palavraLt"></div>
+  <div id="legendaLt"></div>
+  <div id="explicaLt"></div>
+  <div class="linha">
+    <button id="btnConferir" class="principal">✅ Conferir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnOuvir">🔊 Ouvir a palavra</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const ACENTOS = {
+  agudo: {nome: '´ Agudo', mapa: {a: 'á', e: 'é', i: 'í', o: 'ó', u: 'ú'}, cor: '#2f80ed'},
+  circ:  {nome: '^ Circunflexo', mapa: {a: 'â', e: 'ê', o: 'ô'}, cor: '#8e44ad'},
+  til:   {nome: '~ Til', mapa: {a: 'ã', o: 'õ'}, cor: '#e67e22'}
+};
+const CORES = ['#e74c3c', '#2f80ed', '#27ae60', '#e67e22', '#8e44ad', '#16a085'];
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, ferramenta = null, marcas = [], tentativas = 0, resolvido = false;
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.palavras)) return null;
+  const modo = d.modo === 'acentuar' ? 'acentuar' : 'pintar';
+  if (modo === 'acentuar'){
+    const palavras = d.palavras.filter(p => p && p.certa).map(p => ({
+      base: String(p.palavra || String(p.certa).normalize('NFD').replace(/[́̂̃]/g, '').normalize('NFC')),
+      certa: String(p.certa), dica: String(p.dica || ''), explica: String(p.explica || '')}));
+    return palavras.length ? {modo, titulo: d.titulo || 'Acentue a palavra', instrucao: d.instrucao || 'Escolha o acento e toque na letra. Se a palavra não tem acento, é só conferir.', palavras} : null;
+  }
+  const cats = (Array.isArray(d.categorias) ? d.categorias : []).map((c, i) => ({id: String(c.id), nome: String(c.nome || c.id), cor: c.cor || CORES[i % CORES.length], def: c.def || ''}));
+  if (!cats.length) return null;
+  const palavras = d.palavras.filter(p => p && p.palavra && Array.isArray(p.tipos)).map(p => {
+    const partes = Array.isArray(p.partes) ? p.partes.map(String) : [...String(p.palavra)];
+    return {palavra: String(p.palavra), partes, tipos: p.tipos.map(t => t ? String(t) : ''), explica: String(p.explica || '')};
+  }).filter(p => p.partes.length === p.tipos.length);
+  return palavras.length ? {modo, titulo: d.titulo || 'Laboratório de letras', instrucao: d.instrucao || 'Escolha uma cor e toque nas letras.', categorias: cats, palavras, ignoradas: d.palavras.length - palavras.length} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido. Baixe o modelo para ver o formato.');
+  dados = x;
+  $('explicaModo').textContent = x.modo === 'acentuar'
+    ? '✍️ Modo acentuar: a palavra aparece sem acento. A equipe escolhe o acento (agudo, circunflexo ou til) e toca na letra certa. Acertou de primeira = 2 pontos; na segunda = 1.'
+    : `🎨 Modo pintar: cada letra (ou grupo de letras) deve ser pintada com a cor certa: ${x.categorias.map(c => c.nome).join(', ')}. Acertou tudo de primeira = 2 pontos; na segunda = 1.`;
+  $('infoJson').textContent = `${x.titulo} • ${x.palavras.length} palavras` + (x.ignoradas ? ` • ⚠️ ${x.ignoradas} ignorada(s): número de partes diferente do número de tipos` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'letras', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/' + ($('selArquivo').value && $('selArquivo').value !== '__local' ? $('selArquivo').value : 'fo-lab-letras.json'), 'modelo-laboratorio-de-letras.json');
+
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(dados.palavras); const q = +$('selQtd').value; if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+function desenharFerramentas(){
+  const lista = dados.modo === 'acentuar'
+    ? Object.keys(ACENTOS).map(k => ({id: k, nome: ACENTOS[k].nome, cor: ACENTOS[k].cor}))
+    : dados.categorias.concat([{id: '__borracha', nome: '🧽 Borracha', cor: ''}]);
+  $('ferramentas').innerHTML = lista.map(f => `<button data-f="${f.id}" class="${f.id === ferramenta ? 'ativa' : ''} ${f.id === '__borracha' ? 'borracha' : ''}" style="${f.cor ? 'background:' + f.cor : ''}">${AV.esc(f.nome)}</button>`).join('');
+  $('ferramentas').querySelectorAll('button').forEach(b => b.onclick = () => { ferramenta = b.dataset.f; desenharFerramentas(); });
+  $('legendaLt').innerHTML = dados.modo === 'pintar' ? dados.categorias.filter(c => c.def).map(c => `<span style="background:${c.cor}">${AV.esc(c.nome)}: ${AV.esc(c.def)}</span>`).join('') : '';
+}
+function proxima(){
+  if (!fila.length) return fim();
+  if (n > 0) placar.proxima();
+  atual = fila.shift(); n++; tentativas = 0; resolvido = false;
+  $('contadorLt').textContent = `${n} de ${total}`;
+  $('instrucaoLt').textContent = placar.prefixo() + dados.instrucao;
+  $('dicaLt').textContent = dados.modo === 'acentuar' && atual.dica ? '💡 ' + atual.dica : '';
+  if (dados.modo === 'acentuar'){ marcas = [...atual.base].map(() => null); ferramenta = ferramenta && ACENTOS[ferramenta] ? ferramenta : 'agudo'; }
+  else { marcas = atual.partes.map(() => ''); ferramenta = ferramenta && dados.categorias.some(c => c.id === ferramenta) ? ferramenta : dados.categorias[0].id; }
+  $('explicaLt').textContent = '';
+  $('btnConferir').hidden = false; $('btnProxima').hidden = true;
+  desenharFerramentas(); desenharPalavra();
+}
+function letraAcentuada(i){
+  const ch = atual.base[i], ac = marcas[i];
+  if (!ac) return ch;
+  const minus = ch.toLowerCase(), r = ACENTOS[ac].mapa[minus] || ch;
+  return ch === minus ? r : r.toUpperCase();
+}
+function desenharPalavra(classes = {}){
+  if (dados.modo === 'acentuar'){
+    $('palavraLt').innerHTML = [...atual.base].map((ch, i) => `<button class="lt ${classes[i] || ''}" data-i="${i}">${AV.esc(letraAcentuada(i))}</button>`).join('');
+  } else {
+    $('palavraLt').innerHTML = atual.partes.map((p, i) => {
+      const c = dados.categorias.find(x => x.id === marcas[i]);
+      return `<button class="lt ${c ? 'pintada' : ''} ${classes[i] || ''}" data-i="${i}" style="${c ? 'background:' + c.cor : ''}">${AV.esc(p)}</button>`;
+    }).join('');
+  }
+  $('palavraLt').querySelectorAll('.lt').forEach(b => b.onclick = () => tocar(+b.dataset.i));
+}
+function tocar(i){
+  if (resolvido) return;
+  if (dados.modo === 'acentuar'){
+    const ch = atual.base[i].toLowerCase();
+    if (marcas[i] === ferramenta){ marcas[i] = null; }
+    else if (!ACENTOS[ferramenta].mapa[ch]){ AV.avisar(`O acento ${ACENTOS[ferramenta].nome.slice(2).toLowerCase()} não vai na letra "${atual.base[i]}".`); return; }
+    else marcas[i] = ferramenta;   // cada letra guarda o seu acento (órgão tem dois); tocar de novo tira
+  } else {
+    marcas[i] = ferramenta === '__borracha' || marcas[i] === ferramenta ? '' : ferramenta;
+  }
+  AV.tom(700, .05); desenharPalavra();
+}
+function montada(){ return [...atual.base].map((ch, i) => letraAcentuada(i)).join(''); }
+function conferir(){
+  if (resolvido) return;
+  let certo, classes = {};
+  if (dados.modo === 'acentuar'){
+    certo = montada().toLowerCase() === atual.certa.toLowerCase();
+  } else {
+    certo = true;
+    atual.partes.forEach((p, i) => { const ok = marcas[i] === atual.tipos[i]; if (!ok) certo = false; classes[i] = ok ? (atual.tipos[i] ? 'certa' : '') : 'errada'; });
+  }
+  if (certo){
+    resolvido = true; const pts = tentativas === 0 ? 2 : 1; placar.pontuar(pts);
+    $('explicaLt').textContent = `✅ Isso! +${pts} ponto${pts > 1 ? 's' : ''}. ${atual.explica}`;
+    AV.fanfarra(); AV.confete();
+    desenharPalavra(classes); terminar();
+  } else {
+    tentativas++; AV.erro(); desenharPalavra(classes);
+    if (tentativas >= 2){
+      resolvido = true;
+      if (dados.modo === 'acentuar'){ $('palavraLt').innerHTML = [...atual.certa].map(ch => `<button class="lt pintada" style="background:var(--verde)">${AV.esc(ch)}</button>`).join(''); }
+      else { marcas = atual.tipos.slice(); desenharPalavra(); }
+      $('explicaLt').textContent = `💡 A resposta certa está na tela: ${dados.modo === 'acentuar' ? atual.certa.toUpperCase() + '. ' : ''}${atual.explica}`;
+      terminar();
+    } else $('explicaLt').textContent = dados.modo === 'acentuar' ? '❌ Ainda não. Pensem na sílaba mais forte e tentem de novo!' : '❌ As letras que tremeram estão com a cor errada. Tentem de novo!';
+  }
+}
+function terminar(){ $('btnConferir').hidden = true; $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado'; }
+function fim(){ placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnConferir').onclick = conferir;
+$('btnProxima').onclick = proxima;
+$('btnOuvir').onclick = () => atual && AV.falar(dados.modo === 'acentuar' ? atual.certa : atual.palavra);
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>
