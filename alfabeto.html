@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alfabeto Falado</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #grade{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:1150px;margin:10px auto}
+  .letra{width:clamp(70px,9vw,118px);height:clamp(78px,10vw,128px);font-size:clamp(2.2rem,5vw,4rem);border-radius:20px;color:#fff;background:#2f80ed;
+    display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+  .letra.vogal{background:#e74c3c}
+  .letra.acesa{transform:scale(1.18);box-shadow:0 0 0 6px #fff,0 0 0 12px #ffd54a}
+  .legenda{text-align:center;font-size:1.05rem;margin:4px}
+  .legenda span{display:inline-block;width:18px;height:18px;border-radius:5px;vertical-align:middle;margin:0 4px 0 12px}
+  .botoesModo button.ativo{background:#243049;color:#fff}
+  #detalhe,#jogoBox{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;z-index:20;padding:14px}
+  #detalhe.mostrar,#jogoBox.mostrar{display:flex}
+  .painel{background:#fff;border-radius:28px;padding:18px 26px;max-width:920px;width:100%;text-align:center;box-shadow:0 10px 30px #0004;max-height:96vh;overflow:auto}
+  #dLetra{font-size:clamp(5rem,16vw,11rem);font-weight:bold;line-height:1;color:#2f80ed}
+  #dLetra.vogal{color:#e74c3c}
+  #dNome{font-size:clamp(1.4rem,3vw,2rem);margin:4px 0}
+  #dDica{font-size:1.15rem;background:#fff6cc;border-radius:12px;padding:6px 12px;margin:8px auto;max-width:700px}
+  #dPalavras{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+  #dPalavras button{font-size:clamp(1.2rem,2.6vw,1.8rem);display:flex;flex-direction:column;align-items:center;min-width:150px}
+  #dPalavras button span{font-size:clamp(3rem,7vw,5rem);line-height:1.1}
+  #dPalavras b.ini{color:#e74c3c}
+  #jPergunta{font-size:clamp(3.5rem,11vw,8rem);font-weight:bold;margin:8px 0;letter-spacing:6px}
+  #jOpcoes{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+  #jOpcoes button{font-size:clamp(2.5rem,7vw,5rem);min-width:120px;padding:10px 26px}
+  #jOpcoes button.certa{background:#27ae60;color:#fff}
+  #jOpcoes button.errada{background:#ffc9c9}
+  #jMsg{font-size:1.4rem;min-height:1.6em;margin:10px 0}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<h1>🔡 Alfabeto Falado</h1>
+<div class="linha botoesModo">
+  <button data-modo="mai" class="ativo">ABC maiúsculas</button>
+  <button data-modo="min">abc minúsculas</button>
+  <button data-modo="ambas">Aa as duas</button>
+</div>
+<div class="linha">
+  <button id="btnSequencia">🎵 Falar o alfabeto todo</button>
+  <button id="btnSortear">🎲 Sortear uma letra</button>
+  <button id="btnDepois">❓ Qual letra vem depois?</button>
+  <button id="btnAntes">❓ Qual letra vem antes?</button>
+</div>
+<p class="legenda"><span style="background:#e74c3c"></span>vogais <span style="background:#2f80ed"></span>consoantes · Toque numa letra para ouvir o nome e ver palavras com ela.</p>
+<div id="grade"></div>
+
+<div id="detalhe">
+  <div class="painel">
+    <div id="dLetra"></div>
+    <div id="dNome"></div>
+    <div id="dDica" hidden></div>
+    <div id="dPalavras"></div>
+    <div class="linha">
+      <button id="dAnterior">◀️ Anterior</button>
+      <button id="dOuvir">🔊 Ouvir</button>
+      <button id="dProxima">Próxima ▶️</button>
+      <button id="dFechar" class="principal">✖ Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div id="jogoBox">
+  <div class="painel">
+    <h2 id="jTitulo"></h2>
+    <div id="jPergunta"></div>
+    <div id="jOpcoes"></div>
+    <div id="jMsg"></div>
+    <div class="linha">
+      <span id="jPlacar" class="dica" style="font-size:1.1rem"></span>
+      <button id="jOutra" class="principal" hidden>➡️ Outra</button>
+      <button id="jRevelar" hidden>👁️ Mostrar a letra</button>
+      <button id="jFechar">✖ Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+// [letra, nome falado, palavras com figura, dica]
+const L = [
+  ['A','á',[['ABELHA','🐝'],['AVIÃO','✈️'],['ABACAXI','🍍']]],
+  ['B','bê',[['BOLA','⚽'],['BANANA','🍌'],['BORBOLETA','🦋']]],
+  ['C','cê',[['CASA','🏠'],['CAVALO','🐴'],['CEBOLA','🧅']],'O C tem dois sons: CA, CO, CU (casa, cavalo) e CE, CI (cebola, cinema).'],
+  ['D','dê',[['DADO','🎲'],['DENTE','🦷'],['DINOSSAURO','🦕']]],
+  ['E','é',[['ESTRELA','⭐'],['ELEFANTE','🐘'],['ENVELOPE','✉️']]],
+  ['F','éfe',[['FACA','🔪'],['FOGO','🔥'],['FLOR','🌸']]],
+  ['G','gê',[['GATO','🐱'],['GALINHA','🐔'],['GIRAFA','🦒']],'O G tem dois sons: GA, GO, GU (gato, galinha) e GE, GI (girafa, gelo).'],
+  ['H','agá',[['HIPOPÓTAMO','🦛'],['HELICÓPTERO','🚁'],['HOSPITAL','🏥']],'No começo da palavra, o H não tem som: hipopótamo, hora, hoje.'],
+  ['I','i',[['IGREJA','⛪'],['ILHA','🏝️'],['ÍMÃ','🧲']]],
+  ['J','jota',[['JACARÉ','🐊'],['JOANINHA','🐞'],['JOIA','💍']]],
+  ['K','cá',[['KIWI','🥝'],['KARATÊ','🥋'],['KART','🏎️']],'O K aparece em nomes e em palavras que vieram de outras línguas.'],
+  ['L','éle',[['LEÃO','🦁'],['LUA','🌙'],['LIMÃO','🍋']]],
+  ['M','ême',[['MACACO','🐒'],['MAÇÃ','🍎'],['MOTO','🏍️']]],
+  ['N','êne',[['NAVIO','🚢'],['NARIZ','👃'],['NUVEM','☁️']]],
+  ['O','ó',[['OVO','🥚'],['OLHO','👁️'],['OVELHA','🐑']]],
+  ['P','pê',[['PATO','🦆'],['PEIXE','🐟'],['PIPOCA','🍿']]],
+  ['Q','quê',[['QUEIJO','🧀'],['QUATRO','4️⃣'],['QUADRO','🖼️']],'O Q quase sempre vem com o U: QUE, QUI, QUA.'],
+  ['R','érre',[['RATO','🐭'],['RELÓGIO','⏰'],['ROSA','🌹']]],
+  ['S','ésse',[['SAPO','🐸'],['SOL','☀️'],['SORVETE','🍦']]],
+  ['T','tê',[['TOMATE','🍅'],['TARTARUGA','🐢'],['TELEFONE','☎️']]],
+  ['U','u',[['UVA','🍇'],['URSO','🐻'],['UNICÓRNIO','🦄']]],
+  ['V','vê',[['VACA','🐄'],['VELA','🕯️'],['VIOLÃO','🎸']]],
+  ['W','dáblio',[['WI-FI','📶'],['WAFFLE','🧇'],['WILLIAM','👦']],'O W aparece em nomes (Wagner, William) e em palavras de outras línguas.'],
+  ['X','xis',[['XÍCARA','☕'],['XADREZ','♟️'],['XAMPU','🧴']],'O X tem vários sons: xícara, táxi, exame, próximo.'],
+  ['Y','ípsilon',[['YASMIN','👧'],['YURI','👦'],['YAKISOBA','🍜']],'O Y aparece em nomes (Yasmin, Yuri) e em palavras de outras línguas.'],
+  ['Z','zê',[['ZEBRA','🦓'],['ZERO','0️⃣'],['ZABUMBA','🥁']]]
+];
+const VOGAIS = 'AEIOU';
+let modo = 'mai', atual = 0;
+const mostrar = l => modo === 'mai' ? l : modo === 'min' ? l.toLowerCase() : l + l.toLowerCase();
+
+function desenhar(){
+  $('grade').innerHTML = L.map((x, i) => `<button class="letra ${VOGAIS.includes(x[0]) ? 'vogal' : ''}" data-i="${i}">${mostrar(x[0])}</button>`).join('');
+  $('grade').querySelectorAll('.letra').forEach(b => b.onclick = () => abrir(+b.dataset.i));
+}
+document.querySelectorAll('[data-modo]').forEach(b => b.onclick = () => {
+  modo = b.dataset.modo;
+  document.querySelectorAll('[data-modo]').forEach(x => x.classList.toggle('ativo', x === b));
+  desenhar();
+  if ($('detalhe').classList.contains('mostrar')) abrir(atual, true);
+});
+
+function falarLetra(i){
+  const x = L[i];
+  AV.falar(`${x[1]}. ${x[1]} de ${x[2].map(p => p[0].toLowerCase()).join(', ')}.`);
+}
+function abrir(i, semVoz){
+  atual = (i + L.length) % L.length;
+  const x = L[atual];
+  $('dLetra').textContent = modo === 'ambas' ? x[0] + ' ' + x[0].toLowerCase() : mostrar(x[0]);
+  $('dLetra').classList.toggle('vogal', VOGAIS.includes(x[0]));
+  $('dNome').innerHTML = `Nome da letra: <b>${AV.esc(x[1])}</b>`;
+  $('dDica').hidden = !x[3]; $('dDica').textContent = x[3] ? '💡 ' + x[3] : '';
+  const escrever = p => modo === 'min' ? p.toLowerCase() : p;
+  $('dPalavras').innerHTML = x[2].map(([p, e]) => {
+    const w = escrever(p);
+    return `<button data-p="${AV.esc(p)}"><span>${e}</span><div><b class="ini">${AV.esc(w[0])}</b>${AV.esc(w.slice(1))}</div></button>`;
+  }).join('');
+  $('dPalavras').querySelectorAll('button').forEach(b => b.onclick = () => AV.falar(b.dataset.p.toLowerCase()));
+  $('detalhe').classList.add('mostrar');
+  if (!semVoz) falarLetra(atual);
+}
+$('dAnterior').onclick = () => abrir(atual - 1);
+$('dProxima').onclick = () => abrir(atual + 1);
+$('dOuvir').onclick = () => falarLetra(atual);
+$('dFechar').onclick = () => $('detalhe').classList.remove('mostrar');
+$('detalhe').onclick = e => { if (e.target.id === 'detalhe') $('detalhe').classList.remove('mostrar'); };
+
+// Fala o alfabeto acendendo cada letra (usa a fila da voz do navegador)
+let sequenciaLigada = false;
+$('btnSequencia').onclick = () => {
+  const botoes = [...$('grade').querySelectorAll('.letra')];
+  const apagar = () => botoes.forEach(b => b.classList.remove('acesa'));
+  if (sequenciaLigada || !('speechSynthesis' in window)){ speechSynthesis.cancel(); apagar(); sequenciaLigada = false; $('btnSequencia').textContent = '🎵 Falar o alfabeto todo'; return; }
+  speechSynthesis.cancel(); sequenciaLigada = true; $('btnSequencia').textContent = '⏹️ Parar';
+  const voz = AV.vozPara('pt-BR');
+  L.forEach((x, i) => {
+    const u = new SpeechSynthesisUtterance(x[1]); u.lang = 'pt-BR'; u.rate = .8; if (voz) u.voice = voz;
+    u.onstart = () => { apagar(); botoes[i].classList.add('acesa'); };
+    if (i === L.length - 1) u.onend = () => { setTimeout(apagar, 500); sequenciaLigada = false; $('btnSequencia').textContent = '🎵 Falar o alfabeto todo'; };
+    speechSynthesis.speak(u);
+  });
+};
+
+// ---------- Jogos rápidos ----------
+let jogo = null, acertos = 0, tentativas = 0;
+function placar(){ $('jPlacar').textContent = tentativas ? `✅ ${acertos} de ${tentativas}` : ''; }
+function abrirJogo(tipo){ jogo = {tipo}; acertos = 0; tentativas = 0; $('jogoBox').classList.add('mostrar'); novaRodada(); }
+function novaRodada(){
+  const t = jogo.tipo;
+  $('jMsg').textContent = ''; $('jOutra').hidden = true; $('jRevelar').hidden = true; $('jOpcoes').innerHTML = '';
+  if (t === 'sorteio'){
+    jogo.i = Math.floor(Math.random() * L.length);
+    $('jTitulo').textContent = '🎲 Que letra é esta?';
+    $('jPergunta').textContent = mostrar(L[jogo.i][0]);
+    $('jRevelar').hidden = false; $('jRevelar').textContent = '🔊 Ouvir o nome'; $('jOutra').hidden = false;
+    return;
+  }
+  const depois = t === 'depois';
+  const i = depois ? Math.floor(Math.random() * (L.length - 1)) : 1 + Math.floor(Math.random() * (L.length - 1));
+  const certa = depois ? i + 1 : i - 1;
+  jogo.certa = certa;
+  $('jTitulo').textContent = depois ? '❓ Qual letra vem depois?' : '❓ Qual letra vem antes?';
+  $('jPergunta').textContent = depois ? `${mostrar(L[i][0])} ➡️ ?` : `? ➡️ ${mostrar(L[i][0])}`;
+  const outras = [...Array(L.length).keys()].filter(k => k !== certa && k !== i).sort(() => Math.random() - .5).slice(0, 3);
+  const ops = [certa, ...outras].sort(() => Math.random() - .5);
+  $('jOpcoes').innerHTML = ops.map(k => `<button data-k="${k}">${mostrar(L[k][0])}</button>`).join('');
+  jogo.errou = false;
+  $('jOpcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+}
+function responder(b){
+  if (jogo.feito) return;
+  const k = +b.dataset.k;
+  if (k === jogo.certa){
+    jogo.feito = true; b.classList.add('certa');
+    if (!jogo.errou){ acertos++; }
+    tentativas++; placar();
+    $('jMsg').textContent = jogo.errou ? '✅ Agora sim!' : '✅ Isso mesmo!';
+    AV.tom(880, .15); AV.falar(L[k][1]);
+    $('jOutra').hidden = false;
+    setTimeout(() => { jogo.feito = false; }, 50);
+    jogo.feito = true;
+  } else {
+    jogo.errou = true; b.classList.add('errada'); b.disabled = true; AV.erro();
+    $('jMsg').textContent = '🤔 Ainda não. Falem o alfabeto em voz alta até chegar lá!';
+  }
+}
+$('btnSortear').onclick = () => abrirJogo('sorteio');
+$('btnDepois').onclick = () => abrirJogo('depois');
+$('btnAntes').onclick = () => abrirJogo('antes');
+$('jOutra').onclick = () => { jogo.feito = false; novaRodada(); };
+$('jRevelar').onclick = () => { const x = L[jogo.i]; $('jMsg').innerHTML = `<b>${AV.esc(x[1])}</b> — ${x[2].map(p => p[1] + ' ' + AV.esc(p[0])).join(' · ')}`; falarLetra(jogo.i); };
+$('jFechar').onclick = () => $('jogoBox').classList.remove('mostrar');
+desenhar();
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caça-Palavras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .jogo{display:flex;gap:22px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+  #grade{display:grid;gap:3px;background:#fff;border-radius:18px;padding:10px;box-shadow:0 4px 0 #0001;user-select:none;-webkit-user-select:none;touch-action:none}
+  .cel{width:var(--t);height:var(--t);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:calc(var(--t) * .58);border-radius:8px;cursor:pointer;color:#243049}
+  .cel.sel{background:#ffd54a}
+  #pistas{background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 4px 0 #0001;min-width:220px;max-width:340px}
+  #pistas h2{margin:0 0 8px}
+  .pista{display:flex;align-items:center;gap:10px;font-size:1.35rem;font-weight:bold;padding:4px 6px;border-radius:10px}
+  .pista .e{font-size:2rem;width:46px;text-align:center}
+  .pista.achada{text-decoration:line-through;opacity:.55}
+  #msg{text-align:center;font-size:1.3rem;font-weight:bold;min-height:1.5em;margin:6px 0}
+  .so-impressao{display:none}
+  @media print{
+    body{background:#fff !important;padding:0}
+    .naoImprimir,#msg{display:none !important}
+    .so-impressao{display:block;text-align:center;font-size:1.4rem;margin:0 0 10px}
+    .cel{background:none !important;color:#000 !important;border:1px solid #bbb}
+    #grade,#pistas{box-shadow:none}
+    .pista{text-decoration:none !important;opacity:1 !important}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🔍 Caça-Palavras</h1>
+  <div class="cartao">
+    <h2>1. Palavras</h2>
+    <label>Lista: <select id="categoria"></select></label>
+    <details class="pp-painel" id="painelLista"></details>
+    <label>Quantas palavras: <select id="selQtd"><option>6</option><option selected>8</option><option>10</option><option>12</option></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Como será</h2>
+    <label>Tamanho: <select id="selTam"><option value="8">8 × 8 (fácil)</option><option value="10" selected>10 × 10</option><option value="12">12 × 12</option><option value="14">14 × 14 (difícil)</option></select></label>
+    <label>Direções: <select id="selDir">
+      <option value="facil">➡️ ⬇️ só para a direita e para baixo (alfabetização)</option>
+      <option value="medio">➡️ ⬇️ ↘️ também na diagonal</option>
+      <option value="dificil">🔀 em todas as direções, até de trás para a frente</option></select></label>
+    <label>Pistas: <select id="selPista"><option value="figura">🖼️ só a figura (a turma descobre a palavra)</option><option value="ambos" selected>🖼️ figura e palavra</option><option value="palavra">🔤 só a palavra</option></select></label>
+  </div>
+  <button id="btnGerar" class="principal">▶️ Montar o caça-palavras</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="so-impressao">🔍 Caça-palavras — Nome: ____________________________ Data: ___/___</div>
+  <div id="msg" class="naoImprimir"></div>
+  <div class="jogo">
+    <div id="grade"></div>
+    <div id="pistas"></div>
+  </div>
+  <div class="linha naoImprimir">
+    <button id="btnRespostas">👁️ Mostrar as respostas</button>
+    <button id="btnImprimir">🖨️ Imprimir</button>
+    <button id="btnNovo" class="principal">🔁 Outro caça-palavras</button>
+    <button id="btnVoltar">⚙️ Mudar as opções</button>
+  </div>
+  <p class="dica naoImprimir" style="text-align:center">Arraste o dedo (ou o mouse) da primeira até a última letra da palavra. Também dá para tocar na primeira e depois na última.</p>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, P = window.Palavras;
+const CORES = ['#ffb3b3', '#b3d4ff', '#b8f0c8', '#ffe08a', '#e2c4ff', '#ffc9a3', '#a8ede6', '#f7b6dc', '#d6e68a', '#c9d0ff', '#ffd1d1', '#bfe8ff'];
+const PREENCHER = 'AAAAAEEEEEIIIOOOOUUSSSRRRMMNNNTTTLLLCCCDDPPBBGVFHJQXZ';
+const DIRS = {facil: [[0,1],[1,0]], medio: [[0,1],[1,0],[1,1]], dificil: [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]]};
+const limpa = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z]/g, '');
+let N = 10, grade = [], palavras = [], achadas = new Set(), inicio = null, arrastando = false, selecao = [];
+
+P.preencherCategorias($('categoria'));
+P.montarPainelLista($('painelLista'), {aoMudar: () => P.preencherCategorias($('categoria'))});
+
+function gerar(){
+  N = +$('selTam').value;
+  const dirs = DIRS[$('selDir').value];
+  const base = P.lista($('categoria').value).filter(i => { const l = limpa(i.palavra); return l.length >= 3 && l.length <= N; });
+  if (base.length < 3){ if ($('categoria').value === 'propria') $('painelLista').open = true; return AV.avisar('Esta lista tem poucas palavras que cabem no quadro. Escolha outra lista ou um quadro maior.'); }
+  let melhor = null;
+  for (let tentativa = 0; tentativa < 12; tentativa++){
+    const escolhidas = P.embaralhar(base).slice(0, +$('selQtd').value).sort((a, b) => limpa(b.palavra).length - limpa(a.palavra).length);
+    const g = Array.from({length: N}, () => Array(N).fill(''));
+    const ok = [];
+    escolhidas.forEach(item => {
+      const w = limpa(item.palavra), L = w.length;
+      for (let t = 0; t < 400; t++){
+        const [dr, dc] = dirs[Math.floor(Math.random() * dirs.length)];
+        const r0 = Math.floor(Math.random() * N), c0 = Math.floor(Math.random() * N);
+        const r1 = r0 + dr * (L - 1), c1 = c0 + dc * (L - 1);
+        if (r1 < 0 || r1 >= N || c1 < 0 || c1 >= N) continue;
+        let cabe = true;
+        for (let k = 0; k < L; k++){ const ch = g[r0 + dr * k][c0 + dc * k]; if (ch && ch !== w[k]){ cabe = false; break; } }
+        if (!cabe) continue;
+        const cels = [];
+        for (let k = 0; k < L; k++){ g[r0 + dr * k][c0 + dc * k] = w[k]; cels.push([r0 + dr * k, c0 + dc * k]); }
+        ok.push({item, w, cels}); break;
+      }
+    });
+    if (!melhor || ok.length > melhor.ok.length) melhor = {g, ok};
+    if (ok.length === escolhidas.length) break;
+  }
+  grade = melhor.g.map(l => l.map(ch => ch || PREENCHER[Math.floor(Math.random() * PREENCHER.length)]));
+  palavras = melhor.ok.map((p, i) => Object.assign(p, {cor: CORES[i % CORES.length]}));
+  achadas = new Set(); selecao = []; inicio = null;
+  desenhar(); AV.mostrarTela('tJogo');
+  $('msg').textContent = `Encontrem ${palavras.length} palavras!`;
+}
+function desenhar(){
+  const t = Math.max(30, Math.min(58, Math.floor((Math.min(window.innerWidth - 420, window.innerHeight - 210)) / N) - 3));
+  $('grade').style.setProperty('--t', (window.innerWidth < 760 ? Math.floor((window.innerWidth - 50) / N) - 3 : t) + 'px');
+  $('grade').style.gridTemplateColumns = `repeat(${N}, var(--t))`;
+  $('grade').innerHTML = grade.map((l, r) => l.map((ch, c) => `<div class="cel" data-r="${r}" data-c="${c}">${ch}</div>`).join('')).join('');
+  pintar();
+  const tipo = $('selPista').value;
+  $('pistas').innerHTML = `<h2>${tipo === 'figura' ? '🖼️ Encontre:' : '🔤 Palavras'}</h2>` + palavras.map((p, i) => {
+    const txt = tipo === 'figura' ? '_ '.repeat(p.w.length).trim() : AV.esc(p.item.palavra.toUpperCase());
+    return `<div class="pista ${achadas.has(i) ? 'achada' : ''}" data-i="${i}" style="${achadas.has(i) ? 'background:' + p.cor : ''}">${tipo !== 'palavra' ? `<span class="e">${p.item.emoji || '❔'}</span>` : ''}<span>${achadas.has(i) && tipo === 'figura' ? AV.esc(p.item.palavra.toUpperCase()) : txt}</span></div>`;
+  }).join('');
+  $('pistas').querySelectorAll('.pista').forEach(el => el.onclick = () => P.falar(palavras[+el.dataset.i].item.palavra));
+}
+function cel(r, c){ return $('grade').querySelector(`.cel[data-r="${r}"][data-c="${c}"]`); }
+function pintar(){
+  $('grade').querySelectorAll('.cel').forEach(el => { el.style.background = ''; el.classList.remove('sel'); });
+  palavras.forEach((p, i) => { if (achadas.has(i)) p.cels.forEach(([r, c]) => { cel(r, c).style.background = p.cor; }); });
+  selecao.forEach(([r, c]) => cel(r, c).classList.add('sel'));
+}
+function linha(a, b){
+  const dr = Math.sign(b[0] - a[0]), dc = Math.sign(b[1] - a[1]);
+  const lr = Math.abs(b[0] - a[0]), lc = Math.abs(b[1] - a[1]);
+  if (!(lr === 0 || lc === 0 || lr === lc)) return null;
+  const L = Math.max(lr, lc) + 1, cels = [];
+  for (let k = 0; k < L; k++) cels.push([a[0] + dr * k, a[1] + dc * k]);
+  return cels;
+}
+function conferir(cels){
+  // vale a palavra lida nos dois sentidos (e também se ela aparecer por acaso em outro lugar do quadro)
+  const txt = cels.map(([r, c]) => grade[r][c]).join(''), rev = txt.split('').reverse().join('');
+  const i = palavras.findIndex((p, k) => !achadas.has(k) && (p.w === txt || p.w === rev));
+  if (i >= 0){
+    palavras[i].cels = palavras[i].w === txt ? cels : cels.slice().reverse();
+    achadas.add(i); AV.fanfarra(); P.falar(palavras[i].item.palavra);
+    $('msg').textContent = achadas.size === palavras.length ? '🏆 Vocês encontraram todas as palavras!' : `✅ ${palavras[i].item.palavra.toUpperCase()}! Faltam ${palavras.length - achadas.size}.`;
+    if (achadas.size === palavras.length) AV.confete();
+    desenhar(); return true;
+  }
+  if (cels.length > 2) $('msg').textContent = '🤔 Não é uma das palavras. Tentem de novo!';
+  return false;
+}
+function celulaDoEvento(e){
+  const p = e.touches ? e.touches[0] || e.changedTouches[0] : e;
+  const el = document.elementFromPoint(p.clientX, p.clientY);
+  return el && el.classList.contains('cel') ? [+el.dataset.r, +el.dataset.c] : null;
+}
+function comecarArraste(e){
+  const c = celulaDoEvento(e); if (!c) return;
+  e.preventDefault();
+  if (inicio && !arrastando){
+    const cels = linha(inicio, c); inicio = null; selecao = [];
+    if (cels) conferir(cels); pintar(); return;
+  }
+  arrastando = true; inicio = c; selecao = [c]; pintar();
+}
+function moverArraste(e){
+  if (!arrastando) return;
+  const c = celulaDoEvento(e); if (!c) return;
+  e.preventDefault();
+  const cels = linha(inicio, c); if (cels){ selecao = cels; pintar(); }
+}
+function terminarArraste(e){
+  if (!arrastando) return;
+  arrastando = false;
+  if (selecao.length > 1){ conferir(selecao); inicio = null; selecao = []; pintar(); }
+}
+$('grade').addEventListener('mousedown', comecarArraste);
+window.addEventListener('mousemove', moverArraste);
+window.addEventListener('mouseup', terminarArraste);
+$('grade').addEventListener('touchstart', comecarArraste, {passive: false});
+window.addEventListener('touchmove', moverArraste, {passive: false});
+window.addEventListener('touchend', terminarArraste);
+
+$('btnRespostas').onclick = () => { palavras.forEach((p, i) => achadas.add(i)); desenhar(); $('msg').textContent = '👁️ Respostas à mostra.'; };
+$('btnImprimir').onclick = () => { const salvo = new Set(achadas); achadas = new Set(); desenhar(); window.print(); achadas = salvo; desenhar(); };
+$('btnNovo').onclick = gerar;
+$('btnVoltar').onclick = () => AV.mostrarTela('tConfig');
+$('btnGerar').onclick = gerar;
+window.addEventListener('resize', () => { if (grade.length && $('tJogo').classList.contains('ativa')) desenhar(); });
+</script>
+</body>
+</html>

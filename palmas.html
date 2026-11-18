@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmas e Sons</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .modos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .modos button{font-size:1.3rem;min-width:230px}
+  .modos button span{display:block;font-size:2.6rem}
+  .modos button.ativo{background:#243049;color:#fff}
+  #figuras{display:flex;gap:30px;justify-content:center;align-items:flex-end;flex-wrap:wrap;margin:8px 0}
+  .fig{text-align:center;cursor:pointer}
+  .fig .e{font-size:clamp(5rem,14vw,10rem);line-height:1.05}
+  .fig .p{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:bold;letter-spacing:3px;min-height:1.2em}
+  #pergunta{font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;text-align:center;margin:8px 0}
+  #palmasVis{display:flex;gap:14px;justify-content:center;min-height:70px;flex-wrap:wrap}
+  #palmasVis span{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:bold;background:#fff;border-radius:16px;padding:6px 14px;box-shadow:0 4px 0 #0002;animation:entrar .3s backwards}
+  #respostas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+  #respostas button{font-size:clamp(1.8rem,4.6vw,3rem);min-width:110px;color:#fff;background:#2f80ed}
+  #respostas button.certa{background:#27ae60;outline:5px solid #fff;box-shadow:0 0 0 10px #27ae60}
+  #respostas button.errada{background:#e8a0a0}
+  #msg{text-align:center;font-size:clamp(1.1rem,2.5vw,1.6rem);min-height:1.5em}
+  #contador{text-align:center;font-weight:bold}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>👏 Palmas e Sons</h1>
+  <p class="dica" style="text-align:center;max-width:760px">Consciência fonológica: perceber as sílabas e os sons das palavras ouvindo e batendo palmas, antes mesmo de ler.</p>
+  <div class="cartao">
+    <h2>1. O que vamos treinar?</h2>
+    <div class="modos">
+      <button data-modo="silabas" class="ativo"><span>👏</span>Quantas sílabas?</button>
+      <button data-modo="rima"><span>🎵</span>Rima ou não rima?</button>
+      <button data-modo="inicio"><span>🔤</span>Começam com a mesma sílaba?</button>
+    </div>
+  </div>
+  <div class="cartao">
+    <h2>2. Como jogar</h2>
+    <label>Palavras: <select id="selCat">
+      <option value="todas">🌈 Todas</option><option value="animais">🐾 Animais</option><option value="frutas">🍎 Alimentos</option>
+      <option value="coisas">🎒 Objetos</option><option value="natureza">🌳 Natureza</option><option value="corpo">🙂 Corpo</option></select>
+      <small class="dica">(não vale para as rimas, que têm lista própria)</small></label>
+    <label>Rodadas: <select id="selQtd"><option>8</option><option selected>12</option><option>20</option></select></label>
+    <label><input type="checkbox" id="chkEscrita"> Mostrar a palavra escrita (deixe desligado para treinar só o ouvido)</label>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="contador"></div>
+  <div id="pergunta"></div>
+  <div id="figuras"></div>
+  <div id="palmasVis"></div>
+  <div id="respostas"></div>
+  <div id="msg"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnPalmas">👏 Bater palmas junto</button>
+    <button id="btnVerEscrita">🔤 Mostrar escrita</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🌟 Muito bem, turma!</h1>
+  <div id="resultado" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, P = window.Palavras;
+// Grupos de palavras que rimam entre si (mesmo som no final)
+const RIMAS = [
+  [['GATO','🐱'],['PATO','🦆'],['RATO','🐭'],['SAPATO','👞'],['PRATO','🍽️']],
+  [['BOLA','⚽'],['ESCOLA','🏫'],['CEBOLA','🧅'],['SACOLA','🛍️'],['VIOLA','🎻']],
+  [['JANELA','🪟'],['PANELA','🍲'],['VELA','🕯️'],['ESTRELA','⭐'],['TIGELA','🥣']],
+  [['LEÃO','🦁'],['MÃO','✋'],['AVIÃO','✈️'],['BALÃO','🎈'],['PÃO','🍞'],['LIMÃO','🍋'],['VIOLÃO','🎸'],['SABÃO','🧼'],['CAMINHÃO','🚚']],
+  [['CHAPÉU','🎩'],['CÉU','🌌'],['TROFÉU','🏆']],
+  [['DEDO','👆'],['MEDO','😨'],['BRINQUEDO','🧸'],['SEGREDO','🤫']],
+  [['FLOR','🌸'],['TRATOR','🚜'],['COMPUTADOR','💻'],['TAMBOR','🥁']],
+  [['CAMA','🛏️'],['LHAMA','🦙'],['DRAMA','🎭']],
+  [['ABELHA','🐝'],['OVELHA','🐑'],['ORELHA','👂']],
+  [['SOL','☀️'],['GIRASSOL','🌻'],['CARACOL','🐌'],['ANZOL','🪝']],
+  [['CHAVE','🔑'],['AVE','🐦'],['NAVE','🚀']],
+  [['GELO','🧊'],['CABELO','💇'],['MARTELO','🔨'],['CASTELO','🏰'],['CAMELO','🐫']],
+  [['FADA','🧚'],['ESPADA','🗡️'],['ESCADA','🪜'],['SALADA','🥗']],
+  [['PIPOCA','🍿'],['FOCA','🦭'],['BOCA','👄'],['MINHOCA','🪱']],
+  [['BOTA','👢'],['GOTA','💧'],['NOTA','🎵']]
+];
+const sem = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+let modo = 'silabas', fila = [], atual = null, n = 0, total = 0, acertos = 0, respondido = false, escritaVisivel = false;
+
+document.querySelectorAll('[data-modo]').forEach(b => b.onclick = () => {
+  modo = b.dataset.modo; document.querySelectorAll('[data-modo]').forEach(x => x.classList.toggle('ativo', x === b));
+});
+const banco = () => P.lista($('selCat').value).filter(i => i.silabas && i.emoji);
+
+function rodadasSilabas(qtd){
+  const itens = P.embaralhar(banco()).slice(0, qtd);
+  return itens.map(i => ({tipo: 'silabas', itens: [i], certa: String(i.silabas.length)}));
+}
+function rodadasRima(qtd){
+  const r = [];
+  for (let k = 0; k < qtd; k++){
+    if (k % 2 === 0){
+      const g = RIMAS[Math.floor(Math.random() * RIMAS.length)], [a, b] = P.embaralhar(g);
+      r.push({tipo: 'rima', itens: [a, b].map(x => ({palavra: x[0].toLowerCase(), emoji: x[1]})), certa: 'sim'});
+    } else {
+      const [g1, g2] = P.embaralhar(RIMAS), a = g1[Math.floor(Math.random() * g1.length)], b = g2[Math.floor(Math.random() * g2.length)];
+      r.push({tipo: 'rima', itens: [a, b].map(x => ({palavra: x[0].toLowerCase(), emoji: x[1]})), certa: 'nao'});
+    }
+  }
+  return P.embaralhar(r);
+}
+function rodadasInicio(qtd){
+  const itens = banco(), porSil = {};
+  itens.forEach(i => { const s = sem(i.silabas[0]); (porSil[s] = porSil[s] || []).push(i); });
+  const comPar = Object.keys(porSil).filter(s => porSil[s].length >= 2);
+  const r = [];
+  for (let k = 0; k < qtd && comPar.length; k++){
+    if (k % 2 === 0){
+      const s = comPar[Math.floor(Math.random() * comPar.length)], [a, b] = P.embaralhar(porSil[s]);
+      r.push({tipo: 'inicio', itens: [a, b], certa: 'sim'});
+    } else {
+      let a, b, t = 0;
+      do { [a, b] = P.embaralhar(itens); t++; } while (sem(a.silabas[0]) === sem(b.silabas[0]) && t < 50);
+      r.push({tipo: 'inicio', itens: [a, b], certa: 'nao'});
+    }
+  }
+  return P.embaralhar(r);
+}
+function comecar(){
+  const qtd = +$('selQtd').value;
+  fila = modo === 'silabas' ? rodadasSilabas(qtd) : modo === 'rima' ? rodadasRima(qtd) : rodadasInicio(qtd);
+  if (!fila.length) return AV.avisar('Não há palavras suficientes nessa categoria. Escolha "Todas".');
+  total = fila.length; n = 0; acertos = 0;
+  $('btnPalmas').hidden = modo !== 'silabas';
+  AV.mostrarTela('tJogo'); proxima();
+}
+function falarAtual(){
+  if (!atual) return;
+  if (atual.itens.length === 1) AV.falar(atual.itens[0].palavra);
+  else AV.falar(atual.itens.map(i => i.palavra).join('... '));
+}
+function desenharFiguras(){
+  $('figuras').innerHTML = atual.itens.map((i, k) => `<div class="fig" data-k="${k}"><div class="e">${i.emoji}</div><div class="p">${escritaVisivel ? AV.esc(i.palavra.toUpperCase()) : ''}</div></div>`).join(atual.itens.length > 1 ? '<div style="font-size:3rem;align-self:center">＋</div>' : '');
+  $('figuras').querySelectorAll('.fig').forEach(f => f.onclick = () => AV.falar(atual.itens[+f.dataset.k].palavra));
+}
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; respondido = false; escritaVisivel = $('chkEscrita').checked;
+  $('contador').textContent = `${n} de ${total} · ✅ ${acertos}`;
+  $('palmasVis').innerHTML = ''; $('msg').textContent = ''; $('btnProxima').hidden = true;
+  $('pergunta').textContent = {silabas: '👏 Quantas sílabas tem esta palavra? Batam palmas!', rima: '🎵 Estas palavras rimam?', inicio: '🔤 Estas palavras começam com a mesma sílaba?'}[atual.tipo];
+  desenharFiguras();
+  const ops = atual.tipo === 'silabas' ? ['1', '2', '3', '4', '5'] : ['sim', 'nao'];
+  const rot = {sim: '👍 Sim', nao: '👎 Não'};
+  $('respostas').innerHTML = ops.map(o => `<button data-o="${o}">${rot[o] || o}</button>`).join('');
+  $('respostas').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+  setTimeout(falarAtual, 250);
+}
+function mostrarSilabas(i){ $('palmasVis').innerHTML = (i.silabas || [i.palavra]).map((s, k) => `<span style="animation-delay:${k * .45}s">👏 ${AV.esc(s.toUpperCase())}</span>`).join(''); }
+function explicacao(){
+  const [a, b] = atual.itens;
+  if (atual.tipo === 'silabas'){ const s = a.silabas; return `${a.palavra.toUpperCase()} tem ${s.length} ${s.length === 1 ? 'sílaba' : 'sílabas'}: ${s.join(' - ').toUpperCase()}.`; }
+  if (atual.tipo === 'rima') return atual.certa === 'sim' ? `${a.palavra.toUpperCase()} e ${b.palavra.toUpperCase()} terminam com o mesmo som: rimam!` : `${a.palavra.toUpperCase()} e ${b.palavra.toUpperCase()} terminam com sons diferentes.`;
+  return atual.certa === 'sim' ? `As duas começam com ${a.silabas[0].toUpperCase()}: ${a.silabas.join('-').toUpperCase()} e ${b.silabas.join('-').toUpperCase()}.`
+    : `${a.palavra.toUpperCase()} começa com ${a.silabas[0].toUpperCase()} e ${b.palavra.toUpperCase()} começa com ${b.silabas[0].toUpperCase()}.`;
+}
+function responder(b){
+  if (respondido) return;
+  const certo = b.dataset.o === atual.certa;
+  if (!certo && !b.classList.contains('errada') && $('respostas').querySelectorAll('.errada').length === 0){
+    b.classList.add('errada'); AV.erro(); $('msg').textContent = '🤔 Vamos ouvir de novo e tentar mais uma vez!';
+    if (atual.tipo === 'silabas') falarSilabasDevagar(); else falarAtual();
+    return;
+  }
+  respondido = true;
+  if (certo && !$('respostas').querySelector('.errada')) acertos++;
+  $('respostas').querySelectorAll('button').forEach(x => { if (x.dataset.o === atual.certa) x.classList.add('certa'); });
+  if (certo){ AV.fanfarra(); AV.confete(); } else AV.erro();
+  $('msg').textContent = (certo ? '✅ ' : '💡 ') + explicacao();
+  if (atual.tipo === 'silabas') mostrarSilabas(atual.itens[0]);
+  if (atual.tipo === 'inicio'){ escritaVisivel = true; desenharFiguras(); }
+  AV.falar(explicacao().toLowerCase());
+  $('contador').textContent = `${n} de ${total} · ✅ ${acertos}`;
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏁 Ver resultado';
+}
+function falarSilabasDevagar(){
+  const i = atual.itens[0]; if (!i.silabas) return falarAtual();
+  P.falar(i.silabas.join('... '), {rate: .6});
+}
+$('btnPalmas').onclick = () => {
+  const i = atual.itens[0];
+  $('palmasVis').innerHTML = '';
+  (i.silabas || []).forEach((s, k) => setTimeout(() => {
+    const el = document.createElement('span'); el.textContent = '👏'; $('palmasVis').appendChild(el); AV.tom(520 + k * 80, .08);
+  }, k * 650));
+  P.falar(i.silabas.join('... '), {rate: .55});
+};
+$('btnOuvir').onclick = falarAtual;
+$('btnVerEscrita').onclick = () => { escritaVisivel = !escritaVisivel; desenharFiguras(); };
+$('btnProxima').onclick = proxima;
+$('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
+function fim(){
+  $('resultado').innerHTML = `<div class="linhaRank campeao"><span class="pos">⭐</span><span class="nomeRank">Acertos de primeira</span><span class="pts">${acertos} de ${n}</span></div>`;
+  AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete();
+}
+$('btnComecar').onclick = comecar;
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

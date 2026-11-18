@@ -1,0 +1,43 @@
+/* Estilo das atividades de inclusão e das telas usadas direto no iPad.
+   Feito para funcionar também no iPad mini 1 (iOS 9): sem grid, sem "gap", sem variáveis e sem clamp(). */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;background:#eaf4fb;min-height:100vh;padding:10px 12px 40px;-webkit-text-size-adjust:100%}
+h1{font-size:28px;margin:6px 50px 10px;text-align:center}
+h2{font-size:22px;margin:8px 0;text-align:center}
+button{font-family:inherit;font-weight:bold;font-size:18px;border:none;border-radius:16px;padding:12px 18px;margin:5px;background:#fff;color:#243049;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.15)}
+button.ok{background:#27ae60;color:#fff}
+button.azul{background:#2f80ed;color:#fff}
+button.suave{background:#e3e8f0}
+button.grande{font-size:24px;padding:16px 28px}
+button[disabled]{opacity:.4}
+input[type=text],input[type=number],select,textarea{font-family:inherit;font-size:18px;padding:8px 10px;border-radius:10px;border:2px solid #c9d2e0;background:#fff;color:#243049}
+label{font-size:18px}
+.linha{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;-webkit-align-items:center;align-items:center;margin:6px 0}
+.cartao{background:#fff;border-radius:20px;padding:14px 18px;margin:10px auto;max-width:960px;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+.dica{font-size:15px;color:#5b6577}
+.tela{display:none}
+.tela.ativa{display:block}
+[hidden]{display:none !important}
+.topoApoio{position:fixed;top:6px;right:8px;z-index:50}
+.topoApoio a,.topoApoio button{display:inline-block;font-size:20px;padding:6px 10px;margin:0 0 0 6px;border-radius:12px;background:rgba(255,255,255,.9);color:#243049;text-decoration:none;box-shadow:0 2px 0 rgba(0,0,0,.12)}
+#apoioCelebra{position:fixed;left:0;top:0;right:0;bottom:0;display:none;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;background:rgba(255,255,255,.7);z-index:60;text-align:center}
+#apoioCelebra.mostrar{display:-webkit-flex;display:flex}
+#apoioCelebra div{font-size:36px;font-weight:bold;background:#fff;border-radius:28px;padding:22px 34px;margin:0 16px;box-shadow:0 6px 20px rgba(0,0,0,.15);-webkit-animation:apoioPop .4s;animation:apoioPop .4s}
+#apoioCelebra span{display:block;font-size:100px;line-height:1.15}
+@-webkit-keyframes apoioPop{from{-webkit-transform:scale(.6);opacity:0}to{-webkit-transform:scale(1);opacity:1}}
+@keyframes apoioPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@-webkit-keyframes apoioPulsa{50%{-webkit-transform:scale(1.08)}}
+@keyframes apoioPulsa{50%{transform:scale(1.08)}}
+@-webkit-keyframes apoioTreme{25%{-webkit-transform:translateX(-7px)}75%{-webkit-transform:translateX(7px)}}
+@keyframes apoioTreme{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.pulsar{-webkit-animation:apoioPulsa 1s infinite;animation:apoioPulsa 1s infinite}
+.tremer{-webkit-animation:apoioTreme .4s;animation:apoioTreme .4s}
+/* Visual calmo: sem animações, sem confete e com cores mais suaves */
+html.calmo *{-webkit-animation:none !important;animation:none !important;-webkit-transition:none !important;transition:none !important}
+html.calmo body{background:#f3f1ec}
+html.calmo button.ok{background:#5b9b77}
+html.calmo button.azul{background:#5a7fb0}
+html.calmo .pulsar{outline:5px solid #e0b84a}
+@media print{.topoApoio,.naoImprimir{display:none !important}body{background:#fff}}

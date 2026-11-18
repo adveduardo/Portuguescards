@@ -25,6 +25,7 @@ AV.urlJogar = () => location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, 'joga
 Object.defineProperty(AV, 'som', {get: () => somLigado, set: v => { somLigado = !!v; }});
 AV.tom = (freq, dur = .12, tipo = 'triangle', vol = .15, atraso = 0, freqFim) => {
   if (!somLigado) return;
+  if (window.PAINEL_CALMO){ tipo = 'sine'; vol *= .35; }   // visual calmo: sons mais baixos e suaves
   try{
     ac = ac || new (window.AudioContext || window.webkitAudioContext)();
     if (ac.state === 'suspended') ac.resume();
@@ -60,6 +61,7 @@ AV.falar = (t, idioma) => {
   });
 };
 AV.confete = () => {
+  if (window.PAINEL_CALMO) return;
   const itens = ['⭐','🎉','✨','🌟','🎈','🏆'];
   for (let i = 0; i < 30; i++){
     const s = document.createElement('span'); s.className = 'avConfete'; s.textContent = itens[i % itens.length];

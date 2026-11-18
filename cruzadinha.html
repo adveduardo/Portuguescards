@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cruzadinha</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .jogo{display:flex;gap:22px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+  #grade{display:grid;gap:2px;background:transparent;user-select:none;-webkit-user-select:none}
+  .q{width:var(--t);height:var(--t);position:relative}
+  .q.l{background:#fff;border:2px solid #243049;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:calc(var(--t) * .55);cursor:pointer;color:#243049}
+  .q.l.ativa{background:#fff6cc}
+  .q.l.foco{background:#ffd54a}
+  .q.l.certa{color:#1e8449}
+  .q.l.errada{color:#c0392b;background:#ffe3e3}
+  .q.l.revelada{color:#2f80ed}
+  .q .num{position:absolute;top:1px;left:3px;font-size:calc(var(--t) * .26);font-weight:bold;color:#55607a}
+  #pistas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+  .coluna{background:#fff;border-radius:18px;padding:10px 14px;box-shadow:0 4px 0 #0001;min-width:220px}
+  .coluna h2{margin:0 0 6px;font-size:1.3rem}
+  .pista{display:flex;align-items:center;gap:8px;font-size:1.2rem;padding:4px 8px;border-radius:10px;cursor:pointer}
+  .pista .e{font-size:2rem}
+  .pista.ativa{background:#fff6cc}
+  .pista.ok{opacity:.55;text-decoration:line-through}
+  #msg{text-align:center;font-size:1.3rem;font-weight:bold;min-height:1.5em;margin:6px 0}
+  .so-impressao{display:none}
+  @media print{
+    body{background:#fff !important;padding:0}
+    .naoImprimir,#msg{display:none !important}
+    .so-impressao{display:block;text-align:center;font-size:1.4rem;margin:0 0 10px}
+    .q.l{background:#fff !important;color:transparent !important}
+    .q .num{color:#000}
+    .coluna{box-shadow:none}
+    .pista{background:none !important;text-decoration:none !important;opacity:1 !important}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>✏️ Cruzadinha</h1>
+  <div class="cartao">
+    <h2>1. Palavras</h2>
+    <label>Lista: <select id="categoria"></select></label>
+    <details class="pp-painel" id="painelLista"></details>
+    <label>Quantas palavras: <select id="selQtd"><option>5</option><option selected>7</option><option>9</option><option>12</option></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Pistas</h2>
+    <label>Pista: <select id="selPista"><option value="figura">🖼️ figura</option><option value="dica">💬 dica escrita (se a lista tiver; senão, figura)</option></select></label>
+    <label><input type="checkbox" id="chkLetras" checked> Mostrar o número de letras</label>
+    <label><input type="checkbox" id="chkPrimeira"> Já mostrar a primeira letra de cada palavra</label>
+  </div>
+  <button id="btnGerar" class="principal">▶️ Montar a cruzadinha</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="so-impressao">✏️ Cruzadinha — Nome: ____________________________ Data: ___/___</div>
+  <div id="msg" class="naoImprimir"></div>
+  <div class="jogo">
+    <div id="grade"></div>
+    <div id="pistas"></div>
+  </div>
+  <div class="linha naoImprimir">
+    <button id="btnConferir" class="principal">✔️ Conferir</button>
+    <button id="btnRevelar">💡 Revelar a palavra escolhida</button>
+    <button id="btnTudo">👁️ Revelar tudo</button>
+    <button id="btnImprimir">🖨️ Imprimir</button>
+    <button id="btnNovo">🔁 Outra cruzadinha</button>
+    <button id="btnVoltar">⚙️ Opções</button>
+  </div>
+  <p class="dica naoImprimir" style="text-align:center">Toque numa pista ou num quadrinho e digite as letras no teclado. Tocar de novo no mesmo quadrinho troca entre horizontal e vertical.</p>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="palavras.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, P = window.Palavras;
+const base = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '');
+let cruz = null, sel = null, foco = 0, valores = {};
+
+P.preencherCategorias($('categoria'));
+P.montarPainelLista($('painelLista'), {aoMudar: () => P.preencherCategorias($('categoria'))});
+
+// ---------- montagem da grade (várias tentativas; fica a mais completa e compacta) ----------
+function tentar(itens){
+  const mapa = new Map(), dirDe = new Map(), postas = [];
+  const k = (r, c) => r + ',' + c;
+  function cabe(w, r, c, d){
+    const dr = d === 'V' ? 1 : 0, dc = d === 'H' ? 1 : 0;
+    if (mapa.has(k(r - dr, c - dc)) || mapa.has(k(r + dr * w.length, c + dc * w.length))) return -1;
+    let cruza = 0;
+    for (let i = 0; i < w.length; i++){
+      const rr = r + dr * i, cc = c + dc * i, ch = mapa.get(k(rr, cc));
+      if (ch){ if (ch !== w[i] || (dirDe.get(k(rr, cc)) || '').includes(d)) return -1; cruza++; }
+      else if (d === 'H' ? (mapa.has(k(rr - 1, cc)) || mapa.has(k(rr + 1, cc))) : (mapa.has(k(rr, cc - 1)) || mapa.has(k(rr, cc + 1)))) return -1;
+    }
+    return cruza;
+  }
+  function por(item, w, r, c, d){
+    const dr = d === 'V' ? 1 : 0, dc = d === 'H' ? 1 : 0;
+    for (let i = 0; i < w.length; i++){ const kk = k(r + dr * i, c + dc * i); mapa.set(kk, w[i]); dirDe.set(kk, (dirDe.get(kk) || '') + d); }
+    postas.push({item, w, r, c, d});
+  }
+  itens.forEach((item, idx) => {
+    const w = item.w;
+    if (idx === 0){ por(item, w, 0, 0, 'H'); return; }
+    let melhores = [], melhor = 0;
+    postas.forEach(p => {
+      const pdr = p.d === 'V' ? 1 : 0, pdc = p.d === 'H' ? 1 : 0;
+      for (let a = 0; a < p.w.length; a++) for (let b = 0; b < w.length; b++){
+        if (p.w[a] !== w[b]) continue;
+        const d = p.d === 'H' ? 'V' : 'H', rr = p.r + pdr * a, cc = p.c + pdc * a;
+        const r = d === 'V' ? rr - b : rr, c = d === 'H' ? cc - b : cc;
+        const s = cabe(w, r, c, d);
+        if (s > melhor){ melhor = s; melhores = [[r, c, d]]; } else if (s > 0 && s === melhor) melhores.push([r, c, d]);
+      }
+    });
+    if (melhores.length){ const [r, c, d] = melhores[Math.floor(Math.random() * melhores.length)]; por(item, w, r, c, d); }
+  });
+  const rs = [], cs = [];
+  postas.forEach(p => { rs.push(p.r, p.r + (p.d === 'V' ? p.w.length - 1 : 0)); cs.push(p.c, p.c + (p.d === 'H' ? p.w.length - 1 : 0)); });
+  const r0 = Math.min(...rs), c0 = Math.min(...cs);
+  postas.forEach(p => { p.r -= r0; p.c -= c0; });
+  return {postas, linhas: Math.max(...rs) - r0 + 1, colunas: Math.max(...cs) - c0 + 1};
+}
+function gerar(){
+  const lista = P.lista($('categoria').value).filter(i => /^[\p{L}]+$/u.test(i.palavra) && i.palavra.length >= 3 && i.palavra.length <= 12);
+  if (lista.length < 3){ if ($('categoria').value === 'propria') $('painelLista').open = true; return AV.avisar('Esta lista tem poucas palavras (use palavras de 3 a 12 letras, sem espaço).'); }
+  const qtd = +$('selQtd').value;
+  let melhor = null;
+  for (let t = 0; t < 60; t++){
+    const itens = P.embaralhar(lista).slice(0, qtd).map(i => ({i, w: i.palavra.toUpperCase()})).sort((a, b) => b.w.length - a.w.length + (Math.random() - .5));
+    const g = tentar(itens);
+    const nota = g.postas.length * 1000 - g.linhas * g.colunas - Math.abs(g.linhas - g.colunas) * 3;
+    if (g.linhas <= 16 && g.colunas <= 18 && (!melhor || nota > melhor.nota)) melhor = Object.assign(g, {nota});
+  }
+  if (!melhor || melhor.postas.length < 2) return AV.avisar('Não consegui cruzar essas palavras. Tente outra lista.');
+  // numeração: de cima para baixo, da esquerda para a direita
+  const inicios = {};
+  melhor.postas.sort((a, b) => a.r - b.r || a.c - b.c).forEach(p => { const kk = p.r + ',' + p.c; if (!inicios[kk]) inicios[kk] = Object.keys(inicios).length + 1; p.num = inicios[kk]; });
+  cruz = melhor; valores = {}; sel = null;
+  if ($('chkPrimeira').checked) cruz.postas.forEach(p => { valores[p.r + ',' + p.c] = p.w[0]; });
+  desenhar(); AV.mostrarTela('tJogo');
+  $('msg').textContent = `${cruz.postas.length} palavras. Bom trabalho!`;
+  escolher(cruz.postas[0]);
+}
+function celulas(p){ const a = []; for (let i = 0; i < p.w.length; i++) a.push([p.r + (p.d === 'V' ? i : 0), p.c + (p.d === 'H' ? i : 0)]); return a; }
+function desenhar(){
+  const t = window.innerWidth < 760 ? Math.floor((window.innerWidth - 40) / cruz.colunas) - 2 : Math.max(30, Math.min(56, Math.floor(Math.min(window.innerWidth * .55, window.innerHeight - 230) / Math.max(cruz.colunas, cruz.linhas)) - 2));
+  $('grade').style.setProperty('--t', t + 'px');
+  $('grade').style.gridTemplateColumns = `repeat(${cruz.colunas}, var(--t))`;
+  const letra = {}, nums = {};
+  cruz.postas.forEach(p => { celulas(p).forEach(([r, c], i) => { letra[r + ',' + c] = p.w[i]; }); nums[p.r + ',' + p.c] = p.num; });
+  let html = '';
+  for (let r = 0; r < cruz.linhas; r++) for (let c = 0; c < cruz.colunas; c++){
+    const kk = r + ',' + c;
+    html += letra[kk] ? `<div class="q l" data-k="${kk}">${nums[kk] ? `<span class="num">${nums[kk]}</span>` : ''}<span class="v">${AV.esc(valores[kk] || '')}</span></div>` : '<div class="q"></div>';
+  }
+  $('grade').innerHTML = html;
+  $('grade').querySelectorAll('.q.l').forEach(el => el.onclick = () => clicarCelula(el.dataset.k));
+  const tipo = $('selPista').value, comLetras = $('chkLetras').checked;
+  const linhaPista = p => {
+    const dica = tipo === 'dica' && p.item.i.dica ? AV.esc(p.item.i.dica) : '';
+    return `<div class="pista" data-n="${p.num}" data-d="${p.d}"><b>${p.num}.</b> ${dica || `<span class="e">${p.item.i.emoji || '❔'}</span>`}${comLetras ? ` <small>(${p.w.length} letras)</small>` : ''}</div>`;
+  };
+  $('pistas').innerHTML = ['H', 'V'].map(d => {
+    const ps = cruz.postas.filter(p => p.d === d);
+    return ps.length ? `<div class="coluna"><h2>${d === 'H' ? '➡️ Horizontais' : '⬇️ Verticais'}</h2>${ps.map(linhaPista).join('')}</div>` : '';
+  }).join('');
+  $('pistas').querySelectorAll('.pista').forEach(el => el.onclick = () => escolher(cruz.postas.find(p => p.num === +el.dataset.n && p.d === el.dataset.d)));
+  marcar();
+}
+function el(kk){ return $('grade').querySelector(`.q.l[data-k="${kk}"]`); }
+function marcar(){
+  $('grade').querySelectorAll('.q.l').forEach(x => x.classList.remove('ativa', 'foco'));
+  $('pistas').querySelectorAll('.pista').forEach(x => x.classList.toggle('ativa', !!sel && +x.dataset.n === sel.num && x.dataset.d === sel.d));
+  cruz.postas.forEach(p => { const pe = $('pistas').querySelector(`.pista[data-n="${p.num}"][data-d="${p.d}"]`); if (pe) pe.classList.toggle('ok', palavraCerta(p)); });
+  if (!sel) return;
+  celulas(sel).forEach(([r, c], i) => { const x = el(r + ',' + c); x.classList.add('ativa'); if (i === foco) x.classList.add('foco'); });
+}
+function escolher(p, posicao){ sel = p; foco = posicao || Math.max(0, celulas(p).findIndex(([r, c]) => !valores[r + ',' + c])); marcar(); }
+function clicarCelula(kk){
+  const [r, c] = kk.split(',').map(Number);
+  const donas = cruz.postas.filter(p => celulas(p).some(([a, b]) => a === r && b === c));
+  let p = donas[0];
+  if (sel && donas.includes(sel) && donas.length > 1 && celulas(sel)[foco].join(',') === kk) p = donas.find(x => x !== sel);
+  else if (sel && donas.includes(sel)) p = sel;
+  escolher(p, celulas(p).findIndex(([a, b]) => a === r && b === c));
+}
+const palavraCerta = p => celulas(p).every(([r, c], i) => base(valores[r + ',' + c] || '') === base(p.w[i]));
+function digitar(ch){
+  if (!sel) return;
+  const cs = celulas(sel), [r, c] = cs[foco], kk = r + ',' + c;
+  valores[kk] = ch; const x = el(kk); x.querySelector('.v').textContent = ch; x.classList.remove('certa', 'errada', 'revelada');
+  if (palavraCerta(sel)){ P.falar(sel.item.i.palavra); AV.tom(880, .15); verificarFim(); }
+  if (foco < cs.length - 1) foco++;
+  marcar();
+}
+function verificarFim(){
+  if (cruz.postas.every(palavraCerta)){ $('msg').textContent = '🏆 Cruzadinha completa!'; AV.fanfarra(); AV.confete(); }
+}
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || !sel) return;
+  if (e.key === 'Backspace'){
+    e.preventDefault();
+    const cs = celulas(sel); let [r, c] = cs[foco];
+    if (!valores[r + ',' + c] && foco > 0){ foco--; [r, c] = cs[foco]; }
+    delete valores[r + ',' + c]; el(r + ',' + c).querySelector('.v').textContent = ''; marcar(); return;
+  }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown'){ foco = Math.min(celulas(sel).length - 1, foco + 1); marcar(); return; }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ foco = Math.max(0, foco - 1); marcar(); return; }
+  if (/^\p{L}$/u.test(e.key)){ e.preventDefault(); digitar(e.key.toUpperCase()); }
+});
+$('btnConferir').onclick = () => {
+  let erradas = 0, vazias = 0;
+  cruz.postas.forEach(p => celulas(p).forEach(([r, c], i) => {
+    const kk = r + ',' + c, x = el(kk), v = valores[kk];
+    x.classList.remove('certa', 'errada');
+    if (!v){ vazias++; return; }
+    if (base(v) === base(p.w[i])){ x.classList.add('certa'); valores[kk] = p.w[i]; x.querySelector('.v').textContent = p.w[i]; }
+    else { x.classList.add('errada'); erradas++; }
+  }));
+  $('msg').textContent = erradas ? `🔴 ${erradas} letra(s) para rever.` : vazias ? '✅ Tudo certo até aqui! Continuem.' : '🏆 Cruzadinha completa!';
+  if (!erradas && !vazias){ AV.fanfarra(); AV.confete(); }
+  marcar();
+};
+function revelar(p){ celulas(p).forEach(([r, c], i) => { const kk = r + ',' + c; valores[kk] = p.w[i]; const x = el(kk); x.querySelector('.v').textContent = p.w[i]; x.classList.add('revelada'); }); }
+$('btnRevelar').onclick = () => { if (sel){ revelar(sel); P.falar(sel.item.i.palavra); marcar(); verificarFim(); } };
+$('btnTudo').onclick = () => { cruz.postas.forEach(revelar); marcar(); };
+$('btnImprimir').onclick = () => window.print();
+$('btnNovo').onclick = gerar;
+$('btnVoltar').onclick = () => AV.mostrarTela('tConfig');
+$('btnGerar').onclick = gerar;
+window.addEventListener('resize', () => { if (cruz && $('tJogo').classList.contains('ativa')) desenhar(); });
+</script>
+</body>
+</html>

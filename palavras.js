@@ -193,6 +193,7 @@ function avisar(t){
 let somLigado = true, ac;
 function tom(freq, dur = .12, tipo = 'triangle', vol = .15, atraso = 0){
   if (!somLigado) return;
+  if (window.PAINEL_CALMO){ tipo = 'sine'; vol *= .35; }   // visual calmo: sons mais baixos e suaves
   try{
     ac = ac || new (window.AudioContext || window.webkitAudioContext)();
     if (ac.state === 'suspended') ac.resume();
@@ -234,6 +235,7 @@ function falarSilabas(item, rate){
 }
 
 function confete(){
+  if (window.PAINEL_CALMO) return;
   const itens = ['⭐','🎉','✨','🌟','🎈'];
   for (let i = 0; i < 26; i++){
     const s = document.createElement('span'); s.className = 'confete'; s.textContent = itens[i % itens.length];

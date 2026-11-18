@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Escreva com o Dedo</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  body{padding-top:6px;overflow-x:hidden}
+  .modos button{font-size:17px;padding:10px 14px}
+  .modos button.ativo{background:#243049;color:#fff}
+  #palavraTopo{text-align:center;font-size:40px;font-weight:bold;letter-spacing:6px;min-height:48px;margin:2px 0}
+  #palavraTopo span{color:#b8c1d1}
+  #palavraTopo span.agora{color:#2f80ed;text-decoration:underline}
+  #palavraTopo span.feita{color:#27ae60}
+  #quadro{position:relative;margin:0 auto;background:#fff;border-radius:24px;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  #tela{display:block;border-radius:24px;cursor:crosshair}
+  #estrela{position:absolute;right:12px;top:8px;font-size:60px;display:none}
+  #msg{text-align:center;font-size:22px;font-weight:bold;min-height:30px;margin:6px 0}
+  #formNome{display:none;text-align:center;margin:6px 0}
+  #formNome input{width:260px;text-transform:uppercase}
+  .botoes button{font-size:22px;min-width:64px}
+</style>
+</head>
+<body>
+<h1>✋ Escreva com o Dedo</h1>
+<div class="linha modos" id="modos">
+  <button data-m="mai" class="ativo">ABC</button>
+  <button data-m="min">abc</button>
+  <button data-m="num">123</button>
+  <button data-m="vog">Vogais</button>
+  <button data-m="nome">📛 Meu nome</button>
+  <button data-m="pal">Palavras</button>
+</div>
+<div id="formNome"><input type="text" id="inNome" placeholder="Digite o nome" maxlength="20"> <button id="btnNome" class="ok">✅ Começar</button></div>
+<div id="palavraTopo"></div>
+<div id="quadro"><canvas id="tela"></canvas><div id="estrela">⭐</div></div>
+<div id="msg"></div>
+<div class="linha botoes">
+  <button id="btnAnt" title="Anterior">◀️</button>
+  <button id="btnApagar">🧽 Apagar</button>
+  <button id="btnOuvir">🔊</button>
+  <button id="btnPronto" class="ok">✔️ Terminei</button>
+  <button id="btnProx" title="Próxima">▶️</button>
+</div>
+<p class="dica" style="text-align:center">Cubra a letra com o dedo, seguindo o desenho dela. Funciona no iPad, em tela de toque e com o mouse.</p>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var NOMES = {A:'á',B:'bê',C:'cê',D:'dê',E:'é',F:'éfe',G:'gê',H:'agá',I:'i',J:'jota',K:'cá',L:'éle',M:'ême',N:'êne',O:'ó',P:'pê',Q:'quê',R:'érre',S:'ésse',T:'tê',U:'u',V:'vê',W:'dáblio',X:'xis',Y:'ípsilon',Z:'zê'};
+var PALAVRAS = ['GATO','BOLA','CASA','PATO','SAPO','LUA','SOL','MÃE','PAI','UVA','DADO','FACA','MALA','VACA','BOLO'];
+var FONTE = '"Arial Rounded MT Bold","Trebuchet MS",Arial,sans-serif';
+var cv = $('tela'), ctx = cv.getContext('2d'), tam = 400, escala = 1;
+var modo = 'mai', itens = [], pos = 0, tracos = [], atual = null, desenhando = false, feito = false;
+
+function sequencia(m){
+  var abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if (m === 'mai') return abc;
+  if (m === 'min') return abc.map(function(l){ return l.toLowerCase(); });
+  if (m === 'num') return '0123456789'.split('');
+  if (m === 'vog') return ['A','E','I','O','U','a','e','i','o','u'];
+  if (m === 'pal') return PALAVRAS.join(' ').split('');
+  return itens;
+}
+function itemAtual(){ return itens[pos] || ''; }
+function medir(){
+  var largura = Math.min(document.documentElement.clientWidth - 24, 680);
+  var altura = (window.innerHeight || 700) - 250;
+  tam = Math.max(240, Math.min(largura, altura));
+  escala = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.round(tam * escala); cv.height = Math.round(tam * escala);
+  cv.style.width = tam + 'px'; cv.style.height = tam + 'px';
+  $('quadro').style.width = tam + 'px';
+}
+// desenha a letra-guia num contexto qualquer, no tamanho t
+function guia(c, t, letra, modoDesenho){
+  var fs = Math.round(t * 0.8), base = Math.round(t * 0.74);
+  c.font = 'bold ' + fs + 'px ' + FONTE;
+  c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+  if (modoDesenho === 'mascara'){ c.fillStyle = '#000'; c.fillText(letra, t / 2, base); return; }
+  if (modoDesenho === 'dilatada'){ c.fillStyle = '#000'; c.strokeStyle = '#000'; c.lineWidth = t * 0.09; c.lineJoin = 'round'; c.fillText(letra, t / 2, base); c.strokeText(letra, t / 2, base); return; }
+  // linhas de caderno
+  c.strokeStyle = '#cfe0f5'; c.lineWidth = 2; c.setLineDash ? c.setLineDash([]) : 0;
+  var linhas = [base, base - fs * 0.52, base - fs * 0.73];
+  for (var i = 0; i < linhas.length; i++){ c.beginPath(); c.moveTo(t * 0.04, linhas[i]); c.lineTo(t * 0.96, linhas[i]); c.stroke(); }
+  c.fillStyle = '#e6ebf3'; c.fillText(letra, t / 2, base);
+  if (c.setLineDash) c.setLineDash([t * 0.02, t * 0.02]);
+  c.strokeStyle = '#97a3b8'; c.lineWidth = Math.max(2, t * 0.006); c.strokeText(letra, t / 2, base);
+  if (c.setLineDash) c.setLineDash([]);
+}
+function desenhar(){
+  ctx.setTransform(escala, 0, 0, escala, 0, 0);
+  ctx.clearRect(0, 0, tam, tam);
+  var l = itemAtual();
+  if (l && l !== ' ') guia(ctx, tam, l);
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = tam * 0.075;
+  ctx.strokeStyle = feito ? '#27ae60' : '#2f80ed';
+  for (var i = 0; i < tracos.length; i++){
+    var t = tracos[i]; if (!t.length) continue;
+    ctx.beginPath(); ctx.moveTo(t[0][0], t[0][1]);
+    if (t.length === 1) ctx.lineTo(t[0][0] + .1, t[0][1]);
+    for (var k = 1; k < t.length; k++) ctx.lineTo(t[k][0], t[k][1]);
+    ctx.stroke();
+  }
+}
+function topo(){
+  var html = '';
+  if (modo === 'nome' || modo === 'pal'){
+    var ini = pos, fim = pos;
+    while (ini > 0 && itens[ini - 1] !== ' ') ini--;
+    while (fim < itens.length - 1 && itens[fim + 1] !== ' ') fim++;
+    for (var i = ini; i <= fim; i++) html += '<span class="' + (i === pos ? 'agora' : i < pos ? 'feita' : '') + '">' + A.esc(itens[i]) + '</span>';
+  }
+  $('palavraTopo').innerHTML = html;
+}
+function mostrar(){
+  tracos = []; feito = false; $('estrela').style.display = 'none'; $('msg').textContent = '';
+  if (itemAtual() === ' '){ pos++; }
+  topo(); desenhar();
+}
+function falarItem(){
+  var l = itemAtual(); if (!l) return;
+  var u = l.toUpperCase();
+  if (modo === 'nome' || modo === 'pal'){
+    var ini = pos, fim = pos;
+    while (ini > 0 && itens[ini - 1] !== ' ') ini--;
+    while (fim < itens.length - 1 && itens[fim + 1] !== ' ') fim++;
+    A.falar((NOMES[u] || l) + ', de ' + itens.slice(ini, fim + 1).join('').toLowerCase());
+  } else A.falar(NOMES[u] || l);
+}
+function escolherModo(m){
+  modo = m;
+  A.cada(document.querySelectorAll('#modos button'), function(b){ b.className = b.getAttribute('data-m') === m ? 'ativo' : ''; });
+  $('formNome').style.display = m === 'nome' ? 'block' : 'none';
+  if (m === 'nome'){
+    var salvo = A.ler('escreva_nome') || '';
+    $('inNome').value = salvo;
+    itens = salvo ? salvo.toUpperCase().split('') : [];
+  } else itens = sequencia(m);
+  pos = 0; mostrar();
+  if (itens.length) falarItem();
+}
+$('btnNome').onclick = function(){
+  var n = $('inNome').value.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
+  if (!n) return;
+  A.guardar('escreva_nome', n);
+  itens = n.toUpperCase().split(''); pos = 0; mostrar(); falarItem();
+};
+A.cada(document.querySelectorAll('#modos button'), function(b){ b.onclick = function(){ escolherModo(b.getAttribute('data-m')); }; });
+
+// ---------- avaliação: quanto da letra foi coberto e quanto do traço ficou dentro dela ----------
+function avaliar(){
+  var l = itemAtual(); if (!l || !tracos.length) return null;
+  var S = 120, f = S / tam;
+  function tela(){ var c = document.createElement('canvas'); c.width = S; c.height = S; return c; }
+  var gm = tela(), gd = tela(), st = tela();
+  guia(gm.getContext('2d'), S, l, 'mascara');
+  guia(gd.getContext('2d'), S, l, 'dilatada');
+  var sc = st.getContext('2d');
+  sc.lineCap = 'round'; sc.lineJoin = 'round'; sc.lineWidth = tam * 0.075 * f; sc.strokeStyle = '#000';
+  for (var i = 0; i < tracos.length; i++){
+    var t = tracos[i]; if (!t.length) continue;
+    sc.beginPath(); sc.moveTo(t[0][0] * f, t[0][1] * f);
+    if (t.length === 1) sc.lineTo(t[0][0] * f + .1, t[0][1] * f);
+    for (var k = 1; k < t.length; k++) sc.lineTo(t[k][0] * f, t[k][1] * f);
+    sc.stroke();
+  }
+  var a = gm.getContext('2d').getImageData(0, 0, S, S).data, b = gd.getContext('2d').getImageData(0, 0, S, S).data, c = sc.getImageData(0, 0, S, S).data;
+  var letra = 0, coberta = 0, tinta = 0, dentro = 0;
+  for (var p = 3; p < a.length; p += 4){
+    var ehLetra = a[p] > 60, ehTinta = c[p] > 60;
+    if (ehLetra){ letra++; if (ehTinta) coberta++; }
+    if (ehTinta){ tinta++; if (b[p] > 60) dentro++; }
+  }
+  return {cobertura: letra ? coberta / letra : 0, dentro: tinta ? dentro / tinta : 0};
+}
+function conferir(final){
+  if (feito) return;
+  var r = avaliar(); if (!r) return;
+  if (r.cobertura >= 0.55 && r.dentro >= 0.7){
+    feito = true; desenhar(); $('estrela').style.display = 'block';
+    $('msg').textContent = A.sorteio(['⭐ Muito bem!', '⭐ Isso mesmo!', '⭐ Que capricho!']);
+    A.som('ok'); A.falar('Muito bem!');
+    setTimeout(function(){ if (feito && pos < itens.length - 1){ pos++; mostrar(); falarItem(); } else if (feito) $('msg').textContent = '🏆 Você terminou! Toque em ◀️ para rever.'; }, 1700);
+  } else if (final){
+    $('msg').textContent = r.dentro < 0.7 ? '🙂 Vamos tentar de novo? Fique dentro da letra.' : '🙂 Quase! Cubra a letra inteira.';
+    A.som('erro');
+  }
+}
+
+// ---------- toque e mouse ----------
+function ponto(e){
+  var r = cv.getBoundingClientRect(), p = e.touches && e.touches.length ? e.touches[0] : (e.changedTouches && e.changedTouches.length ? e.changedTouches[0] : e);
+  return [(p.clientX - r.left) * tam / r.width, (p.clientY - r.top) * tam / r.height];
+}
+function inicio(e){ e.preventDefault(); if (feito) return; desenhando = true; atual = [ponto(e)]; tracos.push(atual); desenhar(); }
+function move(e){ if (!desenhando) return; e.preventDefault(); atual.push(ponto(e)); desenhar(); }
+function fim(e){ if (!desenhando) return; desenhando = false; conferir(false); }
+cv.addEventListener('touchstart', inicio, false);
+cv.addEventListener('touchmove', move, false);
+cv.addEventListener('touchend', fim, false);
+cv.addEventListener('mousedown', inicio, false);
+window.addEventListener('mousemove', move, false);
+window.addEventListener('mouseup', fim, false);
+
+$('btnApagar').onclick = function(){ tracos = []; feito = false; $('estrela').style.display = 'none'; $('msg').textContent = ''; desenhar(); };
+$('btnOuvir').onclick = falarItem;
+$('btnPronto').onclick = function(){ conferir(true); };
+$('btnProx').onclick = function(){ if (pos < itens.length - 1){ pos++; if (itemAtual() === ' ') pos++; mostrar(); falarItem(); } };
+$('btnAnt').onclick = function(){ if (pos > 0){ pos--; if (itemAtual() === ' ' && pos > 0) pos--; mostrar(); falarItem(); } };
+window.addEventListener('resize', function(){ medir(); desenhar(); });
+medir();
+var pedido = A.param('modo');
+escolherModo(pedido && /^(mai|min|num|vog|nome|pal)$/.test(pedido) ? pedido : 'mai');
+})();
+</script>
+</body>
+</html>

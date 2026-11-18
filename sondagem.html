@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sondagem da Escrita</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .campos{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .campos button{min-width:170px;font-size:1.1rem}
+  .campos button span{display:block;font-size:2.2rem}
+  .campos button.ativo{background:#243049;color:#fff}
+  #dNumero{text-align:center;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:bold;margin:10px 0}
+  #dFigura{text-align:center;font-size:clamp(5rem,14vw,9rem);min-height:1.2em;line-height:1.1}
+  #dPalavra{text-align:center;font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;min-height:1.4em;color:#2f80ed;visibility:hidden}
+  #dPalavra.ver{visibility:visible}
+  .orient{max-width:860px;margin:10px auto;background:#fff6cc;border-radius:16px;padding:10px 16px;font-size:1.05rem}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}
+  td,th{padding:6px 8px;border-bottom:1px solid #eef1f6;text-align:left;font-size:1rem}
+  th{background:#243049;color:#fff}
+  .niv button{padding:6px 10px;font-size:.95rem;margin:2px;box-shadow:none;border:2px solid #d5dbe6;background:#fff}
+  .niv button.on{color:#fff;border-color:transparent}
+  td input{font:inherit;width:100%;border:1px solid #ccd;border-radius:8px;padding:4px 6px}
+  .legendaNiv{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0}
+  .legendaNiv span{border-radius:10px;padding:4px 10px;color:#fff;font-weight:bold;font-size:.95rem}
+  .resumo{display:flex;flex-direction:column;gap:8px;max-width:980px;margin:10px auto}
+  .resumo .l{display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:8px 12px}
+  .resumo .t{width:230px;font-weight:bold}
+  .resumo .b{height:26px;border-radius:999px;min-width:6px}
+  .resumo .q{font-weight:bold;width:40px}
+  .resumo .ns{font-size:.95rem;flex:1}
+  .duplas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .duplas span{background:#fff;border-radius:12px;padding:6px 12px;box-shadow:0 2px 0 #0001}
+  .hist{display:flex;flex-direction:column;gap:8px;max-width:820px;margin:8px auto}
+  .hist div{display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:8px 12px;flex-wrap:wrap}
+  .hist b{flex:1}
+  @media print{body{background:#fff !important}.naoImprimir{display:none !important}}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>📋 Sondagem da Escrita</h1>
+  <p class="dica" style="text-align:center;max-width:820px">Para conhecer a hipótese de escrita de cada aluno: dite 4 palavras do mesmo assunto (da maior para a menor) e uma frase. Depois marque o nível de cada um e veja o mapa da turma. <b>Tudo fica guardado só neste computador.</b></p>
+  <div class="cartao">
+    <h2>1. Escolha o assunto</h2>
+    <div class="campos" id="campos"></div>
+    <label><input type="checkbox" id="chkFigura"> Mostrar a figura enquanto dito (o comum é não mostrar)</label>
+  </div>
+  <div class="linha">
+    <button id="btnDitado" class="principal">🔊 Começar o ditado</button>
+    <button id="btnRegistrar">📝 Só registrar os níveis</button>
+    <button id="btnHistorico">📚 Sondagens anteriores</button>
+  </div>
+</section>
+
+<section id="tDitado" class="tela">
+  <div id="dNumero"></div>
+  <div id="dFigura"></div>
+  <div id="dPalavra"></div>
+  <div class="linha">
+    <button id="btnAnterior">◀️ Anterior</button>
+    <button id="btnDitar" class="principal">🔊 Ditar</button>
+    <button id="btnVer" title="Segure para ver a palavra (só para você)">👁️ Segure para ver</button>
+    <button id="btnSeguinte">Próxima ▶️</button>
+  </div>
+  <div class="orient">
+    💡 <b>Como fazer:</b> dite a palavra do jeito normal, <b>sem separar as sílabas</b>. Não corrija na hora.
+    Quando todos terminarem, peça que cada aluno <b>leia o que escreveu apontando com o dedo</b>: isso mostra como ele pensa a escrita.
+  </div>
+  <div class="linha"><button id="btnIrRegistro">📝 Registrar os níveis</button><button class="voltar">⬅️ Início</button></div>
+</section>
+
+<section id="tRegistro" class="tela">
+  <h1>📝 Registro da sondagem</h1>
+  <div class="linha">
+    <label>Data: <input type="date" id="inData"></label>
+    <span id="rCampo" class="dica" style="font-size:1.1rem"></span>
+  </div>
+  <div class="legendaNiv" id="legenda"></div>
+  <div id="semNomes" class="cartao" hidden>
+    <p>Ainda não há nomes da turma neste computador. Escreva um por linha:</p>
+    <textarea id="txtNomes" style="width:100%;min-height:120px;font:inherit"></textarea>
+    <button id="btnUsarNomes">✅ Usar estes nomes</button>
+  </div>
+  <table id="tabela"></table>
+  <div class="linha"><button id="btnSalvar" class="principal">💾 Salvar e ver o mapa da turma</button><button class="voltar">⬅️ Início</button></div>
+</section>
+
+<section id="tMapa" class="tela">
+  <h1 id="mTitulo">🗺️ Mapa da turma</h1>
+  <div class="resumo" id="resumo"></div>
+  <h2>🤝 Sugestão de duplas (níveis próximos aprendem juntos)</h2>
+  <div class="duplas" id="duplas"></div>
+  <div id="evolucao"></div>
+  <div class="linha naoImprimir">
+    <button id="btnImprimir">🖨️ Imprimir</button>
+    <button id="btnCsv">📄 Baixar planilha (CSV)</button>
+    <button id="btnEditar">✏️ Editar esta sondagem</button>
+    <button class="voltar">⬅️ Início</button>
+  </div>
+</section>
+
+<section id="tHistorico" class="tela">
+  <h1>📚 Sondagens anteriores</h1>
+  <div class="hist" id="hist"></div>
+  <div class="linha"><button class="voltar">⬅️ Início</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const CAMPOS = [
+  {id: 'animais', nome: 'Animais', emoji: '🐾', palavras: [['BORBOLETA','🦋'],['CAVALO','🐴'],['GATO','🐱'],['BOI','🐂']], frase: 'O GATO BEBE LEITE.'},
+  {id: 'escola', nome: 'Material escolar', emoji: '🎒', palavras: [['APONTADOR',''],['CADERNO','📒'],['LÁPIS','✏️'],['GIZ','🖍️']], frase: 'O LÁPIS ESTÁ NO ESTOJO.'},
+  {id: 'lanche', nome: 'Lanche', emoji: '🥪', palavras: [['SANDUÍCHE','🥪'],['BISCOITO','🍪'],['SUCO','🧃'],['PÃO','🍞']], frase: 'EU COMO PÃO COM MANTEIGA.'},
+  {id: 'brinquedos', nome: 'Brinquedos', emoji: '🧸', palavras: [['BICICLETA','🚲'],['BONECA','🪆'],['BOLA','⚽'],['TREM','🚂']], frase: 'A BONECA CAIU DA CAMA.'},
+  {id: 'frutas', nome: 'Frutas', emoji: '🍎', palavras: [['MELANCIA','🍉'],['BANANA','🍌'],['UVA','🍇'],['NOZ','🌰']], frase: 'A BANANA ESTÁ MADURA.'},
+  {id: 'mercado', nome: 'Mercado (EJA)', emoji: '🛒', palavras: [['MORTADELA',''],['MACARRÃO','🍝'],['ARROZ','🍚'],['SAL','🧂']], frase: 'COMPREI ARROZ E FEIJÃO NO MERCADO.'},
+  {id: 'casa', nome: 'Casa (EJA)', emoji: '🏠', palavras: [['GELADEIRA',''],['PANELA','🍲'],['MESA',''],['LUZ','💡']], frase: 'A PANELA ESTÁ NO FOGÃO.'},
+  {id: 'trabalho', nome: 'Trabalho (EJA)', emoji: '🧰', palavras: [['CARPINTEIRO',''],['MARTELO','🔨'],['PREGO',''],['PÁ','']], frase: 'O PEDREIRO USA A PÁ NA OBRA.'}
+];
+const NIVEIS = [
+  {id: 'PS', nome: 'Pré-silábico', cor: '#e74c3c', desc: 'ainda não relaciona a escrita com os sons da fala (usa letras, números ou desenhos sem correspondência).'},
+  {id: 'SSV', nome: 'Silábico sem valor sonoro', cor: '#e67e22', desc: 'uma letra para cada sílaba, sem relação com o som (GATO → KM).'},
+  {id: 'SCV', nome: 'Silábico com valor sonoro', cor: '#d4ac0d', desc: 'uma letra para cada sílaba, com o som certo (GATO → AO ou GT).'},
+  {id: 'SA', nome: 'Silábico-alfabético', cor: '#27ae60', desc: 'às vezes uma letra por sílaba, às vezes a sílaba inteira (GATO → GAO).'},
+  {id: 'A', nome: 'Alfabético', cor: '#2f80ed', desc: 'escreve todos os sons, mesmo com erros de ortografia (CAVALO → KAVALO).'}
+];
+const CHAVE = 'painel_sondagens';
+const lerS = () => { try { return JSON.parse(localStorage.getItem(CHAVE)) || []; } catch (e) { return []; } };
+const gravarS = l => { try { localStorage.setItem(CHAVE, JSON.stringify(l)); } catch (e) { AV.avisar('Não foi possível salvar neste navegador.'); } };
+const turma = () => { try { return (JSON.parse(localStorage.getItem('painel_turma')) || {}).alunos || []; } catch (e) { return []; } };
+const hoje = () => new Date().toISOString().slice(0, 10);
+const dataBR = d => d.split('-').reverse().join('/');
+let campo = CAMPOS[0], passo = 0, atual = null;
+
+$('campos').innerHTML = CAMPOS.map((c, i) => `<button data-i="${i}" class="${i === 0 ? 'ativo' : ''}"><span>${c.emoji}</span>${AV.esc(c.nome)}</button>`).join('');
+$('campos').querySelectorAll('button').forEach(b => b.onclick = () => { campo = CAMPOS[+b.dataset.i]; $('campos').querySelectorAll('button').forEach(x => x.classList.toggle('ativo', x === b)); });
+$('legenda').innerHTML = NIVEIS.map(n => `<span style="background:${n.cor}" title="${AV.esc(n.desc)}">${n.id} = ${AV.esc(n.nome)}</span>`).join('');
+document.querySelectorAll('.voltar').forEach(b => b.onclick = () => AV.mostrarTela('tConfig'));
+
+// ---------- Ditado ----------
+const itens = () => campo.palavras.map(p => ({t: p[0], e: p[1]})).concat([{t: campo.frase, e: '', frase: true}]);
+function mostrarPasso(){
+  const it = itens()[passo];
+  $('dNumero').textContent = it.frase ? '✍️ Agora a frase' : `✍️ Palavra ${passo + 1} de 4`;
+  $('dFigura').textContent = $('chkFigura').checked ? it.e : '';
+  $('dPalavra').textContent = it.t; $('dPalavra').classList.remove('ver');
+  $('btnAnterior').disabled = passo === 0; $('btnSeguinte').disabled = passo === itens().length - 1;
+}
+function ditar(){ const t = itens()[passo].t.toLowerCase(); AV.falar(itens()[passo].frase ? t : `${t}... ${t}`); }
+$('btnDitado').onclick = () => { passo = 0; AV.mostrarTela('tDitado'); mostrarPasso(); };
+$('btnDitar').onclick = ditar;
+$('btnAnterior').onclick = () => { passo = Math.max(0, passo - 1); mostrarPasso(); };
+$('btnSeguinte').onclick = () => { passo = Math.min(itens().length - 1, passo + 1); mostrarPasso(); };
+const ver = v => e => { e.preventDefault(); $('dPalavra').classList.toggle('ver', v); };
+['mousedown', 'touchstart'].forEach(ev => $('btnVer').addEventListener(ev, ver(true)));
+['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(ev => $('btnVer').addEventListener(ev, ver(false)));
+
+// ---------- Registro ----------
+function abrirRegistro(sondagem){
+  atual = sondagem || {id: Date.now(), data: hoje(), campo: campo.nome, registros: {}};
+  $('inData').value = atual.data; $('rCampo').textContent = `Assunto: ${atual.campo}`;
+  const nomes = turma();
+  $('semNomes').hidden = nomes.length > 0;
+  $('tabela').innerHTML = nomes.length ? '<tr><th>Aluno</th><th>Nível</th><th>Observação</th></tr>' + nomes.map((n, i) => {
+    const r = atual.registros[n] || {};
+    return `<tr data-n="${AV.esc(n)}"><td><b>${AV.esc(n)}</b></td><td class="niv">${NIVEIS.map(nv => `<button data-nv="${nv.id}" class="${r.nivel === nv.id ? 'on' : ''}" style="${r.nivel === nv.id ? 'background:' + nv.cor : ''}" title="${AV.esc(nv.nome)}: ${AV.esc(nv.desc)}">${nv.id}</button>`).join('')}</td><td><input value="${AV.esc(r.obs || '')}" placeholder="ex.: troca P e B"></td></tr>`;
+  }).join('') : '';
+  $('tabela').querySelectorAll('.niv button').forEach(b => b.onclick = () => {
+    const tr = b.closest('tr'), ligado = b.classList.contains('on');
+    tr.querySelectorAll('.niv button').forEach(x => { x.classList.remove('on'); x.style.background = ''; });
+    if (!ligado){ b.classList.add('on'); b.style.background = NIVEIS.find(n => n.id === b.dataset.nv).cor; }
+  });
+  AV.mostrarTela('tRegistro');
+}
+$('btnUsarNomes').onclick = () => {
+  const nomes = [...new Set($('txtNomes').value.split('\n').map(s => s.trim()).filter(Boolean))];
+  if (!nomes.length) return;
+  let d = {}; try { d = JSON.parse(localStorage.getItem('painel_turma')) || {}; } catch (e) {}
+  d.alunos = nomes; try { localStorage.setItem('painel_turma', JSON.stringify(d)); } catch (e) {}
+  abrirRegistro(atual);
+};
+$('btnIrRegistro').onclick = () => abrirRegistro();
+$('btnRegistrar').onclick = () => abrirRegistro();
+$('btnSalvar').onclick = () => {
+  atual.data = $('inData').value || hoje(); atual.registros = {};
+  $('tabela').querySelectorAll('tr[data-n]').forEach(tr => {
+    const on = tr.querySelector('.niv button.on'), obs = tr.querySelector('input').value.trim();
+    if (on || obs) atual.registros[tr.dataset.n] = {nivel: on ? on.dataset.nv : '', obs};
+  });
+  if (!Object.keys(atual.registros).length) return AV.avisar('Marque o nível de pelo menos um aluno.');
+  const lista = lerS().filter(s => s.id !== atual.id); lista.push(atual); lista.sort((a, b) => a.data.localeCompare(b.data));
+  gravarS(lista); mostrarMapa(atual);
+};
+
+// ---------- Mapa ----------
+function duplas(regs){
+  const resto = regs.slice().sort((a, b) => a.i - b.i), res = [];
+  while (resto.length > 1){
+    const a = resto.shift();
+    let k = resto.findIndex(x => x.i === a.i + 1);
+    if (k < 0) k = resto.findIndex(x => x.i === a.i);
+    if (k < 0) k = resto.findIndex(x => x.i === a.i + 2);
+    if (k < 0) k = 0;
+    res.push([a, resto.splice(k, 1)[0]]);
+  }
+  if (resto.length){ if (res.length) res[res.length - 1].push(resto[0]); else res.push([resto[0]]); }
+  return res;
+}
+function mostrarMapa(s){
+  atual = s;
+  const regs = Object.keys(s.registros).filter(n => s.registros[n].nivel).map(n => ({n, nv: s.registros[n].nivel, i: NIVEIS.findIndex(x => x.id === s.registros[n].nivel)}));
+  $('mTitulo').textContent = `🗺️ Mapa da turma — ${dataBR(s.data)} (${s.campo})`;
+  const max = Math.max(1, ...NIVEIS.map(nv => regs.filter(r => r.nv === nv.id).length));
+  $('resumo').innerHTML = NIVEIS.map(nv => {
+    const quem = regs.filter(r => r.nv === nv.id);
+    return `<div class="l"><span class="t" style="color:${nv.cor}">${AV.esc(nv.nome)}</span><span class="b" style="width:${quem.length / max * 30}%;background:${nv.cor}"></span><span class="q">${quem.length}</span><span class="ns">${quem.map(r => AV.esc(r.n)).join(', ')}</span></div>`;
+  }).join('');
+  $('duplas').innerHTML = regs.length > 1 ? duplas(regs).map(g => `<span>${g.map(r => `${AV.esc(r.n)} <small>(${r.nv})</small>`).join(' + ')}</span>`).join('') : '<span>Registre pelo menos 2 alunos.</span>';
+  const todas = lerS().filter(x => x.data <= s.data);
+  if (todas.length > 1){
+    const linhas = Object.keys(s.registros).map(n => {
+      const hist = todas.map(x => x.registros[n] && x.registros[n].nivel).filter(Boolean);
+      return hist.length > 1 ? `<span>${AV.esc(n)}: ${hist.join(' → ')}</span>` : '';
+    }).filter(Boolean);
+    $('evolucao').innerHTML = linhas.length ? `<h2>📈 Evolução</h2><div class="duplas">${linhas.join('')}</div>` : '';
+  } else $('evolucao').innerHTML = '';
+  AV.mostrarTela('tMapa');
+}
+$('btnImprimir').onclick = () => window.print();
+$('btnEditar').onclick = () => abrirRegistro(atual);
+$('btnCsv').onclick = () => {
+  const linhas = [['Aluno', 'Nível', 'Nome do nível', 'Observação', 'Data', 'Assunto']].concat(Object.keys(atual.registros).map(n => {
+    const r = atual.registros[n], nv = NIVEIS.find(x => x.id === r.nivel);
+    return [n, r.nivel, nv ? nv.nome : '', r.obs, dataBR(atual.data), atual.campo];
+  }));
+  const csv = '﻿' + linhas.map(l => l.map(v => `"${String(v || '').replace(/"/g, '""')}"`).join(';')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'})); a.download = `sondagem-${atual.data}.csv`; a.click();
+};
+
+// ---------- Histórico ----------
+function mostrarHistorico(){
+  const lista = lerS().slice().reverse();
+  $('hist').innerHTML = lista.length ? lista.map(s => `<div><b>${dataBR(s.data)} — ${AV.esc(s.campo)}</b><span>${Object.keys(s.registros).length} alunos</span><button data-ver="${s.id}">🗺️ Ver mapa</button><button data-apagar="${s.id}">🗑️ Apagar</button></div>`).join('') : '<div>Nenhuma sondagem guardada neste computador.</div>';
+  $('hist').querySelectorAll('[data-ver]').forEach(b => b.onclick = () => mostrarMapa(lerS().find(s => String(s.id) === b.dataset.ver)));
+  $('hist').querySelectorAll('[data-apagar]').forEach(b => b.onclick = () => { if (confirm('Apagar esta sondagem?')){ gravarS(lerS().filter(s => String(s.id) !== b.dataset.apagar)); mostrarHistorico(); } });
+  AV.mostrarTela('tHistorico');
+}
+$('btnHistorico').onclick = mostrarHistorico;
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Famílias Silábicas</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #geradoras{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:8px 0}
+  #geradoras button{display:flex;flex-direction:column;align-items:center;min-width:140px;font-size:1.4rem}
+  #geradoras button span{font-size:3rem;line-height:1.1}
+  .topo{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;background:#fff;border-radius:24px;padding:10px 20px;box-shadow:0 4px 0 #0001}
+  #gEmoji{font-size:clamp(4rem,10vw,7rem);line-height:1}
+  #gPalavra{font-size:clamp(3rem,9vw,6.5rem);font-weight:bold;letter-spacing:8px}
+  #conversa{max-width:900px;margin:10px auto;background:#fff6cc;border-radius:16px;padding:8px 16px;font-size:1.25rem;text-align:center}
+  #silabas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0;min-height:10px}
+  .sil{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:bold;color:#fff;border-radius:18px;padding:6px 22px;box-shadow:0 5px 0 #0002;animation:entrar .4s backwards}
+  #tabela{display:flex;flex-direction:column;gap:8px;align-items:center;margin:8px 0}
+  .familia{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
+  .familia small{width:80px;text-align:right;font-weight:bold;opacity:.7}
+  .familia button{font-size:clamp(1.5rem,3.6vw,2.6rem);min-width:clamp(70px,9vw,120px);color:#fff;padding:8px 10px}
+  .familia.vogais button{background:#7a8599}
+  #montagem{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;min-height:86px;background:#fff;border:4px dashed #b8c4d8;border-radius:20px;margin:10px auto;max-width:900px;padding:8px}
+  #montagem .peca{font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;padding:2px 10px;border-radius:12px;color:#fff}
+  #montagem .vazio{opacity:.5;font-size:1.2rem}
+  #msg{text-align:center;font-size:clamp(1.2rem,2.6vw,1.7rem);min-height:1.5em;margin:6px 0}
+  #msg button{font-size:1.1rem;margin:4px}
+  #mural{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px auto;max-width:1100px}
+  .achada{background:#fff;border-radius:16px;padding:6px 14px;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;box-shadow:0 3px 0 #0001;animation:entrar .4s}
+  .achada.turma{background:#eaf7ee}
+  .achada.falta{background:#f1f3f7;color:#7a8599;font-weight:normal}
+  #contador{text-align:center;font-size:1.2rem;font-weight:bold}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>🧱 Famílias Silábicas</h1>
+  <p class="dica" style="text-align:center;max-width:760px">Inspirado no método Paulo Freire: a turma conversa sobre uma <b>palavra geradora</b>, separa as sílabas, conhece as famílias silábicas e junta sílabas para descobrir palavras novas.</p>
+  <div class="cartao">
+    <h2>1. Palavras geradoras (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Escolha a palavra geradora</h2>
+    <div id="geradoras"></div>
+    <label><input type="checkbox" id="chkMinuscula"> Mostrar em letra minúscula (o padrão é a letra de forma maiúscula)</label>
+  </div>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="topo">
+    <span id="gEmoji"></span><span id="gPalavra"></span>
+    <button id="btnOuvirG">🔊</button>
+  </div>
+  <div id="conversa" hidden></div>
+  <div class="linha">
+    <button id="btnSeparar">✂️ Separar em sílabas</button>
+    <button id="btnFamilias" disabled>🧱 Mostrar as famílias</button>
+    <button id="btnTrocar">🔁 Outra palavra geradora</button>
+  </div>
+  <div id="silabas"></div>
+  <div id="tabela"></div>
+  <div id="areaMontar" hidden>
+    <h2>🔎 Toque nas sílabas para formar uma palavra nova</h2>
+    <div id="montagem"></div>
+    <div class="linha">
+      <button id="btnApagar">⌫ Apagar</button>
+      <button id="btnLimpar">🗑️ Limpar</button>
+      <button id="btnLer">🔊 Ler</button>
+      <button id="btnConferir" class="principal">✔️ Conferir</button>
+    </div>
+    <div id="msg"></div>
+    <div id="contador"></div>
+    <div id="mural"></div>
+    <div class="linha"><button id="btnFaltam">💡 Mostrar as palavras que faltam</button></div>
+  </div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const CORES = ['#e74c3c', '#2f80ed', '#27ae60', '#e67e22', '#8e44ad', '#16a085'];
+const VOGAIS = ['A', 'E', 'I', 'O', 'U'];
+const sem = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-ZÇ]/g, '');
+let dados = null, ger = null, montagem = [], achadas = [], extras = [];
+
+function normalizar(d){
+  if (!d || !Array.isArray(d.palavras)) return null;
+  const palavras = d.palavras.filter(p => p && p.palavra && Array.isArray(p.silabas) && p.silabas.length).map(p => ({
+    palavra: String(p.palavra).toUpperCase(), emoji: p.emoji || '', silabas: p.silabas.map(s => String(s).toUpperCase()),
+    conversa: p.conversa || '',
+    descobertas: (p.descobertas || []).map(x => { const m = String(x).trim().match(/^(\S+)\s*(.*)$/); return m ? {palavra: m[1].toUpperCase(), emoji: m[2] || ''} : null; }).filter(Boolean)
+  }));
+  return palavras.length ? {titulo: d.titulo || 'Palavras geradoras', palavras} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido: cada palavra precisa de "palavra" e "silabas".');
+  dados = x;
+  $('infoJson').textContent = `${x.titulo} • ${x.palavras.length} palavras geradoras` + (origem ? ` • ${origem}` : '');
+  $('geradoras').innerHTML = x.palavras.map((p, i) => `<button data-i="${i}"><span>${p.emoji}</span>${AV.esc(p.palavra)}</button>`).join('');
+  $('geradoras').querySelectorAll('button').forEach(b => b.onclick = () => iniciar(x.palavras[+b.dataset.i]));
+}
+AV.prepararSeletorJson({tipo: 'familias', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/familias-criancas.json', 'modelo-familias-silabicas.json');
+
+const caixa = t => $('chkMinuscula').checked ? t.toLowerCase() : t;
+const falarPalavra = t => AV.falar(String(t).toLowerCase());
+// separa a consoante (ou dígrafo/encontro) do começo da sílaba: "BRA" -> "BR"
+const inicio = s => (sem(s).match(/^[^AEIOU]*/) || [''])[0];
+
+function iniciar(p){
+  ger = p; montagem = []; extras = [];
+  const chave = 'familias_achadas_' + sem(p.palavra);
+  achadas = (() => { try { return JSON.parse(sessionStorage.getItem(chave)) || []; } catch (e) { return []; } })();
+  ger.chave = chave;
+  $('gEmoji').textContent = p.emoji; $('gPalavra').textContent = caixa(p.palavra);
+  $('conversa').hidden = !p.conversa; $('conversa').innerHTML = p.conversa ? '💬 <b>Para conversar:</b> ' + AV.esc(p.conversa) : '';
+  $('silabas').innerHTML = ''; $('tabela').innerHTML = ''; $('areaMontar').hidden = true; $('btnFamilias').disabled = true;
+  AV.mostrarTela('tJogo'); falarPalavra(p.palavra);
+}
+function familiasDa(p){
+  const vistas = [], fams = [];
+  p.silabas.forEach((s, i) => {
+    const c = inicio(s);
+    if (!c || vistas.includes(c)) return;
+    vistas.push(c); fams.push({consoante: c, cor: CORES[i % CORES.length], silabas: VOGAIS.map(v => c + v)});
+  });
+  return fams;
+}
+$('btnSeparar').onclick = () => {
+  $('silabas').innerHTML = ger.silabas.map((s, i) => `<span class="sil" style="background:${CORES[i % CORES.length]};animation-delay:${i * .25}s">${AV.esc(caixa(s))}</span>`).join('');
+  AV.falar(ger.silabas.map(s => s.toLowerCase()).join(', ') + '. ' + ger.palavra.toLowerCase());
+  $('btnFamilias').disabled = false;
+};
+$('btnFamilias').onclick = () => {
+  const fams = familiasDa(ger);
+  $('tabela').innerHTML = fams.map(f => `<div class="familia"><small>${AV.esc(caixa(f.consoante))}</small>` +
+      f.silabas.map(s => `<button data-s="${s}" data-cor="${f.cor}" style="background:${f.cor}">${AV.esc(caixa(s))}</button>`).join('') + '</div>').join('') +
+    `<div class="familia vogais"><small>${caixa('VOGAIS')}</small>` + VOGAIS.map(v => `<button data-s="${v}" data-cor="#7a8599">${caixa(v)}</button>`).join('') + '</div>';
+  $('tabela').querySelectorAll('button').forEach(b => b.onclick = () => {
+    if (montagem.length >= 6) return AV.avisar('Use no máximo 6 sílabas.');
+    montagem.push({s: b.dataset.s, cor: b.dataset.cor}); AV.falar(b.dataset.s.toLowerCase()); desenharMontagem();
+  });
+  $('areaMontar').hidden = false; desenharMontagem(); desenharMural();
+  AV.falar(fams.map(f => f.silabas.map(s => s.toLowerCase()).join(', ')).join('. '));
+};
+function desenharMontagem(){
+  $('montagem').innerHTML = montagem.length ? montagem.map(m => `<span class="peca" style="background:${m.cor}">${AV.esc(caixa(m.s))}</span>`).join('') : '<span class="vazio">As sílabas escolhidas aparecem aqui</span>';
+  $('msg').textContent = '';
+}
+$('btnApagar').onclick = () => { montagem.pop(); desenharMontagem(); };
+$('btnLimpar').onclick = () => { montagem = []; desenharMontagem(); };
+$('btnLer').onclick = () => montagem.length && falarPalavra(montagem.map(m => m.s).join(''));
+
+function guardar(){ try { sessionStorage.setItem(ger.chave, JSON.stringify(achadas)); } catch (e) {} }
+function validas(){ return [{palavra: ger.palavra, emoji: ger.emoji}].concat(ger.descobertas); }
+function conferir(){
+  if (!montagem.length) return;
+  const formada = montagem.map(m => m.s).join(''), chave = sem(formada);
+  const achou = validas().find(v => sem(v.palavra) === chave);
+  if (achadas.includes(chave)){ $('msg').textContent = `😀 ${caixa(achou ? achou.palavra : formada)} já está no mural!`; return; }
+  if (achou){
+    achadas.push(chave); guardar();
+    $('msg').textContent = `✅ ${caixa(achou.palavra)} ${achou.emoji} — palavra descoberta!`;
+    AV.fanfarra(); AV.confete(); falarPalavra(achou.palavra);
+    montagem = []; setTimeout(() => { $('montagem').innerHTML = '<span class="vazio">Formem outra palavra!</span>'; }, 900);
+    desenharMural();
+  } else {
+    $('msg').innerHTML = `🤔 <b>${AV.esc(caixa(formada))}</b> não está na minha lista. Essa palavra existe? A turma decide!
+      <br><button id="btnExiste">✔️ Existe, pode guardar</button><button id="btnNaoExiste">✖ Não existe</button>`;
+    falarPalavra(formada);
+    $('btnExiste').onclick = () => { achadas.push(chave); extras.push(chave); guardar(); $('msg').textContent = `✅ ${caixa(formada)} foi para o mural.`; montagem = []; desenharMontagem(); desenharMural(); AV.fanfarra(); };
+    $('btnNaoExiste').onclick = () => { $('msg').textContent = 'Tudo bem! Vamos tentar outra combinação.'; montagem = []; desenharMontagem(); };
+  }
+}
+$('btnConferir').onclick = conferir;
+function desenharMural(mostrarFaltam){
+  const lista = validas();
+  const daLista = lista.filter(v => achadas.includes(sem(v.palavra)));
+  const daTurma = achadas.filter(c => !lista.some(v => sem(v.palavra) === c));
+  const faltam = mostrarFaltam ? lista.filter(v => !achadas.includes(sem(v.palavra))) : [];
+  $('contador').textContent = `📋 Palavras descobertas: ${daLista.length} de ${lista.length}` + (daTurma.length ? ` (+${daTurma.length} da turma)` : '');
+  $('mural').innerHTML = daLista.map(v => `<span class="achada">${v.emoji} ${AV.esc(caixa(v.palavra))}</span>`).join('') +
+    daTurma.map(c => `<span class="achada turma">⭐ ${AV.esc(caixa(c))}</span>`).join('') +
+    faltam.map(v => `<span class="achada falta">${v.emoji} ${AV.esc(caixa(v.palavra))}</span>`).join('');
+}
+$('btnFaltam').onclick = () => desenharMural(true);
+$('btnOuvirG').onclick = () => falarPalavra(ger.palavra);
+$('btnTrocar').onclick = () => AV.mostrarTela('tConfig');
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('areaMontar').hidden) conferir(); });
+</script>
+</body>
+</html>

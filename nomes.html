@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomes da Turma</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #txtNomes{width:100%;min-height:160px;font:inherit;font-size:1.05rem;border-radius:12px;border:2px solid #ccd;padding:8px}
+  .atividades{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .atividades button{font-size:1.2rem;min-width:220px}
+  .atividades button span{display:block;font-size:2.4rem}
+  .grande{font-size:clamp(3rem,9vw,7rem);font-weight:bold;text-align:center;letter-spacing:4px;margin:10px 0}
+  #tiles,#contagem{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+  .tile{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:bold;background:#fff;border-radius:16px;min-width:clamp(60px,8vw,96px);text-align:center;padding:6px 10px;box-shadow:0 5px 0 #0002;transition:all .4s;position:relative}
+  .tile.primeira{background:#ffd54a}
+  .tile small{position:absolute;top:-14px;right:-8px;background:#2f80ed;color:#fff;border-radius:999px;font-size:1rem;padding:2px 8px}
+  #msg{text-align:center;font-size:clamp(1.2rem,2.6vw,1.7rem);min-height:1.5em;font-weight:bold}
+  #letrasIniciais{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  #letrasIniciais button{min-width:56px;font-size:1.4rem;padding:8px}
+  #letrasIniciais button small{display:block;font-size:.8rem;opacity:.7}
+  #nomesLetra,#alfabetica{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .chipNome{background:#fff;border-radius:14px;padding:6px 14px;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;box-shadow:0 3px 0 #0001}
+  .chipNome b{color:#e74c3c}
+  .grupoLetra{background:#fff;border-radius:16px;padding:8px 14px;box-shadow:0 3px 0 #0001;min-width:160px}
+  .grupoLetra h3{margin:0;font-size:2rem;color:#e74c3c}
+  .grupoLetra div{font-size:1.3rem}
+  .barra{display:flex;align-items:center;gap:10px;margin:5px auto;max-width:900px}
+  .barra .n{width:190px;text-align:right;font-weight:bold;font-size:1.2rem}
+  .barra .b{height:30px;background:#2f80ed;border-radius:999px;color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;min-width:40px}
+  #opcoesOrdem{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  #opcoesOrdem button{font-size:clamp(1.6rem,4vw,2.6rem)}
+  #opcoesOrdem button.certa{background:#27ae60;color:#fff}
+  #opcoesOrdem button.errada{background:#ffc9c9}
+  #crachas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .cracha{width:330px;height:190px;background:#fff;border:3px solid #243049;border-radius:16px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;page-break-inside:avoid;break-inside:avoid}
+  .cracha .nm{font-weight:bold;line-height:1;text-align:center}
+  .cracha .mn{font-size:1.4rem}
+  .cracha .ln{width:100%;border-bottom:3px dotted #888;height:34px}
+  @media print{
+    body{background:#fff !important;padding:0}
+    .naoImprimir{display:none !important}
+    .cracha{border-color:#000}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<section id="tConfig" class="tela ativa">
+  <h1>📛 Nomes da Turma</h1>
+  <p class="dica" style="text-align:center;max-width:780px">O nome é a primeira palavra que muitas crianças (e adultos) aprendem a ler. Os nomes ficam guardados <b>só neste computador</b> e são os mesmos do Sorteador e do Formador de Grupos.</p>
+  <div class="cartao">
+    <h2>1. Nomes (um por linha)</h2>
+    <textarea id="txtNomes" placeholder="Ana Clara&#10;Bruno&#10;Carlos Eduardo"></textarea>
+    <label><input type="checkbox" id="chkPrimeiro" checked> Usar só o primeiro nome</label>
+    <div class="linha" style="justify-content:flex-start"><button id="btnSalvar">💾 Salvar os nomes</button><span id="infoNomes" class="dica"></span></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Escolha a atividade</h2>
+    <div class="atividades">
+      <button data-ir="tDeQuem"><span>🔀</span>De quem é este nome?</button>
+      <button data-ir="tComeca"><span>🔤</span>Quem começa com…?</button>
+      <button data-ir="tLetras"><span>🔢</span>Quantas letras?</button>
+      <button data-ir="tTamanhos"><span>📊</span>Nomes grandes e pequenos</button>
+      <button data-ir="tOrdem"><span>🔠</span>Ordem alfabética</button>
+      <button data-ir="tCrachas"><span>🏷️</span>Crachás para imprimir</button>
+    </div>
+  </div>
+</section>
+
+<section id="tDeQuem" class="tela">
+  <h1>🔀 De quem é este nome?</h1>
+  <div id="tiles"></div>
+  <div id="msg"></div>
+  <div class="linha naoImprimir">
+    <button id="btnPrimeiraLetra">💡 Mostrar a primeira letra</button>
+    <button id="btnMostrarNome" class="principal">👁️ Mostrar o nome</button>
+    <button id="btnOutroNome">➡️ Outro nome</button>
+    <button class="voltar">⬅️ Voltar</button>
+  </div>
+</section>
+
+<section id="tComeca" class="tela">
+  <h1>🔤 Quem tem o nome que começa com…</h1>
+  <div id="letraSorteada" class="grande"></div>
+  <div id="nomesLetra"></div>
+  <div class="linha">
+    <button id="btnSortearLetra" class="principal">🎲 Sortear uma letra</button>
+    <button id="btnMostrarLetra">👁️ Mostrar os nomes</button>
+    <button class="voltar">⬅️ Voltar</button>
+  </div>
+  <p class="dica" style="text-align:center">Ou toque numa letra (o número mostra quantos nomes começam com ela):</p>
+  <div id="letrasIniciais"></div>
+</section>
+
+<section id="tLetras" class="tela">
+  <h1>🔢 Quantas letras tem este nome?</h1>
+  <div id="contagem"></div>
+  <div id="msgLetras" style="text-align:center;font-size:1.6rem;font-weight:bold;min-height:1.5em"></div>
+  <div class="linha">
+    <button id="btnContar" class="principal">🔢 Contar juntos</button>
+    <button id="btnOutroLetras">➡️ Outro nome</button>
+    <button class="voltar">⬅️ Voltar</button>
+  </div>
+</section>
+
+<section id="tTamanhos" class="tela">
+  <h1>📊 Nomes grandes e pequenos</h1>
+  <div id="barras"></div>
+  <div class="linha"><button class="voltar">⬅️ Voltar</button></div>
+</section>
+
+<section id="tOrdem" class="tela">
+  <h1>🔠 Ordem alfabética</h1>
+  <div class="linha">
+    <button id="btnJogoOrdem" class="principal">🎯 Qual nome vem primeiro?</button>
+    <button id="btnListaOrdem">📋 Ver a turma em ordem alfabética</button>
+    <button class="voltar">⬅️ Voltar</button>
+  </div>
+  <div id="jogoOrdem" hidden>
+    <h2>Qual destes nomes vem primeiro no alfabeto?</h2>
+    <div id="opcoesOrdem"></div>
+    <div id="msgOrdem" style="text-align:center;font-size:1.4rem;font-weight:bold;min-height:1.5em;margin:10px 0"></div>
+    <div class="linha"><button id="btnOutraOrdem" hidden>➡️ Outra</button></div>
+  </div>
+  <div id="alfabetica" hidden></div>
+</section>
+
+<section id="tCrachas" class="tela">
+  <h1 class="naoImprimir">🏷️ Crachás</h1>
+  <div class="linha naoImprimir">
+    <label><input type="checkbox" id="chkMinusc" checked> Mostrar também em letra minúscula</label>
+    <label><input type="checkbox" id="chkLinha" checked> Linha para a criança copiar o nome</label>
+    <button id="btnImprimir" class="principal">🖨️ Imprimir</button>
+    <button class="voltar">⬅️ Voltar</button>
+  </div>
+  <div id="crachas"></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const CHAVE = 'painel_turma';
+const ler = () => { try { return JSON.parse(localStorage.getItem(CHAVE)) || {}; } catch (e) { return {}; } };
+const sem = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
+const embaralhar = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+let alunos = [], filaNomes = [];
+
+function carregar(){
+  const d = ler(); alunos = Array.isArray(d.alunos) ? d.alunos : [];
+  $('txtNomes').value = alunos.join('\n'); info();
+}
+function info(){ $('infoNomes').textContent = alunos.length ? `${alunos.length} nomes guardados` : 'Nenhum nome ainda'; }
+$('btnSalvar').onclick = () => {
+  alunos = [...new Set($('txtNomes').value.split('\n').map(s => s.trim().replace(/\s+/g, ' ')).filter(Boolean))];
+  const d = ler(); d.alunos = alunos; d.ausentes = (d.ausentes || []).filter(n => alunos.includes(n));
+  try { localStorage.setItem(CHAVE, JSON.stringify(d)); } catch (e) {}
+  info(); AV.avisar('Nomes salvos neste computador.');
+};
+const nomes = () => {
+  const lista = alunos.map(n => $('chkPrimeiro').checked ? n.split(' ')[0] : n).map(n => n.toUpperCase());
+  return [...new Set(lista)];
+};
+function proximoNome(){
+  if (!filaNomes.length) filaNomes = embaralhar(nomes());
+  return filaNomes.shift();
+}
+document.querySelectorAll('[data-ir]').forEach(b => b.onclick = () => {
+  if (!nomes().length) return AV.avisar('Primeiro escreva os nomes da turma e clique em Salvar.');
+  filaNomes = [];
+  AV.mostrarTela(b.dataset.ir);
+  ({tDeQuem: novoDeQuem, tComeca: montarIniciais, tLetras: novoLetras, tTamanhos: montarBarras, tOrdem: () => {}, tCrachas: montarCrachas})[b.dataset.ir]();
+});
+document.querySelectorAll('.voltar').forEach(b => b.onclick = () => AV.mostrarTela('tConfig'));
+
+// ---------- De quem é? ----------
+let nomeAtual = '', ordemTiles = [];
+function novoDeQuem(){
+  nomeAtual = proximoNome();
+  const letras = [...nomeAtual];
+  do { ordemTiles = embaralhar(letras.map((c, i) => i)); } while (letras.length > 2 && ordemTiles.every((v, i) => v === i));
+  desenharTiles(); $('msg').textContent = 'Quem será? Leiam as letras!';
+}
+function desenharTiles(destacar){
+  $('tiles').innerHTML = ordemTiles.map(i => `<span class="tile ${destacar && i === 0 ? 'primeira' : ''}">${nomeAtual[i] === ' ' ? '&nbsp;' : AV.esc(nomeAtual[i])}</span>`).join('');
+}
+$('btnPrimeiraLetra').onclick = () => { ordemTiles = [0].concat(ordemTiles.filter(i => i !== 0)); desenharTiles(true); $('msg').textContent = `💡 Começa com ${nomeAtual[0]}.`; };
+$('btnMostrarNome').onclick = () => { ordemTiles = [...nomeAtual].map((c, i) => i); desenharTiles(true); $('msg').textContent = `É ${nomeAtual}! 🎉`; AV.fanfarra(); AV.falar(nomeAtual.toLowerCase()); };
+$('btnOutroNome').onclick = novoDeQuem;
+
+// ---------- Quem começa com… ----------
+let letraAtual = '';
+function montarIniciais(){
+  const conta = {};
+  nomes().forEach(n => { const l = sem(n)[0]; conta[l] = (conta[l] || 0) + 1; });
+  $('letrasIniciais').innerHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(l => `<button data-l="${l}" ${conta[l] ? '' : 'disabled'}>${l}<small>${conta[l] || 0}</small></button>`).join('');
+  $('letrasIniciais').querySelectorAll('button').forEach(b => b.onclick = () => mostrarLetra(b.dataset.l, true));
+  $('letraSorteada').textContent = '?'; $('nomesLetra').innerHTML = '';
+}
+function mostrarLetra(l, revelar){
+  letraAtual = l; $('letraSorteada').textContent = l; $('nomesLetra').innerHTML = '';
+  AV.falar(`Quem tem o nome que começa com ${l}?`);
+  if (revelar) setTimeout(revelarLetra, 50);
+}
+function revelarLetra(){
+  const lista = nomes().filter(n => sem(n)[0] === letraAtual);
+  $('nomesLetra').innerHTML = lista.map(n => `<span class="chipNome"><b>${AV.esc(n[0])}</b>${AV.esc(n.slice(1))}</span>`).join('') || '<span class="chipNome">Ninguém 🙂</span>';
+}
+$('btnSortearLetra').onclick = () => { const ls = [...new Set(nomes().map(n => sem(n)[0]))]; mostrarLetra(ls[Math.floor(Math.random() * ls.length)], false); };
+$('btnMostrarLetra').onclick = () => letraAtual && revelarLetra();
+
+// ---------- Quantas letras ----------
+let nomeContar = '';
+function novoLetras(){
+  nomeContar = proximoNome();
+  $('contagem').innerHTML = [...nomeContar].map(c => c === ' ' ? '<span style="width:30px"></span>' : `<span class="tile">${AV.esc(c)}</span>`).join('');
+  $('msgLetras').textContent = 'Quantas letras? Contem com o dedo!';
+}
+$('btnContar').onclick = () => {
+  const tiles = [...$('contagem').querySelectorAll('.tile')];
+  tiles.forEach(t => { const s = t.querySelector('small'); if (s) s.remove(); });
+  tiles.forEach((t, i) => setTimeout(() => {
+    const s = document.createElement('small'); s.textContent = i + 1; t.appendChild(s); AV.tom(500 + i * 40, .08); AV.falar(String(i + 1));
+    if (i === tiles.length - 1) setTimeout(() => { $('msgLetras').textContent = `${nomeContar} tem ${tiles.length} letras.`; AV.falar(`${nomeContar.toLowerCase()} tem ${tiles.length} letras.`); }, 700);
+  }, i * 750));
+};
+$('btnOutroLetras').onclick = novoLetras;
+
+// ---------- Tamanhos ----------
+function montarBarras(){
+  const lista = nomes().map(n => ({n, t: sem(n).replace(/[^A-Z]/g, '').length})).sort((a, b) => b.t - a.t || a.n.localeCompare(b.n));
+  const max = Math.max(...lista.map(x => x.t));
+  $('barras').innerHTML = lista.map((x, i) => `<div class="barra"><span class="n">${i === 0 ? '🏅 ' : i === lista.length - 1 ? '🐜 ' : ''}${AV.esc(x.n)}</span><span class="b" style="width:${x.t / max * 60}%">${x.t}</span></div>`).join('');
+}
+
+// ---------- Ordem alfabética ----------
+let ordemCerta = '';
+$('btnListaOrdem').onclick = () => {
+  $('jogoOrdem').hidden = true; $('alfabetica').hidden = false;
+  const grupos = {};
+  nomes().sort((a, b) => a.localeCompare(b, 'pt')).forEach(n => { const l = sem(n)[0]; (grupos[l] = grupos[l] || []).push(n); });
+  $('alfabetica').innerHTML = Object.keys(grupos).map(l => `<div class="grupoLetra"><h3>${l}</h3>${grupos[l].map(n => `<div>${AV.esc(n)}</div>`).join('')}</div>`).join('');
+};
+function novaOrdem(){
+  const lista = nomes(); if (lista.length < 2) return AV.avisar('Precisa de pelo menos 2 nomes.');
+  const tres = embaralhar(lista).slice(0, Math.min(3, lista.length));
+  ordemCerta = tres.slice().sort((a, b) => a.localeCompare(b, 'pt'))[0];
+  $('opcoesOrdem').innerHTML = tres.map(n => `<button data-n="${AV.esc(n)}">${AV.esc(n)}</button>`).join('');
+  $('opcoesOrdem').querySelectorAll('button').forEach(b => b.onclick = () => {
+    if (b.dataset.n === ordemCerta){
+      b.classList.add('certa'); AV.fanfarra();
+      const ord = tres.slice().sort((a, b2) => a.localeCompare(b2, 'pt'));
+      $('msgOrdem').textContent = '✅ Na ordem: ' + ord.join(' → ');
+      $('btnOutraOrdem').hidden = false;
+    } else { b.classList.add('errada'); b.disabled = true; AV.erro(); $('msgOrdem').textContent = '🤔 Olhem a primeira letra de cada nome e lembrem do alfabeto.'; }
+  });
+  $('msgOrdem').textContent = ''; $('btnOutraOrdem').hidden = true;
+}
+$('btnJogoOrdem').onclick = () => { $('alfabetica').hidden = true; $('jogoOrdem').hidden = false; novaOrdem(); };
+$('btnOutraOrdem').onclick = novaOrdem;
+
+// ---------- Crachás ----------
+function montarCrachas(){
+  $('crachas').innerHTML = nomes().sort((a, b) => a.localeCompare(b, 'pt')).map(n => {
+    const tam = n.length <= 6 ? 3.6 : n.length <= 10 ? 2.6 : n.length <= 16 ? 1.9 : 1.4;
+    return `<div class="cracha"><div class="nm" style="font-size:${tam}rem">${AV.esc(n)}</div>${$('chkMinusc').checked ? `<div class="mn">${AV.esc(n.toLowerCase().replace(/(^|\s)\S/g, s => s.toUpperCase()))}</div>` : ''}${$('chkLinha').checked ? '<div class="ln"></div>' : ''}</div>`;
+  }).join('');
+}
+$('chkMinusc').onchange = montarCrachas; $('chkLinha').onchange = montarCrachas;
+$('btnImprimir').onclick = () => window.print();
+carregar();
+</script>
+</body>
+</html>
