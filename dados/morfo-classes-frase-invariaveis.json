@@ -1,0 +1,1624 @@
+{
+  "titulo": "Na frase: advérbio, preposição, conjunção ou interjeição?",
+  "emoji": "🔎",
+  "instrucao": "Qual é a classe da palavra destacada?",
+  "rodadas": [
+    {
+      "destaque": "Eu [jamais] desisto.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "JAMAIS indica tempo e negação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ela saiu [sem] dizer nada.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SEM liga SAIU a DIZER NADA: preposição."
+    },
+    {
+      "destaque": "Moro aqui [desde] criança.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DESDE liga MORO AQUI a CRIANÇA: preposição."
+    },
+    {
+      "destaque": "Eu moro [perto]: venho a pé.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "PERTO indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Caramba]! Esqueci a chave!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "CARAMBA expressa surpresa: interjeição."
+    },
+    {
+      "destaque": "[Ai]! Machuquei o dedo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "AI expressa dor: interjeição."
+    },
+    {
+      "destaque": "A prova foi [bastante] difícil.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "BASTANTE indica intensidade (aumenta o adjetivo DIFÍCIL) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele trabalha [e] estuda.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas orações com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "[Psiu]! O bebê está dormindo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "PSIU expressa um pedido de silêncio: interjeição."
+    },
+    {
+      "destaque": "Chegamos tarde [porque] o ônibus quebrou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Não sei [se] ele vem.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "SE: liga \"não sei\" à oração \"ele vem\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "Ela canta [bem].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "BEM indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Oh]! Que bonito!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "OH expressa admiração: interjeição."
+    },
+    {
+      "destaque": "[Hum]... não sei se vou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "HUM expressa dúvida: interjeição."
+    },
+    {
+      "destaque": "Ele [realmente] gosta de ler.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "REALMENTE indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ela [nunca] mente.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "NUNCA indica tempo e negação (em nenhum momento) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele dirige [cuidadosamente].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CUIDADOSAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Estudou, [portanto] passou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORTANTO liga duas orações com ideia de conclusão: conjunção."
+    },
+    {
+      "destaque": "Ela [certamente] vai gostar.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CERTAMENTE indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Saí cedo, [pois] tinha consulta.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "POIS liga duas orações com ideia de explicação: conjunção."
+    },
+    {
+      "destaque": "A ponte passa [sobre] o rio.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga A PONTE PASSA a O RIO: preposição."
+    },
+    {
+      "destaque": "Você quer suco [ou] água?",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "OU liga duas palavras com ideia de alternância (uma coisa ou outra): conjunção."
+    },
+    {
+      "destaque": "A escola fica [adiante].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ADIANTE indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Saí [quando] a chuva parou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUANDO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "Estava cansado, [porém] continuou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORÉM liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "[Ei]! Espere por mim!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "EI expressa um chamado: interjeição."
+    },
+    {
+      "destaque": "Ela gosta [de] chocolate.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga GOSTA a CHOCOLATE: preposição."
+    },
+    {
+      "destaque": "Este bolo está [mais] gostoso.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "MAIS indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Bis]! Toca de novo!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "BIS expressa um pedido para repetir: interjeição."
+    },
+    {
+      "destaque": "Estou [muito] cansado.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "MUITO indica intensidade (aumenta o adjetivo CANSADO) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Silêncio]! A prova começou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "SILÊNCIO expressa um pedido de silêncio: interjeição."
+    },
+    {
+      "destaque": "Ande [até] a esquina.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "ATÉ liga ANDE a A ESQUINA: preposição."
+    },
+    {
+      "destaque": "Ele falou [perante] o juiz.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "PERANTE liga FALOU a O JUIZ: preposição."
+    },
+    {
+      "destaque": "Treinou muito, [contudo] perdeu.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "CONTUDO liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Comprei pão [hoje].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "HOJE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Falei [sobre] o projeto.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga FALEI a O PROJETO: preposição."
+    },
+    {
+      "destaque": "As crianças brincam [fora].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "FORA indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Puxa], que pena!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "PUXA expressa pena, lamento: interjeição."
+    },
+    {
+      "destaque": "Ele [ainda] não chegou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AINDA indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vá dormir, [pois] já é tarde.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "POIS liga duas orações com ideia de explicação: conjunção."
+    },
+    {
+      "destaque": "O dia estava lindo, [todavia] ninguém saiu.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "TODAVIA liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Ele respondeu [calmamente].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CALMAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Lutamos [contra] a injustiça.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "CONTRA liga LUTAMOS a A INJUSTIÇA: preposição."
+    },
+    {
+      "destaque": "Comi [muito] no almoço.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "MUITO indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Credo]! Que bicho feio!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "CREDO expressa espanto: interjeição."
+    },
+    {
+      "destaque": "Primeiro estudo, [depois] brinco.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEPOIS indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Moro [em] São Paulo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "EM liga MORO a SÃO PAULO: preposição."
+    },
+    {
+      "destaque": "[Caso] chova, o passeio será adiado.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "CASO liga duas orações com ideia de condição: conjunção."
+    },
+    {
+      "destaque": "O gato está [sob] a cama.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SOB liga O GATO ESTÁ a A CAMA: preposição."
+    },
+    {
+      "destaque": "Ela é mais alta [que] o irmão.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: introduz a comparação entre ela e o irmão: conjunção comparativa."
+    },
+    {
+      "destaque": "[Nossa]! Que susto!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "NOSSA expressa espanto: interjeição."
+    },
+    {
+      "destaque": "[Ih], esqueci o caderno.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "IH expressa contrariedade: interjeição."
+    },
+    {
+      "destaque": "Ele fala [rápido].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "RÁPIDO indica modo (como ele fala) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Saí [sem] guarda-chuva.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SEM liga SAÍ a GUARDA-CHUVA: preposição."
+    },
+    {
+      "destaque": "Ela fala [devagar].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEVAGAR indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vou à praia [se] fizer sol.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "SE liga duas orações com ideia de condição: conjunção."
+    },
+    {
+      "destaque": "Eles moram [longe].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LONGE indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vou [a] pé para o trabalho.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "A liga VOU a PÉ: preposição."
+    },
+    {
+      "destaque": "O livro está [sobre] a mesa.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga O LIVRO ESTÁ a A MESA: preposição."
+    },
+    {
+      "destaque": "[Coragem]! Você consegue!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "CORAGEM expressa ânimo, incentivo: interjeição."
+    },
+    {
+      "destaque": "[Sim], eu aceito o convite.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "SIM indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Porque] estava doente, faltou à aula.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Eu [não] gosto de jiló.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "NÃO indica negação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Olá]! Tudo bem?",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "OLÁ expressa uma saudação: interjeição."
+    },
+    {
+      "destaque": "Chegou [de] ônibus.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga CHEGOU a ÔNIBUS: preposição."
+    },
+    {
+      "destaque": "Ela lê [enquanto] ele cozinha.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "ENQUANTO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "Fiquei acordado [até] meia-noite.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "ATÉ liga ACORDADO a MEIA-NOITE: preposição."
+    },
+    {
+      "destaque": "Saímos [após] o almoço.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "APÓS liga SAÍMOS a O ALMOÇO: preposição."
+    },
+    {
+      "destaque": "Ela canta [e] dança.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas orações com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "[Tomara]! Quero muito que dê certo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "TOMARA expressa desejo: interjeição."
+    },
+    {
+      "destaque": "[Xi]! Acabou a luz.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "XI expressa preocupação: interjeição."
+    },
+    {
+      "destaque": "Passei [por] sua casa.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga PASSEI a SUA CASA: preposição."
+    },
+    {
+      "destaque": "Ele viaja [amanhã] de manhã.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AMANHÃ indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Ah], agora entendi!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "AH expressa que a pessoa entendeu algo: interjeição."
+    },
+    {
+      "destaque": "[Adeus]! Vou sentir saudade.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "ADEUS expressa uma despedida: interjeição."
+    },
+    {
+      "destaque": "Acho [que] vai chover.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: liga \"acho\" à oração \"vai chover\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "[Eba]! Vamos ao parque!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "EBA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "Falou tanto [que] ficou rouco.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE liga duas orações com ideia de consequência: conjunção."
+    },
+    {
+      "destaque": "Comprei arroz, feijão [e] óleo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas palavras com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "Saí cedo [porque] choveu.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Estudo [para] passar na prova.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga ESTUDO a PASSAR NA PROVA: preposição."
+    },
+    {
+      "destaque": "Ele votou [contra] a proposta.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "CONTRA liga VOTOU a A PROPOSTA: preposição."
+    },
+    {
+      "destaque": "[Parabéns]! Você passou de ano!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "PARABÉNS expressa felicitação: interjeição."
+    },
+    {
+      "destaque": "Ela cantou [lindamente].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LINDAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Opa]! Quase caí.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "OPA expressa susto: interjeição."
+    },
+    {
+      "destaque": "Este presente é [para] você.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga PRESENTE a VOCÊ: preposição."
+    },
+    {
+      "destaque": "[Bravo]! Que apresentação linda!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "BRAVO expressa aplauso: interjeição."
+    },
+    {
+      "destaque": "[Felizmente], ninguém se machucou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "FELIZMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Talvez] chova à tarde.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "TALVEZ indica dúvida e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Durmo [pouco] durante a semana.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "POUCO indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele é forte [como] um touro.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "COMO: introduz uma comparação (ele é forte como um touro é forte): conjunção comparativa."
+    },
+    {
+      "destaque": "[Agora] é a sua vez.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AGORA indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Penso, [logo] existo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "LOGO liga duas orações com ideia de conclusão: conjunção."
+    },
+    {
+      "destaque": "O gato está [aqui].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AQUI indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Viajei [para] Recife.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga VIAJEI a RECIFE: preposição."
+    },
+    {
+      "destaque": "[Ui]! Que água gelada!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "UI expressa susto: interjeição."
+    },
+    {
+      "destaque": "Ela está [bem].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "BEM indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Espero [que] você melhore.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: liga \"espero\" à oração \"você melhore\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "Bolo [de] cenoura é o meu preferido.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga BOLO a CENOURA: preposição."
+    },
+    {
+      "destaque": "Esperei [por] você.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga ESPEREI a VOCÊ: preposição."
+    },
+    {
+      "destaque": "Ele estudou [demais] e ficou com dor de cabeça.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEMAIS indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ela chegou [com] fome.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga CHEGOU a FOME: preposição."
+    },
+    {
+      "destaque": "Fiz isso [por] amor.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga FIZ ISSO a AMOR: preposição."
+    },
+    {
+      "destaque": "Copo [de] vidro quebra fácil.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga COPO a VIDRO: preposição."
+    },
+    {
+      "destaque": "Ela foi à festa, [mas] voltou cedo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Estou [sem] fome.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "SEM liga ESTOU a FOME: preposição."
+    },
+    {
+      "destaque": "Choveu, [entretanto] o jogo continuou.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "ENTRETANTO liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Ele joga [mal].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "MAL indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ela [já] terminou a tarefa.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "JÁ indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Os meninos brincam [lá] fora.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LÁ indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Viva]! Ganhamos o jogo!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "VIVA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "[Socorro]! Alguém me ajude!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "SOCORRO expressa um pedido de ajuda: interjeição."
+    },
+    {
+      "destaque": "Não comi [nem] bebi.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "NEM liga duas orações com ideia de adição negativa: conjunção."
+    },
+    {
+      "destaque": "Ontem jantamos [tarde].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "TARDE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele [provavelmente] chegará atrasado.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "PROVAVELMENTE indica dúvida e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Comprei pão [e] leite.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas palavras com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "Ou você estuda, [ou] trabalha.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "OU liga duas orações com ideia de alternância: conjunção."
+    },
+    {
+      "destaque": "[Uau]! Que festa linda!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "UAU expressa admiração: interjeição."
+    },
+    {
+      "destaque": "[Ufa]! Terminei a prova.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "UFA expressa alívio: interjeição."
+    },
+    {
+      "destaque": "[Quando] cheguei, todos dormiam.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUANDO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "Liguei, [mas] ninguém atendeu.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "[Oi]! Que bom te ver!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "OI expressa uma saudação: interjeição."
+    },
+    {
+      "destaque": "O gato está [entre] as caixas.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "ENTRE liga O GATO ESTÁ a AS CAIXAS: preposição."
+    },
+    {
+      "destaque": "Eu [sempre] tomo café de manhã.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "SEMPRE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Voltei [para] casa cedo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga VOLTEI a CASA: preposição."
+    },
+    {
+      "destaque": "Fiz o bolo [conforme] a receita mandava.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "CONFORME liga duas orações com ideia de conformidade (do jeito que): conjunção."
+    },
+    {
+      "destaque": "Hoje eu acordei [cedo].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CEDO indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vamos ficar [dentro]: está chovendo.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DENTRO indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Oba]! Amanhã é feriado.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "OBA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "Fizemos tudo [depressa].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEPRESSA indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele trabalha [com] madeira.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga TRABALHA a MADEIRA: preposição."
+    },
+    {
+      "destaque": "[Tchau]! Até amanhã.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "TCHAU expressa uma despedida: interjeição."
+    },
+    {
+      "destaque": "Volte [logo]!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LOGO indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ficamos [em] casa.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "EM liga FICAMOS a CASA: preposição."
+    },
+    {
+      "destaque": "Fique quieto, [senão] o bebê acorda.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "SENÃO liga duas orações com ideia de alternância (caso contrário): conjunção."
+    },
+    {
+      "destaque": "[Embora] estivesse cansada, ela foi à aula.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "EMBORA liga duas orações com ideia de concessão (apesar de): conjunção."
+    },
+    {
+      "destaque": "Coloque a caixa [ali].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ALI indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Cuidado]! O chão está molhado.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "CUIDADO expressa um aviso: interjeição."
+    },
+    {
+      "destaque": "Ela chegou [ontem].",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ONTEM indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Dei um presente [a] Maria.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "A liga DEI UM PRESENTE a MARIA: preposição."
+    },
+    {
+      "destaque": "[Alô]? Quem fala?",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Interjeição",
+      "explica": "ALÔ expressa um chamado ao telefone: interjeição."
+    },
+    {
+      "destaque": "A carta é [de] Pedro.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga CARTA a PEDRO: preposição."
+    },
+    {
+      "destaque": "Cortei o papel [com] a tesoura.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga CORTEI O PAPEL a A TESOURA: preposição."
+    },
+    {
+      "destaque": "Fui à escola [com] minha irmã.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga FUI À ESCOLA a MINHA IRMÃ: preposição."
+    },
+    {
+      "destaque": "Ele [quase] caiu da escada.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "QUASE indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Estudei, [mas] não entendi.",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Ele chegou [tão] cedo!",
+      "opcoes": [
+        "Advérbio",
+        "Preposição",
+        "Conjunção",
+        "Interjeição"
+      ],
+      "correta": "Advérbio",
+      "explica": "TÃO indica intensidade e não muda de forma: advérbio."
+    }
+  ]
+}

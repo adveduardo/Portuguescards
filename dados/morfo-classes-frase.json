@@ -4,18 +4,40 @@
   "instrucao": "Qual é a classe da palavra destacada?",
   "rodadas": [
     {
-      "destaque": "O [menino] chegou cedo.",
+      "destaque": "Comemos [pão] com manteiga.",
       "opcoes": [
         "Substantivo",
-        "Adjetivo",
         "Verbo",
+        "Adjetivo",
         "Advérbio"
       ],
       "correta": "Substantivo",
-      "explica": "MENINO dá nome a uma pessoa: substantivo."
+      "explica": "PÃO dá nome a um alimento: substantivo."
     },
     {
-      "destaque": "A casa é [bonita].",
+      "destaque": "Eu [jamais] desisto.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "JAMAIS indica tempo e negação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Um [cardume] passou perto do barco.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CARDUME dá nome a um grupo de peixes: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "A noite estava [fria].",
       "opcoes": [
         "Adjetivo",
         "Substantivo",
@@ -23,65 +45,10 @@
         "Verbo"
       ],
       "correta": "Adjetivo",
-      "explica": "BONITA mostra como é a casa: adjetivo."
+      "explica": "FRIA caracteriza a noite, dizendo como é: adjetivo."
     },
     {
-      "destaque": "Os alunos [estudaram] muito.",
-      "opcoes": [
-        "Verbo",
-        "Substantivo",
-        "Adjetivo",
-        "Advérbio"
-      ],
-      "correta": "Verbo",
-      "explica": "ESTUDARAM indica uma ação e muda com o tempo (estudam, estudarão): verbo."
-    },
-    {
-      "destaque": "Ela chegou [ontem].",
-      "opcoes": [
-        "Advérbio",
-        "Adjetivo",
-        "Substantivo",
-        "Pronome"
-      ],
-      "correta": "Advérbio",
-      "explica": "ONTEM indica o tempo da ação \"chegou\": advérbio."
-    },
-    {
-      "destaque": "[Nós] vamos à praia.",
-      "opcoes": [
-        "Pronome",
-        "Substantivo",
-        "Artigo",
-        "Numeral"
-      ],
-      "correta": "Pronome",
-      "explica": "NÓS substitui os nomes das pessoas que falam: pronome."
-    },
-    {
-      "destaque": "Comprei [três] cadernos.",
-      "opcoes": [
-        "Numeral",
-        "Adjetivo",
-        "Artigo",
-        "Advérbio"
-      ],
-      "correta": "Numeral",
-      "explica": "TRÊS indica quantidade: numeral."
-    },
-    {
-      "destaque": "[O] gato dormiu.",
-      "opcoes": [
-        "Artigo",
-        "Pronome",
-        "Preposição",
-        "Numeral"
-      ],
-      "correta": "Artigo",
-      "explica": "O vem antes do substantivo e o define: artigo."
-    },
-    {
-      "destaque": "Fui à escola [com] minha irmã.",
+      "destaque": "Ela saiu [sem] dizer nada.",
       "opcoes": [
         "Preposição",
         "Conjunção",
@@ -89,43 +56,43 @@
         "Artigo"
       ],
       "correta": "Preposição",
-      "explica": "COM liga \"fui à escola\" a \"minha irmã\": preposição."
+      "explica": "SEM liga SAIU a DIZER NADA: preposição."
     },
     {
-      "destaque": "Estudei, [mas] não entendi.",
+      "destaque": "Moro aqui [desde] criança.",
       "opcoes": [
-        "Conjunção",
         "Preposição",
+        "Conjunção",
         "Advérbio",
-        "Interjeição"
+        "Artigo"
       ],
-      "correta": "Conjunção",
-      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+      "correta": "Preposição",
+      "explica": "DESDE liga MORO AQUI a CRIANÇA: preposição."
     },
     {
-      "destaque": "[Oba]! Amanhã é feriado.",
+      "destaque": "Eu moro [perto]: venho a pé.",
       "opcoes": [
-        "Interjeição",
         "Advérbio",
-        "Substantivo",
-        "Conjunção"
-      ],
-      "correta": "Interjeição",
-      "explica": "OBA expressa alegria: interjeição."
-    },
-    {
-      "destaque": "O [jantar] estava delicioso.",
-      "opcoes": [
-        "Substantivo",
-        "Verbo",
         "Adjetivo",
-        "Advérbio"
+        "Substantivo",
+        "Preposição"
       ],
-      "correta": "Substantivo",
-      "explica": "Com o artigo O antes, JANTAR dá nome a uma refeição: substantivo."
+      "correta": "Advérbio",
+      "explica": "PERTO indica lugar e não muda de forma: advérbio."
     },
     {
-      "destaque": "Vamos [jantar] às oito.",
+      "destaque": "Comi a [metade] da pizza.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "METADE indica uma parte, uma fração: numeral fracionário."
+    },
+    {
+      "destaque": "Ela [corre] todas as manhãs.",
       "opcoes": [
         "Verbo",
         "Substantivo",
@@ -133,29 +100,623 @@
         "Advérbio"
       ],
       "correta": "Verbo",
-      "explica": "Aqui JANTAR é a ação de comer à noite: verbo."
+      "explica": "CORRE indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
     },
     {
-      "destaque": "O carro [rápido] passou.",
+      "destaque": "Eles moram numa casa [pequena].",
       "opcoes": [
         "Adjetivo",
+        "Substantivo",
         "Advérbio",
-        "Verbo",
-        "Substantivo"
+        "Verbo"
       ],
       "correta": "Adjetivo",
-      "explica": "RÁPIDO caracteriza o substantivo CARRO: adjetivo."
+      "explica": "PEQUENA caracteriza a casa, dizendo como é: adjetivo."
     },
     {
-      "destaque": "Ele fala [rápido].",
+      "destaque": "Os amigos [conversavam] na praça.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CONVERSAVAM indica uma ação (no passado) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Caramba]! Esqueci a chave!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "CARAMBA expressa surpresa: interjeição."
+    },
+    {
+      "destaque": "[Maria] mora em Salvador.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "MARIA dá nome a uma pessoa: é um substantivo próprio: substantivo."
+    },
+    {
+      "destaque": "[Ai]! Machuquei o dedo.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "AI expressa dor: interjeição."
+    },
+    {
+      "destaque": "Comprei um [caderno] novo.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CADERNO dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "A prova foi [bastante] difícil.",
       "opcoes": [
         "Advérbio",
+        "Pronome",
         "Adjetivo",
-        "Verbo",
         "Substantivo"
       ],
       "correta": "Advérbio",
-      "explica": "RÁPIDO mostra o modo da ação FALA e não muda (eles falam rápido): advérbio."
+      "explica": "BASTANTE indica intensidade (aumenta o adjetivo DIFÍCIL) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Eles [construíram] uma casa.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CONSTRUÍRAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [futebol] é o esporte mais popular do país.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "FUTEBOL dá nome a um esporte: substantivo."
+    },
+    {
+      "destaque": "Ele trabalha [e] estuda.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas orações com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "[Psiu]! O bebê está dormindo.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "PSIU expressa um pedido de silêncio: interjeição."
+    },
+    {
+      "destaque": "Chegamos tarde [porque] o ônibus quebrou.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Não sei [se] ele vem.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Preposição",
+        "Advérbio"
+      ],
+      "correta": "Conjunção",
+      "explica": "SE: liga \"não sei\" à oração \"ele vem\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "Ela canta [bem].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "BEM indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Oh]! Que bonito!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "OH expressa admiração: interjeição."
+    },
+    {
+      "destaque": "[Hum]... não sei se vou.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "HUM expressa dúvida: interjeição."
+    },
+    {
+      "destaque": "Nós [plantamos] tomates na horta.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "PLANTAMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ele [realmente] gosta de ler.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "REALMENTE indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "O chão está [molhado].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "MOLHADO caracteriza o chão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela [nunca] mente.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "NUNCA indica tempo e negação (em nenhum momento) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele dirige [cuidadosamente].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CUIDADOSAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Os [teus] olhos são lindos.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "TEUS indica de quem são os olhos: pronome possessivo."
+    },
+    {
+      "destaque": "Ela leu [a] carta em voz alta.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "A vem antes do substantivo CARTA e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Ela tem olhos [verdes].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VERDES caracteriza os olhos, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Estudou, [portanto] passou.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORTANTO liga duas orações com ideia de conclusão: conjunção."
+    },
+    {
+      "destaque": "Ela [certamente] vai gostar.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CERTAMENTE indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Meu filho tem [oito] anos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "OITO indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "A notícia [triste] chegou cedo.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "TRISTE caracteriza a notícia, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Esta é a [sua] mochila?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "SUA indica de quem é a mochila: pronome possessivo."
+    },
+    {
+      "destaque": "Saí cedo, [pois] tinha consulta.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "POIS liga duas orações com ideia de explicação: conjunção."
+    },
+    {
+      "destaque": "O homem [cujo] carro quebrou pediu ajuda.",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Preposição",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "CUJO liga o homem ao carro dele: pronome relativo."
+    },
+    {
+      "destaque": "Comprei [meio] quilo de carne.",
+      "opcoes": [
+        "Numeral",
+        "Advérbio",
+        "Adjetivo",
+        "Artigo"
+      ],
+      "correta": "Numeral",
+      "explica": "MEIO indica uma parte, uma fração: numeral fracionário."
+    },
+    {
+      "destaque": "A [alegria] tomou conta da festa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "ALEGRIA dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "Ele saiu [correndo].",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CORRENDO: É uma forma do verbo CORRER (o gerúndio): verbo."
+    },
+    {
+      "destaque": "Ela é [linda]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LINDA caracteriza ela, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O prédio [antigo] foi reformado.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ANTIGO caracteriza o prédio, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O vizinho é muito [simpático].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SIMPÁTICO caracteriza o vizinho, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A ponte passa [sobre] o rio.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga A PONTE PASSA a O RIO: preposição."
+    },
+    {
+      "destaque": "Você quer suco [ou] água?",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "OU liga duas palavras com ideia de alternância (uma coisa ou outra): conjunção."
+    },
+    {
+      "destaque": "O pão [quentinho] saiu do forno.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "QUENTINHO caracteriza o pão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A escola fica [adiante].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ADIANTE indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Os] alunos chegaram.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "OS vem antes do substantivo ALUNOS e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Saí [quando] a chuva parou.",
+      "opcoes": [
+        "Conjunção",
+        "Advérbio",
+        "Preposição",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUANDO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "Eu [te] amo.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "TE quer dizer \"a ti / a você\": pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Sinto muita [saudade] da minha avó.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "SAUDADE dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "Comi [muitos] doces.",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Numeral",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "MUITOS acompanha DOCES e varia (muitas balas): pronome indefinido."
+    },
+    {
+      "destaque": "Faltaram [dez] alunos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DEZ indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "A [flor] murchou.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "FLOR dá nome a uma planta: substantivo."
+    },
+    {
+      "destaque": "[As] janelas estão abertas.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "AS vem antes do substantivo JANELAS e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Estava cansado, [porém] continuou.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORÉM liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "[Ei]! Espere por mim!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "EI expressa um chamado: interjeição."
+    },
+    {
+      "destaque": "Ela gosta [de] chocolate.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga GOSTA a CHOCOLATE: preposição."
+    },
+    {
+      "destaque": "A professora [está] cansada.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTÁ indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O menino [educado] agradeceu.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "EDUCADO caracteriza o menino, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Este bolo está [mais] gostoso.",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Conjunção"
+      ],
+      "correta": "Advérbio",
+      "explica": "MAIS indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Bis]! Toca de novo!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "BIS expressa um pedido para repetir: interjeição."
     },
     {
       "destaque": "Comprei [um] lápis, não dois.",
@@ -166,142 +727,21 @@
         "Advérbio"
       ],
       "correta": "Numeral",
-      "explica": "Aqui UM indica a quantidade (um, não dois): numeral."
+      "explica": "UM indica quantidade: numeral cardinal."
     },
     {
-      "destaque": "[Um] homem bateu à porta.",
-      "opcoes": [
-        "Artigo",
-        "Numeral",
-        "Pronome",
-        "Adjetivo"
-      ],
-      "correta": "Artigo",
-      "explica": "UM apresenta um homem qualquer, não um determinado: artigo indefinido."
-    },
-    {
-      "destaque": "Ele [a] viu na festa.",
-      "opcoes": [
-        "Pronome",
-        "Artigo",
-        "Preposição",
-        "Conjunção"
-      ],
-      "correta": "Pronome",
-      "explica": "A substitui ELA (ele viu ela → ele a viu): pronome."
-    },
-    {
-      "destaque": "Dei um presente [a] Maria.",
-      "opcoes": [
-        "Preposição",
-        "Artigo",
-        "Pronome",
-        "Conjunção"
-      ],
-      "correta": "Preposição",
-      "explica": "A liga \"dei um presente\" a \"Maria\": preposição."
-    },
-    {
-      "destaque": "[A] professora sorriu.",
-      "opcoes": [
-        "Artigo",
-        "Pronome",
-        "Preposição",
-        "Numeral"
-      ],
-      "correta": "Artigo",
-      "explica": "A vem antes do substantivo PROFESSORA: artigo."
-    },
-    {
-      "destaque": "Ela está [bem].",
-      "opcoes": [
-        "Advérbio",
-        "Substantivo",
-        "Adjetivo",
-        "Verbo"
-      ],
-      "correta": "Advérbio",
-      "explica": "BEM indica o modo, o estado de como ela está: advérbio."
-    },
-    {
-      "destaque": "O [bem] sempre vence.",
-      "opcoes": [
-        "Substantivo",
-        "Advérbio",
-        "Adjetivo",
-        "Verbo"
-      ],
-      "correta": "Substantivo",
-      "explica": "Com o artigo O, BEM vira nome de uma ideia: substantivo."
-    },
-    {
-      "destaque": "Comi [muito] no almoço.",
+      "destaque": "Estou [muito] cansado.",
       "opcoes": [
         "Advérbio",
         "Pronome",
         "Adjetivo",
-        "Numeral"
-      ],
-      "correta": "Advérbio",
-      "explica": "MUITO intensifica o verbo COMI e não muda: advérbio."
-    },
-    {
-      "destaque": "Comi [muitos] doces.",
-      "opcoes": [
-        "Pronome",
-        "Advérbio",
-        "Adjetivo",
-        "Numeral"
-      ],
-      "correta": "Pronome",
-      "explica": "MUITOS acompanha o substantivo DOCES e varia (muitas balas): pronome indefinido."
-    },
-    {
-      "destaque": "Saí cedo [porque] choveu.",
-      "opcoes": [
-        "Conjunção",
-        "Preposição",
-        "Advérbio",
-        "Pronome"
-      ],
-      "correta": "Conjunção",
-      "explica": "PORQUE liga duas orações e dá a causa: conjunção."
-    },
-    {
-      "destaque": "O livro está [sobre] a mesa.",
-      "opcoes": [
-        "Preposição",
-        "Advérbio",
-        "Conjunção",
-        "Verbo"
-      ],
-      "correta": "Preposição",
-      "explica": "SOBRE liga \"o livro está\" a \"a mesa\": preposição."
-    },
-    {
-      "destaque": "[Psiu]! O bebê está dormindo.",
-      "opcoes": [
-        "Interjeição",
-        "Advérbio",
-        "Substantivo",
-        "Pronome"
-      ],
-      "correta": "Interjeição",
-      "explica": "PSIU pede silêncio: interjeição."
-    },
-    {
-      "destaque": "Ela tirou o [primeiro] lugar.",
-      "opcoes": [
-        "Numeral",
-        "Adjetivo",
-        "Artigo",
         "Substantivo"
       ],
-      "correta": "Numeral",
-      "explica": "PRIMEIRO indica ordem: numeral ordinal."
+      "correta": "Advérbio",
+      "explica": "MUITO indica intensidade (aumenta o adjetivo CANSADO) e não muda de forma: advérbio."
     },
     {
-      "destaque": "O [cantar] dos pássaros me acorda.",
+      "destaque": "A [feira] abre às seis horas.",
       "opcoes": [
         "Substantivo",
         "Verbo",
@@ -309,10 +749,21 @@
         "Advérbio"
       ],
       "correta": "Substantivo",
-      "explica": "Com o artigo O, o verbo CANTAR vira nome: substantivo."
+      "explica": "FEIRA dá nome a um lugar de compras: substantivo."
     },
     {
-      "destaque": "Os pássaros [cantam] de manhã.",
+      "destaque": "[Silêncio]! A prova começou.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "SILÊNCIO expressa um pedido de silêncio: interjeição."
+    },
+    {
+      "destaque": "Você [parece] feliz.",
       "opcoes": [
         "Verbo",
         "Substantivo",
@@ -320,32 +771,10 @@
         "Advérbio"
       ],
       "correta": "Verbo",
-      "explica": "CANTAM indica uma ação: verbo."
+      "explica": "PARECE indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
     },
     {
-      "destaque": "A planta continua [viva].",
-      "opcoes": [
-        "Adjetivo",
-        "Interjeição",
-        "Verbo",
-        "Substantivo"
-      ],
-      "correta": "Adjetivo",
-      "explica": "VIVA caracteriza a planta: adjetivo."
-    },
-    {
-      "destaque": "[Viva]! Ganhamos o jogo!",
-      "opcoes": [
-        "Interjeição",
-        "Adjetivo",
-        "Verbo",
-        "Substantivo"
-      ],
-      "correta": "Interjeição",
-      "explica": "Aqui VIVA expressa alegria: interjeição."
-    },
-    {
-      "destaque": "[Aquele] menino é meu primo.",
+      "destaque": "[Esse] lápis é seu?",
       "opcoes": [
         "Pronome",
         "Artigo",
@@ -353,18 +782,821 @@
         "Numeral"
       ],
       "correta": "Pronome",
-      "explica": "AQUELE indica a posição do menino, longe de quem fala: pronome demonstrativo."
+      "explica": "ESSE indica o lápis que está perto de quem ouve: pronome demonstrativo."
     },
     {
-      "destaque": "Moro [perto] da escola.",
+      "destaque": "[Vários] amigos vieram.",
+      "opcoes": [
+        "Pronome",
+        "Numeral",
+        "Adjetivo",
+        "Artigo"
+      ],
+      "correta": "Pronome",
+      "explica": "VÁRIOS acompanha AMIGOS de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "Isto é para [mim].",
+      "opcoes": [
+        "Pronome",
+        "Preposição",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "MIM pronome pessoal oblíquo que vem depois de preposição."
+    },
+    {
+      "destaque": "Este ano colhemos o [triplo] de milho.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "TRIPLO indica multiplicação (quantas vezes): numeral multiplicativo."
+    },
+    {
+      "destaque": "Meu [cachorro] late muito.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CACHORRO dá nome a um animal: substantivo."
+    },
+    {
+      "destaque": "Nós [tínhamos] saído quando você ligou.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "TÍNHAMOS: É o verbo auxiliar TER, que forma o tempo composto \"tínhamos saído\": verbo."
+    },
+    {
+      "destaque": "[Duas] crianças se perderam no parque.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DUAS indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Ande [até] a esquina.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "ATÉ liga ANDE a A ESQUINA: preposição."
+    },
+    {
+      "destaque": "Ele falou [perante] o juiz.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "PERANTE liga FALOU a O JUIZ: preposição."
+    },
+    {
+      "destaque": "O cachorro [late] para o carteiro.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "LATE indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Treinou muito, [contudo] perdeu.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "CONTUDO liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Comprei pão [hoje].",
       "opcoes": [
         "Advérbio",
         "Adjetivo",
-        "Preposição",
-        "Pronome"
+        "Substantivo",
+        "Preposição"
       ],
       "correta": "Advérbio",
-      "explica": "PERTO indica lugar: advérbio."
+      "explica": "HOJE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Falei [sobre] o projeto.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga FALEI a O PROJETO: preposição."
+    },
+    {
+      "destaque": "[Aquele] menino é meu primo.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "AQUELE indica o menino que está longe de quem fala: pronome demonstrativo."
+    },
+    {
+      "destaque": "As crianças brincam [fora].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "FORA indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Moro no [quinto] andar.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "QUINTO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "O céu [estrelado] encantou a todos.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ESTRELADO caracteriza o céu, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Puxa], que pena!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "PUXA expressa pena, lamento: interjeição."
+    },
+    {
+      "destaque": "A [girafa] tem o pescoço comprido.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "GIRAFA dá nome a um animal: substantivo."
+    },
+    {
+      "destaque": "O [rebanho] voltou para o curral.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "REBANHO dá nome a um grupo de animais: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "Ele [ainda] não chegou.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AINDA indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Eles [nos] convidaram.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Advérbio",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "NOS quer dizer \"a nós\": pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Vá dormir, [pois] já é tarde.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "POIS liga duas orações com ideia de explicação: conjunção."
+    },
+    {
+      "destaque": "O dia estava lindo, [todavia] ninguém saiu.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "TODAVIA liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "[Os] vizinhos fizeram festa.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "OS vem antes do substantivo VIZINHOS e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "A casa é [bonita].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BONITA caracteriza a casa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela [se] olhou no espelho.",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Pronome",
+      "explica": "SE retoma o próprio sujeito (olhou a si mesma): pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Tomei [um] susto!",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UM vem antes do substantivo SUSTO e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Ele comeu um [quarto] da torta.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "QUARTO indica uma parte, uma fração: numeral fracionário."
+    },
+    {
+      "destaque": "Tenho [dois] irmãos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DOIS indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "O dia está [quente].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "QUENTE caracteriza o dia, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Os [idosos] têm atendimento preferencial.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "IDOSOS dá nome a pessoas. Com o artigo OS, a palavra IDOSOS vira nome: substantivo."
+    },
+    {
+      "destaque": "Eu [paguei] a conta de luz.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "PAGUEI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Cada] aluno recebeu um livro.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Pronome",
+      "explica": "CADA acompanha ALUNO, um por um: pronome indefinido."
+    },
+    {
+      "destaque": "[Nós] vamos à praia.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "NÓS substitui os nomes de quem fala: pronome pessoal reto."
+    },
+    {
+      "destaque": "O [milésimo] cliente ganhou um prêmio.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "MILÉSIMO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "São [seis] horas.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "SEIS indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Ele respondeu [calmamente].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CALMAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Lutamos [contra] a injustiça.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "CONTRA liga LUTAMOS a A INJUSTIÇA: preposição."
+    },
+    {
+      "destaque": "Comi [muito] no almoço.",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Advérbio",
+      "explica": "MUITO indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Amanhã eu [viajarei] para o interior.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "VIAJAREI indica uma ação (no futuro) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela teve [coragem] de falar.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CORAGEM dá nome a uma qualidade: substantivo."
+    },
+    {
+      "destaque": "Que dia [lindíssimo]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LINDÍSSIMO: caracteriza o dia no grau superlativo (muito lindo): adjetivo."
+    },
+    {
+      "destaque": "Vi [um] arco-íris.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UM vem antes do substantivo ARCO-ÍRIS e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "[Credo]! Que bicho feio!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "CREDO expressa espanto: interjeição."
+    },
+    {
+      "destaque": "O trabalhador [honesto] devolveu o dinheiro.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "HONESTO caracteriza o trabalhador, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Que] horas são?",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Pronome",
+      "explica": "QUE faz uma pergunta, junto com HORAS: pronome interrogativo."
+    },
+    {
+      "destaque": "Primeiro estudo, [depois] brinco.",
+      "opcoes": [
+        "Advérbio",
+        "Conjunção",
+        "Preposição",
+        "Adjetivo"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEPOIS indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Outro] dia te conto.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "OUTRO acompanha DIA de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "Hoje é o [décimo] dia de aula.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DÉCIMO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "O exercício era [fácil].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FÁCIL caracteriza o exercício, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Aqui [venta] muito em agosto.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "VENTA indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Moro [em] São Paulo.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "EM liga MORO a SÃO PAULO: preposição."
+    },
+    {
+      "destaque": "[Caso] chova, o passeio será adiado.",
+      "opcoes": [
+        "Conjunção",
+        "Substantivo",
+        "Preposição",
+        "Advérbio"
+      ],
+      "correta": "Conjunção",
+      "explica": "CASO liga duas orações com ideia de condição: conjunção."
+    },
+    {
+      "destaque": "[Estudem] para a prova!",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTUDEM indica uma ordem (modo imperativo) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [rio] encheu com a chuva.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "RIO dá nome a um lugar da natureza: substantivo."
+    },
+    {
+      "destaque": "[Umas] crianças brincavam na rua.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMAS vem antes do substantivo CRIANÇAS e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "[Você] quer café?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "VOCÊ é a forma de tratamento usada para falar com alguém: pronome de tratamento."
+    },
+    {
+      "destaque": "Eu [aprendi] a ler este ano.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "APRENDI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela tirou o [primeiro] lugar.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "PRIMEIRO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "A sopa ficou [salgada].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SALGADA caracteriza a sopa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O gato está [sob] a cama.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SOB liga O GATO ESTÁ a A CAMA: preposição."
+    },
+    {
+      "destaque": "Ela é mais alta [que] o irmão.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: introduz a comparação entre ela e o irmão: conjunção comparativa."
+    },
+    {
+      "destaque": "Ele parece [cansado].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "CANSADO caracteriza ele, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Nossa]! Que susto!",
+      "opcoes": [
+        "Interjeição",
+        "Pronome",
+        "Advérbio",
+        "Adjetivo"
+      ],
+      "correta": "Interjeição",
+      "explica": "NOSSA expressa espanto: interjeição."
+    },
+    {
+      "destaque": "[Ih], esqueci o caderno.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "IH expressa contrariedade: interjeição."
+    },
+    {
+      "destaque": "Ele fala [rápido].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "RÁPIDO indica modo (como ele fala) e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Saí [sem] guarda-chuva.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SEM liga SAÍ a GUARDA-CHUVA: preposição."
+    },
+    {
+      "destaque": "Nós [votamos] na eleição.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "VOTAMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ganhei um livro [grosso].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "GROSSO caracteriza o livro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Eu [sou] estudante.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "SOU indica um estado (o verbo SER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [escola] fica na esquina.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "ESCOLA dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "Paguei [cem] reais.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "CEM indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Encontrei [uma] moeda no chão.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMA vem antes do substantivo MOEDA e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Ela fala [devagar].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEVAGAR indica modo e não muda de forma: advérbio."
     },
     {
       "destaque": "A menina [inteligente] respondeu.",
@@ -375,7 +1607,2801 @@
         "Verbo"
       ],
       "correta": "Adjetivo",
-      "explica": "INTELIGENTE caracteriza a menina: adjetivo."
+      "explica": "INTELIGENTE caracteriza a menina, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O cachorro [bravo] latiu.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BRAVO caracteriza o cachorro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Isto] aqui é um presente.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ISTO aponta para algo perto de quem fala: pronome demonstrativo."
+    },
+    {
+      "destaque": "Encontrei uma carteira [perdida].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PERDIDA caracteriza a carteira, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Vou à praia [se] fizer sol.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Preposição",
+        "Advérbio"
+      ],
+      "correta": "Conjunção",
+      "explica": "SE liga duas orações com ideia de condição: conjunção."
+    },
+    {
+      "destaque": "Eles moram [longe].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LONGE indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vou [a] pé para o trabalho.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "A liga VOU a PÉ: preposição."
+    },
+    {
+      "destaque": "[Feche] a porta, por favor.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "FECHE indica um pedido ou uma ordem (modo imperativo) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O livro está [sobre] a mesa.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SOBRE liga O LIVRO ESTÁ a A MESA: preposição."
+    },
+    {
+      "destaque": "Ele chegou em [segundo] lugar.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "SEGUNDO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "Comprei uma bolsa [vermelha].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VERMELHA caracteriza a bolsa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O time [vencedor] ganhou uma taça.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VENCEDOR caracteriza o time, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O [primeiro] dia de trabalho foi ótimo.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "PRIMEIRO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "[Coragem]! Você consegue!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "CORAGEM expressa ânimo, incentivo: interjeição."
+    },
+    {
+      "destaque": "[Sim], eu aceito o convite.",
+      "opcoes": [
+        "Advérbio",
+        "Interjeição",
+        "Substantivo",
+        "Conjunção"
+      ],
+      "correta": "Advérbio",
+      "explica": "SIM indica afirmação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[A] lua está cheia.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "A vem antes do substantivo LUA e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "[Porque] estava doente, faltou à aula.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Minha avó é uma mulher [forte].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FORTE caracteriza a mulher, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Eu [não] gosto de jiló.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "NÃO indica negação e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Olá]! Tudo bem?",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "OLÁ expressa uma saudação: interjeição."
+    },
+    {
+      "destaque": "Nós [ouvimos] uma música linda.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "OUVIMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela fez o [dobro] de pontos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DOBRO indica multiplicação (quantas vezes): numeral multiplicativo."
+    },
+    {
+      "destaque": "Chegou [de] ônibus.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga CHEGOU a ÔNIBUS: preposição."
+    },
+    {
+      "destaque": "Eu [comprei] pão na padaria.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "COMPREI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela lê [enquanto] ele cozinha.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "ENQUANTO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "A [janela] da sala quebrou.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "JANELA dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "A loja tinha [fechado] cedo.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "FECHADO: Junto com TINHA, forma um tempo composto do verbo FECHAR: verbo."
+    },
+    {
+      "destaque": "[Nossa] casa é pequena.",
+      "opcoes": [
+        "Pronome",
+        "Interjeição",
+        "Artigo",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "NOSSA indica de quem é a casa: pronome possessivo."
+    },
+    {
+      "destaque": "Fiquei acordado [até] meia-noite.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "ATÉ liga ACORDADO a MEIA-NOITE: preposição."
+    },
+    {
+      "destaque": "Saímos [após] o almoço.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "APÓS liga SAÍMOS a O ALMOÇO: preposição."
+    },
+    {
+      "destaque": "[Meu] irmão é alto.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "MEU indica de quem é o irmão: pronome possessivo."
+    },
+    {
+      "destaque": "[A] professora sorriu.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "A vem antes do substantivo PROFESSORA e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "A [paciência] da mãe é enorme.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "PACIÊNCIA dá nome a uma qualidade: substantivo."
+    },
+    {
+      "destaque": "O [azul] do céu está lindo.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "AZUL dá nome a uma cor. Com o artigo O, a palavra AZUL vira nome: substantivo."
+    },
+    {
+      "destaque": "A prova foi [difícil].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DIFÍCIL caracteriza a prova, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela canta [e] dança.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas orações com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "A turma [visitou] o museu.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "VISITOU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "É a [vigésima] vez que eu aviso!",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "VIGÉSIMA indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "[Tomara]! Quero muito que dê certo.",
+      "opcoes": [
+        "Interjeição",
+        "Verbo",
+        "Advérbio",
+        "Conjunção"
+      ],
+      "correta": "Interjeição",
+      "explica": "TOMARA expressa desejo: interjeição."
+    },
+    {
+      "destaque": "[Xi]! Acabou a luz.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "XI expressa preocupação: interjeição."
+    },
+    {
+      "destaque": "Passei [por] sua casa.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga PASSEI a SUA CASA: preposição."
+    },
+    {
+      "destaque": "O menino [quebrou] o vaso.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "QUEBROU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Há [um] gato no telhado.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UM vem antes do substantivo GATO e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Ele viaja [amanhã] de manhã.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AMANHÃ indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "A blusa [barata] esgotou na loja.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BARATA caracteriza a blusa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A água do rio está [limpa].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LIMPA caracteriza a água, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Ah], agora entendi!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "AH expressa que a pessoa entendeu algo: interjeição."
+    },
+    {
+      "destaque": "[Adeus]! Vou sentir saudade.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "ADEUS expressa uma despedida: interjeição."
+    },
+    {
+      "destaque": "Acho [que] vai chover.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: liga \"acho\" à oração \"vai chover\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "[Ela] mora no centro.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ELA substitui o nome da pessoa de quem se fala: pronome pessoal reto."
+    },
+    {
+      "destaque": "[Eba]! Vamos ao parque!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "EBA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "O [jantar] estava delicioso.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "JANTAR dá nome a uma refeição. Repare no artigo O antes dele: substantivo."
+    },
+    {
+      "destaque": "Faltam [quinze] minutos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "QUINZE indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Falou tanto [que] ficou rouco.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE liga duas orações com ideia de consequência: conjunção."
+    },
+    {
+      "destaque": "A sala está [escura].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ESCURA caracteriza a sala, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Comprei arroz, feijão [e] óleo.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas palavras com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "O sol [brilha] forte hoje.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "BRILHA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [viagem] foi cansativa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "VIAGEM dá nome a uma ação (o ato de viajar): substantivo."
+    },
+    {
+      "destaque": "Pegue [as] chaves.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "AS vem antes do substantivo CHAVES e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "O [menino] chegou cedo.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "MENINO dá nome a uma pessoa: substantivo."
+    },
+    {
+      "destaque": "Saí cedo [porque] choveu.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "PORQUE liga duas orações com ideia de causa: conjunção."
+    },
+    {
+      "destaque": "Estudo [para] passar na prova.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga ESTUDO a PASSAR NA PROVA: preposição."
+    },
+    {
+      "destaque": "Ele votou [contra] a proposta.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "CONTRA liga VOTOU a A PROPOSTA: preposição."
+    },
+    {
+      "destaque": "O feijão está [caro] este mês.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "CARO caracteriza o feijão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O [médico] receitou um xarope.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "MÉDICO dá nome a uma pessoa (uma profissão): substantivo."
+    },
+    {
+      "destaque": "[Uma] menina cantou.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMA vem antes do substantivo MENINA e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "[Choveu] muito ontem.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CHOVEU indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O carro [rápido] passou.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "RÁPIDO caracteriza o carro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [amizade] deles é antiga.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "AMIZADE dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "[Parabéns]! Você passou de ano!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "PARABÉNS expressa felicitação: interjeição."
+    },
+    {
+      "destaque": "A [turma] fez uma festa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "TURMA dá nome a um grupo de alunos: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "[Algum] aluno sabe a resposta?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "ALGUM acompanha ALUNO de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "Ela cantou [lindamente].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LINDAMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Opa]! Quase caí.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "OPA expressa susto: interjeição."
+    },
+    {
+      "destaque": "O [ônibus] atrasou dez minutos.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "ÔNIBUS dá nome a um meio de transporte: substantivo."
+    },
+    {
+      "destaque": "Comprei [poucas] frutas.",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Numeral",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "POUCAS acompanha FRUTAS e varia (poucos legumes): pronome indefinido."
+    },
+    {
+      "destaque": "Os pássaros [cantam] de manhã.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CANTAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Vamos [jantar] às oito.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "JANTAR indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Os alunos [estudaram] muito.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTUDARAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O ônibus [passa] às sete horas.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "PASSA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Vou [contigo] à festa.",
+      "opcoes": [
+        "Pronome",
+        "Preposição",
+        "Advérbio",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "CONTIGO é o pronome TU junto com a preposição COM: pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Este presente é [para] você.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga PRESENTE a VOCÊ: preposição."
+    },
+    {
+      "destaque": "[Todo] dia eu leio um pouco.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "TODO acompanha DIA de modo geral: pronome indefinido."
+    },
+    {
+      "destaque": "[Eles] chegaram juntos.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ELES substitui os nomes das pessoas de quem se fala: pronome pessoal reto."
+    },
+    {
+      "destaque": "[Bravo]! Que apresentação linda!",
+      "opcoes": [
+        "Interjeição",
+        "Adjetivo",
+        "Verbo",
+        "Substantivo"
+      ],
+      "correta": "Interjeição",
+      "explica": "BRAVO expressa aplauso: interjeição."
+    },
+    {
+      "destaque": "[Quanto] custa o pão?",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Numeral",
+        "Conjunção"
+      ],
+      "correta": "Pronome",
+      "explica": "QUANTO faz uma pergunta: pronome interrogativo."
+    },
+    {
+      "destaque": "Meu pai [trabalha] na construção.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "TRABALHA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [Brasil] é um país enorme.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "BRASIL dá nome a um país: é um substantivo próprio: substantivo."
+    },
+    {
+      "destaque": "[Felizmente], ninguém se machucou.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "FELIZMENTE indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Talvez] chova à tarde.",
+      "opcoes": [
+        "Advérbio",
+        "Conjunção",
+        "Substantivo",
+        "Pronome"
+      ],
+      "correta": "Advérbio",
+      "explica": "TALVEZ indica dúvida e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Durmo [pouco] durante a semana.",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Advérbio",
+      "explica": "POUCO indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele é forte [como] um touro.",
+      "opcoes": [
+        "Conjunção",
+        "Advérbio",
+        "Verbo",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "COMO: introduz uma comparação (ele é forte como um touro é forte): conjunção comparativa."
+    },
+    {
+      "destaque": "Eu gosto de [nadar].",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "NADAR: É o verbo NADAR no infinitivo: verbo."
+    },
+    {
+      "destaque": "[Tudo] está pronto.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "TUDO indica as coisas de modo geral: pronome indefinido."
+    },
+    {
+      "destaque": "[Agora] é a sua vez.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AGORA indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Penso, [logo] existo.",
+      "opcoes": [
+        "Conjunção",
+        "Advérbio",
+        "Preposição",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "LOGO liga duas orações com ideia de conclusão: conjunção."
+    },
+    {
+      "destaque": "O gato [preto] dorme no sofá.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PRETO caracteriza o gato, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela [esqueceu] o guarda-chuva.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ESQUECEU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O gato está [aqui].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "AQUI indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "A professora [paciente] explicou de novo.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PACIENTE caracteriza a professora, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "As crianças [brincam] no parque.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "BRINCAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O bebê [dorme] no berço.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "DORME indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Viajei [para] Recife.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga VIAJEI a RECIFE: preposição."
+    },
+    {
+      "destaque": "A [professora] explicou a matéria.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "PROFESSORA dá nome a uma pessoa (uma profissão): substantivo."
+    },
+    {
+      "destaque": "A comida [baiana] é famosa.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BAIANA: caracteriza a comida e diz de onde ela é: adjetivo (pátrio)."
+    },
+    {
+      "destaque": "Que bolo [delicioso]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DELICIOSO caracteriza o bolo, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Ui]! Que água gelada!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "UI expressa susto: interjeição."
+    },
+    {
+      "destaque": "Ela está [bem].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "BEM indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Este é o [sexto] livro da coleção.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "SEXTO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "Espero [que] você melhore.",
+      "opcoes": [
+        "Conjunção",
+        "Pronome",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUE: liga \"espero\" à oração \"você melhore\", que completa o sentido do verbo: conjunção integrante."
+    },
+    {
+      "destaque": "Moramos perto da [praia].",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "PRAIA dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "Ela [cozinhou] feijão para todos.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "COZINHOU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Bolo [de] cenoura é o meu preferido.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga BOLO a CENOURA: preposição."
+    },
+    {
+      "destaque": "Comprei [duzentos] gramas de queijo.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "DUZENTOS indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "As crianças ficaram [felizes].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FELIZES caracteriza as crianças, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [cidade] estava em festa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CIDADE dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "Esperei [por] você.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga ESPEREI a VOCÊ: preposição."
+    },
+    {
+      "destaque": "Eles [assinaram] o contrato.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ASSINARAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ele [a] viu na festa.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Preposição",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "A substitui ELA (ele viu ela → ele a viu): pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Ele estudou [demais] e ficou com dor de cabeça.",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEMAIS indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Este] caderno é meu.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Adjetivo",
+        "Numeral"
+      ],
+      "correta": "Pronome",
+      "explica": "ESTE indica o caderno que está perto de quem fala: pronome demonstrativo."
+    },
+    {
+      "destaque": "[Um] homem bateu à porta.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UM vem antes do substantivo HOMEM e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "[Nada] ficou para trás.",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Substantivo",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "NADA indica coisa de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "O caminho [longo] cansou a turma.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LONGO caracteriza o caminho, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Você [é] muito gentil.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "É indica um estado (o verbo SER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ele saiu [comigo].",
+      "opcoes": [
+        "Pronome",
+        "Preposição",
+        "Advérbio",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "COMIGO é o pronome EU junto com a preposição COM: pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Ela chegou [com] fome.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga CHEGOU a FOME: preposição."
+    },
+    {
+      "destaque": "A mala [pesada] ficou no chão.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PESADA caracteriza a mala, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Fiz isso [por] amor.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "POR liga FIZ ISSO a AMOR: preposição."
+    },
+    {
+      "destaque": "Copo [de] vidro quebra fácil.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga COPO a VIDRO: preposição."
+    },
+    {
+      "destaque": "Você [me] ajuda?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ME quer dizer \"a mim\": pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Ela foi à festa, [mas] voltou cedo.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Quando eu [chegar], te ligo.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CHEGAR indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O aluno [preguiçoso] dormiu na aula.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PREGUIÇOSO caracteriza o aluno, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Estou [sem] fome.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "SEM liga ESTOU a FOME: preposição."
+    },
+    {
+      "destaque": "Ele [continua] doente.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "CONTINUA indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Choveu, [entretanto] o jogo continuou.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "ENTRETANTO liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "A semana tem [sete] dias.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "SETE indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Que filme [divertido]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DIVERTIDO caracteriza o filme, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O remédio é [gratuito] no posto de saúde.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "GRATUITO caracteriza o remédio, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ele joga [mal].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "MAL indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Vocês] estudaram?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "VOCÊS é a forma de tratamento no plural: pronome de tratamento."
+    },
+    {
+      "destaque": "A [chuva] molhou a roupa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CHUVA dá nome a um fenômeno da natureza: substantivo."
+    },
+    {
+      "destaque": "Ela [já] terminou a tarefa.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "JÁ indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Eu] gosto de ler.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "EU substitui o nome de quem fala: pronome pessoal reto."
+    },
+    {
+      "destaque": "O médico [atendeu] todos os pacientes.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ATENDEU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Quem] chegou?",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Conjunção",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "QUEM faz uma pergunta: pronome interrogativo."
+    },
+    {
+      "destaque": "Os meninos brincam [lá] fora.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "LÁ indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Viva]! Ganhamos o jogo!",
+      "opcoes": [
+        "Interjeição",
+        "Adjetivo",
+        "Verbo",
+        "Advérbio"
+      ],
+      "correta": "Interjeição",
+      "explica": "VIVA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "Plantamos uma [árvore] no pátio.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "ÁRVORE dá nome a uma planta: substantivo."
+    },
+    {
+      "destaque": "A sala tem [trinta] alunos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "TRINTA indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Ela [sorriu] para mim.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "SORRIU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [verdade] sempre aparece.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "VERDADE dá nome a uma ideia: substantivo."
+    },
+    {
+      "destaque": "[Socorro]! Alguém me ajude!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "SOCORRO expressa um pedido de ajuda: interjeição."
+    },
+    {
+      "destaque": "A menina [que] canta é minha prima.",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Pronome",
+      "explica": "QUE retoma a palavra MENINA (a qual canta): pronome relativo."
+    },
+    {
+      "destaque": "Comprei [umas] laranjas.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMAS vem antes do substantivo LARANJAS e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Não comi [nem] bebi.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "NEM liga duas orações com ideia de adição negativa: conjunção."
+    },
+    {
+      "destaque": "Ontem jantamos [tarde].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "TARDE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Ele [provavelmente] chegará atrasado.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "PROVAVELMENTE indica dúvida e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Comprei pão [e] leite.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "E liga duas palavras com ideia de adição: conjunção."
+    },
+    {
+      "destaque": "Ela abriu [a] porta.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "A vem antes do substantivo PORTA e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Ou você estuda, [ou] trabalha.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "OU liga duas orações com ideia de alternância: conjunção."
+    },
+    {
+      "destaque": "O [trabalho] começa às oito.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "TRABALHO dá nome a uma atividade: substantivo."
+    },
+    {
+      "destaque": "O [bem] sempre vence.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "BEM dá nome a uma ideia. Com o artigo O, a palavra BEM vira nome: substantivo."
+    },
+    {
+      "destaque": "[Aquilo] lá é uma estrela?",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "AQUILO aponta para algo distante: pronome demonstrativo."
+    },
+    {
+      "destaque": "Gastei um [terço] do dinheiro.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "TERÇO indica uma parte, uma fração: numeral fracionário."
+    },
+    {
+      "destaque": "[Uau]! Que festa linda!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "UAU expressa admiração: interjeição."
+    },
+    {
+      "destaque": "[Ufa]! Terminei a prova.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "UFA expressa alívio: interjeição."
+    },
+    {
+      "destaque": "O sapato [apertado] machucou meu pé.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "APERTADO caracteriza o sapato, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Quando] cheguei, todos dormiam.",
+      "opcoes": [
+        "Conjunção",
+        "Advérbio",
+        "Preposição",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "QUANDO liga duas orações com ideia de tempo: conjunção."
+    },
+    {
+      "destaque": "O preço subiu para o [quádruplo].",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "QUÁDRUPLO indica multiplicação (quantas vezes): numeral multiplicativo."
+    },
+    {
+      "destaque": "Liguei, [mas] ninguém atendeu.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "[Oi]! Que bom te ver!",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "OI expressa uma saudação: interjeição."
+    },
+    {
+      "destaque": "O gato está [entre] as caixas.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "ENTRE liga O GATO ESTÁ a AS CAIXAS: preposição."
+    },
+    {
+      "destaque": "A água [ferveu].",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "FERVEU indica um processo e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Qual] é o seu nome?",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Conjunção",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "QUAL faz uma pergunta: pronome interrogativo."
+    },
+    {
+      "destaque": "Eu [sempre] tomo café de manhã.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "SEMPRE indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Mil] pessoas foram ao show.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "MIL indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "[O] gato dormiu.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo GATO e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Voltei [para] casa cedo.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "PARA liga VOLTEI a CASA: preposição."
+    },
+    {
+      "destaque": "[Uma] semana passa rápido.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMA vem antes do substantivo SEMANA e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "O [café] esfriou.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CAFÉ dá nome a uma bebida: substantivo."
+    },
+    {
+      "destaque": "Ela [ama] os filhos.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "AMA indica um sentimento e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Fiz o bolo [conforme] a receita mandava.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "CONFORME liga duas orações com ideia de conformidade (do jeito que): conjunção."
+    },
+    {
+      "destaque": "Se eu [tivesse] tempo, viajaria.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "TIVESSE indica uma condição (o verbo TER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Hoje eu acordei [cedo].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "CEDO indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Vamos ficar [dentro]: está chovendo.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DENTRO indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "O livro [que] li é ótimo.",
+      "opcoes": [
+        "Pronome",
+        "Conjunção",
+        "Advérbio",
+        "Preposição"
+      ],
+      "correta": "Pronome",
+      "explica": "QUE retoma a palavra LIVRO (o livro, o qual eu li): pronome relativo."
+    },
+    {
+      "destaque": "[Oba]! Amanhã é feriado.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "OBA expressa alegria: interjeição."
+    },
+    {
+      "destaque": "Comprei [três] cadernos.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "TRÊS indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "Fizemos tudo [depressa].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "DEPRESSA indica modo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[Ninguém] faltou hoje.",
+      "opcoes": [
+        "Pronome",
+        "Advérbio",
+        "Substantivo",
+        "Adjetivo"
+      ],
+      "correta": "Pronome",
+      "explica": "NINGUÉM indica pessoa de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "[As] flores murcharam.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "AS vem antes do substantivo FLORES e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Ele leu o [terceiro] capítulo.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "TERCEIRO indica ordem: numeral ordinal."
+    },
+    {
+      "destaque": "Eu [escrevi] uma carta.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ESCREVI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ele trabalha [com] madeira.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga TRABALHA a MADEIRA: preposição."
+    },
+    {
+      "destaque": "[Tchau]! Até amanhã.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "TCHAU expressa uma despedida: interjeição."
+    },
+    {
+      "destaque": "[A] Joana chegou.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "A vem antes do substantivo JOANA e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "A [lua] apareceu no céu.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "LUA dá nome a um astro: substantivo."
+    },
+    {
+      "destaque": "[O] ônibus chegou.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo ÔNIBUS e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "O [silêncio] da biblioteca ajuda a estudar.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "SILÊNCIO dá nome a a falta de barulho: substantivo."
+    },
+    {
+      "destaque": "Volte [logo]!",
+      "opcoes": [
+        "Advérbio",
+        "Conjunção",
+        "Substantivo",
+        "Adjetivo"
+      ],
+      "correta": "Advérbio",
+      "explica": "LOGO indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "O elefante é um animal [enorme].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ENORME caracteriza o animal, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ficamos [em] casa.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "EM liga FICAMOS a CASA: preposição."
+    },
+    {
+      "destaque": "Fique quieto, [senão] o bebê acorda.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "SENÃO liga duas orações com ideia de alternância (caso contrário): conjunção."
+    },
+    {
+      "destaque": "[O] céu está azul.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo CÉU e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "A planta continua [viva].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VIVA caracteriza a planta, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Que voz [suave]!",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SUAVE caracteriza a voz, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Embora] estivesse cansada, ela foi à aula.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "EMBORA liga duas orações com ideia de concessão (apesar de): conjunção."
+    },
+    {
+      "destaque": "[O] Rio de Janeiro é lindo.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo RIO DE JANEIRO e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Coloque a caixa [ali].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ALI indica lugar e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "[O] correr faz bem à saúde.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo CORRER (um verbo que virou nome) e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "A porta [aberta] deixou entrar o vento.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ABERTA caracteriza a porta, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Comprei [o] livro que você indicou.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "O vem antes do substantivo LIVRO e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "Ele é um cantor [brasileiro].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BRASILEIRO: caracteriza o cantor e diz de onde ele é: adjetivo (pátrio)."
+    },
+    {
+      "destaque": "[Cuidado]! O chão está molhado.",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "CUIDADO expressa um aviso: interjeição."
+    },
+    {
+      "destaque": "Ela chegou [ontem].",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "ONTEM indica tempo e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "A rua [barulhenta] não deixa ninguém dormir.",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BARULHENTA caracteriza a rua, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ganhei [uma] bicicleta.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UMA vem antes do substantivo BICICLETA e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "A [tristeza] passou depressa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "TRISTEZA dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "[Trovejou] durante a noite.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "TROVEJOU indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Paguei o [aluguel] em dia.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "ALUGUEL dá nome a um pagamento: substantivo."
+    },
+    {
+      "destaque": "Comprei o livro e [o] li inteiro.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Preposição",
+        "Substantivo"
+      ],
+      "correta": "Pronome",
+      "explica": "O substitui O LIVRO: pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "Dei um presente [a] Maria.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "A liga DEI UM PRESENTE a MARIA: preposição."
+    },
+    {
+      "destaque": "[Os] Silva chegaram cedo.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "OS vem antes do substantivo SILVA (o nome da família) e mostra que é um ser determinado, já conhecido: artigo definido."
+    },
+    {
+      "destaque": "O [sol] nasceu bonito hoje.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "SOL dá nome a um astro: substantivo."
+    },
+    {
+      "destaque": "[Alô]? Quem fala?",
+      "opcoes": [
+        "Interjeição",
+        "Advérbio",
+        "Substantivo",
+        "Verbo"
+      ],
+      "correta": "Interjeição",
+      "explica": "ALÔ expressa um chamado ao telefone: interjeição."
+    },
+    {
+      "destaque": "A carta é [de] Pedro.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "DE liga CARTA a PEDRO: preposição."
+    },
+    {
+      "destaque": "Cortei o papel [com] a tesoura.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga CORTEI O PAPEL a A TESOURA: preposição."
+    },
+    {
+      "destaque": "No inverno, [anoitece] mais cedo.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "ANOITECE indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela usa um celular [moderno].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "MODERNO caracteriza o celular, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Precisamos de [uns] minutos.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UNS vem antes do substantivo MINUTOS e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Perdi a [chave] de casa.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CHAVE dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "[Alguém] bateu à porta.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ALGUÉM indica uma pessoa de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "Ele comprou [um] carro usado.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UM vem antes do substantivo CARRO e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "Ninguém sabe o que o [futuro] reserva.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "FUTURO dá nome a um tempo que ainda vai chegar: substantivo."
+    },
+    {
+      "destaque": "Eu [gosto] de música.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "GOSTO indica um sentimento e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [respeito] é importante na escola.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "RESPEITO dá nome a um valor, uma ideia: substantivo."
+    },
+    {
+      "destaque": "[Isso] não é justo.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "ISSO aponta para algo de que se falou: pronome demonstrativo."
+    },
+    {
+      "destaque": "[Nenhum] carro passou.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Numeral",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "NENHUM acompanha CARRO de modo vago: pronome indefinido."
+    },
+    {
+      "destaque": "A [bicicleta] está sem freio.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "BICICLETA dá nome a um veículo: substantivo."
+    },
+    {
+      "destaque": "O [cantar] dos pássaros me acorda.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CANTAR dá nome a uma ação: o verbo virou nome, com o artigo O antes: substantivo."
+    },
+    {
+      "destaque": "O céu [ficou] nublado.",
+      "opcoes": [
+        "Verbo",
+        "Substantivo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Verbo",
+      "explica": "FICOU indica uma mudança de estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Bebi [quatro] copos de água.",
+      "opcoes": [
+        "Numeral",
+        "Artigo",
+        "Adjetivo",
+        "Substantivo"
+      ],
+      "correta": "Numeral",
+      "explica": "QUATRO indica quantidade: numeral cardinal."
+    },
+    {
+      "destaque": "A [receita] do bolo é da minha mãe.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "RECEITA dá nome a um texto com instruções: substantivo."
+    },
+    {
+      "destaque": "Fui à escola [com] minha irmã.",
+      "opcoes": [
+        "Preposição",
+        "Conjunção",
+        "Advérbio",
+        "Artigo"
+      ],
+      "correta": "Preposição",
+      "explica": "COM liga FUI À ESCOLA a MINHA IRMÃ: preposição."
+    },
+    {
+      "destaque": "Ele [quase] caiu da escada.",
+      "opcoes": [
+        "Advérbio",
+        "Adjetivo",
+        "Substantivo",
+        "Preposição"
+      ],
+      "correta": "Advérbio",
+      "explica": "QUASE indica intensidade e não muda de forma: advérbio."
+    },
+    {
+      "destaque": "Recebi uma [carta] do meu primo.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "CARTA dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "[Uns] amigos vieram jantar.",
+      "opcoes": [
+        "Artigo",
+        "Pronome",
+        "Numeral",
+        "Preposição"
+      ],
+      "correta": "Artigo",
+      "explica": "UNS vem antes do substantivo AMIGOS e mostra que é um ser qualquer, não determinado: artigo indefinido."
+    },
+    {
+      "destaque": "O [barulho] acordou o bebê.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "BARULHO dá nome a um som: substantivo."
+    },
+    {
+      "destaque": "O [salário] caiu na conta hoje.",
+      "opcoes": [
+        "Substantivo",
+        "Verbo",
+        "Adjetivo",
+        "Advérbio"
+      ],
+      "correta": "Substantivo",
+      "explica": "SALÁRIO dá nome a o dinheiro que se ganha pelo trabalho: substantivo."
+    },
+    {
+      "destaque": "Estudei, [mas] não entendi.",
+      "opcoes": [
+        "Conjunção",
+        "Preposição",
+        "Advérbio",
+        "Pronome"
+      ],
+      "correta": "Conjunção",
+      "explica": "MAS liga duas orações com ideia de oposição: conjunção."
+    },
+    {
+      "destaque": "Ela [lhe] deu um presente.",
+      "opcoes": [
+        "Pronome",
+        "Artigo",
+        "Substantivo",
+        "Advérbio"
+      ],
+      "correta": "Pronome",
+      "explica": "LHE quer dizer \"a ele\": pronome pessoal oblíquo."
+    },
+    {
+      "destaque": "O café está [amargo].",
+      "opcoes": [
+        "Adjetivo",
+        "Substantivo",
+        "Advérbio",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "AMARGO caracteriza o café, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ele chegou [tão] cedo!",
+      "opcoes": [
+        "Advérbio",
+        "Pronome",
+        "Adjetivo",
+        "Conjunção"
+      ],
+      "correta": "Advérbio",
+      "explica": "TÃO indica intensidade e não muda de forma: advérbio."
     }
   ]
 }

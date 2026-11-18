@@ -566,7 +566,15 @@
     },
     {
       "arquivo": "morfo-classes-frase.json",
-      "titulo": "Classifique a palavra na frase"
+      "titulo": "Classifique a palavra na frase (400 frases, as 10 classes)"
+    },
+    {
+      "arquivo": "morfo-classes-frase-sav.json",
+      "titulo": "Na frase: substantivo, adjetivo ou verbo? (148 frases)"
+    },
+    {
+      "arquivo": "morfo-classes-frase-invariaveis.json",
+      "titulo": "Na frase: advérbio, preposição, conjunção ou interjeição? (147 frases)"
     },
     {
       "arquivo": "morfo-classes-mudam.json",

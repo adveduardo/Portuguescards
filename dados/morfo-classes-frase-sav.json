@@ -1,0 +1,1487 @@
+{
+  "titulo": "Na frase: substantivo, adjetivo ou verbo?",
+  "emoji": "🔎",
+  "instrucao": "Qual é a classe da palavra destacada?",
+  "rodadas": [
+    {
+      "destaque": "Comemos [pão] com manteiga.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "PÃO dá nome a um alimento: substantivo."
+    },
+    {
+      "destaque": "Um [cardume] passou perto do barco.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CARDUME dá nome a um grupo de peixes: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "A noite estava [fria].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FRIA caracteriza a noite, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela [corre] todas as manhãs.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CORRE indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Eles moram numa casa [pequena].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PEQUENA caracteriza a casa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Os amigos [conversavam] na praça.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CONVERSAVAM indica uma ação (no passado) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Maria] mora em Salvador.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "MARIA dá nome a uma pessoa: é um substantivo próprio: substantivo."
+    },
+    {
+      "destaque": "Comprei um [caderno] novo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CADERNO dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "Eles [construíram] uma casa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CONSTRUÍRAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [futebol] é o esporte mais popular do país.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "FUTEBOL dá nome a um esporte: substantivo."
+    },
+    {
+      "destaque": "Nós [plantamos] tomates na horta.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "PLANTAMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O chão está [molhado].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "MOLHADO caracteriza o chão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela tem olhos [verdes].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VERDES caracteriza os olhos, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A notícia [triste] chegou cedo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "TRISTE caracteriza a notícia, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [alegria] tomou conta da festa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "ALEGRIA dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "Ele saiu [correndo].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CORRENDO: É uma forma do verbo CORRER (o gerúndio): verbo."
+    },
+    {
+      "destaque": "Ela é [linda]!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LINDA caracteriza ela, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O prédio [antigo] foi reformado.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ANTIGO caracteriza o prédio, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O vizinho é muito [simpático].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SIMPÁTICO caracteriza o vizinho, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O pão [quentinho] saiu do forno.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "QUENTINHO caracteriza o pão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Sinto muita [saudade] da minha avó.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "SAUDADE dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "A [flor] murchou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "FLOR dá nome a uma planta: substantivo."
+    },
+    {
+      "destaque": "A professora [está] cansada.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTÁ indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O menino [educado] agradeceu.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "EDUCADO caracteriza o menino, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [feira] abre às seis horas.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "FEIRA dá nome a um lugar de compras: substantivo."
+    },
+    {
+      "destaque": "Você [parece] feliz.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "PARECE indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Meu [cachorro] late muito.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CACHORRO dá nome a um animal: substantivo."
+    },
+    {
+      "destaque": "Nós [tínhamos] saído quando você ligou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "TÍNHAMOS: É o verbo auxiliar TER, que forma o tempo composto \"tínhamos saído\": verbo."
+    },
+    {
+      "destaque": "O cachorro [late] para o carteiro.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "LATE indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O céu [estrelado] encantou a todos.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ESTRELADO caracteriza o céu, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [girafa] tem o pescoço comprido.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "GIRAFA dá nome a um animal: substantivo."
+    },
+    {
+      "destaque": "O [rebanho] voltou para o curral.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "REBANHO dá nome a um grupo de animais: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "A casa é [bonita].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BONITA caracteriza a casa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O dia está [quente].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "QUENTE caracteriza o dia, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Os [idosos] têm atendimento preferencial.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "IDOSOS dá nome a pessoas. Com o artigo OS, a palavra IDOSOS vira nome: substantivo."
+    },
+    {
+      "destaque": "Eu [paguei] a conta de luz.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "PAGUEI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Amanhã eu [viajarei] para o interior.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "VIAJAREI indica uma ação (no futuro) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela teve [coragem] de falar.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CORAGEM dá nome a uma qualidade: substantivo."
+    },
+    {
+      "destaque": "Que dia [lindíssimo]!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LINDÍSSIMO: caracteriza o dia no grau superlativo (muito lindo): adjetivo."
+    },
+    {
+      "destaque": "O trabalhador [honesto] devolveu o dinheiro.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "HONESTO caracteriza o trabalhador, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O exercício era [fácil].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FÁCIL caracteriza o exercício, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Aqui [venta] muito em agosto.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "VENTA indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "[Estudem] para a prova!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTUDEM indica uma ordem (modo imperativo) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [rio] encheu com a chuva.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "RIO dá nome a um lugar da natureza: substantivo."
+    },
+    {
+      "destaque": "Eu [aprendi] a ler este ano.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "APRENDI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A sopa ficou [salgada].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SALGADA caracteriza a sopa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ele parece [cansado].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "CANSADO caracteriza ele, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Nós [votamos] na eleição.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "VOTAMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ganhei um livro [grosso].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "GROSSO caracteriza o livro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Eu [sou] estudante.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "SOU indica um estado (o verbo SER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [escola] fica na esquina.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "ESCOLA dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "A menina [inteligente] respondeu.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "INTELIGENTE caracteriza a menina, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O cachorro [bravo] latiu.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BRAVO caracteriza o cachorro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Encontrei uma carteira [perdida].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PERDIDA caracteriza a carteira, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "[Feche] a porta, por favor.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "FECHE indica um pedido ou uma ordem (modo imperativo) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Comprei uma bolsa [vermelha].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VERMELHA caracteriza a bolsa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O time [vencedor] ganhou uma taça.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VENCEDOR caracteriza o time, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Minha avó é uma mulher [forte].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FORTE caracteriza a mulher, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Nós [ouvimos] uma música linda.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "OUVIMOS indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Eu [comprei] pão na padaria.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "COMPREI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [janela] da sala quebrou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "JANELA dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "A loja tinha [fechado] cedo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "FECHADO: Junto com TINHA, forma um tempo composto do verbo FECHAR: verbo."
+    },
+    {
+      "destaque": "A [paciência] da mãe é enorme.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "PACIÊNCIA dá nome a uma qualidade: substantivo."
+    },
+    {
+      "destaque": "O [azul] do céu está lindo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "AZUL dá nome a uma cor. Com o artigo O, a palavra AZUL vira nome: substantivo."
+    },
+    {
+      "destaque": "A prova foi [difícil].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DIFÍCIL caracteriza a prova, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A turma [visitou] o museu.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "VISITOU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O menino [quebrou] o vaso.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "QUEBROU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A blusa [barata] esgotou na loja.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BARATA caracteriza a blusa, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A água do rio está [limpa].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LIMPA caracteriza a água, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O [jantar] estava delicioso.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "JANTAR dá nome a uma refeição. Repare no artigo O antes dele: substantivo."
+    },
+    {
+      "destaque": "A sala está [escura].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ESCURA caracteriza a sala, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O sol [brilha] forte hoje.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "BRILHA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [viagem] foi cansativa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "VIAGEM dá nome a uma ação (o ato de viajar): substantivo."
+    },
+    {
+      "destaque": "O [menino] chegou cedo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "MENINO dá nome a uma pessoa: substantivo."
+    },
+    {
+      "destaque": "O feijão está [caro] este mês.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "CARO caracteriza o feijão, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O [médico] receitou um xarope.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "MÉDICO dá nome a uma pessoa (uma profissão): substantivo."
+    },
+    {
+      "destaque": "[Choveu] muito ontem.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CHOVEU indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O carro [rápido] passou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "RÁPIDO caracteriza o carro, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [amizade] deles é antiga.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "AMIZADE dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "A [turma] fez uma festa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "TURMA dá nome a um grupo de alunos: é um substantivo coletivo: substantivo."
+    },
+    {
+      "destaque": "O [ônibus] atrasou dez minutos.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "ÔNIBUS dá nome a um meio de transporte: substantivo."
+    },
+    {
+      "destaque": "Os pássaros [cantam] de manhã.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CANTAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Vamos [jantar] às oito.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "JANTAR indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Os alunos [estudaram] muito.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ESTUDARAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O ônibus [passa] às sete horas.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "PASSA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Meu pai [trabalha] na construção.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "TRABALHA indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [Brasil] é um país enorme.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "BRASIL dá nome a um país: é um substantivo próprio: substantivo."
+    },
+    {
+      "destaque": "Eu gosto de [nadar].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "NADAR: É o verbo NADAR no infinitivo: verbo."
+    },
+    {
+      "destaque": "O gato [preto] dorme no sofá.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PRETO caracteriza o gato, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ela [esqueceu] o guarda-chuva.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ESQUECEU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A professora [paciente] explicou de novo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PACIENTE caracteriza a professora, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "As crianças [brincam] no parque.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "BRINCAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O bebê [dorme] no berço.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "DORME indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [professora] explicou a matéria.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "PROFESSORA dá nome a uma pessoa (uma profissão): substantivo."
+    },
+    {
+      "destaque": "A comida [baiana] é famosa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BAIANA: caracteriza a comida e diz de onde ela é: adjetivo (pátrio)."
+    },
+    {
+      "destaque": "Que bolo [delicioso]!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DELICIOSO caracteriza o bolo, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Moramos perto da [praia].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "PRAIA dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "Ela [cozinhou] feijão para todos.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "COZINHOU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "As crianças ficaram [felizes].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "FELIZES caracteriza as crianças, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [cidade] estava em festa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CIDADE dá nome a um lugar: substantivo."
+    },
+    {
+      "destaque": "Eles [assinaram] o contrato.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ASSINARAM indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O caminho [longo] cansou a turma.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "LONGO caracteriza o caminho, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Você [é] muito gentil.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "É indica um estado (o verbo SER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A mala [pesada] ficou no chão.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PESADA caracteriza a mala, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Quando eu [chegar], te ligo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CHEGAR indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O aluno [preguiçoso] dormiu na aula.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "PREGUIÇOSO caracteriza o aluno, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ele [continua] doente.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "CONTINUA indica um estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Que filme [divertido]!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "DIVERTIDO caracteriza o filme, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "O remédio é [gratuito] no posto de saúde.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "GRATUITO caracteriza o remédio, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [chuva] molhou a roupa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CHUVA dá nome a um fenômeno da natureza: substantivo."
+    },
+    {
+      "destaque": "O médico [atendeu] todos os pacientes.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ATENDEU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Plantamos uma [árvore] no pátio.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "ÁRVORE dá nome a uma planta: substantivo."
+    },
+    {
+      "destaque": "Ela [sorriu] para mim.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "SORRIU indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [verdade] sempre aparece.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "VERDADE dá nome a uma ideia: substantivo."
+    },
+    {
+      "destaque": "O [trabalho] começa às oito.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "TRABALHO dá nome a uma atividade: substantivo."
+    },
+    {
+      "destaque": "O [bem] sempre vence.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "BEM dá nome a uma ideia. Com o artigo O, a palavra BEM vira nome: substantivo."
+    },
+    {
+      "destaque": "O sapato [apertado] machucou meu pé.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "APERTADO caracteriza o sapato, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A água [ferveu].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "FERVEU indica um processo e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [café] esfriou.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CAFÉ dá nome a uma bebida: substantivo."
+    },
+    {
+      "destaque": "Ela [ama] os filhos.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "AMA indica um sentimento e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Se eu [tivesse] tempo, viajaria.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "TIVESSE indica uma condição (o verbo TER) e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Eu [escrevi] uma carta.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ESCREVI indica uma ação e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [lua] apareceu no céu.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "LUA dá nome a um astro: substantivo."
+    },
+    {
+      "destaque": "O [silêncio] da biblioteca ajuda a estudar.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "SILÊNCIO dá nome a a falta de barulho: substantivo."
+    },
+    {
+      "destaque": "O elefante é um animal [enorme].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ENORME caracteriza o animal, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A planta continua [viva].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "VIVA caracteriza a planta, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Que voz [suave]!",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "SUAVE caracteriza a voz, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A porta [aberta] deixou entrar o vento.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "ABERTA caracteriza a porta, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Ele é um cantor [brasileiro].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BRASILEIRO: caracteriza o cantor e diz de onde ele é: adjetivo (pátrio)."
+    },
+    {
+      "destaque": "A rua [barulhenta] não deixa ninguém dormir.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "BARULHENTA caracteriza a rua, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "A [tristeza] passou depressa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "TRISTEZA dá nome a um sentimento: substantivo."
+    },
+    {
+      "destaque": "[Trovejou] durante a noite.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "TROVEJOU indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Paguei o [aluguel] em dia.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "ALUGUEL dá nome a um pagamento: substantivo."
+    },
+    {
+      "destaque": "O [sol] nasceu bonito hoje.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "SOL dá nome a um astro: substantivo."
+    },
+    {
+      "destaque": "No inverno, [anoitece] mais cedo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "ANOITECE indica um fenômeno da natureza e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "Ela usa um celular [moderno].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "MODERNO caracteriza o celular, dizendo como é: adjetivo."
+    },
+    {
+      "destaque": "Perdi a [chave] de casa.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CHAVE dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "Ninguém sabe o que o [futuro] reserva.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "FUTURO dá nome a um tempo que ainda vai chegar: substantivo."
+    },
+    {
+      "destaque": "Eu [gosto] de música.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "GOSTO indica um sentimento e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "O [respeito] é importante na escola.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "RESPEITO dá nome a um valor, uma ideia: substantivo."
+    },
+    {
+      "destaque": "A [bicicleta] está sem freio.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "BICICLETA dá nome a um veículo: substantivo."
+    },
+    {
+      "destaque": "O [cantar] dos pássaros me acorda.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CANTAR dá nome a uma ação: o verbo virou nome, com o artigo O antes: substantivo."
+    },
+    {
+      "destaque": "O céu [ficou] nublado.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Verbo",
+      "explica": "FICOU indica uma mudança de estado e muda conforme a pessoa e o tempo (eu, nós, ontem, amanhã): verbo."
+    },
+    {
+      "destaque": "A [receita] do bolo é da minha mãe.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "RECEITA dá nome a um texto com instruções: substantivo."
+    },
+    {
+      "destaque": "Recebi uma [carta] do meu primo.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "CARTA dá nome a um objeto: substantivo."
+    },
+    {
+      "destaque": "O [barulho] acordou o bebê.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "BARULHO dá nome a um som: substantivo."
+    },
+    {
+      "destaque": "O [salário] caiu na conta hoje.",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Substantivo",
+      "explica": "SALÁRIO dá nome a o dinheiro que se ganha pelo trabalho: substantivo."
+    },
+    {
+      "destaque": "O café está [amargo].",
+      "opcoes": [
+        "Substantivo",
+        "Adjetivo",
+        "Verbo"
+      ],
+      "correta": "Adjetivo",
+      "explica": "AMARGO caracteriza o café, dizendo como é: adjetivo."
+    }
+  ]
+}
