@@ -1,0 +1,189 @@
+{
+  "titulo": "English board game",
+  "casas": 30,
+  "especiais": true,
+  "idioma": "en-US",
+  "tipos": {
+    "vocab": {
+      "nome": "Vocabulary",
+      "emoji": "🔤",
+      "cor": "#2f80ed"
+    },
+    "gram": {
+      "nome": "Grammar",
+      "emoji": "🧩",
+      "cor": "#e74c3c"
+    },
+    "speak": {
+      "nome": "Speak",
+      "emoji": "🗣️",
+      "cor": "#27ae60"
+    },
+    "spell": {
+      "nome": "Spell",
+      "emoji": "🔡",
+      "cor": "#8e44ad"
+    },
+    "trad": {
+      "nome": "Translate",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    }
+  },
+  "desafios": {
+    "vocab": [
+      {
+        "texto": "What is it in English? 🐶",
+        "resposta": "dog"
+      },
+      {
+        "texto": "What is it in English? 🍎",
+        "resposta": "apple"
+      },
+      {
+        "texto": "What is it in English? 🏠",
+        "resposta": "house"
+      },
+      {
+        "texto": "What is it in English? 📚",
+        "resposta": "book"
+      },
+      {
+        "texto": "What is it in English? 🚗",
+        "resposta": "car"
+      },
+      {
+        "texto": "What is it in English? ☀️",
+        "resposta": "sun"
+      },
+      {
+        "texto": "What is it in English? 🐱",
+        "resposta": "cat"
+      },
+      {
+        "texto": "What is it in English? ✏️",
+        "resposta": "pencil"
+      }
+    ],
+    "gram": [
+      {
+        "texto": "Complete: She ___ a student. (is/are)",
+        "resposta": "is"
+      },
+      {
+        "texto": "Complete: They ___ happy. (is/are)",
+        "resposta": "are"
+      },
+      {
+        "texto": "Complete: He ___ soccer every day. (play/plays)",
+        "resposta": "plays"
+      },
+      {
+        "texto": "Complete: Yesterday I ___ to school. (go/went)",
+        "resposta": "went"
+      },
+      {
+        "texto": "Complete: I ___ reading now. (am/is)",
+        "resposta": "am"
+      },
+      {
+        "texto": "Complete: There ___ three books. (is/are)",
+        "resposta": "are"
+      },
+      {
+        "texto": "Complete: She doesn't ___ fish. (like/likes)",
+        "resposta": "like"
+      },
+      {
+        "texto": "Complete: An elephant is ___ than a cat. (bigger/biggest)",
+        "resposta": "bigger"
+      }
+    ],
+    "speak": [
+      {
+        "texto": "Say your name and age.",
+        "resposta": "My name is… I am… years old."
+      },
+      {
+        "texto": "Say what you like to eat.",
+        "resposta": "I like…"
+      },
+      {
+        "texto": "Say what you did yesterday.",
+        "resposta": "Yesterday I…"
+      },
+      {
+        "texto": "Describe your best friend.",
+        "resposta": "My best friend is…"
+      },
+      {
+        "texto": "Say what you can do.",
+        "resposta": "I can…"
+      },
+      {
+        "texto": "Say your favorite day of the week and why.",
+        "resposta": "My favorite day is… because…"
+      }
+    ],
+    "spell": [
+      {
+        "texto": "Spell the word: school",
+        "resposta": "school"
+      },
+      {
+        "texto": "Spell the word: friend",
+        "resposta": "friend"
+      },
+      {
+        "texto": "Spell the word: water",
+        "resposta": "water"
+      },
+      {
+        "texto": "Spell the word: orange",
+        "resposta": "orange"
+      },
+      {
+        "texto": "Spell the word: yellow",
+        "resposta": "yellow"
+      },
+      {
+        "texto": "Spell the word: family",
+        "resposta": "family"
+      }
+    ],
+    "trad": [
+      {
+        "texto": "How do you say \"bom dia\" in English?",
+        "resposta": "good morning"
+      },
+      {
+        "texto": "How do you say \"obrigado\" in English?",
+        "resposta": "thank you"
+      },
+      {
+        "texto": "How do you say \"por favor\" in English?",
+        "resposta": "please"
+      },
+      {
+        "texto": "How do you say \"casa\" in English?",
+        "resposta": "house / home"
+      },
+      {
+        "texto": "How do you say \"amigo\" in English?",
+        "resposta": "friend"
+      },
+      {
+        "texto": "How do you say \"escola\" in English?",
+        "resposta": "school"
+      },
+      {
+        "texto": "How do you say \"água\" in English?",
+        "resposta": "water"
+      },
+      {
+        "texto": "How do you say \"feliz\" in English?",
+        "resposta": "happy"
+      }
+    ]
+  }
+}

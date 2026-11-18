@@ -148,7 +148,7 @@ function novoInicio(){
 function lerEmVozAlta(){
   const partes = ativos().filter(i => faces[i]).map(i => `${dados.dados[i].nome}: ${faces[i].texto}.`);
   if (!partes.length) return AV.avisar('Role os dados primeiro.');
-  AV.falar(`${inicioAtual} ${partes.join(' ')} Agora é com vocês!`);
+  AV.falar([{t: `${inicioAtual} ${partes.join(' ')}`}, {t: 'Agora é com vocês!', l: 'pt-BR'}]);
 }
 function cronometro(){
   clearInterval(timer);
@@ -158,7 +158,7 @@ function cronometro(){
   const tique = () => {
     const r = Math.max(0, Math.ceil((fimTempo - Date.now()) / 1000));
     $('relogio').textContent = AV.mmss(r);
-    if (!r){ clearInterval(timer); $('relogio').classList.add('fim'); AV.sirene(); AV.falar('Acabou o tempo! Hora de compartilhar as histórias.'); }
+    if (!r){ clearInterval(timer); $('relogio').classList.add('fim'); AV.sirene(); AV.falar('Acabou o tempo! Hora de compartilhar as histórias.', 'pt-BR'); }
   };
   tique(); timer = setInterval(tique, 500);
 }

@@ -317,7 +317,7 @@ async function jogarDado(){
   const v = 1 + Math.floor(Math.random() * 6);
   dado.classList.remove('rolando'); desenharDado(v);
   AV.tom(700, .15, 'triangle', .15);
-  if (jogo.voz) AV.falar(String(v));
+  if (jogo.voz) AV.falar(String(v), 'pt-BR');
   await espera(500);
   const e = jogo.equipes[jogo.vez];
   e.antes = e.pos;
@@ -348,7 +348,7 @@ function aviso(texto){
   return new Promise(r => {
     const d = document.createElement('div'); d.id = 'aviso'; d.textContent = texto; document.body.appendChild(d);
     AV.tom(880, .12, 'triangle', .14); AV.tom(1100, .15, 'triangle', .14, .12);
-    if (jogo.voz) AV.falar(texto.replace(/^\S+\s/, ''));
+    if (jogo.voz) AV.falar(texto.replace(/^\S+\s/, ''), 'pt-BR');
     setTimeout(() => { d.remove(); r(); }, 1700);
   });
 }
@@ -395,7 +395,7 @@ function proximaVez(){
 function vitoria(e){
   jogo.terminou = true; ocupado = false; salvar();
   AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 600);
-  if (jogo.voz) AV.falar(`${e.nome} venceu!`);
+  if (jogo.voz) AV.falar(`${e.nome} venceu!`, 'pt-BR');
   $('emojiVitoria').textContent = '🏆 ' + e.emoji;
   $('tituloVitoria').textContent = `${e.nome} chegou primeiro!`;
   const ord = jogo.equipes.slice().sort((a, b) => b.pos - a.pos);

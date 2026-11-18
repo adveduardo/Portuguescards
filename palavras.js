@@ -214,12 +214,15 @@ function escolherVoz(){
   vozPt = vs.find(v => /pt[-_]BR/i.test(v.lang)) || vs.find(v => /^pt/i.test(v.lang)) || null;
 }
 if ('speechSynthesis' in window){ escolherVoz(); speechSynthesis.onvoiceschanged = escolherVoz; }
+let idiomaLista = 'pt-BR';   // muda quando a lista pronta (?lista=) traz "idioma"
 function falar(texto, opcoes = {}){
   if (!('speechSynthesis' in window)) return null;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(texto);
-  u.lang = 'pt-BR'; u.rate = opcoes.rate || .85;
-  if (vozPt) u.voice = vozPt;
+  const lang = opcoes.idioma || idiomaLista;
+  u.lang = lang; u.rate = opcoes.rate || .85;
+  if (lang === 'pt-BR'){ if (vozPt) u.voice = vozPt; }
+  else { const base = lang.slice(0, 2).toLowerCase(), vs = speechSynthesis.getVoices(); u.voice = vs.find(v => String(v.lang).replace('_', '-').toLowerCase() === lang.toLowerCase()) || vs.find(v => String(v.lang).toLowerCase().startsWith(base)) || null; }
   if (opcoes.aoTerminar) u.onend = opcoes.aoTerminar;
   if (opcoes.aoLimite) u.onboundary = opcoes.aoLimite;
   speechSynthesis.speak(u);
@@ -363,6 +366,7 @@ document.head.appendChild(css);
     const x = interpretar(JSON.stringify(d));
     if (!x.itens.length) return;
     listaUrl = x;
+    if (typeof d.idioma === 'string' && d.idioma) idiomaLista = d.idioma;
     selectsCategoria.forEach(({select, opcoes}) => {
       preencherCategorias(select, opcoes);
       select.value = 'url';
@@ -375,6 +379,7 @@ window.Palavras = {
   BANCO, CATEGORIAS, lista, propria, interpretar, embaralhar, baixar, avisar,
   tom, somAcerto, somErro, somClique, falar, falarSilabas, confete,
   preencherCategorias, montarPainelLista, guardar, ler,
-  set som(v){ somLigado = !!v; }, get som(){ return somLigado; }
+  set som(v){ somLigado = !!v; }, get som(){ return somLigado; },
+  get idioma(){ return idiomaLista; }
 };
 })();

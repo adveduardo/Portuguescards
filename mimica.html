@@ -246,7 +246,7 @@ function proximaVez(){
   $('modoPreparar').textContent = MODOS[modoAtual].nome;
   $('verboPreparar').textContent = MODOS[modoAtual].verbo;
   $('btnComecarVez').textContent = `▶️ Começar a vez (${tempoVez} s)`;
-  AV.falar(`Vez de ${d.nomeEq}. ${modoAtual === 'mimica' ? 'Mímica' : 'Desenho'}!`);
+  AV.falar(`Vez de ${d.nomeEq}. ${modoAtual === 'mimica' ? 'Mímica' : 'Desenho'}!`, 'pt-BR');
 }
 function pintarFaixa(d){
   $('faixaVez').style.background = d.corEq;

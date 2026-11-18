@@ -1,0 +1,108 @@
+{
+  "titulo": "There is / there are",
+  "emoji": "🔢",
+  "instrucao": "Choose the correct form",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "There ___ a cat on the sofa.",
+      "opcoes": [
+        "is",
+        "are"
+      ],
+      "correta": "is",
+      "explica": "Singular: there is.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "There ___ three books on the desk.",
+      "opcoes": [
+        "are",
+        "is"
+      ],
+      "correta": "are",
+      "explica": "Plural: there are.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "There ___ some milk in the fridge.",
+      "opcoes": [
+        "is",
+        "are"
+      ],
+      "correta": "is",
+      "explica": "Incontáveis (milk) usam IS.",
+      "imagem": "🥛"
+    },
+    {
+      "destaque": "Are there ___ students in the classroom?",
+      "opcoes": [
+        "any",
+        "some"
+      ],
+      "correta": "any",
+      "explica": "Perguntas e negativas: ANY.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "There are ___ apples on the table.",
+      "opcoes": [
+        "some",
+        "any"
+      ],
+      "correta": "some",
+      "explica": "Afirmativas: SOME.",
+      "imagem": "🍎"
+    },
+    {
+      "destaque": "There isn't ___ water in the bottle.",
+      "opcoes": [
+        "any",
+        "some"
+      ],
+      "correta": "any",
+      "explica": "Negativa: ANY.",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "___ there a bank near here?",
+      "opcoes": [
+        "Is",
+        "Are"
+      ],
+      "correta": "Is",
+      "explica": "Pergunta no singular: Is there…?",
+      "imagem": "🏦"
+    },
+    {
+      "destaque": "There ___ many people at the party yesterday.",
+      "opcoes": [
+        "were",
+        "was"
+      ],
+      "correta": "were",
+      "explica": "Passado plural: there were.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "There ___ a big storm last night.",
+      "opcoes": [
+        "was",
+        "were"
+      ],
+      "correta": "was",
+      "explica": "Passado singular: there was.",
+      "imagem": "⛈️"
+    },
+    {
+      "destaque": "How many chairs ___ there?",
+      "opcoes": [
+        "are",
+        "is"
+      ],
+      "correta": "are",
+      "explica": "How many + plural: are there.",
+      "imagem": "🪑"
+    }
+  ]
+}

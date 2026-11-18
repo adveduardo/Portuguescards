@@ -120,9 +120,9 @@ function normalizar(d){
     const opcoes = r.opcoes.slice(0, 8).map(String);
     const correta = typeof r.correta === 'number' ? opcoes[r.correta] : String(r.correta);
     if (!opcoes.includes(correta)) return null;
-    return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || '', texto: r.texto ? String(r.texto) : ''};
+    return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || '', texto: r.texto ? String(r.texto) : '', ouvir: r.ouvir ? String(r.ouvir) : ''};
   }).filter(Boolean);
-  return rodadas.length ? {tipo: 'rodadas', titulo: d.titulo || jogo.titulo, emoji: d.emoji || jogo.emoji, rodadas, ignoradas: d.rodadas.length - rodadas.length} : null;
+  return rodadas.length ? {tipo: 'rodadas', titulo: d.titulo || jogo.titulo, emoji: d.emoji || jogo.emoji, rodadas, ignoradas: d.rodadas.length - rodadas.length, idiomaOpcoes: d.idiomaOpcoes || ''} : null;
 }
 function carregar(d, origem){
   const x = normalizar(d);
@@ -174,7 +174,7 @@ function proxima(){
   $('enunciado').textContent = placar.prefixo() + atual.enunciado;
   $('img').textContent = atual.imagem; $('img').hidden = !atual.imagem;
   $('textoBase').textContent = atual.texto || ''; $('textoBase').hidden = !atual.texto;
-  $('destaque').innerHTML = marcar(atual.destaque);
+  $('destaque').innerHTML = atual.ouvir ? '🎧 ' + marcar(atual.destaque) : marcar(atual.destaque);
   $('destaque').classList.toggle('longo', atual.destaque.length > 55);
   const ops = atual.classes ? atual.opcoes : M.embaralhar(atual.opcoes);
   $('opcoes').innerHTML = ops.map((o, i) => {
@@ -184,7 +184,8 @@ function proxima(){
   $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
   $('opcoes').classList.toggle('longas', atual.opcoes.some(o => o.length > 28));
   $('explica').textContent = ''; $('btnProxima').hidden = true;
-  if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+  if (atual.ouvir) setTimeout(() => AV.falar(atual.ouvir), 300);   // ouça e escolha: sempre fala
+  else if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
 }
 function responder(b){
   if (respondido) return;
@@ -195,7 +196,8 @@ function responder(b){
   else AV.erro();
   $('explica').textContent = (certo ? '✅ Isso! ' : `❌ A resposta certa é: ${atual.correta}. `) + atual.explica;
   if (!atual.classes && /_{2,}/.test(atual.destaque)) $('destaque').innerHTML = AV.esc(atual.destaque).replace(/_{2,}/, `<mark>${AV.esc(atual.correta)}</mark>`).replace(/\s*\([^)]*\)/, '');
-  if ($('chkVoz').checked) AV.falar((certo ? 'Isso! ' : 'A resposta certa é ' + atual.correta + '. ') + atual.explica);
+  if (atual.ouvir) $('destaque').innerHTML = '🔊 ' + AV.esc(atual.ouvir);
+  if ($('chkVoz').checked) AV.falar([{t: certo ? 'Isso!' : 'A resposta certa é', l: 'pt-BR'}].concat(certo ? [] : [{t: atual.correta, l: dados.idiomaOpcoes || undefined}], [{t: atual.explica, l: 'pt-BR'}]));
   $('btnProxima').hidden = false;
   $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
 }
@@ -208,7 +210,7 @@ function fim(){
 }
 $('btnComecar').onclick = comecar;
 $('btnProxima').onclick = () => { placar.proxima(); proxima(); };
-$('btnOuvir').onclick = () => atual && AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+$('btnOuvir').onclick = () => atual && AV.falar(atual.ouvir || ((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque)));
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
 document.addEventListener('keydown', e => {

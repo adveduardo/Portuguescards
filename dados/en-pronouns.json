@@ -1,0 +1,118 @@
+{
+  "titulo": "Pronouns and possessives",
+  "emoji": "🙋",
+  "instrucao": "Choose the correct pronoun",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "___ is my best friend. (Maria)",
+      "opcoes": [
+        "She",
+        "Her",
+        "Hers"
+      ],
+      "correta": "She",
+      "explica": "Sujeito: SHE.",
+      "imagem": "👧"
+    },
+    {
+      "destaque": "I love ___. (my parents)",
+      "opcoes": [
+        "them",
+        "they",
+        "their"
+      ],
+      "correta": "them",
+      "explica": "Depois do verbo (objeto): THEM.",
+      "imagem": "❤️"
+    },
+    {
+      "destaque": "This is ___ house. (de nós)",
+      "opcoes": [
+        "our",
+        "us",
+        "ours"
+      ],
+      "correta": "our",
+      "explica": "Antes de substantivo: OUR (adjetivo possessivo).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "The book is ___. (meu)",
+      "opcoes": [
+        "mine",
+        "my",
+        "me"
+      ],
+      "correta": "mine",
+      "explica": "Sem substantivo depois: MINE (pronome possessivo).",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Can you help ___? (eu)",
+      "opcoes": [
+        "me",
+        "I",
+        "my"
+      ],
+      "correta": "me",
+      "explica": "Objeto: ME.",
+      "imagem": "🆘"
+    },
+    {
+      "destaque": "___ name is Pedro. (dele)",
+      "opcoes": [
+        "His",
+        "He",
+        "Him"
+      ],
+      "correta": "His",
+      "explica": "Possessivo de he: HIS.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "Call ___ tomorrow. (ela)",
+      "opcoes": [
+        "her",
+        "she",
+        "hers"
+      ],
+      "correta": "her",
+      "explica": "Objeto de she: HER.",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "Is this pen ___? (sua)",
+      "opcoes": [
+        "yours",
+        "your",
+        "you"
+      ],
+      "correta": "yours",
+      "explica": "Sem substantivo depois: YOURS.",
+      "imagem": "🖊️"
+    },
+    {
+      "destaque": "The dog is eating ___ food. (do cachorro)",
+      "opcoes": [
+        "its",
+        "it's",
+        "it"
+      ],
+      "correta": "its",
+      "explica": "ITS = dele/dela (coisa ou animal). IT'S = it is.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "___ are from Recife. (nós)",
+      "opcoes": [
+        "We",
+        "Us",
+        "Our"
+      ],
+      "correta": "We",
+      "explica": "Sujeito: WE.",
+      "imagem": "🏙️"
+    }
+  ]
+}

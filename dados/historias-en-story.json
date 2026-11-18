@@ -1,0 +1,107 @@
+{
+  "titulo": "Story dice",
+  "idioma": "en-US",
+  "dados": [
+    {
+      "nome": "Character",
+      "cor": "#e67e22",
+      "faces": [
+        {
+          "emoji": "🏴‍☠️",
+          "texto": "a pirate"
+        },
+        {
+          "emoji": "🤖",
+          "texto": "a robot"
+        },
+        {
+          "emoji": "🐱",
+          "texto": "a lazy cat"
+        },
+        {
+          "emoji": "👸",
+          "texto": "a princess"
+        },
+        {
+          "emoji": "⚽",
+          "texto": "a soccer player"
+        },
+        {
+          "emoji": "👩‍🚀",
+          "texto": "an astronaut"
+        }
+      ]
+    },
+    {
+      "nome": "Place",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "🏖️",
+          "texto": "at the beach"
+        },
+        {
+          "emoji": "🌳",
+          "texto": "in the forest"
+        },
+        {
+          "emoji": "🏫",
+          "texto": "at school"
+        },
+        {
+          "emoji": "🌕",
+          "texto": "on the moon"
+        },
+        {
+          "emoji": "🛒",
+          "texto": "in a supermarket"
+        },
+        {
+          "emoji": "🍳",
+          "texto": "in the kitchen"
+        }
+      ]
+    },
+    {
+      "nome": "Problem",
+      "cor": "#e74c3c",
+      "faces": [
+        {
+          "emoji": "🌧️",
+          "texto": "it starts to rain"
+        },
+        {
+          "emoji": "📱",
+          "texto": "the phone stops working"
+        },
+        {
+          "emoji": "🔌",
+          "texto": "the lights go out"
+        },
+        {
+          "emoji": "🐕",
+          "texto": "a dog runs away"
+        },
+        {
+          "emoji": "🗺️",
+          "texto": "a treasure map appears"
+        },
+        {
+          "emoji": "🚌",
+          "texto": "they miss the bus"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Once upon a time…",
+    "One day…",
+    "Last weekend…",
+    "It was a dark night…"
+  ],
+  "conectivos": [
+    "First… Then… After that… Finally…",
+    "One day • Suddenly • In the end",
+    "Use the past: was, went, saw, found"
+  ]
+}

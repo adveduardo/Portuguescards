@@ -1,0 +1,140 @@
+{
+  "titulo": "Simple past",
+  "emoji": "⏪",
+  "instrucao": "Choose the correct form",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "Yesterday I ___ (go) to the beach.",
+      "opcoes": [
+        "went",
+        "goed",
+        "go"
+      ],
+      "correta": "went",
+      "explica": "GO é irregular: went.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "She ___ (play) volleyball last week.",
+      "opcoes": [
+        "played",
+        "plaied",
+        "play"
+      ],
+      "correta": "played",
+      "explica": "Regular: verbo + -ED (played).",
+      "imagem": "🏐"
+    },
+    {
+      "destaque": "We ___ (eat) pizza last night.",
+      "opcoes": [
+        "ate",
+        "eated",
+        "eat"
+      ],
+      "correta": "ate",
+      "explica": "EAT é irregular: ate.",
+      "imagem": "🍕"
+    },
+    {
+      "destaque": "He ___ (study) a lot yesterday.",
+      "opcoes": [
+        "studied",
+        "studyed",
+        "study"
+      ],
+      "correta": "studied",
+      "explica": "Consoante + Y: -IED (studied).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "They ___ (see) a great movie.",
+      "opcoes": [
+        "saw",
+        "seed",
+        "see"
+      ],
+      "correta": "saw",
+      "explica": "SEE é irregular: saw.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "I ___ (buy) a new phone.",
+      "opcoes": [
+        "bought",
+        "buyed",
+        "buy"
+      ],
+      "correta": "bought",
+      "explica": "BUY é irregular: bought.",
+      "imagem": "📱"
+    },
+    {
+      "destaque": "Did you ___ the homework?",
+      "opcoes": [
+        "do",
+        "did",
+        "done"
+      ],
+      "correta": "do",
+      "explica": "Com DID, o verbo principal volta à forma básica: Did you do…?",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "She didn't ___ to school yesterday.",
+      "opcoes": [
+        "go",
+        "went",
+        "goes"
+      ],
+      "correta": "go",
+      "explica": "Com DIDN'T, verbo na forma básica.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "___ they travel last summer?",
+      "opcoes": [
+        "Did",
+        "Do",
+        "Were"
+      ],
+      "correta": "Did",
+      "explica": "Pergunta no passado: Did + sujeito + verbo.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "I ___ at home last night.",
+      "opcoes": [
+        "was",
+        "were",
+        "am"
+      ],
+      "correta": "was",
+      "explica": "Passado do to be: I/he/she/it → was.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "We ___ very happy yesterday.",
+      "opcoes": [
+        "were",
+        "was",
+        "are"
+      ],
+      "correta": "were",
+      "explica": "You/we/they → were.",
+      "imagem": "😄"
+    },
+    {
+      "destaque": "He ___ (write) a letter.",
+      "opcoes": [
+        "wrote",
+        "writed",
+        "write"
+      ],
+      "correta": "wrote",
+      "explica": "WRITE é irregular: wrote.",
+      "imagem": "✉️"
+    }
+  ]
+}

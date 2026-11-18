@@ -1,0 +1,154 @@
+{
+  "titulo": "English quiz",
+  "tempoPadrao": 20,
+  "idioma": "en-US",
+  "perguntas": [
+    {
+      "pergunta": "What color is the sky on a sunny day?",
+      "imagem": "☀️",
+      "opcoes": [
+        "blue",
+        "green",
+        "red",
+        "black"
+      ],
+      "correta": "blue"
+    },
+    {
+      "pergunta": "How many days are there in a week?",
+      "imagem": "📅",
+      "opcoes": [
+        "seven",
+        "five",
+        "six",
+        "ten"
+      ],
+      "correta": "seven"
+    },
+    {
+      "pergunta": "What is the opposite of \"big\"?",
+      "imagem": "🐘",
+      "opcoes": [
+        "small",
+        "tall",
+        "long",
+        "fat"
+      ],
+      "correta": "small"
+    },
+    {
+      "pergunta": "Complete: She ___ a teacher.",
+      "imagem": "👩‍🏫",
+      "opcoes": [
+        "is",
+        "are",
+        "am"
+      ],
+      "correta": "is"
+    },
+    {
+      "pergunta": "What is the past of \"go\"?",
+      "imagem": "⏪",
+      "opcoes": [
+        "went",
+        "goed",
+        "gone"
+      ],
+      "correta": "went"
+    },
+    {
+      "pergunta": "Which one is an animal?",
+      "imagem": "🐴",
+      "opcoes": [
+        "horse",
+        "house",
+        "hose",
+        "horn"
+      ],
+      "correta": "horse"
+    },
+    {
+      "pergunta": "Which month comes after March?",
+      "imagem": "🗓️",
+      "opcoes": [
+        "April",
+        "May",
+        "February",
+        "June"
+      ],
+      "correta": "April"
+    },
+    {
+      "pergunta": "\"I'm hungry.\" What do you need?",
+      "imagem": "🍽️",
+      "opcoes": [
+        "food",
+        "a jacket",
+        "sleep",
+        "a pen"
+      ],
+      "correta": "food"
+    },
+    {
+      "pergunta": "Complete: There ___ two cats.",
+      "imagem": "🐱",
+      "opcoes": [
+        "are",
+        "is",
+        "am"
+      ],
+      "correta": "are"
+    },
+    {
+      "pergunta": "What is the plural of \"child\"?",
+      "imagem": "🧒",
+      "opcoes": [
+        "children",
+        "childs",
+        "childrens"
+      ],
+      "correta": "children"
+    },
+    {
+      "pergunta": "\"Library\" means:",
+      "imagem": "📚",
+      "opcoes": [
+        "biblioteca",
+        "livraria",
+        "laboratório"
+      ],
+      "correta": "biblioteca"
+    },
+    {
+      "pergunta": "Complete: I ___ swim. I learned last year.",
+      "imagem": "🏊",
+      "opcoes": [
+        "can",
+        "can't",
+        "must"
+      ],
+      "correta": "can"
+    },
+    {
+      "pergunta": "What do you say when you meet someone in the morning?",
+      "imagem": "🌅",
+      "opcoes": [
+        "Good morning!",
+        "Good night!",
+        "Goodbye!"
+      ],
+      "correta": "Good morning!"
+    },
+    {
+      "pergunta": "Which word is a verb?",
+      "imagem": "🏃",
+      "opcoes": [
+        "run",
+        "happy",
+        "table",
+        "blue"
+      ],
+      "correta": "run"
+    }
+  ]
+}

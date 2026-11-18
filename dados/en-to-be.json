@@ -1,0 +1,140 @@
+{
+  "titulo": "Verb to be",
+  "emoji": "🟰",
+  "instrucao": "Complete with the verb to be",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "I ___ a student.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "am",
+      "explica": "I → am.",
+      "imagem": "🧑‍🎓"
+    },
+    {
+      "destaque": "She ___ my sister.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "is",
+      "explica": "He, she, it → is.",
+      "imagem": "👧"
+    },
+    {
+      "destaque": "They ___ at school.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "are",
+      "explica": "You, we, they → are.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "We ___ friends.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "are",
+      "explica": "We → are.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "It ___ cold today.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "is",
+      "explica": "It → is.",
+      "imagem": "🥶"
+    },
+    {
+      "destaque": "You ___ very tall.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "are",
+      "explica": "You → are.",
+      "imagem": "📏"
+    },
+    {
+      "destaque": "My parents ___ teachers.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "are",
+      "explica": "My parents = they → are.",
+      "imagem": "👨‍👩‍👧"
+    },
+    {
+      "destaque": "The dog ___ hungry.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "is",
+      "explica": "The dog = it → is.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "I ___ not tired.",
+      "opcoes": [
+        "am",
+        "is",
+        "are"
+      ],
+      "correta": "am",
+      "explica": "Negativa: I am not (I'm not).",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "___ you OK?",
+      "opcoes": [
+        "Are",
+        "Is",
+        "Am"
+      ],
+      "correta": "Are",
+      "explica": "Na pergunta, o verbo vem antes: Are you…?",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "___ he your brother?",
+      "opcoes": [
+        "Is",
+        "Are",
+        "Am"
+      ],
+      "correta": "Is",
+      "explica": "He → is: Is he…?",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "He ___ at home now.",
+      "opcoes": [
+        "isn't",
+        "aren't",
+        "am not"
+      ],
+      "correta": "isn't",
+      "explica": "He is not = he isn't.",
+      "imagem": "🏠"
+    }
+  ]
+}

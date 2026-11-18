@@ -1,0 +1,122 @@
+{
+  "titulo": "Simple present",
+  "emoji": "🔁",
+  "instrucao": "Choose the correct form",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "She ___ (like) pizza.",
+      "opcoes": [
+        "likes",
+        "like"
+      ],
+      "correta": "likes",
+      "explica": "He, she, it: o verbo ganha -S no presente.",
+      "imagem": "🍕"
+    },
+    {
+      "destaque": "I ___ (play) soccer on Sundays.",
+      "opcoes": [
+        "play",
+        "plays"
+      ],
+      "correta": "play",
+      "explica": "I, you, we, they: sem -S.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "He ___ (watch) TV every night.",
+      "opcoes": [
+        "watches",
+        "watchs",
+        "watch"
+      ],
+      "correta": "watches",
+      "explica": "Verbos terminados em -CH, -SH, -S, -X, -O ganham -ES: watches.",
+      "imagem": "📺"
+    },
+    {
+      "destaque": "My mother ___ (study) English.",
+      "opcoes": [
+        "studies",
+        "studys",
+        "study"
+      ],
+      "correta": "studies",
+      "explica": "Consoante + Y: troca o Y por -IES (studies).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "___ you like chocolate?",
+      "opcoes": [
+        "Do",
+        "Does"
+      ],
+      "correta": "Do",
+      "explica": "Pergunta com I/you/we/they: Do.",
+      "imagem": "🍫"
+    },
+    {
+      "destaque": "___ she live in Recife?",
+      "opcoes": [
+        "Does",
+        "Do"
+      ],
+      "correta": "Does",
+      "explica": "Pergunta com he/she/it: Does (e o verbo volta sem -S).",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "He ___ like vegetables.",
+      "opcoes": [
+        "doesn't",
+        "don't"
+      ],
+      "correta": "doesn't",
+      "explica": "Negativa com he/she/it: doesn't.",
+      "imagem": "🥦"
+    },
+    {
+      "destaque": "They ___ work on Saturdays.",
+      "opcoes": [
+        "don't",
+        "doesn't"
+      ],
+      "correta": "don't",
+      "explica": "Negativa com I/you/we/they: don't.",
+      "imagem": "🗓️"
+    },
+    {
+      "destaque": "The bus ___ (go) to the city center.",
+      "opcoes": [
+        "goes",
+        "gos",
+        "go"
+      ],
+      "correta": "goes",
+      "explica": "GO → GOES.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "My cat ___ (sleep) a lot.",
+      "opcoes": [
+        "sleeps",
+        "sleep"
+      ],
+      "correta": "sleeps",
+      "explica": "My cat = it → sleeps.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "Does he speak Spanish? — Yes, he ___.",
+      "opcoes": [
+        "does",
+        "do",
+        "is"
+      ],
+      "correta": "does",
+      "explica": "Resposta curta: Yes, he does.",
+      "imagem": "🇪🇸"
+    }
+  ]
+}

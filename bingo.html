@@ -230,7 +230,7 @@ function mostrarVencedor(id){
     }).join('') + '</div><div class="linha"><button id="btnContinuar">▶️ Continuar valendo o próximo lugar</button><button id="btnFim2" class="principal">🏁 Encerrar</button></div>';
   $('btnContinuar').onclick = () => { pausado = false; $('btnChamar').disabled = false; $('vencedorBg').hidden = true; };
   $('btnFim2').onclick = encerrarBingo;
-  AV.fanfarra(); AV.confete(); AV.falar('Bingo! ' + e.nome);
+  AV.fanfarra(); AV.confete(); AV.falar('Bingo! ' + e.nome, 'pt-BR');
 }
 function encerrarBingo(){
   if (comIpads){

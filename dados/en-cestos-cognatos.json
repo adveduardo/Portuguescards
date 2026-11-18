@@ -1,0 +1,100 @@
+{
+  "titulo": "Cognato ou falso cognato?",
+  "idioma": "en-US",
+  "cestos": [
+    {
+      "id": "c",
+      "nome": "Cognato (parece e é)",
+      "emoji": "✅",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "f",
+      "nome": "Falso cognato (parece, mas não é)",
+      "emoji": "🎭",
+      "cor": "#e74c3c"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "hospital",
+      "cesto": "c"
+    },
+    {
+      "palavra": "animal",
+      "cesto": "c"
+    },
+    {
+      "palavra": "important",
+      "cesto": "c"
+    },
+    {
+      "palavra": "family",
+      "cesto": "c"
+    },
+    {
+      "palavra": "music",
+      "cesto": "c"
+    },
+    {
+      "palavra": "telephone",
+      "cesto": "c"
+    },
+    {
+      "palavra": "chocolate",
+      "cesto": "c"
+    },
+    {
+      "palavra": "idea",
+      "cesto": "c"
+    },
+    {
+      "palavra": "problem",
+      "cesto": "c"
+    },
+    {
+      "palavra": "computer",
+      "cesto": "c"
+    },
+    {
+      "palavra": "pretend",
+      "cesto": "f"
+    },
+    {
+      "palavra": "push",
+      "cesto": "f"
+    },
+    {
+      "palavra": "library",
+      "cesto": "f"
+    },
+    {
+      "palavra": "parents",
+      "cesto": "f"
+    },
+    {
+      "palavra": "college",
+      "cesto": "f"
+    },
+    {
+      "palavra": "lunch",
+      "cesto": "f"
+    },
+    {
+      "palavra": "costume",
+      "cesto": "f"
+    },
+    {
+      "palavra": "fabric",
+      "cesto": "f"
+    },
+    {
+      "palavra": "prejudice",
+      "cesto": "f"
+    },
+    {
+      "palavra": "actually",
+      "cesto": "f"
+    }
+  ]
+}

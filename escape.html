@@ -194,7 +194,7 @@ function aoMudar(){
         escaparam.add(id);
         AV.fanfarra(); AV.confete();
         AV.avisar(`🔓 ${g[id].emoji} ${g[id].nome} escaparam!`);
-        AV.falar(`${g[id].nome} escaparam!`);
+        AV.falar(`${g[id].nome} escaparam!`, 'pt-BR');
       }
     });
     if (ids.length && ids.every(id => (progresso(id) || {}).escapou) && !encerrando){
@@ -243,7 +243,7 @@ function comecar(){
     });
   });
   irPara('jogo');
-  AV.sirene(); AV.falar('A porta foi trancada! Resolvam os desafios para escapar!');
+  AV.sirene(); AV.falar('A porta foi trancada! Resolvam os desafios para escapar!', 'pt-BR');
   clearInterval(timer);
   timer = setInterval(tique, 500); tique();
 }
@@ -255,7 +255,7 @@ function tique(){
   if (s !== ultimoSegundo){
     ultimoSegundo = s;
     if (s <= 10 && s > 0) AV.tique();
-    if (s === 60) AV.falar('Falta um minuto!');
+    if (s === 60) AV.falar('Falta um minuto!', 'pt-BR');
   }
   if (s <= 0 && !encerrando){ encerrando = true; encerrarJogo(); }
 }

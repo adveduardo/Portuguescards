@@ -232,7 +232,7 @@ function novaRodada(){
       atraso *= 1.1; setTimeout(girar, atraso);
     } else {
       el.textContent = letra; el.classList.remove('girando');
-      AV.fanfarra(); AV.falar('Letra ' + letra);
+      AV.fanfarra(); AV.falar('Letra ' + letra, 'pt-BR');
       comecarRodada();
     }
   })();
@@ -272,7 +272,7 @@ function pedirStop(quem){
   const quemNome = quem === 'tempo' ? 'Tempo esgotado' : quem === 'professor' ? 'Professor' : (g ? g.emoji + ' ' + g.nome : 'Um grupo');
   Rede.atualizar(`salas/${sala}/estado`, {fase: 'stop', quem, quemNome});
   $('faixaStopBox').innerHTML = `<div id="faixaStop">STOP!</div><h2>${AV.esc(quemNome)}</h2><p class="dica">Recolhendo as respostas…</p>`;
-  AV.sirene(); AV.falar(quem === 'tempo' ? 'Acabou o tempo!' : 'Stop!');
+  AV.sirene(); AV.falar(quem === 'tempo' ? 'Acabou o tempo!' : 'Stop!', 'pt-BR');
   // espera os iPads enviarem as últimas respostas
   setTimeout(() => Rede.ler(`salas/${sala}/respostas/r${rodada}`, (err, r) => montarCorrecao(r || {})), 3500);
 }

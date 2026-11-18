@@ -1,0 +1,50 @@
+{
+  "titulo": "The mysterious box",
+  "imagem": "📦",
+  "idioma": "en-US",
+  "etapas": [
+    {
+      "texto": "On Monday morning, Sam found a big box in front of his door. There was no name on it. Inside, something was moving!",
+      "imagem": "📦",
+      "pergunta": "What do you think is in the box?",
+      "opcoes": [
+        "a puppy",
+        "a pizza",
+        "a book",
+        "a phone"
+      ],
+      "correta": 0,
+      "explica": "Algo estava se mexendo (moving) dentro da caixa: deve ser um animal."
+    },
+    {
+      "texto": "Sam opened the box slowly. A small brown puppy jumped out and licked his face. There was a note: \"Please take care of me. My name is Lucky.\"",
+      "imagem": "🐶",
+      "pergunta": "What will Sam do?",
+      "opcoes": [
+        "take care of the puppy",
+        "throw the box away",
+        "call the police",
+        "go back to sleep"
+      ],
+      "correta": 0,
+      "explica": "O bilhete pede \"take care of me\" (cuide de mim), e Sam parece gostar do cachorro."
+    },
+    {
+      "texto": "Sam gave Lucky water and food. But in the afternoon, a girl knocked on the door. She was crying. \"Have you seen my puppy?\" she asked.",
+      "imagem": "👧",
+      "pergunta": "Who is the girl?",
+      "opcoes": [
+        "Lucky's owner",
+        "Sam's teacher",
+        "a doctor",
+        "Sam's grandmother"
+      ],
+      "correta": 0,
+      "explica": "Ela está procurando o cachorrinho: deve ser a dona (owner) dele."
+    },
+    {
+      "texto": "The girl was Lucky's owner. Her little brother left the puppy at Sam's door as a joke. Sam was sad, but the girl smiled: \"You can visit Lucky every day. I live next door!\"",
+      "imagem": "😄"
+    }
+  ]
+}

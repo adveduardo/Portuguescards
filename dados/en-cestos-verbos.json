@@ -1,0 +1,92 @@
+{
+  "titulo": "Regular or irregular verbs?",
+  "idioma": "en-US",
+  "cestos": [
+    {
+      "id": "r",
+      "nome": "Regular (-ed)",
+      "emoji": "➕",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "i",
+      "nome": "Irregular",
+      "emoji": "🔀",
+      "cor": "#c2185b"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "play",
+      "cesto": "r"
+    },
+    {
+      "palavra": "work",
+      "cesto": "r"
+    },
+    {
+      "palavra": "study",
+      "cesto": "r"
+    },
+    {
+      "palavra": "watch",
+      "cesto": "r"
+    },
+    {
+      "palavra": "like",
+      "cesto": "r"
+    },
+    {
+      "palavra": "want",
+      "cesto": "r"
+    },
+    {
+      "palavra": "visit",
+      "cesto": "r"
+    },
+    {
+      "palavra": "clean",
+      "cesto": "r"
+    },
+    {
+      "palavra": "go",
+      "cesto": "i"
+    },
+    {
+      "palavra": "eat",
+      "cesto": "i"
+    },
+    {
+      "palavra": "see",
+      "cesto": "i"
+    },
+    {
+      "palavra": "have",
+      "cesto": "i"
+    },
+    {
+      "palavra": "buy",
+      "cesto": "i"
+    },
+    {
+      "palavra": "write",
+      "cesto": "i"
+    },
+    {
+      "palavra": "drink",
+      "cesto": "i"
+    },
+    {
+      "palavra": "come",
+      "cesto": "i"
+    },
+    {
+      "palavra": "take",
+      "cesto": "i"
+    },
+    {
+      "palavra": "make",
+      "cesto": "i"
+    }
+  ]
+}

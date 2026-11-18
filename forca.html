@@ -178,7 +178,7 @@ function tentar(L){
   } else if (erros >= maxErros){
     fim = true;
     $('msg').innerHTML = `😅 Era: <span style="color:var(--vermelho)">${item.palavra.toUpperCase()}</span>`;
-    P.somErro(); P.falar('A palavra era ' + item.palavra);
+    P.somErro(); (P.idioma === 'pt-BR' ? P.falar('A palavra era ' + item.palavra) : P.falar(item.palavra));
   }
   render(false);
 }

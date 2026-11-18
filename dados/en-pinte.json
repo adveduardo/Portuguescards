@@ -1,0 +1,51 @@
+{
+  "titulo": "Paint the sentence: noun, verb, adjective, adverb",
+  "idioma": "en-US",
+  "categorias": [
+    {
+      "id": "noun",
+      "nome": "Noun",
+      "plural": "Nouns",
+      "cor": "#2f80ed",
+      "emoji": "📦",
+      "def": "a person, animal, place or thing"
+    },
+    {
+      "id": "verb",
+      "nome": "Verb",
+      "plural": "Verbs",
+      "cor": "#e74c3c",
+      "emoji": "⚡",
+      "def": "an action or a state"
+    },
+    {
+      "id": "adj",
+      "nome": "Adjective",
+      "plural": "Adjectives",
+      "cor": "#27ae60",
+      "emoji": "🎨",
+      "def": "describes a noun"
+    },
+    {
+      "id": "adv",
+      "nome": "Adverb",
+      "plural": "Adverbs",
+      "cor": "#8e44ad",
+      "emoji": "🕒",
+      "def": "describes a verb (how, when, where)"
+    }
+  ],
+  "como_marcar": "word/id with noun, verb, adj, adv; other words stay without a tag",
+  "frases": [
+    "The big/adj dog/noun runs/verb fast/adv.",
+    "My sister/noun sings/verb beautifully/adv.",
+    "Happy/adj children/noun play/verb outside/adv.",
+    "She reads/verb interesting/adj books/noun.",
+    "The old/adj man/noun walks/verb slowly/adv.",
+    "We eat/verb delicious/adj food/noun.",
+    "The teacher/noun speaks/verb very/adv clearly/adv.",
+    "Tom/noun is/verb a smart/adj boy/noun.",
+    "Cats/noun sleep/verb quietly/adv.",
+    "The blue/adj car/noun stopped/verb suddenly/adv."
+  ]
+}

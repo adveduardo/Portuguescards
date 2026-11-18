@@ -83,6 +83,10 @@
     {
       "arquivo": "quiz-colocacao.json",
       "titulo": "Quiz da colocação pronominal"
+    },
+    {
+      "arquivo": "quiz-en.json",
+      "titulo": "🇬🇧 English quiz"
     }
   ],
   "stop": [
@@ -101,6 +105,10 @@
     {
       "arquivo": "stop-ortografia.json",
       "titulo": "Stop da ortografia"
+    },
+    {
+      "arquivo": "stop-en.json",
+      "titulo": "🇬🇧 English Stop"
     }
   ],
   "batata": [
@@ -183,6 +191,10 @@
     {
       "arquivo": "batata-colocacao.json",
       "titulo": "Batata quente da colocação pronominal"
+    },
+    {
+      "arquivo": "batata-en.json",
+      "titulo": "🇬🇧 Hot potato in English"
     }
   ],
   "trilha": [
@@ -257,6 +269,10 @@
     {
       "arquivo": "trilha-colocacao.json",
       "titulo": "Trilha da colocação pronominal"
+    },
+    {
+      "arquivo": "trilha-en.json",
+      "titulo": "🇬🇧 English board game"
     }
   ],
   "escape": [
@@ -319,6 +335,10 @@
     {
       "arquivo": "escape-colocacao.json",
       "titulo": "O Labirinto dos Pronomes Perdidos"
+    },
+    {
+      "arquivo": "escape-en.json",
+      "titulo": "🇬🇧 Escape the Haunted School"
     }
   ],
   "mimica": [
@@ -337,6 +357,10 @@
     {
       "arquivo": "mimica-interjeicoes.json",
       "titulo": "Mímica das interjeições"
+    },
+    {
+      "arquivo": "mimica-en.json",
+      "titulo": "🇬🇧 English charades"
     }
   ],
   "historias": [
@@ -375,6 +399,14 @@
     {
       "arquivo": "historias-significacao.json",
       "titulo": "Dado da significação"
+    },
+    {
+      "arquivo": "historias-en-speak.json",
+      "titulo": "🇬🇧 Roll and speak"
+    },
+    {
+      "arquivo": "historias-en-story.json",
+      "titulo": "🇬🇧 Story dice"
     }
   ],
   "caminho": [
@@ -451,6 +483,10 @@
     {
       "arquivo": "detetive-colocacao.json",
       "titulo": "Detetive da colocação pronominal"
+    },
+    {
+      "arquivo": "detetive-en.json",
+      "titulo": "🇬🇧 Grammar Detective"
     }
   ],
   "pontuacao": [
@@ -545,6 +581,26 @@
     {
       "arquivo": "cc-cestos.json",
       "titulo": "Cestos: verbo no singular ou no plural?"
+    },
+    {
+      "arquivo": "en-cestos-countable.json",
+      "titulo": "🇬🇧 Countable or uncountable?"
+    },
+    {
+      "arquivo": "en-cestos-classes.json",
+      "titulo": "🇬🇧 Noun, verb or adjective?"
+    },
+    {
+      "arquivo": "en-cestos-a-an.json",
+      "titulo": "🇬🇧 A or an?"
+    },
+    {
+      "arquivo": "en-cestos-verbos.json",
+      "titulo": "🇬🇧 Regular or irregular verbs?"
+    },
+    {
+      "arquivo": "en-cestos-cognatos.json",
+      "titulo": "🇬🇧 Cognato ou falso cognato?"
     }
   ],
   "morfo-frases": [
@@ -579,6 +635,10 @@
     {
       "arquivo": "pc-pinte.json",
       "titulo": "Pinte: oração principal, subordinada e conectivo"
+    },
+    {
+      "arquivo": "en-pinte.json",
+      "titulo": "🇬🇧 Paint the sentence: noun, verb, adjective, adverb"
     }
   ],
   "morfo-plural": [
@@ -623,6 +683,10 @@
     {
       "arquivo": "prep-contracoes.json",
       "titulo": "Junte as peças: contrações e combinações"
+    },
+    {
+      "arquivo": "en-montar.json",
+      "titulo": "🇬🇧 Word factory"
     }
   ],
   "morfo-familia": [
@@ -719,6 +783,10 @@
     {
       "arquivo": "pc-ordene.json",
       "titulo": "Monte o período"
+    },
+    {
+      "arquivo": "en-ordene.json",
+      "titulo": "🇬🇧 Put it in order"
     }
   ],
   "morfo-onde": [
@@ -1109,6 +1177,10 @@
     {
       "arquivo": "marque-padrao.json",
       "titulo": "Marque no texto (modelo)"
+    },
+    {
+      "arquivo": "marque-en.json",
+      "titulo": "🇬🇧 Find it in the text"
     }
   ],
   "etapas": [
@@ -1119,6 +1191,10 @@
     {
       "arquivo": "etapas-entrevista.json",
       "titulo": "A entrevista de emprego"
+    },
+    {
+      "arquivo": "etapas-en.json",
+      "titulo": "🇬🇧 The mysterious box"
     }
   ],
   "escrita": [
@@ -1129,12 +1205,20 @@
     {
       "arquivo": "escrita-redacao.json",
       "titulo": "Redação a várias mãos (ENEM)"
+    },
+    {
+      "arquivo": "escrita-en.json",
+      "titulo": "🇬🇧 Chain story (in English)"
     }
   ],
   "debate": [
     {
       "arquivo": "debate-padrao.json",
       "titulo": "Debates para a sala"
+    },
+    {
+      "arquivo": "debate-en.json",
+      "titulo": "🇬🇧 English debates"
     }
   ],
   "analise": [
@@ -1323,6 +1407,26 @@
     {
       "arquivo": "memoria-homonimos.json",
       "titulo": "Memória dos homônimos e parônimos"
+    },
+    {
+      "arquivo": "memoria-en-animais.json",
+      "titulo": "🇬🇧 Memory: animals"
+    },
+    {
+      "arquivo": "memoria-en-comida.json",
+      "titulo": "🇬🇧 Memory: food and drinks"
+    },
+    {
+      "arquivo": "memoria-en-verbos.json",
+      "titulo": "🇬🇧 Memory: action verbs"
+    },
+    {
+      "arquivo": "memoria-en-escola.json",
+      "titulo": "🇬🇧 Memory: at school"
+    },
+    {
+      "arquivo": "memoria-en-falsos.json",
+      "titulo": "🇬🇧 Memory: false friends"
     }
   ],
   "bingo": [
@@ -1333,6 +1437,10 @@
     {
       "arquivo": "bingo-sinonimos.json",
       "titulo": "Bingo dos sinônimos e antônimos"
+    },
+    {
+      "arquivo": "bingo-en.json",
+      "titulo": "🇬🇧 English Bingo (vocabulário)"
     }
   ],
   "escolha-fo": [
@@ -1407,6 +1515,10 @@
     {
       "arquivo": "lista-acentuacao.json",
       "titulo": "Acentuação: palavras para o ditado"
+    },
+    {
+      "arquivo": "lista-en-spelling.json",
+      "titulo": "🇬🇧 English words (spelling)"
     }
   ],
   "escolha-cc": [
@@ -1455,6 +1567,76 @@
     {
       "arquivo": "cl-tipo.json",
       "titulo": "Próclise, mesóclise ou ênclise?"
+    }
+  ],
+  "escolha-en": [
+    {
+      "arquivo": "en-what-is-this.json",
+      "titulo": "🇬🇧 What is it?"
+    },
+    {
+      "arquivo": "en-to-be.json",
+      "titulo": "🇬🇧 Verb to be"
+    },
+    {
+      "arquivo": "en-simple-present.json",
+      "titulo": "🇬🇧 Simple present"
+    },
+    {
+      "arquivo": "en-present-continuous.json",
+      "titulo": "🇬🇧 Present continuous"
+    },
+    {
+      "arquivo": "en-simple-past.json",
+      "titulo": "🇬🇧 Simple past"
+    },
+    {
+      "arquivo": "en-future.json",
+      "titulo": "🇬🇧 Future: will or going to?"
+    },
+    {
+      "arquivo": "en-comparatives.json",
+      "titulo": "🇬🇧 Comparatives and superlatives"
+    },
+    {
+      "arquivo": "en-prepositions.json",
+      "titulo": "🇬🇧 In, on or at?"
+    },
+    {
+      "arquivo": "en-pronouns.json",
+      "titulo": "🇬🇧 Pronouns and possessives"
+    },
+    {
+      "arquivo": "en-there-is.json",
+      "titulo": "🇬🇧 There is / there are"
+    },
+    {
+      "arquivo": "en-modals.json",
+      "titulo": "🇬🇧 Can, must, should"
+    },
+    {
+      "arquivo": "en-question-words.json",
+      "titulo": "🇬🇧 Question words"
+    },
+    {
+      "arquivo": "en-false-friends.json",
+      "titulo": "🇬🇧 False friends (falsos cognatos)"
+    },
+    {
+      "arquivo": "en-reading.json",
+      "titulo": "🇬🇧 Reading time"
+    },
+    {
+      "arquivo": "en-listen.json",
+      "titulo": "🇬🇧 Listen and choose"
+    },
+    {
+      "arquivo": "en-everyday.json",
+      "titulo": "🇬🇧 English in everyday life"
+    },
+    {
+      "arquivo": "en-enem.json",
+      "titulo": "Inglês no ENEM"
     }
   ]
 }

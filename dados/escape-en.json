@@ -1,0 +1,81 @@
+{
+  "titulo": "Escape the Haunted School",
+  "idioma": "en-US",
+  "historia": "The school is haunted! A friendly ghost locked the door. Solve the English challenges to find the code and escape! (A escola está assombrada: resolvam os desafios em inglês para escapar!)",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "The ghost says: \"I have four legs, I say meow and I love fish.\" What am I? (write in English)",
+      "imagem": "🐱",
+      "resposta": [
+        "cat",
+        "a cat"
+      ],
+      "dica": "Meow, meow!"
+    },
+    {
+      "pergunta": "Complete: \"The ghost ___ very old.\"",
+      "imagem": "👻",
+      "opcoes": [
+        "is",
+        "are",
+        "am"
+      ],
+      "correta": "is",
+      "dica": "The ghost = it."
+    },
+    {
+      "pergunta": "Write the answer in English: twelve + eight = ?",
+      "imagem": "➕",
+      "resposta": [
+        "twenty",
+        "20"
+      ],
+      "dica": "12 + 8 = 20. How do you say 20?"
+    },
+    {
+      "pergunta": "What is the opposite of \"open\"? (write in English)",
+      "imagem": "🚪",
+      "resposta": [
+        "closed",
+        "close",
+        "shut"
+      ],
+      "dica": "The door is not open. It is…"
+    },
+    {
+      "pergunta": "Which day comes after Tuesday?",
+      "imagem": "📅",
+      "opcoes": [
+        "Wednesday",
+        "Thursday",
+        "Monday"
+      ],
+      "correta": "Wednesday",
+      "dica": "Monday, Tuesday, …"
+    },
+    {
+      "pergunta": "The ghost wrote: \"Yesterday I goed to the library.\" What is the correct word?",
+      "imagem": "📝",
+      "opcoes": [
+        "went",
+        "go",
+        "gone"
+      ],
+      "correta": "went",
+      "dica": "GO is an irregular verb."
+    },
+    {
+      "pergunta": "Find the key! \"It is NOT in the kitchen. It is ON the table, not UNDER it, in the classroom.\" Where is the key?",
+      "imagem": "🔑",
+      "opcoes": [
+        "on the table in the classroom",
+        "under the table in the classroom",
+        "in the kitchen"
+      ],
+      "correta": "on the table in the classroom",
+      "dica": "ON = em cima de."
+    }
+  ]
+}

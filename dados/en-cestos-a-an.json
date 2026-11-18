@@ -1,0 +1,84 @@
+{
+  "titulo": "A or an?",
+  "idioma": "en-US",
+  "cestos": [
+    {
+      "id": "a",
+      "nome": "a",
+      "emoji": "🅰️",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "an",
+      "nome": "an",
+      "emoji": "🔤",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "car",
+      "cesto": "a"
+    },
+    {
+      "palavra": "book",
+      "cesto": "a"
+    },
+    {
+      "palavra": "dog",
+      "cesto": "a"
+    },
+    {
+      "palavra": "house",
+      "cesto": "a"
+    },
+    {
+      "palavra": "university",
+      "cesto": "a"
+    },
+    {
+      "palavra": "uniform",
+      "cesto": "a"
+    },
+    {
+      "palavra": "teacher",
+      "cesto": "a"
+    },
+    {
+      "palavra": "banana",
+      "cesto": "a"
+    },
+    {
+      "palavra": "apple",
+      "cesto": "an"
+    },
+    {
+      "palavra": "egg",
+      "cesto": "an"
+    },
+    {
+      "palavra": "orange",
+      "cesto": "an"
+    },
+    {
+      "palavra": "umbrella",
+      "cesto": "an"
+    },
+    {
+      "palavra": "hour",
+      "cesto": "an"
+    },
+    {
+      "palavra": "elephant",
+      "cesto": "an"
+    },
+    {
+      "palavra": "ice cream",
+      "cesto": "an"
+    },
+    {
+      "palavra": "honest man",
+      "cesto": "an"
+    }
+  ]
+}

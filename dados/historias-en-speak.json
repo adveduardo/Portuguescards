@@ -1,0 +1,93 @@
+{
+  "titulo": "Roll and speak",
+  "idioma": "en-US",
+  "dados": [
+    {
+      "nome": "Topic",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "👨‍👩‍👧",
+          "texto": "my family"
+        },
+        {
+          "emoji": "🍕",
+          "texto": "my favorite food"
+        },
+        {
+          "emoji": "🤝",
+          "texto": "my best friend"
+        },
+        {
+          "emoji": "🏖️",
+          "texto": "my weekend"
+        },
+        {
+          "emoji": "💼",
+          "texto": "my dream job"
+        },
+        {
+          "emoji": "🏙️",
+          "texto": "my city"
+        },
+        {
+          "emoji": "🐶",
+          "texto": "animals"
+        },
+        {
+          "emoji": "⚽",
+          "texto": "sports"
+        },
+        {
+          "emoji": "🎵",
+          "texto": "music"
+        },
+        {
+          "emoji": "🏫",
+          "texto": "my school"
+        }
+      ]
+    },
+    {
+      "nome": "Challenge",
+      "cor": "#e67e22",
+      "faces": [
+        {
+          "emoji": "2️⃣",
+          "texto": "say two sentences"
+        },
+        {
+          "emoji": "3️⃣",
+          "texto": "say three sentences"
+        },
+        {
+          "emoji": "❓",
+          "texto": "ask a friend a question"
+        },
+        {
+          "emoji": "⏱️",
+          "texto": "speak for 30 seconds"
+        },
+        {
+          "emoji": "👍",
+          "texto": "say something you like"
+        },
+        {
+          "emoji": "👎",
+          "texto": "say something you don't like"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Talk about it in English!",
+    "Speak to a friend!",
+    "Ready? Speak!"
+  ],
+  "conectivos": [
+    "I like… / I don't like… / I love…",
+    "My favorite… is…",
+    "and • but • because",
+    "Do you like…? / What's your favorite…?"
+  ]
+}

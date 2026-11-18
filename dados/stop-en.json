@@ -1,0 +1,141 @@
+{
+  "titulo": "English Stop",
+  "idioma": "en-US",
+  "letras": "ABCDEFGHLMPRST",
+  "tempo": 150,
+  "pontos": {
+    "unica": 10,
+    "repetida": 5
+  },
+  "categorias": [
+    {
+      "nome": "Animal",
+      "respostas": [
+        "ant",
+        "bear",
+        "cat",
+        "dog",
+        "elephant",
+        "fish",
+        "giraffe",
+        "horse",
+        "lion",
+        "monkey",
+        "pig",
+        "rabbit",
+        "snake",
+        "tiger"
+      ]
+    },
+    {
+      "nome": "Food / Drink",
+      "respostas": [
+        "apple",
+        "banana",
+        "cake",
+        "donut",
+        "egg",
+        "fish",
+        "grape",
+        "hamburger",
+        "lemon",
+        "milk",
+        "pizza",
+        "rice",
+        "sandwich",
+        "tea"
+      ]
+    },
+    {
+      "nome": "Color",
+      "respostas": [
+        "black",
+        "blue",
+        "brown",
+        "green",
+        "gray",
+        "orange",
+        "pink",
+        "purple",
+        "red",
+        "silver",
+        "tan",
+        "white"
+      ]
+    },
+    {
+      "nome": "Verb",
+      "respostas": [
+        "ask",
+        "buy",
+        "cook",
+        "dance",
+        "eat",
+        "fly",
+        "go",
+        "help",
+        "listen",
+        "make",
+        "play",
+        "run",
+        "sing",
+        "talk"
+      ]
+    },
+    {
+      "nome": "Country",
+      "respostas": [
+        "Argentina",
+        "Brazil",
+        "Canada",
+        "Denmark",
+        "Egypt",
+        "France",
+        "Germany",
+        "Haiti",
+        "Lebanon",
+        "Mexico",
+        "Peru",
+        "Russia",
+        "Spain",
+        "Thailand"
+      ]
+    },
+    {
+      "nome": "Job",
+      "respostas": [
+        "actor",
+        "baker",
+        "chef",
+        "doctor",
+        "engineer",
+        "farmer",
+        "gardener",
+        "lawyer",
+        "mechanic",
+        "nurse",
+        "pilot",
+        "police officer",
+        "singer",
+        "teacher"
+      ]
+    },
+    {
+      "nome": "Object at school",
+      "respostas": [
+        "book",
+        "chair",
+        "desk",
+        "eraser",
+        "glue",
+        "map",
+        "notebook",
+        "pen",
+        "pencil",
+        "ruler",
+        "scissors",
+        "table"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "titulo": "English in everyday life",
+  "emoji": "🪧",
+  "instrucao": "What does it mean?",
+  "idioma": "en-US",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "EXIT",
+      "opcoes": [
+        "saída",
+        "entrada",
+        "perigo",
+        "aberto"
+      ],
+      "correta": "saída",
+      "explica": "EXIT = saída. Entrada é ENTRANCE.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "PUSH",
+      "opcoes": [
+        "empurre",
+        "puxe",
+        "aperte",
+        "pare"
+      ],
+      "correta": "empurre",
+      "explica": "PUSH = empurre (cuidado: parece \"puxe\", mas é o contrário!). Puxe = PULL.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "PULL",
+      "opcoes": [
+        "puxe",
+        "empurre",
+        "feche",
+        "toque"
+      ],
+      "correta": "puxe",
+      "explica": "PULL = puxe.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "CLOSED",
+      "opcoes": [
+        "fechado",
+        "aberto",
+        "proibido",
+        "lotado"
+      ],
+      "correta": "fechado",
+      "explica": "CLOSED = fechado. Aberto = OPEN.",
+      "imagem": "🔒"
+    },
+    {
+      "destaque": "SALE: 50% OFF",
+      "opcoes": [
+        "liquidação: 50% de desconto",
+        "venda proibida",
+        "50% a mais",
+        "fora de estoque"
+      ],
+      "correta": "liquidação: 50% de desconto",
+      "explica": "SALE = liquidação; OFF = de desconto.",
+      "imagem": "🏷️"
+    },
+    {
+      "destaque": "WET FLOOR",
+      "opcoes": [
+        "piso molhado",
+        "piso novo",
+        "não pise na grama",
+        "chão limpo"
+      ],
+      "correta": "piso molhado",
+      "explica": "WET = molhado; FLOOR = chão, piso.",
+      "imagem": "⚠️"
+    },
+    {
+      "destaque": "NO SMOKING",
+      "opcoes": [
+        "proibido fumar",
+        "fumódromo",
+        "não há fumaça",
+        "área de fumantes"
+      ],
+      "correta": "proibido fumar",
+      "explica": "NO + verbo com -ING = proibido.",
+      "imagem": "🚭"
+    },
+    {
+      "destaque": "OUT OF ORDER",
+      "opcoes": [
+        "com defeito / fora de serviço",
+        "fora de ordem alfabética",
+        "fora da fila",
+        "em promoção"
+      ],
+      "correta": "com defeito / fora de serviço",
+      "explica": "OUT OF ORDER = quebrado, não está funcionando.",
+      "imagem": "🔧"
+    },
+    {
+      "destaque": "STAFF ONLY",
+      "opcoes": [
+        "somente funcionários",
+        "somente clientes",
+        "entrada livre",
+        "saída de emergência"
+      ],
+      "correta": "somente funcionários",
+      "explica": "STAFF = funcionários, equipe; ONLY = somente.",
+      "imagem": "🧑‍💼"
+    },
+    {
+      "destaque": "RESTROOM",
+      "opcoes": [
+        "banheiro",
+        "sala de descanso",
+        "quarto",
+        "recepção"
+      ],
+      "correta": "banheiro",
+      "explica": "RESTROOM = banheiro (em lugares públicos).",
+      "imagem": "🚻"
+    },
+    {
+      "destaque": "EXPIRATION DATE",
+      "opcoes": [
+        "data de validade",
+        "data de fabricação",
+        "data de entrega",
+        "horário de funcionamento"
+      ],
+      "correta": "data de validade",
+      "explica": "EXPIRATION DATE = data de validade.",
+      "imagem": "🗓️"
+    },
+    {
+      "destaque": "SHAKE WELL BEFORE USE",
+      "opcoes": [
+        "agite antes de usar",
+        "lave bem antes de usar",
+        "guarde em local seco",
+        "use com cuidado"
+      ],
+      "correta": "agite antes de usar",
+      "explica": "SHAKE = agitar; BEFORE = antes.",
+      "imagem": "🧴"
+    },
+    {
+      "destaque": "PASSWORD",
+      "opcoes": [
+        "senha",
+        "passaporte",
+        "usuário",
+        "passagem"
+      ],
+      "correta": "senha",
+      "explica": "PASSWORD = senha.",
+      "imagem": "🔑"
+    },
+    {
+      "destaque": "SIGN UP",
+      "opcoes": [
+        "cadastre-se",
+        "entre",
+        "saia",
+        "assine aqui"
+      ],
+      "correta": "cadastre-se",
+      "explica": "SIGN UP = cadastrar-se. LOG IN / SIGN IN = entrar na conta.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "DELETE",
+      "opcoes": [
+        "apagar",
+        "salvar",
+        "enviar",
+        "copiar"
+      ],
+      "correta": "apagar",
+      "explica": "DELETE = apagar, excluir.",
+      "imagem": "🗑️"
+    },
+    {
+      "destaque": "KEEP OUT OF REACH OF CHILDREN",
+      "opcoes": [
+        "mantenha longe do alcance das crianças",
+        "produto para crianças",
+        "proibida a entrada de crianças",
+        "brinquedo infantil"
+      ],
+      "correta": "mantenha longe do alcance das crianças",
+      "explica": "KEEP OUT OF REACH = manter fora do alcance.",
+      "imagem": "🧒"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "titulo": "Noun, verb or adjective?",
+  "idioma": "en-US",
+  "cestos": [
+    {
+      "id": "n",
+      "nome": "Noun",
+      "emoji": "📦",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "v",
+      "nome": "Verb",
+      "emoji": "⚡",
+      "cor": "#e74c3c"
+    },
+    {
+      "id": "a",
+      "nome": "Adjective",
+      "emoji": "🎨",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "house",
+      "cesto": "n"
+    },
+    {
+      "palavra": "teacher",
+      "cesto": "n"
+    },
+    {
+      "palavra": "dog",
+      "cesto": "n"
+    },
+    {
+      "palavra": "city",
+      "cesto": "n"
+    },
+    {
+      "palavra": "happiness",
+      "cesto": "n"
+    },
+    {
+      "palavra": "book",
+      "cesto": "n"
+    },
+    {
+      "palavra": "run",
+      "cesto": "v"
+    },
+    {
+      "palavra": "eat",
+      "cesto": "v"
+    },
+    {
+      "palavra": "write",
+      "cesto": "v"
+    },
+    {
+      "palavra": "think",
+      "cesto": "v"
+    },
+    {
+      "palavra": "play",
+      "cesto": "v"
+    },
+    {
+      "palavra": "go",
+      "cesto": "v"
+    },
+    {
+      "palavra": "happy",
+      "cesto": "a"
+    },
+    {
+      "palavra": "big",
+      "cesto": "a"
+    },
+    {
+      "palavra": "beautiful",
+      "cesto": "a"
+    },
+    {
+      "palavra": "tall",
+      "cesto": "a"
+    },
+    {
+      "palavra": "cold",
+      "cesto": "a"
+    },
+    {
+      "palavra": "blue",
+      "cesto": "a"
+    }
+  ]
+}

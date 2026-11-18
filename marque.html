@@ -128,7 +128,7 @@ function tocar(s){
     resolvido = true; s.classList.add('certa');
     const pts = tentativas === 0 ? 2 : 1; placar.pontuar(pts);
     $('explicaMq').textContent = `✅ Isso! +${pts} ponto${pts > 1 ? 's' : ''}. ${atual.q.explica}`;
-    AV.fanfarra(); AV.confete(); if ($('chkVoz').checked && atual.q.explica) AV.falar(atual.q.explica);
+    AV.fanfarra(); AV.confete(); if ($('chkVoz').checked && atual.q.explica) AV.falar(atual.q.explica, 'pt-BR');
     terminarPergunta();
   } else {
     tentativas++; s.classList.add('errada'); AV.erro();

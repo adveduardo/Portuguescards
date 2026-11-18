@@ -198,7 +198,7 @@ function iniciarCaca(){
     if (!s) terminarCaca(false);
   };
   tique(); timer = setInterval(tique, 1000);
-  AV.falar(`Encontrem todos os ${C[alvo].plural.toLowerCase()}!`);
+  AV.falar([{t: 'Encontrem todos os', l: 'pt-BR'}, {t: C[alvo].plural.toLowerCase() + '!'}]);
 }
 function terminarCaca(achouTudo){
   if (conferido) return;

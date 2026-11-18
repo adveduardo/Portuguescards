@@ -1,0 +1,177 @@
+{
+  "titulo": "False friends (falsos cognatos)",
+  "emoji": "🎭",
+  "instrucao": "What does the highlighted word mean?",
+  "idioma": "en-US",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "I [pretend] to be sick.",
+      "opcoes": [
+        "fingir",
+        "pretender",
+        "planejar",
+        "prometer"
+      ],
+      "correta": "fingir",
+      "explica": "PRETEND = fingir. \"Pretender\" em inglês é \"intend\".",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "[Actually], I don't like coffee.",
+      "opcoes": [
+        "na verdade",
+        "atualmente",
+        "rapidamente",
+        "felizmente"
+      ],
+      "correta": "na verdade",
+      "explica": "ACTUALLY = na verdade. \"Atualmente\" é \"nowadays\" ou \"currently\".",
+      "imagem": "☕"
+    },
+    {
+      "destaque": "[Push] the door.",
+      "opcoes": [
+        "empurre",
+        "puxe",
+        "feche",
+        "abra"
+      ],
+      "correta": "empurre",
+      "explica": "PUSH = empurrar. Puxar é \"pull\".",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "I study at the [library].",
+      "opcoes": [
+        "biblioteca",
+        "livraria",
+        "laboratório",
+        "lanchonete"
+      ],
+      "correta": "biblioteca",
+      "explica": "LIBRARY = biblioteca. Livraria é \"bookstore\".",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "My [parents] live in Bahia.",
+      "opcoes": [
+        "pais (pai e mãe)",
+        "parentes",
+        "padrinhos",
+        "vizinhos"
+      ],
+      "correta": "pais (pai e mãe)",
+      "explica": "PARENTS = pai e mãe. Parentes é \"relatives\".",
+      "imagem": "👨‍👩‍👧"
+    },
+    {
+      "destaque": "She goes to [college] in São Paulo.",
+      "opcoes": [
+        "faculdade",
+        "colégio",
+        "creche",
+        "curso de idiomas"
+      ],
+      "correta": "faculdade",
+      "explica": "COLLEGE = faculdade. Colégio é \"school\".",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "We have [lunch] at noon.",
+      "opcoes": [
+        "almoço",
+        "lanche",
+        "jantar",
+        "café da manhã"
+      ],
+      "correta": "almoço",
+      "explica": "LUNCH = almoço. Lanche é \"snack\".",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "He wore a pirate [costume] to the party.",
+      "opcoes": [
+        "fantasia",
+        "costume (hábito)",
+        "roupa de banho",
+        "uniforme"
+      ],
+      "correta": "fantasia",
+      "explica": "COSTUME = fantasia. Costume (hábito) é \"habit\" ou \"custom\".",
+      "imagem": "🏴‍☠️"
+    },
+    {
+      "destaque": "This shirt is made of a soft [fabric].",
+      "opcoes": [
+        "tecido",
+        "fábrica",
+        "plástico",
+        "papel"
+      ],
+      "correta": "tecido",
+      "explica": "FABRIC = tecido. Fábrica é \"factory\".",
+      "imagem": "👕"
+    },
+    {
+      "destaque": "I'm reading a great [novel].",
+      "opcoes": [
+        "romance (livro)",
+        "novela de TV",
+        "notícia",
+        "revista"
+      ],
+      "correta": "romance (livro)",
+      "explica": "NOVEL = romance (livro). Novela de TV é \"soap opera\".",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "[Prejudice] is a big problem in our society.",
+      "opcoes": [
+        "preconceito",
+        "prejuízo",
+        "pressa",
+        "preguiça"
+      ],
+      "correta": "preconceito",
+      "explica": "PREJUDICE = preconceito. Prejuízo é \"loss\" ou \"damage\".",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "I didn't [realize] it was so late.",
+      "opcoes": [
+        "perceber",
+        "realizar",
+        "lembrar",
+        "esquecer"
+      ],
+      "correta": "perceber",
+      "explica": "REALIZE = perceber, dar-se conta. Realizar é \"carry out\" ou \"achieve\".",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "She is a very [sensible] person.",
+      "opcoes": [
+        "sensata",
+        "sensível",
+        "sentimental",
+        "nervosa"
+      ],
+      "correta": "sensata",
+      "explica": "SENSIBLE = sensato. Sensível é \"sensitive\".",
+      "imagem": "🧠"
+    },
+    {
+      "destaque": "The doctor gave a [lecture] about health.",
+      "opcoes": [
+        "palestra",
+        "leitura",
+        "receita",
+        "consulta"
+      ],
+      "correta": "palestra",
+      "explica": "LECTURE = palestra. Leitura é \"reading\".",
+      "imagem": "🎤"
+    }
+  ]
+}

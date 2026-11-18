@@ -1,0 +1,155 @@
+{
+  "titulo": "Listen and choose",
+  "emoji": "🎧",
+  "instrucao": "Listen and choose",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "13",
+        "30"
+      ],
+      "correta": "13",
+      "explica": "THIRTEEN (13) tem a força no fim: thir-TEEN. THIRTY (30): THIR-ty.",
+      "ouvir": "thirteen"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "50",
+        "15"
+      ],
+      "correta": "50",
+      "explica": "FIFTY = 50. FIFTEEN = 15.",
+      "ouvir": "fifty"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "18",
+        "80"
+      ],
+      "correta": "18",
+      "explica": "EIGHTEEN = 18. EIGHTY = 80.",
+      "ouvir": "eighteen"
+    },
+    {
+      "destaque": "Which word did you hear?",
+      "opcoes": [
+        "🚢 ship",
+        "🐑 sheep"
+      ],
+      "correta": "🚢 ship",
+      "explica": "SHIP (navio) tem o I curto. SHEEP (ovelha) tem o I longo.",
+      "ouvir": "ship"
+    },
+    {
+      "destaque": "Which word did you hear?",
+      "opcoes": [
+        "🐑 sheep",
+        "🚢 ship"
+      ],
+      "correta": "🐑 sheep",
+      "explica": "SHEEP (ovelha): som de I longo, como em \"vi\".",
+      "ouvir": "sheep"
+    },
+    {
+      "destaque": "Which word did you hear?",
+      "opcoes": [
+        "🍳 kitchen",
+        "🐔 chicken"
+      ],
+      "correta": "🍳 kitchen",
+      "explica": "KITCHEN = cozinha. CHICKEN = galinha.",
+      "ouvir": "kitchen"
+    },
+    {
+      "destaque": "Which word did you hear?",
+      "opcoes": [
+        "3️⃣ three",
+        "🌳 tree"
+      ],
+      "correta": "3️⃣ three",
+      "explica": "THREE (três) começa com TH. TREE (árvore) começa com T.",
+      "ouvir": "three"
+    },
+    {
+      "destaque": "How many brothers?",
+      "opcoes": [
+        "2",
+        "1",
+        "3"
+      ],
+      "correta": "2",
+      "explica": "\"I have two brothers\" = eu tenho dois irmãos.",
+      "ouvir": "I have two brothers."
+    },
+    {
+      "destaque": "What time is it?",
+      "opcoes": [
+        "7:30",
+        "7:15",
+        "6:30"
+      ],
+      "correta": "7:30",
+      "explica": "\"Half past seven\" = sete e meia.",
+      "ouvir": "It's half past seven."
+    },
+    {
+      "destaque": "How much is it?",
+      "opcoes": [
+        "$15",
+        "$50",
+        "$5"
+      ],
+      "correta": "$15",
+      "explica": "FIFTEEN = 15.",
+      "ouvir": "It costs fifteen dollars."
+    },
+    {
+      "destaque": "Which day?",
+      "opcoes": [
+        "Thursday",
+        "Tuesday",
+        "Saturday"
+      ],
+      "correta": "Thursday",
+      "explica": "THURSDAY = quinta-feira. TUESDAY = terça-feira.",
+      "ouvir": "See you on Thursday!"
+    },
+    {
+      "destaque": "What is the favorite color?",
+      "opcoes": [
+        "🟣 purple",
+        "🔴 red",
+        "🟢 green"
+      ],
+      "correta": "🟣 purple",
+      "explica": "PURPLE = roxo.",
+      "ouvir": "My favorite color is purple."
+    },
+    {
+      "destaque": "What is her job?",
+      "opcoes": [
+        "👩‍⚕️ doctor",
+        "👩‍🏫 teacher",
+        "👩‍🍳 cook"
+      ],
+      "correta": "👩‍⚕️ doctor",
+      "explica": "DOCTOR = médico(a).",
+      "ouvir": "She is a doctor."
+    },
+    {
+      "destaque": "What should you do?",
+      "opcoes": [
+        "📖 open the book",
+        "📕 close the book",
+        "✍️ write"
+      ],
+      "correta": "📖 open the book",
+      "explica": "\"Open your books\" = abram os livros.",
+      "ouvir": "Open your books, please."
+    }
+  ]
+}

@@ -268,7 +268,7 @@ function calcularResultado(){
     el.querySelector('.quem').textContent = porOpcao[i].join(' ');
   });
   const acertos = ids.filter(id => resultados[id].certo).length;
-  AV.falar(`A resposta certa é ${LETRAS[p.correta]}: ${p.opcoes[p.correta]}.`);
+  AV.falar([{t: `A resposta certa é ${LETRAS[p.correta]}:`, l: 'pt-BR'}, {t: p.opcoes[p.correta]}]);
   if (acertos) AV.fanfarra(); else AV.erro();
   $('btnPlacar').hidden = false;
   $('btnPlacar').textContent = n < perguntas.length ? '📊 Ver placar' : '🏆 Resultado final';

@@ -1,0 +1,100 @@
+{
+  "titulo": "Countable or uncountable?",
+  "idioma": "en-US",
+  "cestos": [
+    {
+      "id": "c",
+      "nome": "Countable",
+      "emoji": "🔢",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "u",
+      "nome": "Uncountable",
+      "emoji": "💧",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "apple",
+      "cesto": "c"
+    },
+    {
+      "palavra": "book",
+      "cesto": "c"
+    },
+    {
+      "palavra": "chair",
+      "cesto": "c"
+    },
+    {
+      "palavra": "egg",
+      "cesto": "c"
+    },
+    {
+      "palavra": "car",
+      "cesto": "c"
+    },
+    {
+      "palavra": "friend",
+      "cesto": "c"
+    },
+    {
+      "palavra": "pencil",
+      "cesto": "c"
+    },
+    {
+      "palavra": "cookie",
+      "cesto": "c"
+    },
+    {
+      "palavra": "dog",
+      "cesto": "c"
+    },
+    {
+      "palavra": "banana",
+      "cesto": "c"
+    },
+    {
+      "palavra": "water",
+      "cesto": "u"
+    },
+    {
+      "palavra": "milk",
+      "cesto": "u"
+    },
+    {
+      "palavra": "rice",
+      "cesto": "u"
+    },
+    {
+      "palavra": "money",
+      "cesto": "u"
+    },
+    {
+      "palavra": "bread",
+      "cesto": "u"
+    },
+    {
+      "palavra": "sugar",
+      "cesto": "u"
+    },
+    {
+      "palavra": "information",
+      "cesto": "u"
+    },
+    {
+      "palavra": "music",
+      "cesto": "u"
+    },
+    {
+      "palavra": "homework",
+      "cesto": "u"
+    },
+    {
+      "palavra": "advice",
+      "cesto": "u"
+    }
+  ]
+}

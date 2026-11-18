@@ -1,0 +1,190 @@
+{
+  "titulo": "Reading time",
+  "emoji": "📖",
+  "instrucao": "Read the text and answer",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "How old is Júlia?",
+      "opcoes": [
+        "13",
+        "10",
+        "3",
+        "30"
+      ],
+      "correta": "13",
+      "explica": "\"I'm 13 years old\" = tenho 13 anos. O 10 é a idade do irmão.",
+      "imagem": "🎂",
+      "texto": "Hi! My name is Júlia. I'm 13 years old and I live in Fortaleza, Brazil. I have one brother, Pedro. He is 10. I love music and I play the guitar. My favorite food is pizza, but I don't like fish. On Saturdays, I go to the beach with my family."
+    },
+    {
+      "destaque": "Where does Júlia live?",
+      "opcoes": [
+        "In Fortaleza",
+        "In Salvador",
+        "At the beach",
+        "In Pedro's house"
+      ],
+      "correta": "In Fortaleza",
+      "explica": "\"I live in Fortaleza\" = eu moro em Fortaleza.",
+      "imagem": "🏙️",
+      "texto": "Hi! My name is Júlia. I'm 13 years old and I live in Fortaleza, Brazil. I have one brother, Pedro. He is 10. I love music and I play the guitar. My favorite food is pizza, but I don't like fish. On Saturdays, I go to the beach with my family."
+    },
+    {
+      "destaque": "What instrument does she play?",
+      "opcoes": [
+        "the guitar",
+        "the piano",
+        "the drums",
+        "the violin"
+      ],
+      "correta": "the guitar",
+      "explica": "\"I play the guitar\" = eu toco violão/guitarra.",
+      "imagem": "🎸",
+      "texto": "Hi! My name is Júlia. I'm 13 years old and I live in Fortaleza, Brazil. I have one brother, Pedro. He is 10. I love music and I play the guitar. My favorite food is pizza, but I don't like fish. On Saturdays, I go to the beach with my family."
+    },
+    {
+      "destaque": "What food doesn't she like?",
+      "opcoes": [
+        "fish",
+        "pizza",
+        "rice",
+        "cake"
+      ],
+      "correta": "fish",
+      "explica": "\"I don't like fish\" = eu não gosto de peixe.",
+      "imagem": "🐟",
+      "texto": "Hi! My name is Júlia. I'm 13 years old and I live in Fortaleza, Brazil. I have one brother, Pedro. He is 10. I love music and I play the guitar. My favorite food is pizza, but I don't like fish. On Saturdays, I go to the beach with my family."
+    },
+    {
+      "destaque": "When does she go to the beach?",
+      "opcoes": [
+        "On Saturdays",
+        "On Sundays",
+        "Every day",
+        "On Mondays"
+      ],
+      "correta": "On Saturdays",
+      "explica": "\"On Saturdays\" = aos sábados.",
+      "imagem": "🏖️",
+      "texto": "Hi! My name is Júlia. I'm 13 years old and I live in Fortaleza, Brazil. I have one brother, Pedro. He is 10. I love music and I play the guitar. My favorite food is pizza, but I don't like fish. On Saturdays, I go to the beach with my family."
+    },
+    {
+      "destaque": "What kind of text is this?",
+      "opcoes": [
+        "an invitation",
+        "a recipe",
+        "a news story",
+        "a poem"
+      ],
+      "correta": "an invitation",
+      "explica": "\"Come to my birthday party!\": é um convite (invitation).",
+      "imagem": "💌",
+      "texto": "Dear Lucas,\nCome to my birthday party!\nDate: Saturday, May 10th\nTime: 3 p.m. to 7 p.m.\nPlace: 25 Green Street\nPlease bring your swimsuit. We're going to have a pool party!\nSee you there,\nMarina"
+    },
+    {
+      "destaque": "What time does the party start?",
+      "opcoes": [
+        "3 p.m.",
+        "7 p.m.",
+        "10 a.m.",
+        "5 p.m."
+      ],
+      "correta": "3 p.m.",
+      "explica": "\"3 p.m. to 7 p.m.\": começa às 15h e termina às 19h.",
+      "imagem": "🕒",
+      "texto": "Dear Lucas,\nCome to my birthday party!\nDate: Saturday, May 10th\nTime: 3 p.m. to 7 p.m.\nPlace: 25 Green Street\nPlease bring your swimsuit. We're going to have a pool party!\nSee you there,\nMarina"
+    },
+    {
+      "destaque": "What should Lucas bring?",
+      "opcoes": [
+        "a swimsuit",
+        "a cake",
+        "a book",
+        "a ball"
+      ],
+      "correta": "a swimsuit",
+      "explica": "\"Please bring your swimsuit\" = traga sua roupa de banho: vai ter piscina!",
+      "imagem": "🩱",
+      "texto": "Dear Lucas,\nCome to my birthday party!\nDate: Saturday, May 10th\nTime: 3 p.m. to 7 p.m.\nPlace: 25 Green Street\nPlease bring your swimsuit. We're going to have a pool party!\nSee you there,\nMarina"
+    },
+    {
+      "destaque": "Why couldn't Tom play soccer?",
+      "opcoes": [
+        "because it was raining",
+        "because he was sick",
+        "because the park was closed",
+        "because he had homework"
+      ],
+      "correta": "because it was raining",
+      "explica": "\"It was raining a lot\" = estava chovendo muito.",
+      "imagem": "🌧️",
+      "texto": "Tom wanted to play soccer in the park after school. But when he looked out of the window, it was raining a lot. He was very sad. Then his mother had an idea: \"Let's make a pizza!\" They cooked together, and Tom forgot about the rain."
+    },
+    {
+      "destaque": "How did Tom feel at first?",
+      "opcoes": [
+        "sad",
+        "happy",
+        "angry",
+        "scared"
+      ],
+      "correta": "sad",
+      "explica": "\"He was very sad\" = ele ficou muito triste.",
+      "imagem": "😢",
+      "texto": "Tom wanted to play soccer in the park after school. But when he looked out of the window, it was raining a lot. He was very sad. Then his mother had an idea: \"Let's make a pizza!\" They cooked together, and Tom forgot about the rain."
+    },
+    {
+      "destaque": "What did Tom and his mother do?",
+      "opcoes": [
+        "They made a pizza.",
+        "They went to the park.",
+        "They watched TV.",
+        "They played soccer."
+      ],
+      "correta": "They made a pizza.",
+      "explica": "\"Let's make a pizza!\" e \"They cooked together\".",
+      "imagem": "🍕",
+      "texto": "Tom wanted to play soccer in the park after school. But when he looked out of the window, it was raining a lot. He was very sad. Then his mother had an idea: \"Let's make a pizza!\" They cooked together, and Tom forgot about the rain."
+    },
+    {
+      "destaque": "Is the library open on Sundays?",
+      "opcoes": [
+        "No, it isn't.",
+        "Yes, it is.",
+        "Only in the morning.",
+        "Only at night."
+      ],
+      "correta": "No, it isn't.",
+      "explica": "\"Open Monday to Friday\": só de segunda a sexta.",
+      "imagem": "📅",
+      "texto": "CITY LIBRARY: RULES\nOpen Monday to Friday, 9 a.m. to 6 p.m.\nPlease be quiet.\nNo food or drinks.\nYou can borrow up to 3 books for 2 weeks."
+    },
+    {
+      "destaque": "How many books can you borrow?",
+      "opcoes": [
+        "3",
+        "2",
+        "6",
+        "9"
+      ],
+      "correta": "3",
+      "explica": "\"Borrow up to 3 books\" = pegar emprestados até 3 livros.",
+      "imagem": "📚",
+      "texto": "CITY LIBRARY: RULES\nOpen Monday to Friday, 9 a.m. to 6 p.m.\nPlease be quiet.\nNo food or drinks.\nYou can borrow up to 3 books for 2 weeks."
+    },
+    {
+      "destaque": "What can't you do in the library?",
+      "opcoes": [
+        "eat or drink",
+        "read",
+        "borrow books",
+        "study"
+      ],
+      "correta": "eat or drink",
+      "explica": "\"No food or drinks\" = proibido comida e bebida.",
+      "imagem": "🚫",
+      "texto": "CITY LIBRARY: RULES\nOpen Monday to Friday, 9 a.m. to 6 p.m.\nPlease be quiet.\nNo food or drinks.\nYou can borrow up to 3 books for 2 weeks."
+    }
+  ]
+}

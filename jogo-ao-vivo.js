@@ -39,12 +39,25 @@ AV.fanfarra = () => [523,659,784,1047].forEach((f, i) => AV.tom(f, .22, 'triangl
 AV.sirene = () => { for (let i = 0; i < 2; i++){ AV.tom(600, .4, 'sawtooth', .12, i * .8, 1200); AV.tom(1200, .4, 'sawtooth', .12, i * .8 + .4, 600); } };
 AV.erro = () => { AV.tom(240, .25, 'sawtooth', .07); AV.tom(180, .3, 'sawtooth', .07, .15); };
 AV.tique = () => AV.tom(1000, .04, 'square', .05);
-AV.falar = t => {
+// Idioma da voz: o JSON da atividade pode trazer "idioma": "en-US" (padrão: português)
+AV.idioma = 'pt-BR';
+AV.vozPara = lang => {
+  const vs = speechSynthesis.getVoices(), alvo = String(lang).replace('_', '-').toLowerCase(), base = alvo.slice(0, 2);
+  return vs.find(v => String(v.lang).replace('_', '-').toLowerCase() === alvo) || vs.find(v => String(v.lang).toLowerCase().startsWith(base)) || null;
+};
+// AV.falar('texto') ou AV.falar('texto', 'pt-BR') ou AV.falar([{t: 'Isso!', l: 'pt-BR'}, {t: 'apple'}])
+AV.falar = (t, idioma) => {
   if (!somLigado || !('speechSynthesis' in window)) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = .95;
-  const v = speechSynthesis.getVoices().find(v => /^pt/i.test(v.lang)); if (v) u.voice = v;
-  speechSynthesis.speak(u);
+  // tira os emojis (a voz leria "rosto de cachorro" e entregaria a resposta)
+  const semEmoji = x => String(x).replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}\u{1F3FB}-\u{1F3FF}]/gu, '').replace(/\s+/g, ' ').trim();
+  const partes = (Array.isArray(t) ? t : [{t, l: idioma}]).map(p => p && p.t ? {t: semEmoji(p.t), l: p.l} : null);
+  partes.filter(p => p && p.t).forEach(p => {
+    const lang = p.l || AV.idioma || 'pt-BR';
+    const u = new SpeechSynthesisUtterance(p.t); u.lang = lang; u.rate = .95;
+    const v = AV.vozPara(lang); if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  });
 };
 AV.confete = () => {
   const itens = ['⭐','🎉','✨','🌟','🎈','🏆'];
@@ -63,7 +76,8 @@ AV.baixarArquivo = (url, nome) => {
     document.body.appendChild(a); a.click(); a.remove();
   }).catch(() => AV.avisar('Não foi possível baixar o modelo.'));
 };
-AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar}) => {
+AV.prepararSeletorJson = ({tipo, tipos, select, botaoAbrir, input, aoCarregar: aoCarregarOriginal}) => {
+  const aoCarregar = (d, origem) => { AV.idioma = d && typeof d.idioma === 'string' && d.idioma ? d.idioma : 'pt-BR'; return aoCarregarOriginal(d, origem); };
   const listaTipos = tipos || [tipo];
   const CHAVE = 'aovivo_json_' + listaTipos[0];
   const carregarUrl = arq => fetch('dados/' + arq + '?v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); })

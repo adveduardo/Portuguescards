@@ -218,7 +218,7 @@ function revelar(){
   $('explicaEt').textContent = e.explica ? '🔎 ' + e.explica : '';
   if (comIpads) Rede.gravar(`salas/${sala}/estado`, {fase: 'resultado', rodada, titulo: txt.titulo, escolhida: e.correta, textoEscolhido: e.opcoes[e.correta],
     rotulo: '📖 No texto, aconteceu:', msgAcerto: 'Vocês acertaram a previsão! +1 ponto 🎉', msgErro: 'Não foi dessa vez. Usem as pistas do texto! 🔎'});
-  AV.fanfarra(); if (e.explica) AV.falar(e.explica);
+  AV.fanfarra(); if (e.explica) AV.falar(e.explica, 'pt-BR');
   desenharPlacar();
   $('btnRevelar').hidden = true; $('btnContinuar').hidden = false; $('btnContinuar').onclick = avancar;
 }
