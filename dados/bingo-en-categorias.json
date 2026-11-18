@@ -1,0 +1,232 @@
+{
+  "titulo": "English Bingo: categories",
+  "idioma": "en-US",
+  "chamadas": [
+    {
+      "id": "fruit",
+      "texto": "a fruit"
+    },
+    {
+      "id": "animal",
+      "texto": "an animal"
+    },
+    {
+      "id": "color",
+      "texto": "a color"
+    },
+    {
+      "id": "school",
+      "texto": "a school object"
+    },
+    {
+      "id": "body",
+      "texto": "a part of the body"
+    },
+    {
+      "id": "family",
+      "texto": "a family member"
+    },
+    {
+      "id": "job",
+      "texto": "a job"
+    },
+    {
+      "id": "drink",
+      "texto": "a drink"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "apple",
+      "t": [
+        "fruit"
+      ]
+    },
+    {
+      "p": "banana",
+      "t": [
+        "fruit"
+      ]
+    },
+    {
+      "p": "orange",
+      "t": [
+        "fruit"
+      ]
+    },
+    {
+      "p": "grape",
+      "t": [
+        "fruit"
+      ]
+    },
+    {
+      "p": "dog",
+      "t": [
+        "animal"
+      ]
+    },
+    {
+      "p": "cat",
+      "t": [
+        "animal"
+      ]
+    },
+    {
+      "p": "horse",
+      "t": [
+        "animal"
+      ]
+    },
+    {
+      "p": "bird",
+      "t": [
+        "animal"
+      ]
+    },
+    {
+      "p": "red",
+      "t": [
+        "color"
+      ]
+    },
+    {
+      "p": "blue",
+      "t": [
+        "color"
+      ]
+    },
+    {
+      "p": "green",
+      "t": [
+        "color"
+      ]
+    },
+    {
+      "p": "yellow",
+      "t": [
+        "color"
+      ]
+    },
+    {
+      "p": "pencil",
+      "t": [
+        "school"
+      ]
+    },
+    {
+      "p": "ruler",
+      "t": [
+        "school"
+      ]
+    },
+    {
+      "p": "eraser",
+      "t": [
+        "school"
+      ]
+    },
+    {
+      "p": "notebook",
+      "t": [
+        "school"
+      ]
+    },
+    {
+      "p": "head",
+      "t": [
+        "body"
+      ]
+    },
+    {
+      "p": "hand",
+      "t": [
+        "body"
+      ]
+    },
+    {
+      "p": "foot",
+      "t": [
+        "body"
+      ]
+    },
+    {
+      "p": "eye",
+      "t": [
+        "body"
+      ]
+    },
+    {
+      "p": "mother",
+      "t": [
+        "family"
+      ]
+    },
+    {
+      "p": "father",
+      "t": [
+        "family"
+      ]
+    },
+    {
+      "p": "sister",
+      "t": [
+        "family"
+      ]
+    },
+    {
+      "p": "brother",
+      "t": [
+        "family"
+      ]
+    },
+    {
+      "p": "teacher",
+      "t": [
+        "job"
+      ]
+    },
+    {
+      "p": "doctor",
+      "t": [
+        "job"
+      ]
+    },
+    {
+      "p": "nurse",
+      "t": [
+        "job"
+      ]
+    },
+    {
+      "p": "driver",
+      "t": [
+        "job"
+      ]
+    },
+    {
+      "p": "water",
+      "t": [
+        "drink"
+      ]
+    },
+    {
+      "p": "milk",
+      "t": [
+        "drink"
+      ]
+    },
+    {
+      "p": "juice",
+      "t": [
+        "drink"
+      ]
+    },
+    {
+      "p": "coffee",
+      "t": [
+        "drink"
+      ]
+    }
+  ]
+}

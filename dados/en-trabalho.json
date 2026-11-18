@@ -1,0 +1,194 @@
+{
+  "titulo": "English at work (entrevista e e-mail)",
+  "emoji": "💼",
+  "instrucao": "What does it mean?",
+  "idioma": "en-US",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "Please send your [résumé].",
+      "opcoes": [
+        "currículo",
+        "resumo do livro",
+        "carteira de trabalho",
+        "foto"
+      ],
+      "correta": "currículo",
+      "explica": "RÉSUMÉ (ou CV) = currículo. Não é \"resumo\"!",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "We are [hiring]!",
+      "opcoes": [
+        "contratando",
+        "demitindo",
+        "fechando",
+        "mudando"
+      ],
+      "correta": "contratando",
+      "explica": "HIRE = contratar. \"We're hiring\" = estamos contratando.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "The [salary] is good.",
+      "opcoes": [
+        "salário",
+        "horário",
+        "chefe",
+        "uniforme"
+      ],
+      "correta": "salário",
+      "explica": "SALARY = salário.",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "I have three years of [experience].",
+      "opcoes": [
+        "experiência",
+        "estudo",
+        "férias",
+        "idade"
+      ],
+      "correta": "experiência",
+      "explica": "EXPERIENCE = experiência.",
+      "imagem": "🛠️"
+    },
+    {
+      "destaque": "This is a [part-time] job.",
+      "opcoes": [
+        "meio período",
+        "período integral",
+        "temporário",
+        "noturno"
+      ],
+      "correta": "meio período",
+      "explica": "PART-TIME = meio período. FULL-TIME = período integral.",
+      "imagem": "🕑"
+    },
+    {
+      "destaque": "I can work [full-time].",
+      "opcoes": [
+        "período integral",
+        "meio período",
+        "fim de semana",
+        "em casa"
+      ],
+      "correta": "período integral",
+      "explica": "FULL-TIME = período integral.",
+      "imagem": "🕘"
+    },
+    {
+      "destaque": "What are your [skills]?",
+      "opcoes": [
+        "habilidades",
+        "escolas",
+        "documentos",
+        "dúvidas"
+      ],
+      "correta": "habilidades",
+      "explica": "SKILLS = habilidades.",
+      "imagem": "💪"
+    },
+    {
+      "destaque": "Fill out the [application form].",
+      "opcoes": [
+        "formulário de candidatura",
+        "carta de demissão",
+        "nota fiscal",
+        "contrato de aluguel"
+      ],
+      "correta": "formulário de candidatura",
+      "explica": "APPLY = candidatar-se. APPLICATION FORM = ficha de inscrição.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "The [manager] will call you.",
+      "opcoes": [
+        "gerente",
+        "cliente",
+        "colega",
+        "motorista"
+      ],
+      "correta": "gerente",
+      "explica": "MANAGER = gerente.",
+      "imagem": "🧑‍💼"
+    },
+    {
+      "destaque": "The [deadline] is Friday.",
+      "opcoes": [
+        "prazo final",
+        "dia de folga",
+        "dia de pagamento",
+        "reunião"
+      ],
+      "correta": "prazo final",
+      "explica": "DEADLINE = prazo final.",
+      "imagem": "⏳"
+    },
+    {
+      "destaque": "What is the email about?",
+      "opcoes": [
+        "um pedido de emprego",
+        "uma reclamação de um cliente",
+        "um convite de festa",
+        "uma demissão"
+      ],
+      "correta": "um pedido de emprego",
+      "explica": "\"Subject: Job application\" e \"I am writing to apply for the cashier position\": Carla está se candidatando à vaga.",
+      "imagem": "📧",
+      "texto": "From: carla.souza@email.com\nTo: hr@greenmarket.com\nSubject: Job application: Cashier\n\nDear Mr. Brown,\nI am writing to apply for the cashier position. I have two years of experience in a supermarket, and I can work full-time.\nPlease find my résumé attached.\nBest regards,\nCarla Souza"
+    },
+    {
+      "destaque": "What is attached to the email?",
+      "opcoes": [
+        "o currículo",
+        "uma foto",
+        "um contrato",
+        "um boleto"
+      ],
+      "correta": "o currículo",
+      "explica": "\"Please find my résumé attached\" = segue meu currículo em anexo.",
+      "imagem": "📎",
+      "texto": "From: carla.souza@email.com\nTo: hr@greenmarket.com\nSubject: Job application: Cashier\n\nDear Mr. Brown,\nI am writing to apply for the cashier position. I have two years of experience in a supermarket, and I can work full-time.\nPlease find my résumé attached.\nBest regards,\nCarla Souza"
+    },
+    {
+      "destaque": "How does Carla end the email?",
+      "opcoes": [
+        "\"Best regards\" (atenciosamente)",
+        "\"Dear\" (prezado)",
+        "\"Subject\" (assunto)",
+        "\"Hi\" (oi)"
+      ],
+      "correta": "\"Best regards\" (atenciosamente)",
+      "explica": "\"Best regards\" é uma despedida formal. \"Dear\" abre o e-mail.",
+      "imagem": "✍️",
+      "texto": "From: carla.souza@email.com\nTo: hr@greenmarket.com\nSubject: Job application: Cashier\n\nDear Mr. Brown,\nI am writing to apply for the cashier position. I have two years of experience in a supermarket, and I can work full-time.\nPlease find my résumé attached.\nBest regards,\nCarla Souza"
+    },
+    {
+      "destaque": "What are the working hours?",
+      "opcoes": [
+        "das 14h às 18h, de segunda a sexta",
+        "das 8h às 18h, todos os dias",
+        "só nos fins de semana",
+        "à noite"
+      ],
+      "correta": "das 14h às 18h, de segunda a sexta",
+      "explica": "\"Monday to Friday, 2 p.m. to 6 p.m.\": 2 p.m. = 14h; 6 p.m. = 18h.",
+      "imagem": "🕑",
+      "texto": "WE'RE HIRING!\nGreen Market needs a CASHIER.\nPart-time: Monday to Friday, 2 p.m. to 6 p.m.\nNo experience needed.\nSkills: good communication, basic math.\nSend your résumé to hr@greenmarket.com"
+    },
+    {
+      "destaque": "Does the job require experience?",
+      "opcoes": [
+        "não, não precisa de experiência",
+        "sim, dois anos",
+        "sim, cinco anos",
+        "o anúncio não diz"
+      ],
+      "correta": "não, não precisa de experiência",
+      "explica": "\"No experience needed\" = não é preciso ter experiência.",
+      "imagem": "✅",
+      "texto": "WE'RE HIRING!\nGreen Market needs a CASHIER.\nPart-time: Monday to Friday, 2 p.m. to 6 p.m.\nNo experience needed.\nSkills: good communication, basic math.\nSend your résumé to hr@greenmarket.com"
+    }
+  ]
+}

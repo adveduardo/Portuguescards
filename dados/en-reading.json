@@ -185,6 +185,84 @@
       "explica": "\"No food or drinks\" = proibido comida e bebida.",
       "imagem": "🚫",
       "texto": "CITY LIBRARY: RULES\nOpen Monday to Friday, 9 a.m. to 6 p.m.\nPlease be quiet.\nNo food or drinks.\nYou can borrow up to 3 books for 2 weeks."
+    },
+    {
+      "destaque": "How much is the orange juice?",
+      "opcoes": [
+        "$2",
+        "$4",
+        "$1",
+        "$6"
+      ],
+      "correta": "$2",
+      "explica": "\"Orange juice ... $2\": o suco de laranja custa 2 dólares.",
+      "imagem": "🧃",
+      "texto": "JOE'S CAFÉ: MENU\nCheese sandwich ........ $4\nChicken salad .......... $6\nPizza (one slice) ...... $3\nOrange juice ........... $2\nCoffee ................. $1\nToday's special: soup of the day + juice = $5"
+    },
+    {
+      "destaque": "You have $5. What can you buy?",
+      "opcoes": [
+        "the special: soup + juice",
+        "two chicken salads",
+        "a chicken salad",
+        "two cheese sandwiches"
+      ],
+      "correta": "the special: soup + juice",
+      "explica": "\"Today's special\" (o prato do dia) custa exatamente $5. Uma salada de frango custa $6.",
+      "imagem": "🍲",
+      "texto": "JOE'S CAFÉ: MENU\nCheese sandwich ........ $4\nChicken salad .......... $6\nPizza (one slice) ...... $3\nOrange juice ........... $2\nCoffee ................. $1\nToday's special: soup of the day + juice = $5"
+    },
+    {
+      "destaque": "What is the cheapest item on the menu?",
+      "opcoes": [
+        "coffee",
+        "pizza",
+        "orange juice",
+        "cheese sandwich"
+      ],
+      "correta": "coffee",
+      "explica": "\"Cheapest\" = o mais barato: o café custa $1.",
+      "imagem": "☕",
+      "texto": "JOE'S CAFÉ: MENU\nCheese sandwich ........ $4\nChicken salad .......... $6\nPizza (one slice) ...... $3\nOrange juice ........... $2\nCoffee ................. $1\nToday's special: soup of the day + juice = $5"
+    },
+    {
+      "destaque": "Why can't Bia go to the party?",
+      "opcoes": [
+        "She has a test tomorrow.",
+        "She is sick.",
+        "She has no money.",
+        "She doesn't like parties."
+      ],
+      "correta": "She has a test tomorrow.",
+      "explica": "\"I have a test tomorrow\" = tenho prova amanhã.",
+      "imagem": "📱",
+      "texto": "Ana: Hi, Bia! Are you coming to the party tonight? 🎉\nBia: Hi! I can't. I have a test tomorrow. 😩\nAna: Oh no! What subject?\nBia: Math. 📐\nAna: Good luck! Let's meet on Saturday?\nBia: Sure! See you on Saturday! 😊"
+    },
+    {
+      "destaque": "What is the test about?",
+      "opcoes": [
+        "Math",
+        "English",
+        "History",
+        "Science"
+      ],
+      "correta": "Math",
+      "explica": "\"What subject?\" (qual matéria?) — \"Math\" = matemática.",
+      "imagem": "📐",
+      "texto": "Ana: Hi, Bia! Are you coming to the party tonight? 🎉\nBia: Hi! I can't. I have a test tomorrow. 😩\nAna: Oh no! What subject?\nBia: Math. 📐\nAna: Good luck! Let's meet on Saturday?\nBia: Sure! See you on Saturday! 😊"
+    },
+    {
+      "destaque": "When are Ana and Bia going to meet?",
+      "opcoes": [
+        "on Saturday",
+        "tonight",
+        "tomorrow",
+        "on Monday"
+      ],
+      "correta": "on Saturday",
+      "explica": "\"Let's meet on Saturday?\" — \"Sure!\" = vamos nos encontrar no sábado.",
+      "imagem": "📅",
+      "texto": "Ana: Hi, Bia! Are you coming to the party tonight? 🎉\nBia: Hi! I can't. I have a test tomorrow. 😩\nAna: Oh no! What subject?\nBia: Math. 📐\nAna: Good luck! Let's meet on Saturday?\nBia: Sure! See you on Saturday! 😊"
     }
   ]
 }

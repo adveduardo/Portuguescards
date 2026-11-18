@@ -1427,6 +1427,14 @@
     {
       "arquivo": "memoria-en-falsos.json",
       "titulo": "🇬🇧 Memory: false friends"
+    },
+    {
+      "arquivo": "memoria-en-familia.json",
+      "titulo": "🇬🇧 Memory: family"
+    },
+    {
+      "arquivo": "memoria-en-profissoes.json",
+      "titulo": "🇬🇧 Memory: jobs"
     }
   ],
   "bingo": [
@@ -1441,6 +1449,10 @@
     {
       "arquivo": "bingo-en.json",
       "titulo": "🇬🇧 English Bingo (vocabulário)"
+    },
+    {
+      "arquivo": "bingo-en-categorias.json",
+      "titulo": "🇬🇧 English Bingo: categories"
     }
   ],
   "escolha-fo": [
@@ -1637,6 +1649,10 @@
     {
       "arquivo": "en-enem.json",
       "titulo": "Inglês no ENEM"
+    },
+    {
+      "arquivo": "en-trabalho.json",
+      "titulo": "🇬🇧 English at work (entrevista e e-mail)"
     }
   ]
 }
