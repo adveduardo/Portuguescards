@@ -1,0 +1,153 @@
+{
+  "titulo": "Trilha da alfabetização",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "letra": {
+      "nome": "Letras",
+      "emoji": "🔤",
+      "cor": "#2f80ed"
+    },
+    "silaba": {
+      "nome": "Sílabas",
+      "emoji": "👏",
+      "cor": "#e67e22"
+    },
+    "rima": {
+      "nome": "Rimas",
+      "emoji": "🎵",
+      "cor": "#27ae60"
+    },
+    "ler": {
+      "nome": "Leitura",
+      "emoji": "📖",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "letra": [
+      {
+        "texto": "Com que letra começa SAPO? 🐸",
+        "resposta": "S"
+      },
+      {
+        "texto": "Com que letra começa VACA? 🐄",
+        "resposta": "V"
+      },
+      {
+        "texto": "Que letra vem depois do B?",
+        "resposta": "C"
+      },
+      {
+        "texto": "Que letra vem antes do Z?",
+        "resposta": "Y"
+      },
+      {
+        "texto": "Diga uma palavra que começa com T.",
+        "resposta": "Ex.: tatu, tomate, tigre"
+      },
+      {
+        "texto": "Qual é a última letra de BOLO?",
+        "resposta": "O"
+      },
+      {
+        "texto": "Soletre GATO.",
+        "resposta": "G-A-T-O"
+      },
+      {
+        "texto": "Quantas letras tem PATO?",
+        "resposta": "4"
+      }
+    ],
+    "silaba": [
+      {
+        "texto": "Bata palmas: quantas sílabas tem CAVALO? 🐴",
+        "resposta": "3: CA-VA-LO"
+      },
+      {
+        "texto": "Bata palmas: quantas sílabas tem SOL? ☀️",
+        "resposta": "1"
+      },
+      {
+        "texto": "Junte: BA + NA + NA",
+        "resposta": "BANANA"
+      },
+      {
+        "texto": "Junte: CA + SA",
+        "resposta": "CASA"
+      },
+      {
+        "texto": "Qual é a primeira sílaba de MACACO?",
+        "resposta": "MA"
+      },
+      {
+        "texto": "Qual é a última sílaba de JANELA?",
+        "resposta": "LA"
+      },
+      {
+        "texto": "Fale uma palavra que começa com PI.",
+        "resposta": "Ex.: pipoca, pipa, pião"
+      },
+      {
+        "texto": "Bata palmas: quantas sílabas tem TARTARUGA? 🐢",
+        "resposta": "4: TAR-TA-RU-GA"
+      }
+    ],
+    "rima": [
+      {
+        "texto": "Fale uma palavra que rima com PÃO.",
+        "resposta": "Ex.: mão, chão, limão"
+      },
+      {
+        "texto": "Fale uma palavra que rima com BOLA.",
+        "resposta": "Ex.: cola, escola, sacola"
+      },
+      {
+        "texto": "JANELA rima com PANELA?",
+        "resposta": "Sim"
+      },
+      {
+        "texto": "SAPO rima com GATO?",
+        "resposta": "Não"
+      },
+      {
+        "texto": "Fale uma palavra que rima com DEDO.",
+        "resposta": "Ex.: medo, cedo, segredo"
+      },
+      {
+        "texto": "Fale uma palavra que rima com GELO.",
+        "resposta": "Ex.: cabelo, martelo, camelo"
+      }
+    ],
+    "ler": [
+      {
+        "texto": "Leia: O GATO BEBE LEITE.",
+        "resposta": "Leitura da frase"
+      },
+      {
+        "texto": "Leia: A BOLA É AZUL.",
+        "resposta": "Leitura da frase"
+      },
+      {
+        "texto": "Leia e diga o que é: 🔑 CHAVE ou CHUVA?",
+        "resposta": "CHAVE"
+      },
+      {
+        "texto": "Leia: EU MORO NA CASA AMARELA.",
+        "resposta": "Leitura da frase"
+      },
+      {
+        "texto": "Troque o G de GATO por R. Que palavra fica?",
+        "resposta": "RATO"
+      },
+      {
+        "texto": "Leia a placa: SAÍDA. O que quer dizer?",
+        "resposta": "Por onde se sai"
+      },
+      {
+        "texto": "Leia: O SAPO PULA NO LAGO.",
+        "resposta": "Leitura da frase"
+      }
+    ]
+  }
+}

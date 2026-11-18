@@ -130,6 +130,46 @@ A.cliques = function(raiz, seletor, fn){
 };
 A.cada = function(lista, fn){ for (var i = 0; i < lista.length; i++) fn(lista[i], i); };
 
+// ---------- Emojis em iPads antigos ----------
+// O iPad mini 1 (iOS 9) e o mini 2 (iOS 12) não têm os emojis mais novos e mostrariam um quadradinho vazio.
+// Nesses aparelhos, cada emoji novo é trocado por um parecido e antigo. Nos aparelhos novos nada muda.
+var TROCA = {'🥶':'❄️','🥵':'🔥','🤩':'😃','🥰':'😍','🧑‍🤝‍🧑':'👫','🧸':'🐻','🧩':'🎯','🧱':'🏰','🧼':'🛁','🧻':'📄','🧥':'👕','🧘':'🌬️',
+  '🦘':'🐰','🦩':'🐦','🪑':'💺','🦖':'🐲','👩‍🏫':'👩','👨‍🏫':'👨','🤸':'🏃','🥁':'🎵','🦶':'👣','🛒':'🏪','🤝':'👫','🧹':'✨','🧑':'👤',
+  '🟢':'💚','🟡':'💛','🟠':'🔶','🟣':'💜','🦆':'🐤','🥕':'🌽','🦋':'🐛','🦊':'🐶','🥦':'🌲','🥒':'🌲','🧢':'👖','🥚':'🍳','🥛':'🍼','🪶':'🐦','🪁':'🎏'};
+var trocas = null;
+A.temEmoji = function(e){
+  try {
+    var c = document.createElement('canvas'); c.width = 64; c.height = 32;
+    var x = c.getContext('2d');
+    x.font = '24px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; x.textBaseline = 'top';
+    if (e.indexOf('‍') >= 0){ var umaParte = e.split('‍')[0]; if (x.measureText(e).width > x.measureText(umaParte).width * 1.5) return false; }
+    x.fillText(e, 0, 0);
+    var d = x.getImageData(0, 0, 64, 32).data;
+    for (var i = 0; i < d.length; i += 4) if (d[i + 3] > 60 && (Math.abs(d[i] - d[i + 1]) > 25 || Math.abs(d[i] - d[i + 2]) > 25)) return true;
+    return false;
+  } catch (err) { return true; }
+};
+function trocarTexto(t){ for (var i = 0; i < trocas.length; i++) if (t.indexOf(trocas[i][0]) >= 0) t = t.split(trocas[i][0]).join(trocas[i][1]); return t; }
+function varrer(no){
+  if (no.nodeType === 3){ var v = trocarTexto(no.nodeValue); if (v !== no.nodeValue) no.nodeValue = v; return; }
+  if (no.nodeType !== 1 || /^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(no.tagName)) return;
+  for (var c = no.firstChild; c; c = c.nextSibling) varrer(c);
+}
+A.emoji = function(e){ return trocas ? trocarTexto(e) : e; };
+function prepararEmojis(){
+  trocas = [];
+  for (var k in TROCA) if (TROCA.hasOwnProperty(k) && !A.temEmoji(k)) trocas.push([k, TROCA[k]]);
+  if (!trocas.length) return;
+  varrer(document.body);
+  if (window.MutationObserver) new MutationObserver(function(ms){
+    for (var i = 0; i < ms.length; i++){
+      if (ms[i].type === 'characterData') varrer(ms[i].target);
+      for (var j = 0; j < ms[i].addedNodes.length; j++) varrer(ms[i].addedNodes[j]);
+    }
+  }).observe(document.body, {childList: true, subtree: true, characterData: true});
+}
+
 window.Apoio = A;
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', A.montarTopo); else A.montarTopo();
+function iniciar(){ A.montarTopo(); prepararEmojis(); }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();

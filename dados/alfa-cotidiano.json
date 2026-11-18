@@ -1,0 +1,231 @@
+{
+  "titulo": "Ônibus, preços, remédios, contas e recados",
+  "emoji": "🧾",
+  "instrucao": "Leia e responda",
+  "rodadas": [
+    {
+      "destaque": "Para onde vai este ônibus?",
+      "opcoes": [
+        "Para o Centro e a Rodoviária.",
+        "Para o Hospital.",
+        "Para a praia.",
+        "Para o aeroporto."
+      ],
+      "correta": "Para o Centro e a Rodoviária.",
+      "explica": "O letreiro mostra o número da linha e o destino.",
+      "imagem": "🚌",
+      "enunciado": "Leia e responda",
+      "texto": "ÔNIBUS 101 — CENTRO / RODOVIÁRIA"
+    },
+    {
+      "destaque": "Qual é o número da linha?",
+      "opcoes": [
+        "203",
+        "320",
+        "23",
+        "230"
+      ],
+      "correta": "230",
+      "explica": "Dois, três, zero: 230 (duzentos e trinta).",
+      "imagem": "🚌",
+      "enunciado": "Leia e responda",
+      "texto": "LINHA 230 — HOSPITAL / BAIRRO NOVO"
+    },
+    {
+      "destaque": "Quanto custa o feijão?",
+      "opcoes": [
+        "R$ 7,99",
+        "R$ 5,00",
+        "R$ 8,50",
+        "R$ 24,90"
+      ],
+      "correta": "R$ 8,50",
+      "explica": "Siga a linha do FEIJÃO até o preço.",
+      "imagem": "🛒",
+      "enunciado": "Leia e responda",
+      "texto": "ARROZ 5 kg ........ R$ 24,90\nFEIJÃO 1 kg ....... R$ 8,50\nÓLEO 900 ml ...... R$ 7,99"
+    },
+    {
+      "destaque": "Qual é o produto mais caro?",
+      "opcoes": [
+        "Todos custam igual",
+        "Arroz",
+        "Feijão",
+        "Óleo"
+      ],
+      "correta": "Arroz",
+      "explica": "R$ 24,90 é o maior preço.",
+      "imagem": "🛒",
+      "enunciado": "Leia e responda",
+      "texto": "ARROZ 5 kg ........ R$ 24,90\nFEIJÃO 1 kg ....... R$ 8,50\nÓLEO 900 ml ...... R$ 7,99"
+    },
+    {
+      "destaque": "O que se deve fazer antes de usar?",
+      "opcoes": [
+        "Agitar o frasco.",
+        "Esquentar o xarope.",
+        "Colocar na geladeira.",
+        "Misturar com água."
+      ],
+      "correta": "Agitar o frasco.",
+      "explica": "\"Agite antes de usar\" = sacuda o frasco.",
+      "imagem": "🧴",
+      "enunciado": "Leia e responda",
+      "texto": "XAROPE\nTomar 10 ml de 8 em 8 horas.\nAgite antes de usar."
+    },
+    {
+      "destaque": "De 8 em 8 horas: quantas vezes por dia?",
+      "opcoes": [
+        "8 vezes",
+        "2 vezes",
+        "10 vezes",
+        "3 vezes"
+      ],
+      "correta": "3 vezes",
+      "explica": "O dia tem 24 horas: 24 ÷ 8 = 3 vezes.",
+      "imagem": "🧴",
+      "enunciado": "Leia e responda",
+      "texto": "XAROPE\nTomar 10 ml de 8 em 8 horas.\nAgite antes de usar."
+    },
+    {
+      "destaque": "Até quando o produto pode ser usado?",
+      "opcoes": [
+        "Para sempre",
+        "Só no dia 10",
+        "Até 10/07/2026",
+        "Até 10/01/2026"
+      ],
+      "correta": "Até 10/07/2026",
+      "explica": "A data de VALIDADE mostra até quando o produto está bom.",
+      "imagem": "📅",
+      "enunciado": "Leia e responda",
+      "texto": "FABRICAÇÃO: 10/01/2026\nVALIDADE: 10/07/2026"
+    },
+    {
+      "destaque": "Até que dia a conta deve ser paga?",
+      "opcoes": [
+        "Qualquer dia",
+        "15/12",
+        "13/24",
+        "12/15"
+      ],
+      "correta": "15/12",
+      "explica": "Vencimento = último dia para pagar sem multa.",
+      "imagem": "💡",
+      "enunciado": "Leia e responda",
+      "texto": "CONTA DE ENERGIA\nValor: R$ 132,40\nVencimento: 15/12"
+    },
+    {
+      "destaque": "Para quando a reunião foi adiada?",
+      "opcoes": [
+        "Quinta-feira, às 19h.",
+        "Hoje, às 19h.",
+        "Sexta-feira, às 9h.",
+        "Ela foi cancelada."
+      ],
+      "correta": "Quinta-feira, às 19h.",
+      "explica": "Adiada = mudou para depois.",
+      "imagem": "📱",
+      "enunciado": "Leia e responda",
+      "texto": "Oi, Maria! A reunião de pais foi adiada para quinta-feira, às 19h. Abraço, professora Ana."
+    },
+    {
+      "destaque": "Quem mandou a mensagem?",
+      "opcoes": [
+        "Maria.",
+        "O diretor.",
+        "Os pais.",
+        "A professora Ana."
+      ],
+      "correta": "A professora Ana.",
+      "explica": "Quem assina a mensagem no final é quem escreveu.",
+      "imagem": "📱",
+      "enunciado": "Leia e responda",
+      "texto": "Oi, Maria! A reunião de pais foi adiada para quinta-feira, às 19h. Abraço, professora Ana."
+    },
+    {
+      "destaque": "Aonde a mãe foi?",
+      "opcoes": [
+        "À escola.",
+        "À farmácia.",
+        "Ao mercado.",
+        "Ao trabalho."
+      ],
+      "correta": "Ao mercado.",
+      "explica": "Está escrito: \"Fui ao mercado\".",
+      "imagem": "📝",
+      "enunciado": "Leia e responda",
+      "texto": "Fui ao mercado. Volto às 18h.\nTem comida na geladeira.\n— Mãe"
+    },
+    {
+      "destaque": "Quanto custam um prato feito e um suco?",
+      "opcoes": [
+        "R$ 27,00",
+        "R$ 24,00",
+        "R$ 21,00",
+        "R$ 18,00"
+      ],
+      "correta": "R$ 24,00",
+      "explica": "18 + 6 = 24 reais.",
+      "imagem": "🍽️",
+      "enunciado": "Leia e responda",
+      "texto": "PRATO FEITO ...... R$ 18,00\nSUCO ............ R$ 6,00\nCAFÉ ............ R$ 3,00"
+    },
+    {
+      "destaque": "Quantos ovos vão no bolo?",
+      "opcoes": [
+        "2 ovos",
+        "1 ovo",
+        "3 ovos",
+        "4 ovos"
+      ],
+      "correta": "2 ovos",
+      "explica": "Na receita: \"2 ovos\".",
+      "imagem": "🎂",
+      "enunciado": "Leia e responda",
+      "texto": "BOLO SIMPLES\n2 ovos, 1 xícara de açúcar, 2 xícaras de farinha,\n1 xícara de leite e 1 colher de fermento."
+    },
+    {
+      "destaque": "O posto abre no sábado?",
+      "opcoes": [
+        "Sim, o dia todo.",
+        "Sim, das 7h às 17h.",
+        "Só no sábado.",
+        "Não, só de segunda a sexta."
+      ],
+      "correta": "Não, só de segunda a sexta.",
+      "explica": "De segunda a sexta: sábado e domingo ficam fora.",
+      "imagem": "🏥",
+      "enunciado": "Leia e responda",
+      "texto": "POSTO DE SAÚDE\nAtendimento: de segunda a sexta, das 7h às 17h."
+    },
+    {
+      "destaque": "Qual é o horário de trabalho?",
+      "opcoes": [
+        "O dia todo.",
+        "Só de manhã, até as 12h.",
+        "Das 8h às 16h.",
+        "Das 16h às 8h."
+      ],
+      "correta": "Das 8h às 16h.",
+      "explica": "Está escrito na linha do Horário.",
+      "imagem": "💼",
+      "enunciado": "Leia e responda",
+      "texto": "PRECISA-SE de ajudante de cozinha.\nHorário: das 8h às 16h.\nSalário: R$ 1.800,00. Trazer documentos."
+    },
+    {
+      "destaque": "Onde se escreve o dia em que você nasceu?",
+      "opcoes": [
+        "No fim da folha.",
+        "Em DATA DE NASCIMENTO.",
+        "Em NOME.",
+        "Em ENDEREÇO."
+      ],
+      "correta": "Em DATA DE NASCIMENTO.",
+      "explica": "Data de nascimento = dia, mês e ano em que você nasceu.",
+      "imagem": "🧾",
+      "enunciado": "Leia e responda",
+      "texto": "NOME: ______________________\nDATA DE NASCIMENTO: ___/___/______\nENDEREÇO: __________________"
+    }
+  ]
+}

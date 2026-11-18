@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Quadro de Fichas</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  #nome{text-align:center;font-size:26px;font-weight:bold;min-height:30px}
+  .premio{max-width:520px;margin:6px auto;background:#fff;border-radius:28px;padding:10px 20px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.08);cursor:pointer}
+  .premio small{display:block;font-size:20px;font-weight:bold;color:#5b6577}
+  .premio span{display:block;font-size:110px;line-height:1.15}
+  .premio b{font-size:32px}
+  #fichas{text-align:center;margin:16px 0}
+  .ficha{display:inline-block;width:110px;height:110px;margin:8px;border-radius:50%;background:#fff;border:5px dashed #b5c2d6;font-size:70px;line-height:100px;text-align:center;vertical-align:middle;cursor:pointer}
+  .ficha.cheia{border:5px solid #f2c94c;background:#fff8dd;-webkit-animation:apoioPop .35s;animation:apoioPop .35s}
+  #tempoPremio{max-width:520px;margin:10px auto;text-align:center}
+  #barraTempo{height:26px;background:#e3e8f0;border-radius:999px;overflow:hidden}
+  #barraTempo div{height:100%;background:#27ae60;width:100%}
+  #seletor .card{display:inline-block;vertical-align:top;width:120px;margin:5px;padding:8px 4px;background:#f7f9fc;border-radius:16px;text-align:center;font-weight:bold;font-size:15px;cursor:pointer}
+  #seletor .card span{display:block;font-size:46px}
+  #seletor .card.ativo,.icones button.ativo,.qtds button.ativo{outline:4px solid #243049}
+  .icones button{font-size:34px;padding:6px 10px}
+  @media (max-width:700px){ .ficha{width:80px;height:80px;font-size:50px;line-height:72px} }
+</style>
+</head>
+<body>
+<h1>⭐ Quadro de Fichas</h1>
+<div id="nome"></div>
+<div class="premio" id="premio"></div>
+<div id="fichas"></div>
+<div class="linha">
+  <button id="btnGanhar" class="ok grande">⭐ Ganhou uma ficha!</button>
+  <button id="btnTirar" class="suave">↩️ Desfazer</button>
+  <button id="btnAjustes" class="suave">⚙️ Ajustes</button>
+</div>
+<div id="tempoPremio" hidden>
+  <p id="textoTempo" style="font-size:22px;font-weight:bold"></p>
+  <div id="barraTempo"><div></div></div>
+  <div class="linha" id="botoesTempo"></div>
+</div>
+
+<div id="seletor" class="cartao" hidden>
+  <h2>Ajustes</h2>
+  <label>Nome (opcional): <input type="text" id="inNome" maxlength="20"></label>
+  <h2>Estou trabalhando para:</h2>
+  <div id="premios" style="text-align:center"></div>
+  <h2>Quantas fichas?</h2>
+  <div class="linha qtds" id="qtds"></div>
+  <h2>Figura da ficha</h2>
+  <div class="linha icones" id="icones"></div>
+  <div class="linha"><button id="btnSalvarAjustes" class="ok grande">✅ Pronto</button></div>
+</div>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var PREMIOS = [['🧸','Brincar'],['🎨','Desenhar'],['📱','Tablet'],['🎵','Música'],['📚','Livro'],['🧩','Quebra-cabeça'],['⚽','Bola'],['🌳','Pátio'],
+  ['🍪','Lanche'],['🌟','Adesivo'],['🙋','Ajudante da professora'],['🧱','Blocos'],['📺','Vídeo'],['🎲','Jogo'],['😌','Descansar'],['🚗','Carrinhos']];
+var ICONES = ['⭐','😀','🚗','🦖','⚽','💎','🌈','🐱','🦄','🚀'];
+var est = A.ler('fichas_estado') || {nome: '', premio: ['🧸','Brincar'], total: 5, icone: '⭐', fichas: 0};
+var timer = null;
+function salvar(){ A.guardar('fichas_estado', est); }
+function desenhar(){
+  $('nome').textContent = est.nome ? est.nome : '';
+  $('premio').innerHTML = '<small>ESTOU TRABALHANDO PARA:</small><span>' + A.esc(est.premio[0]) + '</span><b>' + A.esc(est.premio[1]) + '</b>';
+  var h = '';
+  for (var i = 0; i < est.total; i++) h += '<div class="ficha' + (i < est.fichas ? ' cheia' : '') + '" data-i="' + i + '">' + (i < est.fichas ? est.icone : '') + '</div>';
+  $('fichas').innerHTML = h;
+  A.cliques($('fichas'), '.ficha', function(el){ var i = +el.getAttribute('data-i'); if (i === est.fichas) ganhar(); else if (i === est.fichas - 1) tirar(); });
+  $('btnGanhar').disabled = est.fichas >= est.total;
+}
+function ganhar(){
+  if (est.fichas >= est.total) return;
+  est.fichas++; salvar(); desenhar(); A.som('ok');
+  var faltam = est.total - est.fichas;
+  if (!faltam){ A.celebrar('Hora de: ' + est.premio[1] + '!', est.premio[0], 2600); A.falar('Você conseguiu! Agora é hora de ' + est.premio[1].toLowerCase() + '.'); oferecerTempo(); }
+  else A.falar(faltam === 1 ? 'Falta só uma!' : 'Faltam ' + faltam + '.');
+}
+function tirar(){ if (est.fichas > 0){ est.fichas--; salvar(); desenhar(); $('tempoPremio').hidden = true; } }
+$('btnGanhar').onclick = ganhar;
+$('btnTirar').onclick = tirar;
+$('premio').onclick = function(){ A.falar('Estou trabalhando para: ' + est.premio[1] + '.'); };
+
+// tempo do prêmio, com barra que vai diminuindo
+function oferecerTempo(){
+  $('tempoPremio').hidden = false; $('textoTempo').textContent = 'Quanto tempo de ' + est.premio[1].toLowerCase() + '?';
+  $('barraTempo').firstChild.style.width = '100%';
+  $('botoesTempo').innerHTML = '<button data-m="2">2 min</button><button data-m="5">5 min</button><button data-m="10">10 min</button><button data-m="0" class="suave">🔁 Recomeçar o quadro</button>';
+  A.cliques($('botoesTempo'), 'button', function(b){ var m = +b.getAttribute('data-m'); if (m) iniciarTempo(m); else recomecar(); });
+}
+function iniciarTempo(min){
+  clearInterval(timer);
+  var total = min * 60, resta = total;
+  $('botoesTempo').innerHTML = '<button class="suave" id="btnParar">⏹️ Parar</button>';
+  $('btnParar').onclick = function(){ clearInterval(timer); recomecar(); };
+  timer = setInterval(function(){
+    resta--;
+    $('barraTempo').firstChild.style.width = Math.max(0, resta / total * 100) + '%';
+    $('textoTempo').textContent = est.premio[0] + ' ' + est.premio[1] + ': ' + Math.floor(resta / 60) + ':' + ('0' + (resta % 60)).slice(-2);
+    if (resta === 60) A.falar('Falta um minuto.');
+    if (resta <= 0){ clearInterval(timer); A.som('fim'); A.falar('O tempo acabou. Vamos começar de novo?'); $('textoTempo').textContent = '⏰ O tempo acabou!'; $('botoesTempo').innerHTML = '<button class="ok" id="btnDeNovo">🔁 Começar de novo</button>'; $('btnDeNovo').onclick = recomecar; }
+  }, 1000);
+}
+function recomecar(){ clearInterval(timer); est.fichas = 0; salvar(); desenhar(); $('tempoPremio').hidden = true; A.falar('Estou trabalhando para: ' + est.premio[1] + '.'); }
+
+// ---------- ajustes ----------
+function abrirAjustes(){
+  $('inNome').value = est.nome || '';
+  var h = '';
+  for (var i = 0; i < PREMIOS.length; i++) h += '<div class="card' + (PREMIOS[i][1] === est.premio[1] ? ' ativo' : '') + '" data-i="' + i + '"><span>' + PREMIOS[i][0] + '</span>' + A.esc(PREMIOS[i][1]) + '</div>';
+  $('premios').innerHTML = h;
+  A.cliques($('premios'), '.card', function(el){ est.premio = PREMIOS[+el.getAttribute('data-i')].slice(); abrirAjustes(); });
+  var q = [3, 5, 8, 10], hq = '';
+  for (var k = 0; k < q.length; k++) hq += '<button data-q="' + q[k] + '" class="' + (q[k] === est.total ? 'ativo' : '') + '">' + q[k] + '</button>';
+  $('qtds').innerHTML = hq;
+  A.cliques($('qtds'), 'button', function(b){ est.total = +b.getAttribute('data-q'); est.fichas = Math.min(est.fichas, est.total); abrirAjustes(); });
+  var hi = '';
+  for (var j = 0; j < ICONES.length; j++) hi += '<button data-c="' + ICONES[j] + '" class="' + (ICONES[j] === est.icone ? 'ativo' : '') + '">' + ICONES[j] + '</button>';
+  $('icones').innerHTML = hi;
+  A.cliques($('icones'), 'button', function(b){ est.icone = b.getAttribute('data-c'); abrirAjustes(); });
+  $('seletor').hidden = false;
+}
+$('btnAjustes').onclick = function(){ if ($('seletor').hidden) abrirAjustes(); else $('seletor').hidden = true; };
+$('btnSalvarAjustes').onclick = function(){ est.nome = $('inNome').value.replace(/^\s+|\s+$/g, ''); salvar(); $('seletor').hidden = true; desenhar(); };
+desenhar();
+if (est.fichas >= est.total) oferecerTempo();
+})();
+</script>
+</body>
+</html>

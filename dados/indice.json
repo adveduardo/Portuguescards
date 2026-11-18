@@ -95,6 +95,10 @@
     {
       "arquivo": "quiz-figuras.json",
       "titulo": "Quiz das figuras de linguagem"
+    },
+    {
+      "arquivo": "quiz-alfa.json",
+      "titulo": "Quiz da alfabetização"
     }
   ],
   "stop": [
@@ -211,6 +215,10 @@
     {
       "arquivo": "batata-figuras.json",
       "titulo": "Batata quente das figuras de linguagem"
+    },
+    {
+      "arquivo": "batata-alfa.json",
+      "titulo": "Batata quente da alfabetização"
     }
   ],
   "trilha": [
@@ -297,6 +305,10 @@
     {
       "arquivo": "trilha-figuras.json",
       "titulo": "Trilha das figuras de linguagem"
+    },
+    {
+      "arquivo": "trilha-alfa.json",
+      "titulo": "Trilha da alfabetização"
     }
   ],
   "escape": [
@@ -531,6 +543,10 @@
     {
       "arquivo": "detetive-vicios.json",
       "titulo": "Detetive dos vícios de linguagem (barbarismo e solecismo)"
+    },
+    {
+      "arquivo": "detetive-alfa.json",
+      "titulo": "Detetive das trocas de letras (alfabetização)"
     }
   ],
   "pontuacao": [
@@ -657,6 +673,14 @@
     {
       "arquivo": "fg-cestos-familias.json",
       "titulo": "Cestos: os grupos das figuras de linguagem"
+    },
+    {
+      "arquivo": "alfa-cestos-silabas.json",
+      "titulo": "Cestos: quantas sílabas? (alfabetização)"
+    },
+    {
+      "arquivo": "alfa-cestos-inicial.json",
+      "titulo": "Cestos: com que letra começa? (alfabetização)"
     }
   ],
   "morfo-frases": [
@@ -843,6 +867,10 @@
     {
       "arquivo": "en-ordene.json",
       "titulo": "🇬🇧 Put it in order"
+    },
+    {
+      "arquivo": "alfa-ordene.json",
+      "titulo": "Forme a frase (alfabetização)"
     }
   ],
   "morfo-onde": [
@@ -1499,6 +1527,18 @@
     {
       "arquivo": "memoria-figuras.json",
       "titulo": "Memória das figuras de linguagem"
+    },
+    {
+      "arquivo": "memoria-alfa-figuras.json",
+      "titulo": "Memória: figura e palavra (alfabetização)"
+    },
+    {
+      "arquivo": "memoria-alfa-letras.json",
+      "titulo": "Memória: letra maiúscula e minúscula"
+    },
+    {
+      "arquivo": "memoria-alfa-silabas.json",
+      "titulo": "Memória: figura e primeira sílaba"
     }
   ],
   "bingo": [
@@ -1525,6 +1565,14 @@
     {
       "arquivo": "bingo-figuras.json",
       "titulo": "Bingo das figuras de linguagem"
+    },
+    {
+      "arquivo": "bingo-alfa-letras.json",
+      "titulo": "Bingo das letras (alfabetização)"
+    },
+    {
+      "arquivo": "bingo-alfa-silabas.json",
+      "titulo": "Bingo das sílabas (alfabetização)"
     }
   ],
   "escolha-fo": [
@@ -1809,6 +1857,40 @@
     {
       "arquivo": "escada-palavras.json",
       "titulo": "Escadas de palavras"
+    }
+  ],
+  "escolha-alfa": [
+    {
+      "arquivo": "alfa-letra-inicial.json",
+      "titulo": "Com que letra começa? (ouça e escolha)"
+    },
+    {
+      "arquivo": "alfa-pares.json",
+      "titulo": "P ou B? T ou D? F ou V? C ou G? (trocas de letras)"
+    },
+    {
+      "arquivo": "alfa-palavra-figura.json",
+      "titulo": "Leia a palavra e escolha a figura"
+    },
+    {
+      "arquivo": "alfa-frase-figura.json",
+      "titulo": "Leia a frase e escolha a figura"
+    },
+    {
+      "arquivo": "alfa-parlendas.json",
+      "titulo": "Parlendas e cantigas: complete"
+    },
+    {
+      "arquivo": "alfa-ditados.json",
+      "titulo": "Ditados populares e trava-línguas: complete"
+    },
+    {
+      "arquivo": "alfa-placas.json",
+      "titulo": "Leitura do dia a dia: placas e avisos (EJA)"
+    },
+    {
+      "arquivo": "alfa-cotidiano.json",
+      "titulo": "Leitura do dia a dia: ônibus, preços, contas e recados (EJA)"
     }
   ]
 }

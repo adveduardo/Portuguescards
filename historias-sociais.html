@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Histórias Sociais</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  #lista{text-align:center}
+  .hist{display:inline-block;vertical-align:top;width:200px;margin:7px;padding:12px 8px;background:#fff;border-radius:20px;text-align:center;font-weight:bold;font-size:18px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  .hist span{display:block;font-size:56px;line-height:1.2}
+  .pagina{max-width:900px;margin:0 auto;background:#fff;border-radius:28px;padding:20px 26px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  #pEmoji{font-size:150px;line-height:1.15}
+  #pTexto{font-size:34px;font-weight:bold;line-height:1.35;min-height:96px;margin:8px 0}
+  #pontos{text-align:center;margin:10px 0}
+  #pontos span{display:inline-block;width:16px;height:16px;border-radius:50%;background:#c9d2e0;margin:0 4px}
+  #pontos span.on{background:#2f80ed}
+  #pTitulo{color:#5b6577;font-size:20px;margin:0 0 4px}
+  textarea{width:100%;min-height:200px;font-family:monospace;font-size:14px}
+</style>
+</head>
+<body>
+<section id="tLista" class="tela ativa">
+  <h1>📖 Histórias Sociais</h1>
+  <p class="dica" style="text-align:center;max-width:760px;margin:0 auto 8px">Histórias curtas que mostram, passo a passo, o que acontece numa situação do dia a dia e o que a criança pode fazer. Leia junto, antes da situação acontecer.</p>
+  <div id="lista"></div>
+  <div class="cartao">
+    <h2>✏️ Escrever a sua própria história</h2>
+    <p class="dica">Copie o modelo, troque os textos e as figuras (emojis) e cole aqui. A história fica guardada neste aparelho.</p>
+    <div class="linha"><button id="btnCopiar" class="suave">📋 Copiar o modelo</button><button id="btnMostrarColar" class="suave">📥 Colar a minha história (JSON)</button></div>
+    <div id="caixaColar" hidden>
+      <textarea id="txtJson" placeholder='{"titulo": "Minha história", "emoji": "🌟", "paginas": [{"emoji": "🙂", "texto": "..."}]}'></textarea>
+      <div class="linha"><button id="btnUsarJson" class="ok">✅ Usar esta história</button><button id="btnApagarMinhas" class="suave">🗑️ Apagar as minhas histórias</button></div>
+      <div id="msgJson" class="dica"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tLer" class="tela">
+  <div class="pagina">
+    <p id="pTitulo"></p>
+    <div id="pEmoji"></div>
+    <div id="pTexto"></div>
+  </div>
+  <div id="pontos"></div>
+  <div class="linha">
+    <button id="btnAnt" class="suave grande">◀️</button>
+    <button id="btnOuvir" class="azul grande">🔊 Ouvir</button>
+    <button id="btnProx" class="ok grande">▶️</button>
+  </div>
+  <div class="linha"><label><input type="checkbox" id="chkLer" checked> Ler em voz alta ao virar a página</label><button id="btnVoltar" class="suave">📚 Outras histórias</button></div>
+</section>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var historias = [], minhas = A.ler('historias_minhas') || [], h = null, pag = 0;
+function valida(x){
+  if (!x || !x.paginas || !x.paginas.length) return null;
+  var ps = [];
+  for (var i = 0; i < x.paginas.length; i++){ var p = x.paginas[i]; if (p && p.texto) ps.push({emoji: p.emoji || '', texto: String(p.texto)}); }
+  return ps.length ? {titulo: String(x.titulo || 'Minha história'), emoji: x.emoji || '🌟', paginas: ps, minha: true} : null;
+}
+function desenharLista(){
+  var todas = minhas.concat(historias), out = '';
+  for (var i = 0; i < todas.length; i++) out += '<div class="hist" data-i="' + i + '"><span>' + A.esc(todas[i].emoji) + '</span>' + A.esc(todas[i].titulo) + (todas[i].minha ? ' ✏️' : '') + '</div>';
+  $('lista').innerHTML = out || '<p>Carregando…</p>';
+  A.cliques($('lista'), '.hist', function(el){ abrir(todas[+el.getAttribute('data-i')]); });
+}
+function abrir(x){ h = x; pag = 0; A.mostrarTela('tLer'); mostrar(); }
+function mostrar(){
+  var p = h.paginas[pag];
+  $('pTitulo').textContent = h.titulo;
+  $('pEmoji').textContent = p.emoji;
+  $('pTexto').textContent = p.texto;
+  var d = '';
+  for (var i = 0; i < h.paginas.length; i++) d += '<span class="' + (i <= pag ? 'on' : '') + '"></span>';
+  $('pontos').innerHTML = d;
+  $('btnAnt').disabled = pag === 0;
+  $('btnProx').textContent = pag === h.paginas.length - 1 ? '🌟 Fim' : '▶️';
+  if ($('chkLer').checked) A.falar(p.texto);
+}
+$('btnProx').onclick = function(){ if (pag < h.paginas.length - 1){ pag++; mostrar(); } else { A.celebrar('Fim da história!', '🌟'); setTimeout(function(){ A.mostrarTela('tLista'); }, 1600); } };
+$('btnAnt').onclick = function(){ if (pag > 0){ pag--; mostrar(); } };
+$('btnOuvir').onclick = function(){ A.falar(h.paginas[pag].texto); };
+$('pEmoji').onclick = $('btnOuvir').onclick;
+$('btnVoltar').onclick = function(){ A.mostrarTela('tLista'); };
+
+// ---------- Minha história (colar JSON) ----------
+var MODELO = {titulo: 'Ir ao dentista', emoji: '🦷', paginas: [
+  {emoji: '🦷', texto: 'Hoje eu vou ao dentista.'}, {emoji: '🪑', texto: 'Eu sento numa cadeira grande que sobe e desce.'},
+  {emoji: '😮', texto: 'O dentista pede para eu abrir bem a boca.'}, {emoji: '🔦', texto: 'Ele usa uma luz para ver os meus dentes.'},
+  {emoji: '⭐', texto: 'Quando termina, eu posso ir para casa. Muito bem!'}]};
+function copiar(texto){
+  var t = document.createElement('textarea'); t.value = texto; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+  document.body.appendChild(t); t.select(); try { t.setSelectionRange(0, texto.length); } catch (e) {}
+  var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(t);
+  return ok;
+}
+$('btnCopiar').onclick = function(){
+  var txt = JSON.stringify(MODELO, null, 2);
+  if (copiar(txt)) $('msgJson').textContent = '✅ Modelo copiado! Cole num editor de texto, troque os textos e depois cole aqui.';
+  else { $('caixaColar').hidden = false; $('txtJson').value = txt; $('msgJson').textContent = 'Não consegui copiar sozinho: o modelo está na caixa abaixo.'; }
+  $('caixaColar').hidden = false;
+};
+$('btnMostrarColar').onclick = function(){ $('caixaColar').hidden = !$('caixaColar').hidden; };
+$('btnUsarJson').onclick = function(){
+  var d;
+  try { d = JSON.parse($('txtJson').value); } catch (e) { $('msgJson').textContent = '❌ O texto não é um JSON válido: ' + e.message; return; }
+  var lista = d && d.historias ? d.historias : [d], novas = [];
+  for (var i = 0; i < lista.length; i++){ var v = valida(lista[i]); if (v) novas.push(v); }
+  if (!novas.length){ $('msgJson').textContent = '❌ Não achei páginas com "texto" nesse JSON.'; return; }
+  minhas = novas.concat(minhas); A.guardar('historias_minhas', minhas);
+  $('msgJson').textContent = '✅ ' + novas.length + ' história(s) guardada(s) neste aparelho.'; $('txtJson').value = '';
+  desenharLista();
+};
+$('btnApagarMinhas').onclick = function(){ if (confirm('Apagar as histórias que você colou neste aparelho?')){ minhas = []; A.guardar('historias_minhas', minhas); desenharLista(); } };
+
+A.carregarJSON('dados/historias-sociais.json', function(err, d){
+  if (!err && d && d.historias){ for (var i = 0; i < d.historias.length; i++){ var v = valida(d.historias[i]); if (v){ v.minha = false; historias.push(v); } } }
+  desenharLista();
+  var pedido = A.param('historia');
+  if (pedido){ var todas = minhas.concat(historias); for (var k = 0; k < todas.length; k++) if (todas[k].titulo === pedido) abrir(todas[k]); }
+});
+desenharLista();
+})();
+</script>
+</body>
+</html>

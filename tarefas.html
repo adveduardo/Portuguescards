@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Minhas Tarefas</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  #titulo{text-align:center;font-size:26px;font-weight:bold;color:#5b6577;margin:0}
+  #progresso{max-width:700px;height:22px;margin:8px auto;background:#e3e8f0;border-radius:999px;overflow:hidden}
+  #progresso div{height:100%;background:#27ae60;width:0}
+  .passo{max-width:640px;margin:10px auto;background:#fff;border-radius:30px;padding:14px 20px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  .passo small{display:block;font-size:20px;font-weight:bold;color:#5b6577}
+  .passo span{display:block;font-size:130px;line-height:1.15}
+  .passo b{display:block;font-size:36px}
+  #relogio{text-align:center;font-size:30px;font-weight:bold;min-height:36px}
+  #barraRelogio{max-width:500px;height:16px;margin:4px auto;background:#e3e8f0;border-radius:999px;overflow:hidden}
+  #barraRelogio div{height:100%;background:#2f80ed;width:100%}
+  #lista{max-width:700px;margin:8px auto}
+  .item{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;background:#fff;border-radius:16px;padding:6px 12px;margin:6px 0;font-size:22px;font-weight:bold;cursor:pointer}
+  .item span{font-size:40px;width:60px;text-align:center}
+  .item.feito{opacity:.5;text-decoration:line-through}
+  .item.agora{outline:4px solid #f2c94c}
+  .modelos button{font-size:16px}
+  .linhaEd{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin:5px 0}
+  .linhaEd input.e{width:64px;text-align:center}
+  .linhaEd input.t{-webkit-flex:1;flex:1;margin:0 6px}
+  .linhaEd button{padding:6px 10px;font-size:15px}
+</style>
+</head>
+<body>
+<h1>✅ Minhas Tarefas</h1>
+<section id="tFazer" class="tela ativa">
+  <p id="titulo"></p>
+  <div id="progresso"><div></div></div>
+  <div class="passo" id="passo"></div>
+  <div id="relogio"></div>
+  <div id="barraRelogio" hidden><div></div></div>
+  <div class="linha">
+    <button id="btnVoltar" class="suave">⬅️</button>
+    <button id="btnFeito" class="ok grande">✅ Feito!</button>
+    <button id="btnTempo" class="suave">⏱️ Tempo</button>
+  </div>
+  <div class="linha">
+    <button id="btnLista" class="suave">📋 Ver a lista toda</button>
+    <button id="btnEditar" class="suave">✏️ Montar as tarefas</button>
+    <button id="btnRecomecar" class="suave">🔁 Recomeçar</button>
+  </div>
+  <div id="lista" hidden></div>
+</section>
+
+<section id="tEditar" class="tela">
+  <div class="cartao">
+    <h2>Modelos prontos</h2>
+    <div class="linha modelos" id="modelos"></div>
+    <h2>Tarefas (na ordem)</h2>
+    <label>Título: <input type="text" id="inTitulo" maxlength="40" style="width:60%"></label>
+    <div id="passosEd"></div>
+    <div class="linha"><button id="btnAddPasso" class="suave">➕ Mais um passo</button><button id="btnSalvarEd" class="ok grande">✅ Pronto</button></div>
+    <p class="dica">Use uma figura (emoji) e poucas palavras em cada passo. As tarefas ficam guardadas neste aparelho.</p>
+  </div>
+</section>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var MODELOS = {
+  atividade: ['Começar a atividade', [['📒','Pegar o caderno'],['✏️','Pegar o lápis'],['📝','Escrever o meu nome'],['📄','Fazer a atividade'],['🙋','Mostrar para a professora'],['🎒','Guardar o material']]],
+  maos: ['Lavar as mãos', [['🚰','Abrir a torneira'],['💧','Molhar as mãos'],['🧼','Passar sabão'],['👐','Esfregar contando até 20'],['💦','Enxaguar'],['🧻','Secar as mãos']]],
+  mochila: ['Arrumar a mochila', [['📒','Guardar o caderno'],['✏️','Guardar o estojo'],['📖','Guardar o livro'],['🍎','Guardar a lancheira'],['🧥','Pegar o casaco'],['🎒','Fechar a mochila']]],
+  texto: ['Escrever um texto', [['💭','Pensar no que vou escrever'],['🏷️','Escrever o título'],['✍️','Escrever as frases'],['👀','Ler tudo de novo'],['✏️','Corrigir o que precisar'],['📤','Entregar para a professora']]],
+  chegada: ['Chegar na sala', [['👋','Dar bom-dia'],['🧥','Pendurar o casaco'],['🎒','Guardar a mochila'],['🗓️','Olhar a rotina do dia'],['🪑','Sentar no meu lugar']]],
+  saida: ['Hora de ir embora', [['🧹','Arrumar a mesa'],['🎒','Arrumar a mochila'],['🧥','Vestir o casaco'],['🚶','Fazer a fila'],['👋','Dar tchau']]]
+};
+var est = A.ler('tarefas_estado') || {titulo: MODELOS.atividade[0], passos: MODELOS.atividade[1], atual: 0, minutos: 0};
+var p0 = A.param('modelo'); if (p0 && MODELOS[p0]){ est = {titulo: MODELOS[p0][0], passos: MODELOS[p0][1], atual: 0, minutos: est.minutos || 0}; }
+var timer = null, resta = 0;
+function salvar(){ A.guardar('tarefas_estado', est); }
+
+function mostrar(){
+  var n = est.passos.length;
+  $('titulo').textContent = est.titulo;
+  $('progresso').firstChild.style.width = (n ? est.atual / n * 100 : 0) + '%';
+  if (est.atual >= n){
+    $('passo').innerHTML = '<small>TUDO PRONTO!</small><span>🌟</span><b>Muito bem!</b>';
+    $('btnFeito').disabled = true; pararTempo(); $('relogio').textContent = '';
+  } else {
+    var p = est.passos[est.atual];
+    $('passo').innerHTML = '<small>PASSO ' + (est.atual + 1) + ' DE ' + n + '</small><span>' + A.esc(p[0]) + '</span><b>' + A.esc(p[1]) + '</b>';
+    $('btnFeito').disabled = false;
+    if (est.minutos) iniciarTempo(); else { pararTempo(); $('relogio').textContent = ''; }
+  }
+  $('btnVoltar').disabled = est.atual === 0;
+  if (!$('lista').hidden) desenharLista();
+}
+function falarPasso(){ var p = est.passos[est.atual]; if (p) A.falar('Passo ' + (est.atual + 1) + ': ' + p[1] + '.'); }
+$('btnFeito').onclick = function(){
+  if (est.atual >= est.passos.length) return;
+  est.atual++; salvar(); A.som('ok');
+  if (est.atual >= est.passos.length){ mostrar(); A.celebrar('Tudo pronto!', '🌟', 2400); A.falar('Tudo pronto! Muito bem!'); }
+  else { mostrar(); falarPasso(); }
+};
+$('btnVoltar').onclick = function(){ if (est.atual > 0){ est.atual--; salvar(); mostrar(); falarPasso(); } };
+$('btnRecomecar').onclick = function(){ est.atual = 0; salvar(); mostrar(); falarPasso(); };
+$('passo').onclick = falarPasso;
+
+// tempo para cada passo (bom para quem se distrai: dá um limite visível)
+$('btnTempo').onclick = function(){
+  var ops = [0, 1, 2, 5, 10], i = ops.indexOf(est.minutos);
+  est.minutos = ops[(i + 1) % ops.length]; salvar();
+  $('btnTempo').textContent = est.minutos ? '⏱️ ' + est.minutos + ' min por passo' : '⏱️ Tempo';
+  mostrar();
+};
+function pararTempo(){ clearInterval(timer); timer = null; $('barraRelogio').hidden = true; }
+function iniciarTempo(){
+  pararTempo();
+  var total = est.minutos * 60; resta = total;
+  $('barraRelogio').hidden = false; $('barraRelogio').firstChild.style.width = '100%';
+  var tique = function(){
+    $('relogio').textContent = '⏱️ ' + Math.floor(resta / 60) + ':' + ('0' + (resta % 60)).slice(-2);
+    $('barraRelogio').firstChild.style.width = Math.max(0, resta / total * 100) + '%';
+  };
+  tique();
+  timer = setInterval(function(){
+    resta--; tique();
+    if (resta <= 0){ pararTempo(); $('relogio').textContent = '⏰ O tempo deste passo acabou. Vamos terminar?'; A.som('fim'); A.falar('O tempo acabou. Vamos terminar este passo?'); }
+  }, 1000);
+}
+
+function desenharLista(){
+  var h = '';
+  for (var i = 0; i < est.passos.length; i++) h += '<div class="item ' + (i < est.atual ? 'feito' : i === est.atual ? 'agora' : '') + '" data-i="' + i + '"><span>' + A.esc(est.passos[i][0]) + '</span>' + A.esc(est.passos[i][1]) + '</div>';
+  $('lista').innerHTML = h;
+  A.cliques($('lista'), '.item', function(el){ A.falar(est.passos[+el.getAttribute('data-i')][1]); });
+}
+$('btnLista').onclick = function(){ $('lista').hidden = !$('lista').hidden; if (!$('lista').hidden) desenharLista(); };
+
+// ---------- montar as tarefas ----------
+var rascunho = null;
+function abrirEditor(){
+  rascunho = {titulo: est.titulo, passos: est.passos.map(function(p){ return [p[0], p[1]]; })};
+  var hm = '';
+  for (var k in MODELOS) if (MODELOS.hasOwnProperty(k)) hm += '<button data-m="' + k + '">' + MODELOS[k][1][0][0] + ' ' + A.esc(MODELOS[k][0]) + '</button>';
+  $('modelos').innerHTML = hm;
+  A.cliques($('modelos'), 'button', function(b){ var m = MODELOS[b.getAttribute('data-m')]; rascunho = {titulo: m[0], passos: m[1].map(function(p){ return [p[0], p[1]]; })}; desenharEditor(); });
+  desenharEditor(); A.mostrarTela('tEditar');
+}
+function lerEditor(){
+  rascunho.titulo = $('inTitulo').value;
+  var linhas = $('passosEd').querySelectorAll('.linhaEd');
+  rascunho.passos = [];
+  for (var i = 0; i < linhas.length; i++){ var e = linhas[i].querySelector('.e').value, t = linhas[i].querySelector('.t').value.replace(/^\s+|\s+$/g, ''); if (t) rascunho.passos.push([e || '⭐', t]); }
+}
+function desenharEditor(){
+  $('inTitulo').value = rascunho.titulo;
+  var h = '';
+  for (var i = 0; i < rascunho.passos.length; i++) h += '<div class="linhaEd"><b>' + (i + 1) + '.</b> <input class="e" maxlength="4" value="' + A.esc(rascunho.passos[i][0]) + '"><input class="t" maxlength="40" value="' + A.esc(rascunho.passos[i][1]) + '"><button data-c="sobe" data-i="' + i + '">▲</button><button data-c="desce" data-i="' + i + '">▼</button><button data-c="tira" data-i="' + i + '">✖</button></div>';
+  $('passosEd').innerHTML = h;
+  A.cliques($('passosEd'), 'button', function(b){
+    lerEditor();
+    var i = +b.getAttribute('data-i'), c = b.getAttribute('data-c'), ps = rascunho.passos, t;
+    if (c === 'tira') ps.splice(i, 1);
+    else if (c === 'sobe' && i > 0){ t = ps[i - 1]; ps[i - 1] = ps[i]; ps[i] = t; }
+    else if (c === 'desce' && i < ps.length - 1){ t = ps[i + 1]; ps[i + 1] = ps[i]; ps[i] = t; }
+    desenharEditor();
+  });
+}
+$('btnAddPasso').onclick = function(){ lerEditor(); rascunho.passos.push(['⭐', '']); desenharEditor(); };
+$('btnSalvarEd').onclick = function(){
+  lerEditor();
+  if (!rascunho.passos.length) return alert('Coloque pelo menos um passo.');
+  est.titulo = rascunho.titulo || 'Minhas tarefas'; est.passos = rascunho.passos; est.atual = 0; salvar();
+  A.mostrarTela('tFazer'); mostrar(); falarPasso();
+};
+$('btnEditar').onclick = abrirEditor;
+$('btnTempo').textContent = est.minutos ? '⏱️ ' + est.minutos + ' min por passo' : '⏱️ Tempo';
+mostrar();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Pausa Ativa</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  .opcoes button{font-size:22px;min-width:220px}
+  .opcoes button span{display:block;font-size:44px}
+  .mov{max-width:760px;margin:10px auto;background:#fff;border-radius:34px;padding:16px 24px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.08)}
+  .mov small{display:block;font-size:20px;font-weight:bold;color:#5b6577}
+  #mEmoji{font-size:160px;line-height:1.15}
+  #mTexto{font-size:40px;font-weight:bold;line-height:1.25;min-height:100px}
+  #mSeg{font-size:64px;font-weight:bold;color:#2f80ed}
+  #mBarra{height:22px;background:#e3e8f0;border-radius:999px;overflow:hidden;margin-top:8px}
+  #mBarra div{height:100%;background:#2f80ed;width:100%}
+</style>
+</head>
+<body>
+<h1>🤸 Pausa Ativa</h1>
+<section id="tInicio" class="tela ativa">
+  <p class="dica" style="text-align:center;max-width:760px;margin:0 auto">Uma pausa rápida para mexer o corpo e voltar com mais atenção. Ajuda muito quem tem TDAH (e todo mundo!).</p>
+  <div class="linha opcoes">
+    <button data-n="1"><span>🎲</span>Um movimento</button>
+    <button data-n="3"><span>⏱️</span>1 minuto (3 movimentos)</button>
+    <button data-n="6"><span>💪</span>2 minutos (6 movimentos)</button>
+  </div>
+  <div class="linha"><label><input type="checkbox" id="chkCalma" checked> Terminar com uma respiração calma</label></div>
+</section>
+<section id="tMov" class="tela">
+  <div class="mov">
+    <small id="mConta"></small>
+    <div id="mEmoji"></div>
+    <div id="mTexto"></div>
+    <div id="mSeg"></div>
+    <div id="mBarra"><div></div></div>
+  </div>
+  <div class="linha"><button id="btnPular" class="suave">⏭️ Pular</button><button id="btnParar" class="suave">⏹️ Parar</button></div>
+</section>
+<section id="tFim" class="tela">
+  <div class="mov"><div id="fEmoji" style="font-size:150px">🌟</div><div style="font-size:40px;font-weight:bold">Pronto! Agora vamos voltar para a atividade.</div></div>
+  <div class="linha"><button id="btnDeNovo" class="ok grande">🔁 Outra pausa</button></div>
+</section>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var MOV = [['🦘','Pule no lugar 10 vezes',20],['🙆','Estique os braços para o céu',15],['🔄','Gire os ombros para trás',15],['🐸','Pule como um sapo',15],
+  ['🥁','Marche no lugar',20],['🦶','Toque nos pés sem dobrar os joelhos',15],['🗽','Fique parado como uma estátua',15],['💃','Sacuda o corpo todo',15],
+  ['🦩','Fique num pé só, como um flamingo',15],['👏','Bata palmas 10 vezes',15],['⭐','Faça polichinelos',20],['🏃','Corra no lugar',20],
+  ['🤗','Dê um abraço em você mesmo',10],['🦁','Faça cara de leão e solte o ar',10],['🐢','Ande em câmera lenta, sem sair do lugar',15],['🌳','Fique firme como uma árvore, com os braços para cima',15]];
+var CALMA = ['🎈','Respire como um balão: puxe o ar… e solte bem devagar',20];
+var fila = [], idx = 0, timer = null, resta = 0, total = 0;
+A.cliques(document, '.opcoes button', function(b){
+  var n = +b.getAttribute('data-n');
+  fila = A.embaralhar(MOV).slice(0, n);
+  if ($('chkCalma').checked) fila.push(CALMA);
+  idx = 0; A.mostrarTela('tMov'); mostrar();
+});
+function mostrar(){
+  clearInterval(timer);
+  if (idx >= fila.length){ A.mostrarTela('tFim'); A.som('fim'); A.falar('Pronto! Agora vamos voltar para a atividade.'); return; }
+  var m = fila[idx];
+  $('mConta').textContent = 'MOVIMENTO ' + (idx + 1) + ' DE ' + fila.length;
+  $('mEmoji').textContent = m[0]; $('mTexto').textContent = m[1];
+  total = m[2]; resta = total; tique();
+  A.falar(m[1]);
+  timer = setInterval(function(){
+    resta--; tique();
+    if (resta <= 3 && resta > 0) A.tom(660, .08, .08);
+    if (resta <= 0){ clearInterval(timer); A.som('ok'); idx++; setTimeout(mostrar, 900); }
+  }, 1000);
+}
+function tique(){ $('mSeg').textContent = resta; $('mBarra').firstChild.style.width = (resta / total * 100) + '%'; }
+$('btnPular').onclick = function(){ idx++; mostrar(); };
+$('btnParar').onclick = function(){ clearInterval(timer); A.mostrarTela('tInicio'); };
+$('btnDeNovo').onclick = function(){ A.mostrarTela('tInicio'); };
+})();
+</script>
+</body>
+</html>

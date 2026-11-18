@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Pareamento</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  #config{display:none}
+  #config.aberto{display:block}
+  .opcoesCfg button.ativo{background:#243049;color:#fff}
+  #estrelas{text-align:center;font-size:40px;letter-spacing:4px;min-height:52px}
+  #instrucao{text-align:center;font-size:28px;font-weight:bold;margin:4px 0}
+  #alvo{width:220px;height:200px;margin:8px auto 18px;background:#fff;border:5px dashed #9fb0c8;border-radius:28px;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:120px;font-weight:bold;line-height:1}
+  #alvo.texto{font-size:58px}
+  #opcoes{text-align:center}
+  .op{display:inline-block;vertical-align:top;width:180px;height:170px;margin:10px;background:#fff;border-radius:26px;font-size:100px;font-weight:bold;line-height:170px;text-align:center;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.12);overflow:hidden}
+  .op.texto{font-size:40px}
+  .op.some{opacity:.15}
+  .op.certa{background:#d8f3e2;box-shadow:0 0 0 6px #27ae60}
+  @media (max-width:700px){ .op{width:140px;height:130px;line-height:130px;font-size:74px} .op.texto{font-size:30px} #alvo{width:170px;height:150px;font-size:90px} }
+</style>
+</head>
+<body>
+<h1>🧩 Pareamento</h1>
+<div class="linha"><button id="btnConfig" class="suave">⚙️ Ajustes (para o adulto)</button></div>
+<div id="config" class="cartao">
+  <div class="linha opcoesCfg" id="cfgModo">
+    <button data-v="igual">🟰 Figura igual</button><button data-v="palavra">🖼️ Figura e palavra</button><button data-v="letra">🔤 Letra igual</button>
+    <button data-v="maiuscula">Aa Maiúscula e minúscula</button><button data-v="cor">🎨 Mesma cor</button><button data-v="quantidade">🔢 Número e quantidade</button>
+  </div>
+  <div class="linha opcoesCfg" id="cfgTema"><b>Figuras:</b>
+    <button data-v="animais">🐶 Animais</button><button data-v="transportes">🚗 Transportes</button><button data-v="comidas">🍎 Comidas</button><button data-v="objetos">⚽ Objetos</button>
+  </div>
+  <div class="linha opcoesCfg" id="cfgQtd"><b>Opções na tela:</b><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button></div>
+  <div class="linha opcoesCfg" id="cfgRodadas"><b>Rodadas:</b><button data-v="5">5</button><button data-v="10">10</button><button data-v="15">15</button></div>
+  <div class="linha"><label><input type="checkbox" id="chkSemErro" checked> Sem erro: a opção errada some e a certa pisca (aprendizagem sem erro)</label></div>
+  <div class="linha"><button id="btnAplicar" class="ok">▶️ Começar com estes ajustes</button></div>
+</div>
+<div id="estrelas"></div>
+<div id="instrucao"></div>
+<div id="alvo"></div>
+<div id="opcoes"></div>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var TEMAS = {animais: ['🐶','🐱','🐭','🐰','🐷','🐻','🐼','🐸','🐵','🐔','🐧','🐢','🐟','🐞','🐘','🦁'],
+  transportes: ['🚗','🚌','🚲','✈️','🚀','🚂','🚢','🚁','🚜','🏍️','🚒','🚑'],
+  comidas: ['🍎','🍌','🍇','🍓','🍉','🍕','🍔','🍪','🧀','🍑','🌽','🍞'],
+  objetos: ['⚽','✏️','📕','🎒','🎸','🎈','🔑','⏰','☂️','🎁','🖍️','📷']};
+var FIG_PAL = [['🐱','GATO'],['🐶','CÃO'],['⚽','BOLA'],['🏠','CASA'],['🍎','MAÇÃ'],['🚗','CARRO'],['🌙','LUA'],['☀️','SOL'],['🐟','PEIXE'],['🌸','FLOR'],['🍌','BANANA'],['🐷','PORCO'],['📕','LIVRO'],['🎂','BOLO']];
+var LETRAS = 'ABDEFGHLMNQRT'.split('');
+var CORES = {'🔴': ['🍓','🍎','🚒','🌹'], '🟡': ['🍌','🌻','⭐','🌽'], '🟢': ['🐸','🍀','🌲','📗'], '🔵': ['💧','🐳','💙','👖'], '🟠': ['🍊','🎃','🏀','🦁'], '🟣': ['🍇','🍆','🔮','☔']};
+var NOME_COR = {'🔴': 'vermelho', '🟡': 'amarelo', '🟢': 'verde', '🔵': 'azul', '🟠': 'laranja', '🟣': 'roxo'};
+var cfg = A.ler('pareamento_cfg') || {modo: 'igual', tema: 'animais', qtd: 3, rodadas: 10, semErro: true};
+var p = A.param('modo'); if (p) cfg.modo = p;
+var rodada = 0, acertos = 0, atual = null, errou = false, travado = false;
+
+function marcarCfg(){
+  var grupos = [['cfgModo', cfg.modo], ['cfgTema', cfg.tema], ['cfgQtd', String(cfg.qtd)], ['cfgRodadas', String(cfg.rodadas)]];
+  for (var g = 0; g < grupos.length; g++) A.cada($(grupos[g][0]).querySelectorAll('button'), function(b){ b.className = b.getAttribute('data-v') === grupos[g][1] ? 'ativo' : ''; });
+  $('chkSemErro').checked = cfg.semErro;
+}
+function ligarCfg(id, campo, numero){
+  A.cada($(id).querySelectorAll('button'), function(b){ b.onclick = function(){ cfg[campo] = numero ? +b.getAttribute('data-v') : b.getAttribute('data-v'); marcarCfg(); }; });
+}
+ligarCfg('cfgModo', 'modo'); ligarCfg('cfgTema', 'tema'); ligarCfg('cfgQtd', 'qtd', true); ligarCfg('cfgRodadas', 'rodadas', true);
+$('btnConfig').onclick = function(){ var c = $('config'); c.className = c.className.indexOf('aberto') >= 0 ? 'cartao' : 'cartao aberto'; marcarCfg(); };
+$('btnAplicar').onclick = function(){ cfg.semErro = $('chkSemErro').checked; A.guardar('pareamento_cfg', cfg); $('config').className = 'cartao'; comecar(); };
+
+// monta uma rodada: alvo, opções e qual é a certa
+function gerar(){
+  var n = cfg.qtd, m = cfg.modo, alvo, certa, outras, falaAlvo, inst, textoAlvo = false, textoOps = false;
+  if (m === 'igual'){
+    var lista = A.embaralhar(TEMAS[cfg.tema] || TEMAS.animais);
+    alvo = lista[0]; certa = lista[0]; outras = lista.slice(1, n); inst = 'Encontre a figura igual';
+  } else if (m === 'palavra'){
+    var fp = A.embaralhar(FIG_PAL);
+    alvo = fp[0][0]; certa = fp[0][1]; outras = fp.slice(1, n).map(function(x){ return x[1]; }); inst = 'Qual é a palavra desta figura?'; textoOps = true; falaAlvo = '';
+  } else if (m === 'letra' || m === 'maiuscula'){
+    var ls = A.embaralhar(LETRAS);
+    alvo = ls[0]; certa = m === 'letra' ? ls[0] : ls[0].toLowerCase();
+    outras = ls.slice(1, n).map(function(l){ return m === 'letra' ? l : l.toLowerCase(); });
+    inst = m === 'letra' ? 'Encontre a letra igual' : 'Encontre a mesma letra, minúscula'; textoAlvo = true; textoOps = true;
+  } else if (m === 'cor'){
+    var cs = A.embaralhar(Object.keys(CORES));
+    alvo = cs[0]; certa = A.sorteio(CORES[cs[0]]);
+    outras = cs.slice(1, n).map(function(c){ return A.sorteio(CORES[c]); });
+    inst = 'Qual tem a mesma cor? (' + NOME_COR[cs[0]] + ')';
+  } else {
+    var ns = A.embaralhar([1, 2, 3, 4, 5]);
+    var bolas = function(k){ var s = ''; for (var i = 0; i < k; i++) s += '🔵'; return s; };
+    alvo = String(ns[0]); certa = bolas(ns[0]); outras = ns.slice(1, n).map(bolas); inst = 'Encontre a quantidade ' + ns[0]; textoAlvo = true; textoOps = true;
+  }
+  return {alvo: alvo, certa: certa, ops: A.embaralhar([certa].concat(outras)), inst: inst, textoAlvo: textoAlvo, textoOps: textoOps};
+}
+function estrelas(){ var s = ''; for (var i = 0; i < cfg.rodadas; i++) s += i < acertos ? '⭐' : '☆'; $('estrelas').textContent = s; }
+function comecar(){ rodada = 0; acertos = 0; proxima(); }
+function proxima(){
+  if (rodada >= cfg.rodadas){ A.celebrar('Você conseguiu!', '🏆', 2600); setTimeout(comecar, 2800); return; }
+  rodada++; errou = false; travado = false; atual = gerar();
+  estrelas();
+  $('instrucao').textContent = atual.inst;
+  $('alvo').className = atual.textoAlvo ? 'texto' : ''; $('alvo').textContent = atual.alvo;
+  var h = '';
+  for (var i = 0; i < atual.ops.length; i++) h += '<div class="op' + (atual.textoOps || atual.ops[i].length > 6 ? ' texto' : '') + '" data-i="' + i + '">' + A.esc(atual.ops[i]) + '</div>';
+  $('opcoes').innerHTML = h;
+  A.cliques($('opcoes'), '.op', escolher);
+  A.falar(atual.inst);
+}
+function escolher(el){
+  if (travado || el.className.indexOf('some') >= 0) return;
+  var v = atual.ops[+el.getAttribute('data-i')];
+  if (v === atual.certa){
+    travado = true; el.className += ' certa'; if (!errou) acertos++; estrelas();
+    A.som('ok'); A.falar(A.sorteio(['Isso!', 'Muito bem!', 'Certo!']));
+    setTimeout(proxima, 1300);
+  } else {
+    errou = true;
+    if (cfg.semErro){
+      el.className += ' some';
+      A.cada($('opcoes').querySelectorAll('.op'), function(x){ if (atual.ops[+x.getAttribute('data-i')] === atual.certa) x.className += ' pulsar'; });
+    } else { el.className += ' tremer'; setTimeout(function(){ el.className = el.className.replace(' tremer', ''); }, 450); A.som('erro'); }
+  }
+}
+$('alvo').onclick = function(){ if (atual) A.falar(atual.inst); };
+marcarCfg(); comecar();
+})();
+</script>
+</body>
+</html>

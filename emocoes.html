@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Emoções</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  .abas button.ativo{background:#243049;color:#fff}
+  #rostos{text-align:center}
+  .rosto{display:inline-block;vertical-align:top;width:150px;margin:6px;padding:10px 4px;border-radius:22px;text-align:center;font-weight:bold;font-size:20px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.1)}
+  .rosto span{display:block;font-size:78px;line-height:1.15}
+  .rosto small{display:block;font-size:24px;color:#243049;margin-top:2px}
+  #painelSentir{text-align:center}
+  #sentirGrande{font-size:130px;line-height:1.1}
+  #sentirTexto{font-size:30px;font-weight:bold;margin:4px 0}
+  .tamanho button{font-size:22px}
+  .tamanho button.ativo{outline:4px solid #243049}
+  .ajuda{display:inline-block;vertical-align:top;width:200px;margin:6px;background:#fff;border-radius:18px;padding:10px;font-weight:bold;font-size:17px;box-shadow:0 3px 0 rgba(0,0,0,.08);cursor:pointer}
+  .ajuda span{display:block;font-size:46px}
+  #jSituacao{text-align:center;font-size:110px;line-height:1.1}
+  #jTexto{text-align:center;font-size:30px;font-weight:bold;max-width:860px;margin:6px auto}
+  #jOpcoes{text-align:center}
+  #jMsg{text-align:center;font-size:24px;font-weight:bold;min-height:34px;margin:8px 0}
+  .barraT{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;max-width:760px;margin:6px auto;font-size:22px;font-weight:bold}
+  .barraT .e{font-size:44px;width:60px}
+  .barraT .b{height:30px;border-radius:999px;margin:0 10px;min-width:8px}
+</style>
+</head>
+<body>
+<h1>😊 Emoções</h1>
+<div class="linha abas">
+  <button id="abaSentir">💬 Como estou me sentindo?</button>
+  <button id="abaTurma">👥 Como a turma está hoje?</button>
+  <button id="abaJogo">🎯 Qual é a emoção?</button>
+</div>
+
+<section id="tSentir" class="tela">
+  <div id="rostos"></div>
+  <div id="painelSentir" hidden>
+    <div id="sentirGrande"></div>
+    <div id="sentirTexto"></div>
+    <div class="linha tamanho" id="tamanho"></div>
+    <h2>O que pode me ajudar?</h2>
+    <div id="ajudas" style="text-align:center"></div>
+    <div class="linha"><button id="btnOutro" class="suave">⬅️ Escolher outra emoção</button></div>
+  </div>
+</section>
+
+<section id="tTurma" class="tela">
+  <p class="dica" style="text-align:center">Cada aluno toca no rosto de como está se sentindo. Ninguém vê quem tocou: só a contagem.</p>
+  <div id="rostosTurma" style="text-align:center"></div>
+  <div id="barras"></div>
+  <div class="linha"><button id="btnMostrarBarras" class="azul">📊 Mostrar o resultado</button><button id="btnZerar" class="suave">🔁 Zerar</button></div>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="jSituacao"></div>
+  <div id="jTexto"></div>
+  <div id="jOpcoes"></div>
+  <div id="jMsg"></div>
+  <div class="linha"><button id="btnOuvir" class="suave">🔊 Ouvir</button><button id="btnProxima" class="ok grande" hidden>➡️ Próxima</button></div>
+</section>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var EM = [
+  {id: 'feliz', e: '😀', nome: 'Feliz', cor: '#ffe9a8', ajuda: [['🗣️','Contar para alguém o que aconteceu'],['🎨','Desenhar o que me deixou feliz'],['🤗','Dar um abraço em quem eu gosto']]},
+  {id: 'calmo', e: '😌', nome: 'Calmo', cor: '#cdeedd', ajuda: [['👍','Continuar o que estou fazendo'],['📖','Ler um livro'],['🧩','Fazer uma atividade tranquila']]},
+  {id: 'triste', e: '😢', nome: 'Triste', cor: '#cfe0ff', ajuda: [['🗣️','Conversar com a professora'],['🤗','Pedir um abraço'],['🧸','Segurar algo de que eu gosto'],['🎵','Ouvir uma música calma']]},
+  {id: 'bravo', e: '😠', nome: 'Bravo', cor: '#ffd0d0', ajuda: [['🌬️','Respirar fundo 5 vezes'],['🔢','Contar até 10 bem devagar'],['⏸️','Pedir uma pausa'],['✊','Apertar uma bolinha']]},
+  {id: 'medo', e: '😨', nome: 'Com medo', cor: '#e4d8ff', ajuda: [['🙋','Ficar perto de um adulto'],['🌬️','Respirar devagar'],['🗣️','Contar do que estou com medo'],['🧸','Segurar algo que me acalma']]},
+  {id: 'nervoso', e: '😰', nome: 'Nervoso', cor: '#ffe3c8', ajuda: [['🎈','Respirar como um balão'],['🎧','Ir para um lugar mais quieto'],['💧','Beber água'],['1️⃣','Fazer uma coisa de cada vez']]},
+  {id: 'cansado', e: '😴', nome: 'Cansado', cor: '#dfe5ec', ajuda: [['😌','Descansar um pouquinho'],['💧','Beber água'],['🤸','Alongar o corpo'],['🗣️','Avisar a professora']]},
+  {id: 'confuso', e: '😕', nome: 'Confuso', cor: '#f3e8cc', ajuda: [['🙋','Levantar a mão e perguntar'],['👀','Olhar o exemplo de novo'],['🧑‍🤝‍🧑','Pedir ajuda a um colega'],['🔁','Tentar de novo com calma']]}
+];
+function porId(id){ for (var i = 0; i < EM.length; i++) if (EM[i].id === id) return EM[i]; return null; }
+function rostos(el, fn){
+  var h = '';
+  for (var i = 0; i < EM.length; i++) h += '<div class="rosto" data-id="' + EM[i].id + '" style="background:' + EM[i].cor + '"><span>' + EM[i].e + '</span>' + A.esc(EM[i].nome) + '<small></small></div>';
+  el.innerHTML = h;
+  A.cliques(el, '.rosto', function(r){ fn(porId(r.getAttribute('data-id')), r); });
+}
+
+// ---------- Como estou me sentindo ----------
+var emAtual = null;
+function abrirSentir(){ $('rostos').style.display = ''; $('painelSentir').hidden = true; rostos($('rostos'), sentir); }
+function sentir(em){
+  emAtual = em; $('rostos').style.display = 'none'; $('painelSentir').hidden = false;
+  $('sentirGrande').textContent = em.e;
+  $('sentirTexto').textContent = 'Estou me sentindo ' + em.nome.toLowerCase() + '.';
+  var tams = [['um pouco', 60], ['mais ou menos', 90], ['muito', 130]], h = '';
+  for (var i = 0; i < tams.length; i++) h += '<button data-t="' + i + '" class="suave"><span style="font-size:' + (tams[i][1] / 2) + 'px">' + em.e + '</span> ' + tams[i][0] + '</button>';
+  $('tamanho').innerHTML = h;
+  A.cliques($('tamanho'), 'button', function(b){
+    var t = +b.getAttribute('data-t');
+    A.cada($('tamanho').querySelectorAll('button'), function(x){ x.className = 'suave' + (x === b ? ' ativo' : ''); });
+    $('sentirGrande').style.fontSize = tams[t][1] + 'px';
+    $('sentirTexto').textContent = 'Estou ' + tams[t][0] + ' ' + em.nome.toLowerCase() + '.';
+    A.falar($('sentirTexto').textContent);
+  });
+  var ha = '';
+  for (var k = 0; k < em.ajuda.length; k++) ha += '<div class="ajuda" data-k="' + k + '"><span>' + em.ajuda[k][0] + '</span>' + A.esc(em.ajuda[k][1]) + '</div>';
+  $('ajudas').innerHTML = ha;
+  A.cliques($('ajudas'), '.ajuda', function(el){ A.falar(em.ajuda[+el.getAttribute('data-k')][1]); });
+  A.falar('Estou me sentindo ' + em.nome.toLowerCase() + '.');
+}
+$('btnOutro').onclick = abrirSentir;
+
+// ---------- Turma ----------
+var contagem = A.ler('emocoes_turma') || {};
+function abrirTurma(){
+  rostos($('rostosTurma'), function(em, el){
+    contagem[em.id] = (contagem[em.id] || 0) + 1; A.guardar('emocoes_turma', contagem);
+    A.som('ok'); el.className = 'rosto tremer'; setTimeout(function(){ el.className = 'rosto'; }, 400);
+  });
+  $('barras').innerHTML = '';
+}
+$('btnMostrarBarras').onclick = function(){
+  var max = 1, i, h = '';
+  for (i = 0; i < EM.length; i++) max = Math.max(max, contagem[EM[i].id] || 0);
+  for (i = 0; i < EM.length; i++){ var n = contagem[EM[i].id] || 0; h += '<div class="barraT"><span class="e">' + EM[i].e + '</span><span class="b" style="width:' + (n / max * 60) + '%;background:' + EM[i].cor + ';border:2px solid rgba(0,0,0,.1)"></span>' + n + '</div>'; }
+  $('barras').innerHTML = h;
+};
+$('btnZerar').onclick = function(){ contagem = {}; A.guardar('emocoes_turma', contagem); $('barras').innerHTML = ''; };
+
+// ---------- Jogo: qual é a emoção? ----------
+var SIT = [['🎁','Ganhei um presente de aniversário.',['feliz']], ['🍦','Meu sorvete caiu no chão.',['triste']], ['✏️','Um colega pegou meu lápis sem pedir.',['bravo']],
+  ['⛈️','Ouvi um trovão muito forte.',['medo']], ['📝','Amanhã tem prova.',['nervoso','medo']], ['🏃','Corri muito no recreio.',['cansado']],
+  ['❓','A professora explicou e eu não entendi.',['confuso']], ['🎶','Estou deitado ouvindo uma música tranquila.',['calmo']], ['🐶','Meu cachorro está doente.',['triste','medo']],
+  ['🏆','Meu time ganhou o jogo.',['feliz']], ['🧱','Derrubaram a torre que eu montei.',['bravo','triste']], ['🎢','Vou andar na montanha-russa pela primeira vez.',['nervoso','medo','feliz']],
+  ['🌙','Fiquei acordado até muito tarde.',['cansado']], ['👋','Um amigo novo me chamou para brincar.',['feliz']], ['🔊','A sala está muito barulhenta.',['nervoso','bravo']],
+  ['🛒','Me perdi da minha mãe no mercado.',['medo']]];
+var fila = [], atual = null, respondida = false;
+function abrirJogo(){ fila = []; proxima(); }
+function proxima(){
+  if (!fila.length){
+    fila = A.embaralhar(SIT.map(function(s){ return {tipo: 'sit', s: s}; })).slice(0, 8)
+      .concat(A.embaralhar(EM).slice(0, 4).map(function(e){ return {tipo: 'rosto', e: e}; }));
+    fila = A.embaralhar(fila);
+  }
+  atual = fila.shift(); respondida = false;
+  $('jMsg').textContent = ''; $('btnProxima').hidden = true;
+  var certas = atual.tipo === 'sit' ? atual.s[2] : [atual.e.id];
+  if (atual.tipo === 'sit'){ $('jSituacao').textContent = atual.s[0]; $('jTexto').textContent = atual.s[1] + ' Como eu me sinto?'; }
+  else { $('jSituacao').textContent = atual.e.e; $('jTexto').textContent = 'Que emoção este rosto mostra?'; }
+  var outras = A.embaralhar(EM.filter(function(e){ return certas.indexOf(e.id) < 0; })).slice(0, 2);
+  var ops = A.embaralhar([porId(certas[0])].concat(outras)), h = '';
+  for (var i = 0; i < ops.length; i++) h += '<div class="rosto" data-id="' + ops[i].id + '" style="background:' + ops[i].cor + '"><span>' + ops[i].e + '</span>' + A.esc(ops[i].nome) + '</div>';
+  $('jOpcoes').innerHTML = h;
+  A.cliques($('jOpcoes'), '.rosto', function(el){ responder(el.getAttribute('data-id'), certas, el); });
+  falarAtual();
+}
+function falarAtual(){ A.falar($('jTexto').textContent); }
+function responder(id, certas, el){
+  if (respondida) return;
+  respondida = true;
+  if (certas.indexOf(id) >= 0){
+    el.style.outline = '6px solid #27ae60';
+    $('jMsg').textContent = '✅ Isso! ' + (atual.tipo === 'sit' ? 'Muita gente se sentiria ' + porId(id).nome.toLowerCase() + '.' : 'É ' + porId(id).nome.toLowerCase() + '.');
+    A.som('ok');
+  } else {
+    var c = porId(certas[0]);
+    $('jMsg').textContent = '💭 ' + (atual.tipo === 'sit' ? 'Cada pessoa sente de um jeito. Muita gente se sentiria ' + c.nome.toLowerCase() + '.' : 'Este rosto mostra: ' + c.nome.toLowerCase() + '.');
+    A.cada($('jOpcoes').querySelectorAll('.rosto'), function(x){ if (x.getAttribute('data-id') === c.id) x.style.outline = '6px solid #f2c94c'; });
+  }
+  A.falar($('jMsg').textContent);
+  $('btnProxima').hidden = false;
+}
+$('btnProxima').onclick = proxima;
+$('btnOuvir').onclick = falarAtual;
+
+function aba(q){
+  $('abaSentir').className = q === 'sentir' ? 'ativo' : ''; $('abaTurma').className = q === 'turma' ? 'ativo' : ''; $('abaJogo').className = q === 'jogo' ? 'ativo' : '';
+  A.mostrarTela(q === 'sentir' ? 'tSentir' : q === 'turma' ? 'tTurma' : 'tJogo');
+  if (q === 'sentir') abrirSentir(); else if (q === 'turma') abrirTurma(); else abrirJogo();
+}
+$('abaSentir').onclick = function(){ aba('sentir'); };
+$('abaTurma').onclick = function(){ aba('turma'); };
+$('abaJogo').onclick = function(){ aba('jogo'); };
+var m = A.param('modo');
+aba(m === 'turma' || m === 'jogo' ? m : 'sentir');
+})();
+</script>
+</body>
+</html>

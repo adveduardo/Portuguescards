@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Jogos de Atenção</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  .abas button.ativo{background:#243049;color:#fff}
+  .opc button.ativo{outline:4px solid #243049}
+  #sPalco{width:300px;height:300px;margin:10px auto;border-radius:40px;background:#fff;box-shadow:0 5px 0 rgba(0,0,0,.08);font-size:200px;line-height:300px;text-align:center;cursor:pointer;-webkit-user-select:none;user-select:none}
+  #sInfo,#qInfo,#dInfo{text-align:center;font-size:24px;font-weight:bold;min-height:32px}
+  #sRegra{text-align:center;font-size:26px;margin:4px 0}
+  #pads{width:340px;margin:10px auto}
+  .pad{display:inline-block;width:150px;height:150px;margin:8px;border-radius:30px;opacity:.55;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15)}
+  .pad.aceso{opacity:1;-webkit-transform:scale(1.06);transform:scale(1.06);box-shadow:0 0 0 6px #fff,0 0 22px rgba(0,0,0,.25)}
+  #grade{margin:10px auto;text-align:center}
+  #grade button{width:86px;height:86px;font-size:52px;padding:0;margin:4px;background:#fff}
+  #grade button.achou{background:#d8f3e2;outline:5px solid #27ae60}
+  @media (max-width:700px){ #sPalco{width:220px;height:220px;font-size:140px;line-height:220px} #grade button{width:62px;height:62px;font-size:38px} }
+</style>
+</head>
+<body>
+<h1>🚦 Jogos de Atenção</h1>
+<div class="linha abas">
+  <button id="abaSinal">🚦 Sinal verde, sinal vermelho</button>
+  <button id="abaSeq">🧠 Siga a sequência</button>
+  <button id="abaDif">🔍 Ache o diferente</button>
+</div>
+
+<section id="tSinal" class="tela">
+  <p id="sRegra">Toque quando aparecer <b>🟢</b>. Quando aparecer <b>🔴</b>, espere!</p>
+  <div class="linha opc" id="sTema"><button data-v="cores" class="ativo">🟢 🔴 Cores</button><button data-v="gato">🐱 Só o gato</button><button data-v="estrela">⭐ Só a estrela</button></div>
+  <div class="linha opc" id="sVel"><button data-v="lento" class="ativo">🐢 Devagar</button><button data-v="medio">🐇 Médio</button><button data-v="rapido">🐆 Rápido</button></div>
+  <div id="sPalco"></div>
+  <div id="sInfo"></div>
+  <div class="linha"><button id="sComecar" class="ok grande">▶️ Começar (1 minuto)</button></div>
+</section>
+
+<section id="tSeq" class="tela">
+  <p style="text-align:center;font-size:24px">Olhe e escute a sequência. Depois toque nas cores na mesma ordem.</p>
+  <div id="pads"></div>
+  <div id="qInfo"></div>
+  <div class="linha"><button id="qComecar" class="ok grande">▶️ Começar</button></div>
+</section>
+
+<section id="tDif" class="tela">
+  <p style="text-align:center;font-size:24px">Uma figura é diferente das outras. Encontre!</p>
+  <div id="grade"></div>
+  <div id="dInfo"></div>
+  <div class="linha"><button id="dComecar" class="ok grande">▶️ Começar</button></div>
+</section>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+function opcoes(id, fn){ A.cada($(id).querySelectorAll('button'), function(b){ b.onclick = function(){ A.cada($(id).querySelectorAll('button'), function(x){ x.className = x === b ? 'ativo' : ''; }); fn(b.getAttribute('data-v')); }; }); }
+
+// ---------- Sinal verde, sinal vermelho (esperar antes de agir) ----------
+var TEMAS = {cores: {vai: ['🟢'], espera: ['🔴'], regra: 'Toque quando aparecer <b>🟢</b>. Quando aparecer <b>🔴</b>, espere!'},
+  gato: {vai: ['🐱'], espera: ['🐶', '🐭', '🐰'], regra: 'Toque só no <b>🐱 gato</b>. Nos outros bichos, espere!'},
+  estrela: {vai: ['⭐'], espera: ['🌙', '☀️', '☁️'], regra: 'Toque só na <b>⭐ estrela</b>. Nas outras figuras, espere!'}};
+var VEL = {lento: [1800, 1500], medio: [1400, 1100], rapido: [1000, 800]};
+var sTema = 'cores', sVel = 'lento', sJogo = null;
+opcoes('sTema', function(v){ sTema = v; $('sRegra').innerHTML = TEMAS[v].regra; });
+opcoes('sVel', function(v){ sVel = v; });
+function sFim(){
+  var j = sJogo; clearTimeout(j.t); sJogo = null; $('sPalco').textContent = '🏁';
+  var msg = 'Você tocou certo ' + j.acertos + ' vezes e esperou certinho ' + j.esperas + ' vezes!';
+  $('sInfo').textContent = '⭐ ' + msg + (j.escapes ? ' (Escapou ' + j.escapes + ': da próxima vez, respire antes de tocar.)' : '');
+  A.celebrar('Muito bem!', '🏁', 2000); A.falar(msg); $('sComecar').disabled = false;
+}
+function sProximo(){
+  var j = sJogo; if (!j) return;
+  if (Date.now() >= j.fim) return sFim();
+  var t = TEMAS[sTema], vai = Math.random() < 0.65;
+  j.atual = {vai: vai, tocou: false};
+  $('sPalco').textContent = A.sorteio(vai ? t.vai : t.espera);
+  $('sPalco').style.background = '#fff';
+  j.t = setTimeout(function(){
+    if (!sJogo) return;
+    if (j.atual.vai && !j.atual.tocou) j.perdidas++;
+    if (!j.atual.vai && !j.atual.tocou) j.esperas++;
+    $('sPalco').textContent = ''; j.atual = null;
+    j.t = setTimeout(sProximo, 350 + Math.random() * 500);
+  }, VEL[sVel][0]);
+}
+$('sPalco').onclick = function(){
+  var j = sJogo; if (!j || !j.atual || j.atual.tocou) return;
+  j.atual.tocou = true;
+  if (j.atual.vai){ j.acertos++; $('sPalco').style.background = '#d8f3e2'; A.tom(880, .1); }
+  else { j.escapes++; $('sPalco').style.background = '#fde2e2'; }
+  $('sInfo').textContent = '✅ ' + j.acertos + '   🤚 ' + j.esperas;
+};
+$('sComecar').onclick = function(){
+  sJogo = {fim: Date.now() + 60000, acertos: 0, esperas: 0, escapes: 0, perdidas: 0, atual: null, t: null};
+  $('sComecar').disabled = true; $('sInfo').textContent = 'Prepare-se…';
+  A.falar('Atenção! Prepare-se.'); setTimeout(sProximo, 1500);
+};
+
+// ---------- Siga a sequência (memória) ----------
+var PADS = [['#e74c3c', 330], ['#2f80ed', 440], ['#27ae60', 550], ['#f2c94c', 660]], seq = [], pos = 0, ouvindo = false, errosNivel = 0;
+(function(){ var h = ''; for (var i = 0; i < 4; i++) h += '<div class="pad" data-i="' + i + '" style="background:' + PADS[i][0] + '"></div>'; $('pads').innerHTML = h; })();
+var pads = $('pads').querySelectorAll('.pad');
+function acender(i, ms){ pads[i].className = 'pad aceso'; A.tom(PADS[i][1], ms / 1000 * .9, .12); setTimeout(function(){ pads[i].className = 'pad'; }, ms); }
+function mostrarSeq(){
+  ouvindo = false; pos = 0; $('qInfo').textContent = '👀 Olhe… (nível ' + seq.length + ')';
+  var k = 0, ms = A.calmo ? 800 : 600;
+  var passo = function(){
+    if (k >= seq.length){ ouvindo = true; $('qInfo').textContent = '👆 Sua vez! (nível ' + seq.length + ')'; return; }
+    acender(seq[k], ms); k++; setTimeout(passo, ms + 250);
+  };
+  setTimeout(passo, 700);
+}
+A.cliques($('pads'), '.pad', function(el){
+  if (!ouvindo) return;
+  var i = +el.getAttribute('data-i'); acender(i, 300);
+  if (i !== seq[pos]){
+    ouvindo = false; errosNivel++;
+    if (errosNivel >= 2){ $('qInfo').textContent = '⭐ Você chegou ao nível ' + seq.length + '!'; A.celebrar('Nível ' + seq.length + '!', '🧠'); A.falar('Muito bem! Você chegou ao nível ' + seq.length + '.'); $('qComecar').disabled = false; return; }
+    $('qInfo').textContent = '🙂 Quase! Vamos ver de novo.'; A.falar('Quase! Vamos ver de novo.'); setTimeout(mostrarSeq, 1200); return;
+  }
+  pos++;
+  if (pos >= seq.length){ ouvindo = false; errosNivel = 0; $('qInfo').textContent = '✅ Isso!'; A.som('ok'); seq.push(Math.floor(Math.random() * 4)); setTimeout(mostrarSeq, 1100); }
+});
+$('qComecar').onclick = function(){ seq = [Math.floor(Math.random() * 4), Math.floor(Math.random() * 4)]; errosNivel = 0; $('qComecar').disabled = true; mostrarSeq(); };
+
+// ---------- Ache o diferente (atenção visual) ----------
+var PARES = [['🍎','🍏'],['🐶','🐱'],['⭐','🌟'],['🚗','🚙'],['😀','😃'],['🌸','🌼'],['🐟','🐠'],['🍓','🍒'],['🔵','🔴'],['🐻','🐼'],['🌙','⭐'],['🍋','🍌'],['🐢','🐊'],['⚽','🏀'],['🎈','🎀']];
+var dRodada = 0, dInicio = 0, dCerto = -1;
+function dNova(){
+  dRodada++;
+  if (dRodada > 10){ var seg = Math.round((Date.now() - dInicio) / 1000); $('grade').innerHTML = ''; $('dInfo').textContent = '🏁 Você achou 10 diferentes em ' + seg + ' segundos!'; A.celebrar('Muito bem!', '🔍'); A.falar('Muito bem! Você achou todos.'); $('dComecar').disabled = false; return; }
+  var lado = dRodada <= 3 ? 3 : dRodada <= 7 ? 4 : 5, n = lado * lado, par = A.sorteio(PARES), troca = Math.random() < .5;
+  var igual = troca ? par[1] : par[0], dif = troca ? par[0] : par[1];
+  dCerto = Math.floor(Math.random() * n);
+  var h = '';
+  for (var i = 0; i < n; i++) h += (i && i % lado === 0 ? '<br>' : '') + '<button data-i="' + i + '">' + (i === dCerto ? dif : igual) + '</button>';
+  $('grade').innerHTML = h;
+  $('dInfo').textContent = 'Rodada ' + dRodada + ' de 10';
+  A.cliques($('grade'), 'button', function(b){
+    if (+b.getAttribute('data-i') === dCerto){ b.className = 'achou'; A.som('ok'); setTimeout(dNova, 700); }
+    else { b.className = 'tremer'; setTimeout(function(){ b.className = ''; }, 400); }
+  });
+}
+$('dComecar').onclick = function(){ dRodada = 0; dInicio = Date.now(); $('dComecar').disabled = true; dNova(); };
+
+function aba(q){
+  if (sJogo){ clearTimeout(sJogo.t); sJogo = null; $('sComecar').disabled = false; }
+  $('abaSinal').className = q === 'sinal' ? 'ativo' : ''; $('abaSeq').className = q === 'sequencia' ? 'ativo' : ''; $('abaDif').className = q === 'diferente' ? 'ativo' : '';
+  A.mostrarTela(q === 'sinal' ? 'tSinal' : q === 'sequencia' ? 'tSeq' : 'tDif');
+}
+$('abaSinal').onclick = function(){ aba('sinal'); };
+$('abaSeq').onclick = function(){ aba('sequencia'); };
+$('abaDif').onclick = function(){ aba('diferente'); };
+var m = A.param('modo');
+aba(m === 'sequencia' || m === 'diferente' ? m : 'sinal');
+})();
+</script>
+</body>
+</html>

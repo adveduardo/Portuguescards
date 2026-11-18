@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Rotina Visual</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  .abas button.ativo{background:#243049;color:#fff}
+  .card{display:inline-block;vertical-align:top;width:120px;margin:5px;padding:8px 4px;background:#fff;border-radius:16px;text-align:center;box-shadow:0 3px 0 rgba(0,0,0,.1);cursor:pointer;font-weight:bold;font-size:15px}
+  .card span{display:block;font-size:46px;line-height:1.2}
+  #biblioteca,#hoje{text-align:center}
+  #hoje .card{position:relative;padding-bottom:36px}
+  #hoje .ctl{position:absolute;left:0;right:0;bottom:4px}
+  #hoje .ctl button{font-size:13px;padding:3px 7px;margin:0 1px;box-shadow:none;background:#eef1f6}
+  .agoraBox{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:flex-end;align-items:flex-end;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:6px 0}
+  .grandeCard{background:#fff;border-radius:28px;padding:14px 24px;margin:8px 14px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.08);min-width:240px}
+  .grandeCard small{display:block;font-size:20px;font-weight:bold;letter-spacing:2px;color:#5b6577}
+  .grandeCard span{display:block;font-size:120px;line-height:1.15}
+  .grandeCard b{display:block;font-size:34px}
+  .grandeCard.agora{border:6px solid #f2c94c}
+  .grandeCard.depois{opacity:.75;-webkit-transform:scale(.85);transform:scale(.85)}
+  .grandeCard.feito{opacity:.45}
+  .grandeCard.feito span:after{content:" ✅";font-size:50px}
+  #faixa{text-align:center;margin-top:8px}
+  #faixa .card{width:96px;font-size:13px;cursor:default}
+  #faixa .card span{font-size:34px}
+  #faixa .card.feito{opacity:.4}
+  #faixa .card.agora{outline:5px solid #f2c94c}
+  #seletor{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:40;overflow:auto;padding:20px 10px}
+  #seletor .cartao{max-width:900px}
+  input.pequeno{width:70px;text-align:center}
+</style>
+</head>
+<body>
+<h1>🗓️ Rotina Visual</h1>
+<div class="linha abas">
+  <button id="abaRotina" class="ativo">🗓️ Rotina do dia</button>
+  <button id="abaPD">1️⃣➡️2️⃣ Primeiro e depois</button>
+</div>
+
+<section id="tRotina" class="tela ativa">
+  <div id="modoMostrar">
+    <div class="agoraBox">
+      <div class="grandeCard agora" id="cAgora"></div>
+      <div class="grandeCard depois" id="cDepois"></div>
+    </div>
+    <div class="linha">
+      <button id="btnVoltarPasso" class="suave">⬅️ Voltar</button>
+      <button id="btnProximo" class="ok grande">✅ Terminei! Próxima</button>
+      <button id="btnEditar" class="suave">✏️ Montar a rotina</button>
+    </div>
+    <div id="faixa"></div>
+  </div>
+  <div id="modoEditar" hidden>
+    <div class="cartao">
+      <h2>Hoje (na ordem)</h2>
+      <div id="hoje"></div>
+      <div class="linha"><button id="btnPronto" class="ok grande">▶️ Mostrar a rotina</button><button id="btnLimpar" class="suave">🗑️ Limpar</button></div>
+    </div>
+    <div class="cartao">
+      <h2>Toque para colocar na rotina</h2>
+      <div id="biblioteca"></div>
+      <div class="linha">
+        <input type="text" id="inEmoji" class="pequeno" placeholder="🙂" maxlength="4">
+        <input type="text" id="inTexto" placeholder="Nome do cartão" maxlength="24">
+        <button id="btnCriar" class="azul">➕ Criar cartão</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tPD" class="tela">
+  <div class="agoraBox">
+    <div class="grandeCard agora" id="pdPrimeiro"></div>
+    <div style="font-size:70px;margin-bottom:60px">➡️</div>
+    <div class="grandeCard" id="pdDepois"></div>
+  </div>
+  <div class="linha">
+    <button id="btnPDFeito" class="ok grande">✅ Terminei o primeiro</button>
+    <button id="btnPDNovo" class="suave">🔁 Recomeçar</button>
+  </div>
+  <p class="dica" style="text-align:center">Toque num cartão para trocar o que vem primeiro e o que vem depois.</p>
+</section>
+
+<div id="seletor" hidden><div class="cartao"><h2 id="seletorTitulo">Escolha</h2><div id="seletorLista" style="text-align:center"></div><div class="linha"><button id="seletorFechar" class="suave">Fechar</button></div></div></div>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var CARTOES = [['🏫','Chegada'],['🗣️','Roda de conversa'],['📖','Leitura'],['✏️','Escrita'],['🔢','Matemática'],['🎨','Arte'],['🎵','Música'],['🤸','Educação física'],
+  ['🍎','Lanche'],['🍽️','Almoço'],['⚽','Recreio'],['🚻','Banheiro'],['🧼','Lavar as mãos'],['💧','Beber água'],['📱','Tablet'],['💻','Computador'],
+  ['📚','Biblioteca'],['👥','Trabalho em grupo'],['🧩','Jogo'],['🧸','Brincar'],['😌','Descanso'],['🧘','Respirar com calma'],['📺','Vídeo'],['📝','Prova'],
+  ['🚶','Fila'],['🌳','Pátio'],['🎒','Arrumar a mochila'],['🚌','Ônibus'],['🏠','Ir para casa'],['👋','Tchau']];
+var extras = A.ler('rotina_extras') || [];
+var dia = A.ler('rotina_dia') || {itens: [['🏫','Chegada'],['🗣️','Roda de conversa'],['📖','Leitura'],['🍎','Lanche'],['⚽','Recreio'],['✏️','Escrita'],['🏠','Ir para casa']], atual: 0};
+var pd = A.ler('rotina_pd') || {primeiro: ['✏️','Escrita'], depois: ['🧸','Brincar'], feito: false};
+function salvar(){ A.guardar('rotina_dia', dia); A.guardar('rotina_pd', pd); A.guardar('rotina_extras', extras); }
+function todos(){ return CARTOES.concat(extras); }
+function cartaoHTML(c, attrs, extra){ return '<div class="card" ' + (attrs || '') + '><span>' + A.esc(c[0]) + '</span>' + A.esc(c[1]) + (extra || '') + '</div>'; }
+
+// ---------- Rotina do dia ----------
+function mostrar(){
+  var n = dia.itens.length;
+  if (!n){ editar(); return; }
+  if (dia.atual > n) dia.atual = n;
+  var a = dia.itens[dia.atual], d = dia.itens[dia.atual + 1];
+  if (dia.atual >= n){
+    $('cAgora').innerHTML = '<small>FIM</small><span>🌟</span><b>Acabou a rotina!</b>'; $('cDepois').style.display = 'none';
+  } else {
+    $('cAgora').innerHTML = '<small>AGORA</small><span>' + A.esc(a[0]) + '</span><b>' + A.esc(a[1]) + '</b>';
+    $('cDepois').style.display = d ? '' : 'none';
+    if (d) $('cDepois').innerHTML = '<small>DEPOIS</small><span>' + A.esc(d[0]) + '</span><b>' + A.esc(d[1]) + '</b>';
+  }
+  var h = '';
+  for (var i = 0; i < n; i++) h += '<div class="card ' + (i < dia.atual ? 'feito' : i === dia.atual ? 'agora' : '') + '"><span>' + A.esc(dia.itens[i][0]) + '</span>' + A.esc(dia.itens[i][1]) + '</div>';
+  $('faixa').innerHTML = h;
+  $('btnProximo').disabled = dia.atual >= n; $('btnVoltarPasso').disabled = dia.atual === 0;
+  $('modoMostrar').hidden = false; $('modoEditar').hidden = true;
+}
+function anunciar(){
+  var a = dia.itens[dia.atual], d = dia.itens[dia.atual + 1];
+  if (!a) A.falar('Acabou a rotina. Muito bem!');
+  else A.falar('Agora: ' + a[1] + '.' + (d ? ' Depois: ' + d[1] + '.' : ''));
+}
+$('btnProximo').onclick = function(){
+  if (dia.atual < dia.itens.length){ dia.atual++; salvar(); mostrar(); A.som('ok'); anunciar(); if (dia.atual >= dia.itens.length) A.celebrar('Rotina completa!', '🌟'); }
+};
+$('btnVoltarPasso').onclick = function(){ if (dia.atual > 0){ dia.atual--; salvar(); mostrar(); anunciar(); } };
+$('cAgora').onclick = anunciar;
+function editar(){
+  var h = '';
+  for (var i = 0; i < dia.itens.length; i++) h += cartaoHTML(dia.itens[i], '', '<div class="ctl"><button data-acao="esq" data-i="' + i + '">◀</button><button data-acao="tirar" data-i="' + i + '">✖</button><button data-acao="dir" data-i="' + i + '">▶</button></div>');
+  $('hoje').innerHTML = h || '<p class="dica">Toque nos cartões abaixo para montar a rotina de hoje.</p>';
+  A.cliques($('hoje'), 'button[data-acao]', function(b){
+    var i = +b.getAttribute('data-i'), ac = b.getAttribute('data-acao'), it = dia.itens;
+    if (ac === 'tirar') it.splice(i, 1);
+    else if (ac === 'esq' && i > 0){ var t = it[i - 1]; it[i - 1] = it[i]; it[i] = t; }
+    else if (ac === 'dir' && i < it.length - 1){ var t2 = it[i + 1]; it[i + 1] = it[i]; it[i] = t2; }
+    salvar(); editar();
+  });
+  var lista = todos(), hb = '';
+  for (var k = 0; k < lista.length; k++) hb += cartaoHTML(lista[k], 'data-k="' + k + '"');
+  $('biblioteca').innerHTML = hb;
+  A.cliques($('biblioteca'), '.card', function(el){ var c = todos()[+el.getAttribute('data-k')]; dia.itens.push([c[0], c[1]]); salvar(); editar(); A.falar(c[1]); });
+  $('modoMostrar').hidden = true; $('modoEditar').hidden = false;
+}
+$('btnEditar').onclick = editar;
+$('btnPronto').onclick = function(){ dia.atual = 0; salvar(); mostrar(); anunciar(); };
+$('btnLimpar').onclick = function(){ if (confirm('Tirar todos os cartões da rotina de hoje?')){ dia.itens = []; dia.atual = 0; salvar(); editar(); } };
+$('btnCriar').onclick = function(){
+  var e = $('inEmoji').value.replace(/^\s+|\s+$/g, '') || '⭐', t = $('inTexto').value.replace(/^\s+|\s+$/g, '');
+  if (!t) return;
+  extras.push([e, t]); dia.itens.push([e, t]); $('inEmoji').value = ''; $('inTexto').value = ''; salvar(); editar();
+};
+
+// ---------- Primeiro e depois ----------
+function mostrarPD(){
+  $('pdPrimeiro').className = 'grandeCard ' + (pd.feito ? 'feito' : 'agora');
+  $('pdDepois').className = 'grandeCard ' + (pd.feito ? 'agora' : '');
+  $('pdPrimeiro').innerHTML = '<small>PRIMEIRO</small><span>' + A.esc(pd.primeiro[0]) + '</span><b>' + A.esc(pd.primeiro[1]) + '</b>';
+  $('pdDepois').innerHTML = '<small>DEPOIS</small><span>' + A.esc(pd.depois[0]) + '</span><b>' + A.esc(pd.depois[1]) + '</b>';
+  $('btnPDFeito').disabled = pd.feito;
+}
+function escolher(titulo, fn){
+  $('seletorTitulo').textContent = titulo;
+  var lista = todos(), h = '';
+  for (var k = 0; k < lista.length; k++) h += cartaoHTML(lista[k], 'data-k="' + k + '"');
+  $('seletorLista').innerHTML = h;
+  A.cliques($('seletorLista'), '.card', function(el){ fn(todos()[+el.getAttribute('data-k')]); $('seletor').hidden = true; });
+  $('seletor').hidden = false;
+}
+$('seletorFechar').onclick = function(){ $('seletor').hidden = true; };
+$('pdPrimeiro').onclick = function(){ escolher('O que vem PRIMEIRO?', function(c){ pd.primeiro = [c[0], c[1]]; pd.feito = false; salvar(); mostrarPD(); falarPD(); }); };
+$('pdDepois').onclick = function(){ escolher('O que vem DEPOIS?', function(c){ pd.depois = [c[0], c[1]]; salvar(); mostrarPD(); falarPD(); }); };
+function falarPD(){ A.falar('Primeiro: ' + pd.primeiro[1] + '. Depois: ' + pd.depois[1] + '.'); }
+$('btnPDFeito').onclick = function(){ pd.feito = true; salvar(); mostrarPD(); A.celebrar('Agora: ' + pd.depois[1] + '!', pd.depois[0]); A.falar('Muito bem! Agora: ' + pd.depois[1] + '.'); };
+$('btnPDNovo').onclick = function(){ pd.feito = false; salvar(); mostrarPD(); falarPD(); };
+
+function aba(qual){
+  $('abaRotina').className = qual === 'rotina' ? 'ativo' : ''; $('abaPD').className = qual === 'pd' ? 'ativo' : '';
+  A.mostrarTela(qual === 'rotina' ? 'tRotina' : 'tPD');
+  if (qual === 'rotina') mostrar(); else mostrarPD();
+}
+$('abaRotina').onclick = function(){ aba('rotina'); };
+$('abaPD').onclick = function(){ aba('pd'); };
+aba(A.param('modo') === 'primeiro' ? 'pd' : 'rotina');
+})();
+</script>
+</body>
+</html>

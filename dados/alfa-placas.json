@@ -1,0 +1,215 @@
+{
+  "titulo": "Placas e avisos do dia a dia",
+  "emoji": "🪧",
+  "instrucao": "O que esta placa quer dizer?",
+  "rodadas": [
+    {
+      "destaque": "PARE",
+      "opcoes": [
+        "O carro deve parar.",
+        "Pode seguir em frente.",
+        "Proibido estacionar.",
+        "Saída de emergência."
+      ],
+      "correta": "O carro deve parar.",
+      "explica": "PARE: o motorista para o carro antes de seguir.",
+      "imagem": "🛑",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "SAÍDA",
+      "opcoes": [
+        "Por onde se entra.",
+        "Onde fica o banheiro.",
+        "Lugar proibido.",
+        "Por onde se sai do lugar."
+      ],
+      "correta": "Por onde se sai do lugar.",
+      "explica": "SAÍDA = por onde a gente sai. ENTRADA = por onde a gente entra.",
+      "imagem": "🚪",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "ENTRADA",
+      "opcoes": [
+        "Lugar fechado.",
+        "Lugar perigoso.",
+        "Por onde se entra no lugar.",
+        "Por onde se sai."
+      ],
+      "correta": "Por onde se entra no lugar.",
+      "explica": "ENTRADA = por onde a gente entra.",
+      "imagem": "🚪",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "EMPURRE",
+      "opcoes": [
+        "Não pode abrir a porta.",
+        "Empurrar a porta para abrir.",
+        "Puxar a porta.",
+        "A porta está quebrada."
+      ],
+      "correta": "Empurrar a porta para abrir.",
+      "explica": "EMPURRE: a porta abre para a frente.",
+      "imagem": "🚪",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "PUXE",
+      "opcoes": [
+        "Puxar a porta para abrir.",
+        "Empurrar a porta.",
+        "Bater na porta.",
+        "A porta está trancada."
+      ],
+      "correta": "Puxar a porta para abrir.",
+      "explica": "PUXE: traga a porta para perto de você.",
+      "imagem": "🚪",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "CUIDADO: PISO MOLHADO",
+      "opcoes": [
+        "O chão foi pintado agora.",
+        "É proibido andar aqui.",
+        "Lugar para lavar as mãos.",
+        "O chão pode estar escorregando."
+      ],
+      "correta": "O chão pode estar escorregando.",
+      "explica": "Piso molhado escorrega: ande devagar.",
+      "imagem": "⚠️",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "PROIBIDO FUMAR",
+      "opcoes": [
+        "Venda de cigarro.",
+        "Cuidado com fogo na cozinha.",
+        "Aqui não se pode fumar.",
+        "Aqui é lugar de fumar."
+      ],
+      "correta": "Aqui não se pode fumar.",
+      "explica": "PROIBIDO = não pode.",
+      "imagem": "🚭",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "FECHADO",
+      "opcoes": [
+        "Atendimento só para idosos.",
+        "O lugar não está atendendo agora.",
+        "O lugar está atendendo.",
+        "O lugar mudou de endereço."
+      ],
+      "correta": "O lugar não está atendendo agora.",
+      "explica": "FECHADO é o contrário de ABERTO.",
+      "imagem": "🔒",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "ABERTO 24 HORAS",
+      "opcoes": [
+        "Funciona dia e noite, sem fechar.",
+        "Abre às 24 horas da noite.",
+        "Fica aberto só 24 dias.",
+        "Fecha ao meio-dia."
+      ],
+      "correta": "Funciona dia e noite, sem fechar.",
+      "explica": "O dia tem 24 horas: o lugar não fecha.",
+      "imagem": "🕐",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "PERIGO: ALTA TENSÃO",
+      "opcoes": [
+        "Lugar para carregar o celular.",
+        "Cuidado com o cachorro.",
+        "Saída de emergência.",
+        "Risco de choque elétrico."
+      ],
+      "correta": "Risco de choque elétrico.",
+      "explica": "Alta tensão = energia elétrica forte, perigosa.",
+      "imagem": "⚡",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "NÃO ESTACIONE",
+      "opcoes": [
+        "Lavagem de carros.",
+        "Venda de carros.",
+        "Não deixe o carro parado aqui.",
+        "Lugar para estacionar."
+      ],
+      "correta": "Não deixe o carro parado aqui.",
+      "explica": "Estacionar = deixar o carro parado.",
+      "imagem": "🚗",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "PRONTO-SOCORRO",
+      "opcoes": [
+        "Ponto de ônibus.",
+        "Atendimento médico de urgência.",
+        "Venda de remédios.",
+        "Escola de enfermagem."
+      ],
+      "correta": "Atendimento médico de urgência.",
+      "explica": "No pronto-socorro a pessoa é atendida logo, em caso de urgência.",
+      "imagem": "🏥",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "FARMÁCIA",
+      "opcoes": [
+        "Lugar onde se compram remédios.",
+        "Lugar onde se compra pão.",
+        "Lugar onde se consulta o médico.",
+        "Lugar onde se compra roupa."
+      ],
+      "correta": "Lugar onde se compram remédios.",
+      "explica": "Na farmácia se compram remédios e produtos de higiene.",
+      "imagem": "💊",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "SILÊNCIO",
+      "opcoes": [
+        "Pode falar alto.",
+        "Lugar de música.",
+        "Cuidado: obras.",
+        "Não faça barulho."
+      ],
+      "correta": "Não faça barulho.",
+      "explica": "Silêncio = sem barulho. Comum em hospitais e bibliotecas.",
+      "imagem": "🤫",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "ATENDIMENTO PREFERENCIAL",
+      "opcoes": [
+        "Atendimento para quem chegar primeiro.",
+        "Fila para pagar mais caro.",
+        "Idosos, gestantes e pessoas com deficiência são atendidos primeiro.",
+        "Só crianças podem entrar."
+      ],
+      "correta": "Idosos, gestantes e pessoas com deficiência são atendidos primeiro.",
+      "explica": "Preferencial = tem preferência, é atendido antes.",
+      "imagem": "👵",
+      "enunciado": "O que esta placa quer dizer?"
+    },
+    {
+      "destaque": "LIXO RECICLÁVEL",
+      "opcoes": [
+        "Proibido jogar lixo.",
+        "Lugar de jogar papel, plástico, metal e vidro.",
+        "Lugar de jogar restos de comida.",
+        "Lixo que vai ser queimado."
+      ],
+      "correta": "Lugar de jogar papel, plástico, metal e vidro.",
+      "explica": "Reciclável = pode virar coisa nova.",
+      "imagem": "♻️",
+      "enunciado": "O que esta placa quer dizer?"
+    }
+  ]
+}

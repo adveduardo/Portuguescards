@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Prancha de Comunicação</title>
+<link rel="stylesheet" href="apoio.css">
+<style>
+  body{padding-top:6px}
+  #faixa{background:#fff;border-radius:20px;min-height:96px;padding:6px 10px;margin:4px 56px 8px 0;box-shadow:0 3px 0 rgba(0,0,0,.08);white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #faixa .pal{display:inline-block;vertical-align:middle;text-align:center;margin:2px 6px;font-weight:bold;font-size:15px}
+  #faixa .pal span{display:block;font-size:44px;line-height:1.1}
+  #faixa .vazia{color:#8a94a6;font-size:18px;line-height:84px;padding-left:8px}
+  .acoesFaixa button{font-size:20px}
+  .abas{white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;text-align:center}
+  .abas button{font-size:17px;padding:10px 12px;margin:3px;border:3px solid transparent}
+  .abas button.ativo{border-color:#243049}
+  #grade{text-align:center;margin-top:4px}
+  .pic{display:inline-block;vertical-align:top;width:23%;max-width:190px;margin:1%;padding:8px 4px 10px;border-radius:20px;text-align:center;font-weight:bold;font-size:19px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.12);border:3px solid rgba(0,0,0,.08)}
+  .pic span{display:block;font-size:60px;line-height:1.15}
+  .pic:active{-webkit-transform:scale(.96);transform:scale(.96)}
+  #novo{display:none}
+  @media (max-width:600px){ .pic{width:31%} .pic span{font-size:46px} }
+</style>
+</head>
+<body>
+<div id="faixa"></div>
+<div class="linha acoesFaixa">
+  <button id="btnFalar" class="ok grande">🔊 Falar</button>
+  <button id="btnApagar" class="suave">⌫</button>
+  <button id="btnLimpar" class="suave">🗑️</button>
+</div>
+<div class="abas" id="abas"></div>
+<div id="grade"></div>
+<div class="linha"><button id="btnNovoMostrar" class="suave">➕ Criar cartão</button></div>
+<div id="novo" class="cartao">
+  <div class="linha">
+    <input type="text" id="inEmoji" placeholder="🙂" maxlength="4" style="width:70px;text-align:center">
+    <input type="text" id="inTexto" placeholder="Palavra" maxlength="22">
+    <button id="btnSalvarNovo" class="ok">💾 Guardar nesta aba</button>
+  </div>
+  <p class="dica">O cartão fica guardado neste aparelho. Para apagar um cartão criado, toque nele e segure por 2 segundos.</p>
+</div>
+
+<script src="apoio.js"></script>
+<script>
+(function(){
+'use strict';
+var A = window.Apoio, $ = A.$;
+var CATS = [
+  {id: 'eu', nome: '🙋 Eu quero', cor: '#d9f2d9', itens: [['🙋','Eu'],['👉','Quero'],['🙅','Não quero'],['🆘','Ajuda'],['➕','Mais'],['✋','Pare'],['✅','Terminei'],['⏸️','Pausa'],['👍','Sim'],['👎','Não'],['❓','Não entendi'],['🔁','De novo']]},
+  {id: 'preciso', nome: '🚻 Preciso', cor: '#ffe5cc', itens: [['🚻','Banheiro'],['💧','Água'],['🍎','Comer'],['🤕','Dor'],['🥶','Frio'],['🥵','Calor'],['😴','Dormir'],['🤒','Estou doente'],['🎧','Silêncio'],['🧥','Casaco'],['👩‍🏫','Professora'],['🏠','Ir para casa']]},
+  {id: 'sinto', nome: '😀 Sinto', cor: '#d6e8ff', itens: [['😀','Feliz'],['😢','Triste'],['😠','Bravo'],['😨','Com medo'],['😰','Nervoso'],['😌','Calmo'],['😴','Cansado'],['😕','Confuso'],['🤩','Animado'],['😖','Incomodado'],['🥰','Amado'],['😐','Entediado']]},
+  {id: 'escola', nome: '✏️ Escola', cor: '#efe0ff', itens: [['✏️','Lápis'],['📒','Caderno'],['📖','Livro'],['🖍️','Lápis de cor'],['✂️','Tesoura'],['🎒','Mochila'],['🔢','Matemática'],['🎨','Pintar'],['📱','Tablet'],['⚽','Recreio'],['🍎','Lanche'],['🧑‍🤝‍🧑','Colega']]},
+  {id: 'brincar', nome: '🧸 Brincar', cor: '#ffe0ef', itens: [['⚽','Bola'],['🧱','Blocos'],['🖍️','Desenhar'],['🎵','Música'],['🧩','Quebra-cabeça'],['🚗','Carrinho'],['🧸','Ursinho'],['📺','Vídeo'],['🌳','Parque'],['🏃','Correr'],['📚','História'],['🎲','Jogo']]},
+  {id: 'pessoas', nome: '👪 Pessoas', cor: '#fff6c2', itens: [['👩','Mamãe'],['👨','Papai'],['👵','Vovó'],['👴','Vovô'],['👦','Irmão'],['👧','Irmã'],['👩‍🏫','Professora'],['👨‍🏫','Professor'],['🧑‍🤝‍🧑','Amigo'],['🙋','Eu'],['🧑','Você'],['👪','Família']]}
+];
+var extras = A.ler('prancha_extras') || {};
+var cat = CATS[0], frase = [];
+
+function desenharAbas(){
+  var h = '';
+  for (var i = 0; i < CATS.length; i++) h += '<button data-i="' + i + '" class="' + (CATS[i] === cat ? 'ativo' : '') + '" style="background:' + CATS[i].cor + '">' + A.esc(CATS[i].nome) + '</button>';
+  $('abas').innerHTML = h;
+  A.cliques($('abas'), 'button', function(b){ cat = CATS[+b.getAttribute('data-i')]; desenharAbas(); desenharGrade(); });
+}
+function itensDa(c){ return c.itens.concat(extras[c.id] || []); }
+function desenharGrade(){
+  var lista = itensDa(cat), h = '';
+  for (var i = 0; i < lista.length; i++) h += '<div class="pic" data-i="' + i + '" style="background:' + cat.cor + '"><span>' + A.esc(lista[i][0]) + '</span>' + A.esc(lista[i][1]) + '</div>';
+  $('grade').innerHTML = h;
+  A.cada($('grade').querySelectorAll('.pic'), function(el){
+    var timer = null, i = +el.getAttribute('data-i'), criado = i >= cat.itens.length;
+    el.onclick = function(){ var it = itensDa(cat)[i]; frase.push(it); desenharFaixa(); A.falar(it[1].toLowerCase()); };
+    if (criado){
+      var ini = function(){ timer = setTimeout(function(){ if (confirm('Apagar o cartão "' + itensDa(cat)[i][1] + '"?')){ extras[cat.id].splice(i - cat.itens.length, 1); A.guardar('prancha_extras', extras); desenharGrade(); } }, 2000); };
+      var fim = function(){ clearTimeout(timer); };
+      el.addEventListener('touchstart', ini, false); el.addEventListener('touchend', fim, false);
+      el.addEventListener('mousedown', ini, false); el.addEventListener('mouseup', fim, false); el.addEventListener('mouseleave', fim, false);
+    }
+  });
+}
+function desenharFaixa(){
+  if (!frase.length){ $('faixa').innerHTML = '<span class="vazia">Toque nas figuras para montar a frase…</span>'; return; }
+  var h = '';
+  for (var i = 0; i < frase.length; i++) h += '<span class="pal"><span>' + A.esc(frase[i][0]) + '</span>' + A.esc(frase[i][1]) + '</span>';
+  $('faixa').innerHTML = h;
+  $('faixa').scrollLeft = 99999;
+}
+$('btnFalar').onclick = function(){
+  if (!frase.length) return;
+  var t = []; for (var i = 0; i < frase.length; i++) t.push(frase[i][1].toLowerCase());
+  A.falar(t.join(' '));
+};
+$('faixa').onclick = function(){ $('btnFalar').onclick(); };
+$('btnApagar').onclick = function(){ frase.pop(); desenharFaixa(); };
+$('btnLimpar').onclick = function(){ frase = []; desenharFaixa(); };
+$('btnNovoMostrar').onclick = function(){ var n = $('novo'); n.style.display = n.style.display === 'block' ? 'none' : 'block'; };
+$('btnSalvarNovo').onclick = function(){
+  var e = $('inEmoji').value.replace(/^\s+|\s+$/g, '') || '⭐', t = $('inTexto').value.replace(/^\s+|\s+$/g, '');
+  if (!t) return;
+  (extras[cat.id] = extras[cat.id] || []).push([e, t]); A.guardar('prancha_extras', extras);
+  $('inEmoji').value = ''; $('inTexto').value = ''; desenharGrade(); A.falar(t);
+};
+desenharAbas(); desenharGrade(); desenharFaixa();
+})();
+</script>
+</body>
+</html>

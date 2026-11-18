@@ -1,0 +1,199 @@
+{
+  "titulo": "Leia a frase e escolha a figura",
+  "emoji": "🖼️",
+  "instrucao": "Leia a frase e escolha a figura",
+  "rodadas": [
+    {
+      "destaque": "O GATO ESTÁ NA CAIXA.",
+      "opcoes": [
+        "🐱📦",
+        "🐶📦",
+        "🐱🛏️",
+        "🐭📦"
+      ],
+      "correta": "🐱📦",
+      "explica": "Gato 🐱 + caixa 📦.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "A MENINA COME MAÇÃ.",
+      "opcoes": [
+        "👦🍎",
+        "👧🍌",
+        "👵🍎",
+        "👧🍎"
+      ],
+      "correta": "👧🍎",
+      "explica": "Menina 👧 + maçã 🍎.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O MENINO JOGA BOLA.",
+      "opcoes": [
+        "👦🎈",
+        "👦📚",
+        "👦⚽",
+        "👧⚽"
+      ],
+      "correta": "👦⚽",
+      "explica": "Menino 👦 + bola ⚽.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "CHOVE NA CIDADE.",
+      "opcoes": [
+        "❄️🏙️",
+        "🌧️🏙️",
+        "☀️🏙️",
+        "🌧️🏝️"
+      ],
+      "correta": "🌧️🏙️",
+      "explica": "Chuva 🌧️ + cidade 🏙️.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O CACHORRO DORME.",
+      "opcoes": [
+        "🐶💤",
+        "🐱💤",
+        "🐶🍖",
+        "🐶⚽"
+      ],
+      "correta": "🐶💤",
+      "explica": "Cachorro 🐶 + dormir 💤.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "A VACA BEBE ÁGUA.",
+      "opcoes": [
+        "🐄🌾",
+        "🐖💧",
+        "🐑💧",
+        "🐄💧"
+      ],
+      "correta": "🐄💧",
+      "explica": "Vaca 🐄 + água 💧.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O PEIXE NADA NO MAR.",
+      "opcoes": [
+        "🐟🏜️",
+        "🐦🌊",
+        "🐟🌊",
+        "🐢🌊"
+      ],
+      "correta": "🐟🌊",
+      "explica": "Peixe 🐟 + mar 🌊.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "TRÊS BOLAS.",
+      "opcoes": [
+        "🎈🎈🎈",
+        "⚽⚽⚽",
+        "⚽⚽",
+        "⚽⚽⚽⚽"
+      ],
+      "correta": "⚽⚽⚽",
+      "explica": "Três = 3 bolas.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "DUAS FLORES.",
+      "opcoes": [
+        "🌸🌸",
+        "🌸",
+        "🌸🌸🌸",
+        "🍃🍃"
+      ],
+      "correta": "🌸🌸",
+      "explica": "Duas = 2 flores.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O MACACO COME BANANA.",
+      "opcoes": [
+        "🐒🍎",
+        "🐘🍌",
+        "🐻🍌",
+        "🐒🍌"
+      ],
+      "correta": "🐒🍌",
+      "explica": "Macaco 🐒 + banana 🍌.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "A LUA E AS ESTRELAS.",
+      "opcoes": [
+        "🌙☁️",
+        "☀️☁️",
+        "🌙⭐",
+        "☀️⭐"
+      ],
+      "correta": "🌙⭐",
+      "explica": "Lua 🌙 + estrelas ⭐.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O ÔNIBUS CHEGOU NO PONTO.",
+      "opcoes": [
+        "🚲🚏",
+        "🚌🚏",
+        "🚗🚏",
+        "🚌🏠"
+      ],
+      "correta": "🚌🚏",
+      "explica": "Ônibus 🚌 + ponto 🚏.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O PEDREIRO TRABALHA NA OBRA.",
+      "opcoes": [
+        "👷🧱",
+        "👨‍🍳🍲",
+        "👨‍🌾🌽",
+        "👮🚓"
+      ],
+      "correta": "👷🧱",
+      "explica": "Pedreiro 👷 + obra 🧱.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "A COZINHEIRA FAZ A COMIDA.",
+      "opcoes": [
+        "👩‍🌾🌽",
+        "👩‍🏫📚",
+        "👩‍⚕️💉",
+        "👩‍🍳🍲"
+      ],
+      "correta": "👩‍🍳🍲",
+      "explica": "Cozinheira 👩‍🍳 + comida 🍲.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O CARRO VERMELHO.",
+      "opcoes": [
+        "🚕",
+        "🚓",
+        "🚗",
+        "🚙"
+      ],
+      "correta": "🚗",
+      "explica": "O carro vermelho é 🚗. 🚕 é amarelo e 🚙 é azul.",
+      "enunciado": "Leia a frase e escolha a figura"
+    },
+    {
+      "destaque": "O PÁSSARO VOA NO CÉU.",
+      "opcoes": [
+        "🐦🌳",
+        "🐦☁️",
+        "🐟🌊",
+        "🐔🌾"
+      ],
+      "correta": "🐦☁️",
+      "explica": "Pássaro 🐦 + céu ☁️.",
+      "enunciado": "Leia a frase e escolha a figura"
+    }
+  ]
+}
