@@ -1,0 +1,394 @@
+{
+  "titulo": "Classes de palavras (modelo)",
+  "classes": [
+    "substantivo",
+    "adjetivo",
+    "verbo",
+    "artigo",
+    "pronome",
+    "numeral",
+    "adverbio"
+  ],
+  "palavras": [
+    {
+      "palavra": "mesa",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "escola",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "cachorro",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "menina",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "cidade",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "livro",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "sapato",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "amizade",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "alegria",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "janela",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "árvore",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "professor",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "Brasil",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "chuva",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "bicicleta",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "saudade",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "praia",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "família",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "girafa",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "caderno",
+      "classe": "substantivo"
+    },
+    {
+      "palavra": "bonito",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "feio",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "grande",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "pequeno",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "feliz",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "triste",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "inteligente",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "gelado",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "quente",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "macio",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "cheiroso",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "corajoso",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "gostoso",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "educado",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "curioso",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "preguiçoso",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "barulhento",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "brilhante",
+      "classe": "adjetivo"
+    },
+    {
+      "palavra": "correr",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "pular",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "cantar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "brincar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "comer",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "dormir",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "estudar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "escrever",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "nadar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "sorrir",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "ler",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "desenhar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "viajar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "chover",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "pensar",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "beber",
+      "classe": "verbo"
+    },
+    {
+      "palavra": "o",
+      "classe": "artigo"
+    },
+    {
+      "palavra": "os",
+      "classe": "artigo"
+    },
+    {
+      "palavra": "as",
+      "classe": "artigo"
+    },
+    {
+      "palavra": "uns",
+      "classe": "artigo"
+    },
+    {
+      "palavra": "umas",
+      "classe": "artigo"
+    },
+    {
+      "palavra": "eu",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "ele",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "ela",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "nós",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "eles",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "elas",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "você",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "meu",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "minha",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "nosso",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "este",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "aquele",
+      "classe": "pronome"
+    },
+    {
+      "palavra": "dois",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "três",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "dez",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "cem",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "mil",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "vinte",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "primeiro",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "segundo",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "dobro",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "metade",
+      "classe": "numeral"
+    },
+    {
+      "palavra": "ontem",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "hoje",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "amanhã",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "aqui",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "lá",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "sempre",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "nunca",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "devagar",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "depressa",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "talvez",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "cedo",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "longe",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "perto",
+      "classe": "adverbio"
+    },
+    {
+      "palavra": "sim",
+      "classe": "adverbio"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cestos das Classes</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  body{overflow:hidden}
+  #tJogo.ativa{display:flex;flex-direction:column;height:calc(100vh - 40px);max-width:none}
+  .topoJogo{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  #relogio{font-family:"Courier New",monospace;font-size:2.2rem;font-weight:bold;background:#fff;border-radius:14px;padding:2px 16px;box-shadow:0 3px 0 #0001}
+  #placarRodada{font-size:1.4rem;font-weight:bold;background:#fff;border-radius:14px;padding:6px 14px;box-shadow:0 3px 0 #0001}
+  #ceu{flex:1;position:relative;min-height:200px}
+  #ficha{position:absolute;left:50%;top:0;transform:translateX(-50%);background:#fff;border-radius:22px;padding:12px 30px;font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;
+    box-shadow:0 10px 24px #0003;cursor:grab;touch-action:none;user-select:none;white-space:nowrap;border:5px solid var(--texto)}
+  #ficha.arrastando{cursor:grabbing;transition:none !important;z-index:10}
+  #ficha.certa{border-color:var(--verde);background:#e3f8ea}
+  #ficha.errada{border-color:var(--vermelho);background:#ffe3e3}
+  #cestos{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding-bottom:6px}
+  .cesto{flex:1;min-width:150px;max-width:260px;border-radius:24px 24px 40px 40px;color:#fff;text-align:center;padding:14px 10px 18px;font-size:clamp(1.2rem,2.6vw,1.7rem);font-weight:bold;
+    box-shadow:0 8px 0 #0002;cursor:pointer;border:5px solid transparent;transition:transform .15s}
+  .cesto .e{font-size:2.6rem;display:block}
+  .cesto small{display:block;font-size:.95rem;font-weight:bold;opacity:.9}
+  .cesto.alvo{transform:scale(1.07);border-color:#fff}
+  .cesto.pisca{animation:pisca .5s 2}
+  @keyframes pisca{50%{box-shadow:0 0 0 10px #fff,0 0 30px #fff}}
+  #avisoVez{position:fixed;inset:0;background:#0008;display:flex;align-items:center;justify-content:center;z-index:20}
+  #avisoVez .caixa{background:#fff;border-radius:28px;padding:26px 40px;text-align:center;box-shadow:0 20px 60px #0006}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🧺 Cestos das Classes</h1>
+  <div class="cartao">
+    <h2>1. Palavras (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <p><b>Cestos (classes) que entram no jogo:</b></p><div id="escolhaClasses"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Regras</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0">A turma toda junta</option><option value="2" selected>2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Tempo de cada rodada: <select id="selTempo"><option value="45">45 s</option><option value="60" selected>1 min</option><option value="90">1 min e 30 s</option></select></label>
+    <label>Velocidade da queda: <select id="selVel"><option value="9">🐢 devagar</option><option value="6" selected>🙂 média</option><option value="4">🐇 rápida</option></select></label>
+    <label>Rodadas por equipe: <select id="selRodadas"><option value="1" selected>1</option><option value="2">2</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Arraste a palavra até o cesto certo (ou toque no cesto). Acertou = +1. Errou ou deixou cair no chão = 0.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="topoJogo">
+    <div class="barraEquipes" id="barraEquipes" style="margin:0"></div>
+    <div id="placarRodada">✅ 0</div>
+    <div id="relogio">1:00</div>
+  </div>
+  <div id="ceu"><div id="ficha" hidden></div></div>
+  <div id="cestos"></div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<div id="avisoVez" hidden><div class="caixa"><h1 id="tituloVez"></h1><p id="subVez" style="font-size:1.2rem"></p><button id="btnIniciarVez" class="principal">▶️ Começar</button></div></div>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo, C = M.CLASSES;
+let palavras = null, ativas = [], placar = null, fila = [], atual = null, rodadasRestantes = 0, acertosRodada = 0;
+let timer = null, fimEm = 0, quedaTimer = null, ocupado = false, jogando = false;
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.palavras)) return AV.avisar('JSON inválido: falta a lista "palavras" com "classe".');
+  palavras = d.palavras.map(p => ({palavra: String(p.palavra || ''), classe: M.codigo(p.classe)})).filter(p => p.palavra && p.classe);
+  const presentes = [...new Set(palavras.map(p => p.classe))];
+  M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  $('infoJson').textContent = `${d.titulo || 'Palavras'} • ${palavras.length} palavras` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-cestos', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-classes.json', 'modelo-classes-de-palavras.json');
+
+function comecar(){
+  if (!palavras) return AV.avisar('Carregue um JSON de palavras.');
+  ativas = M.classesMarcadas($('escolhaClasses'));
+  if (ativas.length < 2) return AV.avisar('Escolha pelo menos 2 cestos.');
+  if (!palavras.some(p => ativas.includes(p.classe))) return AV.avisar('Não há palavras dessas classes.');
+  AV.som = $('chkSom').checked;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  rodadasRestantes = Math.max(1, placar.equipes.length) * +$('selRodadas').value;
+  $('cestos').innerHTML = ativas.map(c => `<div class="cesto" data-c="${c}" style="background:${C[c].cor}"><span class="e">🧺</span>${C[c].nome}<small>${C[c].emoji}</small></div>`).join('');
+  $('cestos').querySelectorAll('.cesto').forEach(el => el.onclick = () => { if (atual && !ocupado && !arr) soltarEm(el.dataset.c); });
+  AV.mostrarTela('tJogo');
+  anunciarVez();
+}
+function anunciarVez(){
+  $('tituloVez').textContent = placar.equipes.length ? `Vez de ${placar.equipes[placar.vez].emoji} ${placar.equipes[placar.vez].nome}` : 'Prontos?';
+  $('subVez').textContent = `Vocês têm ${$('selTempo').value} segundos. Coloquem cada palavra no cesto certo!`;
+  $('avisoVez').hidden = false;
+}
+function iniciarRodada(){
+  $('avisoVez').hidden = true;
+  acertosRodada = 0; $('placarRodada').textContent = '✅ 0';
+  fila = M.embaralhar(palavras.filter(p => ativas.includes(p.classe)));
+  jogando = true;
+  fimEm = Date.now() + (+$('selTempo').value) * 1000;
+  clearInterval(timer);
+  const tique = () => {
+    const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
+    $('relogio').textContent = AV.mmss(s); $('relogio').style.color = s <= 10 ? 'var(--vermelho)' : '';
+    if (s <= 5 && s > 0) AV.tique();
+    if (!s) fimRodada();
+  };
+  tique(); timer = setInterval(tique, 1000);
+  novaFicha();
+}
+function novaFicha(){
+  if (!jogando) return;
+  if (!fila.length) fila = M.embaralhar(palavras.filter(p => ativas.includes(p.classe)));
+  atual = fila.pop(); ocupado = false;
+  const f = $('ficha'), ceu = $('ceu');
+  f.className = ''; f.textContent = atual.palavra; f.hidden = false;
+  f.style.transition = 'none'; f.style.left = '50%'; f.style.top = '0px'; f.style.transform = 'translateX(-50%)';
+  void f.offsetWidth;
+  const dur = +$('selVel').value;
+  f.style.transition = `top ${dur}s linear`;
+  f.style.top = (ceu.clientHeight - f.offsetHeight) + 'px';
+  clearTimeout(quedaTimer);
+  quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr) caiu(); }, dur * 1000);
+}
+function caiu(){
+  ocupado = true;
+  const f = $('ficha'); f.classList.add('errada');
+  piscarCesto(atual.classe);
+  AV.erro();
+  setTimeout(novaFicha, 900);
+}
+function piscarCesto(c){ const el = $('cestos').querySelector(`[data-c="${c}"]`); if (el){ el.classList.remove('pisca'); void el.offsetWidth; el.classList.add('pisca'); } }
+function soltarEm(c){
+  if (!atual || ocupado) return;
+  ocupado = true; clearTimeout(quedaTimer);
+  const f = $('ficha');
+  const topo = getComputedStyle(f).top; f.style.transition = 'none'; f.style.top = topo;
+  if (c === atual.classe){
+    f.classList.add('certa'); acertosRodada++; placar.pontuar(1); $('placarRodada').textContent = '✅ ' + acertosRodada;
+    AV.tom(880, .1, 'triangle', .15); AV.tom(1175, .12, 'triangle', .15, .08);
+    setTimeout(novaFicha, 450);
+  } else {
+    f.classList.add('errada'); piscarCesto(atual.classe); AV.erro();
+    setTimeout(novaFicha, 1100);
+  }
+}
+function fimRodada(){
+  jogando = false; clearInterval(timer); clearTimeout(quedaTimer);
+  $('ficha').hidden = true; atual = null;
+  AV.sirene();
+  rodadasRestantes--;
+  if (rodadasRestantes <= 0) return setTimeout(fim, 900);
+  setTimeout(() => { placar.proxima(); anunciarVez(); }, 900);
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete(); }
+
+// ---------- arrastar ----------
+let arr = null;
+$('ficha').addEventListener('pointerdown', e => {
+  if (!atual || ocupado) return;
+  e.preventDefault();
+  const f = $('ficha'), r = f.getBoundingClientRect(), ceu = $('ceu').getBoundingClientRect();
+  f.style.transition = 'none'; f.style.transform = 'none';
+  f.style.left = (r.left - ceu.left) + 'px'; f.style.top = (r.top - ceu.top) + 'px';
+  f.classList.add('arrastando'); clearTimeout(quedaTimer);
+  arr = {dx: e.clientX - r.left, dy: e.clientY - r.top, ceu};
+  f.setPointerCapture(e.pointerId);
+});
+$('ficha').addEventListener('pointermove', e => {
+  if (!arr) return;
+  const f = $('ficha');
+  f.style.left = (e.clientX - arr.dx - arr.ceu.left) + 'px'; f.style.top = (e.clientY - arr.dy - arr.ceu.top) + 'px';
+  const alvo = cestoEm(e.clientX, e.clientY);
+  $('cestos').querySelectorAll('.cesto').forEach(c => c.classList.toggle('alvo', c === alvo));
+});
+$('ficha').addEventListener('pointerup', e => {
+  if (!arr) return;
+  arr = null; $('ficha').classList.remove('arrastando');
+  const alvo = cestoEm(e.clientX, e.clientY);
+  $('cestos').querySelectorAll('.cesto').forEach(c => c.classList.remove('alvo'));
+  if (alvo) soltarEm(alvo.dataset.c);
+  else { // soltou fora: volta a cair de onde está
+    const f = $('ficha'), ceu = $('ceu'), restante = Math.max(.5, (ceu.clientHeight - f.offsetTop - f.offsetHeight) / ceu.clientHeight * +$('selVel').value);
+    f.style.transition = `top ${restante}s linear`; f.style.top = (ceu.clientHeight - f.offsetHeight) + 'px';
+    quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr) caiu(); }, restante * 1000);
+  }
+});
+function cestoEm(x, y){
+  return [...$('cestos').querySelectorAll('.cesto')].find(c => { const r = c.getBoundingClientRect(); return x >= r.left - 10 && x <= r.right + 10 && y >= r.top - 40 && y <= r.bottom; }) || null;
+}
+$('btnComecar').onclick = comecar;
+$('btnIniciarVez').onclick = iniciarRodada;
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

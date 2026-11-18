@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morfologia</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #enunciado{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;margin:8px 0}
+  #cartao{background:#fffdf6;border-radius:30px;padding:16px 26px;margin:8px auto;max-width:1100px;text-align:center;box-shadow:0 8px 0 #0001}
+  #img{font-size:clamp(3rem,8vw,5.5rem);line-height:1.1}
+  #destaque{font-size:clamp(2.2rem,6vw,4.4rem);font-weight:bold;line-height:1.25}
+  #destaque mark{background:#ffe066;border-radius:12px;padding:0 10px;color:var(--texto)}
+  #opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;max-width:1100px;margin:12px auto}
+  #opcoes button{font-size:clamp(1.4rem,3.2vw,2.2rem);padding:18px 14px;border-radius:20px;color:#fff}
+  #opcoes button.ok{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde);transform:scale(1.03)}
+  #opcoes button.nao{opacity:.45;text-decoration:line-through}
+  #opcoes button.apagado{opacity:.3}
+  #explica{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em;margin:6px auto;max-width:1000px}
+  #escolhaClasses{margin-top:6px}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1 id="tituloConfig">📚 Morfologia</h1>
+  <div class="cartao">
+    <h2>1. Conteúdo (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <div id="blocoClasses" hidden><p><b>Classes que entram no jogo:</b></p><div id="escolhaClasses"></div></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes:
+      <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select>
+    </label>
+    <label>Quantas rodadas: <select id="selQtd"><option value="10" selected>10</option><option value="15">15</option><option value="20">20</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkVoz" checked> Ler em voz alta</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="enunciado"></div>
+  <div id="cartao"><div id="img"></div><div id="destaque"></div></div>
+  <div id="opcoes"></div>
+  <div id="explica"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const JOGOS = {
+  classifique: {tipo: 'morfo-classifique', arquivo: 'morfo-classes.json',     titulo: 'Classifique a palavra',   emoji: '🏷️'},
+  plural:      {tipo: 'morfo-plural',      arquivo: 'morfo-plural.json',      titulo: 'Singular e plural',        emoji: '⚖️'},
+  feminino:    {tipo: 'morfo-feminino',    arquivo: 'morfo-feminino.json',    titulo: 'Masculino e feminino',     emoji: '👫'},
+  grau:        {tipo: 'morfo-grau',        arquivo: 'morfo-grau.json',        titulo: 'Diminutivo e aumentativo', emoji: '🔎'},
+  tempos:      {tipo: 'morfo-tempos',      arquivo: 'morfo-tempos.json',      titulo: 'Ontem, hoje, amanhã',      emoji: '🕰️'},
+  conjugacao:  {tipo: 'morfo-conjugacao',  arquivo: 'morfo-conjugacao.json',  titulo: 'Quem faz a ação?',         emoji: '🙋'}
+};
+const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60', '#8e44ad', '#16a085', '#c2185b'];
+const jogo = JOGOS[M.param('jogo')] || JOGOS.classifique;
+document.title = jogo.titulo;
+$('tituloConfig').textContent = `${jogo.emoji} ${jogo.titulo}`;
+
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, respondido = false;
+
+// Aceita dois formatos: "rodadas" (pergunta pronta) ou "palavras" com "classe" (gera as alternativas)
+function normalizar(d){
+  if (!d) return null;
+  if (Array.isArray(d.palavras) && d.palavras.some(p => p && p.classe)){
+    const palavras = d.palavras.map(p => ({palavra: String(p.palavra || ''), classe: M.codigo(p.classe), dica: p.dica || ''})).filter(p => p.palavra && p.classe);
+    return {tipo: 'classes', titulo: d.titulo || jogo.titulo, emoji: d.emoji || jogo.emoji, palavras, classes: [...new Set(palavras.map(p => p.classe))]};
+  }
+  if (!Array.isArray(d.rodadas)) return null;
+  const rodadas = d.rodadas.map(r => {
+    if (!r || !r.destaque || !Array.isArray(r.opcoes)) return null;
+    const opcoes = r.opcoes.slice(0, 6).map(String);
+    const correta = typeof r.correta === 'number' ? opcoes[r.correta] : String(r.correta);
+    if (!opcoes.includes(correta)) return null;
+    return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || ''};
+  }).filter(Boolean);
+  return rodadas.length ? {tipo: 'rodadas', titulo: d.titulo || jogo.titulo, emoji: d.emoji || jogo.emoji, rodadas, ignoradas: d.rodadas.length - rodadas.length} : null;
+}
+function carregar(d, origem){
+  const x = normalizar(d);
+  if (!x) return AV.avisar('JSON inválido para esta atividade. Baixe o modelo para ver o formato.');
+  dados = x;
+  $('blocoClasses').hidden = x.tipo !== 'classes';
+  if (x.tipo === 'classes'){
+    M.montarEscolhaClasses($('escolhaClasses'), x.classes, info);
+  }
+  info(origem);
+}
+function info(origem){
+  if (!dados) return;
+  const qtd = dados.tipo === 'classes' ? dados.palavras.filter(p => M.classesMarcadas($('escolhaClasses')).includes(p.classe)).length : dados.rodadas.length;
+  $('infoJson').textContent = `${dados.titulo} • ${qtd} rodadas disponíveis` + (dados.ignoradas ? ` • ⚠️ ${dados.ignoradas} ignorada(s) por erro no JSON` : '') + (typeof origem === 'string' ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: jogo.tipo, select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/' + jogo.arquivo, 'modelo-' + jogo.arquivo);
+
+function gerarRodadas(){
+  if (dados.tipo === 'rodadas') return dados.rodadas.slice();
+  const ativas = M.classesMarcadas($('escolhaClasses'));
+  if (ativas.length < 2){ AV.avisar('Escolha pelo menos 2 classes.'); return null; }
+  return dados.palavras.filter(p => ativas.includes(p.classe)).map(p => ({
+    enunciado: 'Que classe de palavra é esta?', destaque: p.palavra, imagem: '',
+    opcoes: ativas.map(c => M.CLASSES[c].nome), correta: M.CLASSES[p.classe].nome,
+    explica: `${M.CLASSES[p.classe].nome}: ${M.CLASSES[p.classe].def}` + (p.dica ? ' ' + p.dica : ''), classes: true
+  }));
+}
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  const todas = gerarRodadas(); if (!todas) return;
+  if (!todas.length) return AV.avisar('Não há rodadas com essas opções.');
+  AV.som = $('chkSom').checked;
+  const q = +$('selQtd').value;
+  fila = M.embaralhar(todas); if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+const marcar = t => AV.esc(t).replace(/\[(.+?)\]/g, '<mark>$1</mark>');
+const semMarcas = t => String(t).replace(/[\[\]]/g, '').replace(/_{2,}/g, '...');
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; respondido = false;
+  $('contador').textContent = `${n} de ${total}`;
+  $('enunciado').textContent = placar.prefixo() + atual.enunciado;
+  $('img').textContent = atual.imagem; $('img').hidden = !atual.imagem;
+  $('destaque').innerHTML = marcar(atual.destaque);
+  const ops = atual.classes ? atual.opcoes : M.embaralhar(atual.opcoes);
+  $('opcoes').innerHTML = ops.map((o, i) => {
+    const cl = atual.classes ? Object.values(M.CLASSES).find(c => c.nome === o) : null;
+    return `<button data-o="${AV.esc(o)}" style="background:${cl ? cl.cor : CORES[i % CORES.length]}">${cl ? cl.emoji + ' ' : ''}${AV.esc(o)}</button>`;
+  }).join('');
+  $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+  $('explica').textContent = ''; $('btnProxima').hidden = true;
+  if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+}
+function responder(b){
+  if (respondido) return;
+  respondido = true;
+  const certo = b.dataset.o === atual.correta;
+  $('opcoes').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.o === atual.correta ? 'ok' : x === b ? 'nao' : 'apagado'));
+  if (certo){ placar.pontuar(1); AV.fanfarra(); AV.confete(); }
+  else AV.erro();
+  $('explica').textContent = (certo ? '✅ Isso! ' : `❌ A resposta certa é: ${atual.correta}. `) + atual.explica;
+  if (!atual.classes && /_{2,}/.test(atual.destaque)) $('destaque').innerHTML = AV.esc(atual.destaque).replace(/_{2,}/, `<mark>${AV.esc(atual.correta)}</mark>`).replace(/\s*\([^)]*\)/, '');
+  if ($('chkVoz').checked) AV.falar((certo ? 'Isso! ' : 'A resposta certa é ' + atual.correta + '. ') + atual.explica);
+  $('btnProxima').hidden = false;
+  $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+}
+function fim(){
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  AV.mostrarTela('tFim');
+  $('tituloFim').textContent = `🏆 ${jogo.titulo}: resultado`;
+  placar.ranking($('ranking'), total);
+  AV.fanfarra(); AV.confete();
+}
+$('btnComecar').onclick = comecar;
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnOuvir').onclick = () => atual && AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || ['INPUT', 'SELECT'].includes(e.target.tagName)) return;
+  const k = parseInt(e.key, 10); const bs = $('opcoes').querySelectorAll('button');
+  if (k >= 1 && k <= bs.length) responder(bs[k - 1]);
+  if (e.key === 'Enter' && respondido) $('btnProxima').click();
+});
+</script>
+</body>
+</html>

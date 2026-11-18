@@ -1,0 +1,227 @@
+{
+  "titulo": "Quem faz a ação?",
+  "emoji": "🙋",
+  "instrucao": "Complete com o verbo certo",
+  "rodadas": [
+    {
+      "destaque": "Eu ___ (cantar) muito bem.",
+      "opcoes": [
+        "canto",
+        "canta",
+        "cantamos"
+      ],
+      "correta": "canto",
+      "explica": "Com EU, o verbo fica assim: canto.",
+      "imagem": "🎤"
+    },
+    {
+      "destaque": "Nós ___ (brincar) no parque.",
+      "opcoes": [
+        "brinco",
+        "brincamos",
+        "brincam"
+      ],
+      "correta": "brincamos",
+      "explica": "Com NÓS, o verbo fica assim: brincamos.",
+      "imagem": "🛝"
+    },
+    {
+      "destaque": "Eles ___ (correr) rápido.",
+      "opcoes": [
+        "corre",
+        "correm",
+        "corremos"
+      ],
+      "correta": "correm",
+      "explica": "Com ELES, o verbo fica assim: correm.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Ela ___ (dançar) balé.",
+      "opcoes": [
+        "danço",
+        "dança",
+        "dançam"
+      ],
+      "correta": "dança",
+      "explica": "Com ELA, o verbo fica assim: dança.",
+      "imagem": "🩰"
+    },
+    {
+      "destaque": "Você ___ (falar) alto.",
+      "opcoes": [
+        "falo",
+        "fala",
+        "falamos"
+      ],
+      "correta": "fala",
+      "explica": "Com VOCÊ, o verbo fica assim: fala.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Vocês ___ (estudar) juntos.",
+      "opcoes": [
+        "estuda",
+        "estudam",
+        "estudamos"
+      ],
+      "correta": "estudam",
+      "explica": "Com VOCÊS, o verbo fica assim: estudam.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Eu ___ (beber) água.",
+      "opcoes": [
+        "bebo",
+        "bebe",
+        "bebem"
+      ],
+      "correta": "bebo",
+      "explica": "Com EU, o verbo fica assim: bebo.",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "O menino ___ (pular) corda.",
+      "opcoes": [
+        "pulo",
+        "pula",
+        "pulam"
+      ],
+      "correta": "pula",
+      "explica": "Com O MENINO (ele), o verbo fica assim: pula.",
+      "imagem": "🪢"
+    },
+    {
+      "destaque": "As meninas ___ (desenhar) flores.",
+      "opcoes": [
+        "desenha",
+        "desenhamos",
+        "desenham"
+      ],
+      "correta": "desenham",
+      "explica": "Com AS MENINAS (elas), o verbo fica assim: desenham.",
+      "imagem": "🌸"
+    },
+    {
+      "destaque": "Nós ___ (ler) gibis.",
+      "opcoes": [
+        "leio",
+        "lemos",
+        "leem"
+      ],
+      "correta": "lemos",
+      "explica": "Com NÓS, o verbo fica assim: lemos.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "Eu ___ (escrever) uma carta.",
+      "opcoes": [
+        "escrevo",
+        "escreve",
+        "escrevem"
+      ],
+      "correta": "escrevo",
+      "explica": "Com EU, o verbo fica assim: escrevo.",
+      "imagem": "✉️"
+    },
+    {
+      "destaque": "Os pássaros ___ (voar) alto.",
+      "opcoes": [
+        "voa",
+        "voamos",
+        "voam"
+      ],
+      "correta": "voam",
+      "explica": "Com OS PÁSSAROS (eles), o verbo fica assim: voam.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "A gente ___ (gostar) de festa.",
+      "opcoes": [
+        "gosta",
+        "gostamos",
+        "gostam"
+      ],
+      "correta": "gosta",
+      "explica": "Com A GENTE (igual a ele/ela), o verbo fica assim: gosta.",
+      "imagem": "🎈"
+    },
+    {
+      "destaque": "Eu ___ (ir) à escola.",
+      "opcoes": [
+        "vou",
+        "vai",
+        "vamos"
+      ],
+      "correta": "vou",
+      "explica": "Com EU, o verbo fica assim: vou.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Nós ___ (ser) amigos.",
+      "opcoes": [
+        "sou",
+        "somos",
+        "são"
+      ],
+      "correta": "somos",
+      "explica": "Com NÓS, o verbo fica assim: somos.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Eles ___ (estar) felizes.",
+      "opcoes": [
+        "está",
+        "estou",
+        "estão"
+      ],
+      "correta": "estão",
+      "explica": "Com ELES, o verbo fica assim: estão.",
+      "imagem": "😄"
+    },
+    {
+      "destaque": "Eu ___ (ter) um cachorro.",
+      "opcoes": [
+        "tenho",
+        "tem",
+        "temos"
+      ],
+      "correta": "tenho",
+      "explica": "Com EU, o verbo fica assim: tenho.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "Ela ___ (fazer) bolo.",
+      "opcoes": [
+        "faço",
+        "faz",
+        "fazem"
+      ],
+      "correta": "faz",
+      "explica": "Com ELA, o verbo fica assim: faz.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "Nós ___ (partir) amanhã.",
+      "opcoes": [
+        "parto",
+        "partimos",
+        "partem"
+      ],
+      "correta": "partimos",
+      "explica": "Com NÓS, o verbo fica assim: partimos.",
+      "imagem": "🧳"
+    },
+    {
+      "destaque": "Eu ___ (abrir) a janela.",
+      "opcoes": [
+        "abro",
+        "abre",
+        "abrimos"
+      ],
+      "correta": "abro",
+      "explica": "Com EU, o verbo fica assim: abro.",
+      "imagem": "🪟"
+    }
+  ]
+}

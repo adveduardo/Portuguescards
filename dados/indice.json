@@ -3,24 +3,40 @@
     {
       "arquivo": "quiz-padrao.json",
       "titulo": "Quiz de Português (modelo)"
+    },
+    {
+      "arquivo": "quiz-morfologia.json",
+      "titulo": "Quiz de morfologia"
     }
   ],
   "stop": [
     {
       "arquivo": "stop-padrao.json",
       "titulo": "Stop clássico (modelo)"
+    },
+    {
+      "arquivo": "stop-morfologia.json",
+      "titulo": "Stop da morfologia"
     }
   ],
   "batata": [
     {
       "arquivo": "batata-padrao.json",
       "titulo": "Batata quente (modelo)"
+    },
+    {
+      "arquivo": "batata-morfologia.json",
+      "titulo": "Batata quente de morfologia"
     }
   ],
   "trilha": [
     {
       "arquivo": "trilha-padrao.json",
       "titulo": "Trilha das palavras (modelo)"
+    },
+    {
+      "arquivo": "trilha-morfologia.json",
+      "titulo": "Trilha da morfologia"
     }
   ],
   "escape": [
@@ -55,12 +71,76 @@
     {
       "arquivo": "detetive-padrao.json",
       "titulo": "Detetive das palavras (modelo)"
+    },
+    {
+      "arquivo": "detetive-concordancia.json",
+      "titulo": "Detetive da concordância"
     }
   ],
   "pontuacao": [
     {
       "arquivo": "pontuacao-padrao.json",
       "titulo": "Pontuação viva (modelo)"
+    }
+  ],
+  "morfo-classifique": [
+    {
+      "arquivo": "morfo-classes.json",
+      "titulo": "Classes de palavras (modelo)"
+    }
+  ],
+  "morfo-cestos": [
+    {
+      "arquivo": "morfo-classes.json",
+      "titulo": "Classes de palavras (modelo)"
+    }
+  ],
+  "morfo-frases": [
+    {
+      "arquivo": "morfo-frases.json",
+      "titulo": "Frases para pintar (modelo)"
+    }
+  ],
+  "morfo-plural": [
+    {
+      "arquivo": "morfo-plural.json",
+      "titulo": "Singular e plural (modelo)"
+    }
+  ],
+  "morfo-feminino": [
+    {
+      "arquivo": "morfo-feminino.json",
+      "titulo": "Masculino e feminino (modelo)"
+    }
+  ],
+  "morfo-grau": [
+    {
+      "arquivo": "morfo-grau.json",
+      "titulo": "Diminutivo e aumentativo (modelo)"
+    }
+  ],
+  "morfo-tempos": [
+    {
+      "arquivo": "morfo-tempos.json",
+      "titulo": "Ontem, hoje, amanhã (modelo)"
+    }
+  ],
+  "morfo-conjugacao": [
+    {
+      "arquivo": "morfo-conjugacao.json",
+      "titulo": "Quem faz a ação? (modelo)"
+    }
+  ],
+  "morfo-montar": [
+    {
+      "arquivo": "morfo-montar.json",
+      "titulo": "Monte a palavra (modelo)"
+    }
+  ],
+  "morfo-familia": [
+    {
+      "arquivo": "morfo-familia.json",
+      "titulo": "Família de palavras (modelo)"
     }
   ]
 }

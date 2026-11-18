@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da morfologia",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "classe": {
+      "nome": "Classe",
+      "emoji": "🏷️",
+      "cor": "#2f80ed"
+    },
+    "plural": {
+      "nome": "Plural",
+      "emoji": "⚖️",
+      "cor": "#16a085"
+    },
+    "feminino": {
+      "nome": "Feminino",
+      "emoji": "👫",
+      "cor": "#c2185b"
+    },
+    "grau": {
+      "nome": "Grau",
+      "emoji": "🔎",
+      "cor": "#e67e22"
+    },
+    "tempo": {
+      "nome": "Tempo do verbo",
+      "emoji": "🕰️",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "classe": [
+      {
+        "texto": "Que classe de palavra é CORRER?",
+        "resposta": "verbo"
+      },
+      {
+        "texto": "Que classe de palavra é BONITO?",
+        "resposta": "adjetivo"
+      },
+      {
+        "texto": "Que classe de palavra é JANELA?",
+        "resposta": "substantivo"
+      },
+      {
+        "texto": "Que classe de palavra é ONTEM?",
+        "resposta": "advérbio"
+      },
+      {
+        "texto": "Que classe de palavra é ELE?",
+        "resposta": "pronome"
+      },
+      {
+        "texto": "Que classe de palavra é TRÊS?",
+        "resposta": "numeral"
+      },
+      {
+        "texto": "Que classe de palavra é O (em: o gato)?",
+        "resposta": "artigo"
+      },
+      {
+        "texto": "Que classe de palavra é FELIZ?",
+        "resposta": "adjetivo"
+      }
+    ],
+    "plural": [
+      {
+        "texto": "Qual é o plural de FLOR?",
+        "resposta": "flores"
+      },
+      {
+        "texto": "Qual é o plural de LIMÃO?",
+        "resposta": "limões"
+      },
+      {
+        "texto": "Qual é o plural de ANIMAL?",
+        "resposta": "animais"
+      },
+      {
+        "texto": "Qual é o plural de LÁPIS?",
+        "resposta": "lápis"
+      },
+      {
+        "texto": "Qual é o plural de PAPEL?",
+        "resposta": "papéis"
+      },
+      {
+        "texto": "Qual é o plural de LUZ?",
+        "resposta": "luzes"
+      },
+      {
+        "texto": "Qual é o plural de MÃO?",
+        "resposta": "mãos"
+      },
+      {
+        "texto": "Qual é o plural de PÃO?",
+        "resposta": "pães"
+      }
+    ],
+    "feminino": [
+      {
+        "texto": "Qual é o feminino de GATO?",
+        "resposta": "gata"
+      },
+      {
+        "texto": "Qual é o feminino de ATOR?",
+        "resposta": "atriz"
+      },
+      {
+        "texto": "Qual é o feminino de BOI?",
+        "resposta": "vaca"
+      },
+      {
+        "texto": "Qual é o feminino de PAI?",
+        "resposta": "mãe"
+      },
+      {
+        "texto": "Qual é o feminino de REI?",
+        "resposta": "rainha"
+      },
+      {
+        "texto": "Qual é o feminino de LEÃO?",
+        "resposta": "leoa"
+      },
+      {
+        "texto": "Qual é o feminino de HERÓI?",
+        "resposta": "heroína"
+      },
+      {
+        "texto": "Qual é o feminino de GALO?",
+        "resposta": "galinha"
+      }
+    ],
+    "grau": [
+      {
+        "texto": "Diga o diminutivo de CASA.",
+        "resposta": "casinha"
+      },
+      {
+        "texto": "Diga o aumentativo de CARRO.",
+        "resposta": "carrão"
+      },
+      {
+        "texto": "Diga o diminutivo de FLOR.",
+        "resposta": "florzinha"
+      },
+      {
+        "texto": "Diga o aumentativo de CACHORRO.",
+        "resposta": "cachorrão"
+      },
+      {
+        "texto": "Diga o diminutivo de PÃO.",
+        "resposta": "pãozinho"
+      },
+      {
+        "texto": "Diga o aumentativo de NARIZ.",
+        "resposta": "narigão"
+      },
+      {
+        "texto": "Diga o diminutivo de PÉ.",
+        "resposta": "pezinho"
+      },
+      {
+        "texto": "Diga o aumentativo de HOMEM.",
+        "resposta": "homenzarrão"
+      }
+    ],
+    "tempo": [
+      {
+        "texto": "Passe para o passado: Eu brinco.",
+        "resposta": "Eu brinquei."
+      },
+      {
+        "texto": "Passe para o futuro: Nós cantamos.",
+        "resposta": "Nós vamos cantar (ou: cantaremos)."
+      },
+      {
+        "texto": "Passe para o passado: Ela come.",
+        "resposta": "Ela comeu."
+      },
+      {
+        "texto": "Passe para o futuro: Eu estudo.",
+        "resposta": "Eu vou estudar (ou: estudarei)."
+      },
+      {
+        "texto": "Passe para o passado: Eles correm.",
+        "resposta": "Eles correram."
+      },
+      {
+        "texto": "Passe para o presente: Eu dormi.",
+        "resposta": "Eu durmo."
+      },
+      {
+        "texto": "Passe para o passado: Nós vamos.",
+        "resposta": "Nós fomos."
+      },
+      {
+        "texto": "Passe para o futuro: O sol brilha.",
+        "resposta": "O sol vai brilhar (ou: brilhará)."
+      }
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Família de Palavras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #instrucao{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;margin:6px 0}
+  #arvore{position:relative;max-width:1000px;margin:6px auto;min-height:340px;display:flex;flex-direction:column;align-items:center}
+  #copa{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;background:radial-gradient(ellipse at center,#b9f0c4 0%,#7fd68f 60%,#5cbf6f 100%);
+    border-radius:50% 50% 45% 45%;padding:40px 50px;min-width:min(92vw,760px);min-height:200px;align-items:center;box-shadow:0 8px 0 #0002}
+  .folha{background:#fff;border-radius:999px;padding:10px 20px;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;min-width:150px;text-align:center;box-shadow:0 4px 0 #0002;border:4px dashed #3f9a52;color:#3f9a52}
+  .folha.cheia{border-style:solid;color:var(--texto)}
+  .folha.nova{animation:brotar .4s}
+  @keyframes brotar{from{transform:scale(.3)}}
+  #tronco{background:linear-gradient(90deg,#8d5a33,#a8703f,#8d5a33);color:#fff;border-radius:0 0 20px 20px;padding:14px 40px 18px;font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;text-align:center;min-width:220px;box-shadow:0 8px 0 #0002}
+  #tronco small{display:block;font-size:1rem;opacity:.85}
+  #banco{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:14px 0}
+  #banco button{font-size:clamp(1.3rem,3vw,2rem);padding:12px 22px}
+  #banco button.fora{background:#ffd9d9;color:#a33;text-decoration:line-through;opacity:.7}
+  #banco button.usada{visibility:hidden}
+  #resultado{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🌳 Família de Palavras</h1>
+  <div class="cartao">
+    <h2>1. Famílias (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Toque nas palavras que são da família da palavra do tronco. Cada palavra certa vale 1 ponto. Cuidado com as "intrusas": parecem, mas não são da família!</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="instrucao"></div>
+  <div id="arvore"><div id="copa"></div><div id="tronco"></div></div>
+  <div id="banco"></div>
+  <div id="resultado"></div>
+  <div class="linha">
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima família</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+let familias = null, fila = [], atual = null, n = 0, total = 0, placar = null, achadas = [];
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.familias)) return AV.avisar('JSON inválido: falta a lista "familias".');
+  familias = d.familias.filter(f => f && f.raiz && Array.isArray(f.membros) && f.membros.length)
+    .map(f => ({raiz: String(f.raiz), imagem: f.imagem || '', membros: f.membros.map(String), intrusas: (f.intrusas || []).map(String), explica: f.explica || {}}));
+  $('infoJson').textContent = `${d.titulo || 'Famílias'} • ${familias.length} famílias` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-familia', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-familia.json', 'modelo-familia-de-palavras.json');
+
+function comecar(){
+  if (!familias || !familias.length) return AV.avisar('Carregue um JSON de famílias.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(familias); total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; achadas = [];
+  $('contador').textContent = `Família ${n} de ${total}`;
+  $('instrucao').textContent = `${placar.prefixo()}Quais palavras são da família de ${atual.raiz.toUpperCase()}?`;
+  $('tronco').innerHTML = `${AV.esc(atual.imagem)} ${AV.esc(atual.raiz)}<small>palavra primitiva</small>`;
+  $('banco').innerHTML = M.embaralhar(atual.membros.concat(atual.intrusas)).map(w => `<button data-w="${AV.esc(w)}">${AV.esc(w)}</button>`).join('');
+  $('banco').querySelectorAll('button').forEach(b => b.onclick = () => tocar(b));
+  $('resultado').textContent = ''; $('btnProxima').hidden = true;
+  desenharCopa();
+  if (AV.som) AV.falar(`Quais palavras são da família de ${atual.raiz}?`);
+}
+function desenharCopa(){
+  $('copa').innerHTML = atual.membros.map((_, i) => achadas[i] ? `<div class="folha cheia ${i === achadas.length - 1 ? 'nova' : ''}">🍃 ${AV.esc(achadas[i])}</div>` : '<div class="folha">?</div>').join('');
+}
+function tocar(b){
+  const w = b.dataset.w;
+  if (atual.membros.includes(w)){
+    achadas.push(w); b.classList.add('usada'); placar.pontuar(1);
+    AV.tom(880, .1, 'triangle', .15); desenharCopa();
+    $('resultado').textContent = `✅ ${w} é da família de ${atual.raiz}!`;
+    if (achadas.length === atual.membros.length) completou();
+  } else {
+    b.classList.add('fora'); b.disabled = true; AV.erro();
+    $('resultado').textContent = `❌ ${w} não é da família de ${atual.raiz}` + (atual.explica[w] ? `: ${atual.explica[w]}.` : '.');
+  }
+}
+function completou(){
+  $('resultado').textContent = `🌳 Árvore completa! Todas vêm de ${atual.raiz.toUpperCase()}: ${atual.membros.join(', ')}.`;
+  $('banco').querySelectorAll('button').forEach(b => b.disabled = true);
+  AV.fanfarra(); AV.confete();
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima família' : '🏆 Ver resultado';
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

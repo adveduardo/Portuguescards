@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pinte a Frase</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #instrucao{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;margin:8px 0}
+  #instrucao .alvo{color:#fff;border-radius:12px;padding:2px 12px}
+  #paleta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0}
+  #paleta button{color:#fff;font-size:1.2rem;border:4px solid transparent}
+  #paleta button.ativo{border-color:var(--texto);transform:scale(1.08)}
+  #paleta button.borracha{background:#fff;color:var(--texto)}
+  #texto{background:#fffdf6;border-radius:28px;padding:20px 24px;margin:8px auto;max-width:1150px;text-align:center;box-shadow:0 8px 0 #0001;line-height:2.1}
+  .pal{display:inline-block;font-size:clamp(1.8rem,4.4vw,3.2rem);font-weight:bold;padding:0 10px;margin:3px 2px;border-radius:14px;cursor:pointer;border:4px solid transparent;
+    background:transparent;color:var(--texto);font-family:inherit;transition:background .2s;position:relative;vertical-align:top}
+  .pal:hover{background:#eef3ff}
+  .pal.pintada{color:#fff}
+  .pal.certo{border-color:var(--verde)}
+  .pal.errado{border-color:var(--vermelho);border-style:dashed}
+  .pal .etq{position:absolute;left:50%;transform:translateX(-50%);bottom:-1.25em;font-size:.95rem;white-space:nowrap;color:#fff;border-radius:8px;padding:0 6px;line-height:1.5}
+  #relogio{font-family:"Courier New",monospace;font-size:2rem;font-weight:bold;text-align:center}
+  #resultado{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;min-height:1.5em;margin-top:16px}
+  #legenda{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.95rem}
+  #legenda span{color:#fff;border-radius:8px;padding:2px 8px}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1 id="tituloConfig">🎨 Pinte a Frase</h1>
+  <div class="cartao">
+    <h2>1. Modo</h2>
+    <label><input type="radio" name="modo" value="pintar" checked> 🎨 Pinte a frase: escolher a cor certa para cada palavra</label>
+    <label><input type="radio" name="modo" value="cacar"> 🔍 Caça às classes: achar todas as palavras de uma classe antes do tempo acabar</label>
+    <label id="linhaTempo">Tempo da caça: <select id="selTempo"><option value="30">30 s</option><option value="45">45 s</option><option value="60" selected>1 min</option><option value="90">1 min e 30 s</option></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Frases (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <p><b>Classes que entram no jogo:</b></p><div id="escolhaClasses"></div>
+  </div>
+  <div class="cartao">
+    <h2>3. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Quantas rodadas: <select id="selQtd"><option value="5">5</option><option value="8" selected>8</option><option value="12">12</option><option value="0">todas</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+    <p class="dica">Pontos: cada palavra pintada com a cor certa vale 1 ponto. Na caça, cada palavra encontrada vale 1 ponto e cada clique errado tira 1.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="instrucao"></div>
+  <div id="relogio" hidden></div>
+  <div id="paleta"></div>
+  <div id="texto"></div>
+  <div id="legenda"></div>
+  <div id="resultado"></div>
+  <div class="linha">
+    <button id="btnConferir" class="principal">✅ Conferir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo, C = M.CLASSES;
+let frases = null, fila = [], n = 0, total = 0, placar = null, ativas = [], modo = 'pintar', corAtual = null, conferido = false;
+let alvo = null, faltam = 0, timer = null, fimEm = 0, palavrasAtuais = [];
+
+if (M.param('modo') === 'cacar'){ document.querySelector('input[value=cacar]').checked = true; $('tituloConfig').textContent = '🔍 Caça às Classes'; document.title = 'Caça às Classes'; }
+const atualizarModo = () => { $('linhaTempo').hidden = document.querySelector('input[name=modo]:checked').value !== 'cacar'; };
+document.querySelectorAll('input[name=modo]').forEach(r => r.onchange = atualizarModo); atualizarModo();
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.frases)) return AV.avisar('JSON inválido: falta a lista "frases".');
+  frases = d.frases.map(f => String(f).trim().split(/\s+/).map(M.lerToken)).filter(f => f.some(t => t.classe));
+  const presentes = [...new Set(frases.flat().map(t => t.classe).filter(Boolean))];
+  M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  $('infoJson').textContent = `${d.titulo || 'Frases'} • ${frases.length} frases marcadas` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-frases', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-frases.json', 'modelo-frases-morfologia.json');
+
+function comecar(){
+  if (!frases) return AV.avisar('Carregue um JSON de frases.');
+  ativas = M.classesMarcadas($('escolhaClasses'));
+  if (!ativas.length) return AV.avisar('Escolha pelo menos 1 classe.');
+  modo = document.querySelector('input[name=modo]:checked').value;
+  AV.som = $('chkSom').checked;
+  const q = +$('selQtd').value;
+  let lista = M.embaralhar(frases);
+  if (modo === 'cacar'){
+    // na caça, cada rodada junta 3 frases num textinho
+    const grupos = []; for (let i = 0; i + 2 < lista.length; i += 3) grupos.push(lista.slice(i, i + 3).flat());
+    lista = grupos;
+  }
+  fila = q ? lista.slice(0, q) : lista; total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  $('legenda').innerHTML = ativas.map(c => `<span style="background:${C[c].cor}">${C[c].emoji} ${C[c].nome}: ${C[c].def}</span>`).join('');
+  AV.mostrarTela('tJogo');
+  proxima();
+}
+function proxima(){
+  clearInterval(timer);
+  if (!fila.length) return fim();
+  palavrasAtuais = fila.shift(); n++; conferido = false;
+  $('contador').textContent = `${modo === 'cacar' ? 'Texto' : 'Frase'} ${n} de ${total}`;
+  $('resultado').textContent = ''; $('btnProxima').hidden = true;
+  $('texto').innerHTML = palavrasAtuais.map((t, i) => `<button class="pal" data-i="${i}">${AV.esc(t.texto)}</button>`).join(' ');
+  $('texto').querySelectorAll('.pal').forEach(b => b.onclick = () => tocar(b));
+  if (modo === 'pintar') iniciarPintura(); else iniciarCaca();
+}
+// ---------- PINTAR ----------
+function iniciarPintura(){
+  $('relogio').hidden = true; $('paleta').hidden = false; $('btnConferir').hidden = false;
+  $('instrucao').innerHTML = AV.esc(placar.prefixo()) + 'Escolha uma cor e toque nas palavras. <span class="dica">Palavras de outras classes ficam sem cor.</span>';
+  $('paleta').innerHTML = ativas.map(c => `<button data-c="${c}" style="background:${C[c].cor}">${C[c].emoji} ${C[c].nome}</button>`).join('') + '<button class="borracha" data-c="">🧽 Borracha</button>';
+  $('paleta').querySelectorAll('button').forEach(b => b.onclick = () => escolherCor(b.dataset.c));
+  escolherCor(ativas[0]);
+}
+function escolherCor(c){ corAtual = c; $('paleta').querySelectorAll('button').forEach(b => b.classList.toggle('ativo', b.dataset.c === c)); }
+function pintar(b, c){
+  b.dataset.pintada = c || '';
+  b.classList.toggle('pintada', !!c);
+  b.style.background = c ? C[c].cor : '';
+}
+function conferirPintura(){
+  if (conferido) return;
+  conferido = true;
+  let certas = 0, total = 0;
+  $('texto').querySelectorAll('.pal').forEach(b => {
+    const t = palavrasAtuais[+b.dataset.i], esperado = ativas.includes(t.classe) ? t.classe : '';
+    const pintada = b.dataset.pintada || '';
+    if (!esperado && !pintada) return;           // palavra de outra classe deixada sem cor: ok, não conta
+    if (esperado) total++;
+    if (pintada === esperado){ b.classList.add('certo'); certas++; }
+    else {
+      b.classList.add('errado');
+      b.insertAdjacentHTML('beforeend', `<span class="etq" style="background:${esperado ? C[esperado].cor : '#888'}">${esperado ? C[esperado].nome : 'sem cor'}</span>`);
+    }
+  });
+  placar.pontuar(certas);
+  $('resultado').textContent = certas === total ? `🎉 Perfeito! ${certas} de ${total} palavras certas.` : `✅ ${certas} de ${total} palavras certas. Veja as correções nas palavras tracejadas.`;
+  if (certas === total){ AV.fanfarra(); AV.confete(); } else if (certas) AV.tom(700, .15); else AV.erro();
+  $('btnConferir').hidden = true; $('btnProxima').hidden = false;
+  $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+}
+// ---------- CAÇAR ----------
+function iniciarCaca(){
+  $('paleta').hidden = true; $('btnConferir').hidden = true; $('relogio').hidden = false;
+  const presentes = ativas.filter(c => palavrasAtuais.some(t => t.classe === c));
+  alvo = presentes[Math.floor(Math.random() * presentes.length)];
+  faltam = palavrasAtuais.filter(t => t.classe === alvo).length;
+  $('instrucao').innerHTML = `${AV.esc(placar.prefixo())}Encontre todos os <span class="alvo" style="background:${C[alvo].cor}">${C[alvo].emoji} ${C[alvo].plural.toUpperCase()}</span> • faltam <b id="faltam">${faltam}</b>`;
+  fimEm = Date.now() + (+$('selTempo').value) * 1000;
+  const tique = () => {
+    const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
+    $('relogio').textContent = '⏳ ' + AV.mmss(s); $('relogio').style.color = s <= 10 ? 'var(--vermelho)' : '';
+    if (s <= 10 && s > 0) AV.tique();
+    if (!s) terminarCaca(false);
+  };
+  tique(); timer = setInterval(tique, 1000);
+  AV.falar(`Encontrem todos os ${C[alvo].plural.toLowerCase()}!`);
+}
+function terminarCaca(achouTudo){
+  if (conferido) return;
+  conferido = true; clearInterval(timer);
+  $('texto').querySelectorAll('.pal').forEach(b => {
+    const t = palavrasAtuais[+b.dataset.i];
+    if (t.classe === alvo && !b.classList.contains('pintada')){ b.classList.add('errado'); b.style.borderColor = C[alvo].cor; }
+  });
+  $('resultado').textContent = achouTudo ? '🎉 Acharam todos!' : '⏰ Tempo! As palavras tracejadas eram as que faltavam.';
+  if (achouTudo){ AV.fanfarra(); AV.confete(); } else AV.sirene();
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próximo texto' : '🏆 Ver resultado';
+}
+function tocar(b){
+  if (conferido) return;
+  const t = palavrasAtuais[+b.dataset.i];
+  if (modo === 'pintar'){ pintar(b, b.dataset.pintada === corAtual ? '' : corAtual); AV.tom(600, .05); return; }
+  if (b.classList.contains('pintada')) return;
+  if (t.classe === alvo){
+    pintar(b, alvo); placar.pontuar(1); faltam--; $('faltam').textContent = faltam; AV.tom(880, .1, 'triangle', .14);
+    if (!faltam) terminarCaca(true);
+  } else {
+    b.classList.remove('tremer'); void b.offsetWidth; b.classList.add('tremer');
+    placar.pontuar(-1); AV.erro();
+    const nome = t.classe ? C[t.classe].nome.toLowerCase() : 'de outra classe';
+    $('resultado').textContent = `"${t.palavra}" é ${t.classe ? nome : 'de outra classe'}! (−1)`;
+  }
+}
+function fim(){
+  clearInterval(timer);
+  AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete();
+}
+$('btnComecar').onclick = comecar;
+$('btnConferir').onclick = conferirPintura;
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

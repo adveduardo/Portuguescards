@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monte a Palavra</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #cartao{background:#fffdf6;border-radius:30px;padding:16px 26px;margin:8px auto;max-width:1000px;text-align:center;box-shadow:0 8px 0 #0001}
+  #img{font-size:clamp(3.5rem,9vw,6rem);line-height:1.1}
+  #dica{font-size:clamp(1.5rem,3.6vw,2.4rem);font-weight:bold}
+  #dica small{display:block;font-size:1rem;opacity:.6;font-weight:normal}
+  #slots{display:flex;gap:6px;justify-content:center;align-items:center;margin:16px 0;flex-wrap:wrap}
+  .slot{min-width:140px;height:84px;border:4px dashed #9aa6bf;border-radius:18px;background:#ffffff99;display:flex;align-items:center;justify-content:center;
+    font-size:clamp(1.8rem,4vw,2.8rem);font-weight:bold;cursor:pointer;padding:0 14px}
+  .slot.cheio{border-style:solid;border-color:var(--azul);background:#eaf2ff}
+  .slot.certo{border-color:var(--verde);background:#e3f8ea}
+  .slot.errado{border-color:var(--vermelho);background:#ffe3e3}
+  .mais{font-size:2.4rem;font-weight:bold;opacity:.5}
+  #pecas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0}
+  .peca{font-size:clamp(1.6rem,3.6vw,2.4rem);padding:12px 22px;background:var(--azul);color:#fff;border-radius:18px}
+  .peca.usada{opacity:.25;pointer-events:none}
+  #resultado{text-align:center;font-size:clamp(1.3rem,3vw,2rem);font-weight:bold;min-height:1.5em}
+  #formada{text-align:center;font-size:clamp(2.2rem,6vw,4rem);font-weight:bold;color:var(--verde);min-height:1.2em}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🧩 Monte a Palavra</h1>
+  <div class="cartao">
+    <h2>1. Palavras (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Quantas palavras: <select id="selQtd"><option value="8" selected>8</option><option value="12">12</option><option value="0">todas</option></select></label>
+    <label>Peças a mais (para despistar): <select id="selExtras"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Junte as peças (prefixo, radical e sufixo) para formar a palavra que combina com a dica. Toque numa peça já colocada para devolvê-la.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="cartao"><div id="img"></div><div id="dica"></div></div>
+  <div id="slots"></div>
+  <div id="pecas"></div>
+  <div id="formada"></div>
+  <div id="resultado"></div>
+  <div class="linha">
+    <button id="btnLimpar">↩️ Recomeçar</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, colocadas = [], pecas = [], resolvido = false, tentativas = 0;
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.palavras)) return AV.avisar('JSON inválido: falta a lista "palavras".');
+  const palavras = d.palavras.filter(p => p && p.palavra && Array.isArray(p.partes) && p.partes.length >= 2 && p.dica)
+    .map(p => ({palavra: String(p.palavra), partes: p.partes.map(String), dica: String(p.dica), imagem: p.imagem || '', explica: p.explica || ''}));
+  if (!palavras.length) return AV.avisar('Nenhuma palavra válida (cada uma precisa de "palavra", "partes" e "dica").');
+  dados = {titulo: d.titulo || 'Monte a palavra', palavras, extras: Array.isArray(d.pecasExtras) ? d.pecasExtras.map(String) : []};
+  $('infoJson').textContent = `${dados.titulo} • ${palavras.length} palavras` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-montar', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-montar.json', 'modelo-monte-a-palavra.json');
+
+function comecar(){
+  if (!dados) return AV.avisar('Carregue um JSON.');
+  AV.som = $('chkSom').checked;
+  const q = +$('selQtd').value;
+  fila = M.embaralhar(dados.palavras); if (q) fila = fila.slice(0, q);
+  total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; resolvido = false; tentativas = 0;
+  colocadas = atual.partes.map(() => null);
+  // peças: as certas + algumas de outras palavras ou da lista de extras
+  const outras = [...new Set(dados.extras.concat(dados.palavras.flatMap(p => p.partes)))].filter(x => !atual.partes.includes(x));
+  pecas = M.embaralhar(atual.partes.concat(M.embaralhar(outras).slice(0, +$('selExtras').value))).map((t, i) => ({t, i}));
+  $('contador').textContent = `${placar.prefixo()}Palavra ${n} de ${total}`;
+  $('img').textContent = atual.imagem;
+  $('dica').innerHTML = `${AV.esc(atual.dica)}<small>Monte a palavra com ${atual.partes.length} peças</small>`;
+  $('formada').textContent = ''; $('resultado').textContent = ''; $('btnProxima').hidden = true;
+  desenhar();
+  if (AV.som) AV.falar(atual.dica);
+}
+function desenhar(){
+  $('slots').innerHTML = colocadas.map((p, i) => (i ? '<span class="mais">+</span>' : '') + `<div class="slot ${p ? 'cheio' : ''}" data-i="${i}">${p ? AV.esc(p.t) : '?'}</div>`).join('');
+  $('slots').querySelectorAll('.slot').forEach(s => s.onclick = () => { if (resolvido) return; const i = +s.dataset.i; if (colocadas[i]){ colocadas[i] = null; desenhar(); } });
+  $('pecas').innerHTML = pecas.map(p => `<button class="peca ${colocadas.includes(p) ? 'usada' : ''}" data-i="${p.i}">${AV.esc(p.t)}</button>`).join('');
+  $('pecas').querySelectorAll('.peca').forEach(b => b.onclick = () => {
+    if (resolvido) return;
+    const p = pecas.find(x => x.i === +b.dataset.i), v = colocadas.indexOf(null);
+    if (v < 0) return;
+    colocadas[v] = p; AV.tom(700, .06); desenhar();
+    if (!colocadas.includes(null)) conferir();
+  });
+}
+function conferir(){
+  const certo = colocadas.every((p, i) => p.t === atual.partes[i]);
+  const slots = $('slots').querySelectorAll('.slot');
+  if (certo){
+    resolvido = true;
+    slots.forEach(s => s.classList.add('certo'));
+    placar.pontuar(tentativas === 0 ? 2 : 1);
+    $('formada').textContent = atual.palavra.toUpperCase();
+    $('resultado').textContent = `✅ ${tentativas === 0 ? '+2 pontos!' : '+1 ponto!'} ${atual.explica}`;
+    AV.fanfarra(); AV.confete(); if (AV.som) AV.falar(atual.palavra + '. ' + atual.explica);
+    $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+  } else {
+    tentativas++;
+    colocadas.forEach((p, i) => { if (p.t !== atual.partes[i]) slots[i].classList.add('errado'); });
+    AV.erro();
+    if (tentativas >= 3){
+      resolvido = true;
+      $('formada').textContent = atual.partes.join(' + ') + ' = ' + atual.palavra.toUpperCase();
+      $('resultado').textContent = '💡 ' + atual.explica;
+      $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+    } else {
+      $('resultado').textContent = '🤔 Quase! Troque as peças vermelhas.';
+      setTimeout(() => { if (!resolvido){ colocadas = colocadas.map((p, i) => p && p.t === atual.partes[i] ? p : null); desenhar(); } }, 1200);
+    }
+  }
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking'), total * 2); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnLimpar').onclick = () => { if (!resolvido){ colocadas = colocadas.map(() => null); desenhar(); } };
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+{
+  "titulo": "Quiz de morfologia",
+  "tempoPadrao": 20,
+  "perguntas": [
+    {
+      "pergunta": "Qual destas palavras é um substantivo?",
+      "imagem": "🏷️",
+      "opcoes": [
+        "correr",
+        "bonito",
+        "cadeira",
+        "rápido"
+      ],
+      "correta": "cadeira"
+    },
+    {
+      "pergunta": "Qual palavra é um adjetivo?",
+      "imagem": "🎨",
+      "opcoes": [
+        "gato",
+        "feliz",
+        "pular",
+        "ontem"
+      ],
+      "correta": "feliz"
+    },
+    {
+      "pergunta": "Qual palavra é um verbo?",
+      "imagem": "🏃",
+      "opcoes": [
+        "mesa",
+        "alto",
+        "nadar",
+        "nós"
+      ],
+      "correta": "nadar"
+    },
+    {
+      "pergunta": "Na frase \"O cachorro latiu\", qual é o verbo?",
+      "imagem": "🐶",
+      "opcoes": [
+        "O",
+        "cachorro",
+        "latiu"
+      ],
+      "correta": "latiu"
+    },
+    {
+      "pergunta": "Na frase \"A bola azul rolou\", qual palavra é um adjetivo?",
+      "imagem": "⚽",
+      "opcoes": [
+        "A",
+        "bola",
+        "azul",
+        "rolou"
+      ],
+      "correta": "azul"
+    },
+    {
+      "pergunta": "Qual é o plural de CÃO?",
+      "imagem": "🐕",
+      "opcoes": [
+        "cãos",
+        "cães",
+        "cões",
+        "cãoes"
+      ],
+      "correta": "cães"
+    },
+    {
+      "pergunta": "Qual é o feminino de ATOR?",
+      "imagem": "🎭",
+      "opcoes": [
+        "atora",
+        "atriz",
+        "atoriz",
+        "atrice"
+      ],
+      "correta": "atriz"
+    },
+    {
+      "pergunta": "Qual é o aumentativo de NARIZ?",
+      "imagem": "👃",
+      "opcoes": [
+        "narizinho",
+        "narigão",
+        "narizeiro",
+        "narizada"
+      ],
+      "correta": "narigão"
+    },
+    {
+      "pergunta": "Em \"Eu brinquei ontem\", o verbo está no:",
+      "imagem": "🕰️",
+      "opcoes": [
+        "passado",
+        "presente",
+        "futuro"
+      ],
+      "correta": "passado"
+    },
+    {
+      "pergunta": "Qual palavra é um pronome?",
+      "imagem": "🙋",
+      "opcoes": [
+        "ele",
+        "casa",
+        "bonito",
+        "correr"
+      ],
+      "correta": "ele"
+    },
+    {
+      "pergunta": "Qual palavra é um numeral?",
+      "imagem": "🔢",
+      "opcoes": [
+        "dez",
+        "mesa",
+        "feliz",
+        "aqui"
+      ],
+      "correta": "dez"
+    },
+    {
+      "pergunta": "Qual palavra é um advérbio de tempo?",
+      "imagem": "⏱️",
+      "opcoes": [
+        "ontem",
+        "cadeira",
+        "feliz",
+        "correr"
+      ],
+      "correta": "ontem"
+    },
+    {
+      "pergunta": "Qual é o artigo na frase \"O sol brilha\"?",
+      "imagem": "🔹",
+      "opcoes": [
+        "O",
+        "sol",
+        "brilha"
+      ],
+      "correta": "O"
+    },
+    {
+      "pergunta": "Complete: Nós ___ felizes.",
+      "imagem": "😄",
+      "opcoes": [
+        "estou",
+        "estamos",
+        "estão",
+        "está"
+      ],
+      "correta": "estamos"
+    },
+    {
+      "pergunta": "Qual palavra é um substantivo próprio?",
+      "imagem": "👧",
+      "opcoes": [
+        "cidade",
+        "Maria",
+        "menina",
+        "escola"
+      ],
+      "correta": "Maria"
+    }
+  ]
+}

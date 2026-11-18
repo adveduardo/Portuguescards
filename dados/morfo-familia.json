@@ -1,0 +1,172 @@
+{
+  "titulo": "Família de palavras (modelo)",
+  "familias": [
+    {
+      "raiz": "pedra",
+      "imagem": "🪨",
+      "membros": [
+        "pedreiro",
+        "pedrinha",
+        "pedreira",
+        "pedregulho"
+      ],
+      "intrusas": [
+        "pedalar",
+        "padaria",
+        "perdido"
+      ],
+      "explica": {
+        "pedalar": "vem de PEDAL",
+        "padaria": "vem de PÃO"
+      }
+    },
+    {
+      "raiz": "flor",
+      "imagem": "🌸",
+      "membros": [
+        "florista",
+        "floricultura",
+        "florido",
+        "florzinha"
+      ],
+      "intrusas": [
+        "folha",
+        "forno",
+        "fralda"
+      ]
+    },
+    {
+      "raiz": "mar",
+      "imagem": "🌊",
+      "membros": [
+        "marinho",
+        "marinheiro",
+        "maré",
+        "maremoto"
+      ],
+      "intrusas": [
+        "martelo",
+        "marrom",
+        "mamar"
+      ]
+    },
+    {
+      "raiz": "leite",
+      "imagem": "🥛",
+      "membros": [
+        "leiteiro",
+        "leiteira",
+        "leitoso",
+        "leiteria"
+      ],
+      "intrusas": [
+        "leitura",
+        "leão",
+        "letra"
+      ],
+      "explica": {
+        "leitura": "parece, mas vem de LER"
+      }
+    },
+    {
+      "raiz": "terra",
+      "imagem": "🌍",
+      "membros": [
+        "terreno",
+        "terremoto",
+        "terráqueo",
+        "enterrar"
+      ],
+      "intrusas": [
+        "terça",
+        "termômetro",
+        "tesoura"
+      ]
+    },
+    {
+      "raiz": "livro",
+      "imagem": "📕",
+      "membros": [
+        "livraria",
+        "livreiro",
+        "livrinho"
+      ],
+      "intrusas": [
+        "livre",
+        "lixo",
+        "lima"
+      ],
+      "explica": {
+        "livre": "parece, mas quer dizer solto, não preso"
+      }
+    },
+    {
+      "raiz": "sol",
+      "imagem": "☀️",
+      "membros": [
+        "solar",
+        "ensolarado",
+        "girassol",
+        "solzinho"
+      ],
+      "intrusas": [
+        "soldado",
+        "sola",
+        "sopa"
+      ],
+      "explica": {
+        "soldado": "parece, mas não vem de SOL"
+      }
+    },
+    {
+      "raiz": "dente",
+      "imagem": "🦷",
+      "membros": [
+        "dentista",
+        "dentadura",
+        "dentinho",
+        "dentário"
+      ],
+      "intrusas": [
+        "dentro",
+        "devagar",
+        "desenho"
+      ],
+      "explica": {
+        "dentro": "parece, mas não tem nada a ver com dente"
+      }
+    },
+    {
+      "raiz": "casa",
+      "imagem": "🏠",
+      "membros": [
+        "casinha",
+        "casarão",
+        "caseiro",
+        "casebre"
+      ],
+      "intrusas": [
+        "casaco",
+        "cascata",
+        "cabelo"
+      ],
+      "explica": {
+        "casaco": "parece, mas não vem de CASA"
+      }
+    },
+    {
+      "raiz": "pão",
+      "imagem": "🍞",
+      "membros": [
+        "padaria",
+        "padeiro",
+        "pãozinho"
+      ],
+      "intrusas": [
+        "papel",
+        "pato",
+        "pente"
+      ]
+    }
+  ]
+}

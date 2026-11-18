@@ -1,0 +1,251 @@
+{
+  "titulo": "Monte a palavra (modelo)",
+  "pecasExtras": [
+    "des",
+    "re",
+    "in",
+    "im",
+    "inho",
+    "ão",
+    "eza",
+    "mente",
+    "eiro",
+    "ista",
+    "oso",
+    "aria",
+    "eria"
+  ],
+  "palavras": [
+    {
+      "palavra": "infeliz",
+      "partes": [
+        "in",
+        "feliz"
+      ],
+      "dica": "que não é feliz",
+      "imagem": "😢",
+      "explica": "IN- dá a ideia de NÃO."
+    },
+    {
+      "palavra": "desfazer",
+      "partes": [
+        "des",
+        "fazer"
+      ],
+      "dica": "desmanchar o que foi feito",
+      "imagem": "🧶",
+      "explica": "DES- dá a ideia de contrário."
+    },
+    {
+      "palavra": "refazer",
+      "partes": [
+        "re",
+        "fazer"
+      ],
+      "dica": "fazer de novo",
+      "imagem": "🔁",
+      "explica": "RE- dá a ideia de repetir."
+    },
+    {
+      "palavra": "reler",
+      "partes": [
+        "re",
+        "ler"
+      ],
+      "dica": "ler de novo",
+      "imagem": "📖",
+      "explica": "RE- dá a ideia de repetir."
+    },
+    {
+      "palavra": "incapaz",
+      "partes": [
+        "in",
+        "capaz"
+      ],
+      "dica": "que não é capaz",
+      "imagem": "🙅",
+      "explica": "IN- dá a ideia de NÃO."
+    },
+    {
+      "palavra": "impossível",
+      "partes": [
+        "im",
+        "possível"
+      ],
+      "dica": "que não é possível",
+      "imagem": "🚫",
+      "explica": "Antes de P e B, o IN- vira IM-."
+    },
+    {
+      "palavra": "desobedecer",
+      "partes": [
+        "des",
+        "obedecer"
+      ],
+      "dica": "não obedecer",
+      "imagem": "🙉",
+      "explica": "DES- dá a ideia de contrário."
+    },
+    {
+      "palavra": "pedreiro",
+      "partes": [
+        "pedr",
+        "eiro"
+      ],
+      "dica": "quem trabalha com pedras e construções",
+      "imagem": "🧱",
+      "explica": "-EIRO indica profissão."
+    },
+    {
+      "palavra": "sapateiro",
+      "partes": [
+        "sapat",
+        "eiro"
+      ],
+      "dica": "quem conserta sapatos",
+      "imagem": "👞",
+      "explica": "-EIRO indica profissão."
+    },
+    {
+      "palavra": "leiteiro",
+      "partes": [
+        "leit",
+        "eiro"
+      ],
+      "dica": "quem entrega leite",
+      "imagem": "🥛",
+      "explica": "-EIRO indica profissão."
+    },
+    {
+      "palavra": "jardineiro",
+      "partes": [
+        "jardin",
+        "eiro"
+      ],
+      "dica": "quem cuida do jardim",
+      "imagem": "🌷",
+      "explica": "-EIRO indica profissão."
+    },
+    {
+      "palavra": "dentista",
+      "partes": [
+        "dent",
+        "ista"
+      ],
+      "dica": "quem cuida dos dentes",
+      "imagem": "🦷",
+      "explica": "-ISTA também indica profissão."
+    },
+    {
+      "palavra": "florista",
+      "partes": [
+        "flor",
+        "ista"
+      ],
+      "dica": "quem vende flores",
+      "imagem": "💐",
+      "explica": "-ISTA indica profissão."
+    },
+    {
+      "palavra": "livraria",
+      "partes": [
+        "livr",
+        "aria"
+      ],
+      "dica": "loja de livros",
+      "imagem": "📚",
+      "explica": "-ARIA indica lugar ou loja."
+    },
+    {
+      "palavra": "sorveteria",
+      "partes": [
+        "sorvet",
+        "eria"
+      ],
+      "dica": "loja de sorvetes",
+      "imagem": "🍦",
+      "explica": "-ERIA indica lugar ou loja."
+    },
+    {
+      "palavra": "gatinho",
+      "partes": [
+        "gat",
+        "inho"
+      ],
+      "dica": "gato pequeno",
+      "imagem": "🐱",
+      "explica": "-INHO indica tamanho pequeno."
+    },
+    {
+      "palavra": "casarão",
+      "partes": [
+        "cas",
+        "arão"
+      ],
+      "dica": "casa grande",
+      "imagem": "🏰",
+      "explica": "-ARÃO indica tamanho grande."
+    },
+    {
+      "palavra": "beleza",
+      "partes": [
+        "bel",
+        "eza"
+      ],
+      "dica": "qualidade de quem é belo",
+      "imagem": "✨",
+      "explica": "-EZA forma nomes de qualidades."
+    },
+    {
+      "palavra": "tristeza",
+      "partes": [
+        "trist",
+        "eza"
+      ],
+      "dica": "sentimento de quem está triste",
+      "imagem": "😞",
+      "explica": "-EZA forma nomes de sentimentos e qualidades."
+    },
+    {
+      "palavra": "felizmente",
+      "partes": [
+        "feliz",
+        "mente"
+      ],
+      "dica": "de um jeito feliz, por sorte",
+      "imagem": "🍀",
+      "explica": "-MENTE indica o modo."
+    },
+    {
+      "palavra": "chuvoso",
+      "partes": [
+        "chuv",
+        "oso"
+      ],
+      "dica": "com muita chuva",
+      "imagem": "🌧️",
+      "explica": "-OSO indica que tem muito."
+    },
+    {
+      "palavra": "gostoso",
+      "partes": [
+        "gost",
+        "oso"
+      ],
+      "dica": "que tem gosto bom",
+      "imagem": "😋",
+      "explica": "-OSO indica que tem muito."
+    },
+    {
+      "palavra": "infelizmente",
+      "partes": [
+        "in",
+        "feliz",
+        "mente"
+      ],
+      "dica": "por falta de sorte, que pena",
+      "imagem": "😔",
+      "explica": "IN- (não) + FELIZ + -MENTE (modo)."
+    }
+  ]
+}
