@@ -1,0 +1,161 @@
+{
+  "titulo": "Onde está o bicho? (preposições)",
+  "rodadas": [
+    {
+      "objeto": "mesa",
+      "posicao": "em cima",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "sobre a mesa",
+        "sob a mesa",
+        "entre as mesas"
+      ],
+      "correta": "sobre a mesa",
+      "explica": "SOBRE = em cima de. Cuidado para não confundir com SOB (embaixo de)."
+    },
+    {
+      "objeto": "mesa",
+      "posicao": "embaixo",
+      "animal": "🐶",
+      "nome": "o cachorro",
+      "opcoes": [
+        "sob a mesa",
+        "sobre a mesa",
+        "perante a mesa"
+      ],
+      "correta": "sob a mesa",
+      "explica": "SOB = embaixo de. É o oposto de SOBRE."
+    },
+    {
+      "objeto": "mesa",
+      "posicao": "ao lado",
+      "animal": "🐰",
+      "nome": "o coelho",
+      "opcoes": [
+        "ao lado da mesa",
+        "sob a mesa",
+        "sobre a mesa"
+      ],
+      "correta": "ao lado da mesa",
+      "explica": "AO LADO DE é uma locução prepositiva: várias palavras com valor de preposição."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "dentro",
+      "animal": "🐱",
+      "nome": "o gato",
+      "opcoes": [
+        "dentro da caixa",
+        "sobre a caixa",
+        "sob a caixa"
+      ],
+      "correta": "dentro da caixa",
+      "explica": "DENTRO DE é uma locução prepositiva de lugar."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "fora",
+      "animal": "🐸",
+      "nome": "o sapo",
+      "opcoes": [
+        "fora da caixa",
+        "dentro da caixa",
+        "sob a caixa"
+      ],
+      "correta": "fora da caixa",
+      "explica": "FORA DE é uma locução prepositiva: o contrário de DENTRO DE."
+    },
+    {
+      "objeto": "caixa",
+      "posicao": "em cima",
+      "animal": "🐭",
+      "nome": "o rato",
+      "opcoes": [
+        "sobre a caixa",
+        "sob a caixa",
+        "dentro da caixa"
+      ],
+      "correta": "sobre a caixa",
+      "explica": "SOBRE = em cima de."
+    },
+    {
+      "objeto": "caixas",
+      "posicao": "entre",
+      "animal": "🐹",
+      "nome": "o hamster",
+      "opcoes": [
+        "entre as caixas",
+        "sobre as caixas",
+        "sob as caixas"
+      ],
+      "correta": "entre as caixas",
+      "explica": "ENTRE indica posição no meio de duas coisas."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "atrás",
+      "animal": "🦊",
+      "nome": "a raposa",
+      "opcoes": [
+        "atrás da árvore",
+        "diante da árvore",
+        "sobre a árvore"
+      ],
+      "correta": "atrás da árvore",
+      "explica": "ATRÁS DE é uma locução prepositiva de lugar."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "na frente",
+      "animal": "🐻",
+      "nome": "o urso",
+      "opcoes": [
+        "diante da árvore",
+        "atrás da árvore",
+        "sob a árvore"
+      ],
+      "correta": "diante da árvore",
+      "explica": "DIANTE DE = em frente a. Também se diz PERANTE (mais formal)."
+    },
+    {
+      "objeto": "arvore",
+      "posicao": "em cima",
+      "animal": "🐦",
+      "nome": "o passarinho",
+      "opcoes": [
+        "sobre a árvore",
+        "sob a árvore",
+        "atrás da árvore"
+      ],
+      "correta": "sobre a árvore",
+      "explica": "SOBRE = em cima de."
+    },
+    {
+      "objeto": "casa",
+      "posicao": "perto",
+      "animal": "🐕",
+      "nome": "o cachorro",
+      "opcoes": [
+        "perto da casa",
+        "longe da casa",
+        "sob a casa"
+      ],
+      "correta": "perto da casa",
+      "explica": "PERTO DE é uma locução prepositiva."
+    },
+    {
+      "objeto": "casa",
+      "posicao": "longe",
+      "animal": "🐎",
+      "nome": "o cavalo",
+      "opcoes": [
+        "longe da casa",
+        "perto da casa",
+        "sobre a casa"
+      ],
+      "correta": "longe da casa",
+      "explica": "LONGE DE é uma locução prepositiva: o contrário de PERTO DE."
+    }
+  ]
+}

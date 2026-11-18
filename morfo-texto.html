@@ -72,7 +72,7 @@
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
 const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60'];
-let textos = null, fila = [], atual = null, n = 0, total = 0, placar = null, ativa = null;
+let textos = null, instrucaoTexto = '', fila = [], atual = null, n = 0, total = 0, placar = null, ativa = null;
 
 // "texto [repetição|certa|errada|errada] texto" -> partes
 function analisar(t){
@@ -89,6 +89,7 @@ function analisar(t){
 }
 function carregar(d, origem){
   if (!d || !Array.isArray(d.textos)) return AV.avisar('JSON inválido: falta a lista "textos".');
+  instrucaoTexto = d.instrucao ? String(d.instrucao) : '';
   textos = d.textos.filter(x => x && x.texto).map(x => ({titulo: x.titulo || '', imagem: x.imagem || '', texto: String(x.texto)}))
     .filter(x => analisar(x.texto).some(p => p.tipo === 'rep'));
   $('infoJson').textContent = `${d.titulo || 'Textos'} • ${textos.length} textos` + (origem ? ` • ${origem}` : '');
@@ -108,7 +109,7 @@ function proxima(){
   const t = fila.shift(); n++;
   atual = {titulo: t.titulo, imagem: t.imagem, partes: analisar(t.texto)}; ativa = null;
   $('contador').textContent = `Texto ${n} de ${total}`;
-  $('instrucao').textContent = placar.prefixo() + 'O texto repete muito! Toque nas partes amarelas e troque por um pronome.';
+  $('instrucao').textContent = placar.prefixo() + (instrucaoTexto || 'O texto repete muito! Toque nas partes amarelas e troque por um pronome.');
   $('resultado').textContent = ''; $('escolha').innerHTML = ''; $('btnProxima').hidden = true;
   desenhar();
 }

@@ -1,0 +1,232 @@
+{
+  "titulo": "As faces do SE",
+  "emoji": "🧩",
+  "instrucao": "Qual é a função do SE destacado?",
+  "rodadas": [
+    {
+      "destaque": "[Se] chover, não sairemos.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Conjunção condicional",
+      "explica": "Conjunção condicional: introduz uma condição (= caso).",
+      "imagem": "☔"
+    },
+    {
+      "destaque": "Não sei [se] ele vem.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Conjunção integrante",
+      "explica": "Conjunção integrante: introduz uma oração que completa o verbo (perguntar se, saber se).",
+      "imagem": "🤷"
+    },
+    {
+      "destaque": "Vendem-[se] casas.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Pronome apassivador",
+      "explica": "Pronome apassivador: verbo transitivo direto + SE: o verbo concorda com o sujeito (Vendem-se casas = casas são vendidas).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Precisa-[se] de ajudantes.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Índice de indeterminação do sujeito",
+      "explica": "Índice de indeterminação do sujeito: verbo sem objeto direto + SE: verbo no singular, sujeito indeterminado.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Ela [se] penteou.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Pronome reflexivo",
+      "explica": "Pronome reflexivo: o sujeito pratica a ação sobre si mesmo (ou ação recíproca).",
+      "imagem": "🪞"
+    },
+    {
+      "destaque": "Ele [se] arrependeu do que disse.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Parte integrante do verbo",
+      "explica": "Parte integrante do verbo: o verbo só existe com o pronome (arrepender-se, queixar-se, suicidar-se).",
+      "imagem": "😔"
+    },
+    {
+      "destaque": "Foi-[se] embora sem avisar.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Partícula expletiva (realce)",
+      "explica": "Partícula expletiva (realce): pode ser retirado sem mudar o sentido (ir-se embora, rir-se).",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Perguntei [se] havia vagas.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Conjunção integrante",
+      "explica": "Conjunção integrante: introduz uma oração que completa o verbo (perguntar se, saber se).",
+      "imagem": "💼"
+    },
+    {
+      "destaque": "Alugam-[se] apartamentos.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Pronome apassivador",
+      "explica": "Pronome apassivador: verbo transitivo direto + SE: o verbo concorda com o sujeito (Vendem-se casas = casas são vendidas).",
+      "imagem": "🏢"
+    },
+    {
+      "destaque": "Vive-[se] bem nesta cidade.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Índice de indeterminação do sujeito",
+      "explica": "Índice de indeterminação do sujeito: verbo sem objeto direto + SE: verbo no singular, sujeito indeterminado.",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "Os noivos [se] abraçaram.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Pronome reflexivo",
+      "explica": "Pronome reflexivo: o sujeito pratica a ação sobre si mesmo (ou ação recíproca).",
+      "imagem": "💑"
+    },
+    {
+      "destaque": "Ela [se] queixou do barulho.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Parte integrante do verbo",
+      "explica": "Parte integrante do verbo: o verbo só existe com o pronome (arrepender-se, queixar-se, suicidar-se).",
+      "imagem": "🔊"
+    },
+    {
+      "destaque": "[Se] você estudar, vai passar.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Conjunção condicional",
+      "explica": "Conjunção condicional: introduz uma condição (= caso).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Consertam-[se] bicicletas.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Pronome apassivador",
+      "explica": "Pronome apassivador: verbo transitivo direto + SE: o verbo concorda com o sujeito (Vendem-se casas = casas são vendidas).",
+      "imagem": "🚲"
+    },
+    {
+      "destaque": "Trata-[se] de um problema grave.",
+      "opcoes": [
+        "Conjunção condicional",
+        "Conjunção integrante",
+        "Pronome apassivador",
+        "Índice de indeterminação do sujeito",
+        "Pronome reflexivo",
+        "Parte integrante do verbo",
+        "Partícula expletiva (realce)"
+      ],
+      "correta": "Índice de indeterminação do sujeito",
+      "explica": "Índice de indeterminação do sujeito: verbo sem objeto direto + SE: verbo no singular, sujeito indeterminado.",
+      "imagem": "⚠️"
+    }
+  ]
+}

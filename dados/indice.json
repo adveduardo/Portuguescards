@@ -35,6 +35,10 @@
     {
       "arquivo": "quiz-numerais.json",
       "titulo": "Quiz dos numerais"
+    },
+    {
+      "arquivo": "quiz-invariaveis.json",
+      "titulo": "Quiz das classes invariáveis"
     }
   ],
   "stop": [
@@ -87,6 +91,10 @@
     {
       "arquivo": "batata-numerais.json",
       "titulo": "Batata quente dos numerais"
+    },
+    {
+      "arquivo": "batata-invariaveis.json",
+      "titulo": "Batata quente das invariáveis"
     }
   ],
   "trilha": [
@@ -125,6 +133,10 @@
     {
       "arquivo": "trilha-numerais.json",
       "titulo": "Trilha dos numerais"
+    },
+    {
+      "arquivo": "trilha-invariaveis.json",
+      "titulo": "Trilha das invariáveis"
     }
   ],
   "escape": [
@@ -147,6 +159,10 @@
     {
       "arquivo": "escape-verbos.json",
       "titulo": "Laboratório dos Verbos"
+    },
+    {
+      "arquivo": "escape-conectivos.json",
+      "titulo": "Fuga da Fábrica de Conectivos"
     }
   ],
   "mimica": [
@@ -161,6 +177,10 @@
     {
       "arquivo": "mimica-expressoes.json",
       "titulo": "Mímica das expressões idiomáticas"
+    },
+    {
+      "arquivo": "mimica-interjeicoes.json",
+      "titulo": "Mímica das interjeições"
     }
   ],
   "historias": [
@@ -187,6 +207,10 @@
     {
       "arquivo": "historias-adjetivos.json",
       "titulo": "Turbine a descrição (adjetivos)"
+    },
+    {
+      "arquivo": "historias-conectivos.json",
+      "titulo": "Dado dos conectivos"
     }
   ],
   "caminho": [
@@ -227,6 +251,10 @@
     {
       "arquivo": "detetive-numerais.json",
       "titulo": "Detetive dos numerais"
+    },
+    {
+      "arquivo": "detetive-preposicoes.json",
+      "titulo": "Detetive das preposições"
     }
   ],
   "pontuacao": [
@@ -269,6 +297,18 @@
     {
       "arquivo": "num-cestos.json",
       "titulo": "Cestos dos numerais"
+    },
+    {
+      "arquivo": "prep-cestos.json",
+      "titulo": "Cestos: preposição essencial, acidental ou locução"
+    },
+    {
+      "arquivo": "conj-cestos.json",
+      "titulo": "Cestos das conjunções"
+    },
+    {
+      "arquivo": "inv-cestos.json",
+      "titulo": "Cestos das classes invariáveis"
     }
   ],
   "morfo-frases": [
@@ -287,6 +327,10 @@
     {
       "arquivo": "sint-pinte.json",
       "titulo": "Pinte os termos da oração"
+    },
+    {
+      "arquivo": "inv-frases.json",
+      "titulo": "Pinte as classes invariáveis"
     }
   ],
   "morfo-plural": [
@@ -327,6 +371,10 @@
     {
       "arquivo": "morfo-adv-mente.json",
       "titulo": "Fábrica do -MENTE"
+    },
+    {
+      "arquivo": "prep-contracoes.json",
+      "titulo": "Junte as peças: contrações e combinações"
     }
   ],
   "morfo-familia": [
@@ -405,6 +453,10 @@
     {
       "arquivo": "morfo-onde.json",
       "titulo": "Onde está o bicho? (modelo)"
+    },
+    {
+      "arquivo": "prep-onde.json",
+      "titulo": "Onde está o bicho? (preposições)"
     }
   ],
   "morfo-pron-troque": [
@@ -459,6 +511,10 @@
     {
       "arquivo": "morfo-pron-texto.json",
       "titulo": "Arrume o texto (modelo)"
+    },
+    {
+      "arquivo": "conj-texto.json",
+      "titulo": "Arrume o texto (sem \"e aí\")"
     }
   ],
   "morfo-perto": [
@@ -553,6 +609,18 @@
     {
       "arquivo": "em-variacao.json",
       "titulo": "Variação linguística"
+    },
+    {
+      "arquivo": "em-denotativas.json",
+      "titulo": "Palavras denotativas"
+    },
+    {
+      "arquivo": "em-que.json",
+      "titulo": "As faces do QUE"
+    },
+    {
+      "arquivo": "em-se.json",
+      "titulo": "As faces do SE"
     }
   ],
   "escolha-verbo": [
@@ -627,6 +695,58 @@
     {
       "arquivo": "num-tipos.json",
       "titulo": "Tipos de numeral"
+    }
+  ],
+  "escolha-prep": [
+    {
+      "arquivo": "prep-complete.json",
+      "titulo": "Complete com a preposição"
+    },
+    {
+      "arquivo": "prep-expressoes.json",
+      "titulo": "Expressões que confundem"
+    },
+    {
+      "arquivo": "prep-relacao.json",
+      "titulo": "Que relação a preposição indica?"
+    }
+  ],
+  "escolha-conj": [
+    {
+      "arquivo": "conj-classifique.json",
+      "titulo": "Coordenativa ou subordinativa?"
+    },
+    {
+      "arquivo": "conj-ligue.json",
+      "titulo": "Ligue as frases"
+    },
+    {
+      "arquivo": "conj-parecidas.json",
+      "titulo": "Mas ou mais? Senão ou se não?"
+    },
+    {
+      "arquivo": "conj-porques.json",
+      "titulo": "Os quatro porquês"
+    }
+  ],
+  "escolha-interj": [
+    {
+      "arquivo": "interj-cena.json",
+      "titulo": "Qual interjeição combina com a cena?"
+    },
+    {
+      "arquivo": "interj-emocao.json",
+      "titulo": "Que emoção a interjeição expressa?"
+    },
+    {
+      "arquivo": "interj-regionais.json",
+      "titulo": "Interjeições do Brasil"
+    }
+  ],
+  "escolha-inv": [
+    {
+      "arquivo": "inv-varia.json",
+      "titulo": "Varia ou não varia?"
     }
   ]
 }

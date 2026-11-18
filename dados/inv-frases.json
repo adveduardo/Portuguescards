@@ -1,0 +1,56 @@
+{
+  "titulo": "Pinte as classes invariáveis",
+  "categorias": [
+    {
+      "id": "adv",
+      "nome": "Advérbio",
+      "plural": "Advérbios",
+      "cor": "#8e44ad",
+      "emoji": "🕒",
+      "def": "modifica o verbo, o adjetivo ou outro advérbio (tempo, lugar, modo...)"
+    },
+    {
+      "id": "prep",
+      "nome": "Preposição",
+      "plural": "Preposições",
+      "cor": "#2f80ed",
+      "emoji": "🔗",
+      "def": "liga duas palavras (de, em, com, para, sem, sobre...)"
+    },
+    {
+      "id": "conj",
+      "nome": "Conjunção",
+      "plural": "Conjunções",
+      "cor": "#27ae60",
+      "emoji": "🧷",
+      "def": "liga orações ou termos (e, mas, porque, embora...)"
+    },
+    {
+      "id": "interj",
+      "nome": "Interjeição",
+      "plural": "Interjeições",
+      "cor": "#e67e22",
+      "emoji": "😮",
+      "def": "expressa emoção ou sentimento (oba!, ai!, ufa!)"
+    }
+  ],
+  "como_marcar": "Marque as palavras com adv, prep, conj ou interj. As outras ficam sem marca.",
+  "frases": [
+    "Oba/interj! Amanhã/adv iremos com/prep vocês.",
+    "Ele estudou muito/adv, mas/conj não/adv passou.",
+    "Ai/interj! Bati a perna contra/prep a mesa.",
+    "Ufa/interj! Cheguei cedo/adv e/conj ainda/adv peguei lugar.",
+    "Embora/conj chovesse, saímos sem/prep guarda-chuva.",
+    "Psiu/interj! Fale baixo/adv, porque/conj o bebê dorme.",
+    "Ontem/adv saí com/prep meus amigos e/conj voltei tarde/adv.",
+    "Nossa/interj! Você mora longe/adv.",
+    "Talvez/adv eu viaje para/prep Salvador, mas/conj não/adv sei.",
+    "Eca/interj! Tem uma mosca sobre/prep o bolo.",
+    "Estudei bastante/adv; portanto/conj, estou tranquilo.",
+    "Viva/interj! Hoje/adv não/adv tem aula.",
+    "O gato dormiu sob/prep a cama e/conj acordou bem/adv cedo/adv.",
+    "Ei/interj, espere por/prep mim!",
+    "Ela fala devagar/adv, porém/conj escreve rápido/adv.",
+    "Trabalhei desde/prep cedo/adv e/conj ainda/adv não/adv terminei."
+  ]
+}

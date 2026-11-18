@@ -1,0 +1,66 @@
+{
+  "titulo": "Fuga da Fábrica de Conectivos",
+  "historia": "As máquinas da Fábrica de Conectivos travaram e a porta se trancou! Cada máquina só volta a funcionar com a palavra invariável certa. Consertem todas para descobrir o código da saída.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Máquina 1: \"Estudei muito, ___ não passei.\"",
+      "imagem": "⚙️",
+      "opcoes": [
+        "mas",
+        "mais",
+        "portanto"
+      ],
+      "correta": "mas",
+      "dica": "Há uma oposição de ideias."
+    },
+    {
+      "pergunta": "Máquina 2: escreva a contração de EM + A.",
+      "imagem": "🔩",
+      "resposta": [
+        "na"
+      ],
+      "dica": "Moro ___ cidade."
+    },
+    {
+      "pergunta": "Máquina 3: \"Você faltou ___?\" (no fim da pergunta)",
+      "imagem": "🔧",
+      "opcoes": [
+        "por quê",
+        "porque",
+        "porquê"
+      ],
+      "correta": "por quê",
+      "dica": "No fim da frase: separado e com acento."
+    },
+    {
+      "pergunta": "Máquina 4: escreva uma interjeição de alívio com 3 letras.",
+      "imagem": "😮‍💨",
+      "resposta": [
+        "ufa",
+        "ufa!"
+      ],
+      "dica": "Terminei a prova a tempo! ___!"
+    },
+    {
+      "pergunta": "Máquina 5: \"O gato dormiu ___ a cama\" (embaixo dela).",
+      "imagem": "🐱",
+      "opcoes": [
+        "sob",
+        "sobre",
+        "após"
+      ],
+      "correta": "sob",
+      "dica": "SOBRE é em cima; o outro é embaixo."
+    },
+    {
+      "pergunta": "Máquina 6: escreva a conjunção que completa: \"___ estivesse cansado, foi à festa.\" (concessão, 6 letras)",
+      "imagem": "🎉",
+      "resposta": [
+        "embora"
+      ],
+      "dica": "Começa com E."
+    }
+  ]
+}

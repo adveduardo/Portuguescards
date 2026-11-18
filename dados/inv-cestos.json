@@ -1,0 +1,191 @@
+{
+  "titulo": "Cestos das classes invariáveis",
+  "cestos": [
+    {
+      "id": "adv",
+      "nome": "Advérbio",
+      "emoji": "🕒",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "prep",
+      "nome": "Preposição",
+      "emoji": "🔗",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "conj",
+      "nome": "Conjunção",
+      "emoji": "🧷",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "interj",
+      "nome": "Interjeição",
+      "emoji": "😮",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "ontem",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "aqui",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "muito",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "bem",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "não",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "talvez",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "sempre",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "devagar",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "nunca",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "longe",
+      "cesto": "adv"
+    },
+    {
+      "palavra": "de",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "em",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "com",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "para",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "sem",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "sobre",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "sob",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "entre",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "contra",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "desde",
+      "cesto": "prep"
+    },
+    {
+      "palavra": "e",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "mas",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "porém",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "contudo",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "todavia",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "embora",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "portanto",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "porque",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "nem",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "entretanto",
+      "cesto": "conj"
+    },
+    {
+      "palavra": "Oba!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Ai!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Ufa!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Psiu!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Eca!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Socorro!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Viva!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Tchau!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Ei!",
+      "cesto": "interj"
+    },
+    {
+      "palavra": "Uau!",
+      "cesto": "interj"
+    }
+  ]
+}

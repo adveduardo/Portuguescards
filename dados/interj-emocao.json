@@ -1,0 +1,279 @@
+{
+  "titulo": "Que emoção a interjeição expressa?",
+  "emoji": "😮",
+  "instrucao": "Que sentimento a interjeição destacada expressa?",
+  "rodadas": [
+    {
+      "destaque": "[Oba]! Amanhã é feriado!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Alegria",
+      "explica": "Interjeição de alegria: oba, viva, eba, que bom!",
+      "imagem": "🥳"
+    },
+    {
+      "destaque": "[Ai]! Bati o dedo na porta.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Dor",
+      "explica": "Interjeição de dor: ai, ui!",
+      "imagem": "🤕"
+    },
+    {
+      "destaque": "[Ufa]! Terminei a prova a tempo.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Alívio",
+      "explica": "Interjeição de alívio: ufa, ainda bem, graças a Deus!",
+      "imagem": "😮‍💨"
+    },
+    {
+      "destaque": "[Nossa]! Que prédio enorme!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Espanto",
+      "explica": "Interjeição de espanto: nossa, caramba, puxa, uau!",
+      "imagem": "🏢"
+    },
+    {
+      "destaque": "[Eca]! Tem um cabelo na sopa.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Nojo",
+      "explica": "Interjeição de nojo: eca, argh, que nojo!",
+      "imagem": "🤢"
+    },
+    {
+      "destaque": "[Psiu]! O bebê está dormindo.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Silêncio",
+      "explica": "Interjeição de silêncio: psiu, silêncio, quieto!",
+      "imagem": "👶"
+    },
+    {
+      "destaque": "[Ei], você esqueceu a mochila!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Chamamento",
+      "explica": "Interjeição de chamamento: ei, alô, psiu, ô!",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "[Tomara] que faça sol amanhã!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Desejo",
+      "explica": "Interjeição de desejo: tomara, oxalá, quem dera!",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "[Viva]! Ganhamos o campeonato!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Alegria",
+      "explica": "Interjeição de alegria: oba, viva, eba, que bom!",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "[Ui]! Essa injeção doeu!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Dor",
+      "explica": "Interjeição de dor: ai, ui!",
+      "imagem": "💉"
+    },
+    {
+      "destaque": "[Graças a Deus]! Todos chegaram bem.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Alívio",
+      "explica": "Interjeição de alívio: ufa, ainda bem, graças a Deus!",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "[Caramba]! Você cresceu muito!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Espanto",
+      "explica": "Interjeição de espanto: nossa, caramba, puxa, uau!",
+      "imagem": "📏"
+    },
+    {
+      "destaque": "[Que nojo]! Pisei num chiclete.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Nojo",
+      "explica": "Interjeição de nojo: eca, argh, que nojo!",
+      "imagem": "👟"
+    },
+    {
+      "destaque": "[Silêncio]! A prova vai começar.",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Silêncio",
+      "explica": "Interjeição de silêncio: psiu, silêncio, quieto!",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "[Alô]! Tem alguém aí?",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Chamamento",
+      "explica": "Interjeição de chamamento: ei, alô, psiu, ô!",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "[Quem dera] eu ganhasse na loteria!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Desejo",
+      "explica": "Interjeição de desejo: tomara, oxalá, quem dera!",
+      "imagem": "🍀"
+    },
+    {
+      "destaque": "[Puxa vida]! Que susto você me deu!",
+      "opcoes": [
+        "Alegria",
+        "Dor",
+        "Alívio",
+        "Espanto",
+        "Nojo",
+        "Silêncio",
+        "Chamamento",
+        "Desejo"
+      ],
+      "correta": "Espanto",
+      "explica": "Interjeição de espanto: nossa, caramba, puxa, uau!",
+      "imagem": "😱"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "titulo": "Varia ou não varia?",
+  "emoji": "⚖️",
+  "instrucao": "A palavra destacada varia (gênero e número) ou é invariável?",
+  "rodadas": [
+    {
+      "destaque": "Ela está [meio] cansada.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "Aqui MEIO é advérbio (= um pouco): não varia. Nunca \"meia cansada\".",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "Comi [meia] pizza.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "Aqui MEIO é numeral (= metade): concorda com pizza.",
+      "imagem": "🍕"
+    },
+    {
+      "destaque": "Os alunos estudaram [bastante].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "BASTANTE modificando o verbo é advérbio: não varia.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Havia [bastantes] alunos na sala.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "BASTANTE antes do substantivo (= muitos) concorda com ele.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "As meninas chegaram [cedo].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "CEDO é advérbio de tempo.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "As meninas estão [cansadas].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "CANSADO é adjetivo: concorda com o substantivo.",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "[Só] elas vieram.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "SÓ = apenas: palavra denotativa, não varia.",
+      "imagem": "👭"
+    },
+    {
+      "destaque": "Elas estão [sós].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "SÓ = sozinho: adjetivo, vai ao plural.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Havia [menos] pessoas hoje.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "MENOS nunca varia: \"menas\" não existe.",
+      "imagem": "👥"
+    },
+    {
+      "destaque": "Seguem [anexas] as fotos.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "ANEXO é adjetivo: concorda com fotos.",
+      "imagem": "📎"
+    },
+    {
+      "destaque": "Elas falaram [alto].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "Falar alto: ALTO é advérbio de modo.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "As árvores são [altas].",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "ALTO caracterizando árvores é adjetivo.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "[Oba]! Ganhamos!",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "Interjeições não variam.",
+      "imagem": "🥳"
+    },
+    {
+      "destaque": "Saímos [com] eles.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Invariável",
+      "explica": "Preposições não variam.",
+      "imagem": "👫"
+    },
+    {
+      "destaque": "Elas [mesmas] fizeram o bolo.",
+      "opcoes": [
+        "Variável",
+        "Invariável"
+      ],
+      "correta": "Variável",
+      "explica": "MESMO (= próprio) concorda: elas mesmas.",
+      "imagem": "🎂"
+    }
+  ]
+}

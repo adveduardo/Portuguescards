@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha das invariáveis",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "prep": {
+      "nome": "Preposição",
+      "emoji": "🔗",
+      "cor": "#2f80ed"
+    },
+    "conj": {
+      "nome": "Conjunção",
+      "emoji": "🧷",
+      "cor": "#27ae60"
+    },
+    "interj": {
+      "nome": "Interjeição",
+      "emoji": "😮",
+      "cor": "#e67e22"
+    },
+    "adv": {
+      "nome": "Advérbio",
+      "emoji": "🕒",
+      "cor": "#8e44ad"
+    },
+    "pegadinha": {
+      "nome": "Pegadinha",
+      "emoji": "🪤",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "prep": [
+      {
+        "texto": "DE + ELE forma...",
+        "resposta": "dele"
+      },
+      {
+        "texto": "EM + ESTE forma...",
+        "resposta": "neste"
+      },
+      {
+        "texto": "A + A forma...",
+        "resposta": "à (crase)"
+      },
+      {
+        "texto": "O que indica SOB?",
+        "resposta": "embaixo de"
+      },
+      {
+        "texto": "Em \"anel de ouro\", DE indica...",
+        "resposta": "matéria"
+      },
+      {
+        "texto": "Em \"viajei de ônibus\", DE indica...",
+        "resposta": "meio"
+      },
+      {
+        "texto": "Diga uma locução prepositiva",
+        "resposta": "ao lado de, em cima de, apesar de..."
+      },
+      {
+        "texto": "Gosto ___ chocolate",
+        "resposta": "de"
+      }
+    ],
+    "conj": [
+      {
+        "texto": "Estudei, ___ não passei (mas/mais)",
+        "resposta": "mas"
+      },
+      {
+        "texto": "___ você chorou? (porquê)",
+        "resposta": "Por que"
+      },
+      {
+        "texto": "Chorei ___ caí (porquê)",
+        "resposta": "porque"
+      },
+      {
+        "texto": "Não sei o ___ (porquê)",
+        "resposta": "porquê"
+      },
+      {
+        "texto": "Valor de EMBORA",
+        "resposta": "concessão"
+      },
+      {
+        "texto": "Valor de PORTANTO",
+        "resposta": "conclusão"
+      },
+      {
+        "texto": "Valor de SE em \"Se chover, fico\"",
+        "resposta": "condição"
+      },
+      {
+        "texto": "Valor de QUANDO",
+        "resposta": "tempo"
+      }
+    ],
+    "interj": [
+      {
+        "texto": "Que emoção expressa \"Oba!\"?",
+        "resposta": "alegria"
+      },
+      {
+        "texto": "Que emoção expressa \"Ai!\"?",
+        "resposta": "dor"
+      },
+      {
+        "texto": "Que emoção expressa \"Ufa!\"?",
+        "resposta": "alívio"
+      },
+      {
+        "texto": "Que emoção expressa \"Eca!\"?",
+        "resposta": "nojo"
+      },
+      {
+        "texto": "Que emoção expressa \"Psiu!\"?",
+        "resposta": "pedido de silêncio"
+      },
+      {
+        "texto": "Que emoção expressa \"Tomara!\"?",
+        "resposta": "desejo"
+      },
+      {
+        "texto": "Que emoção expressa \"Nossa!\"?",
+        "resposta": "espanto"
+      },
+      {
+        "texto": "Que emoção expressa \"Socorro!\"?",
+        "resposta": "pedido de ajuda"
+      }
+    ],
+    "adv": [
+      {
+        "texto": "Que tipo de advérbio é \"ontem\"?",
+        "resposta": "tempo"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"aqui\"?",
+        "resposta": "lugar"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"devagar\"?",
+        "resposta": "modo"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"muito\"?",
+        "resposta": "intensidade"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"não\"?",
+        "resposta": "negação"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"talvez\"?",
+        "resposta": "dúvida"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"sim\"?",
+        "resposta": "afirmação"
+      },
+      {
+        "texto": "Que tipo de advérbio é \"longe\"?",
+        "resposta": "lugar"
+      }
+    ],
+    "pegadinha": [
+      {
+        "texto": "Ela está ___ cansada (meio/meia)",
+        "resposta": "meio"
+      },
+      {
+        "texto": "Comi ___ pizza (meio/meia)",
+        "resposta": "meia"
+      },
+      {
+        "texto": "Havia ___ pessoas (menos/menas)",
+        "resposta": "menos"
+      },
+      {
+        "texto": "Moro aqui ___ dez anos (a/há)",
+        "resposta": "há"
+      },
+      {
+        "texto": "Daqui ___ pouco (a/há)",
+        "resposta": "a"
+      },
+      {
+        "texto": "___ você vai? (onde/aonde)",
+        "resposta": "Aonde"
+      },
+      {
+        "texto": "Entre ___ e você (eu/mim)",
+        "resposta": "mim"
+      },
+      {
+        "texto": "Estude, ___ não passa (senão/se não)",
+        "resposta": "senão"
+      }
+    ]
+  }
+}

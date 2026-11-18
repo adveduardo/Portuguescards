@@ -1,0 +1,149 @@
+{
+  "titulo": "Cestos das conjunções",
+  "cestos": [
+    {
+      "id": "adi",
+      "nome": "Adição",
+      "emoji": "➕",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "opo",
+      "nome": "Oposição",
+      "emoji": "⚖️",
+      "cor": "#e74c3c"
+    },
+    {
+      "id": "cau",
+      "nome": "Causa",
+      "emoji": "🔍",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "con",
+      "nome": "Conclusão",
+      "emoji": "🏁",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "cond",
+      "nome": "Condição",
+      "emoji": "❓",
+      "cor": "#8e44ad",
+      "padrao": false
+    },
+    {
+      "id": "conc",
+      "nome": "Concessão",
+      "emoji": "🤝",
+      "cor": "#c2185b",
+      "padrao": false
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "e",
+      "cesto": "adi"
+    },
+    {
+      "palavra": "nem",
+      "cesto": "adi"
+    },
+    {
+      "palavra": "bem como",
+      "cesto": "adi"
+    },
+    {
+      "palavra": "não só... mas também",
+      "cesto": "adi"
+    },
+    {
+      "palavra": "mas",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "porém",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "contudo",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "todavia",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "entretanto",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "no entanto",
+      "cesto": "opo"
+    },
+    {
+      "palavra": "já que",
+      "cesto": "cau"
+    },
+    {
+      "palavra": "visto que",
+      "cesto": "cau"
+    },
+    {
+      "palavra": "uma vez que",
+      "cesto": "cau"
+    },
+    {
+      "palavra": "porquanto",
+      "cesto": "cau"
+    },
+    {
+      "palavra": "portanto",
+      "cesto": "con"
+    },
+    {
+      "palavra": "logo",
+      "cesto": "con"
+    },
+    {
+      "palavra": "por isso",
+      "cesto": "con"
+    },
+    {
+      "palavra": "por conseguinte",
+      "cesto": "con"
+    },
+    {
+      "palavra": "se",
+      "cesto": "cond"
+    },
+    {
+      "palavra": "caso",
+      "cesto": "cond"
+    },
+    {
+      "palavra": "desde que",
+      "cesto": "cond"
+    },
+    {
+      "palavra": "contanto que",
+      "cesto": "cond"
+    },
+    {
+      "palavra": "embora",
+      "cesto": "conc"
+    },
+    {
+      "palavra": "ainda que",
+      "cesto": "conc"
+    },
+    {
+      "palavra": "mesmo que",
+      "cesto": "conc"
+    },
+    {
+      "palavra": "se bem que",
+      "cesto": "conc"
+    }
+  ]
+}

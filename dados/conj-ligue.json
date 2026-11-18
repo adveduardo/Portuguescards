@@ -1,0 +1,163 @@
+{
+  "titulo": "Ligue as frases",
+  "emoji": "🔗",
+  "instrucao": "Escolha o conectivo que deixa a frase com sentido.",
+  "rodadas": [
+    {
+      "destaque": "Choveu muito, ___ o jogo continuou.",
+      "opcoes": [
+        "mas",
+        "portanto",
+        "porque",
+        "quando"
+      ],
+      "correta": "mas",
+      "explica": "MAS indica oposição: era de esperar que o jogo parasse.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Estudei bastante, ___ tirei nota boa.",
+      "opcoes": [
+        "por isso",
+        "embora",
+        "mas",
+        "se"
+      ],
+      "correta": "por isso",
+      "explica": "POR ISSO indica conclusão/consequência.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Fiquei em casa ___ estava doente.",
+      "opcoes": [
+        "porque",
+        "mas",
+        "embora",
+        "portanto"
+      ],
+      "correta": "porque",
+      "explica": "PORQUE indica a causa.",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "___ estivesse cansado, ele foi à festa.",
+      "opcoes": [
+        "Embora",
+        "Porque",
+        "Portanto",
+        "Se"
+      ],
+      "correta": "Embora",
+      "explica": "EMBORA indica concessão: um obstáculo que não impede a ação.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "___ chover, o passeio será cancelado.",
+      "opcoes": [
+        "Se",
+        "Embora",
+        "Mas",
+        "Porque"
+      ],
+      "correta": "Se",
+      "explica": "SE indica condição.",
+      "imagem": "☔"
+    },
+    {
+      "destaque": "Saí mais cedo ___ chegasse a tempo.",
+      "opcoes": [
+        "para que",
+        "porque",
+        "embora",
+        "mas"
+      ],
+      "correta": "para que",
+      "explica": "PARA QUE indica finalidade.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "___ cheguei, todos já tinham saído.",
+      "opcoes": [
+        "Quando",
+        "Embora",
+        "Mas",
+        "Portanto"
+      ],
+      "correta": "Quando",
+      "explica": "QUANDO indica tempo.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "Ele é tão engraçado ___ todos riem.",
+      "opcoes": [
+        "que",
+        "mas",
+        "porque",
+        "se"
+      ],
+      "correta": "que",
+      "explica": "TÃO... QUE indica consequência.",
+      "imagem": "😂"
+    },
+    {
+      "destaque": "Fiz tudo ___ a professora explicou.",
+      "opcoes": [
+        "conforme",
+        "embora",
+        "porque",
+        "mas"
+      ],
+      "correta": "conforme",
+      "explica": "CONFORME indica conformidade.",
+      "imagem": "📋"
+    },
+    {
+      "destaque": "Não fez a tarefa ___ estudou para a prova.",
+      "opcoes": [
+        "nem",
+        "mas",
+        "porque",
+        "se"
+      ],
+      "correta": "nem",
+      "explica": "NEM soma duas negações (= e não).",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "Ou você estuda agora, ___ fica sem tempo depois.",
+      "opcoes": [
+        "ou",
+        "e",
+        "mas",
+        "porque"
+      ],
+      "correta": "ou",
+      "explica": "OU... OU indica alternância.",
+      "imagem": "🔀"
+    },
+    {
+      "destaque": "O ônibus atrasou; ___, perdi a prova.",
+      "opcoes": [
+        "portanto",
+        "embora",
+        "porque",
+        "se"
+      ],
+      "correta": "portanto",
+      "explica": "PORTANTO indica conclusão.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "Ele corre ___ um atleta.",
+      "opcoes": [
+        "como",
+        "porque",
+        "embora",
+        "portanto"
+      ],
+      "correta": "como",
+      "explica": "COMO indica comparação.",
+      "imagem": "🏃"
+    }
+  ]
+}

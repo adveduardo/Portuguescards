@@ -1,0 +1,161 @@
+{
+  "titulo": "Cestos: preposição essencial, acidental ou locução",
+  "cestos": [
+    {
+      "id": "ess",
+      "nome": "Essencial",
+      "emoji": "💎",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "aci",
+      "nome": "Acidental",
+      "emoji": "🔄",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "loc",
+      "nome": "Locução prepositiva",
+      "emoji": "🔗",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "a",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "ante",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "após",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "até",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "com",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "contra",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "de",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "desde",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "em",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "entre",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "para",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "perante",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "por",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "sem",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "sob",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "sobre",
+      "cesto": "ess"
+    },
+    {
+      "palavra": "conforme",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "segundo",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "durante",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "mediante",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "exceto",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "salvo",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "consoante",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "como",
+      "cesto": "aci"
+    },
+    {
+      "palavra": "ao lado de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "em cima de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "apesar de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "por causa de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "a fim de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de acordo com",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "em vez de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "antes de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "perto de",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "através de",
+      "cesto": "loc"
+    }
+  ]
+}

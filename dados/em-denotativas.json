@@ -1,0 +1,247 @@
+{
+  "titulo": "Palavras denotativas",
+  "emoji": "📌",
+  "instrucao": "Que ideia a palavra destacada expressa?",
+  "rodadas": [
+    {
+      "destaque": "[Até] o diretor dançou na festa.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Inclusão",
+      "explica": "Palavra denotativa de inclusão: até, inclusive, também, mesmo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "💃"
+    },
+    {
+      "destaque": "[Só] Pedro faltou.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Exclusão",
+      "explica": "Palavra denotativa de exclusão: só, apenas, somente, exceto, salvo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "[Eis] o resultado da prova.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Designação",
+      "explica": "Palavra denotativa de designação: eis. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "📋"
+    },
+    {
+      "destaque": "Comprei três, [aliás], quatro livros.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Retificação",
+      "explica": "Palavra denotativa de retificação: aliás, ou melhor, ou antes. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Ele é poliglota, [isto é], fala várias línguas.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Explicação",
+      "explica": "Palavra denotativa de explicação: isto é, ou seja, a saber, por exemplo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "🌍"
+    },
+    {
+      "destaque": "[Afinal], quem quebrou o vaso?",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Situação",
+      "explica": "Palavra denotativa de situação: afinal, agora, então. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "🏺"
+    },
+    {
+      "destaque": "Eu [é que] sei o que passei.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Realce",
+      "explica": "Palavra denotativa de realce: é que, lá, cá, só (sei lá, eu é que sei). Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "😤"
+    },
+    {
+      "destaque": "[Felizmente], ninguém se machucou.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Afetividade",
+      "explica": "Palavra denotativa de afetividade: felizmente, infelizmente, ainda bem (muitos livros também os classificam como advérbios). Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "😌"
+    },
+    {
+      "destaque": "Todos vieram, [inclusive] a vovó.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Inclusão",
+      "explica": "Palavra denotativa de inclusão: até, inclusive, também, mesmo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "👵"
+    },
+    {
+      "destaque": "[Apenas] dois alunos acertaram.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Exclusão",
+      "explica": "Palavra denotativa de exclusão: só, apenas, somente, exceto, salvo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "✌️"
+    },
+    {
+      "destaque": "Vou na sexta, [ou melhor], no sábado.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Retificação",
+      "explica": "Palavra denotativa de retificação: aliás, ou melhor, ou antes. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Vários países, [por exemplo] o Japão, adotaram a medida.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Explicação",
+      "explica": "Palavra denotativa de explicação: isto é, ou seja, a saber, por exemplo. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "🗾"
+    },
+    {
+      "destaque": "Sei [lá] o que aconteceu!",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Realce",
+      "explica": "Palavra denotativa de realce: é que, lá, cá, só (sei lá, eu é que sei). Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "🤷"
+    },
+    {
+      "destaque": "[Infelizmente], o show foi cancelado.",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Afetividade",
+      "explica": "Palavra denotativa de afetividade: felizmente, infelizmente, ainda bem (muitos livros também os classificam como advérbios). Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "😞"
+    },
+    {
+      "destaque": "[Então], vamos começar?",
+      "opcoes": [
+        "Inclusão",
+        "Exclusão",
+        "Designação",
+        "Retificação",
+        "Explicação",
+        "Situação",
+        "Realce",
+        "Afetividade"
+      ],
+      "correta": "Situação",
+      "explica": "Palavra denotativa de situação: afinal, agora, então. Essas palavras não se encaixam nas 10 classes gramaticais.",
+      "imagem": "▶️"
+    }
+  ]
+}

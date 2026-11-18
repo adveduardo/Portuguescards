@@ -1,0 +1,127 @@
+{
+  "titulo": "Mas ou mais? Senão ou se não?",
+  "emoji": "👯",
+  "instrucao": "Qual palavra completa a frase?",
+  "rodadas": [
+    {
+      "destaque": "Estudei, ___ não passei.",
+      "opcoes": [
+        "mas",
+        "mais"
+      ],
+      "correta": "mas",
+      "explica": "MAS é conjunção de oposição (= porém). MAIS indica quantidade.",
+      "imagem": "😕"
+    },
+    {
+      "destaque": "Quero ___ sorvete, por favor.",
+      "opcoes": [
+        "mais",
+        "mas"
+      ],
+      "correta": "mais",
+      "explica": "MAIS indica quantidade, intensidade (o oposto de menos).",
+      "imagem": "🍦"
+    },
+    {
+      "destaque": "Ela é inteligente, ___ distraída.",
+      "opcoes": [
+        "mas",
+        "mais"
+      ],
+      "correta": "mas",
+      "explica": "Há oposição de ideias: MAS (= porém).",
+      "imagem": "🙃"
+    },
+    {
+      "destaque": "Estude, ___ não vai passar.",
+      "opcoes": [
+        "senão",
+        "se não"
+      ],
+      "correta": "senão",
+      "explica": "SENÃO = caso contrário, do contrário.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "___ chover, iremos à praia.",
+      "opcoes": [
+        "Se não",
+        "Senão"
+      ],
+      "correta": "Se não",
+      "explica": "SE NÃO = caso não (condição + negação).",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "Ele não fazia nada ___ reclamar.",
+      "opcoes": [
+        "senão",
+        "se não"
+      ],
+      "correta": "senão",
+      "explica": "SENÃO = a não ser, exceto.",
+      "imagem": "😤"
+    },
+    {
+      "destaque": "___ você vai com tanta pressa?",
+      "opcoes": [
+        "Aonde",
+        "Onde"
+      ],
+      "correta": "Aonde",
+      "explica": "AONDE (a + onde) é usado com verbos de movimento: ir a algum lugar.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "___ você mora?",
+      "opcoes": [
+        "Onde",
+        "Aonde"
+      ],
+      "correta": "Onde",
+      "explica": "ONDE indica o lugar em que se está (sem movimento).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Não estudou, ___ ajudou em casa.",
+      "opcoes": [
+        "tampouco",
+        "tão pouco"
+      ],
+      "correta": "tampouco",
+      "explica": "TAMPOUCO = também não.",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "Ganhou ___ dinheiro que nem deu para o lanche.",
+      "opcoes": [
+        "tão pouco",
+        "tampouco"
+      ],
+      "correta": "tão pouco",
+      "explica": "TÃO POUCO = muito pouco (intensidade + quantidade).",
+      "imagem": "🪙"
+    },
+    {
+      "destaque": "Ele fala ___!",
+      "opcoes": [
+        "demais",
+        "de mais"
+      ],
+      "correta": "demais",
+      "explica": "DEMAIS = excessivamente (advérbio de intensidade).",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Não vejo nada ___ nesse vestido.",
+      "opcoes": [
+        "de mais",
+        "demais"
+      ],
+      "correta": "de mais",
+      "explica": "DE MAIS é o contrário de DE MENOS (nada de mais = nada de especial).",
+      "imagem": "👗"
+    }
+  ]
+}

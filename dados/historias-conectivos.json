@@ -1,0 +1,111 @@
+{
+  "titulo": "Dado dos conectivos",
+  "dados": [
+    {
+      "nome": "Início da frase",
+      "cor": "#243049",
+      "faces": [
+        {
+          "emoji": "📚",
+          "texto": "Eu estudei muito"
+        },
+        {
+          "emoji": "🌧️",
+          "texto": "Choveu o dia inteiro"
+        },
+        {
+          "emoji": "🚌",
+          "texto": "O ônibus atrasou"
+        },
+        {
+          "emoji": "🎁",
+          "texto": "Ganhei um presente"
+        },
+        {
+          "emoji": "📶",
+          "texto": "A internet caiu"
+        },
+        {
+          "emoji": "⚽",
+          "texto": "O time perdeu"
+        },
+        {
+          "emoji": "🏠",
+          "texto": "Fiquei em casa"
+        },
+        {
+          "emoji": "📱",
+          "texto": "Comprei um celular novo"
+        },
+        {
+          "emoji": "🍕",
+          "texto": "Pedimos uma pizza"
+        },
+        {
+          "emoji": "😴",
+          "texto": "Dormi tarde"
+        }
+      ]
+    },
+    {
+      "nome": "Conectivo",
+      "cor": "#8e44ad",
+      "faces": [
+        {
+          "emoji": "⚖️",
+          "texto": "mas"
+        },
+        {
+          "emoji": "🔍",
+          "texto": "porque"
+        },
+        {
+          "emoji": "🤝",
+          "texto": "embora"
+        },
+        {
+          "emoji": "🏁",
+          "texto": "portanto"
+        },
+        {
+          "emoji": "⏰",
+          "texto": "quando"
+        },
+        {
+          "emoji": "❓",
+          "texto": "se"
+        },
+        {
+          "emoji": "🎯",
+          "texto": "para que"
+        },
+        {
+          "emoji": "🔗",
+          "texto": "por isso"
+        },
+        {
+          "emoji": "⚡",
+          "texto": "assim que"
+        },
+        {
+          "emoji": "🪞",
+          "texto": "como"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Completem a frase usando o conectivo sorteado!",
+    "Se o conectivo não combinar, reorganizem a frase para que faça sentido.",
+    "Digam que relação o conectivo criou: causa, oposição, tempo...",
+    "Escrevam a frase no caderno."
+  ],
+  "conectivos": [
+    "MAS: oposição",
+    "PORQUE: causa",
+    "EMBORA: concessão",
+    "PORTANTO: conclusão",
+    "SE: condição",
+    "PARA QUE: finalidade"
+  ]
+}
