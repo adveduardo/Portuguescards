@@ -11,6 +11,10 @@
     {
       "arquivo": "quiz-adverbios.json",
       "titulo": "Quiz dos advérbios"
+    },
+    {
+      "arquivo": "quiz-pronomes.json",
+      "titulo": "Quiz dos pronomes"
     }
   ],
   "stop": [
@@ -35,6 +39,10 @@
     {
       "arquivo": "batata-adverbios.json",
       "titulo": "Batata quente dos advérbios"
+    },
+    {
+      "arquivo": "batata-pronomes.json",
+      "titulo": "Batata quente dos pronomes"
     }
   ],
   "trilha": [
@@ -49,6 +57,10 @@
     {
       "arquivo": "trilha-adverbios.json",
       "titulo": "Trilha dos advérbios"
+    },
+    {
+      "arquivo": "trilha-pronomes.json",
+      "titulo": "Trilha dos pronomes"
     }
   ],
   "escape": [
@@ -59,6 +71,10 @@
     {
       "arquivo": "escape-floresta.json",
       "titulo": "O Segredo da Floresta Encantada"
+    },
+    {
+      "arquivo": "escape-pronomes.json",
+      "titulo": "Fuga do Castelo dos Pronomes"
     }
   ],
   "mimica": [
@@ -79,6 +95,10 @@
     {
       "arquivo": "historias-turbine.json",
       "titulo": "Turbine a frase (advérbios)"
+    },
+    {
+      "arquivo": "historias-conjugacao.json",
+      "titulo": "Dado da conjugação"
     }
   ],
   "caminho": [
@@ -99,6 +119,10 @@
     {
       "arquivo": "detetive-bem-mal.json",
       "titulo": "Detetive do bem e do mal"
+    },
+    {
+      "arquivo": "detetive-pronomes.json",
+      "titulo": "Detetive dos pronomes"
     }
   ],
   "pontuacao": [
@@ -121,6 +145,10 @@
     {
       "arquivo": "morfo-adv-cestos.json",
       "titulo": "Cestos dos advérbios"
+    },
+    {
+      "arquivo": "morfo-pron-cestos.json",
+      "titulo": "Cestos dos pronomes"
     }
   ],
   "morfo-frases": [
@@ -131,6 +159,10 @@
     {
       "arquivo": "morfo-adv-frases.json",
       "titulo": "Caça aos advérbios"
+    },
+    {
+      "arquivo": "morfo-pron-frases.json",
+      "titulo": "Caça aos pronomes"
     }
   ],
   "morfo-plural": [
@@ -223,12 +255,76 @@
     {
       "arquivo": "morfo-adv-intensidade.json",
       "titulo": "Termômetro da intensidade (modelo)"
+    },
+    {
+      "arquivo": "morfo-pron-ordene.json",
+      "titulo": "Ordene os pronomes"
     }
   ],
   "morfo-onde": [
     {
       "arquivo": "morfo-onde.json",
       "titulo": "Onde está o bicho? (modelo)"
+    }
+  ],
+  "morfo-pron-troque": [
+    {
+      "arquivo": "morfo-pron-troque.json",
+      "titulo": "Troque pelo pronome (modelo)"
+    }
+  ],
+  "morfo-pron-tipo": [
+    {
+      "arquivo": "morfo-pron-tipo.json",
+      "titulo": "Que tipo de pronome? (modelo)"
+    }
+  ],
+  "morfo-pron-possessivo": [
+    {
+      "arquivo": "morfo-pron-possessivo.json",
+      "titulo": "De quem é? (modelo)"
+    }
+  ],
+  "morfo-pron-tratamento": [
+    {
+      "arquivo": "morfo-pron-tratamento.json",
+      "titulo": "Pronomes de tratamento (modelo)"
+    }
+  ],
+  "morfo-pron-eumim": [
+    {
+      "arquivo": "morfo-pron-eumim.json",
+      "titulo": "Eu ou mim? (modelo)"
+    }
+  ],
+  "morfo-pron-comigo": [
+    {
+      "arquivo": "morfo-pron-comigo.json",
+      "titulo": "Comigo, contigo, conosco (modelo)"
+    }
+  ],
+  "morfo-pron-interrogativo": [
+    {
+      "arquivo": "morfo-pron-interrogativo.json",
+      "titulo": "Pronomes interrogativos (modelo)"
+    }
+  ],
+  "morfo-pron-demonstrativo": [
+    {
+      "arquivo": "morfo-pron-demonstrativo.json",
+      "titulo": "Este, esse ou aquele? (modelo)"
+    }
+  ],
+  "morfo-texto": [
+    {
+      "arquivo": "morfo-pron-texto.json",
+      "titulo": "Arrume o texto (modelo)"
+    }
+  ],
+  "morfo-perto": [
+    {
+      "arquivo": "morfo-perto.json",
+      "titulo": "Perto ou longe? (modelo)"
     }
   ]
 }

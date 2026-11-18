@@ -1,0 +1,134 @@
+{
+  "titulo": "Dado da conjugação",
+  "dados": [
+    {
+      "nome": "Pronome",
+      "cor": "#e67e22",
+      "faces": [
+        {
+          "emoji": "🙋",
+          "texto": "eu"
+        },
+        {
+          "emoji": "👦",
+          "texto": "ele"
+        },
+        {
+          "emoji": "👧",
+          "texto": "ela"
+        },
+        {
+          "emoji": "👫",
+          "texto": "nós"
+        },
+        {
+          "emoji": "🧑‍🤝‍🧑",
+          "texto": "vocês"
+        },
+        {
+          "emoji": "👨‍👨‍👦",
+          "texto": "eles"
+        },
+        {
+          "emoji": "👩‍👩‍👧",
+          "texto": "elas"
+        },
+        {
+          "emoji": "🫵",
+          "texto": "você"
+        }
+      ]
+    },
+    {
+      "nome": "Verbo",
+      "cor": "#e74c3c",
+      "faces": [
+        {
+          "emoji": "🏃",
+          "texto": "correr"
+        },
+        {
+          "emoji": "🎤",
+          "texto": "cantar"
+        },
+        {
+          "emoji": "🍝",
+          "texto": "comer"
+        },
+        {
+          "emoji": "🤸",
+          "texto": "brincar"
+        },
+        {
+          "emoji": "😴",
+          "texto": "dormir"
+        },
+        {
+          "emoji": "📚",
+          "texto": "estudar"
+        },
+        {
+          "emoji": "🦘",
+          "texto": "pular"
+        },
+        {
+          "emoji": "🖍️",
+          "texto": "desenhar"
+        },
+        {
+          "emoji": "📖",
+          "texto": "ler"
+        },
+        {
+          "emoji": "🥤",
+          "texto": "beber"
+        }
+      ]
+    },
+    {
+      "nome": "Quando",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "📅",
+          "texto": "ontem"
+        },
+        {
+          "emoji": "☀️",
+          "texto": "hoje"
+        },
+        {
+          "emoji": "🔮",
+          "texto": "amanhã"
+        },
+        {
+          "emoji": "⏱️",
+          "texto": "agora"
+        },
+        {
+          "emoji": "🔁",
+          "texto": "todos os dias"
+        },
+        {
+          "emoji": "⏪",
+          "texto": "na semana passada"
+        },
+        {
+          "emoji": "⏩",
+          "texto": "na semana que vem"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Formem a frase com o verbo certo!",
+    "Quem fala a frase primeiro?",
+    "Escrevam a frase no caderno!"
+  ],
+  "conectivos": [
+    "Ontem → passado (eu corri)",
+    "Hoje / todo dia → presente (eu corro)",
+    "Amanhã → futuro (eu vou correr)",
+    "Nós corremos • Eles correm"
+  ]
+}

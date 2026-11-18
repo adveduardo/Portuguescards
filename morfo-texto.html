@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrume o Texto</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #instrucao{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;margin:6px 0}
+  #folha{background:#fffdf6;border-radius:24px;padding:20px 30px;margin:8px auto;max-width:1100px;box-shadow:0 8px 0 #0001;
+    background-image:repeating-linear-gradient(transparent 0 calc(1.9em - 2px),#dbe7f5 calc(1.9em - 2px) 1.9em);font-size:clamp(1.4rem,3.2vw,2.2rem);line-height:1.9em}
+  #folha h2{text-align:left;margin:0 0 4px;font-size:1.1em}
+  .rep{background:#ffe066;border-radius:10px;padding:0 8px;cursor:pointer;font-weight:bold;border:3px solid transparent;font-family:inherit;font-size:inherit;color:inherit;line-height:1.4}
+  .rep.ativa{border-color:var(--azul);box-shadow:0 0 0 4px #2f80ed33}
+  .rep.certa{background:#c3f0d1;color:#1e7a43;cursor:default}
+  .rep.revelada{background:#ffd9d9;color:#a33;cursor:default}
+  #escolha{text-align:center;min-height:90px;margin:8px 0}
+  #escolha .titulo{font-weight:bold;font-size:1.2rem;margin-bottom:6px}
+  #escolha button{font-size:clamp(1.3rem,3vw,2rem);padding:12px 26px;margin:4px;color:#fff}
+  #resultado{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>✍️ Arrume o Texto (sem repetição)</h1>
+  <div class="cartao">
+    <h2>1. Textos (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <p class="dica">No JSON, cada repetição é marcada assim: <b>[O Pedro|Ele|Ela|Eles]</b>, com o texto repetido, depois o pronome certo e depois as opções erradas.</p>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Cada repetição trocada certo de primeira vale 1 ponto.</p>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="instrucao"></div>
+  <div id="folha"></div>
+  <div id="escolha"></div>
+  <div id="resultado"></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir o texto</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próximo texto</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60'];
+let textos = null, fila = [], atual = null, n = 0, total = 0, placar = null, ativa = null;
+
+// "texto [repetição|certa|errada|errada] texto" -> partes
+function analisar(t){
+  const partes = [], re = /\[([^\]]+)\]/g; let m, ultimo = 0;
+  while ((m = re.exec(t))){
+    if (m.index > ultimo) partes.push({tipo: 'txt', t: t.slice(ultimo, m.index)});
+    const op = m[1].split('|').map(x => x.trim()).filter(Boolean);
+    if (op.length >= 3) partes.push({tipo: 'rep', original: op[0], certa: op[1], erradas: op.slice(2), estado: 'aberta', tentativas: 0});
+    else partes.push({tipo: 'txt', t: op[0] || ''});
+    ultimo = m.index + m[0].length;
+  }
+  if (ultimo < t.length) partes.push({tipo: 'txt', t: t.slice(ultimo)});
+  return partes;
+}
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.textos)) return AV.avisar('JSON inválido: falta a lista "textos".');
+  textos = d.textos.filter(x => x && x.texto).map(x => ({titulo: x.titulo || '', imagem: x.imagem || '', texto: String(x.texto)}))
+    .filter(x => analisar(x.texto).some(p => p.tipo === 'rep'));
+  $('infoJson').textContent = `${d.titulo || 'Textos'} • ${textos.length} textos` + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-texto', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-pron-texto.json', 'modelo-arrume-o-texto.json');
+
+function comecar(){
+  if (!textos || !textos.length) return AV.avisar('Carregue um JSON de textos.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(textos); total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+function proxima(){
+  if (!fila.length) return fim();
+  const t = fila.shift(); n++;
+  atual = {titulo: t.titulo, imagem: t.imagem, partes: analisar(t.texto)}; ativa = null;
+  $('contador').textContent = `Texto ${n} de ${total}`;
+  $('instrucao').textContent = placar.prefixo() + 'O texto repete muito! Toque nas partes amarelas e troque por um pronome.';
+  $('resultado').textContent = ''; $('escolha').innerHTML = ''; $('btnProxima').hidden = true;
+  desenhar();
+}
+function desenhar(){
+  $('folha').innerHTML = (atual.titulo ? `<h2>${AV.esc(atual.imagem)} ${AV.esc(atual.titulo)}</h2>` : '') +
+    atual.partes.map((p, i) => p.tipo === 'txt' ? AV.esc(p.t)
+      : `<button class="rep ${p.estado === 'certa' ? 'certa' : p.estado === 'revelada' ? 'revelada' : ''} ${ativa === i ? 'ativa' : ''}" data-i="${i}">${AV.esc(p.estado === 'aberta' ? p.original : p.certa)}</button>`).join('');
+  $('folha').querySelectorAll('.rep').forEach(b => b.onclick = () => abrir(+b.dataset.i));
+}
+function abrir(i){
+  const p = atual.partes[i]; if (p.estado !== 'aberta') return;
+  ativa = i; desenhar();
+  $('escolha').innerHTML = `<div class="titulo">Trocar "${AV.esc(p.original)}" por:</div>` +
+    M.embaralhar([p.certa].concat(p.erradas)).map((o, k) => `<button data-o="${AV.esc(o)}" style="background:${CORES[k % 4]}">${AV.esc(o)}</button>`).join('');
+  $('escolha').querySelectorAll('button').forEach(b => b.onclick = () => escolher(i, b));
+}
+function escolher(i, b){
+  const p = atual.partes[i];
+  if (b.dataset.o === p.certa){
+    if (p.tentativas === 0) placar.pontuar(1);
+    p.estado = 'certa'; AV.tom(880, .12, 'triangle', .15);
+    $('resultado').textContent = `✅ Isso! "${p.original}" vira "${p.certa}".`;
+  } else {
+    p.tentativas++; AV.erro();
+    b.disabled = true; b.style.opacity = .35;
+    if (p.tentativas >= 2){ p.estado = 'revelada'; $('resultado').textContent = `💡 O certo era "${p.certa}".`; }
+    else { $('resultado').textContent = `❌ "${b.dataset.o}" não combina. Pense: é masculino ou feminino? Um ou mais de um?`; return; }
+  }
+  ativa = null; $('escolha').innerHTML = ''; desenhar();
+  if (atual.partes.every(x => x.tipo === 'txt' || x.estado !== 'aberta')) terminou();
+}
+const textoFinal = () => atual.partes.map(p => p.tipo === 'txt' ? p.t : (p.estado === 'aberta' ? p.original : p.certa)).join('');
+function terminou(){
+  $('resultado').textContent = '🎉 Texto arrumado! Ficou muito melhor sem tantas repetições.';
+  AV.fanfarra(); AV.confete();
+  if (AV.som) setTimeout(() => AV.falar(textoFinal()), 600);
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próximo texto' : '🏆 Ver resultado';
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnOuvir').onclick = () => atual && AV.falar(textoFinal());
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

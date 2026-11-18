@@ -1,0 +1,60 @@
+{
+  "titulo": "Ordene os pronomes",
+  "sequencias": [
+    {
+      "titulo": "Do mais perto ao mais longe",
+      "esquerda": "👆 perto de quem fala",
+      "direita": "longe dos dois 👉",
+      "itens": [
+        "este",
+        "esse",
+        "aquele"
+      ],
+      "explica": "ESTE: perto de quem fala; ESSE: perto de quem ouve; AQUELE: longe dos dois."
+    },
+    {
+      "titulo": "Isto, isso ou aquilo?",
+      "esquerda": "👆 perto",
+      "direita": "longe 👉",
+      "itens": [
+        "isto",
+        "isso",
+        "aquilo"
+      ],
+      "explica": "ISTO, ISSO e AQUILO seguem a mesma regra de ESTE, ESSE e AQUELE."
+    },
+    {
+      "titulo": "As pessoas do discurso (singular)",
+      "esquerda": "1ª pessoa",
+      "direita": "3ª pessoa",
+      "itens": [
+        "eu",
+        "tu",
+        "ele"
+      ],
+      "explica": "1ª pessoa: quem fala (EU). 2ª: com quem se fala (TU). 3ª: de quem se fala (ELE)."
+    },
+    {
+      "titulo": "As pessoas do discurso (plural)",
+      "esquerda": "1ª pessoa",
+      "direita": "3ª pessoa",
+      "itens": [
+        "nós",
+        "vós",
+        "eles"
+      ],
+      "explica": "NÓS (1ª), VÓS (2ª) e ELES (3ª). Hoje, no lugar de VÓS, quase sempre usamos VOCÊS."
+    },
+    {
+      "titulo": "Possessivos na ordem das pessoas",
+      "esquerda": "1ª pessoa",
+      "direita": "3ª pessoa",
+      "itens": [
+        "meu",
+        "teu",
+        "seu"
+      ],
+      "explica": "MEU (de mim), TEU (de ti), SEU (dele ou de você)."
+    }
+  ]
+}

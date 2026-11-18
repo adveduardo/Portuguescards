@@ -1,0 +1,234 @@
+{
+  "titulo": "Cestos dos pronomes",
+  "cestos": [
+    {
+      "id": "pessoal",
+      "nome": "Pessoais",
+      "emoji": "🙋",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "possessivo",
+      "nome": "Possessivos",
+      "emoji": "🎒",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "demonstrativo",
+      "nome": "Demonstrativos",
+      "emoji": "👉",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "tratamento",
+      "nome": "Tratamento",
+      "emoji": "🎩",
+      "cor": "#8e44ad",
+      "padrao": false
+    },
+    {
+      "id": "interrogativo",
+      "nome": "Interrogativos",
+      "emoji": "❓",
+      "cor": "#c2185b",
+      "padrao": false
+    },
+    {
+      "id": "indefinido",
+      "nome": "Indefinidos",
+      "emoji": "🌫️",
+      "cor": "#16a085",
+      "padrao": false
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "eu",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "tu",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "ele",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "ela",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "nós",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "eles",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "elas",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "me",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "te",
+      "cesto": "pessoal"
+    },
+    {
+      "palavra": "meu",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "minha",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "teu",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "tua",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "seu",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "sua",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "nosso",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "nossa",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "dele",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "dela",
+      "cesto": "possessivo"
+    },
+    {
+      "palavra": "este",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "esta",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "esse",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "essa",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "aquele",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "aquela",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "isto",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "isso",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "aquilo",
+      "cesto": "demonstrativo"
+    },
+    {
+      "palavra": "você",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "senhor",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "senhora",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "Vossa Majestade",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "Vossa Excelência",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "Vossa Alteza",
+      "cesto": "tratamento"
+    },
+    {
+      "palavra": "quem",
+      "cesto": "interrogativo"
+    },
+    {
+      "palavra": "qual",
+      "cesto": "interrogativo"
+    },
+    {
+      "palavra": "quais",
+      "cesto": "interrogativo"
+    },
+    {
+      "palavra": "quantos",
+      "cesto": "interrogativo"
+    },
+    {
+      "palavra": "alguém",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "ninguém",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "tudo",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "nada",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "todos",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "cada",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "algum",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "nenhum",
+      "cesto": "indefinido"
+    },
+    {
+      "palavra": "vários",
+      "cesto": "indefinido"
+    }
+  ]
+}

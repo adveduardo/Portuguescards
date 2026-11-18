@@ -1,0 +1,36 @@
+{
+  "titulo": "Arrume o texto (sem repetição)",
+  "como_marcar": "Marque cada repetição assim: [texto repetido|pronome certo|opção errada|opção errada]",
+  "textos": [
+    {
+      "titulo": "A bola nova",
+      "imagem": "⚽",
+      "texto": "O Pedro ganhou uma bola nova. [O Pedro|Ele|Ela|Eles] levou a bola para a escola. Na hora do recreio, [o Pedro|ele|ela|nós] chamou os amigos para jogar. [Os amigos|Eles|Ele|Elas] adoraram [a bola nova do Pedro|a bola dele|a bola dela|a bola deles]!"
+    },
+    {
+      "titulo": "A gata Mimi",
+      "imagem": "🐱",
+      "texto": "A Mimi é uma gata muito curiosa. [A Mimi|Ela|Ele|Elas] gosta de subir no telhado. Todo dia, [a Mimi|ela|ele|eles] observa os passarinhos. Os passarinhos ficam assustados quando [os passarinhos|eles|ela|nós] veem a Mimi."
+    },
+    {
+      "titulo": "As irmãs cantoras",
+      "imagem": "🎤",
+      "texto": "Ana e Bia são irmãs. [Ana e Bia|Elas|Eles|Ela] estudam na mesma escola. No fim de semana, [Ana e Bia|elas|eles|nós] fazem um show para a família. A família adora o show [de Ana e Bia|delas|deles|dela]."
+    },
+    {
+      "titulo": "O piquenique",
+      "imagem": "🧺",
+      "texto": "Eu e meus amigos fizemos um piquenique. [Eu e meus amigos|Nós|Eles|Eu] levamos sanduíches e suco. Depois de comer, [eu e meus amigos|nós|vocês|eles] brincamos de pega-pega."
+    },
+    {
+      "titulo": "O cachorro do vizinho",
+      "imagem": "🐶",
+      "texto": "O vizinho tem um cachorro chamado Totó. [O Totó|Ele|Ela|Eles] late quando alguém passa na rua. O vizinho cuida muito bem [do Totó|dele|dela|deles]."
+    },
+    {
+      "titulo": "Os livros novos",
+      "imagem": "📚",
+      "texto": "A professora Lúcia trouxe livros novos. [A professora Lúcia|Ela|Ele|Elas] colocou os livros na estante. Os livros eram coloridos, e [os livros|eles|elas|ele] tinham muitas figuras. Os alunos agradeceram [à professora Lúcia|a ela|a ele|a elas]."
+    }
+  ]
+}

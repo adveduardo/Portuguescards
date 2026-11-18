@@ -1,0 +1,178 @@
+{
+  "titulo": "Perto ou longe? (este, esse, aquele)",
+  "quemFala": {
+    "emoji": "🧒",
+    "nome": "Lucas"
+  },
+  "quemOuve": {
+    "emoji": "👧",
+    "nome": "Bia"
+  },
+  "rodadas": [
+    {
+      "objeto": "⚽",
+      "posicao": "falante",
+      "frase": "___ bola é minha.",
+      "opcoes": [
+        "Esta",
+        "Essa",
+        "Aquela"
+      ],
+      "correta": "Esta"
+    },
+    {
+      "objeto": "📕",
+      "posicao": "ouvinte",
+      "frase": "___ livro é seu?",
+      "opcoes": [
+        "Esse",
+        "Este",
+        "Aquele"
+      ],
+      "correta": "Esse"
+    },
+    {
+      "objeto": "🏠",
+      "posicao": "longe",
+      "frase": "___ casa é da vovó.",
+      "opcoes": [
+        "Aquela",
+        "Esta",
+        "Essa"
+      ],
+      "correta": "Aquela"
+    },
+    {
+      "objeto": "🎈",
+      "posicao": "falante",
+      "frase": "___ balão é vermelho.",
+      "opcoes": [
+        "Este",
+        "Esse",
+        "Aquele"
+      ],
+      "correta": "Este"
+    },
+    {
+      "objeto": "🧸",
+      "posicao": "ouvinte",
+      "frase": "Me empresta ___ ursinho?",
+      "opcoes": [
+        "esse",
+        "este",
+        "aquele"
+      ],
+      "correta": "esse"
+    },
+    {
+      "objeto": "🌳",
+      "posicao": "longe",
+      "frase": "___ árvore é muito alta!",
+      "opcoes": [
+        "Aquela",
+        "Esta",
+        "Essa"
+      ],
+      "correta": "Aquela"
+    },
+    {
+      "objeto": "🍎",
+      "posicao": "falante",
+      "frase": "Vou comer ___ maçã.",
+      "opcoes": [
+        "esta",
+        "essa",
+        "aquela"
+      ],
+      "correta": "esta"
+    },
+    {
+      "objeto": "✏️",
+      "posicao": "ouvinte",
+      "frase": "___ lápis é novo?",
+      "opcoes": [
+        "Esse",
+        "Este",
+        "Aquele"
+      ],
+      "correta": "Esse"
+    },
+    {
+      "objeto": "🚗",
+      "posicao": "longe",
+      "frase": "___ carro é do meu tio.",
+      "opcoes": [
+        "Aquele",
+        "Este",
+        "Esse"
+      ],
+      "correta": "Aquele"
+    },
+    {
+      "objeto": "🎁",
+      "posicao": "falante",
+      "frase": "O que é ___? É um presente!",
+      "opcoes": [
+        "isto",
+        "isso",
+        "aquilo"
+      ],
+      "correta": "isto"
+    },
+    {
+      "objeto": "📦",
+      "posicao": "ouvinte",
+      "frase": "O que é ___ que você está segurando?",
+      "opcoes": [
+        "isso",
+        "isto",
+        "aquilo"
+      ],
+      "correta": "isso"
+    },
+    {
+      "objeto": "🛸",
+      "posicao": "longe",
+      "frase": "O que é ___ lá no céu?",
+      "opcoes": [
+        "aquilo",
+        "isto",
+        "isso"
+      ],
+      "correta": "aquilo"
+    },
+    {
+      "objeto": "🐶",
+      "posicao": "longe",
+      "frase": "___ cachorro é do vizinho.",
+      "opcoes": [
+        "Aquele",
+        "Este",
+        "Esse"
+      ],
+      "correta": "Aquele"
+    },
+    {
+      "objeto": "🍦",
+      "posicao": "ouvinte",
+      "frase": "___ sorvete é de morango?",
+      "opcoes": [
+        "Esse",
+        "Este",
+        "Aquele"
+      ],
+      "correta": "Esse"
+    },
+    {
+      "objeto": "🎒",
+      "posicao": "falante",
+      "frase": "___ mochila é nova.",
+      "opcoes": [
+        "Esta",
+        "Essa",
+        "Aquela"
+      ],
+      "correta": "Esta"
+    }
+  ]
+}

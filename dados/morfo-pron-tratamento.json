@@ -1,0 +1,151 @@
+{
+  "titulo": "Pronomes de tratamento",
+  "emoji": "🎩",
+  "instrucao": "Qual pronome de tratamento usamos?",
+  "rodadas": [
+    {
+      "destaque": "um amigo ou colega",
+      "opcoes": [
+        "você",
+        "Vossa Majestade",
+        "Vossa Excelência"
+      ],
+      "correta": "você",
+      "explica": "VOCÊ é usado com amigos, colegas e pessoas próximas.",
+      "imagem": "🧒",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o rei ou a rainha",
+      "opcoes": [
+        "Vossa Majestade",
+        "Vossa Santidade",
+        "Vossa Excelência"
+      ],
+      "correta": "Vossa Majestade",
+      "explica": "VOSSA MAJESTADE é usado com reis e rainhas.",
+      "imagem": "👑",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o presidente",
+      "opcoes": [
+        "Vossa Excelência",
+        "Vossa Alteza",
+        "Vossa Santidade"
+      ],
+      "correta": "Vossa Excelência",
+      "explica": "Vossa Excelência é usado para altas autoridades: presidente, governador, prefeito, juiz, ministro.",
+      "imagem": "🏛️",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o papa",
+      "opcoes": [
+        "Vossa Santidade",
+        "Vossa Majestade",
+        "você"
+      ],
+      "correta": "Vossa Santidade",
+      "explica": "VOSSA SANTIDADE é usado com o papa.",
+      "imagem": "⛪",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "uma pessoa mais velha, com respeito",
+      "opcoes": [
+        "o senhor / a senhora",
+        "Vossa Santidade",
+        "Vossa Alteza"
+      ],
+      "correta": "o senhor / a senhora",
+      "explica": "O SENHOR e A SENHORA mostram respeito.",
+      "imagem": "👵",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o príncipe ou a princesa",
+      "opcoes": [
+        "Vossa Alteza",
+        "Vossa Excelência",
+        "você"
+      ],
+      "correta": "Vossa Alteza",
+      "explica": "VOSSA ALTEZA é usado com príncipes e princesas.",
+      "imagem": "🤴",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o juiz",
+      "opcoes": [
+        "Vossa Excelência",
+        "Vossa Alteza",
+        "Vossa Santidade"
+      ],
+      "correta": "Vossa Excelência",
+      "explica": "Vossa Excelência é usado para altas autoridades: presidente, governador, prefeito, juiz, ministro.",
+      "imagem": "⚖️",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o governador",
+      "opcoes": [
+        "Vossa Excelência",
+        "Vossa Majestade",
+        "você"
+      ],
+      "correta": "Vossa Excelência",
+      "explica": "Vossa Excelência é usado para altas autoridades: presidente, governador, prefeito, juiz, ministro.",
+      "imagem": "🏢",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o prefeito",
+      "opcoes": [
+        "Vossa Excelência",
+        "Vossa Santidade",
+        "Vossa Alteza"
+      ],
+      "correta": "Vossa Excelência",
+      "explica": "Vossa Excelência é usado para altas autoridades: presidente, governador, prefeito, juiz, ministro.",
+      "imagem": "🏙️",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o reitor de uma universidade",
+      "opcoes": [
+        "Vossa Magnificência",
+        "Vossa Majestade",
+        "você"
+      ],
+      "correta": "Vossa Magnificência",
+      "explica": "VOSSA MAGNIFICÊNCIA é usado com reitores de universidades.",
+      "imagem": "🎓",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o diretor de uma empresa, numa carta formal",
+      "opcoes": [
+        "Vossa Senhoria",
+        "Vossa Santidade",
+        "Vossa Majestade"
+      ],
+      "correta": "Vossa Senhoria",
+      "explica": "VOSSA SENHORIA é usado em cartas e documentos formais.",
+      "imagem": "✉️",
+      "enunciado": "Qual pronome de tratamento usamos para falar com"
+    },
+    {
+      "destaque": "o rei (falando SOBRE ele, que não está ouvindo)",
+      "opcoes": [
+        "Sua Majestade",
+        "Vossa Majestade",
+        "você"
+      ],
+      "correta": "Sua Majestade",
+      "explica": "Para falar COM a pessoa usamos VOSSA; para falar SOBRE ela usamos SUA.",
+      "imagem": "🤫",
+      "enunciado": "Que pronome usamos para falar sobre"
+    }
+  ]
+}

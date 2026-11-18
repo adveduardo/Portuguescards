@@ -1,0 +1,287 @@
+{
+  "titulo": "Que tipo de pronome?",
+  "emoji": "🏷️",
+  "instrucao": "Que tipo de pronome é a palavra destacada?",
+  "rodadas": [
+    {
+      "destaque": "[Eu] gosto de ler.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Pessoal",
+      "explica": "Pronome pessoal: indica as pessoas do discurso (eu, tu, ele, nós, vocês, eles).",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "[Nós] vamos ao cinema.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Pessoal",
+      "explica": "Pronome pessoal: indica as pessoas do discurso (eu, tu, ele, nós, vocês, eles).",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "[Eles] chegaram cedo.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Pessoal",
+      "explica": "Pronome pessoal: indica as pessoas do discurso (eu, tu, ele, nós, vocês, eles).",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Este é o [meu] livro.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Possessivo",
+      "explica": "Pronome possessivo: indica de quem é (meu, seu, nosso, dele).",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "A [nossa] escola é grande.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Possessivo",
+      "explica": "Pronome possessivo: indica de quem é (meu, seu, nosso, dele).",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "O [seu] lápis caiu.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Possessivo",
+      "explica": "Pronome possessivo: indica de quem é (meu, seu, nosso, dele).",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "[Este] caderno é novo.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Demonstrativo",
+      "explica": "Pronome demonstrativo: mostra a posição de algo (este, esse, aquele, isso).",
+      "imagem": "📓"
+    },
+    {
+      "destaque": "[Aquela] casa é azul.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Demonstrativo",
+      "explica": "Pronome demonstrativo: mostra a posição de algo (este, esse, aquele, isso).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "[Isso] é muito legal!",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Demonstrativo",
+      "explica": "Pronome demonstrativo: mostra a posição de algo (este, esse, aquele, isso).",
+      "imagem": "🤩"
+    },
+    {
+      "destaque": "[Você] quer brincar?",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Tratamento",
+      "explica": "Pronome de tratamento: é usado para tratar as pessoas (você, senhor, Vossa Majestade).",
+      "imagem": "🧸"
+    },
+    {
+      "destaque": "[Vossa Majestade] chegou.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Tratamento",
+      "explica": "Pronome de tratamento: é usado para tratar as pessoas (você, senhor, Vossa Majestade).",
+      "imagem": "👑"
+    },
+    {
+      "destaque": "O [senhor] precisa de ajuda?",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Tratamento",
+      "explica": "Pronome de tratamento: é usado para tratar as pessoas (você, senhor, Vossa Majestade).",
+      "imagem": "👴"
+    },
+    {
+      "destaque": "[Quem] bateu na porta?",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Interrogativo",
+      "explica": "Pronome interrogativo: é usado para perguntar (quem, qual, quanto, que).",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "[Qual] é a sua cor favorita?",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Interrogativo",
+      "explica": "Pronome interrogativo: é usado para perguntar (quem, qual, quanto, que).",
+      "imagem": "🎨"
+    },
+    {
+      "destaque": "[Quantos] anos você tem?",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Interrogativo",
+      "explica": "Pronome interrogativo: é usado para perguntar (quem, qual, quanto, que).",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "[Alguém] deixou a porta aberta.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Indefinido",
+      "explica": "Pronome indefinido: fala de algo de um jeito vago (alguém, ninguém, todos, tudo).",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "[Ninguém] faltou hoje.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Indefinido",
+      "explica": "Pronome indefinido: fala de algo de um jeito vago (alguém, ninguém, todos, tudo).",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "[Todos] gostaram do passeio.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Indefinido",
+      "explica": "Pronome indefinido: fala de algo de um jeito vago (alguém, ninguém, todos, tudo).",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "[Tudo] está pronto.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Indefinido",
+      "explica": "Pronome indefinido: fala de algo de um jeito vago (alguém, ninguém, todos, tudo).",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "[Cada] aluno trouxe um livro.",
+      "opcoes": [
+        "Pessoal",
+        "Possessivo",
+        "Demonstrativo",
+        "Tratamento",
+        "Interrogativo",
+        "Indefinido"
+      ],
+      "correta": "Indefinido",
+      "explica": "Pronome indefinido: fala de algo de um jeito vago (alguém, ninguém, todos, tudo).",
+      "imagem": "📚"
+    }
+  ]
+}

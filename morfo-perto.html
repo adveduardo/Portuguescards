@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perto ou Longe?</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #contador{text-align:center;opacity:.7}
+  #cena{position:relative;width:min(92vw,110vh,880px);aspect-ratio:16/7;margin:6px auto;border-radius:26px;overflow:hidden;
+    background:linear-gradient(180deg,#bfe6ff 0%,#e3f4ff 70%);box-shadow:0 8px 0 #0002;--u:9px}
+  #cena .chao{position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,#8fd18f,#6fbf73)}
+  #cena .el{position:absolute;transform:translateX(-50%);line-height:1;text-align:center}
+  #cena .rotulo{font-size:calc(var(--u) * 1.7);font-weight:bold;background:#fff;border-radius:10px;padding:2px 8px;white-space:nowrap;color:var(--texto)}
+  #cena .balao{background:#fff;border-radius:18px;padding:6px 14px;font-size:calc(var(--u) * 2.3);font-weight:bold;white-space:nowrap;box-shadow:0 3px 0 #0002;color:var(--texto)}
+  #cena .balao::after{content:"";position:absolute;left:24px;bottom:-12px;border:8px solid transparent;border-top-color:#fff}
+  #cena .marca{border:4px dashed #ffffffcc;border-radius:50%}
+  #frase{text-align:center;font-size:clamp(1.8rem,4.6vw,3.2rem);font-weight:bold;margin:6px 0}
+  #frase mark{background:#ffe066;border-radius:12px;padding:0 10px}
+  #opcoes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  #opcoes button{font-size:clamp(1.5rem,3.4vw,2.4rem);padding:14px 32px;color:#fff;min-width:170px}
+  #opcoes button.ok{outline:6px solid #fff;box-shadow:0 0 0 12px var(--verde)}
+  #opcoes button.nao{opacity:.45;text-decoration:line-through}
+  #opcoes button.apagado{opacity:.3}
+  #explica{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em}
+  .legendaRegra{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:.95rem;margin-top:4px}
+  .legendaRegra span{background:#fff;border-radius:10px;padding:3px 10px;box-shadow:0 2px 0 #0001}
+</style>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🧍 Perto ou Longe? (este, esse, aquele)</h1>
+  <div class="cartao">
+    <h2>1. Cenas (JSON)</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <p class="dica">Em cada cena, o objeto fica perto de <b>quem fala</b> ("falante"), perto de <b>quem ouve</b> ("ouvinte") ou <b>longe</b> dos dois ("longe").</p>
+  </div>
+  <div class="cartao">
+    <h2>2. Quem joga</h2>
+    <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+  </div>
+  <button id="btnComecar" class="principal">▶️ Começar</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="contador"></div>
+  <div id="cena"></div>
+  <div id="frase"></div>
+  <div id="opcoes"></div>
+  <div id="explica"></div>
+  <div class="legendaRegra"><span>👆 <b>este / esta / isto</b>: perto de quem fala</span><span>🫴 <b>esse / essa / isso</b>: perto de quem ouve</span><span>👉 <b>aquele / aquela / aquilo</b>: longe dos dois</span></div>
+  <div class="linha">
+    <button id="btnOuvir">🔊 Ouvir</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnSair">⏹️ Terminar</button>
+  </div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1>🏆 Resultado</h1>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<script src="jogo-ao-vivo.js"></script>
+<script src="morfologia.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo, M = window.Morfo;
+const CORES = ['#e74c3c', '#2f80ed', '#f39c12'];
+const POS = {falante: {x: 27, y: 15, t: 9}, ouvinte: {x: 66, y: 15, t: 9}, longe: {x: 91, y: 40, t: 5.5}};
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, respondido = false;
+
+function carregar(d, origem){
+  if (!d || !Array.isArray(d.rodadas)) return AV.avisar('JSON inválido: falta a lista "rodadas".');
+  const rod = d.rodadas.filter(r => r && POS[r.posicao] && r.frase && Array.isArray(r.opcoes) && r.opcoes.includes(r.correta))
+    .map(r => ({objeto: r.objeto || '⚽', posicao: r.posicao, frase: String(r.frase), opcoes: r.opcoes.map(String), correta: String(r.correta)}));
+  dados = {titulo: d.titulo || 'Perto ou longe?', fala: d.quemFala || {emoji: '🧒', nome: 'Lucas'}, ouve: d.quemOuve || {emoji: '👧', nome: 'Bia'}, rod};
+  $('infoJson').textContent = `${dados.titulo} • ${rod.length} cenas` + (rod.length < d.rodadas.length ? ` • ⚠️ ${d.rodadas.length - rod.length} ignorada(s)` : '') + (origem ? ` • ${origem}` : '');
+}
+AV.prepararSeletorJson({tipo: 'morfo-perto', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-perto.json', 'modelo-perto-ou-longe.json');
+
+function el(cls, css, html){ const d = document.createElement('div'); d.className = 'el ' + (cls || ''); Object.assign(d.style, css); d.innerHTML = html || ''; $('cena').appendChild(d); return d; }
+function desenharCena(){
+  const c = $('cena'); c.innerHTML = '<div class="chao"></div>';
+  c.style.setProperty('--u', (c.clientWidth / 100) + 'px');
+  el('', {left: '13%', bottom: '14%', fontSize: 'calc(var(--u) * 16)'}, AV.esc(dados.fala.emoji));
+  el('', {left: '52%', bottom: '14%', fontSize: 'calc(var(--u) * 16)'}, AV.esc(dados.ouve.emoji));
+  el('rotulo', {left: '13%', bottom: '3%'}, `🗣️ quem fala: ${AV.esc(dados.fala.nome)}`);
+  el('rotulo', {left: '52%', bottom: '3%'}, `👂 quem ouve: ${AV.esc(dados.ouve.nome)}`);
+  const b = el('balao', {left: '27%', top: '6%', transform: 'translateX(-30%)'}, AV.esc(atual.frase.replace(/_{2,}/, '...')));
+  const p = POS[atual.posicao];
+  el('', {left: p.x + '%', bottom: p.y + '%', fontSize: `calc(var(--u) * ${p.t})`, zIndex: 3}, AV.esc(atual.objeto));
+}
+window.addEventListener('resize', () => { if (atual && $('tJogo').classList.contains('ativa')) desenharCena(); });
+
+function comecar(){
+  if (!dados || !dados.rod.length) return AV.avisar('Carregue um JSON de cenas.');
+  AV.som = $('chkSom').checked;
+  fila = M.embaralhar(dados.rod); total = fila.length; n = 0;
+  placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  AV.mostrarTela('tJogo'); proxima();
+}
+const fraseCom = palavra => {
+  const s = atual.frase.replace(/_{2,}/, palavra);
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+function proxima(){
+  if (!fila.length) return fim();
+  atual = fila.shift(); n++; respondido = false;
+  $('contador').textContent = `${placar.prefixo()}Cena ${n} de ${total}`;
+  desenharCena();
+  $('frase').innerHTML = AV.esc(atual.frase).replace(/_{2,}/, '<mark>?</mark>');
+  $('opcoes').innerHTML = atual.opcoes.map((o, i) => `<button data-o="${AV.esc(o)}" style="background:${CORES[i % 3]}">${AV.esc(o)}</button>`).join('');
+  $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+  $('explica').textContent = ''; $('btnProxima').hidden = true;
+  if (AV.som) AV.falar(`${dados.fala.nome} está falando com ${dados.ouve.nome}. Qual palavra completa a frase?`);
+}
+function responder(b){
+  if (respondido) return;
+  respondido = true;
+  const certo = b.dataset.o === atual.correta;
+  $('opcoes').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.o === atual.correta ? 'ok' : x === b ? 'nao' : 'apagado'));
+  if (certo){ placar.pontuar(1); AV.fanfarra(); AV.confete(); } else AV.erro();
+  const onde = {falante: `está perto de quem fala (${dados.fala.nome}): usamos ESTE, ESTA ou ISTO.`,
+                ouvinte: `está perto de quem ouve (${dados.ouve.nome}): usamos ESSE, ESSA ou ISSO.`,
+                longe: `está longe dos dois: usamos AQUELE, AQUELA ou AQUILO.`}[atual.posicao];
+  $('frase').innerHTML = AV.esc(atual.frase).replace(/_{2,}/, `<mark>${AV.esc(atual.correta)}</mark>`);
+  $('explica').textContent = (certo ? '✅ Isso! ' : `❌ O certo é "${atual.correta}". `) + 'O objeto ' + onde;
+  if (AV.som) AV.falar(fraseCom(atual.correta));
+  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+}
+function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking'), total); AV.fanfarra(); AV.confete(); }
+$('btnComecar').onclick = comecar;
+$('btnOuvir').onclick = () => atual && AV.falar(`${dados.fala.nome} está falando com ${dados.ouve.nome}.`);
+$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
+$('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+</script>
+</body>
+</html>

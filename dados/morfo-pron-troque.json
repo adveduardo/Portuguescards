@@ -1,0 +1,227 @@
+{
+  "titulo": "Troque pelo pronome",
+  "emoji": "🔄",
+  "instrucao": "Qual pronome pode substituir as palavras destacadas?",
+  "rodadas": [
+    {
+      "destaque": "[A Maria] saiu cedo.",
+      "opcoes": [
+        "Ela",
+        "Ele",
+        "Nós"
+      ],
+      "correta": "Ela",
+      "explica": "ELA substitui um nome feminino no singular.",
+      "imagem": "👧"
+    },
+    {
+      "destaque": "[O João] comeu pizza.",
+      "opcoes": [
+        "Ele",
+        "Ela",
+        "Eles"
+      ],
+      "correta": "Ele",
+      "explica": "ELE substitui um nome masculino no singular.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "[Os meninos] jogaram bola.",
+      "opcoes": [
+        "Eles",
+        "Elas",
+        "Ele"
+      ],
+      "correta": "Eles",
+      "explica": "ELES substitui um nome masculino no plural.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "[As meninas] pularam corda.",
+      "opcoes": [
+        "Elas",
+        "Eles",
+        "Ela"
+      ],
+      "correta": "Elas",
+      "explica": "ELAS substitui um nome feminino no plural.",
+      "imagem": "🪢"
+    },
+    {
+      "destaque": "[Eu e a Ana] fomos ao parque.",
+      "opcoes": [
+        "Nós",
+        "Eles",
+        "Vocês"
+      ],
+      "correta": "Nós",
+      "explica": "EU + outra pessoa = NÓS.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "[O cachorro] latiu alto.",
+      "opcoes": [
+        "Ele",
+        "Ela",
+        "Nós"
+      ],
+      "correta": "Ele",
+      "explica": "ELE substitui o cachorro (masculino, singular).",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "[A professora] explicou a lição.",
+      "opcoes": [
+        "Ela",
+        "Ele",
+        "Elas"
+      ],
+      "correta": "Ela",
+      "explica": "ELA substitui a professora.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "[Pedro e Lucas] são primos.",
+      "opcoes": [
+        "Eles",
+        "Elas",
+        "Nós"
+      ],
+      "correta": "Eles",
+      "explica": "Dois meninos: ELES.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "[A vovó e a titia] fizeram um bolo.",
+      "opcoes": [
+        "Elas",
+        "Eles",
+        "Ela"
+      ],
+      "correta": "Elas",
+      "explica": "Duas mulheres: ELAS.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "[Você e o Rafa] vão à festa?",
+      "opcoes": [
+        "Vocês",
+        "Nós",
+        "Eles"
+      ],
+      "correta": "Vocês",
+      "explica": "VOCÊ + outra pessoa = VOCÊS.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "[Os pássaros] cantam de manhã.",
+      "opcoes": [
+        "Eles",
+        "Elas",
+        "Ele"
+      ],
+      "correta": "Eles",
+      "explica": "ELES substitui os pássaros.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "[A Lua] brilha no céu.",
+      "opcoes": [
+        "Ela",
+        "Ele",
+        "Eles"
+      ],
+      "correta": "Ela",
+      "explica": "ELA substitui a Lua (feminino).",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "[Meu irmão e eu] dividimos o quarto.",
+      "opcoes": [
+        "Nós",
+        "Eles",
+        "Vocês"
+      ],
+      "correta": "Nós",
+      "explica": "EU + outra pessoa = NÓS.",
+      "imagem": "🛏️"
+    },
+    {
+      "destaque": "[As flores] estão bonitas.",
+      "opcoes": [
+        "Elas",
+        "Eles",
+        "Ela"
+      ],
+      "correta": "Elas",
+      "explica": "ELAS substitui as flores.",
+      "imagem": "🌸"
+    },
+    {
+      "destaque": "[O livro] está na mesa.",
+      "opcoes": [
+        "Ele",
+        "Ela",
+        "Eles"
+      ],
+      "correta": "Ele",
+      "explica": "ELE substitui o livro.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "[Os gatos e as gatas] dormiram.",
+      "opcoes": [
+        "Eles",
+        "Elas",
+        "Ele"
+      ],
+      "correta": "Eles",
+      "explica": "Quando misturamos masculino e feminino, usamos ELES.",
+      "imagem": "🐱"
+    },
+    {
+      "destaque": "[A Júlia e o Caio] chegaram.",
+      "opcoes": [
+        "Eles",
+        "Elas",
+        "Ela"
+      ],
+      "correta": "Eles",
+      "explica": "Quando misturamos masculino e feminino, usamos ELES.",
+      "imagem": "👫"
+    },
+    {
+      "destaque": "[A chuva] molhou tudo.",
+      "opcoes": [
+        "Ela",
+        "Ele",
+        "Nós"
+      ],
+      "correta": "Ela",
+      "explica": "ELA substitui a chuva.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Eu gosto muito [do Pedro].",
+      "opcoes": [
+        "dele",
+        "dela",
+        "deles"
+      ],
+      "correta": "dele",
+      "explica": "DO PEDRO vira DELE (de + ele).",
+      "imagem": "❤️"
+    },
+    {
+      "destaque": "Esta é a casa [da Maria].",
+      "opcoes": [
+        "dela",
+        "dele",
+        "delas"
+      ],
+      "correta": "dela",
+      "explica": "DA MARIA vira DELA (de + ela).",
+      "imagem": "🏠"
+    }
+  ]
+}

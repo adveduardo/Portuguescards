@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha dos pronomes",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "pessoal": {
+      "nome": "Pessoal",
+      "emoji": "🙋",
+      "cor": "#e67e22"
+    },
+    "possessivo": {
+      "nome": "Possessivo",
+      "emoji": "🎒",
+      "cor": "#2f80ed"
+    },
+    "demonstrativo": {
+      "nome": "Demonstrativo",
+      "emoji": "👉",
+      "cor": "#27ae60"
+    },
+    "tratamento": {
+      "nome": "Tratamento",
+      "emoji": "🎩",
+      "cor": "#8e44ad"
+    },
+    "troca": {
+      "nome": "Troca",
+      "emoji": "🔄",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "pessoal": [
+      {
+        "texto": "Que pronome usamos para falar de nós mesmos?",
+        "resposta": "eu"
+      },
+      {
+        "texto": "Qual pronome substitui \"eu e minha família\"?",
+        "resposta": "nós"
+      },
+      {
+        "texto": "Qual pronome substitui \"as meninas\"?",
+        "resposta": "elas"
+      },
+      {
+        "texto": "Qual pronome substitui \"o menino\"?",
+        "resposta": "ele"
+      },
+      {
+        "texto": "Fale uma frase com VOCÊS.",
+        "resposta": "Exemplo: Vocês são legais."
+      },
+      {
+        "texto": "Qual pronome substitui \"a Ana e o Leo\"?",
+        "resposta": "eles"
+      },
+      {
+        "texto": "Diga um pronome pessoal do plural.",
+        "resposta": "nós, vocês, eles, elas"
+      },
+      {
+        "texto": "Junte COM + EU.",
+        "resposta": "comigo"
+      }
+    ],
+    "possessivo": [
+      {
+        "texto": "O livro é de mim. O livro é...",
+        "resposta": "meu"
+      },
+      {
+        "texto": "A casa é de nós. A casa é...",
+        "resposta": "nossa"
+      },
+      {
+        "texto": "O boné é de você. O boné é...",
+        "resposta": "seu"
+      },
+      {
+        "texto": "A bola é da Bia. A bola é...",
+        "resposta": "dela"
+      },
+      {
+        "texto": "Os carrinhos são do Leo. Os carrinhos são...",
+        "resposta": "dele"
+      },
+      {
+        "texto": "As canetas são de mim. As canetas são...",
+        "resposta": "minhas"
+      },
+      {
+        "texto": "Fale uma frase com NOSSO.",
+        "resposta": "Exemplo: Nosso time ganhou."
+      },
+      {
+        "texto": "Os brinquedos são das meninas. Os brinquedos são...",
+        "resposta": "delas"
+      }
+    ],
+    "demonstrativo": [
+      {
+        "texto": "Algo perto de quem fala: este, esse ou aquele?",
+        "resposta": "este"
+      },
+      {
+        "texto": "Algo perto de quem ouve: este, esse ou aquele?",
+        "resposta": "esse"
+      },
+      {
+        "texto": "Algo longe dos dois: este, esse ou aquele?",
+        "resposta": "aquele"
+      },
+      {
+        "texto": "Complete: ___ lápis aqui na minha mão é azul.",
+        "resposta": "Este"
+      },
+      {
+        "texto": "Aponte para algo longe e fale uma frase com AQUELE.",
+        "resposta": "Exemplo: Aquele quadro é bonito."
+      },
+      {
+        "texto": "Complete: O que é ___ na sua mão?",
+        "resposta": "isso"
+      },
+      {
+        "texto": "Complete: ___ aqui é um presente para você.",
+        "resposta": "Isto"
+      },
+      {
+        "texto": "Complete: O que é ___ lá no alto?",
+        "resposta": "aquilo"
+      }
+    ],
+    "tratamento": [
+      {
+        "texto": "Como falamos com o rei?",
+        "resposta": "Vossa Majestade"
+      },
+      {
+        "texto": "Como falamos com o presidente?",
+        "resposta": "Vossa Excelência"
+      },
+      {
+        "texto": "Como falamos com o papa?",
+        "resposta": "Vossa Santidade"
+      },
+      {
+        "texto": "Como falamos com um colega?",
+        "resposta": "você"
+      },
+      {
+        "texto": "Como falamos com uma pessoa mais velha, com respeito?",
+        "resposta": "o senhor / a senhora"
+      },
+      {
+        "texto": "Como falamos com um príncipe?",
+        "resposta": "Vossa Alteza"
+      },
+      {
+        "texto": "Como falamos com o juiz?",
+        "resposta": "Vossa Excelência"
+      },
+      {
+        "texto": "Falando SOBRE o rei (ele não está ouvindo), dizemos...",
+        "resposta": "Sua Majestade"
+      }
+    ],
+    "troca": [
+      {
+        "texto": "Troque pelo pronome: O cachorro latiu.",
+        "resposta": "Ele latiu."
+      },
+      {
+        "texto": "Troque pelo pronome: A professora chegou.",
+        "resposta": "Ela chegou."
+      },
+      {
+        "texto": "Troque pelo pronome: Eu e o Pedro jogamos.",
+        "resposta": "Nós jogamos."
+      },
+      {
+        "texto": "Troque pelo pronome: As flores cresceram.",
+        "resposta": "Elas cresceram."
+      },
+      {
+        "texto": "Troque pelo pronome: Os pássaros voaram.",
+        "resposta": "Eles voaram."
+      },
+      {
+        "texto": "Troque pelo pronome: Você e a Ana venceram.",
+        "resposta": "Vocês venceram."
+      },
+      {
+        "texto": "Troque pelo pronome: O gato e a gata dormiram.",
+        "resposta": "Eles dormiram."
+      },
+      {
+        "texto": "Troque pelo pronome: Gosto muito da vovó.",
+        "resposta": "Gosto muito dela."
+      }
+    ]
+  }
+}

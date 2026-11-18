@@ -1,0 +1,128 @@
+{
+  "titulo": "Este, esse ou aquele?",
+  "emoji": "👉",
+  "instrucao": "Escolha o pronome demonstrativo certo",
+  "rodadas": [
+    {
+      "destaque": "___ lápis aqui na minha mão é azul.",
+      "opcoes": [
+        "Este",
+        "Esse",
+        "Aquele"
+      ],
+      "correta": "Este",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "___ mochila aí nas suas costas é nova?",
+      "opcoes": [
+        "Essa",
+        "Esta",
+        "Aquela"
+      ],
+      "correta": "Essa",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "___ montanha lá longe é altíssima!",
+      "opcoes": [
+        "Aquela",
+        "Esta",
+        "Essa"
+      ],
+      "correta": "Aquela",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "⛰️"
+    },
+    {
+      "destaque": "___ casaco que estou vestindo é quente.",
+      "opcoes": [
+        "Este",
+        "Esse",
+        "Aquele"
+      ],
+      "correta": "Este",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🧥"
+    },
+    {
+      "destaque": "Me empresta ___ caneta que está com você?",
+      "opcoes": [
+        "essa",
+        "esta",
+        "aquela"
+      ],
+      "correta": "essa",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🖊️"
+    },
+    {
+      "destaque": "Olha ___ avião lá no céu!",
+      "opcoes": [
+        "aquele",
+        "este",
+        "esse"
+      ],
+      "correta": "aquele",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "O que é ___ na sua mão?",
+      "opcoes": [
+        "isso",
+        "isto",
+        "aquilo"
+      ],
+      "correta": "isso",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🤲"
+    },
+    {
+      "destaque": "___ aqui é um presente para você.",
+      "opcoes": [
+        "Isto",
+        "Isso",
+        "Aquilo"
+      ],
+      "correta": "Isto",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "O que é ___ lá no alto da árvore?",
+      "opcoes": [
+        "aquilo",
+        "isto",
+        "isso"
+      ],
+      "correta": "aquilo",
+      "explica": "ESTE/ISTO: perto de quem fala • ESSE/ISSO: perto de quem ouve • AQUELE/AQUILO: longe dos dois.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "Gostei ___ sapato que você está usando.",
+      "opcoes": [
+        "desse",
+        "deste",
+        "daquele"
+      ],
+      "correta": "desse",
+      "explica": "DESSE = DE + ESSE (perto de quem ouve).",
+      "imagem": "👟"
+    },
+    {
+      "destaque": "Eu moro ___ casa aqui.",
+      "opcoes": [
+        "nesta",
+        "nessa",
+        "naquela"
+      ],
+      "correta": "nesta",
+      "explica": "NESTA = EM + ESTA (perto de quem fala).",
+      "imagem": "🏠"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "titulo": "De quem é? (possessivos)",
+  "emoji": "🎒",
+  "instrucao": "Troque as palavras destacadas por um pronome possessivo",
+  "rodadas": [
+    {
+      "destaque": "O caderno é [de mim].",
+      "opcoes": [
+        "meu",
+        "minha",
+        "nosso"
+      ],
+      "correta": "meu",
+      "explica": "DE MIM → MEU (caderno é masculino).",
+      "imagem": "📓"
+    },
+    {
+      "destaque": "A boneca é [de mim].",
+      "opcoes": [
+        "minha",
+        "meu",
+        "nossa"
+      ],
+      "correta": "minha",
+      "explica": "DE MIM → MINHA (boneca é feminino).",
+      "imagem": "🪆"
+    },
+    {
+      "destaque": "Os brinquedos são [de mim].",
+      "opcoes": [
+        "meus",
+        "minhas",
+        "meu"
+      ],
+      "correta": "meus",
+      "explica": "DE MIM → MEUS (brinquedos: masculino plural).",
+      "imagem": "🧸"
+    },
+    {
+      "destaque": "As canetas são [de mim].",
+      "opcoes": [
+        "minhas",
+        "meus",
+        "minha"
+      ],
+      "correta": "minhas",
+      "explica": "DE MIM → MINHAS (canetas: feminino plural).",
+      "imagem": "🖊️"
+    },
+    {
+      "destaque": "A casa é [de nós].",
+      "opcoes": [
+        "nossa",
+        "nosso",
+        "minha"
+      ],
+      "correta": "nossa",
+      "explica": "DE NÓS → NOSSA (casa é feminino).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "O carro é [de nós].",
+      "opcoes": [
+        "nosso",
+        "nossa",
+        "meu"
+      ],
+      "correta": "nosso",
+      "explica": "DE NÓS → NOSSO.",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "Os livros são [de nós].",
+      "opcoes": [
+        "nossos",
+        "nossas",
+        "nosso"
+      ],
+      "correta": "nossos",
+      "explica": "DE NÓS → NOSSOS.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "O boné é [de você].",
+      "opcoes": [
+        "seu",
+        "meu",
+        "nosso"
+      ],
+      "correta": "seu",
+      "explica": "DE VOCÊ → SEU.",
+      "imagem": "🧢"
+    },
+    {
+      "destaque": "A mochila é [de você].",
+      "opcoes": [
+        "sua",
+        "seu",
+        "minha"
+      ],
+      "correta": "sua",
+      "explica": "DE VOCÊ → SUA (mochila é feminino).",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "O cachorro é [do Pedro].",
+      "opcoes": [
+        "dele",
+        "dela",
+        "meu"
+      ],
+      "correta": "dele",
+      "explica": "DO PEDRO → DELE.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "A bicicleta é [da Ana].",
+      "opcoes": [
+        "dela",
+        "dele",
+        "minha"
+      ],
+      "correta": "dela",
+      "explica": "DA ANA → DELA.",
+      "imagem": "🚲"
+    },
+    {
+      "destaque": "Os lápis são [dos meninos].",
+      "opcoes": [
+        "deles",
+        "delas",
+        "dele"
+      ],
+      "correta": "deles",
+      "explica": "DOS MENINOS → DELES.",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "As bolas são [das meninas].",
+      "opcoes": [
+        "delas",
+        "deles",
+        "dela"
+      ],
+      "correta": "delas",
+      "explica": "DAS MENINAS → DELAS.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "A camiseta é [de mim].",
+      "opcoes": [
+        "minha",
+        "meu",
+        "sua"
+      ],
+      "correta": "minha",
+      "explica": "DE MIM → MINHA.",
+      "imagem": "👕"
+    },
+    {
+      "destaque": "O lanche é [de nós].",
+      "opcoes": [
+        "nosso",
+        "nossa",
+        "seu"
+      ],
+      "correta": "nosso",
+      "explica": "DE NÓS → NOSSO.",
+      "imagem": "🥪"
+    }
+  ]
+}

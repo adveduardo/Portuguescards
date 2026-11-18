@@ -1,0 +1,64 @@
+{
+  "titulo": "Fuga do Castelo dos Pronomes",
+  "historia": "O dragão trancou a turma na torre do castelo! Resolvam os desafios dos pronomes para descobrir o código e abrir o portão.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Qual pronome substitui \"a princesa\"?",
+      "imagem": "👸",
+      "opcoes": [
+        "Ela",
+        "Ele",
+        "Nós"
+      ],
+      "correta": "Ela",
+      "dica": "A princesa é uma só e é feminino."
+    },
+    {
+      "pergunta": "Escreva o pronome que completa: É para ___ abrir o portão.",
+      "imagem": "🚪",
+      "resposta": [
+        "eu"
+      ],
+      "dica": "Antes de verbo, usamos EU."
+    },
+    {
+      "pergunta": "Com qual pronome falamos com o rei?",
+      "imagem": "👑",
+      "opcoes": [
+        "Vossa Majestade",
+        "Vossa Santidade",
+        "Você"
+      ],
+      "correta": "Vossa Majestade"
+    },
+    {
+      "pergunta": "Junte COM + EU numa palavra só e escreva.",
+      "imagem": "🤝",
+      "resposta": [
+        "comigo"
+      ],
+      "dica": "COM + NÓS = CONOSCO. E COM + EU?"
+    },
+    {
+      "pergunta": "O tesouro está longe de quem fala e de quem ouve. Complete: ___ baú é o tesouro!",
+      "imagem": "💰",
+      "opcoes": [
+        "Este",
+        "Esse",
+        "Aquele"
+      ],
+      "correta": "Aquele",
+      "dica": "Longe dos dois: AQUELE."
+    },
+    {
+      "pergunta": "Escreva o possessivo: A chave é de nós. A chave é ______.",
+      "imagem": "🔑",
+      "resposta": [
+        "nossa"
+      ],
+      "dica": "Chave é feminino: nosso ou nossa?"
+    }
+  ]
+}
