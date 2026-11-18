@@ -1,0 +1,164 @@
+{
+  "titulo": "Trilha das figuras de linguagem",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "pal": {
+      "nome": "Figura de palavra",
+      "emoji": "🌈",
+      "cor": "#2f80ed"
+    },
+    "pen": {
+      "nome": "Figura de pensamento",
+      "emoji": "💭",
+      "cor": "#8e44ad"
+    },
+    "sin": {
+      "nome": "Sintaxe e som",
+      "emoji": "🔊",
+      "cor": "#27ae60"
+    },
+    "vicio": {
+      "nome": "Vício de linguagem",
+      "emoji": "🚫",
+      "cor": "#e74c3c"
+    },
+    "crie": {
+      "nome": "Crie a figura",
+      "emoji": "✍️",
+      "cor": "#e67e22"
+    }
+  },
+  "desafios": {
+    "pal": [
+      {
+        "texto": "Qual figura? Ela é um anjo.",
+        "resposta": "metáfora"
+      },
+      {
+        "texto": "Qual figura? Doce como mel.",
+        "resposta": "comparação"
+      },
+      {
+        "texto": "Qual figura? Li Machado de Assis.",
+        "resposta": "metonímia"
+      },
+      {
+        "texto": "Qual figura? O pé da cama.",
+        "resposta": "catacrese"
+      },
+      {
+        "texto": "Qual figura? Um som macio.",
+        "resposta": "sinestesia"
+      },
+      {
+        "texto": "Qual figura? O Rei do Futebol.",
+        "resposta": "perífrase"
+      }
+    ],
+    "pen": [
+      {
+        "texto": "Qual figura? Chorei um oceano.",
+        "resposta": "hipérbole"
+      },
+      {
+        "texto": "Qual figura? Ele partiu desta para melhor.",
+        "resposta": "eufemismo"
+      },
+      {
+        "texto": "Qual figura? Que ótimo, perdi a prova!",
+        "resposta": "ironia"
+      },
+      {
+        "texto": "Qual figura? Amor e ódio.",
+        "resposta": "antítese"
+      },
+      {
+        "texto": "Qual figura? Um silêncio que grita.",
+        "resposta": "paradoxo"
+      },
+      {
+        "texto": "Qual figura? O sol sorriu.",
+        "resposta": "prosopopeia"
+      }
+    ],
+    "sin": [
+      {
+        "texto": "Qual figura? E ri, e canta, e dança.",
+        "resposta": "polissíndeto"
+      },
+      {
+        "texto": "Qual figura? Vim, vi, venci.",
+        "resposta": "assíndeto"
+      },
+      {
+        "texto": "Qual figura? O rato roeu a roupa.",
+        "resposta": "aliteração"
+      },
+      {
+        "texto": "Qual figura? Toc, toc!",
+        "resposta": "onomatopeia"
+      },
+      {
+        "texto": "Qual figura? Eu gosto de mar; ela, de serra.",
+        "resposta": "zeugma"
+      },
+      {
+        "texto": "Qual figura? Vi com meus próprios olhos.",
+        "resposta": "pleonasmo"
+      }
+    ],
+    "vicio": [
+      {
+        "texto": "Qual vício? Houveram brigas.",
+        "resposta": "solecismo"
+      },
+      {
+        "texto": "Qual vício? O pobrema.",
+        "resposta": "barbarismo"
+      },
+      {
+        "texto": "Qual vício? Subir para cima.",
+        "resposta": "pleonasmo vicioso"
+      },
+      {
+        "texto": "Qual vício? Beijei a boca dela.",
+        "resposta": "cacofonia"
+      },
+      {
+        "texto": "Qual vício? Vou dar um feedback.",
+        "resposta": "estrangeirismo"
+      },
+      {
+        "texto": "Qual vício? A situação da nação causou comoção.",
+        "resposta": "eco"
+      }
+    ],
+    "crie": [
+      {
+        "texto": "Crie uma metáfora sobre o seu time.",
+        "resposta": "Ex.: Meu time é um furacão."
+      },
+      {
+        "texto": "Crie uma hipérbole sobre a fome.",
+        "resposta": "Ex.: Comeria um boi inteiro!"
+      },
+      {
+        "texto": "Crie uma prosopopeia sobre a chuva.",
+        "resposta": "Ex.: A chuva bateu na janela pedindo para entrar."
+      },
+      {
+        "texto": "Crie uma comparação sobre alguém da sala.",
+        "resposta": "Ex.: Ela é rápida como um raio."
+      },
+      {
+        "texto": "Crie uma antítese sobre a escola.",
+        "resposta": "Ex.: Na escola, uns acordam, outros dormem."
+      },
+      {
+        "texto": "Crie uma onomatopeia de animal.",
+        "resposta": "Ex.: muuu, miau, piu-piu"
+      }
+    ]
+  }
+}

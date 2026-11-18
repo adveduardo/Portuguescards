@@ -1,0 +1,231 @@
+{
+  "titulo": "Que tipo de conjunção é o QUE?",
+  "emoji": "🔗",
+  "instrucao": "Que tipo de conjunção é o QUE destacado?",
+  "rodadas": [
+    {
+      "destaque": "Estudou tanto [que] tirou dez.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Consecutiva",
+      "explica": "Tirar dez é a consequência de estudar TANTO. Indica a consequência de algo intenso (tão/tanto... que).",
+      "imagem": "💯"
+    },
+    {
+      "destaque": "Choveu tanto [que] a rua alagou.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Consecutiva",
+      "explica": "Indica a consequência de algo intenso (tão/tanto... que).",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Ela é mais esperta [que] o irmão.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Comparativa",
+      "explica": "Compara dois termos (mais... que, menos... que, melhor que).",
+      "imagem": "🧠"
+    },
+    {
+      "destaque": "Ela canta melhor [que] eu.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Comparativa",
+      "explica": "Compara dois termos (mais... que, menos... que, melhor que).",
+      "imagem": "🎤"
+    },
+    {
+      "destaque": "Fala baixo, [que] o bebê está dormindo.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Explicativa",
+      "explica": "Vem depois de um pedido: fala baixo, pois o bebê está dormindo. Explica o que foi dito antes, em geral depois de uma ordem ou pedido (= pois).",
+      "imagem": "👶"
+    },
+    {
+      "destaque": "Volte cedo, [que] amanhã tem prova.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Explicativa",
+      "explica": "Explica o que foi dito antes, em geral depois de uma ordem ou pedido (= pois).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Não fui à festa, [que] estava doente.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Causal",
+      "explica": "Não fui porque estava doente: a doença causou a falta. Indica a causa: equivale a PORQUE.",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "Fiz sinal [que] se calassem.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Final",
+      "explica": "Fiz sinal para que se calassem. Indica a finalidade: equivale a PARA QUE.",
+      "imagem": "🤫"
+    },
+    {
+      "destaque": "Rezava baixinho [que] ninguém ouvisse.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Final",
+      "explica": "Para que ninguém ouvisse. Indica a finalidade: equivale a PARA QUE.",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "Pouco [que] seja, toda ajuda é bem-vinda.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Concessiva",
+      "explica": "Ainda que seja pouco. Indica uma concessão: equivale a AINDA QUE / EMBORA.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Ele falava [que] falava, sem parar.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Aditiva",
+      "explica": "Falava e falava. Soma ações, em geral repetindo o verbo (= e): fala que fala.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Corre [que] corre o dia inteiro.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Aditiva",
+      "explica": "Corre e corre. Soma ações, em geral repetindo o verbo (= e): fala que fala.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Desejo [que] você seja feliz.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Integrante",
+      "explica": "Desejo ISSO. Introduz oração substantiva: troque a oração por ISSO.",
+      "imagem": "🍀"
+    },
+    {
+      "destaque": "Todos esperavam [que] o time vencesse.",
+      "opcoes": [
+        "Integrante",
+        "Causal",
+        "Comparativa",
+        "Consecutiva",
+        "Final",
+        "Concessiva",
+        "Explicativa",
+        "Aditiva"
+      ],
+      "correta": "Integrante",
+      "explica": "Todos esperavam ISSO. Introduz oração substantiva: troque a oração por ISSO.",
+      "imagem": "⚽"
+    }
+  ]
+}

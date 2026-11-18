@@ -1,0 +1,199 @@
+{
+  "titulo": "Bingo do QUE e do SE",
+  "chamadas": [
+    {
+      "id": "que-rel",
+      "texto": "QUE pronome relativo"
+    },
+    {
+      "id": "que-int",
+      "texto": "QUE conjunção integrante"
+    },
+    {
+      "id": "que-intens",
+      "texto": "QUE advérbio de intensidade"
+    },
+    {
+      "id": "que-prep",
+      "texto": "QUE preposição"
+    },
+    {
+      "id": "que-subst",
+      "texto": "QUE substantivo"
+    },
+    {
+      "id": "que-interr",
+      "texto": "QUE pronome interrogativo"
+    },
+    {
+      "id": "se-apass",
+      "texto": "SE partícula apassivadora"
+    },
+    {
+      "id": "se-indet",
+      "texto": "SE índice de indeterminação do sujeito"
+    },
+    {
+      "id": "se-refl",
+      "texto": "SE pronome reflexivo"
+    },
+    {
+      "id": "se-cond",
+      "texto": "SE conjunção condicional"
+    },
+    {
+      "id": "se-integr",
+      "texto": "SE conjunção integrante"
+    },
+    {
+      "id": "se-parte",
+      "texto": "SE parte integrante do verbo"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "o bolo que fiz",
+      "t": [
+        "que-rel"
+      ]
+    },
+    {
+      "p": "a rua que vi",
+      "t": [
+        "que-rel"
+      ]
+    },
+    {
+      "p": "acho que sim",
+      "t": [
+        "que-int"
+      ]
+    },
+    {
+      "p": "sei que vem",
+      "t": [
+        "que-int"
+      ]
+    },
+    {
+      "p": "que lindo!",
+      "t": [
+        "que-intens"
+      ]
+    },
+    {
+      "p": "que longe!",
+      "t": [
+        "que-intens"
+      ]
+    },
+    {
+      "p": "tenho que ir",
+      "t": [
+        "que-prep"
+      ]
+    },
+    {
+      "p": "temos que sair",
+      "t": [
+        "que-prep"
+      ]
+    },
+    {
+      "p": "um quê especial",
+      "t": [
+        "que-subst"
+      ]
+    },
+    {
+      "p": "um quê de graça",
+      "t": [
+        "que-subst"
+      ]
+    },
+    {
+      "p": "que horas são?",
+      "t": [
+        "que-interr"
+      ]
+    },
+    {
+      "p": "que dia é hoje?",
+      "t": [
+        "que-interr"
+      ]
+    },
+    {
+      "p": "vendem-se casas",
+      "t": [
+        "se-apass"
+      ]
+    },
+    {
+      "p": "alugam-se carros",
+      "t": [
+        "se-apass"
+      ]
+    },
+    {
+      "p": "precisa-se de ajuda",
+      "t": [
+        "se-indet"
+      ]
+    },
+    {
+      "p": "vive-se bem",
+      "t": [
+        "se-indet"
+      ]
+    },
+    {
+      "p": "ela se penteou",
+      "t": [
+        "se-refl"
+      ]
+    },
+    {
+      "p": "ele se feriu",
+      "t": [
+        "se-refl"
+      ]
+    },
+    {
+      "p": "se chover, fico",
+      "t": [
+        "se-cond"
+      ]
+    },
+    {
+      "p": "se der, eu vou",
+      "t": [
+        "se-cond"
+      ]
+    },
+    {
+      "p": "não sei se vem",
+      "t": [
+        "se-integr"
+      ]
+    },
+    {
+      "p": "pergunte se pode",
+      "t": [
+        "se-integr"
+      ]
+    },
+    {
+      "p": "ele se arrependeu",
+      "t": [
+        "se-parte"
+      ]
+    },
+    {
+      "p": "ela se queixou",
+      "t": [
+        "se-parte"
+      ]
+    }
+  ]
+}

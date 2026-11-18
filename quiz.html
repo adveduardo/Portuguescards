@@ -1094,17 +1094,20 @@
         'escolha-conj': 'Conjunção', 'escolha-interj': 'Interjeição', 'escolha-inv': 'Invariáveis (revisão)',
         'escolha-interp': 'Interpretação de texto', 'escolha-red': 'Redação', 'escolha-fo': 'Fonologia',
         'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-sg': 'Significação das palavras',
-        'escolha-em': '🎓 Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês'
+        'escolha-em': '🎓 Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês',
+        'escolha-qs': 'As palavras QUE e SE', 'escolha-fg': 'Figuras e vícios de linguagem'
     };
     const BANCO_ORDEM = ['Interpretação de texto', 'Redação', 'Fonologia', 'Ortografia', 'Acentuação gráfica', 'Significação das palavras',
         'Morfologia', 'Verbo', 'Adjetivo', 'Numeral', 'Advérbio', 'Pronome', 'Preposição', 'Conjunção', 'Interjeição', 'Invariáveis (revisão)',
         'Sintaxe (revisão)', 'Análise sintática', 'Período composto', 'Regência', 'Crase', 'Concordância', 'Colocação pronominal',
+        'As palavras QUE e SE', 'Figuras e vícios de linguagem',
         '🎓 Ensino Médio / ENEM', '🇬🇧 Inglês', '🏆 Quizzes prontos', '🕵️ Detetive (corrija o erro)'];
     function grupoDoBanco(tipo) {
         if (BANCO_NOMES[tipo]) return BANCO_NOMES[tipo];
         if (tipo.indexOf('morfo-adv-') === 0) return 'Advérbio';
         if (tipo.indexOf('morfo-pron-') === 0) return 'Pronome';
         if (['morfo-plural', 'morfo-feminino', 'morfo-grau', 'morfo-tempos', 'morfo-conjugacao'].includes(tipo)) return 'Morfologia';
+        if (tipo.indexOf('escolha-') === 0) return '📦 Outros assuntos';   // assuntos novos do painel entram aqui sozinhos
         return null;   // os outros jogos do painel não são de múltipla escolha
     }
     async function carregarBanco() {

@@ -1,0 +1,83 @@
+{
+  "titulo": "Cestos: QUE relativo ou integrante?",
+  "cestos": [
+    {
+      "id": "rel",
+      "nome": "Pronome relativo",
+      "emoji": "🔙",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "int",
+      "nome": "Conjunção integrante",
+      "emoji": "🔗",
+      "cor": "#e67e22"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "o livro que li",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "a casa que comprei",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "o aluno que faltou",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "a música que ouvi",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "o bolo que fiz",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "os amigos que convidei",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "a carta que chegou",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "a rua que atravessei",
+      "cesto": "rel"
+    },
+    {
+      "palavra": "acho que vai chover",
+      "cesto": "int"
+    },
+    {
+      "palavra": "espero que venha",
+      "cesto": "int"
+    },
+    {
+      "palavra": "sei que você pode",
+      "cesto": "int"
+    },
+    {
+      "palavra": "disse que viria",
+      "cesto": "int"
+    },
+    {
+      "palavra": "é bom que estude",
+      "cesto": "int"
+    },
+    {
+      "palavra": "pediu que saíssemos",
+      "cesto": "int"
+    },
+    {
+      "palavra": "temo que chova",
+      "cesto": "int"
+    },
+    {
+      "palavra": "parece que melhorou",
+      "cesto": "int"
+    }
+  ]
+}

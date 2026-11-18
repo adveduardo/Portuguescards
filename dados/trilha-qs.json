@@ -1,0 +1,180 @@
+{
+  "titulo": "Trilha do QUE e do SE",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "que": {
+      "nome": "Classe do QUE",
+      "emoji": "🧩",
+      "cor": "#2f80ed"
+    },
+    "se": {
+      "nome": "Função do SE",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    },
+    "num": {
+      "nome": "Singular ou plural",
+      "emoji": "🔢",
+      "cor": "#27ae60"
+    },
+    "acento": {
+      "nome": "Que ou quê",
+      "emoji": "✍️",
+      "cor": "#8e44ad"
+    },
+    "frase": {
+      "nome": "Crie a frase",
+      "emoji": "💬",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "que": [
+      {
+        "texto": "Classe do QUE: O bolo que fiz",
+        "resposta": "pronome relativo"
+      },
+      {
+        "texto": "Classe do QUE: Acho que sim",
+        "resposta": "conjunção integrante"
+      },
+      {
+        "texto": "Classe do QUE: Que bonito!",
+        "resposta": "advérbio de intensidade"
+      },
+      {
+        "texto": "Classe do QUE: Tenho que ir",
+        "resposta": "preposição"
+      },
+      {
+        "texto": "Classe do QUE: Um quê de mistério",
+        "resposta": "substantivo"
+      },
+      {
+        "texto": "Classe do QUE: Que horas são?",
+        "resposta": "pronome interrogativo"
+      },
+      {
+        "texto": "Classe do QUE: Eu é que sei",
+        "resposta": "partícula expletiva"
+      },
+      {
+        "texto": "Classe do QUE: Quê! Já acabou?",
+        "resposta": "interjeição"
+      }
+    ],
+    "se": [
+      {
+        "texto": "Função do SE: Vendem-se casas",
+        "resposta": "partícula apassivadora"
+      },
+      {
+        "texto": "Função do SE: Precisa-se de ajuda",
+        "resposta": "índice de indeterminação do sujeito"
+      },
+      {
+        "texto": "Função do SE: Ela se penteou",
+        "resposta": "pronome reflexivo"
+      },
+      {
+        "texto": "Função do SE: Eles se abraçaram",
+        "resposta": "reflexivo recíproco"
+      },
+      {
+        "texto": "Função do SE: Ele se arrependeu",
+        "resposta": "parte integrante do verbo"
+      },
+      {
+        "texto": "Função do SE: Se chover, fico",
+        "resposta": "conjunção condicional"
+      },
+      {
+        "texto": "Função do SE: Não sei se vem",
+        "resposta": "conjunção integrante"
+      },
+      {
+        "texto": "Função do SE: Foi-se embora",
+        "resposta": "partícula expletiva"
+      }
+    ],
+    "num": [
+      {
+        "texto": "Complete: ___-se casas (vender)",
+        "resposta": "Vendem-se"
+      },
+      {
+        "texto": "Complete: ___-se de ajuda (precisar)",
+        "resposta": "Precisa-se"
+      },
+      {
+        "texto": "Complete: ___-se salas (alugar)",
+        "resposta": "Alugam-se"
+      },
+      {
+        "texto": "Complete: ___-se em você (confiar)",
+        "resposta": "Confia-se"
+      },
+      {
+        "texto": "Complete: ___-se gritos (ouvir)",
+        "resposta": "Ouviram-se"
+      },
+      {
+        "texto": "Complete: ___-se de assuntos sérios (tratar)",
+        "resposta": "Trata-se"
+      }
+    ],
+    "acento": [
+      {
+        "texto": "Que ou quê? Rindo de ___?",
+        "resposta": "quê"
+      },
+      {
+        "texto": "Que ou quê? ___ horas são?",
+        "resposta": "Que"
+      },
+      {
+        "texto": "Que ou quê? Um ___ de mistério",
+        "resposta": "quê"
+      },
+      {
+        "texto": "Que ou quê? Não sei o ___ dizer",
+        "resposta": "que"
+      },
+      {
+        "texto": "Que ou quê? Não há de ___",
+        "resposta": "quê"
+      },
+      {
+        "texto": "Que ou quê? Por ___ você saiu?",
+        "resposta": "que"
+      }
+    ],
+    "frase": [
+      {
+        "texto": "Crie uma frase com QUE pronome relativo.",
+        "resposta": "Ex.: A casa que vi é linda."
+      },
+      {
+        "texto": "Crie uma frase com QUE conjunção integrante.",
+        "resposta": "Ex.: Sei que vai dar certo."
+      },
+      {
+        "texto": "Crie uma frase com SE apassivador.",
+        "resposta": "Ex.: Consertam-se bicicletas."
+      },
+      {
+        "texto": "Crie uma frase com SE condicional.",
+        "resposta": "Ex.: Se der tempo, eu vou."
+      },
+      {
+        "texto": "Crie uma frase com SE reflexivo.",
+        "resposta": "Ex.: Ele se machucou."
+      },
+      {
+        "texto": "Crie uma frase com QUE advérbio de intensidade.",
+        "resposta": "Ex.: Que difícil!"
+      }
+    ]
+  }
+}

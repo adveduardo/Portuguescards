@@ -1,0 +1,263 @@
+{
+  "titulo": "Figuras de sintaxe (construção)",
+  "emoji": "🧱",
+  "instrucao": "Qual figura de linguagem aparece?",
+  "rodadas": [
+    {
+      "destaque": "No céu, muitas estrelas.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Elipse",
+      "explica": "Omite um termo fácil de entender pelo contexto (sem ter sido dito antes). Falta o verbo (havia, brilhavam), que não tinha sido dito antes.",
+      "imagem": "🌌"
+    },
+    {
+      "destaque": "Na mesa, apenas pão e café.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Elipse",
+      "explica": "Omite um termo fácil de entender pelo contexto (sem ter sido dito antes). Subentende-se: havia.",
+      "imagem": "☕"
+    },
+    {
+      "destaque": "Ele gosta de futebol; eu, de vôlei.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Zeugma",
+      "explica": "Omite um termo que JÁ apareceu antes na frase. O verbo GOSTO não se repete: já apareceu antes.",
+      "imagem": "🏐"
+    },
+    {
+      "destaque": "O pai lia jornal; a mãe, um romance.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Zeugma",
+      "explica": "Omite um termo que JÁ apareceu antes na frase. O verbo LIA já tinha aparecido.",
+      "imagem": "📰"
+    },
+    {
+      "destaque": "A mim me parece justo.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Pleonasmo",
+      "explica": "Repete uma ideia de propósito, para dar ênfase (pleonasmo literário). A MIM e ME repetem a mesma pessoa, para dar ênfase.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "Vi com meus próprios olhos.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Pleonasmo",
+      "explica": "Repete uma ideia de propósito, para dar ênfase (pleonasmo literário).",
+      "imagem": "👀"
+    },
+    {
+      "destaque": "E corria, e pulava, e gritava, e ria.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Polissíndeto",
+      "explica": "Repete o conectivo (e, nem...) várias vezes.",
+      "imagem": "🤸"
+    },
+    {
+      "destaque": "Nem o frio, nem a chuva, nem o vento nos impediram.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Polissíndeto",
+      "explica": "Repete o conectivo (e, nem...) várias vezes.",
+      "imagem": "🌬️"
+    },
+    {
+      "destaque": "Entrei, sentei, comi, saí.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Assíndeto",
+      "explica": "Junta termos ou orações sem conectivos, só com vírgulas.",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "Chegaram, abraçaram, choraram.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Assíndeto",
+      "explica": "Junta termos ou orações sem conectivos, só com vírgulas.",
+      "imagem": "🤗"
+    },
+    {
+      "destaque": "É tempo de plantar, é tempo de colher, é tempo de agradecer.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Anáfora",
+      "explica": "Repete a mesma palavra ou expressão no começo de frases ou versos.",
+      "imagem": "🌱"
+    },
+    {
+      "destaque": "Quero você aqui, quero você agora, quero você comigo.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Anáfora",
+      "explica": "Repete a mesma palavra ou expressão no começo de frases ou versos.",
+      "imagem": "💞"
+    },
+    {
+      "destaque": "Ouviram do Ipiranga as margens plácidas / De um povo heroico o brado retumbante.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Hipérbato",
+      "explica": "Inverte a ordem normal dos termos da oração. Ordem direta: As margens plácidas do Ipiranga ouviram o brado retumbante de um povo heroico. (Hino Nacional)",
+      "imagem": "🇧🇷"
+    },
+    {
+      "destaque": "Grande foi a alegria daquele dia.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Hipérbato",
+      "explica": "Inverte a ordem normal dos termos da oração. Ordem direta: A alegria daquele dia foi grande.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "Os cariocas somos muito animados.",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Silepse",
+      "explica": "A concordância é feita com a ideia, e não com a palavra escrita. Silepse de pessoa: quem fala se inclui (nós).",
+      "imagem": "🎊"
+    },
+    {
+      "destaque": "Vossa Excelência está cansado?",
+      "opcoes": [
+        "Elipse",
+        "Zeugma",
+        "Pleonasmo",
+        "Polissíndeto",
+        "Assíndeto",
+        "Anáfora",
+        "Hipérbato",
+        "Silepse"
+      ],
+      "correta": "Silepse",
+      "explica": "A concordância é feita com a ideia, e não com a palavra escrita. Silepse de gênero: concorda com a pessoa (um homem), não com a palavra Excelência.",
+      "imagem": "🎩"
+    }
+  ]
+}

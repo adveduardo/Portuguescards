@@ -1,0 +1,247 @@
+{
+  "titulo": "Qual é a classe do QUE?",
+  "emoji": "🧩",
+  "instrucao": "Qual é a classe gramatical do QUE destacado?",
+  "rodadas": [
+    {
+      "destaque": "A menina [que] chegou é minha prima.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Pronome relativo",
+      "explica": "A menina a qual chegou. Retoma um termo anterior (o antecedente) e pode ser trocado por O QUAL / A QUAL.",
+      "imagem": "👧"
+    },
+    {
+      "destaque": "Os livros [que] você me emprestou são ótimos.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Pronome relativo",
+      "explica": "Os livros os quais você me emprestou. Retoma um termo anterior (o antecedente) e pode ser trocado por O QUAL / A QUAL.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "O bairro [que] escolhemos é tranquilo.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Pronome relativo",
+      "explica": "O bairro o qual escolhemos. Retoma um termo anterior (o antecedente) e pode ser trocado por O QUAL / A QUAL.",
+      "imagem": "🏘️"
+    },
+    {
+      "destaque": "Acho [que] vai chover.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Conjunção integrante",
+      "explica": "Acho ISSO. Introduz uma oração substantiva: dá para trocar a oração inteira por ISSO.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "É importante [que] todos participem.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Conjunção integrante",
+      "explica": "ISSO é importante. Introduz uma oração substantiva: dá para trocar a oração inteira por ISSO.",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "Ela pediu [que] fechássemos a porta.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Conjunção integrante",
+      "explica": "Ela pediu ISSO. Introduz uma oração substantiva: dá para trocar a oração inteira por ISSO.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "[Que] filme vocês querem ver?",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Pronome interrogativo",
+      "explica": "Introduz uma pergunta, direta ou indireta.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Não sei [que] dizer.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Pronome interrogativo",
+      "explica": "É uma pergunta indireta: que devo dizer? Introduz uma pergunta, direta ou indireta.",
+      "imagem": "🤔"
+    },
+    {
+      "destaque": "[Que] bonita está a festa!",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Advérbio de intensidade",
+      "explica": "Quão bonita está a festa! Intensifica um adjetivo ou um advérbio (equivale a QUÃO).",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "[Que] longe fica a sua casa!",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Advérbio de intensidade",
+      "explica": "Intensifica o advérbio LONGE. Intensifica um adjetivo ou um advérbio (equivale a QUÃO).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Temos [que] entregar o trabalho hoje.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Preposição",
+      "explica": "Temos DE entregar. Liga dois verbos e equivale a DE (ter que = ter de).",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Aquela canção tem um [quê] de nostalgia.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Substantivo",
+      "explica": "Vem com artigo e leva acento: um quê = um toque, algo.",
+      "imagem": "🎵"
+    },
+    {
+      "destaque": "[Quê]! Você terminou tudo sozinho?",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Interjeição",
+      "explica": "Exprime espanto; leva acento e ponto de exclamação.",
+      "imagem": "😲"
+    },
+    {
+      "destaque": "Nós é [que] organizamos a festa.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Partícula expletiva",
+      "explica": "Nós organizamos a festa. Serve só para dar ênfase: se for retirada, a frase continua com o mesmo sentido.",
+      "imagem": "🎈"
+    },
+    {
+      "destaque": "Por pouco [que] não perdemos o ônibus.",
+      "opcoes": [
+        "Pronome relativo",
+        "Conjunção integrante",
+        "Pronome interrogativo",
+        "Advérbio de intensidade",
+        "Preposição",
+        "Substantivo",
+        "Interjeição",
+        "Partícula expletiva"
+      ],
+      "correta": "Partícula expletiva",
+      "explica": "Por pouco não perdemos o ônibus. Serve só para dar ênfase: se for retirada, a frase continua com o mesmo sentido.",
+      "imagem": "🚌"
+    }
+  ]
+}

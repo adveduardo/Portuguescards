@@ -1,0 +1,83 @@
+{
+  "titulo": "Cestos: SE apassivador ou indeterminador?",
+  "cestos": [
+    {
+      "id": "ap",
+      "nome": "Partícula apassivadora",
+      "emoji": "📦",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "ind",
+      "nome": "Índice de indeterminação",
+      "emoji": "❓",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "vendem-se casas",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "alugam-se salas",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "ouviram-se gritos",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "fazem-se chaves",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "compram-se livros",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "consertam-se rádios",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "lavam-se tapetes",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "fizeram-se reformas",
+      "cesto": "ap"
+    },
+    {
+      "palavra": "precisa-se de ajuda",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "vive-se bem aqui",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "confia-se nele",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "trata-se de amor",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "gosta-se de doce",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "é-se feliz",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "assiste-se a filmes",
+      "cesto": "ind"
+    },
+    {
+      "palavra": "obedece-se à lei",
+      "cesto": "ind"
+    }
+  ]
+}

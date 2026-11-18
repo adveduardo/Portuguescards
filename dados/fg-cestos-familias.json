@@ -1,0 +1,123 @@
+{
+  "titulo": "Cestos: os grupos das figuras de linguagem",
+  "cestos": [
+    {
+      "id": "pal",
+      "nome": "Figuras de palavra",
+      "emoji": "🌈",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "pen",
+      "nome": "Figuras de pensamento",
+      "emoji": "💭",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "sin",
+      "nome": "Figuras de sintaxe",
+      "emoji": "🧱",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "som",
+      "nome": "Figuras de som",
+      "emoji": "🔊",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "metáfora",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "comparação",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "metonímia",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "catacrese",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "sinestesia",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "perífrase",
+      "cesto": "pal"
+    },
+    {
+      "palavra": "antítese",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "paradoxo",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "ironia",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "eufemismo",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "hipérbole",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "gradação",
+      "cesto": "pen"
+    },
+    {
+      "palavra": "elipse",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "zeugma",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "polissíndeto",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "assíndeto",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "anáfora",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "hipérbato",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "silepse",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "anacoluto",
+      "cesto": "sin"
+    },
+    {
+      "palavra": "aliteração",
+      "cesto": "som"
+    },
+    {
+      "palavra": "assonância",
+      "cesto": "som"
+    },
+    {
+      "palavra": "paronomásia",
+      "cesto": "som"
+    }
+  ]
+}

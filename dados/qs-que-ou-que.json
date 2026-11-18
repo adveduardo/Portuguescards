@@ -1,0 +1,87 @@
+{
+  "titulo": "QUE ou QUÊ?",
+  "emoji": "✍️",
+  "instrucao": "Complete com QUE ou QUÊ",
+  "rodadas": [
+    {
+      "destaque": "Você está rindo de ___?",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "quê",
+      "explica": "No fim da frase, o QUE fica tônico e leva acento: de quê?",
+      "imagem": "😂"
+    },
+    {
+      "destaque": "___ horas são?",
+      "opcoes": [
+        "Que",
+        "Quê"
+      ],
+      "correta": "Que",
+      "explica": "No começo da pergunta, o QUE é átono: sem acento.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Ela tem um ___ de artista.",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "quê",
+      "explica": "Com artigo (um quê), é substantivo: leva acento.",
+      "imagem": "🎨"
+    },
+    {
+      "destaque": "Não sei o ___ fazer.",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "que",
+      "explica": "No meio da frase, átono: sem acento.",
+      "imagem": "🤷"
+    },
+    {
+      "destaque": "— Obrigado! — Não há de ___.",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "quê",
+      "explica": "No fim da frase, tônico: não há de quê.",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "___! Você chegou cedo hoje?",
+      "opcoes": [
+        "Que",
+        "Quê"
+      ],
+      "correta": "Quê",
+      "explica": "Interjeição de espanto: leva acento.",
+      "imagem": "😲"
+    },
+    {
+      "destaque": "Vocês querem ___ eu traga o lanche?",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "que",
+      "explica": "Conjunção no meio da frase: sem acento.",
+      "imagem": "🥪"
+    },
+    {
+      "destaque": "Ele saiu sem dizer por ___.",
+      "opcoes": [
+        "que",
+        "quê"
+      ],
+      "correta": "quê",
+      "explica": "POR QUÊ no fim da frase leva acento.",
+      "imagem": "🚪"
+    }
+  ]
+}

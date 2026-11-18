@@ -1,0 +1,69 @@
+{
+  "titulo": "Encontre a figura (ou o vício) no texto",
+  "textos": [
+    {
+      "titulo": "Manhã na escola",
+      "imagem": "🏫",
+      "texto": "O sol acordou cedo e espreguiçou-se no pátio.\nA escola era um formigueiro de vozes.\nTrim!\nO sinal tocou mil vezes naquela manhã.\nOs alunos entraram correndo como um rio apressado.\nNo quadro, o silêncio das letras falava alto.",
+      "perguntas": [
+        {
+          "pergunta": "Em que verso há uma prosopopeia (personificação)?",
+          "evidencia": "O sol acordou cedo e espreguiçou-se no pátio.",
+          "explica": "O sol acorda e se espreguiça como uma pessoa."
+        },
+        {
+          "pergunta": "Em que verso há uma metáfora?",
+          "evidencia": "A escola era um formigueiro de vozes.",
+          "explica": "A escola É um formigueiro: comparação sem COMO."
+        },
+        {
+          "pergunta": "Onde há uma onomatopeia?",
+          "evidencia": "Trim!",
+          "explica": "TRIM imita o som do sinal."
+        },
+        {
+          "pergunta": "Em que verso há uma hipérbole?",
+          "evidencia": "O sinal tocou mil vezes naquela manhã.",
+          "explica": "MIL VEZES é um exagero."
+        },
+        {
+          "pergunta": "Em que verso há uma comparação?",
+          "evidencia": "Os alunos entraram correndo como um rio apressado.",
+          "explica": "Usa o conectivo COMO."
+        },
+        {
+          "pergunta": "Em que verso há um paradoxo?",
+          "evidencia": "No quadro, o silêncio das letras falava alto.",
+          "explica": "Um silêncio que fala alto: ideias opostas juntas."
+        }
+      ]
+    },
+    {
+      "titulo": "O bilhete da Bia",
+      "imagem": "✉️",
+      "texto": "Querida Ana, haviam muitas coisas para te contar.\nOntem eu subi pra cima do morro com meu primo.\nLá de cima, vi o seu irmão com o cachorro dele correndo.\nDepois fizemos um brainstorm para a festa.\nBeijos, Bia.",
+      "perguntas": [
+        {
+          "pergunta": "Onde há um solecismo (erro de concordância)?",
+          "evidencia": "Querida Ana, haviam muitas coisas para te contar.",
+          "explica": "HAVER = existir fica no singular: havia muitas coisas."
+        },
+        {
+          "pergunta": "Onde há um pleonasmo vicioso?",
+          "evidencia": "Ontem eu subi pra cima do morro com meu primo.",
+          "explica": "Quem sobe só pode subir para cima."
+        },
+        {
+          "pergunta": "Onde há uma ambiguidade?",
+          "evidencia": "Lá de cima, vi o seu irmão com o cachorro dele correndo.",
+          "explica": "Quem corria: o irmão ou o cachorro?"
+        },
+        {
+          "pergunta": "Onde há um estrangeirismo?",
+          "evidencia": "Depois fizemos um brainstorm para a festa.",
+          "explica": "BRAINSTORM = chuva de ideias."
+        }
+      ]
+    }
+  ]
+}

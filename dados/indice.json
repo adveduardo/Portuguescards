@@ -87,6 +87,14 @@
     {
       "arquivo": "quiz-en.json",
       "titulo": "🇬🇧 English quiz"
+    },
+    {
+      "arquivo": "quiz-qs.json",
+      "titulo": "Quiz do QUE e do SE"
+    },
+    {
+      "arquivo": "quiz-figuras.json",
+      "titulo": "Quiz das figuras de linguagem"
     }
   ],
   "stop": [
@@ -195,6 +203,14 @@
     {
       "arquivo": "batata-en.json",
       "titulo": "🇬🇧 Hot potato in English"
+    },
+    {
+      "arquivo": "batata-qs.json",
+      "titulo": "Batata quente do QUE e do SE"
+    },
+    {
+      "arquivo": "batata-figuras.json",
+      "titulo": "Batata quente das figuras de linguagem"
     }
   ],
   "trilha": [
@@ -273,6 +289,14 @@
     {
       "arquivo": "trilha-en.json",
       "titulo": "🇬🇧 English board game"
+    },
+    {
+      "arquivo": "trilha-qs.json",
+      "titulo": "Trilha do QUE e do SE"
+    },
+    {
+      "arquivo": "trilha-figuras.json",
+      "titulo": "Trilha das figuras de linguagem"
     }
   ],
   "escape": [
@@ -339,6 +363,14 @@
     {
       "arquivo": "escape-en.json",
       "titulo": "🇬🇧 Escape the Haunted School"
+    },
+    {
+      "arquivo": "escape-qs.json",
+      "titulo": "O Mistério das Palavras Gêmeas"
+    },
+    {
+      "arquivo": "escape-figuras.json",
+      "titulo": "O Museu das Figuras Perdidas"
     }
   ],
   "mimica": [
@@ -407,6 +439,10 @@
     {
       "arquivo": "historias-en-story.json",
       "titulo": "🇬🇧 Story dice"
+    },
+    {
+      "arquivo": "historias-figuras.json",
+      "titulo": "Dado das figuras de linguagem"
     }
   ],
   "caminho": [
@@ -487,6 +523,14 @@
     {
       "arquivo": "detetive-en.json",
       "titulo": "🇬🇧 Grammar Detective"
+    },
+    {
+      "arquivo": "detetive-qs.json",
+      "titulo": "Detetive do QUE e do SE"
+    },
+    {
+      "arquivo": "detetive-vicios.json",
+      "titulo": "Detetive dos vícios de linguagem (barbarismo e solecismo)"
     }
   ],
   "pontuacao": [
@@ -601,6 +645,18 @@
     {
       "arquivo": "en-cestos-cognatos.json",
       "titulo": "🇬🇧 Cognato ou falso cognato?"
+    },
+    {
+      "arquivo": "qs-cestos-que.json",
+      "titulo": "Cestos: QUE relativo ou integrante?"
+    },
+    {
+      "arquivo": "qs-cestos-se.json",
+      "titulo": "Cestos: SE apassivador ou indeterminador?"
+    },
+    {
+      "arquivo": "fg-cestos-familias.json",
+      "titulo": "Cestos: os grupos das figuras de linguagem"
     }
   ],
   "morfo-frases": [
@@ -1181,6 +1237,10 @@
     {
       "arquivo": "marque-en.json",
       "titulo": "🇬🇧 Find it in the text"
+    },
+    {
+      "arquivo": "marque-figuras.json",
+      "titulo": "Encontre a figura (ou o vício) no texto"
     }
   ],
   "etapas": [
@@ -1435,6 +1495,10 @@
     {
       "arquivo": "memoria-en-profissoes.json",
       "titulo": "🇬🇧 Memory: jobs"
+    },
+    {
+      "arquivo": "memoria-figuras.json",
+      "titulo": "Memória das figuras de linguagem"
     }
   ],
   "bingo": [
@@ -1453,6 +1517,14 @@
     {
       "arquivo": "bingo-en-categorias.json",
       "titulo": "🇬🇧 English Bingo: categories"
+    },
+    {
+      "arquivo": "bingo-qs.json",
+      "titulo": "Bingo do QUE e do SE"
+    },
+    {
+      "arquivo": "bingo-figuras.json",
+      "titulo": "Bingo das figuras de linguagem"
     }
   ],
   "escolha-fo": [
@@ -1653,6 +1725,74 @@
     {
       "arquivo": "en-trabalho.json",
       "titulo": "🇬🇧 English at work (entrevista e e-mail)"
+    }
+  ],
+  "escolha-qs": [
+    {
+      "arquivo": "qs-que-classe.json",
+      "titulo": "Qual é a classe do QUE?"
+    },
+    {
+      "arquivo": "qs-que-conjuncao.json",
+      "titulo": "Que tipo de conjunção é o QUE?"
+    },
+    {
+      "arquivo": "qs-que-relativo.json",
+      "titulo": "Pronome relativo ou conjunção integrante?"
+    },
+    {
+      "arquivo": "qs-que-funcao.json",
+      "titulo": "Função sintática do pronome relativo QUE"
+    },
+    {
+      "arquivo": "qs-que-ou-que.json",
+      "titulo": "QUE ou QUÊ?"
+    },
+    {
+      "arquivo": "qs-se-classe.json",
+      "titulo": "Qual é a função do SE?"
+    },
+    {
+      "arquivo": "qs-se-apassivador.json",
+      "titulo": "Partícula apassivadora ou índice de indeterminação?"
+    },
+    {
+      "arquivo": "qs-se-concordancia.json",
+      "titulo": "Verbo + SE: singular ou plural?"
+    }
+  ],
+  "escolha-fg": [
+    {
+      "arquivo": "fg-palavra.json",
+      "titulo": "Figuras de palavra"
+    },
+    {
+      "arquivo": "fg-pensamento.json",
+      "titulo": "Figuras de pensamento"
+    },
+    {
+      "arquivo": "fg-sintaxe.json",
+      "titulo": "Figuras de sintaxe (construção)"
+    },
+    {
+      "arquivo": "fg-som.json",
+      "titulo": "Figuras de som"
+    },
+    {
+      "arquivo": "fg-familias.json",
+      "titulo": "Que tipo de figura é?"
+    },
+    {
+      "arquivo": "fg-vicios.json",
+      "titulo": "Vícios de linguagem"
+    },
+    {
+      "arquivo": "fg-figura-ou-vicio.json",
+      "titulo": "Figura ou vício de linguagem?"
+    },
+    {
+      "arquivo": "fg-revisao.json",
+      "titulo": "Figuras de linguagem: revisão geral"
     }
   ]
 }

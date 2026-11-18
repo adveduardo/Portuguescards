@@ -1,0 +1,82 @@
+{
+  "titulo": "O Museu das Figuras Perdidas",
+  "historia": "As figuras de linguagem fugiram dos quadros do museu! Reconheçam cada uma para devolvê-las aos quadros e descobrir o código da saída.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Quadro 1: \"O museu era um labirinto de cores.\" Qual figura fugiu daqui?",
+      "imagem": "🖼️",
+      "opcoes": [
+        "Metáfora",
+        "Comparação",
+        "Metonímia"
+      ],
+      "correta": "Metáfora",
+      "dica": "Uma coisa É outra, sem COMO."
+    },
+    {
+      "pergunta": "Quadro 2: \"As estátuas cochichavam à noite.\" Qual figura?",
+      "imagem": "🗿",
+      "opcoes": [
+        "Prosopopeia",
+        "Hipérbole",
+        "Eufemismo"
+      ],
+      "correta": "Prosopopeia",
+      "dica": "Estátua não cochicha: ação humana."
+    },
+    {
+      "pergunta": "Quadro 3: escreva a figura — \"Já visitei este museu um milhão de vezes!\"",
+      "imagem": "🔁",
+      "resposta": [
+        "hipérbole",
+        "hiperbole"
+      ],
+      "dica": "Exagero."
+    },
+    {
+      "pergunta": "Quadro 4: \"Crec! O chão de madeira rangeu.\" Qual figura?",
+      "imagem": "🪵",
+      "opcoes": [
+        "Onomatopeia",
+        "Aliteração",
+        "Assonância"
+      ],
+      "correta": "Onomatopeia",
+      "dica": "Imita um som."
+    },
+    {
+      "pergunta": "Quadro 5: \"O guarda viu o ladrão com a lanterna.\" Qual vício de linguagem?",
+      "imagem": "🔦",
+      "opcoes": [
+        "Ambiguidade",
+        "Barbarismo",
+        "Eco"
+      ],
+      "correta": "Ambiguidade",
+      "dica": "Quem estava com a lanterna?"
+    },
+    {
+      "pergunta": "Quadro 6: escreva a figura — \"O quadro era claro e escuro ao mesmo tempo, alegre e triste.\"",
+      "imagem": "🌗",
+      "resposta": [
+        "antítese",
+        "antitese",
+        "paradoxo"
+      ],
+      "dica": "Ideias opostas lado a lado."
+    },
+    {
+      "pergunta": "Quadro 7: \"Haviam muitas pinturas raras.\" Qual vício?",
+      "imagem": "🎨",
+      "opcoes": [
+        "Solecismo",
+        "Arcaísmo",
+        "Cacofonia"
+      ],
+      "correta": "Solecismo",
+      "dica": "Erro de concordância: o certo é HAVIA."
+    }
+  ]
+}

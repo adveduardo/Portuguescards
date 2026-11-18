@@ -1,0 +1,107 @@
+{
+  "titulo": "Verbo + SE: singular ou plural?",
+  "emoji": "🔢",
+  "instrucao": "Complete com a forma correta do verbo",
+  "rodadas": [
+    {
+      "destaque": "___-se apartamentos na praia.",
+      "opcoes": [
+        "Alugam",
+        "Aluga"
+      ],
+      "correta": "Alugam",
+      "explica": "Partícula apassivadora: apartamentos são alugados, então o verbo vai para o plural.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "___-se de vendedores.",
+      "opcoes": [
+        "Precisa",
+        "Precisam"
+      ],
+      "correta": "Precisa",
+      "explica": "PRECISAR DE: índice de indeterminação, verbo no singular.",
+      "imagem": "🛍️"
+    },
+    {
+      "destaque": "___-se muitas reclamações.",
+      "opcoes": [
+        "Ouviram",
+        "Ouviu"
+      ],
+      "correta": "Ouviram",
+      "explica": "Muitas reclamações foram ouvidas: plural.",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "___-se de bons professores.",
+      "opcoes": [
+        "Necessita",
+        "Necessitam"
+      ],
+      "correta": "Necessita",
+      "explica": "NECESSITAR DE: singular.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "___-se aulas particulares.",
+      "opcoes": [
+        "Dão",
+        "Dá"
+      ],
+      "correta": "Dão",
+      "explica": "Aulas são dadas: plural.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "___-se em médicos experientes.",
+      "opcoes": [
+        "Confia",
+        "Confiam"
+      ],
+      "correta": "Confia",
+      "explica": "CONFIAR EM: singular.",
+      "imagem": "🩺"
+    },
+    {
+      "destaque": "___-se roupas usadas.",
+      "opcoes": [
+        "Compram",
+        "Compra"
+      ],
+      "correta": "Compram",
+      "explica": "Roupas são compradas: plural.",
+      "imagem": "👕"
+    },
+    {
+      "destaque": "___-se a festas de aniversário.",
+      "opcoes": [
+        "Vai",
+        "Vão"
+      ],
+      "correta": "Vai",
+      "explica": "IR A: índice de indeterminação, singular.",
+      "imagem": "🎈"
+    },
+    {
+      "destaque": "___-se novas regras.",
+      "opcoes": [
+        "Criaram",
+        "Criou"
+      ],
+      "correta": "Criaram",
+      "explica": "Novas regras foram criadas: plural.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "___-se de todos os detalhes.",
+      "opcoes": [
+        "Cuidou",
+        "Cuidaram"
+      ],
+      "correta": "Cuidou",
+      "explica": "CUIDAR DE: singular.",
+      "imagem": "🔍"
+    }
+  ]
+}

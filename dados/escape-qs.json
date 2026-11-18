@@ -1,0 +1,77 @@
+{
+  "titulo": "O Mistério das Palavras Gêmeas",
+  "historia": "O QUE e o SE trocaram de lugar e trancaram a biblioteca! Descubram a função de cada um para encontrar o código e abrir a porta.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Pista 1: \"O livro QUE você procura está na estante.\" Esse QUE é:",
+      "imagem": "📚",
+      "opcoes": [
+        "pronome relativo",
+        "conjunção integrante",
+        "preposição"
+      ],
+      "correta": "pronome relativo",
+      "dica": "Troque por O QUAL."
+    },
+    {
+      "pergunta": "Pista 2: escreva a forma correta — \"___-se livros raros.\" (vender)",
+      "imagem": "📖",
+      "resposta": [
+        "vendem-se",
+        "vendem se"
+      ],
+      "dica": "Livros são vendidos: plural."
+    },
+    {
+      "pergunta": "Pista 3: \"Precisa-SE de um bibliotecário.\" Esse SE é:",
+      "imagem": "🧑‍🏫",
+      "opcoes": [
+        "índice de indeterminação do sujeito",
+        "partícula apassivadora",
+        "pronome reflexivo"
+      ],
+      "correta": "índice de indeterminação do sujeito",
+      "dica": "PRECISAR DE pede preposição."
+    },
+    {
+      "pergunta": "Pista 4: complete com QUE ou QUÊ — \"O bilhete dizia: procurem por ___?\"",
+      "imagem": "✉️",
+      "resposta": [
+        "quê"
+      ],
+      "dica": "No fim da frase, o QUE leva acento."
+    },
+    {
+      "pergunta": "Pista 5: \"SE vocês acharem a chave, a porta abre.\" Esse SE é:",
+      "imagem": "🔑",
+      "opcoes": [
+        "conjunção condicional",
+        "conjunção integrante",
+        "parte integrante do verbo"
+      ],
+      "correta": "conjunção condicional",
+      "dica": "SE = caso."
+    },
+    {
+      "pergunta": "Pista 6: \"Tenho QUE sair antes do anoitecer.\" Esse QUE equivale a qual palavra?",
+      "imagem": "🌙",
+      "resposta": [
+        "de"
+      ],
+      "dica": "Tenho ___ sair."
+    },
+    {
+      "pergunta": "Pista 7: \"A bibliotecária SE arrependeu de ter trancado a porta.\" Esse SE é:",
+      "imagem": "😔",
+      "opcoes": [
+        "parte integrante do verbo",
+        "pronome reflexivo",
+        "partícula apassivadora"
+      ],
+      "correta": "parte integrante do verbo",
+      "dica": "ARREPENDER-SE só existe com o SE."
+    }
+  ]
+}

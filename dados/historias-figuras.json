@@ -1,0 +1,91 @@
+{
+  "titulo": "Dado das figuras de linguagem",
+  "dados": [
+    {
+      "nome": "Figura",
+      "cor": "#8e44ad",
+      "faces": [
+        {
+          "emoji": "🌈",
+          "texto": "metáfora"
+        },
+        {
+          "emoji": "⚖️",
+          "texto": "comparação"
+        },
+        {
+          "emoji": "🚀",
+          "texto": "hipérbole"
+        },
+        {
+          "emoji": "🗣️",
+          "texto": "prosopopeia"
+        },
+        {
+          "emoji": "💥",
+          "texto": "onomatopeia"
+        },
+        {
+          "emoji": "☯️",
+          "texto": "antítese"
+        },
+        {
+          "emoji": "😏",
+          "texto": "ironia"
+        },
+        {
+          "emoji": "🌸",
+          "texto": "eufemismo"
+        }
+      ]
+    },
+    {
+      "nome": "Tema",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "🏫",
+          "texto": "a escola"
+        },
+        {
+          "emoji": "⚽",
+          "texto": "o futebol"
+        },
+        {
+          "emoji": "🌧️",
+          "texto": "a chuva"
+        },
+        {
+          "emoji": "📱",
+          "texto": "o celular"
+        },
+        {
+          "emoji": "🍔",
+          "texto": "a fome"
+        },
+        {
+          "emoji": "❤️",
+          "texto": "o amor"
+        },
+        {
+          "emoji": "🏙️",
+          "texto": "a cidade"
+        },
+        {
+          "emoji": "🏖️",
+          "texto": "as férias"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Criem uma frase com a figura sobre o tema!",
+    "Escrevam um ou dois versos com a figura!",
+    "Falem em voz alta uma frase com a figura!"
+  ],
+  "conectivos": [
+    "Metáfora: X é Y • Comparação: X é COMO Y",
+    "Hipérbole: exagero • Eufemismo: suavização • Ironia: o contrário",
+    "Prosopopeia: coisa ou animal agindo como gente"
+  ]
+}
