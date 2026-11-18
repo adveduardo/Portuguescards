@@ -1,0 +1,232 @@
+{
+  "titulo": "Termos da oração",
+  "emoji": "🧩",
+  "instrucao": "Qual é a função do termo destacado?",
+  "rodadas": [
+    {
+      "destaque": "[O vento] derrubou a árvore.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Sujeito",
+      "explica": "Sujeito: é de quem se fala e concorda com o verbo.",
+      "imagem": "🌬️"
+    },
+    {
+      "destaque": "O vento derrubou [a árvore].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Objeto direto",
+      "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição.",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "Gosto [de chocolate].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição.",
+      "imagem": "🍫"
+    },
+    {
+      "destaque": "Saímos [de manhã].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Adjunto adverbial",
+      "explica": "Adjunto adverbial: indica circunstância: tempo, lugar, modo, intensidade...",
+      "imagem": "🌅"
+    },
+    {
+      "destaque": "A menina está [cansada].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Predicativo do sujeito",
+      "explica": "Predicativo do sujeito: atribui uma característica ao sujeito.",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "Machado de Assis, [o grande escritor], nasceu no Rio.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Aposto",
+      "explica": "Aposto: explica ou especifica um termo, geralmente entre vírgulas.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "[Maria], venha cá!",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama ou interpela alguém.",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "Entreguei o livro [ao professor].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Os alunos estudaram [muito].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Adjunto adverbial",
+      "explica": "Adjunto adverbial: indica circunstância: tempo, lugar, modo, intensidade...",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "O dia amanheceu [chuvoso].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Predicativo do sujeito",
+      "explica": "Predicativo do sujeito: atribui uma característica ao sujeito.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "[Pedro e Ana] chegaram.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Sujeito",
+      "explica": "Sujeito: é de quem se fala e concorda com o verbo.",
+      "imagem": "👫"
+    },
+    {
+      "destaque": "Comprei [flores] para minha mãe.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Objeto direto",
+      "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição.",
+      "imagem": "💐"
+    },
+    {
+      "destaque": "[Senhores passageiros], apertem os cintos.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Vocativo",
+      "explica": "Vocativo: chama ou interpela alguém.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Brasília, [a capital do país], foi inaugurada em 1960.",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Aposto",
+      "explica": "Aposto: explica ou especifica um termo, geralmente entre vírgulas.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "Confio [em você].",
+      "opcoes": [
+        "Sujeito",
+        "Objeto direto",
+        "Objeto indireto",
+        "Adjunto adverbial",
+        "Predicativo do sujeito",
+        "Aposto",
+        "Vocativo"
+      ],
+      "correta": "Objeto indireto",
+      "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição.",
+      "imagem": "🤝"
+    }
+  ]
+}

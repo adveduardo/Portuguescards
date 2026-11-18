@@ -1,0 +1,211 @@
+{
+  "titulo": "Gêneros textuais do dia a dia",
+  "emoji": "📄",
+  "instrucao": "Leia o texto e identifique o gênero",
+  "rodadas": [
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Recibo",
+      "explica": "Recibo: comprova que um pagamento foi feito: valor, por extenso, motivo, data e assinatura.",
+      "imagem": "🧾",
+      "texto": "Recebi de Maria da Silva a quantia de R$ 350,00 (trezentos e cinquenta reais), referente ao aluguel do mês de março.\nSão Paulo, 5 de abril.\nJosé Pereira"
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Requerimento",
+      "explica": "Requerimento: pedido formal a uma autoridade ou órgão: \"vem requerer\", \"nestes termos, pede deferimento\".",
+      "imagem": "📨",
+      "texto": "Ilmo. Sr. Diretor da Escola Estadual Esperança,\nJoão Souza, aluno do 3º ano da EJA, vem requerer a segunda via do seu histórico escolar.\nNestes termos, pede deferimento."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Bula de remédio",
+      "explica": "Bula de remédio: orienta sobre o medicamento: indicações, posologia, contraindicações, reações adversas.",
+      "imagem": "💊",
+      "texto": "POSOLOGIA: tomar 1 comprimido a cada 8 horas.\nCONTRAINDICAÇÕES: não use em caso de alergia aos componentes da fórmula.\nREAÇÕES ADVERSAS: náusea e sonolência."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Currículo",
+      "explica": "Currículo: apresenta dados, formação e experiência profissional de uma pessoa.",
+      "imagem": "👩‍💼",
+      "texto": "Ana Lima — 34 anos — (11) 9999-0000\nFormação: Ensino Médio completo (EJA, 2024)\nExperiência: auxiliar administrativa (2019–2023)\nCursos: informática básica"
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Notícia",
+      "explica": "Notícia: informa um fato recente: o quê, quem, quando, onde, como e por quê.",
+      "imagem": "📰",
+      "texto": "Uma forte chuva atingiu a zona norte da cidade na noite de ontem. Segundo a Defesa Civil, três bairros ficaram sem energia. Não houve feridos."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Classificado",
+      "explica": "Classificado: anúncio curto de compra, venda, aluguel ou emprego, com contato.",
+      "imagem": "🏷️",
+      "texto": "VENDO geladeira duplex, 2 anos de uso, ótimo estado. R$ 1.200. Tratar com Carlos: (21) 98888-7777."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Receita culinária",
+      "explica": "Receita culinária: ensina a preparar um prato: ingredientes e modo de preparo (verbos no imperativo).",
+      "imagem": "🍰",
+      "texto": "INGREDIENTES: 2 xícaras de farinha, 3 ovos, 1 xícara de açúcar.\nMODO DE PREPARO: bata os ovos com o açúcar, acrescente a farinha e leve ao forno por 40 minutos."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Artigo de lei",
+      "explica": "Artigo de lei: texto normativo organizado em artigos, parágrafos e incisos.",
+      "imagem": "⚖️",
+      "texto": "Art. 5º Todos são iguais perante a lei, sem distinção de qualquer natureza [...]\nI – homens e mulheres são iguais em direitos e obrigações, nos termos desta Constituição;"
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Classificado",
+      "explica": "Classificado: anúncio curto de compra, venda, aluguel ou emprego, com contato.",
+      "imagem": "🏠",
+      "texto": "ALUGA-SE casa com 2 quartos, garagem, perto do metrô. R$ 900. Fone: 3333-4444."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Notícia",
+      "explica": "Notícia: informa um fato recente: o quê, quem, quando, onde, como e por quê.",
+      "imagem": "💉",
+      "texto": "O Ministério da Saúde lançou nesta segunda-feira uma campanha nacional de vacinação contra a gripe. A meta é imunizar 80 milhões de pessoas até junho."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Recibo",
+      "explica": "Recibo: comprova que um pagamento foi feito: valor, por extenso, motivo, data e assinatura.",
+      "imagem": "🚲",
+      "texto": "Declaro que recebi de Pedro Alves a importância de R$ 80,00 (oitenta reais), pelo conserto de uma bicicleta.\nRecife, 10 de maio."
+    },
+    {
+      "destaque": "Que gênero textual é este?",
+      "opcoes": [
+        "Recibo",
+        "Requerimento",
+        "Bula de remédio",
+        "Currículo",
+        "Notícia",
+        "Classificado",
+        "Receita culinária",
+        "Artigo de lei"
+      ],
+      "correta": "Artigo de lei",
+      "explica": "Artigo de lei: texto normativo organizado em artigos, parágrafos e incisos.",
+      "imagem": "📵",
+      "texto": "Art. 1º Fica proibido o uso de celular em sala de aula, salvo para fins pedagógicos.\nParágrafo único. Cabe ao professor autorizar o uso."
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "titulo": "Locução adjetiva → adjetivo",
+  "emoji": "🔁",
+  "instrucao": "Qual adjetivo substitui a locução destacada?",
+  "rodadas": [
+    {
+      "destaque": "Água [de chuva]",
+      "opcoes": [
+        "pluvial",
+        "fluvial",
+        "marítima",
+        "lacustre"
+      ],
+      "correta": "pluvial",
+      "explica": "Água de chuva = Água pluvial.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Transporte [de rio]",
+      "opcoes": [
+        "fluvial",
+        "pluvial",
+        "aéreo",
+        "terrestre"
+      ],
+      "correta": "fluvial",
+      "explica": "Transporte de rio = Transporte fluvial.",
+      "imagem": "🛶"
+    },
+    {
+      "destaque": "Região [de lagos]",
+      "opcoes": [
+        "lacustre",
+        "fluvial",
+        "pluvial",
+        "litorânea"
+      ],
+      "correta": "lacustre",
+      "explica": "Região de lagos = Região lacustre.",
+      "imagem": "🏞️"
+    },
+    {
+      "destaque": "Loção [para cabelo]",
+      "opcoes": [
+        "capilar",
+        "craniana",
+        "facial",
+        "dental"
+      ],
+      "correta": "capilar",
+      "explica": "Loção para cabelo = Loção capilar.",
+      "imagem": "💇"
+    },
+    {
+      "destaque": "Curso [da tarde]",
+      "opcoes": [
+        "vespertino",
+        "matutino",
+        "noturno",
+        "diurno"
+      ],
+      "correta": "vespertino",
+      "explica": "Curso da tarde = Curso vespertino.",
+      "imagem": "🌇"
+    },
+    {
+      "destaque": "Curso [da manhã]",
+      "opcoes": [
+        "matutino",
+        "vespertino",
+        "noturno",
+        "diurno"
+      ],
+      "correta": "matutino",
+      "explica": "Curso da manhã = Curso matutino.",
+      "imagem": "🌅"
+    },
+    {
+      "destaque": "Amor [de mãe]",
+      "opcoes": [
+        "materno",
+        "paterno",
+        "fraterno",
+        "filial"
+      ],
+      "correta": "materno",
+      "explica": "Amor de mãe = Amor materno.",
+      "imagem": "🤱"
+    },
+    {
+      "destaque": "Amor [de irmão]",
+      "opcoes": [
+        "fraterno",
+        "materno",
+        "paterno",
+        "filial"
+      ],
+      "correta": "fraterno",
+      "explica": "Amor de irmão = Amor fraterno.",
+      "imagem": "👫"
+    },
+    {
+      "destaque": "Amor [de filho]",
+      "opcoes": [
+        "filial",
+        "fraterno",
+        "paterno",
+        "materno"
+      ],
+      "correta": "filial",
+      "explica": "Amor de filho = Amor filial.",
+      "imagem": "👨‍👦"
+    },
+    {
+      "destaque": "Ataque [do coração]",
+      "opcoes": [
+        "cardíaco",
+        "cerebral",
+        "pulmonar",
+        "renal"
+      ],
+      "correta": "cardíaco",
+      "explica": "Ataque do coração = Ataque cardíaco.",
+      "imagem": "❤️"
+    },
+    {
+      "destaque": "Problema [dos rins]",
+      "opcoes": [
+        "renal",
+        "hepático",
+        "pulmonar",
+        "gástrico"
+      ],
+      "correta": "renal",
+      "explica": "Problema dos rins = Problema renal.",
+      "imagem": "🩺"
+    },
+    {
+      "destaque": "Doença [do fígado]",
+      "opcoes": [
+        "hepática",
+        "renal",
+        "cardíaca",
+        "pulmonar"
+      ],
+      "correta": "hepática",
+      "explica": "Doença do fígado = Doença hepática.",
+      "imagem": "🏥"
+    },
+    {
+      "destaque": "Luz [da lua]",
+      "opcoes": [
+        "lunar",
+        "solar",
+        "estelar",
+        "sideral"
+      ],
+      "correta": "lunar",
+      "explica": "Luz da lua = Luz lunar.",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "Energia [do sol]",
+      "opcoes": [
+        "solar",
+        "lunar",
+        "estelar",
+        "eólica"
+      ],
+      "correta": "solar",
+      "explica": "Energia do sol = Energia solar.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "Leite [de cabra]",
+      "opcoes": [
+        "caprino",
+        "bovino",
+        "ovino",
+        "suíno"
+      ],
+      "correta": "caprino",
+      "explica": "Leite de cabra = Leite caprino.",
+      "imagem": "🐐"
+    },
+    {
+      "destaque": "Gado [de boi]",
+      "opcoes": [
+        "bovino",
+        "equino",
+        "caprino",
+        "suíno"
+      ],
+      "correta": "bovino",
+      "explica": "Gado de boi = Gado bovino.",
+      "imagem": "🐂"
+    },
+    {
+      "destaque": "Lã [de ovelha]",
+      "opcoes": [
+        "ovina",
+        "caprina",
+        "bovina",
+        "equina"
+      ],
+      "correta": "ovina",
+      "explica": "Lã de ovelha = Lã ovina.",
+      "imagem": "🐑"
+    },
+    {
+      "destaque": "Raça [de cavalo]",
+      "opcoes": [
+        "equina",
+        "bovina",
+        "canina",
+        "felina"
+      ],
+      "correta": "equina",
+      "explica": "Raça de cavalo = Raça equina.",
+      "imagem": "🐎"
+    },
+    {
+      "destaque": "Impressão [do dedo]",
+      "opcoes": [
+        "digital",
+        "manual",
+        "capilar",
+        "ocular"
+      ],
+      "correta": "digital",
+      "explica": "Impressão do dedo = Impressão digital.",
+      "imagem": "☝️"
+    },
+    {
+      "destaque": "Globo [do olho]",
+      "opcoes": [
+        "ocular",
+        "auditivo",
+        "nasal",
+        "bucal"
+      ],
+      "correta": "ocular",
+      "explica": "Globo do olho = Globo ocular.",
+      "imagem": "👁️"
+    },
+    {
+      "destaque": "Vida [do campo]",
+      "opcoes": [
+        "campestre",
+        "urbana",
+        "marítima",
+        "celeste"
+      ],
+      "correta": "campestre",
+      "explica": "Vida do campo = Vida campestre.",
+      "imagem": "🌾"
+    },
+    {
+      "destaque": "Atitude [de criança]",
+      "opcoes": [
+        "infantil",
+        "senil",
+        "viril",
+        "juvenil"
+      ],
+      "correta": "infantil",
+      "explica": "Atitude de criança = Atitude infantil.",
+      "imagem": "🧸"
+    }
+  ]
+}

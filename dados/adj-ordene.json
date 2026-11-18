@@ -1,0 +1,72 @@
+{
+  "titulo": "Graus do adjetivo",
+  "sequencias": [
+    {
+      "titulo": "Grau do adjetivo BOM",
+      "esquerda": "normal",
+      "direita": "máximo",
+      "itens": [
+        "bom",
+        "melhor",
+        "ótimo"
+      ],
+      "explica": "Normal → comparativo de superioridade → superlativo absoluto."
+    },
+    {
+      "titulo": "Grau do adjetivo MAU",
+      "esquerda": "normal",
+      "direita": "máximo",
+      "itens": [
+        "mau",
+        "pior",
+        "péssimo"
+      ],
+      "explica": "Normal → comparativo de superioridade → superlativo absoluto."
+    },
+    {
+      "titulo": "Grau do adjetivo PEQUENO",
+      "esquerda": "normal",
+      "direita": "máximo",
+      "itens": [
+        "pequeno",
+        "menor",
+        "mínimo"
+      ],
+      "explica": "Normal → comparativo → superlativo erudito."
+    },
+    {
+      "titulo": "Grau do adjetivo GRANDE",
+      "esquerda": "normal",
+      "direita": "máximo",
+      "itens": [
+        "grande",
+        "maior",
+        "máximo"
+      ],
+      "explica": "Normal → comparativo → superlativo erudito."
+    },
+    {
+      "titulo": "Comparativos: do menos ao mais",
+      "esquerda": "⬇️ menos",
+      "direita": "mais ⬆️",
+      "itens": [
+        "menos alto que",
+        "tão alto quanto",
+        "mais alto que",
+        "altíssimo"
+      ],
+      "explica": "Inferioridade → igualdade → superioridade → superlativo absoluto sintético."
+    },
+    {
+      "titulo": "Intensidade crescente",
+      "esquerda": "🧊",
+      "direita": "🔥",
+      "itens": [
+        "morno",
+        "quente",
+        "fervente"
+      ],
+      "explica": "Do menos ao mais intenso."
+    }
+  ]
+}

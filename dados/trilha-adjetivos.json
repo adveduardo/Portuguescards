@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha dos adjetivos",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "locucao": {
+      "nome": "Locução",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    },
+    "grau": {
+      "nome": "Grau",
+      "emoji": "🏆",
+      "cor": "#c2185b"
+    },
+    "patrio": {
+      "nome": "Pátrio",
+      "emoji": "🗺️",
+      "cor": "#2f80ed"
+    },
+    "concordancia": {
+      "nome": "Concordância",
+      "emoji": "🤝",
+      "cor": "#27ae60"
+    },
+    "descreva": {
+      "nome": "Descreva",
+      "emoji": "✍️",
+      "cor": "#8e44ad"
+    }
+  },
+  "desafios": {
+    "locucao": [
+      {
+        "texto": "Troque por um adjetivo: água de rio",
+        "resposta": "fluvial"
+      },
+      {
+        "texto": "Troque por um adjetivo: amor de pai",
+        "resposta": "paterno"
+      },
+      {
+        "texto": "Troque por um adjetivo: problema do coração",
+        "resposta": "cardíaco"
+      },
+      {
+        "texto": "Troque por um adjetivo: luz da lua",
+        "resposta": "lunar"
+      },
+      {
+        "texto": "Troque por um adjetivo: doença dos rins",
+        "resposta": "renal"
+      },
+      {
+        "texto": "Troque por um adjetivo: leite de cabra",
+        "resposta": "caprino"
+      },
+      {
+        "texto": "Troque por um adjetivo: período da manhã",
+        "resposta": "matutino"
+      },
+      {
+        "texto": "Troque por um adjetivo: loção para cabelo",
+        "resposta": "capilar"
+      }
+    ],
+    "grau": [
+      {
+        "texto": "Diga o superlativo erudito de FÁCIL",
+        "resposta": "facílimo"
+      },
+      {
+        "texto": "Diga o comparativo de BOM",
+        "resposta": "melhor"
+      },
+      {
+        "texto": "Diga o superlativo de MAU",
+        "resposta": "péssimo"
+      },
+      {
+        "texto": "Diga o superlativo erudito de POBRE",
+        "resposta": "paupérrimo"
+      },
+      {
+        "texto": "Diga o superlativo erudito de DOCE",
+        "resposta": "dulcíssimo"
+      },
+      {
+        "texto": "Diga o comparativo de PEQUENO",
+        "resposta": "menor"
+      },
+      {
+        "texto": "Diga o superlativo erudito de FIEL",
+        "resposta": "fidelíssimo"
+      },
+      {
+        "texto": "Diga o superlativo erudito de MAGRO",
+        "resposta": "macérrimo"
+      }
+    ],
+    "patrio": [
+      {
+        "texto": "Quem nasce em Salvador é...",
+        "resposta": "soteropolitano"
+      },
+      {
+        "texto": "Quem nasce em Belo Horizonte é...",
+        "resposta": "belo-horizontino"
+      },
+      {
+        "texto": "Quem nasce em Espírito Santo é...",
+        "resposta": "capixaba"
+      },
+      {
+        "texto": "Quem nasce em Rio Grande do Norte é...",
+        "resposta": "potiguar"
+      },
+      {
+        "texto": "Quem nasce em Rio de Janeiro (estado) é...",
+        "resposta": "fluminense"
+      },
+      {
+        "texto": "Quem nasce em Florianópolis é...",
+        "resposta": "florianopolitano"
+      },
+      {
+        "texto": "Quem nasce em Bélgica é...",
+        "resposta": "belga"
+      },
+      {
+        "texto": "Quem nasce em Madagascar é...",
+        "resposta": "malgaxe"
+      }
+    ],
+    "concordancia": [
+      {
+        "texto": "Complete: Ela está ___ cansada (meio/meia)",
+        "resposta": "meio"
+      },
+      {
+        "texto": "Complete: Era meio-dia e ___ (meio/meia)",
+        "resposta": "meia"
+      },
+      {
+        "texto": "Complete: Seguem ___ os papéis (anexo)",
+        "resposta": "anexos"
+      },
+      {
+        "texto": "Complete: Elas ___ fizeram (mesmo)",
+        "resposta": "mesmas"
+      },
+      {
+        "texto": "Complete: Camisas ___ (verde-claro)",
+        "resposta": "verde-claras"
+      },
+      {
+        "texto": "Complete: Saias ___ (azul-marinho)",
+        "resposta": "azul-marinho"
+      },
+      {
+        "texto": "Complete: Havia ___ alunos (bastante)",
+        "resposta": "bastantes"
+      },
+      {
+        "texto": "Complete: \"Muito ___\", disse ela (obrigado)",
+        "resposta": "obrigada"
+      }
+    ],
+    "descreva": [
+      {
+        "texto": "Descreva a sala de aula",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva um personagem de filme",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva sua comida preferida",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva o colega à direita (só coisas boas!)",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva sua cidade",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva um dia de chuva",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva um animal",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      },
+      {
+        "texto": "Descreva seu lugar preferido",
+        "resposta": "Resposta livre: usem pelo menos 3 adjetivos"
+      }
+    ]
+  }
+}

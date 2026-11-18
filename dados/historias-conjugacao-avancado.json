@@ -1,0 +1,137 @@
+{
+  "titulo": "Dado da conjugação (avançado)",
+  "dados": [
+    {
+      "nome": "Pessoa",
+      "cor": "#e67e22",
+      "faces": [
+        {
+          "emoji": "🙋",
+          "texto": "eu"
+        },
+        {
+          "emoji": "🫵",
+          "texto": "tu"
+        },
+        {
+          "emoji": "👤",
+          "texto": "ele / ela"
+        },
+        {
+          "emoji": "👫",
+          "texto": "nós"
+        },
+        {
+          "emoji": "🧑‍🤝‍🧑",
+          "texto": "vocês"
+        },
+        {
+          "emoji": "👥",
+          "texto": "eles / elas"
+        }
+      ]
+    },
+    {
+      "nome": "Verbo",
+      "cor": "#e74c3c",
+      "faces": [
+        {
+          "emoji": "🛠️",
+          "texto": "fazer"
+        },
+        {
+          "emoji": "🎁",
+          "texto": "trazer"
+        },
+        {
+          "emoji": "📦",
+          "texto": "pôr"
+        },
+        {
+          "emoji": "👀",
+          "texto": "ver"
+        },
+        {
+          "emoji": "🚶",
+          "texto": "vir"
+        },
+        {
+          "emoji": "🤲",
+          "texto": "ter"
+        },
+        {
+          "emoji": "🗣️",
+          "texto": "dizer"
+        },
+        {
+          "emoji": "🧠",
+          "texto": "saber"
+        },
+        {
+          "emoji": "💭",
+          "texto": "querer"
+        },
+        {
+          "emoji": "📏",
+          "texto": "caber"
+        },
+        {
+          "emoji": "⚖️",
+          "texto": "intervir"
+        },
+        {
+          "emoji": "🔒",
+          "texto": "manter"
+        }
+      ]
+    },
+    {
+      "nome": "Tempo e modo",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "☀️",
+          "texto": "presente do indicativo"
+        },
+        {
+          "emoji": "✅",
+          "texto": "pretérito perfeito"
+        },
+        {
+          "emoji": "🔁",
+          "texto": "pretérito imperfeito"
+        },
+        {
+          "emoji": "🔮",
+          "texto": "futuro do presente"
+        },
+        {
+          "emoji": "🤔",
+          "texto": "futuro do pretérito"
+        },
+        {
+          "emoji": "🙏",
+          "texto": "presente do subjuntivo (que...)"
+        },
+        {
+          "emoji": "❓",
+          "texto": "imperfeito do subjuntivo (se...)"
+        },
+        {
+          "emoji": "⏳",
+          "texto": "futuro do subjuntivo (quando...)"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Conjuguem e escrevam uma frase!",
+    "Quem conjuga certo primeiro ganha o ponto!",
+    "Conjuguem e digam se o verbo é regular ou irregular."
+  ],
+  "conectivos": [
+    "que eu FAÇA • se eu FIZESSE • quando eu FIZER",
+    "quando eu VIR (ver) • quando eu VIER (vir)",
+    "se eu PUSER • se eu MANTIVER • ele INTERVEIO"
+  ]
+}

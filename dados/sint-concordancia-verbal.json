@@ -1,0 +1,127 @@
+{
+  "titulo": "Concordância verbal",
+  "emoji": "🤝",
+  "instrucao": "Qual forma verbal está de acordo com a norma-padrão?",
+  "rodadas": [
+    {
+      "destaque": "___ muitos alunos na sala. (haver = existir)",
+      "opcoes": [
+        "Havia",
+        "Haviam"
+      ],
+      "correta": "Havia",
+      "explica": "HAVER no sentido de existir é impessoal: fica no singular.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "___ dois anos que não o vejo. (fazer)",
+      "opcoes": [
+        "Faz",
+        "Fazem"
+      ],
+      "correta": "Faz",
+      "explica": "FAZER indicando tempo decorrido é impessoal: fica no singular.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Os Estados Unidos ___ um país enorme.",
+      "opcoes": [
+        "são",
+        "é"
+      ],
+      "correta": "são",
+      "explica": "Nome próprio no plural com artigo leva o verbo ao plural.",
+      "imagem": "🗽"
+    },
+    {
+      "destaque": "___ casas nesta rua.",
+      "opcoes": [
+        "Vendem-se",
+        "Vende-se"
+      ],
+      "correta": "Vendem-se",
+      "explica": "Com SE apassivador, o verbo concorda com o sujeito (casas são vendidas).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "___ de vendedores.",
+      "opcoes": [
+        "Precisa-se",
+        "Precisam-se"
+      ],
+      "correta": "Precisa-se",
+      "explica": "Verbo transitivo indireto + SE: sujeito indeterminado, verbo no singular.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Mais de um aluno ___ hoje.",
+      "opcoes": [
+        "faltou",
+        "faltaram"
+      ],
+      "correta": "faltou",
+      "explica": "MAIS DE UM pede, em geral, o verbo no singular.",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "Fui eu que ___ a carta.",
+      "opcoes": [
+        "escrevi",
+        "escreveu"
+      ],
+      "correta": "escrevi",
+      "explica": "Com o pronome relativo QUE, o verbo concorda com o antecedente (eu).",
+      "imagem": "✉️"
+    },
+    {
+      "destaque": "Deve ___ muitas pessoas na festa.",
+      "opcoes": [
+        "haver",
+        "haverem"
+      ],
+      "correta": "haver",
+      "explica": "Na locução, o verbo auxiliar acompanha o impessoal HAVER: tudo no singular.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "___ cinco horas no relógio da igreja.",
+      "opcoes": [
+        "Bateram",
+        "Bateu"
+      ],
+      "correta": "Bateram",
+      "explica": "O sujeito é CINCO HORAS: o verbo vai ao plural.",
+      "imagem": "🕔"
+    },
+    {
+      "destaque": "___ muitas dúvidas sobre o assunto.",
+      "opcoes": [
+        "Existem",
+        "Existe"
+      ],
+      "correta": "Existem",
+      "explica": "EXISTIR é pessoal: concorda com o sujeito (dúvidas).",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Mais de mil pessoas ___ ao show.",
+      "opcoes": [
+        "compareceram",
+        "compareceu"
+      ],
+      "correta": "compareceram",
+      "explica": "MAIS DE + numeral no plural: verbo no plural.",
+      "imagem": "🎤"
+    },
+    {
+      "destaque": "Eu e você ___ amigos.",
+      "opcoes": [
+        "somos",
+        "são"
+      ],
+      "correta": "somos",
+      "explica": "Sujeito composto com EU: verbo na 1ª pessoa do plural.",
+      "imagem": "🤝"
+    }
+  ]
+}

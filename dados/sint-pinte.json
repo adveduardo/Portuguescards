@@ -1,0 +1,74 @@
+{
+  "titulo": "Pinte os termos da oração",
+  "categorias": [
+    {
+      "id": "suj",
+      "nome": "Sujeito",
+      "plural": "Sujeitos",
+      "cor": "#2f80ed",
+      "emoji": "👤",
+      "def": "de quem se fala; concorda com o verbo"
+    },
+    {
+      "id": "vb",
+      "nome": "Verbo",
+      "plural": "Verbos",
+      "cor": "#e74c3c",
+      "emoji": "⚡",
+      "def": "indica ação, estado ou fenômeno"
+    },
+    {
+      "id": "od",
+      "nome": "Objeto direto",
+      "plural": "Objetos diretos",
+      "cor": "#27ae60",
+      "emoji": "🎯",
+      "def": "completa o verbo sem preposição obrigatória"
+    },
+    {
+      "id": "oi",
+      "nome": "Objeto indireto",
+      "plural": "Objetos indiretos",
+      "cor": "#e67e22",
+      "emoji": "↪️",
+      "def": "completa o verbo com preposição"
+    },
+    {
+      "id": "adv",
+      "nome": "Adjunto adverbial",
+      "plural": "Adjuntos adverbiais",
+      "cor": "#8e44ad",
+      "emoji": "🕒",
+      "def": "indica tempo, lugar, modo, intensidade..."
+    },
+    {
+      "id": "pred",
+      "nome": "Predicativo do sujeito",
+      "plural": "Predicativos do sujeito",
+      "cor": "#c2185b",
+      "emoji": "🏷️",
+      "def": "característica do sujeito ligada por verbo de ligação"
+    }
+  ],
+  "como_marcar": "Marque cada palavra com o id da função: suj, vb, od, oi, adv, pred. Ex.: O/suj menino/suj comeu/vb a/od maçã/od.",
+  "frases": [
+    "O/suj menino/suj comeu/vb a/od maçã/od.",
+    "A/suj professora/suj entregou/vb as/od provas/od aos/oi alunos/oi.",
+    "Nós/suj gostamos/vb de/oi música/oi.",
+    "Ontem/adv os/suj alunos/suj visitaram/vb o/od museu/od.",
+    "Maria/suj está/vb feliz/pred.",
+    "O/suj cachorro/suj dormiu/vb no/adv sofá/adv.",
+    "Os/suj convidados/suj chegaram/vb cedo/adv.",
+    "Eu/suj preciso/vb de/oi ajuda/oi.",
+    "A/suj prova/suj parecia/vb difícil/pred.",
+    "Meu/suj pai/suj comprou/vb um/od carro/od novo/od.",
+    "Ela/suj contou/vb a/od verdade/od à/oi mãe/oi.",
+    "Os/suj atletas/suj treinaram/vb muito/adv.",
+    "Na/adv escola/adv, os/suj alunos/suj leram/vb poemas/od.",
+    "O/suj céu/suj ficou/vb nublado/pred.",
+    "Pedro/suj obedece/vb aos/oi pais/oi.",
+    "Choveu/vb muito/adv ontem/adv.",
+    "Os/suj vizinhos/suj continuam/vb barulhentos/pred.",
+    "A/suj empresa/suj enviou/vb o/od contrato/od ao/oi cliente/oi."
+  ]
+}

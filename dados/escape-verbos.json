@@ -1,0 +1,66 @@
+{
+  "titulo": "Laboratório dos Verbos",
+  "historia": "Um cientista maluco trancou a turma no laboratório! As fórmulas secretas são verbos conjugados. Acertem cada fórmula para descobrir o código e abrir a porta.",
+  "tempo": 900,
+  "codigo": "",
+  "desafios": [
+    {
+      "pergunta": "Fórmula 1: Ontem eu ___ (fazer) a experiência.",
+      "imagem": "🧪",
+      "opcoes": [
+        "fiz",
+        "fazi",
+        "fez"
+      ],
+      "correta": "fiz",
+      "dica": "Eu FIZ, ele FEZ."
+    },
+    {
+      "pergunta": "Fórmula 2: escreva o futuro do subjuntivo de VER — Quando eu ___ o resultado...",
+      "imagem": "🔬",
+      "resposta": [
+        "vir"
+      ],
+      "dica": "Não é \"ver\"! Pense em: quando eu VIR."
+    },
+    {
+      "pergunta": "Fórmula 3: \"Vendem-se tubos de ensaio.\" Qual é a voz verbal?",
+      "imagem": "🧫",
+      "opcoes": [
+        "Passiva sintética",
+        "Ativa",
+        "Reflexiva"
+      ],
+      "correta": "Passiva sintética",
+      "dica": "Tem o SE apassivador."
+    },
+    {
+      "pergunta": "Fórmula 4: escreva o particípio irregular de ESCREVER.",
+      "imagem": "📝",
+      "resposta": [
+        "escrito"
+      ],
+      "dica": "A carta foi..."
+    },
+    {
+      "pergunta": "Fórmula 5: O cientista ___ (intervir) na explosão.",
+      "imagem": "💥",
+      "opcoes": [
+        "interveio",
+        "interviu",
+        "interveu"
+      ],
+      "correta": "interveio",
+      "dica": "Intervir se conjuga como VIR: ele veio → ele..."
+    },
+    {
+      "pergunta": "Fórmula 6: escreva o verbo HAVER corretamente — ___ muitos frascos na mesa.",
+      "imagem": "⚗️",
+      "resposta": [
+        "havia",
+        "há"
+      ],
+      "dica": "Haver no sentido de existir fica no singular."
+    }
+  ]
+}

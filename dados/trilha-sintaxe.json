@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da sintaxe",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "sujeito": {
+      "nome": "Sujeito",
+      "emoji": "👤",
+      "cor": "#2f80ed"
+    },
+    "termos": {
+      "nome": "Termos",
+      "emoji": "🧩",
+      "cor": "#27ae60"
+    },
+    "conjuncao": {
+      "nome": "Conjunção",
+      "emoji": "🔗",
+      "cor": "#8e44ad"
+    },
+    "concordancia": {
+      "nome": "Concordância",
+      "emoji": "🤝",
+      "cor": "#e67e22"
+    },
+    "crase": {
+      "nome": "Crase",
+      "emoji": "🔤",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "sujeito": [
+      {
+        "texto": "Qual é o tipo de sujeito: \"Os alunos saíram\"?",
+        "resposta": "simples"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Pedro e Ana dançaram\"?",
+        "resposta": "composto"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Saímos cedo\"?",
+        "resposta": "oculto (nós)"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Choveu à noite\"?",
+        "resposta": "oração sem sujeito"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Bateram à porta\"?",
+        "resposta": "indeterminado"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Há bolo na mesa\"?",
+        "resposta": "oração sem sujeito"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Precisa-se de ajuda\"?",
+        "resposta": "indeterminado"
+      },
+      {
+        "texto": "Qual é o tipo de sujeito: \"Viajarei amanhã\"?",
+        "resposta": "oculto (eu)"
+      }
+    ],
+    "termos": [
+      {
+        "texto": "Qual é a função de \"o livro\" em: Li o livro.",
+        "resposta": "objeto direto"
+      },
+      {
+        "texto": "Qual é a função de \"de você\" em: Gosto de você.",
+        "resposta": "objeto indireto"
+      },
+      {
+        "texto": "Qual é a função de \"ontem\" em: Ontem choveu.",
+        "resposta": "adjunto adverbial"
+      },
+      {
+        "texto": "Qual é a função de \"feliz\" em: Ela está feliz.",
+        "resposta": "predicativo do sujeito"
+      },
+      {
+        "texto": "Qual é a função de \"João\" em: João, venha cá!",
+        "resposta": "vocativo"
+      },
+      {
+        "texto": "Qual é a função de \"a capital\" em: Brasília, a capital, é moderna.",
+        "resposta": "aposto"
+      },
+      {
+        "texto": "Qual é a função de \"aos alunos\" em: Entreguei as provas aos alunos.",
+        "resposta": "objeto indireto"
+      },
+      {
+        "texto": "Qual é a função de \"as crianças\" em: As crianças brincaram.",
+        "resposta": "sujeito"
+      }
+    ],
+    "conjuncao": [
+      {
+        "texto": "Que relação a conjunção indica: \"Estudei, mas não passei\"?",
+        "resposta": "oposição"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Embora cansado, foi\"?",
+        "resposta": "concessão"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Se chover, fico\"?",
+        "resposta": "condição"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Saí porque era tarde\"?",
+        "resposta": "causa"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Estudou; logo, passou\"?",
+        "resposta": "conclusão"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Estudou para que passasse\"?",
+        "resposta": "finalidade"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Quando chegou, saímos\"?",
+        "resposta": "tempo"
+      },
+      {
+        "texto": "Que relação a conjunção indica: \"Ou vem, ou fica\"?",
+        "resposta": "alternância"
+      }
+    ],
+    "concordancia": [
+      {
+        "texto": "Complete: ___ muitos alunos (haver)",
+        "resposta": "Havia"
+      },
+      {
+        "texto": "Complete: ___ dez anos (fazer)",
+        "resposta": "Faz"
+      },
+      {
+        "texto": "Complete: ___ casas (vender + se)",
+        "resposta": "Vendem-se"
+      },
+      {
+        "texto": "Complete: ___ de ajudantes (precisar + se)",
+        "resposta": "Precisa-se"
+      },
+      {
+        "texto": "Complete: Eu e ela ___ (ser) amigas",
+        "resposta": "somos"
+      },
+      {
+        "texto": "Complete: Mais de mil pessoas ___ (vir)",
+        "resposta": "vieram"
+      },
+      {
+        "texto": "Complete: ___ muitas dúvidas (existir)",
+        "resposta": "Existem"
+      },
+      {
+        "texto": "Complete: Deve ___ problemas (haver)",
+        "resposta": "haver"
+      }
+    ],
+    "crase": [
+      {
+        "texto": "Crase ou não? Vou ___ feira.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Crase ou não? Fui ___ cavalo.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Crase ou não? Saí ___ duas horas.",
+        "resposta": "às"
+      },
+      {
+        "texto": "Crase ou não? Falei ___ ela.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Crase ou não? Começou ___ chorar.",
+        "resposta": "a"
+      },
+      {
+        "texto": "Crase ou não? Assisti ___ novela.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Crase ou não? Bife ___ milanesa.",
+        "resposta": "à"
+      },
+      {
+        "texto": "Crase ou não? Cara ___ cara.",
+        "resposta": "a"
+      }
+    ]
+  }
+}

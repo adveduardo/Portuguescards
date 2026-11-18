@@ -11,6 +11,9 @@
   #cartao{background:#fffdf6;border-radius:30px;padding:16px 26px;margin:8px auto;max-width:1100px;text-align:center;box-shadow:0 8px 0 #0001}
   #img{font-size:clamp(3rem,8vw,5.5rem);line-height:1.1}
   #destaque{font-size:clamp(2.2rem,6vw,4.4rem);font-weight:bold;line-height:1.25}
+  #textoBase{font-size:clamp(1.05rem,2.2vw,1.45rem);text-align:left;background:#fff;border-left:6px solid var(--azul);border-radius:12px;padding:10px 16px;margin:0 auto 10px;max-width:980px;white-space:pre-line;line-height:1.5}
+  #destaque.longo{font-size:clamp(1.3rem,2.8vw,2.1rem)}
+  #opcoes.longas button{font-size:clamp(1.05rem,2.2vw,1.5rem);text-align:left}
   #destaque mark{background:#ffe066;border-radius:12px;padding:0 10px;color:var(--texto)}
   #opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px;max-width:1100px;margin:12px auto}
   #opcoes button{font-size:clamp(1.4rem,3.2vw,2.2rem);padding:18px 14px;border-radius:20px;color:#fff}
@@ -20,6 +23,7 @@
   #explica{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em;margin:6px auto;max-width:1000px}
   #escolhaClasses{margin-top:6px}
 </style>
+<script src="visual.js"></script>
 </head>
 <body>
 
@@ -52,7 +56,7 @@
   <div class="barraEquipes" id="barraEquipes"></div>
   <div id="contador"></div>
   <div id="enunciado"></div>
-  <div id="cartao"><div id="img"></div><div id="destaque"></div></div>
+  <div id="cartao"><div id="textoBase" hidden></div><div id="img"></div><div id="destaque"></div></div>
   <div id="opcoes"></div>
   <div id="explica"></div>
   <div class="linha">
@@ -96,7 +100,8 @@ const JOGOS = {
   'pron-demonstrativo': {tipo: 'morfo-pron-demonstrativo', arquivo: 'morfo-pron-demonstrativo.json', titulo: 'Este, esse ou aquele?',    emoji: '👉'}
 };
 const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60', '#8e44ad', '#16a085', '#c2185b'];
-const jogo = JOGOS[M.param('jogo')] || JOGOS.classifique;
+const pedidoArq = M.param('arquivo');
+const jogo = JOGOS[M.param('jogo')] || (pedidoArq ? {tipo: 'escolha-' + pedidoArq.split('-')[0].replace(/\.json$/, ''), arquivo: pedidoArq, titulo: 'Atividade', emoji: '📚'} : JOGOS.classifique);
 document.title = jogo.titulo;
 $('tituloConfig').textContent = `${jogo.emoji} ${jogo.titulo}`;
 
@@ -115,7 +120,7 @@ function normalizar(d){
     const opcoes = r.opcoes.slice(0, 8).map(String);
     const correta = typeof r.correta === 'number' ? opcoes[r.correta] : String(r.correta);
     if (!opcoes.includes(correta)) return null;
-    return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || ''};
+    return {enunciado: r.enunciado || d.instrucao || '', destaque: String(r.destaque), imagem: r.imagem || '', opcoes, correta, explica: r.explica || '', texto: r.texto ? String(r.texto) : ''};
   }).filter(Boolean);
   return rodadas.length ? {tipo: 'rodadas', titulo: d.titulo || jogo.titulo, emoji: d.emoji || jogo.emoji, rodadas, ignoradas: d.rodadas.length - rodadas.length} : null;
 }
@@ -123,6 +128,7 @@ function carregar(d, origem){
   const x = normalizar(d);
   if (!x) return AV.avisar('JSON inválido para esta atividade. Baixe o modelo para ver o formato.');
   dados = x;
+  $('tituloConfig').textContent = `${x.emoji} ${x.titulo}`; document.title = x.titulo;
   $('blocoClasses').hidden = x.tipo !== 'classes';
   if (x.tipo === 'classes'){
     M.montarEscolhaClasses($('escolhaClasses'), x.classes, info);
@@ -167,13 +173,16 @@ function proxima(){
   $('contador').textContent = `${n} de ${total}`;
   $('enunciado').textContent = placar.prefixo() + atual.enunciado;
   $('img').textContent = atual.imagem; $('img').hidden = !atual.imagem;
+  $('textoBase').textContent = atual.texto || ''; $('textoBase').hidden = !atual.texto;
   $('destaque').innerHTML = marcar(atual.destaque);
+  $('destaque').classList.toggle('longo', atual.destaque.length > 55);
   const ops = atual.classes ? atual.opcoes : M.embaralhar(atual.opcoes);
   $('opcoes').innerHTML = ops.map((o, i) => {
     const cl = atual.classes ? Object.values(M.CLASSES).find(c => c.nome === o) : null;
     return `<button data-o="${AV.esc(o)}" style="background:${cl ? cl.cor : CORES[i % CORES.length]}">${cl ? cl.emoji + ' ' : ''}${AV.esc(o)}</button>`;
   }).join('');
   $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
+  $('opcoes').classList.toggle('longas', atual.opcoes.some(o => o.length > 28));
   $('explica').textContent = ''; $('btnProxima').hidden = true;
   if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
 }
@@ -193,7 +202,7 @@ function responder(b){
 function fim(){
   if (window.speechSynthesis) speechSynthesis.cancel();
   AV.mostrarTela('tFim');
-  $('tituloFim').textContent = `🏆 ${jogo.titulo}: resultado`;
+  $('tituloFim').textContent = `🏆 ${dados.titulo}: resultado`;
   placar.ranking($('ranking'), total);
   AV.fanfarra(); AV.confete();
 }

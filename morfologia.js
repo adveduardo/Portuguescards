@@ -34,7 +34,7 @@ function montarEscolhaClasses(el, disponiveis, aoMudar){
   const pedidas = (param('classes') || '').split(',').map(codigo).filter(Boolean);
   const padrao = pedidas.length ? pedidas : BASICO;
   el.innerHTML = `<div class="linha" style="justify-content:flex-start;margin:4px 0">
-      <button type="button" data-nivel="basico">1º ao 3º ano (básico)</button><button type="button" data-nivel="completo">4º e 5º ano (completo)</button></div>
+      <button type="button" data-nivel="basico">Básico: substantivo, adjetivo e verbo</button><button type="button" data-nivel="completo">Todas as classes</button></div>
     <div style="display:flex;flex-wrap:wrap;gap:4px 16px">` +
     lista.map(c => `<label style="margin:2px 0"><input type="checkbox" data-c="${c}" ${padrao.includes(c) ? 'checked' : ''}>
       <span style="background:${CLASSES[c].cor};color:#fff;border-radius:8px;padding:2px 8px;font-weight:bold">${CLASSES[c].emoji} ${CLASSES[c].nome}</span></label>`).join('') + '</div>';

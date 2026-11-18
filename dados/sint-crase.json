@@ -1,0 +1,150 @@
+{
+  "titulo": "Crase",
+  "emoji": "🔤",
+  "instrucao": "Complete corretamente",
+  "rodadas": [
+    {
+      "destaque": "Vou ___ escola.",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "explica": "Crase = preposição A + artigo A. Quem vai, vai A; escola pede artigo A.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Vou ___ Bahia.",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "explica": "Volto DA Bahia → vou À Bahia.",
+      "imagem": "🌴"
+    },
+    {
+      "destaque": "Vou ___ Recife.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Volto DE Recife → vou A Recife (sem artigo).",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "Fui ___ pé.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase antes de palavra masculina.",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Entreguei o livro ___ ela.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase antes de pronome pessoal.",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Chegamos ___ uma conclusão.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase antes de artigo indefinido.",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "Saímos ___ duas horas.",
+      "opcoes": [
+        "às",
+        "as",
+        "a"
+      ],
+      "correta": "às",
+      "explica": "Horas determinadas: crase (às duas horas).",
+      "imagem": "🕑"
+    },
+    {
+      "destaque": "Assisti ___ peça.",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "explica": "ASSISTIR (ver) pede a preposição A: assisti à peça.",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "Refiro-me ___ aquela aluna.",
+      "opcoes": [
+        "àquela",
+        "aquela",
+        "a aquela"
+      ],
+      "correta": "àquela",
+      "explica": "A + AQUELA = ÀQUELA.",
+      "imagem": "👩‍🎓"
+    },
+    {
+      "destaque": "Começou ___ chover.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase antes de verbo.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Fiz um bife ___ milanesa.",
+      "opcoes": [
+        "à",
+        "a"
+      ],
+      "correta": "à",
+      "explica": "À moda de: à milanesa.",
+      "imagem": "🥩"
+    },
+    {
+      "destaque": "Ficamos frente ___ frente.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase entre palavras repetidas.",
+      "imagem": "👀"
+    },
+    {
+      "destaque": "Obedeça ___ regras.",
+      "opcoes": [
+        "às",
+        "as",
+        "a"
+      ],
+      "correta": "às",
+      "explica": "OBEDECER pede A; regras pede AS: obedeça às regras.",
+      "imagem": "📏"
+    },
+    {
+      "destaque": "Dirigiu-se ___ Vossa Excelência.",
+      "opcoes": [
+        "a",
+        "à"
+      ],
+      "correta": "a",
+      "explica": "Não há crase antes da maioria dos pronomes de tratamento.",
+      "imagem": "🏛️"
+    }
+  ]
+}

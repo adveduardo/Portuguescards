@@ -1,0 +1,139 @@
+{
+  "titulo": "A posição do adjetivo muda o sentido",
+  "emoji": "🔀",
+  "instrucao": "O que significa a expressão destacada?",
+  "rodadas": [
+    {
+      "destaque": "Ele é um [grande homem].",
+      "opcoes": [
+        "um homem importante, admirável",
+        "um homem alto e forte",
+        "um homem velho"
+      ],
+      "correta": "um homem importante, admirável",
+      "explica": "Antes do substantivo, GRANDE tem sentido figurado (importante). Depois (homem grande), sentido literal (tamanho).",
+      "imagem": "🏅",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Ele é um [homem grande].",
+      "opcoes": [
+        "um homem alto e forte",
+        "um homem importante, admirável",
+        "um homem rico"
+      ],
+      "correta": "um homem alto e forte",
+      "explica": "Depois do substantivo, GRANDE tem sentido literal: tamanho.",
+      "imagem": "🧍",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Coitado, é um [pobre homem].",
+      "opcoes": [
+        "um homem digno de pena",
+        "um homem sem dinheiro",
+        "um homem muito velho"
+      ],
+      "correta": "um homem digno de pena",
+      "explica": "Antes do substantivo, POBRE significa coitado, digno de pena.",
+      "imagem": "😢",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Ele é um [homem pobre].",
+      "opcoes": [
+        "um homem sem dinheiro",
+        "um homem digno de pena",
+        "um homem simples de coração"
+      ],
+      "correta": "um homem sem dinheiro",
+      "explica": "Depois do substantivo, POBRE significa sem recursos financeiros.",
+      "imagem": "🪙",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Pedro é um [velho amigo].",
+      "opcoes": [
+        "um amigo de muito tempo",
+        "um amigo idoso",
+        "um amigo cansado"
+      ],
+      "correta": "um amigo de muito tempo",
+      "explica": "Antes do substantivo, VELHO indica amizade antiga.",
+      "imagem": "🤝",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Pedro é um [amigo velho].",
+      "opcoes": [
+        "um amigo idoso",
+        "um amigo de muito tempo",
+        "um ex-amigo"
+      ],
+      "correta": "um amigo idoso",
+      "explica": "Depois do substantivo, VELHO indica idade avançada.",
+      "imagem": "👴",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Ela é [alta funcionária] do ministério.",
+      "opcoes": [
+        "ocupa um cargo importante",
+        "tem grande estatura",
+        "trabalha num andar alto"
+      ],
+      "correta": "ocupa um cargo importante",
+      "explica": "Antes do substantivo, ALTA indica posição hierárquica elevada.",
+      "imagem": "🏛️",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Foi uma [simples pergunta].",
+      "opcoes": [
+        "apenas uma pergunta",
+        "uma pergunta fácil",
+        "uma pergunta boba"
+      ],
+      "correta": "apenas uma pergunta",
+      "explica": "Antes do substantivo, SIMPLES significa \"apenas, mero\". Pergunta simples = fácil.",
+      "imagem": "❓",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "[Certo dia], ela foi embora.",
+      "opcoes": [
+        "um dia qualquer, não definido",
+        "o dia correto",
+        "um dia com certeza"
+      ],
+      "correta": "um dia qualquer, não definido",
+      "explica": "Antes do substantivo, CERTO é indefinido (um dia qualquer). O dia certo = o dia correto.",
+      "imagem": "📅",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Comprei um [novo carro].",
+      "opcoes": [
+        "outro carro, diferente do anterior",
+        "um carro zero-quilômetro",
+        "um carro moderno"
+      ],
+      "correta": "outro carro, diferente do anterior",
+      "explica": "Antes do substantivo, NOVO = outro. Carro novo = sem uso.",
+      "imagem": "🚗",
+      "enunciado": "O que significa a expressão destacada?"
+    },
+    {
+      "destaque": "Conversei com [diferentes pessoas].",
+      "opcoes": [
+        "várias pessoas",
+        "pessoas esquisitas",
+        "pessoas de outro país"
+      ],
+      "correta": "várias pessoas",
+      "explica": "Antes do substantivo, DIFERENTES = várias, diversas.",
+      "imagem": "👥",
+      "enunciado": "O que significa a expressão destacada?"
+    }
+  ]
+}

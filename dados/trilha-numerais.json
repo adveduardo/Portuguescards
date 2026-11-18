@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha dos numerais",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "tipo": {
+      "nome": "Tipo",
+      "emoji": "🔢",
+      "cor": "#2f80ed"
+    },
+    "ordinal": {
+      "nome": "Ordinal",
+      "emoji": "🥇",
+      "cor": "#e67e22"
+    },
+    "romano": {
+      "nome": "Romano",
+      "emoji": "🏛️",
+      "cor": "#8e44ad"
+    },
+    "extenso": {
+      "nome": "Por extenso",
+      "emoji": "🧾",
+      "cor": "#27ae60"
+    },
+    "calculo": {
+      "nome": "Cálculo",
+      "emoji": "🧮",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "tipo": [
+      {
+        "texto": "Que tipo de numeral é \"dezena\"?",
+        "resposta": "coletivo"
+      },
+      {
+        "texto": "Que tipo de numeral é \"triplo\"?",
+        "resposta": "multiplicativo"
+      },
+      {
+        "texto": "Que tipo de numeral é \"metade\"?",
+        "resposta": "fracionário"
+      },
+      {
+        "texto": "Que tipo de numeral é \"décimo\"?",
+        "resposta": "ordinal (ou fracionário: um décimo)"
+      },
+      {
+        "texto": "Que tipo de numeral é \"cem\"?",
+        "resposta": "cardinal"
+      },
+      {
+        "texto": "Que tipo de numeral é \"par\"?",
+        "resposta": "coletivo"
+      },
+      {
+        "texto": "Que tipo de numeral é \"quádruplo\"?",
+        "resposta": "multiplicativo"
+      },
+      {
+        "texto": "Que tipo de numeral é \"um terço\"?",
+        "resposta": "fracionário"
+      }
+    ],
+    "ordinal": [
+      {
+        "texto": "Diga o ordinal de 20",
+        "resposta": "vigésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 40",
+        "resposta": "quadragésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 60",
+        "resposta": "sexagésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 70",
+        "resposta": "septuagésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 80",
+        "resposta": "octogésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 100",
+        "resposta": "centésimo"
+      },
+      {
+        "texto": "Diga o ordinal de 300",
+        "resposta": "trecentésimo (ou tricentésimo)"
+      },
+      {
+        "texto": "Diga o ordinal de 15",
+        "resposta": "décimo quinto"
+      }
+    ],
+    "romano": [
+      {
+        "texto": "Como se lê: Papa Francisco I?",
+        "resposta": "primeiro"
+      },
+      {
+        "texto": "Como se lê: Século XX?",
+        "resposta": "vinte"
+      },
+      {
+        "texto": "Como se lê: Capítulo X?",
+        "resposta": "décimo"
+      },
+      {
+        "texto": "Como se lê: Capítulo XV?",
+        "resposta": "quinze"
+      },
+      {
+        "texto": "Como se lê: Dom João VI?",
+        "resposta": "sexto"
+      },
+      {
+        "texto": "Como se lê: Luís XV?",
+        "resposta": "quinze"
+      },
+      {
+        "texto": "Como se lê: II Guerra Mundial?",
+        "resposta": "Segunda"
+      },
+      {
+        "texto": "Como se lê: Século IV?",
+        "resposta": "quarto"
+      }
+    ],
+    "extenso": [
+      {
+        "texto": "Escreva por extenso: R$ 1.050,00",
+        "resposta": "mil e cinquenta reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 2.300,00",
+        "resposta": "dois mil e trezentos reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 1.999,00",
+        "resposta": "mil novecentos e noventa e nove reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 110,00",
+        "resposta": "cento e dez reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 600,00",
+        "resposta": "seiscentos reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 16,00",
+        "resposta": "dezesseis reais"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 75,30",
+        "resposta": "setenta e cinco reais e trinta centavos"
+      },
+      {
+        "texto": "Escreva por extenso: R$ 1.000.000,00",
+        "resposta": "um milhão de reais"
+      }
+    ],
+    "calculo": [
+      {
+        "texto": "Quanto é o dobro de 15?",
+        "resposta": "30"
+      },
+      {
+        "texto": "Quanto é o triplo de 8?",
+        "resposta": "24"
+      },
+      {
+        "texto": "Quanto é metade de 50?",
+        "resposta": "25"
+      },
+      {
+        "texto": "Quantos anos há em duas décadas?",
+        "resposta": "20"
+      },
+      {
+        "texto": "Quantos ovos há em duas dúzias?",
+        "resposta": "24"
+      },
+      {
+        "texto": "Quanto é um quarto de 40?",
+        "resposta": "10"
+      },
+      {
+        "texto": "Quantos meses há em um trimestre?",
+        "resposta": "3"
+      },
+      {
+        "texto": "Quantos anos há em meio século?",
+        "resposta": "50"
+      }
+    ]
+  }
+}

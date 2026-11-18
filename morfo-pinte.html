@@ -26,6 +26,7 @@
   #legenda{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:.95rem}
   #legenda span{color:#fff;border-radius:8px;padding:2px 8px}
 </style>
+<script src="visual.js"></script>
 </head>
 <body>
 
@@ -84,7 +85,9 @@
 <script src="morfologia.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const AV = window.AoVivo, M = window.Morfo, C = M.CLASSES;
+const AV = window.AoVivo, M = window.Morfo;
+let C = M.CLASSES;
+const CORES_PINTE = ['#2f80ed', '#e74c3c', '#27ae60', '#e67e22', '#8e44ad', '#c2185b', '#16a085'];
 let frases = null, fila = [], n = 0, total = 0, placar = null, ativas = [], modo = 'pintar', corAtual = null, conferido = false;
 let alvo = null, faltam = 0, timer = null, fimEm = 0, palavrasAtuais = [];
 
@@ -94,9 +97,23 @@ document.querySelectorAll('input[name=modo]').forEach(r => r.onchange = atualiza
 
 function carregar(d, origem){
   if (!d || !Array.isArray(d.frases)) return AV.avisar('JSON inválido: falta a lista "frases".');
-  frases = d.frases.map(f => String(f).trim().split(/\s+/).map(M.lerToken)).filter(f => f.some(t => t.classe));
-  const presentes = [...new Set(frases.flat().map(t => t.classe).filter(Boolean))];
-  M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  if (Array.isArray(d.categorias) && d.categorias.length){
+    // categorias próprias: frases marcadas com /id (ex.: O/suj menino/suj comeu/vb)
+    C = {};
+    d.categorias.forEach((c, i) => { const id = String(c.id); C[id] = {nome: String(c.nome || id), plural: String(c.plural || (c.nome || id) + 's'), cor: c.cor || CORES_PINTE[i % CORES_PINTE.length], emoji: c.emoji || '🏷️', def: c.def || ''}; });
+    frases = d.frases.map(f => String(f).trim().split(/\s+/).map(tok => {
+      const m = tok.match(/^(.+?)\/([a-z0-9]+)([.,!?;:…"”)]*)$/i);
+      return m && C[m[2]] ? {texto: m[1] + m[3], palavra: m[1], classe: m[2]} : {texto: tok, palavra: tok.replace(/[.,!?;:…"“”()]/g, ''), classe: null};
+    })).filter(f => f.some(t => t.classe));
+    const presentes = new Set(frases.flat().map(t => t.classe).filter(Boolean));
+    $('escolhaClasses').innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:4px 16px">' + Object.keys(C).filter(c => presentes.has(c)).map(c =>
+      `<label style="margin:2px 0"><input type="checkbox" data-c="${c}" checked> <span style="background:${C[c].cor};color:#fff;border-radius:8px;padding:2px 8px;font-weight:bold">${C[c].emoji} ${AV.esc(C[c].nome)}</span></label>`).join('') + '</div>';
+  } else {
+    C = M.CLASSES;
+    frases = d.frases.map(f => String(f).trim().split(/\s+/).map(M.lerToken)).filter(f => f.some(t => t.classe));
+    const presentes = [...new Set(frases.flat().map(t => t.classe).filter(Boolean))];
+    M.montarEscolhaClasses($('escolhaClasses'), Object.keys(C).filter(c => presentes.includes(c)));
+  }
   $('infoJson').textContent = `${d.titulo || 'Frases'} • ${frases.length} frases marcadas` + (origem ? ` • ${origem}` : '');
 }
 AV.prepararSeletorJson({tipo: 'morfo-frases', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});

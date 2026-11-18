@@ -1,0 +1,295 @@
+{
+  "titulo": "Conectivos para a redação",
+  "emoji": "🔗",
+  "instrucao": "Qual é o valor do conectivo destacado?",
+  "rodadas": [
+    {
+      "destaque": "[Ademais], a falta de saneamento agrava o problema.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: acrescenta um argumento.",
+      "imagem": "➕"
+    },
+    {
+      "destaque": "[Além disso], o acesso à internet ainda é desigual.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: acrescenta um argumento.",
+      "imagem": "➕"
+    },
+    {
+      "destaque": "[Outrossim], é preciso investir em educação.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: acrescenta um argumento.",
+      "imagem": "➕"
+    },
+    {
+      "destaque": "A lei existe; [no entanto], não é cumprida.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Oposição",
+      "explica": "Oposição: contrapõe ideias.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "[Todavia], os dados mostram outra realidade.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Oposição",
+      "explica": "Oposição: contrapõe ideias.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "[Haja vista] o aumento dos casos, a campanha foi ampliada.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Causa",
+      "explica": "Causa: apresenta o motivo.",
+      "imagem": "🔍"
+    },
+    {
+      "destaque": "[Visto que] a população envelhece, o sistema precisa mudar.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Causa",
+      "explica": "Causa: apresenta o motivo.",
+      "imagem": "🔍"
+    },
+    {
+      "destaque": "[Portanto], cabe ao Estado agir.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Conclusão",
+      "explica": "Conclusão: encerra o raciocínio.",
+      "imagem": "🏁"
+    },
+    {
+      "destaque": "[Dessa forma], o problema poderá ser resolvido.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Conclusão",
+      "explica": "Conclusão: encerra o raciocínio.",
+      "imagem": "🏁"
+    },
+    {
+      "destaque": "[Em suma], trata-se de um desafio coletivo.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Conclusão",
+      "explica": "Conclusão: encerra o raciocínio.",
+      "imagem": "🏁"
+    },
+    {
+      "destaque": "[Embora] existam avanços, a desigualdade persiste.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Concessão",
+      "explica": "Concessão: admite um argumento contrário sem abandonar a tese.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "[Não obstante] os esforços, os índices continuam altos.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Concessão",
+      "explica": "Concessão: admite um argumento contrário sem abandonar a tese.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "[A exemplo disso], a Finlândia reformou sua educação.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Exemplificação",
+      "explica": "Exemplificação: introduz um exemplo.",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "[Por exemplo], o ECA garante direitos às crianças.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Exemplificação",
+      "explica": "Exemplificação: introduz um exemplo.",
+      "imagem": "💡"
+    },
+    {
+      "destaque": "[A fim de] reduzir o problema, a escola deve promover debates.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Finalidade",
+      "explica": "Finalidade: indica o objetivo.",
+      "imagem": "🎯"
+    },
+    {
+      "destaque": "[Com o intuito de] conscientizar, a mídia deve divulgar campanhas.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Finalidade",
+      "explica": "Finalidade: indica o objetivo.",
+      "imagem": "🎯"
+    },
+    {
+      "destaque": "A desinformação cresceu, [de modo que] a confiança nas instituições caiu.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Consequência",
+      "explica": "Consequência: indica o efeito, o resultado.",
+      "imagem": "📉"
+    },
+    {
+      "destaque": "O desemprego é tão alto [que] muitos jovens desistem de procurar vaga.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Causa",
+        "Conclusão",
+        "Concessão",
+        "Exemplificação",
+        "Finalidade",
+        "Consequência"
+      ],
+      "correta": "Consequência",
+      "explica": "Consequência: indica o efeito, o resultado.",
+      "imagem": "📉"
+    }
+  ]
+}

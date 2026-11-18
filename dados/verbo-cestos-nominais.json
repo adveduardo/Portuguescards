@@ -1,0 +1,153 @@
+{
+  "titulo": "Cestos das formas nominais",
+  "cestos": [
+    {
+      "id": "inf",
+      "nome": "Infinitivo",
+      "emoji": "🔤",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "ger",
+      "nome": "Gerúndio",
+      "emoji": "🔄",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "par",
+      "nome": "Particípio",
+      "emoji": "✅",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "cantar",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "viver",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "sorrir",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "comer",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "pôr",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "fazer",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "partir",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "escrever",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "ler",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "dormir",
+      "cesto": "inf"
+    },
+    {
+      "palavra": "correndo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "cantando",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "partindo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "pondo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "dormindo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "escrevendo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "lendo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "sorrindo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "fazendo",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "estudando",
+      "cesto": "ger"
+    },
+    {
+      "palavra": "estudado",
+      "cesto": "par"
+    },
+    {
+      "palavra": "feito",
+      "cesto": "par"
+    },
+    {
+      "palavra": "escrito",
+      "cesto": "par"
+    },
+    {
+      "palavra": "dito",
+      "cesto": "par"
+    },
+    {
+      "palavra": "aberto",
+      "cesto": "par"
+    },
+    {
+      "palavra": "lido",
+      "cesto": "par"
+    },
+    {
+      "palavra": "posto",
+      "cesto": "par"
+    },
+    {
+      "palavra": "chegado",
+      "cesto": "par"
+    },
+    {
+      "palavra": "entregue",
+      "cesto": "par"
+    },
+    {
+      "palavra": "pago",
+      "cesto": "par"
+    },
+    {
+      "palavra": "aceito",
+      "cesto": "par"
+    },
+    {
+      "palavra": "ganho",
+      "cesto": "par"
+    }
+  ]
+}

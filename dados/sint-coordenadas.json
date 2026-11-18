@@ -1,0 +1,163 @@
+{
+  "titulo": "Conjunções coordenativas",
+  "emoji": "🔗",
+  "instrucao": "Que relação a conjunção destacada estabelece?",
+  "rodadas": [
+    {
+      "destaque": "Estudei [e] passei.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: soma ideias (e, nem, não só... mas também).",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "Estudei, [mas] não passei.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Oposição",
+      "explica": "Oposição: contrasta ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "😕"
+    },
+    {
+      "destaque": "[Ou] você estuda, ou não passa.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Alternância",
+      "explica": "Alternância: alterna ou exclui ideias (ou... ou, ora... ora).",
+      "imagem": "🔀"
+    },
+    {
+      "destaque": "Estudou muito; [portanto], passou.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Conclusão",
+      "explica": "Conclusão: conclui a partir do que foi dito (portanto, logo, por isso, assim).",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "Vou dormir, [pois] estou cansado.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Explicação",
+      "explica": "Explicação: justifica o que foi dito antes (pois, porque, que).",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "Ele é rico, [porém] infeliz.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Oposição",
+      "explica": "Oposição: contrasta ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "Não só canta, [como também] dança.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: soma ideias (e, nem, não só... mas também).",
+      "imagem": "💃"
+    },
+    {
+      "destaque": "Choveu, [logo] a rua está molhada.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Conclusão",
+      "explica": "Conclusão: conclui a partir do que foi dito (portanto, logo, por isso, assim).",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Leve o guarda-chuva, [porque] vai chover.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Explicação",
+      "explica": "Explicação: justifica o que foi dito antes (pois, porque, que).",
+      "imagem": "☔"
+    },
+    {
+      "destaque": "[Ora] ri, ora chora.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Alternância",
+      "explica": "Alternância: alterna ou exclui ideias (ou... ou, ora... ora).",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "Tentei; [contudo], não consegui.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Oposição",
+      "explica": "Oposição: contrasta ideias (mas, porém, contudo, todavia, entretanto).",
+      "imagem": "🙁"
+    },
+    {
+      "destaque": "Não estudou [nem] fez a tarefa.",
+      "opcoes": [
+        "Adição",
+        "Oposição",
+        "Alternância",
+        "Conclusão",
+        "Explicação"
+      ],
+      "correta": "Adição",
+      "explica": "Adição: soma ideias (e, nem, não só... mas também).",
+      "imagem": "📚"
+    }
+  ]
+}

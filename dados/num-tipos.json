@@ -1,0 +1,215 @@
+{
+  "titulo": "Tipos de numeral",
+  "emoji": "🔢",
+  "instrucao": "Que tipo de numeral está destacado?",
+  "rodadas": [
+    {
+      "destaque": "Comprei [três] livros.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Cardinal",
+      "explica": "Numeral cardinal: indica quantidade (um, dois, cem, mil).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Cheguei em [primeiro] lugar.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Ordinal",
+      "explica": "Numeral ordinal: indica ordem, posição (primeiro, décimo).",
+      "imagem": "🥇"
+    },
+    {
+      "destaque": "Ganhei o [dobro] do valor.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Multiplicativo",
+      "explica": "Numeral multiplicativo: indica multiplicação (dobro, triplo).",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "Comi [metade] da pizza.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Fracionário",
+      "explica": "Numeral fracionário: indica divisão, parte (metade, um terço).",
+      "imagem": "🍕"
+    },
+    {
+      "destaque": "Comprei uma [dúzia] de ovos.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Coletivo",
+      "explica": "Numeral coletivo: indica conjunto com número exato (par, dúzia, dezena, década).",
+      "imagem": "🥚"
+    },
+    {
+      "destaque": "Ele mora no [décimo] andar.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Ordinal",
+      "explica": "Numeral ordinal: indica ordem, posição (primeiro, décimo).",
+      "imagem": "🏢"
+    },
+    {
+      "destaque": "Um [terço] da turma faltou.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Fracionário",
+      "explica": "Numeral fracionário: indica divisão, parte (metade, um terço).",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Uma [dezena] de alunos chegou.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Coletivo",
+      "explica": "Numeral coletivo: indica conjunto com número exato (par, dúzia, dezena, década).",
+      "imagem": "🧑‍🎓"
+    },
+    {
+      "destaque": "Recebeu o [triplo] do prêmio.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Multiplicativo",
+      "explica": "Numeral multiplicativo: indica multiplicação (dobro, triplo).",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "[Vinte] pessoas vieram.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Cardinal",
+      "explica": "Numeral cardinal: indica quantidade (um, dois, cem, mil).",
+      "imagem": "👥"
+    },
+    {
+      "destaque": "Ganhei um [par] de tênis.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Coletivo",
+      "explica": "Numeral coletivo: indica conjunto com número exato (par, dúzia, dezena, década).",
+      "imagem": "👟"
+    },
+    {
+      "destaque": "O [quádruplo] de dois é oito.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Multiplicativo",
+      "explica": "Numeral multiplicativo: indica multiplicação (dobro, triplo).",
+      "imagem": "✖️"
+    },
+    {
+      "destaque": "Ficou em [quinto] lugar.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Ordinal",
+      "explica": "Numeral ordinal: indica ordem, posição (primeiro, décimo).",
+      "imagem": "🏅"
+    },
+    {
+      "destaque": "Uma [década] se passou.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Coletivo",
+      "explica": "Numeral coletivo: indica conjunto com número exato (par, dúzia, dezena, década).",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Bebi [dois terços] do suco.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Fracionário",
+      "explica": "Numeral fracionário: indica divisão, parte (metade, um terço).",
+      "imagem": "🧃"
+    },
+    {
+      "destaque": "Paguei [cem] reais.",
+      "opcoes": [
+        "Cardinal",
+        "Ordinal",
+        "Multiplicativo",
+        "Fracionário",
+        "Coletivo"
+      ],
+      "correta": "Cardinal",
+      "explica": "Numeral cardinal: indica quantidade (um, dois, cem, mil).",
+      "imagem": "💵"
+    }
+  ]
+}

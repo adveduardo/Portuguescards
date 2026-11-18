@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha dos verbos",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "modo": {
+      "nome": "Modo",
+      "emoji": "🧭",
+      "cor": "#2f80ed"
+    },
+    "tempo": {
+      "nome": "Tempo",
+      "emoji": "🕰️",
+      "cor": "#e67e22"
+    },
+    "irregular": {
+      "nome": "Irregular",
+      "emoji": "🧪",
+      "cor": "#c2185b"
+    },
+    "voz": {
+      "nome": "Voz",
+      "emoji": "🔊",
+      "cor": "#8e44ad"
+    },
+    "nominal": {
+      "nome": "Formas nominais",
+      "emoji": "🏷️",
+      "cor": "#27ae60"
+    }
+  },
+  "desafios": {
+    "modo": [
+      {
+        "texto": "Qual é o modo do verbo em: \"Eu estudo\"?",
+        "resposta": "indicativo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Que eu estude\"?",
+        "resposta": "subjuntivo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Estude!\"?",
+        "resposta": "imperativo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Se eu estudasse\"?",
+        "resposta": "subjuntivo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Quando eu estudar\"?",
+        "resposta": "subjuntivo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Eu estudaria\"?",
+        "resposta": "indicativo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Não grite!\"?",
+        "resposta": "imperativo"
+      },
+      {
+        "texto": "Qual é o modo do verbo em: \"Eu estudei\"?",
+        "resposta": "indicativo"
+      }
+    ],
+    "tempo": [
+      {
+        "texto": "Qual é o tempo de \"eu cantei\"?",
+        "resposta": "pretérito perfeito"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu cantava\"?",
+        "resposta": "pretérito imperfeito"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu cantara\"?",
+        "resposta": "pretérito mais-que-perfeito"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu cantarei\"?",
+        "resposta": "futuro do presente"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu cantaria\"?",
+        "resposta": "futuro do pretérito"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu canto\"?",
+        "resposta": "presente"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu tinha cantado\"?",
+        "resposta": "pretérito mais-que-perfeito composto"
+      },
+      {
+        "texto": "Qual é o tempo de \"eu vou cantar\"?",
+        "resposta": "futuro (locução verbal)"
+      }
+    ],
+    "irregular": [
+      {
+        "texto": "Complete: Ontem eu ___ (fazer)",
+        "resposta": "fiz"
+      },
+      {
+        "texto": "Complete: Quando eu ___ (ver)",
+        "resposta": "vir"
+      },
+      {
+        "texto": "Complete: Quando eu ___ (vir)",
+        "resposta": "vier"
+      },
+      {
+        "texto": "Complete: Se eu ___ (pôr)",
+        "resposta": "puser"
+      },
+      {
+        "texto": "Complete: Ele ___ (intervir)",
+        "resposta": "interveio"
+      },
+      {
+        "texto": "Complete: Se ele ___ (manter)",
+        "resposta": "mantiver"
+      },
+      {
+        "texto": "Complete: Eles ___ (trazer)",
+        "resposta": "trouxeram"
+      },
+      {
+        "texto": "Complete: Eu ___ (caber)",
+        "resposta": "caibo"
+      }
+    ],
+    "voz": [
+      {
+        "texto": "Qual é a voz: \"O gato comeu o peixe\"?",
+        "resposta": "ativa"
+      },
+      {
+        "texto": "Qual é a voz: \"O peixe foi comido pelo gato\"?",
+        "resposta": "passiva analítica"
+      },
+      {
+        "texto": "Qual é a voz: \"Vendem-se carros\"?",
+        "resposta": "passiva sintética"
+      },
+      {
+        "texto": "Qual é a voz: \"Ela se olhou no espelho\"?",
+        "resposta": "reflexiva"
+      },
+      {
+        "texto": "Qual é a voz: \"Alugam-se casas\"?",
+        "resposta": "passiva sintética"
+      },
+      {
+        "texto": "Qual é a voz: \"A casa foi pintada\"?",
+        "resposta": "passiva analítica"
+      },
+      {
+        "texto": "Qual é a voz: \"Eles se abraçaram\"?",
+        "resposta": "reflexiva (recíproca)"
+      },
+      {
+        "texto": "Qual é a voz: \"Pedro pintou a casa\"?",
+        "resposta": "ativa"
+      }
+    ],
+    "nominal": [
+      {
+        "texto": "Diga o particípio de FAZER",
+        "resposta": "feito"
+      },
+      {
+        "texto": "Diga o gerúndio de CORRER",
+        "resposta": "correndo"
+      },
+      {
+        "texto": "Diga o particípio de VER",
+        "resposta": "visto"
+      },
+      {
+        "texto": "Diga o particípio de PÔR",
+        "resposta": "posto"
+      },
+      {
+        "texto": "Diga o gerúndio de IR",
+        "resposta": "indo"
+      },
+      {
+        "texto": "Diga o particípio de ESCREVER",
+        "resposta": "escrito"
+      },
+      {
+        "texto": "Diga o particípio de ABRIR",
+        "resposta": "aberto"
+      },
+      {
+        "texto": "Diga o infinitivo de \"fiz\"",
+        "resposta": "fazer"
+      }
+    ]
+  }
+}

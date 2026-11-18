@@ -1,0 +1,172 @@
+{
+  "titulo": "Modos verbais",
+  "emoji": "🧭",
+  "instrucao": "Em que modo está o verbo destacado?",
+  "rodadas": [
+    {
+      "destaque": "Eu [estudo] todos os dias.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Indicativo",
+      "explica": "Modo indicativo: expressa certeza, um fato real (presente, passado ou futuro).",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Espero que você [estude] para a prova.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...).",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "[Estude] para a prova!",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Imperativo",
+      "explica": "Modo imperativo: expressa ordem, pedido ou conselho.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Se eu [tivesse] tempo, viajaria.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...).",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Ontem nós [fomos] ao cinema.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Indicativo",
+      "explica": "Modo indicativo: expressa certeza, um fato real (presente, passado ou futuro).",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "[Feche] a porta, por favor.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Imperativo",
+      "explica": "Modo imperativo: expressa ordem, pedido ou conselho.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "Quando você [chegar], me avise.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...). (futuro do subjuntivo)",
+      "imagem": "📱"
+    },
+    {
+      "destaque": "Talvez ela [venha] amanhã.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...).",
+      "imagem": "🤔"
+    },
+    {
+      "destaque": "Amanhã [choverá] na capital.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Indicativo",
+      "explica": "Modo indicativo: expressa certeza, um fato real (presente, passado ou futuro).",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Não [corram] no corredor!",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Imperativo",
+      "explica": "Modo imperativo: expressa ordem, pedido ou conselho. (imperativo negativo)",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "É importante que todos [participem].",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...).",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "Eu [faria] isso se pudesse.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Indicativo",
+      "explica": "Modo indicativo: expressa certeza, um fato real (presente, passado ou futuro). O futuro do pretérito (faria) pertence ao modo indicativo.",
+      "imagem": "🤷"
+    },
+    {
+      "destaque": "[Vamos] embora, pessoal!",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Imperativo",
+      "explica": "Modo imperativo: expressa ordem, pedido ou conselho.",
+      "imagem": "👋"
+    },
+    {
+      "destaque": "Caso [precise], ligue para mim.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Subjuntivo",
+      "explica": "Modo subjuntivo: expressa dúvida, desejo, hipótese ou condição (que eu..., se eu..., quando eu...).",
+      "imagem": "☎️"
+    },
+    {
+      "destaque": "A Terra [gira] em torno do Sol.",
+      "opcoes": [
+        "Indicativo",
+        "Subjuntivo",
+        "Imperativo"
+      ],
+      "correta": "Indicativo",
+      "explica": "Modo indicativo: expressa certeza, um fato real (presente, passado ou futuro).",
+      "imagem": "🌍"
+    }
+  ]
+}

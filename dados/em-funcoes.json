@@ -1,0 +1,217 @@
+{
+  "titulo": "Funções da linguagem",
+  "emoji": "📡",
+  "instrucao": "Qual função da linguagem predomina?",
+  "rodadas": [
+    {
+      "destaque": "A temperatura média no Sul deve cair 5 °C nesta semana, segundo o instituto de meteorologia.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Referencial",
+      "explica": "Função referencial: foco na informação, no assunto; linguagem objetiva (notícias, textos científicos).",
+      "imagem": "🌡️"
+    },
+    {
+      "destaque": "Como eu sofro com essa saudade! Meu peito parece que vai explodir.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Emotiva",
+      "explica": "Função emotiva: foco no emissor, em seus sentimentos e opiniões; 1ª pessoa.",
+      "imagem": "💔"
+    },
+    {
+      "destaque": "Não perca! Compre já o seu e ganhe 50% de desconto!",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Conativa (apelativa)",
+      "explica": "Função conativa (apelativa): foco no receptor; tenta convencer; verbos no imperativo, vocativo (propagandas).",
+      "imagem": "🛍️"
+    },
+    {
+      "destaque": "Alô? Alô? Está me ouvindo? A ligação está falhando...",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Fática",
+      "explica": "Função fática: foco no canal; testa ou mantém o contato (alô, tá me ouvindo?).",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "Substantivo: palavra que dá nome aos seres, objetos, sentimentos e lugares.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Metalinguística",
+      "explica": "Função metalinguística: foco no código; a linguagem explica a própria linguagem (dicionário, poema sobre o poema).",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "Batatinha quando nasce / espalha a rama pelo chão...",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Poética",
+      "explica": "Função poética: foco na mensagem; trabalho com a forma, o som e o ritmo.",
+      "imagem": "🥔"
+    },
+    {
+      "destaque": "Vacine-se! Proteja quem você ama.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Conativa (apelativa)",
+      "explica": "Função conativa (apelativa): foco no receptor; tenta convencer; verbos no imperativo, vocativo (propagandas).",
+      "imagem": "💉"
+    },
+    {
+      "destaque": "— Oi, tudo bem? — Tudo. E aí? — Pois é...",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Fática",
+      "explica": "Função fática: foco no canal; testa ou mantém o contato (alô, tá me ouvindo?).",
+      "imagem": "👋"
+    },
+    {
+      "destaque": "Este poema fala de si mesmo: cada verso que escrevo me pergunta por que sou verso.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Metalinguística",
+      "explica": "Função metalinguística: foco no código; a linguagem explica a própria linguagem (dicionário, poema sobre o poema).",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "A água ferve a 100 °C ao nível do mar.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Referencial",
+      "explica": "Função referencial: foco na informação, no assunto; linguagem objetiva (notícias, textos científicos).",
+      "imagem": "💧"
+    },
+    {
+      "destaque": "Ai, que vergonha eu passei hoje! Nunca mais saio de casa!",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Emotiva",
+      "explica": "Função emotiva: foco no emissor, em seus sentimentos e opiniões; 1ª pessoa.",
+      "imagem": "😳"
+    },
+    {
+      "destaque": "Vozes veladas, veludosas vozes, / volúpias dos violões, vozes veladas...",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Poética",
+      "explica": "Função poética: foco na mensagem; trabalho com a forma, o som e o ritmo.",
+      "imagem": "🎻"
+    },
+    {
+      "destaque": "Você, motorista: se beber, não dirija.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Conativa (apelativa)",
+      "explica": "Função conativa (apelativa): foco no receptor; tenta convencer; verbos no imperativo, vocativo (propagandas).",
+      "imagem": "🚗"
+    },
+    {
+      "destaque": "Na palavra \"girassol\", há a junção de \"gira\" + \"sol\": é uma palavra composta.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Metalinguística",
+      "explica": "Função metalinguística: foco no código; a linguagem explica a própria linguagem (dicionário, poema sobre o poema).",
+      "imagem": "🌻"
+    },
+    {
+      "destaque": "O Brasil tem 26 estados e um Distrito Federal.",
+      "opcoes": [
+        "Referencial",
+        "Emotiva",
+        "Conativa (apelativa)",
+        "Fática",
+        "Metalinguística",
+        "Poética"
+      ],
+      "correta": "Referencial",
+      "explica": "Função referencial: foco na informação, no assunto; linguagem objetiva (notícias, textos científicos).",
+      "imagem": "🗺️"
+    }
+  ]
+}

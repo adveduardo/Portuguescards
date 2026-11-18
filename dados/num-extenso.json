@@ -1,0 +1,150 @@
+{
+  "titulo": "Valor por extenso (cheque e recibo)",
+  "emoji": "🧾",
+  "instrucao": "Como se escreve este valor por extenso?",
+  "rodadas": [
+    {
+      "destaque": "R$ 1.250,00",
+      "opcoes": [
+        "mil duzentos e cinquenta reais",
+        "um mil e duzentos e cinquenta reais",
+        "mil e duzentos e cinquenta reais"
+      ],
+      "correta": "mil duzentos e cinquenta reais",
+      "explica": "Entre o milhar e a centena não se usa \"e\", a não ser que a centena termine em dois zeros (1.200) ou comece com zero (1.050).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 1.200,00",
+      "opcoes": [
+        "mil e duzentos reais",
+        "mil duzentos reais",
+        "um mil duzentos reais"
+      ],
+      "correta": "mil e duzentos reais",
+      "explica": "Entre o milhar e a centena não se usa \"e\", a não ser que a centena termine em dois zeros (1.200) ou comece com zero (1.050).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 2.035,00",
+      "opcoes": [
+        "dois mil e trinta e cinco reais",
+        "dois mil trinta e cinco reais",
+        "dois mil e trinta cinco reais"
+      ],
+      "correta": "dois mil e trinta e cinco reais",
+      "explica": "Entre o milhar e a centena não se usa \"e\", a não ser que a centena termine em dois zeros (1.200) ou comece com zero (1.050).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 3.578,00",
+      "opcoes": [
+        "três mil quinhentos e setenta e oito reais",
+        "três mil e quinhentos e setenta e oito reais",
+        "três mil quinhentos setenta e oito reais"
+      ],
+      "correta": "três mil quinhentos e setenta e oito reais",
+      "explica": "Entre o milhar e a centena não se usa \"e\", a não ser que a centena termine em dois zeros (1.200) ou comece com zero (1.050).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 150,50",
+      "opcoes": [
+        "cento e cinquenta reais e cinquenta centavos",
+        "cento e cinquenta e cinquenta reais",
+        "cem e cinquenta reais e cinquenta centavos"
+      ],
+      "correta": "cento e cinquenta reais e cinquenta centavos",
+      "explica": "Primeiro os reais, depois os centavos, ligados por \"e\".",
+      "imagem": "🪙"
+    },
+    {
+      "destaque": "R$ 100,00",
+      "opcoes": [
+        "cem reais",
+        "cento reais",
+        "um cento de reais"
+      ],
+      "correta": "cem reais",
+      "explica": "Exatamente 100 = CEM. CENTO só aparece com mais algum número: cento e um, cento e vinte.",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 101,00",
+      "opcoes": [
+        "cento e um reais",
+        "cem e um reais",
+        "cem um reais"
+      ],
+      "correta": "cento e um reais",
+      "explica": "De 101 a 199 usa-se CENTO: cento e um.",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 1.000.000,00",
+      "opcoes": [
+        "um milhão de reais",
+        "um milhão reais",
+        "mil milhares de reais"
+      ],
+      "correta": "um milhão de reais",
+      "explica": "Milhão é substantivo: um milhão DE reais.",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "R$ 2.500.000,00",
+      "opcoes": [
+        "dois milhões e quinhentos mil reais",
+        "duas milhões e quinhentos mil reais",
+        "dois milhão e quinhentos mil reais"
+      ],
+      "correta": "dois milhões e quinhentos mil reais",
+      "explica": "MILHÃO é masculino: dois milhões.",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "R$ 50,00",
+      "opcoes": [
+        "cinquenta reais",
+        "cincoenta reais",
+        "cinqüenta reais"
+      ],
+      "correta": "cinquenta reais",
+      "explica": "Escreve-se CINQUENTA, com QU (sem trema desde o Acordo Ortográfico).",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 600,00",
+      "opcoes": [
+        "seiscentos reais",
+        "seissentos reais",
+        "seicentos reais"
+      ],
+      "correta": "seiscentos reais",
+      "explica": "SEISCENTOS se escreve com SC.",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 16,00",
+      "opcoes": [
+        "dezesseis reais",
+        "dezeseis reais",
+        "deseseis reais"
+      ],
+      "correta": "dezesseis reais",
+      "explica": "DEZESSEIS: com Z e SS.",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "R$ 470,00",
+      "opcoes": [
+        "quatrocentos e setenta reais",
+        "quatrocentos setenta reais",
+        "quatro centos e setenta reais"
+      ],
+      "correta": "quatrocentos e setenta reais",
+      "explica": "Entre centena e dezena usa-se \"e\".",
+      "imagem": "💵"
+    }
+  ]
+}

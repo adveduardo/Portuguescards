@@ -1,0 +1,98 @@
+{
+  "titulo": "Ordene os verbos",
+  "sequencias": [
+    {
+      "titulo": "Pessoas do verbo CANTAR (presente)",
+      "esquerda": "1ª pessoa do singular",
+      "direita": "3ª pessoa do plural",
+      "itens": [
+        "eu canto",
+        "tu cantas",
+        "ele canta",
+        "nós cantamos",
+        "vós cantais",
+        "eles cantam"
+      ],
+      "explica": "1ª, 2ª e 3ª pessoas do singular; depois 1ª, 2ª e 3ª do plural."
+    },
+    {
+      "titulo": "Pessoas do verbo SER (presente)",
+      "esquerda": "1ª pessoa do singular",
+      "direita": "3ª pessoa do plural",
+      "itens": [
+        "eu sou",
+        "tu és",
+        "ele é",
+        "nós somos",
+        "vós sois",
+        "eles são"
+      ],
+      "explica": "SER é muito irregular: sou, és, é, somos, sois, são."
+    },
+    {
+      "titulo": "FAZER no pretérito perfeito",
+      "esquerda": "1ª pessoa do singular",
+      "direita": "3ª pessoa do plural",
+      "itens": [
+        "eu fiz",
+        "tu fizeste",
+        "ele fez",
+        "nós fizemos",
+        "vós fizestes",
+        "eles fizeram"
+      ],
+      "explica": "Eu FIZ, ele FEZ: não confunda!"
+    },
+    {
+      "titulo": "Do passado mais distante ao futuro",
+      "esquerda": "⏪ passado distante",
+      "direita": "futuro ⏩",
+      "itens": [
+        "eu cantara",
+        "eu cantei",
+        "eu canto",
+        "eu cantarei"
+      ],
+      "explica": "Mais-que-perfeito (antes de outro passado) → perfeito → presente → futuro."
+    },
+    {
+      "titulo": "Imperativo afirmativo de FALAR",
+      "esquerda": "tu",
+      "direita": "vocês",
+      "itens": [
+        "fala (tu)",
+        "fale (você)",
+        "falemos (nós)",
+        "falai (vós)",
+        "falem (vocês)"
+      ],
+      "explica": "O imperativo não tem a 1ª pessoa do singular (eu)."
+    },
+    {
+      "titulo": "Futuro do subjuntivo de VER",
+      "esquerda": "eu",
+      "direita": "eles",
+      "itens": [
+        "quando eu vir",
+        "quando tu vires",
+        "quando nós virmos",
+        "quando vós virdes",
+        "quando eles virem"
+      ],
+      "explica": "Futuro do subjuntivo de VER: vir, vires, vir, virmos, virdes, virem."
+    },
+    {
+      "titulo": "Futuro do subjuntivo de VIR",
+      "esquerda": "eu",
+      "direita": "eles",
+      "itens": [
+        "quando eu vier",
+        "quando tu vieres",
+        "quando nós viermos",
+        "quando vós vierdes",
+        "quando eles vierem"
+      ],
+      "explica": "Futuro do subjuntivo de VIR: vier, vieres, vier, viermos, vierdes, vierem."
+    }
+  ]
+}

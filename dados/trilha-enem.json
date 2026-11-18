@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha do ENEM",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "figuras": {
+      "nome": "Figuras",
+      "emoji": "🎭",
+      "cor": "#c2185b"
+    },
+    "funcoes": {
+      "nome": "Funções",
+      "emoji": "📡",
+      "cor": "#2f80ed"
+    },
+    "literatura": {
+      "nome": "Literatura",
+      "emoji": "📚",
+      "cor": "#8e44ad"
+    },
+    "redacao": {
+      "nome": "Redação",
+      "emoji": "📝",
+      "cor": "#27ae60"
+    },
+    "conectivos": {
+      "nome": "Conectivos",
+      "emoji": "🔗",
+      "cor": "#e67e22"
+    }
+  },
+  "desafios": {
+    "figuras": [
+      {
+        "texto": "Qual é a figura: \"Ele é forte como um touro\"?",
+        "resposta": "comparação"
+      },
+      {
+        "texto": "Qual é a figura: \"Meu coração é um balde despejado\"?",
+        "resposta": "metáfora"
+      },
+      {
+        "texto": "Qual é a figura: \"Li Machado de Assis\"?",
+        "resposta": "metonímia"
+      },
+      {
+        "texto": "Qual é a figura: \"Morri de vergonha\"?",
+        "resposta": "hipérbole"
+      },
+      {
+        "texto": "Qual é a figura: \"O sol sorria para nós\"?",
+        "resposta": "personificação"
+      },
+      {
+        "texto": "Qual é a figura: \"Ele faltou com a verdade\"?",
+        "resposta": "eufemismo"
+      },
+      {
+        "texto": "Qual é a figura: \"Rir e chorar\"?",
+        "resposta": "antítese"
+      },
+      {
+        "texto": "Qual é a figura: \"O rato roeu a roupa do rei\"?",
+        "resposta": "aliteração"
+      }
+    ],
+    "funcoes": [
+      {
+        "texto": "Qual é a função da linguagem: uma notícia de jornal?",
+        "resposta": "referencial"
+      },
+      {
+        "texto": "Qual é a função da linguagem: um diário íntimo?",
+        "resposta": "emotiva"
+      },
+      {
+        "texto": "Qual é a função da linguagem: uma propaganda?",
+        "resposta": "conativa"
+      },
+      {
+        "texto": "Qual é a função da linguagem: \"Alô, está me ouvindo?\"?",
+        "resposta": "fática"
+      },
+      {
+        "texto": "Qual é a função da linguagem: um verbete de dicionário?",
+        "resposta": "metalinguística"
+      },
+      {
+        "texto": "Qual é a função da linguagem: um poema com rimas e ritmo?",
+        "resposta": "poética"
+      },
+      {
+        "texto": "Qual é a função da linguagem: uma bula de remédio?",
+        "resposta": "referencial"
+      },
+      {
+        "texto": "Qual é a função da linguagem: \"Compre já!\"?",
+        "resposta": "conativa"
+      }
+    ],
+    "literatura": [
+      {
+        "texto": "Quem escreveu Iracema?",
+        "resposta": "José de Alencar"
+      },
+      {
+        "texto": "Escola de Gregório de Matos?",
+        "resposta": "Barroco"
+      },
+      {
+        "texto": "Quem escreveu O Cortiço?",
+        "resposta": "Aluísio Azevedo"
+      },
+      {
+        "texto": "Ano da Semana de Arte Moderna?",
+        "resposta": "1922"
+      },
+      {
+        "texto": "Autor de Macunaíma?",
+        "resposta": "Mário de Andrade"
+      },
+      {
+        "texto": "Escola de Olavo Bilac?",
+        "resposta": "Parnasianismo"
+      },
+      {
+        "texto": "Autora de A Hora da Estrela?",
+        "resposta": "Clarice Lispector"
+      },
+      {
+        "texto": "Autor de Morte e Vida Severina?",
+        "resposta": "João Cabral de Melo Neto"
+      }
+    ],
+    "redacao": [
+      {
+        "texto": "Qual o tipo textual da redação do ENEM?",
+        "resposta": "dissertativo-argumentativo"
+      },
+      {
+        "texto": "O que a competência 1 avalia?",
+        "resposta": "norma-padrão"
+      },
+      {
+        "texto": "O que a competência 5 avalia?",
+        "resposta": "proposta de intervenção"
+      },
+      {
+        "texto": "Diga os elementos da proposta de intervenção",
+        "resposta": "agente, ação, modo, finalidade, detalhamento"
+      },
+      {
+        "texto": "Quantos parágrafos costuma ter a redação?",
+        "resposta": "quatro (introdução, 2 desenvolvimentos, conclusão)"
+      },
+      {
+        "texto": "O que é repertório sociocultural?",
+        "resposta": "informações de outras áreas que apoiam o argumento"
+      },
+      {
+        "texto": "O que deve ter na introdução?",
+        "resposta": "contextualização e tese"
+      },
+      {
+        "texto": "O que zera a redação?",
+        "resposta": "fuga total ao tema, não ser dissertativo-argumentativo, ter até 7 linhas, parte desconectada do tema, folha em branco"
+      }
+    ],
+    "conectivos": [
+      {
+        "texto": "Que valor tem \"ademais\"?",
+        "resposta": "adição"
+      },
+      {
+        "texto": "Que valor tem \"todavia\"?",
+        "resposta": "oposição"
+      },
+      {
+        "texto": "Que valor tem \"haja vista\"?",
+        "resposta": "causa"
+      },
+      {
+        "texto": "Que valor tem \"portanto\"?",
+        "resposta": "conclusão"
+      },
+      {
+        "texto": "Que valor tem \"embora\"?",
+        "resposta": "concessão"
+      },
+      {
+        "texto": "Que valor tem \"a fim de\"?",
+        "resposta": "finalidade"
+      },
+      {
+        "texto": "Que valor tem \"por exemplo\"?",
+        "resposta": "exemplificação"
+      },
+      {
+        "texto": "Que valor tem \"de modo que\"?",
+        "resposta": "consequência"
+      }
+    ]
+  }
+}

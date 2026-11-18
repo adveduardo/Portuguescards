@@ -1,0 +1,223 @@
+{
+  "titulo": "Obra e autor",
+  "emoji": "📕",
+  "instrucao": "Quem escreveu esta obra?",
+  "rodadas": [
+    {
+      "destaque": "Dom Casmurro",
+      "opcoes": [
+        "Machado de Assis",
+        "José de Alencar",
+        "Aluísio Azevedo",
+        "Lima Barreto"
+      ],
+      "correta": "Machado de Assis",
+      "explica": "Dom Casmurro foi escrita por Machado de Assis.",
+      "imagem": "👀"
+    },
+    {
+      "destaque": "Iracema",
+      "opcoes": [
+        "José de Alencar",
+        "Gonçalves Dias",
+        "Castro Alves",
+        "Machado de Assis"
+      ],
+      "correta": "José de Alencar",
+      "explica": "Iracema foi escrita por José de Alencar.",
+      "imagem": "🏹"
+    },
+    {
+      "destaque": "O Cortiço",
+      "opcoes": [
+        "Aluísio Azevedo",
+        "Machado de Assis",
+        "Raul Pompeia",
+        "Euclides da Cunha"
+      ],
+      "correta": "Aluísio Azevedo",
+      "explica": "O Cortiço foi escrita por Aluísio Azevedo.",
+      "imagem": "🏚️"
+    },
+    {
+      "destaque": "Vidas Secas",
+      "opcoes": [
+        "Graciliano Ramos",
+        "Rachel de Queiroz",
+        "Jorge Amado",
+        "José Lins do Rego"
+      ],
+      "correta": "Graciliano Ramos",
+      "explica": "Vidas Secas foi escrita por Graciliano Ramos.",
+      "imagem": "🐕"
+    },
+    {
+      "destaque": "Grande Sertão: Veredas",
+      "opcoes": [
+        "Guimarães Rosa",
+        "Graciliano Ramos",
+        "Mário de Andrade",
+        "Ariano Suassuna"
+      ],
+      "correta": "Guimarães Rosa",
+      "explica": "Grande Sertão: Veredas foi escrita por Guimarães Rosa.",
+      "imagem": "🐎"
+    },
+    {
+      "destaque": "A Hora da Estrela",
+      "opcoes": [
+        "Clarice Lispector",
+        "Cecília Meireles",
+        "Rachel de Queiroz",
+        "Lygia Fagundes Telles"
+      ],
+      "correta": "Clarice Lispector",
+      "explica": "A Hora da Estrela foi escrita por Clarice Lispector.",
+      "imagem": "⭐"
+    },
+    {
+      "destaque": "Macunaíma",
+      "opcoes": [
+        "Mário de Andrade",
+        "Oswald de Andrade",
+        "Manuel Bandeira",
+        "Monteiro Lobato"
+      ],
+      "correta": "Mário de Andrade",
+      "explica": "Macunaíma foi escrita por Mário de Andrade.",
+      "imagem": "🦜"
+    },
+    {
+      "destaque": "O Quinze",
+      "opcoes": [
+        "Rachel de Queiroz",
+        "Clarice Lispector",
+        "Graciliano Ramos",
+        "Jorge Amado"
+      ],
+      "correta": "Rachel de Queiroz",
+      "explica": "O Quinze foi escrita por Rachel de Queiroz.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "Auto da Compadecida",
+      "opcoes": [
+        "Ariano Suassuna",
+        "João Cabral de Melo Neto",
+        "Jorge Amado",
+        "Dias Gomes"
+      ],
+      "correta": "Ariano Suassuna",
+      "explica": "Auto da Compadecida foi escrita por Ariano Suassuna.",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "Morte e Vida Severina",
+      "opcoes": [
+        "João Cabral de Melo Neto",
+        "Carlos Drummond de Andrade",
+        "Vinicius de Moraes",
+        "Manuel Bandeira"
+      ],
+      "correta": "João Cabral de Melo Neto",
+      "explica": "Morte e Vida Severina foi escrita por João Cabral de Melo Neto.",
+      "imagem": "🌵"
+    },
+    {
+      "destaque": "Capitães da Areia",
+      "opcoes": [
+        "Jorge Amado",
+        "Graciliano Ramos",
+        "Érico Veríssimo",
+        "José Lins do Rego"
+      ],
+      "correta": "Jorge Amado",
+      "explica": "Capitães da Areia foi escrita por Jorge Amado.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "Os Sertões",
+      "opcoes": [
+        "Euclides da Cunha",
+        "Lima Barreto",
+        "Monteiro Lobato",
+        "Graça Aranha"
+      ],
+      "correta": "Euclides da Cunha",
+      "explica": "Os Sertões foi escrita por Euclides da Cunha.",
+      "imagem": "🌵"
+    },
+    {
+      "destaque": "O Navio Negreiro",
+      "opcoes": [
+        "Castro Alves",
+        "Álvares de Azevedo",
+        "Gonçalves Dias",
+        "Casimiro de Abreu"
+      ],
+      "correta": "Castro Alves",
+      "explica": "O Navio Negreiro foi escrita por Castro Alves.",
+      "imagem": "⛓️"
+    },
+    {
+      "destaque": "Memórias de um Sargento de Milícias",
+      "opcoes": [
+        "Manuel Antônio de Almeida",
+        "José de Alencar",
+        "Joaquim Manuel de Macedo",
+        "Machado de Assis"
+      ],
+      "correta": "Manuel Antônio de Almeida",
+      "explica": "Memórias de um Sargento de Milícias foi escrita por Manuel Antônio de Almeida.",
+      "imagem": "🎖️"
+    },
+    {
+      "destaque": "A Moreninha",
+      "opcoes": [
+        "Joaquim Manuel de Macedo",
+        "José de Alencar",
+        "Bernardo Guimarães",
+        "Machado de Assis"
+      ],
+      "correta": "Joaquim Manuel de Macedo",
+      "explica": "A Moreninha foi escrita por Joaquim Manuel de Macedo.",
+      "imagem": "🏝️"
+    },
+    {
+      "destaque": "Quarto de Despejo",
+      "opcoes": [
+        "Carolina Maria de Jesus",
+        "Conceição Evaristo",
+        "Clarice Lispector",
+        "Rachel de Queiroz"
+      ],
+      "correta": "Carolina Maria de Jesus",
+      "explica": "Quarto de Despejo foi escrita por Carolina Maria de Jesus.",
+      "imagem": "📓"
+    },
+    {
+      "destaque": "Triste Fim de Policarpo Quaresma",
+      "opcoes": [
+        "Lima Barreto",
+        "Euclides da Cunha",
+        "Machado de Assis",
+        "Monteiro Lobato"
+      ],
+      "correta": "Lima Barreto",
+      "explica": "Triste Fim de Policarpo Quaresma foi escrita por Lima Barreto.",
+      "imagem": "🇧🇷"
+    },
+    {
+      "destaque": "Sagarana",
+      "opcoes": [
+        "Guimarães Rosa",
+        "Graciliano Ramos",
+        "Jorge Amado",
+        "Ariano Suassuna"
+      ],
+      "correta": "Guimarães Rosa",
+      "explica": "Sagarana foi escrita por Guimarães Rosa.",
+      "imagem": "🐂"
+    }
+  ]
+}

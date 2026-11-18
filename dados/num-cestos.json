@@ -1,0 +1,158 @@
+{
+  "titulo": "Cestos dos numerais",
+  "cestos": [
+    {
+      "id": "car",
+      "nome": "Cardinal",
+      "emoji": "🔢",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "ord",
+      "nome": "Ordinal",
+      "emoji": "🥇",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "mul",
+      "nome": "Multiplicativo",
+      "emoji": "✖️",
+      "cor": "#c2185b"
+    },
+    {
+      "id": "fra",
+      "nome": "Fracionário",
+      "emoji": "🍕",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "col",
+      "nome": "Coletivo",
+      "emoji": "📦",
+      "cor": "#8e44ad",
+      "padrao": false
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "dois",
+      "cesto": "car"
+    },
+    {
+      "palavra": "cem",
+      "cesto": "car"
+    },
+    {
+      "palavra": "mil",
+      "cesto": "car"
+    },
+    {
+      "palavra": "vinte",
+      "cesto": "car"
+    },
+    {
+      "palavra": "quinze",
+      "cesto": "car"
+    },
+    {
+      "palavra": "oitenta",
+      "cesto": "car"
+    },
+    {
+      "palavra": "primeiro",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "segundo",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "vigésimo",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "centésimo",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "milésimo",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "trigésimo",
+      "cesto": "ord"
+    },
+    {
+      "palavra": "dobro",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "triplo",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "quádruplo",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "quíntuplo",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "duplo",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "sêxtuplo",
+      "cesto": "mul"
+    },
+    {
+      "palavra": "metade",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "um terço",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "três quartos",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "dois quintos",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "meio",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "um décimo",
+      "cesto": "fra"
+    },
+    {
+      "palavra": "dúzia",
+      "cesto": "col"
+    },
+    {
+      "palavra": "dezena",
+      "cesto": "col"
+    },
+    {
+      "palavra": "centena",
+      "cesto": "col"
+    },
+    {
+      "palavra": "par",
+      "cesto": "col"
+    },
+    {
+      "palavra": "década",
+      "cesto": "col"
+    },
+    {
+      "palavra": "milheiro",
+      "cesto": "col"
+    }
+  ]
+}

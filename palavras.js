@@ -229,7 +229,7 @@ function falarSilabas(item, rate){
 function confete(){
   const itens = ['⭐','🎉','✨','🌟','🎈'];
   for (let i = 0; i < 26; i++){
-    const s = document.createElement('span'); s.textContent = itens[i % itens.length];
+    const s = document.createElement('span'); s.className = 'confete'; s.textContent = itens[i % itens.length];
     const dx = Math.random()*600-300, dy = Math.random()*500-280, rot = Math.random()*720-360;
     s.style.cssText = 'position:fixed;left:50%;top:35%;font-size:28px;pointer-events:none;z-index:40;transition:transform 1.3s ease-out,opacity 1.3s ease-out';
     document.body.appendChild(s);

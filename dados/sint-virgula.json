@@ -1,0 +1,117 @@
+{
+  "titulo": "Vírgula: certa ou errada?",
+  "emoji": "✒️",
+  "instrucao": "A vírgula foi usada corretamente?",
+  "rodadas": [
+    {
+      "destaque": "Os alunos, fizeram a prova.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "❌ Vírgula errada",
+      "explica": "Não se separa o sujeito do verbo com vírgula.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Maria, venha aqui!",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "Vocativo é separado por vírgula.",
+      "imagem": "📣"
+    },
+    {
+      "destaque": "Ontem à noite, choveu muito.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "Adjunto adverbial deslocado para o início pode ser separado por vírgula.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Comprei arroz, feijão, e macarrão.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "❌ Vírgula errada",
+      "explica": "Em enumeração simples, não se usa vírgula antes do E.",
+      "imagem": "🛒"
+    },
+    {
+      "destaque": "Estudei muito, mas não passei.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "Usa-se vírgula antes de MAS (oração adversativa).",
+      "imagem": "😕"
+    },
+    {
+      "destaque": "O menino que chegou ontem, é meu primo.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "❌ Vírgula errada",
+      "explica": "A vírgula separou o sujeito (o menino que chegou ontem) do verbo.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "Pelé, o rei do futebol, nasceu em Minas Gerais.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "O aposto explicativo fica entre vírgulas.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "Eu gosto, de chocolate.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "❌ Vírgula errada",
+      "explica": "Não se separa o verbo do complemento.",
+      "imagem": "🍫"
+    },
+    {
+      "destaque": "Quando cheguei, todos dormiam.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "Oração subordinada adverbial antes da principal: vírgula.",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "A professora disse, que haveria prova.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "❌ Vírgula errada",
+      "explica": "Não se separa o verbo da oração que o completa.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "Os alunos estudaram, e a professora corrigiu as provas.",
+      "opcoes": [
+        "✅ Vírgula certa",
+        "❌ Vírgula errada"
+      ],
+      "correta": "✅ Vírgula certa",
+      "explica": "Orações com sujeitos diferentes ligadas por E podem ter vírgula.",
+      "imagem": "✅"
+    }
+  ]
+}

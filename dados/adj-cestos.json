@@ -1,0 +1,145 @@
+{
+  "titulo": "Cestos: adjetivo, locução adjetiva ou substantivo",
+  "cestos": [
+    {
+      "id": "adj",
+      "nome": "Adjetivo",
+      "emoji": "🎨",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "loc",
+      "nome": "Locução adjetiva",
+      "emoji": "🔗",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "sub",
+      "nome": "Substantivo",
+      "emoji": "📦",
+      "cor": "#2f80ed"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "bonito",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "alegre",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "corajoso",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "feliz",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "materno",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "urbano",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "dourado",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "pluvial",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "noturno",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "infantil",
+      "cesto": "adj"
+    },
+    {
+      "palavra": "de ouro",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de madeira",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "sem graça",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "com medo",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de mãe",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "da cidade",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de chuva",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "da noite",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de criança",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "de coragem",
+      "cesto": "loc"
+    },
+    {
+      "palavra": "mesa",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "alegria",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "amizade",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "coragem",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "felicidade",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "cidade",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "chuva",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "noite",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "criança",
+      "cesto": "sub"
+    },
+    {
+      "palavra": "ouro",
+      "cesto": "sub"
+    }
+  ]
+}

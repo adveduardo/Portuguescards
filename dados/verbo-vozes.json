@@ -1,0 +1,175 @@
+{
+  "titulo": "Vozes verbais",
+  "emoji": "🔊",
+  "instrucao": "Em que voz está o verbo?",
+  "rodadas": [
+    {
+      "destaque": "O aluno leu o livro.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz ativa",
+      "explica": "Voz ativa: o sujeito pratica a ação.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "O livro foi lido pelo aluno.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva analítica",
+      "explica": "Voz passiva analítica: o sujeito sofre a ação: verbo SER + particípio (+ agente da passiva).",
+      "imagem": "📗"
+    },
+    {
+      "destaque": "Vendem-se casas.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva sintética",
+      "explica": "Voz passiva sintética: verbo transitivo direto + SE apassivador; o verbo concorda com o sujeito (Vendem-se casas).",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Ela se penteou diante do espelho.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz reflexiva",
+      "explica": "Voz reflexiva: o sujeito pratica e sofre a ação ao mesmo tempo (ou ação recíproca).",
+      "imagem": "🪞"
+    },
+    {
+      "destaque": "A carta foi escrita por Ana.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva analítica",
+      "explica": "Voz passiva analítica: o sujeito sofre a ação: verbo SER + particípio (+ agente da passiva).",
+      "imagem": "✉️"
+    },
+    {
+      "destaque": "Alugam-se quartos.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva sintética",
+      "explica": "Voz passiva sintética: verbo transitivo direto + SE apassivador; o verbo concorda com o sujeito (Vendem-se casas).",
+      "imagem": "🛏️"
+    },
+    {
+      "destaque": "Os bombeiros apagaram o fogo.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz ativa",
+      "explica": "Voz ativa: o sujeito pratica a ação.",
+      "imagem": "🚒"
+    },
+    {
+      "destaque": "O fogo foi apagado pelos bombeiros.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva analítica",
+      "explica": "Voz passiva analítica: o sujeito sofre a ação: verbo SER + particípio (+ agente da passiva).",
+      "imagem": "🧯"
+    },
+    {
+      "destaque": "Consertam-se sapatos.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva sintética",
+      "explica": "Voz passiva sintética: verbo transitivo direto + SE apassivador; o verbo concorda com o sujeito (Vendem-se casas).",
+      "imagem": "👞"
+    },
+    {
+      "destaque": "Os jogadores se cumprimentaram.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz reflexiva",
+      "explica": "Voz reflexiva: o sujeito pratica e sofre a ação ao mesmo tempo (ou ação recíproca).",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "A professora corrigiu as provas.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz ativa",
+      "explica": "Voz ativa: o sujeito pratica a ação.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Fizeram-se várias tentativas.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva sintética",
+      "explica": "Voz passiva sintética: verbo transitivo direto + SE apassivador; o verbo concorda com o sujeito (Vendem-se casas).",
+      "imagem": "🔁"
+    },
+    {
+      "destaque": "A ponte será construída pela prefeitura.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz passiva analítica",
+      "explica": "Voz passiva analítica: o sujeito sofre a ação: verbo SER + particípio (+ agente da passiva).",
+      "imagem": "🌉"
+    },
+    {
+      "destaque": "O menino se vestiu sozinho.",
+      "opcoes": [
+        "Voz ativa",
+        "Voz passiva analítica",
+        "Voz passiva sintética",
+        "Voz reflexiva"
+      ],
+      "correta": "Voz reflexiva",
+      "explica": "Voz reflexiva: o sujeito pratica e sofre a ação ao mesmo tempo (ou ação recíproca).",
+      "imagem": "👕"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "titulo": "Pronome relativo",
+  "emoji": "🔁",
+  "instrucao": "Qual pronome relativo completa a frase?",
+  "rodadas": [
+    {
+      "destaque": "A cidade ___ nasci é linda.",
+      "opcoes": [
+        "onde",
+        "que",
+        "cujo"
+      ],
+      "correta": "onde",
+      "explica": "ONDE retoma lugar (nasci EM um lugar).",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "O livro ___ capa é azul é meu.",
+      "opcoes": [
+        "cuja",
+        "que",
+        "onde"
+      ],
+      "correta": "cuja",
+      "explica": "CUJO/CUJA indica posse e concorda com o que vem depois (capa).",
+      "imagem": "📘"
+    },
+    {
+      "destaque": "A pessoa ___ falei chegou.",
+      "opcoes": [
+        "de quem",
+        "que",
+        "onde"
+      ],
+      "correta": "de quem",
+      "explica": "Quem fala, fala DE alguém: de quem.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "O filme ___ assisti foi ótimo.",
+      "opcoes": [
+        "a que",
+        "que",
+        "onde"
+      ],
+      "correta": "a que",
+      "explica": "Quem assiste, assiste A algo: a que.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Este é o aluno ___ pai é médico.",
+      "opcoes": [
+        "cujo",
+        "que",
+        "quem"
+      ],
+      "correta": "cujo",
+      "explica": "CUJO indica posse (o pai do aluno).",
+      "imagem": "🩺"
+    },
+    {
+      "destaque": "A escola ___ estudo é grande.",
+      "opcoes": [
+        "em que",
+        "que",
+        "cuja"
+      ],
+      "correta": "em que",
+      "explica": "Quem estuda, estuda EM um lugar: em que (ou onde).",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "Os amigos ___ confio são poucos.",
+      "opcoes": [
+        "em quem",
+        "que",
+        "cujos"
+      ],
+      "correta": "em quem",
+      "explica": "Quem confia, confia EM alguém.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Gosto da música ___ você cantou.",
+      "opcoes": [
+        "que",
+        "cuja",
+        "onde"
+      ],
+      "correta": "que",
+      "explica": "Quem canta, canta algo (sem preposição): que.",
+      "imagem": "🎵"
+    },
+    {
+      "destaque": "O motivo ___ ele faltou é sério.",
+      "opcoes": [
+        "pelo qual",
+        "que",
+        "onde"
+      ],
+      "correta": "pelo qual",
+      "explica": "Faltou POR um motivo: pelo qual.",
+      "imagem": "❗"
+    },
+    {
+      "destaque": "A rua ___ moro é tranquila.",
+      "opcoes": [
+        "em que",
+        "que",
+        "cuja"
+      ],
+      "correta": "em que",
+      "explica": "Quem mora, mora EM um lugar.",
+      "imagem": "🏘️"
+    }
+  ]
+}

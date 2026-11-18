@@ -1,0 +1,107 @@
+{
+  "titulo": "Colocação pronominal",
+  "emoji": "📍",
+  "instrucao": "Escolha a frase correta",
+  "rodadas": [
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Não me disseram nada.",
+        "Não disseram-me nada."
+      ],
+      "correta": "Não me disseram nada.",
+      "explica": "Palavras negativas atraem o pronome (próclise).",
+      "imagem": "🙅"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Empreste-me o lápis.",
+        "Me empreste o lápis."
+      ],
+      "correta": "Empreste-me o lápis.",
+      "explica": "Na norma-padrão, não se inicia frase com pronome oblíquo. (Na fala, 'Me empresta' é comum.)",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Quem te contou?",
+        "Quem contou-te?"
+      ],
+      "correta": "Quem te contou?",
+      "explica": "Pronomes interrogativos atraem o pronome (próclise).",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Espero que me ajude.",
+        "Espero que ajude-me."
+      ],
+      "correta": "Espero que me ajude.",
+      "explica": "Conjunções subordinativas atraem o pronome (próclise).",
+      "imagem": "🙏"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Contar-lhe-ei a verdade.",
+        "Contarei-lhe a verdade."
+      ],
+      "correta": "Contar-lhe-ei a verdade.",
+      "explica": "Com verbo no futuro do presente, sem palavra atrativa: mesóclise (ou 'Eu lhe contarei').",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Aqui se vende de tudo.",
+        "Aqui vende-se de tudo."
+      ],
+      "correta": "Aqui se vende de tudo.",
+      "explica": "Advérbios atraem o pronome (próclise).",
+      "imagem": "🏪"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Sempre me lembro de você.",
+        "Sempre lembro-me de você."
+      ],
+      "correta": "Sempre me lembro de você.",
+      "explica": "O advérbio SEMPRE atrai o pronome.",
+      "imagem": "💭"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Far-lhe-ia um favor.",
+        "Faria-lhe um favor."
+      ],
+      "correta": "Far-lhe-ia um favor.",
+      "explica": "Futuro do pretérito sem palavra atrativa: mesóclise.",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Tudo se resolveu.",
+        "Tudo resolveu-se."
+      ],
+      "correta": "Tudo se resolveu.",
+      "explica": "Pronomes indefinidos atraem o pronome.",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "Qual frase segue a norma-padrão?",
+      "opcoes": [
+        "Entreguei-lhe o documento.",
+        "Lhe entreguei o documento."
+      ],
+      "correta": "Entreguei-lhe o documento.",
+      "explica": "Verbo no início da oração, sem palavra atrativa: ênclise.",
+      "imagem": "📄"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "titulo": "Tipos de sujeito",
+  "emoji": "👤",
+  "instrucao": "Qual é o tipo de sujeito?",
+  "rodadas": [
+    {
+      "destaque": "O menino correu.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Simples",
+      "explica": "Sujeito simples: um só núcleo.",
+      "imagem": "🏃"
+    },
+    {
+      "destaque": "Ana e Pedro viajaram.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Composto",
+      "explica": "Sujeito composto: dois ou mais núcleos.",
+      "imagem": "✈️"
+    },
+    {
+      "destaque": "Fomos ao cinema.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oculto (desinencial)",
+      "explica": "Sujeito oculto (desinencial): não aparece, mas a terminação do verbo indica quem é.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Roubaram minha bicicleta.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Indeterminado",
+      "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE).",
+      "imagem": "🚲"
+    },
+    {
+      "destaque": "Choveu muito ontem.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oração sem sujeito",
+      "explica": "Oração sem sujeito: verbos impessoais: fenômenos da natureza, HAVER (existir) e FAZER (tempo).",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Precisa-se de funcionários.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Indeterminado",
+      "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE).",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Há muitas pessoas na fila.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oração sem sujeito",
+      "explica": "Oração sem sujeito: verbos impessoais: fenômenos da natureza, HAVER (existir) e FAZER (tempo).",
+      "imagem": "🧍"
+    },
+    {
+      "destaque": "Faz frio no inverno.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oração sem sujeito",
+      "explica": "Oração sem sujeito: verbos impessoais: fenômenos da natureza, HAVER (existir) e FAZER (tempo).",
+      "imagem": "🥶"
+    },
+    {
+      "destaque": "Estudei para a prova.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oculto (desinencial)",
+      "explica": "Sujeito oculto (desinencial): não aparece, mas a terminação do verbo indica quem é.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "O cachorro e o gato brigaram.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Composto",
+      "explica": "Sujeito composto: dois ou mais núcleos.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "Vive-se bem aqui.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Indeterminado",
+      "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE).",
+      "imagem": "🏡"
+    },
+    {
+      "destaque": "Os alunos fizeram a prova.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Simples",
+      "explica": "Sujeito simples: um só núcleo.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "Falaram mal de você.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Indeterminado",
+      "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE).",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Anoiteceu rapidamente.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oração sem sujeito",
+      "explica": "Oração sem sujeito: verbos impessoais: fenômenos da natureza, HAVER (existir) e FAZER (tempo).",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "Chegaremos amanhã.",
+      "opcoes": [
+        "Simples",
+        "Composto",
+        "Oculto (desinencial)",
+        "Indeterminado",
+        "Oração sem sujeito"
+      ],
+      "correta": "Oculto (desinencial)",
+      "explica": "Sujeito oculto (desinencial): não aparece, mas a terminação do verbo indica quem é.",
+      "imagem": "📅"
+    }
+  ]
+}

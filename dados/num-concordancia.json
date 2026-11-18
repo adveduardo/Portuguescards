@@ -1,0 +1,118 @@
+{
+  "titulo": "Concordância com numerais",
+  "emoji": "⚖️",
+  "instrucao": "Complete corretamente",
+  "rodadas": [
+    {
+      "destaque": "Comprei ___ de queijo.",
+      "opcoes": [
+        "duzentos gramas",
+        "duzentas gramas"
+      ],
+      "correta": "duzentos gramas",
+      "explica": "GRAMA (unidade de massa) é masculino: o grama, duzentos gramas.",
+      "imagem": "🧀"
+    },
+    {
+      "destaque": "Já é meio-dia e ___.",
+      "opcoes": [
+        "meia",
+        "meio"
+      ],
+      "correta": "meia",
+      "explica": "Meio-dia e meia (hora).",
+      "imagem": "🕧"
+    },
+    {
+      "destaque": "Compareceram ___ pessoas.",
+      "opcoes": [
+        "duas mil e quinhentas",
+        "dois mil e quinhentas",
+        "duas mil e quinhentos"
+      ],
+      "correta": "duas mil e quinhentas",
+      "explica": "Os numerais variáveis concordam com o substantivo: duas mil e quinhentas pessoas.",
+      "imagem": "👥"
+    },
+    {
+      "destaque": "___ uma hora da tarde.",
+      "opcoes": [
+        "É",
+        "São"
+      ],
+      "correta": "É",
+      "explica": "Com uma hora, o verbo fica no singular: É uma hora.",
+      "imagem": "🕐"
+    },
+    {
+      "destaque": "___ duas horas.",
+      "opcoes": [
+        "São",
+        "É"
+      ],
+      "correta": "São",
+      "explica": "Com duas horas ou mais, o verbo vai ao plural: SÃO duas horas.",
+      "imagem": "🕑"
+    },
+    {
+      "destaque": "___ dez anos que moro aqui.",
+      "opcoes": [
+        "Faz",
+        "Fazem"
+      ],
+      "correta": "Faz",
+      "explica": "FAZER indicando tempo é impessoal: fica no singular.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "Abra o livro na página ___.",
+      "opcoes": [
+        "vinte e dois",
+        "vinte e duas"
+      ],
+      "correta": "vinte e dois",
+      "explica": "Concorda com \"número\" subentendido: página (número) vinte e dois.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "___ de pessoas aplaudiram.",
+      "opcoes": [
+        "Os milhares",
+        "As milhares"
+      ],
+      "correta": "Os milhares",
+      "explica": "MILHAR é masculino: os milhares de pessoas.",
+      "imagem": "👏"
+    },
+    {
+      "destaque": "___ de mulheres votaram.",
+      "opcoes": [
+        "Dois milhões",
+        "Duas milhões"
+      ],
+      "correta": "Dois milhões",
+      "explica": "MILHÃO é masculino: dois milhões de mulheres.",
+      "imagem": "🗳️"
+    },
+    {
+      "destaque": "Comprei uma dúzia e ___ de ovos.",
+      "opcoes": [
+        "meia",
+        "meio"
+      ],
+      "correta": "meia",
+      "explica": "Concorda com dúzia (feminino): uma dúzia e meia.",
+      "imagem": "🥚"
+    },
+    {
+      "destaque": "Paguei ___ reais.",
+      "opcoes": [
+        "duzentos",
+        "duzentas"
+      ],
+      "correta": "duzentos",
+      "explica": "REAL é masculino: duzentos reais.",
+      "imagem": "💵"
+    }
+  ]
+}

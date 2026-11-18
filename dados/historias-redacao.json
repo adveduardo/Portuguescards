@@ -1,0 +1,147 @@
+{
+  "titulo": "Gerador de redação (ENEM)",
+  "dados": [
+    {
+      "nome": "Tema",
+      "cor": "#243049",
+      "faces": [
+        {
+          "emoji": "📱",
+          "texto": "Os impactos das redes sociais na saúde mental dos jovens"
+        },
+        {
+          "emoji": "🗑️",
+          "texto": "O desafio do descarte correto do lixo no Brasil"
+        },
+        {
+          "emoji": "📚",
+          "texto": "A evasão escolar no ensino médio brasileiro"
+        },
+        {
+          "emoji": "👵",
+          "texto": "A valorização da pessoa idosa na sociedade"
+        },
+        {
+          "emoji": "🍞",
+          "texto": "O combate à insegurança alimentar no Brasil"
+        },
+        {
+          "emoji": "♿",
+          "texto": "Os desafios da inclusão de pessoas com deficiência"
+        },
+        {
+          "emoji": "📰",
+          "texto": "A disseminação de notícias falsas na internet"
+        },
+        {
+          "emoji": "💧",
+          "texto": "A preservação dos recursos hídricos"
+        },
+        {
+          "emoji": "🎨",
+          "texto": "A democratização do acesso à cultura"
+        },
+        {
+          "emoji": "🧠",
+          "texto": "O estigma associado às doenças mentais"
+        },
+        {
+          "emoji": "🚸",
+          "texto": "A violência contra crianças e adolescentes"
+        },
+        {
+          "emoji": "🌳",
+          "texto": "O desmatamento e os povos da floresta"
+        }
+      ]
+    },
+    {
+      "nome": "Repertório",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "⚖️",
+          "texto": "Constituição Federal de 1988"
+        },
+        {
+          "emoji": "📊",
+          "texto": "Um dado estatístico (IBGE, OMS, ONU)"
+        },
+        {
+          "emoji": "🧐",
+          "texto": "Um filósofo ou sociólogo"
+        },
+        {
+          "emoji": "📖",
+          "texto": "Uma obra literária brasileira"
+        },
+        {
+          "emoji": "🎬",
+          "texto": "Um filme, série ou documentário"
+        },
+        {
+          "emoji": "🏛️",
+          "texto": "Um fato histórico"
+        },
+        {
+          "emoji": "📜",
+          "texto": "Uma lei específica (ECA, Estatuto do Idoso, LBI...)"
+        },
+        {
+          "emoji": "🌍",
+          "texto": "Um exemplo de outro país"
+        }
+      ]
+    },
+    {
+      "nome": "Conectivo",
+      "cor": "#8e44ad",
+      "faces": [
+        {
+          "emoji": "➕",
+          "texto": "Ademais"
+        },
+        {
+          "emoji": "⚖️",
+          "texto": "No entanto"
+        },
+        {
+          "emoji": "🔍",
+          "texto": "Haja vista"
+        },
+        {
+          "emoji": "🤝",
+          "texto": "Embora"
+        },
+        {
+          "emoji": "💡",
+          "texto": "A exemplo disso"
+        },
+        {
+          "emoji": "🎯",
+          "texto": "A fim de"
+        },
+        {
+          "emoji": "🏁",
+          "texto": "Portanto"
+        },
+        {
+          "emoji": "📉",
+          "texto": "Por conseguinte"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Escreva a tese em uma frase!",
+    "Monte a introdução: contextualização + tese + argumentos.",
+    "Escreva um parágrafo de desenvolvimento usando o repertório e o conectivo.",
+    "Elabore a proposta de intervenção: agente, ação, modo, finalidade e detalhamento."
+  ],
+  "conectivos": [
+    "Introdução: contexto + tese",
+    "D1: argumento + repertório",
+    "D2: argumento + repertório",
+    "Conclusão: proposta de intervenção completa"
+  ]
+}

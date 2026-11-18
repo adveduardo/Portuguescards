@@ -1,0 +1,159 @@
+{
+  "titulo": "Turbine a descrição (adjetivos)",
+  "dados": [
+    {
+      "nome": "Substantivo",
+      "cor": "#2f80ed",
+      "faces": [
+        {
+          "emoji": "🏠",
+          "texto": "a casa"
+        },
+        {
+          "emoji": "🐕",
+          "texto": "o cachorro"
+        },
+        {
+          "emoji": "🏙️",
+          "texto": "a cidade"
+        },
+        {
+          "emoji": "👩‍🏫",
+          "texto": "a professora"
+        },
+        {
+          "emoji": "🏖️",
+          "texto": "a praia"
+        },
+        {
+          "emoji": "🚗",
+          "texto": "o carro"
+        },
+        {
+          "emoji": "🌳",
+          "texto": "a árvore"
+        },
+        {
+          "emoji": "🍰",
+          "texto": "o bolo"
+        }
+      ]
+    },
+    {
+      "nome": "Adjetivo",
+      "cor": "#27ae60",
+      "faces": [
+        {
+          "emoji": "🕸️",
+          "texto": "antigo"
+        },
+        {
+          "emoji": "🔍",
+          "texto": "misterioso"
+        },
+        {
+          "emoji": "📢",
+          "texto": "barulhento"
+        },
+        {
+          "emoji": "✨",
+          "texto": "brilhante"
+        },
+        {
+          "emoji": "😴",
+          "texto": "tranquilo"
+        },
+        {
+          "emoji": "🌈",
+          "texto": "colorido"
+        },
+        {
+          "emoji": "🥶",
+          "texto": "gelado"
+        },
+        {
+          "emoji": "🤩",
+          "texto": "incrível"
+        }
+      ]
+    },
+    {
+      "nome": "Locução adjetiva",
+      "cor": "#e67e22",
+      "faces": [
+        {
+          "emoji": "🪵",
+          "texto": "de madeira"
+        },
+        {
+          "emoji": "🪟",
+          "texto": "sem janelas"
+        },
+        {
+          "emoji": "💚",
+          "texto": "de olhos verdes"
+        },
+        {
+          "emoji": "🌙",
+          "texto": "da noite"
+        },
+        {
+          "emoji": "🌊",
+          "texto": "do mar"
+        },
+        {
+          "emoji": "🍫",
+          "texto": "de chocolate"
+        },
+        {
+          "emoji": "🏆",
+          "texto": "de respeito"
+        },
+        {
+          "emoji": "🌸",
+          "texto": "de flores"
+        }
+      ]
+    },
+    {
+      "nome": "Grau",
+      "cor": "#c2185b",
+      "faces": [
+        {
+          "emoji": "⬆️",
+          "texto": "comparativo de superioridade (mais... que)"
+        },
+        {
+          "emoji": "⬇️",
+          "texto": "comparativo de inferioridade (menos... que)"
+        },
+        {
+          "emoji": "🟰",
+          "texto": "comparativo de igualdade (tão... quanto)"
+        },
+        {
+          "emoji": "🏆",
+          "texto": "superlativo (-íssimo)"
+        },
+        {
+          "emoji": "💪",
+          "texto": "superlativo analítico (muito...)"
+        },
+        {
+          "emoji": "🎯",
+          "texto": "superlativo relativo (o mais... de)"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "Escreva uma frase descritiva usando tudo o que saiu!",
+    "Troque a locução adjetiva por um adjetivo, se existir.",
+    "Escreva um parágrafo de descrição para um conto."
+  ],
+  "conectivos": [
+    "Adjetivo: caracteriza o substantivo",
+    "Locução adjetiva: preposição + palavra (de ouro = dourado)",
+    "Mais... que • menos... que • tão... quanto • -íssimo"
+  ]
+}

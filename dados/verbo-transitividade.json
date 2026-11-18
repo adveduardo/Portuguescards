@@ -1,0 +1,215 @@
+{
+  "titulo": "Transitividade verbal",
+  "emoji": "🎯",
+  "instrucao": "Como se classifica o verbo destacado?",
+  "rodadas": [
+    {
+      "destaque": "O bebê [dormiu] cedo.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo intransitivo (VI)",
+      "explica": "Verbo intransitivo (VI): tem sentido completo, não precisa de complemento.",
+      "imagem": "👶"
+    },
+    {
+      "destaque": "Ana [comprou] um livro.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo direto (VTD)",
+      "explica": "Transitivo direto (VTD): pede complemento sem preposição (objeto direto).",
+      "imagem": "📕"
+    },
+    {
+      "destaque": "Eu [gosto] de música.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo indireto (VTI)",
+      "explica": "Transitivo indireto (VTI): pede complemento com preposição (objeto indireto).",
+      "imagem": "🎵"
+    },
+    {
+      "destaque": "Ele [entregou] a carta ao carteiro.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo direto e indireto (VTDI)",
+      "explica": "Transitivo direto e indireto (VTDI): pede os dois complementos: objeto direto e objeto indireto.",
+      "imagem": "✉️"
+    },
+    {
+      "destaque": "Maria [está] cansada.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo de ligação (VL)",
+      "explica": "Verbo de ligação (VL): liga o sujeito a uma característica (predicativo): ser, estar, parecer, ficar, continuar, permanecer, andar.",
+      "imagem": "🥱"
+    },
+    {
+      "destaque": "Os pássaros [voaram].",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo intransitivo (VI)",
+      "explica": "Verbo intransitivo (VI): tem sentido completo, não precisa de complemento.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "Nós [precisamos] de ajuda.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo indireto (VTI)",
+      "explica": "Transitivo indireto (VTI): pede complemento com preposição (objeto indireto).",
+      "imagem": "🆘"
+    },
+    {
+      "destaque": "O professor [explicou] a matéria aos alunos.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo direto e indireto (VTDI)",
+      "explica": "Transitivo direto e indireto (VTDI): pede os dois complementos: objeto direto e objeto indireto.",
+      "imagem": "👩‍🏫"
+    },
+    {
+      "destaque": "O céu [ficou] escuro.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo de ligação (VL)",
+      "explica": "Verbo de ligação (VL): liga o sujeito a uma característica (predicativo): ser, estar, parecer, ficar, continuar, permanecer, andar.",
+      "imagem": "🌑"
+    },
+    {
+      "destaque": "Ela [escreveu] um poema.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo direto (VTD)",
+      "explica": "Transitivo direto (VTD): pede complemento sem preposição (objeto direto).",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "Eu [confio] em você.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo indireto (VTI)",
+      "explica": "Transitivo indireto (VTI): pede complemento com preposição (objeto indireto).",
+      "imagem": "🤝"
+    },
+    {
+      "destaque": "A criança [parece] feliz.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo de ligação (VL)",
+      "explica": "Verbo de ligação (VL): liga o sujeito a uma característica (predicativo): ser, estar, parecer, ficar, continuar, permanecer, andar.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "Os convidados [chegaram].",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo intransitivo (VI)",
+      "explica": "Verbo intransitivo (VI): tem sentido completo, não precisa de complemento.",
+      "imagem": "🎉"
+    },
+    {
+      "destaque": "[Paguei] a conta ao garçom.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo direto e indireto (VTDI)",
+      "explica": "Transitivo direto e indireto (VTDI): pede os dois complementos: objeto direto e objeto indireto.",
+      "imagem": "💵"
+    },
+    {
+      "destaque": "[Assisti] ao filme.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Transitivo indireto (VTI)",
+      "explica": "Transitivo indireto (VTI): pede complemento com preposição (objeto indireto).",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Ele [continua] doente.",
+      "opcoes": [
+        "Verbo intransitivo (VI)",
+        "Transitivo direto (VTD)",
+        "Transitivo indireto (VTI)",
+        "Transitivo direto e indireto (VTDI)",
+        "Verbo de ligação (VL)"
+      ],
+      "correta": "Verbo de ligação (VL)",
+      "explica": "Verbo de ligação (VL): liga o sujeito a uma característica (predicativo): ser, estar, parecer, ficar, continuar, permanecer, andar.",
+      "imagem": "🤒"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "titulo": "Quiz de sintaxe",
+  "tempoPadrao": 25,
+  "perguntas": [
+    {
+      "pergunta": "Em \"Choveu muito ontem\", o sujeito é:",
+      "imagem": "🌧️",
+      "opcoes": [
+        "inexistente (oração sem sujeito)",
+        "oculto",
+        "indeterminado",
+        "simples"
+      ],
+      "correta": "inexistente (oração sem sujeito)"
+    },
+    {
+      "pergunta": "Em \"Roubaram meu celular\", o sujeito é:",
+      "imagem": "📱",
+      "opcoes": [
+        "indeterminado",
+        "oculto",
+        "simples",
+        "composto"
+      ],
+      "correta": "indeterminado"
+    },
+    {
+      "pergunta": "Em \"Gosto de música\", DE MÚSICA é:",
+      "imagem": "🎵",
+      "opcoes": [
+        "objeto indireto",
+        "objeto direto",
+        "adjunto adverbial",
+        "sujeito"
+      ],
+      "correta": "objeto indireto"
+    },
+    {
+      "pergunta": "Em \"Maria, venha cá!\", MARIA é:",
+      "imagem": "📣",
+      "opcoes": [
+        "vocativo",
+        "sujeito",
+        "aposto",
+        "objeto direto"
+      ],
+      "correta": "vocativo"
+    },
+    {
+      "pergunta": "Qual frase tem crase correta?",
+      "imagem": "🏫",
+      "opcoes": [
+        "Vou à escola.",
+        "Vou à pé.",
+        "Falei à ele.",
+        "Começou à chover."
+      ],
+      "correta": "Vou à escola."
+    },
+    {
+      "pergunta": "\"Embora estivesse cansado, foi à festa.\" A conjunção indica:",
+      "imagem": "🎉",
+      "opcoes": [
+        "concessão",
+        "causa",
+        "conclusão",
+        "adição"
+      ],
+      "correta": "concessão"
+    },
+    {
+      "pergunta": "Qual está correta?",
+      "imagem": "🏫",
+      "opcoes": [
+        "Havia muitos alunos.",
+        "Haviam muitos alunos.",
+        "Houveram muitos alunos."
+      ],
+      "correta": "Havia muitos alunos."
+    },
+    {
+      "pergunta": "Em \"Faz dois anos\", o verbo FAZER é:",
+      "imagem": "📅",
+      "opcoes": [
+        "impessoal",
+        "pessoal",
+        "de ligação",
+        "transitivo indireto"
+      ],
+      "correta": "impessoal"
+    },
+    {
+      "pergunta": "\"Estudou; portanto, passou.\" PORTANTO indica:",
+      "imagem": "🎓",
+      "opcoes": [
+        "conclusão",
+        "explicação",
+        "oposição",
+        "alternância"
+      ],
+      "correta": "conclusão"
+    },
+    {
+      "pergunta": "Qual frase segue a norma-padrão?",
+      "imagem": "🙅",
+      "opcoes": [
+        "Não me disseram nada.",
+        "Não disseram-me nada."
+      ],
+      "correta": "Não me disseram nada."
+    },
+    {
+      "pergunta": "Em \"A cidade onde nasci\", ONDE é:",
+      "imagem": "🏙️",
+      "opcoes": [
+        "pronome relativo",
+        "advérbio de tempo",
+        "conjunção",
+        "preposição"
+      ],
+      "correta": "pronome relativo"
+    },
+    {
+      "pergunta": "Em \"A prova parecia difícil\", DIFÍCIL é:",
+      "imagem": "📝",
+      "opcoes": [
+        "predicativo do sujeito",
+        "objeto direto",
+        "adjunto adverbial",
+        "aposto"
+      ],
+      "correta": "predicativo do sujeito"
+    },
+    {
+      "pergunta": "Qual frase tem vírgula ERRADA?",
+      "imagem": "✒️",
+      "opcoes": [
+        "Os alunos, fizeram a prova.",
+        "Maria, venha cá.",
+        "Quando cheguei, todos dormiam."
+      ],
+      "correta": "Os alunos, fizeram a prova."
+    },
+    {
+      "pergunta": "\"Prefiro cinema ___ teatro.\"",
+      "imagem": "🎟️",
+      "opcoes": [
+        "a",
+        "do que",
+        "que"
+      ],
+      "correta": "a"
+    },
+    {
+      "pergunta": "\"Vendem-se casas.\" O SE é:",
+      "imagem": "🏠",
+      "opcoes": [
+        "pronome apassivador",
+        "índice de indeterminação",
+        "reflexivo",
+        "conjunção"
+      ],
+      "correta": "pronome apassivador"
+    }
+  ]
+}

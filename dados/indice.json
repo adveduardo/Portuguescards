@@ -15,6 +15,26 @@
     {
       "arquivo": "quiz-pronomes.json",
       "titulo": "Quiz dos pronomes"
+    },
+    {
+      "arquivo": "quiz-sintaxe.json",
+      "titulo": "Quiz de sintaxe"
+    },
+    {
+      "arquivo": "quiz-enem.json",
+      "titulo": "Quiz ENEM de Linguagens"
+    },
+    {
+      "arquivo": "quiz-verbos.json",
+      "titulo": "Quiz dos verbos"
+    },
+    {
+      "arquivo": "quiz-adjetivos.json",
+      "titulo": "Quiz dos adjetivos"
+    },
+    {
+      "arquivo": "quiz-numerais.json",
+      "titulo": "Quiz dos numerais"
     }
   ],
   "stop": [
@@ -25,6 +45,10 @@
     {
       "arquivo": "stop-morfologia.json",
       "titulo": "Stop da morfologia"
+    },
+    {
+      "arquivo": "stop-em.json",
+      "titulo": "Stop do Ensino Médio"
     }
   ],
   "batata": [
@@ -43,6 +67,26 @@
     {
       "arquivo": "batata-pronomes.json",
       "titulo": "Batata quente dos pronomes"
+    },
+    {
+      "arquivo": "batata-sintaxe.json",
+      "titulo": "Batata quente da sintaxe"
+    },
+    {
+      "arquivo": "batata-enem.json",
+      "titulo": "Batata quente do ENEM"
+    },
+    {
+      "arquivo": "batata-verbos.json",
+      "titulo": "Batata quente dos verbos"
+    },
+    {
+      "arquivo": "batata-adjetivos.json",
+      "titulo": "Batata quente dos adjetivos"
+    },
+    {
+      "arquivo": "batata-numerais.json",
+      "titulo": "Batata quente dos numerais"
     }
   ],
   "trilha": [
@@ -61,6 +105,26 @@
     {
       "arquivo": "trilha-pronomes.json",
       "titulo": "Trilha dos pronomes"
+    },
+    {
+      "arquivo": "trilha-sintaxe.json",
+      "titulo": "Trilha da sintaxe"
+    },
+    {
+      "arquivo": "trilha-enem.json",
+      "titulo": "Trilha do ENEM"
+    },
+    {
+      "arquivo": "trilha-verbos.json",
+      "titulo": "Trilha dos verbos"
+    },
+    {
+      "arquivo": "trilha-adjetivos.json",
+      "titulo": "Trilha dos adjetivos"
+    },
+    {
+      "arquivo": "trilha-numerais.json",
+      "titulo": "Trilha dos numerais"
     }
   ],
   "escape": [
@@ -75,6 +139,14 @@
     {
       "arquivo": "escape-pronomes.json",
       "titulo": "Fuga do Castelo dos Pronomes"
+    },
+    {
+      "arquivo": "escape-literario.json",
+      "titulo": "Fuga do Sebo Literário"
+    },
+    {
+      "arquivo": "escape-verbos.json",
+      "titulo": "Laboratório dos Verbos"
     }
   ],
   "mimica": [
@@ -85,6 +157,10 @@
     {
       "arquivo": "mimica-adverbios.json",
       "titulo": "Mímica dos advérbios de modo"
+    },
+    {
+      "arquivo": "mimica-expressoes.json",
+      "titulo": "Mímica das expressões idiomáticas"
     }
   ],
   "historias": [
@@ -99,6 +175,18 @@
     {
       "arquivo": "historias-conjugacao.json",
       "titulo": "Dado da conjugação"
+    },
+    {
+      "arquivo": "historias-redacao.json",
+      "titulo": "Gerador de redação (ENEM)"
+    },
+    {
+      "arquivo": "historias-conjugacao-avancado.json",
+      "titulo": "Dado da conjugação (avançado)"
+    },
+    {
+      "arquivo": "historias-adjetivos.json",
+      "titulo": "Turbine a descrição (adjetivos)"
     }
   ],
   "caminho": [
@@ -123,6 +211,22 @@
     {
       "arquivo": "detetive-pronomes.json",
       "titulo": "Detetive dos pronomes"
+    },
+    {
+      "arquivo": "detetive-sintaxe.json",
+      "titulo": "Detetive da sintaxe (concordância, regência e crase)"
+    },
+    {
+      "arquivo": "detetive-verbos.json",
+      "titulo": "Detetive dos verbos"
+    },
+    {
+      "arquivo": "detetive-concordancia-nominal.json",
+      "titulo": "Detetive da concordância nominal"
+    },
+    {
+      "arquivo": "detetive-numerais.json",
+      "titulo": "Detetive dos numerais"
     }
   ],
   "pontuacao": [
@@ -149,6 +253,22 @@
     {
       "arquivo": "morfo-pron-cestos.json",
       "titulo": "Cestos dos pronomes"
+    },
+    {
+      "arquivo": "verbo-cestos-nominais.json",
+      "titulo": "Cestos das formas nominais"
+    },
+    {
+      "arquivo": "verbo-cestos-conjugacao.json",
+      "titulo": "Cestos das conjugações"
+    },
+    {
+      "arquivo": "adj-cestos.json",
+      "titulo": "Cestos: adjetivo, locução adjetiva ou substantivo"
+    },
+    {
+      "arquivo": "num-cestos.json",
+      "titulo": "Cestos dos numerais"
     }
   ],
   "morfo-frases": [
@@ -163,6 +283,10 @@
     {
       "arquivo": "morfo-pron-frases.json",
       "titulo": "Caça aos pronomes"
+    },
+    {
+      "arquivo": "sint-pinte.json",
+      "titulo": "Pinte os termos da oração"
     }
   ],
   "morfo-plural": [
@@ -259,6 +383,22 @@
     {
       "arquivo": "morfo-pron-ordene.json",
       "titulo": "Ordene os pronomes"
+    },
+    {
+      "arquivo": "em-escolas-ordene.json",
+      "titulo": "Linha do tempo da literatura"
+    },
+    {
+      "arquivo": "verbo-ordene.json",
+      "titulo": "Ordene os verbos"
+    },
+    {
+      "arquivo": "adj-ordene.json",
+      "titulo": "Graus do adjetivo"
+    },
+    {
+      "arquivo": "num-ordene.json",
+      "titulo": "Ordene os numerais"
     }
   ],
   "morfo-onde": [
@@ -325,6 +465,168 @@
     {
       "arquivo": "morfo-perto.json",
       "titulo": "Perto ou longe? (modelo)"
+    }
+  ],
+  "escolha-sint": [
+    {
+      "arquivo": "sint-colocacao.json",
+      "titulo": "Colocação pronominal"
+    },
+    {
+      "arquivo": "sint-concordancia-verbal.json",
+      "titulo": "Concordância verbal"
+    },
+    {
+      "arquivo": "sint-coordenadas.json",
+      "titulo": "Conjunções coordenativas"
+    },
+    {
+      "arquivo": "sint-crase.json",
+      "titulo": "Crase"
+    },
+    {
+      "arquivo": "sint-regencia.json",
+      "titulo": "Regência verbal"
+    },
+    {
+      "arquivo": "sint-relativo.json",
+      "titulo": "Pronome relativo"
+    },
+    {
+      "arquivo": "sint-subordinadas.json",
+      "titulo": "Conjunções subordinativas adverbiais"
+    },
+    {
+      "arquivo": "sint-sujeito.json",
+      "titulo": "Tipos de sujeito"
+    },
+    {
+      "arquivo": "sint-termos.json",
+      "titulo": "Termos da oração"
+    },
+    {
+      "arquivo": "sint-virgula.json",
+      "titulo": "Vírgula: certa ou errada?"
+    }
+  ],
+  "escolha-em": [
+    {
+      "arquivo": "em-autor-escola.json",
+      "titulo": "Autor e escola literária"
+    },
+    {
+      "arquivo": "em-competencias.json",
+      "titulo": "Competências da redação do ENEM"
+    },
+    {
+      "arquivo": "em-conectivos.json",
+      "titulo": "Conectivos para a redação"
+    },
+    {
+      "arquivo": "em-figuras-1.json",
+      "titulo": "Figuras de linguagem I"
+    },
+    {
+      "arquivo": "em-figuras-2.json",
+      "titulo": "Figuras de linguagem II (som e construção)"
+    },
+    {
+      "arquivo": "em-funcoes.json",
+      "titulo": "Funções da linguagem"
+    },
+    {
+      "arquivo": "em-generos.json",
+      "titulo": "Gêneros textuais do dia a dia"
+    },
+    {
+      "arquivo": "em-interpretacao.json",
+      "titulo": "Interpretação de texto"
+    },
+    {
+      "arquivo": "em-intervencao.json",
+      "titulo": "Proposta de intervenção (ENEM)"
+    },
+    {
+      "arquivo": "em-obra-autor.json",
+      "titulo": "Obra e autor"
+    },
+    {
+      "arquivo": "em-variacao.json",
+      "titulo": "Variação linguística"
+    }
+  ],
+  "escolha-verbo": [
+    {
+      "arquivo": "verbo-irregulares.json",
+      "titulo": "Verbos irregulares"
+    },
+    {
+      "arquivo": "verbo-modos.json",
+      "titulo": "Modos verbais"
+    },
+    {
+      "arquivo": "verbo-nominais.json",
+      "titulo": "Formas nominais do verbo"
+    },
+    {
+      "arquivo": "verbo-subjuntivo.json",
+      "titulo": "Tempos do subjuntivo"
+    },
+    {
+      "arquivo": "verbo-tempos.json",
+      "titulo": "Tempos do indicativo"
+    },
+    {
+      "arquivo": "verbo-transitividade.json",
+      "titulo": "Transitividade verbal"
+    },
+    {
+      "arquivo": "verbo-vozes.json",
+      "titulo": "Vozes verbais"
+    }
+  ],
+  "escolha-adj": [
+    {
+      "arquivo": "adj-compostos.json",
+      "titulo": "Plural dos adjetivos compostos"
+    },
+    {
+      "arquivo": "adj-locucao.json",
+      "titulo": "Locução adjetiva → adjetivo"
+    },
+    {
+      "arquivo": "adj-patrios.json",
+      "titulo": "Adjetivos pátrios"
+    },
+    {
+      "arquivo": "adj-posicao.json",
+      "titulo": "A posição do adjetivo muda o sentido"
+    },
+    {
+      "arquivo": "adj-superlativo.json",
+      "titulo": "Superlativo erudito"
+    }
+  ],
+  "escolha-num": [
+    {
+      "arquivo": "num-concordancia.json",
+      "titulo": "Concordância com numerais"
+    },
+    {
+      "arquivo": "num-extenso.json",
+      "titulo": "Valor por extenso (cheque e recibo)"
+    },
+    {
+      "arquivo": "num-ordinais.json",
+      "titulo": "Ordinais por extenso"
+    },
+    {
+      "arquivo": "num-romanos.json",
+      "titulo": "Como se lê o numeral romano?"
+    },
+    {
+      "arquivo": "num-tipos.json",
+      "titulo": "Tipos de numeral"
     }
   ]
 }
