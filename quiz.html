@@ -10,7 +10,8 @@
     <meta name="apple-mobile-web-app-title" content="Português">
     <meta name="theme-color" content="#f0f2f5">
     
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- confete: cópia local da mesma biblioteca (canvas-confetti 1.6.0), funciona também sem internet -->
+    <script src="libs/canvas-confetti.js"></script>
     <style>
         /* Variaveis Premium & Modo Escuro Automático */
         :root {
@@ -260,6 +261,29 @@
         .nav-controls button { background: var(--text) !important; border-radius: 12px; transition: 0.2s; }
         .nav-controls button:hover { transform: scale(1.1); background: var(--primary) !important; }
 
+        /* Relógio do jogo (alto da tela) */
+        .game-timer { align-self: center; font-size: 1.3rem; font-weight: bold; padding: 4px 12px; border-radius: 10px; background: rgba(0,0,0,0.06); white-space: nowrap; }
+        .game-timer.pouco { background: var(--danger); color: white; animation: piscaTempo 1s infinite; }
+        @keyframes piscaTempo { 50% { opacity: 0.6; } }
+
+        /* Tempo para responder (barra dentro da pergunta) */
+        .q-timer { position: relative; height: 34px; border-radius: 17px; background: rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 15px; }
+        #q-timer-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: linear-gradient(90deg, var(--success), var(--accent)); transition: width 0.25s linear; }
+        .q-timer.pouco #q-timer-bar { background: var(--danger); }
+        #q-timer-txt { position: relative; z-index: 1; line-height: 34px; font-weight: bold; font-size: 1.1rem; }
+
+        /* Aviso de fim do tempo do jogo */
+        #tempo-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 200; justify-content: center; align-items: center; padding: 20px; }
+        #tempo-aviso { background: var(--card-bg); color: var(--text); border-radius: 28px; padding: 40px; width: 95%; max-width: 600px; text-align: center; border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); animation: modalFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        body:not(.dark-mode) #tempo-aviso { background: rgba(255,255,255,0.95); }
+
+        /* Tabuleiro de Temas: colunas = temas, linhas = pontos */
+        .grid.temas-mode { max-width: 1150px; margin: 0 auto; gap: 12px; align-content: start; }
+        .grid.temas-mode .card { aspect-ratio: auto; min-height: 78px; font-size: clamp(1.6rem, 3.5vw, 2.6rem); border-radius: 16px; }
+        .grid.temas-mode .card.used-correct, .grid.temas-mode .card.used-wrong { animation: none; transform: scale(0.97); }
+        .tema-header { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 64px; padding: 8px 6px; border-radius: 14px;
+            background: var(--card-bg); border: 2px solid var(--border); box-shadow: var(--glass-shadow); font-weight: bold; font-size: clamp(0.8rem, 1.5vw, 1.1rem); line-height: 1.2; word-break: break-word; }
+
         /* Impressão Limpa */
         @media print {
             @page { margin: 1.5cm; }
@@ -287,6 +311,17 @@
         <button onclick="clearStorage()" style="background:transparent; color:#856404; border:none; text-decoration:underline; cursor:pointer; margin-left:10px;">Descartar</button>
     </div>
 
+    <div class="input-group" id="banco-area" style="background: rgba(67, 97, 238, 0.08); padding: 15px; border-radius: 16px; border: 2px dashed var(--primary);">
+        <label style="color: var(--primary); font-size: 1.1rem;">📚 Banco de Questões do Painel 📚</label>
+        <select id="bancoSel" style="margin-top:10px;"><option value="">Carregando os assuntos…</option></select>
+        <input type="number" id="bancoQtd" min="1" placeholder="Quantas questões? (vazio = todas)" style="margin-top:5px;">
+        <div style="display:flex; gap:10px; width:100%; max-width:350px; margin-top:5px;">
+            <button type="button" onclick="usarBanco(false)" style="flex:1; background:var(--primary); color:white; padding:12px; border-radius:12px; border:none; cursor:pointer; font-weight:bold;">✅ Usar</button>
+            <button type="button" onclick="usarBanco(true)" title="Junta com as questões que já estão na caixa (bom para o Tabuleiro de Temas)" style="flex:1; background:transparent; color:var(--primary); padding:12px; border-radius:12px; border:2px solid var(--primary); cursor:pointer; font-weight:bold;">➕ Juntar</button>
+        </div>
+        <small id="bancoInfo" style="opacity:0.85; max-width:350px;">Questões prontas das atividades do painel. Não precisa de IA nem de colar nada.</small>
+    </div>
+
     <div class="input-group" style="background: rgba(155, 89, 182, 0.1); padding: 15px; border-radius: 16px; border: 2px dashed var(--joker);">
         <label style="color: var(--joker); font-size: 1.1rem;">🔮 Gerador Automático de Questões 🔮</label>
         <input type="text" id="themeInput" placeholder="Tema (Ex: Verbos / Substantivos)" oninput="updatePromptView()" style="margin-top:10px;">
@@ -300,6 +335,7 @@
             <option value="anthropic/claude-3-haiku">Anthropic: Claude 3 Haiku</option>
             <option value="anthropic/claude-3.5-sonnet">Anthropic: Claude 3.5 Sonnet</option>
             <option value="meta-llama/llama-3-8b-instruct:free">Meta: Llama 3 (Grátis)</option>
+            <option value="__outro">✏️ Outro modelo (digitar o nome)</option>
         </select>
         <input type="password" id="apiKeyInput" placeholder="Sua Chave de API OpenRouter" style="margin-top:5px;">
         <button onclick="generateWithAPI()" id="btn-gerar-ia" style="background:var(--joker); color:white; padding:12px; border-radius:12px; border:none; width:100%; cursor:pointer; margin-top:10px; font-weight:bold; transition: 0.2s;">⚡ GERAR QUESTÕES ⚡</button>
@@ -330,6 +366,7 @@
             <option value="stop">Sequência</option>
             <option value="redacao">Temas de Redação</option>
             <option value="memoria">Jogo da Memória</option>
+            <option value="temas">Tabuleiro de Temas (pontos)</option>
         </select>
     </div>
 
@@ -351,8 +388,22 @@
     </div>
 
     <div class="input-group">
-        <label>Tempo (MM:SS):</label>
+        <label>⏳ Tempo do Jogo (MM:SS):</label>
         <input type="text" id="timeInput" onkeyup="formatTimeInput(this)" value="30:00">
+        <small style="opacity:0.75; max-width:350px;">Um relógio aparece no alto do jogo e avisa quando o tempo acabar. Use 00:00 para jogar sem limite.</small>
+    </div>
+
+    <div class="input-group" id="question-time-area">
+        <label>⏱️ Tempo para Responder Cada Pergunta:</label>
+        <select id="questionTimeSel">
+            <option value="0">Sem limite</option>
+            <option value="15">15 segundos</option>
+            <option value="30">30 segundos</option>
+            <option value="45">45 segundos</option>
+            <option value="60">1 minuto</option>
+            <option value="90">1 minuto e meio</option>
+            <option value="120">2 minutos</option>
+        </select>
     </div>
 
     <button class="action-btn" onclick="startGame()" style="background:var(--success); color:white; margin-top: 10px;">INICIAR NOVO</button>
@@ -367,6 +418,7 @@
             <button onclick="toggleDarkMode()" style="font-size: 24px; background: none; border: none; cursor:pointer; transition: 0.2s;">🌙</button>
             <button onclick="toggleFullScreen()" style="font-size: 24px; background: none; border: none; cursor:pointer; transition: 0.2s;">📺</button>
             <button onclick="if(confirm('Deseja encerrar o jogo agora e gerar o relatório?')) showFinal()" style="font-size: 24px; background: none; border: none; cursor:pointer; transition: 0.2s;" title="Encerrar Jogo e Gerar Relatório">📊</button>
+            <span id="game-timer" class="game-timer" style="display:none;" title="Tempo do jogo"></span>
         </div>
         <div id="score-board"></div>
         <button onclick="location.reload()" style="background:var(--danger); color:white; border:none; padding:8px 15px; border-radius:10px; font-weight: bold; cursor:pointer; transition: 0.2s;">SAIR</button>
@@ -381,6 +433,18 @@
         <div id="modal-actions" style="margin-top:25px; display:flex; gap:15px; flex-direction:column;">
             <button id="btn-rebound" class="action-btn" style="display:none; background:var(--joker); color:white;">🏀 REBOTE</button>
             <button id="btn-continue" class="action-btn" style="display:none; background:var(--primary); color:white;" onclick="closeModal()">PRÓXIMA PERGUNTA</button>
+        </div>
+    </div>
+</div>
+
+<div id="tempo-overlay">
+    <div id="tempo-aviso">
+        <h1 style="font-size:4.5rem; margin:0;">⏰</h1>
+        <h1 style="margin:10px 0; color:var(--danger);">O TEMPO DO JOGO ACABOU!</h1>
+        <p style="font-size:1.2rem;">Vejam a classificação final ou continuem jogando.</p>
+        <div style="display:flex; flex-direction:column; gap:15px; margin-top:25px;">
+            <button class="action-btn" style="background:var(--primary); color:white;" onclick="fecharAvisoTempo(true)">🏆 VER RESULTADO</button>
+            <button class="action-btn" style="background:transparent; color:var(--text); border:2px solid var(--border);" onclick="fecharAvisoTempo(false)">CONTINUAR JOGANDO</button>
         </div>
     </div>
 </div>
@@ -436,6 +500,38 @@
         "Equilíbrio: Dar 3 pulinhos de uma perna só.",
         "Estátua Filosófica: O aluno que deu a resposta errada precisa ficar congelado na pose de 'O Pensador' até terminar a próxima rodada."
     ];
+
+    // Quantidade de imagens na pasta "gif" (1 a 83, em .gif ou .webp). Se colocar mais, aumente este número.
+    const TOTAL_GIFS = 83;
+
+    // Confete só se a biblioteca carregou (sem ela, o jogo continua normalmente)
+    function soltarConfete() { if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 70 }); }
+
+    function embaralharLista(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+    function escHTML(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+    // Copia um texto e só diz "Copiado!" se deu certo
+    function copiarTexto(texto, msg) {
+        const manual = () => prompt('Não deu para copiar automaticamente. Selecione e copie o texto abaixo (Ctrl+C):', texto);
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texto).then(() => alert(msg)).catch(manual);
+        else manual();
+    }
+
+    // Bipe curto (só com o som ligado)
+    let ctxBip = null;
+    function bip(vezes) {
+        const soundCb = document.getElementById('soundCb');
+        if (!soundCb || !soundCb.checked) return;
+        try {
+            ctxBip = ctxBip || new (window.AudioContext || window.webkitAudioContext)();
+            for (let i = 0; i < (vezes || 1); i++) {
+                const o = ctxBip.createOscillator(), g = ctxBip.createGain(), t = ctxBip.currentTime + i * 0.35;
+                o.type = 'square'; o.frequency.value = 880;
+                g.gain.setValueAtTime(0.15, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                o.connect(g); g.connect(ctxBip.destination); o.start(t); o.stop(t + 0.3);
+            }
+        } catch (e) {}
+    }
 
     const audioBg = new Audio();
     let currentAudioType = 'none';
@@ -541,7 +637,7 @@
             img.onerror = () => tryNextImage(img, num, step + 1, isFallback); 
         } else {
             if(!isFallback) {
-                const numGarantido = Math.floor(Math.random() * 100) + 1;
+                const numGarantido = Math.floor(Math.random() * TOTAL_GIFS) + 1;
                 img.src = `gif/${numGarantido}.gif`;
                 img.onerror = () => tryNextImage(img, numGarantido, 0, true);
             } else { img.style.display = 'none'; }
@@ -549,7 +645,7 @@
     }
 
     function saveGameState() {
-        const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport, fleetData, memoryCards };
+        const state = { questions, teams, currentTeamIdx, cardStates, gameMode, originalTurnIdx, currentStopIdx, quizReport, fleetData, memoryCards, tempoJogoRestante };
         localStorage.setItem('edu_quiz_state', JSON.stringify(state));
     }
 
@@ -572,8 +668,10 @@
         if(gameMode === 'tictactoe') grid.className = 'grid ttt-mode';
         else if(gameMode === 'batalha') grid.className = 'grid batalha-mode';
         else if(gameMode === 'memoria') grid.className = 'grid memoria-mode';
-        
+        else if(gameMode === 'temas') { grid.className = 'grid temas-mode'; temasLayout = []; montarTemas(); }
+
         playSound('lobby');
+        iniciarTempoJogo(state.tempoJogoRestante || 0);
         if(gameMode === 'stop') { grid.style.display = 'none'; loadStopQuestion(); } else { renderBoard(); }
     }
 
@@ -585,13 +683,16 @@
     function toggleFullScreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
     function formatTimeInput(input) { let v = input.value.replace(/\D/g, ""); if (v.length > 2) v = v.substring(0, 2) + ":" + v.substring(2, 4); input.value = v; }
     function togglePrompt() { const p = document.getElementById('prompt-container'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
-    function copyPromptText() { navigator.clipboard.writeText(document.getElementById('prompt-text').innerText); alert("Copiado!"); }
-    async function pasteJSON() { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
+    function copyPromptText() { copiarTexto(document.getElementById('prompt-text').innerText, "Copiado!"); }
+    async function pasteJSON() {
+        try { document.getElementById('jsonInput').value = await navigator.clipboard.readText(); }
+        catch (e) { alert("Não deu para colar automaticamente. Clique na caixa de questões e use Ctrl+V."); document.getElementById('jsonInput').focus(); }
+    }
     function cleanNames() { const i = document.getElementById('teamNamesInput'); i.value = i.value.split(',').map(n => n.trim().split(' ')[0]).filter(n => n).join(', '); }
     
     function handleModeChange() { 
         const mode = document.getElementById('gameModeSel').value;
-        document.getElementById('extra-configs').style.display = (mode === 'classic' || mode === 'batalha' || mode === 'redacao' || mode === 'memoria') ? 'block' : 'none'; 
+        document.getElementById('extra-configs').style.display = (mode === 'classic' || mode === 'batalha' || mode === 'redacao' || mode === 'memoria' || mode === 'temas') ? 'block' : 'none';
         updatePromptView();
     }
     
@@ -602,22 +703,42 @@
         
         if (mode === 'memoria') {
             document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${qtd} pares de associação para um Jogo da Memória sobre o tema: ${theme || 'Substantivos'}. Retorne APENAS um JSON neste formato: [{"q":"[Palavra 1 (Ex: Gato)]","a":"[Classificação 1 (Ex: Substantivo Comum)]","correct":"A","b":"","c":"","d":"","pts":10,"exp":"Breve explicação"}]`;
+        } else if (mode === 'temas') {
+            document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${qtd} questões de múltipla escolha sobre ${theme || 'o tema'}, divididas em 4 temas (subassuntos), com dificuldade crescente dentro de cada tema. Retorne APENAS um JSON neste formato: [{"tema":"Nome do tema","q":"?","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":""}]. Use "pts" 10, 20, 30, 40 ou 50 conforme a dificuldade.`;
         } else {
             document.getElementById('prompt-text').innerText = `Atue como professor de Português. Gere ${qtd} questões sobre ${theme || 'o tema'} em JSON: [{"q":"?","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":""}]`;
         }
     }
 
     async function generateWithAPI() {
-        const btn = document.getElementById('btn-gerar-ia'); btn.innerText = "⏳..."; btn.disabled = true;
+        const btn = document.getElementById('btn-gerar-ia');
+        const textoBotao = btn.innerText;
+        let modelo = document.getElementById('modelSel').value;
+        if (modelo === '__outro') {
+            let salvo = ''; try { salvo = localStorage.getItem('edu_quiz_modelo') || ''; } catch (e) {}
+            modelo = (prompt('Nome do modelo no OpenRouter (veja a lista em openrouter.ai/models). Ex.: google/gemini-2.5-flash', salvo) || '').trim();
+            if (!modelo) return;
+            try { localStorage.setItem('edu_quiz_modelo', modelo); } catch (e) {}
+        }
+        btn.innerText = "⏳..."; btn.disabled = true;
         try {
             const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                 method: "POST", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${document.getElementById('apiKeyInput').value}` },
-                body: JSON.stringify({ model: document.getElementById('modelSel').value, messages: [{role: "user", content: document.getElementById('prompt-text').innerText}] })
+                body: JSON.stringify({ model: modelo, messages: [{role: "user", content: document.getElementById('prompt-text').innerText}] })
             });
-            const data = await res.json();
-            document.getElementById('jsonInput').value = data.choices[0].message.content.replace(/```json|```/g, "").trim();
-        } catch (e) { alert("Erro na IA"); }
-        btn.innerText = "⚡ GERAR"; btn.disabled = false;
+            let data = null; try { data = await res.json(); } catch (e) {}
+            if (!res.ok || !data || data.error || !data.choices || !data.choices[0]) {
+                throw new Error((data && data.error && (data.error.message || data.error.code)) || ('código ' + res.status));
+            }
+            // tira o que vier antes/depois da lista de questões
+            let texto = String(data.choices[0].message.content || '').replace(/```json|```/g, "").trim();
+            const ini = texto.indexOf('['), fim = texto.lastIndexOf(']');
+            if (ini >= 0 && fim > ini) texto = texto.slice(ini, fim + 1);
+            document.getElementById('jsonInput').value = texto;
+        } catch (e) {
+            alert("Erro na IA: " + (e && e.message ? e.message : e) + "\n\nConfira a chave da API. Se o modelo não existir mais, escolha outro na lista (ou \"Outro modelo\").");
+        }
+        btn.innerText = textoBotao; btn.disabled = false;
     }
 
     function startGame() {
@@ -629,9 +750,12 @@
         const finalCount = gameMode === 'tictactoe' ? 2 : Math.max(names.length, count);
         teams = names.map(name => ({name, score: 0}));
         while(teams.length < finalCount) teams.push({name: `Grupo ${teams.length+1}`, score: 0});
+        if(gameMode === 'tictactoe') teams = teams.slice(0, 2);   // Jogo da Velha: só X e O
         
         if(gameMode === 'batalha') generateFleet();
-        
+        temasLayout = [];
+        if(gameMode === 'temas') montarTemas();
+
         if(gameMode === 'memoria') {
             memoryCards = [];
             questions.forEach((q, i) => {
@@ -653,12 +777,14 @@
         if(gameMode === 'tictactoe') grid.className = 'grid ttt-mode'; 
         else if(gameMode === 'batalha') grid.className = 'grid batalha-mode';
         else if(gameMode === 'memoria') grid.className = 'grid memoria-mode';
+        else if(gameMode === 'temas') grid.className = 'grid temas-mode';
         else grid.className = 'grid';
-        
+
         document.getElementById('setup-menu').style.display = 'none';
         document.getElementById('game-area').style.display = 'flex';
-        
+
         playSound('lobby');
+        iniciarTempoJogo(lerTempoJogo());
         if(gameMode === 'stop') { document.getElementById('grid').style.display = 'none'; loadStopQuestion(); } else { renderBoard(); }
         saveGameState();
     }
@@ -678,7 +804,28 @@
 
     function renderBoard() {
         const grid = document.getElementById('grid'); grid.innerHTML = '';
-        
+        grid.style.gridTemplateColumns = '';
+
+        if(gameMode === 'temas') {
+            if (!temasLayout.length) montarTemas();
+            const linhas = Math.max(0, ...temasLayout.map(c => c.idxs.length));
+            grid.style.gridTemplateColumns = `repeat(${temasLayout.length}, minmax(0, 1fr))`;
+            temasLayout.forEach(c => { const h = document.createElement('div'); h.className = 'tema-header'; h.innerText = c.tema; grid.appendChild(h); });
+            for (let r = 0; r < linhas; r++) {
+                temasLayout.forEach(c => {
+                    const i = c.idxs[r];
+                    if (i === undefined) { grid.appendChild(document.createElement('div')); return; }
+                    const card = document.createElement('div'), st = cardStates[i];
+                    card.className = 'card' + (st ? (st.correct ? ' used-correct' : ' used-wrong') : '');
+                    card.innerHTML = st ? (st.mark || '') : (parseInt(questions[i].pts) || 10);
+                    card.onclick = () => { if (!cardStates[i]) { originalTurnIdx = currentTeamIdx; showQuestion(i); } };
+                    grid.appendChild(card);
+                });
+            }
+            renderScores();
+            return;
+        }
+
         if(gameMode === 'memoria') {
             const oldTurn = document.getElementById('memoria-turn-indicator');
             if(oldTurn) oldTurn.remove();
@@ -768,14 +915,33 @@
         checkMemoryMatch();
     }
 
+    // Descobre qual par (ainda não encontrado) é formado por essas duas cartas.
+    // Aceita textos repetidos em pares diferentes (ex.: "Gato" e "Mesa" com a resposta "Substantivo Comum"):
+    // vale qualquer carta com o mesmo texto, e cada par só pode ser encontrado uma vez.
+    function parDaMemoria(c1, c2) {
+        const norm = t => String(t).replace(/<[^>]*>/g, '').trim().toLowerCase();
+        const usados = new Set();
+        Object.keys(cardStates).forEach(i => { const s = cardStates[i]; if (s && s.matched) usados.add(s.pairId !== undefined ? s.pairId : memoryCards[i].pairId); });
+        const textos = {};
+        memoryCards.forEach(c => { (textos[c.pairId] = textos[c.pairId] || []).push(norm(c.text)); });
+        const alvo = [norm(c1.data.text), norm(c2.data.text)].sort().join('\u0000');
+        const candidatos = Object.keys(textos).map(Number)
+            .filter(k => !usados.has(k) && textos[k].length === 2 && textos[k].slice().sort().join('\u0000') === alvo);
+        if (!candidatos.length) return null;
+        if (candidatos.includes(c1.data.pairId)) return c1.data.pairId;
+        if (candidatos.includes(c2.data.pairId)) return c2.data.pairId;
+        return candidatos[0];
+    }
+
     function checkMemoryMatch() {
-        let isMatch = firstCard.data.pairId === secondCard.data.pairId;
+        const parId = parDaMemoria(firstCard, secondCard);
+        let isMatch = parId !== null;
 
         if (isMatch) {
             setTimeout(() => { playSound('correct'); }, 300);
             teams[currentTeamIdx].score += 10;
-            cardStates[firstCard.idx] = { matched: true };
-            cardStates[secondCard.idx] = { matched: true };
+            cardStates[firstCard.idx] = { matched: true, pairId: parId };
+            cardStates[secondCard.idx] = { matched: true, pairId: parId };
             
             firstCard.el.classList.add('used-correct');
             secondCard.el.classList.add('used-correct');
@@ -825,6 +991,202 @@
         [firstCard, secondCard] = [null, null];
     }
 
+    // ========== TEMPO DO JOGO (campo "Tempo do Jogo") ==========
+    let tempoJogoRestante = 0, timerJogoInt = null, tempoJogoAcabou = false, avisoTempoPendente = false;
+    function lerTempoJogo() {
+        const v = (document.getElementById('timeInput').value || '').trim();
+        const m = v.match(/^(\d{1,3}):(\d{1,2})$/);
+        if (m) return parseInt(m[1]) * 60 + parseInt(m[2]);
+        const n = parseInt(v);
+        return n > 0 ? n * 60 : 0;
+    }
+    function iniciarTempoJogo(segundos) {
+        pararTempoJogo();
+        tempoJogoAcabou = false; avisoTempoPendente = false;
+        tempoJogoRestante = Math.max(0, parseInt(segundos) || 0);
+        if (tempoJogoRestante > 0) timerJogoInt = setInterval(tiqueTempoJogo, 1000);
+        desenharTempoJogo();
+    }
+    function pararTempoJogo() { clearInterval(timerJogoInt); timerJogoInt = null; }
+    function tiqueTempoJogo() {
+        if (tempoJogoRestante <= 0) return;
+        tempoJogoRestante--;
+        desenharTempoJogo();
+        if (tempoJogoRestante % 10 === 0) saveGameState();   // guarda o tempo que falta (para "Continuar Jogo")
+        if (tempoJogoRestante === 60) bip(1);
+        if (tempoJogoRestante <= 0) { pararTempoJogo(); tempoJogoAcabou = true; desenharTempoJogo(); bip(3); avisarFimDoTempo(); }
+    }
+    function desenharTempoJogo() {
+        const el = document.getElementById('game-timer'); if (!el) return;
+        if (!timerJogoInt && !tempoJogoAcabou) { el.style.display = 'none'; return; }
+        const m = Math.floor(tempoJogoRestante / 60), s = tempoJogoRestante % 60;
+        el.style.display = 'inline-block';
+        el.innerText = (tempoJogoAcabou ? '⏰ ' : '⏳ ') + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        el.classList.toggle('pouco', tempoJogoRestante <= 60);
+    }
+    // se uma pergunta estiver aberta, o aviso espera ela terminar (aparece ao clicar em "Próxima pergunta")
+    function avisarFimDoTempo() {
+        if (document.getElementById('modal-overlay').style.display === 'flex') { avisoTempoPendente = true; return; }
+        avisoTempoPendente = false;
+        document.getElementById('tempo-overlay').style.display = 'flex';
+    }
+    function fecharAvisoTempo(verResultado) {
+        document.getElementById('tempo-overlay').style.display = 'none';
+        if (verResultado) showFinal();
+    }
+
+    // ========== TEMPO PARA RESPONDER CADA PERGUNTA ==========
+    let timerPerguntaInt = null;
+    function segundosPergunta() { const s = document.getElementById('questionTimeSel'); return s ? (parseInt(s.value) || 0) : 0; }
+    function pararTimerPergunta() { clearInterval(timerPerguntaInt); timerPerguntaInt = null; }
+    function iniciarTimerPergunta(idx) {
+        pararTimerPergunta();
+        const total = segundosPergunta();
+        if (!total || !document.getElementById('q-timer')) return;
+        const fim = Date.now() + total * 1000;
+        const tique = () => {
+            const caixa = document.getElementById('q-timer'), bar = document.getElementById('q-timer-bar'), txt = document.getElementById('q-timer-txt');
+            if (!caixa || !bar || !txt) return pararTimerPergunta();
+            const resta = Math.max(0, fim - Date.now()), s = Math.ceil(resta / 1000);
+            bar.style.width = (resta / (total * 1000) * 100) + '%';
+            txt.innerText = '⏱️ ' + s + ' s';
+            caixa.classList.toggle('pouco', s <= 5);
+            if (resta <= 0) { pararTimerPergunta(); tempoEsgotadoPergunta(idx); }
+        };
+        tique();
+        timerPerguntaInt = setInterval(tique, 250);
+    }
+    // acabou o tempo: conta como resposta errada (com rebote, se estiver ligado)
+    function tempoEsgotadoPergunta(idx) {
+        const q = questions[idx % questions.length];
+        bip(3);
+        checkAns(null, '-', String(q.correct || 'A'), idx, true);
+    }
+
+    // ========== TABULEIRO DE TEMAS (colunas = temas, linhas = pontos) ==========
+    let temasLayout = [];
+    function montarTemas() {
+        const ordem = [], mapa = {};
+        const temTema = questions.some(q => q && String(q.tema || '').trim());
+        questions.forEach((q, i) => {
+            let t = String((q && q.tema) || '').trim();
+            if (!temTema) t = 'Bloco ' + (Math.floor(i / 5) + 1);   // JSON sem "tema": colunas de 5 questões
+            else if (!t) t = 'Outros';
+            if (!mapa[t]) { mapa[t] = []; ordem.push(t); }
+            mapa[t].push(i);
+        });
+        ordem.forEach(t => {
+            const idxs = mapa[t];
+            const p0 = parseInt(questions[idxs[0]].pts) || 0;
+            // todas valendo o mesmo (ou sem pontos): 10, 20, 30… na ordem em que aparecem
+            if (idxs.every(i => (parseInt(questions[i].pts) || 0) === p0)) idxs.forEach((i, k) => { questions[i].pts = (k + 1) * 10; });
+            idxs.sort((a, b) => (parseInt(questions[a].pts) || 0) - (parseInt(questions[b].pts) || 0));
+        });
+        temasLayout = ordem.map(t => ({ tema: t, idxs: mapa[t] }));
+    }
+
+    // ========== BANCO DE QUESTÕES DO PAINEL ==========
+    const BANCO_NOMES = {
+        'quiz': '🏆 Quizzes prontos', 'detetive': '🕵️ Detetive (corrija o erro)',
+        'escolha-sint': 'Sintaxe (revisão)', 'escolha-an': 'Análise sintática', 'escolha-pc': 'Período composto',
+        'escolha-rg': 'Regência', 'escolha-cr': 'Crase', 'escolha-cc': 'Concordância', 'escolha-cl': 'Colocação pronominal',
+        'escolha-verbo': 'Verbo', 'escolha-adj': 'Adjetivo', 'escolha-num': 'Numeral', 'escolha-prep': 'Preposição',
+        'escolha-conj': 'Conjunção', 'escolha-interj': 'Interjeição', 'escolha-inv': 'Invariáveis (revisão)',
+        'escolha-interp': 'Interpretação de texto', 'escolha-red': 'Redação', 'escolha-fo': 'Fonologia',
+        'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-sg': 'Significação das palavras',
+        'escolha-em': '🎓 Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês'
+    };
+    const BANCO_ORDEM = ['Interpretação de texto', 'Redação', 'Fonologia', 'Ortografia', 'Acentuação gráfica', 'Significação das palavras',
+        'Morfologia', 'Verbo', 'Adjetivo', 'Numeral', 'Advérbio', 'Pronome', 'Preposição', 'Conjunção', 'Interjeição', 'Invariáveis (revisão)',
+        'Sintaxe (revisão)', 'Análise sintática', 'Período composto', 'Regência', 'Crase', 'Concordância', 'Colocação pronominal',
+        '🎓 Ensino Médio / ENEM', '🇬🇧 Inglês', '🏆 Quizzes prontos', '🕵️ Detetive (corrija o erro)'];
+    function grupoDoBanco(tipo) {
+        if (BANCO_NOMES[tipo]) return BANCO_NOMES[tipo];
+        if (tipo.indexOf('morfo-adv-') === 0) return 'Advérbio';
+        if (tipo.indexOf('morfo-pron-') === 0) return 'Pronome';
+        if (['morfo-plural', 'morfo-feminino', 'morfo-grau', 'morfo-tempos', 'morfo-conjugacao'].includes(tipo)) return 'Morfologia';
+        return null;   // os outros jogos do painel não são de múltipla escolha
+    }
+    async function carregarBanco() {
+        const sel = document.getElementById('bancoSel'); if (!sel) return;
+        try {
+            const r = await fetch('dados/indice.json?v=' + Date.now());
+            if (!r.ok) throw new Error();
+            const ind = await r.json(), grupos = {}, vistos = new Set();
+            Object.keys(ind).forEach(tipo => {
+                const g = grupoDoBanco(tipo); if (!g) return;
+                (ind[tipo] || []).forEach(e => {
+                    if (!e || !e.arquivo || vistos.has(e.arquivo)) return;
+                    vistos.add(e.arquivo); (grupos[g] = grupos[g] || []).push(e);
+                });
+            });
+            const nomes = BANCO_ORDEM.filter(g => grupos[g]).concat(Object.keys(grupos).filter(g => !BANCO_ORDEM.includes(g)));
+            sel.innerHTML = '<option value="">— Escolha um assunto —</option>' + nomes.map(g =>
+                `<optgroup label="${escHTML(g)}">` + grupos[g].map(e => `<option value="${escHTML(e.arquivo)}">${escHTML(e.titulo || e.arquivo)}</option>`).join('') + '</optgroup>').join('');
+        } catch (e) {
+            sel.innerHTML = '<option value="">Banco indisponível: abra o PortuguêsCards pelo painel</option>';
+        }
+    }
+    // Converte as atividades do painel para o formato do PortuguêsCards: {q, a, b, c, d, correct, pts, exp, texto}
+    function converterDoPainel(d) {
+        const L = ['a', 'b', 'c', 'd'], out = [];
+        const montar = (pergunta, opcoes, certa, exp, texto) => {
+            opcoes = (opcoes || []).map(o => String(o)); certa = String(certa);
+            if (!String(pergunta || '').trim() || !opcoes.includes(certa)) return;
+            // até 4 alternativas: a certa + 3 sorteadas
+            const ops = embaralharLista([certa].concat(embaralharLista(opcoes.filter(o => o !== certa)).slice(0, 3)));
+            const q = { q: String(pergunta), a: '', b: '', c: '', d: '', correct: 'A', pts: 10, exp: exp ? String(exp) : '' };
+            ops.forEach((o, i) => { q[L[i]] = o; });
+            q.correct = L[ops.indexOf(certa)].toUpperCase();
+            if (texto) q.texto = String(texto);
+            out.push(q);
+        };
+        const certaDe = (ops, c) => typeof c === 'number' ? ops[c] : c;
+        (Array.isArray(d.perguntas) ? d.perguntas : []).forEach(p => {
+            if (!p || !Array.isArray(p.opcoes)) return;
+            montar((p.imagem ? p.imagem + ' ' : '') + (p.pergunta || ''), p.opcoes, certaDe(p.opcoes, p.correta), p.explica, p.texto);
+        });
+        (Array.isArray(d.rodadas) ? d.rodadas : []).forEach(r => {
+            if (!r || !r.destaque || !Array.isArray(r.opcoes) || r.ouvir) return;   // "ouça e escolha" precisa de áudio
+            const enun = String(r.enunciado || d.instrucao || '').trim();
+            let pergunta = String(r.destaque).replace(/\[([^\]]+)\]/g, '“$1”');
+            if (enun) pergunta = (/[?:]$/.test(enun) ? enun + ' ' : enun + ': ') + pergunta;
+            if (r.imagem) pergunta = r.imagem + ' ' + pergunta;
+            montar(pergunta, r.opcoes, certaDe(r.opcoes, r.correta), r.explica, r.texto);
+        });
+        (Array.isArray(d.frases) ? d.frases : []).forEach(f => {
+            if (!f || !f.frase || !Array.isArray(f.opcoes)) return;
+            montar(`🕵️ Na frase “${f.frase}”, qual palavra corrige o erro “${f.errada}”?`, f.opcoes, f.correta, f.explica);
+        });
+        return out;
+    }
+    async function usarBanco(juntar) {
+        const sel = document.getElementById('bancoSel'), info = document.getElementById('bancoInfo');
+        if (!sel.value) return alert('Escolha um assunto do banco.');
+        const titulo = (sel.options[sel.selectedIndex].text || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
+        info.innerText = '⏳ Carregando…';
+        try {
+            const r = await fetch('dados/' + sel.value + '?v=' + Date.now());
+            if (!r.ok) throw new Error();
+            let novas = converterDoPainel(await r.json());
+            if (!novas.length) { info.innerText = '⚠️ Esse assunto não tem questões de múltipla escolha que funcionem aqui.'; return; }
+            const qtd = parseInt(document.getElementById('bancoQtd').value);
+            if (qtd > 0 && qtd < novas.length) novas = embaralharLista(novas).slice(0, qtd);
+            novas.forEach(q => { q.tema = titulo; });
+            let atuais = [];
+            if (juntar) {
+                try { atuais = JSON.parse(document.getElementById('jsonInput').value || '[]'); } catch (e) { atuais = []; }
+                if (!Array.isArray(atuais)) atuais = [];
+            }
+            const todas = atuais.concat(novas);
+            document.getElementById('jsonInput').value = JSON.stringify(todas, null, 1);
+            info.innerText = juntar ? `✅ +${novas.length} questões de “${titulo}” (total: ${todas.length}). Escolha o modo de jogo e clique em INICIAR.`
+                                    : `✅ ${novas.length} questões de “${titulo}” prontas. Escolha o modo de jogo e clique em INICIAR.`;
+        } catch (e) {
+            info.innerText = '⚠️ Não foi possível abrir esse assunto. Abra o PortuguêsCards pelo painel (GitHub Pages).';
+        }
+    }
+
     // ========== FUNÇÕES QUE ESTAVAM FALTANDO (AGORA IMPLEMENTADAS) ==========
     function triggerSurprise(idx) {
         document.getElementById('modal-content').innerHTML = ""; 
@@ -851,7 +1213,7 @@
 
         document.getElementById('modal-content').innerHTML = `<h1 style="font-size:5rem; margin-bottom:10px;">${emoji}</h1><h1 style="margin-top:0;">${tituloModal}</h1><h2 style="font-size:2rem;">${teams[currentTeamIdx].name} ${isPositive ? 'ganhou' : 'perdeu'} ${bonus} pontos!</h2>`;
         
-        if(isPositive) confetti({ particleCount: 150, spread: 70 });
+        if(isPositive) soltarConfete();
         saveGameState();
     }
 
@@ -870,8 +1232,8 @@
         document.getElementById('exp-box').innerHTML = `<b style="color: var(--success);">Tema atribuído a: ${studentName}</b>`;
         document.getElementById('exp-box').style.display = 'block';
         document.getElementById('btn-continue').style.display = 'block';
-        
-        confetti({ particleCount: 150, spread: 70 });
+
+        soltarConfete();
         saveGameState();
     }
 
@@ -894,6 +1256,7 @@
     }
 
     function showQuestion(idx) {
+        pararTimerPergunta();
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
 
@@ -907,7 +1270,7 @@
         document.getElementById('btn-rebound').style.display = 'none';
         document.getElementById('exp-box').style.display = 'none';
         
-        const randNum = Math.floor(Math.random() * 500) + 1;
+        const randNum = Math.floor(Math.random() * TOTAL_GIFS) + 1;
         let gifHTML = document.getElementById('gifsCb').checked ? `<img src="gif/${randNum}.gif" onerror="tryNextImage(this, ${randNum}, 0, false)" style="max-height:180px; border-radius:15px; margin-bottom:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">` : '';
         
         if (gameMode === 'redacao') {
@@ -949,8 +1312,10 @@
         let btnTextoHTML = q.texto ? `<button class="action-btn" id="btn-toggle-texto" style="background:var(--text); color:white; margin-bottom:20px; width:100%;" onclick="toggleTexto()">📖 VER TEXTO BASE</button>` : '';
         let textoConteudo = q.texto ? q.texto.replace(/\n/g, '<br>') : '';
 
-        document.getElementById('modal-content').innerHTML = 
-            `${btnTextoHTML}
+        const tempoHTML = segundosPergunta() > 0 ? `<div id="q-timer" class="q-timer"><div id="q-timer-bar"></div><span id="q-timer-txt"></span></div>` : '';
+
+        document.getElementById('modal-content').innerHTML =
+            `${tempoHTML}${btnTextoHTML}
             <div id="question-view">
                 ${gifHTML}
                 <h2 style="font-size:clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 20px;">${q.q}</h2>
@@ -961,9 +1326,10 @@
                 ${textoConteudo}
             </div>
         `;
+        iniciarTimerPergunta(idx);
     }
 
-    function checkAns(btn, chosen, correct, idx) {
+    function checkAns(btn, chosen, correct, idx, porTempo) {
         const isCorrect = chosen.trim().toUpperCase() === correct.trim().toUpperCase();
         const q = questions[idx % questions.length];
         const hasEnoughOptions = q.c !== undefined && q.c !== "";
@@ -971,19 +1337,24 @@
         const correctKey = correct ? correct.trim().toLowerCase() : "";
         const correctText = q[correctKey] || "";
 
+        // pontos da questão: campo "pts" do JSON (padrão 10); no rebote vale a metade
+        const basePts = Math.max(1, parseInt(q.pts) || 10);
+        const ptsRebote = Math.ceil(basePts / 2);
+        pararTimerPergunta();
+
         if(isCorrect) {
             playSound('correct');
             document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
-            btn.classList.add('correct'); 
-            
-            let ptsGanhos = isReboundActive ? 5 : 10;
+            btn.classList.add('correct');
+
+            let ptsGanhos = isReboundActive ? ptsRebote : basePts;
             let mark = '✅';
             let msgExtra = "";
-            
-            if(gameMode === 'tictactoe') { mark = currentTeamIdx === 0 ? 'X' : 'O'; } 
+
+            if(gameMode === 'tictactoe') { mark = currentTeamIdx === 0 ? 'X' : 'O'; }
             else if (gameMode === 'batalha') {
-                if(fleetData[idx] === '🚢') { mark = '💥'; ptsGanhos = 15; msgExtra = `<br><b style="color:var(--danger); font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`; } 
-                else { mark = '🌊'; ptsGanhos = isReboundActive ? 5 : 10; msgExtra = `<br><b style="color:var(--primary); font-size:1.2rem;">🌊 ÁGUA! Nenhuma embarcação aqui. (+${ptsGanhos} pts)</b>`; }
+                if(fleetData[idx] === '🚢') { mark = '💥'; ptsGanhos = basePts + 5; msgExtra = `<br><b style="color:var(--danger); font-size:1.2rem;">💥 NA MOSCA! Acertou um navio! (+${ptsGanhos} pts)</b>`; }
+                else { mark = '🌊'; ptsGanhos = isReboundActive ? ptsRebote : basePts; msgExtra = `<br><b style="color:var(--primary); font-size:1.2rem;">🌊 ÁGUA! Nenhuma embarcação aqui. (+${ptsGanhos} pts)</b>`; }
             }
             
             teams[currentTeamIdx].score += ptsGanhos;
@@ -994,22 +1365,26 @@
             document.getElementById('exp-box').innerHTML = `<b style="color:var(--success);">Resposta Correta: ${correct}</b>${msgExtra}<br><div style="margin-top:10px;">${q.exp || ""}</div>`;
             document.getElementById('exp-box').style.display = 'block';
             document.getElementById('btn-continue').style.display = 'block';
-            confetti({ particleCount: 150, spread: 70 });
-            
+            soltarConfete();
+
             if(gameMode === 'tictactoe') { if(verificarVitoriaTTT()) return; }
         } else {
             playSound('wrong');
-            btn.classList.add('wrong'); btn.disabled = true;
+            if (btn) { btn.classList.add('wrong'); btn.disabled = true; }
+            // depois de um erro ninguém responde de novo até o rebote começar (nem depois do erro final)
+            document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+            if (porTempo) { const td = document.getElementById('turn-display'); if (td) td.innerHTML = `⏰ Acabou o tempo de <b>${teams[currentTeamIdx].name}</b>!`; }
             if (document.getElementById('reboundCb').checked && !isReboundActive && hasEnoughOptions) {
                 isReboundActive = true;
                 const btnReb = document.getElementById('btn-rebound');
                 btnReb.style.display = 'block';
                 btnReb.onclick = () => {
                     currentTeamIdx = (currentTeamIdx + 1) % teams.length;
-                    document.getElementById('turn-display').innerHTML = `Vez de: <b>${teams[currentTeamIdx].name}</b> (REBOTE - Vale 5)`;
+                    document.getElementById('turn-display').innerHTML = `Vez de: <b>${teams[currentTeamIdx].name}</b> (REBOTE - Vale ${ptsRebote})`;
                     document.querySelectorAll('.opt-btn').forEach(b => { if(!b.classList.contains('wrong')) b.disabled = false; });
                     btnReb.style.display = 'none';
                     renderScores();
+                    iniciarTimerPergunta(idx);
                 };
             } else {
                 cardStates[idx] = { correct: false, mark: '❌' };
@@ -1020,7 +1395,7 @@
                     const randPunish = punishmentsList[Math.floor(Math.random() * punishmentsList.length)];
                     punishmentHTML = `<div style="margin-top:15px; padding:15px; background: rgba(252, 163, 17, 0.2); border:2px dashed var(--accent); border-radius:12px; color:var(--text); text-align:center;"><b style="font-size:1.1rem; color:var(--accent);">🚨 HORA DO MICO! 🚨</b><br><span style="font-size:1.1rem; margin-top:5px; display:inline-block;">${randPunish}</span></div>`;
                 }
-                document.getElementById('exp-box').innerHTML = `<b style="color:var(--danger);">Resposta Correta: ${correct}</b><br><div style="margin-top:10px;">${q.exp || ""}</div>` + punishmentHTML;
+                document.getElementById('exp-box').innerHTML = (porTempo ? `<b style="color:var(--danger);">⏰ Tempo esgotado!</b><br>` : '') + `<b style="color:var(--danger);">Resposta Correta: ${correct}</b><br><div style="margin-top:10px;">${q.exp || ""}</div>` + punishmentHTML;
                 document.getElementById('exp-box').style.display = 'block';
                 document.getElementById('btn-continue').style.display = 'block';
             }
@@ -1055,8 +1430,12 @@
 
     function closeModal() {
         document.getElementById('modal-overlay').style.display = 'none';
+        pararTimerPergunta();
         playSound('lobby');
-        if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (currentTeamIdx + 1) % teams.length; loadStopQuestion(); return; }
+        // o tempo do jogo acabou durante a pergunta: avisa agora
+        if (avisoTempoPendente) { avisoTempoPendente = false; document.getElementById('tempo-overlay').style.display = 'flex'; }
+        // a próxima vez é de quem vem depois da equipe dona da pergunta (mesmo se outra pegou o rebote)
+        if(gameMode === 'stop') { currentStopIdx++; currentTeamIdx = (originalTurnIdx + 1) % teams.length; loadStopQuestion(); return; }
         
         currentTeamIdx = (originalTurnIdx + 1) % teams.length;
         renderBoard();
@@ -1071,7 +1450,7 @@
         saveGameState();
     }
 
-    function loadStopQuestion() { if(currentStopIdx < questions.length) showQuestion(currentStopIdx); else showFinal(); }
+    function loadStopQuestion() { if(currentStopIdx < questions.length) { originalTurnIdx = currentTeamIdx; showQuestion(currentStopIdx); } else showFinal(); }
 
     function printCustomReport() {
         const printContent = document.getElementById('hidden-print-data').innerHTML;
@@ -1088,6 +1467,9 @@
     }
 
     function showFinal() {
+        pararTempoJogo(); pararTimerPergunta();
+        tempoJogoAcabou = false; avisoTempoPendente = false; desenharTempoJogo();
+        document.getElementById('tempo-overlay').style.display = 'none';
         document.getElementById('modal').style.backgroundColor = "";
         document.getElementById('modal').style.color = "";
         playSound('stop');
@@ -1225,8 +1607,7 @@
             return `${r.team} - ${r.isCorrect ? 'ACERTOU' : 'ERROU'} - Questão: ${r.question}\nGabarito: ${r.correctLetter} - ${r.correctText}\nJustificativa: ${r.exp}`;
         }).join('\n\n');
         
-        navigator.clipboard.writeText("RELATÓRIO DE AULA - PROF. EDUARDO\n\n" + text);
-        alert("Copiado para a área de transferência!");
+        copiarTexto("RELATÓRIO DE AULA - PROF. EDUARDO\n\n" + text, "Copiado para a área de transferência!");
     }
 
     function restartGame() {
@@ -1239,6 +1620,7 @@
     window.onload = () => {
         checkExistingGame();
         updatePromptView();
+        carregarBanco();
     }
 
     let currentFCIdx = 0;
@@ -1311,6 +1693,7 @@
         const currentQ = questions[currentFCIdx];
         if (isHard && !difficultFC.includes(currentQ)) difficultFC.push(currentQ);
         nextFC();
+        checkFCEnd();   // atualiza o botão "Revisar difíceis" (inclusive na última carta)
     }
 
     function checkFCEnd() {

@@ -204,9 +204,10 @@ function aoMudar(){
 function respostasAtuais(){ return ((arvore.respostas || {})['q' + n]) || {}; }
 
 // ---------- Perguntas ----------
+let perguntaId = 0, calculadaId = 0;   // cada pergunta é calculada uma vez só
 function mostrarPergunta(){
   const p = perguntas[n - 1];
-  encerrada = false;
+  encerrada = false; perguntaId++;
   tempoAtual = $('selTempo').value === 'json' ? p.tempo : +$('selTempo').value;
   irPara('pergunta');
   $('numPergunta').textContent = `${n}/${perguntas.length}`;
@@ -238,7 +239,14 @@ function encerrarPergunta(){
   $('contador').classList.remove('pouco');
   $('btnEncerrarPergunta').hidden = true;
   // espera um instante para chegarem respostas do último segundo
-  setTimeout(() => Rede.ler(`salas/${sala}`, (err, v) => { if (v) arvore = v; calcularResultado(); }), 1200);
+  const pid = perguntaId;
+  setTimeout(() => Rede.lerInsistindo(`salas/${sala}`, (err, v) => {
+    if (pid !== perguntaId || calculadaId === pid) return;
+    calculadaId = pid;
+    if (v) arvore = v;
+    else if (err) AV.avisar('⚠️ A internet oscilou: usei as respostas que já tinham chegado.');
+    calcularResultado();
+  }), 1200);
 }
 function calcularResultado(){
   const p = perguntas[n - 1], g = grupos(), ids = Object.keys(g), resp = respostasAtuais();

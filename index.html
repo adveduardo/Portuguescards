@@ -721,6 +721,10 @@
             if (p.classList.contains('aberto') && e.target.id !== 'menu-btn') fecharMenu();
         });
         document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharMenu(); });
+        // clique dentro da atividade (no iframe) não chega a esta página: quando o foco vai para o iframe, fecha o menu
+        window.addEventListener('blur', () => setTimeout(() => {
+            if (document.activeElement === document.getElementById('app-frame')) fecharMenu();
+        }, 0));
         document.getElementById('tool-selector').addEventListener('change', atualizarBotaoMenu);
         montarArvore();
         atualizarBotaoMenu();

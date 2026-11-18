@@ -118,7 +118,8 @@ const AV = window.AoVivo;
 
 let dados = null, sala = null, arvore = {}, ouvinte = null, fase = 'config';
 let atividade = null;          // {modo, proposta, equipes, rodadasTotal, k, textos, tempo}
-let rodadaGlobal = 0, fimRodada = 0, extra = 0, timer = null, avisouFim = false, leituraIdx = 0;
+let rodadaGlobal = 0, fimRodada = 0, extra = 0, timer = null, avisouFim = false, leituraIdx = 0, inicioLocal = 0;
+let tokenRecolher = 0, recolhido = 0;   // cada rodada é recolhida uma vez só
 
 // ---------- JSON ----------
 function normalizar(d){
@@ -233,8 +234,9 @@ function iniciarRodada(){
   a.tarefas = tarefasDaRodada();
   $('infoEscr').textContent = `Sala ${sala}` + (a.modo === 'corrente' ? ` • Rodada ${a.k + 1} de ${a.rodadasTotal}` : '');
   $('btnRecolher').textContent = a.k + 1 >= a.rodadasTotal ? '📖 Recolher e ler os textos' : '⏭️ Recolher e ir para a próxima rodada';
-  Rede.gravar(`salas/${sala}/estado`, {fase: 'escrevendo', rodada: rodadaGlobal, titulo: dados.titulo, tempo: a.tempo, extra: 0, tarefas: a.tarefas});
-  fimRodada = a.tempo ? Date.now() + a.tempo * 1000 : 0;
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'escrevendo', rodada: rodadaGlobal, titulo: dados.titulo, tempo: a.tempo, extra: 0, tarefas: a.tarefas, inicio: Rede.TS});
+  inicioLocal = Date.now();
+  fimRodada = a.tempo ? inicioLocal + a.tempo * 1000 : 0;
   clearInterval(timer); timer = setInterval(relogio, 250); relogio();
   AV.tom(660, .12); AV.tom(880, .15, 'triangle', .14, .12);
   desenharStatus();
@@ -265,7 +267,10 @@ function desenharStatus(){
 }
 $('btnMaisTempo').onclick = () => {
   if (!atividade || !atividade.tempo) return;
-  extra += 60; fimRodada = Math.max(fimRodada, Date.now()) + 60000; avisouFim = false;
+  // +1 minuto a partir de agora (ou do fim, se ainda não acabou). "extra" é contado desde o início da rodada,
+  // para os iPads chegarem ao mesmo horário final: início + tempo + extra
+  fimRodada = Math.max(fimRodada, Date.now()) + 60000; avisouFim = false;
+  extra = Math.round((fimRodada - inicioLocal) / 1000) - atividade.tempo;
   Rede.atualizar(`salas/${sala}/estado`, {extra});
   relogio();
 };
@@ -278,8 +283,16 @@ $('btnRecolher').onclick = () => {
   $('relogioEscr').textContent = '📥 Recolhendo os textos…';
   clearInterval(timer);
   // espera os iPads salvarem o último rascunho
-  setTimeout(() => Rede.ler(`salas/${sala}/escrita/r${rodadaGlobal}`, (err, v) => {
+  const tk = ++tokenRecolher, rAtual = rodadaGlobal;
+  setTimeout(() => Rede.lerInsistindo(`salas/${sala}/escrita/r${rAtual}`, (err, v) => {
+    if (tk !== tokenRecolher || recolhido === tk || rAtual !== rodadaGlobal) return;
+    recolhido = tk;
     $('btnRecolher').disabled = false;
+    if (err && !v){
+      // não deu para ler de novo: usa a cópia que o telão já recebeu ao vivo
+      v = rascunhos();
+      AV.avisar('⚠️ A internet oscilou: usei os textos que já tinham chegado.');
+    }
     guardarRodada(v || {});
     atividade.k++;
     if (atividade.k < atividade.rodadasTotal) iniciarRodada();

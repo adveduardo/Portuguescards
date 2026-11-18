@@ -65,6 +65,11 @@
         /* Overlay Inicial */
         #startOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
         #startOverlay button { padding: 15px 30px; font-size: 20px; background: #5d9cec; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; }
+
+        /* Meta (contagem regressiva) chegou a zero */
+        .timer-panel.meta-fim { background: #f05a5b !important; color: white; animation: metaPisca 1s infinite; }
+        .timer-panel.meta-fim .mode-text { color: white; font-weight: bold; }
+        @keyframes metaPisca { 50% { opacity: 0.7; } }
     </style>
 </head>
 <body>
@@ -167,24 +172,49 @@
         // Lógica de tempo
         function runTimerLogic() {
             if (!isRunning) return;
-            
+
             if (isCountdown) {
-                if (seconds > 0) seconds--;
+                if (seconds > 0) {
+                    seconds--;
+                    if (seconds === 0) metaAtingida();
+                }
             } else {
                 seconds++;
             }
             updateTimerDisplay();
         }
 
+        // A meta chegou a zero: o painel do relógio pisca em vermelho e toca 3 bipes
+        function metaAtingida() {
+            document.querySelector('.timer-panel').classList.add('meta-fim');
+            document.getElementById('mode-text').innerText = "⏰ Tempo esgotado!";
+            try {
+                audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') audioContext.resume();
+                for (let i = 0; i < 3; i++) {
+                    const o = audioContext.createOscillator(), g = audioContext.createGain(), t = audioContext.currentTime + i * 0.4;
+                    o.type = 'square'; o.frequency.value = 880;
+                    g.gain.setValueAtTime(0.2, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+                    o.connect(g); g.connect(audioContext.destination); o.start(t); o.stop(t + 0.32);
+                }
+            } catch (e) {}
+        }
+        function limparAvisoMeta() {
+            document.querySelector('.timer-panel').classList.remove('meta-fim');
+        }
+
         // Eventos de Tempo
         document.getElementById('btn-reset').addEventListener('click', () => {
             seconds = isCountdown ? goalSeconds : 0;
+            limparAvisoMeta();
+            if (isCountdown) document.getElementById('mode-text').innerText = "Meta: " + (goalSeconds / 60) + " min";
             updateTimerDisplay();
         });
 
         document.getElementById('btn-goal').addEventListener('click', () => {
             let userInput = prompt("Tempo em minutos (ex: 5). Branco para cronômetro normal:");
-            
+            limparAvisoMeta();
+
             if (userInput !== null && userInput.trim() !== "" && !isNaN(userInput) && userInput > 0) {
                 isCountdown = true;
                 goalSeconds = Math.floor(parseFloat(userInput) * 60);
@@ -200,18 +230,18 @@
 
         // Botão de Parar/Continuar
         document.getElementById('btn-stop').addEventListener('click', function() {
-            if (!audioContext) return; 
-            
+            if (!timerInterval) return;   // ainda não começou (o relógio funciona mesmo sem microfone)
+
             isRunning = !isRunning;
-            
+
             if (isRunning) {
                 this.innerHTML = '⏸ Parar';
                 this.style.background = '#f05a5b';
-                audioContext.resume(); 
+                if (audioContext) audioContext.resume();
             } else {
                 this.innerHTML = '▶ Continuar';
-                this.style.background = '#50c878'; 
-                audioContext.suspend(); 
+                this.style.background = '#50c878';
+                if (audioContext) audioContext.suspend();
                 
                 // Reset visual e lógico
                 document.getElementById('noise-bar').style.width = '0%';
@@ -303,7 +333,7 @@
                 analisarAudio();
 
             } catch (err) {
-                alert('Erro ao acessar o microfone. Verifique as permissões.');
+                alert('Não foi possível usar o microfone. O relógio continua funcionando (Parar, Meta e ↺). Para medir o barulho, permita o microfone no navegador e recarregue a página.');
             }
         }
     </script>

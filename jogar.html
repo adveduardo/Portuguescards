@@ -351,7 +351,7 @@ function fecharOuvintes(){
 function comecarAOuvir(){
   fecharOuvintes();
   estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null; bg.rodada = null;
-  Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo);
+  Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo, function(){ recalcularRelogios(); });
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
     if (g === null && eq){
@@ -454,14 +454,36 @@ function montarStop(){
     if (r){ for (var c in r) if (r.hasOwnProperty(c) && $(c)) $(c).value = r[c]; aoDigitar(true); }
   });
   // relógio
+  stopInicioLocal = Date.now();
+  iniciarRelogioStop();
+}
+// O relógio segue o horário em que o professor começou (no servidor). Assim ele continua certo
+// se a página recarregar. Se ainda não deu para medir o relógio do servidor, usa a hora deste aparelho.
+var stopInicioLocal = 0;
+function inicioNoAparelho(inicioLocal){
+  return (estado && typeof estado.inicio === 'number' && Rede.relogioMedido) ? estado.inicio - Rede.offset : inicioLocal;
+}
+function iniciarRelogioStop(){
   clearInterval(timerRelogio);
-  fimLocal = estado.tempo ? Date.now() + estado.tempo * 1000 : 0;
+  fimLocal = estado.tempo ? inicioNoAparelho(stopInicioLocal) + estado.tempo * 1000 : 0;
   $('tempoStop').innerHTML = '';
-  if (fimLocal) timerRelogio = setInterval(function(){
+  if (!fimLocal) return;
+  var tique = function(){
     var s = Math.max(0, Math.round((fimLocal - Date.now()) / 1000));
     $('tempoStop').innerHTML = '⏳ ' + Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
     if (!s) clearInterval(timerRelogio);
-  }, 500);
+  };
+  timerRelogio = setInterval(tique, 500); tique();
+}
+// chamado quando a medição do relógio do servidor termina
+function recalcularRelogios(){
+  if (!estado || !eq) return;
+  if (jogo === 'stop' && estado.fase === 'jogando' && stopRodada === estado.rodada && !travado) iniciarRelogioStop();
+  if (jogo === 'escrita' && estado.fase === 'escrevendo' && escr.rodada === estado.rodada && escr.fim){
+    calcularFimEscrita();
+    if (!escr.timer) escr.timer = setInterval(relogioEscrita, 500);
+    relogioEscrita();
+  }
 }
 function caminhoResp(){ return 'salas/' + sala + '/respostas/r' + stopRodada + '/' + eq.id; }
 function lerCampos(){
@@ -562,8 +584,15 @@ function montarPergunta(){
 function responder(i){
   if (respondeu || !estado || estado.fase !== 'pergunta') return;
   respondeu = true; vibrar();
-  Rede.gravar('salas/' + sala + '/respostas/q' + quizN + '/' + eq.id, {o: i, t: Rede.TS}, function(err){
-    if (err){ respondeu = false; alert('Não foi possível enviar. Toque de novo.'); return; }
+  var n = quizN;
+  Rede.gravar('salas/' + sala + '/respostas/q' + n + '/' + eq.id, {o: i, t: Rede.TS}, function(err){
+    if (!err || quizN !== n) return;
+    // não chegou: mostra as opções de novo para a equipe tocar outra vez
+    respondeu = false;
+    if (estado && estado.fase === 'pergunta'){
+      $('opcoesQuiz').style.display = 'block'; $('esperaQuiz').style.display = 'none';
+    }
+    alert('A resposta não foi enviada (sem internet). Toquem de novo na resposta.');
   });
   mostrarEnviada(i);
 }
@@ -923,7 +952,10 @@ function montarVotacao(){
 }
 function votar(i){
   if (!estado || estado.fase !== 'votacao') return;
-  Rede.gravar('salas/' + sala + '/votos/r' + estado.rodada + '/' + eq.id, i);
+  var r = estado.rodada;
+  Rede.gravar('salas/' + sala + '/votos/r' + r + '/' + eq.id, i, function(err){
+    if (err && cam.rodada === r && cam.voto === i) $('camStatus').innerHTML = '❌ O voto não foi enviado (sem internet). Toquem de novo na opção.';
+  });
   marcarVoto(i); vibrar();
 }
 function marcarVoto(i){
@@ -934,14 +966,14 @@ function marcarVoto(i){
 }
 
 // ================= ESCRITA EM EQUIPE =================
-var escr = {rodada: null, tarefas: [], i: 0, salvos: {}, timer: null, timerSalvar: null, fim: 0, extra: 0};
+var escr = {rodada: null, tarefas: [], i: 0, salvos: {}, timer: null, timerSalvar: null, fim: 0, extra: 0, inicioLocal: 0};
 function renderEscrita(){
   var f = estado.fase;
   if (f === 'escrevendo'){
     if (escr.rodada !== estado.rodada) iniciarEscrita();
     else if ((estado.extra || 0) !== escr.extra && escr.fim){
-      // o professor deu mais tempo
-      escr.fim = Math.max(escr.fim, Date.now()) + ((estado.extra || 0) - escr.extra) * 1000; escr.extra = estado.extra || 0;
+      // o professor deu mais tempo: o horário final passa a ser início + tempo + extra
+      calcularFimEscrita();
       if (!escr.timer) escr.timer = setInterval(relogioEscrita, 500);
       relogioEscrita();
     }
@@ -958,14 +990,19 @@ function renderEscrita(){
   else telaEspera(estado.titulo ? '✍️ ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
 }
 function caminhoEscrita(){ return 'salas/' + sala + '/escrita/r' + escr.rodada + '/' + eq.id; }
+// horário final da rodada = início (do servidor, quando já medido) + tempo + minutos extras
+function calcularFimEscrita(){
+  escr.extra = estado.extra || 0;
+  escr.fim = estado.tempo ? inicioNoAparelho(escr.inicioLocal) + (estado.tempo + escr.extra) * 1000 : 0;
+}
 function iniciarEscrita(){
   var r = estado.rodada;
   escr.rodada = r; escr.i = 0; escr.salvos = {};
   escr.tarefas = Rede.lista((estado.tarefas || {})[eq.id]);
   pararRelogioEscrita();
   if (!escr.tarefas.length){ telaEspera('Nesta rodada a sua equipe descansa 😌', 'Acompanhem os colegas pelo telão 👀'); return; }
-  escr.extra = estado.extra || 0;
-  escr.fim = estado.tempo ? Date.now() + (estado.tempo + escr.extra) * 1000 : 0;
+  escr.inicioLocal = Date.now();
+  calcularFimEscrita();
   if (escr.fim) escr.timer = setInterval(relogioEscrita, 500);
   telaEspera('✍️ Preparando a folha…', '');
   Rede.ler(caminhoEscrita(), function(err, salvos){
@@ -1019,7 +1056,18 @@ $('escrTexto').oninput = function(){
 $('escrEnviar').onclick = function(){
   if (!$('escrTexto').value.replace(/^\s+|\s+$/g, '')){ alert('Escrevam alguma coisa antes de enviar 🙂'); return; }
   $('escrEnviar').disabled = true;
-  salvarEscrita(true, function(){ escr.i++; vibrar(); mostrarTarefaEscrita(); });
+  var r = escr.rodada, parte = escr.i;
+  salvarEscrita(true, function(err){
+    if (escr.rodada !== r || escr.i !== parte) return;
+    if (err){
+      // não chegou: continua na mesma parte, com o botão liberado
+      var t = escr.tarefas[parte]; if (t && escr.salvos[t.id]) escr.salvos[t.id].enviado = false;
+      $('escrEnviar').disabled = false;
+      alert('O texto não foi enviado (sem internet). Ele continua aqui: toquem em Enviar de novo.');
+      return;
+    }
+    escr.i++; vibrar(); mostrarTarefaEscrita();
+  });
 };
 
 // ================= BINGO =================

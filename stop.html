@@ -274,8 +274,19 @@ function pedirStop(quem){
   $('faixaStopBox').innerHTML = `<div id="faixaStop">STOP!</div><h2>${AV.esc(quemNome)}</h2><p class="dica">Recolhendo as respostas…</p>`;
   AV.sirene(); AV.falar(quem === 'tempo' ? 'Acabou o tempo!' : 'Stop!', 'pt-BR');
   // espera os iPads enviarem as últimas respostas
-  setTimeout(() => Rede.ler(`salas/${sala}/respostas/r${rodada}`, (err, r) => montarCorrecao(r || {})), 3500);
+  const tk = ++tokenStop, rAtual = rodada;
+  setTimeout(() => Rede.lerInsistindo(`salas/${sala}/respostas/r${rAtual}`, (err, r) => {
+    if (tk !== tokenStop || correcaoFeita === tk || rAtual !== rodada) return;
+    correcaoFeita = tk;
+    if (err && !r){
+      // não deu para ler de novo: usa a cópia que o telão já recebeu ao vivo
+      r = (arvore.respostas || {})['r' + rAtual] || {};
+      AV.avisar('⚠️ A internet oscilou: usei as respostas que já tinham chegado.');
+    }
+    montarCorrecao(r || {});
+  }), 3500);
 }
+let tokenStop = 0, correcaoFeita = 0;   // a correção de cada STOP é montada uma vez só
 $('btnStopProf').onclick = () => pedirStop('professor');
 $('btnRodada').onclick = novaRodada;
 $('btnProxima').onclick = novaRodada;

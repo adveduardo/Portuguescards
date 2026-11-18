@@ -106,22 +106,32 @@ Rede.definirEnderecoLocal = function(url){
 // FIREBASE (REST + EventSource)
 // =========================================================================
 function req(metodo, path, corpo, cb){
-  var x = new XMLHttpRequest();
-  x.open(metodo, Rede.base + '/' + partes(path).join('/') + '.json', true);
-  x.setRequestHeader('Content-Type', 'application/json');
-  x.timeout = 15000;
+  var x = new XMLHttpRequest(), feito = false;
+  // Responde UMA vez só. Numa queda de rede o navegador avisa duas vezes
+  // (readystatechange com status 0 e, logo depois, error ou timeout).
+  function fim(err, d){ if (feito) return; feito = true; if (cb) cb(err, d); }
+  try{
+    x.open(metodo, Rede.base + '/' + partes(path).join('/') + '.json', true);
+    x.setRequestHeader('Content-Type', 'application/json');
+    x.timeout = 15000;
+  }catch(e){ setTimeout(function(){ fim(new Error('Sem conexão')); }, 0); return; }
   x.onreadystatechange = function(){
     if (x.readyState !== 4) return;
     if (x.status >= 200 && x.status < 300){
       var d = null; try{ d = JSON.parse(x.responseText); }catch(e){}
-      cb && cb(null, d);
+      fim(null, d);
+    } else if (x.status === 0){
+      // queda de rede ou tempo esgotado: o aviso certo (error/timeout) chega em seguida
+      setTimeout(function(){ fim(new Error('Sem conexão')); }, 50);
     } else {
-      cb && cb(new Error('Erro ' + x.status + ' ' + (x.responseText || '')));
+      fim(new Error('Erro ' + x.status + ' ' + (x.responseText || '')));
     }
   };
-  x.ontimeout = function(){ cb && cb(new Error('Tempo esgotado')); };
-  x.onerror = function(){ cb && cb(new Error('Sem conexão')); };
-  x.send(corpo === undefined ? null : JSON.stringify(corpo));
+  x.ontimeout = function(){ fim(new Error('Tempo esgotado')); };
+  x.onerror = function(){ fim(new Error('Sem conexão')); };
+  x.onabort = function(){ fim(new Error('Cancelado')); };
+  try{ x.send(corpo === undefined ? null : JSON.stringify(corpo)); }
+  catch(e){ fim(new Error('Sem conexão')); }
 }
 
 function ouvirFirebase(path, cb){
@@ -227,6 +237,16 @@ Rede.ler = function(path, cb){
   if (Rede.modo === 'firebase') return req('GET', path, undefined, cb);
   setTimeout(function(){ if (cb) cb(null, copiar(lerLocalCaminho(path))); }, 0);
 };
+// Lê tentando de novo algumas vezes se a internet oscilar (cb é chamado uma vez só, no fim)
+Rede.lerInsistindo = function(path, cb, tentativas){
+  var resta = tentativas || 3;
+  (function tentar(){
+    Rede.ler(path, function(err, v){
+      if (!err || --resta <= 0){ if (cb) cb(err, v); return; }
+      setTimeout(tentar, 1500);
+    });
+  })();
+};
 Rede.gravar = function(path, valor, cb){        // substitui
   if (Rede.modo === 'firebase') return req('PUT', path, valor, cb);
   gravarLocalCaminho(path, resolverTS(copiar(valor)));
@@ -271,14 +291,15 @@ Rede.novaSala = function(dados, cb){
 // Mede a diferença entre o relógio deste aparelho e o do servidor (em ms).
 // Assim o telão e os iPads mostram o mesmo cronômetro, mesmo com relógios diferentes.
 Rede.offset = 0;
+Rede.relogioMedido = false;   // true depois que a diferença de relógio foi medida com sucesso
 Rede.medirRelogio = function(caminho, cb){
-  if (Rede.modo !== 'firebase'){ Rede.offset = 0; if (cb) cb(0); return; }
+  if (Rede.modo !== 'firebase'){ Rede.offset = 0; Rede.relogioMedido = true; if (cb) cb(0); return; }
   var t0 = Date.now();
   req('PUT', caminho, Rede.TS, function(err, v){
     if (err){ if (cb) cb(Rede.offset); return; }
     var terminar = function(valor){
       var t1 = Date.now();
-      if (typeof valor === 'number') Rede.offset = valor - Math.round((t0 + t1) / 2);
+      if (typeof valor === 'number'){ Rede.offset = valor - Math.round((t0 + t1) / 2); Rede.relogioMedido = true; }
       if (cb) cb(Rede.offset);
     };
     if (typeof v === 'number') terminar(v);
