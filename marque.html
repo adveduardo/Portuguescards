@@ -44,6 +44,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div id="barraEquipes" class="barraEquipes"></div>
   <div class="dica" id="contadorMq" style="text-align:center"></div>
   <div id="perguntaMq"></div>
@@ -59,7 +60,7 @@
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -67,7 +68,7 @@
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
-let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, tentativas = 0, resolvido = false;
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, tentativas = 0, resolvido = false, listaRod = [], navR = null;
 
 const limpo = t => String(t).replace(/\s+/g, ' ').trim().toLowerCase();
 // divide o texto em parágrafos e frases
@@ -105,11 +106,13 @@ function comecar(){
   total = fila.length; n = 0;
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
   AV.mostrarTela('tJogo');
-  proxima();
+  listaRod = fila.slice();
+  navR = AV.rodadas({lugar: $('navLugar'), total: listaRod.length, placar, btnProxima: $('btnProxima'), btnPuladas: $('btnPuladas'),
+    mostrar: i => { fila = listaRod.slice(i); n = i; proxima(); }});
+  navR.ir(0);
 }
 function proxima(){
   if (!fila.length) return fim();
-  if (n > 0) placar.proxima();
   atual = fila.shift(); n++; tentativas = 0; resolvido = false;
   $('contadorMq').textContent = `${n} de ${total}`;
   $('perguntaMq').textContent = placar.prefixo() + '❓ ' + atual.q.pergunta;
@@ -141,9 +144,9 @@ function tocar(s){
   }
 }
 function terminarPergunta(){ $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado'; }
-function fim(){ placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+function fim(){ if (navR) navR.noFim(); placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
 $('btnComecar').onclick = comecar;
-$('btnProxima').onclick = proxima;
+$('btnProxima').onclick = () => navR.ir(navR.idx + 1, true);
 $('btnOuvir').onclick = () => atual && AV.falar(atual.q.pergunta);
 $('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');

@@ -50,6 +50,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div id="barraEquipes" class="barraEquipes"></div>
   <div id="passoAn"></div>
   <div id="perguntaAn"></div>
@@ -68,7 +69,7 @@
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -86,7 +87,7 @@ const TIPOS = {
   voc:  {nome: 'Vocativo', cor: '#00838f'},       pv:   {nome: 'Predicado', cor: '#34495e'}
 };
 const limpar = t => String(t).toLowerCase().replace(/[.,!?;:"“”()…—]/g, '').trim();
-let resolvidos = [], dados = null, fila = [], oracao = null, passo = 0, tokens = [], sel = new Set(), tentativas = 0, resolvido = false, placar = null, total = 0, feitas = 0, pontosMax = 0;
+let resolvidos = [], dados = null, fila = [], oracao = null, passo = 0, tokens = [], sel = new Set(), tentativas = 0, resolvido = false, placar = null, total = 0, feitas = 0, pontosMax = 0, listaRod = [], navR = null;
 
 function indicesDe(toks, resposta){
   const limpos = toks.map(limpar), partes = (Array.isArray(resposta) ? resposta : [resposta]).map(p => String(p).split(/\s+/).map(limpar).filter(Boolean));
@@ -132,7 +133,10 @@ function comecar(){
   total = fila.length; feitas = 0; pontosMax = fila.reduce((s, o) => s + o.passos.length * 2, 0);
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
   AV.mostrarTela('tJogo');
-  proximaOracao();
+  listaRod = fila.slice();
+  navR = AV.rodadas({lugar: $('navLugar'), total: listaRod.length, placar, girarVez: false, btnPuladas: $('btnPuladas'),
+    mostrar: i => { fila = listaRod.slice(i); feitas = i; proximaOracao(); }});
+  navR.ir(0);
 }
 function proximaOracao(){
   if (!fila.length) return fim();
@@ -198,14 +202,14 @@ function terminarPasso(){
   $('btnConferir').hidden = true; $('btnLimpar').hidden = true; $('btnProximo').hidden = false;
   const ultimo = passo + 1 >= oracao.passos.length;
   $('btnProximo').textContent = !ultimo ? '➡️ Próximo passo' : (fila.length ? '🔬 Próxima oração' : '🏆 Ver resultado');
-  if (ultimo){ $('perguntaAn').textContent = '🔬 Análise completa!'; AV.confete(); }
+  if (ultimo){ $('perguntaAn').textContent = '🔬 Análise completa!'; AV.confete(); if (navR) navR.marcarFeito(); }
 }
 $('btnProximo').onclick = () => {
   placar.proxima();
   if (passo + 1 < oracao.passos.length){ passo++; mostrarPasso(); }
-  else proximaOracao();
+  else navR.ir(navR.idx + 1, true);
 };
-function fim(){ placar.ranking($('ranking'), pontosMax); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+function fim(){ if (navR) navR.noFim(); placar.ranking($('ranking'), pontosMax); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
 $('btnComecar').onclick = comecar;
 $('btnConferir').onclick = conferir;
 $('btnLimpar').onclick = () => { sel = new Set(); desenharFrase(); };

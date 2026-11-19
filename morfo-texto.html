@@ -47,6 +47,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div class="barraEquipes" id="barraEquipes"></div>
   <div id="contador"></div>
   <div id="instrucao"></div>
@@ -63,7 +64,7 @@
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -72,7 +73,7 @@
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
 const CORES = ['#e74c3c', '#2f80ed', '#f39c12', '#27ae60'];
-let textos = null, instrucaoTexto = '', fila = [], atual = null, n = 0, total = 0, placar = null, ativa = null;
+let textos = null, instrucaoTexto = '', fila = [], atual = null, n = 0, total = 0, placar = null, ativa = null, listaRod = [], navR = null;
 
 // "texto [repetição|certa|errada|errada] texto" -> partes
 function analisar(t){
@@ -102,7 +103,10 @@ function comecar(){
   AV.som = $('chkSom').checked;
   fila = M.embaralhar(textos); total = fila.length; n = 0;
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
-  AV.mostrarTela('tJogo'); proxima();
+  AV.mostrarTela('tJogo'); listaRod = fila.slice();
+  navR = AV.rodadas({lugar: $('navLugar'), total: listaRod.length, placar, btnProxima: $('btnProxima'), btnPuladas: $('btnPuladas'),
+    mostrar: i => { fila = listaRod.slice(i); n = i; proxima(); }});
+  navR.ir(0);
 }
 function proxima(){
   if (!fila.length) return fim();
@@ -148,10 +152,10 @@ function terminou(){
   if (AV.som) setTimeout(() => AV.falar(textoFinal()), 600);
   $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próximo texto' : '🏆 Ver resultado';
 }
-function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete(); }
+function fim(){ if (navR) navR.noFim(); AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete(); }
 $('btnComecar').onclick = comecar;
 $('btnOuvir').onclick = () => atual && AV.falar(textoFinal());
-$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnProxima').onclick = () => navR.ir(navR.idx + 1, true);
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
 </script>

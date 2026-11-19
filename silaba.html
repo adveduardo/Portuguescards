@@ -47,6 +47,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div id="barraEquipes" class="barraEquipes"></div>
   <div class="dica" id="contadorSl" style="text-align:center"></div>
   <div id="perguntaSl"></div>
@@ -63,7 +64,7 @@
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -72,7 +73,7 @@
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
 const CORES = ['#e74c3c', '#2f80ed', '#27ae60', '#e67e22'];
-let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, etapa = 'tonica', erros = 0;
+let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, etapa = 'tonica', erros = 0, listaRod = [], navR = null;
 
 function classeAuto(p){
   if (p.silabas.length === 1) return 'Monossílabo tônico';
@@ -102,11 +103,13 @@ function comecar(){
   fila = M.embaralhar(dados.palavras); const q = +$('selQtd').value; if (q) fila = fila.slice(0, q);
   total = fila.length; n = 0;
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
-  AV.mostrarTela('tJogo'); proxima();
+  AV.mostrarTela('tJogo'); listaRod = fila.slice();
+  navR = AV.rodadas({lugar: $('navLugar'), total: listaRod.length, placar, btnProxima: $('btnProxima'), btnPuladas: $('btnPuladas'),
+    mostrar: i => { fila = listaRod.slice(i); n = i; proxima(); }});
+  navR.ir(0);
 }
 function proxima(){
   if (!fila.length) return fim();
-  if (n > 0) placar.proxima();
   atual = fila.shift(); n++; etapa = 'tonica'; erros = 0;
   $('contadorSl').textContent = `${n} de ${total}`;
   $('perguntaSl').textContent = placar.prefixo() + '👆 Toquem na sílaba mais forte (tônica)';
@@ -149,9 +152,9 @@ function classificar(b){
     $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
   } else { erros++; b.classList.add('nao'); AV.erro(); $('explicaSl').textContent = '❌ Contem as sílabas de trás para a frente: última, penúltima, antepenúltima…'; }
 }
-function fim(){ placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+function fim(){ if (navR) navR.noFim(); placar.ranking($('ranking'), total * 2); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
 $('btnComecar').onclick = comecar;
-$('btnProxima').onclick = proxima;
+$('btnProxima').onclick = () => navR.ir(navR.idx + 1, true);
 $('btnOuvir').onclick = () => atual && AV.falar(atual.palavra);
 $('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');

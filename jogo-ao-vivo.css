@@ -82,4 +82,5 @@ button.vermelho{background:var(--vermelho);color:#fff;font-size:1.3rem}
 .avPonto.ok{background:#2fb36d}
 .avPonto.erro{background:#ef5350}
 .avPonto.pulou{background:#ffd54a;border-color:#e6b800}
+.avRefazer{text-align:center;background:#fff8d6;border:1px solid #f0d77a;border-radius:12px;padding:6px 12px;margin:0 auto 6px;max-width:720px;font-weight:bold;font-size:.95rem}
 @media (max-width:600px){ .avNav .txt{display:none} }

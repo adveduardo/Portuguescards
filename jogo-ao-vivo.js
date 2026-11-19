@@ -53,7 +53,7 @@ AV.barraNavegacao = op => {
   caixa.innerHTML = '<div class="avNav"><button type="button" class="avNavVoltar" title="Voltar (seta ←)">⏮️ <span class="txt">Voltar</span></button>' +
     '<div class="avMapa" aria-label="Toque num número para ir direto"></div>' +
     '<button type="button" class="avNavPular" title="Pular; dá para voltar depois (seta →)">⏭️ <span class="txt">Pular</span></button><span class="avNavSom"></span></div>' +
-    '<div class="avLegenda">' + (op.legenda ? AV.esc(op.legenda) : 'Toque num número para ir direto · <i class="avPonto ok"></i> acertou · <i class="avPonto erro"></i> errou · <i class="avPonto pulou"></i> pulada (dá para voltar)') + '</div>';
+    '<div class="avLegenda">' + (op.legendaHtml || (op.legenda ? AV.esc(op.legenda) : 'Toque num número para ir direto · <i class="avPonto ok"></i> acertou · <i class="avPonto erro"></i> errou · <i class="avPonto pulou"></i> pulada (dá para voltar)')) + '</div>';
   op.lugar.appendChild(caixa);
   const mapa = caixa.querySelector('.avMapa'), voltar = caixa.querySelector('.avNavVoltar'), pular = caixa.querySelector('.avNavPular');
   AV.botaoSom(caixa.querySelector('.avNavSom'));
@@ -70,6 +70,60 @@ AV.barraNavegacao = op => {
     const at = mapa.querySelector('.atual'); if (at) try { at.scrollIntoView({block: 'nearest', inline: 'center'}); } catch (e) {}
   };
   return {atualizar};
+};
+// Pular e voltar nos jogos de "fila" (o proxima() do jogo tira a próxima rodada da fila).
+// const R = AV.rodadas({lugar, total, mostrar(i), placar, aoAvancar, girarVez, btnProxima, btnPuladas, telaJogo})
+//   mostrar(i): o jogo monta a fila a partir da rodada i e chama o seu proxima() (i = total leva ao fim)
+//   R.ir(i, avancando) · R.idx · R.noFim() · R.valePonto() · R.marcarFeito()
+// A rodada conta como feita quando o botão "Próxima" aparece (ou quando o jogo chama R.marcarFeito()).
+// Rodada já feita pode ser refeita, mas não vale ponto de novo.
+AV.rodadas = op => {
+  const lugar = op.lugar;
+  const r = {idx: 0, total: op.total, iniciado: false, telaJogo: op.telaJogo || 'tJogo', automatico: !!op.btnProxima,
+    est: Array.from({length: op.total}, () => ({feito: false, pulada: false, jaFeito: false}))};
+  lugar._rodadas = r;
+  if (!lugar._nav){
+    lugar._nav = AV.barraNavegacao({lugar, total: () => lugar._rodadas.total, atual: () => lugar._rodadas.idx,
+      irPara: (i, av) => lugar._rodadas.ir(i, av),
+      respondida: () => { const x = lugar._rodadas; return !!x.est[x.idx] && x.est[x.idx].feito; },
+      estado: i => { const e = lugar._rodadas.est[i]; return e.feito ? 'ok' : e.pulada ? 'pulou' : ''; },
+      legendaHtml: 'Toque num número para ir direto · <i class="avPonto ok"></i> feita · <i class="avPonto pulou"></i> pulada (dá para voltar)'});
+    const aviso = document.createElement('div'); aviso.className = 'avRefazer'; aviso.hidden = true;
+    aviso.textContent = '✅ Esta rodada já foi feita: dá para refazer, mas não vale ponto de novo.';
+    lugar.appendChild(aviso); lugar._aviso = aviso;
+    document.addEventListener('keydown', e => {
+      const x = lugar._rodadas, tela = document.getElementById(x.telaJogo);
+      if (!tela || !tela.classList.contains('ativa') || ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); x.ir(x.idx + 1, true); }
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); x.ir(x.idx - 1, false); }
+    });
+  }
+  r.valePonto = () => !r.est[r.idx] || !r.est[r.idx].jaFeito;
+  if (op.placar){ const orig = op.placar.pontuar.bind(op.placar); op.placar.pontuar = (...a) => { if (r.valePonto()) return orig(...a); }; }
+  r.marcarFeito = () => { const e = r.est[r.idx]; if (e){ e.feito = true; e.pulada = false; } lugar._nav.atualizar(); };
+  if (op.btnProxima && !op.btnProxima._observado){
+    op.btnProxima._observado = true;
+    new MutationObserver(() => { const x = lugar._rodadas; if (!op.btnProxima.hidden && x.automatico && x.iniciado) x.marcarFeito(); })
+      .observe(op.btnProxima, {attributes: true, attributeFilter: ['hidden']});
+  }
+  r.ir = (novo, avancando) => {
+    if (novo < 0) return;
+    const e = r.est[r.idx];
+    if (r.iniciado && e && !e.feito && novo !== r.idx) e.pulada = true;
+    if (avancando && r.iniciado){ if (op.placar && op.girarVez !== false) op.placar.proxima(); if (op.aoAvancar) op.aoAvancar(); }
+    if (novo >= r.total){ lugar._aviso.hidden = true; op.mostrar(r.total); return; }
+    r.iniciado = true; r.idx = novo; r.est[novo].jaFeito = r.est[novo].feito;
+    lugar._aviso.hidden = !r.est[novo].jaFeito;
+    op.mostrar(novo);
+    lugar._nav.atualizar();
+  };
+  r.noFim = () => {
+    const b = op.btnPuladas; if (!b) return;
+    const faltam = r.est.filter(e => !e.feito).length;
+    b.hidden = !faltam; b.textContent = `↩️ Voltar às não respondidas (${faltam})`;
+    b.onclick = () => { const p = r.est.findIndex(e => !e.feito); if (p < 0) return; AV.mostrarTela(r.telaJogo); r.ir(p, false); };
+  };
+  return r;
 };
 // a caixinha "Sons e voz" de cada atividade passa a lembrar a última escolha
 const ligarCaixaSom = () => document.querySelectorAll('#chkSom').forEach(c => {
