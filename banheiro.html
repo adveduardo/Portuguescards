@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fila do Banheiro</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#2b2550;background:#f3efff}
+  .palco{min-height:100vh;padding:10px 12px 80px;
+    background:#f6f1ff;
+    background-image:radial-gradient(circle at 8% 18%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 16%),
+      radial-gradient(circle at 88% 10%,rgba(255,205,226,.75) 0,rgba(255,205,226,0) 22%),
+      radial-gradient(circle at 75% 88%,rgba(190,236,255,.85) 0,rgba(190,236,255,0) 26%),
+      radial-gradient(circle at 20% 92%,rgba(255,240,180,.8) 0,rgba(255,240,180,0) 20%),
+      linear-gradient(160deg,#f7f0ff,#e8f6ff)}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 0 4px}
+  h1{margin:0 auto 0 0;font-size:30px;letter-spacing:.5px;color:#4c2fa8;text-shadow:0 3px 0 rgba(76,47,168,.15)}
+  h1 small{display:block;font-size:14px;font-weight:normal;color:#6b6290;letter-spacing:0;text-shadow:none}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#2b2550;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(43,37,80,.15)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(43,37,80,.15)}
+  button[disabled]{opacity:.45;cursor:default}
+  .faixa{display:none;background:#fff3c4;border:3px dashed #f5b700;border-radius:16px;padding:10px 14px;margin:8px auto;max-width:900px;text-align:center;font-size:20px;font-weight:bold;color:#7a5b00}
+  .portas{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:6px -8px 0}
+  .cartao{-webkit-flex:1 1 300px;flex:1 1 300px;max-width:440px;margin:8px;background:#fff;border-radius:26px;padding:12px 12px 14px;text-align:center;position:relative;
+    box-shadow:0 6px 0 rgba(43,37,80,.07),0 12px 26px rgba(43,37,80,.10)}
+  .cab{font-size:24px;font-weight:bold;margin:2px 0 6px}
+  .porta{position:relative;width:200px;max-width:100%;height:225px;margin:4px auto 8px;border:7px solid #888;border-bottom-width:9px;border-radius:100px 100px 12px 12px;
+    background:-webkit-linear-gradient(top,#fffaf2,#ffe6c4);background:linear-gradient(to bottom,#fffaf2,#ffe6c4);overflow:hidden}
+  .porta:before,.porta:after{content:"";position:absolute;left:22%;right:22%;border:3px solid rgba(160,110,40,.18);border-radius:10px}
+  .porta:before{top:30%;height:26%}
+  .porta:after{top:62%;height:26%}
+  .trinco{position:absolute;top:14px;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:2;background:#2b2550;border-radius:20px;padding:4px;width:120px}
+  .trinco span{display:block;border-radius:16px;color:#fff;font-weight:bold;font-size:15px;letter-spacing:1px;padding:4px 0}
+  .livre .trinco span{background:#22b573}
+  .ocupada .trinco span{background:#ef4444}
+  .macaneta{position:absolute;right:16px;top:118px;width:16px;height:16px;border-radius:50%;background:#f2b84b;box-shadow:inset -2px -2px 0 rgba(0,0,0,.18);z-index:2}
+  .dentro{position:absolute;left:0;right:0;top:58px;z-index:1;padding:0 26px}
+  .dentro.vazio{top:118px;color:#b39b77;font-size:15px;font-weight:bold}
+  .bichao{font-size:66px;line-height:1.1}
+  .quem{font-size:19px;font-weight:bold;background:rgba(255,255,255,.85);border-radius:12px;padding:3px 6px;display:inline-block;max-width:100%;word-wrap:break-word}
+  .pula{display:inline-block;-webkit-animation:pula 1.6s ease-in-out infinite;animation:pula 1.6s ease-in-out infinite}
+  @-webkit-keyframes pula{0%,100%{-webkit-transform:translateY(0)}50%{-webkit-transform:translateY(-8px)}}
+  @keyframes pula{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .tempo{font-size:24px;font-weight:bold;margin:2px 0 4px}
+  .tempo small{font-size:14px;color:#7a7296;font-weight:normal}
+  .trilho{height:12px;background:#ece8f6;border-radius:8px;overflow:hidden;margin:0 14px 8px}
+  .barra{height:100%;width:0;border-radius:8px;-webkit-transition:width .8s linear;transition:width .8s linear}
+  .quase .barra{background:#f5b700 !important}
+  .passou .barra{background:#ef4444 !important}
+  .passouMsg{display:none;color:#c0262d;font-weight:bold;font-size:16px;margin:0 0 6px}
+  .passou .passouMsg{display:block}
+  .passou .porta{border-color:#ef4444 !important;-webkit-animation:balanca 2.4s ease-in-out infinite;animation:balanca 2.4s ease-in-out infinite}
+  @-webkit-keyframes balanca{0%,80%,100%{-webkit-transform:rotate(0)}85%{-webkit-transform:rotate(-3deg)}90%{-webkit-transform:rotate(3deg)}95%{-webkit-transform:rotate(-2deg)}}
+  @keyframes balanca{0%,80%,100%{transform:rotate(0)}85%{transform:rotate(-3deg)}90%{transform:rotate(3deg)}95%{transform:rotate(-2deg)}}
+  .btVoltei{background:#22b573;color:#fff;font-size:22px;padding:12px 22px;border-radius:18px;box-shadow:0 4px 0 #168a56;margin:2px 0 8px}
+  .filaTit{font-size:16px;color:#6b6290;margin:6px 0 4px;text-align:left;padding-left:4px}
+  .fila{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;min-height:44px;-webkit-align-items:center;align-items:center;background:#f7f5fd;border-radius:16px;padding:4px;margin:0 0 10px}
+  .pessoa{display:-webkit-inline-box;display:-webkit-inline-flex;display:inline-flex;-webkit-align-items:center;align-items:center;background:#fff;border:2px solid #e3def3;border-radius:999px;padding:3px 4px 3px 3px;margin:3px;font-weight:bold;font-size:15px}
+  .pessoa.novo{-webkit-animation:entra .45s ease-out both;animation:entra .45s ease-out both}
+  .pessoa.prox{border-color:#f5b700;background:#fffbea}
+  .pessoa .pos{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:#ece8f6;color:#4c2fa8;font-size:13px;margin-right:4px;text-align:center}
+  .pessoa.prox .pos{background:#f5b700;color:#fff}
+  .pessoa .bicho{font-size:20px;margin-right:3px}
+  .pessoa .tira{background:transparent;box-shadow:none;color:#b0a8c8;font-size:13px;padding:2px 6px;margin:0 0 0 2px}
+  @-webkit-keyframes entra{from{opacity:0;-webkit-transform:scale(.5)}to{opacity:1;-webkit-transform:scale(1)}}
+  @keyframes entra{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+  .semFila{color:#a39cbd;font-size:15px;margin:0 8px}
+  .btEntrar{color:#fff;font-size:20px;padding:12px 20px;border-radius:18px;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+  .dicaBar{position:fixed;left:50%;bottom:10px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#fff;border-radius:999px;padding:8px 18px;font-size:17px;
+    box-shadow:0 4px 14px rgba(43,37,80,.15);max-width:94%;text-align:center;-webkit-transition:opacity .5s;transition:opacity .5s;z-index:5}
+  .dicaBar b{color:#22a06b}
+  .fundoEscuro{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(32,24,70,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .janela{background:#fff;max-width:760px;margin:24px auto;border-radius:24px;padding:16px;position:relative}
+  .janela h2{margin:0 0 8px;font-size:24px;color:#4c2fa8;padding-right:90px}
+  .fechar{position:absolute;right:12px;top:12px}
+  .nomes{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:6px -4px}
+  .nomeBt{-webkit-flex:1 1 150px;flex:1 1 150px;margin:4px;padding:10px 8px;font-size:17px;border:3px solid #e3def3;box-shadow:0 3px 0 #e3def3;border-radius:16px;text-align:left;
+    display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+  .nomeBt .bicho{font-size:28px;margin-right:6px}
+  .nomeBt small{display:block;font-size:12px;color:#a33;font-weight:normal}
+  .nomeBt.enche{visibility:hidden;height:0;padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;border-top-width:0;border-bottom-width:0}
+  .outro{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-top:8px}
+  .outro input{-webkit-flex:1;flex:1;font:inherit;font-size:17px;padding:9px 10px;border:2px solid #d8d2ee;border-radius:12px;min-width:0}
+  .dica{font-size:14px;color:#6b6290;margin:4px 0 8px}
+  .linha{margin:10px 0;font-size:17px}
+  .linha select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid #d8d2ee;border-radius:10px;background:#fff;max-width:100%}
+  .linha label{display:inline-block;margin:3px 10px 3px 0}
+  table{border-collapse:collapse;width:100%;margin:6px 0}
+  th,td{border:1px solid #e6e1f3;padding:6px 8px;text-align:left;font-size:15px}
+  th{background:#f5f2fc}
+  .anuncio{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(32,24,70,.6);display:none;z-index:30;text-align:center;padding-top:8vh}
+  .anuncio .caixa{display:inline-block;background:#fff;border-radius:34px;padding:22px 34px 26px;max-width:92%;-webkit-animation:surge .5s cubic-bezier(.2,1.6,.4,1) both;animation:surge .5s cubic-bezier(.2,1.6,.4,1) both;border:8px solid #f5b700}
+  .anuncio .ticket{font-size:20px;font-weight:bold;color:#b07d00;letter-spacing:1px}
+  .anuncio .grande{font-size:110px;line-height:1.1}
+  .anuncio .vez{font-size:42px;font-weight:bold;color:#4c2fa8;margin:4px 0}
+  .anuncio .onde{font-size:24px}
+  .anuncio .volta{font-size:18px;color:#6b6290;margin-top:6px}
+  @-webkit-keyframes surge{from{opacity:0;-webkit-transform:scale(.4) rotate(-6deg)}to{opacity:1;-webkit-transform:scale(1) rotate(0)}}
+  @keyframes surge{from{opacity:0;transform:scale(.4) rotate(-6deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+  #aviso{position:fixed;left:50%;top:14px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:40;background:#2b2550;color:#fff;padding:10px 18px;border-radius:14px;font-size:17px;display:none;max-width:92%;text-align:center}
+  #impressao{display:none}
+  @media (max-width:600px){ h1{font-size:24px} .cab{font-size:21px} .anuncio .grande{font-size:80px} .anuncio .vez{font-size:32px} .dicaBar{font-size:14px} }
+  @media print{
+    body,.palco{background:#fff !important}
+    .palco,.fundoEscuro,.anuncio,#aviso,.dicaBar{display:none !important}
+    #impressao{display:block;font-family:Arial,Helvetica,sans-serif;color:#000}
+    #impressao td,#impressao th{border:1px solid #000}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🚻 Fila do Banheiro <small>Toque em ➕ para entrar na fila. Quando voltar, toque em ✅ Voltei!</small></h1>
+    <button type="button" id="btPausa" title="Pausar a fila durante uma explicação ou prova">⏸️ Pausar a fila</button>
+    <button type="button" id="btRegistro" title="Quem foi, a que horas e quanto tempo ficou">📋 Registro</button>
+    <button type="button" id="btAjustes">⚙️ Ajustes</button>
+    <button type="button" id="btSom" title="Ligar ou desligar o som">🔊</button>
+  </div>
+  <div class="faixa" id="faixaPausa">⏸️ Fila pausada: agora é hora de prestar atenção na aula 😉</div>
+  <div class="portas" id="portas"></div>
+</div>
+<div class="dicaBar" id="dica"></div>
+
+<div class="fundoEscuro" id="janEscolha">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janEscolha">✖ Fechar</button>
+    <h2 id="escTitulo"></h2>
+    <div class="dica" id="escFonte"></div>
+    <div class="nomes" id="escNomes"></div>
+    <div class="outro"><input type="text" id="escOutro" maxlength="40" placeholder="✏️ Outro nome"><button type="button" id="escOk">OK</button></div>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janAjustes">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janAjustes">✖ Fechar</button>
+    <h2>⚙️ Ajustes da fila</h2>
+    <div class="linha"><b>Banheiros:</b><br>
+      <label><input type="radio" name="modo" value="dois"> 🚺 Meninas e 🚹 Meninos (duas filas)</label>
+      <label><input type="radio" name="modo" value="um"> 🚻 Um banheiro para todos</label></div>
+    <div class="linha"><label><input type="checkbox" id="cfgAgua"> 💧 Fila do bebedouro também</label></div>
+    <div class="linha"><b>Tempo combinado:</b> <select id="cfgMinutos"></select></div>
+    <div class="linha"><b>Cada aluno pode ir:</b> <select id="cfgLimite"><option value="0">quantas vezes precisar</option><option value="1">1 vez por aula</option><option value="2">2 vezes por aula</option><option value="3">3 vezes por aula</option></select>
+      <div class="dica">O bebedouro conta separado do banheiro.</div></div>
+    <div class="linha"><b>Lista de nomes:</b> <select id="cfgFonte"></select>
+      <div class="dica">A lista vem da 📋 Chamada ou do 🎲 Sorteador de Alunos (Ferramentas da sala). Os nomes ficam só neste aparelho.</div></div>
+    <div class="linha"><label><input type="checkbox" id="cfgEsconder"> Não mostrar quem faltou hoje (marcado na Chamada ou no Sorteador)</label></div>
+    <div class="linha"><button type="button" id="btNovaAula">🔄 Começar nova aula</button> <span class="dica">Esvazia as filas e zera a contagem de idas. O registro continua guardado.</span></div>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janRegistro">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janRegistro">✖ Fechar</button>
+    <h2>📋 Registro de hoje</h2>
+    <div class="dica" id="regResumo"></div>
+    <div id="regTabela"></div>
+    <div><button type="button" id="btImprimir">🖨️ Imprimir</button></div>
+  </div>
+</div>
+
+<div class="anuncio" id="anuncio"><div class="caixa" id="anuncioCaixa"></div></div>
+<div id="aviso"></div>
+<div id="impressao"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CHAVE = 'banheiro_estado';
+  var PORTAS = {
+    meninas: {nome: 'Meninas', titulo: 'banheiro das meninas', icone: '🚺', cor: '#8b5cf6'},
+    meninos: {nome: 'Meninos', titulo: 'banheiro dos meninos', icone: '🚹', cor: '#0d9488'},
+    todos:   {nome: 'Banheiro', titulo: 'banheiro', icone: '🚻', cor: '#f08c00'},
+    agua:    {nome: 'Bebedouro', titulo: 'bebedouro', icone: '💧', cor: '#2f80ed'}
+  };
+  var ANIMAIS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐤', '🐙', '🐢', '🐝', '🐞', '🐬', '🐳', '🐠', '🦀', '🐌', '🦄', '🐲', '🐴', '🐑', '🐘', '🐿️'];
+  var DICAS = ['lave bem as mãos com sabão. 👐', 'dê a descarga e deixe tudo limpinho. 🚽', 'vá e volte sem passear pela escola. 🚶', 'feche bem a torneira. 💧',
+    'jogue o papel no lixo. 🗑️', 'fale baixinho no corredor: as outras turmas estão em aula. 🙊', 'combinado é combinado: volte no tempo certo. ⏱️', 'esperar a vez também é respeitar os colegas. 🙋'];
+  var somLigado = true, audio = null, escolhaPorta = null, timerAnuncio = null, nomesCache = null, jaNaFila = {};
+  try { somLigado = localStorage.getItem('painel_som') !== '0'; } catch (e) {}
+
+  // ---------- utilidades ----------
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function aparar(s){ return String(s == null ? '' : s).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
+  function lerJSON(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+  function hoje(){ var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function mmss(ms){ var s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+  function hora(ms){ var d = new Date(ms); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function primeiro(n){ return String(n).split(' ')[0]; }
+  function hash(s){ var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
+  function avisar(t){ var a = $('aviso'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 2800); }
+  function mostrar(id){ $(id).style.display = 'block'; }
+  function esconder(id){ $(id).style.display = 'none'; }
+
+  // ---------- som e voz (respeita o botão de som do Painel) ----------
+  function tom(freq, dur, quando){
+    if (!somLigado) return;
+    try {
+      var C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+      audio = audio || new C();
+      var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + (quando || 0), vol = window.PAINEL_CALMO ? 0.06 : 0.16;
+      o.type = 'sine'; o.frequency.value = freq; o.connect(g); g.connect(audio.destination);
+      g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      o.start(t0); o.stop(t0 + dur + 0.05);
+    } catch (e) {}
+  }
+  function plim(){ tom(784, 0.18); tom(1047, 0.32, 0.16); }
+  function falar(t){
+    if (!somLigado || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    try { var u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = 1; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {}
+  }
+  function pintarSom(){ $('btSom').innerHTML = somLigado ? '🔊' : '🔇'; $('btSom').title = somLigado ? 'Som ligado (toque para desligar)' : 'Som desligado (toque para ligar)'; }
+  $('btSom').onclick = function(){
+    somLigado = !somLigado;
+    try { localStorage.setItem('painel_som', somLigado ? '1' : '0'); } catch (e) {}
+    if (!somLigado && window.speechSynthesis) try { window.speechSynthesis.cancel(); } catch (e) {}
+    pintarSom(); if (somLigado) plim();
+  };
+
+  // ---------- estado ----------
+  function padrao(){ return {config: {modo: 'dois', agua: false, minutos: 5, limite: 0, fonte: 'auto', esconder: true}, portas: {}, contagem: {}, registro: [], dia: hoje(), pausada: false}; }
+  function carregar(){
+    var e = lerJSON(CHAVE), p = padrao(), k;
+    if (!e || !e.config) e = p;
+    for (k in p.config) if (!(k in e.config)) e.config[k] = p.config[k];
+    e.portas = e.portas || {}; e.contagem = e.contagem || {}; e.registro = e.registro instanceof Array ? e.registro : [];
+    if (e.dia !== hoje()){ e.portas = {}; e.contagem = {}; e.pausada = false; e.dia = hoje(); }   // dia novo: filas vazias
+    var limite = Date.now() - 7 * 864e5;
+    e.registro = e.registro.filter(function(r){ return r && r.s >= limite; });   // guarda só a última semana
+    return e;
+  }
+  var est = carregar();
+  function salvar(){ try { localStorage.setItem(CHAVE, JSON.stringify(est)); } catch (e) {} }
+  function porta(id){ return est.portas[id] || (est.portas[id] = {ocupante: null, fila: []}); }
+  function ativas(){ var l = est.config.modo === 'um' ? ['todos'] : ['meninas', 'meninos']; if (est.config.agua) l.push('agua'); return l; }
+  function tipoDe(id){ return id === 'agua' ? 'agua' : 'banheiro'; }
+  function contaDe(nome, id){ return est.contagem[nome + '|' + tipoDe(id)] || 0; }
+  function ondeEsta(nome){
+    for (var id in est.portas){
+      var p = est.portas[id];
+      if (p.ocupante && p.ocupante.nome === nome) return {porta: id, dentro: true};
+      if (p.fila.indexOf(nome) >= 0) return {porta: id, dentro: false};
+    }
+    return null;
+  }
+
+  // ---------- nomes da turma (Chamada ou Sorteador) ----------
+  var PARTICULAS = {de: 1, da: 1, 'do': 1, dos: 1, das: 1, e: 1};
+  function nomeCurto(n){
+    var p = String(n).split(' ');
+    if (p.length <= 2) return n;
+    var out = [p[0]];
+    if (!PARTICULAS[p[1].toLowerCase()]) out.push(p[1]);
+    out.push(p[p.length - 1].charAt(0).toUpperCase() + '.');
+    return out.join(' ');
+  }
+  function listaNomes(){
+    var cfg = est.config, ch = lerJSON('chamada_dados'), pt = lerJSON('painel_turma'), r = {nomes: [], ausentes: {}, rotulo: ''}, i, t = null;
+    var temChamada = ch && ch.turmas instanceof Array && ch.turmas.length;
+    if (temChamada && (cfg.fonte === 'auto' || cfg.fonte.indexOf('chamada:') === 0)){
+      var alvo = cfg.fonte.indexOf('chamada:') === 0 ? cfg.fonte.slice(8) : ch.atual;
+      for (i = 0; i < ch.turmas.length; i++) if (ch.turmas[i].id === alvo) t = ch.turmas[i];
+      t = t || ch.turmas[0];
+      var marcas = (t.chamadas || {})[hoje()] || {};
+      r.nomes = (t.alunos || []).map(function(a){ if (marcas[a.id] === 'F') r.ausentes[a.nome] = 1; return a.nome; });
+      r.rotulo = 'Chamada, ' + t.nome;
+    } else if ((cfg.fonte === 'auto' || cfg.fonte === 'sorteador') && pt && pt.alunos instanceof Array && pt.alunos.length){
+      r.nomes = pt.alunos.slice(); r.rotulo = 'Sorteador' + (pt.turma ? ', ' + pt.turma : '');
+      (pt.ausentes || []).forEach(function(n){ r.ausentes[n] = 1; });
+    }
+    var curtos = {}, quantos = {};
+    r.nomes.forEach(function(n){ var c = nomeCurto(n); curtos[n] = c; quantos[c] = (quantos[c] || 0) + 1; });
+    r.curto = function(n){ var c = curtos[n] || nomeCurto(n); return quantos[c] > 1 ? n : c; };   // nomes curtos iguais: mostra inteiro
+    r.indice = {}; r.nomes.forEach(function(n, k){ r.indice[n] = k; });
+    return r;
+  }
+  function nomes(){ return nomesCache || (nomesCache = listaNomes()); }
+  function curto(n){ return nomes().curto(n); }
+  function bicho(n){ var k = nomes().indice[n]; return ANIMAIS[(k === undefined ? hash(n) : k) % ANIMAIS.length]; }
+
+  // ---------- regras da fila ----------
+  function entrar(id, nome){
+    nome = aparar(nome); if (!nome) return false;
+    if (est.pausada){ avisar('⏸️ A fila está pausada agora.'); return false; }
+    var onde = ondeEsta(nome), lim = +est.config.limite || 0;
+    if (onde){ avisar(esc(curto(nome)) + (onde.dentro ? ' já saiu e ainda não voltou.' : ' já está na fila.')); return false; }
+    if (lim && contaDe(nome, id) >= lim){ avisar(esc(curto(nome)) + ' já foi ' + lim + (lim === 1 ? ' vez' : ' vezes') + ' nesta aula.'); return false; }
+    porta(id).fila.push(nome); salvar();
+    if (!andar(id)){ tom(660, 0.14); avisar(bicho(nome) + ' ' + esc(curto(nome)) + ' entrou na fila. Posição: ' + porta(id).fila.length + '.'); }
+    desenhar(); return true;
+  }
+  function andar(id){
+    var p = porta(id);
+    if (p.ocupante || !p.fila.length) return false;
+    var nome = p.fila.shift(), k = nome + '|' + tipoDe(id);
+    p.ocupante = {nome: nome, desde: Date.now(), avisado: false};
+    est.contagem[k] = (est.contagem[k] || 0) + 1;
+    salvar(); anunciar(id, nome); return true;
+  }
+  function voltou(id){
+    var p = porta(id); if (!p.ocupante) return;
+    var nome = p.ocupante.nome;
+    est.registro.push({n: nome, p: id, s: p.ocupante.desde, v: Date.now()});
+    p.ocupante = null; salvar();
+    if (!andar(id)){ tom(988, 0.12); tom(1319, 0.2, 0.12); avisar('👏 Que bom que voltou, ' + esc(primeiro(nome)) + '!'); }
+    desenhar();
+  }
+  function tirar(id, i){
+    var p = porta(id), nome = p.fila[i]; if (nome === undefined) return;
+    if (!confirm('Tirar ' + curto(nome) + ' da fila?')) return;
+    p.fila.splice(i, 1); salvar(); desenhar();
+  }
+  function encerrarTodos(){
+    for (var id in est.portas){ var p = est.portas[id]; if (p.ocupante) est.registro.push({n: p.ocupante.nome, p: id, s: p.ocupante.desde, v: Date.now()}); }
+  }
+  function anunciar(id, nome){
+    var P = PORTAS[id], agua = id === 'agua';
+    $('anuncioCaixa').innerHTML = '<div class="ticket">🎟️ PASSE ' + (agua ? 'DO BEBEDOURO' : 'DO BANHEIRO') + '</div><div class="grande">' + bicho(nome) + '</div>' +
+      '<div class="vez">Sua vez, ' + esc(primeiro(curto(nome))) + '!</div><div class="onde">Pode ir ' + (agua ? 'beber água' : 'ao ' + P.titulo) + ' ' + P.icone + '</div>' +
+      '<div class="volta">Volte em até ' + est.config.minutos + ' minutos 😉</div>';
+    $('anuncioCaixa').style.borderColor = P.cor;
+    mostrar('anuncio'); plim();
+    setTimeout(function(){ falar(primeiro(nome) + ', sua vez! ' + (agua ? 'Pode ir beber água.' : 'Pode ir ao banheiro.')); }, 450);
+    clearTimeout(timerAnuncio); timerAnuncio = setTimeout(function(){ esconder('anuncio'); }, 4200);
+  }
+  $('anuncio').onclick = function(){ esconder('anuncio'); };
+
+  // ---------- desenho ----------
+  function htmlPorta(id){
+    var P = PORTAS[id], p = porta(id), oc = p.ocupante, h;
+    h = '<div class="cartao" id="cartao-' + id + '" style="border-top:8px solid ' + P.cor + '">' +
+      '<div class="cab" style="color:' + P.cor + '">' + P.icone + ' ' + P.nome + '</div>' +
+      '<div class="porta ' + (oc ? 'ocupada' : 'livre') + '" style="border-color:' + P.cor + '"><div class="trinco"><span>' + (oc ? 'OCUPADO' : 'LIVRE') + '</span></div><div class="macaneta"></div>' +
+      (oc ? '<div class="dentro"><div class="bichao"><span class="pula">' + bicho(oc.nome) + '</span></div><div class="quem">' + esc(curto(oc.nome)) + '</div></div>'
+          : '<div class="dentro vazio">' + (id === 'agua' ? 'Ninguém bebendo água' : 'Ninguém aqui') + '</div>') + '</div>';
+    if (oc){
+      h += '<div class="tempo" id="tempo-' + id + '"></div><div class="trilho"><div class="barra" id="barra-' + id + '" style="background:' + P.cor + '"></div></div>' +
+        '<div class="passouMsg">⏰ Passou do tempo combinado!</div>' +
+        '<button type="button" class="btVoltei" data-acao="voltei" data-porta="' + id + '">✅ Voltei!</button>';
+    }
+    h += '<div class="filaTit">👥 Na fila: <b>' + p.fila.length + '</b></div><div class="fila">';
+    p.fila.forEach(function(n, i){
+      h += '<span class="pessoa' + (i === 0 ? ' prox' : '') + ((jaNaFila[id] || []).indexOf(n) < 0 ? ' novo' : '') + '" title="' + (i === 0 ? 'É o próximo!' : (i + 1) + 'º da fila') + '">' +
+        '<b class="pos">' + (i + 1) + '</b><span class="bicho">' + bicho(n) + '</span>' + esc(curto(n)) +
+        '<button type="button" class="tira" data-acao="tirar" data-porta="' + id + '" data-i="' + i + '" title="Tirar da fila" aria-label="Tirar da fila">✖</button></span>';
+    });
+    if (!p.fila.length) h += '<span class="semFila">Ninguém esperando</span>';
+    h += '</div><button type="button" class="btEntrar" data-acao="entrar" data-porta="' + id + '" style="background:' + P.cor + '"' + (est.pausada ? ' disabled' : '') + '>➕ Entrar na fila</button></div>';
+    return h;
+  }
+  function desenhar(){
+    nomesCache = null;
+    $('portas').innerHTML = ativas().map(htmlPorta).join('');
+    jaNaFila = {}; ativas().forEach(function(id){ jaNaFila[id] = porta(id).fila.slice(); });   // só quem acabou de chegar faz a animação
+    $('faixaPausa').style.display = est.pausada ? 'block' : 'none';
+    $('btPausa').innerHTML = est.pausada ? '▶️ Liberar a fila' : '⏸️ Pausar a fila';
+    tique();
+  }
+  function tique(){
+    var lim = est.config.minutos * 60000, agora = Date.now(), l = ativas();
+    for (var i = 0; i < l.length; i++){
+      var id = l[i], p = porta(id), card = $('cartao-' + id);
+      if (!p.ocupante || !card) continue;
+      var t = agora - p.ocupante.desde;
+      $('tempo-' + id).innerHTML = '⏱️ ' + mmss(t) + ' <small>de ' + mmss(lim) + '</small>';
+      $('barra-' + id).style.width = Math.min(100, t / lim * 100) + '%';
+      card.className = 'cartao' + (t >= lim ? ' passou' : t >= lim * 0.75 ? ' quase' : '');
+      if (t >= lim && !p.ocupante.avisado){
+        p.ocupante.avisado = true; salvar();
+        tom(659, 0.2); tom(523, 0.35, 0.22);
+        avisar('⏰ ' + esc(curto(p.ocupante.nome)) + ' passou do tempo combinado.');
+      }
+    }
+  }
+  setInterval(tique, 1000);
+
+  $('portas').onclick = function(e){
+    var el = e.target; while (el && el !== this && !el.getAttribute('data-acao')) el = el.parentNode;
+    if (!el || el === this || el.disabled) return;
+    var acao = el.getAttribute('data-acao'), id = el.getAttribute('data-porta');
+    if (acao === 'entrar') abrirEscolha(id);
+    else if (acao === 'voltei') voltou(id);
+    else if (acao === 'tirar') tirar(id, +el.getAttribute('data-i'));
+  };
+
+  // ---------- escolher o nome ----------
+  function abrirEscolha(id){
+    if (est.pausada){ avisar('⏸️ A fila está pausada agora.'); return; }
+    escolhaPorta = id;
+    var P = PORTAS[id], L = nomes(), lim = +est.config.limite || 0, h = '';
+    $('escTitulo').innerHTML = P.icone + ' Quem vai ' + (id === 'agua' ? 'ao bebedouro' : 'ao ' + P.titulo) + '?';
+    L.nomes.forEach(function(n){
+      if (est.config.esconder && L.ausentes[n]) return;
+      var onde = ondeEsta(n), cheio = lim && contaDe(n, id) >= lim;
+      var rot = onde ? (onde.dentro ? 'saiu e não voltou' : 'já está na fila') : cheio ? 'já foi ' + lim + 'x' : '';
+      h += '<button type="button" class="nomeBt" data-nome="' + esc(n) + '"' + (onde || cheio ? ' disabled' : '') + '><span class="bicho">' + bicho(n) + '</span><span>' + esc(L.curto(n)) + (rot ? '<small>' + rot + '</small>' : '') + '</span></button>';
+    });
+    if (h) h += new Array(6).join('<span class="nomeBt enche"></span>');
+    else h = '<p class="dica">Ainda não há lista da turma neste aparelho. Escreva o nome abaixo ou cadastre a turma na 📋 Chamada (Ferramentas da sala) para só tocar no nome.</p>';
+    $('escNomes').innerHTML = h;
+    $('escFonte').innerHTML = L.rotulo ? 'Lista: ' + esc(L.rotulo) + (est.config.esconder && Object.keys(L.ausentes).length ? ' (sem quem faltou hoje)' : '') : '';
+    $('escOutro').value = '';
+    mostrar('janEscolha');
+  }
+  $('escNomes').onclick = function(e){
+    var el = e.target; while (el && el !== this && !el.getAttribute('data-nome')) el = el.parentNode;
+    if (!el || el === this || el.disabled) return;
+    if (entrar(escolhaPorta, el.getAttribute('data-nome'))) esconder('janEscolha');
+  };
+  function outroNome(){ var n = aparar($('escOutro').value); if (!n){ $('escOutro').focus(); return; } if (entrar(escolhaPorta, n)) esconder('janEscolha'); }
+  $('escOk').onclick = outroNome;
+  $('escOutro').onkeydown = function(e){ if (e.keyCode === 13) outroNome(); };
+
+  // ---------- janelas ----------
+  var fechos = document.querySelectorAll('[data-fechar]');
+  for (var f = 0; f < fechos.length; f++) fechos[f].onclick = function(){ esconder(this.getAttribute('data-fechar')); };
+  var fundos = document.querySelectorAll('.fundoEscuro');
+  for (f = 0; f < fundos.length; f++) fundos[f].onclick = function(e){ if (e.target === this) esconder(this.id); };
+  document.addEventListener('keydown', function(e){
+    if (e.keyCode !== 27) return;
+    esconder('anuncio'); for (var i = 0; i < fundos.length; i++) esconder(fundos[i].id);
+  });
+
+  $('btPausa').onclick = function(){
+    est.pausada = !est.pausada; salvar(); desenhar();
+    avisar(est.pausada ? '⏸️ Fila pausada. Quem já saiu ainda pode voltar.' : '▶️ Fila liberada!');
+  };
+
+  // ---------- ajustes ----------
+  function abrirAjustes(){
+    var c = est.config, ch = lerJSON('chamada_dados'), pt = lerJSON('painel_turma'), h = '<option value="auto">automático (Chamada ou Sorteador)</option>', i;
+    var rs = document.getElementsByName('modo'); for (i = 0; i < rs.length; i++) rs[i].checked = rs[i].value === c.modo;
+    $('cfgAgua').checked = !!c.agua; $('cfgEsconder').checked = !!c.esconder; $('cfgLimite').value = String(c.limite);
+    var m = ''; for (i = 1; i <= 15; i++) m += '<option value="' + i + '">' + i + (i === 1 ? ' minuto' : ' minutos') + '</option>';
+    $('cfgMinutos').innerHTML = m; $('cfgMinutos').value = String(c.minutos);
+    if (ch && ch.turmas instanceof Array) ch.turmas.forEach(function(t){ h += '<option value="chamada:' + esc(t.id) + '">Chamada: ' + esc(t.nome) + ' (' + (t.alunos || []).length + ')</option>'; });
+    if (pt && pt.alunos instanceof Array && pt.alunos.length) h += '<option value="sorteador">Sorteador' + (pt.turma ? ': ' + esc(pt.turma) : '') + ' (' + pt.alunos.length + ')</option>';
+    h += '<option value="nenhuma">sem lista (escrever o nome)</option>';
+    $('cfgFonte').innerHTML = h; $('cfgFonte').value = c.fonte; if ($('cfgFonte').value !== c.fonte) $('cfgFonte').value = 'auto';
+    mostrar('janAjustes');
+  }
+  $('btAjustes').onclick = abrirAjustes;
+  function temGente(){ for (var id in est.portas){ var p = est.portas[id]; if (p.ocupante || p.fila.length) return true; } return false; }
+  function mudarPortas(aplicar){
+    var antes = ativas().join();
+    aplicar();
+    if (ativas().join() === antes) return;
+    for (var id in est.portas){
+      if (ativas().indexOf(id) >= 0) continue;
+      var p = est.portas[id];
+      if (p.ocupante) est.registro.push({n: p.ocupante.nome, p: id, s: p.ocupante.desde, v: Date.now()});
+      delete est.portas[id];
+    }
+  }
+  var rsModo = document.getElementsByName('modo');
+  for (f = 0; f < rsModo.length; f++) rsModo[f].onchange = function(){
+    var novo = this.value;
+    if (temGente() && !confirm('Mudar os banheiros agora esvazia as filas que deixarem de existir. Continuar?')){ abrirAjustes(); return; }
+    mudarPortas(function(){ est.config.modo = novo; }); salvar(); desenhar();
+  };
+  $('cfgAgua').onchange = function(){
+    var v = this.checked, quem = porta('agua');
+    if (!v && (quem.ocupante || quem.fila.length) && !confirm('Tirar a fila do bebedouro? Quem está nela sai da fila.')){ this.checked = true; return; }
+    mudarPortas(function(){ est.config.agua = v; }); salvar(); desenhar();
+  };
+  $('cfgMinutos').onchange = function(){ est.config.minutos = +this.value || 5; salvar(); desenhar(); };
+  $('cfgLimite').onchange = function(){ est.config.limite = +this.value || 0; salvar(); desenhar(); };
+  $('cfgFonte').onchange = function(){ est.config.fonte = this.value; salvar(); desenhar(); };
+  $('cfgEsconder').onchange = function(){ est.config.esconder = this.checked; salvar(); };
+  $('btNovaAula').onclick = function(){
+    if (!confirm('Começar uma nova aula? As filas e a contagem de idas voltam a zero (o registro continua guardado).')) return;
+    encerrarTodos(); est.portas = {}; est.contagem = {}; est.pausada = false; salvar(); desenhar();
+    esconder('janAjustes'); avisar('🔄 Nova aula: filas vazias e contagem zerada!');
+  };
+
+  // ---------- registro ----------
+  function linhasHoje(){ var d = hoje(); return est.registro.filter(function(r){ var x = new Date(r.s); return x.getFullYear() + '-' + ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2) === d; }); }
+  function tabelaRegistro(){
+    var l = linhasHoje(), lim = est.config.minutos * 60000;
+    if (!l.length) return '<p class="dica">Ninguém saiu hoje ainda.</p>';
+    return '<table><tr><th>Saiu</th><th>Voltou</th><th>Aluno</th><th>Onde</th><th>Tempo</th></tr>' + l.slice().reverse().map(function(r){
+      var t = r.v - r.s, P = PORTAS[r.p] || {icone: '', nome: r.p};
+      return '<tr><td>' + hora(r.s) + '</td><td>' + hora(r.v) + '</td><td>' + esc(r.n) + '</td><td>' + P.icone + ' ' + P.nome + '</td><td>' + mmss(t) + (t > lim ? ' ⏰' : '') + '</td></tr>';
+    }).join('') + '</table>';
+  }
+  function resumoRegistro(){
+    var l = linhasHoje(), por = {}, soma = 0, mais = [];
+    l.forEach(function(r){ por[r.n] = (por[r.n] || 0) + 1; soma += r.v - r.s; });
+    for (var n in por) if (por[n] > 1) mais.push(n + ' (' + por[n] + 'x)');
+    return l.length ? l.length + (l.length === 1 ? ' saída' : ' saídas') + ' hoje, tempo médio de ' + mmss(soma / l.length) + '.' + (mais.length ? ' Foram mais de uma vez: ' + esc(mais.join(', ')) + '.' : '') + ' ⏰ = passou do tempo combinado.' : '';
+  }
+  $('btRegistro').onclick = function(){ $('regResumo').innerHTML = resumoRegistro(); $('regTabela').innerHTML = tabelaRegistro(); mostrar('janRegistro'); };
+  $('btImprimir').onclick = function(){
+    var d = hoje().split('-');
+    $('impressao').innerHTML = '<h2>Saídas da sala — ' + d[2] + '/' + d[1] + '/' + d[0] + '</h2><p>' + resumoRegistro() + '</p>' + tabelaRegistro();
+    setTimeout(function(){ window.print(); }, 80);
+  };
+
+  // ---------- dicas do Sapinho ----------
+  var dicaAtual = Math.floor(Math.random() * DICAS.length);
+  function trocarDica(){
+    var el = $('dica'); el.style.opacity = '0';
+    setTimeout(function(){ dicaAtual = (dicaAtual + 1) % DICAS.length; el.innerHTML = '🐸 <b>O Sapinho lembra:</b> ' + DICAS[dicaAtual]; el.style.opacity = '1'; }, 500);
+  }
+  $('dica').innerHTML = '🐸 <b>O Sapinho lembra:</b> ' + DICAS[dicaAtual];
+  setInterval(trocarDica, 9000);
+
+  // ---------- início ----------
+  ativas().forEach(function(id){ jaNaFila[id] = porta(id).fila.slice(); });
+  pintarSom(); salvar(); desenhar();
+  window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') desenhar(); });
+  window.FILA = {estado: function(){ return est; }, tique: tique};   // usado nos testes
+})();
+</script>
+</body>
+</html>
