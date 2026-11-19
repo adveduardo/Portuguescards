@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chamada e mapa de sala</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;background:#eef1f6;padding:10px 10px 30px}
+  h1{font-size:22px;margin:4px 0 8px}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;margin:0 0 8px}
+  .topo > *{margin:3px 6px 3px 0}
+  select,input[type=text],input[type=number],input[type=date],textarea{font:inherit;font-size:16px;padding:7px 9px;border:2px solid #d8deea;border-radius:9px;background:#fff;color:#243049}
+  textarea{width:100%;min-height:220px;resize:vertical}
+  button{font:inherit;font-weight:bold;font-size:15px;border:none;border-radius:10px;padding:9px 13px;margin:3px;cursor:pointer;background:#fff;color:#243049;box-shadow:0 2px 0 rgba(0,0,0,.12)}
+  .painel button,.caixa button{border:2px solid #d8deea}
+  button.forte{background:#2f80ed;color:#fff;border-color:#2f80ed}
+  button.verde{background:#27ae60;color:#fff;border-color:#27ae60}
+  button.perigo{background:#fdecea;color:#b03a2e;border-color:#f5c6c0}
+  button.ativo{background:#243049;color:#fff;border-color:#243049}
+  .abas{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 0 8px}
+  .abas button{-webkit-flex:1 1 auto;flex:1 1 auto;font-size:15px}
+  .painel{display:none;background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .painel.ativo{display:block}
+  .dica{font-size:14px;color:#566078;margin:4px 0 8px}
+  .resumo{font-size:17px;font-weight:bold;margin:6px 0}
+  .resumo span{display:inline-block;margin-right:12px}
+  .cards{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:6px -4px}
+  .card{-webkit-flex:1 1 210px;flex:1 1 210px;margin:4px;padding:10px 12px;border-radius:12px;border:3px solid #2fb36d;background:#eefaf3;cursor:pointer;
+    font-size:17px;font-weight:bold;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;min-height:56px;-webkit-user-select:none;user-select:none}
+  .card .num{min-width:30px;color:#7a849a;font-size:14px}
+  .card .nome{-webkit-flex:1;flex:1}
+  .card .st{font-size:14px;margin-left:6px;white-space:nowrap}
+  .card.F{border-color:#ef5350;background:#ffebee}
+  .card.A{border-color:#e6b800;background:#fff8d6}
+  .card.enchimento{visibility:hidden;height:0;min-height:0;padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;border-top-width:0;border-bottom-width:0}
+  .quadro{background:#2e5e3e;color:#fff;text-align:center;border-radius:10px;padding:8px;font-weight:bold;margin:6px auto;max-width:900px;letter-spacing:1px}
+  .sala{overflow-x:auto;padding:4px 0;-webkit-overflow-scrolling:touch}
+  .fila{display:-webkit-box;display:-webkit-flex;display:flex}
+  .fila .lugar:first-child{margin-left:auto}
+  .fila .lugar:last-child{margin-right:auto}
+  .lugar{width:120px;min-width:84px;height:62px;margin:4px;border-radius:10px;border:2px solid #b9c6dc;background:#f7f9fc;display:-webkit-box;display:-webkit-flex;display:flex;overflow:hidden;
+    -webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;text-align:center;font-size:13px;font-weight:bold;padding:3px;cursor:pointer;line-height:1.15;word-break:break-word}
+  .lugar.cheio{background:#e8f1fe;border-color:#2f80ed}
+  .lugar.vazio{background:repeating-linear-gradient(45deg,#eceff4,#eceff4 6px,#fff 6px,#fff 12px);border-style:dashed;color:#9aa3b5;font-weight:normal}
+  .lugar.sel,.chip.sel{box-shadow:0 0 0 4px #ffb300}
+  .lugar.ausente{opacity:.55}
+  .chips{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:6px 0;min-height:52px;padding:4px;border:2px dashed #d8deea;border-radius:12px}
+  .chips.alvo{border-color:#ffb300;background:#fffaf0}
+  .chip{background:#fff;border:2px solid #c9d2e3;border-radius:999px;padding:6px 12px;margin:3px;font-weight:bold;cursor:pointer;font-size:14px}
+  table{border-collapse:collapse;width:100%;margin:6px 0}
+  th,td{border:1px solid #dde3ee;padding:6px 8px;text-align:left;font-size:15px}
+  th{background:#f3f6fb}
+  td.n{text-align:center}
+  .baixo{color:#c0392b;font-weight:bold}
+  #aviso{position:fixed;left:50%;bottom:16px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:30;background:#243049;color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;display:none;max-width:92%}
+  .caixa{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(20,28,45,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .caixaDentro{background:#fff;max-width:640px;margin:30px auto;padding:14px;border-radius:14px}
+  .caixaDentro textarea{min-height:200px;font-family:Consolas,Menlo,monospace;font-size:13px}
+  #impressao{display:none}
+  @media print{
+    @page{margin:12mm}
+    body{background:#fff;padding:0}
+    .tela,.caixa,#aviso{display:none !important}
+    #impressao{display:block;font-family:Arial,Helvetica,sans-serif;color:#000}
+    #impressao h2{margin:0 0 6px;font-size:16pt}
+    #impressao table td,#impressao table th{border:1px solid #000;font-size:11pt;padding:4px 6px}
+    #impressao .quadro{background:#fff;color:#000;border:2px solid #000}
+    #impressao .sala{overflow:visible}
+    #impressao .lugar{border:1.5px solid #000;background:#fff !important;color:#000;width:auto;-webkit-flex:1;flex:1;min-width:0;height:54px;font-size:10.5pt;margin:3px}
+    #impressao .lugar.vazio{border-style:dashed;color:#999}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div class="tela">
+  <h1>📋 Chamada e mapa de sala</h1>
+  <div class="topo">
+    <label for="selTurma"><b>Turma:</b></label>
+    <select id="selTurma" aria-label="Turma"></select>
+    <button id="btnNovaTurma">➕ Nova turma</button>
+  </div>
+  <div class="abas" id="abas">
+    <button data-aba="pChamada" class="ativo">📋 Chamada</button>
+    <button data-aba="pMapa">💺 Mapa de sala</button>
+    <button data-aba="pTurma">👥 Turma e alunos</button>
+    <button data-aba="pRelatorio">📊 Relatório</button>
+  </div>
+
+  <div class="painel ativo" id="pChamada">
+    <div class="topo">
+      <label for="data"><b>Data:</b></label><input type="date" id="data">
+      <button id="btnTodos">✅ Todos presentes</button>
+      <button id="btnSorteador" title="Leva a lista e as faltas deste dia para o Sorteador de Alunos e o Formador de Grupos">🎲 Usar no Sorteador e nos Grupos</button>
+      <button id="btnCopiar">📋 Copiar as faltas</button>
+      <button id="btnImpChamada">🖨️ Imprimir</button>
+    </div>
+    <div class="resumo" id="resumo"></div>
+    <p class="dica">Toque no nome para marcar <b>falta</b>; toque de novo para <b>atraso</b>; mais uma vez volta para <b>presente</b>. Tudo fica guardado sozinho.</p>
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <div class="painel" id="pMapa">
+    <div class="topo">
+      <label>Fileiras (lado a lado): <input type="number" id="fileiras" min="1" max="12" value="6" style="width:70px"></label>
+      <label>Carteiras em cada fileira: <input type="number" id="carteiras" min="1" max="12" value="6" style="width:70px"></label>
+    </div>
+    <div class="topo">
+      <button id="btnSortearLugares" class="forte">🎲 Sortear lugares</button>
+      <label><input type="checkbox" id="chkPresentes"> só quem veio no dia</label>
+      <button id="btnVazia">🚫 Marcar carteira vazia</button>
+      <button id="btnEsvaziar">↩️ Tirar todos dos lugares</button>
+      <button id="btnVirar">🔄 Ver do lado da turma</button>
+      <button id="btnImpMapa">🖨️ Imprimir o mapa</button>
+    </div>
+    <p class="dica" id="dicaMapa"></p>
+    <p class="dica" id="legendaVisao" style="font-weight:bold"></p>
+    <div id="sala"></div>
+    <p class="dica"><b>Sem lugar</b> (para tirar alguém da carteira, toque no aluno e depois aqui):</p>
+    <div class="chips" id="semLugar"></div>
+  </div>
+
+  <div class="painel" id="pTurma">
+    <div class="topo"><label for="nomeTurma"><b>Nome da turma:</b></label><input type="text" id="nomeTurma" placeholder="ex.: 7º ano A"><button id="btnRenomear">✔️ Salvar nome</button></div>
+    <p class="dica">Cole ou digite os nomes, <b>um por linha</b>. A ordem da lista vira o número de chamada.</p>
+    <textarea id="txtAlunos" placeholder="Ana Beatriz&#10;Bruno Souza&#10;Carla Lima"></textarea>
+    <div class="topo">
+      <button id="btnSalvarAlunos" class="verde">💾 Salvar a lista</button>
+      <label><input type="checkbox" id="chkAlfa"> pôr em ordem alfabética</label>
+      <button id="btnImportar" title="Trazer a lista guardada no Sorteador de Alunos">📥 Trazer do Sorteador</button>
+    </div>
+    <hr style="border:none;border-top:1px solid #e3e7ef;margin:12px 0">
+    <p class="dica">🔒 Os nomes e as faltas ficam <b>só neste aparelho</b> (não vão para a internet). Para não perder nada, baixe uma cópia de vez em quando.</p>
+    <div class="topo">
+      <button id="btnBackup">⬇️ Baixar cópia de segurança</button>
+      <button id="btnRestaurar">⬆️ Restaurar uma cópia</button>
+      <button id="btnApagarTurma" class="perigo">🗑️ Apagar esta turma</button>
+    </div>
+  </div>
+
+  <div class="painel" id="pRelatorio">
+    <div class="topo">
+      <button id="btnCSV">⬇️ Baixar planilha (Excel)</button>
+      <button id="btnImpRel">🖨️ Imprimir o relatório</button>
+    </div>
+    <div class="dica" id="infoRel"></div>
+    <div id="tabelaRel"></div>
+  </div>
+</div>
+
+<div class="caixa" id="caixa">
+  <div class="caixaDentro">
+    <p id="caixaTitulo" style="margin:0 0 8px;font-weight:bold"></p>
+    <textarea id="caixaTxt"></textarea>
+    <div class="topo" style="margin-top:8px">
+      <button id="caixaArquivo">📂 Escolher arquivo</button>
+      <button id="caixaOk" class="verde">⬆️ Restaurar</button>
+      <button id="caixaFechar" class="forte">Fechar</button>
+    </div>
+    <input type="file" id="arqRestaurar" accept=".json,application/json,text/plain" style="display:none">
+  </div>
+</div>
+<div id="impressao"></div>
+<div id="aviso"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CHAVE = 'chamada_dados';
+  var dados = {turmas: [], atual: null}, aba = 'pChamada', selecionado = null, modoVazia = false, visaoTurma = false;
+
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function aparar(s){ return String(s == null ? '' : s).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
+  function novoId(){ return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function avisar(t){ var a = $('aviso'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 2800); }
+  function salvar(){ try { localStorage.setItem(CHAVE, JSON.stringify(dados)); } catch (e){ avisar('Não consegui guardar neste aparelho (memória cheia ou modo anônimo).'); } }
+  function carregar(){ try { var d = JSON.parse(localStorage.getItem(CHAVE)); if (d && d.turmas instanceof Array) dados = d; } catch (e) {} }
+  function turma(){ for (var i = 0; i < dados.turmas.length; i++) if (dados.turmas[i].id === dados.atual) return dados.turmas[i]; return dados.turmas[0] || null; }
+  function hojeISO(){ var h = new Date(); return h.getFullYear() + '-' + ('0' + (h.getMonth() + 1)).slice(-2) + '-' + ('0' + h.getDate()).slice(-2); }
+  function dataBR(v){ var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : v; }
+  function dataSel(){ return /^\d{4}-\d{2}-\d{2}$/.test($('data').value) ? $('data').value : hojeISO(); }
+  function embaralhar(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function alunoPorId(t, id){ for (var i = 0; i < t.alunos.length; i++) if (t.alunos[i].id === id) return t.alunos[i]; return null; }
+  var PARTICULAS = {de: 1, da: 1, 'do': 1, dos: 1, das: 1, e: 1};
+  function nomeCurto(n){
+    var m = / \(\d+\)$/.exec(n), suf = m ? m[0] : '', p;
+    if (m) n = n.slice(0, n.length - suf.length);
+    p = n.split(' ');
+    if (p.length <= 2) return n + suf;
+    var out = [p[0]];
+    if (!PARTICULAS[p[1].toLowerCase()]) out.push(p[1]);
+    out.push(p[p.length - 1].charAt(0).toUpperCase() + '.');
+    return out.join(' ') + suf;
+  }
+
+  // ---------- caixa de texto (copiar, cópia de segurança em aparelhos antigos, restaurar) ----------
+  var acaoCaixa = null;
+  function abrirCaixa(titulo, texto, acao){
+    $('caixaTitulo').innerHTML = titulo; $('caixaTxt').value = texto || '';
+    $('caixaTxt').readOnly = !acao; acaoCaixa = acao || null;
+    $('caixaOk').style.display = acao ? '' : 'none'; $('caixaArquivo').style.display = acao ? '' : 'none';
+    $('caixa').style.display = 'block';
+    if (!acao) setTimeout(function(){ try { $('caixaTxt').focus(); $('caixaTxt').select(); } catch (e) {} }, 50);
+  }
+  function fecharCaixa(){ $('caixa').style.display = 'none'; acaoCaixa = null; }
+  $('caixaFechar').onclick = fecharCaixa;
+  $('caixa').onclick = function(e){ if (e.target === this) fecharCaixa(); };
+  $('caixaOk').onclick = function(){ if (acaoCaixa) acaoCaixa($('caixaTxt').value); };
+  $('caixaArquivo').onclick = function(){ $('arqRestaurar').click(); };
+  $('arqRestaurar').onchange = function(){
+    var f = this.files && this.files[0], inp = this; if (!f) return;
+    var r = new FileReader();
+    r.onload = function(){ $('caixaTxt').value = r.result; inp.value = ''; };
+    r.readAsText(f);
+  };
+
+  function baixar(nome, conteudo, tipo){
+    var a = document.createElement('a');
+    if (window.navigator && navigator.msSaveBlob){ navigator.msSaveBlob(new Blob([conteudo], {type: tipo}), nome); return; }
+    if (!('download' in a) || typeof Blob === 'undefined' || !window.URL){
+      abrirCaixa('Este aparelho não baixa arquivos. Copie o texto abaixo e guarde (por e-mail ou num bloco de notas).', conteudo.replace(/^\uFEFF/, ''));
+      return;
+    }
+    var url = URL.createObjectURL(new Blob([conteudo], {type: tipo}));
+    a.href = url; a.download = nome; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    avisar('Arquivo salvo na pasta de downloads.');
+  }
+  function copiar(texto){
+    var ok = false, ta = document.createElement('textarea');
+    ta.value = texto; ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (ok) avisar('Copiado! Cole onde quiser.');
+    else abrirCaixa('Copie o texto abaixo:', texto);
+  }
+
+  // ---------- turmas ----------
+  function criarTurma(nome){
+    var t = {id: novoId(), nome: nome, alunos: [], chamadas: {}, mapa: {linhas: 6, colunas: 6, lugares: {}, vazios: {}}};
+    dados.turmas.push(t); dados.atual = t.id; salvar(); return t;
+  }
+  function desenharSeletor(){
+    var t = turma();
+    $('selTurma').innerHTML = dados.turmas.map(function(x){ return '<option value="' + x.id + '"' + (t && x.id === t.id ? ' selected' : '') + '>' + esc(x.nome) + ' (' + x.alunos.length + ')</option>'; }).join('') || '<option value="">(nenhuma turma ainda)</option>';
+  }
+  $('selTurma').onchange = function(){ if (!this.value) return; dados.atual = this.value; selecionado = null; salvar(); tudo(); };
+  $('btnNovaTurma').onclick = function(){
+    var nome = aparar(prompt('Nome da nova turma (ex.: 8º ano B):') || '');
+    if (!nome) return;
+    criarTurma(nome); irAba('pTurma');
+    avisar('Turma criada. Agora cole a lista de nomes.');
+  };
+
+  // ---------- abas ----------
+  function irAba(id){
+    aba = id;
+    var bs = $('abas').querySelectorAll('button'), i;
+    for (i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-aba') === id ? 'ativo' : '';
+    var ps = document.querySelectorAll('.painel');
+    for (i = 0; i < ps.length; i++) ps[i].className = 'painel' + (ps[i].id === id ? ' ativo' : '');
+    tudo();
+  }
+  $('abas').onclick = function(e){ var a = e.target.getAttribute('data-aba'); if (a) irAba(a); };
+
+  // ---------- chamada ----------
+  function situacao(t, data, id){ return (t.chamadas[data] || {})[id] || 'P'; }
+  function desenharChamada(){
+    var t = turma(), data = dataSel(), h = '', f = 0, a = 0;
+    if (!t || !t.alunos.length){ $('cards').innerHTML = '<p class="dica">Nenhum aluno nesta turma. Vá em <b>👥 Turma e alunos</b> e cole a lista.</p>'; $('resumo').innerHTML = ''; return; }
+    t.alunos.forEach(function(al, i){
+      var s = situacao(t, data, al.id);
+      if (s === 'F') f++; else if (s === 'A') a++;
+      h += '<div class="card ' + s + '" data-id="' + al.id + '"><span class="num">' + (i + 1) + '</span><span class="nome">' + esc(al.nome) + '</span><span class="st">' + (s === 'F' ? '❌ Falta' : s === 'A' ? '⏰ Atraso' : '✅') + '</span></div>';
+    });
+    $('cards').innerHTML = h + new Array(7).join('<div class="card enchimento"></div>');   // deixa a última linha com cartões do mesmo tamanho
+    $('resumo').innerHTML = '<span>👥 ' + t.alunos.length + ' alunos</span><span style="color:#1e8449">✅ ' + (t.alunos.length - f) + ' presentes</span><span style="color:#c0392b">❌ ' + f + ' faltas</span><span style="color:#9a7d00">⏰ ' + a + ' atrasos</span>' +
+      (t.chamadas[data] ? '' : ' <small style="font-weight:normal;color:#7a849a">(chamada de ' + dataBR(data) + ' ainda não feita)</small>');
+  }
+  $('cards').onclick = function(e){
+    var el = e.target; while (el && el !== this && !el.getAttribute('data-id')) el = el.parentNode;
+    if (!el || el === this) return;
+    var t = turma(), data = dataSel(), m = (t.chamadas[data] = t.chamadas[data] || {}), id = el.getAttribute('data-id'), s = m[id] || 'P';
+    s = s === 'P' ? 'F' : s === 'F' ? 'A' : 'P';
+    if (s === 'P') delete m[id]; else m[id] = s;
+    salvar(); desenharChamada();
+  };
+  $('data').onchange = function(){ tudo(); };
+  $('btnTodos').onclick = function(){ var t = turma(); if (!t) return; t.chamadas[dataSel()] = {}; salvar(); desenharChamada(); avisar('Todos presentes em ' + dataBR(dataSel()) + '.'); };
+  function comSituacao(t, data, s){ return t.alunos.filter(function(al){ return situacao(t, data, al.id) === s; }); }
+  $('btnCopiar').onclick = function(){
+    var t = turma(); if (!t) return;
+    var data = dataSel(), f = comSituacao(t, data, 'F'), at = comSituacao(t, data, 'A'), nomes = function(l){ return l.map(function(x){ return x.nome; }).join(', '); };
+    copiar(t.nome + ' — ' + dataBR(data) + '\nFaltas (' + f.length + '): ' + (nomes(f) || 'nenhuma') + (at.length ? '\nAtrasos (' + at.length + '): ' + nomes(at) : ''));
+  };
+  $('btnSorteador').onclick = function(){
+    var t = turma(); if (!t || !t.alunos.length){ avisar('Esta turma ainda não tem alunos.'); return; }
+    var d = {};
+    try { d = JSON.parse(localStorage.getItem('painel_turma')) || {}; } catch (e) {}
+    d.turma = t.nome; d.alunos = t.alunos.map(function(x){ return x.nome; }); d.ausentes = comSituacao(t, dataSel(), 'F').map(function(x){ return x.nome; });
+    try { localStorage.setItem('painel_turma', JSON.stringify(d)); } catch (e) {}
+    avisar('Pronto! O Sorteador e o Formador de Grupos já têm esta turma' + (d.ausentes.length ? ', sem os ' + d.ausentes.length + ' que faltaram.' : '.'));
+  };
+
+  // ---------- mapa de sala ----------
+  // lugares guardados como "fila-coluna": fila 0 é a mais perto do quadro; a coluna 0 fica à esquerda de quem olha do lado do professor.
+  function mapa(t){ t.mapa = t.mapa || {linhas: 6, colunas: 6, lugares: {}, vazios: {}}; t.mapa.lugares = t.mapa.lugares || {}; t.mapa.vazios = t.mapa.vazios || {}; return t.mapa; }
+  function htmlSala(t, paraImprimir){
+    var mp = mapa(t), data = dataSel(), r, c, k, id, al, filas = [], i, ordemC = [], ordemR = [], curtos = {}, quantos = {};
+    t.alunos.forEach(function(a){ var n = nomeCurto(a.nome); curtos[a.id] = n; quantos[n] = (quantos[n] || 0) + 1; });
+    function rotulo(a){ return quantos[curtos[a.id]] > 1 ? a.nome : curtos[a.id]; }   // nomes curtos iguais: mostra o nome inteiro
+    for (c = 0; c < mp.colunas; c++) ordemC.push(c);
+    for (r = 0; r < mp.linhas; r++) ordemR.push(r);
+    if (visaoTurma) ordemC.reverse(); else ordemR.reverse();   // virar a sala = girar o desenho 180 graus
+    for (i = 0; i < ordemR.length; i++){
+      r = ordemR[i];
+      var fila = '';
+      for (var j = 0; j < ordemC.length; j++){
+        c = ordemC[j]; k = r + '-' + c; id = mp.lugares[k]; al = id ? alunoPorId(t, id) : null;
+        if (id && !al){ delete mp.lugares[k]; id = null; }
+        var faltou = !paraImprimir && al && situacao(t, data, al.id) === 'F';
+        var cls = 'lugar' + (mp.vazios[k] ? ' vazio' : al ? ' cheio' : '') + (!paraImprimir && selecionado && selecionado.lugar === k ? ' sel' : '') + (faltou ? ' ausente' : '');
+        fila += '<div class="' + cls + '" data-k="' + k + '"' + (al ? ' title="' + esc(al.nome) + '"' : '') + '>' +
+          '<span>' + (mp.vazios[k] ? 'sem carteira' : al ? esc(rotulo(al)) + (faltou ? '<br><small>(faltou)</small>' : '') : (paraImprimir ? '' : '—')) + '</span></div>';
+      }
+      filas.push('<div class="fila">' + fila + '</div>');
+    }
+    var quadro = '<div class="quadro">QUADRO • mesa do professor</div>';
+    return visaoTurma ? quadro + '<div class="sala">' + filas.join('') + '</div>' : '<div class="sala">' + filas.join('') + '</div>' + quadro;
+  }
+  function desenharMapa(){
+    var t = turma();
+    if (!t){ $('sala').innerHTML = '<p class="dica">Crie uma turma primeiro.</p>'; $('semLugar').innerHTML = ''; return; }
+    var mp = mapa(t);
+    $('fileiras').value = mp.colunas; $('carteiras').value = mp.linhas;
+    $('sala').innerHTML = htmlSala(t, false);
+    var ocupados = {}; Object.keys(mp.lugares).forEach(function(k){ ocupados[mp.lugares[k]] = 1; });
+    var sem = t.alunos.filter(function(x){ return !ocupados[x.id]; });
+    $('semLugar').innerHTML = sem.map(function(x){ return '<span class="chip' + (selecionado && selecionado.aluno === x.id && !selecionado.lugar ? ' sel' : '') + '" data-aluno="' + x.id + '">' + esc(x.nome) + '</span>'; }).join('') ||
+      '<span class="dica" style="margin:8px">' + (t.alunos.length ? 'Todos têm lugar. 👍' : 'Nenhum aluno nesta turma ainda.') + '</span>';
+    $('semLugar').className = 'chips' + (selecionado && selecionado.lugar ? ' alvo' : '');
+    $('btnVazia').className = modoVazia ? 'ativo' : '';
+    $('btnVirar').innerHTML = visaoTurma ? '🔄 Ver do lado do professor' : '🔄 Ver do lado da turma';
+    $('legendaVisao').innerHTML = visaoTurma ? '👀 Visto pelos alunos, de frente para o quadro (o quadro fica em cima).' : '👀 Visto da mesa do professor, de frente para a turma (o quadro fica embaixo).';
+    $('dicaMapa').innerHTML = modoVazia ? '🚫 Toque nas carteiras que não existem (corredor, carteira quebrada). Toque de novo para desfazer. Quando terminar, toque outra vez em "Marcar carteira vazia".' :
+      'Toque num aluno (na lista ou numa carteira) e depois na carteira para onde ele vai. Se a carteira estiver ocupada, os dois trocam de lugar.';
+  }
+  $('sala').onclick = function(e){
+    var el = e.target; while (el && el !== this && !el.getAttribute('data-k')) el = el.parentNode;
+    if (!el || el === this) return;
+    var t = turma(), mp = mapa(t), k = el.getAttribute('data-k'), ocupante = mp.lugares[k];
+    if (modoVazia){
+      if (mp.vazios[k]) delete mp.vazios[k]; else { mp.vazios[k] = 1; delete mp.lugares[k]; }
+      salvar(); desenharMapa(); return;
+    }
+    if (mp.vazios[k]) return;
+    if (!selecionado){ if (ocupante){ selecionado = {aluno: ocupante, lugar: k}; desenharMapa(); } return; }
+    if (selecionado.lugar === k){ selecionado = null; desenharMapa(); return; }
+    if (selecionado.lugar){ if (ocupante) mp.lugares[selecionado.lugar] = ocupante; else delete mp.lugares[selecionado.lugar]; }
+    mp.lugares[k] = selecionado.aluno;   // vindo da lista: quem estava nesta carteira volta para "Sem lugar"
+    selecionado = null; salvar(); desenharMapa();
+  };
+  $('semLugar').onclick = function(e){
+    var t = turma(); if (!t) return;
+    var mp = mapa(t), id = e.target.getAttribute('data-aluno');
+    if (selecionado && selecionado.lugar){
+      if (id) mp.lugares[selecionado.lugar] = id; else delete mp.lugares[selecionado.lugar];
+      selecionado = null; salvar(); desenharMapa(); return;
+    }
+    if (!id) return;
+    selecionado = (selecionado && selecionado.aluno === id) ? null : {aluno: id, lugar: null};
+    desenharMapa();
+  };
+  function mudarTamanho(){
+    var t = turma(); if (!t) return;
+    var mp = mapa(t), c = Math.max(1, Math.min(12, parseInt($('fileiras').value, 10) || 1)), l = Math.max(1, Math.min(12, parseInt($('carteiras').value, 10) || 1));
+    mp.linhas = l; mp.colunas = c; selecionado = null;
+    Object.keys(mp.lugares).forEach(function(k){ var p = k.split('-'); if (+p[0] >= l || +p[1] >= c) delete mp.lugares[k]; });
+    Object.keys(mp.vazios).forEach(function(k){ var p = k.split('-'); if (+p[0] >= l || +p[1] >= c) delete mp.vazios[k]; });
+    salvar(); desenharMapa();
+  }
+  $('fileiras').onchange = mudarTamanho; $('carteiras').onchange = mudarTamanho;
+  $('btnSortearLugares').onclick = function(){
+    var t = turma(); if (!t || !t.alunos.length){ avisar('Esta turma ainda não tem alunos.'); return; }
+    var mp = mapa(t), data = dataSel(), livres = [], r, c;
+    for (r = 0; r < mp.linhas; r++) for (c = 0; c < mp.colunas; c++) if (!mp.vazios[r + '-' + c]) livres.push(r + '-' + c);   // da frente para o fundo
+    var quem = t.alunos.filter(function(x){ return !$('chkPresentes').checked || situacao(t, data, x.id) !== 'F'; });
+    mp.lugares = {}; selecionado = null;
+    var lista = embaralhar(quem);
+    for (var i = 0; i < lista.length && i < livres.length; i++) mp.lugares[livres[i]] = lista[i].id;
+    salvar(); desenharMapa();
+    if (quem.length > livres.length) avisar('Há mais alunos (' + quem.length + ') do que carteiras (' + livres.length + '). Aumente as fileiras ou as carteiras.');
+    else avisar('Lugares sorteados! Toque em dois alunos para trocar de lugar.');
+  };
+  $('btnVazia').onclick = function(){ modoVazia = !modoVazia; selecionado = null; desenharMapa(); };
+  $('btnEsvaziar').onclick = function(){ var t = turma(); if (!t) return; if (!confirm('Tirar todos os alunos das carteiras?')) return; mapa(t).lugares = {}; selecionado = null; salvar(); desenharMapa(); };
+  $('btnVirar').onclick = function(){ visaoTurma = !visaoTurma; desenharMapa(); };
+
+  // ---------- turma e alunos ----------
+  function desenharTurma(){
+    var t = turma();
+    $('nomeTurma').value = t ? t.nome : '';
+    $('txtAlunos').value = t ? t.alunos.map(function(x){ return x.nome; }).join('\n') : '';
+  }
+  $('btnRenomear').onclick = function(){
+    var n = aparar($('nomeTurma').value); if (!n){ avisar('Escreva o nome da turma.'); return; }
+    var t = turma(); if (t) t.nome = n; else criarTurma(n);
+    salvar(); desenharSeletor(); avisar('Nome salvo.');
+  };
+  $('btnSalvarAlunos').onclick = function(){
+    var t = turma() || criarTurma(aparar($('nomeTurma').value) || 'Minha turma');
+    var vezes = {}, nomes = [];
+    $('txtAlunos').value.split(/\r?\n/).forEach(function(s){
+      s = aparar(s.replace(/^\s*\d+\s*[.\-)–]?\s+/, '').replace(/ \(\d+\)\s*$/, '')); if (!s) return;
+      var k = s.toLowerCase(); vezes[k] = (vezes[k] || 0) + 1;
+      nomes.push(vezes[k] > 1 ? s + ' (' + vezes[k] + ')' : s);   // nomes iguais viram "Nome (2)" para ninguém sumir da lista
+    });
+    if ($('chkAlfa').checked) nomes.sort(function(a, b){ return a.localeCompare(b, 'pt-BR'); });
+    var antigos = {}; t.alunos.forEach(function(x){ antigos[x.nome.toLowerCase()] = x; });
+    t.alunos = nomes.map(function(n){ var a = antigos[n.toLowerCase()]; return {id: a ? a.id : novoId(), nome: n}; });
+    salvar(); desenharSeletor(); desenharTurma();
+    avisar(nomes.length + ' alunos salvos em ' + esc(t.nome) + '.');
+  };
+  $('btnImportar').onclick = function(){
+    var d = null; try { d = JSON.parse(localStorage.getItem('painel_turma')); } catch (e) {}
+    if (!d || !(d.alunos instanceof Array) || !d.alunos.length){ avisar('O Sorteador ainda não tem nomes guardados neste aparelho.'); return; }
+    $('txtAlunos').value = d.alunos.join('\n');
+    if (!aparar($('nomeTurma').value) && d.turma) $('nomeTurma').value = d.turma;
+    avisar(d.alunos.length + ' nomes trazidos. Toque em "Salvar a lista".');
+  };
+  $('btnBackup').onclick = function(){ baixar('chamada-copia-' + hojeISO() + '.json', JSON.stringify(dados), 'application/json'); };
+  $('btnRestaurar').onclick = function(){
+    abrirCaixa('Escolha o arquivo da cópia (chamada-copia-....json) ou cole o texto dela aqui e toque em Restaurar. As turmas deste aparelho serão trocadas pelas da cópia.', '', function(texto){
+      var d;
+      try { d = JSON.parse(texto); } catch (e) { d = null; }
+      if (!d || !(d.turmas instanceof Array)){ avisar('Isso não é uma cópia da chamada.'); return; }
+      if (!confirm('Restaurar a cópia com ' + d.turmas.length + ' turma(s)? As turmas deste aparelho serão substituídas.')) return;
+      dados = d; dados.atual = turma() ? turma().id : null;
+      selecionado = null; salvar(); fecharCaixa(); irAba('pChamada'); avisar('Cópia restaurada.');
+    });
+  };
+  $('btnApagarTurma').onclick = function(){
+    var t = turma(); if (!t) return;
+    if (!confirm('Apagar a turma "' + t.nome + '" com todas as chamadas? Isso não tem volta.')) return;
+    dados.turmas = dados.turmas.filter(function(x){ return x.id !== t.id; });
+    dados.atual = dados.turmas.length ? dados.turmas[0].id : null; selecionado = null; salvar(); tudo();
+  };
+
+  // ---------- relatório ----------
+  function estatisticas(t){
+    var datas = Object.keys(t.chamadas);
+    return t.alunos.map(function(al, i){
+      var f = 0, a = 0;
+      datas.forEach(function(d){ var s = t.chamadas[d][al.id]; if (s === 'F') f++; else if (s === 'A') a++; });
+      return {n: i + 1, id: al.id, nome: al.nome, faltas: f, atrasos: a, pct: datas.length ? Math.round((datas.length - f) * 100 / datas.length) : 100};
+    });
+  }
+  function tabelaRel(t){
+    return '<table><tr><th>Nº</th><th>Aluno</th><th>Faltas</th><th>Atrasos</th><th>Presença</th></tr>' + estatisticas(t).map(function(x){
+      return '<tr><td class="n">' + x.n + '</td><td>' + esc(x.nome) + '</td><td class="n">' + x.faltas + '</td><td class="n">' + x.atrasos + '</td><td class="n' + (x.pct < 75 ? ' baixo' : '') + '">' + x.pct + '%</td></tr>';
+    }).join('') + '</table>';
+  }
+  function infoRel(t){
+    var datas = Object.keys(t.chamadas).sort();
+    return datas.length ? datas.length + ' chamada(s) feita(s), de ' + dataBR(datas[0]) + ' a ' + dataBR(datas[datas.length - 1]) + '. Em vermelho, presença abaixo de 75%.' : 'Ainda não há chamadas feitas nesta turma.';
+  }
+  function desenharRelatorio(){
+    var t = turma(); if (!t){ $('tabelaRel').innerHTML = ''; $('infoRel').innerHTML = 'Crie uma turma primeiro.'; return; }
+    $('infoRel').innerHTML = infoRel(t);
+    $('tabelaRel').innerHTML = t.alunos.length ? tabelaRel(t) : '';
+  }
+  $('btnCSV').onclick = function(){
+    var t = turma(); if (!t || !t.alunos.length){ avisar('Esta turma ainda não tem alunos.'); return; }
+    var datas = Object.keys(t.chamadas).sort(), q = function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; };
+    var linhas = [['Nº', 'Aluno'].concat(datas.map(dataBR), ['Faltas', 'Atrasos', 'Presença (%)']).map(q).join(';')];
+    estatisticas(t).forEach(function(x){
+      linhas.push([x.n, x.nome].concat(datas.map(function(d){ return t.chamadas[d][x.id] || 'P'; }), [x.faltas, x.atrasos, x.pct]).map(q).join(';'));
+    });
+    baixar('chamada-' + (t.nome.replace(/[^0-9A-Za-zÀ-ÿ]+/g, '-').replace(/^-+|-+$/g, '') || 'turma') + '.csv', '\uFEFF' + linhas.join('\r\n'), 'text/csv;charset=utf-8');
+  };
+
+  // ---------- impressão ----------
+  function imprimir(html){ $('impressao').innerHTML = html; setTimeout(function(){ window.print(); }, 80); }
+  $('btnImpChamada').onclick = function(){
+    var t = turma(); if (!t) return;
+    var data = dataSel();
+    imprimir('<h2>Chamada — ' + esc(t.nome) + ' — ' + dataBR(data) + '</h2><table><tr><th>Nº</th><th>Aluno</th><th>Situação</th></tr>' + t.alunos.map(function(al, i){
+      var s = situacao(t, data, al.id); return '<tr><td class="n">' + (i + 1) + '</td><td>' + esc(al.nome) + '</td><td>' + (s === 'F' ? 'Falta' : s === 'A' ? 'Atraso' : 'Presente') + '</td></tr>';
+    }).join('') + '</table>');
+  };
+  $('btnImpMapa').onclick = function(){
+    var t = turma(); if (!t) return;
+    imprimir('<h2>Mapa de sala — ' + esc(t.nome) + '</h2><p style="margin:0 0 6px">' + (visaoTurma ? 'Visto pelos alunos, de frente para o quadro.' : 'Visto da mesa do professor, de frente para a turma.') + '</p>' + htmlSala(t, true));
+  };
+  $('btnImpRel').onclick = function(){ var t = turma(); if (!t) return; imprimir('<h2>Frequência — ' + esc(t.nome) + '</h2><p>' + infoRel(t) + '</p>' + tabelaRel(t)); };
+
+  // ---------- início ----------
+  function tudo(){
+    desenharSeletor();
+    if (aba === 'pChamada') desenharChamada();
+    else if (aba === 'pMapa') desenharMapa();
+    else if (aba === 'pTurma') desenharTurma();
+    else desenharRelatorio();
+  }
+  carregar();
+  $('data').value = hojeISO();
+  if (!dados.turmas.length){ irAba('pTurma'); avisar('Comece dando um nome para a turma e colando a lista de alunos.'); }
+  else { dados.atual = turma().id; irAba('pChamada'); }
+  window.CHAMADA = {dados: function(){ return dados; }, nomeCurto: nomeCurto};   // usado nos testes
+})();
+</script>
+</body>
+</html>

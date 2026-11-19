@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR Code da atividade</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;background:#eef1f6;padding:10px 10px 30px}
+  h1{font-size:22px;margin:4px 0 4px}
+  .dica{font-size:14px;color:#566078;margin:4px 0 8px}
+  .painel{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);margin:0 0 10px}
+  .rotulo{font-weight:bold;font-size:16px;margin:4px 0 6px}
+  .opcoes{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 0 8px}
+  button{font:inherit;font-weight:bold;font-size:15px;border:2px solid #d8deea;border-radius:10px;padding:9px 13px;margin:3px;cursor:pointer;background:#fff;color:#243049;box-shadow:0 2px 0 rgba(0,0,0,.1)}
+  button.ativo{background:#243049;color:#fff;border-color:#243049}
+  button.forte{background:#2f80ed;color:#fff;border-color:#2f80ed}
+  button[disabled]{opacity:.45;cursor:default}
+  input[type=text],input[type=search],input[type=url],input[type=tel],select{font:inherit;font-size:16px;padding:8px 10px;border:2px solid #d8deea;border-radius:9px;background:#fff;color:#243049;width:100%;margin:0 0 6px}
+  #sala{width:150px;font-size:30px;letter-spacing:8px;text-align:center;font-weight:bold}
+  .resultado{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center}
+  .qr{width:300px;height:300px;margin:4px 16px 4px 0;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .qr svg,#telaoQR svg{display:block;width:100%;height:100%;shape-rendering:crispEdges}
+  .vazioQR{width:100%;height:100%;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+    border:3px dashed #c9d2e3;border-radius:14px;color:#7a849a;text-align:center;padding:20px;font-size:16px}
+  .ladoQR{-webkit-flex:1 1 280px;flex:1 1 280px;min-width:240px}
+  .tituloQR{font-size:24px;font-weight:bold;margin:0 0 4px}
+  .endereco{font-size:14px;color:#566078;word-break:break-all;margin:0 0 8px}
+  .aviso{font-size:14px;background:#fff8d6;border:1px solid #f0d77a;border-radius:10px;padding:8px 10px;margin:8px 0 0;display:none}
+  .telao{position:fixed;left:0;top:0;right:0;bottom:0;background:#fff;z-index:50;display:none;text-align:center;padding:14px}
+  #telaoTitulo{font-size:34px;font-weight:bold;margin:4px 60px 8px;line-height:1.15}
+  #telaoQR{margin:0 auto}
+  #telaoEnd{font-size:20px;color:#333;margin-top:8px;word-break:break-all}
+  #telaoFechar{position:absolute;right:10px;top:10px}
+  #avisoFlutuante{position:fixed;left:50%;bottom:16px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:60;background:#243049;color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;display:none;max-width:92%}
+  #impressao{display:none}
+  @media print{
+    @page{margin:12mm}
+    html.visual-adulto body:not(.escuro),body{background:#fff !important;padding:0}
+    .tela,.telao,#avisoFlutuante{display:none !important}
+    #impressao{display:block;color:#000;font-family:Arial,Helvetica,sans-serif}
+    .cartaz{text-align:center;padding-top:.8cm}
+    .cTitulo{font-size:30pt;font-weight:bold;margin-bottom:.5cm}
+    .cQR{width:14cm;height:14cm;margin:0 auto}
+    .cQR svg,.pQR svg{display:block;width:100%;height:100%}
+    .cInstr{font-size:17pt;margin-top:.5cm}
+    .cEnd{font-size:11pt;margin-top:.3cm;word-break:break-all;color:#333}
+    table.pequenos{width:100%;border-collapse:collapse;table-layout:fixed}
+    table.pequenos td{border:1px dashed #888;text-align:center;vertical-align:top;padding:.25cm;height:6.4cm}
+    .pQR{width:4.2cm;height:4.2cm;margin:0 auto}
+    .pTit{font-size:10pt;font-weight:bold;margin-top:.15cm}
+    .pEnd{font-size:7pt;word-break:break-all;color:#333;margin-top:.1cm}
+  }
+</style>
+<script src="visual.js"></script>
+<script src="qrcode-lib.js"></script>
+</head>
+<body>
+<div class="tela">
+  <h1>📱 QR Code da atividade</h1>
+  <p class="dica">Os alunos apontam a câmera do celular para o código e a atividade abre direto, sem precisar digitar o endereço.</p>
+
+  <div class="painel">
+    <p class="rotulo">1. O que os alunos vão abrir?</p>
+    <div class="opcoes" id="tipos">
+      <button type="button" data-tipo="atividade" class="ativo">📚 Uma atividade do Painel</button>
+      <button type="button" data-tipo="sala">🎮 Sala de um jogo com iPads ou celulares</button>
+      <button type="button" data-tipo="link">🔗 Outro link</button>
+    </div>
+    <div id="boxAtividade">
+      <input type="search" id="busca" placeholder="🔎 Procurar atividade (ex.: crase, verbo, PortuguêsCards)" aria-label="Procurar atividade">
+      <select id="selAtividade" aria-label="Atividade"><option value="">Carregando a lista de atividades...</option></select>
+      <p class="dica" id="infoAtividade"></p>
+    </div>
+    <div id="boxSala" style="display:none">
+      <label for="sala"><b>Código da sala:</b> os 4 números que aparecem na tela do jogo.</label><br>
+      <input type="tel" id="sala" maxlength="4" inputmode="numeric" autocomplete="off" placeholder="0000">
+      <p class="dica">Abra o jogo no telão (Quiz ao Vivo, Stop, Escape Room, Mímica, Bingo...), veja o código da sala e digite aqui. Os alunos caem direto na sala, com o código já preenchido.</p>
+    </div>
+    <div id="boxLink" style="display:none">
+      <input type="url" id="link" placeholder="Cole o endereço (formulário do Google, vídeo, texto...)" aria-label="Endereço">
+    </div>
+    <p class="rotulo">2. Frase que aparece com o código <small style="font-weight:normal;color:#7a849a">(se quiser)</small></p>
+    <input type="text" id="titulo" maxlength="80" placeholder="ex.: Responda no celular" aria-label="Frase do cartaz">
+  </div>
+
+  <div class="painel resultado">
+    <div class="qr" id="qr"></div>
+    <div class="ladoQR">
+      <div class="tituloQR" id="tituloQR"></div>
+      <div class="endereco" id="endereco"></div>
+      <div>
+        <button type="button" id="btnTela" class="forte precisaQR">🖥️ Mostrar grande no telão</button>
+        <button type="button" id="btnCartaz" class="precisaQR">🖨️ Imprimir cartaz</button>
+        <button type="button" id="btnPequenos" class="precisaQR">✂️ Imprimir 12 pequenos (para colar no caderno)</button>
+        <button type="button" id="btnCopiar" class="precisaQR">📋 Copiar o link</button>
+        <button type="button" id="btnBaixar" class="precisaQR">⬇️ Baixar a imagem</button>
+        <button type="button" id="btnAbrir" class="precisaQR">↗️ Testar o link</button>
+      </div>
+      <p class="aviso" id="avisoLocal"></p>
+    </div>
+  </div>
+  <p class="dica">💡 Na maioria dos celulares basta abrir a <b>câmera</b> e apontar para o código. Em celulares mais antigos, use o Google Lens ou um aplicativo leitor de QR Code.</p>
+</div>
+
+<div class="telao" id="telao">
+  <button type="button" id="telaoFechar">✖ Fechar</button>
+  <div id="telaoTitulo"></div>
+  <div id="telaoQR"></div>
+  <div id="telaoEnd"></div>
+</div>
+<div id="impressao"></div>
+<div id="avisoFlutuante"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var SITE = 'https://adveduardo.github.io/Portuguescards/';
+  var LOCAL = location.protocol === 'file:' || /^(localhost|127(\.\d+){3}|0\.0\.0\.0|\[::1\])$/.test(location.hostname);
+  var BASE = LOCAL ? SITE : location.href.replace(/[?#].*$/, '').replace(/[^\/]*$/, '');
+  var tipo = 'atividade', itens = [], urlAtual = '', tituloAtual = '', escolhida = '';
+
+  if (typeof qrcode === 'undefined'){ $('qr').innerHTML = '<div class="vazioQR">Não consegui carregar o gerador de QR Code. Recarregue a página.</div>'; return; }
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+
+  var ACENTOS = {'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+    'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', 'ñ': 'n'};
+  function semAcento(t){ return String(t).toLowerCase().replace(/[áàâãäéèêëíìîïóòôõöúùûüçñ]/g, function(c){ return ACENTOS[c]; }); }
+  function semEmoji(t){ return String(t).replace(/^(?:[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2190-\u21FF\u2300-\u27BF\u2B00-\u2BFF\uFE0F\u200D\u20E3])+\s*/, ''); }
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function aparar(s){ return String(s == null ? '' : s).replace(/^\s+|\s+$/g, ''); }
+  function curto(u){ return u.replace(/^https?:\/\//, ''); }
+  function avisar(t){ var a = $('avisoFlutuante'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 2600); }
+  function lerLS(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+  function gravarLS(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  // ---------- lista de atividades (a mesma do menu do Painel) ----------
+  function extrair(sel){
+    var out = [], i, j, el;
+    function por(grupo, op){
+      var v = op.getAttribute('value'), t = op.textContent || op.innerText || '';
+      if (!v || /iPads/.test(t)) return;   // jogos com iPads: os alunos entram pela sala do jogo
+      out.push({grupo: grupo, texto: t, valor: v});
+    }
+    for (i = 0; i < sel.children.length; i++){
+      el = sel.children[i];
+      if (el.tagName === 'OPTGROUP'){
+        if (/Ferramentas da sala/.test(el.label)) continue;
+        for (j = 0; j < el.children.length; j++) por(el.label, el.children[j]);
+      } else if (el.tagName === 'OPTION') por('', el);
+    }
+    return out;
+  }
+  function carregarMenu(pronto){
+    var sel = null;
+    try { if (window.parent && window.parent !== window) sel = window.parent.document.getElementById('tool-selector'); } catch (e) {}
+    if (sel){ pronto(extrair(sel)); return; }
+    var x = new XMLHttpRequest();
+    x.onreadystatechange = function(){
+      if (x.readyState !== 4) return;
+      var m = /<select id="tool-selector"[^>]*>([\s\S]*?)<\/select>/.exec(x.responseText || ''), d;
+      if (!m){ pronto([]); return; }
+      d = document.createElement('div'); d.innerHTML = '<select>' + m[1] + '</select>';
+      pronto(extrair(d.firstChild));
+    };
+    try { x.open('GET', 'index.html', true); x.send(); } catch (e) { pronto([]); }
+  }
+  function textoDe(v){ for (var i = 0; i < itens.length; i++) if (itens[i].valor === v) return itens[i].texto; return ''; }
+  function desenharLista(){
+    var palavras = semAcento(aparar($('busca').value)).split(/\s+/), html = '', grupo = null, n = 0, i, k, it, alvo, temSel = false;
+    for (i = 0; i < itens.length; i++){
+      it = itens[i]; alvo = semAcento(it.grupo + ' ' + it.texto);
+      for (k = 0; k < palavras.length; k++) if (palavras[k] && alvo.indexOf(palavras[k]) < 0) break;
+      if (k < palavras.length) continue;
+      if (it.grupo !== grupo){ if (grupo) html += '</optgroup>'; grupo = it.grupo; if (grupo) html += '<optgroup label="' + esc(grupo) + '">'; }
+      if (it.valor === escolhida) temSel = true;
+      html += '<option value="' + esc(it.valor) + '"' + (it.valor === escolhida ? ' selected' : '') + '>' + esc(it.texto) + '</option>';
+      n++;
+    }
+    if (grupo) html += '</optgroup>';
+    if (!itens.length) html = '<option value="">Não consegui ler a lista de atividades (use "Outro link")</option>';
+    else if (!n) html = '<option value="">Nenhuma atividade com esse nome</option>';
+    else if (!temSel) html = '<option value="">— Escolha a atividade (' + n + ') —</option>' + html;
+    $('selAtividade').innerHTML = html;
+    $('infoAtividade').innerHTML = itens.length ? '📚 ' + n + (n === 1 ? ' atividade' : ' atividades') + (aparar($('busca').value) ? ' encontradas' : '') +
+      '. Os jogos com iPads (Quiz ao Vivo, Stop, Escape Room, Bingo...) não estão nesta lista: para eles, use <b>🎮 Sala de um jogo</b>.' : '';
+    atualizar();
+  }
+
+  // ---------- endereço e desenho do código ----------
+  function svgQR(texto){
+    var qr = qrcode(0, 'M'); qr.addData(texto); qr.make();
+    return qr.createSvgTag({cellSize: 1, margin: 4, scalable: true});
+  }
+  function atualizar(){
+    var url = '', padrao = '', msg = '';
+    if (tipo === 'atividade'){
+      escolhida = $('selAtividade').value || escolhida;
+      var v = $('selAtividade').value;
+      if (v){ url = BASE + encodeURI(v); padrao = semEmoji(textoDe(v)); } else msg = 'Escolha uma atividade na lista';
+    } else if (tipo === 'sala'){
+      var s = $('sala').value.replace(/\D/g, '');
+      if (s.length === 4){ url = BASE + 'jogar.html?sala=' + s; padrao = 'Entre no jogo: sala ' + s; } else msg = 'Digite os 4 números da sala';
+    } else {
+      var l = aparar($('link').value);
+      if (l && !/^[a-z][a-z0-9+.\-]*:/i.test(l) && /^[^\s\/]+\.[^\s]+$/.test(l)) l = 'https://' + l;
+      if (/^https?:\/\/[^\s]+\.[^\s]+$/i.test(l)) url = l; else msg = l ? 'Esse link não parece um endereço de internet (deve começar com https://)' : 'Cole um link para gerar o código';
+    }
+    $('titulo').placeholder = padrao || 'ex.: Responda no celular';
+    tituloAtual = aparar($('titulo').value) || padrao;
+    urlAtual = url;
+    if (url){
+      try { $('qr').innerHTML = svgQR(url); }
+      catch (e){ urlAtual = ''; msg = 'Esse link é grande demais para caber num QR Code.'; }
+    }
+    if (!urlAtual) $('qr').innerHTML = '<div class="vazioQR">' + esc(msg) + '</div>';
+    $('tituloQR').innerHTML = urlAtual ? esc(tituloAtual) : '';
+    $('endereco').innerHTML = urlAtual ? esc(curto(urlAtual)) : '';
+    var bs = document.querySelectorAll('.precisaQR');
+    for (var i = 0; i < bs.length; i++) bs[i].disabled = !urlAtual;
+    $('avisoLocal').style.display = (LOCAL && urlAtual && tipo !== 'link') ? 'block' : 'none';
+    gravarLS('qr_ultimo', {tipo: tipo, atividade: escolhida, sala: $('sala').value, link: $('link').value, titulo: $('titulo').value});
+  }
+  function mudarTipo(t){
+    tipo = t;
+    var bs = $('tipos').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-tipo') === t ? 'ativo' : '';
+    $('boxAtividade').style.display = t === 'atividade' ? '' : 'none';
+    $('boxSala').style.display = t === 'sala' ? '' : 'none';
+    $('boxLink').style.display = t === 'link' ? '' : 'none';
+    atualizar();
+  }
+  $('tipos').onclick = function(e){ var el = e.target; while (el && el !== this && !el.getAttribute('data-tipo')) el = el.parentNode; if (el && el !== this) mudarTipo(el.getAttribute('data-tipo')); };
+  $('busca').oninput = desenharLista; $('busca').onkeyup = function(){ if (this.value !== this.ultimo){ this.ultimo = this.value; desenharLista(); } };
+  $('selAtividade').onchange = atualizar;
+  $('sala').oninput = atualizar; $('sala').onkeyup = atualizar;
+  $('link').oninput = atualizar; $('link').onchange = atualizar;
+  $('titulo').oninput = atualizar; $('titulo').onkeyup = atualizar;
+
+  // ---------- telão ----------
+  function tamanhoTelao(){
+    var lado = Math.max(140, Math.min(window.innerWidth - 40, window.innerHeight - $('telaoTitulo').offsetHeight - $('telaoEnd').offsetHeight - 60));
+    $('telaoQR').style.width = lado + 'px'; $('telaoQR').style.height = lado + 'px';
+  }
+  function fecharTelao(){ $('telao').style.display = 'none'; }
+  $('btnTela').onclick = function(){
+    if (!urlAtual) return;
+    $('telaoTitulo').innerHTML = esc(tituloAtual); $('telaoEnd').innerHTML = esc(curto(urlAtual));
+    $('telaoQR').innerHTML = svgQR(urlAtual);
+    $('telao').style.display = 'block'; tamanhoTelao();
+  };
+  $('telaoFechar').onclick = fecharTelao;
+  window.addEventListener('resize', function(){ if ($('telao').style.display === 'block') tamanhoTelao(); });
+  document.addEventListener('keydown', function(e){ if ((e.key === 'Escape' || e.keyCode === 27) && $('telao').style.display === 'block') fecharTelao(); });
+
+  // ---------- imprimir, copiar, baixar ----------
+  function imprimir(html){ $('impressao').innerHTML = html; setTimeout(function(){ window.print(); }, 120); }
+  $('btnCartaz').onclick = function(){
+    if (!urlAtual) return;
+    imprimir('<div class="cartaz"><div class="cTitulo">' + esc(tituloAtual || 'Abra no celular') + '</div><div class="cQR">' + svgQR(urlAtual) + '</div>' +
+      '<div class="cInstr">📷 Abra a câmera do celular e aponte para o código</div><div class="cEnd">' + esc(urlAtual) + '</div></div>');
+  };
+  $('btnPequenos').onclick = function(){
+    if (!urlAtual) return;
+    var cel = '<td><div class="pQR">' + svgQR(urlAtual) + '</div><div class="pTit">' + esc(tituloAtual) + '</div><div class="pEnd">' + esc(curto(urlAtual)) + '</div></td>';
+    var linha = '<tr>' + cel + cel + cel + '</tr>';
+    imprimir('<table class="pequenos">' + linha + linha + linha + linha + '</table>');
+  };
+  $('btnCopiar').onclick = function(){
+    if (!urlAtual) return;
+    var ok = false, ta = document.createElement('textarea');
+    ta.value = urlAtual; ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    if (ok) avisar('Link copiado! Cole no grupo da turma, se quiser.'); else window.prompt('Copie o link:', urlAtual);
+  };
+  $('btnBaixar').onclick = function(){
+    if (!urlAtual) return;
+    var qr = qrcode(0, 'M'); qr.addData(urlAtual); qr.make();
+    var n = qr.getModuleCount(), cel = Math.max(4, Math.floor(900 / (n + 8))), lado = cel * (n + 8), topo = tituloAtual ? 100 : 0, r, c;
+    var cv = document.createElement('canvas'); cv.width = lado; cv.height = lado + topo;
+    var x = cv.getContext('2d');
+    x.fillStyle = '#fff'; x.fillRect(0, 0, cv.width, cv.height); x.fillStyle = '#000';
+    if (topo){ x.font = 'bold 42px Arial, Helvetica, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(tituloAtual, lado / 2, 62, lado - 40); }
+    for (r = 0; r < n; r++) for (c = 0; c < n; c++) if (qr.isDark(r, c)) x.fillRect((c + 4) * cel, topo + (r + 4) * cel, cel, cel);
+    var img = cv.toDataURL('image/png'), a = document.createElement('a');
+    if ('download' in a){
+      a.href = img; a.download = 'qrcode-' + (semAcento(tituloAtual).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'atividade') + '.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      avisar('Imagem salva na pasta de downloads.');
+    } else {
+      var w = window.open(''); if (w) w.document.write('<title>QR Code</title><p style="font-family:sans-serif">Toque e segure a imagem para salvar.</p><img src="' + img + '" style="max-width:100%">');
+    }
+  };
+  $('btnAbrir').onclick = function(){ if (urlAtual) window.open(urlAtual, '_blank'); };
+
+  // ---------- início ----------
+  if (LOCAL) $('avisoLocal').innerHTML = 'ℹ️ O Painel está aberto só neste computador, então o código leva para o site publicado (' + esc(curto(SITE)) + '). Se você mudou alguma atividade e ainda não publicou, a mudança não aparece no celular.';
+  var u = lerLS('qr_ultimo') || {}, q = location.search, m;
+  if ((m = /[?&]sala=(\d{4})/.exec(q))){ u.tipo = 'sala'; u.sala = m[1]; }
+  else if ((m = /[?&]atividade=([^&]+)/.exec(q))){ u.tipo = 'atividade'; u.atividade = decodeURIComponent(m[1]); }
+  else if ((m = /[?&]link=([^&]+)/.exec(q))){ u.tipo = 'link'; u.link = decodeURIComponent(m[1]); }
+  escolhida = u.atividade || ''; $('sala').value = u.sala || ''; $('link').value = u.link || ''; $('titulo').value = u.titulo || '';
+  mudarTipo(u.tipo === 'sala' || u.tipo === 'link' ? u.tipo : 'atividade');
+  carregarMenu(function(lista){ itens = lista; desenharLista(); });
+  window.QR = {url: function(){ return urlAtual; }, titulo: function(){ return tituloAtual; }, itens: function(){ return itens; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Lousa digital</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:#eef1f6;
+    font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;-webkit-user-select:none;user-select:none}
+  #barra{position:fixed;top:0;left:0;right:0;z-index:10;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12);
+    display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;padding:3px 4px}
+  .grupo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin:2px 4px;padding-right:6px;border-right:1px solid #e3e7ef}
+  .grupo:last-child{border-right:none}
+  button,select{font:inherit;font-weight:bold;color:#243049;border:2px solid transparent;border-radius:10px;background:#f1f4f9;
+    min-width:42px;height:42px;margin:2px;padding:0 8px;font-size:17px;cursor:pointer}
+  select{padding:0 6px;font-size:15px;border-color:#dde3ee}
+  button.ativo{border-color:#2f80ed;background:#e6f0fe}
+  button .rot{font-size:13px;margin-left:4px}
+  button .txt{font-size:13px}
+  .cor{min-width:32px;width:32px;height:32px;border-radius:50%;padding:0;border:3px solid #fff;box-shadow:0 0 0 1px #c8cfdb}
+  .cor.ativo{box-shadow:0 0 0 3px #243049}
+  .tam{position:relative}
+  .tam i{display:inline-block;border-radius:50%;background:#243049;vertical-align:middle}
+  .borr{display:inline-block;width:20px;height:12px;border-radius:3px;vertical-align:middle;
+    background:-webkit-linear-gradient(left,#f48fb1 0,#f48fb1 55%,#90caf9 55%);background:linear-gradient(90deg,#f48fb1 0,#f48fb1 55%,#90caf9 55%);
+    -webkit-transform:rotate(-20deg);transform:rotate(-20deg)}
+  #pagInfo{font-size:14px;min-width:70px;text-align:center}
+  #area{position:absolute;left:0;right:0;bottom:0;top:52px;background:#fff}
+  #area canvas{position:absolute;left:0;top:0}
+  #cvTinta{cursor:crosshair;touch-action:none;-ms-touch-action:none}
+  #cvVivo{pointer-events:none}
+  #caixaTexto{position:absolute;display:none;z-index:5;border:2px dashed #2f80ed;background:rgba(255,255,255,.92);
+    font-weight:bold;font-family:"Trebuchet MS",Arial,sans-serif;padding:0 4px;min-width:180px;outline:none;border-radius:6px}
+  #mostrarBarra{position:fixed;top:6px;right:6px;z-index:11;display:none;box-shadow:0 2px 8px rgba(0,0,0,.2);background:#fff}
+  #aviso{position:fixed;left:50%;bottom:16px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:12;
+    background:#243049;color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;display:none}
+  #impressao{display:none}
+  @media (max-width:700px){ button .rot{display:none} }
+  @media print{
+    @page{size:landscape;margin:8mm}
+    html,body{height:auto;overflow:visible;background:#fff}
+    #barra,#area,#mostrarBarra,#aviso{display:none !important}
+    #impressao{display:block}
+    #impressao img{width:100%;border:1px solid #ccc}
+  }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="barra">
+  <div class="grupo" id="ferramentas">
+    <button class="ferr ativo" data-f="caneta" title="Caneta (tecla 1)" aria-label="Caneta">✏️<span class="rot">Caneta</span></button>
+    <button class="ferr" data-f="marca" title="Marca-texto (tecla 2)" aria-label="Marca-texto"><span style="background:#ffeb3b;padding:0 5px;border-radius:4px">ab</span><span class="rot">Marca-texto</span></button>
+    <button class="ferr" data-f="borracha" title="Borracha (tecla 3)" aria-label="Borracha"><span class="borr"></span><span class="rot">Borracha</span></button>
+    <button class="ferr" data-f="texto" title="Escrever com o teclado (tecla 4)" aria-label="Texto">🔤<span class="rot">Texto</span></button>
+  </div>
+  <div class="grupo" id="cores"></div>
+  <div class="grupo" id="tamanhos"></div>
+  <div class="grupo">
+    <select id="fundo" title="Fundo da lousa" aria-label="Fundo da lousa">
+      <option value="branco">⬜ Branco</option>
+      <option value="pautado">📓 Pautado</option>
+      <option value="ditado">🔢 Ditado (linhas numeradas)</option>
+      <option value="caligrafia">✍️ Caligrafia</option>
+      <option value="quadriculado">🔲 Quadriculado</option>
+      <option value="verde">💚 Quadro verde</option>
+      <option value="preto">⬛ Quadro preto</option>
+    </select>
+  </div>
+  <div class="grupo">
+    <button id="desfazer" title="Desfazer (Ctrl+Z)" aria-label="Desfazer">↩️<span class="rot">Desfazer</span></button>
+    <button id="refazer" title="Refazer (Ctrl+Y)" aria-label="Refazer">↪️</button>
+    <button id="limpar" title="Apagar tudo nesta página" aria-label="Limpar a página">✖<span class="rot">Limpar</span></button>
+  </div>
+  <div class="grupo">
+    <button id="pagAnt" title="Página anterior" aria-label="Página anterior">◀</button>
+    <span id="pagInfo">Página 1 de 1</span>
+    <button id="pagProx" title="Próxima página" aria-label="Próxima página">▶</button>
+    <button id="pagNova" title="Nova página" aria-label="Nova página">➕</button>
+  </div>
+  <div class="grupo">
+    <button id="salvar" title="Salvar a página como imagem" aria-label="Salvar imagem">💾</button>
+    <button id="imprimir" title="Imprimir a página" aria-label="Imprimir"><span class="txt">Imprimir</span></button>
+    <button id="cheia" title="Tela cheia" aria-label="Tela cheia">🔳</button>
+    <button id="novaLousa" title="Começar uma lousa nova (apaga todas as páginas)" aria-label="Nova lousa"><span class="txt">Nova</span></button>
+    <button id="ocultar" title="Esconder as ferramentas" aria-label="Esconder as ferramentas">▲</button>
+  </div>
+</div>
+<div id="area">
+  <canvas id="cvFundo"></canvas>
+  <canvas id="cvTinta"></canvas>
+  <canvas id="cvVivo"></canvas>
+  <input id="caixaTexto" type="text" autocomplete="off" placeholder="Digite e aperte Enter">
+</div>
+<button id="mostrarBarra" aria-label="Mostrar as ferramentas">▼ Ferramentas</button>
+<div id="aviso"></div>
+<div id="impressao"><img id="imgImp" alt="Página da lousa"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var barra = $('barra'), area = $('area'), cvF = $('cvFundo'), cvT = $('cvTinta'), cvV = $('cvVivo');
+  var ctxF = cvF.getContext('2d'), ctxT = cvT.getContext('2d'), ctxV = cvV.getContext('2d');
+  var DPR = Math.min(window.devicePixelRatio || 1, 2), W = 0, H = 0;
+  var CORES_CLARO = ['#1f2937', '#1d4ed8', '#dc2626', '#15803d', '#7e22ce', '#ea580c'];
+  var CORES_ESCURO = ['#ffffff', '#fde047', '#f9a8d4', '#93c5fd', '#86efac', '#fdba74'];
+  var CORES_MARCA = ['#ffeb3b', '#76ff03', '#ff80ab', '#40c4ff'];
+  var TAM = {caneta: [0.0025, 0.005, 0.01], marca: [0.016, 0.026, 0.04], borracha: [0.02, 0.045, 0.09], texto: [0.025, 0.04, 0.065]};
+  var FUNDO_COR = {branco: '#ffffff', pautado: '#fffef7', ditado: '#fffef7', caligrafia: '#ffffff', quadriculado: '#ffffff', verde: '#2e5e3e', preto: '#1f2428'};
+  var CHAVE = 'lousa_dados';
+  var est = {ferr: 'caneta', cor: {caneta: 0, marca: 0}, tam: {caneta: 1, marca: 1, borracha: 1, texto: 1}};
+  var paginas = [], atual = 0, traco = null, ptrId = null, tempoSalvar = null;
+
+  function pag(){ return paginas[atual]; }
+  function escuro(){ var f = pag().fundo; return f === 'verde' || f === 'preto'; }
+  function corAtual(){
+    if (est.ferr === 'marca') return CORES_MARCA[est.cor.marca];
+    var lista = escuro() ? CORES_ESCURO : CORES_CLARO;
+    return lista[est.cor.caneta] || lista[0];
+  }
+  function avisar(t){ var a = $('aviso'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 2200); }
+
+  // ---------- desenho ----------
+  function linha(c, x1, y1, x2, y2){ c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.stroke(); }
+  function desenharFundo(){
+    var f = pag().fundo, c = ctxF, esp, y, x, n, mx;
+    c.setTransform(DPR, 0, 0, DPR, 0, 0);
+    c.fillStyle = FUNDO_COR[f] || '#fff'; c.fillRect(0, 0, W, H);
+    if (f === 'pautado' || f === 'ditado'){
+      esp = Math.max(30, W / 20);
+      c.strokeStyle = '#a9c6ea'; c.lineWidth = 1.3;
+      for (y = esp * 1.5; y < H; y += esp) linha(c, 0, y, W, y);
+      mx = f === 'ditado' ? esp * 1.7 : esp * 1.2;
+      c.strokeStyle = '#ef9a9a'; c.lineWidth = 1.6; linha(c, mx, 0, mx, H);
+      if (f === 'ditado'){
+        c.fillStyle = '#8a96aa'; c.font = 'bold ' + Math.round(esp * 0.5) + 'px Arial, sans-serif'; c.textAlign = 'right';
+        for (y = esp * 1.5, n = 1; y < H; y += esp, n++) c.fillText(n + '.', mx - 8, y - esp * 0.2);
+      }
+    } else if (f === 'caligrafia'){
+      esp = Math.max(40, W / 12);
+      for (y = esp * 0.7; y + esp < H; y += esp * 1.7){
+        c.lineWidth = 1; c.strokeStyle = '#c5d8f2'; linha(c, 0, y, W, y);
+        if (c.setLineDash) c.setLineDash([8, 6]);
+        c.strokeStyle = '#e3a6a6'; linha(c, 0, y + esp / 2, W, y + esp / 2);
+        if (c.setLineDash) c.setLineDash([]);
+        c.lineWidth = 2; c.strokeStyle = '#5b8fd6'; linha(c, 0, y + esp, W, y + esp);
+      }
+    } else if (f === 'quadriculado'){
+      esp = Math.max(18, W / 45);
+      c.strokeStyle = '#d9e6f6'; c.lineWidth = 1;
+      for (x = esp; x < W; x += esp) linha(c, x, 0, x, H);
+      for (y = esp; y < H; y += esp) linha(c, 0, y, W, y);
+    }
+  }
+  function tracar(c, o, w){
+    var p = o.p, n = p.length, i, lw = Math.max(1, o.w * w);
+    if (n < 2) return;
+    c.save();
+    c.lineCap = 'round'; c.lineJoin = 'round'; c.lineWidth = lw;
+    if (o.f === 'borracha'){ c.globalCompositeOperation = 'destination-out'; c.strokeStyle = c.fillStyle = 'rgba(0,0,0,1)'; }
+    else { c.strokeStyle = c.fillStyle = o.c; if (o.f === 'marca'){ c.globalAlpha = 0.4; c.globalCompositeOperation = o.m || 'source-over'; } }
+    c.beginPath();
+    if (n === 2){ c.arc(p[0] * w, p[1] * w, lw / 2, 0, Math.PI * 2); c.fill(); }
+    else {
+      c.moveTo(p[0] * w, p[1] * w);
+      for (i = 2; i < n - 2; i += 2) c.quadraticCurveTo(p[i] * w, p[i + 1] * w, (p[i] + p[i + 2]) / 2 * w, (p[i + 1] + p[i + 3]) / 2 * w);
+      c.lineTo(p[n - 2] * w, p[n - 1] * w);
+      c.stroke();
+    }
+    c.restore();
+  }
+  function escrever(c, o, w){
+    c.save();
+    c.fillStyle = o.c; c.textBaseline = 'top';
+    c.font = 'bold ' + Math.round(o.s * w) + 'px "Trebuchet MS", Arial, sans-serif';
+    c.fillText(o.txt, o.x * w, o.y * w);
+    c.restore();
+  }
+  function redesenharTinta(){
+    var objs = pag().objs, i, o;
+    ctxT.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctxT.clearRect(0, 0, W, H);
+    for (i = 0; i < objs.length; i++){
+      o = objs[i];
+      if (o.t === 'apagar') ctxT.clearRect(0, 0, W, H);
+      else if (o.t === 'l') tracar(ctxT, o, W);
+      else if (o.t === 'x') escrever(ctxT, o, W);
+    }
+  }
+  function tudo(){ desenharFundo(); redesenharTinta(); atualizarBarra(); }
+
+  // ---------- tamanho da tela ----------
+  function medir(){
+    var oculta = barra.style.display === 'none';
+    area.style.top = (oculta ? 0 : barra.offsetHeight) + 'px';
+    W = area.clientWidth; H = area.clientHeight;
+    [cvF, cvT, cvV].forEach(function(cv){
+      cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+    });
+    ctxV.setTransform(DPR, 0, 0, DPR, 0, 0);
+    tudo();
+  }
+
+  // ---------- barra ----------
+  function montarCores(){
+    var box = $('cores'), lista, i, b, sel, h = '';
+    if (est.ferr === 'borracha'){ box.style.display = 'none'; return; }
+    box.style.display = '';
+    lista = est.ferr === 'marca' ? CORES_MARCA : (escuro() ? CORES_ESCURO : CORES_CLARO);
+    sel = est.ferr === 'marca' ? est.cor.marca : est.cor.caneta;
+    for (i = 0; i < lista.length; i++) h += '<button class="cor' + (i === sel ? ' ativo' : '') + '" data-i="' + i + '" style="background:' + lista[i] + '" aria-label="Cor ' + (i + 1) + '"></button>';
+    box.innerHTML = h;
+    var bs = box.querySelectorAll('.cor');
+    for (i = 0; i < bs.length; i++) bs[i].onclick = function(){
+      var k = +this.getAttribute('data-i');
+      if (est.ferr === 'marca') est.cor.marca = k; else est.cor.caneta = k;
+      montarCores();
+    };
+  }
+  function montarTamanhos(){
+    var box = $('tamanhos'), i, h = '', d = [6, 11, 18], nomes = ['fino', 'médio', 'grosso'];
+    for (i = 0; i < 3; i++) h += '<button class="tam' + (est.tam[est.ferr] === i ? ' ativo' : '') + '" data-i="' + i + '" title="Traço ' + nomes[i] + '" aria-label="Traço ' + nomes[i] + '"><i style="width:' + d[i] + 'px;height:' + d[i] + 'px"></i></button>';
+    box.innerHTML = h;
+    var bs = box.querySelectorAll('.tam');
+    for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ est.tam[est.ferr] = +this.getAttribute('data-i'); montarTamanhos(); };
+  }
+  function escolherFerr(f){
+    est.ferr = f;
+    var bs = document.querySelectorAll('.ferr'), i;
+    for (i = 0; i < bs.length; i++) bs[i].className = 'ferr' + (bs[i].getAttribute('data-f') === f ? ' ativo' : '');
+    cvT.style.cursor = f === 'texto' ? 'text' : 'crosshair';
+    montarCores(); montarTamanhos();
+  }
+  function atualizarBarra(){
+    $('pagInfo').innerHTML = 'Página ' + (atual + 1) + ' de ' + paginas.length;
+    $('fundo').value = pag().fundo;
+    $('pagAnt').disabled = atual === 0;
+    $('pagProx').disabled = atual === paginas.length - 1;
+    $('desfazer').disabled = !pag().objs.length;
+    $('refazer').disabled = !pag().desfeitos.length;
+    montarCores();
+  }
+
+  // ---------- guardar no aparelho ----------
+  function gravarAgora(){
+    clearTimeout(tempoSalvar); tempoSalvar = null;
+    try { localStorage.setItem(CHAVE, JSON.stringify({paginas: paginas.map(function(p){ return {fundo: p.fundo, objs: p.objs}; }), atual: atual})); } catch (e) {}
+  }
+  function salvarLocal(){ clearTimeout(tempoSalvar); tempoSalvar = setTimeout(gravarAgora, 300); }
+  window.addEventListener('pagehide', function(){ if (tempoSalvar) gravarAgora(); }, false);
+  window.addEventListener('beforeunload', function(){ if (tempoSalvar) gravarAgora(); }, false);
+  function carregarLocal(){
+    try {
+      var d = JSON.parse(localStorage.getItem(CHAVE));
+      if (d && d.paginas && d.paginas.length){
+        paginas = d.paginas.map(function(p){ return {fundo: FUNDO_COR[p.fundo] ? p.fundo : 'branco', objs: p.objs || [], desfeitos: []}; });
+        atual = Math.min(d.atual || 0, paginas.length - 1);
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  function novaPagina(fundo){ paginas.push({fundo: fundo || 'branco', objs: [], desfeitos: []}); atual = paginas.length - 1; }
+
+  // ---------- traço ----------
+  function ponto(e){ var r = cvT.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; }
+  function arred(v){ return Math.round(v * 10000) / 10000; }
+  function iniciar(pt){
+    if (est.ferr === 'texto') return;
+    var f = est.ferr;
+    traco = {t: 'l', f: f, c: f === 'borracha' ? '' : corAtual(), w: TAM[f][est.tam[f]], p: [arred(pt.x / W), arred(pt.y / W)]};
+    if (f === 'marca') traco.m = escuro() ? 'source-over' : 'multiply';
+    traco.ux = pt.x; traco.uy = pt.y; traco.mx = pt.x; traco.my = pt.y;
+    if (f !== 'marca'){   // um toque já deixa um ponto
+      ctxT.setTransform(DPR, 0, 0, DPR, 0, 0);
+      tracar(ctxT, {t: 'l', f: f, c: traco.c, w: traco.w, p: [pt.x / W, pt.y / W]}, W);
+    }
+  }
+  function mover(pt){
+    if (!traco) return;
+    var dx = pt.x - traco.ux, dy = pt.y - traco.uy;
+    if (dx * dx + dy * dy < 2) return;
+    traco.p.push(arred(pt.x / W), arred(pt.y / W));
+    var nmx = (traco.ux + pt.x) / 2, nmy = (traco.uy + pt.y) / 2;
+    if (traco.f === 'marca'){
+      ctxV.clearRect(0, 0, W, H); tracar(ctxV, traco, W);
+    } else {
+      var c = ctxT;
+      c.save(); c.setTransform(DPR, 0, 0, DPR, 0, 0);
+      c.lineCap = 'round'; c.lineJoin = 'round'; c.lineWidth = Math.max(1, traco.w * W);
+      if (traco.f === 'borracha'){ c.globalCompositeOperation = 'destination-out'; c.strokeStyle = 'rgba(0,0,0,1)'; } else c.strokeStyle = traco.c;
+      c.beginPath(); c.moveTo(traco.mx, traco.my); c.quadraticCurveTo(traco.ux, traco.uy, nmx, nmy); c.stroke();
+      c.restore();
+    }
+    traco.ux = pt.x; traco.uy = pt.y; traco.mx = nmx; traco.my = nmy;
+  }
+  function terminar(){
+    if (!traco) return;
+    var o = traco; traco = null;
+    delete o.ux; delete o.uy; delete o.mx; delete o.my;
+    if (o.f === 'marca'){ ctxV.clearRect(0, 0, W, H); ctxT.setTransform(DPR, 0, 0, DPR, 0, 0); tracar(ctxT, o, W); }
+    pag().objs.push(o); pag().desfeitos = [];
+    atualizarBarra(); salvarLocal();
+  }
+
+  // ---------- texto ----------
+  var caixa = $('caixaTexto'), posTexto = null, textoPendente = null;
+  function abrirTexto(pt){
+    fecharTexto(true);
+    var s = TAM.texto[est.tam.texto] * W;
+    posTexto = pt;
+    caixa.style.left = pt.x + 'px'; caixa.style.top = pt.y + 'px';
+    caixa.style.fontSize = Math.round(s) + 'px'; caixa.style.height = Math.round(s * 1.35) + 'px';
+    caixa.style.color = corAtual(); caixa.style.background = escuro() ? 'rgba(0,0,0,.35)' : 'rgba(255,255,255,.92)';
+    caixa.style.maxWidth = Math.max(200, W - pt.x - 10) + 'px';
+    caixa.value = ''; caixa.style.display = 'block';
+    caixa.focus();   // precisa ser no mesmo toque para o teclado abrir no iPad
+  }
+  function fecharTexto(gravar){
+    if (caixa.style.display !== 'block') return;
+    var t = caixa.value.replace(/^\s+|\s+$/g, '');
+    caixa.style.display = 'none'; caixa.blur();
+    if (gravar && t && posTexto){
+      var s = TAM.texto[est.tam.texto];
+      pag().objs.push({t: 'x', c: corAtual(), s: s, x: arred(posTexto.x / W), y: arred(posTexto.y / W), txt: t});
+      pag().desfeitos = []; redesenharTinta(); atualizarBarra(); salvarLocal();
+    }
+    posTexto = null;
+  }
+  caixa.onkeydown = function(e){
+    if (e.keyCode === 13){ e.preventDefault(); fecharTexto(true); }
+    else if (e.keyCode === 27){ e.preventDefault(); fecharTexto(false); }
+  };
+  caixa.onblur = function(){ fecharTexto(true); };
+
+  // ---------- eventos de ponteiro, toque e mouse ----------
+  if (window.PointerEvent){
+    cvT.addEventListener('pointerdown', function(e){
+      if (ptrId !== null) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      e.preventDefault();
+      if (est.ferr === 'texto'){ textoPendente = ponto(e); return; }
+      ptrId = e.pointerId; try { cvT.setPointerCapture(e.pointerId); } catch (x) {}
+      iniciar(ponto(e));
+    }, false);
+    cvT.addEventListener('pointermove', function(e){ if (e.pointerId === ptrId){ e.preventDefault(); mover(ponto(e)); } }, false);
+    var fimPtr = function(e){
+      if (textoPendente && e.type === 'pointerup'){ var tp = textoPendente; textoPendente = null; abrirTexto(tp); return; }
+      if (e.pointerId === ptrId){ ptrId = null; terminar(); }
+    };
+    cvT.addEventListener('pointerup', fimPtr, false);
+    cvT.addEventListener('pointercancel', fimPtr, false);
+  } else {
+    var toque = function(e, id){ for (var i = 0; i < e.changedTouches.length; i++) if (e.changedTouches[i].identifier === id) return e.changedTouches[i]; return null; };
+    cvT.addEventListener('touchstart', function(e){
+      e.preventDefault();
+      if (ptrId !== null) return;
+      var t = e.changedTouches[0];
+      if (est.ferr === 'texto'){ textoPendente = ponto(t); return; }
+      ptrId = t.identifier; iniciar(ponto(t));
+    }, false);
+    cvT.addEventListener('touchmove', function(e){ e.preventDefault(); var t = toque(e, ptrId); if (t) mover(ponto(t)); }, false);
+    var fimToque = function(e){
+      if (textoPendente && e.type === 'touchend'){ var tp = textoPendente; textoPendente = null; abrirTexto(tp); return; }
+      var t = toque(e, ptrId); if (t){ ptrId = null; terminar(); }
+    };
+    cvT.addEventListener('touchend', fimToque, false);
+    cvT.addEventListener('touchcancel', fimToque, false);
+    var mouseDown = false;
+    cvT.addEventListener('mousedown', function(e){
+      if (e.button !== 0) return;
+      if (est.ferr === 'texto'){ textoPendente = ponto(e); return; }
+      mouseDown = true; iniciar(ponto(e));
+    }, false);
+    window.addEventListener('mousemove', function(e){ if (mouseDown) mover(ponto(e)); }, false);
+    window.addEventListener('mouseup', function(){
+      if (textoPendente){ var tp = textoPendente; textoPendente = null; abrirTexto(tp); return; }
+      if (mouseDown){ mouseDown = false; terminar(); }
+    }, false);
+  }
+
+  // ---------- botões ----------
+  var fs = document.querySelectorAll('.ferr');
+  for (var k = 0; k < fs.length; k++) fs[k].onclick = function(){ fecharTexto(true); escolherFerr(this.getAttribute('data-f')); };
+  $('fundo').onchange = function(){ pag().fundo = this.value; tudo(); salvarLocal(); };
+  function desfazer(){ var p = pag(); if (p.objs.length){ p.desfeitos.push(p.objs.pop()); redesenharTinta(); atualizarBarra(); salvarLocal(); } }
+  function refazer(){ var p = pag(); if (p.desfeitos.length){ p.objs.push(p.desfeitos.pop()); redesenharTinta(); atualizarBarra(); salvarLocal(); } }
+  $('desfazer').onclick = desfazer;
+  $('refazer').onclick = refazer;
+  $('limpar').onclick = function(){
+    var p = pag();
+    if (!p.objs.length || p.objs[p.objs.length - 1].t === 'apagar') return;
+    p.objs.push({t: 'apagar'}); p.desfeitos = [];
+    redesenharTinta(); atualizarBarra(); salvarLocal();
+    avisar('Página limpa. Use "Desfazer" para trazer de volta.');
+  };
+  $('pagAnt').onclick = function(){ if (atual > 0){ fecharTexto(true); atual--; tudo(); salvarLocal(); } };
+  $('pagProx').onclick = function(){ if (atual < paginas.length - 1){ fecharTexto(true); atual++; tudo(); salvarLocal(); } };
+  $('pagNova').onclick = function(){ fecharTexto(true); novaPagina(pag().fundo); tudo(); salvarLocal(); avisar('Página ' + paginas.length + ' criada.'); };
+  $('novaLousa').onclick = function(){
+    if (!confirm('Começar uma lousa nova? Todas as páginas desta lousa serão apagadas.')) return;
+    var f = pag().fundo; paginas = []; novaPagina(f); tudo(); salvarLocal();
+  };
+  function imagem(){
+    var c = document.createElement('canvas'); c.width = cvF.width; c.height = cvF.height;
+    var x = c.getContext('2d'); x.drawImage(cvF, 0, 0); x.drawImage(cvT, 0, 0);
+    return c.toDataURL('image/png');
+  }
+  $('salvar').onclick = function(){
+    fecharTexto(true);
+    var url = imagem(), a = document.createElement('a');
+    if ('download' in a){
+      a.href = url; a.download = 'lousa-pagina-' + (atual + 1) + '.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      avisar('Imagem salva na pasta de downloads.');
+    } else {
+      var w = window.open(''); if (w) w.document.write('<title>Lousa</title><p style="font-family:sans-serif">Toque e segure a imagem para salvar.</p><img src="' + url + '" style="max-width:100%">');
+    }
+  };
+  $('imprimir').onclick = function(){
+    fecharTexto(true);
+    var img = $('imgImp');
+    img.onload = function(){ img.onload = null; window.print(); };
+    img.src = imagem();
+  };
+  $('cheia').onclick = function(){
+    var el = document.documentElement, dentro = window.self !== window.top;
+    var req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    var sair = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+    if (document.fullscreenElement || document.webkitFullscreenElement){ if (sair) sair.call(document); return; }
+    if (dentro){ window.open(location.href, '_blank'); return; }   // dentro do painel, a tela cheia abre a lousa numa aba própria
+    if (!req){ avisar('Este aparelho não tem tela cheia. Esconda as ferramentas com ▲.'); return; }
+    try { req.call(el); } catch (e){ avisar('Não foi possível abrir em tela cheia.'); }
+  };
+  $('ocultar').onclick = function(){ barra.style.display = 'none'; $('mostrarBarra').style.display = 'block'; medir(); };
+  $('mostrarBarra').onclick = function(){ barra.style.display = ''; $('mostrarBarra').style.display = 'none'; medir(); };
+
+  document.addEventListener('keydown', function(e){
+    if (e.target === caixa) return;
+    var ctrl = e.ctrlKey || e.metaKey, tecla = (e.key || '').toLowerCase();
+    if (ctrl && tecla === 'z' && !e.shiftKey){ e.preventDefault(); desfazer(); }
+    else if (ctrl && (tecla === 'y' || (tecla === 'z' && e.shiftKey))){ e.preventDefault(); refazer(); }
+    else if (!ctrl && ['1', '2', '3', '4'].indexOf(tecla) >= 0){ escolherFerr(['caneta', 'marca', 'borracha', 'texto'][+tecla - 1]); }
+  }, false);
+
+  var tempoMedir = null;
+  window.addEventListener('resize', function(){ clearTimeout(tempoMedir); tempoMedir = setTimeout(medir, 120); }, false);
+  window.addEventListener('orientationchange', function(){ setTimeout(medir, 300); }, false);
+
+  // ---------- início ----------
+  var pedido = (location.search.match(/[?&]fundo=([a-z]+)/) || [])[1];
+  if (!carregarLocal()) novaPagina(FUNDO_COR[pedido] ? pedido : 'branco');
+  else if (FUNDO_COR[pedido] && pag().fundo !== pedido){
+    if (pag().objs.length) novaPagina(pedido); else pag().fundo = pedido;
+  }
+  escolherFerr('caneta');
+  medir();
+  window.LOUSA = {paginas: function(){ return paginas; }, atual: function(){ return atual; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

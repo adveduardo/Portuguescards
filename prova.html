@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montar prova ou lista</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;background:#eef1f6;padding:12px}
+  h1{font-size:24px;margin:4px 0 4px}
+  .sub{margin:0 0 12px;color:#566078}
+  .cartao{background:#fff;border-radius:14px;padding:12px 14px;margin:0 0 12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .cartao h2{font-size:18px;margin:0 0 8px}
+  .linha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 -5px}
+  .campo{margin:4px 5px;-webkit-flex:1 1 180px;flex:1 1 180px;min-width:150px}
+  .campo.largo{-webkit-flex-basis:100%;flex-basis:100%}
+  .campo label{display:block;font-size:13px;font-weight:bold;margin-bottom:2px;color:#566078}
+  input[type=text],input[type=number],input[type=date],select,textarea{width:100%;font:inherit;font-size:15px;padding:7px 9px;border:2px solid #d8deea;border-radius:9px;background:#fff;color:#243049}
+  textarea{min-height:56px;resize:vertical}
+  .opcoes label{display:inline-block;margin:4px 16px 4px 0;font-size:15px;cursor:pointer}
+  .opcoes input{width:18px;height:18px;margin-right:6px;vertical-align:-3px}
+  button{font:inherit;font-weight:bold;font-size:15px;border:none;border-radius:10px;padding:9px 14px;margin:3px;cursor:pointer;background:#e9eef6;color:#243049}
+  button.forte{background:#2f80ed;color:#fff}
+  button.verde{background:#27ae60;color:#fff}
+  button.mini{font-size:13px;padding:5px 9px}
+  button:disabled{opacity:.5;cursor:default}
+  .arvore{max-height:380px;overflow:auto;border:1px solid #e3e7ef;border-radius:10px;padding:4px 6px;margin-top:6px}
+  .bg-linha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:3px 0;border-bottom:1px solid #f0f2f7}
+  .bg-mais{min-width:34px;padding:4px 0;margin:0 6px 0 0}
+  .bg-rotulo{-webkit-flex:1;flex:1;font-weight:bold;cursor:pointer}
+  .bg-rotulo small,.bg-item small{font-weight:normal;color:#7a849a}
+  .bg-itens{padding:2px 0 6px 42px}
+  .bg-itens[hidden]{display:none}
+  .bg-item{display:block;padding:2px 0;cursor:pointer}
+  .bg-vazio{padding:10px;color:#7a849a}
+  #resumo,#info{font-size:14px;color:#566078;margin:6px 0}
+  #info.erro{color:#c0392b;font-weight:bold}
+  #lista .q{border:1px solid #e3e7ef;border-radius:10px;padding:8px 10px;margin:6px 0}
+  #lista .q .tema{font-size:12px;color:#7a849a}
+  #lista .q ol{margin:4px 0 2px 22px;padding:0}
+  #lista .q li{margin:1px 0}
+  #lista .q li.certa{color:#1e8449;font-weight:bold}
+  #lista .acoesq{float:right;margin-left:8px}
+  .texto-base{white-space:pre-wrap;background:#f7f9fc;border-left:4px solid #b9c6dc;padding:6px 10px;margin:4px 0;font-size:14px}
+  details summary{cursor:pointer;color:#2f80ed;font-size:14px}
+  #folhas{display:none}
+  @media print{
+    @page{size:A4;margin:13mm 12mm}
+    body{background:#fff;padding:0;color:#000}
+    .tela{display:none !important}
+    #folhas{display:block}
+    body.so-gabarito .folha.prova{display:none}
+    body.so-provas .folha.gab{display:none}
+  }
+  .folha{page-break-after:always;font-family:Arial,Helvetica,sans-serif;color:#000;font-size:11.5pt;line-height:1.35}
+  .folha:last-child{page-break-after:auto}
+  .folha.grande{font-size:15pt}
+  .cab{border-collapse:collapse;width:100%;margin-bottom:6px}
+  .cab td{border:1px solid #000;padding:4px 6px;vertical-align:top;font-size:10.5pt}
+  .folha.grande .cab td{font-size:13pt}
+  .cab .nota{width:22%}
+  .titulo-prova{text-align:center;font-weight:bold;font-size:14pt;margin:8px 0 4px}
+  .instr{font-size:10.5pt;margin:2px 0 10px;font-style:italic}
+  .questoes.duas{-webkit-column-count:2;column-count:2;-webkit-column-gap:9mm;column-gap:9mm}
+  .qp{-webkit-column-break-inside:avoid;break-inside:avoid;page-break-inside:avoid;margin:0 0 10px}
+  .qp .enun b{margin-right:4px}
+  .qp .alts{margin:3px 0 0 16px}
+  .qp .alt{margin:2px 0}
+  .tb{border:1px solid #000;padding:6px 8px;margin:4px 0 8px;white-space:pre-wrap;font-size:10.5pt;break-inside:avoid;page-break-inside:avoid}
+  .folha.grande .tb{font-size:13pt}
+  .gab h3{margin:12px 0 4px;font-size:12pt}
+  .gab table{border-collapse:collapse;margin:2px 0 8px}
+  .gab td,.gab th{border:1px solid #000;padding:3px 7px;text-align:center;font-size:11pt;min-width:26px}
+  .gab .exp{font-size:10pt;margin:2px 0}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div class="tela">
+  <h1>📝 Montar prova ou lista para imprimir</h1>
+  <p class="sub">Escolha os assuntos do Banco de Questões, sorteie, confira e imprima. O gabarito sai numa folha separada.</p>
+
+  <div class="cartao">
+    <h2>1. Cabeçalho</h2>
+    <div class="linha">
+      <div class="campo"><label for="tipo">Tipo</label>
+        <select id="tipo"><option value="Prova">Prova</option><option value="Lista de exercícios">Lista de exercícios</option><option value="Atividade">Atividade</option><option value="Simulado">Simulado</option></select></div>
+      <div class="campo" style="-webkit-flex-grow:3;flex-grow:3"><label for="titulo">Título</label><input id="titulo" type="text" value="Avaliação de Língua Portuguesa"></div>
+    </div>
+    <div class="linha">
+      <div class="campo" style="-webkit-flex-grow:2;flex-grow:2"><label for="escola">Escola</label><input id="escola" type="text" placeholder="Nome da escola"></div>
+      <div class="campo"><label for="professor">Professor(a)</label><input id="professor" type="text"></div>
+      <div class="campo"><label for="disciplina">Disciplina</label><input id="disciplina" type="text" value="Língua Portuguesa"></div>
+    </div>
+    <div class="linha">
+      <div class="campo"><label for="turma">Turma</label><input id="turma" type="text" placeholder="ex.: 7º ano A"></div>
+      <div class="campo"><label for="data">Data</label><input id="data" type="date"></div>
+      <div class="campo"><label for="valor">Valor (opcional)</label><input id="valor" type="text" placeholder="ex.: 10 pontos"></div>
+    </div>
+    <div class="linha"><div class="campo largo"><label for="instrucoes">Instruções</label>
+      <textarea id="instrucoes">Leia com atenção e marque apenas uma alternativa em cada questão.</textarea></div></div>
+    <div class="opcoes">
+      <label><input type="checkbox" id="chkNome" checked>Linha para nome e número</label>
+      <label><input type="checkbox" id="chkNota" checked>Espaço para a nota</label>
+      <label><input type="checkbox" id="chkEmoji" checked>Tirar os emojis do começo dos enunciados</label>
+      <label><input type="checkbox" id="chkGrande">Letra grande (EJA e inclusão)</label>
+      <label><input type="checkbox" id="chkColunas">Duas colunas (economiza papel)</label>
+    </div>
+  </div>
+
+  <div class="cartao">
+    <h2>2. Assuntos</h2>
+    <div class="linha">
+      <div class="campo" style="-webkit-flex-grow:3;flex-grow:3"><input id="busca" type="text" placeholder="🔎 Procurar assunto (ex.: crase, verbo, interpretação)"></div>
+      <div class="campo" style="-webkit-flex-grow:0;flex-grow:0;min-width:0;white-space:nowrap">
+        <button class="mini" id="btnAbrir">➕ Abrir todos</button><button class="mini" id="btnFechar">➖ Fechar todos</button><button class="mini" id="btnDesmarcar">✖ Desmarcar</button></div>
+    </div>
+    <div class="arvore" id="arvore"><div class="bg-vazio">Carregando os assuntos…</div></div>
+    <div id="resumo">Nenhum assunto marcado.</div>
+  </div>
+
+  <div class="cartao">
+    <h2>3. Questões</h2>
+    <div class="linha">
+      <div class="campo"><label for="qtd">Quantas questões?</label><input id="qtd" type="number" min="1" max="100" value="10"></div>
+      <div class="campo"><label for="versoes">Versões</label>
+        <select id="versoes"><option value="1">Uma versão</option><option value="2" selected>Duas (A e B)</option><option value="3">Três (A, B e C)</option><option value="4">Quatro (A, B, C e D)</option></select></div>
+    </div>
+    <div class="opcoes">
+      <label><input type="checkbox" id="chkDistribuir" checked>Distribuir igualmente entre os assuntos marcados</label>
+      <label><input type="checkbox" id="chkEmbaralhar" checked>Nas outras versões, embaralhar também as alternativas</label>
+      <label><input type="checkbox" id="chkExplica">Explicações no gabarito</label>
+    </div>
+    <button class="forte" id="btnSortear">🎲 Sortear as questões</button>
+    <div id="info"></div>
+  </div>
+
+  <div class="cartao" id="cartaoConferir" style="display:none">
+    <h2>4. Conferir <small id="totalQ" style="font-weight:normal;color:#7a849a"></small></h2>
+    <p class="sub" style="margin:0">Em verde está a resposta certa (só aparece aqui e no gabarito). Troque ou tire o que não quiser.</p>
+    <div id="lista"></div>
+    <button id="btnMais">➕ Mais uma questão</button>
+  </div>
+
+  <div class="cartao" id="cartaoImprimir" style="display:none">
+    <h2>5. Imprimir</h2>
+    <button class="verde" id="btnImpProvas">🖨️ Imprimir as provas</button>
+    <button class="verde" id="btnImpGab">🖨️ Imprimir só o gabarito</button>
+    <button id="btnImpTudo">🖨️ Imprimir tudo</button>
+    <button id="btnAba">↗️ Abrir numa aba própria</button>
+    <p class="sub" style="margin:6px 0 0">Dica: na janela de impressão, escolha "Salvar como PDF" para guardar ou mandar por e-mail. O último sorteio fica guardado neste aparelho, e o gabarito sempre corresponde às folhas.</p>
+  </div>
+</div>
+<div id="folhas"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  // mesmas regras do Banco de Questões do PortuguêsCards
+  var BANCO_NOMES = {
+    'quiz': '🏆 Quizzes prontos', 'detetive': '🕵️ Detetive (corrija o erro)',
+    'escolha-sint': 'Sintaxe (revisão)', 'escolha-an': 'Análise sintática', 'escolha-pc': 'Período composto',
+    'escolha-rg': 'Regência', 'escolha-cr': 'Crase', 'escolha-cc': 'Concordância', 'escolha-cl': 'Colocação pronominal',
+    'escolha-verbo': 'Verbo', 'escolha-adj': 'Adjetivo', 'escolha-num': 'Numeral', 'escolha-prep': 'Preposição',
+    'escolha-conj': 'Conjunção', 'escolha-interj': 'Interjeição', 'escolha-inv': 'Invariáveis (revisão)',
+    'escolha-interp': 'Interpretação de texto', 'escolha-red': 'Redação', 'escolha-fo': 'Fonologia',
+    'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-sg': 'Significação das palavras',
+    'escolha-em': '🎓 Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês',
+    'escolha-qs': 'As palavras QUE e SE', 'escolha-fg': 'Figuras e vícios de linguagem'
+  };
+  var BANCO_ORDEM = ['Interpretação de texto', 'Redação', 'Fonologia', 'Ortografia', 'Acentuação gráfica', 'Significação das palavras',
+    'Morfologia', 'Verbo', 'Adjetivo', 'Numeral', 'Advérbio', 'Pronome', 'Preposição', 'Conjunção', 'Interjeição', 'Invariáveis (revisão)',
+    'Sintaxe (revisão)', 'Análise sintática', 'Período composto', 'Regência', 'Crase', 'Concordância', 'Colocação pronominal',
+    'As palavras QUE e SE', 'Figuras e vícios de linguagem', '🎓 Ensino Médio / ENEM', '🇬🇧 Inglês', '🏆 Quizzes prontos', '🕵️ Detetive (corrija o erro)'];
+  function grupoDoBanco(tipo){
+    if (BANCO_NOMES[tipo]) return BANCO_NOMES[tipo];
+    if (tipo.indexOf('morfo-adv-') === 0) return 'Advérbio';
+    if (tipo.indexOf('morfo-pron-') === 0) return 'Pronome';
+    if (['morfo-plural', 'morfo-feminino', 'morfo-grau', 'morfo-tempos', 'morfo-conjugacao', 'morfo-classifique'].indexOf(tipo) >= 0) return 'Morfologia';
+    if (tipo.indexOf('escolha-') === 0) return '📦 Outros assuntos';
+    return null;
+  }
+  var CLASSES = {substantivo: 'Substantivo', adjetivo: 'Adjetivo', verbo: 'Verbo', artigo: 'Artigo', pronome: 'Pronome', numeral: 'Numeral',
+    adverbio: 'Advérbio', preposicao: 'Preposição', conjuncao: 'Conjunção', interjeicao: 'Interjeição'};
+  var LISTA_CLASSES = ['Substantivo', 'Adjetivo', 'Verbo', 'Artigo', 'Pronome', 'Numeral', 'Advérbio', 'Preposição', 'Conjunção', 'Interjeição'];
+  var ACENTOS = {'á':'a','à':'a','â':'a','ã':'a','ä':'a','é':'e','ê':'e','è':'e','í':'i','î':'i','ó':'o','ô':'o','õ':'o','ö':'o','ú':'u','ü':'u','ç':'c'};
+  function semAcento(t){ return String(t || '').toLowerCase().replace(/[áàâãäéêèíîóôõöúüç]/g, function(c){ return ACENTOS[c]; }); }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function embaralhar(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function lerJSON(url, cb){
+    var x = new XMLHttpRequest();
+    x.open('GET', url, true);
+    x.onreadystatechange = function(){
+      if (x.readyState !== 4) return;
+      if (x.status === 200 || (x.status === 0 && x.responseText)){ try { cb(null, JSON.parse(x.responseText)); } catch (e){ cb(e); } }
+      else cb(new Error('HTTP ' + x.status));
+    };
+    x.send();
+  }
+  function guardar(chave, v){ try { localStorage.setItem(chave, JSON.stringify(v)); } catch (e) {} }
+  function ler(chave){ try { return JSON.parse(localStorage.getItem(chave)); } catch (e){ return null; } }
+
+  // ---------- conversão (as mesmas regras do Banco de Questões) ----------
+  function converter(d, tema){
+    var out = [];
+    function montar(pergunta, opcoes, certa, exp, texto){
+      opcoes = (opcoes || []).map(function(o){ return String(o); }); certa = String(certa);
+      if (!String(pergunta || '').replace(/\s/g, '') || opcoes.indexOf(certa) < 0) return;
+      var outras = embaralhar(opcoes.filter(function(o, i){ return o !== certa && opcoes.indexOf(o) === i; })).slice(0, 3);
+      out.push({q: String(pergunta), ops: embaralhar([certa].concat(outras)), certa: certa, exp: exp ? String(exp) : '', texto: texto ? String(texto) : '', tema: tema});
+    }
+    function certaDe(ops, c){ return typeof c === 'number' ? ops[c] : c; }
+    (d.perguntas || []).forEach(function(p){
+      if (!p || !(p.opcoes instanceof Array)) return;
+      montar((p.imagem ? p.imagem + ' ' : '') + (p.pergunta || ''), p.opcoes, certaDe(p.opcoes, p.correta), p.explica, p.texto);
+    });
+    (d.rodadas || []).forEach(function(r){
+      if (!r || !r.destaque || !(r.opcoes instanceof Array) || r.ouvir) return;
+      var enun = String(r.enunciado || d.instrucao || '').replace(/^\s+|\s+$/g, '');
+      var pergunta = String(r.destaque).replace(/\[([^\]]+)\]/g, '“$1”');
+      if (enun) pergunta = (/[?:]$/.test(enun) ? enun + ' ' : enun + ': ') + pergunta;
+      if (r.imagem) pergunta = r.imagem + ' ' + pergunta;
+      montar(pergunta, r.opcoes, certaDe(r.opcoes, r.correta), r.explica, r.texto);
+    });
+    (d.palavras || []).forEach(function(p){
+      if (!p || !p.palavra || !p.classe) return;
+      var c = CLASSES[semAcento(p.classe)]; if (!c) return;
+      montar('Qual é a classe da palavra “' + p.palavra + '”?', LISTA_CLASSES, c, p.dica || '');
+    });
+    (d.frases || []).forEach(function(f){
+      if (!f || !f.frase || !(f.opcoes instanceof Array)) return;
+      montar('Na frase “' + f.frase + '”, qual palavra corrige o erro “' + f.errada + '”?', f.opcoes, f.correta, f.explica);
+    });
+    return out;
+  }
+  function chave(q){ return q.q + '|' + q.certa; }
+
+  // ---------- árvore de assuntos ----------
+  var BANCO = [], abertos = {}, marcados = {}, porArquivo = {}, cache = {};
+  function tituloLimpo(e){ return String(e.titulo || e.arquivo).replace(/^[^A-Za-zÀ-ÿ0-9]+/, '').replace(/\s*\(\d+ questões\)$/, ''); }
+  function carregarArvore(){
+    lerJSON('dados/indice.json?v=' + Date.now(), function(err, ind){
+      if (err){ $('arvore').innerHTML = '<div class="bg-vazio">Não consegui abrir os assuntos. Abra pelo painel (GitHub Pages).</div>'; return; }
+      var grupos = {}, vistos = {};
+      function por(g, e){
+        if (!g || !e || !e.arquivo || vistos[e.arquivo] || !e.qtd) return;
+        vistos[e.arquivo] = 1; (grupos[g] = grupos[g] || []).push(e); porArquivo[e.arquivo] = e;
+      }
+      (ind.banco || []).forEach(function(e){ por(e.grupo || '📦 Outros assuntos', e); });
+      Object.keys(ind).forEach(function(tipo){ if (tipo !== 'banco') (ind[tipo] || []).forEach(function(e){ por(grupoDoBanco(tipo), e); }); });
+      var nomes = BANCO_ORDEM.filter(function(g){ return grupos[g]; }).concat(Object.keys(grupos).filter(function(g){ return BANCO_ORDEM.indexOf(g) < 0; }));
+      BANCO = nomes.map(function(g){ return {nome: g, itens: grupos[g]}; });
+      desenharArvore();
+    });
+  }
+  function visiveis(g){
+    var b = semAcento($('busca').value).replace(/^\s+|\s+$/g, '');
+    return g.itens.filter(function(e){ return !b || semAcento((e.titulo || e.arquivo) + ' ' + g.nome).indexOf(b) >= 0; });
+  }
+  function desenharArvore(){
+    var buscando = !!$('busca').value.replace(/\s/g, ''), h = '';
+    BANCO.forEach(function(g, gi){
+      var itens = visiveis(g); if (!itens.length) return;
+      var aberto = buscando || abertos[g.nome], marc = itens.filter(function(e){ return marcados[e.arquivo]; }).length;
+      var total = itens.reduce(function(t, e){ return t + (e.qtd || 0); }, 0);
+      h += '<div class="bg-grupo"><div class="bg-linha"><button type="button" class="bg-mais" data-g="' + gi + '">' + (aberto ? '−' : '+') + '</button>' +
+        '<label class="bg-rotulo"><input type="checkbox" data-gc="' + gi + '"' + (marc && marc === itens.length ? ' checked' : '') + '> ' + esc(g.nome) +
+        ' <small>' + itens.length + ' assunto(s) · ' + total + ' questões</small></label></div>' +
+        '<div class="bg-itens"' + (aberto ? '' : ' hidden') + '>' + itens.map(function(e){
+          return '<label class="bg-item"><input type="checkbox" data-a="' + esc(e.arquivo) + '"' + (marcados[e.arquivo] ? ' checked' : '') + '> ' + esc(e.titulo || e.arquivo) + ' <small>(' + e.qtd + ')</small></label>';
+        }).join('') + '</div></div>';
+    });
+    $('arvore').innerHTML = h || '<div class="bg-vazio">Nenhum assunto encontrado.</div>';
+    resumo();
+  }
+  function resumo(){
+    var arqs = Object.keys(marcados), n = arqs.reduce(function(t, a){ return t + ((porArquivo[a] || {}).qtd || 0); }, 0);
+    $('resumo').innerHTML = arqs.length ? '✔️ ' + arqs.length + ' assunto(s) marcado(s) · ' + n + ' questões para sortear' : 'Nenhum assunto marcado.';
+  }
+  $('arvore').onclick = function(e){
+    var t = e.target, g;
+    if (t.getAttribute('data-g') !== null){ g = BANCO[+t.getAttribute('data-g')]; abertos[g.nome] = !abertos[g.nome]; desenharArvore(); }
+  };
+  $('arvore').onchange = function(e){
+    var t = e.target;
+    if (t.getAttribute('data-gc') !== null){
+      visiveis(BANCO[+t.getAttribute('data-gc')]).forEach(function(it){ if (t.checked) marcados[it.arquivo] = true; else delete marcados[it.arquivo]; });
+      desenharArvore();
+    } else if (t.getAttribute('data-a') !== null){
+      if (t.checked) marcados[t.getAttribute('data-a')] = true; else delete marcados[t.getAttribute('data-a')];
+      desenharArvore();
+    }
+  };
+  $('busca').oninput = desenharArvore;
+  $('btnAbrir').onclick = function(){ BANCO.forEach(function(g){ abertos[g.nome] = true; }); desenharArvore(); };
+  $('btnFechar').onclick = function(){ abertos = {}; desenharArvore(); };
+  $('btnDesmarcar').onclick = function(){ marcados = {}; desenharArvore(); };
+
+  // ---------- sorteio ----------
+  var sel = [], versoes = [];
+  function carregarArquivos(arqs, cb){
+    var falta = arqs.length, erro = null;
+    if (!falta) return cb(null);
+    arqs.forEach(function(a){
+      if (cache[a]){ if (!--falta) cb(erro); return; }
+      lerJSON('dados/' + a, function(err, d){
+        if (err) erro = err; else cache[a] = converter(d, tituloLimpo(porArquivo[a] || {arquivo: a}));
+        if (!--falta) cb(erro);
+      });
+    });
+  }
+  function usadas(){ var u = {}; sel.forEach(function(q){ u[chave(q)] = 1; }); return u; }
+  function sortear(n, distribuir){
+    var arqs = embaralhar(Object.keys(marcados)), u = usadas(), filas, out = [], i, fila, q, mudou;
+    filas = arqs.map(function(a){ return embaralhar(cache[a] || []); });
+    if (!distribuir){ filas = [embaralhar([].concat.apply([], filas))]; }
+    while (out.length < n){
+      mudou = false;
+      for (i = 0; i < filas.length && out.length < n; i++){
+        fila = filas[i];
+        while (fila.length){ q = fila.shift(); if (!u[chave(q)]){ u[chave(q)] = 1; out.push(q); mudou = true; break; } }
+      }
+      if (!mudou) break;
+    }
+    return out;
+  }
+  function info(t, erro){ $('info').innerHTML = t; $('info').className = erro ? 'erro' : ''; }
+  $('btnSortear').onclick = function(){
+    var arqs = Object.keys(marcados), n = Math.max(1, Math.min(100, parseInt($('qtd').value, 10) || 10));
+    if (!arqs.length){ info('Marque pelo menos um assunto (toque no + para abrir os grupos).', true); return; }
+    info('⏳ Carregando as questões…');
+    carregarArquivos(arqs, function(err){
+      if (err && !arqs.some(function(a){ return cache[a]; })){ info('Não consegui abrir os assuntos. Abra pelo painel (GitHub Pages).', true); return; }
+      sel = [];
+      sel = sortear(n, $('chkDistribuir').checked);
+      if (!sel.length){ info('Esses assuntos não têm questões de múltipla escolha.', true); return; }
+      info('✅ ' + sel.length + ' questões sorteadas' + (sel.length < n ? ' (só havia essas)' : '') + '. Confira abaixo e imprima.');
+      gerarVersoes(); mostrar(); salvarEstado();
+    });
+  };
+
+  // ---------- versões ----------
+  function blocos(lista){
+    var mapa = {}, out = [];
+    lista.forEach(function(q){
+      if (q.texto){ var k = 'T:' + q.texto; if (!mapa[k]){ mapa[k] = []; out.push(mapa[k]); } mapa[k].push(q); }
+      else out.push([q]);
+    });
+    return out;
+  }
+  function gerarVersoes(){
+    var nv = +$('versoes').value, emb = $('chkEmbaralhar').checked, base = blocos(sel), v;
+    sel = [].concat.apply([], base);   // questões do mesmo texto ficam juntas
+    versoes = [];
+    for (v = 0; v < nv; v++){
+      var bl = v === 0 ? base : embaralhar(base).map(function(b){ return b.length > 1 ? embaralhar(b) : b; }), qs = [];
+      bl.forEach(function(b){ b.forEach(function(q){
+        var ops = (v === 0 || !emb) ? q.ops.slice() : embaralhar(q.ops);
+        qs.push({i: sel.indexOf(q), ops: ops});
+      }); });
+      versoes.push(qs);
+    }
+  }
+  function letraCerta(q, ops){ return 'abcd'.charAt(ops.indexOf(q.certa)); }
+
+  // ---------- conferir ----------
+  var RE_EMOJI = /^(?:[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2190-\u21FF\u2300-\u27BF\u2B00-\u2BFF\uFE0F\u200D\u20E3])+\s*/;
+  function enunciado(q){
+    var t = q.q;
+    if ($('chkEmoji').checked) t = t.replace(RE_EMOJI, '');
+    if (q.texto) t = t.replace(/^\([^)]{1,90}\)\s*/, '');
+    return t;
+  }
+  function mostrar(){
+    $('cartaoConferir').style.display = sel.length ? '' : 'none';
+    $('cartaoImprimir').style.display = sel.length ? '' : 'none';
+    $('totalQ').innerHTML = sel.length + ' questões';
+    var h = '', ultimoTexto = '';
+    sel.forEach(function(q, i){
+      h += '<div class="q"><span class="acoesq"><button class="mini" data-trocar="' + i + '">🔄 Trocar</button><button class="mini" data-tirar="' + i + '">🗑️ Tirar</button></span>' +
+        '<div class="tema">' + esc(q.tema) + '</div>';
+      if (q.texto && q.texto !== ultimoTexto) h += '<details><summary>📖 Texto-base</summary><div class="texto-base">' + esc(q.texto) + '</div></details>';
+      ultimoTexto = q.texto;
+      h += '<b>' + (i + 1) + '.</b> ' + esc(enunciado(q)) + '<ol type="a">' + q.ops.map(function(o){ return '<li' + (o === q.certa ? ' class="certa"' : '') + '>' + esc(o) + (o === q.certa ? ' ✅' : '') + '</li>'; }).join('') + '</ol></div>';
+    });
+    $('lista').innerHTML = h;
+  }
+  $('lista').onclick = function(e){
+    var t = e.target, i;
+    if (t.getAttribute('data-trocar') !== null){
+      i = +t.getAttribute('data-trocar');
+      carregarArquivos(Object.keys(marcados), function(){ trocar(i); });
+    } else if (t.getAttribute('data-tirar') !== null){
+      sel.splice(+t.getAttribute('data-tirar'), 1); gerarVersoes(); mostrar(); salvarEstado();
+    }
+  };
+  function trocar(i){
+      var tema = sel[i].tema, u = usadas(), candidatos = [];
+      Object.keys(marcados).forEach(function(a){ (cache[a] || []).forEach(function(q){ if (!u[chave(q)]) candidatos.push(q); }); });
+      if (!candidatos.length){ info('Não há mais questões diferentes nesses assuntos.', true); return; }
+      var mesmo = candidatos.filter(function(q){ return q.tema === tema; });
+      var nova = (mesmo.length ? mesmo : candidatos)[Math.floor(Math.random() * (mesmo.length || candidatos.length))];
+      sel[i] = nova; gerarVersoes(); mostrar(); salvarEstado();
+  }
+  $('btnMais').onclick = function(){
+    carregarArquivos(Object.keys(marcados), function(){
+      var mais = sortear(1, false);
+      if (!mais.length){ info('Não há mais questões diferentes nesses assuntos.', true); return; }
+      sel.push(mais[0]); gerarVersoes(); mostrar(); salvarEstado();
+    });
+  };
+  $('versoes').onchange = $('chkEmbaralhar').onchange = function(){ if (sel.length){ gerarVersoes(); salvarEstado(); } };
+  $('chkEmoji').onchange = function(){ mostrar(); salvarCabecalho(); };
+
+  // ---------- folhas de impressão ----------
+  var CAMPOS = ['tipo', 'titulo', 'escola', 'professor', 'disciplina', 'turma', 'data', 'valor', 'instrucoes'];
+  var CHECKS = ['chkNome', 'chkNota', 'chkEmoji', 'chkGrande', 'chkColunas', 'chkDistribuir', 'chkEmbaralhar', 'chkExplica'];
+  function dataBR(v){ var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : (v || ''); }
+  function cabecalho(letra){
+    var v = function(id){ return esc($(id).value.replace(/^\s+|\s+$/g, '')); }, nv = versoes.length;
+    var h = '<table class="cab">' +
+      '<tr><td colspan="' + ($('chkNota').checked ? 3 : 4) + '"><b>Escola:</b> ' + v('escola') + '</td>' + ($('chkNota').checked ? '<td class="nota" rowspan="3"><b>Nota:</b></td>' : '') + '</tr>' +
+      '<tr><td colspan="2"><b>Professor(a):</b> ' + v('professor') + '</td><td' + ($('chkNota').checked ? '' : ' colspan="2"') + '><b>Disciplina:</b> ' + v('disciplina') + '</td></tr>' +
+      '<tr><td><b>Turma:</b> ' + v('turma') + '</td><td><b>Data:</b> ' + esc(dataBR($('data').value)) + '</td><td' + ($('chkNota').checked ? '' : ' colspan="2"') + '><b>Valor:</b> ' + v('valor') + '</td></tr>';
+    if ($('chkNome').checked) h += '<tr><td colspan="' + ($('chkNota').checked ? 3 : 3) + '"><b>Nome:</b></td><td><b>Nº:</b></td></tr>';
+    h += '</table><div class="titulo-prova">' + v('titulo') + (nv > 1 ? ' — Versão ' + letra : '') + '</div>';
+    if ($('instrucoes').value.replace(/\s/g, '')) h += '<div class="instr">' + v('instrucoes') + '</div>';
+    return h;
+  }
+  function montarFolhas(){
+    var L = 'ABCD', grande = $('chkGrande').checked ? ' grande' : '', h = '';
+    versoes.forEach(function(qs, v){
+      var ultimo = '', corpo = '';
+      qs.forEach(function(item, n){
+        var q = sel[item.i];
+        if (q.texto && q.texto !== ultimo) corpo += '<div class="tb"><b>Leia o texto para responder às próximas questões.</b>\n\n' + esc(q.texto) + '</div>';
+        ultimo = q.texto;
+        corpo += '<div class="qp"><div class="enun"><b>' + (n + 1) + '.</b>' + esc(enunciado(q)) + '</div><div class="alts">' +
+          item.ops.map(function(o, k){ return '<div class="alt">' + 'abcd'.charAt(k) + ') ' + esc(o) + '</div>'; }).join('') + '</div></div>';
+      });
+      h += '<div class="folha prova' + grande + '">' + cabecalho(L.charAt(v)) + '<div class="questoes' + ($('chkColunas').checked ? ' duas' : '') + '">' + corpo + '</div></div>';
+    });
+    var gab = '<div class="folha gab"><div class="titulo-prova">Gabarito — ' + esc($('titulo').value) + (($('turma').value) ? ' — ' + esc($('turma').value) : '') + '</div>';
+    versoes.forEach(function(qs, v){
+      if (versoes.length > 1) gab += '<h3>Versão ' + L.charAt(v) + '</h3>';
+      for (var ini = 0; ini < qs.length; ini += 10){
+        var parte = qs.slice(ini, ini + 10);
+        gab += '<table><tr>' + parte.map(function(x, k){ return '<th>' + (ini + k + 1) + '</th>'; }).join('') + '</tr><tr>' +
+          parte.map(function(x){ return '<td>' + letraCerta(sel[x.i], x.ops) + '</td>'; }).join('') + '</tr></table>';
+      }
+      if ($('chkExplica').checked) qs.forEach(function(x, n){
+        var q = sel[x.i];
+        gab += '<div class="exp"><b>' + (n + 1) + '. ' + letraCerta(q, x.ops) + ')</b> ' + esc(q.certa) + (q.exp ? ' — ' + esc(q.exp) : '') + ' <i>(' + esc(q.tema) + ')</i></div>';
+      });
+    });
+    $('folhas').innerHTML = h + gab + '</div>';
+  }
+  function imprimir(modo){
+    if (!sel.length) return;
+    montarFolhas();
+    document.body.className = modo;
+    setTimeout(function(){ window.print(); setTimeout(function(){ document.body.className = ''; }, 500); }, 60);
+  }
+  $('btnImpProvas').onclick = function(){ imprimir('so-provas'); };
+  $('btnImpGab').onclick = function(){ imprimir('so-gabarito'); };
+  $('btnImpTudo').onclick = function(){ imprimir(''); };
+  $('btnAba').onclick = function(){ salvarEstado(); window.open(location.href.split('#')[0], '_blank'); };
+
+  // ---------- guardar neste aparelho ----------
+  function salvarCabecalho(){
+    var d = {};
+    CAMPOS.forEach(function(id){ if (id !== 'data') d[id] = $(id).value; });
+    CHECKS.forEach(function(id){ d[id] = $(id).checked; });
+    d.versoes = $('versoes').value; d.qtd = $('qtd').value;
+    guardar('prova_cabecalho', d);
+  }
+  function salvarEstado(){
+    salvarCabecalho();
+    guardar('prova_ultima', {sel: sel, versoes: versoes, marcados: marcados, data: $('data').value});
+  }
+  var TITULOS = {'Prova': 'Avaliação de Língua Portuguesa', 'Lista de exercícios': 'Lista de exercícios de Língua Portuguesa', 'Atividade': 'Atividade de Língua Portuguesa', 'Simulado': 'Simulado de Língua Portuguesa'};
+  $('tipo').onchange = function(){
+    var atual = $('titulo').value, padrao = false;
+    Object.keys(TITULOS).forEach(function(k){ if (TITULOS[k] === atual || !atual) padrao = true; });
+    if (padrao) $('titulo').value = TITULOS[this.value];
+    salvarCabecalho();
+  };
+  CAMPOS.forEach(function(id){ $(id).addEventListener('change', salvarCabecalho, false); });
+  CHECKS.forEach(function(id){ if (id !== 'chkEmoji') $(id).addEventListener('change', salvarCabecalho, false); });
+  $('qtd').addEventListener('change', salvarCabecalho, false);
+
+  (function iniciar(){
+    var hoje = new Date(), d = ler('prova_cabecalho'), u = ler('prova_ultima');
+    $('data').value = hoje.getFullYear() + '-' + ('0' + (hoje.getMonth() + 1)).slice(-2) + '-' + ('0' + hoje.getDate()).slice(-2);
+    if (d){
+      CAMPOS.forEach(function(id){ if (d[id] !== undefined && id !== 'data') $(id).value = d[id]; });
+      CHECKS.forEach(function(id){ if (d[id] !== undefined) $(id).checked = d[id]; });
+      if (d.versoes) $('versoes').value = d.versoes;
+      if (d.qtd) $('qtd').value = d.qtd;
+    }
+    if (u && u.sel && u.sel.length){
+      sel = u.sel; versoes = u.versoes || []; marcados = u.marcados || {};
+      if (u.data) $('data').value = u.data;
+      if (!versoes.length) gerarVersoes();
+      info('Último sorteio recuperado (' + sel.length + ' questões). Pode imprimir ou sortear de novo.');
+      mostrar();
+    }
+    carregarArvore();
+  })();
+  window.PROVA = {sel: function(){ return sel; }, versoes: function(){ return versoes; }, montarFolhas: montarFolhas};   // usado nos testes
+})();
+</script>
+</body>
+</html>
