@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Lagoa das Palavras</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:#3aa6d8}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#1f3550;-webkit-user-select:none;user-select:none}
+  #lagoa{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-action:none}
+  #hud{position:fixed;left:0;right:0;top:0;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;
+    -webkit-justify-content:center;justify-content:center;padding:6px 8px;z-index:5;pointer-events:none}
+  #hud .chip{background:rgba(255,255,255,.92);border-radius:14px;padding:5px 12px;margin:3px;font-weight:bold;font-size:17px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  #hud .alvo{color:#fff;font-size:20px}
+  #hud button{pointer-events:auto}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#1f3550;background:#fff;padding:9px 14px;margin:3px;font-size:16px;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+  button.forte{background:#22b573;color:#fff;font-size:22px;padding:12px 24px;box-shadow:0 4px 0 #168a56}
+  .tela{position:fixed;left:0;top:0;right:0;bottom:0;z-index:10;display:none;overflow:auto;-webkit-overflow-scrolling:touch;background:rgba(20,50,80,.55);padding:14px}
+  .tela.ativa{display:block}
+  .cartao{background:#fff;border-radius:26px;max-width:760px;margin:20px auto;padding:18px 20px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.3)}
+  .cartao h1{margin:0 0 6px;font-size:32px;color:#0f6aa8}
+  .cartao h2{margin:4px 0 10px;font-size:26px}
+  .dica{font-size:15px;color:#4a607a;margin:6px 0}
+  .linha{margin:10px 0;font-size:17px;text-align:left}
+  .linha select{font:inherit;font-size:16px;padding:6px 8px;border:2px solid #cfe0f2;border-radius:10px;background:#fff;max-width:100%}
+  .regras{text-align:left;font-size:16px;line-height:1.45;padding-left:22px;margin:8px 0}
+  .alvoGrande{display:inline-block;color:#fff;font-size:30px;font-weight:bold;border-radius:18px;padding:8px 20px;margin:8px 0}
+  .opsB{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:10px 0}
+  .opsB button{color:#fff;font-size:22px;padding:12px 18px;min-width:150px}
+  .opsB button.certa{outline:5px solid #2ecc71;outline-offset:2px}
+  .opsB button.apagada{opacity:.45}
+  .palavraB{font-size:34px;font-weight:bold;color:#0f6aa8;margin:6px 0}
+  .ranking{text-align:left;max-width:520px;margin:10px auto}
+  .ranking div{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;background:#f3f8fd;border-radius:14px;padding:8px 12px;margin:6px 0;font-size:20px;font-weight:bold}
+  .ranking div span:last-child{margin-left:auto}
+  #aviso{position:fixed;left:50%;bottom:16px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#1f3550;color:#fff;padding:10px 18px;border-radius:14px;font-size:18px;z-index:8;display:none;max-width:92%;text-align:center}
+  @media (max-width:600px){ #hud .chip{font-size:14px;padding:4px 8px} #hud .alvo{font-size:16px} .cartao h1{font-size:26px} .alvoGrande{font-size:24px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<canvas id="lagoa"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hFase"></span>
+  <span class="chip" id="hEquipe"></span>
+  <span class="chip alvo" id="hAlvo"></span>
+  <span class="chip" id="hPatos"></span>
+  <span class="chip" id="hVidas"></span>
+  <span class="chip" id="hPontos"></span>
+  <span class="chip" id="hTempo" style="display:none"></span>
+  <button type="button" id="btPausa" title="Pausar (barra de espaço)">⏸️</button>
+  <button type="button" id="btSom"></button>
+</div>
+<div id="aviso"></div>
+
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🐥 Lagoa das Palavras</h1>
+  <p class="dica" style="font-size:17px">Guie a pata pela lagoa e pegue só as palavras do grupo pedido. Cada acerto ganha um patinho na fila!</p>
+  <div class="linha"><b>Palavras:</b> <select id="selArquivo"><option value="">carregando…</option></select><div class="dica" id="infoArq"></div></div>
+  <div class="linha"><b>Quem joga:</b> <select id="selEquipes"><option value="0">uma pessoa ou a turma toda</option><option value="2">2 equipes (revezam a cada fase)</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></div>
+  <div class="linha"><b>Fases:</b> <select id="selFases"><option value="3">3</option><option value="4">4</option><option value="6" selected>6</option><option value="8">8</option></select>
+    &nbsp; <b>Patinhos por fase:</b> <select id="selMeta"><option value="5">5</option><option value="8" selected>8</option><option value="10">10</option></select></div>
+  <div class="linha"><b>Velocidade:</b> <select id="selVel"><option value="0.75">devagar</option><option value="1" selected>normal</option><option value="1.3">rápida</option></select>
+    &nbsp; <b>Tempo por fase:</b> <select id="selTempo"><option value="0" selected>sem tempo</option><option value="60">1 minuto</option><option value="90">1 minuto e meio</option></select></div>
+  <ol class="regras">
+    <li><b>Para guiar a pata:</b> setas do teclado (ou W A S D), ou toque e segure na tela no lugar para onde ela deve nadar.</li>
+    <li><b>Acertou</b> (palavra do grupo pedido): ganha um patinho e 10 pontos.</li>
+    <li><b>Errou:</b> um patinho foge e você perde um ❤️. A tela mostra a classe certa da palavra.</li>
+    <li>Completou a fila: <b>pergunta bônus</b> (+20 pontos) e a próxima fase pede outro grupo.</li>
+  </ol>
+  <button type="button" class="forte" id="btComecar">🐥 Começar</button>
+</div></div>
+
+<div class="tela" id="tFase"><div class="cartao" id="cFase"></div></div>
+<div class="tela" id="tBonus"><div class="cartao" id="cBonus"></div></div>
+<div class="tela" id="tPausa"><div class="cartao"><h2>⏸️ Pausa</h2><p class="dica" id="pausaAlvo"></p><button type="button" class="forte" id="btContinuar">▶️ Continuar</button> <button type="button" id="btSairJogo">⏹️ Terminar</button></div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = Sala.esc;
+  var CLASSES = {
+    substantivo: {nome: 'Substantivo', plural: 'SUBSTANTIVOS', cor: '#2f80ed', def: 'dão nome a pessoas, animais, objetos, lugares e sentimentos'},
+    adjetivo: {nome: 'Adjetivo', plural: 'ADJETIVOS', cor: '#27ae60', def: 'mostram uma característica do substantivo'},
+    verbo: {nome: 'Verbo', plural: 'VERBOS', cor: '#e74c3c', def: 'indicam ação, estado ou fenômeno da natureza'},
+    artigo: {nome: 'Artigo', plural: 'ARTIGOS', cor: '#8e44ad', def: 'vêm antes do substantivo: o, a, um, uma…'},
+    pronome: {nome: 'Pronome', plural: 'PRONOMES', cor: '#e67e22', def: 'substituem ou acompanham o nome: eu, ele, meu…'},
+    numeral: {nome: 'Numeral', plural: 'NUMERAIS', cor: '#16a085', def: 'indicam quantidade ou ordem: dois, primeiro…'},
+    adverbio: {nome: 'Advérbio', plural: 'ADVÉRBIOS', cor: '#c2185b', def: 'indicam tempo, lugar, modo ou intensidade'},
+    preposicao: {nome: 'Preposição', plural: 'PREPOSIÇÕES', cor: '#795548', def: 'ligam duas palavras: de, em, para, com…'},
+    conjuncao: {nome: 'Conjunção', plural: 'CONJUNÇÕES', cor: '#546e7a', def: 'ligam orações ou termos: e, mas, porque…'},
+    interjeicao: {nome: 'Interjeição', plural: 'INTERJEIÇÕES', cor: '#b7791f', def: 'expressam emoção: oba!, ai!, ufa!'}
+  };
+  var CODIGOS = {s: 'substantivo', a: 'adjetivo', v: 'verbo', t: 'artigo', p: 'pronome', n: 'numeral', d: 'adverbio', r: 'preposicao', c: 'conjuncao', i: 'interjeicao'};
+  var CORES = ['#2f80ed', '#e74c3c', '#27ae60', '#e67e22', '#8e44ad', '#16a085', '#c2185b', '#795548'];
+  var EQUIPES = [{nome: 'Leões', emoji: '🦁', cor: '#e74c3c'}, {nome: 'Golfinhos', emoji: '🐬', cor: '#2f80ed'}, {nome: 'Pandas', emoji: '🐼', cor: '#27ae60'}, {nome: 'Abelhas', emoji: '🐝', cor: '#e6a800'}];
+  var dados = null, jogo = null, cv = $('lagoa'), ctx = cv.getContext('2d'), W = 0, H = 0, ESC = 1, rodando = false, ultimo = 0, teclas = {}, toque = null, avisoT = null;
+
+  // ---------- utilidades ----------
+  function aleat(a, b){ return a + Math.random() * (b - a); }
+  function sortear(l){ return l[Math.floor(Math.random() * l.length)]; }
+  function avisar(t, ms){ var a = $('aviso'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisoT); avisoT = setTimeout(function(){ a.style.display = 'none'; }, ms || 2200); }
+  function mostrarTela(id){ var ts = document.querySelectorAll('.tela'); for (var i = 0; i < ts.length; i++) ts[i].className = 'tela' + (ts[i].id === id ? ' ativa' : ''); }
+  function xhr(url, ok, falha){
+    var x = new XMLHttpRequest();
+    x.onreadystatechange = function(){ if (x.readyState !== 4) return; if (x.status === 200 || (x.status === 0 && x.responseText)){ try { ok(JSON.parse(x.responseText)); } catch (e) { falha(); } } else falha(); };
+    try { x.open('GET', url, true); x.send(); } catch (e) { falha(); }
+  }
+  function codigoClasse(c){
+    var k = Sala.semAcento(String(c || '')).replace(/[^a-z]/g, '');
+    if (CODIGOS[k]) return CODIGOS[k];
+    for (var id in CLASSES) if (Sala.semAcento(id) === k || Sala.semAcento(CLASSES[id].nome) === k) return id;
+    return '';
+  }
+
+  // ---------- palavras (os mesmos arquivos dos Cestos) ----------
+  function normalizar(d){
+    var cats = {}, pal = [];
+    if (d && d.cestos && d.cestos.length){
+      d.cestos.forEach(function(c, i){ var id = String(c.id || c.nome); cats[id] = {nome: String(c.nome || id), plural: String(c.nome || id).toUpperCase(), cor: c.cor || CORES[i % CORES.length], def: ''}; });
+      (d.palavras || []).forEach(function(p){ var id = String(p.cesto || p.classe || ''); if (p.palavra && cats[id]) pal.push({t: String(p.palavra), c: id}); });
+    } else {
+      (d && d.palavras || []).forEach(function(p){ var id = codigoClasse(p.classe); if (p.palavra && id){ if (!cats[id]) cats[id] = CLASSES[id]; pal.push({t: String(p.palavra), c: id}); } });
+    }
+    var conta = {}; pal.forEach(function(p){ conta[p.c] = (conta[p.c] || 0) + 1; });
+    var boas = Object.keys(cats).filter(function(id){ return conta[id] >= 3; });
+    if (boas.length < 2) return null;
+    return {titulo: d.titulo || 'Palavras', cats: cats, palavras: pal, alvos: boas, conta: conta};
+  }
+  function carregarArquivo(arq){
+    $('infoArq').textContent = 'Carregando…'; dados = null;
+    xhr('dados/' + arq, function(d){
+      var n = normalizar(d);
+      if (!n){ $('infoArq').textContent = 'Este arquivo não tem palavras em grupos suficientes.'; return; }
+      dados = n;
+      $('infoArq').textContent = n.titulo + ' • ' + n.palavras.length + ' palavras • grupos: ' + n.alvos.map(function(id){ return n.cats[id].nome; }).join(', ');
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq + '.'; });
+  }
+  xhr('dados/indice.json', function(ind){
+    var l = ind['morfo-cestos'] || [], sel = $('selArquivo'), pedido = (location.search.match(/[?&]arquivo=([\w.-]+\.json)/) || [])[1];
+    sel.innerHTML = l.map(function(e){ return '<option value="' + esc(e.arquivo) + '">' + esc(e.titulo || e.arquivo) + '</option>'; }).join('');
+    if (pedido && !l.some(function(e){ return e.arquivo === pedido; })) sel.innerHTML += '<option value="' + esc(pedido) + '">' + esc(pedido) + '</option>';
+    sel.value = pedido || (l.some(function(e){ return e.arquivo === 'morfo-classes.json'; }) ? 'morfo-classes.json' : (l[0] && l[0].arquivo));
+    if (sel.value) carregarArquivo(sel.value);
+  }, function(){ $('selArquivo').innerHTML = '<option value="morfo-classes.json">Classes de palavras</option>'; carregarArquivo('morfo-classes.json'); });
+  $('selArquivo').onchange = function(){ carregarArquivo(this.value); };
+
+  // ---------- tela ----------
+  function medir(){
+    var dpr = window.devicePixelRatio || 1;
+    W = window.innerWidth; H = window.innerHeight; ESC = Math.max(0.6, Math.min(1.4, Math.min(W, H) / 700));
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!rodando) desenhar(0);
+  }
+  window.addEventListener('resize', medir);
+
+  // ---------- jogo ----------
+  function comecar(){
+    if (!dados){ avisar('Escolha um arquivo de palavras.'); return; }
+    var ne = +$('selEquipes').value, nf = +$('selFases').value, alvos = Sala.embaralhar(dados.alvos), fases = [];
+    for (var i = 0; i < nf; i++) fases.push({alvo: alvos[i % alvos.length], equipe: ne ? i % ne : -1});
+    jogo = {fases: fases, f: 0, meta: +$('selMeta').value, vel: +$('selVel').value, tempo: +$('selTempo').value,
+      equipes: ne ? EQUIPES.slice(0, ne).map(function(e){ return {nome: e.nome, emoji: e.emoji, cor: e.cor, pontos: 0}; }) : [{nome: 'Turma', emoji: '🐥', cor: '#0f6aa8', pontos: 0}]};
+    introFase();
+  }
+  function faseAtual(){ return jogo.fases[jogo.f]; }
+  function equipeAtual(){ var f = faseAtual(); return jogo.equipes[f.equipe < 0 ? 0 : f.equipe]; }
+  function textoAlvo(id){ return 'Pegue só: ' + dados.cats[id].plural; }
+  function introFase(){
+    var f = faseAtual(), c = dados.cats[f.alvo], eq = equipeAtual();
+    rodando = false;
+    $('cFase').innerHTML = '<h2>Fase ' + (jogo.f + 1) + ' de ' + jogo.fases.length + '</h2>' +
+      (jogo.equipes.length > 1 ? '<p style="font-size:24px;font-weight:bold;margin:4px 0">Vez ' + (eq.nome === 'Abelhas' ? 'das ' : 'dos ') + eq.emoji + ' ' + esc(eq.nome) + '</p>' : '') +
+      '<div class="alvoGrande" style="background:' + c.cor + '">' + esc(textoAlvo(f.alvo)) + '</div>' +
+      (c.def ? '<p class="dica" style="font-size:18px">Lembrete: ' + esc(c.plural.toLowerCase()) + ' ' + esc(c.def) + '.</p>' : '') +
+      '<p class="dica">Junte ' + jogo.meta + ' patinhos. Cuidado: palavra errada espanta um patinho e tira um ❤️.</p>' +
+      '<button type="button" class="forte" id="btIrFase">▶️ Começar a fase</button>';
+    mostrarTela('tFase');
+    Sala.falar('Fase ' + (jogo.f + 1) + '. ' + (c.def ? 'Pegue só os ' + c.plural.toLowerCase() + '!' : 'Pegue só: ' + c.nome + '!'));
+    $('btIrFase').onclick = iniciarFase;
+  }
+  function iniciarFase(){
+    var f = faseAtual();
+    mostrarTela('');
+    jogo.pata = {x: W / 2, y: H * 0.6, ang: -Math.PI / 2, alvoAng: -Math.PI / 2};
+    jogo.trilha = []; jogo.filhotes = 0; jogo.vidas = 3; jogo.fugindo = []; jogo.efeitos = []; jogo.sequencia = 0;
+    jogo.velAtual = 150 * ESC * jogo.vel * (1 + 0.07 * jogo.f);
+    jogo.palavras = []; jogo.fimFase = 0;
+    jogo.restante = jogo.tempo ? jogo.tempo : 0;
+    var n = Math.min(9, 6 + Math.floor(jogo.f / 2));
+    for (var i = 0; i < n; i++) jogo.palavras.push(novaPalavra(i % 2 === 0));
+    $('hud').style.display = '';
+    atualizarHud();
+    rodando = true; ultimo = 0; teclas = {}; toque = null;
+    requestAnimationFrame(passo);
+  }
+  function novaPalavra(certa){
+    var f = faseAtual(), lista = dados.palavras.filter(function(p){ return certa ? p.c === f.alvo : p.c !== f.alvo; });
+    var emUso = (jogo.palavras || []).map(function(w){ return w.t; }), cand = lista.filter(function(p){ return emUso.indexOf(p.t) < 0; });
+    var p = sortear(cand.length ? cand : lista), r = 33 * ESC, x, y, k = 0;
+    do {
+      x = aleat(r + 20, W - r - 20); y = aleat(90 + r, H - r - 20); k++;
+    } while (k < 40 && (dist(x, y, jogo.pata.x, jogo.pata.y) < 170 * ESC || (jogo.palavras || []).some(function(w){ return dist(x, y, w.x, w.y) < 3 * r; })));
+    var a = aleat(0, Math.PI * 2), v = aleat(12, 28) * ESC;
+    return {t: p.t, c: p.c, x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: r, fase: aleat(0, 6), nasc: 0};
+  }
+  function dist(a, b, c, d){ var x = a - c, y = b - d; return Math.sqrt(x * x + y * y); }
+
+  // ---------- controles ----------
+  var DIRS = {ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0], w: [0, -1], s: [0, 1], a: [-1, 0], d: [1, 0], W: [0, -1], S: [0, 1], A: [-1, 0], D: [1, 0]};
+  var CODIGO_TECLA = {38: 'ArrowUp', 40: 'ArrowDown', 37: 'ArrowLeft', 39: 'ArrowRight', 87: 'w', 83: 's', 65: 'a', 68: 'd'};
+  function nomeTecla(e){ return e.key && e.key !== 'Unidentified' ? e.key : CODIGO_TECLA[e.keyCode]; }
+  document.addEventListener('keydown', function(e){
+    var k = nomeTecla(e);
+    if ((k === ' ' || k === 'p' || e.keyCode === 32) && jogo && (rodando || $('tPausa').className.indexOf('ativa') >= 0)){ e.preventDefault(); pausar(); return; }
+    if (DIRS[k]){ e.preventDefault(); teclas[k] = true; }
+  });
+  document.addEventListener('keyup', function(e){ var k = nomeTecla(e); if (DIRS[k]) delete teclas[k]; });
+  function ponto(e){ var t = e.touches && e.touches[0] ? e.touches[0] : e; return {x: t.clientX, y: t.clientY}; }
+  cv.addEventListener('touchstart', function(e){ e.preventDefault(); toque = ponto(e); }, false);
+  cv.addEventListener('touchmove', function(e){ e.preventDefault(); toque = ponto(e); }, false);
+  cv.addEventListener('touchend', function(e){ e.preventDefault(); toque = null; }, false);
+  cv.addEventListener('mousedown', function(e){ toque = ponto(e); });
+  window.addEventListener('mousemove', function(e){ if (toque) toque = ponto(e); });
+  window.addEventListener('mouseup', function(){ toque = null; });
+
+  function pausar(){
+    if (!jogo) return;
+    if (rodando){ rodando = false; $('pausaAlvo').innerHTML = esc(textoAlvo(faseAtual().alvo)); mostrarTela('tPausa'); }
+    else if ($('tPausa').className.indexOf('ativa') >= 0){ mostrarTela(''); rodando = true; ultimo = 0; requestAnimationFrame(passo); }
+  }
+  $('btPausa').onclick = pausar;
+  $('btContinuar').onclick = pausar;
+  $('btSairJogo').onclick = function(){ mostrarTela(''); fimDeJogo(); };
+
+  // ---------- laço do jogo ----------
+  function passo(t){
+    if (!rodando) return;
+    var dt = ultimo ? Math.min(0.05, (t - ultimo) / 1000) : 0.016; ultimo = t;
+    atualizar(dt); desenhar(t / 1000);
+    if (rodando) requestAnimationFrame(passo);
+  }
+  function angDif(a, b){ var d = b - a; while (d > Math.PI) d -= Math.PI * 2; while (d < -Math.PI) d += Math.PI * 2; return d; }
+  function atualizar(dt){
+    var p = jogo.pata, dx = 0, dy = 0, k;
+    for (k in teclas){ dx += DIRS[k][0]; dy += DIRS[k][1]; }
+    if (dx || dy) p.alvoAng = Math.atan2(dy, dx);
+    else if (toque && dist(toque.x, toque.y, p.x, p.y) > 12) p.alvoAng = Math.atan2(toque.y - p.y, toque.x - p.x);
+    var giro = 6 * dt, d = angDif(p.ang, p.alvoAng);
+    p.ang += Math.abs(d) < giro ? d : (d > 0 ? giro : -giro);
+    p.x += Math.cos(p.ang) * jogo.velAtual * dt; p.y += Math.sin(p.ang) * jogo.velAtual * dt;
+    var m = 18 * ESC, topo = 70;
+    if (p.x < m){ p.x = m; p.ang = p.alvoAng = Math.PI - p.ang; }
+    if (p.x > W - m){ p.x = W - m; p.ang = p.alvoAng = Math.PI - p.ang; }
+    if (p.y < topo){ p.y = topo; p.ang = p.alvoAng = -p.ang; }
+    if (p.y > H - m){ p.y = H - m; p.ang = p.alvoAng = -p.ang; }
+    jogo.trilha.unshift({x: p.x, y: p.y});
+    var max = (jogo.meta + 3) * 42 * ESC / Math.max(1, jogo.velAtual * dt) + 10;
+    if (jogo.trilha.length > max) jogo.trilha.length = Math.floor(max);
+    jogo.palavras.forEach(function(w){
+      w.nasc = Math.min(1, w.nasc + dt * 3);
+      w.x += w.vx * dt; w.y += w.vy * dt;
+      if (w.x < w.r + 10 || w.x > W - w.r - 10) w.vx = -w.vx;
+      if (w.y < 80 + w.r || w.y > H - w.r - 10) w.vy = -w.vy;
+      w.x = Math.max(w.r + 10, Math.min(W - w.r - 10, w.x)); w.y = Math.max(80 + w.r, Math.min(H - w.r - 10, w.y));
+    });
+    for (var i = 0; i < jogo.palavras.length; i++){
+      var w = jogo.palavras[i];
+      if (w.nasc > 0.6 && dist(w.x, w.y, p.x, p.y) < w.r + 24 * ESC){ pegar(w, i); break; }
+    }
+    jogo.fugindo = jogo.fugindo.filter(function(f){ f.x += f.vx * dt; f.y += f.vy * dt; f.vida -= dt; return f.vida > 0; });
+    jogo.efeitos = jogo.efeitos.filter(function(e){ e.t += dt; return e.t < e.dur; });
+    if (jogo.tempo && !jogo.fimFase){
+      jogo.restante -= dt;
+      if (jogo.restante <= 0){ jogo.restante = 0; terminarFase('tempo'); }
+      else if (Math.ceil(jogo.restante) !== jogo.ultimoSeg){ jogo.ultimoSeg = Math.ceil(jogo.restante); atualizarHud(); if (jogo.ultimoSeg <= 5) Sala.tom(1000, .04, 0, 'square'); }
+    }
+  }
+  function pegar(w, i){
+    var f = faseAtual(), eq = equipeAtual();
+    jogo.palavras.splice(i, 1);
+    if (w.c === f.alvo){
+      jogo.filhotes++; jogo.sequencia++;
+      var pts = 10 + Math.min(10, (jogo.sequencia - 1) * 2);
+      eq.pontos += pts;
+      jogo.efeitos.push({tipo: 'anel', x: w.x, y: w.y, cor: '#2ecc71', t: 0, dur: 0.5});
+      jogo.efeitos.push({tipo: 'texto', x: w.x, y: w.y - 20, txt: '+' + pts, cor: '#1e8449', t: 0, dur: 1});
+      Sala.tom(660 + jogo.filhotes * 40, .1, 0, 'triangle'); Sala.tom(990 + jogo.filhotes * 40, .12, .08, 'triangle');
+      if (jogo.filhotes >= jogo.meta){ atualizarHud(); terminarFase('completa'); return; }
+    } else {
+      jogo.sequencia = 0; jogo.vidas--;
+      var cat = dados.cats[w.c];
+      jogo.efeitos.push({tipo: 'anel', x: w.x, y: w.y, cor: '#e74c3c', t: 0, dur: 0.5});
+      jogo.efeitos.push({tipo: 'flash', t: 0, dur: 0.35});
+      if (jogo.filhotes > 0){
+        var pos = posFilhote(jogo.filhotes - 1) || jogo.pata, a = aleat(0, Math.PI * 2);
+        jogo.filhotes--;
+        jogo.fugindo.push({x: pos.x, y: pos.y, vx: Math.cos(a) * 220 * ESC, vy: Math.sin(a) * 220 * ESC, vida: 1.6});
+      }
+      Sala.tom(240, .25, 0, 'sawtooth'); Sala.tom(180, .3, .15, 'sawtooth');
+      avisar('«' + esc(w.t) + '» é ' + esc(cat.nome.toLowerCase()) + (dados.cats[f.alvo] ? ', não ' + esc(dados.cats[f.alvo].nome.toLowerCase()) : '') + '!', 2600);
+      if (jogo.vidas <= 0){ atualizarHud(); terminarFase('vidas'); return; }
+    }
+    var faltamCertas = jogo.palavras.filter(function(x){ return x.c === f.alvo; }).length;
+    jogo.palavras.push(novaPalavra(faltamCertas < 2 || Math.random() < 0.45));
+    atualizarHud();
+  }
+  function atualizarHud(){
+    var f = faseAtual(), c = dados.cats[f.alvo], eq = equipeAtual(), v = '';
+    for (var i = 0; i < 3; i++) v += i < jogo.vidas ? '❤️' : '♡';
+    $('hFase').textContent = 'Fase ' + (jogo.f + 1) + '/' + jogo.fases.length;
+    $('hEquipe').style.display = jogo.equipes.length > 1 ? '' : 'none';
+    $('hEquipe').textContent = eq.emoji + ' ' + eq.nome;
+    $('hAlvo').textContent = textoAlvo(f.alvo); $('hAlvo').style.background = c.cor;
+    $('hPatos').textContent = '🐥 ' + jogo.filhotes + '/' + jogo.meta;
+    $('hVidas').textContent = v;
+    $('hPontos').textContent = '⭐ ' + eq.pontos;
+    $('hTempo').style.display = jogo.tempo ? '' : 'none';
+    if (jogo.tempo) $('hTempo').textContent = '⏱️ ' + Math.ceil(jogo.restante) + ' s';
+  }
+  function terminarFase(motivo){
+    if (jogo.fimFase) return;
+    jogo.fimFase = motivo; rodando = false;
+    desenhar(performance.now() / 1000);
+    var eq = equipeAtual();
+    if (motivo === 'completa'){
+      var extra = jogo.vidas * 5; eq.pontos += extra;
+      Sala.festa(); Sala.confete(90);
+      setTimeout(function(){ perguntaBonus('🎉 Fila completa! +' + extra + ' pontos pelos ❤️ que sobraram.'); }, 900);
+    } else {
+      Sala.tom(300, .4, 0, 'sine');
+      setTimeout(function(){ mostrarResumo(motivo === 'vidas' ? '💔 Acabaram os corações.' : '⏰ Acabou o tempo.', jogo.filhotes + ' patinhos na fila.'); }, 700);
+    }
+    atualizarHud();
+  }
+  function perguntaBonus(titulo){
+    var p = sortear(dados.palavras), outras = Sala.embaralhar(dados.alvos.filter(function(id){ return id !== p.c; })).slice(0, 3);
+    if (dados.alvos.indexOf(p.c) < 0) outras = outras.slice(0, 2);
+    var ops = Sala.embaralhar(outras.concat([p.c])), eq = equipeAtual(), feito = false;
+    $('cBonus').innerHTML = '<h2>' + titulo + '</h2><p style="font-size:22px;font-weight:bold;margin:6px 0">🎁 Pergunta bônus (+20)</p><p class="dica" style="font-size:18px">A palavra</p>' +
+      '<div class="palavraB">' + esc(p.t) + '</div><p class="dica" style="font-size:18px">é do grupo…</p><div class="opsB" id="opsB">' +
+      ops.map(function(id){ return '<button type="button" data-c="' + esc(id) + '" style="background:' + dados.cats[id].cor + '">' + esc(dados.cats[id].nome) + '</button>'; }).join('') + '</div><div id="resB"></div>';
+    mostrarTela('tBonus');
+    Sala.falar('Pergunta bônus: a palavra ' + p.t + ' é do grupo…');
+    var bs = $('opsB').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){
+      if (feito) return; feito = true;
+      var certo = this.getAttribute('data-c') === p.c;
+      for (var j = 0; j < bs.length; j++){ bs[j].disabled = true; bs[j].className = bs[j].getAttribute('data-c') === p.c ? 'certa' : 'apagada'; }
+      if (certo){ eq.pontos += 20; Sala.plim(); } else Sala.tom(220, .25, 0, 'sawtooth');
+      $('resB').innerHTML = '<p style="font-size:22px;font-weight:bold">' + (certo ? '✅ Isso! +20 pontos' : '❌ É ' + esc(dados.cats[p.c].nome.toLowerCase()) + '.') + '</p><button type="button" class="forte" id="btSegue">➡️ Continuar</button>';
+      $('btSegue').onclick = proximaFase;
+    };
+  }
+  function mostrarResumo(titulo, sub){
+    $('cBonus').innerHTML = '<h2>' + titulo + '</h2><p style="font-size:20px">' + sub + '</p><button type="button" class="forte" id="btSegue">➡️ Continuar</button>';
+    mostrarTela('tBonus');
+    $('btSegue').onclick = proximaFase;
+  }
+  function proximaFase(){
+    jogo.f++;
+    if (jogo.f >= jogo.fases.length) return fimDeJogo();
+    introFase();
+  }
+  function fimDeJogo(){
+    rodando = false; $('hud').style.display = 'none';
+    var ord = jogo.equipes.slice().sort(function(a, b){ return b.pontos - a.pontos; }), med = ['🏆', '2º', '3º', '4º'];
+    $('cFim').innerHTML = '<h1>🐥 Fim da lagoa!</h1>' + (jogo.equipes.length > 1 ? '<h2>' + ord[0].emoji + ' ' + esc(ord[0].nome) + ' venceram!</h2>' : '<h2>⭐ ' + ord[0].pontos + ' pontos</h2>') +
+      '<div class="ranking">' + ord.map(function(e, i){ return '<div><span>' + (jogo.equipes.length > 1 ? med[i] + ' ' : '') + e.emoji + ' ' + esc(e.nome) + '</span><span>⭐ ' + e.pontos + '</span></div>'; }).join('') + '</div>' +
+      '<button type="button" class="forte" id="btDeNovo">🔁 Jogar de novo</button> <button type="button" id="btMudar">⚙️ Mudar as palavras</button>';
+    mostrarTela('tFim'); Sala.festa(); Sala.confete(120);
+    $('btDeNovo').onclick = comecar;
+    $('btMudar').onclick = function(){ mostrarTela('tConfig'); jogo = null; desenhar(0); };
+  }
+
+  // ---------- desenho ----------
+  function posFilhote(i){
+    var alvo = (i + 1) * 42 * ESC, acum = 0, t = jogo.trilha;
+    for (var k = 1; k < t.length; k++){
+      acum += dist(t[k].x, t[k].y, t[k - 1].x, t[k - 1].y);
+      if (acum >= alvo){ var ang = Math.atan2(t[k - 1].y - t[k].y, t[k - 1].x - t[k].x); return {x: t[k].x, y: t[k].y, ang: ang}; }
+    }
+    return null;
+  }
+  function desenharLagoa(tempo){
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#8fdcfb'); g.addColorStop(1, '#2f9fd6');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.lineWidth = 2;
+    for (var i = 0; i < 9; i++){
+      var y = (i + 0.5) * H / 9, ofs = Math.sin(tempo * 0.6 + i) * 30;
+      ctx.beginPath(); ctx.moveTo(W * 0.1 + ofs, y); ctx.quadraticCurveTo(W * 0.3 + ofs, y - 8, W * 0.5 + ofs, y); ctx.quadraticCurveTo(W * 0.7 + ofs, y + 8, W * 0.9 + ofs, y); ctx.stroke();
+    }
+    ctx.fillStyle = '#3c8d40';   // juncos nos cantos de baixo
+    for (var j = 0; j < 6; j++){
+      var bx = j < 3 ? 14 + j * 14 : W - 14 - (j - 3) * 14, alt = 50 + (j % 3) * 18;
+      ctx.beginPath(); ctx.moveTo(bx - 4, H); ctx.quadraticCurveTo(bx + Math.sin(tempo + j) * 4, H - alt / 2, bx, H - alt); ctx.quadraticCurveTo(bx + 4, H - alt / 2, bx + 5, H); ctx.fill();
+    }
+  }
+  function textoMedido(t, maxW, base){
+    var tam = base;
+    ctx.font = 'bold ' + tam + 'px "Trebuchet MS", Arial, sans-serif';
+    while (ctx.measureText(t).width > maxW && tam > 10){ tam--; ctx.font = 'bold ' + tam + 'px "Trebuchet MS", Arial, sans-serif'; }
+    return tam;
+  }
+  function desenharPalavra(w, tempo){
+    var y = w.y + Math.sin(tempo * 2 + w.fase) * 3, s = 0.5 + w.nasc * 0.5, r = w.r * s;
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0,.12)'; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(w.x + 3, y + 5, r, r * 0.8, 0, 0, Math.PI * 2) : ctx.arc(w.x + 3, y + 5, r, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#4caf50'; ctx.beginPath(); ctx.moveTo(w.x, y); ctx.arc(w.x, y, r, 0.35, Math.PI * 2 - 0.05); ctx.closePath(); ctx.fill();   // folha com um corte
+    ctx.strokeStyle = '#2e7d32'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(w.x, y, r * 0.62, 0.6, Math.PI * 1.6); ctx.stroke();
+    var tam = textoMedido(w.t, 180 * ESC, Math.round(23 * ESC)), larg = ctx.measureText(w.t).width + 16 * ESC, alt = tam + 10 * ESC;
+    ctx.fillStyle = 'rgba(255,255,255,.96)';
+    caixa(w.x - larg / 2, y - r - alt + 6 * ESC, larg, alt, alt / 2); ctx.fill();
+    ctx.fillStyle = '#1f3550'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(w.t, w.x, y - r - alt / 2 + 6 * ESC);
+    ctx.restore();
+  }
+  function caixa(x, y, w, h, r){
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arc(x + w - r, y + r, r, -Math.PI / 2, 0); ctx.lineTo(x + w, y + h - r); ctx.arc(x + w - r, y + h - r, r, 0, Math.PI / 2);
+    ctx.lineTo(x + r, y + h); ctx.arc(x + r, y + h - r, r, Math.PI / 2, Math.PI); ctx.lineTo(x, y + r); ctx.arc(x + r, y + r, r, Math.PI, Math.PI * 1.5); ctx.closePath();
+  }
+  function desenharPato(x, y, ang, tam, mae, tempo){
+    ctx.save(); ctx.translate(x, y + Math.sin(tempo * 4 + x * 0.05) * (mae ? 1 : 1.6)); ctx.rotate(ang);
+    ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.beginPath(); ctx.arc(-tam * 0.9, 0, tam * 0.5, 0, Math.PI * 2); ctx.fill();   // marolinha
+    ctx.fillStyle = mae ? '#fffaf0' : '#ffd23f';
+    ctx.beginPath(); if (ctx.ellipse) ctx.ellipse(0, 0, tam, tam * 0.72, 0, 0, Math.PI * 2); else ctx.arc(0, 0, tam, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = mae ? '#d9cbb0' : '#e0a800'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = mae ? '#f0e6d2' : '#f5c000'; ctx.beginPath(); if (ctx.ellipse) ctx.ellipse(-tam * 0.15, 0, tam * 0.55, tam * 0.4, 0, 0, Math.PI * 2); ctx.fill();   // asa
+    ctx.fillStyle = mae ? '#fffaf0' : '#ffd23f'; ctx.beginPath(); ctx.arc(tam * 0.75, 0, tam * 0.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();   // cabeça
+    ctx.fillStyle = '#ff8c1a'; ctx.beginPath(); ctx.moveTo(tam * 1.15, -tam * 0.16); ctx.lineTo(tam * 1.55, 0); ctx.lineTo(tam * 1.15, tam * 0.16); ctx.closePath(); ctx.fill();   // bico
+    ctx.fillStyle = '#1f2a37'; ctx.beginPath(); ctx.arc(tam * 0.88, -tam * 0.2, tam * 0.08, 0, Math.PI * 2); ctx.arc(tam * 0.88, tam * 0.2, tam * 0.08, 0, Math.PI * 2); ctx.fill();   // olhos
+    if (mae){ ctx.fillStyle = '#e8508a'; ctx.beginPath(); ctx.arc(tam * 0.45, -tam * 0.42, tam * 0.16, 0, Math.PI * 2); ctx.arc(tam * 0.45, -tam * 0.08, tam * 0.16, 0, Math.PI * 2); ctx.fill(); }   // laço
+    ctx.restore();
+  }
+  function desenhar(tempo){
+    if (!W) return;
+    desenharLagoa(tempo);
+    if (!jogo || !jogo.pata) return;
+    jogo.palavras.forEach(function(w){ desenharPalavra(w, tempo); });
+    for (var i = jogo.filhotes - 1; i >= 0; i--){ var f = posFilhote(i); if (f) desenharPato(f.x, f.y, f.ang, 15 * ESC, false, tempo + i); }
+    jogo.fugindo.forEach(function(f){ ctx.globalAlpha = Math.max(0, Math.min(1, f.vida)); desenharPato(f.x, f.y, Math.atan2(f.vy, f.vx), 15 * ESC, false, tempo); ctx.globalAlpha = 1; });
+    desenharPato(jogo.pata.x, jogo.pata.y, jogo.pata.ang, 26 * ESC, true, tempo);
+    jogo.efeitos.forEach(function(e){
+      var k = e.t / e.dur;
+      if (e.tipo === 'anel'){ ctx.strokeStyle = e.cor; ctx.globalAlpha = 1 - k; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(e.x, e.y, 20 + k * 50 * ESC, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1; }
+      else if (e.tipo === 'texto'){ ctx.globalAlpha = 1 - k; ctx.fillStyle = e.cor; ctx.font = 'bold ' + Math.round(26 * ESC) + 'px "Trebuchet MS", Arial'; ctx.textAlign = 'center'; ctx.fillText(e.txt, e.x, e.y - k * 40); ctx.globalAlpha = 1; }
+      else if (e.tipo === 'flash'){ ctx.fillStyle = 'rgba(231,76,60,' + (0.3 * (1 - k)) + ')'; ctx.fillRect(0, 0, W, H); }
+    });
+  }
+
+  // ---------- início ----------
+  $('btComecar').onclick = comecar;
+  Sala.botaoSom($('btSom'));
+  medir();
+  (function anima(t){ if (!rodando && (!jogo || !jogo.pata)) desenharLagoa(t / 1000); requestAnimationFrame(anima); })(0);
+  window.LAGOA = {jogo: function(){ return jogo; }, dados: function(){ return dados; }, pegar: function(i){ pegar(jogo.palavras[i], i); }};   // usado nos testes
+})();
+</script>
+</body>
+</html>
