@@ -1,0 +1,5524 @@
+{
+ "titulo": "⭐ Banco completo: Análise sintática (503 questões)",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "🔎 Em \"Ele comprou um carro novo.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "composto",
+    "simples",
+    "oculto (desinencial)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Os alunos da escola visitaram o museu.\"?",
+   "opcoes": [
+    "o museu",
+    "a escola",
+    "Os alunos da escola",
+    "visitaram o museu"
+   ],
+   "correta": "Os alunos da escola",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔎 Em \"Pedro e Ana foram ao cinema.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "composto",
+    "indeterminado"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em \"Fomos de ônibus.\", o adjunto adverbial \"de ônibus\" indica:",
+   "opcoes": [
+    "dúvida",
+    "intensidade",
+    "meio",
+    "finalidade"
+   ],
+   "correta": "meio",
+   "explica": "\"de ônibus\" é adjunto adverbial de meio."
+  },
+  {
+   "pergunta": "🧩 Em \"Gosto de música.\", o termo \"de música\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "agente da passiva",
+    "adjunto adverbial",
+    "objeto direto"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🔗 Em \"Dei um presente ao meu pai.\", o verbo \"dei\" é:",
+   "opcoes": [
+    "de ligação",
+    "transitivo direto",
+    "intransitivo",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "O cachorro latiu.",
+    "O técnico julgou a jogada perigosa.",
+    "Gosto de música.",
+    "Os convidados chegaram cedo."
+   ],
+   "correta": "O técnico julgou a jogada perigosa.",
+   "explica": "Em \"O técnico julgou a jogada perigosa.\", \"perigosa\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🧩 Em \"Tenho confiança em você.\", o termo \"em você\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "aposto",
+    "predicativo do objeto",
+    "sujeito"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de modo?",
+   "opcoes": [
+    "Ela estava muito cansada.",
+    "Os alunos estudaram na biblioteca.",
+    "Estudo para passar.",
+    "Ele trabalhou com dedicação."
+   ],
+   "correta": "Ele trabalhou com dedicação.",
+   "explica": "Em \"Ele trabalhou com dedicação.\", \"com dedicação\" indica modo."
+  },
+  {
+   "pergunta": "🔎 Em \"Terminei a lição.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "composto",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "As flores murcharam.",
+    "Enviei uma carta para minha avó.",
+    "Ela anda triste.",
+    "Comprei um livro."
+   ],
+   "correta": "Comprei um livro.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Há muitas pessoas na fila.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "inexistente (oração sem sujeito)",
+    "indeterminado",
+    "composto"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"Ana escreveu o poema.\" na voz passiva analítica?",
+   "opcoes": [
+    "O poema foi escrito por Ana.",
+    "Ana foi escrita pelo poema.",
+    "O poema escreveu Ana.",
+    "O poema foi escrevido por Ana."
+   ],
+   "correta": "O poema foi escrito por Ana.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "As crianças brincaram no parque.",
+    "Achei o filme interessante.",
+    "A água estava gelada.",
+    "O júri considerou o réu inocente."
+   ],
+   "correta": "As crianças brincaram no parque.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de instrumento?",
+   "opcoes": [
+    "Escrevi com caneta azul.",
+    "Ela fala muito.",
+    "Por causa da chuva, o jogo foi adiado.",
+    "As crianças brincam perto da praia."
+   ],
+   "correta": "Escrevi com caneta azul.",
+   "explica": "Em \"Escrevi com caneta azul.\", \"com caneta azul\" indica instrumento."
+  },
+  {
+   "pergunta": "🔄 Em \"Ela se penteou.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "ativa",
+    "reflexiva",
+    "passiva sintética"
+   ],
+   "correta": "reflexiva",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em \"Saí com meus pais.\", o adjunto adverbial \"com meus pais\" indica:",
+   "opcoes": [
+    "causa",
+    "meio",
+    "companhia",
+    "intensidade"
+   ],
+   "correta": "companhia",
+   "explica": "\"com meus pais\" é adjunto adverbial de companhia."
+  },
+  {
+   "pergunta": "🔗 Em \"Escrevi uma carta.\", o verbo \"escrevi\" é:",
+   "opcoes": [
+    "de ligação",
+    "transitivo direto",
+    "intransitivo",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "O menino caiu da escada.",
+    "O bebê dormiu.",
+    "Meu avô continua forte.",
+    "Ofereci ajuda ao vizinho."
+   ],
+   "correta": "Ofereci ajuda ao vizinho.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "📘 O complemento nominal completa:",
+   "opcoes": [
+    "um vocativo",
+    "um verbo transitivo direto",
+    "um substantivo, adjetivo ou advérbio",
+    "um verbo intransitivo"
+   ],
+   "correta": "um substantivo, adjetivo ou advérbio"
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Minha mãe fez um bolo.\"?",
+   "opcoes": [
+    "fez um bolo",
+    "Minha mãe",
+    "um bolo",
+    "fez"
+   ],
+   "correta": "Minha mãe",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "A menina chegou cansada.",
+    "Ela escreveu uma carta.",
+    "A professora explicou a lição.",
+    "Os pássaros voaram."
+   ],
+   "correta": "A menina chegou cansada.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Os alunos estudaram na biblioteca.\", o termo \"na biblioteca\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "agente da passiva",
+    "vocativo",
+    "aposto"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Ele parece feliz.",
+    "Dei um presente ao meu pai.",
+    "Necessito de descanso.",
+    "Lavei a louça."
+   ],
+   "correta": "Ele parece feliz.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "A plateia sorriu.",
+    "Ele ama a natureza.",
+    "Preciso de ajuda.",
+    "Dei um presente ao meu pai."
+   ],
+   "correta": "A plateia sorriu.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "📘 Em \"Choveu muito\", a oração:",
+   "opcoes": [
+    "tem sujeito indeterminado",
+    "tem sujeito simples",
+    "não tem sujeito",
+    "tem sujeito oculto"
+   ],
+   "correta": "não tem sujeito"
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Duvido de tudo.",
+    "Preciso de ajuda.",
+    "O avião partiu.",
+    "Enviei uma carta para minha avó."
+   ],
+   "correta": "Enviei uma carta para minha avó.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧩 Em \"Considero você inteligente.\", o termo \"inteligente\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "agente da passiva",
+    "predicativo do objeto",
+    "aposto"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🧩 Em \"Chegaram as encomendas.\", o termo \"as encomendas\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "agente da passiva",
+    "objeto direto",
+    "sujeito"
+   ],
+   "correta": "sujeito",
+   "explica": "Sujeito: termo com o qual o verbo concorda."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Precisa-se de vendedores.",
+    "Meu irmão e minha prima estudam juntos.",
+    "Minha mãe fez um bolo.",
+    "Faz dez anos que moro aqui."
+   ],
+   "correta": "Meu irmão e minha prima estudam juntos.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"A professora de Ciências faltou.\"?",
+   "opcoes": [
+    "professora",
+    "faltou",
+    "Ciências",
+    "A"
+   ],
+   "correta": "professora",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de instrumento?",
+   "opcoes": [
+    "Os alunos estudaram na biblioteca.",
+    "Cortei o pão com a faca.",
+    "Ela fala muito.",
+    "O gato dormiu no sofá."
+   ],
+   "correta": "Cortei o pão com a faca.",
+   "explica": "Em \"Cortei o pão com a faca.\", \"com a faca\" indica instrumento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Ofereci ajuda ao vizinho.",
+    "As flores murcharam.",
+    "Duvido de tudo.",
+    "Ele assistiu ao jogo."
+   ],
+   "correta": "As flores murcharam.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🔗 Em \"A criança chorou.\", o verbo \"chorou\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "intransitivo",
+    "transitivo direto e indireto"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Falaram mal de você.",
+    "Come-se bem nesta cidade.",
+    "Roubaram minha bicicleta.",
+    "Comprei um livro novo."
+   ],
+   "correta": "Comprei um livro novo.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "Ele assistiu ao jogo.",
+    "Pedro virou médico.",
+    "Comprei um livro.",
+    "Mostrei as fotos aos amigos."
+   ],
+   "correta": "Ele assistiu ao jogo.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔎 Em \"O técnico julgou a jogada perigosa.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Ninguém respondeu à pergunta.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "simples",
+    "indeterminado",
+    "oculto (desinencial)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Chegaste tarde.",
+    "Choveu muito ontem.",
+    "Disseram que vai chover.",
+    "Trovejou a noite toda."
+   ],
+   "correta": "Chegaste tarde.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🔎 Em \"A professora e os alunos visitaram o museu.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "composto",
+    "indeterminado"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Caiu uma estrela.",
+    "Trata-se de um caso sério.",
+    "Havia poucos alunos na sala.",
+    "Gosto muito de música."
+   ],
+   "correta": "Trata-se de um caso sério.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Arroz, feijão e salada estavam na mesa.",
+    "Roubaram minha bicicleta.",
+    "Terminei a lição.",
+    "Comprei um livro novo."
+   ],
+   "correta": "Arroz, feijão e salada estavam na mesa.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🔎 Em \"Nós fomos ao parque.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔄 Em \"Vendem-se casas.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "passiva sintética",
+    "reflexiva",
+    "passiva analítica"
+   ],
+   "correta": "passiva sintética",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧩 Em \"O menino travesso quebrou o vaso.\", o termo \"travesso\" é:",
+   "opcoes": [
+    "vocativo",
+    "predicativo do objeto",
+    "adjunto adverbial",
+    "adjunto adnominal"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🔎 Em \"Os alunos estavam atentos.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado verbal",
+    "predicado nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔗 Em \"Ele assistiu ao jogo.\", o verbo \"assistiu\" é:",
+   "opcoes": [
+    "intransitivo",
+    "de ligação",
+    "transitivo direto",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Expliquei a lição aos alunos.\", o verbo \"expliquei\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "intransitivo",
+    "de ligação",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "O professor de História explicou a matéria.",
+    "Há muitas pessoas na fila.",
+    "Necessita-se de professores.",
+    "Cães e gatos dormiam na varanda."
+   ],
+   "correta": "Necessita-se de professores.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"A chuva molhou as roupas do varal.\"?",
+   "opcoes": [
+    "molhou as roupas",
+    "o varal",
+    "A chuva",
+    "as roupas do varal"
+   ],
+   "correta": "A chuva",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "Necessito de descanso.",
+    "O sol nasceu.",
+    "Acredito em fadas.",
+    "Elegeram Ana representante da turma."
+   ],
+   "correta": "Elegeram Ana representante da turma.",
+   "explica": "Em \"Elegeram Ana representante da turma.\", \"representante da turma\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Pedro virou médico.",
+    "Ela simpatizou com a vizinha.",
+    "Necessito de descanso.",
+    "Paguei a conta ao garçom."
+   ],
+   "correta": "Pedro virou médico.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔗 Em \"Ana pintou o quadro.\", o verbo \"pintou\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "de ligação",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔄 Em \"O menino quebrou o vaso.\", o verbo está na voz:",
+   "opcoes": [
+    "reflexiva",
+    "ativa",
+    "passiva sintética",
+    "passiva analítica"
+   ],
+   "correta": "ativa",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de lugar?",
+   "opcoes": [
+    "Tremia de frio.",
+    "Cortei o pão com a faca.",
+    "O gato dormiu no sofá.",
+    "Economizei para a viagem."
+   ],
+   "correta": "O gato dormiu no sofá.",
+   "explica": "Em \"O gato dormiu no sofá.\", \"no sofá\" indica lugar."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"Os alunos pintaram o mural.\" na voz passiva analítica?",
+   "opcoes": [
+    "O mural foi pintado pelos alunos.",
+    "Os alunos foram pintados pelo mural.",
+    "O mural pintou os alunos.",
+    "O mural foram pintados pelos alunos."
+   ],
+   "correta": "O mural foi pintado pelos alunos.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🧭 Em \"Por causa da chuva, o jogo foi adiado.\", o adjunto adverbial \"Por causa da chuva\" indica:",
+   "opcoes": [
+    "modo",
+    "companhia",
+    "causa",
+    "negação"
+   ],
+   "correta": "causa",
+   "explica": "\"Por causa da chuva\" é adjunto adverbial de causa."
+  },
+  {
+   "pergunta": "🧭 Em \"Cortei o pão com a faca.\", o adjunto adverbial \"com a faca\" indica:",
+   "opcoes": [
+    "negação",
+    "instrumento",
+    "lugar",
+    "intensidade"
+   ],
+   "correta": "instrumento",
+   "explica": "\"com a faca\" é adjunto adverbial de instrumento."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Aquelas flores amarelas murcharam.\"?",
+   "opcoes": [
+    "flores",
+    "murcharam",
+    "Aquelas",
+    "amarelas"
+   ],
+   "correta": "flores",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"O cachorro latiu a noite toda.\"?",
+   "opcoes": [
+    "a noite toda",
+    "a noite",
+    "O cachorro",
+    "latiu"
+   ],
+   "correta": "O cachorro",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔄 Em \"Alugam-se apartamentos.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "reflexiva",
+    "passiva sintética",
+    "ativa"
+   ],
+   "correta": "passiva sintética",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Gosto de música.",
+    "Confio em você.",
+    "Ela anda triste.",
+    "Ofereci ajuda ao vizinho."
+   ],
+   "correta": "Ela anda triste.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔎 Em \"A professora explicou a lição.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em \"Estudo para passar.\", o adjunto adverbial \"para passar\" indica:",
+   "opcoes": [
+    "lugar",
+    "dúvida",
+    "companhia",
+    "finalidade"
+   ],
+   "correta": "finalidade",
+   "explica": "\"para passar\" é adjunto adverbial de finalidade."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Ele comprou um carro novo.",
+    "O cachorro latiu a noite toda.",
+    "Chegaste tarde.",
+    "Eu e você vamos à festa."
+   ],
+   "correta": "Eu e você vamos à festa.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "Gosto de música.",
+    "Considero você inteligente.",
+    "O avião partiu.",
+    "O bebê dormiu."
+   ],
+   "correta": "Considero você inteligente.",
+   "explica": "Em \"Considero você inteligente.\", \"inteligente\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🧭 Em \"Ele não respondeu.\", o adjunto adverbial \"não\" indica:",
+   "opcoes": [
+    "negação",
+    "companhia",
+    "finalidade",
+    "intensidade"
+   ],
+   "correta": "negação",
+   "explica": "\"não\" é adjunto adverbial de negação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Contei a história às crianças.",
+    "Acredito em fadas.",
+    "O avião partiu.",
+    "A prova foi fácil."
+   ],
+   "correta": "A prova foi fácil.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧩 Em \"Estou certo da vitória.\", o termo \"da vitória\" é:",
+   "opcoes": [
+    "agente da passiva",
+    "objeto direto",
+    "complemento nominal",
+    "predicativo do sujeito"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧩 Em \"Aquele cachorro late muito.\", o termo \"Aquele\" é:",
+   "opcoes": [
+    "adjunto adnominal",
+    "objeto direto",
+    "objeto indireto",
+    "adjunto adverbial"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "Preciso de ajuda.",
+    "A plateia sorriu.",
+    "Nomearam o professor diretor.",
+    "Obedeça aos pais."
+   ],
+   "correta": "Nomearam o professor diretor.",
+   "explica": "Em \"Nomearam o professor diretor.\", \"diretor\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🔎 Em \"Falaram mal de você.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "inexistente (oração sem sujeito)",
+    "indeterminado"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧩 Em \"Elegeram Ana representante da turma.\", o termo \"representante da turma\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "predicativo do objeto",
+    "aposto",
+    "objeto direto"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🔄 Em \"Ela se olhou no espelho.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva sintética",
+    "reflexiva",
+    "ativa",
+    "passiva analítica"
+   ],
+   "correta": "reflexiva",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🔎 Em \"É meio-dia.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "simples",
+    "composto"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "As crianças dormiram tranquilas.",
+    "A sopa está quente.",
+    "O sol nasceu cedo.",
+    "O técnico julgou a jogada perigosa."
+   ],
+   "correta": "A sopa está quente.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Pedro e Ana foram ao cinema.",
+    "Ninguém respondeu à pergunta.",
+    "Terminei a lição.",
+    "Gosto muito de música."
+   ],
+   "correta": "Ninguém respondeu à pergunta.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "Encontrei meu amigo.",
+    "O quadro foi pintado por Tarsila.",
+    "O menino quebrou o vaso.",
+    "Lavei a louça."
+   ],
+   "correta": "O quadro foi pintado por Tarsila.",
+   "explica": "Em \"O quadro foi pintado por Tarsila.\", \"por Tarsila\" é agente da passiva."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"A professora corrigiu as provas.\" na voz passiva analítica?",
+   "opcoes": [
+    "As provas foram corrigidas pela professora.",
+    "As provas corrigiram a professora.",
+    "As provas foi corrigida pela professora.",
+    "A professora foi corrigida pelas provas."
+   ],
+   "correta": "As provas foram corrigidas pela professora.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "O cachorro latiu.",
+    "As flores murcharam.",
+    "Obrigado, amigos, pela ajuda!",
+    "A criança chorou."
+   ],
+   "correta": "Obrigado, amigos, pela ajuda!",
+   "explica": "Em \"Obrigado, amigos, pela ajuda!\", \"amigos\" é vocativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Meu irmão e minha prima estudam juntos.",
+    "Roubaram minha bicicleta.",
+    "É meio-dia.",
+    "Chegaste tarde."
+   ],
+   "correta": "Roubaram minha bicicleta.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧩 Em \"Recife, capital de Pernambuco, é linda.\", o termo \"capital de Pernambuco\" é:",
+   "opcoes": [
+    "objeto direto",
+    "aposto",
+    "vocativo",
+    "adjunto adverbial"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Caiu uma estrela no quintal.\"?",
+   "opcoes": [
+    "o quintal",
+    "no quintal",
+    "uma estrela",
+    "caiu"
+   ],
+   "correta": "uma estrela",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧩 Em \"Acredito em fadas.\", o termo \"em fadas\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "objeto indireto",
+    "complemento nominal",
+    "objeto direto"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "A menina chegou cansada.",
+    "Elegeram Ana representante da turma.",
+    "Gosto de chocolate.",
+    "As crianças dormiram tranquilas."
+   ],
+   "correta": "Gosto de chocolate.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"A chegada dos turistas animou a cidade.\"?",
+   "opcoes": [
+    "chegada",
+    "turistas",
+    "animou",
+    "cidade"
+   ],
+   "correta": "chegada",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "Os convidados chegaram cedo.",
+    "O sol nasceu.",
+    "Encontrei meu amigo.",
+    "Maria, venha cá!"
+   ],
+   "correta": "Maria, venha cá!",
+   "explica": "Em \"Maria, venha cá!\", \"Maria\" é vocativo."
+  },
+  {
+   "pergunta": "🧩 Em \"Ana pintou o quadro.\", o termo \"o quadro\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "objeto direto",
+    "adjunto adnominal",
+    "vocativo"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧩 Em \"O técnico julgou a jogada perigosa.\", o termo \"perigosa\" é:",
+   "opcoes": [
+    "aposto",
+    "vocativo",
+    "predicativo do sujeito",
+    "predicativo do objeto"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de modo?",
+   "opcoes": [
+    "Ontem choveu.",
+    "Estudo para passar.",
+    "Por causa da chuva, o jogo foi adiado.",
+    "Ele respondeu educadamente."
+   ],
+   "correta": "Ele respondeu educadamente.",
+   "explica": "Em \"Ele respondeu educadamente.\", \"educadamente\" indica modo."
+  },
+  {
+   "pergunta": "🧩 Em \"Confio em você.\", o termo \"em você\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "adjunto adnominal",
+    "adjunto adverbial",
+    "objeto indireto"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "Ele ama a natureza.",
+    "Comprei um livro.",
+    "Ela abriu a janela.",
+    "O bolo foi feito pela avó."
+   ],
+   "correta": "O bolo foi feito pela avó.",
+   "explica": "Em \"O bolo foi feito pela avó.\", \"pela avó\" é agente da passiva."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Pedi desculpas ao colega.",
+    "O sol nasceu.",
+    "O gato comeu o peixe.",
+    "Expliquei a lição aos alunos."
+   ],
+   "correta": "O sol nasceu.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🔗 Em \"Pedro virou médico.\", o verbo \"virou\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo indireto",
+    "transitivo direto",
+    "de ligação"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧩 Em \"Por causa da chuva, o jogo foi adiado.\", o termo \"Por causa da chuva\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "agente da passiva",
+    "vocativo",
+    "predicativo do sujeito"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Disseram que vai chover.",
+    "Terminei a lição.",
+    "O professor de História explicou a matéria.",
+    "Há muitas pessoas na fila."
+   ],
+   "correta": "Disseram que vai chover.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "O sol e a chuva formaram um arco-íris.",
+    "Nevou no sul do país.",
+    "Amanheceu nublado.",
+    "Caiu uma estrela."
+   ],
+   "correta": "Caiu uma estrela.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"Nomearam o professor diretor.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado verbal",
+    "predicado nominal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"A turma do sexto ano venceu o torneio.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "O professor de História explicou a matéria.",
+    "Necessita-se de professores.",
+    "Há muitas pessoas na fila.",
+    "Tudo estava calmo."
+   ],
+   "correta": "Há muitas pessoas na fila.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ele assistiu ao jogo.\", o termo \"ao jogo\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "adjunto adnominal",
+    "objeto direto",
+    "adjunto adverbial"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🔎 Em \"Precisamos de ajuda.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "oculto (desinencial)",
+    "composto",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Necessito de descanso.",
+    "Escrevi uma carta.",
+    "Contei a história às crianças.",
+    "Gosto de música."
+   ],
+   "correta": "Escrevi uma carta.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Entreguei o livro à professora.",
+    "O cachorro latiu.",
+    "A prova foi fácil.",
+    "Ele ama a natureza."
+   ],
+   "correta": "O cachorro latiu.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🔗 Em \"Mostrei as fotos aos amigos.\", o verbo \"mostrei\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧩 Em \"A casa foi construída pelos operários.\", o termo \"pelos operários\" é:",
+   "opcoes": [
+    "sujeito",
+    "agente da passiva",
+    "predicativo do sujeito",
+    "adjunto adverbial"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🔗 Em \"Obedeça aos pais.\", o verbo \"obedeça\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "intransitivo",
+    "de ligação"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "Confio em você.",
+    "O bebê dormiu.",
+    "O cachorro latiu.",
+    "Meu irmão, Pedro, chegou."
+   ],
+   "correta": "Meu irmão, Pedro, chegou.",
+   "explica": "Em \"Meu irmão, Pedro, chegou.\", \"Pedro\" é aposto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "Os pássaros voaram.",
+    "Dei um presente ao meu pai.",
+    "Gosto de música.",
+    "Contei a história às crianças."
+   ],
+   "correta": "Gosto de música.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Roubaram minha bicicleta.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "indeterminado",
+    "simples",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Lavei a louça.",
+    "Choveu muito.",
+    "Meu avô continua forte.",
+    "Ela escreveu uma carta."
+   ],
+   "correta": "Meu avô continua forte.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"Os operários construíram a ponte.\" na voz passiva analítica?",
+   "opcoes": [
+    "A ponte foram construídos pelos operários.",
+    "A ponte construiu os operários.",
+    "Os operários foram construídos pela ponte.",
+    "A ponte foi construída pelos operários."
+   ],
+   "correta": "A ponte foi construída pelos operários.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"O sol e a chuva formaram um arco-íris.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "composto"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "O sol nasceu cedo.",
+    "A água estava gelada.",
+    "Meu avô continua forte.",
+    "O dia permaneceu nublado."
+   ],
+   "correta": "O sol nasceu cedo.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Há muitas pessoas na fila.",
+    "Roubaram minha bicicleta.",
+    "O professor de História explicou a matéria.",
+    "Come-se bem nesta cidade."
+   ],
+   "correta": "O professor de História explicou a matéria.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Vi o filme.",
+    "Meu avô continua forte.",
+    "Os convidados chegaram cedo.",
+    "Lavei a louça."
+   ],
+   "correta": "Os convidados chegaram cedo.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧩 Em \"Entreguei o livro à professora.\", o termo \"à professora\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "predicativo do sujeito",
+    "objeto indireto",
+    "adjunto adnominal"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Meus dois primos moram longe.\"?",
+   "opcoes": [
+    "primos",
+    "longe",
+    "Meus",
+    "dois"
+   ],
+   "correta": "primos",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ganhei um anel de ouro.\", o termo \"de ouro\" é:",
+   "opcoes": [
+    "sujeito",
+    "adjunto adnominal",
+    "objeto indireto",
+    "aposto"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🔎 Em \"Faz dez anos que moro aqui.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "simples"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔗 Em \"Contei a história às crianças.\", o verbo \"contei\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "intransitivo",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "Lavei a louça.",
+    "O dia permaneceu nublado.",
+    "A menina está cansada.",
+    "O bolo ficou delicioso."
+   ],
+   "correta": "Lavei a louça.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "São duas horas.",
+    "Saímos cedo de casa.",
+    "Trata-se de um caso sério.",
+    "Você viu meu caderno?"
+   ],
+   "correta": "São duas horas.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "Entreguei o livro à professora.",
+    "As crianças dormiram tranquilas.",
+    "Nomearam o professor diretor.",
+    "A água estava gelada."
+   ],
+   "correta": "Entreguei o livro à professora.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "📘 Os termos acessórios da oração são:",
+   "opcoes": [
+    "complemento nominal e agente da passiva",
+    "sujeito e predicado",
+    "objeto direto e indireto",
+    "adjunto adnominal, adjunto adverbial e aposto"
+   ],
+   "correta": "adjunto adnominal, adjunto adverbial e aposto"
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Achei o filme interessante.",
+    "Meu avô continua forte.",
+    "Ele parece feliz.",
+    "Ela escreveu uma carta."
+   ],
+   "correta": "Achei o filme interessante.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Comprei um livro novo.\", o termo \"um livro novo\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "agente da passiva",
+    "adjunto adnominal",
+    "objeto direto"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em \"Ela fala muito.\", o adjunto adverbial \"muito\" indica:",
+   "opcoes": [
+    "companhia",
+    "intensidade",
+    "causa",
+    "meio"
+   ],
+   "correta": "intensidade",
+   "explica": "\"muito\" é adjunto adverbial de intensidade."
+  },
+  {
+   "pergunta": "🔗 Em \"Ele parece feliz.\", o verbo \"parece\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "intransitivo",
+    "de ligação",
+    "transitivo indireto"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔎 Em \"Disseram que vai chover.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "indeterminado",
+    "composto",
+    "simples"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Vive-se bem aqui.",
+    "Há muitas pessoas na fila.",
+    "Disseram que vai chover.",
+    "Aquela menina canta muito bem."
+   ],
+   "correta": "Aquela menina canta muito bem.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧩 Em \"A carta foi escrita por Ana.\", o termo \"por Ana\" é:",
+   "opcoes": [
+    "adjunto adnominal",
+    "agente da passiva",
+    "adjunto adverbial",
+    "objeto direto"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🔎 Em \"Trovejou a noite toda.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "Paguei a conta ao garçom.",
+    "Acredito em fadas.",
+    "O avião partiu.",
+    "Vi o filme."
+   ],
+   "correta": "Acredito em fadas.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Tudo estava calmo.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "simples",
+    "indeterminado"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"Lavei a louça.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado verbal",
+    "predicado nominal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🔗 Em \"O bebê dormiu.\", o verbo \"dormiu\" é:",
+   "opcoes": [
+    "de ligação",
+    "transitivo direto",
+    "intransitivo",
+    "transitivo indireto"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "Acredito em fadas.",
+    "Os convidados chegaram cedo.",
+    "Necessito de descanso.",
+    "Só quero uma coisa: paz."
+   ],
+   "correta": "Só quero uma coisa: paz.",
+   "explica": "Em \"Só quero uma coisa: paz.\", \"paz\" é aposto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "A água estava gelada.",
+    "Choveu muito.",
+    "Achei o filme interessante.",
+    "Nomearam o professor diretor."
+   ],
+   "correta": "Choveu muito.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🔗 Em \"Concordo com você.\", o verbo \"concordo\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo direto e indireto",
+    "de ligação",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em \"Tremia de frio.\", o adjunto adverbial \"de frio\" indica:",
+   "opcoes": [
+    "negação",
+    "lugar",
+    "causa",
+    "finalidade"
+   ],
+   "correta": "causa",
+   "explica": "\"de frio\" é adjunto adverbial de causa."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Gosto de música.",
+    "Ofereci ajuda ao vizinho.",
+    "Os pássaros voaram.",
+    "Confio em você."
+   ],
+   "correta": "Os pássaros voaram.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧩 Em \"Obedeça aos pais.\", o termo \"aos pais\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "vocativo",
+    "adjunto adnominal",
+    "objeto indireto"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🧩 Em \"A casa de madeira é antiga.\", o termo \"de madeira\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "sujeito",
+    "aposto",
+    "adjunto adnominal"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🔎 Em \"Caiu uma estrela.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "composto",
+    "simples"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em \"Provavelmente choverá.\", o adjunto adverbial \"Provavelmente\" indica:",
+   "opcoes": [
+    "dúvida",
+    "meio",
+    "tempo",
+    "causa"
+   ],
+   "correta": "dúvida",
+   "explica": "\"Provavelmente\" é adjunto adverbial de dúvida."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de lugar?",
+   "opcoes": [
+    "Saí com meus pais.",
+    "As crianças brincam perto da praia.",
+    "Ela estava muito cansada.",
+    "Ela fala muito."
+   ],
+   "correta": "As crianças brincam perto da praia.",
+   "explica": "Em \"As crianças brincam perto da praia.\", \"perto da praia\" indica lugar."
+  },
+  {
+   "pergunta": "🧩 Em \"Os alunos fizeram a lição.\", o termo \"a lição\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "objeto direto",
+    "predicativo do sujeito",
+    "vocativo"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de companhia?",
+   "opcoes": [
+    "Cortei o pão com a faca.",
+    "Ela estava muito cansada.",
+    "Ele trabalhou com dedicação.",
+    "Saí com meus pais."
+   ],
+   "correta": "Saí com meus pais.",
+   "explica": "Em \"Saí com meus pais.\", \"com meus pais\" indica companhia."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "O céu ficou escuro.",
+    "O dia permaneceu nublado.",
+    "Pedro virou médico.",
+    "Considero você inteligente."
+   ],
+   "correta": "Considero você inteligente.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"No fim da tarde, chegaram os convidados.\"?",
+   "opcoes": [
+    "No fim da tarde",
+    "os convidados",
+    "chegaram",
+    "a tarde"
+   ],
+   "correta": "os convidados",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔎 Em \"Choveu muito ontem.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "composto"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ana, minha prima, é médica.\", o termo \"minha prima\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "vocativo",
+    "agente da passiva",
+    "aposto"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "📘 Núcleo do sujeito é:",
+   "opcoes": [
+    "o verbo da oração",
+    "a última palavra da frase",
+    "o artigo que inicia a frase",
+    "a palavra principal do sujeito"
+   ],
+   "correta": "a palavra principal do sujeito"
+  },
+  {
+   "pergunta": "🔎 Em \"O pai e a mãe chegaram juntos.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "composto",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "A prova foi fácil.",
+    "Pedro virou médico.",
+    "Os pássaros voaram.",
+    "Concordo com você."
+   ],
+   "correta": "Concordo com você.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Dei um presente ao meu pai.",
+    "A plateia sorriu.",
+    "Ela abriu a janela.",
+    "Obedeça aos pais."
+   ],
+   "correta": "Dei um presente ao meu pai.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🔎 Em \"Vencemos o jogo.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "simples",
+    "indeterminado"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "📘 O agente da passiva aparece:",
+   "opcoes": [
+    "na voz passiva analítica, indicando quem pratica a ação",
+    "só em orações sem sujeito",
+    "na voz ativa",
+    "na voz reflexiva"
+   ],
+   "correta": "na voz passiva analítica, indicando quem pratica a ação"
+  },
+  {
+   "pergunta": "🔎 Em \"Gosto muito de música.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "composto",
+    "oculto (desinencial)",
+    "simples"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Telefonaram para você.",
+    "Precisamos de ajuda.",
+    "A chuva molhou as roupas.",
+    "Faz dez anos que moro aqui."
+   ],
+   "correta": "A chuva molhou as roupas.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔗 Em \"Vi o filme.\", o verbo \"vi\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "de ligação",
+    "intransitivo",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Precisa-se de vendedores.",
+    "A professora e os alunos visitaram o museu.",
+    "O professor de História explicou a matéria.",
+    "O cachorro latiu a noite toda."
+   ],
+   "correta": "Precisa-se de vendedores.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🔎 Em \"O céu ficou escuro.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "não há predicado",
+    "predicado verbal",
+    "predicado nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔎 Em \"Meu irmão e minha prima estudam juntos.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🔄 Em \"O gato se lambia.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva sintética",
+    "passiva analítica",
+    "reflexiva",
+    "ativa"
+   ],
+   "correta": "reflexiva",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🔗 Em \"Paguei a conta ao garçom.\", o verbo \"paguei\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto",
+    "de ligação",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🔎 Em \"Os alunos chegaram.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Terminei a lição.",
+    "Choveu muito ontem.",
+    "Trata-se de um caso sério.",
+    "Chegaram as encomendas."
+   ],
+   "correta": "Terminei a lição.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧩 Em \"Obrigado, amigos, pela ajuda!\", o termo \"amigos\" é:",
+   "opcoes": [
+    "aposto",
+    "agente da passiva",
+    "vocativo",
+    "predicativo do objeto"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de intensidade?",
+   "opcoes": [
+    "As crianças brincam perto da praia.",
+    "Ela fala muito.",
+    "Ele não respondeu.",
+    "Por causa da chuva, o jogo foi adiado."
+   ],
+   "correta": "Ela fala muito.",
+   "explica": "Em \"Ela fala muito.\", \"muito\" indica intensidade."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Vive-se bem aqui.",
+    "Trovejou a noite toda.",
+    "Amanheceu nublado.",
+    "Chegaram as encomendas."
+   ],
+   "correta": "Vive-se bem aqui.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em \"Economizei para a viagem.\", o adjunto adverbial \"para a viagem\" indica:",
+   "opcoes": [
+    "intensidade",
+    "negação",
+    "dúvida",
+    "finalidade"
+   ],
+   "correta": "finalidade",
+   "explica": "\"para a viagem\" é adjunto adverbial de finalidade."
+  },
+  {
+   "pergunta": "🔗 Em \"Lavei a louça.\", o verbo \"lavei\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "intransitivo",
+    "de ligação",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "A turma do sexto ano venceu o torneio.",
+    "Fomos ao cinema ontem.",
+    "Bateram à porta.",
+    "Trovejou a noite toda."
+   ],
+   "correta": "Trovejou a noite toda.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Gosto de música.",
+    "O menino quebrou o vaso.",
+    "As flores murcharam.",
+    "O bebê dormiu."
+   ],
+   "correta": "O menino quebrou o vaso.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔗 Em \"As flores murcharam.\", o verbo \"murcharam\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "intransitivo",
+    "de ligação",
+    "transitivo direto"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧩 Em \"Os pássaros cantavam.\", o termo \"Os pássaros\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "sujeito",
+    "adjunto adnominal",
+    "vocativo"
+   ],
+   "correta": "sujeito",
+   "explica": "Sujeito: termo com o qual o verbo concorda."
+  },
+  {
+   "pergunta": "🔗 Em \"Ela anda triste.\", o verbo \"anda\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo direto e indireto",
+    "transitivo indireto",
+    "de ligação"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "O avião partiu.",
+    "Ela abriu a janela.",
+    "Necessito de descanso.",
+    "Meu avô continua forte."
+   ],
+   "correta": "Necessito de descanso.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔗 Em \"O gato comeu o peixe.\", o verbo \"comeu\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "de ligação",
+    "transitivo indireto",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Comprei um livro novo.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "indeterminado"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🔄 Em \"Consertam-se bicicletas.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "reflexiva",
+    "ativa",
+    "passiva sintética"
+   ],
+   "correta": "passiva sintética",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🔎 Em \"Chegaste tarde.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "indeterminado",
+    "simples"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "O dia permaneceu nublado.",
+    "Escrevi uma carta.",
+    "O avião partiu.",
+    "Concordo com você."
+   ],
+   "correta": "O dia permaneceu nublado.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "📘 Os termos integrantes da oração são:",
+   "opcoes": [
+    "vocativo e aposto",
+    "sujeito e predicado",
+    "adjunto adnominal, adjunto adverbial e aposto",
+    "objeto direto, objeto indireto, complemento nominal e agente da passiva"
+   ],
+   "correta": "objeto direto, objeto indireto, complemento nominal e agente da passiva"
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "O técnico julgou a jogada perigosa.",
+    "A sopa está quente.",
+    "A professora explicou a lição.",
+    "Os alunos chegaram."
+   ],
+   "correta": "O técnico julgou a jogada perigosa.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Todos os convidados elogiaram a festa.\"?",
+   "opcoes": [
+    "elogiaram",
+    "Todos",
+    "convidados",
+    "festa"
+   ],
+   "correta": "convidados",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de tempo?",
+   "opcoes": [
+    "Estudamos com atenção.",
+    "Ontem choveu.",
+    "Ele respondeu educadamente.",
+    "Tremia de frio."
+   ],
+   "correta": "Ontem choveu.",
+   "explica": "Em \"Ontem choveu.\", \"Ontem\" indica tempo."
+  },
+  {
+   "pergunta": "🔗 Em \"Comprei um livro.\", o verbo \"comprei\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "de ligação",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Elegeram Ana representante da turma.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado nominal",
+    "predicado verbo-nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Eu e você vamos à festa.",
+    "Come-se bem nesta cidade.",
+    "Viajamos nas férias.",
+    "Aquela menina canta muito bem."
+   ],
+   "correta": "Viajamos nas férias.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "A casa foi construída pelos operários.",
+    "Vi o filme.",
+    "Ela abriu a janela.",
+    "Ana pintou o quadro."
+   ],
+   "correta": "A casa foi construída pelos operários.",
+   "explica": "Em \"A casa foi construída pelos operários.\", \"pelos operários\" é agente da passiva."
+  },
+  {
+   "pergunta": "🔎 Em \"O time saiu vitorioso.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado nominal",
+    "predicado verbo-nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Achei o filme interessante.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "predicado verbal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Encontrei meu amigo na rua.\", o termo \"meu amigo\" é:",
+   "opcoes": [
+    "vocativo",
+    "agente da passiva",
+    "adjunto adverbial",
+    "objeto direto"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "O pai e a mãe chegaram juntos.",
+    "Estudei a tarde toda.",
+    "Come-se bem nesta cidade.",
+    "É meio-dia."
+   ],
+   "correta": "É meio-dia.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "O dia permaneceu nublado.",
+    "A menina está cansada.",
+    "O céu ficou escuro.",
+    "Os pássaros voaram."
+   ],
+   "correta": "Os pássaros voaram.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "Confio em você.",
+    "Os convidados chegaram cedo.",
+    "O júri considerou o réu inocente.",
+    "Obedeça aos pais."
+   ],
+   "correta": "O júri considerou o réu inocente.",
+   "explica": "Em \"O júri considerou o réu inocente.\", \"inocente\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Pedro e Ana foram ao cinema.\"?",
+   "opcoes": [
+    "o cinema",
+    "Pedro e Ana",
+    "foram ao cinema",
+    "ao cinema"
+   ],
+   "correta": "Pedro e Ana",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de dúvida?",
+   "opcoes": [
+    "Ontem choveu.",
+    "Talvez eu viaje.",
+    "Estudamos com atenção.",
+    "Escrevi com caneta azul."
+   ],
+   "correta": "Talvez eu viaje.",
+   "explica": "Em \"Talvez eu viaje.\", \"Talvez\" indica dúvida."
+  },
+  {
+   "pergunta": "🔎 Em \"As crianças dormiram tranquilas.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado verbal",
+    "predicado nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Achei o filme interessante.\", o termo \"interessante\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "adjunto adverbial",
+    "objeto direto",
+    "predicativo do objeto"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Trovejou a noite toda.",
+    "Cães e gatos dormiam na varanda.",
+    "Choveu muito ontem.",
+    "Terminei a lição."
+   ],
+   "correta": "Cães e gatos dormiam na varanda.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧩 Em \"Viajamos de avião.\", o termo \"de avião\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "aposto",
+    "predicativo do sujeito",
+    "complemento nominal"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "O menino caiu da escada.",
+    "Lavei a louça.",
+    "Crianças, façam silêncio!",
+    "Comprei um livro."
+   ],
+   "correta": "Crianças, façam silêncio!",
+   "explica": "Em \"Crianças, façam silêncio!\", \"Crianças\" é vocativo."
+  },
+  {
+   "pergunta": "🔄 Em \"As provas foram corrigidas pela professora.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "reflexiva",
+    "passiva sintética",
+    "passiva analítica"
+   ],
+   "correta": "passiva analítica",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"A polícia prendeu o ladrão.\" na voz passiva analítica?",
+   "opcoes": [
+    "O ladrão prendeu a polícia.",
+    "O ladrão foi preso pela polícia.",
+    "A polícia foi presa pelo ladrão.",
+    "O ladrão foram presos pela polícia."
+   ],
+   "correta": "O ladrão foi preso pela polícia.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"O menino quebrou o vaso.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado verbal",
+    "predicado nominal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Saímos cedo de casa.",
+    "A turma do sexto ano venceu o torneio.",
+    "Necessita-se de professores.",
+    "O pai e a mãe chegaram juntos."
+   ],
+   "correta": "O pai e a mãe chegaram juntos.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🔗 Em \"Confio em você.\", o verbo \"confio\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto",
+    "intransitivo",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "A menina está cansada.",
+    "A menina chegou cansada.",
+    "A professora explicou a lição.",
+    "O time venceu o jogo."
+   ],
+   "correta": "A menina está cansada.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Os alunos chegaram.",
+    "As crianças dormiram tranquilas.",
+    "O sol nasceu cedo.",
+    "Ele parece feliz."
+   ],
+   "correta": "As crianças dormiram tranquilas.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"A água estava gelada.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔗 Em \"O dia permaneceu nublado.\", o verbo \"permaneceu\" é:",
+   "opcoes": [
+    "de ligação",
+    "intransitivo",
+    "transitivo direto e indireto",
+    "transitivo direto"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de tempo?",
+   "opcoes": [
+    "Cortei o pão com a faca.",
+    "Estudo para passar.",
+    "Os alunos estudaram na biblioteca.",
+    "À noite, a cidade fica silenciosa."
+   ],
+   "correta": "À noite, a cidade fica silenciosa.",
+   "explica": "Em \"À noite, a cidade fica silenciosa.\", \"À noite\" indica tempo."
+  },
+  {
+   "pergunta": "🔗 Em \"Acredito em fadas.\", o verbo \"acredito\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "intransitivo"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧩 Em \"O bolo foi feito pela avó.\", o termo \"pela avó\" é:",
+   "opcoes": [
+    "agente da passiva",
+    "adjunto adverbial",
+    "adjunto adnominal",
+    "complemento nominal"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🔗 Em \"O menino caiu da escada.\", o verbo \"caiu\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "de ligação",
+    "transitivo direto e indireto",
+    "intransitivo"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "As flores murcharam.",
+    "Meu avô continua forte.",
+    "Os pássaros voaram.",
+    "Ana pintou o quadro."
+   ],
+   "correta": "Ana pintou o quadro.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧩 Em \"O gol foi marcado pelo capitão.\", o termo \"pelo capitão\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "predicativo do objeto",
+    "agente da passiva",
+    "objeto direto"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Ela simpatizou com a vizinha.",
+    "Encontrei meu amigo.",
+    "Pedro virou médico.",
+    "O menino caiu da escada."
+   ],
+   "correta": "Encontrei meu amigo.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ana, você trouxe o livro?\", o termo \"Ana\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "aposto",
+    "predicativo do sujeito",
+    "vocativo"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🔎 Em \"Amanheceu nublado.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "composto"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔗 Em \"Ofereci ajuda ao vizinho.\", o verbo \"ofereci\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "intransitivo",
+    "transitivo direto e indireto",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Aquela menina canta muito bem.\"?",
+   "opcoes": [
+    "canta muito bem",
+    "canta",
+    "muito bem",
+    "Aquela menina"
+   ],
+   "correta": "Aquela menina",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧩 Em \"Crianças, façam silêncio!\", o termo \"Crianças\" é:",
+   "opcoes": [
+    "sujeito",
+    "vocativo",
+    "predicativo do objeto",
+    "predicativo do sujeito"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🧭 Em \"Ela estava muito cansada.\", o adjunto adverbial \"muito\" indica:",
+   "opcoes": [
+    "companhia",
+    "meio",
+    "dúvida",
+    "intensidade"
+   ],
+   "correta": "intensidade",
+   "explica": "\"muito\" é adjunto adverbial de intensidade."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Confio em você.",
+    "As flores murcharam.",
+    "O céu ficou escuro.",
+    "Pedi desculpas ao colega."
+   ],
+   "correta": "Pedi desculpas ao colega.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Ela anda triste.",
+    "O júri considerou o réu inocente.",
+    "Os pássaros voaram.",
+    "O sol nasceu cedo."
+   ],
+   "correta": "O júri considerou o réu inocente.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de dúvida?",
+   "opcoes": [
+    "À noite, a cidade fica silenciosa.",
+    "Provavelmente choverá.",
+    "Estudo para passar.",
+    "Brinquei com meu irmão."
+   ],
+   "correta": "Provavelmente choverá.",
+   "explica": "Em \"Provavelmente choverá.\", \"Provavelmente\" indica dúvida."
+  },
+  {
+   "pergunta": "🔎 Em \"Considero você inteligente.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Venha logo, meu filho!\", o termo \"meu filho\" é:",
+   "opcoes": [
+    "vocativo",
+    "predicativo do objeto",
+    "aposto",
+    "agente da passiva"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🧩 Em \"Cortei o pão com a faca.\", o termo \"com a faca\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "complemento nominal",
+    "adjunto adverbial",
+    "vocativo"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de finalidade?",
+   "opcoes": [
+    "Cortei o pão com a faca.",
+    "Economizei para a viagem.",
+    "As crianças brincam perto da praia.",
+    "Ele não respondeu."
+   ],
+   "correta": "Economizei para a viagem.",
+   "explica": "Em \"Economizei para a viagem.\", \"para a viagem\" indica finalidade."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de lugar?",
+   "opcoes": [
+    "Por causa da chuva, o jogo foi adiado.",
+    "Ele não respondeu.",
+    "Cortei o pão com a faca.",
+    "Os alunos estudaram na biblioteca."
+   ],
+   "correta": "Os alunos estudaram na biblioteca.",
+   "explica": "Em \"Os alunos estudaram na biblioteca.\", \"na biblioteca\" indica lugar."
+  },
+  {
+   "pergunta": "🔗 Em \"A plateia sorriu.\", o verbo \"sorriu\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "de ligação",
+    "intransitivo"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "Escrevi uma carta.",
+    "Lavei a louça.",
+    "Venha logo, meu filho!",
+    "Vi o filme."
+   ],
+   "correta": "Venha logo, meu filho!",
+   "explica": "Em \"Venha logo, meu filho!\", \"meu filho\" é vocativo."
+  },
+  {
+   "pergunta": "🔎 Em \"Ela acordou animada.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ele tem orgulho do filho.\", o termo \"do filho\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "predicativo do sujeito",
+    "complemento nominal",
+    "agente da passiva"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Viajamos nas férias.",
+    "A professora e os alunos visitaram o museu.",
+    "Vencemos o jogo.",
+    "Amanheceu nublado."
+   ],
+   "correta": "Amanheceu nublado.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔎 Em \"As crianças brincaram no parque.\", o predicado é:",
+   "opcoes": [
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado verbal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧩 Em \"As crianças alegres cantavam.\", o termo \"alegres\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "vocativo",
+    "adjunto adnominal",
+    "sujeito"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Meu avô continua forte.",
+    "Ela abriu a janela.",
+    "Os convidados chegaram cedo.",
+    "Obedeça aos pais."
+   ],
+   "correta": "Ela abriu a janela.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "O bolo ficou delicioso.",
+    "Meu avô continua forte.",
+    "O dia permaneceu nublado.",
+    "O time venceu o jogo."
+   ],
+   "correta": "O time venceu o jogo.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Fomos ao cinema ontem.",
+    "São duas horas.",
+    "Caiu uma estrela.",
+    "Faz dez anos que moro aqui."
+   ],
+   "correta": "Fomos ao cinema ontem.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧩 Em \"O ladrão foi preso pela polícia.\", o termo \"pela polícia\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "vocativo",
+    "agente da passiva",
+    "predicativo do sujeito"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Nevou no sul do país.",
+    "O pai e a mãe chegaram juntos.",
+    "Gosto muito de música.",
+    "Está frio hoje."
+   ],
+   "correta": "Gosto muito de música.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🔎 Em \"O sol nasceu cedo.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado nominal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🔎 Em \"Pedro virou médico.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"O cachorro mordeu o carteiro.\" na voz passiva analítica?",
+   "opcoes": [
+    "O carteiro foi mordido pelo cachorro.",
+    "O cachorro foi mordido pelo carteiro.",
+    "O carteiro mordeu o cachorro.",
+    "O carteiro foi mordendo pelo cachorro."
+   ],
+   "correta": "O carteiro foi mordido pelo cachorro.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🔄 Em \"Ana escreveu o poema.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva sintética",
+    "passiva analítica",
+    "ativa",
+    "reflexiva"
+   ],
+   "correta": "ativa",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Ela abriu a janela.",
+    "Ele ama a natureza.",
+    "O menino caiu da escada.",
+    "Necessito de descanso."
+   ],
+   "correta": "O menino caiu da escada.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Nevou no sul do país.",
+    "O sol e a chuva formaram um arco-íris.",
+    "Telefonaram para você.",
+    "Precisamos de ajuda."
+   ],
+   "correta": "O sol e a chuva formaram um arco-íris.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧩 Em \"Apareceu um gato na janela.\", o termo \"um gato\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "vocativo",
+    "sujeito",
+    "predicativo do sujeito"
+   ],
+   "correta": "sujeito",
+   "explica": "Sujeito: termo com o qual o verbo concorda."
+  },
+  {
+   "pergunta": "🔗 Em \"Necessito de descanso.\", o verbo \"necessito\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "de ligação",
+    "transitivo indireto",
+    "transitivo direto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Ela abriu a janela.\", o verbo \"abriu\" é:",
+   "opcoes": [
+    "de ligação",
+    "intransitivo",
+    "transitivo indireto",
+    "transitivo direto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Meu irmão, Pedro, chegou.\", o termo \"Pedro\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "vocativo",
+    "objeto direto",
+    "aposto"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Pedro e Ana foram ao cinema.",
+    "O professor de História explicou a matéria.",
+    "Viajamos nas férias.",
+    "Terminei a lição."
+   ],
+   "correta": "Pedro e Ana foram ao cinema.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🔎 Em \"Choveu muito.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Pedro e Ana foram ao cinema.",
+    "Chegaram o pai e o filho.",
+    "Viajamos nas férias.",
+    "Telefonaram para você."
+   ],
+   "correta": "Telefonaram para você.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🔄 Em \"Eu me vesti rapidamente.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "reflexiva",
+    "passiva sintética",
+    "passiva analítica"
+   ],
+   "correta": "reflexiva",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Vencemos o jogo.",
+    "Pedro e Ana foram ao cinema.",
+    "Havia poucos alunos na sala.",
+    "Aquela menina canta muito bem."
+   ],
+   "correta": "Vencemos o jogo.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🔗 Em \"Meu avô continua forte.\", o verbo \"continua\" é:",
+   "opcoes": [
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "de ligação",
+    "intransitivo"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧩 Em \"Só quero uma coisa: paz.\", o termo \"paz\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "predicativo do sujeito",
+    "aposto",
+    "adjunto adnominal"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "🔗 Em \"A prova foi fácil.\", o verbo \"foi\" é:",
+   "opcoes": [
+    "de ligação",
+    "intransitivo",
+    "transitivo direto e indireto",
+    "transitivo indireto"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧩 Em \"Comprei duas camisas.\", o termo \"duas\" é:",
+   "opcoes": [
+    "adjunto adnominal",
+    "aposto",
+    "complemento nominal",
+    "objeto indireto"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🧩 Em \"O céu ficou escuro.\", o termo \"escuro\" é:",
+   "opcoes": [
+    "sujeito",
+    "predicativo do sujeito",
+    "objeto direto",
+    "adjunto adnominal"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"O cachorro latiu a noite toda.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "composto"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"Telefonaram para você.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "simples",
+    "inexistente (oração sem sujeito)",
+    "indeterminado"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Os alunos chegaram.",
+    "Choveu muito.",
+    "Os alunos saíram felizes.",
+    "A professora explicou a lição."
+   ],
+   "correta": "Os alunos saíram felizes.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Os alunos chegaram cedo.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "simples",
+    "indeterminado",
+    "composto"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔗 Em \"Enviei uma carta para minha avó.\", o verbo \"enviei\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo direto e indireto",
+    "de ligação",
+    "intransitivo"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Lavei a louça.",
+    "A menina chegou cansada.",
+    "A água estava gelada.",
+    "Nomearam o professor diretor."
+   ],
+   "correta": "A água estava gelada.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔎 Em \"Minha mãe fez um bolo.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "simples",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "Ele ama a natureza.",
+    "Os convidados chegaram cedo.",
+    "Professor, posso sair?",
+    "O menino quebrou o vaso."
+   ],
+   "correta": "Professor, posso sair?",
+   "explica": "Em \"Professor, posso sair?\", \"Professor\" é vocativo."
+  },
+  {
+   "pergunta": "🧩 Em \"A menina está cansada.\", o termo \"cansada\" é:",
+   "opcoes": [
+    "sujeito",
+    "predicativo do sujeito",
+    "adjunto adverbial",
+    "predicativo do objeto"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "A menina chegou cansada.",
+    "O céu ficou escuro.",
+    "O júri considerou o réu inocente.",
+    "O menino quebrou o vaso."
+   ],
+   "correta": "O menino quebrou o vaso.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧩 Em \"Ela tem necessidade de carinho.\", o termo \"de carinho\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "predicativo do sujeito",
+    "agente da passiva",
+    "predicativo do objeto"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Duvido de tudo.",
+    "Contei a história às crianças.",
+    "Obedeça aos pais.",
+    "Escrevi uma carta."
+   ],
+   "correta": "Contei a história às crianças.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧩 Em \"Nomearam o professor diretor.\", o termo \"diretor\" é:",
+   "opcoes": [
+    "predicativo do objeto",
+    "adjunto adnominal",
+    "objeto indireto",
+    "sujeito"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🔎 Em \"Ele parece feliz.\", o predicado é:",
+   "opcoes": [
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "Ana pintou o quadro.",
+    "Preciso de ajuda.",
+    "Vi o filme.",
+    "Ele parece feliz."
+   ],
+   "correta": "Preciso de ajuda.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Estão chamando você lá fora.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "indeterminado",
+    "composto"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🔎 Em \"Havia poucos alunos na sala.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "oculto (desinencial)",
+    "composto",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Ninguém respondeu à pergunta.\"?",
+   "opcoes": [
+    "a pergunta",
+    "respondeu",
+    "Ninguém",
+    "à pergunta"
+   ],
+   "correta": "Ninguém",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "O dia permaneceu nublado.",
+    "Ele voltou triste da viagem.",
+    "O menino quebrou o vaso.",
+    "A água estava gelada."
+   ],
+   "correta": "Ele voltou triste da viagem.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Emprestei o caderno a Ana.\", o verbo \"emprestei\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "intransitivo"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "São duas horas.",
+    "Os alunos chegaram cedo.",
+    "É meio-dia.",
+    "Vencemos o jogo."
+   ],
+   "correta": "Os alunos chegaram cedo.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Precisa-se de vendedores.",
+    "Ventou muito na praia.",
+    "Fomos ao cinema ontem.",
+    "Precisamos de ajuda."
+   ],
+   "correta": "Ventou muito na praia.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"O menino quebrou o vaso.\" na voz passiva analítica?",
+   "opcoes": [
+    "O vaso foi quebrado pelo menino.",
+    "O vaso era quebrando pelo menino.",
+    "O menino foi quebrado pelo vaso.",
+    "O vaso quebrou o menino."
+   ],
+   "correta": "O vaso foi quebrado pelo menino.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🔗 Em \"O cachorro latiu.\", o verbo \"latiu\" é:",
+   "opcoes": [
+    "intransitivo",
+    "de ligação",
+    "transitivo indireto",
+    "transitivo direto"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "A menina chegou cansada.",
+    "O céu ficou escuro.",
+    "Achei o filme interessante.",
+    "A professora explicou a lição."
+   ],
+   "correta": "O céu ficou escuro.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "📘 O predicativo do objeto aparece com verbos como:",
+   "opcoes": [
+    "haver e fazer",
+    "considerar, julgar, eleger, nomear, achar",
+    "ser, estar, ficar",
+    "chover, nevar, ventar"
+   ],
+   "correta": "considerar, julgar, eleger, nomear, achar"
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Precisa-se de vendedores.",
+    "A professora e os alunos visitaram o museu.",
+    "Aquela menina canta muito bem.",
+    "A turma do sexto ano venceu o torneio."
+   ],
+   "correta": "A professora e os alunos visitaram o museu.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em \"As crianças brincam perto da praia.\", o adjunto adverbial \"perto da praia\" indica:",
+   "opcoes": [
+    "causa",
+    "negação",
+    "instrumento",
+    "lugar"
+   ],
+   "correta": "lugar",
+   "explica": "\"perto da praia\" é adjunto adverbial de lugar."
+  },
+  {
+   "pergunta": "🧩 Em \"Maria, venha cá!\", o termo \"Maria\" é:",
+   "opcoes": [
+    "vocativo",
+    "adjunto adverbial",
+    "predicativo do sujeito",
+    "aposto"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🔗 Em \"O menino quebrou o vaso.\", o verbo \"quebrou\" é:",
+   "opcoes": [
+    "de ligação",
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "intransitivo"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Lavei a louça.\", o termo \"a louça\" é:",
+   "opcoes": [
+    "sujeito",
+    "complemento nominal",
+    "objeto direto",
+    "objeto indireto"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de companhia?",
+   "opcoes": [
+    "Ela estava muito cansada.",
+    "Ela fala muito.",
+    "Brinquei com meu irmão.",
+    "À noite, a cidade fica silenciosa."
+   ],
+   "correta": "Brinquei com meu irmão.",
+   "explica": "Em \"Brinquei com meu irmão.\", \"com meu irmão\" indica companhia."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "A prova foi fácil.",
+    "O menino quebrou o vaso.",
+    "A professora explicou a lição.",
+    "Os alunos chegaram."
+   ],
+   "correta": "A prova foi fácil.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em \"Escrevi com caneta azul.\", o adjunto adverbial \"com caneta azul\" indica:",
+   "opcoes": [
+    "dúvida",
+    "instrumento",
+    "intensidade",
+    "finalidade"
+   ],
+   "correta": "instrumento",
+   "explica": "\"com caneta azul\" é adjunto adverbial de instrumento."
+  },
+  {
+   "pergunta": "🔎 Em \"O time venceu o jogo.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado verbal",
+    "predicado nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Meu irmão e minha prima estudam juntos.\"?",
+   "opcoes": [
+    "sujeito oculto",
+    "estudam juntos",
+    "Meu irmão e minha prima",
+    "juntos"
+   ],
+   "correta": "Meu irmão e minha prima",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em \"Talvez eu viaje.\", o adjunto adverbial \"Talvez\" indica:",
+   "opcoes": [
+    "dúvida",
+    "companhia",
+    "meio",
+    "intensidade"
+   ],
+   "correta": "dúvida",
+   "explica": "\"Talvez\" é adjunto adverbial de dúvida."
+  },
+  {
+   "pergunta": "🔎 Em \"Cães e gatos dormiam na varanda.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "simples",
+    "inexistente (oração sem sujeito)",
+    "composto"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Estudei a tarde toda.",
+    "Estão chamando você lá fora.",
+    "Trovejou a noite toda.",
+    "Pedro e Ana foram ao cinema."
+   ],
+   "correta": "Estudei a tarde toda.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "Confio em você.",
+    "O cachorro latiu.",
+    "Ana, minha prima, é médica.",
+    "Gosto de música."
+   ],
+   "correta": "Ana, minha prima, é médica.",
+   "explica": "Em \"Ana, minha prima, é médica.\", \"minha prima\" é aposto."
+  },
+  {
+   "pergunta": "🔄 Em \"Fizeram-se muitas perguntas.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "passiva analítica",
+    "reflexiva",
+    "passiva sintética"
+   ],
+   "correta": "passiva sintética",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧩 Em \"Estudamos com atenção.\", o termo \"com atenção\" é:",
+   "opcoes": [
+    "aposto",
+    "complemento nominal",
+    "objeto indireto",
+    "adjunto adverbial"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🔎 Em \"Necessita-se de professores.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "indeterminado",
+    "composto"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "📘 São verbos de ligação:",
+   "opcoes": [
+    "ser, estar, ficar, parecer, permanecer, continuar",
+    "gostar, precisar, confiar",
+    "correr, pular, cantar, dançar",
+    "dar, entregar, oferecer"
+   ],
+   "correta": "ser, estar, ficar, parecer, permanecer, continuar"
+  },
+  {
+   "pergunta": "🔗 Em \"Os pássaros voaram.\", o verbo \"voaram\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "de ligação",
+    "intransitivo"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🔄 Qual é a forma correta de \"O vento derrubou as árvores.\" na voz passiva analítica?",
+   "opcoes": [
+    "As árvores derrubaram o vento.",
+    "O vento foi derrubado pelas árvores.",
+    "As árvores foram derrubadas pelo vento.",
+    "As árvores foi derrubada pelo vento."
+   ],
+   "correta": "As árvores foram derrubadas pelo vento.",
+   "explica": "O objeto direto da ativa vira sujeito da passiva; o sujeito da ativa vira agente da passiva; o verbo vira ser + particípio, concordando com o novo sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"Os pássaros voaram.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧩 Em \"O gato comeu o peixe.\", o termo \"o peixe\" é:",
+   "opcoes": [
+    "vocativo",
+    "predicativo do sujeito",
+    "objeto direto",
+    "objeto indireto"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "O professor de História explicou a matéria.",
+    "Arroz, feijão e salada estavam na mesa.",
+    "Come-se bem nesta cidade.",
+    "Precisamos de ajuda."
+   ],
+   "correta": "Precisamos de ajuda.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Gosto de música.",
+    "Pedro virou médico.",
+    "Expliquei a lição aos alunos.",
+    "Ela simpatizou com a vizinha."
+   ],
+   "correta": "Expliquei a lição aos alunos.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há vocativo?",
+   "opcoes": [
+    "Ela abriu a janela.",
+    "Encontrei meu amigo.",
+    "O bebê dormiu.",
+    "Ana, você trouxe o livro?"
+   ],
+   "correta": "Ana, você trouxe o livro?",
+   "explica": "Em \"Ana, você trouxe o livro?\", \"Ana\" é vocativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "O céu ficou escuro.",
+    "Confio em você.",
+    "A criança chorou.",
+    "Vi o filme."
+   ],
+   "correta": "A criança chorou.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em \"À noite, a cidade fica silenciosa.\", o adjunto adverbial \"À noite\" indica:",
+   "opcoes": [
+    "meio",
+    "causa",
+    "instrumento",
+    "tempo"
+   ],
+   "correta": "tempo",
+   "explica": "\"À noite\" é adjunto adverbial de tempo."
+  },
+  {
+   "pergunta": "🔎 Em \"A menina chegou cansada.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Saímos cedo de casa.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "simples",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Cães e gatos dormiam na varanda.\"?",
+   "opcoes": [
+    "dormiam",
+    "Cães e gatos",
+    "a varanda",
+    "na varanda"
+   ],
+   "correta": "Cães e gatos",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔎 Em \"Gosto de chocolate.\", o predicado é:",
+   "opcoes": [
+    "predicado nominal",
+    "predicado verbo-nominal",
+    "não há predicado",
+    "predicado verbal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Disseram que vai chover.",
+    "O sol e a chuva formaram um arco-íris.",
+    "Você viu meu caderno?",
+    "Está frio hoje."
+   ],
+   "correta": "Está frio hoje.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Lavei a louça.",
+    "A prova foi fácil.",
+    "Obedeça aos pais.",
+    "Preciso de ajuda."
+   ],
+   "correta": "Lavei a louça.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Minha mãe fez um bolo.",
+    "Faz dez anos que moro aqui.",
+    "Come-se bem nesta cidade.",
+    "Chegaram o pai e o filho."
+   ],
+   "correta": "Chegaram o pai e o filho.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🔄 Em \"A ponte foi construída pelos operários.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "passiva sintética",
+    "reflexiva",
+    "ativa"
+   ],
+   "correta": "passiva analítica",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "As crianças brincaram no parque.",
+    "Ele parece feliz.",
+    "A água estava gelada.",
+    "Nomearam o professor diretor."
+   ],
+   "correta": "Nomearam o professor diretor.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔄 Em \"O vaso foi quebrado pelo menino.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "passiva sintética",
+    "reflexiva",
+    "ativa"
+   ],
+   "correta": "passiva analítica",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em \"Estudamos com atenção.\", o adjunto adverbial \"com atenção\" indica:",
+   "opcoes": [
+    "dúvida",
+    "causa",
+    "finalidade",
+    "modo"
+   ],
+   "correta": "modo",
+   "explica": "\"com atenção\" é adjunto adverbial de modo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "Elegeram Ana representante da turma.",
+    "A professora explicou a lição.",
+    "Ela acordou animada.",
+    "O céu ficou escuro."
+   ],
+   "correta": "A professora explicou a lição.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧩 Em \"Minha casa é grande.\", o termo \"Minha\" é:",
+   "opcoes": [
+    "adjunto adnominal",
+    "complemento nominal",
+    "sujeito",
+    "predicativo do sujeito"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🔎 Em \"Você viu meu caderno?\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "simples",
+    "composto",
+    "indeterminado"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"Os alunos saíram felizes.\", o predicado é:",
+   "opcoes": [
+    "predicado nominal",
+    "predicado verbal",
+    "não há predicado",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Os livros e os cadernos sumiram.\"?",
+   "opcoes": [
+    "livros e cadernos (dois núcleos)",
+    "sumiram",
+    "só livros",
+    "só cadernos"
+   ],
+   "correta": "livros e cadernos (dois núcleos)",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧩 Em \"Ela abriu a janela.\", o termo \"a janela\" é:",
+   "opcoes": [
+    "objeto direto",
+    "agente da passiva",
+    "predicativo do sujeito",
+    "adjunto adverbial"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🔎 Em \"Arroz, feijão e salada estavam na mesa.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "inexistente (oração sem sujeito)",
+    "simples",
+    "oculto (desinencial)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"O menino travesso quebrou o vaso.\"?",
+   "opcoes": [
+    "travesso",
+    "vaso",
+    "menino",
+    "O"
+   ],
+   "correta": "menino",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Amanheceu nublado.",
+    "Tudo estava calmo.",
+    "Ventou muito na praia.",
+    "São duas horas."
+   ],
+   "correta": "Tudo estava calmo.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"A casa da minha avó é antiga.\"?",
+   "opcoes": [
+    "avó",
+    "casa",
+    "minha",
+    "antiga"
+   ],
+   "correta": "casa",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há predicativo do objeto?",
+   "opcoes": [
+    "Achei o filme interessante.",
+    "Preciso de ajuda.",
+    "O sol nasceu.",
+    "O avião partiu."
+   ],
+   "correta": "Achei o filme interessante.",
+   "explica": "Em \"Achei o filme interessante.\", \"interessante\" é predicativo do objeto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Gosto de música.",
+    "O menino caiu da escada.",
+    "Vi o filme.",
+    "O avião partiu."
+   ],
+   "correta": "Vi o filme.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔎 Em \"A diretora e a coordenadora organizaram a festa.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "indeterminado",
+    "composto",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Entreguei o livro à professora.",
+    "Meu avô continua forte.",
+    "A sopa está quente.",
+    "Ela acordou animada."
+   ],
+   "correta": "Ela acordou animada.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Pedi desculpas ao colega.\", o verbo \"pedi\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "de ligação"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "A menina está cansada.",
+    "Dei um presente ao meu pai.",
+    "Ofereci ajuda ao vizinho.",
+    "Obedeça aos pais."
+   ],
+   "correta": "Obedeça aos pais.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Duvido de tudo.\", o verbo \"duvido\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "intransitivo",
+    "transitivo indireto",
+    "transitivo direto e indireto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de modo?",
+   "opcoes": [
+    "Ela estava muito cansada.",
+    "Ele não respondeu.",
+    "Estudamos com atenção.",
+    "Em 2010, nasceu minha irmã."
+   ],
+   "correta": "Estudamos com atenção.",
+   "explica": "Em \"Estudamos com atenção.\", \"com atenção\" indica modo."
+  },
+  {
+   "pergunta": "🔄 Em \"O menino se machucou.\", o verbo está na voz:",
+   "opcoes": [
+    "reflexiva",
+    "ativa",
+    "passiva sintética",
+    "passiva analítica"
+   ],
+   "correta": "reflexiva",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "Elegeram Ana representante da turma.",
+    "O sol nasceu cedo.",
+    "O dia permaneceu nublado.",
+    "A prova foi fácil."
+   ],
+   "correta": "Elegeram Ana representante da turma.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Os pássaros cantavam nas árvores.\"?",
+   "opcoes": [
+    "cantavam",
+    "as árvores",
+    "Os pássaros",
+    "nas árvores"
+   ],
+   "correta": "Os pássaros",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔎 Em \"O júri considerou o réu inocente.\", o predicado é:",
+   "opcoes": [
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Foi divertida a festa de ontem.\"?",
+   "opcoes": [
+    "divertida",
+    "ontem",
+    "foi divertida",
+    "a festa de ontem"
+   ],
+   "correta": "a festa de ontem",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧩 Em \"Dei um presente ao meu pai.\", o termo \"ao meu pai\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "objeto direto",
+    "agente da passiva",
+    "adjunto adverbial"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🔄 Em \"Os operários construíram a ponte.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "reflexiva",
+    "passiva sintética",
+    "passiva analítica"
+   ],
+   "correta": "ativa",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "📘 Na voz passiva analítica, usa-se:",
+   "opcoes": [
+    "verbo estar + gerúndio",
+    "verbo ter + infinitivo",
+    "verbo + se",
+    "verbo ser + particípio"
+   ],
+   "correta": "verbo ser + particípio"
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Enviei uma carta para minha avó.",
+    "Dei um presente ao meu pai.",
+    "A menina está cansada.",
+    "O avião partiu."
+   ],
+   "correta": "O avião partiu.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de finalidade?",
+   "opcoes": [
+    "À noite, a cidade fica silenciosa.",
+    "Estudo para passar.",
+    "Ele não respondeu.",
+    "Por causa da chuva, o jogo foi adiado."
+   ],
+   "correta": "Estudo para passar.",
+   "explica": "Em \"Estudo para passar.\", \"para passar\" indica finalidade."
+  },
+  {
+   "pergunta": "🔄 Em \"A professora corrigiu as provas.\", o verbo está na voz:",
+   "opcoes": [
+    "ativa",
+    "passiva analítica",
+    "passiva sintética",
+    "reflexiva"
+   ],
+   "correta": "ativa",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "📘 O objeto indireto completa:",
+   "opcoes": [
+    "um verbo intransitivo",
+    "um verbo de ligação",
+    "um verbo transitivo indireto, com preposição",
+    "um nome, com preposição"
+   ],
+   "correta": "um verbo transitivo indireto, com preposição"
+  },
+  {
+   "pergunta": "🔎 Em \"Eu e você vamos à festa.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "composto",
+    "indeterminado",
+    "oculto (desinencial)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧩 Em \"Professor, posso sair?\", o termo \"Professor\" é:",
+   "opcoes": [
+    "objeto direto",
+    "adjunto adverbial",
+    "complemento nominal",
+    "vocativo"
+   ],
+   "correta": "vocativo",
+   "explica": "Vocativo: termo usado para chamar ou interpelar alguém; fica isolado por vírgula."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Os pássaros voaram.",
+    "Elegeram Ana representante da turma.",
+    "O júri considerou o réu inocente.",
+    "O dia permaneceu nublado."
+   ],
+   "correta": "O dia permaneceu nublado.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em \"Os alunos estudaram na biblioteca.\", o adjunto adverbial \"na biblioteca\" indica:",
+   "opcoes": [
+    "lugar",
+    "negação",
+    "causa",
+    "instrumento"
+   ],
+   "correta": "lugar",
+   "explica": "\"na biblioteca\" é adjunto adverbial de lugar."
+  },
+  {
+   "pergunta": "🔎 Em \"Estudei a tarde toda.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)",
+    "simples"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🔎 Em \"O dia permaneceu nublado.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔗 Em \"Preciso de ajuda.\", o verbo \"preciso\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "transitivo direto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🔎 Em \"Chegaram as encomendas.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "indeterminado",
+    "oculto (desinencial)",
+    "composto"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔗 Em \"A menina está cansada.\", o verbo \"está\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "de ligação",
+    "transitivo indireto",
+    "intransitivo"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Meu avô continua forte.",
+    "Concordo com você.",
+    "O menino caiu da escada.",
+    "Lavei a louça."
+   ],
+   "correta": "Meu avô continua forte.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"O professor de História explicou a matéria.\"?",
+   "opcoes": [
+    "O professor de História",
+    "a matéria",
+    "explicou a matéria",
+    "explicou"
+   ],
+   "correta": "O professor de História",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧩 Em \"Vi o filme ontem.\", o termo \"o filme\" é:",
+   "opcoes": [
+    "sujeito",
+    "objeto indireto",
+    "objeto direto",
+    "aposto"
+   ],
+   "correta": "objeto direto",
+   "explica": "Objeto direto: completa o verbo transitivo direto, sem preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "Ela simpatizou com a vizinha.",
+    "Expliquei a lição aos alunos.",
+    "O cachorro latiu.",
+    "Comprei um livro."
+   ],
+   "correta": "Ela simpatizou com a vizinha.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Roubaram minha bicicleta.",
+    "Faz calor no verão.",
+    "Cães e gatos dormiam na varanda.",
+    "Minha mãe fez um bolo."
+   ],
+   "correta": "Faz calor no verão.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Apareceu um gato na janela.\"?",
+   "opcoes": [
+    "um gato",
+    "apareceu",
+    "na janela",
+    "a janela"
+   ],
+   "correta": "um gato",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Ontem à noite a vizinha fez uma festa.\"?",
+   "opcoes": [
+    "fez uma festa",
+    "a vizinha",
+    "Ontem à noite",
+    "uma festa"
+   ],
+   "correta": "a vizinha",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔎 Em \"Entreguei o livro à professora.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "predicado verbal",
+    "não há predicado"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em \"Ele respondeu educadamente.\", o adjunto adverbial \"educadamente\" indica:",
+   "opcoes": [
+    "finalidade",
+    "lugar",
+    "negação",
+    "modo"
+   ],
+   "correta": "modo",
+   "explica": "\"educadamente\" é adjunto adverbial de modo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Necessito de descanso.",
+    "Ela anda triste.",
+    "Comprei um livro.",
+    "Entreguei o livro à professora."
+   ],
+   "correta": "Entreguei o livro à professora.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🔎 Em \"O professor de História explicou a matéria.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "oculto (desinencial)",
+    "simples",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Duvido de tudo.",
+    "Comprei um livro.",
+    "O céu ficou escuro.",
+    "Ele assistiu ao jogo."
+   ],
+   "correta": "O céu ficou escuro.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔗 Em \"O avião partiu.\", o verbo \"partiu\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "intransitivo",
+    "transitivo direto",
+    "de ligação"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de intensidade?",
+   "opcoes": [
+    "Provavelmente choverá.",
+    "Saí com meus pais.",
+    "Ela estava muito cansada.",
+    "Escrevi com caneta azul."
+   ],
+   "correta": "Ela estava muito cansada.",
+   "explica": "Em \"Ela estava muito cansada.\", \"muito\" indica intensidade."
+  },
+  {
+   "pergunta": "🧩 Em \"O livro de Ana sumiu.\", o termo \"de Ana\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "adjunto adnominal",
+    "aposto",
+    "vocativo"
+   ],
+   "correta": "adjunto adnominal",
+   "explica": "Adjunto adnominal: acompanha o substantivo, caracterizando-o ou determinando-o (artigos, adjetivos, pronomes, numerais, locuções adjetivas)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "O menino quebrou o vaso.",
+    "O técnico julgou a jogada perigosa.",
+    "Entreguei o livro à professora.",
+    "O bolo ficou delicioso."
+   ],
+   "correta": "O bolo ficou delicioso.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em \"Ontem choveu.\", o adjunto adverbial \"Ontem\" indica:",
+   "opcoes": [
+    "tempo",
+    "causa",
+    "meio",
+    "companhia"
+   ],
+   "correta": "tempo",
+   "explica": "\"Ontem\" é adjunto adverbial de tempo."
+  },
+  {
+   "pergunta": "🔗 Em \"Entreguei o livro à professora.\", o verbo \"entreguei\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "transitivo indireto",
+    "de ligação"
+   ],
+   "correta": "transitivo direto e indireto",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🔎 Em \"A chuva molhou as roupas.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "indeterminado",
+    "inexistente (oração sem sujeito)",
+    "simples"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "A criança chorou.",
+    "O dia permaneceu nublado.",
+    "Ele parece feliz.",
+    "Mostrei as fotos aos amigos."
+   ],
+   "correta": "Mostrei as fotos aos amigos.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "A menina chegou cansada.",
+    "Os alunos estavam atentos.",
+    "Ela anda triste.",
+    "Ela escreveu uma carta."
+   ],
+   "correta": "Ela escreveu uma carta.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Nós fomos ao parque.",
+    "Estão chamando você lá fora.",
+    "Nevou no sul do país.",
+    "Saímos cedo de casa."
+   ],
+   "correta": "Nevou no sul do país.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧩 Em \"A chuva molhou as roupas.\", o termo \"A chuva\" é:",
+   "opcoes": [
+    "sujeito",
+    "predicativo do sujeito",
+    "aposto",
+    "objeto indireto"
+   ],
+   "correta": "sujeito",
+   "explica": "Sujeito: termo com o qual o verbo concorda."
+  },
+  {
+   "pergunta": "🔎 Em \"Aquela menina canta muito bem.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "oculto (desinencial)",
+    "simples",
+    "indeterminado"
+   ],
+   "correta": "simples",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "O sol nasceu.",
+    "Paguei a conta ao garçom.",
+    "Ele assistiu ao jogo.",
+    "Ele parece feliz."
+   ],
+   "correta": "Paguei a conta ao garçom.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Chegaram as encomendas.\"?",
+   "opcoes": [
+    "sujeito oculto",
+    "as encomendas",
+    "chegaram",
+    "oração sem sujeito"
+   ],
+   "correta": "as encomendas",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🔄 Em \"A polícia prendeu o ladrão.\", o verbo está na voz:",
+   "opcoes": [
+    "reflexiva",
+    "passiva sintética",
+    "passiva analítica",
+    "ativa"
+   ],
+   "correta": "ativa",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em \"O gato dormiu no sofá.\", o adjunto adverbial \"no sofá\" indica:",
+   "opcoes": [
+    "finalidade",
+    "meio",
+    "lugar",
+    "companhia"
+   ],
+   "correta": "lugar",
+   "explica": "\"no sofá\" é adjunto adverbial de lugar."
+  },
+  {
+   "pergunta": "📘 O verbo HAVER, no sentido de existir, forma oração:",
+   "opcoes": [
+    "com sujeito simples",
+    "com sujeito oculto",
+    "sem sujeito",
+    "com sujeito composto"
+   ],
+   "correta": "sem sujeito"
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "O gato comeu o peixe.",
+    "Escrevi uma carta.",
+    "Ele ama a natureza.",
+    "O gol foi marcado pelo capitão."
+   ],
+   "correta": "O gol foi marcado pelo capitão.",
+   "explica": "Em \"O gol foi marcado pelo capitão.\", \"pelo capitão\" é agente da passiva."
+  },
+  {
+   "pergunta": "🔗 Em \"O sol nasceu.\", o verbo \"nasceu\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "de ligação",
+    "intransitivo"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Tudo estava calmo na cidade.\"?",
+   "opcoes": [
+    "Tudo",
+    "na cidade",
+    "calmo",
+    "estava calmo"
+   ],
+   "correta": "Tudo",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Ele comprou um carro novo.",
+    "Faz calor no verão.",
+    "Comprei um livro novo.",
+    "Chegaram o pai e o filho."
+   ],
+   "correta": "Ele comprou um carro novo.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em \"Viajamos de avião.\", o adjunto adverbial \"de avião\" indica:",
+   "opcoes": [
+    "meio",
+    "intensidade",
+    "companhia",
+    "negação"
+   ],
+   "correta": "meio",
+   "explica": "\"de avião\" é adjunto adverbial de meio."
+  },
+  {
+   "pergunta": "🧩 Em \"Sou favorável à proposta.\", o termo \"à proposta\" é:",
+   "opcoes": [
+    "objeto indireto",
+    "sujeito",
+    "complemento nominal",
+    "adjunto adnominal"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🔗 Em \"Os convidados chegaram cedo.\", o verbo \"chegaram\" é:",
+   "opcoes": [
+    "transitivo direto",
+    "de ligação",
+    "intransitivo",
+    "transitivo direto e indireto"
+   ],
+   "correta": "intransitivo",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "O pai e a mãe chegaram juntos.",
+    "Você viu meu caderno?",
+    "Come-se bem nesta cidade.",
+    "Meu irmão e minha prima estudam juntos."
+   ],
+   "correta": "Você viu meu caderno?",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto e indireto?",
+   "opcoes": [
+    "Escrevi uma carta.",
+    "Vi o filme.",
+    "Concordo com você.",
+    "Emprestei o caderno a Ana."
+   ],
+   "correta": "Emprestei o caderno a Ana.",
+   "explica": "Verbo transitivo direto e indireto: pede os dois objetos (algo A alguém)."
+  },
+  {
+   "pergunta": "🔗 Em \"O céu ficou escuro.\", o verbo \"ficou\" é:",
+   "opcoes": [
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "transitivo indireto",
+    "de ligação"
+   ],
+   "correta": "de ligação",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔎 Em \"A menina está cansada.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado verbo-nominal",
+    "não há predicado",
+    "predicado nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🔗 Em \"Gosto de música.\", o verbo \"gosto\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo indireto",
+    "transitivo direto e indireto",
+    "de ligação"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Chegaste tarde.",
+    "Havia poucos alunos na sala.",
+    "Ele comprou um carro novo.",
+    "Estão chamando você lá fora."
+   ],
+   "correta": "Estão chamando você lá fora.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Tudo estava calmo.",
+    "Comprei um livro novo.",
+    "Falaram mal de você.",
+    "Cães e gatos dormiam na varanda."
+   ],
+   "correta": "Falaram mal de você.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🔎 Em \"Precisa-se de vendedores.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Necessito de descanso.",
+    "O céu ficou escuro.",
+    "Ele ama a natureza.",
+    "Gosto de música."
+   ],
+   "correta": "Ele ama a natureza.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Choveu muito ontem.",
+    "Os alunos chegaram cedo.",
+    "A professora e os alunos visitaram o museu.",
+    "Estão chamando você lá fora."
+   ],
+   "correta": "Choveu muito ontem.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em \"Ele trabalhou com dedicação.\", o adjunto adverbial \"com dedicação\" indica:",
+   "opcoes": [
+    "finalidade",
+    "intensidade",
+    "modo",
+    "negação"
+   ],
+   "correta": "modo",
+   "explica": "\"com dedicação\" é adjunto adverbial de modo."
+  },
+  {
+   "pergunta": "🔎 Em \"Chegaram o pai e o filho.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "composto",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Trovejou a noite toda.",
+    "Trata-se de um caso sério.",
+    "Nós fomos ao parque.",
+    "Falaram mal de você."
+   ],
+   "correta": "Nós fomos ao parque.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbal?",
+   "opcoes": [
+    "O bolo ficou delicioso.",
+    "Elegeram Ana representante da turma.",
+    "Ele parece feliz.",
+    "Os alunos chegaram."
+   ],
+   "correta": "Os alunos chegaram.",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🔗 Em \"Ele ama a natureza.\", o verbo \"ama\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo direto",
+    "transitivo direto e indireto",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "Gosto de música.",
+    "Brasília, a capital do país, foi inaugurada em 1960.",
+    "Necessito de descanso.",
+    "Confio em você."
+   ],
+   "correta": "Brasília, a capital do país, foi inaugurada em 1960.",
+   "explica": "Em \"Brasília, a capital do país, foi inaugurada em 1960.\", \"a capital do país\" é aposto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Lavei a louça.",
+    "Ele voltou triste da viagem.",
+    "Entreguei o livro à professora.",
+    "Os alunos estavam atentos."
+   ],
+   "correta": "Os alunos estavam atentos.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo direto?",
+   "opcoes": [
+    "Confio em você.",
+    "O sol nasceu.",
+    "O avião partiu.",
+    "O gato comeu o peixe."
+   ],
+   "correta": "O gato comeu o peixe.",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🔗 Em \"Encontrei meu amigo.\", o verbo \"encontrei\" é:",
+   "opcoes": [
+    "intransitivo",
+    "de ligação",
+    "transitivo direto",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo direto",
+   "explica": "Verbo transitivo direto: pede complemento sem preposição (objeto direto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de causa?",
+   "opcoes": [
+    "Brinquei com meu irmão.",
+    "Saí com meus pais.",
+    "Tremia de frio.",
+    "À noite, a cidade fica silenciosa."
+   ],
+   "correta": "Tremia de frio.",
+   "explica": "Em \"Tremia de frio.\", \"de frio\" indica causa."
+  },
+  {
+   "pergunta": "📘 O aposto:",
+   "opcoes": [
+    "explica ou especifica outro termo, geralmente entre vírgulas",
+    "completa um verbo",
+    "chama o ouvinte",
+    "indica circunstância"
+   ],
+   "correta": "explica ou especifica outro termo, geralmente entre vírgulas"
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de causa?",
+   "opcoes": [
+    "Estudamos com atenção.",
+    "Ela fala muito.",
+    "Escrevi com caneta azul.",
+    "Por causa da chuva, o jogo foi adiado."
+   ],
+   "correta": "Por causa da chuva, o jogo foi adiado.",
+   "explica": "Em \"Por causa da chuva, o jogo foi adiado.\", \"Por causa da chuva\" indica causa."
+  },
+  {
+   "pergunta": "🔄 Em \"Compram-se livros usados.\", o verbo está na voz:",
+   "opcoes": [
+    "reflexiva",
+    "passiva analítica",
+    "passiva sintética",
+    "ativa"
+   ],
+   "correta": "passiva sintética",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧩 Em \"O júri considerou o réu inocente.\", o termo \"inocente\" é:",
+   "opcoes": [
+    "objeto direto",
+    "adjunto adverbial",
+    "predicativo do objeto",
+    "aposto"
+   ],
+   "correta": "predicativo do objeto",
+   "explica": "Predicativo do objeto: atribui uma característica ao objeto."
+  },
+  {
+   "pergunta": "🧩 Em \"Preciso de ajuda.\", o termo \"de ajuda\" é:",
+   "opcoes": [
+    "adjunto adnominal",
+    "objeto direto",
+    "objeto indireto",
+    "vocativo"
+   ],
+   "correta": "objeto indireto",
+   "explica": "Objeto indireto: completa o verbo transitivo indireto, com preposição obrigatória."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Cães e gatos dormiam na varanda.",
+    "Ninguém respondeu à pergunta.",
+    "Necessita-se de professores.",
+    "Havia poucos alunos na sala."
+   ],
+   "correta": "Havia poucos alunos na sala.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "Há muitas pessoas na fila.",
+    "Chegaram o pai e o filho.",
+    "Ventou muito na praia.",
+    "Bateram à porta."
+   ],
+   "correta": "Bateram à porta.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "A plateia sorriu.",
+    "Duvido de tudo.",
+    "A prova foi fácil.",
+    "Mostrei as fotos aos amigos."
+   ],
+   "correta": "Duvido de tudo.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Machado de Assis, o grande escritor, nasceu no Rio.\", o termo \"o grande escritor\" é:",
+   "opcoes": [
+    "sujeito",
+    "agente da passiva",
+    "aposto",
+    "adjunto adnominal"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "🔎 Em \"Nevou no sul do país.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "indeterminado",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🧩 Em \"O cigarro é prejudicial à saúde.\", o termo \"à saúde\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "aposto",
+    "complemento nominal",
+    "adjunto adverbial"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🔄 Em \"O poema foi escrito por Ana.\", o verbo está na voz:",
+   "opcoes": [
+    "reflexiva",
+    "passiva analítica",
+    "ativa",
+    "passiva sintética"
+   ],
+   "correta": "passiva analítica",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🔎 Em \"Está frio hoje.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)",
+    "composto",
+    "indeterminado"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔎 Em \"Ela escreveu uma carta.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbal"
+   ],
+   "correta": "predicado verbal",
+   "explica": "Predicado verbal: o núcleo é um verbo significativo (ação), sem predicativo."
+  },
+  {
+   "pergunta": "🔎 Em \"Ele voltou triste da viagem.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbo-nominal",
+    "predicado verbal"
+   ],
+   "correta": "predicado verbo-nominal",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "Recife, capital de Pernambuco, é linda.",
+    "Obedeça aos pais.",
+    "O sol nasceu.",
+    "A plateia sorriu."
+   ],
+   "correta": "Recife, capital de Pernambuco, é linda.",
+   "explica": "Em \"Recife, capital de Pernambuco, é linda.\", \"capital de Pernambuco\" é aposto."
+  },
+  {
+   "pergunta": "🔎 Em \"A sopa está quente.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado verbo-nominal",
+    "predicado verbal",
+    "predicado nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"O cheiro do bolo invadiu a casa.\"?",
+   "opcoes": [
+    "invadiu",
+    "casa",
+    "cheiro",
+    "bolo"
+   ],
+   "correta": "cheiro",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Achei o filme interessante.",
+    "As crianças dormiram tranquilas.",
+    "As crianças brincaram no parque.",
+    "Ele parece feliz."
+   ],
+   "correta": "Ele parece feliz.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "Comprei um livro.",
+    "O ladrão foi preso pela polícia.",
+    "Vi o filme.",
+    "O gato comeu o peixe."
+   ],
+   "correta": "O ladrão foi preso pela polícia.",
+   "explica": "Em \"O ladrão foi preso pela polícia.\", \"pela polícia\" é agente da passiva."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é composto?",
+   "opcoes": [
+    "Havia poucos alunos na sala.",
+    "É meio-dia.",
+    "A diretora e a coordenadora organizaram a festa.",
+    "Come-se bem nesta cidade."
+   ],
+   "correta": "A diretora e a coordenadora organizaram a festa.",
+   "explica": "Sujeito composto: tem dois ou mais núcleos."
+  },
+  {
+   "pergunta": "🧩 Em \"Ontem choveu muito.\", o termo \"Ontem\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "vocativo",
+    "adjunto adnominal",
+    "sujeito"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em \"Em 2010, nasceu minha irmã.\", o adjunto adverbial \"Em 2010\" indica:",
+   "opcoes": [
+    "meio",
+    "tempo",
+    "negação",
+    "intensidade"
+   ],
+   "correta": "tempo",
+   "explica": "\"Em 2010\" é adjunto adverbial de tempo."
+  },
+  {
+   "pergunta": "🔎 Em \"Faz calor no verão.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "simples",
+    "inexistente (oração sem sujeito)",
+    "oculto (desinencial)"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Pedro e Ana chegaram.\"?",
+   "opcoes": [
+    "Pedro e Ana (dois núcleos)",
+    "só Pedro",
+    "chegaram",
+    "só Ana"
+   ],
+   "correta": "Pedro e Ana (dois núcleos)",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é de ligação?",
+   "opcoes": [
+    "Duvido de tudo.",
+    "Contei a história às crianças.",
+    "A menina está cansada.",
+    "Vi o filme."
+   ],
+   "correta": "A menina está cansada.",
+   "explica": "Verbo de ligação: liga o sujeito a uma característica (predicativo): ser, estar, ficar, parecer, permanecer, continuar, virar, andar."
+  },
+  {
+   "pergunta": "🔎 Em \"Bateram à porta.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "indeterminado",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é oculto (desinencial)?",
+   "opcoes": [
+    "Os alunos chegaram cedo.",
+    "O professor de História explicou a matéria.",
+    "Saímos cedo de casa.",
+    "São duas horas."
+   ],
+   "correta": "Saímos cedo de casa.",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de tempo?",
+   "opcoes": [
+    "Talvez eu viaje.",
+    "Ela estava muito cansada.",
+    "Em 2010, nasceu minha irmã.",
+    "Ela fala muito."
+   ],
+   "correta": "Em 2010, nasceu minha irmã.",
+   "explica": "Em \"Em 2010, nasceu minha irmã.\", \"Em 2010\" indica tempo."
+  },
+  {
+   "pergunta": "🔎 Em \"A prova foi fácil.\", o predicado é:",
+   "opcoes": [
+    "predicado verbo-nominal",
+    "não há predicado",
+    "predicado verbal",
+    "predicado nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧩 Em \"Talvez eu viaje.\", o termo \"Talvez\" é:",
+   "opcoes": [
+    "predicativo do objeto",
+    "predicativo do sujeito",
+    "objeto direto",
+    "adjunto adverbial"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🔎 Em \"Viajamos nas férias.\", o sujeito é:",
+   "opcoes": [
+    "indeterminado",
+    "composto",
+    "oculto (desinencial)",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Saímos cedo de casa.",
+    "Minha mãe fez um bolo.",
+    "Telefonaram para você.",
+    "Roubaram minha bicicleta."
+   ],
+   "correta": "Minha mãe fez um bolo.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"Come-se bem nesta cidade.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "indeterminado",
+    "simples",
+    "composto"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há agente da passiva?",
+   "opcoes": [
+    "Encontrei meu amigo.",
+    "A carta foi escrita por Ana.",
+    "Ele ama a natureza.",
+    "Ela abriu a janela."
+   ],
+   "correta": "A carta foi escrita por Ana.",
+   "explica": "Em \"A carta foi escrita por Ana.\", \"por Ana\" é agente da passiva."
+  },
+  {
+   "pergunta": "🔎 Em \"Fomos ao cinema ontem.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "composto",
+    "simples",
+    "indeterminado"
+   ],
+   "correta": "oculto (desinencial)",
+   "explica": "Sujeito oculto: não aparece, mas é identificado pela terminação do verbo (eu, tu, nós...)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Sobraram dois pedaços de bolo.\"?",
+   "opcoes": [
+    "oração sem sujeito",
+    "sobraram",
+    "dois pedaços de bolo",
+    "sujeito oculto"
+   ],
+   "correta": "dois pedaços de bolo",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "A professora explicou a lição.",
+    "O júri considerou o réu inocente.",
+    "Pedro virou médico.",
+    "Ele voltou triste da viagem."
+   ],
+   "correta": "Pedro virou médico.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "📘 Os termos essenciais da oração são:",
+   "opcoes": [
+    "aposto e vocativo",
+    "adjunto adnominal e adverbial",
+    "sujeito e predicado",
+    "objeto direto e indireto"
+   ],
+   "correta": "sujeito e predicado"
+  },
+  {
+   "pergunta": "🔎 Em \"Meu avô continua forte.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado nominal",
+    "predicado verbal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"Os alunos do sexto ano viajaram.\"?",
+   "opcoes": [
+    "sexto",
+    "alunos",
+    "Os",
+    "ano"
+   ],
+   "correta": "alunos",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "🧩 Em \"Pedro virou médico.\", o termo \"médico\" é:",
+   "opcoes": [
+    "predicativo do sujeito",
+    "aposto",
+    "predicativo do objeto",
+    "vocativo"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"Ventou muito na praia.\", o sujeito é:",
+   "opcoes": [
+    "simples",
+    "composto",
+    "indeterminado",
+    "inexistente (oração sem sujeito)"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🎯 Qual é o sujeito da oração \"Saiu o resultado da prova.\"?",
+   "opcoes": [
+    "o resultado da prova",
+    "saiu",
+    "oração sem sujeito",
+    "sujeito oculto"
+   ],
+   "correta": "o resultado da prova",
+   "explica": "O sujeito é o termo com o qual o verbo concorda (pergunte ao verbo: \"quem?\" ou \"o quê?\")."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é nominal?",
+   "opcoes": [
+    "Ela anda triste.",
+    "Choveu muito.",
+    "A menina chegou cansada.",
+    "Lavei a louça."
+   ],
+   "correta": "Ela anda triste.",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Choveu muito ontem.",
+    "São duas horas.",
+    "Está frio hoje.",
+    "O cachorro latiu a noite toda."
+   ],
+   "correta": "O cachorro latiu a noite toda.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔎 Em \"O bolo ficou delicioso.\", o predicado é:",
+   "opcoes": [
+    "não há predicado",
+    "predicado verbal",
+    "predicado nominal",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o predicado é verbo-nominal?",
+   "opcoes": [
+    "A menina está cansada.",
+    "Choveu muito.",
+    "O céu ficou escuro.",
+    "O time saiu vitorioso."
+   ],
+   "correta": "O time saiu vitorioso.",
+   "explica": "Predicado verbo-nominal: tem dois núcleos, um verbo significativo e um predicativo (do sujeito ou do objeto)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de meio?",
+   "opcoes": [
+    "Tremia de frio.",
+    "À noite, a cidade fica silenciosa.",
+    "Provavelmente choverá.",
+    "Viajamos de avião."
+   ],
+   "correta": "Viajamos de avião.",
+   "explica": "Em \"Viajamos de avião.\", \"de avião\" indica meio."
+  },
+  {
+   "pergunta": "🔎 Em \"Ela anda triste.\", o predicado é:",
+   "opcoes": [
+    "predicado verbal",
+    "predicado nominal",
+    "não há predicado",
+    "predicado verbo-nominal"
+   ],
+   "correta": "predicado nominal",
+   "explica": "Predicado nominal: verbo de ligação + predicativo do sujeito; o núcleo é o predicativo (estado, qualidade)."
+  },
+  {
+   "pergunta": "🎯 Qual é o núcleo do sujeito em \"O time de futebol da escola venceu.\"?",
+   "opcoes": [
+    "escola",
+    "time",
+    "venceu",
+    "futebol"
+   ],
+   "correta": "time",
+   "explica": "O núcleo é a palavra principal do sujeito; os outros termos o acompanham (adjuntos)."
+  },
+  {
+   "pergunta": "📘 O sujeito indeterminado ocorre com:",
+   "opcoes": [
+    "verbos que indicam fenômenos da natureza",
+    "verbo na 3ª pessoa do plural sem referência, ou verbo + SE (com VTI ou VI)",
+    "o verbo haver no sentido de existir",
+    "sujeito com dois núcleos"
+   ],
+   "correta": "verbo na 3ª pessoa do plural sem referência, ou verbo + SE (com VTI ou VI)"
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de meio?",
+   "opcoes": [
+    "Provavelmente choverá.",
+    "Os alunos estudaram na biblioteca.",
+    "Em 2010, nasceu minha irmã.",
+    "Fomos de ônibus."
+   ],
+   "correta": "Fomos de ônibus.",
+   "explica": "Em \"Fomos de ônibus.\", \"de ônibus\" indica meio."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é inexistente (oração sem sujeito)?",
+   "opcoes": [
+    "Faz dez anos que moro aqui.",
+    "Terminei a lição.",
+    "Os alunos chegaram cedo.",
+    "Precisamos de ajuda."
+   ],
+   "correta": "Faz dez anos que moro aqui.",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔎 Em \"São duas horas.\", o sujeito é:",
+   "opcoes": [
+    "composto",
+    "indeterminado",
+    "inexistente (oração sem sujeito)",
+    "simples"
+   ],
+   "correta": "inexistente (oração sem sujeito)",
+   "explica": "Oração sem sujeito: verbos impessoais (haver = existir, fazer/ser indicando tempo, fenômenos da natureza)."
+  },
+  {
+   "pergunta": "🔎 Em \"Trata-se de um caso sério.\", o sujeito é:",
+   "opcoes": [
+    "oculto (desinencial)",
+    "indeterminado",
+    "inexistente (oração sem sujeito)",
+    "composto"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧩 Em \"Tenho medo de altura.\", o termo \"de altura\" é:",
+   "opcoes": [
+    "complemento nominal",
+    "aposto",
+    "adjunto adverbial",
+    "objeto direto"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧩 Em \"Ele parece feliz.\", o termo \"feliz\" é:",
+   "opcoes": [
+    "aposto",
+    "adjunto adnominal",
+    "complemento nominal",
+    "predicativo do sujeito"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há aposto?",
+   "opcoes": [
+    "O bebê dormiu.",
+    "O avião partiu.",
+    "A criança chorou.",
+    "Machado de Assis, o grande escritor, nasceu no Rio."
+   ],
+   "correta": "Machado de Assis, o grande escritor, nasceu no Rio.",
+   "explica": "Em \"Machado de Assis, o grande escritor, nasceu no Rio.\", \"o grande escritor\" é aposto."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é indeterminado?",
+   "opcoes": [
+    "A professora e os alunos visitaram o museu.",
+    "Come-se bem nesta cidade.",
+    "Ventou muito na praia.",
+    "Gosto muito de música."
+   ],
+   "correta": "Come-se bem nesta cidade.",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧩 Em \"A prova foi fácil.\", o termo \"fácil\" é:",
+   "opcoes": [
+    "vocativo",
+    "adjunto adnominal",
+    "predicativo do sujeito",
+    "objeto indireto"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🔎 Em \"Vive-se bem aqui.\", o sujeito é:",
+   "opcoes": [
+    "inexistente (oração sem sujeito)",
+    "composto",
+    "oculto (desinencial)",
+    "indeterminado"
+   ],
+   "correta": "indeterminado",
+   "explica": "Sujeito indeterminado: existe, mas não se sabe ou não se quer dizer quem é (verbo na 3ª pessoa do plural sem referência, ou verbo + SE com VTI/VI)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase há adjunto adverbial de negação?",
+   "opcoes": [
+    "Provavelmente choverá.",
+    "Os alunos estudaram na biblioteca.",
+    "Ele trabalhou com dedicação.",
+    "Ele não respondeu."
+   ],
+   "correta": "Ele não respondeu.",
+   "explica": "Em \"Ele não respondeu.\", \"não\" indica negação."
+  },
+  {
+   "pergunta": "🧩 Em \"O quadro foi pintado por Tarsila.\", o termo \"por Tarsila\" é:",
+   "opcoes": [
+    "vocativo",
+    "predicativo do sujeito",
+    "agente da passiva",
+    "complemento nominal"
+   ],
+   "correta": "agente da passiva",
+   "explica": "Agente da passiva: na voz passiva, indica quem pratica a ação (geralmente com \"por/pelo\")."
+  },
+  {
+   "pergunta": "🔄 Em \"O ladrão foi preso pela polícia.\", o verbo está na voz:",
+   "opcoes": [
+    "passiva analítica",
+    "reflexiva",
+    "ativa",
+    "passiva sintética"
+   ],
+   "correta": "passiva analítica",
+   "explica": "Ativa: o sujeito pratica a ação. Passiva analítica: ser + particípio (+ agente). Passiva sintética: verbo + se. Reflexiva: o sujeito pratica e recebe a ação."
+  },
+  {
+   "pergunta": "🧭 Em \"Brinquei com meu irmão.\", o adjunto adverbial \"com meu irmão\" indica:",
+   "opcoes": [
+    "negação",
+    "lugar",
+    "companhia",
+    "causa"
+   ],
+   "correta": "companhia",
+   "explica": "\"com meu irmão\" é adjunto adverbial de companhia."
+  },
+  {
+   "pergunta": "📘 O vocativo:",
+   "opcoes": [
+    "é sempre o sujeito",
+    "é um tipo de objeto",
+    "é um adjunto adverbial",
+    "não pertence nem ao sujeito nem ao predicado"
+   ],
+   "correta": "não pertence nem ao sujeito nem ao predicado"
+  },
+  {
+   "pergunta": "🧩 Em \"A obediência às leis é importante.\", o termo \"às leis\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "aposto",
+    "objeto indireto",
+    "complemento nominal"
+   ],
+   "correta": "complemento nominal",
+   "explica": "Complemento nominal: completa o sentido de um nome (substantivo, adjetivo ou advérbio), sempre com preposição."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Chegaram as encomendas.",
+    "Eu e você vamos à festa.",
+    "Gosto muito de música.",
+    "É meio-dia."
+   ],
+   "correta": "Chegaram as encomendas.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🔗 Em \"Ela simpatizou com a vizinha.\", o verbo \"simpatizou\" é:",
+   "opcoes": [
+    "intransitivo",
+    "transitivo direto e indireto",
+    "transitivo direto",
+    "transitivo indireto"
+   ],
+   "correta": "transitivo indireto",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  },
+  {
+   "pergunta": "🧩 Em \"Os alunos saíram felizes.\", o termo \"felizes\" é:",
+   "opcoes": [
+    "adjunto adverbial",
+    "predicativo do sujeito",
+    "objeto indireto",
+    "predicativo do objeto"
+   ],
+   "correta": "predicativo do sujeito",
+   "explica": "Predicativo do sujeito: atribui uma característica ao sujeito."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o sujeito é simples?",
+   "opcoes": [
+    "Está frio hoje.",
+    "Trata-se de um caso sério.",
+    "A turma do sexto ano venceu o torneio.",
+    "Ventou muito na praia."
+   ],
+   "correta": "A turma do sexto ano venceu o torneio.",
+   "explica": "Sujeito simples: tem um só núcleo."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é intransitivo?",
+   "opcoes": [
+    "Preciso de ajuda.",
+    "O menino quebrou o vaso.",
+    "Comprei um livro.",
+    "O bebê dormiu."
+   ],
+   "correta": "O bebê dormiu.",
+   "explica": "Verbo intransitivo: tem sentido completo, não pede complemento."
+  },
+  {
+   "pergunta": "🧩 Em \"Brasília, a capital do país, foi inaugurada em 1960.\", o termo \"a capital do país\" é:",
+   "opcoes": [
+    "sujeito",
+    "objeto indireto",
+    "aposto",
+    "adjunto adverbial"
+   ],
+   "correta": "aposto",
+   "explica": "Aposto: explica, especifica ou resume outro termo, geralmente entre vírgulas."
+  },
+  {
+   "pergunta": "🧩 Em \"Ele saiu cedo.\", o termo \"cedo\" é:",
+   "opcoes": [
+    "objeto direto",
+    "vocativo",
+    "predicativo do sujeito",
+    "adjunto adverbial"
+   ],
+   "correta": "adjunto adverbial",
+   "explica": "Adjunto adverbial: indica uma circunstância (tempo, lugar, modo, causa, instrumento...)."
+  },
+  {
+   "pergunta": "🧭 Em qual frase o verbo é transitivo indireto?",
+   "opcoes": [
+    "O sol nasceu.",
+    "Ele ama a natureza.",
+    "Enviei uma carta para minha avó.",
+    "Confio em você."
+   ],
+   "correta": "Confio em você.",
+   "explica": "Verbo transitivo indireto: pede complemento com preposição (objeto indireto)."
+  }
+ ]
+}

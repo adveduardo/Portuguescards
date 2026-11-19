@@ -1233,7 +1233,12 @@
                 const titulo = String((bancoPorArquivo[arq] || {}).titulo || arq).replace(/^[^\p{L}\p{N}]+/u, '').replace(/\s*\(\d+ questões\)$/, '').trim();
                 return converterDoPainel(await r.json()).map(q => Object.assign(q, { tema: titulo }));
             }));
-            let novas = embaralharLista([].concat(...listas));   // a ordem é sempre sorteada
+            const vistasBanco = new Set();   // a mesma pergunta com a mesma resposta não se repete quando vários assuntos são marcados
+            let novas = embaralharLista([].concat(...listas)).filter(q => {   // a ordem é sempre sorteada
+                const k = q.q + '|' + q[String(q.correct).toLowerCase()];
+                if (vistasBanco.has(k)) return false;
+                vistasBanco.add(k); return true;
+            });
             if (!novas.length) { info.innerText = '⚠️ Esse assunto não tem questões de múltipla escolha que funcionem aqui.'; return; }
             const disponiveis = novas.length, qtd = parseInt(document.getElementById('bancoQtd').value);
             if (qtd > 0 && qtd < novas.length) novas = novas.slice(0, qtd);   // sorteia exatamente a quantidade pedida
