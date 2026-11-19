@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A história de Marta · Saúde é só escolha individual? · EJA</title>
+<style>
+:root{
+  --ink:#16243d; --navy:#1f3f73; --blue:#2a6db5; --magenta:#c2185b; --green:#1d8a57;
+  --yellow:#f2b21b; --red:#d6402e; --cream:#f7f2e7; --paper:#fffdf8; --line:#e2d9c6;
+  --muted:#596377; --m-soft:#fbe4ed; --b-soft:#e3eefb; --g-soft:#e2f3e9; --y-soft:#fdf1d2; --r-soft:#fbe6e2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#101b2d;overflow:hidden;font-family:"Segoe UI",Ubuntu,Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{opacity:.35;cursor:default}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:var(--cream);overflow:hidden;transform-origin:center center;transform:translate(-50%,-50%)}
+.band{position:absolute;left:0;width:100%;height:16px;z-index:5;
+  background:repeating-linear-gradient(90deg,var(--green) 0 90px,var(--yellow) 90px 150px,var(--blue) 150px 250px,var(--red) 250px 300px,var(--magenta) 300px 380px)}
+.band.top{top:0}.band.bot{bottom:0}
+
+/* ---------- slides ---------- */
+.slide{position:absolute;left:0;top:16px;width:1600px;height:804px;padding:34px 80px 0;display:none}
+.slide.on{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kicker{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta)}
+h2{font-size:56px;line-height:1.08;font-weight:800;color:var(--navy);margin:8px 0 24px;letter-spacing:-.01em}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{border:0;border-radius:14px;padding:14px 26px;font-size:28px;font-weight:700;background:var(--navy);color:#fff}
+.btn.ghost{background:var(--paper);color:var(--navy);border:3px solid var(--navy)}
+.btn.small{font-size:22px;padding:10px 18px;border-radius:12px}
+.empty{font-size:26px;color:var(--muted);font-style:italic}
+.nota{position:absolute;right:80px;bottom:14px;max-width:820px;background:#fff6d2;border-left:10px solid var(--yellow);border-radius:0 12px 12px 0;padding:12px 20px;font-size:21px;line-height:1.35;color:var(--ink);display:none;box-shadow:0 3px 10px rgba(0,0,0,.12);z-index:4}
+.nota b{color:var(--magenta)}
+body.notes .nota{display:block}
+.ans{visibility:hidden;opacity:0;transition:opacity .25s}
+.ans.shown{visibility:visible;opacity:1}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:10px;padding:9px 20px;border-radius:999px;font-size:31px;font-weight:600;margin:0 12px 12px 0;border:2px solid transparent;line-height:1.2}
+.chip .cx{border:0;background:rgba(0,0,0,.09);width:32px;height:32px;border-radius:50%;font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.c-y{background:var(--y-soft);border-color:#ecd28f}
+.c-g{background:var(--g-soft);border-color:#a9d8bd}
+.c-b{background:var(--b-soft);border-color:#a9c7ea}
+.c-m{background:var(--m-soft);border-color:#eeb2c8}
+.c-muted{background:#fff;border-color:var(--line);color:var(--muted)}
+.addrow{display:flex;gap:16px;margin-bottom:22px}
+.addrow input{flex:1;font:inherit;font-size:32px;padding:14px 22px;border:3px solid var(--navy);border-radius:14px;background:#fff;color:var(--ink);min-width:0}
+.addrow input:focus{outline:4px solid var(--yellow)}
+.chipzone{background:var(--paper);border:3px dashed var(--line);border-radius:20px;padding:24px 24px 12px;overflow:auto}
+
+/* ---------- 1 capa ---------- */
+.cover{display:grid;grid-template-columns:1fr 540px;gap:60px;align-items:center;height:740px}
+.cover h1{font-size:100px;line-height:.98;font-weight:900;color:var(--navy);margin:18px 0 16px;letter-spacing:-.02em}
+.cover-sub{font-size:40px;color:var(--magenta);font-weight:700}
+.qbox{margin-top:34px;background:var(--paper);border-left:12px solid var(--yellow);padding:22px 28px;font-size:34px;line-height:1.28;font-weight:600;border-radius:0 16px 16px 0;box-shadow:0 3px 0 var(--line)}
+.qbox span{display:block;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px}
+.byline{margin-top:24px;font-size:24px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tile{height:196px;border-radius:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#fff;font-size:28px;font-weight:700}
+.tile .ic{font-size:80px;stroke-width:1.8}
+.t-m{background:var(--magenta)}.t-y{background:var(--yellow);color:var(--ink)}.t-b{background:var(--blue)}
+.t-n{background:var(--navy)}.t-g{background:var(--green)}.t-r{background:var(--red)}
+
+/* ---------- 2 diagnóstico ---------- */
+#s2 .chipzone{height:440px}
+
+/* ---------- 3 saúde ---------- */
+.s3grid{display:grid;grid-template-columns:520px 1fr;gap:56px;align-items:center}
+.s3grid svg text{font-family:inherit}
+.quote{font-family:Georgia,"DejaVu Serif","Times New Roman",serif;font-size:34px;line-height:1.35;font-style:italic;background:var(--paper);border-radius:18px;padding:26px 30px;border:2px solid var(--line)}
+.quote cite{display:block;font-family:"Segoe UI",Ubuntu,Roboto,Arial,sans-serif;font-style:normal;font-size:21px;color:var(--muted);margin-top:12px}
+.ask{font-size:46px;font-weight:800;color:var(--magenta);margin:34px 0 20px}
+.votes{display:flex;gap:22px}
+.vote{position:relative;flex:1}
+.vmain{width:100%;border:0;border-radius:20px;padding:18px 10px 14px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:2px}
+.vl{font-size:32px;font-weight:700}
+.vc{font-size:64px;font-weight:900;line-height:1}
+.v-sim .vmain{background:var(--blue)}.v-nao .vmain{background:var(--red)}.v-dep .vmain{background:var(--green)}
+.vminus{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.28);color:#fff;font-size:28px;line-height:1}
+
+/* ---------- 4 Marta ---------- */
+.marta{display:grid;grid-template-columns:330px 1fr;gap:56px;align-items:start}
+.marta-pic{text-align:center}
+.marta-pic svg{width:330px;height:396px}
+.tag{display:inline-block;margin-top:12px;background:var(--navy);color:#fff;font-size:22px;font-weight:700;border-radius:999px;padding:8px 20px}
+.story p{font-size:38px;line-height:1.42;margin-bottom:20px}
+.hl{font-weight:700;padding:0 6px;border-radius:8px}
+.hl.m{background:var(--m-soft)}.hl.y{background:var(--y-soft)}.hl.b{background:var(--b-soft)}
+.hl.n{background:#e4e8f2}.hl.g{background:var(--g-soft)}.hl.r{background:var(--r-soft)}
+.gloss{display:grid;grid-template-columns:auto 1fr;gap:12px 20px;align-items:center;margin-top:10px;background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:18px 22px}
+.gl{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;padding:8px 16px;font-size:24px;font-weight:600;text-align:left}
+.gl.used{background:var(--navy);color:#fff}
+.gloss .ans{font-size:27px}
+
+/* ---------- 5 dia ---------- */
+.tl{position:relative;margin-top:96px}
+.tl-ev{position:absolute;font-size:24px;font-weight:700;color:var(--navy);white-space:nowrap;transform:translateX(-50%)}
+.tl-ev::after{content:"";position:absolute;left:50%;top:100%;width:3px;background:var(--navy);opacity:.5}
+.tl-ev.r1{top:-88px}.tl-ev.r1::after{height:56px}
+.tl-ev.r2{top:-44px}.tl-ev.r2::after{height:12px}
+.tl-ev.first{transform:none}.tl-ev.first::after{left:2px}
+.tl-bar{display:flex;height:96px;border-radius:16px;overflow:hidden;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+.seg{display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:700;color:#fff;border-right:3px solid var(--cream);white-space:nowrap;overflow:hidden}
+.seg:last-child{border-right:0}
+.s-casa{background:var(--green)}.s-bus{background:var(--yellow);color:var(--ink)}.s-work{background:var(--magenta)}.s-sono{background:var(--navy)}
+.tl-times{position:relative;height:44px;margin-top:10px}
+.tl-times span{position:absolute;transform:translateX(-50%);font-size:24px;font-weight:700;color:var(--muted)}
+.tl-times span.first{transform:none}.tl-times span.last{transform:translateX(-100%)}
+.legend{display:flex;gap:28px;font-size:22px;color:var(--muted);margin-top:4px}
+.legend i{display:inline-block;width:22px;height:22px;border-radius:6px;vertical-align:-4px;margin-right:8px}
+.qs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+.qcard{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:20px 24px;display:flex;flex-direction:column;gap:12px;min-height:220px}
+.qcard p{font-size:28px;font-weight:600;line-height:1.3}
+.qcard .btn{align-self:flex-start}
+.qcard .ans{font-size:34px;font-weight:800;color:var(--magenta);line-height:1.2}
+
+/* ---------- 6 ciclo ---------- */
+.cycle{position:relative;width:1440px;height:600px}
+.cycle svg{position:absolute;left:0;top:0;width:1440px;height:600px;overflow:visible}
+.arr{fill:none;stroke:var(--magenta);stroke-width:6;opacity:0;transition:opacity .4s}
+.arr.shown{opacity:1}
+.cnode{position:absolute;width:320px;height:120px;border-radius:20px;border:3px dashed #c9bfa9;background:rgba(255,255,255,.5);display:flex;align-items:center;gap:14px;padding:12px 18px;text-align:left;font-size:24px;font-weight:600;line-height:1.25}
+.cnode .num{flex:none;width:52px;height:52px;border-radius:50%;background:#d9cfbb;color:#fff;font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.cnode .txt{visibility:hidden}
+.cnode .q{position:absolute;right:22px;font-size:44px;font-weight:800;color:#c9bfa9}
+.cnode.shown{border:3px solid var(--magenta);background:#fff;box-shadow:0 6px 18px rgba(194,24,91,.15)}
+.cnode.shown .num{background:var(--magenta)}
+.cnode.shown .txt{visibility:visible}
+.cnode.shown .q{display:none}
+#cyc-center{position:absolute;left:520px;top:225px;width:400px;height:120px;border-radius:60px;background:var(--navy);color:#fff;font-size:32px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;opacity:0;transform:scale(.8);transition:all .4s}
+#cyc-center.shown{opacity:1;transform:none}
+.cyc-ctrl{position:absolute;left:0;bottom:0;display:flex;gap:16px}
+
+/* ---------- 7 grupos ---------- */
+.s7grid{display:grid;grid-template-columns:1fr 470px;gap:48px}
+.glist{list-style:none;counter-reset:q}
+.glist li{counter-increment:q;font-size:30px;line-height:1.3;padding:12px 0 12px 70px;position:relative;border-bottom:2px solid var(--line)}
+.glist li::before{content:counter(q);position:absolute;left:0;top:10px;width:50px;height:50px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:26px}
+.glist li.e1::before{background:var(--magenta)}
+.etapa-note{margin-top:18px;font-size:24px;color:var(--muted)}
+.etapa-note b{color:var(--magenta)}
+.pill{display:inline-block;background:var(--magenta);color:#fff;border-radius:999px;padding:2px 14px;font-size:20px;font-weight:700;vertical-align:4px;margin-left:8px}
+.roles{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:18px 22px;margin-bottom:20px}
+.roles h3{font-size:22px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.roles div{font-size:27px;font-weight:600;padding:5px 0;display:flex;align-items:center;gap:12px}
+.roles .ic{font-size:30px;color:var(--magenta)}
+.timer{background:var(--navy);color:#fff;border-radius:22px;padding:18px 22px;text-align:center}
+.timer.done{background:var(--red);animation:pulse 1s infinite alternate}
+@keyframes pulse{to{background:#a52c1e}}
+#tm{font-size:104px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.05}
+.trow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tb{border:0;border-radius:12px;padding:10px 12px;font-size:23px;font-weight:700;background:rgba(255,255,255,.16);color:#fff}
+.tb.main{background:var(--yellow);color:var(--ink)}
+.folha{margin-top:16px;font-size:23px;color:var(--muted);line-height:1.35}
+
+/* ---------- 8 quadro ---------- */
+#board{display:flex;flex-direction:column;height:604px;gap:16px}
+.board-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.hint{font-size:24px;color:var(--muted)}
+.hint b{color:var(--navy)}
+#deck{display:flex;flex-wrap:wrap;gap:10px;background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:14px;min-height:84px;align-items:center}
+.fc{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;background:#fff;border:2px solid #d8cfbc;border-radius:12px;font-size:23px;font-weight:600;text-align:left;cursor:pointer;line-height:1.2;box-shadow:0 2px 0 rgba(0,0,0,.05)}
+.fc .ic{font-size:28px;color:var(--navy)}
+.fc.sel{border-color:var(--yellow);outline:4px solid var(--yellow);background:#fffbea}
+.cols{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;min-height:0}
+.col{border-radius:18px;display:flex;flex-direction:column;min-height:0;border:3px solid transparent;cursor:pointer;transition:border-color .2s}
+.col .ch{padding:12px 18px;border-radius:15px 15px 0 0;color:#fff}
+.col .ch b{display:block;font-size:28px}
+.col .ch span{font-size:20px;opacity:.9}
+.col .cb{flex:1;padding:12px;overflow:auto;display:flex;flex-direction:column;gap:8px;border-radius:0 0 15px 15px}
+.col .fc{width:100%;font-size:22px}
+.col .fc span{flex:1}
+.col .fc .cx{border:0;background:#eee;width:32px;height:32px;border-radius:50%;font-size:22px;line-height:1;flex:none}
+.col-m .ch{background:var(--magenta)}.col-m .cb{background:var(--m-soft)}
+.col-t .ch{background:var(--blue)}.col-t .cb{background:var(--b-soft)}
+.col-p .ch{background:var(--green)}.col-p .cb{background:var(--g-soft)}
+.col.target{border-color:var(--yellow);border-style:dashed}
+
+/* ---------- 9 descoberta ---------- */
+.s9grid{display:grid;grid-template-columns:1.15fr 1fr;gap:36px}
+.box{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:24px 28px}
+.box h3{font-size:30px;color:var(--navy);margin-bottom:16px}
+.box .chip{font-size:26px;padding:7px 16px;margin:0 10px 10px 0}
+.src{font-size:21px;color:var(--muted);margin-top:8px}
+.law{font-family:Georgia,"DejaVu Serif","Times New Roman",serif;font-size:36px;line-height:1.35;font-style:italic}
+.banner{margin-top:28px;background:var(--navy);color:#fff;border-radius:22px;padding:24px 34px;font-size:36px;font-weight:700;line-height:1.3;display:flex;align-items:center;gap:24px}
+.banner .ic{font-size:64px;color:var(--yellow)}
+
+/* ---------- 10 tabela ---------- */
+.ptable{width:100%;border-collapse:separate;border-spacing:12px 10px;margin:-10px -12px 0;table-layout:fixed}
+.ptable th{color:#fff;font-size:28px;padding:12px;border-radius:14px;text-align:left}
+.ptable th:nth-child(1){background:var(--magenta)}.ptable th:nth-child(2){background:var(--blue)}
+.ptable th:nth-child(3){background:var(--navy)}.ptable th:nth-child(4){background:var(--green)}
+.ptable th small{font-size:20px;font-weight:600;opacity:.85;margin-left:6px}
+.cell{min-height:80px;background:#fff;border:2px dashed #cfc5b0;border-radius:12px;padding:10px 14px;font-size:25px;line-height:1.28;outline:none}
+.cell:focus{border:3px solid var(--yellow);background:#fffdf2}
+#ex-row{display:none}
+#ex-row.shown{display:table-row}
+#ex-row td div{background:var(--y-soft);border-radius:12px;padding:10px 14px;font-size:24px;font-style:italic;line-height:1.28;min-height:80px}
+.s10ctrl{display:flex;gap:16px;align-items:center;margin-top:8px}
+
+/* ---------- 11 cartões ---------- */
+.flips{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:268px 268px;gap:24px}
+.flip{border:0;background:none;padding:0;perspective:1400px;text-align:left}
+.flip .in{display:block;position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:22px;padding:22px 26px;display:flex;flex-direction:column;justify-content:center;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.front{background:#fff;border:3px solid var(--line);gap:8px}
+.front .ic{font-size:56px}
+.front b{font-size:32px;color:var(--navy)}
+.front span{font-size:26px;color:var(--muted);line-height:1.25}
+.back{transform:rotateY(180deg);color:#fff;font-size:24.5px;line-height:1.36}
+.back b{display:block;font-size:24px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.f1 .ic{color:var(--green)}.f1 .back{background:var(--green)}
+.f2 .ic{color:var(--magenta)}.f2 .back{background:var(--magenta)}
+.f3 .ic{color:var(--blue)}.f3 .back{background:var(--blue)}
+.f4 .ic{color:#b9830a}.f4 .back{background:#8a6208}
+.f5 .ic{color:var(--navy)}.f5 .back{background:var(--navy)}
+.f6 .ic{color:var(--red)}.f6 .back{background:var(--red)}
+.s11ctrl{position:absolute;left:80px;bottom:16px}
+
+/* ---------- 12 informalidade ---------- */
+.inf{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.icard{border-radius:22px;overflow:hidden;background:#fff;border:2px solid var(--line);display:flex;flex-direction:column;height:520px}
+.icard .ih{padding:18px 24px;color:#fff;display:flex;align-items:center;gap:14px;min-height:128px}
+.icard .ih .ic{font-size:44px}
+.icard .ih b{font-size:30px;line-height:1.15}
+.icard .ib{padding:22px 24px;flex:1;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.icard .ib p{font-size:27px;line-height:1.36}
+.i1 .ih{background:var(--blue)}.i2 .ih{background:#8a6208}.i3 .ih{background:var(--green)}
+
+/* ---------- 13 produção ---------- */
+.prod{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.pcard{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:22px 26px;min-height:560px;display:flex;flex-direction:column;gap:14px}
+.pcard .et{align-self:flex-start;color:#fff;border-radius:999px;padding:6px 20px;font-size:24px;font-weight:800}
+.p1 .et{background:var(--magenta)}.p2 .et{background:var(--blue)}.p3 .et{background:var(--green)}
+.pcard p{font-size:27px;line-height:1.34}
+.pcard ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pcard li{font-size:24px;line-height:1.28;padding-left:30px;position:relative}
+.pcard li::before{content:"";position:absolute;left:4px;top:11px;width:13px;height:13px;border-radius:3px;background:var(--yellow)}
+.blank{display:inline-block;width:150px;border-bottom:3px solid var(--ink);margin:0 6px}
+.pcard .model{font-family:Georgia,"DejaVu Serif","Times New Roman",serif;font-style:italic;font-size:25px;background:#fff;border-left:8px solid var(--blue);padding:10px 16px;border-radius:0 12px 12px 0}
+
+/* ---------- 14 comparação ---------- */
+.s14grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.s14grid h3{font-size:30px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.s14grid h3 .dot2{width:22px;height:22px;border-radius:50%}
+#s14 .chipzone{height:470px}
+#s14 .col-fim .chipzone{height:384px}
+
+/* ---------- 15 painel ---------- */
+.subh{font-size:32px;color:var(--magenta);font-weight:700;margin:-14px 0 22px}
+.painel{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pcol{border-radius:22px;overflow:hidden;display:flex;flex-direction:column;height:470px;background:#fff;border:2px solid var(--line)}
+.pcol .ph{padding:14px 20px;color:#fff}
+.pcol .ph b{display:block;font-size:30px}
+.pcol .ph span{font-size:21px;opacity:.9}
+.pcol .pb{padding:14px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.pcol .addrow{margin:0;gap:10px}
+.pcol .addrow input{font-size:24px;padding:10px 14px;border-width:2px}
+.pcol .addrow .btn{font-size:22px;padding:8px 14px}
+.pcol .chips{flex:1;overflow:auto}
+.pcol .chip{font-size:24px;padding:7px 14px;margin:0 8px 8px 0;border-radius:14px}
+.p-ind .ph{background:var(--magenta)}.p-col .ph{background:var(--blue)}.p-pub .ph{background:var(--green)}
+.closing{margin-top:22px;text-align:center;font-size:36px;font-weight:800;color:var(--navy);letter-spacing:.01em}
+
+/* ---------- rodapé ---------- */
+#foot{position:absolute;left:0;bottom:16px;width:100%;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:6;font-size:18px;color:var(--muted)}
+.f-left{font-weight:600;width:330px}
+.dots{display:flex;gap:9px}
+.dot{width:14px;height:14px;border-radius:50%;border:0;background:#d6ccb8;padding:0}
+.dot.on{background:var(--magenta);transform:scale(1.25)}
+.f-right{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.fbtn{border:2px solid var(--line);background:var(--paper);border-radius:10px;padding:6px 12px;font-size:17px;font-weight:600;color:var(--muted)}
+.fbtn.on{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.nav{width:48px;height:48px;border-radius:50%;border:2px solid var(--line);background:var(--paper);font-size:30px;line-height:1;color:var(--navy);font-weight:700;padding-bottom:4px}
+#count{font-size:20px;font-weight:700;color:var(--navy);min-width:72px;text-align:center}
+
+/* modal */
+.modal{position:absolute;inset:0;background:rgba(16,27,45,.55);display:none;align-items:center;justify-content:center;z-index:20}
+.modal.on{display:flex}
+.mbox{background:#fff;border-radius:22px;padding:34px 40px;width:760px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.mbox p{font-size:32px;font-weight:700;color:var(--navy);line-height:1.3}
+.mbox .msub{font-size:24px;font-weight:400;color:var(--muted);margin-top:10px}
+.mrow{display:flex;gap:16px;justify-content:flex-end;margin-top:28px}
+.btn.danger{background:var(--red)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 10h16M7.5 17v3M16.5 17v3M8 13.5h.01M16 13.5h.01"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9.8 12 3.5 12 3.5z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.6A8 8 0 1 1 9.4 4a6.4 6.4 0 0 0 10.6 10.6z"/></symbol>
+    <symbol id="i-pot" viewBox="0 0 24 24"><path d="M4 10h16v4a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6v-4z"/><path d="M2 10h20M9.5 3.5c-.6.8-.6 1.7 0 2.5M14.5 3.5c-.6.8-.6 1.7 0 2.5"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12h7"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-5h4v5"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h4"/></symbol>
+    <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4h3l8 5V5l-8 5H3z"/><path d="M17.5 9a4 4 0 0 1 0 6"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12 7.5C9 5.5 4.5 6.5 4.5 12c0 4 2.8 8.5 5.5 8.5 1 0 1.3-.5 2-.5s1 .5 2 .5c2.7 0 5.5-4.5 5.5-8.5 0-5.5-4.5-6.5-7.5-4.5z"/><path d="M12 7.5c0-2 1-3.5 3-4"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3.5 20c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6M15 14.6c3 0 5.5 2 5.5 5.4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M14 6l4 4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+    <symbol id="i-hour" viewBox="0 0 24 24"><path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9"/></symbol>
+    <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#c2185b"/></marker>
+  </defs>
+</svg>
+
+<div id="stage">
+<div class="band top"></div>
+
+<!-- 1 · CAPA -->
+<section class="slide" id="s1">
+  <div class="cover">
+    <div>
+      <div class="kicker">EJA · Saúde, trabalho e a organização da vida social</div>
+      <h1>Saúde é só<br>escolha minha?</h1>
+      <p class="cover-sub">Estudo de caso: a história de Marta</p>
+      <div class="qbox"><span>Pergunta da aula</span>Por que a saúde não depende apenas das escolhas individuais?</div>
+      <p class="byline">Prof. Eduardo Goulart</p>
+    </div>
+    <div class="tiles">
+      <div class="tile t-m"><svg class="ic"><use href="#i-clock"/></svg>Jornada</div>
+      <div class="tile t-y"><svg class="ic"><use href="#i-bus"/></svg>Transporte</div>
+      <div class="tile t-b"><svg class="ic"><use href="#i-drop"/></svg>Saneamento</div>
+      <div class="tile t-n"><svg class="ic"><use href="#i-moon"/></svg>Sono</div>
+      <div class="tile t-g"><svg class="ic"><use href="#i-pot"/></svg>Alimentação</div>
+      <div class="tile t-r"><svg class="ic"><use href="#i-cross"/></svg>Atendimento</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · DIAGNÓSTICO -->
+<section class="slide" id="s2">
+  <div class="kicker">Para começar</div>
+  <h2>Para ter saúde, uma pessoa precisa de...</h2>
+  <div class="addrow">
+    <input id="in-ini" type="text" autocomplete="off" placeholder="Digite uma palavra e aperte Enter">
+    <button class="btn" id="add-ini" type="button">Adicionar</button>
+  </div>
+  <div class="chipzone" id="chips-ini"></div>
+  <div class="nota"><b>Professor:</b> digite o que a turma disser, sem corrigir. Use vírgula para várias palavras. Na tela 14 a turma responde de novo e compara.</div>
+</section>
+
+<!-- 3 · O QUE É SAÚDE -->
+<section class="slide" id="s3">
+  <div class="kicker">Conversa</div>
+  <h2>O que é ter saúde?</h2>
+  <div class="s3grid">
+    <svg viewBox="0 0 520 470" width="520" height="470" aria-label="Três círculos: físico, mental e social">
+      <circle cx="185" cy="170" r="140" fill="rgba(42,109,181,.15)" stroke="#2a6db5" stroke-width="4"/>
+      <circle cx="335" cy="170" r="140" fill="rgba(194,24,91,.13)" stroke="#c2185b" stroke-width="4"/>
+      <circle cx="260" cy="300" r="140" fill="rgba(29,138,87,.13)" stroke="#1d8a57" stroke-width="4"/>
+      <text x="120" y="140" font-size="36" font-weight="800" fill="#2a6db5" text-anchor="middle">Físico</text>
+      <text x="400" y="140" font-size="36" font-weight="800" fill="#c2185b" text-anchor="middle">Mental</text>
+      <text x="260" y="395" font-size="36" font-weight="800" fill="#1d8a57" text-anchor="middle">Social</text>
+      <rect x="185" y="196" width="150" height="44" rx="22" fill="#fffdf8" stroke="#1f3f73" stroke-width="2"/>
+      <text x="260" y="227" font-size="27" font-weight="800" fill="#1f3f73" text-anchor="middle">Bem-estar</text>
+    </svg>
+    <div>
+      <blockquote class="quote">“Saúde é o estado de completo bem-estar físico, mental e social, e não apenas a ausência de doença.”<cite>Organização Mundial da Saúde (OMS), 1948</cite></blockquote>
+      <p class="ask">E isso depende só de mim?</p>
+      <div class="votes">
+        <div class="vote v-sim"><button class="vmain" type="button" data-v="sim"><span class="vl">Sim</span><span class="vc" id="vc-sim">0</span></button><button class="vminus" type="button" data-vm="sim" title="Diminuir">−</button></div>
+        <div class="vote v-nao"><button class="vmain" type="button" data-v="nao"><span class="vl">Não</span><span class="vc" id="vc-nao">0</span></button><button class="vminus" type="button" data-vm="nao" title="Diminuir">−</button></div>
+        <div class="vote v-dep"><button class="vmain" type="button" data-v="dep"><span class="vl">Depende</span><span class="vc" id="vc-dep">0</span></button><button class="vminus" type="button" data-vm="dep" title="Diminuir">−</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="nota"><b>Professor:</b> clique no botão para contar cada mão levantada; o sinal − corrige. Não dê a resposta agora: a aula vai responder.</div>
+</section>
+
+<!-- 4 · CONHEÇA MARTA -->
+<section class="slide" id="s4">
+  <div class="kicker">Estudo de caso</div>
+  <h2>Conheça Marta</h2>
+  <div class="marta">
+    <div class="marta-pic">
+      <svg viewBox="0 0 300 360" aria-label="Ilustração de Marta">
+        <circle cx="150" cy="175" r="140" fill="#fdf1d2"/>
+        <path d="M58 360c0-88 40-124 92-124s92 36 92 124z" fill="#c2185b"/>
+        <path d="M124 240l26 30 26-30" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+        <rect x="134" y="192" width="32" height="50" rx="14" fill="#8a5636"/>
+        <circle cx="150" cy="70" r="27" fill="#2b1d16"/>
+        <circle cx="150" cy="136" r="63" fill="#2b1d16"/>
+        <ellipse cx="150" cy="150" rx="47" ry="55" fill="#a56d48"/>
+        <path d="M103 136c6-40 88-42 94 0-18-22-74-22-94 0z" fill="#2b1d16"/>
+        <circle cx="132" cy="152" r="5" fill="#2b1d16"/><circle cx="168" cy="152" r="5" fill="#2b1d16"/>
+        <path d="M124 163q8 5 16 0M160 163q8 5 16 0" stroke="#6e4128" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M137 182q13 5 26 0" stroke="#5b2f1e" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M92 254l114 98" stroke="#f2b21b" stroke-width="13" stroke-linecap="round"/>
+      </svg>
+      <span class="tag">Personagem fictícia</span>
+    </div>
+    <div class="story">
+      <p>Marta trabalha <span class="hl m">muitas horas</span> por dia, usa <span class="hl y">dois ônibus</span> para chegar ao emprego e mora num bairro <span class="hl b">sem saneamento</span> adequado.</p>
+      <p>Tem pouco tempo para <span class="hl n">descansar</span>, <span class="hl g">preparar alimentos</span> e <span class="hl r">procurar atendimento médico</span>.</p>
+      <p>Quando adoece, falta ao trabalho e <span class="hl m">perde parte da renda</span>.</p>
+      <div class="gloss">
+        <button class="gl" type="button" data-reveal="g1">O que é <b>saneamento</b>?</button><span class="ans" id="g1">Água tratada, esgoto e coleta de lixo.</span>
+        <button class="gl" type="button" data-reveal="g2">O que é <b>renda</b>?</button><span class="ans" id="g2">O dinheiro que a pessoa ganha.</span>
+        <button class="gl" type="button" data-reveal="g3">O que é <b>jornada</b>?</button><span class="ans" id="g3">As horas de trabalho por dia.</span>
+      </div>
+    </div>
+  </div>
+  <div class="nota"><b>Professor:</b> leia em voz alta e pause nas palavras destacadas. Pergunte: alguém conhece uma rotina parecida? (sem pedir detalhes pessoais)</div>
+</section>
+
+<!-- 5 · UM DIA DE MARTA -->
+<section class="slide" id="s5">
+  <div class="kicker">Estudo de caso</div>
+  <h2>Um dia na vida de Marta</h2>
+  <div class="tl">
+    <div class="tl-ev r2 first" style="left:0">Acorda</div>
+    <div class="tl-ev r1" style="left:10.417%">Começa a trabalhar</div>
+    <div class="tl-ev r2" style="left:60.417%">Sai do trabalho</div>
+    <div class="tl-ev r1" style="left:68.75%">Chega em casa</div>
+    <div class="tl-ev r2" style="left:79.167%">Dorme</div>
+    <div class="tl-bar">
+      <div class="seg s-casa" style="flex:.5"></div>
+      <div class="seg s-bus" style="flex:2">ônibus</div>
+      <div class="seg s-work" style="flex:12">trabalho · 12 horas</div>
+      <div class="seg s-bus" style="flex:2">ônibus</div>
+      <div class="seg s-casa" style="flex:2.5">casa</div>
+      <div class="seg s-sono" style="flex:5">sono</div>
+    </div>
+    <div class="tl-times">
+      <span class="first" style="left:0">4h30</span>
+      <span style="left:10.417%">7h</span>
+      <span style="left:60.417%">19h</span>
+      <span style="left:68.75%">21h</span>
+      <span style="left:79.167%">23h30</span>
+      <span class="last" style="left:100%">4h30</span>
+    </div>
+    <div class="legend"><span><i style="background:var(--magenta)"></i>trabalho</span><span><i style="background:var(--yellow)"></i>ônibus (sai de casa às 5h)</span><span><i style="background:var(--green)"></i>em casa: jantar, limpar, preparar o dia seguinte</span><span><i style="background:var(--navy)"></i>sono</span></div>
+  </div>
+  <div class="qs">
+    <div class="qcard"><p>Quantas horas Marta dorme?</p><button class="btn small" type="button" data-reveal="a1">Ver resposta</button><div class="ans" id="a1">5 horas</div></div>
+    <div class="qcard"><p>Quantas horas ela passa fora de casa?</p><button class="btn small" type="button" data-reveal="a2">Ver resposta</button><div class="ans" id="a2">16 horas (das 5h às 21h)</div></div>
+    <div class="qcard"><p>Quanto tempo sobra para descansar, cozinhar ou ir ao médico?</p><button class="btn small" type="button" data-reveal="a3">Ver resposta</button><div class="ans" id="a3">Quase nada: 2h30 em casa, já com tarefas</div></div>
+  </div>
+  <div class="nota"><b>Lei:</b> jornada normal de até 8 h por dia e 44 h por semana (Constituição, art. 7º, XIII), com no máximo 2 h extras por dia (CLT, art. 59), salvo escalas como 12x36. Pergunte: Marta tem carteira assinada?</div>
+</section>
+
+<!-- 6 · CICLO -->
+<section class="slide" id="s6">
+  <div class="kicker">Estudo de caso</div>
+  <h2>O ciclo que adoece</h2>
+  <div class="cycle" id="cycle">
+    <svg id="cyc-svg"></svg>
+    <button class="cnode" type="button" data-step="0" style="left:560px;top:0"><span class="num">1</span><span class="txt">Trabalha muitas horas e passa 4 horas no ônibus</span><span class="q">?</span></button>
+    <button class="cnode" type="button" data-step="1" style="left:1007px;top:155px"><span class="num">2</span><span class="txt">Dorme pouco, come o que dá e não vai ao médico</span><span class="q">?</span></button>
+    <button class="cnode" type="button" data-step="2" style="left:836px;top:407px"><span class="num">3</span><span class="txt">O corpo cansa e adoece</span><span class="q">?</span></button>
+    <button class="cnode" type="button" data-step="3" style="left:284px;top:407px"><span class="num">4</span><span class="txt">Falta ao trabalho e perde parte da renda</span><span class="q">?</span></button>
+    <button class="cnode" type="button" data-step="4" style="left:113px;top:155px"><span class="num">5</span><span class="txt">Com menos dinheiro, trabalha ainda mais</span><span class="q">?</span></button>
+    <div id="cyc-center">Como quebrar esse ciclo?</div>
+    <div class="cyc-ctrl"><button class="btn" id="cyc-next" type="button">Próximo passo</button><button class="btn ghost small" id="cyc-reset" type="button">Recomeçar</button></div>
+  </div>
+  <div class="nota"><b>Professor:</b> antes de cada clique, pergunte “o que acontece depois?”. Lembre o slide “Ciclo da Exaustão” do CCP.</div>
+</section>
+
+<!-- 7 · GRUPOS -->
+<section class="slide" id="s7">
+  <div class="kicker">Trabalho em grupo · 20 minutos</div>
+  <h2>Investiguem o caso de Marta</h2>
+  <div class="s7grid">
+    <div>
+      <ol class="glist">
+        <li class="e1">Quais fatores afetam a saúde de Marta?</li>
+        <li class="e1">Quais problemas dependem de escolhas da própria Marta?</li>
+        <li>Quais dependem das condições de trabalho e da organização da sociedade?</li>
+        <li class="e1">Que direitos ou serviços poderiam ajudá-la?</li>
+        <li>Que soluções imediatas e coletivas vocês propõem?</li>
+      </ol>
+      <p class="etapa-note"><b>Etapa 1:</b> perguntas 1, 2 e 4 (números em rosa), respondidas oralmente ou com o banco de palavras.</p>
+      <p class="folha">Registrem na Folha do grupo: <b>problema → causa → consequência → solução</b>.</p>
+    </div>
+    <div>
+      <div class="roles">
+        <h3>Papéis no grupo</h3>
+        <div><svg class="ic"><use href="#i-book"/></svg>Leitor(a)</div>
+        <div><svg class="ic"><use href="#i-pen"/></svg>Escriba</div>
+        <div><svg class="ic"><use href="#i-chat"/></svg>Porta-voz</div>
+        <div><svg class="ic"><use href="#i-hour"/></svg>Guardião(ã) do tempo</div>
+      </div>
+      <div class="timer" id="timer">
+        <div id="tm">20:00</div>
+        <div class="trow">
+          <button class="tb main" id="t-go" type="button">Iniciar</button>
+          <button class="tb" id="t-reset" type="button">Zerar</button>
+          <button class="tb" id="t-minus" type="button">−5 min</button>
+          <button class="tb" id="t-plus" type="button">+5 min</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · DE QUEM DEPENDE -->
+<section class="slide" id="s8">
+  <div class="kicker">Debate</div>
+  <h2>De quem depende?</h2>
+  <div id="board">
+    <div class="board-top">
+      <p class="hint"><b>Clique no cartão e depois na coluna.</b> Um cartão pode ir para mais de uma coluna; o × tira.</p>
+      <button class="btn ghost small" id="board-reset" type="button">Reiniciar quadro</button>
+    </div>
+    <div id="deck"></div>
+    <div class="cols">
+      <div class="col col-m" id="colwrap-m"><div class="ch"><b>Da Marta</b><span>escolha individual</span></div><div class="cb" id="col-m"></div></div>
+      <div class="col col-t" id="colwrap-t"><div class="ch"><b>Do trabalho</b><span>empregador e condições de trabalho</span></div><div class="cb" id="col-t"></div></div>
+      <div class="col col-p" id="colwrap-p"><div class="ch"><b>Do poder público e da sociedade</b><span>serviços, leis e comunidade</span></div><div class="cb" id="col-p"></div></div>
+    </div>
+  </div>
+  <div class="nota"><b>Professor:</b> vários fatores cabem em mais de uma coluna. Peça justificativa: “por que você colocou aí?”. O objetivo é o debate, não uma resposta única.</div>
+</section>
+
+<!-- 9 · DESCOBERTA -->
+<section class="slide" id="s9">
+  <div class="kicker">O que a turma descobriu</div>
+  <h2>Cuidar de si importa. Mas escolher exige condições.</h2>
+  <div class="s9grid">
+    <div class="box">
+      <h3>A lei do SUS diz que a saúde depende de:</h3>
+      <div>
+        <span class="chip c-y">alimentação</span><span class="chip c-y">moradia</span><span class="chip c-b">saneamento básico</span><span class="chip c-g">meio ambiente</span><span class="chip c-m">trabalho</span><span class="chip c-m">renda</span><span class="chip c-b">educação</span><span class="chip c-g">atividade física</span><span class="chip c-y">transporte</span><span class="chip c-g">lazer</span><span class="chip c-b">acesso a bens e serviços essenciais</span>
+      </div>
+      <p class="src">Lei 8.080/1990, art. 3º</p>
+    </div>
+    <div class="box">
+      <h3>E de quem é a responsabilidade?</h3>
+      <p class="law">“O dever do Estado não exclui o das pessoas, da família, das empresas e da sociedade.”</p>
+      <p class="src">Lei 8.080/1990, art. 2º, § 2º</p>
+    </div>
+  </div>
+  <div class="banner"><svg class="ic"><use href="#i-people"/></svg><span>Saúde é responsabilidade de todos: da pessoa, da família, das empresas, da sociedade e do Estado.</span></div>
+</section>
+
+<!-- 10 · PROBLEMA → SOLUÇÃO -->
+<section class="slide" id="s10">
+  <div class="kicker">Socialização dos grupos</div>
+  <h2>Do problema à solução</h2>
+  <table class="ptable">
+    <thead><tr><th>Problema</th><th>Causa</th><th>Consequência</th><th>Possível solução</th></tr></thead>
+    <tbody>
+      <tr id="ex-row"><td><div>Cansaço constante</div></td><td><div>Jornada longa e 4 horas de ônibus</div></td><td><div>Adoece, falta e perde renda</div></td><td><div>Respeitar a jornada legal; transporte mais rápido</div></td></tr>
+    </tbody>
+    <tbody id="ptbody"></tbody>
+  </table>
+  <div class="s10ctrl"><button class="btn ghost small" id="ex-btn" type="button">Mostrar exemplo</button></div>
+  <div class="nota"><b>Professor:</b> clique na célula e digite o que o porta-voz disser. Esc sai da célula; as setas voltam a trocar de tela.</div>
+</section>
+
+<!-- 11 · DIREITOS -->
+<section class="slide" id="s11">
+  <div class="kicker">Direitos e serviços · clique para virar</div>
+  <h2>O que protege a saúde de Marta?</h2>
+  <div class="flips">
+    <button class="flip f1" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-house"/></svg><b>SUS e UBS</b><span>Onde Marta pode ser atendida de graça?</span></span>
+      <span class="face back"><b>SUS e UBS</b>Na UBS do bairro, porta de entrada do SUS: consultas, vacinas e exames. Saúde é direito de todos e dever do Estado (Constituição, art. 196).</span>
+    </span></button>
+    <button class="flip f2" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-clock"/></svg><b>Jornada</b><span>Quantas horas por dia a lei permite?</span></span>
+      <span class="face back"><b>Jornada</b>Até 8 horas por dia e 44 por semana (Constituição, art. 7º). Horas extras: no máximo 2 por dia (CLT, art. 59).</span>
+    </span></button>
+    <button class="flip f3" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-doc"/></svg><b>Atestado</b><span>Faltou por doença. Pode descontar?</span></span>
+      <span class="face back"><b>Atestado</b>Não. Com atestado médico, a falta é justificada (Lei 605/1949). Nos primeiros 15 dias, a empresa paga; depois, o INSS.</span>
+    </span></button>
+    <button class="flip f4" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-bus"/></svg><b>Vale-transporte</b><span>Quem paga os dois ônibus?</span></span>
+      <span class="face back"><b>Vale-transporte</b>Com carteira assinada, a empresa fornece o vale-transporte. Marta paga no máximo 6% do salário básico; a empresa paga o resto (Lei 7.418/1985).</span>
+    </span></button>
+    <button class="flip f5" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-drop"/></svg><b>Saneamento</b><span>Água tratada e esgoto são direito?</span></span>
+      <span class="face back"><b>Saneamento</b>Sim. A lei fixa a meta de 99% da população com água potável e 90% com coleta e tratamento de esgoto até 2033 (Lei 14.026/2020).</span>
+    </span></button>
+    <button class="flip f6" type="button"><span class="in">
+      <span class="face front"><svg class="ic"><use href="#i-mega"/></svg><b>Participação</b><span>Onde reclamar e propor melhorias?</span></span>
+      <span class="face back"><b>Participação</b>Conselhos e conferências de saúde (Lei 8.142/1990), associação de moradores e Ouvidoria do SUS: Disque Saúde 136.</span>
+    </span></button>
+  </div>
+  <div class="s11ctrl"><button class="btn ghost small" id="flip-reset" type="button">Desvirar todos</button></div>
+  <div class="nota"><b>Professor:</b> pergunte antes de virar cada cartão. Valorize o que a turma já sabe por experiência de trabalho.</div>
+</section>
+
+<!-- 12 · SEM CARTEIRA -->
+<section class="slide" id="s12">
+  <div class="kicker">Debate</div>
+  <h2>E se Marta não tivesse carteira assinada?</h2>
+  <div class="inf">
+    <div class="icard i1">
+      <div class="ih"><svg class="ic"><use href="#i-brief"/></svg><b>Trabalha para um patrão, mas sem carteira</b></div>
+      <div class="ib"><button class="btn small" type="button" data-reveal="r1">Mostrar</button>
+        <p class="ans" id="r1">Os direitos continuam valendo: o vínculo pode ser reconhecido na Justiça do Trabalho. Mas, no dia a dia, ela costuma ficar sem vale-transporte, sem salário nos dias de atestado e com dificuldade no INSS.</p></div>
+    </div>
+    <div class="icard i2">
+      <div class="ih"><svg class="ic"><use href="#i-people"/></svg><b>Trabalha por conta própria</b></div>
+      <div class="ib"><button class="btn small" type="button" data-reveal="r2">Mostrar</button>
+        <p class="ans" id="r2">Não tem os direitos da CLT. Pode contribuir para o INSS como autônoma ou MEI e, assim, ter auxílio quando adoecer.</p></div>
+    </div>
+    <div class="icard i3">
+      <div class="ih"><svg class="ic"><use href="#i-heart"/></svg><b>Vale para todo mundo</b></div>
+      <div class="ib"><button class="btn small" type="button" data-reveal="r3">Mostrar</button>
+        <p class="ans" id="r3">Com ou sem carteira: SUS, vacinas, saneamento e o direito de participar (conselhos de saúde e Disque Saúde 136).</p></div>
+    </div>
+  </div>
+  <div class="nota"><b>Professor:</b> quem trabalha com subordinação, salário e regularidade é empregado, com ou sem registro (CLT, art. 3º). O auxílio por incapacidade temporária exige, em regra, 12 contribuições ao INSS.</div>
+</section>
+
+<!-- 13 · PRODUÇÃO -->
+<section class="slide" id="s13">
+  <div class="kicker">Produção individual</div>
+  <h2>Agora é com você</h2>
+  <div class="prod">
+    <div class="pcard p1">
+      <span class="et">Etapa 1</span>
+      <p>Complete:<br>A saúde da Marta depende de <span class="blank"></span> e de <span class="blank"></span>.</p>
+      <p>Depois, desenhe uma solução para Marta e escreva uma legenda.</p>
+      <ul><li>Pode responder falando ou com um colega escriba.</li><li>Use o banco de palavras.</li></ul>
+    </div>
+    <div class="pcard p2">
+      <span class="et">Etapa 2</span>
+      <p>Escreva um parágrafo de 5 a 8 linhas. Comece assim:</p>
+      <p class="model">“A saúde não depende apenas de consultas e medicamentos. Ela também é influenciada por...”</p>
+      <ul><li>2 fatores sociais</li><li>1 exemplo do dia a dia</li><li>1 proposta de melhoria</li><li>1 frase de conclusão</li></ul>
+    </div>
+    <div class="pcard p3">
+      <span class="et">Etapa 3</span>
+      <p>Escreva uma carta à comunidade ou à prefeitura (15 a 20 linhas).</p>
+      <ul><li>Uma tese</li><li>Dois argumentos</li><li>Um exemplo ligado ao trabalho</li><li>Responsabilidade individual × coletiva</li><li>Proposta: ação + responsável + finalidade</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · COMPARAÇÃO -->
+<section class="slide" id="s14">
+  <div class="kicker">Para fechar</div>
+  <h2>E agora? Para ter saúde, uma pessoa precisa de...</h2>
+  <div class="s14grid">
+    <div>
+      <h3><span class="dot2" style="background:#d6ccb8"></span>No começo da aula</h3>
+      <div class="chipzone" id="chips-ini2"></div>
+    </div>
+    <div class="col-fim">
+      <h3><span class="dot2" style="background:var(--green)"></span>Agora</h3>
+      <div class="addrow">
+        <input id="in-fim" type="text" autocomplete="off" placeholder="Digite e aperte Enter">
+        <button class="btn" id="add-fim" type="button">Adicionar</button>
+      </div>
+      <div class="chipzone" id="chips-fim"></div>
+    </div>
+  </div>
+  <div class="nota"><b>Professor:</b> destaque as palavras novas (trabalho, renda, saneamento, transporte, SUS...). Elas mostram o que a turma aprendeu.</div>
+</section>
+
+<!-- 15 · PAINEL -->
+<section class="slide" id="s15">
+  <div class="kicker">Painel da turma</div>
+  <h2>Saúde é direito</h2>
+  <p class="subh">cuidar de si, cuidar do outro e transformar as condições de vida</p>
+  <div class="painel">
+    <div class="pcol p-ind"><div class="ph"><b>Eu posso...</b><span>o que fazer individualmente</span></div>
+      <div class="pb"><div class="addrow"><input id="in-ind" type="text" autocomplete="off" placeholder="Digite e Enter"><button class="btn" id="add-ind" type="button">+</button></div><div class="chips" id="chips-ind"></div></div></div>
+    <div class="pcol p-col"><div class="ph"><b>Nós podemos...</b><span>o que fazer coletivamente</span></div>
+      <div class="pb"><div class="addrow"><input id="in-col" type="text" autocomplete="off" placeholder="Digite e Enter"><button class="btn" id="add-col" type="button">+</button></div><div class="chips" id="chips-col"></div></div></div>
+    <div class="pcol p-pub"><div class="ph"><b>O poder público deve...</b><span>o que garantir por políticas públicas</span></div>
+      <div class="pb"><div class="addrow"><input id="in-pub" type="text" autocomplete="off" placeholder="Digite e Enter"><button class="btn" id="add-pub" type="button">+</button></div><div class="chips" id="chips-pub"></div></div></div>
+  </div>
+  <p class="closing">A saúde é a maior das obras sociais.</p>
+</section>
+
+<footer id="foot">
+  <div class="f-left">A história de Marta · EJA</div>
+  <div class="dots" id="dots"></div>
+  <div class="f-right">
+    <button class="fbtn" id="b-notes" type="button" title="Notas do professor (tecla N)">Notas (N)</button>
+    <button class="fbtn" id="b-fs" type="button" title="Tela cheia (tecla F)">Tela cheia (F)</button>
+    <button class="fbtn" id="b-clear" type="button">Limpar respostas</button>
+    <button class="nav" id="prev" type="button" aria-label="Voltar">‹</button>
+    <span id="count">1 / 15</span>
+    <button class="nav" id="next" type="button" aria-label="Avançar">›</button>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="mbox">
+    <p>Apagar todas as respostas desta apresentação?</p>
+    <p class="msub">Palavras, votos, quadro, tabela e painel voltam ao início. Use antes de aplicar com outra turma.</p>
+    <div class="mrow"><button class="btn ghost small" id="m-no" type="button">Cancelar</button><button class="btn small danger" id="m-yes" type="button">Apagar</button></div>
+  </div>
+</div>
+
+<div class="band bot"></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  var KEY = "marta-eja-v1";
+  var CARDS = [
+    {id:"c1", t:"Trabalha 12 horas por dia", i:"clock"},
+    {id:"c2", t:"Pega dois ônibus", i:"bus"},
+    {id:"c3", t:"Bairro sem saneamento", i:"drop"},
+    {id:"c4", t:"Dorme só 5 horas", i:"moon"},
+    {id:"c5", t:"Sem tempo para cozinhar", i:"pot"},
+    {id:"c6", t:"Não consegue ir ao médico", i:"cross"},
+    {id:"c7", t:"Adoece e perde renda", i:"coin"},
+    {id:"c8", t:"Escolhe o que come", i:"apple"},
+    {id:"c9", t:"Vai à UBS quando sente algo", i:"house"}
+  ];
+  var IDS = CARDS.map(function(c){ return c.id; });
+
+  function fresh(){
+    return {diagIni:[], diagFim:[], votes:{sim:0,nao:0,dep:0},
+      board:{m:[],t:[],p:[]},
+      table:[["","","",""],["","","",""],["","","",""],["","","",""]],
+      painel:{ind:[],col:[],pub:[]}};
+  }
+  var S = fresh();
+
+  function arr(x){ return Array.isArray(x) ? x.filter(function(v){ return typeof v === "string"; }) : []; }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY); if(!raw) return;
+      var o = JSON.parse(raw), f = fresh();
+      f.diagIni = arr(o.diagIni); f.diagFim = arr(o.diagFim);
+      if(o.votes){ ["sim","nao","dep"].forEach(function(k){ f.votes[k] = Math.max(0, parseInt(o.votes[k],10) || 0); }); }
+      if(o.board){ ["m","t","p"].forEach(function(k){ f.board[k] = arr(o.board[k]).filter(function(id){ return IDS.indexOf(id) >= 0; }); }); }
+      if(Array.isArray(o.table) && o.table.length){
+        f.table = o.table.slice(0,6).map(function(r){ var a = arr(r); while(a.length < 4) a.push(""); return a.slice(0,4); });
+      }
+      if(o.painel){ ["ind","col","pub"].forEach(function(k){ f.painel[k] = arr(o.painel[k]); }); }
+      S = f;
+    }catch(e){}
+  }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+  var saveTimer = null;
+  function saveSoon(){ clearTimeout(saveTimer); saveTimer = setTimeout(save, 300); }
+  function ic(name){ return '<svg class="ic" aria-hidden="true"><use href="#i-' + name + '"/></svg>'; }
+
+  load();
+
+  /* ---------- escala ---------- */
+  var stage = $("stage");
+  function fit(){
+    var s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = "translate(-50%,-50%) scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit); fit();
+
+  /* ---------- chips ---------- */
+  var rerenders = [];
+  function chipBox(listEl, getArr, cls, empty, removable){
+    function r(){
+      var a = getArr(); listEl.innerHTML = "";
+      if(!a.length){ var e = document.createElement("span"); e.className = "empty"; e.textContent = empty; listEl.appendChild(e); return; }
+      a.forEach(function(w, i){
+        var c = document.createElement("span"); c.className = "chip " + cls;
+        var t = document.createElement("span"); t.textContent = w; c.appendChild(t);
+        if(removable){
+          var x = document.createElement("button"); x.type = "button"; x.className = "cx"; x.title = "Remover"; x.textContent = "×";
+          x.addEventListener("click", function(ev){ ev.stopPropagation(); getArr().splice(i,1); save(); r(); });
+          c.appendChild(x);
+        }
+        listEl.appendChild(c);
+      });
+      listEl.scrollTop = listEl.scrollHeight;
+    }
+    rerenders.push(r); r(); return r;
+  }
+  function chipInput(inp, btn, listEl, getArr, cls, empty){
+    var r = chipBox(listEl, getArr, cls, empty, true);
+    function add(){
+      var v = inp.value.trim(); if(!v) return;
+      v.split(/[;,]/).map(function(s){ return s.trim(); }).filter(Boolean).forEach(function(s){ getArr().push(s); });
+      inp.value = ""; save(); r(); inp.focus();
+    }
+    inp.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); add(); } });
+    btn.addEventListener("click", add);
+  }
+  chipInput($("in-ini"), $("add-ini"), $("chips-ini"), function(){ return S.diagIni; }, "c-y", "As palavras da turma aparecem aqui.");
+  var rIni2 = chipBox($("chips-ini2"), function(){ return S.diagIni; }, "c-muted", "Nenhuma palavra foi registrada na tela 2.", false);
+  chipInput($("in-fim"), $("add-fim"), $("chips-fim"), function(){ return S.diagFim; }, "c-g", "Digite as palavras de agora.");
+  chipInput($("in-ind"), $("add-ind"), $("chips-ind"), function(){ return S.painel.ind; }, "c-m", "Ex.: dormir mais quando puder");
+  chipInput($("in-col"), $("add-col"), $("chips-col"), function(){ return S.painel.col; }, "c-b", "Ex.: mutirão de limpeza no bairro");
+  chipInput($("in-pub"), $("add-pub"), $("chips-pub"), function(){ return S.painel.pub; }, "c-g", "Ex.: UBS com horário à noite");
+
+  /* ---------- votos ---------- */
+  function rv(){ ["sim","nao","dep"].forEach(function(k){ $("vc-" + k).textContent = S.votes[k]; }); }
+  document.querySelectorAll("[data-v]").forEach(function(b){
+    b.addEventListener("click", function(){ S.votes[b.dataset.v]++; save(); rv(); });
+  });
+  document.querySelectorAll("[data-vm]").forEach(function(b){
+    b.addEventListener("click", function(){ var k = b.dataset.vm; S.votes[k] = Math.max(0, S.votes[k] - 1); save(); rv(); });
+  });
+  rerenders.push(rv); rv();
+
+  /* ---------- revelar ---------- */
+  document.querySelectorAll("[data-reveal]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var t = $(b.dataset.reveal), on = !t.classList.contains("shown");
+      t.classList.toggle("shown", on); b.classList.toggle("used", on);
+    });
+  });
+  function hideReveals(){
+    document.querySelectorAll(".ans.shown").forEach(function(a){ a.classList.remove("shown"); });
+    document.querySelectorAll("[data-reveal].used").forEach(function(b){ b.classList.remove("used"); });
+  }
+
+  /* ---------- ciclo ---------- */
+  var POS = [[560,0],[1007,155],[836,407],[284,407],[113,155]], NW = 320, NH = 120, CX = 720, CY = 285;
+  var svg = $("cyc-svg"), NS = "http://www.w3.org/2000/svg", arrows = [], step = 0;
+  for(var i = 0; i < 5; i++){
+    var a = POS[i], b = POS[(i + 1) % 5];
+    var ax = a[0] + NW/2, ay = a[1] + NH/2, bx = b[0] + NW/2, by = b[1] + NH/2;
+    var dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
+    var hw = NW/2 + 18, hh = NH/2 + 18;
+    var t = Math.min(hw / Math.max(Math.abs(ux), 1e-6), hh / Math.max(Math.abs(uy), 1e-6));
+    var sx = ax + ux*t, sy = ay + uy*t, ex = bx - ux*t, ey = by - uy*t;
+    var mx = (sx + ex)/2, my = (sy + ey)/2, nx = mx - CX, ny = my - CY, nl = Math.hypot(nx, ny) || 1;
+    var qx = mx + nx/nl*42, qy = my + ny/nl*42;
+    var p = document.createElementNS(NS, "path");
+    p.setAttribute("d", "M" + sx.toFixed(1) + " " + sy.toFixed(1) + " Q" + qx.toFixed(1) + " " + qy.toFixed(1) + " " + ex.toFixed(1) + " " + ey.toFixed(1));
+    p.setAttribute("class", "arr"); p.setAttribute("marker-end", "url(#ah)");
+    svg.appendChild(p); arrows.push(p);
+  }
+  var nodes = Array.prototype.slice.call(document.querySelectorAll(".cnode"));
+  function cyc(){
+    nodes.forEach(function(n, i){ n.classList.toggle("shown", i < step); });
+    arrows.forEach(function(p, i){ p.classList.toggle("shown", i < 4 ? step > i + 1 : step >= 5); });
+    $("cyc-center").classList.toggle("shown", step >= 5);
+    $("cyc-next").disabled = step >= 5;
+  }
+  $("cyc-next").addEventListener("click", function(){ if(step < 5){ step++; cyc(); } });
+  $("cyc-reset").addEventListener("click", function(){ step = 0; cyc(); });
+  nodes.forEach(function(n){ n.addEventListener("click", function(){ if(+n.dataset.step === step){ step++; cyc(); } }); });
+  cyc();
+
+  /* ---------- cronômetro ---------- */
+  var TT = 20*60, tLeft = TT, tRun = false, tEnd = 0, tInt = null;
+  function tRender(){
+    var m = Math.floor(tLeft/60), s = tLeft % 60;
+    $("tm").textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+    $("timer").classList.toggle("done", tLeft === 0);
+  }
+  function tStop(){ tRun = false; clearInterval(tInt); $("t-go").textContent = "Iniciar"; }
+  function tStart(){
+    if(tLeft <= 0) return;
+    tRun = true; tEnd = Date.now() + tLeft*1000; $("t-go").textContent = "Pausar";
+    tInt = setInterval(function(){
+      tLeft = Math.max(0, Math.round((tEnd - Date.now())/1000)); tRender();
+      if(tLeft === 0) tStop();
+    }, 250);
+  }
+  function tAdd(sec){
+    tLeft = Math.max(0, Math.min(99*60, tLeft + sec));
+    if(tRun) tEnd = Date.now() + tLeft*1000;
+    if(tLeft === 0) tStop();
+    tRender();
+  }
+  $("t-go").addEventListener("click", function(){ if(tRun) tStop(); else tStart(); });
+  $("t-reset").addEventListener("click", function(){ tStop(); tLeft = TT; tRender(); });
+  $("t-minus").addEventListener("click", function(){ tAdd(-300); });
+  $("t-plus").addEventListener("click", function(){ tAdd(300); });
+  tRender();
+
+  /* ---------- quadro "de quem depende" ---------- */
+  var sel = null;
+  function inCols(id){ return ["m","t","p"].filter(function(k){ return S.board[k].indexOf(id) >= 0; }); }
+  function rb(){
+    var deck = $("deck"); deck.innerHTML = "";
+    var free = CARDS.filter(function(c){ return !inCols(c.id).length; });
+    if(!free.length){ var e = document.createElement("span"); e.className = "empty"; e.textContent = "Todos os cartões foram distribuídos."; deck.appendChild(e); }
+    free.forEach(function(c){
+      var b = document.createElement("button"); b.type = "button";
+      b.className = "fc" + (sel && sel.id === c.id && sel.from === "deck" ? " sel" : "");
+      b.innerHTML = ic(c.i) + "<span></span>"; b.querySelector("span").textContent = c.t;
+      b.addEventListener("click", function(e){ e.stopPropagation(); sel = (sel && sel.id === c.id && sel.from === "deck") ? null : {id:c.id, from:"deck"}; rb(); });
+      deck.appendChild(b);
+    });
+    ["m","t","p"].forEach(function(k){
+      var body = $("col-" + k); body.innerHTML = "";
+      S.board[k].forEach(function(id){
+        var c = CARDS.filter(function(x){ return x.id === id; })[0]; if(!c) return;
+        var d = document.createElement("div");
+        d.className = "fc placed" + (sel && sel.id === id && sel.from === k ? " sel" : "");
+        d.innerHTML = ic(c.i) + '<span></span><button type="button" class="cx" title="Tirar desta coluna">×</button>';
+        d.querySelector("span").textContent = c.t;
+        d.addEventListener("click", function(e){ e.stopPropagation(); sel = (sel && sel.id === id && sel.from === k) ? null : {id:id, from:k}; rb(); });
+        d.querySelector(".cx").addEventListener("click", function(e){
+          e.stopPropagation(); S.board[k] = S.board[k].filter(function(x){ return x !== id; });
+          if(sel && sel.id === id) sel = null; save(); rb();
+        });
+        body.appendChild(d);
+      });
+      $("colwrap-" + k).classList.toggle("target", !!sel && S.board[k].indexOf(sel.id) < 0);
+    });
+  }
+  ["m","t","p"].forEach(function(k){
+    $("colwrap-" + k).addEventListener("click", function(e){
+      e.stopPropagation();
+      if(!sel) return;
+      if(S.board[k].indexOf(sel.id) < 0) S.board[k].push(sel.id);
+      sel = null; save(); rb();
+    });
+  });
+  $("s8").addEventListener("click", function(){ if(sel){ sel = null; rb(); } });
+  $("board-reset").addEventListener("click", function(e){ e.stopPropagation(); S.board = {m:[],t:[],p:[]}; sel = null; save(); rb(); });
+  rerenders.push(rb); rb();
+
+  /* ---------- tabela ---------- */
+  function rt(){
+    var tb = $("ptbody"); tb.innerHTML = "";
+    S.table.forEach(function(row, ri){
+      var tr = document.createElement("tr");
+      row.forEach(function(val, ci){
+        var td = document.createElement("td"), d = document.createElement("div");
+        d.className = "cell"; d.contentEditable = "true"; d.spellcheck = false; d.textContent = val;
+        d.setAttribute("aria-label", ["Problema","Causa","Consequência","Possível solução"][ci] + ", linha " + (ri + 1));
+        d.addEventListener("input", function(){ S.table[ri][ci] = d.innerText.replace(/\s+$/,""); saveSoon(); });
+        d.addEventListener("paste", function(e){
+          e.preventDefault();
+          var txt = (e.clipboardData || window.clipboardData).getData("text");
+          document.execCommand("insertText", false, txt);
+        });
+        td.appendChild(d); tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+  rerenders.push(rt); rt();
+  $("ex-btn").addEventListener("click", function(){
+    var on = $("ex-row").classList.toggle("shown");
+    $("ex-btn").textContent = on ? "Esconder exemplo" : "Mostrar exemplo";
+  });
+
+  /* ---------- cartões ---------- */
+  var flips = document.querySelectorAll(".flip");
+  flips.forEach(function(f){ f.addEventListener("click", function(){ f.classList.toggle("on"); }); });
+  function unflip(){ flips.forEach(function(f){ f.classList.remove("on"); }); }
+  $("flip-reset").addEventListener("click", unflip);
+
+  /* ---------- navegação ---------- */
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide")), N = slides.length, cur = 0;
+  var dots = $("dots");
+  slides.forEach(function(s, i){
+    var d = document.createElement("button"); d.type = "button"; d.className = "dot"; d.title = "Tela " + (i + 1);
+    d.addEventListener("click", function(){ go(i); }); dots.appendChild(d);
+  });
+  function go(i){
+    i = Math.max(0, Math.min(N - 1, i));
+    slides[cur].classList.remove("on"); cur = i; slides[cur].classList.add("on");
+    $("count").textContent = (cur + 1) + " / " + N;
+    Array.prototype.forEach.call(dots.children, function(d, j){ d.classList.toggle("on", j === cur); });
+    $("prev").disabled = cur === 0; $("next").disabled = cur === N - 1;
+    if(slides[cur].id === "s14") rIni2();
+    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    try{ sessionStorage.setItem(KEY + "-slide", String(cur)); }catch(e){}
+  }
+  $("prev").addEventListener("click", function(){ go(cur - 1); });
+  $("next").addEventListener("click", function(){ go(cur + 1); });
+
+  function toggleFS(){
+    try{
+      if(!document.fullscreenElement){ var p = document.documentElement.requestFullscreen(); if(p && p.catch) p.catch(function(){}); }
+      else { var q = document.exitFullscreen(); if(q && q.catch) q.catch(function(){}); }
+    }catch(e){}
+  }
+  function toggleNotes(){ var on = document.body.classList.toggle("notes"); $("b-notes").classList.toggle("on", on); }
+  $("b-fs").addEventListener("click", toggleFS);
+  $("b-notes").addEventListener("click", toggleNotes);
+
+  /* limpar */
+  function closeModal(){ $("modal").classList.remove("on"); }
+  $("b-clear").addEventListener("click", function(){ $("modal").classList.add("on"); });
+  $("m-no").addEventListener("click", closeModal);
+  $("m-yes").addEventListener("click", function(){
+    S = fresh(); save(); sel = null; step = 0; cyc(); tStop(); tLeft = TT; tRender();
+    hideReveals(); unflip(); $("ex-row").classList.remove("shown"); $("ex-btn").textContent = "Mostrar exemplo";
+    rerenders.forEach(function(f){ f(); }); closeModal();
+  });
+
+  /* teclado */
+  document.addEventListener("keydown", function(e){
+    var t = e.target, tag = t && t.tagName;
+    var typing = t && (t.isContentEditable || tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT");
+    if($("modal").classList.contains("on")){ if(e.key === "Escape") closeModal(); return; }
+    if(typing){ if(e.key === "Escape") t.blur(); return; }
+    if(tag === "BUTTON" && (e.key === " " || e.key === "Enter")) return;
+    if(e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key;
+    if(k === "ArrowRight" || k === "PageDown" || k === " "){ e.preventDefault(); go(cur + 1); }
+    else if(k === "ArrowLeft" || k === "PageUp" || k === "Backspace"){ e.preventDefault(); go(cur - 1); }
+    else if(k === "Home"){ go(0); }
+    else if(k === "End"){ go(N - 1); }
+    else if(k === "f" || k === "F"){ toggleFS(); }
+    else if(k === "n" || k === "N"){ toggleNotes(); }
+  });
+  /* depois de clicar num botão, devolve o foco à página para as setas funcionarem */
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("button") : null;
+    if(b && !b.closest(".addrow")) setTimeout(function(){ if(document.activeElement === b) b.blur(); }, 0);
+  });
+
+  var start = 0;
+  try{ start = parseInt(sessionStorage.getItem(KEY + "-slide"), 10) || 0; }catch(e){}
+  slides[0].classList.add("on"); cur = 0; go(start);
+})();
+</script>
+</body>
+</html>

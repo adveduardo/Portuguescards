@@ -110,6 +110,9 @@
         <select id="tool-selector" onchange="changeTool()">
             <option value="">🏠 Tela Inicial</option>
             <option value="quiz.html">🃏 PortuguêsCards (Jogo de Português)</option>
+            <optgroup label="🗂️ Projetos temp">
+                <option value="projetos/marta-saude-eja.html">🏥 A história de Marta: saúde é só escolha minha? (EJA)</option>
+            </optgroup>
             <optgroup label="🧰 Ferramentas da sala">
                 <option value="ruido.html">🔊 Medidor de Ruído</option>
                 <option value="semaforo.html">🚦 Semáforo da Turma</option>
@@ -772,7 +775,7 @@
         </div>
     </div>
 
-    <iframe id="app-frame" src="" allow="microphone; autoplay"></iframe>
+    <iframe id="app-frame" src="" allow="microphone; autoplay; fullscreen" allowfullscreen></iframe>
 
     <script>
         function changeTool() {
