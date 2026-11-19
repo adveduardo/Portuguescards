@@ -2,103 +2,128 @@
   "quiz": [
     {
       "arquivo": "quiz-padrao.json",
-      "titulo": "Quiz de Português (modelo)"
+      "titulo": "Quiz de Português (modelo)",
+      "qtd": 30
     },
     {
       "arquivo": "quiz-morfologia.json",
-      "titulo": "Quiz de morfologia"
+      "titulo": "Quiz de morfologia",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-adverbios.json",
-      "titulo": "Quiz dos advérbios"
+      "titulo": "Quiz dos advérbios",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-pronomes.json",
-      "titulo": "Quiz dos pronomes"
+      "titulo": "Quiz dos pronomes",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-sintaxe.json",
-      "titulo": "Quiz de sintaxe"
+      "titulo": "Quiz de sintaxe",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-enem.json",
-      "titulo": "Quiz ENEM de Linguagens"
+      "titulo": "Quiz ENEM de Linguagens",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-verbos.json",
-      "titulo": "Quiz dos verbos"
+      "titulo": "Quiz dos verbos",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-adjetivos.json",
-      "titulo": "Quiz dos adjetivos"
+      "titulo": "Quiz dos adjetivos",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-numerais.json",
-      "titulo": "Quiz dos numerais"
+      "titulo": "Quiz dos numerais",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-invariaveis.json",
-      "titulo": "Quiz das classes invariáveis"
+      "titulo": "Quiz das classes invariáveis",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-proverbios.json",
-      "titulo": "Quiz dos provérbios"
+      "titulo": "Quiz dos provérbios",
+      "qtd": 14
     },
     {
       "arquivo": "quiz-analise.json",
-      "titulo": "Quiz de análise sintática"
+      "titulo": "Quiz de análise sintática",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-periodo.json",
-      "titulo": "Quiz do período composto"
+      "titulo": "Quiz do período composto",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-regencia.json",
-      "titulo": "Quiz de regência"
+      "titulo": "Quiz de regência",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-crase.json",
-      "titulo": "Quiz da crase"
+      "titulo": "Quiz da crase",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-fonologia.json",
-      "titulo": "Quiz de fonologia"
+      "titulo": "Quiz de fonologia",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-ortografia.json",
-      "titulo": "Quiz da ortografia"
+      "titulo": "Quiz da ortografia",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-acentuacao.json",
-      "titulo": "Corrida do acento"
+      "titulo": "Corrida do acento",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-significacao.json",
-      "titulo": "Quiz da significação das palavras"
+      "titulo": "Quiz da significação das palavras",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-concordancia.json",
-      "titulo": "Quiz da concordância"
+      "titulo": "Quiz da concordância",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-colocacao.json",
-      "titulo": "Quiz da colocação pronominal"
+      "titulo": "Quiz da colocação pronominal",
+      "qtd": 15
     },
     {
       "arquivo": "quiz-en.json",
-      "titulo": "🇬🇧 English quiz"
+      "titulo": "🇬🇧 English quiz",
+      "qtd": 14
     },
     {
       "arquivo": "quiz-qs.json",
-      "titulo": "Quiz do QUE e do SE"
+      "titulo": "Quiz do QUE e do SE",
+      "qtd": 14
     },
     {
       "arquivo": "quiz-figuras.json",
-      "titulo": "Quiz das figuras de linguagem"
+      "titulo": "Quiz das figuras de linguagem",
+      "qtd": 14
     },
     {
       "arquivo": "quiz-alfa.json",
-      "titulo": "Quiz da alfabetização"
+      "titulo": "Quiz da alfabetização",
+      "qtd": 14
     }
   ],
   "stop": [
@@ -466,87 +491,108 @@
   "detetive": [
     {
       "arquivo": "detetive-padrao.json",
-      "titulo": "Detetive das palavras (modelo)"
+      "titulo": "Detetive das palavras (modelo)",
+      "qtd": 32
     },
     {
       "arquivo": "detetive-concordancia.json",
-      "titulo": "Detetive da concordância"
+      "titulo": "Detetive da concordância",
+      "qtd": 16
     },
     {
       "arquivo": "detetive-bem-mal.json",
-      "titulo": "Detetive do bem e do mal"
+      "titulo": "Detetive do bem e do mal",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-pronomes.json",
-      "titulo": "Detetive dos pronomes"
+      "titulo": "Detetive dos pronomes",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-sintaxe.json",
-      "titulo": "Detetive da sintaxe (concordância, regência e crase)"
+      "titulo": "Detetive da sintaxe (concordância, regência e crase)",
+      "qtd": 13
     },
     {
       "arquivo": "detetive-verbos.json",
-      "titulo": "Detetive dos verbos"
+      "titulo": "Detetive dos verbos",
+      "qtd": 16
     },
     {
       "arquivo": "detetive-concordancia-nominal.json",
-      "titulo": "Detetive da concordância nominal"
+      "titulo": "Detetive da concordância nominal",
+      "qtd": 14
     },
     {
       "arquivo": "detetive-numerais.json",
-      "titulo": "Detetive dos numerais"
+      "titulo": "Detetive dos numerais",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-preposicoes.json",
-      "titulo": "Detetive das preposições"
+      "titulo": "Detetive das preposições",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-redacao.json",
-      "titulo": "Detetive da redação"
+      "titulo": "Detetive da redação",
+      "qtd": 13
     },
     {
       "arquivo": "detetive-regencia.json",
-      "titulo": "Detetive da regência"
+      "titulo": "Detetive da regência",
+      "qtd": 11
     },
     {
       "arquivo": "detetive-crase.json",
-      "titulo": "Detetive da crase"
+      "titulo": "Detetive da crase",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-ortografia.json",
-      "titulo": "Detetive da ortografia"
+      "titulo": "Detetive da ortografia",
+      "qtd": 15
     },
     {
       "arquivo": "detetive-acentuacao.json",
-      "titulo": "Detetive da acentuação"
+      "titulo": "Detetive da acentuação",
+      "qtd": 13
     },
     {
       "arquivo": "detetive-significacao.json",
-      "titulo": "Detetive dos homônimos e parônimos"
+      "titulo": "Detetive dos homônimos e parônimos",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-concordancia-verbal.json",
-      "titulo": "Detetive da concordância verbal"
+      "titulo": "Detetive da concordância verbal",
+      "qtd": 13
     },
     {
       "arquivo": "detetive-colocacao.json",
-      "titulo": "Detetive da colocação pronominal"
+      "titulo": "Detetive da colocação pronominal",
+      "qtd": 9
     },
     {
       "arquivo": "detetive-en.json",
-      "titulo": "🇬🇧 Grammar Detective"
+      "titulo": "🇬🇧 Grammar Detective",
+      "qtd": 14
     },
     {
       "arquivo": "detetive-qs.json",
-      "titulo": "Detetive do QUE e do SE"
+      "titulo": "Detetive do QUE e do SE",
+      "qtd": 12
     },
     {
       "arquivo": "detetive-vicios.json",
-      "titulo": "Detetive dos vícios de linguagem (barbarismo e solecismo)"
+      "titulo": "Detetive dos vícios de linguagem (barbarismo e solecismo)",
+      "qtd": 13
     },
     {
       "arquivo": "detetive-alfa.json",
-      "titulo": "Detetive das trocas de letras (alfabetização)"
+      "titulo": "Detetive das trocas de letras (alfabetização)",
+      "qtd": 13
     }
   ],
   "pontuacao": [
@@ -558,35 +604,43 @@
   "morfo-classifique": [
     {
       "arquivo": "morfo-classes.json",
-      "titulo": "Classes de palavras: as 10 classes (modelo)"
+      "titulo": "Classes de palavras: as 10 classes (modelo)",
+      "qtd": 195
     },
     {
       "arquivo": "morfo-classes-basico.json",
-      "titulo": "Básico com figuras: substantivo, adjetivo e verbo"
+      "titulo": "Básico com figuras: substantivo, adjetivo e verbo",
+      "qtd": 36
     },
     {
       "arquivo": "morfo-classes-frase.json",
-      "titulo": "Classifique a palavra na frase (400 frases, as 10 classes)"
+      "titulo": "Classifique a palavra na frase (400 frases, as 10 classes)",
+      "qtd": 400
     },
     {
       "arquivo": "morfo-classes-frase-sav.json",
-      "titulo": "Na frase: substantivo, adjetivo ou verbo? (148 frases)"
+      "titulo": "Na frase: substantivo, adjetivo ou verbo? (148 frases)",
+      "qtd": 148
     },
     {
       "arquivo": "morfo-classes-frase-invariaveis.json",
-      "titulo": "Na frase: advérbio, preposição, conjunção ou interjeição? (147 frases)"
+      "titulo": "Na frase: advérbio, preposição, conjunção ou interjeição? (147 frases)",
+      "qtd": 147
     },
     {
       "arquivo": "morfo-classes-mudam.json",
-      "titulo": "A mesma palavra, classes diferentes"
+      "titulo": "A mesma palavra, classes diferentes",
+      "qtd": 26
     },
     {
       "arquivo": "morfo-classes-invariaveis.json",
-      "titulo": "As classes invariáveis: advérbio, preposição, conjunção e interjeição"
+      "titulo": "As classes invariáveis: advérbio, preposição, conjunção e interjeição",
+      "qtd": 47
     },
     {
       "arquivo": "morfo-classes-eja.json",
-      "titulo": "Palavras do dia a dia (EJA)"
+      "titulo": "Palavras do dia a dia (EJA)",
+      "qtd": 46
     }
   ],
   "morfo-cestos": [
@@ -756,31 +810,36 @@
   "morfo-plural": [
     {
       "arquivo": "morfo-plural.json",
-      "titulo": "Singular e plural (modelo)"
+      "titulo": "Singular e plural (modelo)",
+      "qtd": 24
     }
   ],
   "morfo-feminino": [
     {
       "arquivo": "morfo-feminino.json",
-      "titulo": "Masculino e feminino (modelo)"
+      "titulo": "Masculino e feminino (modelo)",
+      "qtd": 22
     }
   ],
   "morfo-grau": [
     {
       "arquivo": "morfo-grau.json",
-      "titulo": "Diminutivo e aumentativo (modelo)"
+      "titulo": "Diminutivo e aumentativo (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-tempos": [
     {
       "arquivo": "morfo-tempos.json",
-      "titulo": "Ontem, hoje, amanhã (modelo)"
+      "titulo": "Ontem, hoje, amanhã (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-conjugacao": [
     {
       "arquivo": "morfo-conjugacao.json",
-      "titulo": "Quem faz a ação? (modelo)"
+      "titulo": "Quem faz a ação? (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-montar": [
@@ -810,37 +869,43 @@
   "morfo-adv-pergunta": [
     {
       "arquivo": "morfo-adv-pergunta.json",
-      "titulo": "Pergunte ao verbo (modelo)"
+      "titulo": "Pergunte ao verbo (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-adv-tipo": [
     {
       "arquivo": "morfo-adv-tipo.json",
-      "titulo": "Que tipo de advérbio? (modelo)"
+      "titulo": "Que tipo de advérbio? (modelo)",
+      "qtd": 23
     }
   ],
   "morfo-adv-adjetivo": [
     {
       "arquivo": "morfo-adv-adjetivo.json",
-      "titulo": "Adjetivo ou advérbio? (modelo)"
+      "titulo": "Adjetivo ou advérbio? (modelo)",
+      "qtd": 22
     }
   ],
   "morfo-adv-locucao": [
     {
       "arquivo": "morfo-adv-locucao.json",
-      "titulo": "Locução adverbial (modelo)"
+      "titulo": "Locução adverbial (modelo)",
+      "qtd": 14
     }
   ],
   "morfo-adv-complete": [
     {
       "arquivo": "morfo-adv-complete.json",
-      "titulo": "Complete com o advérbio (modelo)"
+      "titulo": "Complete com o advérbio (modelo)",
+      "qtd": 16
     }
   ],
   "morfo-adv-opostos": [
     {
       "arquivo": "morfo-adv-opostos.json",
-      "titulo": "Advérbios opostos (modelo)"
+      "titulo": "Advérbios opostos (modelo)",
+      "qtd": 14
     }
   ],
   "morfo-ordene": [
@@ -918,49 +983,57 @@
   "morfo-pron-troque": [
     {
       "arquivo": "morfo-pron-troque.json",
-      "titulo": "Troque pelo pronome (modelo)"
+      "titulo": "Troque pelo pronome (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-pron-tipo": [
     {
       "arquivo": "morfo-pron-tipo.json",
-      "titulo": "Que tipo de pronome? (modelo)"
+      "titulo": "Que tipo de pronome? (modelo)",
+      "qtd": 20
     }
   ],
   "morfo-pron-possessivo": [
     {
       "arquivo": "morfo-pron-possessivo.json",
-      "titulo": "De quem é? (modelo)"
+      "titulo": "De quem é? (modelo)",
+      "qtd": 15
     }
   ],
   "morfo-pron-tratamento": [
     {
       "arquivo": "morfo-pron-tratamento.json",
-      "titulo": "Pronomes de tratamento (modelo)"
+      "titulo": "Pronomes de tratamento (modelo)",
+      "qtd": 12
     }
   ],
   "morfo-pron-eumim": [
     {
       "arquivo": "morfo-pron-eumim.json",
-      "titulo": "Eu ou mim? (modelo)"
+      "titulo": "Eu ou mim? (modelo)",
+      "qtd": 14
     }
   ],
   "morfo-pron-comigo": [
     {
       "arquivo": "morfo-pron-comigo.json",
-      "titulo": "Comigo, contigo, conosco (modelo)"
+      "titulo": "Comigo, contigo, conosco (modelo)",
+      "qtd": 10
     }
   ],
   "morfo-pron-interrogativo": [
     {
       "arquivo": "morfo-pron-interrogativo.json",
-      "titulo": "Pronomes interrogativos (modelo)"
+      "titulo": "Pronomes interrogativos (modelo)",
+      "qtd": 12
     }
   ],
   "morfo-pron-demonstrativo": [
     {
       "arquivo": "morfo-pron-demonstrativo.json",
-      "titulo": "Este, esse ou aquele? (modelo)"
+      "titulo": "Este, esse ou aquele? (modelo)",
+      "qtd": 11
     }
   ],
   "morfo-texto": [
@@ -986,307 +1059,378 @@
   "escolha-sint": [
     {
       "arquivo": "sint-colocacao.json",
-      "titulo": "Colocação pronominal"
+      "titulo": "Colocação pronominal",
+      "qtd": 10
     },
     {
       "arquivo": "sint-concordancia-verbal.json",
-      "titulo": "Concordância verbal"
+      "titulo": "Concordância verbal",
+      "qtd": 12
     },
     {
       "arquivo": "sint-coordenadas.json",
-      "titulo": "Conjunções coordenativas"
+      "titulo": "Conjunções coordenativas",
+      "qtd": 12
     },
     {
       "arquivo": "sint-crase.json",
-      "titulo": "Crase"
+      "titulo": "Crase",
+      "qtd": 14
     },
     {
       "arquivo": "sint-regencia.json",
-      "titulo": "Regência verbal"
+      "titulo": "Regência verbal",
+      "qtd": 13
     },
     {
       "arquivo": "sint-relativo.json",
-      "titulo": "Pronome relativo"
+      "titulo": "Pronome relativo",
+      "qtd": 10
     },
     {
       "arquivo": "sint-subordinadas.json",
-      "titulo": "Conjunções subordinativas adverbiais"
+      "titulo": "Conjunções subordinativas adverbiais",
+      "qtd": 15
     },
     {
       "arquivo": "sint-sujeito.json",
-      "titulo": "Tipos de sujeito"
+      "titulo": "Tipos de sujeito",
+      "qtd": 15
     },
     {
       "arquivo": "sint-termos.json",
-      "titulo": "Termos da oração"
+      "titulo": "Termos da oração",
+      "qtd": 15
     },
     {
       "arquivo": "sint-virgula.json",
-      "titulo": "Vírgula: certa ou errada?"
+      "titulo": "Vírgula: certa ou errada?",
+      "qtd": 11
     }
   ],
   "escolha-em": [
     {
       "arquivo": "em-autor-escola.json",
-      "titulo": "Autor e escola literária"
+      "titulo": "Autor e escola literária",
+      "qtd": 19
     },
     {
       "arquivo": "em-competencias.json",
-      "titulo": "Competências da redação do ENEM"
+      "titulo": "Competências da redação do ENEM",
+      "qtd": 12
     },
     {
       "arquivo": "em-conectivos.json",
-      "titulo": "Conectivos para a redação"
+      "titulo": "Conectivos para a redação",
+      "qtd": 18
     },
     {
       "arquivo": "em-figuras-1.json",
-      "titulo": "Figuras de linguagem I"
+      "titulo": "Figuras de linguagem I",
+      "qtd": 18
     },
     {
       "arquivo": "em-figuras-2.json",
-      "titulo": "Figuras de linguagem II (som e construção)"
+      "titulo": "Figuras de linguagem II (som e construção)",
+      "qtd": 16
     },
     {
       "arquivo": "em-funcoes.json",
-      "titulo": "Funções da linguagem"
+      "titulo": "Funções da linguagem",
+      "qtd": 15
     },
     {
       "arquivo": "em-generos.json",
-      "titulo": "Gêneros textuais do dia a dia"
+      "titulo": "Gêneros textuais do dia a dia",
+      "qtd": 12
     },
     {
       "arquivo": "em-interpretacao.json",
-      "titulo": "Interpretação de texto"
+      "titulo": "Interpretação de texto",
+      "qtd": 10
     },
     {
       "arquivo": "em-intervencao.json",
-      "titulo": "Proposta de intervenção (ENEM)"
+      "titulo": "Proposta de intervenção (ENEM)",
+      "qtd": 13
     },
     {
       "arquivo": "em-obra-autor.json",
-      "titulo": "Obra e autor"
+      "titulo": "Obra e autor",
+      "qtd": 18
     },
     {
       "arquivo": "em-variacao.json",
-      "titulo": "Variação linguística"
+      "titulo": "Variação linguística",
+      "qtd": 12
     },
     {
       "arquivo": "em-denotativas.json",
-      "titulo": "Palavras denotativas"
+      "titulo": "Palavras denotativas",
+      "qtd": 15
     },
     {
       "arquivo": "em-que.json",
-      "titulo": "As faces do QUE"
+      "titulo": "As faces do QUE",
+      "qtd": 14
     },
     {
       "arquivo": "em-se.json",
-      "titulo": "As faces do SE"
+      "titulo": "As faces do SE",
+      "qtd": 15
     }
   ],
   "escolha-verbo": [
     {
       "arquivo": "verbo-irregulares.json",
-      "titulo": "Verbos irregulares"
+      "titulo": "Verbos irregulares",
+      "qtd": 16
     },
     {
       "arquivo": "verbo-modos.json",
-      "titulo": "Modos verbais"
+      "titulo": "Modos verbais",
+      "qtd": 15
     },
     {
       "arquivo": "verbo-nominais.json",
-      "titulo": "Formas nominais do verbo"
+      "titulo": "Formas nominais do verbo",
+      "qtd": 14
     },
     {
       "arquivo": "verbo-subjuntivo.json",
-      "titulo": "Tempos do subjuntivo"
+      "titulo": "Tempos do subjuntivo",
+      "qtd": 12
     },
     {
       "arquivo": "verbo-tempos.json",
-      "titulo": "Tempos do indicativo"
+      "titulo": "Tempos do indicativo",
+      "qtd": 15
     },
     {
       "arquivo": "verbo-transitividade.json",
-      "titulo": "Transitividade verbal"
+      "titulo": "Transitividade verbal",
+      "qtd": 16
     },
     {
       "arquivo": "verbo-vozes.json",
-      "titulo": "Vozes verbais"
+      "titulo": "Vozes verbais",
+      "qtd": 14
     }
   ],
   "escolha-adj": [
     {
       "arquivo": "adj-compostos.json",
-      "titulo": "Plural dos adjetivos compostos"
+      "titulo": "Plural dos adjetivos compostos",
+      "qtd": 12
     },
     {
       "arquivo": "adj-locucao.json",
-      "titulo": "Locução adjetiva → adjetivo"
+      "titulo": "Locução adjetiva → adjetivo",
+      "qtd": 22
     },
     {
       "arquivo": "adj-patrios.json",
-      "titulo": "Adjetivos pátrios"
+      "titulo": "Adjetivos pátrios",
+      "qtd": 18
     },
     {
       "arquivo": "adj-posicao.json",
-      "titulo": "A posição do adjetivo muda o sentido"
+      "titulo": "A posição do adjetivo muda o sentido",
+      "qtd": 11
     },
     {
       "arquivo": "adj-superlativo.json",
-      "titulo": "Superlativo erudito"
+      "titulo": "Superlativo erudito",
+      "qtd": 18
     }
   ],
   "escolha-num": [
     {
       "arquivo": "num-concordancia.json",
-      "titulo": "Concordância com numerais"
+      "titulo": "Concordância com numerais",
+      "qtd": 11
     },
     {
       "arquivo": "num-extenso.json",
-      "titulo": "Valor por extenso (cheque e recibo)"
+      "titulo": "Valor por extenso (cheque e recibo)",
+      "qtd": 13
     },
     {
       "arquivo": "num-ordinais.json",
-      "titulo": "Ordinais por extenso"
+      "titulo": "Ordinais por extenso",
+      "qtd": 14
     },
     {
       "arquivo": "num-romanos.json",
-      "titulo": "Como se lê o numeral romano?"
+      "titulo": "Como se lê o numeral romano?",
+      "qtd": 14
     },
     {
       "arquivo": "num-tipos.json",
-      "titulo": "Tipos de numeral"
+      "titulo": "Tipos de numeral",
+      "qtd": 16
     }
   ],
   "escolha-prep": [
     {
       "arquivo": "prep-complete.json",
-      "titulo": "Complete com a preposição"
+      "titulo": "Complete com a preposição",
+      "qtd": 15
     },
     {
       "arquivo": "prep-expressoes.json",
-      "titulo": "Expressões que confundem"
+      "titulo": "Expressões que confundem",
+      "qtd": 14
     },
     {
       "arquivo": "prep-relacao.json",
-      "titulo": "Que relação a preposição indica?"
+      "titulo": "Que relação a preposição indica?",
+      "qtd": 18
     }
   ],
   "escolha-conj": [
     {
       "arquivo": "conj-classifique.json",
-      "titulo": "Coordenativa ou subordinativa?"
+      "titulo": "Coordenativa ou subordinativa?",
+      "qtd": 14
     },
     {
       "arquivo": "conj-ligue.json",
-      "titulo": "Ligue as frases"
+      "titulo": "Ligue as frases",
+      "qtd": 13
     },
     {
       "arquivo": "conj-parecidas.json",
-      "titulo": "Mas ou mais? Senão ou se não?"
+      "titulo": "Mas ou mais? Senão ou se não?",
+      "qtd": 12
     },
     {
       "arquivo": "conj-porques.json",
-      "titulo": "Os quatro porquês"
+      "titulo": "Os quatro porquês",
+      "qtd": 14
     }
   ],
   "escolha-interj": [
     {
       "arquivo": "interj-cena.json",
-      "titulo": "Qual interjeição combina com a cena?"
+      "titulo": "Qual interjeição combina com a cena?",
+      "qtd": 13
     },
     {
       "arquivo": "interj-emocao.json",
-      "titulo": "Que emoção a interjeição expressa?"
+      "titulo": "Que emoção a interjeição expressa?",
+      "qtd": 17
     },
     {
       "arquivo": "interj-regionais.json",
-      "titulo": "Interjeições do Brasil"
+      "titulo": "Interjeições do Brasil",
+      "qtd": 9
     }
   ],
   "escolha-inv": [
     {
       "arquivo": "inv-varia.json",
-      "titulo": "Varia ou não varia?"
+      "titulo": "Varia ou não varia?",
+      "qtd": 15
     }
   ],
   "escolha-interp": [
     {
       "arquivo": "interp-6a9.json",
-      "titulo": "Interpretação de texto (6º ao 9º ano)"
+      "titulo": "Interpretação de texto (6º ao 9º ano)",
+      "qtd": 11
     },
     {
       "arquivo": "interp-enem.json",
-      "titulo": "Interpretação de texto (Ensino Médio / ENEM)"
+      "titulo": "Interpretação de texto (Ensino Médio / ENEM)",
+      "qtd": 9
     },
     {
       "arquivo": "interp-eja.json",
-      "titulo": "Interpretação de textos do dia a dia (EJA)"
+      "titulo": "Interpretação de textos do dia a dia (EJA)",
+      "qtd": 10
     },
     {
       "arquivo": "interp-inferencia.json",
-      "titulo": "Está escrito, dá para deduzir ou não dá para afirmar?"
+      "titulo": "Está escrito, dá para deduzir ou não dá para afirmar?",
+      "qtd": 12
     },
     {
       "arquivo": "interp-fato-opiniao.json",
-      "titulo": "Fato ou opinião?"
+      "titulo": "Fato ou opinião?",
+      "qtd": 12
     },
     {
       "arquivo": "interp-ideia.json",
-      "titulo": "Ideia principal e título"
+      "titulo": "Ideia principal e título",
+      "qtd": 8
     },
     {
       "arquivo": "interp-sentido.json",
-      "titulo": "Sentido da palavra no contexto"
+      "titulo": "Sentido da palavra no contexto",
+      "qtd": 12
     },
     {
       "arquivo": "interp-referencia.json",
-      "titulo": "A quem a palavra se refere?"
+      "titulo": "A quem a palavra se refere?",
+      "qtd": 10
     },
     {
       "arquivo": "interp-humor.json",
-      "titulo": "Por que é engraçado?"
+      "titulo": "Por que é engraçado?",
+      "qtd": 7
     },
     {
       "arquivo": "interp-proverbios.json",
-      "titulo": "O que quer dizer o provérbio?"
+      "titulo": "O que quer dizer o provérbio?",
+      "qtd": 14
     }
   ],
   "escolha-red": [
     {
       "arquivo": "red-tese.json",
-      "titulo": "Isso é uma tese?"
+      "titulo": "Isso é uma tese?",
+      "qtd": 12
     },
     {
       "arquivo": "red-argumentos.json",
-      "titulo": "Que tipo de argumento é este?"
+      "titulo": "Que tipo de argumento é este?",
+      "qtd": 12
     },
     {
       "arquivo": "red-tema.json",
-      "titulo": "Abordou, tangenciou ou fugiu do tema?"
+      "titulo": "Abordou, tangenciou ou fugiu do tema?",
+      "qtd": 12
     },
     {
       "arquivo": "red-repertorio.json",
-      "titulo": "Qual repertório combina com o tema?"
+      "titulo": "Qual repertório combina com o tema?",
+      "qtd": 12
     },
     {
       "arquivo": "red-intervencao-falta.json",
-      "titulo": "O que falta nesta proposta de intervenção?"
+      "titulo": "O que falta nesta proposta de intervenção?",
+      "qtd": 8
     },
     {
       "arquivo": "red-formal.json",
-      "titulo": "Formal ou informal?"
+      "titulo": "Formal ou informal?",
+      "qtd": 12
     },
     {
       "arquivo": "red-discurso.json",
-      "titulo": "Discurso direto e indireto"
+      "titulo": "Discurso direto e indireto",
+      "qtd": 9
     },
     {
       "arquivo": "red-narrativa.json",
-      "titulo": "Elementos da narrativa"
+      "titulo": "Elementos da narrativa",
+      "qtd": 9
     },
     {
       "arquivo": "red-avalie.json",
-      "titulo": "Avalie a redação"
+      "titulo": "Avalie a redação",
+      "qtd": 6
     }
   ],
   "marque": [
@@ -1354,145 +1498,179 @@
   "escolha-an": [
     {
       "arquivo": "an-adjunto-adnominal.json",
-      "titulo": "Adjunto adnominal"
+      "titulo": "Adjunto adnominal",
+      "qtd": 12
     },
     {
       "arquivo": "an-adjunto-adverbial.json",
-      "titulo": "Adjunto adverbial: que circunstância?"
+      "titulo": "Adjunto adverbial: que circunstância?",
+      "qtd": 16
     },
     {
       "arquivo": "an-agente.json",
-      "titulo": "Agente da passiva e vozes verbais"
+      "titulo": "Agente da passiva e vozes verbais",
+      "qtd": 10
     },
     {
       "arquivo": "an-aposto-vocativo.json",
-      "titulo": "Aposto, vocativo ou sujeito?"
+      "titulo": "Aposto, vocativo ou sujeito?",
+      "qtd": 11
     },
     {
       "arquivo": "an-aposto.json",
-      "titulo": "Tipos de aposto"
+      "titulo": "Tipos de aposto",
+      "qtd": 12
     },
     {
       "arquivo": "an-cn-aa.json",
-      "titulo": "Complemento nominal ou adjunto adnominal?"
+      "titulo": "Complemento nominal ou adjunto adnominal?",
+      "qtd": 14
     },
     {
       "arquivo": "an-integrantes.json",
-      "titulo": "Termos integrantes da oração"
+      "titulo": "Termos integrantes da oração",
+      "qtd": 14
     },
     {
       "arquivo": "an-nucleo.json",
-      "titulo": "Núcleo do sujeito e do objeto"
+      "titulo": "Núcleo do sujeito e do objeto",
+      "qtd": 10
     },
     {
       "arquivo": "an-obliquos.json",
-      "titulo": "O, A ou LHE?"
+      "titulo": "O, A ou LHE?",
+      "qtd": 11
     },
     {
       "arquivo": "an-predicado.json",
-      "titulo": "Tipos de predicado"
+      "titulo": "Tipos de predicado",
+      "qtd": 12
     },
     {
       "arquivo": "an-predicativo.json",
-      "titulo": "Predicativo do sujeito ou do objeto?"
+      "titulo": "Predicativo do sujeito ou do objeto?",
+      "qtd": 12
     },
     {
       "arquivo": "an-sujeito-qual.json",
-      "titulo": "Qual é o sujeito?"
+      "titulo": "Qual é o sujeito?",
+      "qtd": 12
     },
     {
       "arquivo": "an-virgula.json",
-      "titulo": "Vírgula no aposto e no vocativo"
+      "titulo": "Vírgula no aposto e no vocativo",
+      "qtd": 11
     },
     {
       "arquivo": "an-vl.json",
-      "titulo": "Verbo de ligação ou significativo?"
+      "titulo": "Verbo de ligação ou significativo?",
+      "qtd": 12
     }
   ],
   "escolha-pc": [
     {
       "arquivo": "pc-adjetivas.json",
-      "titulo": "Adjetivas: restritiva ou explicativa?"
+      "titulo": "Adjetivas: restritiva ou explicativa?",
+      "qtd": 12
     },
     {
       "arquivo": "pc-adverbiais.json",
-      "titulo": "Orações subordinadas adverbiais"
+      "titulo": "Orações subordinadas adverbiais",
+      "qtd": 16
     },
     {
       "arquivo": "pc-coord-sub.json",
-      "titulo": "Coordenação ou subordinação?"
+      "titulo": "Coordenação ou subordinação?",
+      "qtd": 12
     },
     {
       "arquivo": "pc-coordenadas.json",
-      "titulo": "Orações coordenadas"
+      "titulo": "Orações coordenadas",
+      "qtd": 14
     },
     {
       "arquivo": "pc-reduzidas-desenvolver.json",
-      "titulo": "Desenvolva a oração reduzida"
+      "titulo": "Desenvolva a oração reduzida",
+      "qtd": 8
     },
     {
       "arquivo": "pc-reduzidas.json",
-      "titulo": "Orações reduzidas"
+      "titulo": "Orações reduzidas",
+      "qtd": 10
     },
     {
       "arquivo": "pc-relativo-unir.json",
-      "titulo": "Una as orações com o pronome relativo"
+      "titulo": "Una as orações com o pronome relativo",
+      "qtd": 8
     },
     {
       "arquivo": "pc-substantivas.json",
-      "titulo": "Orações subordinadas substantivas"
+      "titulo": "Orações subordinadas substantivas",
+      "qtd": 14
     },
     {
       "arquivo": "pc-tipo-sub.json",
-      "titulo": "Substantiva, adjetiva ou adverbial?"
+      "titulo": "Substantiva, adjetiva ou adverbial?",
+      "qtd": 12
     }
   ],
   "escolha-rg": [
     {
       "arquivo": "rg-certo-errado.json",
-      "titulo": "Regência verbal: certo ou errado?"
+      "titulo": "Regência verbal: certo ou errado?",
+      "qtd": 14
     },
     {
       "arquivo": "rg-nominal-ce.json",
-      "titulo": "Regência nominal: certo ou errado?"
+      "titulo": "Regência nominal: certo ou errado?",
+      "qtd": 10
     },
     {
       "arquivo": "rg-nominal.json",
-      "titulo": "Regência nominal: que preposição o nome pede?"
+      "titulo": "Regência nominal: que preposição o nome pede?",
+      "qtd": 16
     },
     {
       "arquivo": "rg-relativo.json",
-      "titulo": "Regência e pronome relativo"
+      "titulo": "Regência e pronome relativo",
+      "qtd": 11
     },
     {
       "arquivo": "rg-sentido.json",
-      "titulo": "A regência muda o sentido"
+      "titulo": "A regência muda o sentido",
+      "qtd": 11
     },
     {
       "arquivo": "rg-verbal-prep.json",
-      "titulo": "Que preposição o verbo pede?"
+      "titulo": "Que preposição o verbo pede?",
+      "qtd": 16
     }
   ],
   "escolha-cr": [
     {
       "arquivo": "cr-locucoes.json",
-      "titulo": "Crase nas expressões do dia a dia"
+      "titulo": "Crase nas expressões do dia a dia",
+      "qtd": 12
     },
     {
       "arquivo": "cr-lugares.json",
-      "titulo": "Crase com nomes de lugares (vou e volto)"
+      "titulo": "Crase com nomes de lugares (vou e volto)",
+      "qtd": 13
     },
     {
       "arquivo": "cr-ocorre.json",
-      "titulo": "Casos em que ocorre a crase"
+      "titulo": "Casos em que ocorre a crase",
+      "qtd": 12
     },
     {
       "arquivo": "cr-proibida.json",
-      "titulo": "Casos em que não ocorre crase"
+      "titulo": "Casos em que não ocorre crase",
+      "qtd": 14
     },
     {
       "arquivo": "cr-tipo.json",
-      "titulo": "Crase: obrigatória, facultativa ou proibida?"
+      "titulo": "Crase: obrigatória, facultativa ou proibida?",
+      "qtd": 16
     }
   ],
   "letras": [
@@ -1610,61 +1788,74 @@
   "escolha-fo": [
     {
       "arquivo": "fo-fonemas.json",
-      "titulo": "Letras × fonemas"
+      "titulo": "Letras × fonemas",
+      "qtd": 14
     },
     {
       "arquivo": "fo-monossilabos.json",
-      "titulo": "Monossílabo tônico ou átono?"
+      "titulo": "Monossílabo tônico ou átono?",
+      "qtd": 14
     },
     {
       "arquivo": "fo-separacao.json",
-      "titulo": "Separação silábica"
+      "titulo": "Separação silábica",
+      "qtd": 14
     }
   ],
   "escolha-or": [
     {
       "arquivo": "or-hifen.json",
-      "titulo": "Com hífen, junto ou separado?"
+      "titulo": "Com hífen, junto ou separado?",
+      "qtd": 18
     },
     {
       "arquivo": "or-letras.json",
-      "titulo": "Complete com a letra certa"
+      "titulo": "Complete com a letra certa",
+      "qtd": 30
     },
     {
       "arquivo": "or-regras.json",
-      "titulo": "Por que se escreve assim?"
+      "titulo": "Por que se escreve assim?",
+      "qtd": 16
     }
   ],
   "escolha-ac": [
     {
       "arquivo": "ac-acordo.json",
-      "titulo": "Acentuação depois do Acordo Ortográfico"
+      "titulo": "Acentuação depois do Acordo Ortográfico",
+      "qtd": 16
     },
     {
       "arquivo": "ac-regras.json",
-      "titulo": "Por que tem acento?"
+      "titulo": "Por que tem acento?",
+      "qtd": 24
     }
   ],
   "escolha-sg": [
     {
       "arquivo": "sg-antonimos.json",
-      "titulo": "Qual é o antônimo?"
+      "titulo": "Qual é o antônimo?",
+      "qtd": 12
     },
     {
       "arquivo": "sg-homonimos-tipos.json",
-      "titulo": "Perfeitos, homófonos ou homógrafos?"
+      "titulo": "Perfeitos, homófonos ou homógrafos?",
+      "qtd": 12
     },
     {
       "arquivo": "sg-homonimos.json",
-      "titulo": "Homônimos: qual completa a frase?"
+      "titulo": "Homônimos: qual completa a frase?",
+      "qtd": 14
     },
     {
       "arquivo": "sg-paronimos.json",
-      "titulo": "Parônimos: qual completa a frase?"
+      "titulo": "Parônimos: qual completa a frase?",
+      "qtd": 14
     },
     {
       "arquivo": "sg-sinonimos.json",
-      "titulo": "Qual é o sinônimo?"
+      "titulo": "Qual é o sinônimo?",
+      "qtd": 12
     }
   ],
   "listas": [
@@ -1688,107 +1879,132 @@
   "escolha-cc": [
     {
       "arquivo": "cc-gerais.json",
-      "titulo": "Ocorrências gerais de concordância verbal"
+      "titulo": "Ocorrências gerais de concordância verbal",
+      "qtd": 12
     },
     {
       "arquivo": "cc-nominal.json",
-      "titulo": "Concordância nominal"
+      "titulo": "Concordância nominal",
+      "qtd": 16
     },
     {
       "arquivo": "cc-outras.json",
-      "titulo": "Outras ocorrências de concordância verbal"
+      "titulo": "Outras ocorrências de concordância verbal",
+      "qtd": 12
     },
     {
       "arquivo": "cc-verbal.json",
-      "titulo": "Concordância verbal: o básico"
+      "titulo": "Concordância verbal: o básico",
+      "qtd": 12
     }
   ],
   "escolha-cl": [
     {
       "arquivo": "cl-enclise.json",
-      "titulo": "Ocorrências da ênclise"
+      "titulo": "Ocorrências da ênclise",
+      "qtd": 8
     },
     {
       "arquivo": "cl-formas.json",
-      "titulo": "Junte o verbo e o pronome"
+      "titulo": "Junte o verbo e o pronome",
+      "qtd": 10
     },
     {
       "arquivo": "cl-locucoes.json",
-      "titulo": "Pronomes átonos nas locuções verbais"
+      "titulo": "Pronomes átonos nas locuções verbais",
+      "qtd": 11
     },
     {
       "arquivo": "cl-mesoclise.json",
-      "titulo": "Ocorrência da mesóclise"
+      "titulo": "Ocorrência da mesóclise",
+      "qtd": 8
     },
     {
       "arquivo": "cl-motivo.json",
-      "titulo": "Por que a próclise é obrigatória?"
+      "titulo": "Por que a próclise é obrigatória?",
+      "qtd": 12
     },
     {
       "arquivo": "cl-proclise.json",
-      "titulo": "Ocorrências da próclise"
+      "titulo": "Ocorrências da próclise",
+      "qtd": 12
     },
     {
       "arquivo": "cl-tipo.json",
-      "titulo": "Próclise, mesóclise ou ênclise?"
+      "titulo": "Próclise, mesóclise ou ênclise?",
+      "qtd": 12
     }
   ],
   "escolha-en": [
     {
       "arquivo": "en-what-is-this.json",
-      "titulo": "🇬🇧 What is it?"
+      "titulo": "🇬🇧 What is it?",
+      "qtd": 22
     },
     {
       "arquivo": "en-to-be.json",
-      "titulo": "🇬🇧 Verb to be"
+      "titulo": "🇬🇧 Verb to be",
+      "qtd": 12
     },
     {
       "arquivo": "en-simple-present.json",
-      "titulo": "🇬🇧 Simple present"
+      "titulo": "🇬🇧 Simple present",
+      "qtd": 11
     },
     {
       "arquivo": "en-present-continuous.json",
-      "titulo": "🇬🇧 Present continuous"
+      "titulo": "🇬🇧 Present continuous",
+      "qtd": 10
     },
     {
       "arquivo": "en-simple-past.json",
-      "titulo": "🇬🇧 Simple past"
+      "titulo": "🇬🇧 Simple past",
+      "qtd": 12
     },
     {
       "arquivo": "en-future.json",
-      "titulo": "🇬🇧 Future: will or going to?"
+      "titulo": "🇬🇧 Future: will or going to?",
+      "qtd": 8
     },
     {
       "arquivo": "en-comparatives.json",
-      "titulo": "🇬🇧 Comparatives and superlatives"
+      "titulo": "🇬🇧 Comparatives and superlatives",
+      "qtd": 10
     },
     {
       "arquivo": "en-prepositions.json",
-      "titulo": "🇬🇧 In, on or at?"
+      "titulo": "🇬🇧 In, on or at?",
+      "qtd": 12
     },
     {
       "arquivo": "en-pronouns.json",
-      "titulo": "🇬🇧 Pronouns and possessives"
+      "titulo": "🇬🇧 Pronouns and possessives",
+      "qtd": 10
     },
     {
       "arquivo": "en-there-is.json",
-      "titulo": "🇬🇧 There is / there are"
+      "titulo": "🇬🇧 There is / there are",
+      "qtd": 10
     },
     {
       "arquivo": "en-modals.json",
-      "titulo": "🇬🇧 Can, must, should"
+      "titulo": "🇬🇧 Can, must, should",
+      "qtd": 10
     },
     {
       "arquivo": "en-question-words.json",
-      "titulo": "🇬🇧 Question words"
+      "titulo": "🇬🇧 Question words",
+      "qtd": 10
     },
     {
       "arquivo": "en-false-friends.json",
-      "titulo": "🇬🇧 False friends (falsos cognatos)"
+      "titulo": "🇬🇧 False friends (falsos cognatos)",
+      "qtd": 14
     },
     {
       "arquivo": "en-reading.json",
-      "titulo": "🇬🇧 Reading time"
+      "titulo": "🇬🇧 Reading time",
+      "qtd": 20
     },
     {
       "arquivo": "en-listen.json",
@@ -1796,83 +2012,102 @@
     },
     {
       "arquivo": "en-everyday.json",
-      "titulo": "🇬🇧 English in everyday life"
+      "titulo": "🇬🇧 English in everyday life",
+      "qtd": 16
     },
     {
       "arquivo": "en-enem.json",
-      "titulo": "Inglês no ENEM"
+      "titulo": "Inglês no ENEM",
+      "qtd": 8
     },
     {
       "arquivo": "en-trabalho.json",
-      "titulo": "🇬🇧 English at work (entrevista e e-mail)"
+      "titulo": "🇬🇧 English at work (entrevista e e-mail)",
+      "qtd": 15
     }
   ],
   "escolha-qs": [
     {
       "arquivo": "qs-que-classe.json",
-      "titulo": "Qual é a classe do QUE?"
+      "titulo": "Qual é a classe do QUE?",
+      "qtd": 15
     },
     {
       "arquivo": "qs-que-conjuncao.json",
-      "titulo": "Que tipo de conjunção é o QUE?"
+      "titulo": "Que tipo de conjunção é o QUE?",
+      "qtd": 14
     },
     {
       "arquivo": "qs-que-relativo.json",
-      "titulo": "Pronome relativo ou conjunção integrante?"
+      "titulo": "Pronome relativo ou conjunção integrante?",
+      "qtd": 12
     },
     {
       "arquivo": "qs-que-funcao.json",
-      "titulo": "Função sintática do pronome relativo QUE"
+      "titulo": "Função sintática do pronome relativo QUE",
+      "qtd": 13
     },
     {
       "arquivo": "qs-que-ou-que.json",
-      "titulo": "QUE ou QUÊ?"
+      "titulo": "QUE ou QUÊ?",
+      "qtd": 8
     },
     {
       "arquivo": "qs-se-classe.json",
-      "titulo": "Qual é a função do SE?"
+      "titulo": "Qual é a função do SE?",
+      "qtd": 16
     },
     {
       "arquivo": "qs-se-apassivador.json",
-      "titulo": "Partícula apassivadora ou índice de indeterminação?"
+      "titulo": "Partícula apassivadora ou índice de indeterminação?",
+      "qtd": 13
     },
     {
       "arquivo": "qs-se-concordancia.json",
-      "titulo": "Verbo + SE: singular ou plural?"
+      "titulo": "Verbo + SE: singular ou plural?",
+      "qtd": 10
     }
   ],
   "escolha-fg": [
     {
       "arquivo": "fg-palavra.json",
-      "titulo": "Figuras de palavra"
+      "titulo": "Figuras de palavra",
+      "qtd": 16
     },
     {
       "arquivo": "fg-pensamento.json",
-      "titulo": "Figuras de pensamento"
+      "titulo": "Figuras de pensamento",
+      "qtd": 15
     },
     {
       "arquivo": "fg-sintaxe.json",
-      "titulo": "Figuras de sintaxe (construção)"
+      "titulo": "Figuras de sintaxe (construção)",
+      "qtd": 16
     },
     {
       "arquivo": "fg-som.json",
-      "titulo": "Figuras de som"
+      "titulo": "Figuras de som",
+      "qtd": 10
     },
     {
       "arquivo": "fg-familias.json",
-      "titulo": "Que tipo de figura é?"
+      "titulo": "Que tipo de figura é?",
+      "qtd": 23
     },
     {
       "arquivo": "fg-vicios.json",
-      "titulo": "Vícios de linguagem"
+      "titulo": "Vícios de linguagem",
+      "qtd": 15
     },
     {
       "arquivo": "fg-figura-ou-vicio.json",
-      "titulo": "Figura ou vício de linguagem?"
+      "titulo": "Figura ou vício de linguagem?",
+      "qtd": 12
     },
     {
       "arquivo": "fg-revisao.json",
-      "titulo": "Figuras de linguagem: revisão geral"
+      "titulo": "Figuras de linguagem: revisão geral",
+      "qtd": 16
     }
   ],
   "familias": [
@@ -1902,27 +2137,33 @@
     },
     {
       "arquivo": "alfa-palavra-figura.json",
-      "titulo": "Leia a palavra e escolha a figura"
+      "titulo": "Leia a palavra e escolha a figura",
+      "qtd": 24
     },
     {
       "arquivo": "alfa-frase-figura.json",
-      "titulo": "Leia a frase e escolha a figura"
+      "titulo": "Leia a frase e escolha a figura",
+      "qtd": 16
     },
     {
       "arquivo": "alfa-parlendas.json",
-      "titulo": "Parlendas e cantigas: complete"
+      "titulo": "Parlendas e cantigas: complete",
+      "qtd": 19
     },
     {
       "arquivo": "alfa-ditados.json",
-      "titulo": "Ditados populares e trava-línguas: complete"
+      "titulo": "Ditados populares e trava-línguas: complete",
+      "qtd": 14
     },
     {
       "arquivo": "alfa-placas.json",
-      "titulo": "Leitura do dia a dia: placas e avisos (EJA)"
+      "titulo": "Leitura do dia a dia: placas e avisos (EJA)",
+      "qtd": 16
     },
     {
       "arquivo": "alfa-cotidiano.json",
-      "titulo": "Leitura do dia a dia: ônibus, preços, contas e recados (EJA)"
+      "titulo": "Leitura do dia a dia: ônibus, preços, contas e recados (EJA)",
+      "qtd": 16
     }
   ]
 }

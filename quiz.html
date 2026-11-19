@@ -99,6 +99,20 @@
 
         /* Inputs & Menus */
         .input-group { margin: 15px auto; display: flex; flex-direction: column; gap: 8px; align-items: center; width: 100%; position: relative; box-sizing: border-box; }
+        /* Banco de Questões: grupos com + e − */
+        .banco-acoes { display: flex; gap: 6px; width: 100%; max-width: 350px; }
+        .banco-acoes button { flex: 1; background: transparent; color: var(--primary); border: 1px solid var(--primary); border-radius: 10px; padding: 6px 4px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+        .banco-arvore { width: 100%; max-width: 350px; max-height: 330px; overflow-y: auto; text-align: left; background: rgba(255,255,255,0.45); border: 2px solid var(--border); border-radius: 12px; padding: 6px; box-sizing: border-box; }
+        .banco-arvore label { font-weight: normal; font-size: 0.9rem; letter-spacing: 0; opacity: 1; cursor: pointer; }
+        .bg-linha { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
+        .bg-mais { width: 26px; height: 26px; flex: none; border-radius: 8px; border: none; background: var(--primary); color: #fff; font-weight: bold; font-size: 1rem; line-height: 1; cursor: pointer; padding: 0; }
+        .bg-rotulo { font-weight: bold !important; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .bg-rotulo small, .bg-item small { opacity: 0.65; font-weight: normal; }
+        .bg-itens { margin: 2px 0 6px 32px; display: flex; flex-direction: column; gap: 3px; }
+        .bg-itens[hidden] { display: none; }
+        .bg-item { display: flex; align-items: flex-start; gap: 6px; }
+        .bg-item input, .bg-rotulo input { width: 17px; height: 17px; flex: none; margin-top: 2px; }
+        .bg-vazio { opacity: 0.7; padding: 8px; text-align: center; }
         label { font-weight: bold; font-size: 0.95rem; letter-spacing: 0.5px; opacity: 0.9;}
         
         input[type="number"], input[type="range"], select, textarea, input[type="text"], input[type="password"] {
@@ -313,8 +327,11 @@
 
     <div class="input-group" id="banco-area" style="background: rgba(67, 97, 238, 0.08); padding: 15px; border-radius: 16px; border: 2px dashed var(--primary);">
         <label style="color: var(--primary); font-size: 1.1rem;">📚 Banco de Questões do Painel 📚</label>
-        <select id="bancoSel" style="margin-top:10px;"><option value="">Carregando os assuntos…</option></select>
-        <input type="number" id="bancoQtd" min="1" placeholder="Quantas questões? (vazio = todas)" style="margin-top:5px;">
+        <input type="text" id="bancoBusca" placeholder="🔎 Buscar assunto (ex.: crase, verbo)" oninput="desenharBanco()" style="margin-top:10px;">
+        <div class="banco-acoes"><button type="button" onclick="abrirBanco(true)">➕ Abrir todos</button><button type="button" onclick="abrirBanco(false)">➖ Fechar todos</button><button type="button" onclick="limparBanco()">✖ Desmarcar</button></div>
+        <div id="bancoArvore" class="banco-arvore"><div class="bg-vazio">Carregando os assuntos…</div></div>
+        <small id="bancoSelecao" style="max-width:350px;">Toque no <b>+</b> para abrir um grupo e marque um ou mais assuntos (ou o grupo inteiro).</small>
+        <input type="number" id="bancoQtd" min="1" placeholder="Quantas questões? (sorteadas; vazio = todas)" style="margin-top:5px;">
         <div style="display:flex; gap:10px; width:100%; max-width:350px; margin-top:5px;">
             <button type="button" onclick="usarBanco(false)" style="flex:1; background:var(--primary); color:white; padding:12px; border-radius:12px; border:none; cursor:pointer; font-weight:bold;">✅ Usar</button>
             <button type="button" onclick="usarBanco(true)" title="Junta com as questões que já estão na caixa (bom para o Tabuleiro de Temas)" style="flex:1; background:transparent; color:var(--primary); padding:12px; border-radius:12px; border:2px solid var(--primary); cursor:pointer; font-weight:bold;">➕ Juntar</button>
@@ -1106,30 +1123,65 @@
         if (BANCO_NOMES[tipo]) return BANCO_NOMES[tipo];
         if (tipo.indexOf('morfo-adv-') === 0) return 'Advérbio';
         if (tipo.indexOf('morfo-pron-') === 0) return 'Pronome';
-        if (['morfo-plural', 'morfo-feminino', 'morfo-grau', 'morfo-tempos', 'morfo-conjugacao'].includes(tipo)) return 'Morfologia';
+        if (['morfo-plural', 'morfo-feminino', 'morfo-grau', 'morfo-tempos', 'morfo-conjugacao', 'morfo-classifique'].includes(tipo)) return 'Morfologia';
         if (tipo.indexOf('escolha-') === 0) return '📦 Outros assuntos';   // assuntos novos do painel entram aqui sozinhos
         return null;   // os outros jogos do painel não são de múltipla escolha
     }
+    // Árvore do banco: grupos que abrem e fecham (+ e −) e assuntos que podem ser marcados juntos
+    let BANCO = [];
+    const bancoAbertos = new Set(), bancoMarcados = new Set(), bancoPorArquivo = {};
+    const semAcentoBanco = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     async function carregarBanco() {
-        const sel = document.getElementById('bancoSel'); if (!sel) return;
+        const el = document.getElementById('bancoArvore'); if (!el) return;
         try {
             const r = await fetch('dados/indice.json?v=' + Date.now());
             if (!r.ok) throw new Error();
             const ind = await r.json(), grupos = {}, vistos = new Set();
-            Object.keys(ind).forEach(tipo => {
-                const g = grupoDoBanco(tipo); if (!g) return;
-                (ind[tipo] || []).forEach(e => {
-                    if (!e || !e.arquivo || vistos.has(e.arquivo)) return;
-                    vistos.add(e.arquivo); (grupos[g] = grupos[g] || []).push(e);
-                });
-            });
+            const por = (g, e) => {
+                if (!g || !e || !e.arquivo || vistos.has(e.arquivo)) return;
+                vistos.add(e.arquivo); (grupos[g] = grupos[g] || []).push(e); bancoPorArquivo[e.arquivo] = e;
+            };
+            (ind.banco || []).forEach(e => por(e.grupo || '📦 Outros assuntos', e));   // os bancos completos vêm primeiro em cada grupo
+            Object.keys(ind).forEach(tipo => { if (tipo !== 'banco') (ind[tipo] || []).forEach(e => por(grupoDoBanco(tipo), e)); });
             const nomes = BANCO_ORDEM.filter(g => grupos[g]).concat(Object.keys(grupos).filter(g => !BANCO_ORDEM.includes(g)));
-            sel.innerHTML = '<option value="">— Escolha um assunto —</option>' + nomes.map(g =>
-                `<optgroup label="${escHTML(g)}">` + grupos[g].map(e => `<option value="${escHTML(e.arquivo)}">${escHTML(e.titulo || e.arquivo)}</option>`).join('') + '</optgroup>').join('');
+            BANCO = nomes.map(g => ({ nome: g, itens: grupos[g] }));
+            desenharBanco();
         } catch (e) {
-            sel.innerHTML = '<option value="">Banco indisponível: abra o PortuguêsCards pelo painel</option>';
+            el.innerHTML = '<div class="bg-vazio">Banco indisponível: abra o PortuguêsCards pelo painel</div>';
         }
     }
+    function itensVisiveisBanco(g) {
+        const busca = semAcentoBanco((document.getElementById('bancoBusca') || {}).value || '').trim();
+        return g.itens.filter(e => !busca || semAcentoBanco((e.titulo || e.arquivo) + ' ' + g.nome).includes(busca));
+    }
+    function desenharBanco() {
+        const el = document.getElementById('bancoArvore'); if (!el) return;
+        const buscando = !!((document.getElementById('bancoBusca') || {}).value || '').trim();
+        el.innerHTML = BANCO.map((g, gi) => {
+            const itens = itensVisiveisBanco(g); if (!itens.length) return '';
+            const aberto = buscando || bancoAbertos.has(g.nome);
+            const marc = itens.filter(e => bancoMarcados.has(e.arquivo)).length, total = itens.reduce((t, e) => t + (e.qtd || 0), 0);
+            return `<div class="bg-grupo"><div class="bg-linha"><button type="button" class="bg-mais" data-g="${gi}" title="${aberto ? 'Fechar' : 'Abrir'} o grupo">${aberto ? '−' : '+'}</button>` +
+                `<label class="bg-rotulo"><input type="checkbox" data-gc="${gi}" ${marc && marc === itens.length ? 'checked' : ''}> ${escHTML(g.nome)} <small>${itens.length} assunto(s)${total ? ' · ' + total + ' questões' : ''}</small></label></div>` +
+                `<div class="bg-itens" ${aberto ? '' : 'hidden'}>` + itens.map(e => `<label class="bg-item"><input type="checkbox" data-a="${escHTML(e.arquivo)}" ${bancoMarcados.has(e.arquivo) ? 'checked' : ''}> <span>${escHTML(e.titulo || e.arquivo)}${e.qtd ? ` <small>(${e.qtd})</small>` : ''}</span></label>`).join('') + '</div></div>';
+        }).join('') || '<div class="bg-vazio">Nenhum assunto encontrado.</div>';
+        el.querySelectorAll('input[data-gc]').forEach(cb => {
+            const itens = itensVisiveisBanco(BANCO[+cb.dataset.gc]), marc = itens.filter(e => bancoMarcados.has(e.arquivo)).length;
+            cb.indeterminate = marc > 0 && marc < itens.length;
+            cb.onchange = () => { itens.forEach(e => cb.checked ? bancoMarcados.add(e.arquivo) : bancoMarcados.delete(e.arquivo)); desenharBanco(); };
+        });
+        el.querySelectorAll('.bg-mais').forEach(b => b.onclick = () => {
+            const nome = BANCO[+b.dataset.g].nome;
+            bancoAbertos.has(nome) ? bancoAbertos.delete(nome) : bancoAbertos.add(nome); desenharBanco();
+        });
+        el.querySelectorAll('input[data-a]').forEach(cb => cb.onchange = () => { cb.checked ? bancoMarcados.add(cb.dataset.a) : bancoMarcados.delete(cb.dataset.a); desenharBanco(); });
+        const sel = [...bancoMarcados], qtd = sel.reduce((t, a) => t + ((bancoPorArquivo[a] || {}).qtd || 0), 0);
+        document.getElementById('bancoSelecao').innerHTML = sel.length
+            ? `✔️ <b>${sel.length}</b> assunto(s) marcado(s)${qtd ? ` · <b>${qtd}</b> questões para sortear` : ''}`
+            : 'Toque no <b>+</b> para abrir um grupo e marque um ou mais assuntos (ou o grupo inteiro).';
+    }
+    function abrirBanco(abrir) { BANCO.forEach(g => abrir ? bancoAbertos.add(g.nome) : bancoAbertos.delete(g.nome)); desenharBanco(); }
+    function limparBanco() { bancoMarcados.clear(); desenharBanco(); }
     // Converte as atividades do painel para o formato do PortuguêsCards: {q, a, b, c, d, correct, pts, exp, texto}
     function converterDoPainel(d) {
         const L = ['a', 'b', 'c', 'd'], out = [];
@@ -1157,6 +1209,13 @@
             if (r.imagem) pergunta = r.imagem + ' ' + pergunta;
             montar(pergunta, r.opcoes, certaDe(r.opcoes, r.correta), r.explica, r.texto);
         });
+        const CLASSES = { substantivo: 'Substantivo', adjetivo: 'Adjetivo', verbo: 'Verbo', artigo: 'Artigo', pronome: 'Pronome', numeral: 'Numeral',
+            adverbio: 'Advérbio', preposicao: 'Preposição', conjuncao: 'Conjunção', interjeicao: 'Interjeição' };
+        (Array.isArray(d.palavras) ? d.palavras : []).forEach(p => {
+            if (!p || !p.palavra || !p.classe) return;
+            const c = CLASSES[semAcentoBanco(p.classe)]; if (!c) return;
+            montar(`🏷️ Qual é a classe da palavra “${p.palavra}”?`, Object.values(CLASSES), c, p.dica || '');
+        });
         (Array.isArray(d.frases) ? d.frases : []).forEach(f => {
             if (!f || !f.frase || !Array.isArray(f.opcoes)) return;
             montar(`🕵️ Na frase “${f.frase}”, qual palavra corrige o erro “${f.errada}”?`, f.opcoes, f.correta, f.explica);
@@ -1164,18 +1223,20 @@
         return out;
     }
     async function usarBanco(juntar) {
-        const sel = document.getElementById('bancoSel'), info = document.getElementById('bancoInfo');
-        if (!sel.value) return alert('Escolha um assunto do banco.');
-        const titulo = (sel.options[sel.selectedIndex].text || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
+        const info = document.getElementById('bancoInfo'), arquivos = [...bancoMarcados];
+        if (!arquivos.length) return alert('Marque um ou mais assuntos do banco (toque no + para abrir os grupos).');
         info.innerText = '⏳ Carregando…';
         try {
-            const r = await fetch('dados/' + sel.value + '?v=' + Date.now());
-            if (!r.ok) throw new Error();
-            let novas = converterDoPainel(await r.json());
+            const listas = await Promise.all(arquivos.map(async arq => {
+                const r = await fetch('dados/' + arq + '?v=' + Date.now());
+                if (!r.ok) throw new Error();
+                const titulo = String((bancoPorArquivo[arq] || {}).titulo || arq).replace(/^[^\p{L}\p{N}]+/u, '').replace(/\s*\(\d+ questões\)$/, '').trim();
+                return converterDoPainel(await r.json()).map(q => Object.assign(q, { tema: titulo }));
+            }));
+            let novas = embaralharLista([].concat(...listas));   // a ordem é sempre sorteada
             if (!novas.length) { info.innerText = '⚠️ Esse assunto não tem questões de múltipla escolha que funcionem aqui.'; return; }
-            const qtd = parseInt(document.getElementById('bancoQtd').value);
-            if (qtd > 0 && qtd < novas.length) novas = embaralharLista(novas).slice(0, qtd);
-            novas.forEach(q => { q.tema = titulo; });
+            const disponiveis = novas.length, qtd = parseInt(document.getElementById('bancoQtd').value);
+            if (qtd > 0 && qtd < novas.length) novas = novas.slice(0, qtd);   // sorteia exatamente a quantidade pedida
             let atuais = [];
             if (juntar) {
                 try { atuais = JSON.parse(document.getElementById('jsonInput').value || '[]'); } catch (e) { atuais = []; }
@@ -1183,8 +1244,10 @@
             }
             const todas = atuais.concat(novas);
             document.getElementById('jsonInput').value = JSON.stringify(todas, null, 1);
-            info.innerText = juntar ? `✅ +${novas.length} questões de “${titulo}” (total: ${todas.length}). Escolha o modo de jogo e clique em INICIAR.`
-                                    : `✅ ${novas.length} questões de “${titulo}” prontas. Escolha o modo de jogo e clique em INICIAR.`;
+            const de = arquivos.length === 1 ? `de “${novas[0].tema}”` : `de ${arquivos.length} assuntos`;
+            const aviso = qtd > disponiveis ? ` (só havia ${disponiveis})` : '';
+            info.innerText = juntar ? `✅ +${novas.length} questões sorteadas ${de}${aviso} (total: ${todas.length}). Escolha o modo de jogo e clique em INICIAR.`
+                                    : `✅ ${novas.length} questões sorteadas ${de}${aviso}, entre ${disponiveis} disponíveis. Escolha o modo de jogo e clique em INICIAR.`;
         } catch (e) {
             info.innerText = '⚠️ Não foi possível abrir esse assunto. Abra o PortuguêsCards pelo painel (GitHub Pages).';
         }
