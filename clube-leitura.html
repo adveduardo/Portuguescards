@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clube de leitura</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#2d2a4a;background:#f4f1ea}
+  .palco{min-height:100vh;padding:10px 12px 30px;background:#f4f1ea;
+    background-image:radial-gradient(circle at 10% 14%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 18%),radial-gradient(circle at 90% 16%,rgba(214,240,214,.85) 0,rgba(214,240,214,0) 24%),
+      radial-gradient(circle at 80% 92%,rgba(255,224,200,.85) 0,rgba(255,224,200,0) 26%),linear-gradient(160deg,#f7f3ea,#eef4ff)}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  h1{margin:0 auto 0 0;font-size:30px;color:#2e7d32;text-shadow:0 3px 0 rgba(46,125,50,.13)}
+  h1 small{display:block;font-size:14px;font-weight:normal;color:#6b6655;text-shadow:none}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#2d2a4a;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(45,42,74,.15)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(45,42,74,.15)}
+  select,input[type=text],input[type=date]{font:inherit;font-size:16px;padding:8px 10px;border:2px solid #ded6c3;border-radius:10px;background:#fff;color:#2d2a4a;max-width:100%}
+  .turmaSel{margin:3px 6px;font-size:16px;font-weight:bold}
+  .abas{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:8px 0}
+  .abas button{-webkit-flex:1 1 auto;flex:1 1 auto;font-size:17px}
+  .abas button.ativo{background:#2e7d32;color:#fff}
+  .painel{display:none}
+  .painel.ativo{display:block}
+  .destaque{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 -6px 6px}
+  .caixaD{-webkit-flex:1 1 280px;flex:1 1 280px;margin:6px;background:#fff;border-radius:22px;padding:14px;box-shadow:0 6px 18px rgba(45,42,74,.08)}
+  .caixaD h3{margin:0 0 6px;font-size:16px;color:#6b6655;font-weight:normal}
+  .livroMes{font-size:24px;font-weight:bold}
+  .livroMes small{display:block;font-size:15px;font-weight:normal;color:#6b6655}
+  .numero{font-size:46px;font-weight:bold;color:#2e7d32;line-height:1.1}
+  .estante{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 -6px}
+  .leitor{-webkit-flex:1 1 200px;flex:1 1 200px;margin:6px;background:#fff;border-radius:20px;padding:10px 12px;cursor:pointer;box-shadow:0 4px 12px rgba(45,42,74,.07);text-align:left}
+  .leitor .cab{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+  .leitor .bicho{font-size:32px;margin-right:6px}
+  .leitor .nome{-webkit-flex:1;flex:1;font-weight:bold;font-size:17px;min-width:0}
+  .leitor .qtd{font-size:26px;font-weight:bold;color:#2e7d32}
+  .prateleira{height:46px;border-bottom:6px solid #b98a5a;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:flex-end;align-items:flex-end;margin-top:6px;padding:0 2px;overflow:hidden}
+  .lombada{width:13px;margin-right:2px;border-radius:3px 3px 0 0;box-shadow:inset -2px 0 0 rgba(0,0,0,.15)}
+  .selo{font-size:13px;color:#6b6655;margin-top:4px;min-height:17px}
+  .leitor.vazio .prateleira{opacity:.45}
+  .form{background:#fff;border-radius:22px;padding:16px;max-width:760px;margin:0 auto;box-shadow:0 6px 18px rgba(45,42,74,.08)}
+  .campo{margin:0 0 12px}
+  .campo label{display:block;font-weight:bold;margin:0 0 4px}
+  .campo input[type=text],.campo select{width:100%}
+  .sugestoes button{font-size:14px;padding:6px 10px;border:2px solid #ded6c3;box-shadow:none}
+  .estrelas button{font-size:34px;padding:2px 6px;background:transparent;box-shadow:none;margin:0}
+  .guardar{background:#2e7d32;color:#fff;font-size:20px;padding:12px 22px;border-radius:18px;box-shadow:0 4px 0 #1b5e20}
+  .livros table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}
+  .livros th,.livros td{padding:8px 10px;border-bottom:1px solid #eee6d6;text-align:left;font-size:16px;vertical-align:top}
+  .livros th{background:#f1ecdf}
+  .dica{font-size:14px;color:#6b6655;margin:6px 0}
+  .fundoEscuro{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(30,28,50,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .janela{background:#fff;max-width:720px;margin:24px auto;border-radius:24px;padding:16px;position:relative}
+  .janela h2{margin:0 0 10px;font-size:24px;color:#2e7d32;padding-right:90px}
+  .fechar{position:absolute;right:12px;top:12px}
+  .itemLivro{border-bottom:1px dashed #e6dfcf;padding:8px 0;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:flex-start;align-items:flex-start}
+  .itemLivro .txt{-webkit-flex:1;flex:1}
+  .itemLivro small{color:#6b6655}
+  @media (max-width:600px){ h1{font-size:24px} .abas button{font-size:15px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>📚 Clube de leitura <small>Cada livro lido vai para a estante da turma.</small></h1>
+    <label class="turmaSel">Turma: <select id="selFonte" aria-label="Turma"></select></label>
+    <button type="button" id="btPlanilha">⬇️ Planilha</button>
+    <button type="button" id="btCopia" title="Baixar cópia de segurança">💾 Cópia</button>
+    <button type="button" id="btRestaurar" title="Restaurar uma cópia">⬆️ Restaurar</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="abas" id="abas">
+    <button type="button" data-aba="pEstante" class="ativo">📚 Estante da turma</button>
+    <button type="button" data-aba="pRegistrar">➕ Registrar leitura</button>
+    <button type="button" data-aba="pLivros">📖 Livros lidos</button>
+  </div>
+
+  <div class="painel ativo" id="pEstante">
+    <div class="destaque">
+      <div class="caixaD"><h3>⭐ Livro do mês</h3><div id="livroMes"></div></div>
+      <div class="caixaD"><h3>📊 A turma já leu</h3><div id="totais"></div></div>
+    </div>
+    <div class="estante" id="estante"></div>
+    <p class="dica">🌱 1 livro · 🌿 3 livros · 🌳 5 livros · 🏆 10 livros. Toque num aluno para ver os livros dele e imprimir o certificado.</p>
+  </div>
+
+  <div class="painel" id="pRegistrar">
+    <div class="form">
+      <div class="campo"><label for="fAluno">Quem leu?</label><select id="fAluno"></select><input type="text" id="fAlunoTxt" maxlength="40" placeholder="Nome do aluno" style="display:none;width:100%"></div>
+      <div class="campo"><label for="fTitulo">Título do livro</label><input type="text" id="fTitulo" maxlength="80" placeholder="ex.: O Pequeno Príncipe" autocomplete="off">
+        <div class="sugestoes" id="sugestoes"></div></div>
+      <div class="campo"><label for="fAutor">Autor (se souber)</label><input type="text" id="fAutor" maxlength="60" placeholder="ex.: Antoine de Saint-Exupéry"></div>
+      <div class="campo"><label>Quantas estrelas o livro merece?</label><div class="estrelas" id="fEstrelas"></div></div>
+      <div class="campo"><label for="fComentario">O que achou? (uma frase)</label><input type="text" id="fComentario" maxlength="120" placeholder="ex.: Gostei do final surpreendente!"></div>
+      <div class="campo"><label for="fData">Terminou de ler em</label><input type="date" id="fData"></div>
+      <button type="button" class="guardar" id="btGuardar">📚 Guardar leitura</button>
+    </div>
+  </div>
+
+  <div class="painel livros" id="pLivros">
+    <input type="text" id="buscaLivro" placeholder="🔎 Procurar livro ou autor" style="width:100%;margin:0 0 8px">
+    <div id="tabelaLivros"></div>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janLeitor">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janLeitor">✖ Fechar</button>
+    <h2 id="leitorTitulo"></h2>
+    <div id="leitorLivros"></div>
+    <div style="margin-top:10px"><button type="button" id="btCertificado">🏅 Imprimir certificado</button></div>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janMes">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janMes">✖ Fechar</button>
+    <h2>⭐ Escolher o livro do mês</h2>
+    <p class="dica">Sem escolha, o livro do mês é o mais bem avaliado entre os lidos neste mês.</p>
+    <div id="opcoesMes"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = Sala.esc, CHAVE = 'clube_leitura';
+  var CORES = ['#e57373', '#64b5f6', '#81c784', '#ffb74d', '#ba68c8', '#4db6ac', '#f06292', '#a1887f', '#7986cb', '#dce775'];
+  var dados = Sala.ler(CHAVE) || {}, estrelas = 0, leitorAberto = null;
+  arrumar();
+  function arrumar(){ dados.fonte = dados.fonte || 'auto'; dados.leituras = dados.leituras instanceof Array ? dados.leituras : []; dados.livroDoMes = dados.livroDoMes || {}; }
+  function salvar(){ Sala.gravar(CHAVE, dados); }
+  function chave(t){ return Sala.semAcento(t).replace(/[^a-z0-9]+/g, ' ').replace(/^\s+|\s+$/g, ''); }
+  function mesAtual(){ return Sala.hoje().slice(0, 7); }
+  function dataBR(v){ var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); return m ? m[3] + '/' + m[2] + '/' + m[1] : v; }
+  function estrelasTxt(n){ var s = ''; for (var i = 1; i <= 5; i++) s += i <= Math.round(n) ? '⭐' : '☆'; return s; }
+  function selo(n){ return n >= 10 ? '🏆 Troféu da leitura' : n >= 5 ? '🌳 Árvore da leitura' : n >= 3 ? '🌿 Broto da leitura' : n >= 1 ? '🌱 Semente da leitura' : ''; }
+  function distintos(l){ var vistos = {}, out = []; l.forEach(function(x){ var k = chave(x.titulo); if (k && !vistos[k]){ vistos[k] = 1; out.push(x); } }); return out; }   // releitura não conta duas vezes
+  function turma(){ return Sala.turma(dados.fonte); }
+  function leitoresDaTela(t){   // com lista: os alunos da turma; sem lista: quem já tem leitura guardada
+    if (t.nomes.length) return t.nomes;
+    var l = []; dados.leituras.forEach(function(x){ if (l.indexOf(x.aluno) < 0) l.push(x.aluno); }); return l.sort(function(a, b){ return a.localeCompare(b); });
+  }
+  function leiturasDe(nome){ return dados.leituras.filter(function(x){ return x.aluno === nome; }); }
+  function livros(lista){   // agrupa por título
+    var g = {}, ordem = [];
+    lista.forEach(function(x){
+      var k = chave(x.titulo); if (!k) return;
+      if (!g[k]){ g[k] = {k: k, titulo: x.titulo, autor: x.autor || '', leitores: [], soma: 0, notas: 0, ultima: ''}; ordem.push(k); }
+      var b = g[k]; if (!b.autor && x.autor) b.autor = x.autor;
+      if (b.leitores.indexOf(x.aluno) < 0) b.leitores.push(x.aluno);
+      if (x.estrelas){ b.soma += x.estrelas; b.notas++; }
+      if (x.data > b.ultima) b.ultima = x.data;
+    });
+    return ordem.map(function(k){ var b = g[k]; b.media = b.notas ? b.soma / b.notas : 0; return b; });
+  }
+
+  // ---------- estante ----------
+  function livroDoMes(t){
+    var nomes = leitoresDaTela(t), doMes = dados.leituras.filter(function(x){ return x.data && x.data.slice(0, 7) === mesAtual() && nomes.indexOf(x.aluno) >= 0; });
+    var l = livros(doMes); if (!l.length) return null;
+    var fixo = dados.livroDoMes[(t.chave || 'geral') + '|' + mesAtual()];
+    for (var i = 0; i < l.length; i++) if (l[i].k === fixo) return l[i];
+    l.sort(function(a, b){ return (b.media - a.media) || (b.leitores.length - a.leitores.length) || (a.ultima < b.ultima ? 1 : -1); });
+    return l[0];
+  }
+  function desenharEstante(){
+    var t = turma(), nomes = leitoresDaTela(t), lm = livroDoMes(t), total = 0, doMes = 0;
+    nomes.forEach(function(n){ distintos(leiturasDe(n)).forEach(function(x){ total++; if (x.data && x.data.slice(0, 7) === mesAtual()) doMes++; }); });
+    $('livroMes').innerHTML = lm ? '<div class="livroMes">📖 ' + esc(lm.titulo) + '<small>' + (lm.autor ? esc(lm.autor) + ' · ' : '') + (lm.notas ? estrelasTxt(lm.media) + ' ' + lm.media.toFixed(1).replace('.', ',') + ' · ' : '') + lm.leitores.length + (lm.leitores.length === 1 ? ' leitor' : ' leitores') + '</small></div><button type="button" id="btMes">📌 Escolher outro</button>'
+      : '<p class="dica">Quando alguém registrar uma leitura neste mês, o livro aparece aqui.</p>';
+    if ($('btMes')) $('btMes').onclick = abrirMes;
+    $('totais').innerHTML = '<div class="numero">' + total + (total === 1 ? ' livro' : ' livros') + '</div><div class="dica">' + doMes + ' neste mês' + (t.nome ? ' · ' + esc(t.nome) : '') + '</div>';
+    if (!nomes.length){ $('estante').innerHTML = '<p class="dica" style="padding:0 6px">Cadastre a turma na 📋 Chamada ou no 🎲 Sorteador (Ferramentas da sala) para ver a estante de cada aluno. Sem lista, você pode escrever o nome em ➕ Registrar leitura.</p>'; return; }
+    $('estante').innerHTML = nomes.map(function(n){
+      var l = distintos(leiturasDe(n)), lomb = '';
+      l.slice(-14).forEach(function(x, i){ lomb += '<span class="lombada" title="' + esc(x.titulo) + '" style="height:' + (30 + Sala.hash(x.titulo) % 14) + 'px;background:' + CORES[Sala.hash(x.titulo) % CORES.length] + '"></span>'; });
+      return '<div class="leitor' + (l.length ? '' : ' vazio') + '" data-aluno="' + esc(n) + '"><div class="cab"><span class="bicho">' + t.bicho(n) + '</span><span class="nome">' + esc(t.curto(n)) + '</span><span class="qtd">' + l.length + '</span></div>' +
+        '<div class="prateleira">' + lomb + '</div><div class="selo">' + selo(l.length) + '</div></div>';
+    }).join('');
+  }
+  $('estante').onclick = function(e){ var el = e.target; while (el && el !== this && el.getAttribute('data-aluno') === null) el = el.parentNode; if (el && el !== this) abrirLeitor(el.getAttribute('data-aluno')); };
+  function abrirLeitor(nome){
+    var t = turma(), l = leiturasDe(nome).map(function(x, i){ return {x: x, i: i}; })
+      .sort(function(a, b){ return a.x.data < b.x.data ? 1 : a.x.data > b.x.data ? -1 : b.i - a.i; }).map(function(o){ return o.x; });   // mais recente primeiro
+    var primeiros = distintos(leiturasDe(nome)).map(function(x){ return x.id; }), qtd = primeiros.length;
+    leitorAberto = nome;
+    $('leitorTitulo').innerHTML = t.bicho(nome) + ' ' + esc(nome) + ' <small style="font-size:16px;color:#6b6655">' + qtd + (qtd === 1 ? ' livro' : ' livros') + ' · ' + selo(qtd) + '</small>';
+    $('leitorLivros').innerHTML = l.length ? l.map(function(x){
+      return '<div class="itemLivro"><div class="txt"><b>' + esc(x.titulo) + '</b>' + (x.autor ? ' <small>— ' + esc(x.autor) + '</small>' : '') + (primeiros.indexOf(x.id) < 0 ? ' <small>(releitura)</small>' : '') + '<br><small>' + (x.estrelas ? estrelasTxt(x.estrelas) + ' · ' : '') + dataBR(x.data) + '</small>' +
+        (x.comentario ? '<br>💬 <i>' + esc(x.comentario) + '</i>' : '') + '</div><button type="button" data-apagar="' + esc(x.id) + '" title="Apagar esta leitura" aria-label="Apagar esta leitura">✖</button></div>';
+    }).join('') : '<p class="dica">Ainda não registrou nenhuma leitura.</p>';
+    $('btCertificado').style.display = l.length ? '' : 'none';
+    $('janLeitor').style.display = 'block';
+  }
+  $('leitorLivros').onclick = function(e){
+    var id = e.target.getAttribute('data-apagar'); if (id === null) return;
+    if (!confirm('Apagar esta leitura?')) return;
+    dados.leituras = dados.leituras.filter(function(x){ return x.id !== id; }); salvar(); abrirLeitor(leitorAberto); tudo();
+  };
+  function abrirMes(){
+    var t = turma(), nomes = leitoresDaTela(t), l = livros(dados.leituras.filter(function(x){ return x.data && x.data.slice(0, 7) === mesAtual() && nomes.indexOf(x.aluno) >= 0; }));
+    $('opcoesMes').innerHTML = l.map(function(b){ return '<button type="button" data-k="' + esc(b.k) + '" style="display:block;width:100%;text-align:left">📖 ' + esc(b.titulo) + ' <small>(' + b.leitores.length + (b.leitores.length === 1 ? ' leitor' : ' leitores') + (b.notas ? ', ' + b.media.toFixed(1).replace('.', ',') + ' ⭐' : '') + ')</small></button>'; }).join('') +
+      '<button type="button" data-k="">↩️ Escolha automática (o mais bem avaliado)</button>';
+    $('janMes').style.display = 'block';
+  }
+  $('opcoesMes').onclick = function(e){
+    var el = e.target; while (el && el !== this && el.getAttribute('data-k') === null) el = el.parentNode; if (!el || el === this) return;
+    var k = (turma().chave || 'geral') + '|' + mesAtual(), v = el.getAttribute('data-k');
+    if (v) dados.livroDoMes[k] = v; else delete dados.livroDoMes[k];
+    salvar(); $('janMes').style.display = 'none'; tudo();
+  };
+
+  // ---------- registrar leitura ----------
+  function desenharForm(){
+    var t = turma(), sel = $('fAluno'), atual = sel.value;
+    if (t.nomes.length){
+      sel.innerHTML = '<option value="">— escolha o aluno —</option>' + t.nomes.map(function(n){ return '<option value="' + esc(n) + '">' + t.bicho(n) + ' ' + esc(n) + '</option>'; }).join('');
+      sel.value = atual; sel.style.display = ''; $('fAlunoTxt').style.display = 'none';
+    } else { sel.style.display = 'none'; $('fAlunoTxt').style.display = ''; }
+    if (!$('fData').value) $('fData').value = Sala.hoje();
+    desenharEstrelas();
+  }
+  function desenharEstrelas(){
+    var h = ''; for (var i = 1; i <= 5; i++) h += '<button type="button" data-e="' + i + '" aria-label="' + i + (i === 1 ? ' estrela' : ' estrelas') + '">' + (i <= estrelas ? '⭐' : '☆') + '</button>';
+    $('fEstrelas').innerHTML = h;
+  }
+  $('fEstrelas').onclick = function(e){ var n = e.target.getAttribute('data-e'); if (n === null) return; estrelas = +n === estrelas ? 0 : +n; desenharEstrelas(); Sala.tom(500 + estrelas * 90, 0.12); };
+  function sugerir(){
+    var q = chave($('fTitulo').value), h = '';
+    if (q.length >= 2){
+      livros(dados.leituras).filter(function(b){ return b.k.indexOf(q) >= 0 && b.k !== q; }).slice(0, 6).forEach(function(b){
+        h += '<button type="button" data-titulo="' + esc(b.titulo) + '" data-autor="' + esc(b.autor) + '">📖 ' + esc(b.titulo) + (b.autor ? ' — ' + esc(b.autor) : '') + '</button>';
+      });
+    }
+    $('sugestoes').innerHTML = h;
+  }
+  $('fTitulo').oninput = sugerir; $('fTitulo').onkeyup = sugerir;
+  $('sugestoes').onclick = function(e){
+    var el = e.target; while (el && el !== this && el.getAttribute('data-titulo') === null) el = el.parentNode; if (!el || el === this) return;
+    $('fTitulo').value = el.getAttribute('data-titulo'); if (!$('fAutor').value) $('fAutor').value = el.getAttribute('data-autor'); $('sugestoes').innerHTML = '';
+  };
+  $('btGuardar').onclick = function(){
+    var t = turma(), aluno = t.nomes.length ? $('fAluno').value : Sala.aparar($('fAlunoTxt').value), titulo = Sala.aparar($('fTitulo').value);
+    if (!aluno){ Sala.avisar('Escolha quem leu o livro.'); return; }
+    if (!titulo){ Sala.avisar('Escreva o título do livro.'); $('fTitulo').focus(); return; }
+    var data = /^\d{4}-\d{2}-\d{2}$/.test($('fData').value) ? $('fData').value : Sala.hoje();
+    var repetido = leiturasDe(aluno).some(function(x){ return chave(x.titulo) === chave(titulo); }), antes = distintos(leiturasDe(aluno)).length;
+    if (repetido && !confirm(aluno + ' já tem este livro na estante. Registrar de novo (releitura)?')) return;
+    dados.leituras.push({id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2, 6), aluno: aluno, titulo: titulo, autor: Sala.aparar($('fAutor').value), estrelas: estrelas, data: data, comentario: Sala.aparar($('fComentario').value)});
+    salvar();
+    var n = distintos(leiturasDe(aluno)).length, marco = n > antes && (n === 1 || n === 3 || n === 5 || n === 10 || (n > 10 && n % 5 === 0));
+    if (marco){ Sala.confete(110); Sala.festa(); Sala.avisar(t.bicho(aluno) + ' ' + esc(Sala.nomeCurto(aluno)) + ' chegou a ' + n + (n === 1 ? ' livro! ' : ' livros! ') + selo(n).split(' ')[0]); }
+    else { Sala.plim(); Sala.avisar('📚 Leitura guardada na estante de ' + esc(Sala.nomeCurto(aluno)) + '!'); }
+    $('fTitulo').value = ''; $('fAutor').value = ''; $('fComentario').value = ''; $('fAlunoTxt').value = ''; $('fAluno').value = ''; estrelas = 0; $('sugestoes').innerHTML = '';
+    tudo();
+  };
+
+  // ---------- livros lidos ----------
+  function desenharLivros(){
+    var t = turma(), nomes = leitoresDaTela(t), q = chave($('buscaLivro').value);
+    var l = livros(dados.leituras.filter(function(x){ return nomes.indexOf(x.aluno) >= 0; })).filter(function(b){ return !q || b.k.indexOf(q) >= 0 || chave(b.autor).indexOf(q) >= 0; });
+    l.sort(function(a, b){ return (b.leitores.length - a.leitores.length) || (b.media - a.media) || a.titulo.localeCompare(b.titulo); });
+    $('tabelaLivros').innerHTML = l.length ? '<table><tr><th>Livro</th><th>Estrelas</th><th>Quem leu</th></tr>' + l.map(function(b){
+      return '<tr><td><b>' + esc(b.titulo) + '</b>' + (b.autor ? '<br><small>' + esc(b.autor) + '</small>' : '') + '</td><td>' + (b.notas ? estrelasTxt(b.media) + '<br><small>' + b.media.toFixed(1).replace('.', ',') + '</small>' : '—') + '</td>' +
+        '<td>' + b.leitores.map(function(n){ return t.bicho(n) + ' ' + esc(t.curto(n)); }).join('<br>') + '</td></tr>';
+    }).join('') + '</table><p class="dica">Os livros que mais colegas leram aparecem primeiro: boas dicas de leitura!</p>' : '<p class="dica">' + (q ? 'Nenhum livro com esse nome.' : 'Nenhuma leitura registrada nesta turma ainda.') + '</p>';
+  }
+  $('buscaLivro').oninput = desenharLivros; $('buscaLivro').onkeyup = desenharLivros;
+
+  // ---------- abas, turma, arquivos ----------
+  function tudo(){ Sala.preencherFontes($('selFonte'), dados.fonte, true); desenharEstante(); desenharForm(); desenharLivros(); }
+  $('abas').onclick = function(e){
+    var a = e.target.getAttribute('data-aba'); if (!a) return;
+    var bs = this.querySelectorAll('button'), ps = document.querySelectorAll('.painel'), i;
+    for (i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-aba') === a ? 'ativo' : '';
+    for (i = 0; i < ps.length; i++) ps[i].className = ps[i].className.replace(/\s*ativo/g, '') + (ps[i].id === a ? ' ativo' : '');
+  };
+  $('selFonte').onchange = function(){ dados.fonte = this.value; salvar(); tudo(); };
+  var fechos = document.querySelectorAll('[data-fechar]'), f;
+  for (f = 0; f < fechos.length; f++) fechos[f].onclick = function(){ $(this.getAttribute('data-fechar')).style.display = 'none'; };
+  var fundos = document.querySelectorAll('.fundoEscuro');
+  for (f = 0; f < fundos.length; f++) fundos[f].onclick = function(e){ if (e.target === this) this.style.display = 'none'; };
+  $('btPlanilha').onclick = function(){
+    var t = turma(), nomes = leitoresDaTela(t), q = function(v){ return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
+    var linhas = [['Aluno', 'Livro', 'Autor', 'Estrelas', 'Terminou em', 'O que achou'].map(q).join(';')];
+    dados.leituras.filter(function(x){ return nomes.indexOf(x.aluno) >= 0; }).forEach(function(x){ linhas.push([x.aluno, x.titulo, x.autor, x.estrelas || '', dataBR(x.data), x.comentario].map(q).join(';')); });
+    Sala.baixarTexto('clube-de-leitura' + (t.nome ? '-' + t.nome.replace(/[^0-9A-Za-zÀ-ÿ]+/g, '-') : '') + '.csv', String.fromCharCode(65279) + linhas.join('\r\n'), 'text/csv;charset=utf-8');
+  };
+  $('btCopia').onclick = function(){ Sala.copia.baixar('clube-leitura-copia-' + Sala.hoje() + '.json', [CHAVE]); };
+  $('btRestaurar').onclick = function(){ Sala.copia.restaurar([CHAVE], function(){ dados = Sala.ler(CHAVE) || {}; arrumar(); tudo(); }); };
+
+  // ---------- certificado ----------
+  $('btCertificado').onclick = function(){
+    var t = turma(), nome = leitorAberto, l = distintos(leiturasDe(nome)), d = Sala.hoje().split('-');
+    var meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    Sala.imprimir('<style>@page{size:A4 landscape;margin:10mm}</style><div style="border:10px double #2e7d32;border-radius:18px;padding:22px 30px;text-align:center;min-height:170mm">' +
+      '<div style="font-size:42pt">📚🏅📚</div><div style="font-size:30pt;font-weight:bold;margin:4px 0">Certificado do Clube de Leitura</div>' +
+      '<div style="font-size:15pt;margin:10px 0 2px">Certificamos que</div><div style="font-size:34pt;font-weight:bold;margin:2px 0 8px">' + esc(nome) + '</div>' +
+      '<div style="font-size:16pt">leu <b>' + l.length + (l.length === 1 ? ' livro' : ' livros') + '</b>' + (t.nome ? ' no Clube de Leitura da turma ' + esc(t.nome) : ' no Clube de Leitura') + '. ' + (selo(l.length) || '') + '</div>' +
+      '<div style="font-size:12pt;margin:12px auto;max-width:80%;color:#333">' + l.slice(-10).map(function(x){ return esc(x.titulo); }).join(' · ') + '</div>' +
+      '<div style="font-size:13pt;margin-top:22px">' + (+d[2]) + ' de ' + meses[+d[1] - 1] + ' de ' + d[0] + '</div>' +
+      '<div style="margin:34px auto 0;width:300px;border-top:1px solid #000;padding-top:4px;font-size:12pt">Professor(a)</div></div>');
+  };
+
+  // ---------- início ----------
+  Sala.botaoSom($('btSom'));
+  tudo();
+  window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') tudo(); });
+  window.CLUBE = {dados: function(){ return dados; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

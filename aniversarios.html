@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniversariantes</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#3a2350;background:#fff0f6}
+  .palco{min-height:100vh;padding:10px 12px 30px;background:#fff0f6;
+    background-image:radial-gradient(circle at 10% 15%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 18%),radial-gradient(circle at 88% 12%,rgba(255,236,170,.85) 0,rgba(255,236,170,0) 22%),
+      radial-gradient(circle at 80% 90%,rgba(200,226,255,.85) 0,rgba(200,226,255,0) 26%),linear-gradient(160deg,#ffeef7,#f2f0ff)}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  h1{margin:0 auto 0 0;font-size:30px;color:#c2185b;text-shadow:0 3px 0 rgba(194,24,91,.13)}
+  h1 small{display:block;font-size:14px;font-weight:normal;color:#7a5f73;text-shadow:none}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#3a2350;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(58,35,80,.15)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(58,35,80,.15)}
+  select,input[type=text]{font:inherit;font-size:16px;padding:6px 8px;border:2px solid #f0d3e3;border-radius:10px;background:#fff;color:#3a2350;max-width:100%}
+  .turmaSel{margin:3px 6px;font-size:16px;font-weight:bold}
+  .hoje{max-width:980px;margin:12px auto}
+  .festa{position:relative;overflow:hidden;background:#fff;border-radius:30px;padding:20px 18px 22px;text-align:center;margin:0 0 12px;border:6px solid #ff8fb8;box-shadow:0 10px 26px rgba(194,24,91,.15)}
+  .festa .bichao{font-size:84px;line-height:1.1}
+  .festa .parabens{font-size:44px;font-weight:bold;color:#c2185b;margin:2px 0}
+  .festa .sub{font-size:22px;color:#7a5f73;margin:0 0 10px}
+  .festa .bolo{font-size:46px}
+  .balao{position:absolute;font-size:46px;-webkit-animation:sobe 3.6s ease-in-out infinite alternate;animation:sobe 3.6s ease-in-out infinite alternate}
+  @-webkit-keyframes sobe{from{-webkit-transform:translateY(8px) rotate(-6deg)}to{-webkit-transform:translateY(-14px) rotate(6deg)}}
+  @keyframes sobe{from{transform:translateY(8px) rotate(-6deg)}to{transform:translateY(-14px) rotate(6deg)}}
+  .festejar{background:#ff4f8b;color:#fff;font-size:20px;padding:12px 20px;border-radius:18px;box-shadow:0 4px 0 #c2185b}
+  .atrasado{background:#fffbe8;border:4px dashed #f5b700;border-radius:24px;padding:14px;text-align:center;font-size:20px;margin:0 0 12px}
+  .nenhum{background:#fff;border-radius:24px;padding:18px;text-align:center;font-size:22px;margin:0 0 12px;box-shadow:0 6px 18px rgba(58,35,80,.08)}
+  .nenhum small{display:block;font-size:17px;color:#7a5f73;margin-top:6px}
+  .meses{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:6px 0}
+  .meses button{min-width:68px;border:2px solid #f0d3e3;box-shadow:0 3px 0 #f0d3e3}
+  .meses button.ativo{background:#c2185b;color:#fff;border-color:#c2185b}
+  .meses button small{display:block;font-size:12px;font-weight:normal}
+  .lista{max-width:760px;margin:6px auto;background:#fff;border-radius:24px;padding:10px 14px;box-shadow:0 6px 18px rgba(58,35,80,.08)}
+  .lista h2{margin:4px 0 8px;font-size:22px;color:#c2185b;text-align:center}
+  .pessoa{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:7px 4px;border-bottom:1px dashed #f0d3e3;font-size:19px}
+  .pessoa:last-child{border-bottom:none}
+  .pessoa .dia{width:46px;height:46px;line-height:46px;border-radius:50%;background:#ffe3ef;color:#c2185b;font-weight:bold;text-align:center;margin-right:10px;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .pessoa .bicho{font-size:30px;margin-right:8px}
+  .pessoa .nome{-webkit-flex:1;flex:1;font-weight:bold}
+  .pessoa .quando{font-size:14px;color:#7a5f73;text-align:right}
+  .pessoa.passou{opacity:.55}
+  .pessoa.ehHoje{background:#fff3c4;border-radius:14px}
+  .semData{text-align:center;color:#7a5f73;font-size:15px;margin:8px 0}
+  .fundoEscuro{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(40,20,60,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .janela{background:#fff;max-width:700px;margin:24px auto;border-radius:24px;padding:16px;position:relative}
+  .janela h2{margin:0 0 10px;font-size:24px;color:#c2185b;padding-right:90px}
+  .fechar{position:absolute;right:12px;top:12px}
+  .linhaD{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:5px 0;border-bottom:1px solid #f6e4ee}
+  .linhaD .bicho{font-size:24px;margin-right:6px}
+  .linhaD .nome{-webkit-flex:1;flex:1;font-weight:bold;min-width:0}
+  .linhaD select{margin-left:4px}
+  .dica{font-size:14px;color:#7a5f73;margin:6px 0}
+  @media (max-width:600px){ h1{font-size:24px} .festa .parabens{font-size:32px} .pessoa{font-size:17px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🎂 Aniversariantes <small>Cadastre as datas uma vez. No dia, a tela faz a festa!</small></h1>
+    <label class="turmaSel">Turma: <select id="selFonte" aria-label="Turma"></select></label>
+    <button type="button" id="btDatas">✏️ Datas</button>
+    <button type="button" id="btImpMes">🖨️ Imprimir o mês</button>
+    <button type="button" id="btImpAno">🖨️ Imprimir o ano</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="hoje" id="hoje"></div>
+  <div class="meses" id="meses"></div>
+  <div class="lista" id="lista"></div>
+  <div class="semData" id="semData"></div>
+</div>
+
+<div class="fundoEscuro" id="janDatas">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janDatas">✖ Fechar</button>
+    <h2>✏️ Datas de aniversário</h2>
+    <p class="dica">Escolha o dia e o mês de cada um. Fica guardado na hora, só neste aparelho.</p>
+    <div id="listaDatas"></div>
+    <h3 style="margin:16px 0 4px">Outras pessoas (professores, funcionários…)</h3>
+    <p class="dica">Aparecem em todas as turmas.</p>
+    <div id="listaExtras"></div>
+    <div class="linhaD"><input type="text" id="extraNome" maxlength="40" placeholder="Nome (ex.: Professora Lúcia)" style="-webkit-flex:1;flex:1;min-width:0"><button type="button" id="btExtra">➕ Adicionar</button></div>
+    <div style="margin-top:14px"><button type="button" id="btCopia">⬇️ Baixar cópia de segurança</button> <button type="button" id="btRestaurar">⬆️ Restaurar uma cópia</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = Sala.esc, CHAVE = 'aniversarios_dados';
+  var MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  var CURTOS = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  var SEMANA = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+  var MAXDIA = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  var dados = Sala.ler(CHAVE) || {}, mesVisto = new Date().getMonth(), festejouAgora = false;
+  arrumar();
+  function arrumar(){ dados.fonte = dados.fonte || 'auto'; dados.datas = dados.datas || {}; dados.extras = dados.extras instanceof Array ? dados.extras : []; }
+  function salvar(){ Sala.gravar(CHAVE, dados); }
+  function bissexto(a){ return (a % 4 === 0 && a % 100 !== 0) || a % 400 === 0; }
+  function mmdd(d){ return ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function primeiro(n){ return String(n).split(' ')[0]; }
+
+  // ---------- quem está na tela ----------
+  function turma(){
+    var t = Sala.turma(dados.fonte), bichoAluno = t.bicho;
+    t.bicho = function(n){ return t.indice[n] === undefined ? '⭐' : bichoAluno(n); };   // adultos cadastrados à mão ganham estrela
+    return t;
+  }
+  function pessoas(){ var t = turma(), l = t.nomes.slice(); dados.extras.forEach(function(e){ if (l.indexOf(e) < 0) l.push(e); }); return {t: t, nomes: l}; }
+  function fazAnos(nome, d){   // 29/02 é festejado em 28/02 nos anos que não são bissextos
+    var x = dados.datas[nome]; if (!x) return false;
+    if (x === mmdd(d)) return true;
+    return x === '02-29' && !bissexto(d.getFullYear()) && mmdd(d) === '02-28';
+  }
+  function proxima(nome, hoje){   // próxima data do aniversário (hoje conta)
+    var x = dados.datas[nome]; if (!x) return null;
+    var m = +x.slice(0, 2) - 1, dia = +x.slice(3), ano = hoje.getFullYear(), base = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+    for (var k = 0; k < 9; k++){
+      var a = ano + k, dd = (m === 1 && dia === 29 && !bissexto(a)) ? 28 : dia, d = new Date(a, m, dd);
+      if (d.getTime() >= base.getTime()) return d;
+    }
+    return null;
+  }
+
+  // ---------- tela principal ----------
+  function cartaoFesta(nome, t, atrasado){
+    var bal = '<span class="balao" style="left:4%;top:12px">🎈</span><span class="balao" style="right:5%;top:30px;-webkit-animation-delay:-1.2s;animation-delay:-1.2s">🎈</span>' +
+      '<span class="balao" style="left:12%;bottom:18px;-webkit-animation-delay:-2s;animation-delay:-2s">🎁</span><span class="balao" style="right:12%;bottom:12px;-webkit-animation-delay:-.6s;animation-delay:-.6s">🎉</span>';
+    return '<div class="festa">' + bal + '<div class="bolo">🎂</div><div class="bichao">' + t.bicho(nome) + '</div>' +
+      '<div class="parabens">Parabéns, ' + esc(primeiro(nome)) + '!</div><div class="sub">' + esc(nome) + ' — ' + (atrasado ? 'fez aniversário ' + atrasado + '. Parabéns atrasado! 🎈' : 'hoje é o seu dia! 🎉') + '</div>' +
+      '<button type="button" class="festejar" data-festejar="' + esc(nome) + '">🎉 Festejar</button></div>';
+  }
+  function desenharHoje(){
+    var P = pessoas(), t = P.t, hoje = new Date(), h = '', aniversariantes = [], atrasados = [];
+    P.nomes.forEach(function(n){ if (fazAnos(n, hoje)) aniversariantes.push(n); });
+    if (hoje.getDay() === 1){   // segunda-feira: quem fez anos no fim de semana
+      [1, 2].forEach(function(k){
+        var d = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - k);
+        P.nomes.forEach(function(n){ if (fazAnos(n, d) && aniversariantes.indexOf(n) < 0) atrasados.push({n: n, quando: k === 1 ? 'no domingo' : 'no sábado'}); });
+      });
+    }
+    aniversariantes.forEach(function(n){ h += cartaoFesta(n, t, ''); });
+    if (atrasados.length) h += '<div class="atrasado">🎈 <b>Parabéns atrasado!</b> No fim de semana fizeram aniversário: ' + atrasados.map(function(a){ return t.bicho(a.n) + ' <b>' + esc(t.curto(a.n)) + '</b> (' + a.quando + ')'; }).join(', ') + '</div>';
+    if (!aniversariantes.length){
+      var prox = null;
+      P.nomes.forEach(function(n){ var d = proxima(n, hoje); if (d && (!prox || d.getTime() < prox.d.getTime())) prox = {n: n, d: d}; });
+      var falta = prox ? Math.round((prox.d.getTime() - new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()).getTime()) / 864e5) : 0;
+      h += '<div class="nenhum">Hoje não tem aniversário 🙂' + (prox ? '<small>Próximo: ' + t.bicho(prox.n) + ' <b>' + esc(t.curto(prox.n)) + '</b>, ' + SEMANA[prox.d.getDay()] + ', ' + prox.d.getDate() + ' de ' + MESES[prox.d.getMonth()] + ' (' + (falta === 1 ? 'amanhã' : 'daqui a ' + falta + ' dias') + ')</small>' : '<small>Toque em ✏️ Datas para cadastrar os aniversários da turma.</small>') + '</div>';
+    }
+    $('hoje').innerHTML = h;
+    return aniversariantes;
+  }
+  function desenharMes(){
+    var P = pessoas(), t = P.t, hoje = new Date(), conta = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], semData = 0;
+    P.nomes.forEach(function(n){ var x = dados.datas[n]; if (x) conta[+x.slice(0, 2) - 1]++; else semData++; });
+    $('meses').innerHTML = CURTOS.map(function(m, i){ return '<button type="button" data-mes="' + i + '"' + (i === mesVisto ? ' class="ativo"' : '') + '>' + m + '<small>' + (conta[i] ? conta[i] + ' 🎂' : '—') + '</small></button>'; }).join('');
+    var doMes = P.nomes.filter(function(n){ var x = dados.datas[n]; return x && +x.slice(0, 2) - 1 === mesVisto; })
+      .sort(function(a, b){ return dados.datas[a] < dados.datas[b] ? -1 : dados.datas[a] > dados.datas[b] ? 1 : a.localeCompare(b); });
+    var h = '<h2>🎂 Aniversariantes de ' + MESES[mesVisto] + '</h2>';
+    if (!doMes.length) h += '<p class="semData">Ninguém faz aniversário em ' + MESES[mesVisto] + '.</p>';
+    doMes.forEach(function(n){
+      var dia = +dados.datas[n].slice(3), d = new Date(hoje.getFullYear(), mesVisto, Math.min(dia, (mesVisto === 1 && !bissexto(hoje.getFullYear())) ? 28 : dia));
+      var ehHoje = mesVisto === hoje.getMonth() && fazAnos(n, hoje), passou = !ehHoje && d.getTime() < new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()).getTime();
+      h += '<div class="pessoa' + (ehHoje ? ' ehHoje' : passou ? ' passou' : '') + '"><span class="dia">' + dia + '</span><span class="bicho">' + t.bicho(n) + '</span><span class="nome">' + esc(n) + '</span>' +
+        '<span class="quando">' + (ehHoje ? '🎉 hoje!' : SEMANA[d.getDay()] + (passou ? ' ✔️' : '')) + '</span></div>';
+    });
+    $('lista').innerHTML = h;
+    $('semData').innerHTML = semData ? semData + (semData === 1 ? ' pessoa ainda sem data.' : ' pessoas ainda sem data.') + ' <button type="button" id="btSemData">✏️ Cadastrar</button>' : '';
+    if ($('btSemData')) $('btSemData').onclick = abrirDatas;
+  }
+  function tudo(){ Sala.preencherFontes($('selFonte'), dados.fonte, false); var a = desenharHoje(); desenharMes(); return a; }
+  function festejar(nome){
+    Sala.confete(140); Sala.festa();
+    if (nome) setTimeout(function(){ Sala.falar('Parabéns, ' + primeiro(nome) + '! Feliz aniversário! A turma toda deseja muitas felicidades!'); }, 1700);
+  }
+  $('hoje').onclick = function(e){ var n = e.target.getAttribute('data-festejar'); if (n !== null) festejar(n); };
+  $('meses').onclick = function(e){ var el = e.target; while (el && el !== this && el.getAttribute('data-mes') === null) el = el.parentNode; if (el && el !== this){ mesVisto = +el.getAttribute('data-mes'); desenharMes(); } };
+  $('selFonte').onchange = function(){ dados.fonte = this.value; salvar(); tudo(); };
+
+  // ---------- cadastrar datas ----------
+  function selDia(nome, dia, mes){
+    var max = mes ? MAXDIA[mes - 1] : 31, h = '<option value="">dia</option>';
+    for (var i = 1; i <= max; i++) h += '<option value="' + i + '"' + (i === dia ? ' selected' : '') + '>' + i + '</option>';
+    return '<select data-nome="' + esc(nome) + '" data-campo="dia" aria-label="Dia">' + h + '</select>';
+  }
+  function selMes(nome, mes){
+    return '<select data-nome="' + esc(nome) + '" data-campo="mes" aria-label="Mês"><option value="">mês</option>' + MESES.map(function(m, i){ return '<option value="' + (i + 1) + '"' + (i + 1 === mes ? ' selected' : '') + '>' + m + '</option>'; }).join('') + '</select>';
+  }
+  function linhaData(nome, t, extra){
+    var x = dados.datas[nome], dia = x ? +x.slice(3) : 0, mes = x ? +x.slice(0, 2) : 0;
+    return '<div class="linhaD"><span class="bicho">' + t.bicho(nome) + '</span><span class="nome">' + esc(nome) + '</span>' + selDia(nome, dia, mes) + selMes(nome, mes) +
+      (extra ? '<button type="button" data-tirar="' + esc(nome) + '" title="Tirar" aria-label="Tirar">✖</button>' : '') + '</div>';
+  }
+  function abrirDatas(){
+    var t = turma();
+    $('listaDatas').innerHTML = t.nomes.length ? t.nomes.map(function(n){ return linhaData(n, t, false); }).join('') : '<p class="dica">Ainda não há lista da turma neste aparelho: cadastre a turma na 📋 Chamada ou no 🎲 Sorteador (Ferramentas da sala). Você também pode usar "Outras pessoas" aqui embaixo.</p>';
+    $('listaExtras').innerHTML = dados.extras.map(function(n){ return linhaData(n, t, true); }).join('');
+    $('janDatas').style.display = 'block';
+  }
+  function mudouData(e){
+    var nome = e.target.getAttribute('data-nome'); if (nome === null) return;
+    var linha = e.target.parentNode, dia = +linha.querySelector('[data-campo="dia"]').value || 0, mes = +linha.querySelector('[data-campo="mes"]').value || 0;
+    if (mes && dia > MAXDIA[mes - 1]) dia = MAXDIA[mes - 1];
+    if (e.target.getAttribute('data-campo') === 'mes'){ var novo = document.createElement('div'); novo.innerHTML = selDia(nome, dia, mes); linha.replaceChild(novo.firstChild, linha.querySelector('[data-campo="dia"]')); }
+    if (dia && mes) dados.datas[nome] = ('0' + mes).slice(-2) + '-' + ('0' + dia).slice(-2); else delete dados.datas[nome];
+    salvar(); tudo();
+  }
+  $('listaDatas').onchange = mudouData; $('listaExtras').onchange = mudouData;
+  $('listaExtras').onclick = function(e){
+    var n = e.target.getAttribute('data-tirar'); if (n === null) return;
+    if (!confirm('Tirar ' + n + ' da lista?')) return;
+    dados.extras = dados.extras.filter(function(x){ return x !== n; }); delete dados.datas[n]; salvar(); abrirDatas(); tudo();
+  };
+  function addExtra(){
+    var n = Sala.aparar($('extraNome').value); if (!n){ $('extraNome').focus(); return; }
+    if (dados.extras.indexOf(n) < 0) dados.extras.push(n);
+    $('extraNome').value = ''; salvar(); abrirDatas(); tudo();
+  }
+  $('btExtra').onclick = addExtra;
+  $('extraNome').onkeydown = function(e){ if (e.keyCode === 13) addExtra(); };
+  $('btDatas').onclick = abrirDatas;
+  var fechos = document.querySelectorAll('[data-fechar]'), f;
+  for (f = 0; f < fechos.length; f++) fechos[f].onclick = function(){ $(this.getAttribute('data-fechar')).style.display = 'none'; };
+  $('janDatas').onclick = function(e){ if (e.target === this) this.style.display = 'none'; };
+  $('btCopia').onclick = function(){ Sala.copia.baixar('aniversarios-copia-' + Sala.hoje() + '.json', [CHAVE]); };
+  $('btRestaurar').onclick = function(){ Sala.copia.restaurar([CHAVE], function(){ dados = Sala.ler(CHAVE) || {}; arrumar(); abrirDatas(); tudo(); }); };
+
+  // ---------- imprimir ----------
+  function nomesDoMes(m, P){ return P.nomes.filter(function(n){ var x = dados.datas[n]; return x && +x.slice(0, 2) - 1 === m; }).sort(function(a, b){ return dados.datas[a] < dados.datas[b] ? -1 : 1; }); }
+  $('btImpMes').onclick = function(){
+    var P = pessoas(), l = nomesDoMes(mesVisto, P);
+    Sala.imprimir('<div style="text-align:center;border:4px dashed #000;border-radius:24px;padding:20px"><div style="font-size:40pt">🎂🎈🎉</div><h1 style="font-size:30pt;margin:6px 0">Aniversariantes de ' + MESES[mesVisto] + '</h1>' +
+      (P.t.nome ? '<p style="font-size:14pt;margin:0 0 14px">' + esc(P.t.nome) + '</p>' : '') +
+      (l.length ? l.map(function(n){ return '<p style="font-size:20pt;margin:8px 0">' + P.t.bicho(n) + ' <b>' + (+dados.datas[n].slice(3)) + '</b> — ' + esc(n) + '</p>'; }).join('') : '<p style="font-size:16pt">Ninguém faz aniversário neste mês.</p>') + '</div>');
+  };
+  $('btImpAno').onclick = function(){
+    var P = pessoas(), h = '<h1 style="text-align:center;font-size:24pt;margin:0 0 8px">🎂 Aniversariantes ' + (P.t.nome ? '— ' + esc(P.t.nome) : '') + '</h1><table style="width:100%;border-collapse:collapse;table-layout:fixed">';
+    for (var r = 0; r < 4; r++){
+      h += '<tr>';
+      for (var c = 0; c < 3; c++){
+        var m = r * 3 + c, l = nomesDoMes(m, P);
+        h += '<td style="border:2px solid #000;vertical-align:top;padding:6px;height:5.6cm"><b style="font-size:14pt;text-transform:capitalize">' + MESES[m] + '</b>' +
+          l.map(function(n){ return '<div style="font-size:11pt">' + (+dados.datas[n].slice(3)) + ' — ' + esc(Sala.nomeCurto(n)) + '</div>'; }).join('') + '</td>';
+      }
+      h += '</tr>';
+    }
+    Sala.imprimir(h + '</table>');
+  };
+
+  // ---------- início ----------
+  Sala.botaoSom($('btSom'));
+  var deHoje = tudo();
+  if (deHoje.length){ setTimeout(function(){ festejar(''); }, 400); festejouAgora = true; }
+  window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') tudo(); });
+  window.ANIVERSARIOS = {dados: function(){ return dados; }, festejou: function(){ return festejouAgora; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

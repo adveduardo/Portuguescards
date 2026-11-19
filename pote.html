@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pote de conquistas</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#2b2550;background:#fff7e8}
+  .palco{min-height:100vh;padding:10px 12px 30px;background:#fff7e8;
+    background-image:radial-gradient(circle at 12% 15%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 18%),radial-gradient(circle at 90% 20%,rgba(255,214,165,.8) 0,rgba(255,214,165,0) 24%),
+      radial-gradient(circle at 80% 90%,rgba(196,232,255,.85) 0,rgba(196,232,255,0) 26%),linear-gradient(160deg,#fff4e0,#fdf0ff)}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  h1{margin:0 auto 0 0;font-size:30px;color:#b4530b;text-shadow:0 3px 0 rgba(180,83,11,.15)}
+  h1 small{display:block;font-size:14px;font-weight:normal;color:#7b6a58;text-shadow:none}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#2b2550;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(43,37,80,.15)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(43,37,80,.15)}
+  button[disabled]{opacity:.45;cursor:default}
+  select,input[type=text],textarea{font:inherit;font-size:16px;padding:7px 9px;border:2px solid #ead9c3;border-radius:10px;background:#fff;color:#2b2550;max-width:100%}
+  .turmaSel{margin:3px 6px;font-size:16px;font-weight:bold}
+  .area{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;-webkit-align-items:center;align-items:center;margin-top:8px}
+  .ladoPote{margin:10px 24px;text-align:center}
+  .pote{position:relative;width:310px;margin:0 auto}
+  .tampa{width:62%;height:30px;margin:0 auto -6px;border-radius:12px 12px 6px 6px;position:relative;z-index:3;color:#fff;font-weight:bold;font-size:15px;line-height:30px;
+    overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 8px;text-align:center;text-shadow:0 1px 0 rgba(0,0,0,.25);
+    background:-webkit-linear-gradient(top,#e2843b,#b4530b);background:linear-gradient(to bottom,#e2843b,#b4530b);box-shadow:0 4px 0 rgba(0,0,0,.15)}
+  .gargalo{width:66%;height:16px;margin:0 auto;border:5px solid rgba(110,150,190,.55);border-bottom:none;border-radius:6px 6px 0 0;background:rgba(255,255,255,.45)}
+  .vidro{position:relative;width:310px;height:370px;border:6px solid rgba(110,150,190,.6);border-radius:34px 34px 64px 64px;background:rgba(255,255,255,.5);overflow:hidden;
+    box-shadow:inset 0 -10px 30px rgba(110,150,190,.25),0 10px 24px rgba(43,37,80,.12)}
+  .bolas{position:absolute;left:6px;right:6px;top:6px;bottom:8px}
+  .bola{position:absolute;border-radius:50%;box-shadow:inset -3px -4px 0 rgba(0,0,0,.14);-webkit-transition:-webkit-transform .75s cubic-bezier(.3,1.35,.55,1);transition:transform .75s cubic-bezier(.3,1.35,.55,1)}
+  .brilho{position:absolute;left:20px;top:26px;width:22px;height:62%;border-radius:20px;background:rgba(255,255,255,.55);z-index:2;pointer-events:none}
+  .cheio .vidro{border-color:#f5b700;-webkit-animation:brilha 1.4s ease-in-out infinite alternate;animation:brilha 1.4s ease-in-out infinite alternate}
+  @-webkit-keyframes brilha{from{box-shadow:0 0 0 rgba(245,183,0,0)}to{box-shadow:0 0 36px rgba(245,183,0,.9)}}
+  @keyframes brilha{from{box-shadow:0 0 0 rgba(245,183,0,0)}to{box-shadow:0 0 36px rgba(245,183,0,.9)}}
+  .ladoInfo{-webkit-flex:0 1 430px;flex:0 1 430px;margin:10px;text-align:center}
+  .placar{font-size:72px;font-weight:bold;color:#b4530b;line-height:1}
+  .placar small{font-size:28px;color:#7b6a58}
+  .falta{font-size:20px;margin:6px 0 10px}
+  .premio{background:#fff;border-radius:18px;padding:10px 14px;font-size:20px;box-shadow:0 4px 12px rgba(43,37,80,.08);margin:0 0 12px}
+  .premio button{font-size:13px;padding:4px 8px}
+  .mais{background:#22b573;color:#fff;font-size:28px;padding:14px 26px;border-radius:20px;box-shadow:0 5px 0 #168a56}
+  .motivosTit{margin:12px 0 4px;color:#7b6a58}
+  .motivos{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center}
+  .motivos button{font-size:15px;border:2px solid #ead9c3;box-shadow:0 3px 0 #ead9c3}
+  .fundoEscuro{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(32,24,70,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .janela{background:#fff;max-width:640px;margin:24px auto;border-radius:24px;padding:16px;position:relative}
+  .janela h2{margin:0 0 10px;font-size:24px;color:#b4530b;padding-right:90px}
+  .fechar{position:absolute;right:12px;top:12px}
+  .linha{margin:10px 0;font-size:17px}
+  .linha textarea{width:100%;min-height:150px}
+  .linha input[type=text]{width:100%}
+  .dica{font-size:14px;color:#7b6a58;margin:4px 0}
+  ul.lista{padding-left:20px;margin:6px 0}
+  ul.lista li{margin:4px 0}
+  .festa{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(32,24,70,.6);display:none;z-index:30;text-align:center;padding-top:8vh}
+  .festa .caixa{display:inline-block;background:#fff;border-radius:34px;padding:24px 34px;max-width:92%;border:8px solid #f5b700;-webkit-animation:surge .55s cubic-bezier(.2,1.6,.4,1) both;animation:surge .55s cubic-bezier(.2,1.6,.4,1) both}
+  .festa .grande{font-size:90px;line-height:1.1}
+  .festa .titulo{font-size:40px;font-weight:bold;color:#b4530b;margin:6px 0}
+  .festa .qual{font-size:24px;margin:6px 0 14px}
+  @-webkit-keyframes surge{from{opacity:0;-webkit-transform:scale(.4) rotate(-6deg)}to{opacity:1;-webkit-transform:scale(1) rotate(0)}}
+  @keyframes surge{from{opacity:0;transform:scale(.4) rotate(-6deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+  @media (min-width:1100px) and (min-height:760px){ .pote,.vidro{width:350px} .vidro{height:430px} }
+  @media (max-width:600px){ h1{font-size:24px} .placar{font-size:56px} .mais{font-size:23px} .festa .titulo{font-size:30px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🏆 Pote de conquistas <small>A turma toda junta bolinhas. Pote cheio, prêmio para todo mundo!</small></h1>
+    <label class="turmaSel">Turma: <select id="selPote" aria-label="Turma"></select></label>
+    <button type="button" id="btConquistas">📜 Conquistas</button>
+    <button type="button" id="btAjustes">⚙️ Ajustes</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="area">
+    <div class="ladoPote">
+      <div class="pote" id="pote">
+        <div class="tampa" id="rotuloPote"></div>
+        <div class="gargalo"></div>
+        <div class="vidro" id="vidro"><div class="bolas" id="bolas"></div><div class="brilho"></div></div>
+      </div>
+    </div>
+    <div class="ladoInfo">
+      <div class="placar"><span id="qtd">0</span><small> de <span id="meta">20</span></small></div>
+      <div class="falta" id="falta"></div>
+      <div class="premio" id="premio"></div>
+      <button type="button" class="mais" id="btMais">➕ 1 bolinha</button>
+      <div class="motivosTit">Ou toque no motivo da bolinha:</div>
+      <div class="motivos" id="motivos"></div>
+      <div><button type="button" id="btDesfazer">↩️ Desfazer a última</button> <button type="button" id="btEntregue" style="display:none">🎁 Prêmio entregue: esvaziar o pote</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="festa" id="festa">
+  <div class="caixa">
+    <div class="grande">🎉🏆🎉</div>
+    <div class="titulo">A turma encheu o pote!</div>
+    <div class="qual" id="festaPremio"></div>
+    <button type="button" id="festaFechar">Fechar</button>
+    <button type="button" id="festaEntregue" style="background:#22b573;color:#fff">🎁 Prêmio entregue: esvaziar o pote</button>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janAjustes">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janAjustes">✖ Fechar</button>
+    <h2>⚙️ Ajustes do pote</h2>
+    <div class="linha"><b>Quantas bolinhas enchem o pote:</b> <select id="cfgMeta"></select></div>
+    <div class="linha"><b>Prêmio combinado com a turma:</b><input type="text" id="cfgPremio" maxlength="80" placeholder="ex.: 10 minutos de música no fim da aula"></div>
+    <div class="linha"><b>Motivos das bolinhas</b> (um por linha):<textarea id="cfgMotivos"></textarea>
+      <div class="dica">Os motivos valem para todos os potes.</div></div>
+    <div class="linha">
+      <button type="button" id="btNovoPote">➕ Novo pote (outra turma)</button>
+      <button type="button" id="btEsvaziar">↩️ Esvaziar sem contar prêmio</button>
+      <button type="button" id="btApagarPote">🗑️ Apagar este pote</button>
+    </div>
+    <div class="linha"><button type="button" id="btCopia">⬇️ Baixar cópia de segurança</button> <button type="button" id="btRestaurar">⬆️ Restaurar uma cópia</button></div>
+  </div>
+</div>
+
+<div class="fundoEscuro" id="janConquistas">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janConquistas">✖ Fechar</button>
+    <h2>📜 Conquistas da turma</h2>
+    <div id="listaConquistas"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = Sala.esc, CHAVE = 'pote_dados';
+  var CORES = ['#ff5d8f', '#ffbe0b', '#3a86ff', '#8338ec', '#06d6a0', '#fb5607', '#ff006e', '#00b4d8'];
+  var MOTIVOS = ['📚 Todos fizeram a tarefa', '🙊 Silêncio na explicação', '⏱️ Voltaram do intervalo no horário', '👐 Ajudaram um colega', '✨ Sala organizada no fim da aula', '👏 Participaram bem da atividade'];
+  var METAS = [10, 15, 20, 25, 30, 40, 50];
+  var dados = Sala.ler(CHAVE) || {};
+  dados.potes = dados.potes || {}; dados.motivos = dados.motivos instanceof Array ? dados.motivos : MOTIVOS.slice();
+
+  function salvar(){ Sala.gravar(CHAVE, dados); }
+  function dataBR(ms){ var d = new Date(ms); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear(); }
+  function hora(ms){ var d = new Date(ms); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+
+  // ---------- potes: um por turma (Chamada ou Sorteador) e potes criados à mão ----------
+  function opcoes(){
+    var l = Sala.fontes().map(function(f){ return {chave: f.valor, nome: f.nome}; }), vistos = {};
+    l.forEach(function(o){ vistos[o.chave] = 1; });
+    for (var k in dados.potes) if (!vistos[k] && (k.indexOf('pote:') === 0 || k === 'geral')) l.push({chave: k, nome: dados.potes[k].nome});
+    if (!l.length) l.push({chave: 'geral', nome: 'Minha turma'});
+    return l;
+  }
+  function pote(){
+    var k = dados.atual, l = opcoes(), o = null, i;
+    for (i = 0; i < l.length; i++) if (l[i].chave === k) o = l[i];
+    if (!o){
+      var t = Sala.turma('auto'); o = l[0];
+      for (i = 0; i < l.length; i++) if (l[i].chave === t.chave) o = l[i];
+      dados.atual = o.chave;
+    }
+    var p = dados.potes[o.chave] || (dados.potes[o.chave] = {meta: 20, premio: '', cores: [], log: [], conquistas: []});
+    p.nome = o.nome;
+    return p;
+  }
+  function desenharSeletor(){
+    var h = opcoes().map(function(o){ return '<option value="' + esc(o.chave) + '">' + esc(o.nome) + '</option>'; }).join('') + '<option value="+novo">➕ Novo pote…</option>';
+    $('selPote').innerHTML = h; $('selPote').value = dados.atual;
+  }
+  $('selPote').onchange = function(){
+    if (this.value === '+novo'){ novoPote(); return; }
+    dados.atual = this.value; salvar(); tudo(false);
+  };
+  function novoPote(){
+    var nome = Sala.aparar(prompt('Nome do novo pote (ex.: 8º ano B):') || '');
+    if (!nome){ desenharSeletor(); return; }
+    var k = 'pote:' + new Date().getTime().toString(36);
+    dados.potes[k] = {nome: nome, meta: 20, premio: '', cores: [], log: [], conquistas: []};
+    dados.atual = k; salvar(); tudo(false); Sala.avisar('Pote "' + esc(nome) + '" criado.');
+  }
+
+  // ---------- desenho do pote e das bolinhas ----------
+  function arranjo(W, H, meta){   // maior bolinha que ainda deixa caber a meta
+    for (var d = Math.floor(Math.min(W, H) / 2); d >= 8; d--){
+      var cols = Math.floor(W / d), passo = d * 0.87, filas = Math.floor((H - d) / passo) + 1;
+      if (cols >= 2 && filas * cols - Math.floor(filas / 2) >= meta) return {d: d, cols: cols, passo: passo};
+    }
+    return {d: 8, cols: Math.max(2, Math.floor(W / 8)), passo: 7};
+  }
+  function posicao(i, a, W){
+    var f = 0, n;
+    while (true){ n = f % 2 ? a.cols - 1 : a.cols; if (i < n) break; i -= n; f++; }
+    var margem = (W - a.cols * a.d) / 2 + (f % 2 ? a.d / 2 : 0), tremido = ((Sala.hash('b' + f + '-' + i) % 7) - 3) * a.d * 0.025;
+    return {x: margem + i * a.d + tremido, y: f * a.passo};
+  }
+  function htmlBola(i, a, W, cor, nova){
+    var pos = posicao(i, a, W), queda = nova ? 'translateY(-' + ($('vidro').clientHeight + 40) + 'px)' : 'translateY(0)';
+    return '<span class="bola" id="bola' + i + '" style="width:' + a.d + 'px;height:' + a.d + 'px;left:' + pos.x.toFixed(1) + 'px;bottom:' + pos.y.toFixed(1) + 'px;' +
+      'background:radial-gradient(circle at 32% 30%,rgba(255,255,255,.9) 0,rgba(255,255,255,0) 30%),' + CORES[cor % CORES.length] + ';-webkit-transform:' + queda + ';transform:' + queda + '"></span>';
+  }
+  function desenharBolas(novaUltima){
+    var p = pote(), caixa = $('bolas'), W = caixa.clientWidth || 290, H = caixa.clientHeight || 350, a = arranjo(W, H, p.meta), h = '';
+    for (var i = 0; i < p.cores.length; i++) h += htmlBola(i, a, W, p.cores[i], novaUltima && i === p.cores.length - 1);
+    caixa.innerHTML = h;
+    if (novaUltima && p.cores.length){
+      var b = $('bola' + (p.cores.length - 1));
+      b.offsetWidth;   // força o navegador a desenhar antes de soltar a bolinha
+      b.style.webkitTransform = 'translateY(0)'; b.style.transform = 'translateY(0)';
+    }
+  }
+  function cheio(){ var p = pote(); return p.cores.length >= p.meta; }
+  function tudo(novaUltima){
+    var p = pote(), qtd = p.cores.length, falta = Math.max(0, p.meta - qtd);
+    desenharSeletor();
+    $('qtd').innerHTML = qtd; $('meta').innerHTML = p.meta;
+    $('rotuloPote').innerHTML = esc(p.nome);
+    $('falta').innerHTML = falta ? 'Faltam <b>' + falta + '</b> ' + (falta === 1 ? 'bolinha' : 'bolinhas') + ' para o prêmio!' : '🎉 Pote cheio! Hora do prêmio!';
+    $('premio').innerHTML = '🎁 Prêmio: <b>' + (p.premio ? esc(p.premio) : 'combine com a turma') + '</b> <button type="button" id="btPremio" title="Mudar o prêmio">✏️</button>';
+    $('btPremio').onclick = mudarPremio;
+    $('motivos').innerHTML = dados.motivos.map(function(m, i){ return '<button type="button" data-m="' + i + '"' + (cheio() ? ' disabled' : '') + '>' + esc(m) + '</button>'; }).join('');
+    $('btMais').disabled = cheio(); $('btMais').innerHTML = cheio() ? '🎉 Pote cheio!' : '➕ 1 bolinha';
+    $('btDesfazer').disabled = !qtd;
+    $('btEntregue').style.display = cheio() ? '' : 'none';
+    $('pote').className = 'pote' + (cheio() ? ' cheio' : '');
+    desenharBolas(novaUltima);
+  }
+  function mudarPremio(){
+    var p = pote(), novo = prompt('Qual é o prêmio quando a turma encher o pote?', p.premio || '');
+    if (novo === null) return;
+    p.premio = Sala.aparar(novo); salvar(); tudo(false);
+  }
+
+  // ---------- juntar bolinhas ----------
+  function maisUma(motivo){
+    var p = pote();
+    if (cheio()) return;
+    p.cores.push(Math.floor(Math.random() * CORES.length));
+    p.log.push({t: new Date().getTime(), m: motivo || ''});
+    if (p.log.length > 300) p.log = p.log.slice(-300);
+    salvar(); tudo(true);
+    Sala.tom(330 + Math.min(p.cores.length, 50) * 14, 0.16, 0.45, 'triangle');
+    if (motivo) Sala.avisar('+1 bolinha: ' + esc(motivo));
+    if (cheio()) setTimeout(festa, 900);
+  }
+  $('btMais').onclick = function(){ maisUma(''); };
+  $('motivos').onclick = function(e){ var i = e.target.getAttribute('data-m'); if (i !== null && !e.target.disabled) maisUma(dados.motivos[+i]); };
+  $('btDesfazer').onclick = function(){
+    var p = pote(); if (!p.cores.length) return;
+    p.cores.pop(); p.log.pop(); salvar(); tudo(false); Sala.avisar('↩️ Tirei a última bolinha.');
+  };
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+    if (e.key === '+' || e.keyCode === 107 || e.keyCode === 187) maisUma('');
+  });
+
+  // ---------- pote cheio ----------
+  function festa(){
+    var p = pote();
+    $('festaPremio').innerHTML = p.premio ? '🎁 Prêmio: <b>' + esc(p.premio) + '</b>' : 'Combinem o prêmio com o professor! 🎁';
+    $('festa').style.display = 'block';
+    Sala.confete(120); Sala.festa();
+    setTimeout(function(){ Sala.falar('Parabéns, turma! Vocês encheram o pote de conquistas!'); }, 1600);
+  }
+  function entregue(){
+    var p = pote();
+    p.conquistas.push({t: new Date().getTime(), premio: p.premio, meta: p.meta});
+    p.cores = []; salvar();
+    $('festa').style.display = 'none'; tudo(false);
+    Sala.avisar('🏆 Conquista guardada! O pote está vazio de novo.');
+  }
+  $('festaFechar').onclick = function(){ $('festa').style.display = 'none'; };
+  $('festaEntregue').onclick = entregue;
+  $('btEntregue').onclick = entregue;
+
+  // ---------- janelas ----------
+  var fechos = document.querySelectorAll('[data-fechar]'), f;
+  for (f = 0; f < fechos.length; f++) fechos[f].onclick = function(){ $(this.getAttribute('data-fechar')).style.display = 'none'; };
+  var fundos = document.querySelectorAll('.fundoEscuro');
+  for (f = 0; f < fundos.length; f++) fundos[f].onclick = function(e){ if (e.target === this) this.style.display = 'none'; };
+
+  $('btAjustes').onclick = function(){
+    var p = pote();
+    $('cfgMeta').innerHTML = METAS.map(function(m){ return '<option value="' + m + '">' + m + ' bolinhas</option>'; }).join('');
+    $('cfgMeta').value = String(p.meta); if (+$('cfgMeta').value !== p.meta){ $('cfgMeta').innerHTML += '<option value="' + p.meta + '">' + p.meta + ' bolinhas</option>'; $('cfgMeta').value = String(p.meta); }
+    $('cfgPremio').value = p.premio || ''; $('cfgMotivos').value = dados.motivos.join('\n');
+    $('btApagarPote').style.display = dados.atual.indexOf('pote:') === 0 ? '' : 'none';
+    $('janAjustes').style.display = 'block';
+  };
+  $('cfgMeta').onchange = function(){ var p = pote(), antes = cheio(); p.meta = +this.value || 20; salvar(); tudo(false); if (!antes && cheio()) setTimeout(festa, 400); };
+  $('cfgPremio').onchange = function(){ pote().premio = Sala.aparar(this.value); salvar(); tudo(false); };
+  $('cfgMotivos').onchange = function(){
+    var l = this.value.split(/\r?\n/).map(Sala.aparar).filter(function(x){ return x; });
+    dados.motivos = l.length ? l.slice(0, 12) : MOTIVOS.slice(); salvar(); tudo(false);
+  };
+  $('btNovoPote').onclick = function(){ $('janAjustes').style.display = 'none'; novoPote(); };
+  $('btEsvaziar').onclick = function(){ if (!confirm('Esvaziar o pote sem guardar como conquista?')) return; pote().cores = []; salvar(); tudo(false); };
+  $('btApagarPote').onclick = function(){
+    if (!confirm('Apagar o pote "' + pote().nome + '" e as conquistas dele?')) return;
+    delete dados.potes[dados.atual]; dados.atual = null; salvar(); $('janAjustes').style.display = 'none'; tudo(false);
+  };
+  $('btCopia').onclick = function(){ Sala.copia.baixar('pote-copia-' + Sala.hoje() + '.json', [CHAVE]); };
+  $('btRestaurar').onclick = function(){
+    Sala.copia.restaurar([CHAVE], function(){ dados = Sala.ler(CHAVE) || {}; dados.potes = dados.potes || {}; dados.motivos = dados.motivos instanceof Array ? dados.motivos : MOTIVOS.slice(); $('janAjustes').style.display = 'none'; tudo(false); });
+  };
+
+  $('btConquistas').onclick = function(){
+    var p = pote(), h = '';
+    h += '<p style="font-size:18px">' + (p.conquistas.length ? '🏆 A turma <b>' + esc(p.nome) + '</b> já encheu o pote <b>' + p.conquistas.length + (p.conquistas.length === 1 ? ' vez' : ' vezes') + '</b>!' : 'A turma ainda não encheu o pote. Falta pouco!') + '</p>';
+    if (p.conquistas.length) h += '<ul class="lista">' + p.conquistas.slice().reverse().map(function(c){ return '<li>' + dataBR(c.t) + ' — ' + c.meta + ' bolinhas' + (c.premio ? ': ' + esc(c.premio) : '') + '</li>'; }).join('') + '</ul>';
+    var hojeLog = p.log.filter(function(l){ return Sala.hoje(new Date(l.t)) === Sala.hoje(); });
+    h += '<h3 style="margin:14px 0 4px">Bolinhas de hoje (' + hojeLog.length + ')</h3>';
+    h += hojeLog.length ? '<ul class="lista">' + hojeLog.slice().reverse().map(function(l){ return '<li>' + hora(l.t) + ' — ' + (l.m ? esc(l.m) : 'bolinha') + '</li>'; }).join('') + '</ul>' : '<p class="dica">Nenhuma bolinha hoje ainda.</p>';
+    $('listaConquistas').innerHTML = h; $('janConquistas').style.display = 'block';
+  };
+
+  // ---------- início ----------
+  Sala.botaoSom($('btSom'));
+  tudo(false);
+  var tempoMedir = null;
+  window.addEventListener('resize', function(){ clearTimeout(tempoMedir); tempoMedir = setTimeout(function(){ desenharBolas(false); }, 150); });
+  window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') tudo(false); });
+  window.POTE = {dados: function(){ return dados; }, pote: pote};   // usado nos testes
+})();
+</script>
+</body>
+</html>

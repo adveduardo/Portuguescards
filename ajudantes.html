@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajudantes da semana</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#23324a;background:#eef7ff}
+  .palco{min-height:100vh;padding:10px 12px 30px;background:#eef7ff;
+    background-image:radial-gradient(circle at 10% 12%,rgba(255,255,255,.95) 0,rgba(255,255,255,0) 18%),radial-gradient(circle at 92% 18%,rgba(200,255,224,.8) 0,rgba(200,255,224,0) 24%),
+      radial-gradient(circle at 78% 92%,rgba(255,226,196,.8) 0,rgba(255,226,196,0) 26%),linear-gradient(160deg,#eaf6ff,#f3fff4)}
+  .topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  h1{margin:0 auto 0 0;font-size:30px;color:#1565c0;text-shadow:0 3px 0 rgba(21,101,192,.13)}
+  h1 small{display:block;font-size:14px;font-weight:normal;color:#5a6b80;text-shadow:none}
+  button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:14px;color:#23324a;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(35,50,74,.15)}
+  button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(35,50,74,.15)}
+  select,input[type=text]{font:inherit;font-size:16px;padding:7px 9px;border:2px solid #cfe0f2;border-radius:10px;background:#fff;color:#23324a;max-width:100%}
+  .turmaSel{margin:3px 6px;font-size:16px;font-weight:bold}
+  .semana{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:8px 0 4px}
+  .semana .rot{font-size:22px;font-weight:bold;margin:0 10px;text-align:center}
+  .semana .rot small{display:block;font-size:14px;color:#5a6b80;font-weight:normal}
+  .quadro{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:6px -6px}
+  .tarefa{-webkit-flex:1 1 230px;flex:1 1 230px;max-width:330px;margin:6px;background:#fff;border-radius:22px;padding:12px 12px 14px;text-align:center;
+    box-shadow:0 5px 0 rgba(35,50,74,.06),0 10px 22px rgba(35,50,74,.09);-webkit-animation:aparece .4s ease-out both;animation:aparece .4s ease-out both}
+  @-webkit-keyframes aparece{from{opacity:0;-webkit-transform:translateY(12px)}to{opacity:1;-webkit-transform:translateY(0)}}
+  @keyframes aparece{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .icone{width:74px;height:74px;line-height:74px;border-radius:50%;font-size:40px;margin:0 auto 6px}
+  .nomeTarefa{font-size:19px;font-weight:bold;margin:0 0 8px;min-height:24px}
+  .aluno{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:20px;font-weight:bold;margin:4px 0}
+  .aluno .bicho{font-size:34px;margin-right:6px}
+  .aluno.faltou{opacity:.5;text-decoration:line-through}
+  .substituto{display:inline-block;background:#fff4c2;border:2px dashed #f0b400;border-radius:12px;padding:3px 10px;font-size:15px;font-weight:bold;margin:2px 0}
+  .vago{color:#9aa8b8;font-size:16px}
+  .dica{font-size:14px;color:#5a6b80;margin:6px 0;text-align:center}
+  .vazio{background:#fff;border-radius:22px;padding:20px;max-width:620px;margin:30px auto;text-align:center;font-size:18px}
+  .fundoEscuro{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(20,32,55,.55);display:none;z-index:20;overflow:auto;-webkit-overflow-scrolling:touch}
+  .janela{background:#fff;max-width:680px;margin:24px auto;border-radius:24px;padding:16px;position:relative}
+  .janela h2{margin:0 0 10px;font-size:24px;color:#1565c0;padding-right:90px}
+  .fechar{position:absolute;right:12px;top:12px}
+  .linhaT{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin:6px 0}
+  .linhaT input{-webkit-flex:1;flex:1;min-width:0;margin:0 6px}
+  .linhaT select{font-size:20px;padding:4px}
+  @media (max-width:600px){ h1{font-size:24px} .semana .rot{font-size:18px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🙋 Ajudantes da semana <small>Cada aluno passa por todas as tarefas. Toda segunda-feira a lista anda sozinha.</small></h1>
+    <label class="turmaSel">Turma: <select id="selFonte" aria-label="Turma"></select></label>
+    <button type="button" id="btTarefas">✏️ Tarefas</button>
+    <button type="button" id="btImprimir">🖨️ Imprimir</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="semana">
+    <button type="button" id="btAntes" title="Semana anterior">⏮️</button>
+    <div class="rot" id="rotSemana"></div>
+    <button type="button" id="btDepois" title="Próxima semana">⏭️</button>
+    <button type="button" id="btHoje" style="display:none">📅 Esta semana</button>
+    <button type="button" id="btSortear">🔀 Sortear de novo</button>
+  </div>
+  <div class="quadro" id="quadro"></div>
+  <p class="dica" id="dicaFalta"></p>
+</div>
+
+<div class="fundoEscuro" id="janTarefas">
+  <div class="janela">
+    <button type="button" class="fechar" data-fechar="janTarefas">✖ Fechar</button>
+    <h2>✏️ Tarefas da sala</h2>
+    <p class="dica" style="text-align:left">Escolha o desenho, o nome da tarefa e quantos alunos fazem cada uma. As tarefas valem para todas as turmas.</p>
+    <div id="listaTarefas"></div>
+    <div style="margin-top:10px"><button type="button" id="btNovaTarefa">➕ Nova tarefa</button> <button type="button" id="btPadrao">↩️ Voltar às tarefas sugeridas</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = Sala.esc, CHAVE = 'ajudantes_dados', DIA = 864e5;
+  var PADRAO = [{e: '🖍️', nome: 'Apagar o quadro', qtd: 1}, {e: '📄', nome: 'Distribuir o material', qtd: 2}, {e: '📦', nome: 'Recolher as atividades', qtd: 1},
+    {e: '📽️', nome: 'Ligar o projetor', qtd: 1}, {e: '🚻', nome: 'Cuidar da Fila do banheiro', qtd: 1}, {e: '🗑️', nome: 'Lixo no lugar', qtd: 1},
+    {e: '💡', nome: 'Luzes e ventilador na saída', qtd: 1}, {e: '🎤', nome: 'Porta-voz da turma', qtd: 1}];
+  var EMOJIS = ['🖍️', '📄', '📦', '📽️', '🚻', '🗑️', '💡', '🎤', '📚', '✏️', '📋', '⏱️', '🔔', '🎨', '💧', '📢', '🖥️', '🎒', '🌱', '🚪', '🍎', '⭐', '📅', '🎵'];
+  var FUNDOS = ['#ffe3ec', '#fff1c7', '#dff3ff', '#e8e2ff', '#dcf7e9', '#ffe6d5', '#f1e4ff', '#dff7f7'];
+  var dados = Sala.ler(CHAVE) || {}, verSemana = 0;
+  dados.fonte = dados.fonte || 'auto'; dados.turmas = dados.turmas || {};
+  dados.tarefas = dados.tarefas instanceof Array && dados.tarefas.length ? dados.tarefas : copia(PADRAO);
+
+  function copia(l){ return l.map(function(t){ return {e: t.e, nome: t.nome, qtd: t.qtd}; }); }
+  function salvar(){ Sala.gravar(CHAVE, dados); }
+  function segunda(d){ var x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - (x.getDay() + 6) % 7); return x; }
+  function semanasEntre(a, b){ return Math.round((segunda(b).getTime() - segunda(a).getTime()) / (7 * DIA)); }
+  function diaMes(d){ return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2); }
+  function dataVista(){ var d = new Date(); d.setDate(d.getDate() + verSemana * 7); return d; }
+
+  // ---------- rodízio ----------
+  function registro(t){
+    var r = dados.turmas[t.chave];
+    if (!r){ r = dados.turmas[t.chave] = {ordem: Sala.embaralhar(t.nomes), inicio: segunda(new Date()).getTime()}; salvar(); }
+    var dentro = {}, ordem = [];
+    t.nomes.forEach(function(n){ dentro[n] = 1; });
+    r.ordem.forEach(function(n){ if (dentro[n]){ ordem.push(n); delete dentro[n]; } });
+    t.nomes.forEach(function(n){ if (dentro[n]) ordem.push(n); });   // quem entrou na turma depois vai para o fim da fila
+    if (ordem.join('|') !== r.ordem.join('|')){ r.ordem = ordem; salvar(); }
+    return r;
+  }
+  function vagas(){ var v = 0; dados.tarefas.forEach(function(t){ v += Math.max(1, +t.qtd || 1); }); return v; }
+  function atribuir(t, semana){
+    var r = registro(t), n = r.ordem.length, total = vagas(), k = 0;
+    var w = semanasEntre(new Date(r.inicio), semana), inicio = n ? ((w * total) % n + n) % n : 0;
+    return {inicio: inicio, total: total, ordem: r.ordem, lista: dados.tarefas.map(function(tar){
+      var q = Math.max(1, +tar.qtd || 1), quem = [];
+      for (var i = 0; i < q; i++){ quem.push(k < n ? r.ordem[(inicio + k) % n] : null); k++; }
+      return {tarefa: tar, alunos: quem};
+    })};
+  }
+  function substitutos(t, a){   // para quem faltou hoje: o próximo da fila que está sem tarefa nesta semana
+    var usados = {}, subs = {}, n = a.ordem.length, i, j;
+    a.lista.forEach(function(l){ l.alunos.forEach(function(x){ if (x) usados[x] = 1; }); });
+    a.lista.forEach(function(l){ l.alunos.forEach(function(x){
+      if (!x || !t.ausentes[x]) return;
+      for (i = 0; i < n; i++){
+        j = a.ordem[(a.inicio + a.total + i) % n];
+        if (!usados[j] && !t.ausentes[j]){ subs[x] = j; usados[j] = 1; break; }
+      }
+    }); });
+    return subs;
+  }
+
+  // ---------- desenho ----------
+  function turma(){ return Sala.turma(dados.fonte); }
+  function tudo(){
+    Sala.preencherFontes($('selFonte'), dados.fonte, false);
+    var t = turma(), seg = segunda(dataVista()), sex = new Date(seg.getTime()); sex.setDate(sex.getDate() + 4);
+    $('rotSemana').innerHTML = 'Semana de ' + diaMes(seg) + ' a ' + diaMes(sex) + '<small>' + (verSemana === 0 ? 'esta semana' : verSemana === 1 ? 'próxima semana' : verSemana === -1 ? 'semana passada' : (verSemana > 0 ? 'daqui a ' + verSemana + ' semanas' : 'há ' + (-verSemana) + ' semanas')) + (t.nome ? ' · ' + esc(t.nome) : '') + '</small>';
+    $('btHoje').style.display = verSemana ? '' : 'none';
+    if (!t.nomes.length){
+      $('quadro').innerHTML = '<div class="vazio">Para montar os ajudantes, cadastre a turma na <b>📋 Chamada</b> ou no <b>🎲 Sorteador de Alunos</b> (Ferramentas da sala). Os nomes ficam só neste aparelho.</div>';
+      $('dicaFalta').innerHTML = ''; return;
+    }
+    var a = atribuir(t, dataVista()), subs = verSemana === 0 ? substitutos(t, a) : {}, faltas = 0;
+    $('quadro').innerHTML = a.lista.map(function(l, i){
+      var h = '<div class="tarefa" style="-webkit-animation-delay:' + (i * 0.05) + 's;animation-delay:' + (i * 0.05) + 's"><div class="icone" style="background:' + FUNDOS[i % FUNDOS.length] + '">' + esc(l.tarefa.e) + '</div><div class="nomeTarefa">' + esc(l.tarefa.nome) + '</div>';
+      l.alunos.forEach(function(x){
+        if (!x){ h += '<div class="aluno vago">— sem aluno —</div>'; return; }
+        var faltou = verSemana === 0 && t.ausentes[x];
+        if (faltou) faltas++;
+        h += '<div class="aluno' + (faltou ? ' faltou' : '') + '"><span class="bicho">' + t.bicho(x) + '</span>' + esc(t.curto(x)) + '</div>';
+        if (faltou) h += '<div class="substituto">' + (subs[x] ? '🔄 Hoje: ' + t.bicho(subs[x]) + ' ' + esc(t.curto(subs[x])) : 'faltou hoje') + '</div>';
+      });
+      return h + '</div>';
+    }).join('');
+    $('dicaFalta').innerHTML = faltas ? 'Quem faltou hoje (marcado na Chamada ou no Sorteador) aparece riscado, com um colega no lugar só por hoje.' : '';
+  }
+  $('selFonte').onchange = function(){ dados.fonte = this.value; salvar(); tudo(); };
+  $('btAntes').onclick = function(){ verSemana--; tudo(); };
+  $('btDepois').onclick = function(){ verSemana++; tudo(); };
+  $('btHoje').onclick = function(){ verSemana = 0; tudo(); };
+  $('btSortear').onclick = function(){
+    var t = turma(); if (!t.nomes.length) return;
+    if (!confirm('Sortear uma nova ordem para ' + (t.nome || 'esta turma') + '? O rodízio recomeça na semana que está na tela.')) return;
+    dados.turmas[t.chave] = {ordem: Sala.embaralhar(t.nomes), inicio: segunda(dataVista()).getTime()};
+    salvar(); tudo(); Sala.plim(); Sala.avisar('🔀 Nova ordem sorteada!');
+  };
+
+  // ---------- editar as tarefas ----------
+  function desenharTarefas(){
+    $('listaTarefas').innerHTML = dados.tarefas.map(function(t, i){
+      var ops = EMOJIS.indexOf(t.e) < 0 ? [t.e].concat(EMOJIS) : EMOJIS;
+      return '<div class="linhaT"><select data-i="' + i + '" data-campo="e" aria-label="Desenho">' + ops.map(function(e){ return '<option' + (e === t.e ? ' selected' : '') + '>' + e + '</option>'; }).join('') + '</select>' +
+        '<input type="text" data-i="' + i + '" data-campo="nome" maxlength="40" value="' + esc(t.nome) + '" aria-label="Nome da tarefa">' +
+        '<select data-i="' + i + '" data-campo="qtd" aria-label="Quantos alunos" style="font-size:16px">' + [1, 2, 3].map(function(q){ return '<option value="' + q + '"' + (q === +t.qtd ? ' selected' : '') + '>' + q + (q === 1 ? ' aluno' : ' alunos') + '</option>'; }).join('') + '</select>' +
+        '<button type="button" data-tirar="' + i + '" title="Tirar a tarefa" aria-label="Tirar a tarefa">✖</button></div>';
+    }).join('');
+  }
+  $('listaTarefas').onchange = function(e){
+    var i = e.target.getAttribute('data-i'), campo = e.target.getAttribute('data-campo'); if (i === null) return;
+    var v = campo === 'qtd' ? +e.target.value : campo === 'nome' ? Sala.aparar(e.target.value) || 'Tarefa' : e.target.value;
+    dados.tarefas[+i][campo] = v; salvar(); tudo();
+  };
+  $('listaTarefas').onclick = function(e){
+    var i = e.target.getAttribute('data-tirar'); if (i === null) return;
+    if (dados.tarefas.length <= 1){ Sala.avisar('Deixe pelo menos uma tarefa.'); return; }
+    dados.tarefas.splice(+i, 1); salvar(); desenharTarefas(); tudo();
+  };
+  $('btNovaTarefa').onclick = function(){ dados.tarefas.push({e: '⭐', nome: 'Nova tarefa', qtd: 1}); salvar(); desenharTarefas(); tudo(); var ins = $('listaTarefas').querySelectorAll('input'); ins[ins.length - 1].focus(); ins[ins.length - 1].select(); };
+  $('btPadrao').onclick = function(){ if (!confirm('Voltar às tarefas sugeridas? As suas mudanças nas tarefas serão desfeitas.')) return; dados.tarefas = copia(PADRAO); salvar(); desenharTarefas(); tudo(); };
+  $('btTarefas').onclick = function(){ desenharTarefas(); $('janTarefas').style.display = 'block'; };
+  var fechos = document.querySelectorAll('[data-fechar]'), f;
+  for (f = 0; f < fechos.length; f++) fechos[f].onclick = function(){ $(this.getAttribute('data-fechar')).style.display = 'none'; };
+  $('janTarefas').onclick = function(e){ if (e.target === this) this.style.display = 'none'; };
+
+  // ---------- imprimir ----------
+  $('btImprimir').onclick = function(){
+    var t = turma(); if (!t.nomes.length) return;
+    var seg = segunda(dataVista()), sex = new Date(seg.getTime()); sex.setDate(sex.getDate() + 4);
+    var a = atribuir(t, dataVista());
+    Sala.imprimir('<h1 style="text-align:center;margin:0 0 4px;font-size:26pt">🙋 Ajudantes da semana</h1><p style="text-align:center;margin:0 0 14px;font-size:14pt">' + esc(t.nome) + ' — de ' + diaMes(seg) + ' a ' + diaMes(sex) + '</p>' +
+      '<table style="width:100%;border-collapse:collapse">' + a.lista.map(function(l){
+        return '<tr><td style="border:2px solid #000;padding:8px;font-size:26pt;text-align:center;width:60px">' + esc(l.tarefa.e) + '</td><td style="border:2px solid #000;padding:8px;font-size:16pt;font-weight:bold">' + esc(l.tarefa.nome) + '</td>' +
+          '<td style="border:2px solid #000;padding:8px;font-size:16pt">' + l.alunos.map(function(x){ return x ? t.bicho(x) + ' ' + esc(x) : '—'; }).join('<br>') + '</td></tr>';
+      }).join('') + '</table>');
+  };
+
+  // ---------- início ----------
+  Sala.botaoSom($('btSom'));
+  tudo();
+  window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') tudo(); });
+  window.AJUDANTES = {dados: function(){ return dados; }, atribuir: function(semanas){ var d = new Date(); d.setDate(d.getDate() + semanas * 7); return atribuir(turma(), d); }};   // usado nos testes
+})();
+</script>
+</body>
+</html>
