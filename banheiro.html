@@ -110,6 +110,7 @@
   }
 </style>
 <script src="visual.js"></script>
+<script src="sala.js"></script>
 </head>
 <body>
 <div class="palco">
@@ -178,49 +179,21 @@
     todos:   {nome: 'Banheiro', titulo: 'banheiro', icone: '🚻', cor: '#f08c00'},
     agua:    {nome: 'Bebedouro', titulo: 'bebedouro', icone: '💧', cor: '#2f80ed'}
   };
-  var ANIMAIS = ['🐶', '🐱', '🐭', '🐹', '🐰', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐤', '🐙', '🐢', '🐝', '🐞', '🐬', '🐳', '🐠', '🦀', '🐌', '🦄', '🐲', '🐴', '🐑', '🐘', '🐿️'];
   var DICAS = ['lave bem as mãos com sabão. 👐', 'dê a descarga e deixe tudo limpinho. 🚽', 'vá e volte sem passear pela escola. 🚶', 'feche bem a torneira. 💧',
     'jogue o papel no lixo. 🗑️', 'fale baixinho no corredor: as outras turmas estão em aula. 🙊', 'combinado é combinado: volte no tempo certo. ⏱️', 'esperar a vez também é respeitar os colegas. 🙋'];
-  var somLigado = true, audio = null, escolhaPorta = null, timerAnuncio = null, nomesCache = null, jaNaFila = {};
-  try { somLigado = localStorage.getItem('painel_som') !== '0'; } catch (e) {}
+  var escolhaPorta = null, timerAnuncio = null, nomesCache = null, jaNaFila = {};
 
   // ---------- utilidades ----------
-  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
-  function aparar(s){ return String(s == null ? '' : s).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, ''); }
-  function lerJSON(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
-  function hoje(){ var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  var esc = Sala.esc, aparar = Sala.aparar, lerJSON = Sala.ler, hoje = Sala.hoje;
   function mmss(ms){ var s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
   function hora(ms){ var d = new Date(ms); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
   function primeiro(n){ return String(n).split(' ')[0]; }
-  function hash(s){ var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
   function avisar(t){ var a = $('aviso'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 2800); }
   function mostrar(id){ $(id).style.display = 'block'; }
   function esconder(id){ $(id).style.display = 'none'; }
 
-  // ---------- som e voz (respeita o botão de som do Painel) ----------
-  function tom(freq, dur, quando){
-    if (!somLigado) return;
-    try {
-      var C = window.AudioContext || window.webkitAudioContext; if (!C) return;
-      audio = audio || new C();
-      var o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + (quando || 0), vol = window.PAINEL_CALMO ? 0.06 : 0.16;
-      o.type = 'sine'; o.frequency.value = freq; o.connect(g); g.connect(audio.destination);
-      g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-      o.start(t0); o.stop(t0 + dur + 0.05);
-    } catch (e) {}
-  }
-  function plim(){ tom(784, 0.18); tom(1047, 0.32, 0.16); }
-  function falar(t){
-    if (!somLigado || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
-    try { var u = new SpeechSynthesisUtterance(t); u.lang = 'pt-BR'; u.rate = 1; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {}
-  }
-  function pintarSom(){ $('btSom').innerHTML = somLigado ? '🔊' : '🔇'; $('btSom').title = somLigado ? 'Som ligado (toque para desligar)' : 'Som desligado (toque para ligar)'; }
-  $('btSom').onclick = function(){
-    somLigado = !somLigado;
-    try { localStorage.setItem('painel_som', somLigado ? '1' : '0'); } catch (e) {}
-    if (!somLigado && window.speechSynthesis) try { window.speechSynthesis.cancel(); } catch (e) {}
-    pintarSom(); if (somLigado) plim();
-  };
+  // ---------- som e voz (sala.js; respeitam o botão de som do Painel) ----------
+  var tom = Sala.tom, plim = Sala.plim, falar = Sala.falar;
 
   // ---------- estado ----------
   function padrao(){ return {config: {modo: 'dois', agua: false, minutos: 5, limite: 0, fonte: 'auto', esconder: true}, portas: {}, contagem: {}, registro: [], dia: hoje(), pausada: false}; }
@@ -249,39 +222,10 @@
     return null;
   }
 
-  // ---------- nomes da turma (Chamada ou Sorteador) ----------
-  var PARTICULAS = {de: 1, da: 1, 'do': 1, dos: 1, das: 1, e: 1};
-  function nomeCurto(n){
-    var p = String(n).split(' ');
-    if (p.length <= 2) return n;
-    var out = [p[0]];
-    if (!PARTICULAS[p[1].toLowerCase()]) out.push(p[1]);
-    out.push(p[p.length - 1].charAt(0).toUpperCase() + '.');
-    return out.join(' ');
-  }
-  function listaNomes(){
-    var cfg = est.config, ch = lerJSON('chamada_dados'), pt = lerJSON('painel_turma'), r = {nomes: [], ausentes: {}, rotulo: ''}, i, t = null;
-    var temChamada = ch && ch.turmas instanceof Array && ch.turmas.length;
-    if (temChamada && (cfg.fonte === 'auto' || cfg.fonte.indexOf('chamada:') === 0)){
-      var alvo = cfg.fonte.indexOf('chamada:') === 0 ? cfg.fonte.slice(8) : ch.atual;
-      for (i = 0; i < ch.turmas.length; i++) if (ch.turmas[i].id === alvo) t = ch.turmas[i];
-      t = t || ch.turmas[0];
-      var marcas = (t.chamadas || {})[hoje()] || {};
-      r.nomes = (t.alunos || []).map(function(a){ if (marcas[a.id] === 'F') r.ausentes[a.nome] = 1; return a.nome; });
-      r.rotulo = 'Chamada, ' + t.nome;
-    } else if ((cfg.fonte === 'auto' || cfg.fonte === 'sorteador') && pt && pt.alunos instanceof Array && pt.alunos.length){
-      r.nomes = pt.alunos.slice(); r.rotulo = 'Sorteador' + (pt.turma ? ', ' + pt.turma : '');
-      (pt.ausentes || []).forEach(function(n){ r.ausentes[n] = 1; });
-    }
-    var curtos = {}, quantos = {};
-    r.nomes.forEach(function(n){ var c = nomeCurto(n); curtos[n] = c; quantos[c] = (quantos[c] || 0) + 1; });
-    r.curto = function(n){ var c = curtos[n] || nomeCurto(n); return quantos[c] > 1 ? n : c; };   // nomes curtos iguais: mostra inteiro
-    r.indice = {}; r.nomes.forEach(function(n, k){ r.indice[n] = k; });
-    return r;
-  }
-  function nomes(){ return nomesCache || (nomesCache = listaNomes()); }
+  // ---------- nomes da turma (Chamada ou Sorteador, pelo sala.js) ----------
+  function nomes(){ return nomesCache || (nomesCache = Sala.turma(est.config.fonte)); }
   function curto(n){ return nomes().curto(n); }
-  function bicho(n){ var k = nomes().indice[n]; return ANIMAIS[(k === undefined ? hash(n) : k) % ANIMAIS.length]; }
+  function bicho(n){ return nomes().bicho(n); }
 
   // ---------- regras da fila ----------
   function entrar(id, nome){
@@ -433,15 +377,12 @@
 
   // ---------- ajustes ----------
   function abrirAjustes(){
-    var c = est.config, ch = lerJSON('chamada_dados'), pt = lerJSON('painel_turma'), h = '<option value="auto">automático (Chamada ou Sorteador)</option>', i;
+    var c = est.config, i;
     var rs = document.getElementsByName('modo'); for (i = 0; i < rs.length; i++) rs[i].checked = rs[i].value === c.modo;
     $('cfgAgua').checked = !!c.agua; $('cfgEsconder').checked = !!c.esconder; $('cfgLimite').value = String(c.limite);
     var m = ''; for (i = 1; i <= 15; i++) m += '<option value="' + i + '">' + i + (i === 1 ? ' minuto' : ' minutos') + '</option>';
     $('cfgMinutos').innerHTML = m; $('cfgMinutos').value = String(c.minutos);
-    if (ch && ch.turmas instanceof Array) ch.turmas.forEach(function(t){ h += '<option value="chamada:' + esc(t.id) + '">Chamada: ' + esc(t.nome) + ' (' + (t.alunos || []).length + ')</option>'; });
-    if (pt && pt.alunos instanceof Array && pt.alunos.length) h += '<option value="sorteador">Sorteador' + (pt.turma ? ': ' + esc(pt.turma) : '') + ' (' + pt.alunos.length + ')</option>';
-    h += '<option value="nenhuma">sem lista (escrever o nome)</option>';
-    $('cfgFonte').innerHTML = h; $('cfgFonte').value = c.fonte; if ($('cfgFonte').value !== c.fonte) $('cfgFonte').value = 'auto';
+    Sala.preencherFontes($('cfgFonte'), c.fonte, true);
     mostrar('janAjustes');
   }
   $('btAjustes').onclick = abrirAjustes;
@@ -512,7 +453,7 @@
 
   // ---------- início ----------
   ativas().forEach(function(id){ jaNaFila[id] = porta(id).fila.slice(); });
-  pintarSom(); salvar(); desenhar();
+  Sala.botaoSom($('btSom')); salvar(); desenhar();
   window.addEventListener('storage', function(e){ if (e.key === 'chamada_dados' || e.key === 'painel_turma') desenhar(); });
   window.FILA = {estado: function(){ return est; }, tique: tique};   // usado nos testes
 })();
