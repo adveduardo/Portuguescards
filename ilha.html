@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ilha das Palavras</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #placar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:2px 0 8px}
+  .eqCard{display:flex;align-items:center;gap:8px;background:#fff;border-radius:16px;padding:6px 14px;font-weight:bold;font-size:1.15rem;box-shadow:0 3px 0 #0001;border:3px solid transparent;cursor:pointer;transition:transform .2s}
+  .eqCard.davez{transform:scale(1.07);box-shadow:0 0 0 4px #fff,0 6px 16px #0002}
+  .eqCard .em{font-size:1.6rem}
+  .eqCard .num{background:#f1f4fa;border-radius:10px;padding:1px 8px}
+  #tabuleiro{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(6,1fr);gap:6px;margin:0 auto;
+    width:min(96vw,calc((100vh - 150px) * 1.3333),1150px);aspect-ratio:8/6}
+  .casa{border-radius:14px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:bold;box-shadow:inset 0 -5px 0 #0002;min-width:0;min-height:0}
+  .casa .ico{font-size:clamp(1rem,3vw,2.3rem);line-height:1}
+  .casa .rot{font-size:clamp(.5rem,.95vw,.8rem);opacity:.95;text-align:center;line-height:1.05}
+  .casa.marcada{box-shadow:0 0 0 4px #fff,0 0 0 8px var(--amarelo)}
+  .casa .peoes{position:absolute;left:0;right:0;bottom:-8px;display:flex;justify-content:center;gap:2px;pointer-events:none}
+  .peao{width:clamp(20px,2.6vw,36px);height:clamp(20px,2.6vw,36px);border-radius:50%;background:#fff;border:3px solid;display:flex;align-items:center;justify-content:center;font-size:clamp(.75rem,1.5vw,1.25rem);box-shadow:0 3px 6px #0004;animation:quica .3s}
+  @keyframes quica{0%{transform:translateY(-14px)}60%{transform:translateY(2px)}100%{transform:translateY(0)}}
+  .bau{position:absolute;top:-14px;right:-8px;font-size:clamp(1.1rem,2.4vw,2rem);filter:drop-shadow(0 3px 2px #0005);animation:bauPula 1.3s ease-in-out infinite}
+  @keyframes bauPula{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(8deg)}}
+  #centro{grid-row:2/6;grid-column:2/8;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 50% 60%,#ffe9a8 0,#ffe9a8 30%,#8fd9ff 31%,#4fb3e8 100%);box-shadow:inset 0 0 0 6px #fff8}
+  #centro::before{content:"🏝️";position:absolute;font-size:min(22vw,200px);opacity:.18;pointer-events:none}
+  #rodadaInfo{font-size:clamp(.95rem,1.8vw,1.3rem);font-weight:bold;background:#fffc;border-radius:12px;padding:2px 12px;position:relative}
+  #rodadaInfo .dobro{color:#c2185b}
+  #vezInfo span{display:inline-block;color:#fff;font-weight:bold;font-size:clamp(1.1rem,2.6vw,2rem);border-radius:16px;padding:4px 16px;box-shadow:0 4px 0 #0002;position:relative}
+  #dado{width:clamp(56px,7vw,90px);height:clamp(56px,7vw,90px);background:#fff;border:4px solid var(--texto);border-radius:18px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:8px;position:relative}
+  #dado i{width:60%;height:60%;border-radius:50%;margin:auto}
+  #dado i.p{background:var(--texto)}
+  #dado.rolando{animation:rolar .12s infinite}
+  @keyframes rolar{0%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}100%{transform:rotate(-14deg)}}
+  #btnAcao{position:relative;font-size:clamp(1.05rem,2.2vw,1.6rem)}
+  #logInfo{font-size:clamp(.85rem,1.5vw,1.1rem);background:#fffd;border-radius:12px;padding:4px 12px;max-width:92%;text-align:center;position:relative}
+  .janela{position:fixed;inset:0;background:#0009;display:flex;align-items:center;justify-content:center;z-index:30;padding:14px}
+  .janela[hidden]{display:none}
+  .caixaJ{background:#fff;border-radius:28px;max-width:980px;width:100%;max-height:94vh;overflow:auto;padding:18px 24px;text-align:center;box-shadow:0 20px 60px #0006;animation:surge .35s cubic-bezier(.2,1.5,.4,1)}
+  @keyframes surge{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+  .caixaJ h2{font-size:clamp(1.4rem,3vw,2.2rem);margin:4px 0 8px}
+  .vezJ{display:inline-block;color:#fff;font-weight:bold;font-size:1.3rem;border-radius:14px;padding:4px 14px;margin-bottom:6px}
+  .pergunta{font-size:clamp(1.25rem,2.9vw,2.1rem);font-weight:bold;margin:8px 0 14px}
+  .textoBase{text-align:left;background:#f7f8fc;border-left:6px solid var(--azul);padding:10px 14px;border-radius:12px;font-size:1.1rem;white-space:pre-wrap;margin:0 0 8px}
+  .ops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ops button{font-size:clamp(1rem,2.1vw,1.55rem);padding:12px 14px;color:#fff;text-align:left;min-height:60px;margin:0}
+  .ops button b{display:inline-block;min-width:1.6em}
+  .ops button.certa{outline:6px solid #2ecc71;outline-offset:2px}
+  .ops button.errada,.ops button.apagada{opacity:.45}
+  .ops button:disabled{cursor:default}
+  .resQ{font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:bold;margin:12px 0 4px;min-height:1.4em}
+  .explica{font-size:1.05rem;font-weight:normal;margin-top:6px;opacity:.85}
+  .relogioQ{font-weight:bold;font-size:1.5rem;margin:10px 0 4px}
+  .iconeGrande{font-size:clamp(3.5rem,9vw,6rem);line-height:1.1}
+  .textoCartaz{font-size:clamp(1.15rem,2.6vw,1.8rem);margin:4px 0 12px}
+  .letras{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+  .letras span{width:clamp(40px,6vw,64px);height:clamp(48px,7vw,74px);background:#ffd54a;border-radius:12px;font-size:clamp(1.4rem,3.4vw,2.4rem);font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 #c9a227}
+  .letras.revelada span{background:#c8f5d6;box-shadow:0 4px 0 #3fb36d}
+  .chipsEq{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+  .chipsEq button{color:#fff;font-size:1.2rem}
+  .chipsEq button.marcado{outline:5px solid #ffd54a;outline-offset:2px;transform:scale(1.06)}
+  .duelo{font-size:clamp(1.2rem,2.8vw,1.9rem);font-weight:bold;margin:4px 0 8px}
+  .duelo span{color:#fff;border-radius:14px;padding:4px 12px;display:inline-block}
+  .flutua{position:fixed;z-index:40;font-weight:bold;font-size:1.7rem;pointer-events:none;text-shadow:0 2px 0 #fff,0 0 8px #fff;animation:flutua 1.5s ease-out forwards}
+  @keyframes flutua{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-70px)}}
+  #podio .linhaRank .pts{white-space:nowrap}
+  .ajusteBtns button{font-size:1.2rem;min-width:110px}
+  @media (max-width:700px){ .ops{grid-template-columns:1fr} .eqCard{font-size:.95rem;padding:4px 8px} }
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+
+<section id="tConfig" class="tela ativa">
+  <h1>🏝️ Ilha das Palavras</h1>
+  <p class="dica" style="text-align:center;font-size:1.1rem">Festa no tabuleiro: acertou a pergunta, joga o dado e anda pela ilha. Junte 💎 joias e troque por 🏆 troféus no baú do tesouro!</p>
+  <div class="cartao" id="cartaoSalva" hidden>
+    <h2>Partida salva</h2>
+    <p id="infoSalva"></p>
+    <div class="linha" style="justify-content:flex-start"><button id="btnContinuar" class="principal">▶️ Continuar a partida</button><button id="btnApagarSalva">🗑️ Começar outra</button></div>
+  </div>
+  <div class="cartao">
+    <h2>1. Perguntas</h2>
+    <label>Assunto: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start"><button id="btnAbrirJson">📂 Abrir outro JSON do computador</button></div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>2. Equipes e regras</h2>
+    <label>Equipes: <select id="selEquipes"><option value="2" selected>2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+    <label>Rodadas: <select id="selRodadas"><option value="5">5 (rápida)</option><option value="8" selected>8</option><option value="10">10</option><option value="12">12 (longa)</option></select></label>
+    <label>Quem erra: <select id="selErro"><option value="0" selected>fica parado</option><option value="1">anda 1 casa</option></select></label>
+    <label>Minijogo: <select id="selMini"><option value="1">depois de cada rodada</option><option value="2" selected>a cada 2 rodadas</option><option value="0">só nas casas 🎪</option></select></label>
+    <label>Tempo para responder: <select id="selTempo"><option value="0" selected>sem tempo</option><option value="20">20 segundos</option><option value="30">30 segundos</option><option value="45">45 segundos</option></select></label>
+    <label><input type="checkbox" id="chkCerebro" checked> No fim, +1 🏆 para quem mais acertou</label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+  </div>
+  <div class="cartao">
+    <h2>Como se joga</h2>
+    <ol>
+      <li>Na sua vez, a equipe responde uma pergunta. <b>Acertou: ganha 2 💎 e joga o dado.</b> Errou: fica parada.</li>
+      <li>Cada casa tem uma surpresa: 💎 +3 joias · 💥 −3 joias · 🍀 sorte · ⚡ azar · 🔄 troca de lugar · 🎪 minijogo · 🌀 redemoinho · 🏁 passou pelo início: +2 💎.</li>
+      <li>Ao passar pelo 🗝️ <b>baú do tesouro</b>, a equipe pode trocar 10 💎 por 1 🏆. Depois o baú se esconde em outro lugar.</li>
+      <li>Nas 2 últimas rodadas, as joias valem em dobro. <b>Vence quem tiver mais 🏆</b> (empate: mais 💎).</li>
+      <li>O professor pode tocar no placar de uma equipe para dar ou tirar joias e troféus.</li>
+    </ol>
+  </div>
+  <button id="btnComecar" class="principal">🎉 Começar a festa</button>
+</section>
+
+<section id="tJogo" class="tela">
+  <div id="placar"></div>
+  <div id="tabuleiro">
+    <div id="centro">
+      <div id="rodadaInfo"></div>
+      <div id="vezInfo"></div>
+      <div id="dado"></div>
+      <button id="btnAcao" class="principal">❓ Ver a pergunta</button>
+      <div id="logInfo"></div>
+    </div>
+  </div>
+  <div class="linha" style="margin-top:10px"><span id="somLugar"></span><button id="btnSair">⏹️ Terminar</button></div>
+</section>
+
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏆 Fim da festa!</h1>
+  <div id="podio" class="ranking"></div>
+  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+</section>
+
+<div id="janela" class="janela" hidden><div class="caixaJ" id="caixaJ"></div></div>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const N = 24, CUSTO = 10, SALVA = 'ilha_partida';
+const EQUIPES = [{nome: 'Leões', art: 'dos', emoji: '🦁', cor: '#e74c3c'}, {nome: 'Golfinhos', art: 'dos', emoji: '🐬', cor: '#2f80ed'},
+  {nome: 'Papagaios', art: 'dos', emoji: '🦜', cor: '#27ae60'}, {nome: 'Abelhas', art: 'das', emoji: '🐝', cor: '#e6a800'}];
+const TIPOS = {
+  inicio: {e: '🏁', nome: 'Início', cor: '#5c6b80'},
+  joia: {e: '💎', nome: '+3 joias', cor: '#2f80ed'},
+  perde: {e: '💥', nome: '−3 joias', cor: '#c0392b'},
+  sorte: {e: '🍀', nome: 'Sorte', cor: '#27ae60'},
+  azar: {e: '⚡', nome: 'Azar', cor: '#8e44ad'},
+  troca: {e: '🔄', nome: 'Troca', cor: '#e67e22'},
+  mini: {e: '🎪', nome: 'Minijogo', cor: '#c2185b'},
+  redemoinho: {e: '🌀', nome: 'Redemoinho', cor: '#16a085'}
+};
+const DISTRIB = ['joia', 'joia', 'joia', 'joia', 'joia', 'joia', 'joia', 'joia', 'joia', 'joia', 'perde', 'perde', 'perde',
+  'sorte', 'sorte', 'sorte', 'azar', 'azar', 'troca', 'troca', 'mini', 'mini', 'redemoinho'];   // 23 casas + o início = 24
+const CORES_OP = ['#2f80ed', '#e67e22', '#27ae60', '#8e44ad'];
+const PALAVRAS = ['BIBLIOTECA', 'CADERNO', 'ESCOLA', 'AMIZADE', 'AVENTURA', 'BRINCADEIRA', 'CHOCOLATE', 'PALAVRA', 'FRASE', 'POESIA', 'POEMA', 'ROMANCE',
+  'VERBO', 'ADJETIVO', 'SUJEITO', 'PREDICADO', 'PRONOME', 'ARTIGO', 'NUMERAL', 'VOGAL', 'CONSOANTE', 'DITONGO', 'HIATO', 'ACENTO', 'LEITURA', 'ESCRITA',
+  'AUTOR', 'LEITOR', 'PERSONAGEM', 'NARRADOR', 'ENREDO', 'CONFLITO', 'DESFECHO', 'TEXTO', 'LETRA', 'ALFABETO', 'MENSAGEM', 'CARTA', 'BILHETE', 'RECEITA',
+  'CONVITE', 'ENTREVISTA', 'DEBATE', 'ARGUMENTO', 'RIMA', 'ESTROFE', 'VERSO', 'LENDA', 'CONTO', 'TIRINHA', 'CHARGE', 'TEATRO', 'TESOURO', 'PIRATA',
+  'PRAIA', 'ILHA', 'COQUEIRO', 'BARCO', 'MARINHEIRO', 'GAIVOTA', 'CONCHA', 'AREIA', 'ESTRELA', 'PLANETA', 'FOGUETE', 'MOCHILA', 'ESTOJO', 'BORRACHA',
+  'CANETA', 'QUADRO', 'RECREIO', 'MERENDA', 'UNIFORME', 'JANELA', 'ESPELHO', 'TELEFONE', 'GIRASSOL', 'BORBOLETA', 'PINGUIM', 'GOLFINHO'];
+const SORTE = [
+  {t: 'Achou um baú pequeno!', d: 'Ganhe 5 💎.', f: async eq => { ganhar(eq, 5); }},
+  {t: 'Vento a favor!', d: 'Avance 3 casas.', f: async eq => { await andar(eq, 3); }},
+  {t: 'Presente da turma!', d: 'Cada equipe te dá 2 💎.', f: async eq => { jogo.equipes.forEach(o => { if (o !== eq) transferir(o, eq, 2); }); }},
+  {t: 'Dado mágico!', d: 'Jogue o dado de novo.', f: async eq => { const v = await rolarDado(); log(`${eq.emoji} tirou ${v} no dado mágico`); await andar(eq, v); }}
+];
+const AZAR = [
+  {t: 'Tempestade!', d: 'Perca 5 💎.', f: async eq => { ganhar(eq, -5); }},
+  {t: 'Correnteza!', d: 'Volte 3 casas.', f: async eq => { await andarTras(eq, 3); }},
+  {t: 'Dívida com os piratas!', d: 'Dê 2 💎 para cada equipe.', f: async eq => { jogo.equipes.forEach(o => { if (o !== eq) transferir(eq, o, 2); }); }},
+  {t: 'Barco furado!', d: 'Fiquem uma vez sem jogar.', f: async eq => { eq.pulaVez = true; desenharPlacar(); }}
+];
+const PIPS = {1: [5], 2: [1, 9], 3: [1, 5, 9], 4: [1, 3, 7, 9], 5: [1, 3, 5, 7, 9], 6: [1, 3, 4, 6, 7, 9]};
+let banco = null, jogo = null, ocupado = false, qAtual = null, teclaJanela = null;
+
+// ---------- utilidades ----------
+const esperar = ms => new Promise(r => setTimeout(r, ms));
+const sortear = l => l[Math.floor(Math.random() * l.length)];
+function embaralhar(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const nomeEq = eq => `${eq.emoji} ${AV.esc(eq.nome)}`;
+function log(t){ if (jogo) jogo.log = t; $('logInfo').textContent = t; }
+function celula(i){   // posição da casa na grade 8 x 6 (a volta da ilha, no sentido do relógio)
+  if (i < 8) return [1, i + 1];
+  if (i < 13) return [i - 6, 8];
+  if (i < 20) return [6, 20 - i];
+  return [25 - i, 1];
+}
+
+// ---------- perguntas (bancos e quizzes do Painel) ----------
+function carregar(d, origem){
+  const ps = (d && Array.isArray(d.perguntas) ? d.perguntas : []).map(q => {
+    const ops = (Array.isArray(q.opcoes) ? q.opcoes : []).map(String).filter(Boolean);
+    return {p: String(q.pergunta || ''), ops, c: String(q.correta == null ? '' : q.correta), ex: q.explica ? String(q.explica) : '', tx: q.texto ? String(q.texto) : '', im: q.imagem ? String(q.imagem) : ''};
+  }).filter(q => q.p && q.ops.length >= 2 && q.ops.includes(q.c));
+  if (!ps.length) return AV.avisar('Este arquivo não tem perguntas de múltipla escolha (pergunta, opcoes e correta).');
+  banco = {titulo: d.titulo || 'Perguntas', perguntas: ps};
+  $('infoJson').textContent = `${banco.titulo} • ${ps.length} perguntas` + (origem ? ` • ${origem}` : '');
+}
+if (!/[?&]arquivo=/.test(location.search)) history.replaceState(null, '', location.pathname + '?arquivo=banco-quiz-geral.json' + location.hash);   // começa com o quiz geral (mistura de todos os assuntos)
+AV.prepararSeletorJson({tipos: ['banco', 'quiz'], select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+function proximaPergunta(){
+  if (jogo.ip >= jogo.perguntas.length){ jogo.perguntas = embaralhar(jogo.perguntas); jogo.ip = 0; }
+  return jogo.perguntas[jogo.ip++];
+}
+
+// ---------- começar, salvar e continuar ----------
+function comecar(){
+  if (!banco) return AV.avisar('Escolha um assunto com perguntas.');
+  AV.som = $('chkSom').checked;
+  const ne = +$('selEquipes').value;
+  jogo = {titulo: banco.titulo, rodadas: +$('selRodadas').value, rodada: 1, vez: 0, erroAnda: +$('selErro').value, mini: +$('selMini').value,
+    tempo: +$('selTempo').value, cerebro: $('chkCerebro').checked, casas: ['inicio'].concat(embaralhar(DISTRIB)), bau: 0,
+    equipes: EQUIPES.slice(0, ne).map(e => Object.assign({}, e, {pos: 0, joias: 0, trofeus: 0, acertos: 0, respostas: 0, pulaVez: false})),
+    perguntas: embaralhar(banco.perguntas), ip: 0, ultimoMini: '', log: '🎉 A festa começou! Boa sorte a todos.', terminado: false};
+  jogo.bau = sortearBau(-1);
+  iniciarTela();
+  AV.falar('A festa começou! Boa sorte a todos.');
+}
+function sortearBau(atual){ let p; do { p = 1 + Math.floor(Math.random() * (N - 1)); } while (p === atual || p < 4); return p; }
+function salvar(){ try { localStorage.setItem(SALVA, JSON.stringify(jogo)); } catch (e) {} }
+function partidaSalva(){
+  let s = null; try { s = JSON.parse(localStorage.getItem(SALVA)); } catch (e) {}
+  const ok = s && !s.terminado && Array.isArray(s.equipes) && Array.isArray(s.perguntas) && s.perguntas.length;
+  $('cartaoSalva').hidden = !ok;
+  if (ok) $('infoSalva').innerHTML = `${AV.esc(s.titulo)} • rodada ${s.rodada} de ${s.rodadas} • ` + s.equipes.map(e => `${e.emoji} ${AV.esc(e.nome)}: 🏆 ${e.trofeus} 💎 ${e.joias}`).join(' · ');
+  return ok ? s : null;
+}
+$('btnContinuar').onclick = () => { const s = partidaSalva(); if (!s) return; jogo = s; AV.som = $('chkSom').checked; iniciarTela(); };
+$('btnApagarSalva').onclick = () => { try { localStorage.removeItem(SALVA); } catch (e) {} partidaSalva(); };
+function iniciarTela(){
+  ocupado = false;
+  AV.mostrarTela('tJogo');
+  montarTabuleiro(); desenharTudo(); desenharDado(1);
+  prepararVez();
+}
+
+// ---------- desenho ----------
+function montarTabuleiro(){
+  const t = $('tabuleiro');
+  t.querySelectorAll('.casa').forEach(c => c.remove());
+  for (let i = 0; i < N; i++){
+    const [r, c] = celula(i), T = TIPOS[jogo.casas[i]];
+    const d = document.createElement('div');
+    d.className = 'casa'; d.id = 'casa' + i; d.style.gridRow = r; d.style.gridColumn = c; d.style.background = T.cor;
+    d.innerHTML = `<span class="ico">${T.e}</span><span class="rot">${T.nome}</span><span class="peoes"></span>`;
+    t.appendChild(d);
+  }
+  desenharBau();
+}
+function desenharBau(){
+  document.querySelectorAll('.casa .bau').forEach(b => b.remove());
+  const c = $('casa' + jogo.bau); if (c) c.insertAdjacentHTML('beforeend', `<span class="bau" title="Baú do tesouro: ${CUSTO} 💎 = 1 🏆">🗝️</span>`);
+}
+function desenharPeoes(){
+  document.querySelectorAll('.casa .peoes').forEach(p => { p.innerHTML = ''; });
+  jogo.equipes.forEach(e => { const p = document.querySelector(`#casa${e.pos} .peoes`); if (p) p.insertAdjacentHTML('beforeend', `<span class="peao" style="border-color:${e.cor}" title="${AV.esc(e.nome)}">${e.emoji}</span>`); });
+}
+function desenharPlacar(){
+  $('placar').innerHTML = jogo.equipes.map((e, i) => `<div class="eqCard${i === jogo.vez ? ' davez' : ''}" data-i="${i}" style="border-color:${i === jogo.vez ? e.cor : 'transparent'}" title="Toque para ajustar as joias e os troféus">` +
+    `<span class="em">${e.emoji}</span>${AV.esc(e.nome)}<span class="num">🏆 ${e.trofeus}</span><span class="num">💎 ${e.joias}</span>${e.pulaVez ? '<span title="Fica uma vez sem jogar">😴</span>' : ''}</div>`).join('');
+}
+const dobro = () => jogo.rodadas >= 4 && jogo.rodada > jogo.rodadas - 2;
+function desenharCentro(){
+  const eq = jogo.equipes[jogo.vez];
+  $('rodadaInfo').innerHTML = `Rodada <b>${Math.min(jogo.rodada, jogo.rodadas)}</b> de ${jogo.rodadas}` + (dobro() ? ' · <span class="dobro">⭐ joias em dobro!</span>' : '');
+  $('vezInfo').innerHTML = `<span style="background:${eq.cor}">${eq.emoji} Vez ${eq.art} ${AV.esc(eq.nome)}</span>`;
+  $('logInfo').textContent = jogo.log;
+}
+function desenharTudo(){ desenharPlacar(); desenharPeoes(); desenharCentro(); }
+function desenharDado(v){ $('dado').innerHTML = Array.from({length: 9}, (_, k) => `<i class="${PIPS[v].includes(k + 1) ? 'p' : ''}"></i>`).join(''); }
+function marcarCasa(i){ document.querySelectorAll('.casa.marcada').forEach(c => c.classList.remove('marcada')); const c = $('casa' + i); if (c) c.classList.add('marcada'); }
+function flutuar(eq, txt){
+  const i = jogo.equipes.indexOf(eq), card = document.querySelector(`.eqCard[data-i="${i}"]`); if (!card) return;
+  const r = card.getBoundingClientRect(), el = document.createElement('div');
+  el.className = 'flutua'; el.textContent = txt; el.style.left = (r.left + r.width / 2 - 30) + 'px'; el.style.top = (r.bottom - 6) + 'px'; el.style.color = eq.cor;
+  document.body.appendChild(el); setTimeout(() => el.remove(), 1600);
+}
+
+// ---------- joias ----------
+function ganhar(eq, n){
+  if (n > 0 && dobro()) n *= 2;
+  const antes = eq.joias; eq.joias = Math.max(0, eq.joias + n);
+  const real = eq.joias - antes;
+  desenharPlacar();
+  if (real) flutuar(eq, (real > 0 ? '+' : '') + real + ' 💎');
+  if (real > 0) AV.tom(1047, .1, 'triangle', .14); else if (real < 0) AV.tom(220, .2, 'sawtooth', .06);
+  return real;
+}
+function transferir(de, para, n){
+  const v = Math.min(n, de.joias); de.joias -= v; para.joias += v; desenharPlacar();
+  if (v){ flutuar(de, '−' + v + ' 💎'); setTimeout(() => flutuar(para, '+' + v + ' 💎'), 250); }
+  return v;
+}
+
+// ---------- janelas ----------
+function abrirJanela(html){ $('caixaJ').innerHTML = html; $('janela').hidden = false; }
+function fecharJanela(){ $('janela').hidden = true; $('caixaJ').innerHTML = ''; teclaJanela = null; }
+function cartaz(icone, titulo, texto, autoMs){
+  return new Promise(res => {
+    abrirJanela(`<div class="iconeGrande">${icone}</div><h2>${titulo}</h2>${texto ? `<p class="textoCartaz">${texto}</p>` : ''}<div class="linha"><button class="principal" id="btnOk">OK</button></div>`);
+    let feito = false, t = null;
+    const ok = () => { if (feito) return; feito = true; clearTimeout(t); fecharJanela(); res(); };
+    $('btnOk').onclick = ok; if (autoMs) t = setTimeout(ok, autoMs);
+    teclaJanela = k => { if (k === 'Enter' || k === ' ') ok(); };
+  });
+}
+function escolher(icone, titulo, texto, sim, nao){
+  return new Promise(res => {
+    abrirJanela(`<div class="iconeGrande">${icone}</div><h2>${titulo}</h2><p class="textoCartaz">${texto}</p><div class="linha"><button class="principal" id="btnSim">${sim}</button><button id="btnNao">${nao}</button></div>`);
+    const fim = v => { fecharJanela(); res(v); };
+    $('btnSim').onclick = () => fim(true); $('btnNao').onclick = () => fim(false);
+    teclaJanela = k => { if (k === 'Enter') fim(true); if (k === 'Escape') fim(false); };
+  });
+}
+function htmlPergunta(q, clicavel){
+  return (q.tx ? `<div class="textoBase">${AV.esc(q.tx)}</div>` : '') +
+    `<div class="pergunta">${q.im ? AV.esc(q.im) + ' ' : ''}${AV.esc(q.p)}</div>` +
+    `<div class="ops">${q.ops.map((o, i) => `<button data-o="${AV.esc(o)}" style="background:${CORES_OP[i % 4]}"${clicavel ? '' : ' tabindex="-1"'}><b>${'ABCDEF'[i]}</b> ${AV.esc(o)}</button>`).join('')}</div>`;
+}
+function mostrarCerta(q, escolhida){
+  document.querySelectorAll('.caixaJ .ops button').forEach(b => {
+    b.disabled = true;
+    b.classList.add(b.dataset.o === q.c ? 'certa' : b.dataset.o === escolhida ? 'errada' : 'apagada');
+  });
+}
+
+// ---------- a vez de uma equipe ----------
+function prepararVez(){
+  const eq = jogo.equipes[jogo.vez];
+  desenharTudo();
+  $('btnAcao').disabled = false;
+  $('btnAcao').textContent = eq.pulaVez ? '😴 Ver o que acontece' : '❓ Ver a pergunta';
+  AV.falar(`Vez ${eq.art} ${eq.nome}!`);
+}
+async function jogarVez(){
+  if (ocupado || !jogo || jogo.terminado) return;
+  ocupado = true; $('btnAcao').disabled = true;
+  const eq = jogo.equipes[jogo.vez];
+  try {
+    if (eq.pulaVez){
+      eq.pulaVez = false; desenharPlacar();
+      log(`😴 ${eq.nome} ficaram sem jogar nesta vez.`);
+      await cartaz('😴', `${nomeEq(eq)} ficam sem jogar`, 'O barco furou na vez passada. Na próxima, voltam ao jogo!');
+    } else {
+      const certo = await perguntar(eq);
+      let noBau = false;
+      if (certo){ const v = await rolarDado(); log(`${eq.emoji} ${eq.nome} acertaram e tiraram ${v} no dado.`); noBau = await andar(eq, v); if (!noBau) await efeitoCasa(eq); }
+      else if (jogo.erroAnda){ log(`${eq.emoji} ${eq.nome} erraram e andaram 1 casa.`); noBau = await andar(eq, 1); if (!noBau) await efeitoCasa(eq); }
+      else log(`${eq.emoji} ${eq.nome} erraram e ficaram parados.`);
+    }
+  } finally { ocupado = false; }
+  await proximaVez();
+}
+function perguntar(eq){
+  return new Promise(res => {
+    const q = proximaPergunta(); qAtual = q; eq.respostas++;
+    let respondido = false, timer = null;
+    abrirJanela(`<div class="vezJ" style="background:${eq.cor}">${nomeEq(eq)}</div>` + htmlPergunta(q, true) +
+      (jogo.tempo ? '<div class="relogioQ" id="relQ"></div>' : '') + '<div class="resQ" id="resQ"></div><div class="linha" id="botoesQ"></div>');
+    AV.falar(q.p);
+    const responder = o => {
+      if (respondido) return; respondido = true; clearInterval(timer);
+      const certo = o === q.c;
+      mostrarCerta(q, o);
+      if (certo){ eq.acertos++; ganhar(eq, 2); AV.fanfarra(); }
+      else AV.erro();
+      $('resQ').innerHTML = (certo ? `✅ Acertou! +${dobro() ? 4 : 2} 💎` : `${o === null ? '⏰ Acabou o tempo!' : '❌ Não foi dessa vez.'} A resposta certa é: <b>${AV.esc(q.c)}</b>.`) +
+        (q.ex ? `<div class="explica">💡 ${AV.esc(q.ex)}</div>` : '');
+      const rot = certo ? '🎲 Jogar o dado' : jogo.erroAnda ? '👣 Andar 1 casa' : '➡️ Passar a vez';
+      $('botoesQ').innerHTML = `<button class="principal" id="btnSegueQ">${rot}</button>`;
+      const seguir = () => { fecharJanela(); res(certo); };
+      $('btnSegueQ').onclick = seguir;
+      teclaJanela = k => { if (k === 'Enter' || k === ' ') seguir(); };
+    };
+    document.querySelectorAll('.caixaJ .ops button').forEach(b => b.onclick = () => responder(b.dataset.o));
+    teclaJanela = k => { const i = '1234'.indexOf(k) >= 0 ? '1234'.indexOf(k) : 'abcd'.indexOf(String(k).toLowerCase()); if (i >= 0 && q.ops[i] !== undefined) responder(q.ops[i]); };
+    if (jogo.tempo){
+      const fimEm = Date.now() + jogo.tempo * 1000;
+      const t = () => { const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000)); const el = $('relQ'); if (el) el.textContent = '⏳ ' + s + ' s'; if (s <= 5 && s > 0) AV.tique(); if (!s) responder(null); };
+      t(); timer = setInterval(t, 500);
+    }
+  });
+}
+function rolarDado(){
+  return new Promise(res => {
+    const d = $('dado'); d.classList.add('rolando'); let k = 0;
+    const tm = setInterval(() => {
+      desenharDado(1 + Math.floor(Math.random() * 6)); AV.tom(300 + Math.random() * 300, .03, 'square', .04);
+      if (++k > 10){ clearInterval(tm); const v = 1 + Math.floor(Math.random() * 6); desenharDado(v); d.classList.remove('rolando'); AV.tom(660, .12); setTimeout(() => res(v), 450); }
+    }, 80);
+  });
+}
+async function andar(eq, passos){   // devolve true se parou em cima do baú
+  let parouNoBau = false;
+  for (let s = 0; s < passos; s++){
+    eq.pos = (eq.pos + 1) % N;
+    desenharPeoes(); AV.tom(520 + s * 40, .06, 'triangle', .1);
+    await esperar(window.PAINEL_CALMO ? 150 : 300);
+    if (eq.pos === 0){ ganhar(eq, 2); log(`${eq.emoji} ${eq.nome} passaram pelo início: +2 💎`); }
+    if (eq.pos === jogo.bau){ if (s === passos - 1) parouNoBau = true; await bau(eq); }
+  }
+  marcarCasa(eq.pos);
+  return parouNoBau;
+}
+async function andarTras(eq, passos){
+  for (let s = 0; s < passos; s++){ eq.pos = (eq.pos - 1 + N) % N; desenharPeoes(); AV.tom(420 - s * 40, .06, 'triangle', .1); await esperar(window.PAINEL_CALMO ? 150 : 280); }
+  marcarCasa(eq.pos);
+}
+async function bau(eq){
+  if (eq.joias < CUSTO){ AV.avisar(`🗝️ Baú do tesouro: é preciso ter ${CUSTO} 💎 para trocar por 1 🏆 (${eq.nome}: ${eq.joias} 💎).`); await esperar(500); return; }
+  const sim = await escolher('🗝️', 'Baú do tesouro!', `${nomeEq(eq)}: trocar ${CUSTO} 💎 por 1 🏆?`, '🏆 Trocar', 'Agora não');
+  if (!sim) return;
+  eq.joias -= CUSTO; eq.trofeus++; desenharPlacar(); flutuar(eq, '+1 🏆');
+  AV.fanfarra(); AV.confete();
+  await cartaz('🏆', `${nomeEq(eq)} ganharam um troféu!`, 'O baú vai se esconder em outro lugar da ilha…', 2600);
+  jogo.bau = sortearBau(jogo.bau); desenharBau();
+  log(`🏆 ${eq.nome} trocaram ${CUSTO} 💎 por um troféu. O baú mudou de lugar!`);
+}
+async function efeitoCasa(eq){
+  const tipo = jogo.casas[eq.pos];
+  if (tipo === 'joia'){ const r = ganhar(eq, 3); log(`💎 ${eq.nome} ganharam ${r} joias.`); await cartaz('💎', 'Joias!', `${nomeEq(eq)} ganham ${r} 💎`, 1600); }
+  else if (tipo === 'perde'){ const r = ganhar(eq, -3); log(`💥 ${eq.nome} perderam ${-r} joias.`); await cartaz('💥', 'Ops!', r ? `${nomeEq(eq)} perdem ${-r} 💎` : `${nomeEq(eq)} não tinham joias para perder. Ufa!`, 1800); }
+  else if (tipo === 'sorte'){ const c = sortear(SORTE); log(`🍀 ${eq.nome}: ${c.t} ${c.d}`); AV.tom(880, .12, 'triangle', .14); await cartaz('🍀', 'Carta da sorte: ' + c.t, c.d); await c.f(eq); }
+  else if (tipo === 'azar'){ const c = sortear(AZAR); log(`⚡ ${eq.nome}: ${c.t} ${c.d}`); AV.erro(); await cartaz('⚡', 'Carta do azar: ' + c.t, c.d); await c.f(eq); }
+  else if (tipo === 'troca'){
+    const o = sortear(jogo.equipes.filter(x => x !== eq));
+    await cartaz('🔄', 'Troca de lugar!', `${nomeEq(eq)} trocam de lugar com ${nomeEq(o)}.`);
+    [eq.pos, o.pos] = [o.pos, eq.pos]; desenharPeoes(); AV.tom(600, .1); AV.tom(900, .1, 'triangle', .12, .1);
+    log(`🔄 ${eq.nome} trocaram de lugar com ${o.nome}.`);
+  }
+  else if (tipo === 'mini'){ await cartaz('🎪', 'Minijogo!', 'Todas as equipes participam.', 1800); await minijogo(); }
+  else if (tipo === 'redemoinho'){
+    let p; do { p = Math.floor(Math.random() * N); } while (p === eq.pos);
+    await cartaz('🌀', 'Redemoinho!', `${nomeEq(eq)} são levados para outra parte da ilha.`);
+    eq.pos = p; desenharPeoes(); marcarCasa(p); AV.tom(300, .5, 'sine', .12, 0, 900);
+    log(`🌀 O redemoinho levou ${eq.nome} para outra casa.`);
+  }
+}
+async function proximaVez(){
+  if (!jogo || jogo.terminado) return;
+  jogo.vez++;
+  if (jogo.vez >= jogo.equipes.length){
+    jogo.vez = 0;
+    const acabou = jogo.rodada;
+    if (jogo.mini && acabou % jogo.mini === 0 && acabou < jogo.rodadas){ desenharTudo(); await cartaz('🎪', 'Hora do minijogo!', 'Fim da rodada: todas as equipes participam.', 2000); await minijogo(); }
+    jogo.rodada++;
+    if (jogo.rodada > jogo.rodadas){ salvar(); return terminar(); }
+    if (jogo.rodadas >= 4 && jogo.rodada === jogo.rodadas - 1){ desenharTudo(); AV.fanfarra(); await cartaz('⭐', 'Reta final!', 'Nas 2 últimas rodadas, todas as joias valem em dobro!'); }
+  }
+  salvar(); prepararVez();
+}
+
+// ---------- minijogos (todas as equipes) ----------
+async function minijogo(){
+  const t = sortear(['relampago', 'embaralhada', 'duelo'].filter(x => x !== jogo.ultimoMini));
+  jogo.ultimoMini = t;
+  if (t === 'relampago') await miniRelampago(); else if (t === 'embaralhada') await miniEmbaralhada(); else await miniDuelo();
+  desenharPlacar(); salvar();
+}
+function chipsEquipes(lista){ return lista.map(e => `<button data-i="${jogo.equipes.indexOf(e)}" style="background:${e.cor}">${nomeEq(e)}</button>`).join(''); }
+function miniRelampago(){
+  return new Promise(res => {
+    const q = proximaPergunta(); qAtual = q;
+    abrirJanela(`<h2>⚡ Relâmpago!</h2><p class="dica" style="font-size:1.1rem">Todas as equipes respondem: escrevam a letra no papel ou mostrem com os dedos (1 a 4). Quem acertar ganha 3 💎.</p>` +
+      htmlPergunta(q, false) + '<div class="linha" id="botoesM"><button class="principal" id="btnRevela">👀 Mostrar a resposta</button></div>');
+    AV.falar(q.p);
+    const revelar = () => {
+      mostrarCerta(q, null); AV.tom(880, .15);
+      $('botoesM').innerHTML = `<div style="width:100%"><p style="font-size:1.2rem;margin:6px 0"><b>Quem acertou?</b> Toque nas equipes e confirme.</p><div class="chipsEq" id="chipsM">${chipsEquipes(jogo.equipes)}</div>` +
+        `<button class="principal" id="btnConfirma">✅ Confirmar</button>${q.ex ? `<div class="explica">💡 ${AV.esc(q.ex)}</div>` : ''}</div>`;
+      $('chipsM').querySelectorAll('button').forEach(b => b.onclick = () => b.classList.toggle('marcado'));
+      const confirmar = () => {
+        const sel = [...$('chipsM').querySelectorAll('button.marcado')].map(b => jogo.equipes[+b.dataset.i]);
+        sel.forEach(e => ganhar(e, 3));
+        if (sel.length){ AV.fanfarra(); log(`⚡ Relâmpago: ${sel.map(e => e.nome).join(', ')} ganharam joias.`); } else log('⚡ Relâmpago: ninguém acertou.');
+        fecharJanela(); res();
+      };
+      $('btnConfirma').onclick = confirmar;
+      teclaJanela = k => { if (k === 'Enter') confirmar(); };
+    };
+    $('btnRevela').onclick = revelar;
+    teclaJanela = k => { if (k === 'Enter' || k === ' ') revelar(); };
+  });
+}
+function embaralharPalavra(p){ let e = p; for (let i = 0; i < 12 && e === p; i++) e = embaralhar(p.split('')).join(''); return e; }
+function miniEmbaralhada(){
+  return new Promise(res => {
+    const w = sortear(PALAVRAS), emb = embaralharPalavra(w);
+    abrirJanela(`<h2>🔤 Palavra embaralhada!</h2><p class="dica" style="font-size:1.1rem">Quem descobrir primeiro, grite a palavra! Toque na equipe que acertou: +5 💎.</p>` +
+      `<div class="letras" id="letrasM">${emb.split('').map(l => `<span>${l}</span>`).join('')}</div>` +
+      `<div class="chipsEq" id="chipsM">${chipsEquipes(jogo.equipes)}</div><div class="linha" id="botoesM"><button id="btnNinguem">👀 Ninguém descobriu: mostrar</button></div>`);
+    let feito = false;
+    const revelar = eq => {
+      if (feito) return; feito = true;
+      $('letrasM').innerHTML = w.split('').map(l => `<span>${l}</span>`).join(''); $('letrasM').classList.add('revelada');
+      $('chipsM').querySelectorAll('button').forEach(b => { b.disabled = true; if (eq && +b.dataset.i === jogo.equipes.indexOf(eq)) b.classList.add('marcado'); });
+      if (eq){ ganhar(eq, 5); AV.fanfarra(); log(`🔤 ${eq.nome} descobriram a palavra ${w}!`); } else { AV.tom(400, .2); log(`🔤 A palavra era ${w}.`); }
+      $('botoesM').innerHTML = '<button class="principal" id="btnContinua">➡️ Continuar</button>';
+      $('btnContinua').onclick = () => { fecharJanela(); res(); };
+      teclaJanela = k => { if (k === 'Enter' || k === ' '){ fecharJanela(); res(); } };
+    };
+    $('chipsM').querySelectorAll('button').forEach(b => b.onclick = () => revelar(jogo.equipes[+b.dataset.i]));
+    $('btnNinguem').onclick = () => revelar(null);
+  });
+}
+function miniDuelo(){
+  return new Promise(res => {
+    const [a, b] = embaralhar(jogo.equipes).slice(0, 2), q = proximaPergunta(); qAtual = q;
+    abrirJanela(`<h2>🥊 Duelo!</h2><div class="duelo"><span style="background:${a.cor}">${nomeEq(a)}</span> × <span style="background:${b.cor}">${nomeEq(b)}</span></div>` +
+      '<p class="dica" style="font-size:1.1rem">Quem responder certo primeiro pega 3 💎 da outra equipe.</p>' + htmlPergunta(q, false) +
+      `<p style="margin:12px 0 0;font-weight:bold">Quem acertou primeiro?</p><div class="chipsEq" id="chipsM">${chipsEquipes([a, b])}<button data-i="-1" style="background:#7a849a">Ninguém acertou</button></div><div class="linha" id="botoesM"></div>`);
+    AV.falar(q.p);
+    let feito = false;
+    const decidir = i => {
+      if (feito) return; feito = true;
+      mostrarCerta(q, null);
+      $('chipsM').querySelectorAll('button').forEach(x => { x.disabled = true; if (+x.dataset.i === i) x.classList.add('marcado'); });
+      if (i >= 0){ const venc = jogo.equipes[i], perd = venc === a ? b : a, v = transferir(perd, venc, 3); AV.fanfarra(); log(`🥊 ${venc.nome} venceram o duelo e pegaram ${v} 💎 de ${perd.nome}.`); }
+      else { AV.tom(400, .2); log('🥊 Duelo sem vencedor.'); }
+      $('botoesM').innerHTML = (q.ex ? `<div class="explica" style="width:100%">💡 ${AV.esc(q.ex)}</div>` : '') + '<button class="principal" id="btnContinua">➡️ Continuar</button>';
+      $('btnContinua').onclick = () => { fecharJanela(); res(); };
+      teclaJanela = k => { if (k === 'Enter' || k === ' '){ fecharJanela(); res(); } };
+    };
+    $('chipsM').querySelectorAll('button').forEach(x => x.onclick = () => decidir(+x.dataset.i));
+  });
+}
+
+// ---------- fim ----------
+async function terminar(){
+  if (!jogo) return;
+  jogo.terminado = true; ocupado = true; salvar();
+  if (jogo.cerebro){
+    const max = Math.max(...jogo.equipes.map(e => e.acertos)), venc = jogo.equipes.filter(e => e.acertos === max && max > 0);
+    if (venc.length){ venc.forEach(e => { e.trofeus++; }); desenharPlacar(); AV.fanfarra(); await cartaz('🧠', 'Prêmio Cérebro da Ilha!', `${venc.map(nomeEq).join(' e ')} ${venc.length > 1 ? 'empataram com' : 'fizeram'} mais acertos (${max}) e ganham +1 🏆!`); }
+  }
+  salvar();
+  const ord = jogo.equipes.slice().sort((x, y) => y.trofeus - x.trofeus || y.joias - x.joias || y.acertos - x.acertos);
+  const empate = ord.length > 1 && ord[0].trofeus === ord[1].trofeus && ord[0].joias === ord[1].joias;
+  const med = ['🥇', '🥈', '🥉', '4º'];
+  $('podio').innerHTML = ord.map((e, i) => `<div class="linhaRank${i === 0 ? ' campeao' : ''}"><span class="pos">${med[i]}</span><span class="nomeRank">${nomeEq(e)}</span>` +
+    `<span class="pts">🏆 ${e.trofeus} · 💎 ${e.joias} <small>(${e.acertos} de ${e.respostas} acertos)</small></span></div>`).join('');
+  $('tituloFim').textContent = empate ? '🤝 Empate na festa!' : `🏆 ${ord[0].emoji} ${ord[0].nome} venceram a festa!`;
+  AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete();
+  AV.falar(empate ? 'Empate! Parabéns a todos!' : `${ord[0].nome} venceram a festa! Parabéns!`);
+  ocupado = false;
+}
+
+// ---------- ajustes do professor ----------
+$('placar').onclick = e => {
+  const card = e.target.closest('.eqCard'); if (!card || ocupado || !$('janela').hidden) return;
+  const eq = jogo.equipes[+card.dataset.i];
+  abrirJanela(`<h2>${nomeEq(eq)}</h2><p class="textoCartaz">🏆 ${eq.trofeus} · 💎 ${eq.joias}</p><div class="linha ajusteBtns">` +
+    '<button data-a="j3">+3 💎</button><button data-a="j-3">−3 💎</button><button data-a="t1">+1 🏆</button><button data-a="t-1">−1 🏆</button></div><div class="linha"><button class="principal" id="btnFechaAj">Fechar</button></div>');
+  $('caixaJ').querySelectorAll('[data-a]').forEach(b => b.onclick = () => {
+    const a = b.dataset.a, n = +a.slice(1);
+    if (a[0] === 'j'){ eq.joias = Math.max(0, eq.joias + n); flutuar(eq, (n > 0 ? '+' : '−') + Math.abs(n) + ' 💎'); }
+    else { eq.trofeus = Math.max(0, eq.trofeus + n); flutuar(eq, (n > 0 ? '+' : '−') + '1 🏆'); }
+    desenharPlacar(); salvar(); $('caixaJ').querySelector('.textoCartaz').textContent = `🏆 ${eq.trofeus} · 💎 ${eq.joias}`;
+  });
+  $('btnFechaAj').onclick = fecharJanela;
+  teclaJanela = k => { if (k === 'Enter' || k === 'Escape') fecharJanela(); };
+};
+
+// ---------- botões e teclado ----------
+$('btnComecar').onclick = comecar;
+$('btnAcao').onclick = jogarVez;
+$('btnSair').onclick = () => { if (!ocupado && confirm('Terminar a festa agora e ver o resultado?')) terminar(); };
+$('btnDeNovo').onclick = () => { AV.mostrarTela('tConfig'); partidaSalva(); };
+AV.botaoSom($('somLugar'));
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (!$('janela').hidden){ if (teclaJanela){ e.preventDefault(); teclaJanela(e.key); } return; }
+  if ($('tJogo').classList.contains('ativa') && (e.key === 'Enter' || e.key === ' ') && !$('btnAcao').disabled){ e.preventDefault(); jogarVez(); }
+});
+partidaSalva();
+window.ILHA = {jogo: () => jogo, pergunta: () => qAtual};   // usado nos testes
+</script>
+</body>
+</html>
