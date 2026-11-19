@@ -24,6 +24,21 @@
   #pecas button{font-size:clamp(1.3rem,3vw,2rem);padding:12px 22px;background:var(--azul);color:#fff}
   #pecas button.usada{visibility:hidden}
   #resultado{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em;max-width:1000px;margin:0 auto}
+  #textoMontado{max-width:1050px;margin:10px auto;background:#fff;border-left:6px solid var(--verde);border-radius:12px;padding:12px 18px;font-size:clamp(1.05rem,2.2vw,1.4rem);line-height:1.55}
+  .navegar button{min-width:120px}
+  /* frases longas (parágrafos, textos): lista de cima para baixo, mais fácil de ler */
+  #tJogo.longo #pista{flex-direction:column;align-items:stretch}
+  #tJogo.longo .ponta{min-width:0;padding:4px 10px;font-size:1rem}
+  #tJogo.longo #slots{flex-direction:column;align-items:stretch}
+  #tJogo.longo #slots::before{display:none}
+  #tJogo.longo .slot{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;text-align:left;font-size:clamp(1rem,2vw,1.32rem);font-weight:600;min-height:54px;padding:6px 14px}
+  #tJogo.longo .slot small{order:-1;min-width:30px;font-size:.95rem;opacity:.6}
+  #tJogo.longo #pecas{flex-direction:column;align-items:stretch;max-width:1150px;margin:10px auto}
+  #tJogo.longo #pecas button{font-size:clamp(1rem,2vw,1.28rem);text-align:left;font-weight:600;padding:10px 16px}
+  #tJogo.longo #pecas button.usada{display:none}
+  #textoFinal{max-width:1050px;margin:10px auto;background:#fff;border-radius:18px;padding:14px 22px;box-shadow:0 4px 0 #0001}
+  #textoFinal h2{text-align:left;margin:0 0 6px}
+  #textoFinal p{font-size:clamp(1.05rem,2.1vw,1.35rem);line-height:1.6;text-indent:2em;margin:8px 0;text-align:justify}
   @media (max-width:800px){ #pista{flex-direction:column} }
 </style>
 <script src="visual.js"></script>
@@ -43,10 +58,18 @@
     <div id="infoJson" class="dica"></div>
   </div>
   <div class="cartao">
-    <h2>2. Quem joga</h2>
+    <h2>2. Quais sequências</h2>
+    <label id="lblTema" hidden>Tema: <select id="selTema"></select></label>
+    <label id="lblParte" hidden>Parte: <select id="selParte"></select></label>
+    <label id="lblQtd">Quantas: <select id="selQtd"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="0">todas</option></select></label>
+    <div id="infoFiltro" class="dica"></div>
+  </div>
+  <div class="cartao">
+    <h2>3. Quem joga</h2>
     <label>Equipes: <select id="selEquipes"><option value="0" selected>A turma toda junta</option><option value="2">2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
     <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
-    <p class="dica">Toque nas palavras na ordem certa, da ponta esquerda para a direita. Acertou de primeira = 2 pontos; na segunda tentativa = 1.</p>
+    <p class="dica">Toque nas peças (palavras ou frases) na ordem certa, do começo para o fim. Acertou de primeira = 2 pontos; na segunda tentativa = 1.
+      Use ⏮️ <b>Voltar</b> e ⏭️ <b>Avançar</b> (ou as setas ← → do teclado e o passador de slides) para mudar de sequência quando precisar.</p>
   </div>
   <button id="btnComecar" class="principal">▶️ Começar</button>
 </section>
@@ -58,16 +81,22 @@
   <div id="pista"><div class="ponta" id="esq"></div><div id="slots"></div><div class="ponta" id="dir"></div></div>
   <div id="pecas"></div>
   <div id="resultado"></div>
-  <div class="linha">
+  <div id="textoMontado" hidden></div>
+  <div class="linha navegar">
+    <button id="btnVoltar" title="Voltar para a sequência anterior (seta ←)">⏮️ Voltar</button>
     <button id="btnLimpar">↩️ Recomeçar</button>
+    <button id="btnLer" hidden>🔊 Ler</button>
     <button id="btnProxima" class="principal" hidden>➡️ Próxima</button>
+    <button id="btnAvancar" title="Ir para a próxima sequência (seta →)">⏭️ Avançar</button>
     <button id="btnSair">⏹️ Terminar</button>
   </div>
 </section>
 
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
+  <div id="resumoFim" class="dica" style="text-align:center;font-size:1.1rem"></div>
   <div id="ranking" class="ranking"></div>
+  <div id="textoFinal" hidden></div>
   <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
@@ -76,40 +105,89 @@
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
-let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, colocadas = [], pecas = [], resolvido = false, tentativas = 0;
+let dados = null, lista = [], estados = [], idx = 0, atual = null, placar = null, colocadas = [], pecas = [], resolvido = false, tentativas = 0, modoTema = false;
 
 function carregar(d, origem){
   if (!d || !Array.isArray(d.sequencias)) return AV.avisar('JSON inválido: falta a lista "sequencias".');
   const seqs = d.sequencias.filter(s => s && Array.isArray(s.itens) && s.itens.length >= 2).map(s => ({
-    titulo: String(s.titulo || 'Coloque em ordem'), esquerda: s.esquerda || '⬅️', direita: s.direita || '➡️', itens: s.itens.map(String), explica: s.explica || ''}));
+    titulo: String(s.titulo || 'Coloque em ordem'), esquerda: s.esquerda || '⬅️', direita: s.direita || '➡️', itens: s.itens.map(String), explica: s.explica || '',
+    tema: s.tema ? String(s.tema) : '', parte: s.parte ? String(s.parte) : ''}));
   if (!seqs.length) return AV.avisar('Nenhuma sequência válida.');
   dados = {titulo: d.titulo || 'Ordene', seqs};
   $('tituloConfig').textContent = '📶 ' + dados.titulo; document.title = dados.titulo;
-  $('infoJson').textContent = `${dados.titulo} • ${seqs.length} sequências` + (origem ? ` • ${origem}` : '');
+  const pecasTotal = seqs.reduce((t, s) => t + s.itens.length, 0);
+  $('infoJson').textContent = `${dados.titulo} • ${seqs.length} sequências • ${pecasTotal} peças` + (origem ? ` • ${origem}` : '');
+  // filtros opcionais: "tema" e "parte" em cada sequência
+  const temas = [...new Set(seqs.map(s => s.tema).filter(Boolean))], partes = [...new Set(seqs.map(s => s.parte).filter(Boolean))];
+  $('selTema').innerHTML = '<option value="">🎲 Vários temas, sorteados</option>' + temas.map(t => `<option value="${AV.esc(t)}">${AV.esc(t)}</option>`).join('');
+  $('selParte').innerHTML = '<option value="">Todas as partes</option>' + partes.map(p => `<option value="${AV.esc(p)}">${AV.esc(p)}</option>`).join('');
+  $('lblTema').hidden = !temas.length; $('lblParte').hidden = !partes.length;
+  $('selQtd').value = seqs.length > 12 ? '10' : '0';
+  infoFiltro();
 }
+function filtradas(){
+  const tema = $('selTema').value, parte = $('selParte').value;
+  return dados.seqs.filter(s => (!tema || s.tema === tema) && (!parte || s.parte === parte));
+}
+function infoFiltro(){
+  if (!dados) return;
+  const n = filtradas().length, tema = $('selTema').value;
+  $('lblQtd').hidden = !!tema;
+  $('infoFiltro').textContent = tema ? `O tema "${tema}" tem ${n} sequência(s), jogadas na ordem do texto. No fim aparece o texto completo.` : `${n} sequência(s) disponíveis com essas opções.`;
+}
+['selTema', 'selParte', 'selQtd'].forEach(id => $(id).addEventListener('change', infoFiltro));
 AV.prepararSeletorJson({tipo: 'morfo-ordene', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
 $('btnModelo').onclick = () => AV.baixarArquivo('dados/morfo-adv-linha-tempo.json', 'modelo-ordene.json');
 
 function comecar(){
   if (!dados) return AV.avisar('Carregue um JSON.');
+  let s = filtradas();
+  if (!s.length) return AV.avisar('Nenhuma sequência com essas opções.');
+  modoTema = !!$('selTema').value;
+  if (!modoTema){ s = M.embaralhar(s); const q = +$('selQtd').value; if (q) s = s.slice(0, q); }
   AV.som = $('chkSom').checked;
-  fila = dados.seqs.slice(); total = fila.length; n = 0;
+  lista = s; idx = 0;
+  estados = s.map(() => ({resolvido: false, pontuado: false, pulada: false, msg: ''}));
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
-  AV.mostrarTela('tJogo'); proxima();
+  AV.mostrarTela('tJogo'); mostrar(true);
 }
-function proxima(){
-  if (!fila.length) return fim();
-  atual = fila.shift(); n++; resolvido = false; tentativas = 0;
-  colocadas = atual.itens.map(() => null);
-  // embaralha até ficar fora da ordem certa
-  let emb, k = 0; do { emb = M.embaralhar(atual.itens); } while (k++ < 20 && emb.join('|') === atual.itens.join('|'));
-  pecas = emb.map((t, i) => ({t, i}));
-  $('contador').textContent = `${placar.prefixo()}Sequência ${n} de ${total}`;
+const ehLongo = s => s.itens.some(t => t.length > 40) || s.itens.join('').length / s.itens.length > 28;
+function mostrar(falar){
+  atual = lista[idx]; const e = estados[idx];
+  resolvido = e.resolvido; tentativas = 0;
+  $('tJogo').classList.toggle('longo', ehLongo(atual));
+  if (resolvido){ pecas = atual.itens.map((t, i) => ({t, i})); colocadas = pecas.slice(); }
+  else {
+    colocadas = atual.itens.map(() => null);
+    // embaralha até ficar fora da ordem certa
+    let emb, k = 0; do { emb = M.embaralhar(atual.itens); } while (k++ < 20 && emb.join('|') === atual.itens.join('|'));
+    pecas = emb.map((t, i) => ({t, i}));
+  }
+  $('contador').textContent = `${placar.prefixo()}Sequência ${idx + 1} de ${lista.length}` + (atual.tema && !modoTema ? ` • ${atual.tema}` : '');
   $('tituloSeq').textContent = atual.titulo;
   $('esq').textContent = atual.esquerda; $('dir').textContent = atual.direita;
-  $('resultado').textContent = ''; $('btnProxima').hidden = true;
+  $('resultado').textContent = e.msg;
   desenhar();
-  if (AV.som) AV.falar(atual.titulo);
+  if (resolvido) $('slots').querySelectorAll('.slot').forEach(s => s.classList.add('certo'));
+  atualizarBotoes();
+  if (falar && AV.som && !resolvido) AV.falar(atual.titulo);
+}
+function atualizarBotoes(){
+  const ultimo = idx === lista.length - 1, longo = ehLongo(atual);
+  $('btnVoltar').disabled = idx === 0;
+  $('btnAvancar').textContent = ultimo ? '🏁 Finalizar' : '⏭️ Avançar';
+  $('btnProxima').hidden = !resolvido; $('btnProxima').textContent = ultimo ? '🏆 Ver resultado' : '➡️ Próxima';
+  $('btnLimpar').textContent = resolvido ? '🔁 Montar de novo' : '↩️ Recomeçar';
+  $('btnLer').hidden = !resolvido;
+  $('textoMontado').hidden = !(resolvido && longo);
+  $('textoMontado').textContent = atual.itens.join(' ');
+}
+function irPara(novo, avancando){
+  if (!lista.length || novo < 0) return;
+  if (avancando && !estados[idx].resolvido) estados[idx].pulada = true;
+  if (novo >= lista.length) return fim();
+  if (avancando) placar.proxima();   // a vez das equipes só gira quando a turma segue em frente
+  idx = novo; mostrar(true);
 }
 function desenhar(){
   $('slots').innerHTML = colocadas.map((p, i) => `<div class="slot ${p ? 'cheio' : ''}" data-i="${i}">${p ? AV.esc(p.t) : ''}<small>${i + 1}º</small></div>`).join('');
@@ -125,37 +203,60 @@ function desenhar(){
 }
 function conferir(){
   const certo = colocadas.every((p, i) => p.t === atual.itens[i]);
-  const slots = $('slots').querySelectorAll('.slot');
+  const slots = $('slots').querySelectorAll('.slot'), e = estados[idx];
   if (certo){
-    resolvido = true; slots.forEach(s => s.classList.add('certo'));
-    placar.pontuar(tentativas === 0 ? 2 : 1);
-    $('resultado').textContent = `✅ Ordem certa! ${atual.explica}`;
-    AV.fanfarra(); AV.confete(); if (AV.som) AV.falar(atual.itens.join(', ') + '. ' + atual.explica);
-    $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+    resolvido = true; e.resolvido = true; e.pulada = false; slots.forEach(s => s.classList.add('certo'));
+    if (!e.pontuado){ placar.pontuar(tentativas === 0 ? 2 : 1); e.pontuado = true; }
+    e.msg = `✅ Ordem certa! ${atual.explica}`; $('resultado').textContent = e.msg;
+    AV.fanfarra(); AV.confete();
+    if (AV.som) AV.falar(ehLongo(atual) ? 'Ordem certa!' : atual.itens.join(', ') + '. ' + atual.explica);
+    atualizarBotoes();
   } else {
     tentativas++;
     colocadas.forEach((p, i) => { if (p.t !== atual.itens[i]) slots[i].classList.add('errado'); });
     AV.erro();
     if (tentativas >= 2){
-      resolvido = true;
+      resolvido = true; e.resolvido = true; e.pontuado = true; e.pulada = false;
+      e.msg = `💡 A ordem certa é: ${atual.itens.join(' → ')}. ${atual.explica}`;
       setTimeout(() => {
+        if (lista[idx] !== atual) return;
         colocadas = atual.itens.map(t => pecas.find(p => p.t === t));
         desenhar(); $('slots').querySelectorAll('.slot').forEach(s => s.classList.add('certo'));
       }, 1200);
-      $('resultado').textContent = `💡 A ordem certa é: ${atual.itens.join(' → ')}. ${atual.explica}`;
-      $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+      $('resultado').textContent = ehLongo(atual) ? `💡 Vejam a ordem certa. ${atual.explica}` : e.msg;
+      if (ehLongo(atual)) e.msg = `💡 ${atual.explica}`;
+      atualizarBotoes();
     } else {
       $('resultado').textContent = '🤔 Quase! As vermelhas estão fora do lugar. Tentem de novo.';
-      setTimeout(() => { if (!resolvido){ colocadas = colocadas.map((p, i) => p && p.t === atual.itens[i] ? p : null); desenhar(); } }, 1300);
+      setTimeout(() => { if (!resolvido && lista[idx] === atual){ colocadas = colocadas.map((p, i) => p && p.t === atual.itens[i] ? p : null); desenhar(); } }, 1300);
     }
   }
 }
-function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking'), total * 2); AV.fanfarra(); AV.confete(); }
+function fim(){
+  const montadas = estados.filter(e => e.resolvido).length, puladas = estados.filter(e => e.pulada).length;
+  $('resumoFim').textContent = `${montadas} de ${lista.length} sequência(s) montada(s)` + (puladas ? ` • ${puladas} pulada(s)` : '');
+  AV.mostrarTela('tFim'); placar.ranking($('ranking'), lista.length * 2);
+  $('textoFinal').hidden = !modoTema;
+  if (modoTema) $('textoFinal').innerHTML = `<h2>📄 Texto completo: ${AV.esc(lista[0].tema)}</h2>` + lista.map(s => `<p>${AV.esc(s.itens.join(' '))}</p>`).join('');
+  AV.fanfarra(); AV.confete();
+}
 $('btnComecar').onclick = comecar;
-$('btnLimpar').onclick = () => { if (!resolvido){ colocadas = colocadas.map(() => null); desenhar(); } };
-$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnLimpar').onclick = () => {
+  if (resolvido){ estados[idx].resolvido = false; estados[idx].msg = ''; mostrar(false); return; }   // montar de novo (os pontos não contam outra vez)
+  colocadas = colocadas.map(() => null); desenhar();
+};
+$('btnProxima').onclick = () => irPara(idx + 1, true);
+$('btnAvancar').onclick = () => irPara(idx + 1, true);
+$('btnVoltar').onclick = () => irPara(idx - 1, false);
+$('btnLer').onclick = () => AV.falar(atual.itens.join(' '));
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+// setas do teclado e passador de slides (que envia PageUp/PageDown)
+document.addEventListener('keydown', ev => {
+  if (!$('tJogo').classList.contains('ativa') || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  if (ev.key === 'ArrowRight' || ev.key === 'PageDown'){ ev.preventDefault(); irPara(idx + 1, true); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp'){ ev.preventDefault(); irPara(idx - 1, false); }
+});
 </script>
 </body>
 </html>

@@ -2,41 +2,1437 @@
   "titulo": "Monte o parágrafo dissertativo",
   "sequencias": [
     {
-      "titulo": "Ordene a introdução",
+      "titulo": "Introdução — Evasão escolar",
+      "tema": "Evasão escolar",
+      "parte": "Introdução",
       "esquerda": "início",
       "direita": "fim",
       "itens": [
         "No Brasil, milhões de jovens abandonam a escola antes de concluir o ensino médio.",
         "Esse cenário é preocupante, pois compromete o futuro de toda uma geração.",
-        "Entre as causas do problema, destacam-se a necessidade de trabalhar e o desinteresse pelas aulas."
+        "Entre as causas desse problema, destacam-se a necessidade de trabalhar e o desinteresse pelas aulas."
       ],
-      "explica": "Contextualização → tese → apresentação dos argumentos."
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
     },
     {
-      "titulo": "Ordene o desenvolvimento",
+      "titulo": "Desenvolvimento — Evasão escolar",
+      "tema": "Evasão escolar",
+      "parte": "Desenvolvimento",
       "esquerda": "início",
       "direita": "fim",
       "itens": [
         "Em primeiro lugar, a necessidade de complementar a renda afasta muitos jovens da sala de aula.",
-        "Segundo pesquisas do IBGE, precisar trabalhar é o principal motivo do abandono escolar entre os jovens.",
+        "Isso acontece porque muitas famílias dependem do salário dos filhos adolescentes para pagar as contas.",
+        "Prova dessa dependência é que, segundo o IBGE, precisar trabalhar é o principal motivo do abandono escolar entre os jovens.",
         "Assim, sem apoio financeiro, estudar deixa de ser prioridade para muitas famílias."
       ],
-      "explica": "Tópico frasal (argumento) → repertório que comprova → fechamento ligado à tese."
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (dados do IBGE) → fechamento ligado à tese."
     },
     {
-      "titulo": "Ordene a conclusão (proposta de intervenção)",
+      "titulo": "Conclusão — Evasão escolar",
+      "tema": "Evasão escolar",
+      "parte": "Conclusão",
       "esquerda": "início",
       "direita": "fim",
       "itens": [
         "Portanto, é urgente combater a evasão escolar no país.",
-        "Para isso, o Ministério da Educação deve ampliar programas de bolsa para estudantes,",
+        "Para isso, o Ministério da Educação deve ampliar os programas de bolsa para estudantes do ensino médio,",
         "por meio de parcerias com estados e municípios,",
-        "a fim de que os jovens possam permanecer na escola."
+        "a fim de que os jovens possam permanecer na escola.",
+        "Dessa forma, a educação deixará de ser interrompida pela pobreza."
       ],
-      "explica": "Retomada da tese → agente + ação → modo/meio → finalidade."
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Exclusão digital",
+      "tema": "Exclusão digital",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Na era da informação, a internet tornou-se essencial para estudar, trabalhar e acessar serviços públicos.",
+        "No entanto, muitos brasileiros ainda vivem desconectados, o que aprofunda as desigualdades.",
+        "Entre as causas desse problema, destacam-se o alto custo dos aparelhos e a falta de infraestrutura em regiões afastadas."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Exclusão digital",
+      "tema": "Exclusão digital",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, o preço de celulares, computadores e planos de internet exclui as famílias mais pobres.",
+        "Isso acontece porque, para quem ganha pouco, a conexão compete com gastos básicos, como comida e aluguel.",
+        "Essa dificuldade ficou evidente durante a pandemia de covid-19, quando muitos estudantes não conseguiram acompanhar as aulas remotas.",
+        "Assim, a falta de acesso digital se transforma em falta de oportunidades."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a pandemia de covid-19) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Exclusão digital",
+      "tema": "Exclusão digital",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso democratizar o acesso à internet no Brasil.",
+        "Para isso, o governo federal deve oferecer internet gratuita em escolas, bibliotecas e praças,",
+        "por meio de parcerias com empresas de telecomunicação,",
+        "a fim de garantir que todos possam estudar e trabalhar conectados.",
+        "Dessa forma, a tecnologia será uma ponte, e não uma barreira."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Fake news e desinformação",
+      "tema": "Fake news e desinformação",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Com as redes sociais, qualquer pessoa pode publicar e compartilhar informações em poucos segundos.",
+        "Contudo, essa facilidade favorece a disseminação de notícias falsas, um problema que ameaça a democracia.",
+        "Esse desafio é agravado pela falta de educação midiática e pelo interesse de quem lucra com a desinformação."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Fake news e desinformação",
+      "tema": "Fake news e desinformação",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos usuários não sabem verificar a origem do que leem e compartilham.",
+        "Isso acontece porque a escola raramente ensina a checar fontes, datas e autores de uma notícia.",
+        "Essa falta de preparo explica por que boatos sobre vacinas e eleições se espalharam com tanta rapidez nos últimos anos.",
+        "Assim, sem educação midiática, o cidadão se torna presa fácil da manipulação."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (os boatos sobre vacinas e eleições) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Fake news e desinformação",
+      "tema": "Fake news e desinformação",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário combater a desinformação no país.",
+        "Para isso, as escolas devem incluir a educação midiática no currículo,",
+        "por meio de oficinas de checagem de fatos e de leitura crítica,",
+        "para que os estudantes aprendam a identificar notícias falsas.",
+        "Dessa forma, a informação voltará a ser um instrumento de cidadania."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Estigma das doenças mentais (ENEM 2020)",
+      "tema": "Estigma das doenças mentais (ENEM 2020)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Segundo a Organização Mundial da Saúde, a saúde é um estado de completo bem-estar físico, mental e social.",
+        "No Brasil, porém, as doenças mentais ainda são cercadas de preconceito, o que é um grave problema.",
+        "Esse estigma é sustentado pela desinformação e pela falta de serviços de atendimento psicológico."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Estigma das doenças mentais (ENEM 2020)",
+      "tema": "Estigma das doenças mentais (ENEM 2020)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a desinformação faz com que transtornos como a depressão sejam vistos como frescura ou fraqueza.",
+        "Isso acontece porque pouco se fala sobre saúde mental nas escolas, nas famílias e nos meios de comunicação.",
+        "Essa falta de diálogo é perigosa, já que, de acordo com a OMS, a depressão é uma das principais causas de incapacidade no mundo.",
+        "Assim, o preconceito agrava doenças que poderiam ser tratadas."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Organização Mundial da Saúde (OMS)) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Estigma das doenças mentais (ENEM 2020)",
+      "tema": "Estigma das doenças mentais (ENEM 2020)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é fundamental combater o estigma associado às doenças mentais.",
+        "Para isso, o Ministério da Saúde deve promover campanhas de conscientização,",
+        "por meio da televisão, das redes sociais e das escolas,",
+        "a fim de esclarecer que os transtornos mentais são doenças que têm tratamento.",
+        "Dessa forma, mais pessoas se sentirão seguras para pedir ajuda."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Uso excessivo das redes sociais",
+      "tema": "Uso excessivo das redes sociais",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "As redes sociais fazem parte da rotina de milhões de brasileiros, sobretudo dos jovens.",
+        "Entretanto, o uso excessivo dessas plataformas tem prejudicado a saúde e as relações pessoais.",
+        "Esse problema está ligado ao funcionamento dos algoritmos e à busca constante por aprovação."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Uso excessivo das redes sociais",
+      "tema": "Uso excessivo das redes sociais",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, os algoritmos são programados para prender a atenção do usuário pelo maior tempo possível.",
+        "Isso acontece porque, quanto mais tempo as pessoas passam conectadas, mais anúncios as empresas conseguem vender.",
+        "Esse modelo de negócio é denunciado no documentário \"O Dilema das Redes\", em que ex-funcionários de grandes empresas de tecnologia revelam como as plataformas manipulam o comportamento.",
+        "Assim, o usuário deixa de controlar o próprio tempo."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o documentário \"O Dilema das Redes\") → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Uso excessivo das redes sociais",
+      "tema": "Uso excessivo das redes sociais",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso estimular um uso mais equilibrado das redes sociais.",
+        "Para isso, escolas e famílias devem orientar crianças e jovens sobre os riscos do uso excessivo,",
+        "por meio de palestras, rodas de conversa e combinados sobre o tempo de tela,",
+        "a fim de preservar a saúde mental e o convívio presencial.",
+        "Dessa forma, a tecnologia servirá às pessoas, e não o contrário."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Bullying e cyberbullying",
+      "tema": "Bullying e cyberbullying",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "O ambiente escolar deveria ser um espaço de acolhimento e aprendizagem.",
+        "Na prática, porém, muitos estudantes sofrem bullying, o que é um problema grave.",
+        "Essa violência é alimentada pela intolerância às diferenças e pelo anonimato da internet."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Bullying e cyberbullying",
+      "tema": "Bullying e cyberbullying",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a intolerância às diferenças transforma características físicas e culturais em motivo de ataque.",
+        "Isso acontece porque muitas crianças não aprendem, em casa e na escola, a respeitar quem é diferente.",
+        "Para enfrentar essa intolerância, a Lei 13.185, de 2015, criou o Programa de Combate à Intimidação Sistemática, que obriga as escolas a prevenir o bullying.",
+        "Assim, a lei existe, mas precisa sair do papel."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Lei 13.185, de 2015) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Bullying e cyberbullying",
+      "tema": "Bullying e cyberbullying",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente combater o bullying nas escolas brasileiras.",
+        "Para isso, as escolas devem criar projetos permanentes de respeito às diferenças,",
+        "por meio de debates, atividades em grupo e apoio psicológico às vítimas,",
+        "para que todos os estudantes se sintam seguros.",
+        "Dessa forma, a escola cumprirá seu papel de formar cidadãos."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Violência contra a mulher (ENEM 2015)",
+      "tema": "Violência contra a mulher (ENEM 2015)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A Lei Maria da Penha, criada em 2006, é considerada um marco na proteção das mulheres brasileiras.",
+        "Apesar disso, a violência contra a mulher persiste no país, o que é inaceitável.",
+        "Esse problema tem raízes no machismo histórico e na dificuldade de denunciar o agressor."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Violência contra a mulher (ENEM 2015)",
+      "tema": "Violência contra a mulher (ENEM 2015)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, o machismo histórico ainda faz com que muitos homens tratem a mulher como propriedade.",
+        "Isso acontece porque, durante séculos, a sociedade brasileira foi organizada em torno da autoridade masculina.",
+        "Essa herança patriarcal é discutida por Simone de Beauvoir, para quem \"ninguém nasce mulher: torna-se mulher\", ou seja, os papéis de gênero são construídos pela sociedade.",
+        "Assim, combater a violência exige mudar mentalidades, e não apenas punir."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (Simone de Beauvoir) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Violência contra a mulher (ENEM 2015)",
+      "tema": "Violência contra a mulher (ENEM 2015)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário enfrentar a violência contra a mulher com firmeza.",
+        "Para isso, o poder público deve ampliar as delegacias da mulher e as casas de acolhimento,",
+        "por meio de investimentos em todos os municípios,",
+        "a fim de que as vítimas possam denunciar e recomeçar a vida em segurança.",
+        "Dessa forma, a lei deixará de ser apenas uma promessa."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Valorização da herança africana (ENEM 2024)",
+      "tema": "Valorização da herança africana (ENEM 2024)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A cultura brasileira foi profundamente marcada pela herança dos povos africanos, presente na música, na culinária, na religião e na língua.",
+        "No entanto, essa contribuição ainda é pouco valorizada, o que reforça o racismo no país.",
+        "Esse desafio decorre do apagamento histórico e da pouca presença dessa história nas escolas."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Valorização da herança africana (ENEM 2024)",
+      "tema": "Valorização da herança africana (ENEM 2024)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a história do Brasil foi contada, por muito tempo, apenas do ponto de vista europeu.",
+        "Isso acontece porque, após a abolição, em 1888, a população negra não recebeu terras, educação nem reconhecimento.",
+        "Para corrigir esse apagamento, a Lei 10.639, de 2003, tornou obrigatório o ensino de história e cultura afro-brasileira nas escolas.",
+        "Assim, valorizar a herança africana é também reparar uma injustiça histórica."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Lei 10.639, de 2003) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Valorização da herança africana (ENEM 2024)",
+      "tema": "Valorização da herança africana (ENEM 2024)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso valorizar a herança africana no Brasil.",
+        "Para isso, as secretarias de educação devem garantir o cumprimento da Lei 10.639,",
+        "por meio da formação de professores e da compra de materiais didáticos adequados,",
+        "para que os estudantes conheçam e respeitem as raízes africanas do país.",
+        "Dessa forma, o Brasil dará um passo importante contra o racismo."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Inclusão de pessoas com deficiência",
+      "tema": "Inclusão de pessoas com deficiência",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A Lei Brasileira de Inclusão, de 2015, assegura às pessoas com deficiência os mesmos direitos dos demais cidadãos.",
+        "Na realidade, porém, essas pessoas ainda enfrentam muitas barreiras, o que fere a cidadania.",
+        "Entre as causas desse problema, destacam-se a falta de acessibilidade e o preconceito."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Inclusão de pessoas com deficiência",
+      "tema": "Inclusão de pessoas com deficiência",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a falta de acessibilidade impede que muitas pessoas com deficiência estudem, trabalhem e se divirtam.",
+        "Isso acontece porque calçadas, transportes e prédios ainda são construídos sem rampas, elevadores ou sinalização adequada.",
+        "Essas barreiras físicas contrariam a própria Constituição Federal, que garante a todos o direito de ir e vir.",
+        "Assim, a cidade sem acessibilidade exclui uma parte importante da população."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Constituição Federal) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Inclusão de pessoas com deficiência",
+      "tema": "Inclusão de pessoas com deficiência",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente garantir a inclusão das pessoas com deficiência.",
+        "Para isso, as prefeituras devem adaptar calçadas, transportes e prédios públicos,",
+        "por meio de obras de acessibilidade e da fiscalização das construções,",
+        "a fim de que todos possam circular com autonomia.",
+        "Dessa forma, a inclusão deixará de existir apenas no papel."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Educação de surdos (ENEM 2017)",
+      "tema": "Educação de surdos (ENEM 2017)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Desde 2002, a Língua Brasileira de Sinais, a Libras, é reconhecida por lei como meio de comunicação da comunidade surda.",
+        "Mesmo assim, a formação educacional dos surdos ainda enfrenta grandes desafios no país.",
+        "Esse problema se deve à falta de professores bilíngues e ao desconhecimento da Libras pela sociedade."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Educação de surdos (ENEM 2017)",
+      "tema": "Educação de surdos (ENEM 2017)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, faltam profissionais preparados para ensinar estudantes surdos.",
+        "Isso acontece porque poucos cursos de formação de professores oferecem uma preparação sólida em Libras.",
+        "Essa carência faz com que muitos alunos surdos dependam apenas de um intérprete, quando há um, para acompanhar as aulas.",
+        "Assim, o direito à educação fica comprometido para essa população."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a falta de professores bilíngues) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Educação de surdos (ENEM 2017)",
+      "tema": "Educação de surdos (ENEM 2017)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso melhorar a educação dos surdos no Brasil.",
+        "Para isso, o Ministério da Educação deve ampliar a formação de professores bilíngues,",
+        "por meio de cursos gratuitos de Libras e de pedagogia bilíngue,",
+        "a fim de garantir uma aprendizagem de qualidade aos estudantes surdos.",
+        "Dessa forma, a escola será realmente para todos."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Respeito à pessoa idosa",
+      "tema": "Respeito à pessoa idosa",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "De acordo com o IBGE, a população brasileira está envelhecendo rapidamente.",
+        "Essa mudança exige atenção, pois muitos idosos ainda sofrem abandono e desrespeito.",
+        "Esse problema é agravado pela desvalorização da velhice e pela falta de políticas públicas de cuidado."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Respeito à pessoa idosa",
+      "tema": "Respeito à pessoa idosa",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a sociedade de consumo costuma valorizar apenas quem é jovem e produtivo.",
+        "Isso acontece porque a pessoa idosa é vista, muitas vezes, como alguém que não tem mais nada a oferecer.",
+        "Contra esse desprezo, o Estatuto da Pessoa Idosa garante prioridade no atendimento e proteção contra a violência e o abandono.",
+        "Assim, respeitar o idoso é cumprir a lei e reconhecer a sua história."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o Estatuto da Pessoa Idosa) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Respeito à pessoa idosa",
+      "tema": "Respeito à pessoa idosa",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário valorizar a pessoa idosa no Brasil.",
+        "Para isso, as prefeituras devem criar centros de convivência e programas de cuidado,",
+        "por meio de parcerias com unidades de saúde e associações de bairro,",
+        "para que os idosos tenham lazer, saúde e companhia.",
+        "Dessa forma, envelhecer será sinônimo de dignidade."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Fome e desperdício de alimentos",
+      "tema": "Fome e desperdício de alimentos",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "O Brasil é um dos maiores produtores de alimentos do mundo.",
+        "Mesmo assim, milhões de brasileiros ainda passam fome, um contraste inaceitável.",
+        "Esse problema se explica pela desigualdade de renda e pelo grande desperdício de comida."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Fome e desperdício de alimentos",
+      "tema": "Fome e desperdício de alimentos",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, toneladas de alimentos são jogadas fora todos os dias no país.",
+        "Isso acontece porque frutas e verduras se estragam no transporte, nas feiras e nas casas, por falta de planejamento.",
+        "Esse desperdício revela uma contradição já denunciada por Josué de Castro em \"Geografia da Fome\": a fome no Brasil não é falta de comida, mas de acesso a ela.",
+        "Assim, reduzir o desperdício também é combater a fome."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (Josué de Castro, em \"Geografia da Fome\") → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Fome e desperdício de alimentos",
+      "tema": "Fome e desperdício de alimentos",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso combater a fome e o desperdício de alimentos.",
+        "Para isso, o governo deve incentivar a doação de alimentos por supermercados e feiras,",
+        "por meio de bancos de alimentos e de benefícios fiscais para quem doa,",
+        "a fim de que a comida chegue a quem precisa.",
+        "Dessa forma, nenhum alimento bom irá para o lixo enquanto houver fome."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Lixo e reciclagem",
+      "tema": "Lixo e reciclagem",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A produção de lixo cresce a cada ano nas cidades brasileiras.",
+        "Contudo, grande parte desses resíduos não é reciclada, o que prejudica o meio ambiente.",
+        "Esse problema está ligado à falta de coleta seletiva e à pouca conscientização da população."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Lixo e reciclagem",
+      "tema": "Lixo e reciclagem",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos municípios ainda não oferecem coleta seletiva.",
+        "Isso acontece porque a separação e o transporte dos materiais exigem investimento e planejamento.",
+        "Essa falta de investimento descumpre a Política Nacional de Resíduos Sólidos, de 2010, que prevê o fim dos lixões e o incentivo à reciclagem.",
+        "Assim, materiais que poderiam ser reaproveitados acabam poluindo rios e solos."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Política Nacional de Resíduos Sólidos, de 2010) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Lixo e reciclagem",
+      "tema": "Lixo e reciclagem",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente ampliar a reciclagem no país.",
+        "Para isso, as prefeituras devem implantar a coleta seletiva em todos os bairros,",
+        "por meio de parcerias com cooperativas de catadores,",
+        "a fim de reduzir a poluição e gerar renda.",
+        "Dessa forma, o lixo deixará de ser problema e passará a ser recurso."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Desmatamento e preservação ambiental",
+      "tema": "Desmatamento e preservação ambiental",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A Constituição Federal garante a todos o direito a um meio ambiente ecologicamente equilibrado.",
+        "Apesar disso, o desmatamento da Amazônia e de outros biomas continua avançando, o que ameaça o futuro do planeta.",
+        "Esse problema é causado, principalmente, pela exploração ilegal da floresta e pela fiscalização insuficiente."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Desmatamento e preservação ambiental",
+      "tema": "Desmatamento e preservação ambiental",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a exploração ilegal de madeira e a abertura de pastos destroem grandes áreas de floresta.",
+        "Isso acontece porque essas atividades dão lucro rápido e raramente são punidas.",
+        "Esse lucro imediato contraria o alerta do líder indígena Ailton Krenak, em \"Ideias para adiar o fim do mundo\", de que a humanidade não pode se separar da natureza.",
+        "Assim, a destruição das florestas compromete o equilíbrio da vida."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (Ailton Krenak, em \"Ideias para adiar o fim do mundo\") → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Desmatamento e preservação ambiental",
+      "tema": "Desmatamento e preservação ambiental",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso conter o desmatamento no Brasil.",
+        "Para isso, os órgãos ambientais devem intensificar a fiscalização das áreas de floresta,",
+        "por meio do monitoramento por satélite e de punições mais rigorosas,",
+        "a fim de proteger a biodiversidade e os povos da floresta.",
+        "Dessa forma, o país cumprirá o que determina a Constituição."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Uso consciente da água",
+      "tema": "Uso consciente da água",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A água é um recurso essencial à vida e ao desenvolvimento econômico.",
+        "No entanto, o desperdício e a poluição ameaçam a disponibilidade desse bem no Brasil.",
+        "Esse problema tem origem nos hábitos de consumo e na falta de investimento em saneamento."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Uso consciente da água",
+      "tema": "Uso consciente da água",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitas pessoas desperdiçam água em tarefas do dia a dia.",
+        "Isso acontece porque existe a falsa ideia de que a água é um recurso infinito.",
+        "Essa ilusão se desfez durante a crise hídrica de São Paulo, entre 2014 e 2015, quando os reservatórios chegaram a níveis muito baixos.",
+        "Assim, economizar água é uma responsabilidade de todos."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a crise hídrica de São Paulo (2014-2015)) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Uso consciente da água",
+      "tema": "Uso consciente da água",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário promover o uso consciente da água.",
+        "Para isso, as companhias de saneamento devem realizar campanhas educativas,",
+        "por meio de anúncios, visitas às escolas e contas de água com dicas de economia,",
+        "para que a população mude seus hábitos de consumo.",
+        "Dessa forma, as próximas gerações também terão água."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Mobilidade urbana",
+      "tema": "Mobilidade urbana",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Nas grandes cidades brasileiras, os congestionamentos fazem parte da rotina dos trabalhadores.",
+        "Essa situação é preocupante, pois afeta a saúde, a economia e a qualidade de vida.",
+        "Esse problema decorre da prioridade dada ao carro e da precariedade do transporte coletivo."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Mobilidade urbana",
+      "tema": "Mobilidade urbana",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, as cidades foram planejadas para o automóvel, e não para as pessoas.",
+        "Isso acontece porque, durante décadas, investiu-se mais em avenidas do que em ônibus, metrôs e ciclovias.",
+        "Essa escolha contraria a Constituição Federal, que inclui o transporte entre os direitos sociais desde 2015.",
+        "Assim, quem depende do transporte público perde horas preciosas todos os dias."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Constituição Federal) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Mobilidade urbana",
+      "tema": "Mobilidade urbana",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso melhorar a mobilidade urbana no Brasil.",
+        "Para isso, as prefeituras devem ampliar e modernizar o transporte coletivo,",
+        "por meio de corredores exclusivos de ônibus, ciclovias e integração de tarifas,",
+        "a fim de reduzir o tempo de deslocamento da população.",
+        "Dessa forma, as cidades serão mais humanas e sustentáveis."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Álcool e direção: a Lei Seca (ENEM 2013)",
+      "tema": "Álcool e direção: a Lei Seca (ENEM 2013)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em 2008, a Lei Seca passou a punir com mais rigor os motoristas que dirigem depois de beber.",
+        "Mesmo assim, a combinação de álcool e direção ainda causa muitas mortes no trânsito brasileiro.",
+        "Esse problema persiste por causa da sensação de impunidade e da falta de conscientização."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Álcool e direção: a Lei Seca (ENEM 2013)",
+      "tema": "Álcool e direção: a Lei Seca (ENEM 2013)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos motoristas acreditam que não serão fiscalizados.",
+        "Isso acontece porque as blitze ainda são raras em várias cidades do país.",
+        "Essa sensação de impunidade é perigosa, já que o álcool diminui os reflexos e a atenção de quem dirige.",
+        "Assim, sem fiscalização constante, a lei perde a força."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (os efeitos do álcool sobre os reflexos) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Álcool e direção: a Lei Seca (ENEM 2013)",
+      "tema": "Álcool e direção: a Lei Seca (ENEM 2013)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário reduzir os acidentes causados pelo álcool.",
+        "Para isso, os departamentos de trânsito devem ampliar as blitze da Lei Seca,",
+        "por meio de mais agentes e de bafômetros em todos os municípios,",
+        "a fim de inibir quem insiste em beber e dirigir.",
+        "Dessa forma, muitas vidas serão poupadas."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Trabalho infantil",
+      "tema": "Trabalho infantil",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A legislação brasileira proíbe o trabalho de menores de 16 anos, exceto na condição de aprendiz, a partir dos 14.",
+        "Mesmo assim, muitas crianças ainda trabalham no Brasil, o que viola os seus direitos.",
+        "Esse problema é causado pela pobreza e pela ideia de que trabalhar cedo forma o caráter."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Trabalho infantil",
+      "tema": "Trabalho infantil",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a pobreza obriga muitas famílias a contar com o trabalho dos filhos.",
+        "Isso acontece porque a renda dos adultos nem sempre é suficiente para garantir o sustento da casa.",
+        "Essa realidade foi retratada por Jorge Amado em \"Capitães da Areia\", romance sobre crianças abandonadas que lutam para sobreviver nas ruas de Salvador.",
+        "Assim, a criança que trabalha perde a infância e a chance de estudar."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o romance \"Capitães da Areia\", de Jorge Amado) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Trabalho infantil",
+      "tema": "Trabalho infantil",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente erradicar o trabalho infantil no país.",
+        "Para isso, o governo deve ampliar os programas de transferência de renda às famílias pobres,",
+        "por meio de benefícios ligados à frequência escolar dos filhos,",
+        "para que as crianças possam estudar e brincar.",
+        "Dessa forma, a infância será protegida, como determina o Estatuto da Criança e do Adolescente."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Analfabetismo de jovens e adultos",
+      "tema": "Analfabetismo de jovens e adultos",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Saber ler e escrever é condição para exercer plenamente a cidadania.",
+        "No Brasil, porém, milhões de jovens e adultos ainda não sabem ler, o que limita as suas oportunidades.",
+        "Esse problema tem raízes na desigualdade histórica e na dificuldade de conciliar estudo e trabalho."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Analfabetismo de jovens e adultos",
+      "tema": "Analfabetismo de jovens e adultos",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos adultos não puderam estudar na infância.",
+        "Isso acontece porque, no passado, muitas crianças pobres precisavam trabalhar desde cedo.",
+        "Essa exclusão foi enfrentada pelo educador Paulo Freire, que alfabetizou trabalhadores a partir de palavras do seu cotidiano, como \"tijolo\".",
+        "Assim, alfabetizar adultos é devolver um direito que lhes foi negado."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o educador Paulo Freire) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Analfabetismo de jovens e adultos",
+      "tema": "Analfabetismo de jovens e adultos",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso combater o analfabetismo de jovens e adultos.",
+        "Para isso, os governos devem ampliar as turmas de Educação de Jovens e Adultos,",
+        "por meio de aulas no período noturno e perto dos locais de trabalho,",
+        "a fim de facilitar a volta desses cidadãos aos estudos.",
+        "Dessa forma, nunca será tarde para aprender."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Doação de órgãos",
+      "tema": "Doação de órgãos",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Milhares de brasileiros aguardam na fila por um transplante de órgão.",
+        "Essa espera é angustiante, pois muitos pacientes morrem antes de receber a doação.",
+        "Esse problema é agravado pela desinformação e pela falta de diálogo nas famílias."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Doação de órgãos",
+      "tema": "Doação de órgãos",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitas pessoas não sabem que, no Brasil, a doação depende da autorização da família.",
+        "Isso acontece porque o assunto é pouco discutido, já que envolve o tema delicado da morte.",
+        "Essa falta de conversa faz com que, no momento da perda, muitas famílias recusem a doação por não conhecerem a vontade do parente.",
+        "Assim, vidas que poderiam ser salvas acabam perdidas."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a lei que exige a autorização da família) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Doação de órgãos",
+      "tema": "Doação de órgãos",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário incentivar a doação de órgãos no Brasil.",
+        "Para isso, o Ministério da Saúde deve promover campanhas sobre o tema,",
+        "por meio de propagandas e de orientações nos hospitais,",
+        "para que as pessoas conversem com as suas famílias sobre o desejo de doar.",
+        "Dessa forma, a fila de transplantes diminuirá."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Obesidade infantil",
+      "tema": "Obesidade infantil",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A obesidade infantil cresce no Brasil e em todo o mundo.",
+        "Esse cenário é preocupante, pois aumenta o risco de doenças como diabetes e hipertensão.",
+        "Entre as causas desse problema, destacam-se a alimentação baseada em ultraprocessados e o sedentarismo."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Obesidade infantil",
+      "tema": "Obesidade infantil",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, os alimentos ultraprocessados ocupam cada vez mais espaço no prato das crianças.",
+        "Isso acontece porque esses produtos são baratos, práticos e muito anunciados.",
+        "Esse consumo vai contra o Guia Alimentar para a População Brasileira, do Ministério da Saúde, que recomenda dar preferência a alimentos naturais.",
+        "Assim, a criança se acostuma desde cedo a uma alimentação pouco saudável."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o Guia Alimentar para a População Brasileira) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Obesidade infantil",
+      "tema": "Obesidade infantil",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente combater a obesidade infantil.",
+        "Para isso, as escolas devem oferecer merenda saudável e aulas de educação alimentar,",
+        "por meio de hortas escolares e de cardápios feitos por nutricionistas,",
+        "a fim de formar hábitos saudáveis desde a infância.",
+        "Dessa forma, as crianças crescerão com mais saúde."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Vacinação",
+      "tema": "Vacinação",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "O Programa Nacional de Imunizações tornou o Brasil uma referência mundial em vacinação.",
+        "Nos últimos anos, porém, a cobertura vacinal caiu, o que ameaça a saúde pública.",
+        "Esse problema é causado pela circulação de notícias falsas e pela falsa sensação de que certas doenças desapareceram."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Vacinação",
+      "tema": "Vacinação",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, boatos sobre supostos perigos das vacinas assustam muitas famílias.",
+        "Isso acontece porque as informações falsas se espalham nas redes sociais mais rápido do que as verdadeiras.",
+        "Esse medo infundado já trouxe consequências, como a volta de casos de sarampo, doença que estava controlada no país.",
+        "Assim, a desinformação coloca vidas em risco."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a volta do sarampo ao Brasil) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Vacinação",
+      "tema": "Vacinação",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário recuperar a cobertura vacinal no Brasil.",
+        "Para isso, o Ministério da Saúde deve combater a desinformação sobre as vacinas,",
+        "por meio de campanhas com profissionais de saúde e de vacinação nas escolas,",
+        "para que as famílias confiem na ciência.",
+        "Dessa forma, doenças evitáveis não voltarão a ameaçar a população."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Hábito de leitura",
+      "tema": "Hábito de leitura",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A leitura amplia o vocabulário, desenvolve o senso crítico e estimula a imaginação.",
+        "No entanto, o hábito de ler ainda é pouco comum entre muitos brasileiros.",
+        "Esse problema se deve ao preço dos livros e à falta de bibliotecas acessíveis."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Hábito de leitura",
+      "tema": "Hábito de leitura",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, os livros ainda são caros para boa parte da população.",
+        "Isso acontece porque, com o orçamento apertado, comprar livros deixa de ser prioridade.",
+        "Essa barreira contraria a ideia de Monteiro Lobato de que \"um país se faz com homens e livros\".",
+        "Assim, o acesso à leitura acaba restrito a poucos."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (Monteiro Lobato) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Hábito de leitura",
+      "tema": "Hábito de leitura",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso incentivar o hábito de leitura no Brasil.",
+        "Para isso, as prefeituras devem ampliar e modernizar as bibliotecas públicas,",
+        "por meio de acervos atualizados, rodas de leitura e empréstimo gratuito,",
+        "a fim de aproximar os livros da população.",
+        "Dessa forma, o país formará mais leitores e cidadãos críticos."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Intolerância religiosa (ENEM 2016)",
+      "tema": "Intolerância religiosa (ENEM 2016)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A Constituição Federal garante a liberdade de crença e o livre exercício dos cultos religiosos.",
+        "Apesar disso, a intolerância religiosa ainda é frequente no Brasil, o que é inaceitável.",
+        "Esse problema é alimentado pelo preconceito e pela falta de conhecimento sobre outras religiões."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Intolerância religiosa (ENEM 2016)",
+      "tema": "Intolerância religiosa (ENEM 2016)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, as religiões de matriz africana, como o candomblé e a umbanda, estão entre os principais alvos de ataques.",
+        "Isso acontece porque o racismo histórico associou essas religiões a algo negativo.",
+        "Esse preconceito é crime: a Lei 7.716, de 1989, pune a discriminação por raça, cor e religião.",
+        "Assim, o respeito à diversidade religiosa precisa ser ensinado e cobrado."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Lei 7.716, de 1989) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Intolerância religiosa (ENEM 2016)",
+      "tema": "Intolerância religiosa (ENEM 2016)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário combater a intolerância religiosa no país.",
+        "Para isso, as escolas devem promover o conhecimento sobre as diferentes religiões,",
+        "por meio de aulas, visitas e conversas com líderes religiosos,",
+        "para que os estudantes aprendam a respeitar todas as crenças.",
+        "Dessa forma, a liberdade religiosa garantida pela Constituição será respeitada."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — População em situação de rua",
+      "tema": "População em situação de rua",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Nas grandes cidades brasileiras, é cada vez mais comum ver pessoas morando nas ruas.",
+        "Essa realidade é grave, pois revela a negação de direitos básicos, como moradia e alimentação.",
+        "Esse problema é causado pelo desemprego, pela falta de moradia acessível e pelo rompimento de vínculos familiares."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — População em situação de rua",
+      "tema": "População em situação de rua",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, o desemprego e o alto custo dos aluguéis empurram muitas famílias para as ruas.",
+        "Isso acontece porque, sem renda fixa, torna-se impossível pagar por um lugar para morar.",
+        "Essa situação desrespeita a Constituição Federal, que inclui a moradia entre os direitos sociais.",
+        "Assim, quem vive na rua é vítima de uma exclusão que começa muito antes."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Constituição Federal) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — População em situação de rua",
+      "tema": "População em situação de rua",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é urgente garantir dignidade à população em situação de rua.",
+        "Para isso, as prefeituras devem ampliar os abrigos e os programas de moradia,",
+        "por meio de parcerias com assistentes sociais e organizações da sociedade civil,",
+        "a fim de oferecer moradia, trabalho e acompanhamento a essas pessoas.",
+        "Dessa forma, elas poderão reconstruir as suas vidas."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Trabalho informal e por aplicativos",
+      "tema": "Trabalho informal e por aplicativos",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "As mudanças no mercado de trabalho fizeram crescer o número de trabalhadores informais no Brasil.",
+        "Essa situação preocupa, pois muitos deles não têm direitos básicos, como férias e aposentadoria.",
+        "Esse problema está ligado ao desemprego e ao crescimento do trabalho por aplicativos."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Trabalho informal e por aplicativos",
+      "tema": "Trabalho informal e por aplicativos",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos trabalhadores de aplicativos enfrentam jornadas longas e sem proteção.",
+        "Isso acontece porque eles não têm carteira assinada e precisam trabalhar muitas horas para garantir uma renda razoável.",
+        "Essa rotina exaustiva lembra a crítica do filme \"Tempos Modernos\", de Charlie Chaplin, em que o operário é tratado como peça de uma máquina.",
+        "Assim, a liberdade prometida pelos aplicativos esconde uma realidade de insegurança."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o filme \"Tempos Modernos\", de Charlie Chaplin) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Trabalho informal e por aplicativos",
+      "tema": "Trabalho informal e por aplicativos",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário proteger os trabalhadores informais.",
+        "Para isso, o Congresso Nacional deve criar regras para o trabalho por aplicativos,",
+        "por meio de leis que garantam contribuição à previdência e seguro contra acidentes,",
+        "para que esses trabalhadores tenham segurança e dignidade.",
+        "Dessa forma, o progresso tecnológico não significará retrocesso nos direitos."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Consumismo",
+      "tema": "Consumismo",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Na sociedade atual, comprar se tornou uma forma de buscar prazer e reconhecimento.",
+        "Esse comportamento é preocupante, pois leva ao endividamento e à degradação do meio ambiente.",
+        "Esse problema é estimulado pela publicidade e pela facilidade de crédito."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Consumismo",
+      "tema": "Consumismo",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a publicidade cria constantemente novas necessidades nas pessoas.",
+        "Isso acontece porque as propagandas associam os produtos à felicidade e ao sucesso.",
+        "Essa associação foi analisada pelo sociólogo Zygmunt Bauman, que descreveu a \"modernidade líquida\" como uma época de relações e desejos passageiros.",
+        "Assim, o consumidor compra cada vez mais e se satisfaz cada vez menos."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o sociólogo Zygmunt Bauman) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Consumismo",
+      "tema": "Consumismo",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso estimular o consumo consciente.",
+        "Para isso, as escolas devem oferecer educação financeira aos estudantes,",
+        "por meio de aulas práticas sobre orçamento, crédito e propaganda,",
+        "a fim de formar consumidores mais críticos.",
+        "Dessa forma, as pessoas comprarão por necessidade, e não por impulso."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Manipulação de dados na internet (ENEM 2018)",
+      "tema": "Manipulação de dados na internet (ENEM 2018)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Ao navegar na internet, cada clique, curtida e busca deixa um rastro de informações pessoais.",
+        "O problema é que esses dados têm sido usados para manipular o comportamento dos usuários.",
+        "Esse desafio é agravado pela falta de transparência das empresas e pelo desconhecimento das pessoas."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Manipulação de dados na internet (ENEM 2018)",
+      "tema": "Manipulação de dados na internet (ENEM 2018)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, as plataformas coletam dados para direcionar anúncios e conteúdos a cada usuário.",
+        "Isso acontece porque conhecer os gostos das pessoas permite influenciar o que elas compram e até em quem votam.",
+        "Essa influência ficou evidente no escândalo da Cambridge Analytica, que usou dados de milhões de usuários do Facebook em campanhas políticas.",
+        "Assim, a privacidade se tornou uma questão de democracia."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o escândalo da Cambridge Analytica) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Manipulação de dados na internet (ENEM 2018)",
+      "tema": "Manipulação de dados na internet (ENEM 2018)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário proteger os dados pessoais dos brasileiros.",
+        "Para isso, a Autoridade Nacional de Proteção de Dados deve fiscalizar o cumprimento da LGPD,",
+        "por meio de auditorias nas empresas e de multas para quem desrespeitar a lei,",
+        "a fim de impedir o uso abusivo das informações dos usuários.",
+        "Dessa forma, a internet será um espaço mais seguro."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Gravidez na adolescência",
+      "tema": "Gravidez na adolescência",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A gravidez na adolescência ainda é uma realidade frequente no Brasil.",
+        "Essa situação é preocupante, pois muitas vezes interrompe os estudos e os planos de vida dos jovens.",
+        "Esse problema se deve à falta de educação sexual e ao acesso desigual aos serviços de saúde."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Gravidez na adolescência",
+      "tema": "Gravidez na adolescência",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitos adolescentes não recebem orientação adequada sobre sexualidade e prevenção.",
+        "Isso acontece porque o tema ainda é tratado como tabu em muitas famílias e escolas.",
+        "Esse silêncio contraria o Estatuto da Criança e do Adolescente, que garante aos jovens o direito à saúde e à informação.",
+        "Assim, sem informação, os jovens ficam mais vulneráveis."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (o Estatuto da Criança e do Adolescente) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Gravidez na adolescência",
+      "tema": "Gravidez na adolescência",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso prevenir a gravidez na adolescência.",
+        "Para isso, escolas e unidades de saúde devem oferecer orientação sobre sexualidade e prevenção,",
+        "por meio de palestras, atendimento nos postos e materiais educativos,",
+        "para que os jovens possam fazer escolhas conscientes.",
+        "Dessa forma, eles terão mais condições de planejar o futuro."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Abandono de animais",
+      "tema": "Abandono de animais",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Cães e gatos são considerados membros da família em muitos lares brasileiros.",
+        "Mesmo assim, o abandono de animais ainda é comum, o que causa sofrimento e problemas de saúde pública.",
+        "Esse problema é causado pela compra por impulso e pela falta de castração."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Abandono de animais",
+      "tema": "Abandono de animais",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitas pessoas adotam ou compram animais sem pensar nas responsabilidades.",
+        "Isso acontece porque o filhote é visto como um presente, e não como um compromisso de muitos anos.",
+        "Essa irresponsabilidade pode ser crime: a Lei de Crimes Ambientais, de 1998, pune os maus-tratos a animais, e o abandono é uma forma de maus-tratos.",
+        "Assim, abandonar um animal é desrespeitar a vida e a lei."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Lei de Crimes Ambientais, de 1998) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Abandono de animais",
+      "tema": "Abandono de animais",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário combater o abandono de animais.",
+        "Para isso, as prefeituras devem oferecer castração gratuita e campanhas de adoção responsável,",
+        "por meio de mutirões nos bairros e de parcerias com protetores de animais,",
+        "a fim de reduzir o número de animais nas ruas.",
+        "Dessa forma, cães e gatos terão a proteção que merecem."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Acesso ao cinema e à cultura (ENEM 2019)",
+      "tema": "Acesso ao cinema e à cultura (ENEM 2019)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "O cinema é uma forma de arte capaz de emocionar, informar e fazer refletir.",
+        "No Brasil, porém, o acesso às salas de cinema ainda é desigual, o que limita o direito à cultura.",
+        "Esse problema se deve à concentração das salas nas grandes cidades e ao alto preço dos ingressos."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Acesso ao cinema e à cultura (ENEM 2019)",
+      "tema": "Acesso ao cinema e à cultura (ENEM 2019)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, a maioria das salas de cinema está nos shoppings das grandes cidades.",
+        "Isso acontece porque as empresas preferem investir onde há mais público com poder de compra.",
+        "Essa concentração desrespeita a Constituição Federal, que garante a todos o pleno exercício dos direitos culturais.",
+        "Assim, moradores de cidades pequenas e de periferias ficam longe das telas."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Constituição Federal) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Acesso ao cinema e à cultura (ENEM 2019)",
+      "tema": "Acesso ao cinema e à cultura (ENEM 2019)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso democratizar o acesso ao cinema no Brasil.",
+        "Para isso, o Ministério da Cultura deve levar sessões gratuitas a escolas e praças,",
+        "por meio de cinemas itinerantes e de parcerias com as prefeituras,",
+        "para que todos possam conhecer a produção cinematográfica.",
+        "Dessa forma, a cultura chegará a todos os cantos do país."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Registro civil e cidadania (ENEM 2021)",
+      "tema": "Registro civil e cidadania (ENEM 2021)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "A certidão de nascimento é o primeiro documento de um cidadão brasileiro.",
+        "Mesmo assim, ainda há pessoas sem registro civil no país, o que as torna invisíveis para o Estado.",
+        "Esse problema atinge principalmente famílias pobres e moradores de regiões isoladas."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Registro civil e cidadania (ENEM 2021)",
+      "tema": "Registro civil e cidadania (ENEM 2021)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, quem não tem certidão de nascimento não consegue acessar direitos básicos.",
+        "Isso acontece porque, sem esse documento, não é possível tirar outros, como o RG e o CPF.",
+        "Essa exclusão lembra a obra \"O Cidadão de Papel\", de Gilberto Dimenstein, segundo a qual muitos direitos existem apenas no papel.",
+        "Assim, a falta de registro impede o exercício da cidadania."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a obra \"O Cidadão de Papel\", de Gilberto Dimenstein) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Registro civil e cidadania (ENEM 2021)",
+      "tema": "Registro civil e cidadania (ENEM 2021)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário garantir o registro civil a todos os brasileiros.",
+        "Para isso, o poder público deve ampliar os mutirões de documentação,",
+        "por meio de cartórios itinerantes em comunidades afastadas,",
+        "a fim de que ninguém fique sem acesso aos seus direitos.",
+        "Dessa forma, todos poderão exercer plenamente a cidadania."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Povos e comunidades tradicionais (ENEM 2022)",
+      "tema": "Povos e comunidades tradicionais (ENEM 2022)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Indígenas, quilombolas, ribeirinhos e outros povos tradicionais fazem parte da diversidade brasileira.",
+        "No entanto, essas comunidades ainda enfrentam desvalorização e ameaças aos seus territórios.",
+        "Esse desafio decorre do preconceito e de interesses econômicos sobre as suas terras."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Povos e comunidades tradicionais (ENEM 2022)",
+      "tema": "Povos e comunidades tradicionais (ENEM 2022)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, os territórios tradicionais são alvo de invasões para a exploração de madeira e de minérios.",
+        "Isso acontece porque essas áreas guardam grandes riquezas naturais.",
+        "Essas invasões desrespeitam a Constituição Federal, que reconhece aos indígenas os direitos sobre as terras que tradicionalmente ocupam.",
+        "Assim, proteger esses territórios é também proteger culturas e florestas."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (a Constituição Federal) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Povos e comunidades tradicionais (ENEM 2022)",
+      "tema": "Povos e comunidades tradicionais (ENEM 2022)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é preciso valorizar os povos e comunidades tradicionais.",
+        "Para isso, o governo federal deve garantir a proteção dos seus territórios,",
+        "por meio da fiscalização e da conclusão dos processos de demarcação,",
+        "a fim de preservar os seus modos de vida.",
+        "Dessa forma, o Brasil respeitará a sua própria diversidade."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
+    },
+    {
+      "titulo": "Introdução — Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "tema": "Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "parte": "Introdução",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Cuidar da casa, dos filhos e de familiares doentes é um trabalho essencial para a sociedade.",
+        "No Brasil, porém, essa tarefa recai principalmente sobre as mulheres e não é reconhecida, o que é injusto.",
+        "Esse problema tem origem na divisão tradicional dos papéis de homens e mulheres."
+      ],
+      "explica": "Contextualização (apresenta o tema) → tese (a opinião sobre o problema) → os argumentos que serão desenvolvidos."
+    },
+    {
+      "titulo": "Desenvolvimento — Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "tema": "Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "parte": "Desenvolvimento",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Em primeiro lugar, muitas mulheres acumulam o trabalho fora de casa e as tarefas domésticas.",
+        "Isso acontece porque, historicamente, o cuidado foi visto como uma obrigação feminina.",
+        "Essa dupla jornada é confirmada por dados do IBGE, que mostram que as mulheres dedicam muito mais horas aos afazeres domésticos do que os homens.",
+        "Assim, o trabalho de cuidado se torna uma sobrecarga invisível."
+      ],
+      "explica": "Tópico frasal (o argumento) → explicação → repertório que comprova (dados do IBGE) → fechamento ligado à tese."
+    },
+    {
+      "titulo": "Conclusão — Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "tema": "Trabalho de cuidado realizado pela mulher (ENEM 2023)",
+      "parte": "Conclusão",
+      "esquerda": "início",
+      "direita": "fim",
+      "itens": [
+        "Portanto, é necessário dar visibilidade ao trabalho de cuidado realizado pelas mulheres.",
+        "Para isso, o poder público deve ampliar a rede de serviços de cuidado,",
+        "por meio da construção de creches públicas e de centros-dia para idosos,",
+        "para que as mulheres tenham mais tempo para estudar e trabalhar.",
+        "Dessa forma, o cuidado será uma responsabilidade de toda a sociedade."
+      ],
+      "explica": "Retomada da tese → agente e ação (quem faz o quê) → meio (como) → finalidade (para quê) → frase final."
     },
     {
       "titulo": "A ordem dos conectivos",
+      "tema": "Estrutura da redação",
+      "parte": "Estrutura",
       "esquerda": "início",
       "direita": "fim",
       "itens": [
@@ -49,6 +1445,8 @@
     },
     {
       "titulo": "Ordem dos parágrafos da redação",
+      "tema": "Estrutura da redação",
+      "parte": "Estrutura",
       "esquerda": "início",
       "direita": "fim",
       "itens": [
