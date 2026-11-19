@@ -1,0 +1,151 @@
+{
+  "titulo": "O que você faria?",
+  "emoji": "🤔",
+  "instrucao": "O que você faria?",
+  "rodadas": [
+    {
+      "destaque": "Um colega levou a culpa por um erro que foi seu.",
+      "opcoes": [
+        "Assumir o erro e conversar com o chefe",
+        "Ficar quieto",
+        "Culpar outra pessoa",
+        "Faltar no dia seguinte"
+      ],
+      "correta": "Assumir o erro e conversar com o chefe",
+      "explica": "Assumir os erros mostra responsabilidade e gera confiança.",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "Você não entendeu uma tarefa que o chefe passou.",
+      "opcoes": [
+        "Perguntar de novo e confirmar o que entendeu",
+        "Fazer de qualquer jeito",
+        "Não fazer nada",
+        "Pedir para um colega fazer escondido"
+      ],
+      "correta": "Perguntar de novo e confirmar o que entendeu",
+      "explica": "Perguntar evita erros. Ninguém nasce sabendo!",
+      "imagem": "❓"
+    },
+    {
+      "destaque": "Um cliente chega muito irritado.",
+      "opcoes": [
+        "Ouvir com calma e procurar uma solução",
+        "Gritar de volta",
+        "Ignorar o cliente",
+        "Rir da situação"
+      ],
+      "correta": "Ouvir com calma e procurar uma solução",
+      "explica": "Ouvir e manter a calma ajuda a resolver o problema.",
+      "imagem": "😠"
+    },
+    {
+      "destaque": "Você chega cansado do trabalho e ainda precisa estudar.",
+      "opcoes": [
+        "Estudar um pouco por dia, num horário possível, e pedir apoio em casa",
+        "Desistir da escola",
+        "Estudar só na véspera da prova",
+        "Ficar a noite toda acordado"
+      ],
+      "correta": "Estudar um pouco por dia, num horário possível, e pedir apoio em casa",
+      "explica": "Pouco todo dia vale mais que muito de vez em quando.",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "Um colega da EJA diz que vai desistir dos estudos.",
+      "opcoes": [
+        "Conversar, ouvir e lembrar o motivo que o trouxe de volta",
+        "Concordar que estudar não vale a pena",
+        "Rir dele",
+        "Não falar nada"
+      ],
+      "correta": "Conversar, ouvir e lembrar o motivo que o trouxe de volta",
+      "explica": "Uma palavra de apoio pode fazer alguém continuar.",
+      "imagem": "💬"
+    },
+    {
+      "destaque": "Você recebeu uma crítica do chefe.",
+      "opcoes": [
+        "Ouvir, perguntar como melhorar e não levar para o lado pessoal",
+        "Brigar com o chefe",
+        "Chorar e ir embora",
+        "Fingir que não ouviu"
+      ],
+      "correta": "Ouvir, perguntar como melhorar e não levar para o lado pessoal",
+      "explica": "Críticas podem ajudar você a crescer.",
+      "imagem": "👂"
+    },
+    {
+      "destaque": "Você viu um colega sendo humilhado no trabalho.",
+      "opcoes": [
+        "Apoiar o colega e avisar quem pode resolver",
+        "Rir junto",
+        "Gravar e postar",
+        "Fingir que não viu"
+      ],
+      "correta": "Apoiar o colega e avisar quem pode resolver",
+      "explica": "Respeito é para todos. Ficar calado também machuca.",
+      "imagem": "🚫"
+    },
+    {
+      "destaque": "Você encontrou uma carteira perdida na empresa.",
+      "opcoes": [
+        "Entregar ao responsável ou aos achados e perdidos",
+        "Ficar com o dinheiro",
+        "Jogar fora",
+        "Esconder"
+      ],
+      "correta": "Entregar ao responsável ou aos achados e perdidos",
+      "explica": "Honestidade é um valor que abre portas.",
+      "imagem": "👛"
+    },
+    {
+      "destaque": "Você tem uma entrevista amanhã e seu filho ficou doente.",
+      "opcoes": [
+        "Avisar a empresa, explicar e pedir para remarcar",
+        "Não ir e não avisar",
+        "Mentir sobre o motivo",
+        "Desistir da vaga"
+      ],
+      "correta": "Avisar a empresa, explicar e pedir para remarcar",
+      "explica": "Comunicar com antecedência mostra responsabilidade.",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "A vaga pede conhecimento de computador e você não sabe usar.",
+      "opcoes": [
+        "Procurar um curso gratuito e treinar",
+        "Desistir de trabalhar",
+        "Mentir no currículo",
+        "Achar que nunca vai aprender"
+      ],
+      "correta": "Procurar um curso gratuito e treinar",
+      "explica": "Sempre é tempo de aprender algo novo.",
+      "imagem": "💻"
+    },
+    {
+      "destaque": "No trabalho em equipe, um colega não ajuda em nada.",
+      "opcoes": [
+        "Conversar com ele e dividir as tarefas com clareza",
+        "Fazer tudo sozinho e reclamar com todos",
+        "Brigar na frente de todos",
+        "Também parar de fazer"
+      ],
+      "correta": "Conversar com ele e dividir as tarefas com clareza",
+      "explica": "Conversar e combinar as tarefas resolve muitos problemas.",
+      "imagem": "👥"
+    },
+    {
+      "destaque": "Você conseguiu cumprir uma meta importante.",
+      "opcoes": [
+        "Comemorar e definir o próximo passo",
+        "Achar que não fez mais que a obrigação",
+        "Esconder de todos",
+        "Parar de sonhar"
+      ],
+      "correta": "Comemorar e definir o próximo passo",
+      "explica": "Reconhecer as conquistas dá força para continuar!",
+      "imagem": "🎉"
+    }
+  ]
+}

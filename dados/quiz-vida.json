@@ -1,0 +1,365 @@
+{
+  "titulo": "Quiz do projeto de vida",
+  "tempoPadrao": 20,
+  "perguntas": [
+    {
+      "pergunta": "A hora extra deve ser paga com, no mínimo:",
+      "imagem": "⏰",
+      "opcoes": [
+        "50% a mais que a hora normal",
+        "O mesmo valor da hora normal",
+        "10% a menos",
+        "Nada a mais"
+      ],
+      "correta": "50% a mais que a hora normal",
+      "explica": "A Constituição garante pelo menos 50% a mais na hora extra."
+    },
+    {
+      "pergunta": "O que é o 13º salário?",
+      "imagem": "🎄",
+      "opcoes": [
+        "Um salário extra por ano, que pode ser pago em duas parcelas",
+        "Um desconto no fim do ano",
+        "O salário de 13 dias",
+        "Um prêmio só para chefes"
+      ],
+      "correta": "Um salário extra por ano, que pode ser pago em duas parcelas",
+      "explica": "O 13º é pago no fim do ano, geralmente em duas parcelas (até novembro e até dezembro)."
+    },
+    {
+      "pergunta": "Onde o trabalhador pode consultar a carteira de trabalho hoje?",
+      "imagem": "📱",
+      "opcoes": [
+        "No aplicativo Carteira de Trabalho Digital",
+        "Só no cartório",
+        "Só no sindicato",
+        "Em lugar nenhum"
+      ],
+      "correta": "No aplicativo Carteira de Trabalho Digital",
+      "explica": "A carteira de trabalho agora é digital: dá para ver os contratos pelo celular."
+    },
+    {
+      "pergunta": "O que o MEI (microempreendedor individual) tem?",
+      "imagem": "🏪",
+      "opcoes": [
+        "CNPJ, nota fiscal e contribuição para o INSS",
+        "Salário fixo do governo",
+        "Férias pagas pelo governo",
+        "Nenhum direito"
+      ],
+      "correta": "CNPJ, nota fiscal e contribuição para o INSS",
+      "explica": "Formalizado como MEI, quem trabalha por conta própria contribui para o INSS e pode emitir nota."
+    },
+    {
+      "pergunta": "Depois de quanto tempo de trabalho a pessoa com carteira assinada tem direito a férias?",
+      "imagem": "🏖️",
+      "opcoes": [
+        "12 meses",
+        "1 mês",
+        "6 meses",
+        "5 anos"
+      ],
+      "correta": "12 meses",
+      "explica": "A cada 12 meses de trabalho, o trabalhador tem direito a 30 dias de férias."
+    },
+    {
+      "pergunta": "Uma TV custa R$ 1.200 à vista ou 12 × R$ 120. Quanto se paga a mais no parcelado?",
+      "imagem": "📺",
+      "opcoes": [
+        "R$ 240",
+        "Nada",
+        "R$ 120",
+        "R$ 12"
+      ],
+      "correta": "R$ 240",
+      "explica": "12 × 120 = 1.440. Então 1.440 − 1.200 = 240 a mais."
+    },
+    {
+      "pergunta": "Qual é um jeito de economizar no mês?",
+      "imagem": "📝",
+      "opcoes": [
+        "Anotar os gastos e cortar o que não é necessário",
+        "Comprar tudo parcelado",
+        "Pedir lanche todo dia",
+        "Não olhar o extrato"
+      ],
+      "correta": "Anotar os gastos e cortar o que não é necessário",
+      "explica": "Quem anota os gastos descobre para onde o dinheiro vai."
+    },
+    {
+      "pergunta": "Salário de R$ 1.800 e aluguel de R$ 600. Que parte do salário vai para o aluguel?",
+      "imagem": "🏠",
+      "opcoes": [
+        "Um terço (1/3)",
+        "A metade (1/2)",
+        "Um quarto (1/4)",
+        "Tudo"
+      ],
+      "correta": "Um terço (1/3)",
+      "explica": "600 é a terça parte de 1.800 (1.800 ÷ 3 = 600)."
+    },
+    {
+      "pergunta": "Se Ana guardar R$ 200 por mês, quanto terá em 6 meses?",
+      "imagem": "🐷",
+      "opcoes": [
+        "R$ 1.200",
+        "R$ 600",
+        "R$ 206",
+        "R$ 2.000"
+      ],
+      "correta": "R$ 1.200",
+      "explica": "200 × 6 = 1.200. Guardar um pouco todo mês faz diferença."
+    },
+    {
+      "pergunta": "O que acontece se você pagar só o valor mínimo da fatura do cartão?",
+      "imagem": "💳",
+      "opcoes": [
+        "O resto vira dívida com juros altos",
+        "A dívida acaba",
+        "O banco perdoa o resto",
+        "Você ganha pontos"
+      ],
+      "correta": "O resto vira dívida com juros altos",
+      "explica": "O que não é pago entra no rotativo, com juros muito altos."
+    },
+    {
+      "pergunta": "O que fazer? Loja conhecida, site oficial, preço normal e boas avaliações.",
+      "imagem": "✅",
+      "opcoes": [
+        "Pode comprar, guardando o comprovante",
+        "Nunca comprar nada pela internet",
+        "Pagar para um desconhecido",
+        "Mandar a senha do cartão"
+      ],
+      "correta": "Pode comprar, guardando o comprovante",
+      "explica": "Nem tudo é golpe: compre em lojas conhecidas e guarde os comprovantes."
+    },
+    {
+      "pergunta": "O que fazer? Mensagem: “Oi, mãe! Troquei de número. Me manda um Pix urgente?”",
+      "imagem": "📱",
+      "opcoes": [
+        "Ligar para o número antigo do filho antes de mandar qualquer dinheiro",
+        "Mandar o Pix rapidinho",
+        "Mandar a senha do banco",
+        "Responder com seus documentos"
+      ],
+      "correta": "Ligar para o número antigo do filho antes de mandar qualquer dinheiro",
+      "explica": "É o golpe do falso parente. Confirme por ligação ou pessoalmente."
+    },
+    {
+      "pergunta": "O que fazer? Boleto recebido por WhatsApp com o nome de outra empresa como beneficiário.",
+      "imagem": "📄",
+      "opcoes": [
+        "Conferir o beneficiário e pegar o boleto no site oficial",
+        "Pagar sem olhar",
+        "Pagar duas vezes",
+        "Pagar e apagar a conversa"
+      ],
+      "correta": "Conferir o beneficiário e pegar o boleto no site oficial",
+      "explica": "Golpistas trocam o boleto. Confira quem vai receber o dinheiro."
+    },
+    {
+      "pergunta": "O que fazer? Vaga de emprego: “Para ser contratado, pague uma taxa de R$ 100.”",
+      "imagem": "💼",
+      "opcoes": [
+        "Desconfiar: empresa séria não cobra para contratar",
+        "Pagar a taxa",
+        "Pedir desconto na taxa",
+        "Pagar e indicar os amigos"
+      ],
+      "correta": "Desconfiar: empresa séria não cobra para contratar",
+      "explica": "Cobrar para dar emprego é sinal de golpe."
+    },
+    {
+      "pergunta": "Qual exame dá o certificado do ensino fundamental ou médio para jovens e adultos?",
+      "imagem": "📜",
+      "opcoes": [
+        "ENCCEJA",
+        "SISU",
+        "ProUni",
+        "Prova Brasil"
+      ],
+      "correta": "ENCCEJA",
+      "explica": "O ENCCEJA certifica quem não concluiu os estudos na idade regular."
+    },
+    {
+      "pergunta": "Qual é a idade mínima para fazer o ENCCEJA do ensino médio?",
+      "imagem": "🎂",
+      "opcoes": [
+        "18 anos",
+        "12 anos",
+        "15 anos",
+        "30 anos"
+      ],
+      "correta": "18 anos",
+      "explica": "Ensino fundamental: a partir de 15 anos. Ensino médio: a partir de 18 anos."
+    },
+    {
+      "pergunta": "O que os Institutos Federais oferecem?",
+      "imagem": "🏫",
+      "opcoes": [
+        "Cursos técnicos e superiores gratuitos",
+        "Só cursos pagos",
+        "Só atendimento de saúde",
+        "Empréstimos"
+      ],
+      "correta": "Cursos técnicos e superiores gratuitos",
+      "explica": "Os Institutos Federais têm cursos gratuitos em todo o país."
+    },
+    {
+      "pergunta": "Estudar a distância (EAD) exige principalmente:",
+      "imagem": "💻",
+      "opcoes": [
+        "Organização e disciplina com os horários",
+        "Nenhum esforço",
+        "Morar perto da escola",
+        "Ter muito dinheiro"
+      ],
+      "correta": "Organização e disciplina com os horários",
+      "explica": "No EAD, você organiza seu tempo: um horário fixo por dia ajuda muito."
+    },
+    {
+      "pergunta": "Onde procurar ajuda? Precisa de um advogado, mas não pode pagar.",
+      "imagem": "⚖️",
+      "opcoes": [
+        "Defensoria Pública",
+        "Procon",
+        "INSS",
+        "Sine"
+      ],
+      "correta": "Defensoria Pública",
+      "explica": "A Defensoria Pública dá assistência jurídica gratuita."
+    },
+    {
+      "pergunta": "Onde procurar ajuda? Foi demitido e quer procurar vagas e pedir o seguro-desemprego.",
+      "imagem": "💼",
+      "opcoes": [
+        "Sine",
+        "Procon",
+        "Cartório",
+        "UBS"
+      ],
+      "correta": "Sine",
+      "explica": "O Sine ajuda a encontrar vagas e orienta sobre o seguro-desemprego."
+    },
+    {
+      "pergunta": "Onde procurar ajuda? Precisa tirar o CPF ou corrigir um dado dele.",
+      "imagem": "📇",
+      "opcoes": [
+        "Receita Federal",
+        "Conselho Tutelar",
+        "UBS",
+        "Sine"
+      ],
+      "correta": "Receita Federal",
+      "explica": "O CPF é da Receita Federal. Também dá para resolver nos Correios, no Banco do Brasil e na Caixa."
+    },
+    {
+      "pergunta": "Onde procurar ajuda? Precisa tirar ou regularizar o título de eleitor.",
+      "imagem": "🗳️",
+      "opcoes": [
+        "Cartório eleitoral (Justiça Eleitoral)",
+        "Procon",
+        "UBS",
+        "Sine"
+      ],
+      "correta": "Cartório eleitoral (Justiça Eleitoral)",
+      "explica": "O título de eleitor é feito na Justiça Eleitoral, também pelo site ou aplicativo do TSE."
+    },
+    {
+      "pergunta": "Qual destas é uma habilidade comportamental?",
+      "imagem": "🌟",
+      "opcoes": [
+        "Trabalhar em equipe",
+        "Dirigir caminhão",
+        "Usar planilha",
+        "Operar máquina de costura"
+      ],
+      "correta": "Trabalhar em equipe",
+      "explica": "Habilidades comportamentais têm a ver com atitude: trabalho em equipe, pontualidade, paciência."
+    },
+    {
+      "pergunta": "O que NÃO precisa ir no currículo?",
+      "imagem": "🔒",
+      "opcoes": [
+        "Os números do RG e do CPF",
+        "Telefone para contato",
+        "Experiências de trabalho",
+        "Escolaridade"
+      ],
+      "correta": "Os números do RG e do CPF",
+      "explica": "Por segurança, não coloque números de documentos. A empresa pede depois, se contratar."
+    },
+    {
+      "pergunta": "Qual frase é melhor para o resumo do currículo?",
+      "imagem": "⭐",
+      "opcoes": [
+        "Pontual, responsável e com experiência no atendimento ao público",
+        "Sou o melhor do mundo",
+        "Não sei fazer muita coisa",
+        "Aceito qualquer coisa"
+      ],
+      "correta": "Pontual, responsável e com experiência no atendimento ao público",
+      "explica": "Destaque suas qualidades de forma simples e verdadeira."
+    },
+    {
+      "pergunta": "Qual mensagem é adequada para enviar o currículo por WhatsApp?",
+      "imagem": "📱",
+      "opcoes": [
+        "Bom dia! Sou Ana Souza e tenho interesse na vaga de auxiliar administrativo. Envio meu currículo. Obrigada!",
+        "oi tem vaga",
+        "VAGA!!! ME CHAMA",
+        "manda aí as vagas"
+      ],
+      "correta": "Bom dia! Sou Ana Souza e tenho interesse na vaga de auxiliar administrativo. Envio meu currículo. Obrigada!",
+      "explica": "Cumprimente, diga quem você é, qual vaga quer e agradeça."
+    },
+    {
+      "pergunta": "Qual é a saudação mais adequada em um e-mail profissional?",
+      "imagem": "📧",
+      "opcoes": [
+        "Prezada Sra. Lima,",
+        "Fala, Lima!",
+        "E aí, beleza?",
+        "Oi, sumida!"
+      ],
+      "correta": "Prezada Sra. Lima,",
+      "explica": "“Prezado(a)” é uma saudação formal."
+    },
+    {
+      "pergunta": "Como atender um cliente?",
+      "imagem": "🛎️",
+      "opcoes": [
+        "Bom dia! Em que posso ajudar?",
+        "Fala aí, o que manda?",
+        "Que foi?",
+        "Hum?"
+      ],
+      "correta": "Bom dia! Em que posso ajudar?",
+      "explica": "Cortesia e clareza no atendimento fazem o cliente voltar."
+    },
+    {
+      "pergunta": "Qual meta está mais bem definida?",
+      "imagem": "💰",
+      "opcoes": [
+        "Guardar R$ 50 por mês durante um ano para pagar um curso",
+        "Economizar dinheiro",
+        "Ficar rico logo",
+        "Guardar o que sobrar, se sobrar"
+      ],
+      "correta": "Guardar R$ 50 por mês durante um ano para pagar um curso",
+      "explica": "Valor, prazo e motivo deixam a meta clara e fácil de acompanhar."
+    },
+    {
+      "pergunta": "Isto é um sonho, uma meta ou uma ação? Fazer a inscrição no ENCCEJA amanhã",
+      "imagem": "📝",
+      "opcoes": [
+        "Ação",
+        "Sonho",
+        "Meta"
+      ],
+      "correta": "Ação",
+      "explica": "É um passo concreto, para agora."
+    }
+  ]
+}

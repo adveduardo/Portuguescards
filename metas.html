@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu plano de metas</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  .degrauForm{border:2px solid #d8ecea;border-radius:16px;padding:8px 12px 10px;margin:10px 0}
+  .degrauForm h3{margin:2px 0 4px;font-size:18px}
+  .checks{margin-top:6px}
+  .check{display:inline-block;font-size:13.5px;font-weight:bold;border-radius:999px;padding:4px 9px;margin:2px;background:#eef1f5;color:#6b778c}
+  .check.ok{background:#e3f7ee;color:#11613a}
+  .escada{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:flex-end;align-items:flex-end;margin:10px 0 4px;min-height:330px}
+  .degrau{-webkit-flex:1;flex:1;margin:0 4px;border-radius:14px 14px 4px 4px;color:#fff;padding:10px 8px;font-size:15px;position:relative;min-width:0;word-wrap:break-word}
+  .degrau b{display:block;font-size:13px;opacity:.9;margin-bottom:3px}
+  .degrau .prazo{display:block;font-size:13px;margin-top:5px;opacity:.95}
+  .d1{background:#2a9d8f;min-height:120px}
+  .d2{background:#457b9d;min-height:190px}
+  .d3{background:#6d4c9f;min-height:260px}
+  .topoSonho{text-align:center;background:#fff7d6;border:3px solid #f2c94c;border-radius:18px;padding:10px;margin:0 4px 6px;font-size:18px;font-weight:bold;color:#7a5200}
+  .topoSonho .trofeu{font-size:40px;display:block}
+  .vazio{opacity:.65;font-style:italic}
+  .vindo{background:#fff4d6;border-radius:12px;padding:8px 10px;margin:6px 0;font-size:15px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🎯 Meu plano de metas <small>Do sonho ao primeiro passo: três degraus, com prazo e com quem pode ajudar.</small></h1>
+    <button type="button" id="btExemplo">💡 Exemplo</button>
+    <button type="button" id="btImprimir" class="principal">🖨️ Imprimir</button>
+    <button type="button" id="btApagar">🗑️ Apagar</button>
+  </div>
+  <div class="privado">🔒 Fica só neste aparelho. Em aparelho da escola, toque em <b>🗑️ Apagar</b> quando terminar.</div>
+  <div class="duas">
+    <div class="cartao">
+      <div id="vindo" class="vindo" hidden></div>
+      <label class="campo" for="nome">Seu nome <small>(opcional)</small></label>
+      <input type="text" id="nome" maxlength="50" autocomplete="off">
+      <label class="campo" for="sonho">🏆 Meu sonho</label>
+      <textarea id="sonho" maxlength="200" placeholder="Ex.: ser eletricista com carteira assinada"></textarea>
+      <label class="campo" for="porque">💛 Por que esse sonho é importante para mim?</label>
+      <textarea id="porque" maxlength="300"></textarea>
+      <div id="degrausForm"></div>
+      <label class="campo" for="obstaculo">🚧 O que pode atrapalhar?</label>
+      <input type="text" id="obstaculo" maxlength="150" placeholder="Ex.: cansaço depois do trabalho">
+      <label class="campo" for="solucao">🛠️ Como vou resolver?</label>
+      <input type="text" id="solucao" maxlength="150" placeholder="Ex.: estudar no horário do almoço">
+    </div>
+    <div class="cartao">
+      <h2>✨ A escada do meu sonho</h2>
+      <div id="escada"></div>
+      <p class="dica">Uma boa meta diz <b>o quê</b>, <b>quanto</b> e <b>até quando</b>. E começa com um passo pequeno, ainda nesta semana.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH = 'metas_plano';
+  var DEGRAUS = [{t: '1º degrau', p: 'até 3 meses'}, {t: '2º degrau', p: 'até 1 ano'}, {t: '3º degrau', p: 'até 3 anos'}];
+  var CAMPOS = ['nome', 'sonho', 'porque', 'obstaculo', 'solucao'];
+  var MEDIDA = /\d|\b(uma?|dois|duas|três|quatro|cinco|dez|cada|por dia|por semana|por mês|todo dia|todos os dias)\b/i;
+
+  var h = '';
+  DEGRAUS.forEach(function(d, i){
+    h += '<div class="degrauForm"><h3>' + ['1️⃣', '2️⃣', '3️⃣'][i] + ' ' + d.t + ' <small style="font-weight:normal;color:#4b5b73">(' + d.p + ')</small></h3>' +
+      '<label class="campo" for="meta' + i + '">Meta: o que vou fazer?</label><input type="text" id="meta' + i + '" maxlength="140">' +
+      '<div class="linha"><div><label class="campo" for="prazo' + i + '">Até quando?</label><input type="text" id="prazo' + i + '" maxlength="40" placeholder="Ex.: até março"></div>' +
+      '<div><label class="campo" for="ajuda' + i + '">Quem pode ajudar?</label><input type="text" id="ajuda' + i + '" maxlength="80"></div></div>' +
+      '<label class="campo" for="passo' + i + '">👣 Primeiro passo (nesta semana)</label><input type="text" id="passo' + i + '" maxlength="140">' +
+      '<div class="checks" id="checks' + i + '"></div></div>';
+    CAMPOS.push('meta' + i, 'prazo' + i, 'ajuda' + i, 'passo' + i);
+  });
+  $('degrausForm').innerHTML = h;
+
+  function val(id){ return Sala.aparar($(id).value); }
+  function dados(){ var d = {}; CAMPOS.forEach(function(c){ d[c] = $(c).value; }); return d; }
+  function salvar(){ Sala.gravar(CH, dados()); }
+  function preencher(d){ CAMPOS.forEach(function(c){ $(c).value = d && d[c] ? d[c] : ''; }); atualizar(); }
+
+  function checks(i){
+    var meta = val('meta' + i), prazo = val('prazo' + i), passo = val('passo' + i);
+    var l = [['📏 dá para medir', MEDIDA.test(meta + ' ' + prazo)], ['📅 tem prazo', !!prazo], ['👣 tem primeiro passo', !!passo]];
+    $('checks' + i).innerHTML = meta ? l.map(function(x){ return '<span class="check' + (x[1] ? ' ok' : '') + '">' + (x[1] ? '✔ ' : '○ ') + x[0] + '</span>'; }).join('') : '';
+  }
+  function escadaHTML(imprimir){
+    var sonho = val('sonho'), out = '<div class="topoSonho"><span class="trofeu">🏆</span>' + (sonho ? Sala.esc(sonho) : '<span class="vazio">Meu sonho…</span>') + '</div><div class="escada">';
+    DEGRAUS.forEach(function(d, i){
+      var meta = val('meta' + i), prazo = val('prazo' + i);
+      out += '<div class="degrau d' + (i + 1) + '"><b>' + d.t + '</b>' + (meta ? Sala.esc(meta) : '<span class="vazio">meta ' + (i + 1) + '</span>') +
+        (prazo ? '<span class="prazo">📅 ' + Sala.esc(prazo) + '</span>' : '') + '</div>';
+    });
+    return out + '</div>';
+  }
+  function atualizar(){
+    for (var i = 0; i < 3; i++) checks(i);
+    $('escada').innerHTML = escadaHTML();
+  }
+  CAMPOS.forEach(function(c){ $(c).oninput = function(){ atualizar(); salvar(); }; });
+
+  var area = (location.search.match(/[?&]area=([^&]*)/) || [])[1];
+  if (area){
+    area = decodeURIComponent(area.replace(/\+/g, ' '));
+    $('vindo').hidden = false;
+    $('vindo').innerHTML = '🎡 Da sua Roda da Vida: a área <b>' + Sala.esc(area) + '</b> pede cuidado. Que tal um sonho ou uma meta para ela?';
+  }
+
+  $('btExemplo').onclick = function(){
+    if (val('sonho') && !confirm('Trocar o que está escrito pelo exemplo?')) return;
+    preencher({nome: '', sonho: 'Ser eletricista com carteira assinada', porque: 'Para dar uma vida melhor para minha família e trabalhar com o que eu gosto.',
+      meta0: 'Fazer a inscrição no ENCCEJA e estudar 30 minutos por dia', prazo0: 'até março', ajuda0: 'A professora da EJA e meu filho', passo0: 'Baixar as provas antigas nesta semana',
+      meta1: 'Conseguir o certificado do ensino fundamental', prazo1: 'até dezembro', ajuda1: 'Os colegas da turma', passo1: 'Montar um horário de estudo na geladeira',
+      meta2: 'Concluir o curso de eletricista no Instituto Federal', prazo2: 'em 2 anos', ajuda2: 'O chefe da obra', passo2: 'Ler o edital do curso',
+      obstaculo: 'Cansaço depois do trabalho', solucao: 'Estudar no horário do almoço e dormir mais cedo'});
+    salvar();
+  };
+  $('btApagar').onclick = function(){
+    if (!confirm('Apagar o plano deste aparelho?')) return;
+    try { localStorage.removeItem(CH); } catch (e) {}
+    preencher({}); Sala.avisar('🗑️ Apagado deste aparelho.');
+  };
+  $('btImprimir').onclick = function(){
+    var linha = function(r, v){ return '<p style="margin:5px 0"><b>' + r + '</b> ' + (v ? Sala.esc(v) : '______________________________________________') + '</p>'; };
+    var deg = '';
+    DEGRAUS.forEach(function(d, i){
+      deg += '<div style="border:2px solid #555;border-radius:10px;padding:6px 10px;margin:8px 0"><b>' + d.t + ' (' + d.p + ')</b>' +
+        linha('Meta:', val('meta' + i)) + linha('Até quando:', val('prazo' + i)) + linha('Primeiro passo:', val('passo' + i)) + linha('Quem pode ajudar:', val('ajuda' + i)) + '</div>';
+    });
+    Sala.imprimir('<div style="max-width:720px;margin:0 auto;font-size:15px">' +
+      '<style>#salaImpressao .escada{display:flex;align-items:flex-end;margin:6px 0}#salaImpressao .degrau{flex:1;margin:0 4px;border:2px solid #333;border-radius:10px 10px 2px 2px;padding:6px;font-size:13px}' +
+      '#salaImpressao .degrau b{display:block}#salaImpressao .d1{min-height:70px}#salaImpressao .d2{min-height:110px}#salaImpressao .d3{min-height:150px}' +
+      '#salaImpressao .topoSonho{text-align:center;border:2px solid #333;border-radius:12px;padding:6px;margin:0 4px 4px;font-weight:bold}#salaImpressao .trofeu{display:block;font-size:26px}#salaImpressao .vazio{color:#888}</style>' +
+      '<h1 style="margin:0 0 4px;font-size:26px">🎯 Meu plano de metas</h1>' + linha('Nome:', val('nome')) +
+      escadaHTML(true) + linha('🏆 Meu sonho:', val('sonho')) + linha('💛 Por que é importante:', val('porque')) + deg +
+      linha('🚧 O que pode atrapalhar:', val('obstaculo')) + linha('🛠️ Como vou resolver:', val('solucao')) +
+      '<p style="margin-top:18px">Compromisso comigo: ______________________________ &nbsp; Data: ____/____/______</p>' +
+      '<p>Vou revisar este plano em: ____/____/______</p></div>');
+  };
+
+  preencher(Sala.ler(CH));
+  window.METAS = {dados: dados, atualizar: atualizar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

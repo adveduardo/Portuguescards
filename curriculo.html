@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu currículo</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  .exp{border:2px solid #d8ecea;border-radius:14px;padding:6px 10px 10px;margin:8px 0;position:relative}
+  .exp .tirar{position:absolute;right:6px;top:6px}
+  .folha{background:#fff;border:1px solid #d5dde5;border-radius:6px;padding:26px 28px;min-height:520px;box-shadow:0 8px 20px rgba(31,42,68,.12);font-family:Arial,Helvetica,sans-serif;color:#111;font-size:15px;line-height:1.4}
+  .folha .cvNome{font-size:26px;font-weight:bold;margin:0;color:#0b4f49}
+  .folha .cvContato{color:#333;margin:4px 0 12px;font-size:14px}
+  .folha h3{font-size:14px;letter-spacing:1px;text-transform:uppercase;color:#0b4f49;border-bottom:2px solid #0f766e;padding-bottom:2px;margin:14px 0 6px}
+  .folha p{margin:3px 0}
+  .folha ul{margin:2px 0 0 18px;padding:0}
+  .folha .cvExp{margin:0 0 7px}
+  .folha .cvExp b{color:#111}
+  .folha .vazio{color:#999;font-style:italic}
+  .guardar{display:block;font-weight:bold;margin:6px 0}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>📄 Meu currículo <small>Preencha à esquerda e veja a folha pronta à direita. Depois, é só imprimir.</small></h1>
+    <button type="button" id="btExemplo">💡 Exemplo</button>
+    <button type="button" id="btImprimir" class="principal">🖨️ Imprimir</button>
+    <button type="button" id="btApagar">🗑️ Apagar tudo</button>
+  </div>
+  <div class="privado">🔒 <b>Seus dados são seus.</b> Nada sai deste aparelho. Só fica guardado se você marcar a caixinha abaixo; em aparelho da escola, deixe desmarcada e toque em <b>🗑️ Apagar tudo</b> no fim.
+    <label class="guardar"><input type="checkbox" id="chkGuardar"> Guardar neste aparelho para continuar depois</label></div>
+  <div class="duas">
+    <div class="cartao" id="form">
+      <h2>👤 Dados de contato</h2>
+      <label class="campo" for="nome">Nome completo</label><input type="text" id="nome" maxlength="70" autocomplete="off">
+      <div class="linha">
+        <div><label class="campo" for="tel">Telefone / WhatsApp</label><input type="tel" id="tel" maxlength="30" autocomplete="off"></div>
+        <div><label class="campo" for="email">E-mail</label><input type="email" id="email" maxlength="70" autocomplete="off"></div>
+      </div>
+      <label class="campo" for="local">Bairro e cidade</label><input type="text" id="local" maxlength="80" placeholder="Ex.: Bairro Jardim, Recife – PE" autocomplete="off">
+      <h2 style="margin-top:14px">🎯 Objetivo</h2>
+      <input type="text" id="objetivo" maxlength="70" list="cargos" placeholder="Ex.: Auxiliar administrativo" aria-label="Objetivo">
+      <datalist id="cargos"><option value="Auxiliar administrativo"><option value="Atendente"><option value="Auxiliar de cozinha"><option value="Vendedor(a)"><option value="Operador(a) de caixa">
+        <option value="Recepcionista"><option value="Cuidador(a) de idosos"><option value="Auxiliar de limpeza"><option value="Ajudante de obras"><option value="Motorista"><option value="Estoquista"><option value="Auxiliar de produção"></datalist>
+      <label class="campo" for="resumo">Resumo <small>(2 ou 3 linhas sobre você)</small></label>
+      <textarea id="resumo" maxlength="400" placeholder="Ex.: Pontual, responsável e com experiência no atendimento ao público."></textarea>
+      <h2 style="margin-top:14px">🎓 Escolaridade</h2>
+      <select id="escola" aria-label="Escolaridade">
+        <option value="">— escolha —</option><option>Ensino fundamental incompleto</option><option>Ensino fundamental em curso (EJA)</option><option>Ensino fundamental completo</option>
+        <option>Ensino médio em curso (EJA)</option><option>Ensino médio completo</option><option>Curso técnico em andamento</option><option>Curso técnico completo</option>
+        <option>Ensino superior em andamento</option><option>Ensino superior completo</option></select>
+      <input type="text" id="escolaDet" maxlength="100" placeholder="Escola e ano (ex.: EJA – Escola Estadual Centro, conclusão em 2026)" style="margin-top:6px" aria-label="Escola e ano">
+      <h2 style="margin-top:14px">💼 Experiências</h2>
+      <p class="dica">Trabalho sem carteira também conta: diarista, vendas, cuidar de pessoas, obras, bicos…</p>
+      <div id="exps"></div>
+      <button type="button" id="btExp">➕ Mais uma experiência</button>
+      <h2 style="margin-top:14px">📚 Cursos</h2>
+      <textarea id="cursos" maxlength="500" placeholder="Um por linha. Ex.: Informática básica (40 h) – Senac, 2024"></textarea>
+      <h2 style="margin-top:14px">⭐ Habilidades</h2>
+      <p class="dica">Toque para marcar.</p>
+      <div class="chips" id="chips"></div>
+      <input type="text" id="outras" maxlength="150" placeholder="Outras habilidades (separe com vírgula)" style="margin-top:6px" aria-label="Outras habilidades">
+      <h2 style="margin-top:14px">➕ Informações adicionais</h2>
+      <textarea id="adicionais" maxlength="300" placeholder="Ex.: CNH categoria B. Disponível para trabalhar aos sábados."></textarea>
+    </div>
+    <div class="cartao">
+      <h2>👀 Como vai ficar</h2>
+      <div id="avisos"></div>
+      <div class="folha" id="folha"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH = 'curriculo_rascunho', MAX_EXP = 5;
+  var HABS = ['Pontualidade', 'Trabalho em equipe', 'Responsabilidade', 'Comunicação', 'Organização', 'Paciência', 'Aprendo rápido', 'Honestidade',
+              'Atendimento ao público', 'Digitar no computador', 'Operar o caixa', 'Cozinhar', 'Dirigir', 'Limpeza e organização', 'Cuidar de pessoas', 'Vendas'];
+  var CAMPOS = ['nome', 'tel', 'email', 'local', 'objetivo', 'resumo', 'escola', 'escolaDet', 'cursos', 'outras', 'adicionais'];
+  var exps = [], habs = {};
+
+  function v(id){ return Sala.aparar($(id).value); }
+  function linhasDe(t){ return String(t || '').split(/\n+/).map(Sala.aparar).filter(function(x){ return x; }); }
+  function dados(){ var d = {exps: exps, habs: habs}; CAMPOS.forEach(function(c){ d[c] = $(c).value; }); return d; }
+  function guardar(){ if ($('chkGuardar').checked) Sala.gravar(CH, dados()); }
+
+  function desenharChips(){
+    $('chips').innerHTML = HABS.map(function(h, i){ return '<button type="button" class="chip' + (habs[h] ? ' on' : '') + '" data-i="' + i + '">' + (habs[h] ? '✔ ' : '') + Sala.esc(h) + '</button>'; }).join('');
+    var bs = $('chips').querySelectorAll('.chip');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){
+      var h = HABS[+this.getAttribute('data-i')]; if (habs[h]) delete habs[h]; else habs[h] = 1; desenharChips(); atualizar();
+    };
+  }
+  function desenharExps(){
+    var h = '';
+    exps.forEach(function(e, i){
+      h += '<div class="exp"><button type="button" class="pequeno tirar" data-tirar="' + i + '" aria-label="Tirar experiência">✖</button>' +
+        '<div class="linha"><div><label class="campo">Função</label><input type="text" maxlength="60" data-e="' + i + '" data-c="funcao" value="' + Sala.esc(e.funcao) + '" placeholder="Ex.: Atendente"></div>' +
+        '<div><label class="campo">Onde</label><input type="text" maxlength="60" data-e="' + i + '" data-c="onde" value="' + Sala.esc(e.onde) + '" placeholder="Ex.: Padaria Pão Quente ou Autônomo(a)"></div></div>' +
+        '<div class="linha"><div><label class="campo">Período</label><input type="text" maxlength="30" data-e="' + i + '" data-c="periodo" value="' + Sala.esc(e.periodo) + '" placeholder="Ex.: 2021 – 2024"></div>' +
+        '<div><label class="campo">O que você fazia</label><input type="text" maxlength="120" data-e="' + i + '" data-c="fazia" value="' + Sala.esc(e.fazia) + '" placeholder="Ex.: atendimento e caixa"></div></div></div>';
+    });
+    $('exps').innerHTML = h;
+    $('btExp').disabled = exps.length >= MAX_EXP;
+    var ins = $('exps').querySelectorAll('input');
+    for (var k = 0; k < ins.length; k++) ins[k].oninput = function(){ exps[+this.getAttribute('data-e')][this.getAttribute('data-c')] = this.value; atualizar(); };
+    var ts = $('exps').querySelectorAll('[data-tirar]');
+    for (k = 0; k < ts.length; k++) ts[k].onclick = function(){ exps.splice(+this.getAttribute('data-tirar'), 1); if (!exps.length) exps.push(novaExp()); desenharExps(); atualizar(); };
+  }
+  function novaExp(){ return {funcao: '', onde: '', periodo: '', fazia: ''}; }
+
+  function folhaHTML(){
+    var nome = v('nome'), contato = [v('local'), v('tel'), v('email')].filter(function(x){ return x; }), h = '';
+    h += '<p class="cvNome">' + (nome ? Sala.esc(nome) : '<span class="vazio">Seu nome</span>') + '</p>';
+    h += '<p class="cvContato">' + (contato.length ? contato.map(Sala.esc).join(' • ') : '<span class="vazio">bairro e cidade • telefone • e-mail</span>') + '</p>';
+    if (v('objetivo')) h += '<h3>Objetivo</h3><p>' + Sala.esc(v('objetivo')) + '</p>';
+    if (v('resumo')) h += '<h3>Resumo</h3><p>' + Sala.esc(v('resumo')) + '</p>';
+    if (v('escola') || v('escolaDet')) h += '<h3>Escolaridade</h3><p>' + Sala.esc(v('escola')) + (v('escola') && v('escolaDet') ? '<br>' : '') + Sala.esc(v('escolaDet')) + '</p>';
+    var ex = exps.filter(function(e){ return Sala.aparar(e.funcao) || Sala.aparar(e.onde); });
+    if (ex.length){
+      h += '<h3>Experiência</h3>';
+      ex.forEach(function(e){
+        h += '<div class="cvExp"><b>' + Sala.esc(Sala.aparar(e.funcao)) + '</b>' + (Sala.aparar(e.onde) ? ' – ' + Sala.esc(Sala.aparar(e.onde)) : '') +
+          (Sala.aparar(e.periodo) ? ' (' + Sala.esc(Sala.aparar(e.periodo)) + ')' : '') + (Sala.aparar(e.fazia) ? '<br>' + Sala.esc(Sala.aparar(e.fazia)) : '') + '</div>';
+      });
+    }
+    var cursos = linhasDe($('cursos').value);
+    if (cursos.length) h += '<h3>Cursos</h3><ul>' + cursos.map(function(c){ return '<li>' + Sala.esc(c) + '</li>'; }).join('') + '</ul>';
+    var hs = HABS.filter(function(x){ return habs[x]; }).concat(v('outras').split(',').map(Sala.aparar).filter(function(x){ return x; }));
+    if (hs.length) h += '<h3>Habilidades</h3><p>' + hs.map(Sala.esc).join(' • ') + '</p>';
+    if (v('adicionais')) h += '<h3>Informações adicionais</h3><p>' + Sala.esc(v('adicionais')) + '</p>';
+    return h;
+  }
+  function avisos(){
+    var a = [], tudo = CAMPOS.map(function(c){ return $(c).value; }).join(' ') + ' ' + exps.map(function(e){ return e.funcao + ' ' + e.onde + ' ' + e.periodo + ' ' + e.fazia; }).join(' ');
+    if (/\d{3}\.?\d{3}\.?\d{3}-?\d{2}/.test(tudo) || /\b(cpf|rg)\s*[:nº°.]*\s*\d/i.test(tudo)) a.push(['ruim', '🔒 Parece que há um número de documento (CPF ou RG). Por segurança, não coloque no currículo: a empresa pede depois, se contratar.']);
+    if (!v('nome') || !(v('tel') || v('email'))) a.push(['atencao', '👤 Coloque seu nome e pelo menos um contato (telefone ou e-mail).']);
+    if (v('email') && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))) a.push(['atencao', '📧 Confira o e-mail: ele precisa ter @ e um ponto (ex.: nome@email.com).']);
+    if (!v('objetivo')) a.push(['atencao', '🎯 Escreva o objetivo: a vaga ou função que você procura.']);
+    if (!a.length) a.push(['bom', '✅ Tudo certo! Antes de imprimir, revise a escrita e peça para alguém ler.']);
+    $('avisos').innerHTML = a.map(function(x){ return '<div class="aviso ' + x[0] + '">' + x[1] + '</div>'; }).join('');
+  }
+  function atualizar(){ $('folha').innerHTML = folhaHTML(); avisos(); guardar(); }
+  function preencher(d){
+    d = d || {};
+    CAMPOS.forEach(function(c){ $(c).value = d[c] || ''; });
+    exps = d.exps instanceof Array && d.exps.length ? d.exps.slice(0, MAX_EXP) : [novaExp(), novaExp()];
+    habs = d.habs && typeof d.habs === 'object' ? d.habs : {};
+    desenharExps(); desenharChips(); atualizar();
+  }
+
+  CAMPOS.forEach(function(c){ $(c).oninput = $(c).onchange = atualizar; });
+  $('btExp').onclick = function(){ if (exps.length < MAX_EXP){ exps.push(novaExp()); desenharExps(); } };
+  $('chkGuardar').onchange = function(){
+    if (this.checked){ Sala.gravar(CH, dados()); Sala.avisar('💾 Guardado neste aparelho.'); }
+    else { try { localStorage.removeItem(CH); } catch (e) {} Sala.avisar('Não fica mais guardado neste aparelho.'); }
+  };
+  $('btApagar').onclick = function(){
+    if (!confirm('Apagar todo o currículo desta tela e deste aparelho?')) return;
+    try { localStorage.removeItem(CH); } catch (e) {}
+    $('chkGuardar').checked = false; preencher({}); Sala.avisar('🗑️ Apagado.');
+  };
+  $('btExemplo').onclick = function(){
+    if (v('nome') && !confirm('Trocar o que está escrito pelo exemplo?')) return;
+    preencher({nome: 'Ana Souza', tel: '(81) 9 0000-0000', email: 'ana.souza@email.com', local: 'Bairro Jardim, Recife – PE', objetivo: 'Auxiliar administrativo',
+      resumo: 'Pontual, responsável e com experiência no atendimento ao público. Estou concluindo o ensino médio na EJA e gosto de aprender coisas novas.',
+      escola: 'Ensino médio em curso (EJA)', escolaDet: 'EJA – Escola Estadual Centro, conclusão em 2026',
+      exps: [{funcao: 'Atendente', onde: 'Padaria Pão Quente', periodo: '2021 – 2024', fazia: 'Atendimento ao público, caixa e organização da loja'},
+             {funcao: 'Diarista autônoma', onde: 'Residências', periodo: '2017 – 2021', fazia: 'Limpeza e organização de casas'}],
+      cursos: 'Informática básica (40 h) – Senac, 2023\nAtendimento ao cliente (20 h) – curso on-line, 2024',
+      habs: {'Pontualidade': 1, 'Trabalho em equipe': 1, 'Atendimento ao público': 1, 'Digitar no computador': 1, 'Operar o caixa': 1},
+      outras: '', adicionais: 'Disponível para trabalhar aos sábados.'});
+  };
+  $('btImprimir').onclick = function(){
+    Sala.imprimir('<style>#salaImpressao .folha{font-family:Arial,Helvetica,sans-serif;color:#000;font-size:14px;line-height:1.4;max-width:720px;margin:0 auto}' +
+      '#salaImpressao .cvNome{font-size:26px;font-weight:bold;margin:0}#salaImpressao .cvContato{margin:4px 0 10px}#salaImpressao h3{font-size:13px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid #000;padding-bottom:2px;margin:12px 0 5px}' +
+      '#salaImpressao p{margin:3px 0}#salaImpressao ul{margin:2px 0 0 18px;padding:0}#salaImpressao .cvExp{margin:0 0 6px}#salaImpressao .vazio{color:#999}</style>' +
+      '<div class="folha">' + folhaHTML() + '</div>');
+  };
+
+  var salvo = Sala.ler(CH);
+  $('chkGuardar').checked = !!salvo;
+  preencher(salvo);
+  window.CURRICULO = {dados: dados, folha: folhaHTML};   // usado nos testes
+})();
+</script>
+</body>
+</html>

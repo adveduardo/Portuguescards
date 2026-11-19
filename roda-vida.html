@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roda da Vida</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  .area{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;padding:6px 0;border-bottom:1px dashed #d8ecea}
+  .area:last-child{border-bottom:none}
+  .area .em{font-size:28px;width:40px;text-align:center;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .area .nome{-webkit-flex:0 0 150px;flex:0 0 150px;font-weight:bold;font-size:17px;min-width:0}
+  .area input.nomeEd{-webkit-flex:0 0 150px;flex:0 0 150px;width:150px}
+  .area input[type=range]{-webkit-flex:1;flex:1;min-width:60px;margin:0 6px;height:34px}
+  .area .nota{width:46px;height:46px;line-height:46px;border-radius:50%;text-align:center;font-weight:bold;font-size:22px;color:#fff;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .area button{padding:6px 11px;font-size:18px;margin:2px}
+  #roda svg{width:100%;max-width:500px;display:block;margin:0 auto}
+  .forte{color:#11613a}
+  .cuidar{color:#9b1c1c}
+  #resumo p{font-size:17px;margin:8px 0}
+  @media (max-width:600px){ .area .nome,.area input.nomeEd{-webkit-flex-basis:96px;flex-basis:96px;width:96px;font-size:15px} .area button{padding:5px 8px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🎡 Roda da Vida <small>Dê uma nota de 0 a 10 para cada área da sua vida hoje. A roda mostra o que está bem e o que pede cuidado.</small></h1>
+    <button type="button" id="btExemplo">💡 Exemplo</button>
+    <button type="button" id="btAreas">✏️ Mudar as áreas</button>
+    <button type="button" id="btGuardar">📌 Guardar para comparar</button>
+    <button type="button" id="btImprimir" class="principal">🖨️ Imprimir</button>
+    <button type="button" id="btApagar">🗑️ Apagar</button>
+  </div>
+  <div class="privado">🔒 Tudo fica só neste aparelho. Em aparelho da escola, toque em <b>🗑️ Apagar</b> quando terminar.</div>
+  <div class="duas">
+    <div class="cartao">
+      <label class="campo" for="nome">Seu nome <small>(opcional)</small></label>
+      <input type="text" id="nome" maxlength="50" autocomplete="off">
+      <p class="dica">0 = precisa de muita atenção • 10 = está ótimo. Não existe resposta certa: é como você se sente hoje.</p>
+      <div id="areas"></div>
+    </div>
+    <div class="cartao">
+      <div id="roda"></div>
+      <label class="dica" for="selComparar">Comparar com uma roda guardada:</label>
+      <select id="selComparar"></select>
+      <div id="resumo"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var PADRAO = [['❤️', 'Saúde'], ['🏠', 'Família'], ['💼', 'Trabalho e renda'], ['🎓', 'Estudos'], ['💰', 'Dinheiro'], ['👥', 'Amizades'], ['🎨', 'Lazer'], ['😊', 'Bem-estar']];
+  var CORES = ['#e63946', '#f4a261', '#2a9d8f', '#457b9d', '#e9b730', '#8e44ad', '#ff6f91', '#06b88a'];
+  var CH = 'roda_vida', CHH = 'roda_vida_hist', N = 8;
+  var est = Sala.ler(CH) || {}, editando = false;
+  var areas = est.areas instanceof Array && est.areas.length === N ? est.areas : PADRAO.map(function(a){ return {e: a[0], n: a[1]}; });
+  var valores = est.valores instanceof Array && est.valores.length === N ? est.valores : [5, 5, 5, 5, 5, 5, 5, 5];
+  $('nome').value = est.nome || '';
+
+  function salvar(){ Sala.gravar(CH, {nome: $('nome').value, areas: areas, valores: valores}); }
+  function corNota(v){ return v <= 3 ? '#d62839' : v <= 6 ? '#e8890c' : '#1f9d6b'; }
+  function historico(){ var h = Sala.ler(CHH); return h instanceof Array ? h : []; }
+  function dataBR(ms){ var d = new Date(ms); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear(); }
+
+  function desenharAreas(){
+    var h = '';
+    areas.forEach(function(a, i){
+      h += '<div class="area"><span class="em">' + a.e + '</span>' +
+        (editando ? '<input type="text" class="nomeEd" maxlength="24" data-i="' + i + '" value="' + Sala.esc(a.n) + '" aria-label="Nome da área ' + (i + 1) + '">'
+                  : '<span class="nome">' + Sala.esc(a.n) + '</span>') +
+        '<button type="button" data-menos="' + i + '" aria-label="Diminuir">−</button>' +
+        '<input type="range" min="0" max="10" step="1" value="' + valores[i] + '" data-i="' + i + '" aria-label="' + Sala.esc(a.n) + '">' +
+        '<button type="button" data-mais="' + i + '" aria-label="Aumentar">+</button>' +
+        '<span class="nota" id="nota' + i + '" style="background:' + corNota(valores[i]) + '">' + valores[i] + '</span></div>';
+    });
+    $('areas').innerHTML = h;
+    var rs = $('areas').querySelectorAll('input[type=range]');
+    for (var k = 0; k < rs.length; k++){
+      rs[k].oninput = rs[k].onchange = function(){ mudar(+this.getAttribute('data-i'), +this.value); };
+    }
+    var bs = $('areas').querySelectorAll('button');
+    for (k = 0; k < bs.length; k++){
+      bs[k].onclick = function(){
+        var m = this.getAttribute('data-menos'), p = this.getAttribute('data-mais');
+        if (m !== null) mudar(+m, valores[+m] - 1); else mudar(+p, valores[+p] + 1);
+        var r = $('areas').querySelector('input[type=range][data-i="' + (m !== null ? m : p) + '"]'); if (r) r.value = valores[m !== null ? +m : +p];
+      };
+    }
+    var ns = $('areas').querySelectorAll('input.nomeEd');
+    for (k = 0; k < ns.length; k++){
+      ns[k].oninput = function(){ areas[+this.getAttribute('data-i')].n = Sala.aparar(this.value) || PADRAO[+this.getAttribute('data-i')][1]; salvar(); desenharRoda(); };
+    }
+  }
+  function mudar(i, v){
+    v = Math.max(0, Math.min(10, Math.round(v)));
+    valores[i] = v;
+    var n = $('nota' + i); if (n){ n.textContent = v; n.style.background = corNota(v); }
+    salvar(); desenharRoda();
+  }
+
+  function ponto(i, r){ var a = -Math.PI / 2 + i * 2 * Math.PI / N; return [260 + r * Math.cos(a), 260 + r * Math.sin(a)]; }
+  function setor(i, r){
+    if (r <= 0) return '';
+    var a0 = -Math.PI / 2 + (i - 0.5) * 2 * Math.PI / N, a1 = a0 + 2 * Math.PI / N;
+    var x0 = 260 + r * Math.cos(a0), y0 = 260 + r * Math.sin(a0), x1 = 260 + r * Math.cos(a1), y1 = 260 + r * Math.sin(a1);
+    return 'M260,260 L' + x0.toFixed(1) + ',' + y0.toFixed(1) + ' A' + r + ',' + r + ' 0 0 1 ' + x1.toFixed(1) + ',' + y1.toFixed(1) + ' Z';
+  }
+  function svgRoda(vals, comp){
+    var R = 180, s = '<svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roda da Vida">', i, k;
+    for (i = 0; i < N; i++) s += '<path d="' + setor(i, R) + '" fill="' + CORES[i] + '" fill-opacity="0.13" stroke="#fff" stroke-width="2"/>';
+    for (i = 0; i < N; i++) if (vals[i] > 0) s += '<path class="fatia" d="' + setor(i, R * vals[i] / 10) + '" fill="' + CORES[i] + '" fill-opacity="0.85" stroke="#fff" stroke-width="2"><title>' + Sala.esc(areas[i].n) + ': ' + vals[i] + '</title></path>';
+    for (k = 2; k <= 10; k += 2) s += '<circle cx="260" cy="260" r="' + (R * k / 10) + '" fill="none" stroke="#9fb7c4" stroke-opacity="0.5" stroke-width="1"/>';
+    if (comp){
+      var pts = [];
+      for (i = 0; i < N; i++){ var p = ponto(i, R * comp[i] / 10); pts.push(p[0].toFixed(1) + ',' + p[1].toFixed(1)); }
+      s += '<polygon id="poliComp" points="' + pts.join(' ') + '" fill="none" stroke="#1f2a44" stroke-width="3" stroke-dasharray="9 6"/>';
+    }
+    for (i = 0; i < N; i++){
+      var q = ponto(i, R + 38);
+      s += '<text x="' + q[0].toFixed(1) + '" y="' + (q[1] - 4).toFixed(1) + '" font-size="30" text-anchor="middle">' + areas[i].e + '</text>' +
+           '<text x="' + q[0].toFixed(1) + '" y="' + (q[1] + 24).toFixed(1) + '" font-size="21" font-weight="bold" text-anchor="middle" fill="' + corNota(vals[i]) + '">' + vals[i] + '</text>';
+    }
+    return s + '</svg>';
+  }
+  function comparacao(){
+    var i = $('selComparar').value; if (i === '') return null;
+    var h = historico()[+i]; return h ? h.valores : null;
+  }
+  function desenharComparar(){
+    var h = historico(), sel = $('selComparar'), atual = sel.value, o = '<option value="">— nenhuma —</option>';
+    h.forEach(function(x, i){ o += '<option value="' + i + '">' + Sala.esc((x.nome || 'Sem nome') + ' — ' + dataBR(x.quando)) + '</option>'; });
+    sel.innerHTML = o; sel.value = atual && +atual < h.length ? atual : '';
+  }
+  function ordem(){ var idx = []; for (var i = 0; i < N; i++) idx.push(i); return idx.sort(function(a, b){ return valores[a] - valores[b] || a - b; }); }
+  function desenharRoda(){
+    var comp = comparacao();
+    $('roda').innerHTML = svgRoda(valores, comp);
+    var o = ordem(), baixas = o.slice(0, 2), altas = o.slice(-2).reverse(), soma = 0;
+    valores.forEach(function(v){ soma += v; });
+    var nomes = function(l){ return l.map(function(i){ return areas[i].e + ' ' + Sala.esc(areas[i].n) + ' (' + valores[i] + ')'; }).join(' e '); };
+    var h = '<p class="forte">💪 <b>Pontos fortes:</b> ' + nomes(altas) + '</p>' +
+            '<p class="cuidar">🌱 <b>Para cuidar:</b> ' + nomes(baixas) + '</p>' +
+            '<p>📊 Média: <b>' + (soma / N).toFixed(1).replace('.', ',') + '</b></p>';
+    if (comp){
+      var melhorou = [];
+      for (var i = 0; i < N; i++) if (valores[i] > comp[i]) melhorou.push(areas[i].e + ' ' + Sala.esc(areas[i].n) + ' (+' + (valores[i] - comp[i]) + ')');
+      h += '<p>🔁 A linha tracejada é a roda guardada. ' + (melhorou.length ? 'Melhorou: ' + melhorou.join(', ') + '. 🎉' : 'Compare as áreas e converse sobre o que mudou.') + '</p>';
+    }
+    h += '<button type="button" class="principal" id="btMeta">🎯 Criar uma meta para ' + Sala.esc(areas[baixas[0]].n) + '</button>';
+    $('resumo').innerHTML = h;
+    $('btMeta').onclick = function(){ location.href = 'metas.html?area=' + encodeURIComponent(areas[baixas[0]].n); };
+  }
+
+  $('nome').oninput = salvar;
+  $('selComparar').onchange = desenharRoda;
+  $('btAreas').onclick = function(){
+    editando = !editando; this.innerHTML = editando ? '✔️ Pronto' : '✏️ Mudar as áreas'; desenharAreas();
+    if (!editando) desenharRoda();
+  };
+  $('btExemplo').onclick = function(){
+    valores = [7, 8, 5, 6, 3, 7, 4, 6]; salvar(); desenharAreas(); desenharRoda();
+    Sala.avisar('Exemplo: veja que Dinheiro (3) e Lazer (4) pedem mais cuidado.');
+  };
+  $('btGuardar').onclick = function(){
+    var h = historico();
+    h.push({nome: Sala.aparar($('nome').value), quando: new Date().getTime(), valores: valores.slice(), areas: areas.map(function(a){ return a.n; })});
+    if (h.length > 40) h = h.slice(-40);
+    Sala.gravar(CHH, h); desenharComparar();
+    Sala.avisar('📌 Roda guardada! Daqui a alguns meses, faça de novo e compare.');
+  };
+  $('btApagar').onclick = function(){
+    if (!confirm('Apagar a roda e as rodas guardadas deste aparelho?')) return;
+    try { localStorage.removeItem(CH); localStorage.removeItem(CHH); } catch (e) {}
+    $('nome').value = ''; valores = [5, 5, 5, 5, 5, 5, 5, 5];
+    areas = PADRAO.map(function(a){ return {e: a[0], n: a[1]}; });
+    desenharAreas(); desenharComparar(); desenharRoda(); Sala.avisar('🗑️ Apagado deste aparelho.');
+  };
+  $('btImprimir').onclick = function(){
+    var nome = Sala.aparar($('nome').value), linhas = '';
+    areas.forEach(function(a, i){ linhas += '<tr><td>' + a.e + ' ' + Sala.esc(a.n) + '</td><td style="text-align:center;font-weight:bold">' + valores[i] + '</td><td style="border-bottom:1px solid #999"></td></tr>'; });
+    var o = ordem();
+    Sala.imprimir('<div style="max-width:720px;margin:0 auto">' +
+      '<h1 style="margin:0 0 4px;font-size:26px">🎡 Minha Roda da Vida</h1>' +
+      '<p style="margin:0 0 10px">Nome: <b>' + (nome ? Sala.esc(nome) : '_____________________________') + '</b> &nbsp; Data: ' + dataBR(new Date().getTime()) + '</p>' +
+      '<div style="width:380px;margin:0 auto">' + svgRoda(valores, comparacao()) + '</div>' +
+      '<table style="width:100%;border-collapse:collapse;font-size:15px;margin-top:8px"><tr><th style="text-align:left">Área</th><th>Nota</th><th style="text-align:left">O que posso fazer?</th></tr>' + linhas + '</table>' +
+      '<p style="margin-top:14px">🌱 Área que mais quero cuidar: <b>' + Sala.esc(areas[o[0]].n) + '</b></p>' +
+      '<p>👣 Uma ação para esta semana: ____________________________________________</p>' +
+      '<p>🙌 Quem pode me ajudar: _________________________________________________</p></div>');
+  };
+
+  desenharAreas(); desenharComparar(); desenharRoda();
+  window.RODA = {valores: function(){ return valores; }, areas: function(){ return areas; }, mudar: mudar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+{
+  "titulo": "Cestos: necessidade ou desejo?",
+  "cestos": [
+    {
+      "id": "necessidade",
+      "nome": "Necessidade",
+      "emoji": "🏠",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "desejo",
+      "nome": "Desejo",
+      "emoji": "✨",
+      "cor": "#c2185b"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "comida",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "remédio receitado",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "aluguel",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "conta de luz",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "passagem do trabalho",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "material escolar",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "água",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "gás de cozinha",
+      "cesto": "necessidade"
+    },
+    {
+      "palavra": "celular último modelo",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "tênis de marca",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "TV maior",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "lanche pedido todo dia",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "roupa da moda",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "mais um streaming",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "videogame novo",
+      "cesto": "desejo"
+    },
+    {
+      "palavra": "perfume importado",
+      "cesto": "desejo"
+    }
+  ]
+}

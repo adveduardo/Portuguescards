@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orçamento do mês</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  .lin{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin:4px 0}
+  .lin input.desc{-webkit-flex:1;flex:1;min-width:0}
+  .lin select{-webkit-flex:0 0 170px;flex:0 0 170px;width:170px;margin-right:6px}
+  .lin input.valor{-webkit-flex:0 0 110px;flex:0 0 110px;width:110px;margin-left:6px;text-align:right}
+  .lin button{padding:5px 9px;margin-left:4px}
+  .total{font-size:18px;font-weight:bold;text-align:right;margin:8px 0 2px}
+  .saldo{font-size:30px;font-weight:bold;text-align:center;border-radius:18px;padding:12px;margin:8px 0}
+  .saldo small{display:block;font-size:16px;font-weight:normal;margin-top:4px}
+  .saldo.pos{background:#e3f7ee;color:#11613a}
+  .saldo.neg{background:#fde4e4;color:#9b1c1c}
+  .barra{margin:6px 0}
+  .barra .rot{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;font-size:15px}
+  .barra .fundo{height:14px;background:#eef1f5;border-radius:8px;overflow:hidden}
+  .barra .cheio{height:14px;border-radius:8px}
+  .meta input{width:130px;display:inline-block;text-align:right}
+  .meta p{font-size:16px}
+  .guardar{display:block;font-weight:bold;margin:6px 0}
+  @media (max-width:600px){ .lin select{-webkit-flex-basis:100px;flex-basis:100px;width:100px} .lin input.valor{-webkit-flex-basis:92px;flex-basis:92px;width:92px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>💰 Orçamento do mês <small>Quanto entra, quanto sai e quanto sobra. Valores em reais (ex.: 1.500,00).</small></h1>
+    <button type="button" id="btExemplo">💡 Exemplo</button>
+    <button type="button" id="btImprimir" class="principal">🖨️ Imprimir</button>
+    <button type="button" id="btApagar">🗑️ Apagar tudo</button>
+  </div>
+  <div class="privado">🔒 Nada sai deste aparelho. Só fica guardado se você marcar a caixinha; em aparelho da escola, deixe desmarcada.
+    <label class="guardar"><input type="checkbox" id="chkGuardar"> Guardar neste aparelho para continuar depois</label></div>
+  <div class="duas">
+    <div class="cartao">
+      <h2>⬇️ Entradas (o que eu recebo)</h2>
+      <div id="entradas"></div>
+      <button type="button" id="btEntrada">➕ Entrada</button>
+      <div class="total">Total de entradas: <span id="totEnt">R$ 0,00</span></div>
+      <h2 style="margin-top:16px">⬆️ Despesas (o que eu gasto)</h2>
+      <div id="despesas"></div>
+      <button type="button" id="btDespesa">➕ Despesa</button>
+      <div class="total">Total de despesas: <span id="totDesp">R$ 0,00</span></div>
+    </div>
+    <div class="cartao">
+      <h2>📊 Resultado do mês</h2>
+      <div id="saldo" class="saldo pos">R$ 0,00</div>
+      <div id="barras"></div>
+      <div class="meta cartao" style="margin:12px 0 0;box-shadow:none;border:2px solid #d8ecea">
+        <h2>🐷 Meta de economia</h2>
+        <p>Quero juntar <input type="text" id="objetivo" inputmode="decimal" placeholder="1.000,00" aria-label="Valor da meta"> guardando
+          <input type="text" id="mensal" inputmode="decimal" placeholder="100,00" aria-label="Valor guardado por mês"> por mês.</p>
+        <p id="metaRes" class="dica"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH = 'orcamento_mes';
+  var CATS = ['Moradia', 'Contas da casa', 'Alimentação', 'Transporte', 'Saúde', 'Educação', 'Dívidas e parcelas', 'Lazer', 'Outros'];
+  var CORES = ['#457b9d', '#2a9d8f', '#e9b730', '#f4a261', '#e63946', '#6d4c9f', '#9b1c1c', '#ff6f91', '#7a8699'];
+  var ENT_PADRAO = [['Salário', ''], ['Bicos e extras', ''], ['Benefícios', '']];
+  var DESP_PADRAO = [['Moradia', 'Aluguel ou prestação'], ['Contas da casa', 'Luz'], ['Contas da casa', 'Água'], ['Contas da casa', 'Gás'], ['Contas da casa', 'Internet e celular'],
+    ['Alimentação', 'Mercado'], ['Transporte', 'Ônibus ou combustível'], ['Saúde', 'Remédios'], ['Dívidas e parcelas', 'Parcelas'], ['Lazer', 'Passeios e lanches']];
+  var ent = [], desp = [];
+
+  // dinheiro no formato brasileiro (sem depender de Intl, que os iPads antigos não têm)
+  function num(s){
+    s = String(s == null ? '' : s).replace(/[^\d,.\-]/g, '');
+    if (!s) return 0;
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\-?\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = parseFloat(s); return isNaN(n) ? 0 : n;
+  }
+  function brl(n){
+    var neg = n < 0, c = Math.round(Math.abs(n) * 100), inteiro = String(Math.floor(c / 100)), dec = ('0' + (c % 100)).slice(-2);
+    inteiro = inteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return (neg ? '− ' : '') + 'R$ ' + inteiro + ',' + dec;
+  }
+  function soma(l){ var t = 0; l.forEach(function(x){ t += num(x.valor); }); return t; }
+
+  function linhaHTML(tipo, x, i){
+    var sel = '';
+    if (tipo === 'd'){
+      sel = '<select data-t="d" data-i="' + i + '" data-c="cat" aria-label="Categoria">' + CATS.map(function(c){ return '<option' + (c === x.cat ? ' selected' : '') + '>' + c + '</option>'; }).join('') + '</select>';
+    }
+    return '<div class="lin">' + sel + '<input type="text" class="desc" maxlength="40" data-t="' + tipo + '" data-i="' + i + '" data-c="desc" value="' + Sala.esc(x.desc) + '" aria-label="Descrição">' +
+      '<input type="text" class="valor" inputmode="decimal" maxlength="14" placeholder="0,00" data-t="' + tipo + '" data-i="' + i + '" data-c="valor" value="' + Sala.esc(x.valor) + '" aria-label="Valor em reais">' +
+      '<button type="button" data-tirar="' + tipo + i + '" aria-label="Tirar linha">✖</button></div>';
+  }
+  function desenharListas(){
+    $('entradas').innerHTML = ent.map(function(x, i){ return linhaHTML('e', x, i); }).join('');
+    $('despesas').innerHTML = desp.map(function(x, i){ return linhaHTML('d', x, i); }).join('');
+    var cs = document.querySelectorAll('[data-c]');
+    for (var k = 0; k < cs.length; k++) cs[k].oninput = cs[k].onchange = function(){
+      var l = this.getAttribute('data-t') === 'e' ? ent : desp; l[+this.getAttribute('data-i')][this.getAttribute('data-c')] = this.value; calcular();
+    };
+    var ts = document.querySelectorAll('[data-tirar]');
+    for (k = 0; k < ts.length; k++) ts[k].onclick = function(){
+      var t = this.getAttribute('data-tirar'), l = t.charAt(0) === 'e' ? ent : desp; l.splice(+t.slice(1), 1); desenharListas(); calcular();
+    };
+  }
+  function porCategoria(){
+    var m = {}; desp.forEach(function(x){ var v = num(x.valor); if (v > 0) m[x.cat] = (m[x.cat] || 0) + v; });
+    return CATS.filter(function(c){ return m[c]; }).map(function(c){ return {cat: c, valor: m[c], cor: CORES[CATS.indexOf(c)]}; }).sort(function(a, b){ return b.valor - a.valor; });
+  }
+  function totais(){ var e = soma(ent), d = soma(desp); return {entradas: e, despesas: d, saldo: e - d}; }
+  function calcular(){
+    var t = totais(), el = $('saldo');
+    $('totEnt').textContent = brl(t.entradas); $('totDesp').textContent = brl(t.despesas);
+    el.className = 'saldo ' + (t.saldo >= 0 ? 'pos' : 'neg');
+    var msg = !t.entradas && !t.despesas ? 'Preencha as entradas e as despesas.'
+      : t.saldo > 0 ? 'Sobrou dinheiro! Que tal guardar uma parte para a reserva de emergência?'
+      : t.saldo === 0 ? 'Empatou: entrou e saiu o mesmo valor. Qualquer imprevisto vira dívida; veja o que dá para cortar.'
+      : 'Faltou dinheiro. Veja quais gastos dá para cortar ou negociar.';
+    el.innerHTML = (t.saldo >= 0 ? 'Sobra: ' : 'Falta: ') + brl(Math.abs(t.saldo)) + '<small>' + msg + '</small>';
+    var cats = porCategoria(), h = '';
+    cats.forEach(function(c){
+      var pct = t.despesas ? Math.round(c.valor * 100 / t.despesas) : 0;
+      h += '<div class="barra"><div class="rot"><span>' + c.cat + '</span><span>' + brl(c.valor) + ' (' + pct + '%)</span></div>' +
+           '<div class="fundo"><div class="cheio" style="width:' + pct + '%;background:' + c.cor + '"></div></div></div>';
+    });
+    if (t.entradas > 0) h += '<p class="dica">💡 Guardar 10% das entradas seria ' + brl(t.entradas / 10) + ' por mês.</p>';
+    $('barras').innerHTML = h;
+    calcularMeta(); guardar();
+  }
+  function calcularMeta(){
+    var obj = num($('objetivo').value), men = num($('mensal').value), r = '';
+    if (obj > 0 && men > 0){
+      var meses = Math.ceil(obj / men - 1e-9), anos = Math.floor(meses / 12), resto = meses % 12;
+      r = '🎯 Você chega lá em <b>' + meses + (meses === 1 ? ' mês' : ' meses') + '</b>' +
+          (anos ? ' (' + anos + (anos === 1 ? ' ano' : ' anos') + (resto ? ' e ' + resto + (resto === 1 ? ' mês' : ' meses') : '') + ')' : '') + '. Um passo de cada vez!';
+    } else r = 'Escreva quanto quer juntar e quanto consegue guardar por mês.';
+    $('metaRes').innerHTML = r;
+  }
+  function dados(){ return {ent: ent, desp: desp, objetivo: $('objetivo').value, mensal: $('mensal').value}; }
+  function guardar(){ if ($('chkGuardar').checked) Sala.gravar(CH, dados()); }
+  function preencher(d){
+    d = d || {};
+    ent = d.ent instanceof Array ? d.ent : ENT_PADRAO.map(function(x){ return {desc: x[0], valor: x[1]}; });
+    desp = d.desp instanceof Array ? d.desp : DESP_PADRAO.map(function(x){ return {cat: x[0], desc: x[1], valor: ''}; });
+    $('objetivo').value = d.objetivo || ''; $('mensal').value = d.mensal || '';
+    desenharListas(); calcular();
+  }
+
+  $('objetivo').oninput = $('mensal').oninput = function(){ calcularMeta(); guardar(); };
+  $('btEntrada').onclick = function(){ ent.push({desc: '', valor: ''}); desenharListas(); };
+  $('btDespesa').onclick = function(){ desp.push({cat: 'Outros', desc: '', valor: ''}); desenharListas(); };
+  $('chkGuardar').onchange = function(){
+    if (this.checked){ Sala.gravar(CH, dados()); Sala.avisar('💾 Guardado neste aparelho.'); }
+    else { try { localStorage.removeItem(CH); } catch (e) {} Sala.avisar('Não fica mais guardado neste aparelho.'); }
+  };
+  $('btApagar').onclick = function(){
+    if (!confirm('Apagar todo o orçamento desta tela e deste aparelho?')) return;
+    try { localStorage.removeItem(CH); } catch (e) {}
+    $('chkGuardar').checked = false; preencher({}); Sala.avisar('🗑️ Apagado.');
+  };
+  $('btExemplo').onclick = function(){
+    preencher({ent: [{desc: 'Salário', valor: '1.800,00'}, {desc: 'Bicos e extras', valor: '300,00'}],
+      desp: [{cat: 'Moradia', desc: 'Aluguel', valor: '600,00'}, {cat: 'Contas da casa', desc: 'Luz', valor: '120,00'}, {cat: 'Contas da casa', desc: 'Água', valor: '80,00'},
+             {cat: 'Contas da casa', desc: 'Gás', valor: '110,00'}, {cat: 'Contas da casa', desc: 'Internet e celular', valor: '100,00'}, {cat: 'Alimentação', desc: 'Mercado', valor: '550,00'},
+             {cat: 'Transporte', desc: 'Ônibus', valor: '180,00'}, {cat: 'Saúde', desc: 'Remédios', valor: '60,00'}, {cat: 'Dívidas e parcelas', desc: 'Parcela da geladeira', valor: '150,00'},
+             {cat: 'Lazer', desc: 'Passeios e lanches', valor: '100,00'}],
+      objetivo: '1.000,00', mensal: '50,00'});
+    Sala.avisar('Exemplo: uma família que ganha R$ 2.100,00 por mês.');
+  };
+  $('btImprimir').onclick = function(){
+    var t = totais(), linhas = function(l, comCat){
+      return l.filter(function(x){ return num(x.valor) > 0 || Sala.aparar(x.desc); }).map(function(x){
+        return '<tr><td>' + (comCat ? Sala.esc(x.cat) + ' – ' : '') + Sala.esc(x.desc) + '</td><td style="text-align:right">' + brl(num(x.valor)) + '</td></tr>'; }).join('');
+    };
+    Sala.imprimir('<div style="max-width:700px;margin:0 auto;font-size:15px"><h1 style="margin:0 0 8px;font-size:26px">💰 Meu orçamento do mês</h1>' +
+      '<p>Mês: ____________________</p>' +
+      '<table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">Entradas</th><th></th></tr>' + linhas(ent) +
+      '<tr><td><b>Total de entradas</b></td><td style="text-align:right"><b>' + brl(t.entradas) + '</b></td></tr>' +
+      '<tr><th style="text-align:left;padding-top:10px">Despesas</th><th></th></tr>' + linhas(desp, true) +
+      '<tr><td><b>Total de despesas</b></td><td style="text-align:right"><b>' + brl(t.despesas) + '</b></td></tr>' +
+      '<tr><td style="padding-top:10px"><b>' + (t.saldo >= 0 ? 'Sobra' : 'Falta') + '</b></td><td style="text-align:right;padding-top:10px"><b>' + brl(Math.abs(t.saldo)) + '</b></td></tr></table>' +
+      '<p style="margin-top:14px">' + $('metaRes').innerHTML + '</p>' +
+      '<p>✂️ Um gasto que posso cortar: ______________________________________</p>' +
+      '<p>🐷 Quanto vou guardar este mês: ____________________________________</p></div>');
+  };
+
+  var salvo = Sala.ler(CH);
+  $('chkGuardar').checked = !!salvo;
+  preencher(salvo);
+  window.ORCAMENTO = {totais: totais, num: num, brl: brl};   // usado nos testes
+})();
+</script>
+</body>
+</html>

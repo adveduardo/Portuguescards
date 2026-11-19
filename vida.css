@@ -1,0 +1,33 @@
+/* vida.css — visual comum das telas de Projeto de Vida (EJA). Funciona nos iPads antigos (sem grid). */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#1f2a44;background:#e9f5f3}
+.palco{min-height:100vh;padding:10px 12px 34px;background:#e9f5f3;background-image:linear-gradient(160deg,#e6f6f2,#eef0fb)}
+.topo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap;max-width:1180px;margin:0 auto}
+h1{margin:0 auto 0 0;font-size:28px;color:#0f766e}
+h1 small{display:block;font-size:14px;font-weight:normal;color:#4b5b73}
+h2{font-size:21px;color:#0f766e;margin:4px 0 8px}
+button{font:inherit;font-weight:bold;cursor:pointer;border:none;border-radius:12px;color:#1f2a44;background:#fff;padding:9px 13px;margin:3px;font-size:15px;box-shadow:0 3px 0 rgba(31,42,68,.15)}
+button:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 1px 0 rgba(31,42,68,.15)}
+button.principal{background:#0f766e;color:#fff;box-shadow:0 3px 0 #0b5a54}
+button.pequeno{padding:5px 9px;font-size:14px}
+input[type=text],input[type=tel],input[type=email],textarea,select{font:inherit;font-size:16px;padding:7px 9px;border:2px solid #cfe3e1;border-radius:10px;background:#fff;color:#1f2a44;width:100%;max-width:100%}
+input[type=text]:focus,input[type=tel]:focus,input[type=email]:focus,textarea:focus,select:focus{outline:none;border-color:#0f766e}
+textarea{resize:vertical;min-height:60px}
+label.campo{display:block;margin:9px 0 3px;font-weight:bold;font-size:15px}
+label.campo small{font-weight:normal;color:#4b5b73}
+.cartao{background:#fff;border-radius:20px;padding:14px 16px;margin:10px auto;max-width:1180px;box-shadow:0 6px 18px rgba(31,42,68,.08)}
+.duas{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.duas>.cartao{-webkit-flex:1 1 440px;flex:1 1 440px;margin:8px;min-width:0}
+.dica{font-size:14px;color:#4b5b73;margin:6px 0}
+.privado{font-size:13.5px;color:#35506b;background:#f2fbf9;border:2px dashed #b9e2dc;border-radius:12px;padding:8px 10px;margin:8px auto;max-width:1180px}
+.linha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:0 -5px}
+.linha>*{-webkit-flex:1 1 200px;flex:1 1 200px;margin:0 5px;min-width:0}
+.chips{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+.chip{border:2px solid #cfe3e1;background:#fff;border-radius:999px;padding:6px 11px;margin:3px;font-size:14px;box-shadow:none;font-weight:bold}
+.chip.on{background:#0f766e;color:#fff;border-color:#0f766e}
+.aviso{border-radius:12px;padding:8px 10px;margin:6px 0;font-size:15px}
+.aviso.bom{background:#e3f7ee;color:#11613a}
+.aviso.atencao{background:#fff4d6;color:#7a5200}
+.aviso.ruim{background:#fde4e4;color:#9b1c1c}
+@media (max-width:600px){ h1{font-size:23px} .duas>.cartao{margin:6px 0} }

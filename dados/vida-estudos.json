@@ -1,0 +1,151 @@
+{
+  "titulo": "Caminhos para continuar estudando",
+  "emoji": "🎓",
+  "instrucao": "Qual é a resposta certa?",
+  "rodadas": [
+    {
+      "destaque": "Qual exame dá o certificado do ensino fundamental ou médio para jovens e adultos?",
+      "opcoes": [
+        "ENCCEJA",
+        "SISU",
+        "ProUni",
+        "Prova Brasil"
+      ],
+      "correta": "ENCCEJA",
+      "explica": "O ENCCEJA certifica quem não concluiu os estudos na idade regular.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "Qual é a idade mínima para fazer o ENCCEJA do ensino médio?",
+      "opcoes": [
+        "18 anos",
+        "12 anos",
+        "15 anos",
+        "30 anos"
+      ],
+      "correta": "18 anos",
+      "explica": "Ensino fundamental: a partir de 15 anos. Ensino médio: a partir de 18 anos.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "Para que serve a nota do ENEM?",
+      "opcoes": [
+        "Para entrar na faculdade (pelo SISU, ProUni ou FIES)",
+        "Para tirar carteira de motorista",
+        "Para se aposentar",
+        "Para votar"
+      ],
+      "correta": "Para entrar na faculdade (pelo SISU, ProUni ou FIES)",
+      "explica": "A nota do ENEM abre portas para universidades públicas e bolsas de estudo.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "O SISU oferece vagas em:",
+      "opcoes": [
+        "Universidades e institutos públicos",
+        "Escolas de idiomas",
+        "Empresas",
+        "Bancos"
+      ],
+      "correta": "Universidades e institutos públicos",
+      "explica": "Pelo SISU, a nota do ENEM é usada para disputar vagas em instituições públicas.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "O ProUni oferece:",
+      "opcoes": [
+        "Bolsas de estudo em faculdades particulares",
+        "Empréstimo para comprar carro",
+        "Vagas de emprego",
+        "Cursos de inglês no exterior"
+      ],
+      "correta": "Bolsas de estudo em faculdades particulares",
+      "explica": "O ProUni dá bolsas integrais ou parciais para estudantes de baixa renda.",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "O FIES é:",
+      "opcoes": [
+        "Um financiamento para pagar a faculdade particular",
+        "Uma bolsa que não precisa pagar",
+        "Um exame",
+        "Um curso técnico"
+      ],
+      "correta": "Um financiamento para pagar a faculdade particular",
+      "explica": "No FIES, o estudante paga a dívida depois de formado.",
+      "imagem": "💳"
+    },
+    {
+      "destaque": "O que os Institutos Federais oferecem?",
+      "opcoes": [
+        "Cursos técnicos e superiores gratuitos",
+        "Só cursos pagos",
+        "Só atendimento de saúde",
+        "Empréstimos"
+      ],
+      "correta": "Cursos técnicos e superiores gratuitos",
+      "explica": "Os Institutos Federais têm cursos gratuitos em todo o país.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "O que é o PROEJA?",
+      "opcoes": [
+        "A EJA junto com um curso profissionalizante",
+        "Um programa de empréstimo",
+        "Um tipo de bolsa de faculdade",
+        "Um aplicativo de vagas"
+      ],
+      "correta": "A EJA junto com um curso profissionalizante",
+      "explica": "No PROEJA, a pessoa conclui os estudos e aprende uma profissão ao mesmo tempo.",
+      "imagem": "🔧"
+    },
+    {
+      "destaque": "Quem trabalha o dia todo pode estudar como?",
+      "opcoes": [
+        "À noite na EJA ou a distância, organizando os horários",
+        "Não pode estudar",
+        "Só largando o emprego",
+        "Só nas férias"
+      ],
+      "correta": "À noite na EJA ou a distância, organizando os horários",
+      "explica": "Há caminhos para conciliar trabalho e estudo.",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "Estudar a distância (EAD) exige principalmente:",
+      "opcoes": [
+        "Organização e disciplina com os horários",
+        "Nenhum esforço",
+        "Morar perto da escola",
+        "Ter muito dinheiro"
+      ],
+      "correta": "Organização e disciplina com os horários",
+      "explica": "No EAD, você organiza seu tempo: um horário fixo por dia ajuda muito.",
+      "imagem": "💻"
+    },
+    {
+      "destaque": "Onde encontrar cursos gratuitos de qualificação profissional?",
+      "opcoes": [
+        "Institutos Federais, programas do Senai e do Senac e cursos da prefeitura",
+        "Só em faculdades caras",
+        "Só fora do Brasil",
+        "Em lugar nenhum"
+      ],
+      "correta": "Institutos Federais, programas do Senai e do Senac e cursos da prefeitura",
+      "explica": "Há muitos cursos gratuitos. Fique de olho nos editais e nos prazos de inscrição.",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "Uma boa forma de escolher um curso é:",
+      "opcoes": [
+        "Pensar no que você gosta e no que a sua região procura",
+        "Escolher o mais caro",
+        "Escolher o que o vizinho fez",
+        "Escolher qualquer um"
+      ],
+      "correta": "Pensar no que você gosta e no que a sua região procura",
+      "explica": "Gosto pessoal + oportunidades na região = boa escolha.",
+      "imagem": "🗺️"
+    }
+  ]
+}

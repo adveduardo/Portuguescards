@@ -129,6 +129,11 @@
       "arquivo": "quiz-pontuacao.json",
       "titulo": "Quiz da pontuação",
       "qtd": 33
+    },
+    {
+      "arquivo": "quiz-vida.json",
+      "titulo": "Quiz do projeto de vida",
+      "qtd": 30
     }
   ],
   "stop": [
@@ -253,6 +258,10 @@
     {
       "arquivo": "batata-pontuacao.json",
       "titulo": "Batata quente da pontuação"
+    },
+    {
+      "arquivo": "batata-vida.json",
+      "titulo": "Batata quente: conversa sobre a vida"
     }
   ],
   "trilha": [
@@ -347,6 +356,10 @@
     {
       "arquivo": "trilha-pontuacao.json",
       "titulo": "Trilha da pontuação"
+    },
+    {
+      "arquivo": "trilha-vida.json",
+      "titulo": "Trilha da vida"
     }
   ],
   "escape": [
@@ -421,6 +434,10 @@
     {
       "arquivo": "escape-figuras.json",
       "titulo": "O Museu das Figuras Perdidas"
+    },
+    {
+      "arquivo": "escape-vida.json",
+      "titulo": "A entrevista da Dona Cida"
     }
   ],
   "mimica": [
@@ -443,6 +460,10 @@
     {
       "arquivo": "mimica-en.json",
       "titulo": "🇬🇧 English charades"
+    },
+    {
+      "arquivo": "mimica-vida.json",
+      "titulo": "Mímica das profissões"
     }
   ],
   "historias": [
@@ -493,12 +514,20 @@
     {
       "arquivo": "historias-figuras.json",
       "titulo": "Dado das figuras de linguagem"
+    },
+    {
+      "arquivo": "historias-vida.json",
+      "titulo": "Dados da conversa (projeto de vida)"
     }
   ],
   "caminho": [
     {
       "arquivo": "caminho-padrao.json",
       "titulo": "A caixa misteriosa do quintal (modelo)"
+    },
+    {
+      "arquivo": "caminho-vida.json",
+      "titulo": "A nova chance de Marcos"
     }
   ],
   "detetive": [
@@ -788,6 +817,18 @@
     {
       "arquivo": "pt-cestos-usos.json",
       "titulo": "Cestos: para que serve cada sinal?"
+    },
+    {
+      "arquivo": "vida-cestos-sonho.json",
+      "titulo": "Cestos: sonho, meta ou ação?"
+    },
+    {
+      "arquivo": "vida-cestos-habilidades.json",
+      "titulo": "Cestos: habilidade técnica ou comportamental?"
+    },
+    {
+      "arquivo": "vida-cestos-necessidade.json",
+      "titulo": "Cestos: necessidade ou desejo?"
     }
   ],
   "morfo-frases": [
@@ -1504,6 +1545,10 @@
     {
       "arquivo": "debate-en.json",
       "titulo": "🇬🇧 English debates"
+    },
+    {
+      "arquivo": "debate-vida.json",
+      "titulo": "Debates da vida adulta"
     }
   ],
   "analise": [
@@ -1774,6 +1819,14 @@
     {
       "arquivo": "memoria-pontuacao.json",
       "titulo": "Memória da pontuação"
+    },
+    {
+      "arquivo": "memoria-vida-servicos.json",
+      "titulo": "Memória: onde procurar ajuda"
+    },
+    {
+      "arquivo": "memoria-vida-profissoes.json",
+      "titulo": "Memória das profissões"
     }
   ],
   "bingo": [
@@ -2091,6 +2144,53 @@
       "arquivo": "en-trabalho.json",
       "titulo": "🇬🇧 English at work (entrevista e e-mail)",
       "qtd": 15
+    }
+  ],
+  "escolha-vida": [
+    {
+      "arquivo": "vida-metas.json",
+      "titulo": "Meta bem definida? Sonho, meta e ação",
+      "qtd": 16
+    },
+    {
+      "arquivo": "vida-curriculo.json",
+      "titulo": "Currículo e entrevista: o que fazer?",
+      "qtd": 16
+    },
+    {
+      "arquivo": "vida-direitos.json",
+      "titulo": "Direitos do trabalhador: o básico",
+      "qtd": 14
+    },
+    {
+      "arquivo": "vida-dinheiro.json",
+      "titulo": "Dinheiro no dia a dia",
+      "qtd": 16
+    },
+    {
+      "arquivo": "vida-golpes.json",
+      "titulo": "Golpe ou não? Proteja-se",
+      "qtd": 12
+    },
+    {
+      "arquivo": "vida-estudos.json",
+      "titulo": "Caminhos para continuar estudando",
+      "qtd": 12
+    },
+    {
+      "arquivo": "vida-servicos.json",
+      "titulo": "Onde procurar ajuda?",
+      "qtd": 12
+    },
+    {
+      "arquivo": "vida-comunicacao.json",
+      "titulo": "Comunicação no trabalho: formal ou informal?",
+      "qtd": 12
+    },
+    {
+      "arquivo": "vida-atitudes.json",
+      "titulo": "O que você faria?",
+      "qtd": 12
     }
   ],
   "escolha-qs": [

@@ -1,0 +1,151 @@
+{
+  "titulo": "Onde procurar ajuda?",
+  "emoji": "🏛️",
+  "instrucao": "Onde procurar ajuda?",
+  "rodadas": [
+    {
+      "destaque": "Precisa se inscrever no Cadastro Único (CadÚnico) para ter acesso a programas sociais.",
+      "opcoes": [
+        "CRAS",
+        "Procon",
+        "Cartório",
+        "Conselho Tutelar"
+      ],
+      "correta": "CRAS",
+      "explica": "O CRAS (Centro de Referência de Assistência Social) faz o CadÚnico e orienta sobre benefícios.",
+      "imagem": "🏘️"
+    },
+    {
+      "destaque": "Precisa de um advogado, mas não pode pagar.",
+      "opcoes": [
+        "Defensoria Pública",
+        "Procon",
+        "INSS",
+        "Sine"
+      ],
+      "correta": "Defensoria Pública",
+      "explica": "A Defensoria Pública dá assistência jurídica gratuita.",
+      "imagem": "⚖️"
+    },
+    {
+      "destaque": "Comprou um produto com defeito e a loja não quer trocar.",
+      "opcoes": [
+        "Procon",
+        "CRAS",
+        "Conselho Tutelar",
+        "Cartório eleitoral"
+      ],
+      "correta": "Procon",
+      "explica": "O Procon defende os direitos do consumidor.",
+      "imagem": "🛍️"
+    },
+    {
+      "destaque": "Foi demitido e quer procurar vagas e pedir o seguro-desemprego.",
+      "opcoes": [
+        "Sine",
+        "Procon",
+        "Cartório",
+        "UBS"
+      ],
+      "correta": "Sine",
+      "explica": "O Sine ajuda a encontrar vagas e orienta sobre o seguro-desemprego.",
+      "imagem": "💼"
+    },
+    {
+      "destaque": "Precisa marcar uma consulta pelo SUS.",
+      "opcoes": [
+        "UBS (posto de saúde)",
+        "Defensoria Pública",
+        "Procon",
+        "Receita Federal"
+      ],
+      "correta": "UBS (posto de saúde)",
+      "explica": "A Unidade Básica de Saúde é a porta de entrada do SUS.",
+      "imagem": "🏥"
+    },
+    {
+      "destaque": "Precisa da segunda via da certidão de nascimento.",
+      "opcoes": [
+        "Cartório de registro civil",
+        "Procon",
+        "Sine",
+        "UBS"
+      ],
+      "correta": "Cartório de registro civil",
+      "explica": "Certidões de nascimento, casamento e óbito ficam no cartório de registro civil.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "Uma criança está sofrendo maus-tratos.",
+      "opcoes": [
+        "Conselho Tutelar (ou Disque 100)",
+        "Procon",
+        "Sine",
+        "Receita Federal"
+      ],
+      "correta": "Conselho Tutelar (ou Disque 100)",
+      "explica": "O Conselho Tutelar protege os direitos de crianças e adolescentes. O Disque 100 recebe denúncias.",
+      "imagem": "👧"
+    },
+    {
+      "destaque": "Quer saber sobre aposentadoria ou auxílio por doença.",
+      "opcoes": [
+        "INSS",
+        "Procon",
+        "Cartório",
+        "CRAS"
+      ],
+      "correta": "INSS",
+      "explica": "O INSS cuida da aposentadoria e de outros benefícios. Também dá para usar o aplicativo Meu INSS.",
+      "imagem": "👵"
+    },
+    {
+      "destaque": "Precisa tirar ou regularizar o título de eleitor.",
+      "opcoes": [
+        "Cartório eleitoral (Justiça Eleitoral)",
+        "Procon",
+        "UBS",
+        "Sine"
+      ],
+      "correta": "Cartório eleitoral (Justiça Eleitoral)",
+      "explica": "O título de eleitor é feito na Justiça Eleitoral, também pelo site ou aplicativo do TSE.",
+      "imagem": "🗳️"
+    },
+    {
+      "destaque": "Uma mulher está sofrendo violência em casa.",
+      "opcoes": [
+        "Ligue 180 ou Delegacia da Mulher",
+        "Procon",
+        "Sine",
+        "Cartório"
+      ],
+      "correta": "Ligue 180 ou Delegacia da Mulher",
+      "explica": "O Ligue 180 é a Central de Atendimento à Mulher: gratuito e sigiloso.",
+      "imagem": "💜"
+    },
+    {
+      "destaque": "Alguém passou mal e precisa de socorro médico urgente.",
+      "opcoes": [
+        "SAMU (192)",
+        "Procon",
+        "Sine",
+        "Cartório"
+      ],
+      "correta": "SAMU (192)",
+      "explica": "SAMU: 192. Bombeiros: 193. Polícia: 190.",
+      "imagem": "🚑"
+    },
+    {
+      "destaque": "Precisa tirar o CPF ou corrigir um dado dele.",
+      "opcoes": [
+        "Receita Federal",
+        "Conselho Tutelar",
+        "UBS",
+        "Sine"
+      ],
+      "correta": "Receita Federal",
+      "explica": "O CPF é da Receita Federal. Também dá para resolver nos Correios, no Banco do Brasil e na Caixa.",
+      "imagem": "📇"
+    }
+  ]
+}

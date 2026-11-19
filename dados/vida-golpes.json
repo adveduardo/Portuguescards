@@ -1,0 +1,163 @@
+{
+  "titulo": "Golpe ou não? Proteja-se",
+  "emoji": "🚨",
+  "instrucao": "O que fazer?",
+  "rodadas": [
+    {
+      "destaque": "Mensagem: “Oi, mãe! Troquei de número. Me manda um Pix urgente?”",
+      "opcoes": [
+        "Ligar para o número antigo do filho antes de mandar qualquer dinheiro",
+        "Mandar o Pix rapidinho",
+        "Mandar a senha do banco",
+        "Responder com seus documentos"
+      ],
+      "correta": "Ligar para o número antigo do filho antes de mandar qualquer dinheiro",
+      "explica": "É o golpe do falso parente. Confirme por ligação ou pessoalmente.",
+      "imagem": "📱",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Ligação: “Sou do banco. Para cancelar uma compra, diga sua senha e o código que chegou por SMS.”",
+      "opcoes": [
+        "Desligar e ligar para o número que está no cartão",
+        "Passar a senha",
+        "Passar só o código",
+        "Passar os dados do cartão"
+      ],
+      "correta": "Desligar e ligar para o número que está no cartão",
+      "explica": "O banco nunca pede senha nem código. Ligue você mesmo para o banco.",
+      "imagem": "☎️",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Anúncio: celular novo de R$ 3.000 por R$ 300. Só hoje! Pagamento adiantado.",
+      "opcoes": [
+        "Desconfiar: preço baixo demais e pressa são sinais de golpe",
+        "Pagar logo, antes que acabe",
+        "Mandar o Pix e esperar",
+        "Comprar dois"
+      ],
+      "correta": "Desconfiar: preço baixo demais e pressa são sinais de golpe",
+      "explica": "Promoção boa demais, com pressa e pagamento adiantado, costuma ser golpe.",
+      "imagem": "📦",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Vaga de emprego: “Para ser contratado, pague uma taxa de R$ 100.”",
+      "opcoes": [
+        "Desconfiar: empresa séria não cobra para contratar",
+        "Pagar a taxa",
+        "Pedir desconto na taxa",
+        "Pagar e indicar os amigos"
+      ],
+      "correta": "Desconfiar: empresa séria não cobra para contratar",
+      "explica": "Cobrar para dar emprego é sinal de golpe.",
+      "imagem": "💼",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "E-mail: “Seu CPF será cancelado. Clique no link para regularizar.”",
+      "opcoes": [
+        "Não clicar e consultar o site oficial do governo (gov.br)",
+        "Clicar no link",
+        "Responder com seus dados",
+        "Encaminhar para todos"
+      ],
+      "correta": "Não clicar e consultar o site oficial do governo (gov.br)",
+      "explica": "Links em mensagens assustadoras podem roubar seus dados. Procure o site oficial.",
+      "imagem": "📧",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Empréstimo “pré-aprovado” que pede um depósito antes de liberar o dinheiro.",
+      "opcoes": [
+        "Não depositar: é golpe",
+        "Depositar logo",
+        "Depositar só a metade",
+        "Pedir mais dinheiro emprestado"
+      ],
+      "correta": "Não depositar: é golpe",
+      "explica": "Empréstimo de verdade não pede depósito antecipado.",
+      "imagem": "💸",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Alguém diz que mandou um código por SMS para você “por engano” e pede o número.",
+      "opcoes": [
+        "Não passar o código: ele serve para clonar seu WhatsApp",
+        "Passar o código, para ajudar",
+        "Passar e apagar a mensagem",
+        "Passar o código e a senha"
+      ],
+      "correta": "Não passar o código: ele serve para clonar seu WhatsApp",
+      "explica": "Esse código é a chave da sua conta. Ative também a confirmação em duas etapas.",
+      "imagem": "🔐",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Mensagem: “Você ganhou um prêmio! Pague o frete para receber.”",
+      "opcoes": [
+        "Desconfiar: você nem participou de sorteio",
+        "Pagar o frete",
+        "Mandar seus dados",
+        "Responder que aceita"
+      ],
+      "correta": "Desconfiar: você nem participou de sorteio",
+      "explica": "Prêmio que pede pagamento é golpe.",
+      "imagem": "🎁",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Boleto recebido por WhatsApp com o nome de outra empresa como beneficiário.",
+      "opcoes": [
+        "Conferir o beneficiário e pegar o boleto no site oficial",
+        "Pagar sem olhar",
+        "Pagar duas vezes",
+        "Pagar e apagar a conversa"
+      ],
+      "correta": "Conferir o beneficiário e pegar o boleto no site oficial",
+      "explica": "Golpistas trocam o boleto. Confira quem vai receber o dinheiro.",
+      "imagem": "📄",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Loja conhecida, site oficial, preço normal e boas avaliações.",
+      "opcoes": [
+        "Pode comprar, guardando o comprovante",
+        "Nunca comprar nada pela internet",
+        "Pagar para um desconhecido",
+        "Mandar a senha do cartão"
+      ],
+      "correta": "Pode comprar, guardando o comprovante",
+      "explica": "Nem tudo é golpe: compre em lojas conhecidas e guarde os comprovantes.",
+      "imagem": "✅",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Ligação: “Seu filho foi preso. Deposite agora para soltá-lo.”",
+      "opcoes": [
+        "Desligar e tentar falar com o filho ou com a família",
+        "Depositar na hora",
+        "Passar seus dados",
+        "Fazer um empréstimo para depositar"
+      ],
+      "correta": "Desligar e tentar falar com o filho ou com a família",
+      "explica": "É um golpe comum. Mantenha a calma e confirme antes de qualquer coisa.",
+      "imagem": "📞",
+      "enunciado": "O que fazer?"
+    },
+    {
+      "destaque": "Você caiu num golpe e fez um Pix.",
+      "opcoes": [
+        "Avisar o banco na hora e registrar um boletim de ocorrência",
+        "Ficar com vergonha e não contar",
+        "Mandar outro Pix",
+        "Esperar o golpista devolver"
+      ],
+      "correta": "Avisar o banco na hora e registrar um boletim de ocorrência",
+      "explica": "Avisar o banco rápido ajuda: existe um mecanismo especial de devolução do Pix para casos de golpe.",
+      "imagem": "🚓",
+      "enunciado": "O que fazer?"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "titulo": "A nova chance de Marcos",
+  "inicio": "inicio",
+  "partes": {
+    "inicio": {
+      "imagem": "🏗️",
+      "texto": "Marcos tem 34 anos e trabalha como ajudante de pedreiro. Parou de estudar no 7º ano para ajudar em casa. Ele sonha ser eletricista, mas o curso pede o ensino fundamental completo.",
+      "opcoes": [
+        {
+          "texto": "Voltar a estudar na EJA",
+          "vai": "eja"
+        },
+        {
+          "texto": "Tentar se matricular no curso mesmo assim",
+          "vai": "curso"
+        }
+      ]
+    },
+    "eja": {
+      "imagem": "🏫",
+      "texto": "Marcos se matriculou na EJA, à noite. Na primeira semana, chegou cansado e quase dormiu na aula. A professora percebeu.",
+      "opcoes": [
+        {
+          "texto": "Conversar com a professora",
+          "vai": "conversa"
+        },
+        {
+          "texto": "Faltar alguns dias para descansar",
+          "vai": "faltas"
+        }
+      ]
+    },
+    "curso": {
+      "imagem": "📋",
+      "texto": "Na escola técnica, a atendente explicou: sem o ensino fundamental, ele não pode se matricular. Mas existe o ENCCEJA, um exame para jovens e adultos.",
+      "opcoes": [
+        {
+          "texto": "Estudar para o ENCCEJA",
+          "vai": "encceja"
+        },
+        {
+          "texto": "Desistir do curso por enquanto",
+          "vai": "desiste"
+        }
+      ]
+    },
+    "conversa": {
+      "imagem": "💬",
+      "texto": "A professora mostrou como estudar 30 minutos na hora do almoço. Um colega ofereceu carona. Marcos começou a gostar de Matemática: medir fios e fazer contas era com ele!",
+      "opcoes": [
+        {
+          "texto": "Seguir firme até o fim do ano",
+          "vai": "formatura"
+        },
+        {
+          "texto": "Contar para o chefe da obra",
+          "vai": "chefe"
+        }
+      ]
+    },
+    "faltas": {
+      "imagem": "📅",
+      "texto": "Marcos faltou uma semana. Quando voltou, estava perdido na matéria e pensou em desistir. Um colega mandou mensagem: “Volta, a gente te ajuda!”",
+      "opcoes": [
+        {
+          "texto": "Voltar e pedir ajuda",
+          "vai": "conversa"
+        },
+        {
+          "texto": "Desistir de vez",
+          "vai": "desiste"
+        }
+      ]
+    },
+    "encceja": {
+      "imagem": "📝",
+      "texto": "Marcos baixou as provas antigas do ENCCEJA e estudou um pouco todo dia, com vídeos no celular. Fez a prova com o coração na mão.",
+      "opcoes": [
+        {
+          "texto": "Ver o resultado",
+          "vai": "resultado"
+        }
+      ]
+    },
+    "resultado": {
+      "imagem": "🎉",
+      "texto": "Aprovado em quase tudo! Precisou refazer só uma área no ano seguinte. Com o certificado na mão, fez a matrícula no curso de eletricista.",
+      "opcoes": [
+        {
+          "texto": "Começar o curso",
+          "vai": "final"
+        }
+      ]
+    },
+    "desiste": {
+      "imagem": "🌧️",
+      "texto": "Marcos voltou à rotina, mas o sonho não saiu da cabeça. Um dia, viu o filho fazendo a lição e pensou: nunca é tarde para recomeçar.",
+      "opcoes": [
+        {
+          "texto": "Recomeçar na EJA",
+          "vai": "eja"
+        },
+        {
+          "texto": "Tentar o ENCCEJA",
+          "vai": "encceja"
+        }
+      ]
+    },
+    "chefe": {
+      "imagem": "👷",
+      "texto": "O chefe gostou de saber e deixou Marcos sair 15 minutos mais cedo nos dias de prova. E ainda o colocou para ajudar o eletricista da obra.",
+      "opcoes": [
+        {
+          "texto": "Aproveitar para aprender na prática",
+          "vai": "formatura"
+        }
+      ]
+    },
+    "formatura": {
+      "imagem": "🎓",
+      "texto": "No fim do ano, Marcos concluiu o ensino fundamental. Na formatura, os filhos aplaudiram de pé.",
+      "opcoes": [
+        {
+          "texto": "Fazer o curso de eletricista",
+          "vai": "final"
+        }
+      ]
+    },
+    "final": {
+      "imagem": "💡",
+      "texto": "Dois anos depois, Marcos é eletricista, tem carteira assinada e faz serviços extras como MEI. Hoje ele diz aos colegas: “Se eu consegui, você também consegue!” FIM."
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da vida",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "eu": {
+      "nome": "Quem sou eu",
+      "emoji": "💭",
+      "cor": "#8e44ad"
+    },
+    "trabalho": {
+      "nome": "Trabalho",
+      "emoji": "💼",
+      "cor": "#2f80ed"
+    },
+    "dinheiro": {
+      "nome": "Dinheiro",
+      "emoji": "💰",
+      "cor": "#27ae60"
+    },
+    "estudos": {
+      "nome": "Estudos",
+      "emoji": "🎓",
+      "cor": "#e67e22"
+    },
+    "cidadania": {
+      "nome": "Cidadania",
+      "emoji": "🏛️",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "eu": [
+      {
+        "texto": "Conte em um minuto: uma conquista sua.",
+        "resposta": "Resposta pessoal: vale tudo, do pequeno ao grande!"
+      },
+      {
+        "texto": "Diga três qualidades suas.",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "Qual é o seu maior sonho?",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "Diga uma coisa que você quer mudar na sua vida.",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "Quem é uma pessoa importante na sua história? Por quê?",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "O que trouxe você de volta aos estudos?",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "Diga uma coisa que deixa você feliz.",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "Diga um desafio que você já superou.",
+        "resposta": "Resposta pessoal."
+      }
+    ],
+    "trabalho": [
+      {
+        "texto": "Diga uma habilidade técnica e uma comportamental.",
+        "resposta": "Ex.: dirigir (técnica) e pontualidade (comportamental)."
+      },
+      {
+        "texto": "Quantos dias de férias tem quem trabalha com carteira assinada?",
+        "resposta": "30 dias, a cada 12 meses."
+      },
+      {
+        "texto": "O que não pode faltar num currículo?",
+        "resposta": "Contato, objetivo, escolaridade e experiências."
+      },
+      {
+        "texto": "Trabalho sem carteira conta como experiência?",
+        "resposta": "Sim! Coloque a função, o período e o que você fazia."
+      },
+      {
+        "texto": "Quem deposita o FGTS?",
+        "resposta": "O empregador, todo mês."
+      },
+      {
+        "texto": "Diga uma atitude que ajuda numa entrevista de emprego.",
+        "resposta": "Chegar antes, ser educado, falar a verdade."
+      },
+      {
+        "texto": "O que é o MEI?",
+        "resposta": "Microempreendedor individual, com CNPJ e contribuição para o INSS."
+      },
+      {
+        "texto": "Qual é a jornada normal de trabalho?",
+        "resposta": "Até 8 horas por dia e 44 por semana."
+      }
+    ],
+    "dinheiro": [
+      {
+        "texto": "Ganho R$ 1.500 e gasto R$ 1.350. Quanto sobra?",
+        "resposta": "R$ 150"
+      },
+      {
+        "texto": "Necessidade ou desejo: tênis de marca?",
+        "resposta": "Desejo"
+      },
+      {
+        "texto": "O que é reserva de emergência?",
+        "resposta": "Dinheiro guardado para imprevistos."
+      },
+      {
+        "texto": "Qual dívida costuma ter os juros mais altos?",
+        "resposta": "O rotativo do cartão de crédito."
+      },
+      {
+        "texto": "Guardando R$ 50 por mês, quanto você terá em um ano?",
+        "resposta": "R$ 600"
+      },
+      {
+        "texto": "Diga um sinal de golpe.",
+        "resposta": "Pressa, preço baixo demais, pedido de senha ou de código."
+      },
+      {
+        "texto": "Quanto é 10% de R$ 800?",
+        "resposta": "R$ 80"
+      },
+      {
+        "texto": "O que conferir antes de confirmar um Pix?",
+        "resposta": "O nome de quem recebe e o valor."
+      }
+    ],
+    "estudos": [
+      {
+        "texto": "Qual exame certifica o ensino fundamental e o médio para jovens e adultos?",
+        "resposta": "O ENCCEJA."
+      },
+      {
+        "texto": "Para que serve a nota do ENEM?",
+        "resposta": "Para entrar na faculdade (SISU, ProUni e FIES)."
+      },
+      {
+        "texto": "O que oferecem os Institutos Federais?",
+        "resposta": "Cursos técnicos e superiores gratuitos."
+      },
+      {
+        "texto": "O que é o ProUni?",
+        "resposta": "Bolsas de estudo em faculdades particulares."
+      },
+      {
+        "texto": "Diga uma dica para estudar quando se trabalha o dia todo.",
+        "resposta": "Um pouco por dia, num horário fixo e possível."
+      },
+      {
+        "texto": "Que curso você gostaria de fazer?",
+        "resposta": "Resposta pessoal."
+      },
+      {
+        "texto": "O que é o PROEJA?",
+        "resposta": "A EJA junto com um curso profissionalizante."
+      },
+      {
+        "texto": "O que é o SISU?",
+        "resposta": "O sistema que usa a nota do ENEM para vagas em instituições públicas."
+      }
+    ],
+    "cidadania": [
+      {
+        "texto": "Onde fazer o Cadastro Único?",
+        "resposta": "No CRAS."
+      },
+      {
+        "texto": "Onde conseguir um advogado gratuito?",
+        "resposta": "Na Defensoria Pública."
+      },
+      {
+        "texto": "Qual é o número do SAMU?",
+        "resposta": "192"
+      },
+      {
+        "texto": "O produto veio com defeito e a loja não troca. Onde reclamar?",
+        "resposta": "No Procon."
+      },
+      {
+        "texto": "Onde marcar consulta pelo SUS?",
+        "resposta": "Na UBS (posto de saúde)."
+      },
+      {
+        "texto": "Qual é o número da Central de Atendimento à Mulher?",
+        "resposta": "180"
+      },
+      {
+        "texto": "Onde tirar a segunda via da certidão de nascimento?",
+        "resposta": "No cartório de registro civil."
+      },
+      {
+        "texto": "Diga um direito que todo cidadão tem.",
+        "resposta": "Ex.: saúde, educação, voto, segurança."
+      }
+    ]
+  }
+}

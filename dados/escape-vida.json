@@ -1,0 +1,72 @@
+{
+  "titulo": "A entrevista da Dona Cida",
+  "tempo": 900,
+  "codigo": "",
+  "historia": "A Dona Cida tem uma entrevista de emprego daqui a pouco, mas o currículo dela ficou trancado numa pasta com cadeado! Cada desafio resolvido revela um número do código. Ajudem a Dona Cida a chegar a tempo!",
+  "desafios": [
+    {
+      "pergunta": "Qual e-mail a Dona Cida deve colocar no currículo?",
+      "imagem": "📧",
+      "opcoes": [
+        "cida.santos@email.com",
+        "cidinha_gata@email.com",
+        "tiacida2000@email.com"
+      ],
+      "correta": "cida.santos@email.com",
+      "dica": "Use um e-mail simples, com o nome."
+    },
+    {
+      "pergunta": "A entrevista é às 14h. Ela quer chegar 15 minutos antes. A que horas deve chegar? (Ex.: 13h30)",
+      "imagem": "⏰",
+      "resposta": [
+        "13h45",
+        "13:45",
+        "13 45",
+        "1345",
+        "13h 45",
+        "13 h 45"
+      ],
+      "dica": "14h menos 15 minutos."
+    },
+    {
+      "pergunta": "Ela trabalhou 5 anos como diarista, sem carteira. Isso conta como experiência no currículo?",
+      "imagem": "🏠",
+      "opcoes": [
+        "Sim",
+        "Não"
+      ],
+      "correta": "Sim",
+      "dica": "Trabalho informal também é experiência!"
+    },
+    {
+      "pergunta": "Escreva a palavra que falta: “Envio em ______ o meu currículo.” (começa com A)",
+      "imagem": "📎",
+      "resposta": [
+        "anexo"
+      ],
+      "dica": "É o arquivo que vai junto com o e-mail."
+    },
+    {
+      "pergunta": "Qual destas é uma habilidade comportamental?",
+      "imagem": "🌟",
+      "opcoes": [
+        "Pontualidade",
+        "Digitar",
+        "Dirigir"
+      ],
+      "correta": "Pontualidade",
+      "dica": "Tem a ver com atitude."
+    },
+    {
+      "pergunta": "O que NÃO se deve colocar no currículo?",
+      "imagem": "🔒",
+      "opcoes": [
+        "O número do CPF",
+        "O telefone",
+        "As experiências"
+      ],
+      "correta": "O número do CPF",
+      "dica": "Por segurança, documentos ficam para depois."
+    }
+  ]
+}
