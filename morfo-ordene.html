@@ -26,6 +26,21 @@
   #resultado{text-align:center;font-size:clamp(1.2rem,2.8vw,1.8rem);font-weight:bold;min-height:1.5em;max-width:1000px;margin:0 auto}
   #textoMontado{max-width:1050px;margin:10px auto;background:#fff;border-left:6px solid var(--verde);border-radius:12px;padding:12px 18px;font-size:clamp(1.05rem,2.2vw,1.4rem);line-height:1.55}
   .navegar button{min-width:120px}
+  /* barra fixa no alto: voltar, pular, ir direto para uma sequência e som (no celular os botões de baixo ficam longe) */
+  #navTopo{position:-webkit-sticky;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:6px;background:rgba(238,241,246,.96);
+    padding:6px 4px;margin:0 0 6px;border-bottom:1px solid #d9dfe9}
+  #navTopo button{padding:8px 12px;font-size:1rem;min-width:0;box-shadow:0 2px 0 #0002}
+  #mapaSeq{flex:1;display:flex;gap:5px;overflow-x:auto;padding:3px 2px;-webkit-overflow-scrolling:touch}
+  #mapaSeq button{flex:0 0 auto;min-width:34px;height:34px;padding:0 6px;border-radius:17px;font-size:.9rem;background:#fff;border:2px solid #c9d2e3;box-shadow:none;color:#243049}
+  #mapaSeq button.ok{background:#2fb36d;border-color:#2fb36d;color:#fff}
+  #mapaSeq button.pulou{background:#ffd54a;border-color:#e6b800}
+  #mapaSeq button.atual{border-color:#2f80ed;box-shadow:0 0 0 3px #2f80ed55}
+  .legendaMapa{text-align:center;font-size:.85rem;opacity:.7;margin:-2px 0 4px}
+  .legendaMapa .ponto{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin:0 2px;border:2px solid transparent}
+  .legendaMapa .ponto.ok{background:#2fb36d}
+  .legendaMapa .ponto.pulou{background:#ffd54a;border-color:#e6b800}
+  #somInicio{display:flex;justify-content:center;margin:-4px 0 10px}
+  @media (max-width:600px){ #navTopo .txt{display:none} }
   /* frases longas (parágrafos, textos): lista de cima para baixo, mais fácil de ler */
   #tJogo.longo #pista{flex-direction:column;align-items:stretch}
   #tJogo.longo .ponta{min-width:0;padding:4px 10px;font-size:1rem}
@@ -47,6 +62,7 @@
 
 <section id="tConfig" class="tela ativa">
   <h1 id="tituloConfig">📶 Ordene</h1>
+  <div id="somInicio"></div>
   <div class="cartao">
     <h2>1. Sequências (JSON)</h2>
     <label>Arquivo: <select id="selArquivo"></select></label>
@@ -76,6 +92,13 @@
 
 <section id="tJogo" class="tela">
   <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="navTopo">
+    <button id="navVoltar" title="Voltar para a sequência anterior (seta ←)">⏮️ <span class="txt">Voltar</span></button>
+    <div id="mapaSeq" aria-label="Sequências: toque num número para ir direto"></div>
+    <button id="navPular" title="Pular esta sequência; dá para voltar depois (seta →)">⏭️ <span class="txt">Pular</span></button>
+    <span id="navSomLugar"></span>
+  </div>
+  <div class="legendaMapa">Toque num número para ir direto: <i class="ponto ok"></i> montada · <i class="ponto pulou"></i> pulada (dá para voltar)</div>
   <div id="contador"></div>
   <div id="tituloSeq"></div>
   <div id="pista"><div class="ponta" id="esq"></div><div id="slots"></div><div class="ponta" id="dir"></div></div>
@@ -97,7 +120,7 @@
   <div id="resumoFim" class="dica" style="text-align:center;font-size:1.1rem"></div>
   <div id="ranking" class="ranking"></div>
   <div id="textoFinal" hidden></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às puladas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -174,17 +197,25 @@ function mostrar(falar){
 }
 function atualizarBotoes(){
   const ultimo = idx === lista.length - 1, longo = ehLongo(atual);
-  $('btnVoltar').disabled = idx === 0;
-  $('btnAvancar').textContent = ultimo ? '🏁 Finalizar' : '⏭️ Avançar';
+  $('btnVoltar').disabled = $('navVoltar').disabled = idx === 0;
+  $('btnAvancar').textContent = ultimo ? '🏁 Finalizar' : resolvido ? '⏭️ Avançar' : '⏭️ Pular';
+  $('navPular').innerHTML = (ultimo ? '🏁 <span class="txt">Fim</span>' : '⏭️ <span class="txt">' + (resolvido ? 'Avançar' : 'Pular') + '</span>');
+  desenharMapa();
   $('btnProxima').hidden = !resolvido; $('btnProxima').textContent = ultimo ? '🏆 Ver resultado' : '➡️ Próxima';
   $('btnLimpar').textContent = resolvido ? '🔁 Montar de novo' : '↩️ Recomeçar';
   $('btnLer').hidden = !resolvido;
   $('textoMontado').hidden = !(resolvido && longo);
   $('textoMontado').textContent = atual.itens.join(' ');
 }
+function desenharMapa(){
+  const m = $('mapaSeq');
+  m.innerHTML = lista.map((s, i) => `<button class="${estados[i].resolvido ? 'ok' : estados[i].pulada ? 'pulou' : ''}${i === idx ? ' atual' : ''}" data-i="${i}" title="Sequência ${i + 1}${estados[i].resolvido ? ' (montada)' : estados[i].pulada ? ' (pulada)' : ''}">${i + 1}</button>`).join('');
+  m.querySelectorAll('button').forEach(b => b.onclick = () => { const n = +b.dataset.i; if (n !== idx) irPara(n, n > idx); });
+  const at = m.querySelector('.atual'); if (at && at.scrollIntoView) try { at.scrollIntoView({block: 'nearest', inline: 'center'}); } catch (e) {}
+}
 function irPara(novo, avancando){
   if (!lista.length || novo < 0) return;
-  if (avancando && !estados[idx].resolvido) estados[idx].pulada = true;
+  if (!estados[idx].resolvido && novo !== idx) estados[idx].pulada = true;   // saiu sem montar: fica marcada para voltar depois
   if (novo >= lista.length) return fim();
   if (avancando) placar.proxima();   // a vez das equipes só gira quando a turma segue em frente
   idx = novo; mostrar(true);
@@ -235,6 +266,7 @@ function conferir(){
 function fim(){
   const montadas = estados.filter(e => e.resolvido).length, puladas = estados.filter(e => e.pulada).length;
   $('resumoFim').textContent = `${montadas} de ${lista.length} sequência(s) montada(s)` + (puladas ? ` • ${puladas} pulada(s)` : '');
+  $('btnPuladas').hidden = !puladas; $('btnPuladas').textContent = `↩️ Voltar às puladas (${puladas})`;
   AV.mostrarTela('tFim'); placar.ranking($('ranking'), lista.length * 2);
   $('textoFinal').hidden = !modoTema;
   if (modoTema) $('textoFinal').innerHTML = `<h2>📄 Texto completo: ${AV.esc(lista[0].tema)}</h2>` + lista.map(s => `<p>${AV.esc(s.itens.join(' '))}</p>`).join('');
@@ -251,6 +283,11 @@ $('btnVoltar').onclick = () => irPara(idx - 1, false);
 $('btnLer').onclick = () => AV.falar(atual.itens.join(' '));
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+$('btnPuladas').onclick = () => { const p = estados.findIndex(e => e.pulada && !e.resolvido); if (p < 0) return; idx = p; AV.mostrarTela('tJogo'); mostrar(true); };
+$('navVoltar').onclick = () => irPara(idx - 1, false);
+$('navPular').onclick = () => irPara(idx + 1, true);
+AV.botaoSom($('somInicio'), true);   // tirar o som logo no início
+AV.botaoSom($('navSomLugar'));       // e durante o jogo
 // setas do teclado e passador de slides (que envia PageUp/PageDown)
 document.addEventListener('keydown', ev => {
   if (!$('tJogo').classList.contains('ativa') || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;

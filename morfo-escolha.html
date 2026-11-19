@@ -29,6 +29,7 @@
 
 <section id="tConfig" class="tela ativa">
   <h1 id="tituloConfig">📚 Morfologia</h1>
+  <div id="somInicio" class="linha" style="margin:-4px 0 10px"></div>
   <div class="cartao">
     <h2>1. Conteúdo (JSON)</h2>
     <label>Arquivo: <select id="selArquivo"></select></label>
@@ -54,6 +55,7 @@
 
 <section id="tJogo" class="tela">
   <div class="barraEquipes" id="barraEquipes"></div>
+  <div id="navLugar"></div>
   <div id="contador"></div>
   <div id="enunciado"></div>
   <div id="cartao"><div id="textoBase" hidden></div><div id="img"></div><div id="destaque"></div></div>
@@ -69,7 +71,7 @@
 <section id="tFim" class="tela">
   <h1 id="tituloFim">🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -105,7 +107,7 @@ const jogo = JOGOS[M.param('jogo')] || (pedidoArq ? {tipo: 'escolha-' + pedidoAr
 document.title = jogo.titulo;
 $('tituloConfig').textContent = `${jogo.emoji} ${jogo.titulo}`;
 
-let dados = null, fila = [], atual = null, n = 0, total = 0, placar = null, respondido = false;
+let dados = null, lista = [], est = [], idx = 0, atual = null, total = 0, placar = null, respondido = false, nav = null;
 
 // Aceita dois formatos: "rodadas" (pergunta pronta) ou "palavras" com "classe" (gera as alternativas)
 function normalizar(d){
@@ -159,57 +161,84 @@ function comecar(){
   if (!todas.length) return AV.avisar('Não há rodadas com essas opções.');
   AV.som = $('chkSom').checked;
   const q = +$('selQtd').value;
-  fila = M.embaralhar(todas); if (q) fila = fila.slice(0, q);
-  total = fila.length; n = 0;
+  lista = M.embaralhar(todas); if (q) lista = lista.slice(0, q);
+  total = lista.length; idx = 0;
+  est = lista.map(() => ({respondida: false, certo: false, escolha: null, ops: null, pulada: false}));
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
+  if (!nav) nav = AV.barraNavegacao({lugar: $('navLugar'), total: () => total, atual: () => idx, respondida: () => respondido, irPara,
+    estado: i => est[i].respondida ? (est[i].certo ? 'ok' : 'erro') : est[i].pulada ? 'pulou' : ''});
   AV.mostrarTela('tJogo');
-  proxima();
+  mostrar(true);
+}
+// mudar de rodada: dá para pular uma difícil e voltar depois (as já respondidas aparecem com a resposta)
+function irPara(novo, avancando){
+  if (!lista.length || novo < 0) return;
+  if (!est[idx].respondida && novo !== idx) est[idx].pulada = true;
+  if (novo >= total) return fim();
+  if (avancando) placar.proxima();
+  idx = novo; mostrar(true);
 }
 const marcar = t => AV.esc(t).replace(/\[(.+?)\]/g, '<mark>$1</mark>');
 const semMarcas = t => String(t).replace(/[\[\]]/g, '').replace(/_{2,}/g, '...');
-function proxima(){
-  if (!fila.length) return fim();
-  atual = fila.shift(); n++; respondido = false;
-  $('contador').textContent = `${n} de ${total}`;
+function mostrar(falar){
+  atual = lista[idx]; const e = est[idx]; respondido = e.respondida;
+  $('contador').textContent = `${idx + 1} de ${total}`;
   $('enunciado').textContent = placar.prefixo() + atual.enunciado;
   $('img').textContent = atual.imagem; $('img').hidden = !atual.imagem;
   $('textoBase').textContent = atual.texto || ''; $('textoBase').hidden = !atual.texto;
   $('destaque').innerHTML = atual.ouvir ? '🎧 ' + marcar(atual.destaque) : marcar(atual.destaque);
   $('destaque').classList.toggle('longo', atual.destaque.length > 55);
-  const ops = atual.classes ? atual.opcoes : M.embaralhar(atual.opcoes);
+  if (!e.ops) e.ops = atual.classes ? atual.opcoes.slice() : M.embaralhar(atual.opcoes);   // a ordem fica a mesma se voltar
+  const ops = e.ops;
   $('opcoes').innerHTML = ops.map((o, i) => {
     const cl = atual.classes ? Object.values(M.CLASSES).find(c => c.nome === o) : null;
     return `<button data-o="${AV.esc(o)}" style="background:${cl ? cl.cor : CORES[i % CORES.length]}">${cl ? cl.emoji + ' ' : ''}${AV.esc(o)}</button>`;
   }).join('');
   $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => responder(b));
   $('opcoes').classList.toggle('longas', atual.opcoes.some(o => o.length > 28));
-  $('explica').textContent = ''; $('btnProxima').hidden = true;
-  if (atual.ouvir) setTimeout(() => AV.falar(atual.ouvir), 300);   // ouça e escolha: sempre fala
-  else if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+  $('explica').textContent = '';
+  if (e.respondida) aplicarResposta(false);
+  else if (falar){
+    if (atual.ouvir){ if (AV.som) setTimeout(() => AV.falar(atual.ouvir), 300); else $('explica').textContent = '🔇 O som está desligado: toque em 🔊 para ouvir.'; }   // ouça e escolha: sempre fala
+    else if ($('chkVoz').checked) AV.falar((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque));
+  }
+  atualizarBotoes();
+}
+function atualizarBotoes(){
+  $('btnProxima').hidden = !respondido;
+  $('btnProxima').textContent = idx === total - 1 ? '🏆 Ver resultado' : '➡️ Próxima';
+  if (nav) nav.atualizar();
 }
 function responder(b){
   if (respondido) return;
-  respondido = true;
-  const certo = b.dataset.o === atual.correta;
-  $('opcoes').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.o === atual.correta ? 'ok' : x === b ? 'nao' : 'apagado'));
-  if (certo){ placar.pontuar(1); AV.fanfarra(); AV.confete(); }
+  const e = est[idx];
+  respondido = e.respondida = true; e.escolha = b.dataset.o; e.certo = b.dataset.o === atual.correta; e.pulada = false;
+  if (e.certo){ placar.pontuar(1); AV.fanfarra(); AV.confete(); }
   else AV.erro();
+  aplicarResposta(true);
+  atualizarBotoes();
+}
+function aplicarResposta(falar){
+  const e = est[idx], certo = e.certo;
+  $('opcoes').querySelectorAll('button').forEach(x => x.classList.add(x.dataset.o === atual.correta ? 'ok' : x.dataset.o === e.escolha ? 'nao' : 'apagado'));
   $('explica').textContent = (certo ? '✅ Isso! ' : `❌ A resposta certa é: ${atual.correta}. `) + atual.explica;
   if (!atual.classes && /_{2,}/.test(atual.destaque)) $('destaque').innerHTML = AV.esc(atual.destaque).replace(/_{2,}/, `<mark>${AV.esc(atual.correta)}</mark>`).replace(/\s*\([^)]*\)/, '');
   if (atual.ouvir) $('destaque').innerHTML = '🔊 ' + AV.esc(atual.ouvir);
-  if ($('chkVoz').checked) AV.falar([{t: certo ? 'Isso!' : 'A resposta certa é', l: 'pt-BR'}].concat(certo ? [] : [{t: atual.correta, l: dados.idiomaOpcoes || undefined}], [{t: atual.explica, l: 'pt-BR'}]));
-  $('btnProxima').hidden = false;
-  $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+  if (falar && $('chkVoz').checked) AV.falar([{t: certo ? 'Isso!' : 'A resposta certa é', l: 'pt-BR'}].concat(certo ? [] : [{t: atual.correta, l: dados.idiomaOpcoes || undefined}], [{t: atual.explica, l: 'pt-BR'}]));
 }
 function fim(){
   if (window.speechSynthesis) speechSynthesis.cancel();
   AV.mostrarTela('tFim');
   $('tituloFim').textContent = `🏆 ${dados.titulo}: resultado`;
   placar.ranking($('ranking'), total);
+  const faltam = est.filter(e => !e.respondida).length;
+  $('btnPuladas').hidden = !faltam; $('btnPuladas').textContent = `↩️ Voltar às não respondidas (${faltam})`;
   AV.fanfarra(); AV.confete();
 }
 $('btnComecar').onclick = comecar;
-$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnProxima').onclick = () => irPara(idx + 1, true);
+$('btnPuladas').onclick = () => { const p = est.findIndex(e => !e.respondida); if (p < 0) return; idx = p; AV.mostrarTela('tJogo'); mostrar(true); };
+AV.botaoSom($('somInicio'), true);   // tirar o som logo no início
 $('btnOuvir').onclick = () => atual && AV.falar(atual.ouvir || ((atual.enunciado ? atual.enunciado + ' ' : '') + semMarcas(atual.destaque)));
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
@@ -218,6 +247,8 @@ document.addEventListener('keydown', e => {
   const k = parseInt(e.key, 10); const bs = $('opcoes').querySelectorAll('button');
   if (k >= 1 && k <= bs.length) responder(bs[k - 1]);
   if (e.key === 'Enter' && respondido) $('btnProxima').click();
+  if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); irPara(idx + 1, true); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); irPara(idx - 1, false); }
 });
 </script>
 </body>

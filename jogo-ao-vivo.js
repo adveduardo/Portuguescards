@@ -3,6 +3,7 @@
 'use strict';
 const AV = {};
 let somLigado = true, ac;
+try { somLigado = localStorage.getItem('painel_som') !== '0'; } catch (e) {}   // a escolha de som vale para todas as atividades deste aparelho
 
 AV.esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -22,7 +23,61 @@ AV.mostrarTela = id => {
 AV.urlJogar = () => location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, 'jogar.html');
 
 // ---------- sons ----------
-Object.defineProperty(AV, 'som', {get: () => somLigado, set: v => { somLigado = !!v; }});
+const pintarSom = b => {
+  const grande = b.classList.contains('avSomGrande');
+  b.textContent = grande ? (somLigado ? '🔊 Som ligado' : '🔇 Som desligado') : (somLigado ? '🔊' : '🔇');
+  b.title = somLigado ? 'Desligar o som e a voz' : 'Ligar o som e a voz';
+  b.setAttribute('aria-pressed', String(!somLigado));
+  b.classList.toggle('desligado', !somLigado);
+};
+Object.defineProperty(AV, 'som', {get: () => somLigado, set: v => {
+  somLigado = !!v;
+  try { localStorage.setItem('painel_som', somLigado ? '1' : '0'); } catch (e) {}
+  if (!somLigado) try { speechSynthesis.cancel(); } catch (e) {}
+  document.querySelectorAll('#chkSom').forEach(c => { c.checked = somLigado; });
+  document.querySelectorAll('.avSom').forEach(pintarSom);
+}});
+// Botão 🔊/🔇: AV.botaoSom(lugar) (pequeno) ou AV.botaoSom(lugar, true) ("🔊 Som ligado")
+AV.botaoSom = (lugar, grande) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'avSom' + (grande ? ' avSomGrande' : '');
+  b.onclick = () => { AV.som = !AV.som; };
+  pintarSom(b);
+  if (lugar) lugar.appendChild(b);
+  return b;
+};
+// Barra fixa no alto para mudar de rodada: ⏮️ Voltar · números (ir direto) · ⏭️ Pular · 🔊
+// AV.barraNavegacao({lugar, total(), atual(), estado(i) → 'ok' | 'erro' | 'pulou' | '', irPara(i, avancando), respondida(), legenda})
+AV.barraNavegacao = op => {
+  const caixa = document.createElement('div');
+  caixa.innerHTML = '<div class="avNav"><button type="button" class="avNavVoltar" title="Voltar (seta ←)">⏮️ <span class="txt">Voltar</span></button>' +
+    '<div class="avMapa" aria-label="Toque num número para ir direto"></div>' +
+    '<button type="button" class="avNavPular" title="Pular; dá para voltar depois (seta →)">⏭️ <span class="txt">Pular</span></button><span class="avNavSom"></span></div>' +
+    '<div class="avLegenda">' + (op.legenda ? AV.esc(op.legenda) : 'Toque num número para ir direto · <i class="avPonto ok"></i> acertou · <i class="avPonto erro"></i> errou · <i class="avPonto pulou"></i> pulada (dá para voltar)') + '</div>';
+  op.lugar.appendChild(caixa);
+  const mapa = caixa.querySelector('.avMapa'), voltar = caixa.querySelector('.avNavVoltar'), pular = caixa.querySelector('.avNavPular');
+  AV.botaoSom(caixa.querySelector('.avNavSom'));
+  voltar.onclick = () => op.irPara(op.atual() - 1, false);
+  pular.onclick = () => op.irPara(op.atual() + 1, true);
+  const atualizar = () => {
+    const n = op.total(), i0 = op.atual(), ultimo = i0 === n - 1;
+    voltar.disabled = i0 === 0;
+    pular.innerHTML = ultimo ? '🏁 <span class="txt">Fim</span>' : '⏭️ <span class="txt">' + (op.respondida && op.respondida() ? 'Avançar' : 'Pular') + '</span>';
+    let h = '';
+    for (let i = 0; i < n; i++) h += `<button type="button" class="${op.estado(i) || ''}${i === i0 ? ' atual' : ''}" data-i="${i}">${i + 1}</button>`;
+    mapa.innerHTML = h;
+    mapa.querySelectorAll('button').forEach(b => b.onclick = () => { const k = +b.dataset.i; if (k !== op.atual()) op.irPara(k, k > op.atual()); });
+    const at = mapa.querySelector('.atual'); if (at) try { at.scrollIntoView({block: 'nearest', inline: 'center'}); } catch (e) {}
+  };
+  return {atualizar};
+};
+// a caixinha "Sons e voz" de cada atividade passa a lembrar a última escolha
+const ligarCaixaSom = () => document.querySelectorAll('#chkSom').forEach(c => {
+  c.checked = somLigado;
+  if (!c.dataset.avSom){ c.dataset.avSom = '1'; c.addEventListener('change', () => { AV.som = c.checked; }); }
+});
+ligarCaixaSom();
+document.addEventListener('DOMContentLoaded', ligarCaixaSom);
 AV.tom = (freq, dur = .12, tipo = 'triangle', vol = .15, atraso = 0, freqFim) => {
   if (!somLigado) return;
   if (window.PAINEL_CALMO){ tipo = 'sine'; vol *= .35; }   // visual calmo: sons mais baixos e suaves
