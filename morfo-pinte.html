@@ -60,6 +60,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div class="barraEquipes" id="barraEquipes"></div>
   <div id="contador"></div>
   <div id="instrucao"></div>
@@ -78,7 +79,7 @@
 <section id="tFim" class="tela">
   <h1>🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -88,7 +89,7 @@ const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
 let C = M.CLASSES;
 const CORES_PINTE = ['#2f80ed', '#e74c3c', '#27ae60', '#e67e22', '#8e44ad', '#c2185b', '#16a085'];
-let frases = null, fila = [], n = 0, total = 0, placar = null, ativas = [], modo = 'pintar', corAtual = null, conferido = false;
+let frases = null, lista = [], est = [], idx = 0, nav = null, total = 0, placar = null, ativas = [], modo = 'pintar', corAtual = null, conferido = false;
 let alvo = null, faltam = 0, timer = null, fimEm = 0, palavrasAtuais = [];
 
 if (M.param('modo') === 'cacar'){ document.querySelector('input[value=cacar]').checked = true; $('tituloConfig').textContent = '🔍 Caça às Classes'; document.title = 'Caça às Classes'; }
@@ -126,45 +127,70 @@ function comecar(){
   modo = document.querySelector('input[name=modo]:checked').value;
   AV.som = $('chkSom').checked;
   const q = +$('selQtd').value;
-  let lista = M.embaralhar(frases);
+  let l = M.embaralhar(frases);
   if (modo === 'cacar'){
     // na caça, cada rodada junta 3 frases num textinho
-    const grupos = []; for (let i = 0; i + 2 < lista.length; i += 3) grupos.push(lista.slice(i, i + 3).flat());
-    lista = grupos;
+    const grupos = []; for (let i = 0; i + 2 < l.length; i += 3) grupos.push(l.slice(i, i + 3).flat());
+    l = grupos;
   }
-  fila = q ? lista.slice(0, q) : lista; total = fila.length; n = 0;
+  lista = q ? l.slice(0, q) : l; total = lista.length; idx = 0;
+  if (!total) return AV.avisar('Não há frases suficientes para jogar.');
+  est = lista.map(() => ({feito: false, pulada: false, pintura: {}, alvo: null, achadas: [], perfeito: false, txt: ''}));
   placar = M.criarPlacar($('barraEquipes'), +$('selEquipes').value);
   $('legenda').innerHTML = ativas.map(c => `<span style="background:${C[c].cor}">${C[c].emoji} ${C[c].nome}: ${C[c].def}</span>`).join('');
+  if (!nav) nav = AV.barraNavegacao({lugar: $('navLugar'), total: () => total, atual: () => idx, irPara,
+    respondida: () => !!est[idx] && est[idx].feito,
+    estado: i => est[i].feito ? (est[i].perfeito ? 'ok' : 'erro') : est[i].pulada ? 'pulou' : ''});
   AV.mostrarTela('tJogo');
-  proxima();
+  mostrar();
 }
-function proxima(){
+// mudar de frase: dá para pular e voltar depois (a pintura fica guardada; as já conferidas aparecem corrigidas)
+function irPara(novo, avancando){
+  if (!lista.length || novo < 0) return;
   clearInterval(timer);
-  if (!fila.length) return fim();
-  palavrasAtuais = fila.shift(); n++; conferido = false;
-  $('contador').textContent = `${modo === 'cacar' ? 'Texto' : 'Frase'} ${n} de ${total}`;
-  $('resultado').textContent = ''; $('btnProxima').hidden = true;
+  if (!est[idx].feito && novo !== idx) est[idx].pulada = true;
+  if (novo >= total) return fim();
+  if (avancando) placar.proxima();
+  idx = novo; mostrar();
+}
+function mostrar(){
+  clearInterval(timer);
+  palavrasAtuais = lista[idx]; const e = est[idx]; conferido = e.feito;
+  $('contador').textContent = `${modo === 'cacar' ? 'Texto' : 'Frase'} ${idx + 1} de ${total}`;
+  $('resultado').textContent = e.txt;
   $('texto').innerHTML = palavrasAtuais.map((t, i) => `<button class="pal" data-i="${i}">${AV.esc(t.texto)}</button>`).join(' ');
   $('texto').querySelectorAll('.pal').forEach(b => b.onclick = () => tocar(b));
-  if (modo === 'pintar') iniciarPintura(); else iniciarCaca();
+  if (modo === 'pintar'){
+    iniciarPintura();
+    $('texto').querySelectorAll('.pal').forEach(b => { const c = e.pintura[b.dataset.i]; if (c) pintar(b, c, true); });
+    if (e.feito) marcarCorrecao();
+  } else if (e.feito) mostrarCacaFeita();
+  else iniciarCaca();
+  atualizarBotoes();
+}
+function atualizarBotoes(){
+  const e = est[idx];
+  $('btnConferir').hidden = modo !== 'pintar' || e.feito;
+  $('btnProxima').hidden = !e.feito;
+  $('btnProxima').textContent = idx === total - 1 ? '🏆 Ver resultado' : modo === 'cacar' ? '➡️ Próximo texto' : '➡️ Próxima';
+  if (nav) nav.atualizar();
 }
 // ---------- PINTAR ----------
 function iniciarPintura(){
-  $('relogio').hidden = true; $('paleta').hidden = false; $('btnConferir').hidden = false;
+  $('relogio').hidden = true; $('paleta').hidden = false;
   $('instrucao').innerHTML = AV.esc(placar.prefixo()) + 'Escolha uma cor e toque nas palavras. <span class="dica">Palavras de outras classes ficam sem cor.</span>';
   $('paleta').innerHTML = ativas.map(c => `<button data-c="${c}" style="background:${C[c].cor}">${C[c].emoji} ${C[c].nome}</button>`).join('') + '<button class="borracha" data-c="">🧽 Borracha</button>';
   $('paleta').querySelectorAll('button').forEach(b => b.onclick = () => escolherCor(b.dataset.c));
   escolherCor(ativas[0]);
 }
 function escolherCor(c){ corAtual = c; $('paleta').querySelectorAll('button').forEach(b => b.classList.toggle('ativo', b.dataset.c === c)); }
-function pintar(b, c){
+function pintar(b, c, soDesenhar){
   b.dataset.pintada = c || '';
   b.classList.toggle('pintada', !!c);
   b.style.background = c ? C[c].cor : '';
+  if (!soDesenhar){ if (c) est[idx].pintura[b.dataset.i] = c; else delete est[idx].pintura[b.dataset.i]; }   // guarda para quando voltar
 }
-function conferirPintura(){
-  if (conferido) return;
-  conferido = true;
+function marcarCorrecao(){   // mostra as correções nas palavras e devolve quantas estão certas
   let certas = 0, total = 0;
   $('texto').querySelectorAll('.pal').forEach(b => {
     const t = palavrasAtuais[+b.dataset.i], esperado = ativas.includes(t.classe) ? t.classe : '';
@@ -177,19 +203,33 @@ function conferirPintura(){
       b.insertAdjacentHTML('beforeend', `<span class="etq" style="background:${esperado ? C[esperado].cor : '#888'}">${esperado ? C[esperado].nome : 'sem cor'}</span>`);
     }
   });
-  placar.pontuar(certas);
-  $('resultado').textContent = certas === total ? `🎉 Perfeito! ${certas} de ${total} palavras certas.` : `✅ ${certas} de ${total} palavras certas. Veja as correções nas palavras tracejadas.`;
-  if (certas === total){ AV.fanfarra(); AV.confete(); } else if (certas) AV.tom(700, .15); else AV.erro();
-  $('btnConferir').hidden = true; $('btnProxima').hidden = false;
-  $('btnProxima').textContent = fila.length ? '➡️ Próxima' : '🏆 Ver resultado';
+  return {certas, total};
+}
+function conferirPintura(){
+  const e = est[idx];
+  if (conferido || e.feito) return;
+  conferido = true;
+  const r = marcarCorrecao();
+  placar.pontuar(r.certas);
+  e.feito = true; e.pulada = false; e.perfeito = r.certas === r.total;
+  e.txt = e.perfeito ? `🎉 Perfeito! ${r.certas} de ${r.total} palavras certas.` : `✅ ${r.certas} de ${r.total} palavras certas. Veja as correções nas palavras tracejadas.`;
+  $('resultado').textContent = e.txt;
+  if (e.perfeito){ AV.fanfarra(); AV.confete(); } else if (r.certas) AV.tom(700, .15); else AV.erro();
+  atualizarBotoes();
 }
 // ---------- CAÇAR ----------
+function instrucaoCaca(){
+  const e = est[idx], faltaTxt = e.feito ? '' : ` • faltam <b id="faltam">${faltam}</b>`;
+  $('instrucao').innerHTML = `${AV.esc(placar.prefixo())}Encontre todos os <span class="alvo" style="background:${C[alvo].cor}">${C[alvo].emoji} ${C[alvo].plural.toUpperCase()}</span>${faltaTxt}`;
+}
 function iniciarCaca(){
-  $('paleta').hidden = true; $('btnConferir').hidden = true; $('relogio').hidden = false;
-  const presentes = ativas.filter(c => palavrasAtuais.some(t => t.classe === c));
-  alvo = presentes[Math.floor(Math.random() * presentes.length)];
-  faltam = palavrasAtuais.filter(t => t.classe === alvo).length;
-  $('instrucao').innerHTML = `${AV.esc(placar.prefixo())}Encontre todos os <span class="alvo" style="background:${C[alvo].cor}">${C[alvo].emoji} ${C[alvo].plural.toUpperCase()}</span> • faltam <b id="faltam">${faltam}</b>`;
+  const e = est[idx];
+  $('paleta').hidden = true; $('relogio').hidden = false;
+  if (!e.alvo){ const presentes = ativas.filter(c => palavrasAtuais.some(t => t.classe === c)); e.alvo = presentes[Math.floor(Math.random() * presentes.length)]; }
+  alvo = e.alvo;
+  $('texto').querySelectorAll('.pal').forEach(b => { if (e.achadas.indexOf(+b.dataset.i) >= 0) pintar(b, alvo, true); });   // o que já tinha achado continua achado
+  faltam = palavrasAtuais.filter((t, i) => t.classe === alvo && e.achadas.indexOf(i) < 0).length;
+  instrucaoCaca();
   fimEm = Date.now() + (+$('selTempo').value) * 1000;
   const tique = () => {
     const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
@@ -200,16 +240,29 @@ function iniciarCaca(){
   tique(); timer = setInterval(tique, 1000);
   AV.falar([{t: 'Encontrem todos os', l: 'pt-BR'}, {t: C[alvo].plural.toLowerCase() + '!'}]);
 }
-function terminarCaca(achouTudo){
-  if (conferido) return;
-  conferido = true; clearInterval(timer);
+function marcarFaltantes(){
   $('texto').querySelectorAll('.pal').forEach(b => {
     const t = palavrasAtuais[+b.dataset.i];
     if (t.classe === alvo && !b.classList.contains('pintada')){ b.classList.add('errado'); b.style.borderColor = C[alvo].cor; }
   });
-  $('resultado').textContent = achouTudo ? '🎉 Acharam todos!' : '⏰ Tempo! As palavras tracejadas eram as que faltavam.';
+}
+function mostrarCacaFeita(){
+  const e = est[idx];
+  $('paleta').hidden = true; $('relogio').hidden = true;
+  alvo = e.alvo; faltam = 0;
+  $('texto').querySelectorAll('.pal').forEach(b => { if (e.achadas.indexOf(+b.dataset.i) >= 0) pintar(b, alvo, true); });
+  marcarFaltantes(); instrucaoCaca();
+}
+function terminarCaca(achouTudo){
+  const e = est[idx];
+  if (conferido || e.feito) return;
+  conferido = true; clearInterval(timer);
+  marcarFaltantes();
+  e.feito = true; e.pulada = false; e.perfeito = achouTudo;
+  e.txt = achouTudo ? '🎉 Acharam todos!' : '⏰ Tempo! As palavras tracejadas eram as que faltavam.';
+  $('resultado').textContent = e.txt;
   if (achouTudo){ AV.fanfarra(); AV.confete(); } else AV.sirene();
-  $('btnProxima').hidden = false; $('btnProxima').textContent = fila.length ? '➡️ Próximo texto' : '🏆 Ver resultado';
+  atualizarBotoes();
 }
 function tocar(b){
   if (conferido) return;
@@ -217,7 +270,8 @@ function tocar(b){
   if (modo === 'pintar'){ pintar(b, b.dataset.pintada === corAtual ? '' : corAtual); AV.tom(600, .05); return; }
   if (b.classList.contains('pintada')) return;
   if (t.classe === alvo){
-    pintar(b, alvo); placar.pontuar(1); faltam--; $('faltam').textContent = faltam; AV.tom(880, .1, 'triangle', .14);
+    pintar(b, alvo, true); est[idx].achadas.push(+b.dataset.i);
+    placar.pontuar(1); faltam--; $('faltam').textContent = faltam; AV.tom(880, .1, 'triangle', .14);
     if (!faltam) terminarCaca(true);
   } else {
     b.classList.remove('tremer'); void b.offsetWidth; b.classList.add('tremer');
@@ -228,13 +282,22 @@ function tocar(b){
 }
 function fim(){
   clearInterval(timer);
-  AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarra(); AV.confete();
+  AV.mostrarTela('tFim'); placar.ranking($('ranking'));
+  const faltamRodadas = est.filter(e => !e.feito).length;
+  $('btnPuladas').hidden = !faltamRodadas; $('btnPuladas').textContent = `↩️ Voltar às não respondidas (${faltamRodadas})`;
+  AV.fanfarra(); AV.confete();
 }
 $('btnComecar').onclick = comecar;
 $('btnConferir').onclick = conferirPintura;
-$('btnProxima').onclick = () => { placar.proxima(); proxima(); };
+$('btnProxima').onclick = () => irPara(idx + 1, true);
+$('btnPuladas').onclick = () => { const p = est.findIndex(e => !e.feito); if (p < 0) return; idx = p; AV.mostrarTela('tJogo'); mostrar(); };
 $('btnSair').onclick = () => { if (confirm('Terminar e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); irPara(idx + 1, true); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); irPara(idx - 1, false); }
+});
 </script>
 </body>
 </html>

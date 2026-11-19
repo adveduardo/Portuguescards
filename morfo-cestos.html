@@ -11,6 +11,10 @@
   .topoJogo{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
   #relogio{font-family:"Courier New",monospace;font-size:2.2rem;font-weight:bold;background:#fff;border-radius:14px;padding:2px 16px;box-shadow:0 3px 0 #0001}
   #placarRodada{font-size:1.4rem;font-weight:bold;background:#fff;border-radius:14px;padding:6px 14px;box-shadow:0 3px 0 #0001}
+  #controlesJogo{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  #controlesJogo button{padding:8px 12px;font-size:1rem;min-width:0}
+  #pausaAviso{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);background:#fff;border-radius:22px;padding:14px 26px;font-size:2rem;font-weight:bold;box-shadow:0 10px 30px #0003;z-index:5}
+  #ficha.pulada{transition:all .45s ease-in !important;opacity:0;transform:translate(-50%,-60px) scale(.6) !important}
   #ceu{flex:1;position:relative;min-height:200px}
   #ficha{position:absolute;left:50%;top:0;transform:translateX(-50%);background:#fff;border-radius:22px;padding:12px 30px;font-size:clamp(2rem,5vw,3.4rem);font-weight:bold;
     box-shadow:0 10px 24px #0003;cursor:grab;touch-action:none;user-select:none;white-space:nowrap;border:5px solid var(--texto)}
@@ -62,8 +66,9 @@
     <div class="barraEquipes" id="barraEquipes" style="margin:0"></div>
     <div id="placarRodada">✅ 0</div>
     <div id="relogio">1:00</div>
+    <div id="controlesJogo"><button type="button" id="btnPausa" title="Pausar o tempo e a palavra">⏸️ Pausar</button><button type="button" id="btnPularPalavra" title="Pular esta palavra sem perder ponto; ela volta depois">⏭️ Pular esta palavra</button><span id="somJogo"></span></div>
   </div>
-  <div id="ceu"><div id="ficha" hidden></div></div>
+  <div id="ceu"><div id="ficha" hidden></div><div id="pausaAviso" hidden>⏸️ Pausado</div></div>
   <div id="cestos"></div>
 </section>
 
@@ -81,7 +86,7 @@
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo, C = M.CLASSES;
 let palavras = null, ativas = [], placar = null, fila = [], atual = null, rodadasRestantes = 0, acertosRodada = 0;
-let timer = null, fimEm = 0, quedaTimer = null, ocupado = false, jogando = false;
+let timer = null, fimEm = 0, quedaTimer = null, ocupado = false, jogando = false, pausado = false, restanteTempo = 0, fichaPendente = false;
 
 let CATS = C;   // cestos: classes de palavras ou categorias próprias do JSON ("cestos")
 const CORES_CESTO = ['#e67e22', '#2f80ed', '#27ae60', '#c2185b', '#8e44ad', '#16a085', '#e74c3c'];
@@ -126,20 +131,47 @@ function iniciarRodada(){
   $('avisoVez').hidden = true;
   acertosRodada = 0; $('placarRodada').textContent = '✅ 0';
   fila = M.embaralhar(palavras.filter(p => ativas.includes(p.classe)));
-  jogando = true;
+  jogando = true; pausado = false; fichaPendente = false; $('pausaAviso').hidden = true; $('btnPausa').textContent = '⏸️ Pausar';
   fimEm = Date.now() + (+$('selTempo').value) * 1000;
-  clearInterval(timer);
-  const tique = () => {
-    const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
-    $('relogio').textContent = AV.mmss(s); $('relogio').style.color = s <= 10 ? 'var(--vermelho)' : '';
-    if (s <= 5 && s > 0) AV.tique();
-    if (!s) fimRodada();
-  };
-  tique(); timer = setInterval(tique, 1000);
+  ligarRelogio();
   novaFicha();
+}
+function tiqueRelogio(){
+  const s = Math.max(0, Math.ceil((fimEm - Date.now()) / 1000));
+  $('relogio').textContent = AV.mmss(s); $('relogio').style.color = s <= 10 ? 'var(--vermelho)' : '';
+  if (s <= 5 && s > 0) AV.tique();
+  if (!s) fimRodada();
+}
+function ligarRelogio(){ clearInterval(timer); tiqueRelogio(); timer = setInterval(tiqueRelogio, 1000); }
+// ---------- pausar e pular palavra ----------
+function pausar(){
+  if (!jogando) return;
+  if (!pausado){
+    pausado = true; restanteTempo = fimEm - Date.now(); clearInterval(timer); clearTimeout(quedaTimer);
+    const f = $('ficha'), topo = getComputedStyle(f).top; f.style.transition = 'none'; f.style.top = topo;   // a palavra para no ar
+    $('pausaAviso').hidden = false; $('btnPausa').textContent = '▶️ Continuar';
+  } else {
+    pausado = false; fimEm = Date.now() + restanteTempo; ligarRelogio();
+    $('pausaAviso').hidden = true; $('btnPausa').textContent = '⏸️ Pausar';
+    if (fichaPendente){ fichaPendente = false; novaFicha(); }
+    else if (atual && !ocupado){   // a palavra volta a cair de onde parou
+      const f = $('ficha'), ceu = $('ceu'), restante = Math.max(.5, (ceu.clientHeight - f.offsetTop - f.offsetHeight) / ceu.clientHeight * +$('selVel').value);
+      f.style.transition = `top ${restante}s linear`; f.style.top = (ceu.clientHeight - f.offsetHeight) + 'px';
+      quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr && !pausado) caiu(); }, restante * 1000);
+    }
+  }
+}
+function pularPalavra(){
+  if (!jogando || pausado || !atual || ocupado || arr) return;
+  ocupado = true; clearTimeout(quedaTimer);
+  fila.unshift(atual);   // a palavra pulada volta mais tarde na mesma rodada
+  const f = $('ficha'), topo = getComputedStyle(f).top; f.style.transition = 'none'; f.style.top = topo; void f.offsetWidth;
+  f.classList.add('pulada'); AV.tom(520, .08);
+  setTimeout(novaFicha, 450);
 }
 function novaFicha(){
   if (!jogando) return;
+  if (pausado){ fichaPendente = true; return; }   // pausou na troca de palavra: a próxima espera o "Continuar"
   if (!fila.length) fila = M.embaralhar(palavras.filter(p => ativas.includes(p.classe)));
   atual = fila.pop(); ocupado = false;
   const f = $('ficha'), ceu = $('ceu');
@@ -150,7 +182,7 @@ function novaFicha(){
   f.style.transition = `top ${dur}s linear`;
   f.style.top = (ceu.clientHeight - f.offsetHeight) + 'px';
   clearTimeout(quedaTimer);
-  quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr) caiu(); }, dur * 1000);
+  quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr && !pausado) caiu(); }, dur * 1000);
 }
 function caiu(){
   ocupado = true;
@@ -161,7 +193,7 @@ function caiu(){
 }
 function piscarCesto(c){ const el = $('cestos').querySelector(`[data-c="${c}"]`); if (el){ el.classList.remove('pisca'); void el.offsetWidth; el.classList.add('pisca'); } }
 function soltarEm(c){
-  if (!atual || ocupado) return;
+  if (!atual || ocupado || pausado) return;
   ocupado = true; clearTimeout(quedaTimer);
   const f = $('ficha');
   const topo = getComputedStyle(f).top; f.style.transition = 'none'; f.style.top = topo;
@@ -175,7 +207,7 @@ function soltarEm(c){
   }
 }
 function fimRodada(){
-  jogando = false; clearInterval(timer); clearTimeout(quedaTimer);
+  jogando = false; pausado = false; $('pausaAviso').hidden = true; clearInterval(timer); clearTimeout(quedaTimer);
   $('ficha').hidden = true; atual = null;
   AV.sirene();
   rodadasRestantes--;
@@ -187,7 +219,7 @@ function fim(){ AV.mostrarTela('tFim'); placar.ranking($('ranking')); AV.fanfarr
 // ---------- arrastar ----------
 let arr = null;
 $('ficha').addEventListener('pointerdown', e => {
-  if (!atual || ocupado) return;
+  if (!atual || ocupado || pausado) return;
   e.preventDefault();
   const f = $('ficha'), r = f.getBoundingClientRect(), ceu = $('ceu').getBoundingClientRect();
   f.style.transition = 'none'; f.style.transform = 'none';
@@ -212,7 +244,7 @@ $('ficha').addEventListener('pointerup', e => {
   else { // soltou fora: volta a cair de onde está
     const f = $('ficha'), ceu = $('ceu'), restante = Math.max(.5, (ceu.clientHeight - f.offsetTop - f.offsetHeight) / ceu.clientHeight * +$('selVel').value);
     f.style.transition = `top ${restante}s linear`; f.style.top = (ceu.clientHeight - f.offsetHeight) + 'px';
-    quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr) caiu(); }, restante * 1000);
+    quedaTimer = setTimeout(() => { if (atual && !ocupado && !arr && !pausado) caiu(); }, restante * 1000);
   }
 });
 function cestoEm(x, y){
@@ -220,6 +252,14 @@ function cestoEm(x, y){
 }
 $('btnComecar').onclick = comecar;
 $('btnIniciarVez').onclick = iniciarRodada;
+$('btnPausa').onclick = pausar;
+$('btnPularPalavra').onclick = pularPalavra;
+AV.botaoSom($('somJogo'));
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === ' ' || e.key === 'p'){ e.preventDefault(); pausar(); }
+  if (e.key === 'ArrowRight'){ e.preventDefault(); pularPalavra(); }
+});
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
 </script>
 </body>

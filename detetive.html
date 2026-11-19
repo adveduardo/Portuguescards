@@ -54,6 +54,7 @@
 </section>
 
 <section id="tJogo" class="tela">
+  <div id="navLugar"></div>
   <div class="barraEquipes" id="barraEquipes"></div>
   <div id="contador"></div>
   <div id="instrucao">🔍 Encontre a palavra escrita errado!</div>
@@ -70,7 +71,7 @@
 <section id="tFim" class="tela">
   <h1 id="tituloFim">🏆 Resultado</h1>
   <div id="ranking" class="ranking"></div>
-  <div class="linha"><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
+  <div class="linha"><button id="btnPuladas" hidden>↩️ Voltar às não respondidas</button><button id="btnDeNovo" class="principal">🔁 Jogar de novo</button></div>
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
@@ -79,7 +80,7 @@ const $ = id => document.getElementById(id);
 const AV = window.AoVivo;
 const EQUIPES = [{nome:'Leões',emoji:'🦁',cor:'#e74c3c'},{nome:'Golfinhos',emoji:'🐬',cor:'#2f80ed'},{nome:'Papagaios',emoji:'🦜',cor:'#27ae60'},{nome:'Abelhas',emoji:'🐝',cor:'#e6a800'}];
 const limpar = t => String(t).replace(/[.,!?;:"“”()…]/g, '');
-let dados = null, fila = [], atual = null, n = 0, total = 0, equipes = [], vez = 0, tentativas = 0, etapa = 'achar', acertosTurma = 0;
+let dados = null, lista = [], est = [], idx = 0, atual = null, total = 0, equipes = [], vez = 0, acertosTurma = 0, nav = null;
 
 function normalizar(d){
   if (!d || !Array.isArray(d.frases)) return null;
@@ -104,68 +105,100 @@ function comecar(){
   if (!dados) return AV.avisar('Carregue um JSON de frases.');
   AV.som = $('chkSom').checked;
   const q = +$('selQtd').value;
-  fila = embaralhar(dados.frases); if (q) fila = fila.slice(0, q);
-  total = fila.length; n = 0; vez = 0; acertosTurma = 0;
+  lista = embaralhar(dados.frases); if (q) lista = lista.slice(0, q);
+  total = lista.length; idx = 0; vez = 0; acertosTurma = 0;
+  est = lista.map(() => ({etapa: 'achar', tentativas: 0, ops: null, escolha: null, certo: false, pulada: false}));
   const ne = +$('selEquipes').value;
   equipes = ne ? EQUIPES.slice(0, ne).map(e => Object.assign({pontos: 0}, e)) : [];
+  if (!nav) nav = AV.barraNavegacao({lugar: $('navLugar'), total: () => total, atual: () => idx, irPara,
+    respondida: () => !!est[idx] && est[idx].etapa === 'feito',
+    estado: i => est[i].etapa === 'feito' ? (est[i].certo ? 'ok' : 'erro') : est[i].pulada ? 'pulou' : ''});
   AV.mostrarTela('tJogo');
-  proxima();
+  mostrar(true);
 }
 function desenharEquipes(){
   $('barraEquipes').innerHTML = equipes.length
     ? equipes.map((e, i) => `<span class="chipEq ${i === vez ? 'davez' : ''}" style="background:${e.cor}">${e.emoji} ${AV.esc(e.nome)}<b>${e.pontos}</b></span>`).join('')
     : `<span class="chipEq davez" style="background:var(--texto)">👩‍🏫 Turma toda<b>${acertosTurma}</b></span>`;
 }
-function proxima(){
-  if (!fila.length) return fim();
-  atual = fila.shift(); n++; tentativas = 0; etapa = 'achar';
+// mudar de frase: dá para pular uma difícil e voltar depois (as já resolvidas aparecem resolvidas, sem contar ponto de novo)
+function irPara(novo, avancando){
+  if (!lista.length || novo < 0) return;
+  if (est[idx].etapa !== 'feito' && novo !== idx) est[idx].pulada = true;
+  if (novo >= total) return fim();
+  if (avancando && equipes.length) vez = (vez + 1) % equipes.length;
+  idx = novo; mostrar(true);
+}
+const palavraErrada = () => [...$('frase').querySelectorAll('.palavra')].find(x => limpar(x.textContent) === atual.errada);
+function mostrar(comSom){
+  atual = lista[idx]; const e = est[idx];
   desenharEquipes();
-  $('contador').textContent = `Frase ${n} de ${total}`;
-  $('instrucao').textContent = (equipes.length ? `${equipes[vez].emoji} ${equipes[vez].nome}: ` : '') + '🔍 Encontre a palavra escrita errado!';
+  $('contador').textContent = `Frase ${idx + 1} de ${total}`;
   $('frase').innerHTML = atual.frase.split(/\s+/).map((t, i) => `<button class="palavra" data-i="${i}">${AV.esc(t)}</button>`).join(' ');
   $('frase').querySelectorAll('.palavra').forEach(b => b.onclick = () => tocarPalavra(b));
-  $('opcoes').innerHTML = ''; $('resultado').textContent = '';
-  $('btnProxima').hidden = true; $('btnOuvir').hidden = true;
-  AV.tom(660, .1);
+  $('opcoes').innerHTML = ''; $('resultado').textContent = ''; $('btnOuvir').hidden = true;
+  if (e.etapa === 'achar'){
+    $('instrucao').textContent = (equipes.length ? `${equipes[vez].emoji} ${equipes[vez].nome}: ` : '') + '🔍 Encontre a palavra escrita errado!';
+    if (comSom) AV.tom(660, .1);
+  } else {
+    const alvo = palavraErrada(); if (alvo) alvo.classList.add('achada');
+    if (e.etapa === 'corrigir') pedirCorrecao('');
+    else aplicarFeito();
+  }
+  atualizarBotoes();
+}
+function atualizarBotoes(){
+  const feito = est[idx].etapa === 'feito';
+  $('btnProxima').hidden = !feito;
+  $('btnProxima').textContent = idx === total - 1 ? '🏆 Ver resultado' : '➡️ Próxima frase';
+  if (nav) nav.atualizar();
 }
 function tocarPalavra(b){
-  if (etapa !== 'achar') return;
+  const e = est[idx];
+  if (e.etapa !== 'achar') return;
   if (limpar(b.textContent) === atual.errada){
     b.classList.add('achada');
-    if (tentativas === 0) pontuar(1);
+    if (e.tentativas === 0) pontuar(1);
     AV.tom(880, .15, 'triangle', .15);
-    pedirCorrecao(tentativas === 0 ? '🎯 Achou! +1 ponto. ' : '🎯 Achou! ');
+    pedirCorrecao(e.tentativas === 0 ? '🎯 Achou! +1 ponto. ' : '🎯 Achou! ');
   } else {
-    tentativas++;
+    e.tentativas++;
     b.classList.add('certa'); setTimeout(() => b.classList.remove('certa'), 900);
     AV.erro();
-    if (tentativas >= 2){
-      const alvo = [...$('frase').querySelectorAll('.palavra')].find(x => limpar(x.textContent) === atual.errada);
+    if (e.tentativas >= 2){
+      const alvo = palavraErrada();
       if (alvo) alvo.classList.add('achada');
       pedirCorrecao('🕵️ A palavra errada era esta. ');
     } else $('resultado').textContent = 'Essa palavra está escrita certo! Tentem outra.';
   }
 }
 function pedirCorrecao(prefixo){
-  etapa = 'corrigir';
+  const e = est[idx];
+  e.etapa = 'corrigir';
+  if (!e.ops) e.ops = embaralhar(atual.opcoes);   // a ordem fica a mesma se voltar
   $('instrucao').textContent = prefixo + 'Agora: como se escreve certo?';
   $('resultado').textContent = '';
-  $('opcoes').innerHTML = embaralhar(atual.opcoes).map(o => `<button data-o="${AV.esc(o)}">${AV.esc(o)}</button>`).join('');
+  $('opcoes').innerHTML = e.ops.map(o => `<button data-o="${AV.esc(o)}">${AV.esc(o)}</button>`).join('');
   $('opcoes').querySelectorAll('button').forEach(b => b.onclick = () => corrigir(b));
 }
 function corrigir(b){
-  if (etapa !== 'corrigir') return;
-  etapa = 'feito';
-  const certo = b.dataset.o === atual.correta;
-  $('opcoes').querySelectorAll('button').forEach(x => { if (x.dataset.o === atual.correta) x.classList.add('ok'); else if (x === b) x.classList.add('nao'); x.disabled = true; });
-  const alvo = [...$('frase').querySelectorAll('.palavra')].find(x => limpar(x.textContent) === atual.errada);
+  const e = est[idx];
+  if (e.etapa !== 'corrigir') return;
+  e.etapa = 'feito'; e.escolha = b.dataset.o; e.certo = b.dataset.o === atual.correta; e.pulada = false;
+  aplicarFeito();
+  if (e.certo){ pontuar(1); AV.fanfarra(); AV.confete(); }
+  else AV.erro();
+  atualizarBotoes();
+}
+function aplicarFeito(){
+  const e = est[idx];
+  if (!e.ops) e.ops = embaralhar(atual.opcoes);
+  $('opcoes').innerHTML = e.ops.map(o => `<button data-o="${AV.esc(o)}" disabled class="${o === atual.correta ? 'ok' : o === e.escolha ? 'nao' : ''}">${AV.esc(o)}</button>`).join('');
+  const alvo = palavraErrada();
   if (alvo){ alvo.textContent = alvo.textContent.replace(atual.errada, atual.correta); alvo.classList.remove('achada'); alvo.classList.add('corrigida'); }
-  if (certo){ pontuar(1); AV.fanfarra(); AV.confete(); $('resultado').textContent = `✅ Isso! Escreve-se "${atual.correta}".`; }
-  else { AV.erro(); $('resultado').textContent = `❌ O certo é "${atual.correta}".`; }
+  $('resultado').textContent = e.certo ? `✅ Isso! Escreve-se "${atual.correta}".` : `❌ O certo é "${atual.correta}".`;
   $('instrucao').textContent = '';
-  $('btnProxima').hidden = false; $('btnOuvir').hidden = false;
-  $('btnProxima').textContent = fila.length ? '➡️ Próxima frase' : '🏆 Ver resultado';
-  desenharEquipes();
+  $('btnOuvir').hidden = false;
 }
 function pontuar(p){ if (equipes.length) equipes[vez].pontos += p; else acertosTurma += p; desenharEquipes(); }
 function fim(){
@@ -179,13 +212,22 @@ function fim(){
     $('ranking').innerHTML = `<div class="linhaRank campeao"><span class="pos">🕵️</span><span class="nomeRank">Turma toda</span><span class="pts">${acertosTurma} de ${total * 2}</span></div>`;
     $('tituloFim').textContent = '🏆 Muito bem, detetives!';
   }
+  const faltam = est.filter(e => e.etapa !== 'feito').length;
+  $('btnPuladas').hidden = !faltam; $('btnPuladas').textContent = `↩️ Voltar às não respondidas (${faltam})`;
   AV.fanfarra(); AV.confete();
 }
 $('btnComecar').onclick = comecar;
-$('btnProxima').onclick = () => { if (equipes.length) vez = (vez + 1) % equipes.length; proxima(); };
-$('btnOuvir').onclick = () => AV.falar(atual.frase.split(/\s+/).map(t => limpar(t) === atual.errada ? t.replace(atual.errada, atual.correta) : t).join(' '));
+$('btnProxima').onclick = () => irPara(idx + 1, true);
+$('btnPuladas').onclick = () => { const p = est.findIndex(e => e.etapa !== 'feito'); if (p < 0) return; idx = p; AV.mostrarTela('tJogo'); mostrar(true); };
+$('btnOuvir').onclick = () => atual && AV.falar(atual.frase.split(/\s+/).map(t => limpar(t) === atual.errada ? t.replace(atual.errada, atual.correta) : t).join(' '));
 $('btnSair').onclick = () => { if (confirm('Terminar o jogo e ver o resultado?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
+document.addEventListener('keydown', e => {
+  if (!$('tJogo').classList.contains('ativa') || ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); irPara(idx + 1, true); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); irPara(idx - 1, false); }
+  if (e.key === 'Enter' && est[idx] && est[idx].etapa === 'feito'){ e.preventDefault(); irPara(idx + 1, true); }
+});
 </script>
 </body>
 </html>
