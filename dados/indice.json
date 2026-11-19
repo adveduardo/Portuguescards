@@ -2165,5 +2165,25 @@
       "titulo": "Leitura do dia a dia: ônibus, preços, contas e recados (EJA)",
       "qtd": 16
     }
+  ],
+  "banco": [
+    {
+      "arquivo": "banco-verbo.json",
+      "titulo": "⭐ Banco completo: Verbo (550 questões)",
+      "grupo": "Verbo",
+      "qtd": 550
+    },
+    {
+      "arquivo": "banco-numeral.json",
+      "titulo": "⭐ Banco completo: Numeral (530 questões)",
+      "grupo": "Numeral",
+      "qtd": 530
+    },
+    {
+      "arquivo": "banco-ortografia.json",
+      "titulo": "⭐ Banco completo: Ortografia (747 questões)",
+      "grupo": "Ortografia",
+      "qtd": 747
+    }
   ]
 }
