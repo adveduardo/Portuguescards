@@ -1,0 +1,413 @@
+{
+  "titulo": "Vírgula: para que serve?",
+  "emoji": "✒️",
+  "instrucao": "Qual sinal completa melhor a frase?",
+  "rodadas": [
+    {
+      "destaque": "Embora estivesse cansado___ ele terminou o trabalho.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A oração adverbial que vem antes da principal fica separada por vírgula.",
+      "imagem": "😴"
+    },
+    {
+      "destaque": "Ele correu muito___ porém perdeu o ônibus.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        ", (vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "Antes de mas, porém, portanto, pois (orações coordenadas) usa-se vírgula.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "Brasília___ a capital do Brasil, foi inaugurada em 1960.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O aposto explica o termo anterior e fica entre vírgulas.",
+      "imagem": "🏙️"
+    },
+    {
+      "destaque": "Porto Alegre___ 1º de setembro de 2026.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "Nas datas, a vírgula separa o nome do lugar.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Na mochila havia livros___ cadernos, lápis e borracha.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A vírgula separa os itens de uma enumeração. Antes do “e” final, não se usa vírgula.",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "Não___ obrigado, já almocei.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O sim ou o não no início da resposta fica separado por vírgula.",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "Ontem à noite___ assistimos a um filme de terror.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O adjunto adverbial deslocado (no começo ou no meio da frase) fica separado por vírgula.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "O Sol___ que é uma estrela, ilumina a Terra.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A oração adjetiva explicativa fica entre vírgulas.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "O dia estava lindo; a praia estava___ contudo, vazia.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        ", (vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A conjunção deslocada para o meio da oração (porém, contudo...) fica entre vírgulas.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "Turma___ vamos começar a aula.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "O Sol, que é uma estrela, ilumina a Terra.",
+      "opcoes": [
+        "isolar a oração adjetiva explicativa",
+        "separar o nome do lugar e a data",
+        "separar orações em sequência, sem conjunção",
+        "separar a oração adverbial que vem antes da principal"
+      ],
+      "correta": "isolar a oração adjetiva explicativa",
+      "explica": "A oração adjetiva explicativa fica entre vírgulas.",
+      "imagem": "☀️",
+      "enunciado": "Para que serve a vírgula depois de “Sol”?"
+    },
+    {
+      "destaque": "Manaus, 20 de novembro de 2025.",
+      "opcoes": [
+        "separar o nome do lugar e a data",
+        "separar o sim ou o não no início da resposta",
+        "separar os itens de uma enumeração",
+        "marcar a omissão de um verbo, para não repeti-lo"
+      ],
+      "correta": "separar o nome do lugar e a data",
+      "explica": "Nas datas, a vírgula separa o nome do lugar.",
+      "imagem": "📅",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Mãe, posso ir à casa da Ana?",
+      "opcoes": [
+        "isolar o vocativo (o nome de quem é chamado)",
+        "isolar a oração adjetiva explicativa",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "separar a oração adverbial que vem antes da principal"
+      ],
+      "correta": "isolar o vocativo (o nome de quem é chamado)",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "👩",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Meu cachorro, um vira-lata muito esperto, adora correr.",
+      "opcoes": [
+        "isolar o aposto (explicação sobre o termo anterior)",
+        "separar a oração adverbial que vem antes da principal",
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "separar o nome do lugar e a data"
+      ],
+      "correta": "isolar o aposto (explicação sobre o termo anterior)",
+      "explica": "O aposto explica o termo anterior e fica entre vírgulas.",
+      "imagem": "🐕",
+      "enunciado": "Para que serve a vírgula depois de “cachorro”?"
+    },
+    {
+      "destaque": "A bandeira do Brasil tem as cores verde, amarelo, azul e branco.",
+      "opcoes": [
+        "separar os itens de uma enumeração",
+        "isolar a conjunção deslocada (porém, contudo...)",
+        "isolar o vocativo (o nome de quem é chamado)",
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)"
+      ],
+      "correta": "separar os itens de uma enumeração",
+      "explica": "A vírgula separa os itens de uma enumeração. Antes do “e” final, não se usa vírgula.",
+      "imagem": "🎨",
+      "enunciado": "Para que serve a vírgula depois de “amarelo”?"
+    },
+    {
+      "destaque": "Ele correu muito, porém perdeu o ônibus.",
+      "opcoes": [
+        "separar orações ligadas por mas, porém, portanto, pois",
+        "separar o sim ou o não no início da resposta",
+        "isolar o aposto (explicação sobre o termo anterior)",
+        "isolar expressões como isto é, ou seja, por exemplo"
+      ],
+      "correta": "separar orações ligadas por mas, porém, portanto, pois",
+      "explica": "Antes de mas, porém, portanto, pois (orações coordenadas) usa-se vírgula.",
+      "imagem": "🚌",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Acordei, tomei banho e fui para a escola.",
+      "opcoes": [
+        "separar orações em sequência, sem conjunção",
+        "separar o nome do lugar e a data",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "isolar a oração adjetiva explicativa"
+      ],
+      "correta": "separar orações em sequência, sem conjunção",
+      "explica": "Orações em sequência, sem conjunção, são separadas por vírgula.",
+      "imagem": "⏰",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Com muito cuidado, o veterinário examinou o gato.",
+      "opcoes": [
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)",
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "isolar a oração adjetiva explicativa",
+        "isolar a conjunção deslocada (porém, contudo...)"
+      ],
+      "correta": "separar o adjunto adverbial deslocado (tempo, lugar, modo...)",
+      "explica": "O adjunto adverbial deslocado (no começo ou no meio da frase) fica separado por vírgula.",
+      "imagem": "🐱",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Uns preferem cinema; outros, teatro.",
+      "opcoes": [
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "isolar o vocativo (o nome de quem é chamado)",
+        "isolar a oração adjetiva explicativa",
+        "separar orações em sequência, sem conjunção"
+      ],
+      "correta": "marcar a omissão de um verbo, para não repeti-lo",
+      "explica": "A vírgula marca o lugar do verbo que foi omitido para não repetir.",
+      "imagem": "🎬",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Quando a chuva parou, saímos para brincar.",
+      "opcoes": [
+        "separar a oração adverbial que vem antes da principal",
+        "separar os itens de uma enumeração",
+        "isolar a oração adjetiva explicativa",
+        "separar o sim ou o não no início da resposta"
+      ],
+      "correta": "separar a oração adverbial que vem antes da principal",
+      "explica": "A oração adverbial que vem antes da principal fica separada por vírgula.",
+      "imagem": "🌈",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Você□ Pedro□ será o próximo a ler.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "vírgulas ,  ,",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "📖",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Muito obrigado□ professora□ pela ajuda.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "vírgulas ,  ,",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "😊",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Na próxima semana, teremos prova de Ciências.",
+        "Na próxima, semana teremos prova de Ciências.",
+        "Na próxima semana teremos, prova de Ciências.",
+        "Na próxima semana teremos prova, de Ciências."
+      ],
+      "correta": "Na próxima semana, teremos prova de Ciências.",
+      "explica": "A vírgula pode separar o adjunto adverbial que abre a frase, mas não separa o verbo do complemento.",
+      "imagem": "🔬",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Chegamos ao meio-dia, isto é, na hora do almoço.",
+        "Chegamos ao meio-dia isto é, na hora do almoço.",
+        "Chegamos ao meio-dia, isto é na hora do almoço.",
+        "Chegamos, ao meio-dia isto é na hora do almoço."
+      ],
+      "correta": "Chegamos ao meio-dia, isto é, na hora do almoço.",
+      "explica": "A expressão “isto é” fica entre duas vírgulas.",
+      "imagem": "🍽️",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Ana, minha melhor amiga, mudou de escola.",
+        "Ana minha melhor amiga, mudou de escola.",
+        "Ana, minha, melhor amiga, mudou de escola.",
+        "Ana minha melhor amiga mudou, de escola."
+      ],
+      "correta": "Ana, minha melhor amiga, mudou de escola.",
+      "explica": "O aposto (minha melhor amiga) fica entre duas vírgulas.",
+      "imagem": "👭",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Ninguém sabe onde ele mora.",
+        "Ninguém sabe, onde ele mora.",
+        "Ninguém, sabe onde ele mora.",
+        "Ninguém sabe onde, ele mora."
+      ],
+      "correta": "Ninguém sabe onde ele mora.",
+      "explica": "Não se separa o sujeito do verbo nem o verbo do seu complemento (onde ele mora).",
+      "imagem": "🏠",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Se chover, o jogo será adiado.",
+        "Se, chover o jogo será adiado.",
+        "Se chover o jogo, será adiado.",
+        "Se chover o jogo será, adiado."
+      ],
+      "correta": "Se chover, o jogo será adiado.",
+      "explica": "A oração com “se”, antes da principal, fica separada por vírgula.",
+      "imagem": "🌧️",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "A menina estava feliz com o presente.",
+        "A menina estava, feliz com o presente.",
+        "A menina, estava feliz com o presente.",
+        "A menina estava feliz, com, o presente."
+      ],
+      "correta": "A menina estava feliz com o presente.",
+      "explica": "Não se usa vírgula entre o sujeito e o verbo nem entre o verbo de ligação e o predicativo.",
+      "imagem": "🎁",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Não, quero café.",
+      "opcoes": [
+        "quer café",
+        "não quer café",
+        "quer saber se tem café",
+        "quer café e chá"
+      ],
+      "correta": "quer café",
+      "explica": "A vírgula separa o “não” (a resposta) do resto: a pessoa recusou outra coisa e QUER café.",
+      "imagem": "☕",
+      "enunciado": "O que a pessoa quer?"
+    },
+    {
+      "destaque": "Não quero café.",
+      "opcoes": [
+        "não quer café",
+        "quer café",
+        "quer mais café",
+        "quer café sem açúcar"
+      ],
+      "correta": "não quer café",
+      "explica": "Sem vírgula, o “não” nega o verbo: a pessoa NÃO quer café.",
+      "imagem": "☕",
+      "enunciado": "O que a pessoa quer?"
+    },
+    {
+      "destaque": "Os alunos, que estudaram, foram aprovados.",
+      "opcoes": [
+        "todos os alunos (e todos estudaram)",
+        "só os alunos que estudaram",
+        "nenhum aluno",
+        "só os alunos que faltaram"
+      ],
+      "correta": "todos os alunos (e todos estudaram)",
+      "explica": "Entre vírgulas, a oração é explicativa: vale para TODOS os alunos.",
+      "imagem": "🎓",
+      "enunciado": "Quem foi aprovado?"
+    },
+    {
+      "destaque": "Os alunos que estudaram foram aprovados.",
+      "opcoes": [
+        "só os alunos que estudaram",
+        "todos os alunos",
+        "nenhum aluno",
+        "só os alunos que faltaram"
+      ],
+      "correta": "só os alunos que estudaram",
+      "explica": "Sem vírgulas, a oração é restritiva: só os alunos que estudaram foram aprovados.",
+      "imagem": "🎓",
+      "enunciado": "Quem foi aprovado?"
+    }
+  ]
+}

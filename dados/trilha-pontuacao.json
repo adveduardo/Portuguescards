@@ -1,0 +1,204 @@
+{
+  "titulo": "Trilha da pontuação",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "fim": {
+      "nome": "Fim de frase",
+      "emoji": "❓",
+      "cor": "#2f80ed"
+    },
+    "virgula": {
+      "nome": "Vírgula",
+      "emoji": "✒️",
+      "cor": "#27ae60"
+    },
+    "dialogo": {
+      "nome": "Diálogo e citação",
+      "emoji": "💬",
+      "cor": "#8e44ad"
+    },
+    "outros": {
+      "nome": "Outros sinais",
+      "emoji": "💭",
+      "cor": "#e67e22"
+    },
+    "sentido": {
+      "nome": "Sentido",
+      "emoji": "🔄",
+      "cor": "#c2185b"
+    }
+  },
+  "desafios": {
+    "fim": [
+      {
+        "texto": "Que sinal termina: Que horas são___",
+        "resposta": "? (pergunta direta)"
+      },
+      {
+        "texto": "Que sinal termina: Que susto___",
+        "resposta": "! (emoção)"
+      },
+      {
+        "texto": "Que sinal termina: A aula começa às sete___",
+        "resposta": ". (frase declarativa)"
+      },
+      {
+        "texto": "Que sinal termina: Eu ia dizer que___",
+        "resposta": "... (fala interrompida)"
+      },
+      {
+        "texto": "Que sinal termina: Quero saber onde você mora___",
+        "resposta": ". (pergunta indireta)"
+      },
+      {
+        "texto": "Que sinal vem depois da interjeição: Ufa___ Acabou a prova.",
+        "resposta": "! (Ufa!)"
+      },
+      {
+        "texto": "Como se abrevia a palavra senhor?",
+        "resposta": "Sr. (com ponto)"
+      },
+      {
+        "texto": "Leia com a entonação certa: Você vem?",
+        "resposta": "Com a voz subindo no fim (pergunta)"
+      }
+    ],
+    "virgula": [
+      {
+        "texto": "Onde vai a vírgula? Pedro venha cá!",
+        "resposta": "Pedro, venha cá!"
+      },
+      {
+        "texto": "Onde vão as vírgulas? Comprei pão leite e ovos.",
+        "resposta": "Comprei pão, leite e ovos."
+      },
+      {
+        "texto": "Onde vai a vírgula? Belém 5 de maio de 2025.",
+        "resposta": "Belém, 5 de maio de 2025."
+      },
+      {
+        "texto": "A vírgula está certa? Os alunos, fizeram a prova.",
+        "resposta": "Não: sujeito e verbo não se separam."
+      },
+      {
+        "texto": "Onde vai a vírgula? Estudei muito mas não passei.",
+        "resposta": "Estudei muito, mas não passei."
+      },
+      {
+        "texto": "Onde vão as vírgulas? Pelé o Rei do Futebol nasceu em Minas.",
+        "resposta": "Pelé, o Rei do Futebol, nasceu em Minas."
+      },
+      {
+        "texto": "Onde vai a vírgula? Quando o sinal tocou todos saíram.",
+        "resposta": "Quando o sinal tocou, todos saíram."
+      },
+      {
+        "texto": "Onde vai a vírgula? Sim eu fiz a lição.",
+        "resposta": "Sim, eu fiz a lição."
+      }
+    ],
+    "dialogo": [
+      {
+        "texto": "Que sinal abre a fala do personagem no diálogo?",
+        "resposta": "O travessão (—)"
+      },
+      {
+        "texto": "Pontue: A mãe disse ___ Venha jantar.",
+        "resposta": "A mãe disse: — Venha jantar."
+      },
+      {
+        "texto": "Que sinal envolve uma citação?",
+        "resposta": "As aspas (“ ”)"
+      },
+      {
+        "texto": "Em “— Vou sair — avisou Ana.”, quem fala depois do segundo travessão?",
+        "resposta": "O narrador"
+      },
+      {
+        "texto": "Que sinal vem antes de uma citação, depois de “disse”?",
+        "resposta": "Os dois-pontos (:)"
+      },
+      {
+        "texto": "Para que servem as aspas em: Pedi um “delivery”.",
+        "resposta": "Destacar a palavra estrangeira"
+      },
+      {
+        "texto": "Pontue o título: Li O Pequeno Príncipe nas férias.",
+        "resposta": "Li “O Pequeno Príncipe” nas férias."
+      },
+      {
+        "texto": "Qual é maior: o hífen ou o travessão?",
+        "resposta": "O travessão (—)"
+      }
+    ],
+    "outros": [
+      {
+        "texto": "Que sinal separa: Uns gostam de sol e praia___ outros, de frio e montanha.",
+        "resposta": "; (ponto e vírgula)"
+      },
+      {
+        "texto": "Use parênteses: A ONU Organização das Nações Unidas foi criada em 1945.",
+        "resposta": "A ONU (Organização das Nações Unidas) foi criada em 1945."
+      },
+      {
+        "texto": "Para que servem as reticências em: Bem... não sei.",
+        "resposta": "Indicar hesitação, dúvida"
+      },
+      {
+        "texto": "Para que servem os parênteses em: Cecília Meireles (1901-1964)?",
+        "resposta": "Indicar os anos de nascimento e de morte"
+      },
+      {
+        "texto": "Que sinal cria suspense: E a porta se abriu___",
+        "resposta": "... (reticências)"
+      },
+      {
+        "texto": "No teatro, como se escrevem os gestos: PEDRO sorrindo: Oi!",
+        "resposta": "Entre parênteses: PEDRO (sorrindo): Oi!"
+      },
+      {
+        "texto": "Quantos pontos têm as reticências?",
+        "resposta": "Três"
+      },
+      {
+        "texto": "Que sinal separa os itens de uma lei?",
+        "resposta": "O ponto e vírgula (;)"
+      }
+    ],
+    "sentido": [
+      {
+        "texto": "Qual a diferença? “Não, quero café.” e “Não quero café.”",
+        "resposta": "Na 1ª, a pessoa quer café; na 2ª, não quer."
+      },
+      {
+        "texto": "Quem é a professora? Maria, a professora, chegou.",
+        "resposta": "Maria"
+      },
+      {
+        "texto": "Com quem se fala? Maria, a professora chegou.",
+        "resposta": "Com Maria"
+      },
+      {
+        "texto": "Quem é estudiosa? Ana, disse a professora, é estudiosa.",
+        "resposta": "Ana"
+      },
+      {
+        "texto": "Quem foi aprovado? Os alunos, que estudaram, foram aprovados.",
+        "resposta": "Todos os alunos"
+      },
+      {
+        "texto": "Quem foi aprovado? Os alunos que estudaram foram aprovados.",
+        "resposta": "Só os que estudaram"
+      },
+      {
+        "texto": "O que a pessoa pede? Não, espere.",
+        "resposta": "Que o outro espere"
+      },
+      {
+        "texto": "Leia de dois jeitos: Você vai sair? / Você vai sair!",
+        "resposta": "Pergunta × surpresa ou ordem"
+      }
+    ]
+  }
+}

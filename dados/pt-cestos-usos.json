@@ -1,0 +1,139 @@
+{
+  "titulo": "Cestos: para que serve cada sinal?",
+  "cestos": [
+    {
+      "id": "virgula",
+      "nome": "Vírgula",
+      "emoji": ",",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "pv",
+      "nome": "Ponto e vírgula",
+      "emoji": ";",
+      "cor": "#00838f"
+    },
+    {
+      "id": "dp",
+      "nome": "Dois-pontos",
+      "emoji": ":",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "travessao",
+      "nome": "Travessão",
+      "emoji": "—",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "aspas",
+      "nome": "Aspas",
+      "emoji": "“ ”",
+      "cor": "#c2185b"
+    },
+    {
+      "id": "parenteses",
+      "nome": "Parênteses",
+      "emoji": "( )",
+      "cor": "#5d4037"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "separar o vocativo",
+      "cesto": "virgula"
+    },
+    {
+      "palavra": "lista de palavras",
+      "cesto": "virgula"
+    },
+    {
+      "palavra": "lugar e data",
+      "cesto": "virgula"
+    },
+    {
+      "palavra": "antes de “mas”",
+      "cesto": "virgula"
+    },
+    {
+      "palavra": "depois de “sim”",
+      "cesto": "virgula"
+    },
+    {
+      "palavra": "incisos de uma lei",
+      "cesto": "pv"
+    },
+    {
+      "palavra": "lista com itens longos",
+      "cesto": "pv"
+    },
+    {
+      "palavra": "orações longas",
+      "cesto": "pv"
+    },
+    {
+      "palavra": "pausa maior que a vírgula",
+      "cesto": "pv"
+    },
+    {
+      "palavra": "anunciar uma lista",
+      "cesto": "dp"
+    },
+    {
+      "palavra": "antes da citação",
+      "cesto": "dp"
+    },
+    {
+      "palavra": "depois de “ele disse”",
+      "cesto": "dp"
+    },
+    {
+      "palavra": "antes de uma explicação",
+      "cesto": "dp"
+    },
+    {
+      "palavra": "início da fala",
+      "cesto": "travessao"
+    },
+    {
+      "palavra": "troca de quem fala",
+      "cesto": "travessao"
+    },
+    {
+      "palavra": "separar o narrador",
+      "cesto": "travessao"
+    },
+    {
+      "palavra": "envolver a citação",
+      "cesto": "aspas"
+    },
+    {
+      "palavra": "palavra estrangeira",
+      "cesto": "aspas"
+    },
+    {
+      "palavra": "gíria",
+      "cesto": "aspas"
+    },
+    {
+      "palavra": "título de filme",
+      "cesto": "aspas"
+    },
+    {
+      "palavra": "informação extra",
+      "cesto": "parenteses"
+    },
+    {
+      "palavra": "sigla",
+      "cesto": "parenteses"
+    },
+    {
+      "palavra": "anos (1902-1987)",
+      "cesto": "parenteses"
+    },
+    {
+      "palavra": "rubrica do teatro",
+      "cesto": "parenteses"
+    }
+  ]
+}

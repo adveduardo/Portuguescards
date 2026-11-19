@@ -1,0 +1,397 @@
+{
+  "titulo": "Para que serve cada sinal?",
+  "emoji": "🎯",
+  "instrucao": "Para que serve o sinal destacado?",
+  "rodadas": [
+    {
+      "destaque": "No zoológico vimos leões, girafas, macacos e zebras.",
+      "opcoes": [
+        "separar os itens de uma enumeração",
+        "separar o nome do lugar e a data",
+        "separar a oração adverbial que vem antes da principal",
+        "separar o sim ou o não no início da resposta"
+      ],
+      "correta": "separar os itens de uma enumeração",
+      "explica": "A vírgula separa os itens de uma enumeração. Antes do “e” final, não se usa vírgula.",
+      "imagem": "🦁",
+      "enunciado": "Para que serve a vírgula depois de “girafas”?"
+    },
+    {
+      "destaque": "Na festa, as meninas dançaram forró; os meninos, quadrilha.",
+      "opcoes": [
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "separar orações em sequência, sem conjunção",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "separar o sim ou o não no início da resposta"
+      ],
+      "correta": "marcar a omissão de um verbo, para não repeti-lo",
+      "explica": "A vírgula marca o lugar do verbo que foi omitido para não repetir.",
+      "imagem": "🎶",
+      "enunciado": "Para que serve a vírgula depois de “meninos”?"
+    },
+    {
+      "destaque": "O cão latiu, o gato fugiu, a vizinha acordou.",
+      "opcoes": [
+        "separar orações em sequência, sem conjunção",
+        "separar o sim ou o não no início da resposta",
+        "isolar a oração adjetiva explicativa",
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)"
+      ],
+      "correta": "separar orações em sequência, sem conjunção",
+      "explica": "Orações em sequência, sem conjunção, são separadas por vírgula.",
+      "imagem": "🐶",
+      "enunciado": "Para que serve a vírgula depois de “latiu”?"
+    },
+    {
+      "destaque": "Estudei bastante, mas não consegui terminar a prova.",
+      "opcoes": [
+        "separar orações ligadas por mas, porém, portanto, pois",
+        "separar o sim ou o não no início da resposta",
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)",
+        "separar os itens de uma enumeração"
+      ],
+      "correta": "separar orações ligadas por mas, porém, portanto, pois",
+      "explica": "Antes de mas, porém, portanto, pois (orações coordenadas) usa-se vírgula.",
+      "imagem": "📝",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Professora, posso apagar o quadro?",
+      "opcoes": [
+        "isolar o vocativo (o nome de quem é chamado)",
+        "separar orações em sequência, sem conjunção",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "separar o sim ou o não no início da resposta"
+      ],
+      "correta": "isolar o vocativo (o nome de quem é chamado)",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "🖍️",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Quando a chuva parou, saímos para brincar.",
+      "opcoes": [
+        "separar a oração adverbial que vem antes da principal",
+        "separar os itens de uma enumeração",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "isolar a oração adjetiva explicativa"
+      ],
+      "correta": "separar a oração adverbial que vem antes da principal",
+      "explica": "A oração adverbial que vem antes da principal fica separada por vírgula.",
+      "imagem": "🌈",
+      "enunciado": "Para que serve a vírgula nesta frase?"
+    },
+    {
+      "destaque": "Só havia uma explicação: alguém tinha comido o bolo.",
+      "opcoes": [
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "introduzir uma citação (palavras de outra pessoa)",
+        "isolar a conjunção deslocada (porém, contudo...)"
+      ],
+      "correta": "introduzir uma explicação, uma consequência ou uma conclusão",
+      "explica": "Os dois-pontos introduzem uma explicação, uma consequência ou uma conclusão.",
+      "imagem": "🍰",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "O Brasil tem cinco regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+      "opcoes": [
+        "anunciar uma enumeração",
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "introduzir uma citação (palavras de outra pessoa)",
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)"
+      ],
+      "correta": "anunciar uma enumeração",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🗺️",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "O menino perguntou: — Posso brincar com vocês?",
+      "opcoes": [
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "anunciar uma enumeração",
+        "separar orações longas (pausa maior que a vírgula)"
+      ],
+      "correta": "introduzir a fala do personagem, depois do verbo de dizer",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "👦",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "— Eu adoro dias de chuva — contou Ana.",
+      "opcoes": [
+        "indicar o início da fala do personagem",
+        "indicar as rubricas (gestos e ações) no texto teatral",
+        "indicar uma sigla ou o significado dela",
+        "isolar uma informação extra ou um comentário"
+      ],
+      "correta": "indicar o início da fala do personagem",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "🌧️",
+      "enunciado": "Para que serve o travessão do início da frase?"
+    },
+    {
+      "destaque": "— Não esqueçam — disse a professora — que amanhã tem prova.",
+      "opcoes": [
+        "separar a fala do personagem da fala do narrador",
+        "indicar uma sigla ou o significado dela",
+        "isolar uma informação extra ou um comentário",
+        "indicar datas, anos ou referências"
+      ],
+      "correta": "separar a fala do personagem da fala do narrador",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "📝",
+      "enunciado": "Para que serve o travessão depois de “esqueçam”?"
+    },
+    {
+      "destaque": "Bem... acho que posso ajudar.",
+      "opcoes": [
+        "indicar hesitação, dúvida ou timidez",
+        "encerrar um pedido ou uma ordem dita com calma",
+        "acompanhar uma interjeição (Ai! Oba! Ufa!)",
+        "expressar emoção (surpresa, alegria, susto, dor)"
+      ],
+      "correta": "indicar hesitação, dúvida ou timidez",
+      "explica": "As reticências indicam hesitação, dúvida ou timidez.",
+      "imagem": "🤔",
+      "enunciado": "Para que servem as reticências nesta frase?"
+    },
+    {
+      "destaque": "Comprei pão, leite, ovos, frutas...",
+      "opcoes": [
+        "deixar a ideia no ar, para o leitor completar",
+        "encerrar uma frase declarativa (afirmativa ou negativa)",
+        "expressar emoção (surpresa, alegria, susto, dor)",
+        "reforçar uma ordem, um aviso ou um pedido de socorro"
+      ],
+      "correta": "deixar a ideia no ar, para o leitor completar",
+      "explica": "As reticências deixam a ideia no ar, para o leitor completar.",
+      "imagem": "🛍️",
+      "enunciado": "Para que servem as reticências nesta frase?"
+    },
+    {
+      "destaque": "Quando olhei para trás, vi uma sombra se aproximando...",
+      "opcoes": [
+        "criar suspense",
+        "acompanhar uma interjeição (Ai! Oba! Ufa!)",
+        "encerrar uma frase declarativa (afirmativa ou negativa)",
+        "encerrar um pedido ou uma ordem dita com calma"
+      ],
+      "correta": "criar suspense",
+      "explica": "As reticências criam suspense.",
+      "imagem": "👀",
+      "enunciado": "Para que servem as reticências nesta frase?"
+    },
+    {
+      "destaque": "Na feira, compramos frutas, como maçã e banana; verduras, como alface e couve; e temperos, como alho e cebola.",
+      "opcoes": [
+        "separar itens de uma enumeração que já têm vírgulas",
+        "isolar o aposto (explicação sobre o termo anterior)",
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "isolar expressões como isto é, ou seja, por exemplo"
+      ],
+      "correta": "separar itens de uma enumeração que já têm vírgulas",
+      "explica": "Quando os itens da enumeração já têm vírgulas, o ponto e vírgula separa um item do outro.",
+      "imagem": "🍎",
+      "enunciado": "Para que serve o ponto e vírgula depois de “banana”?"
+    },
+    {
+      "destaque": "São deveres do aluno: respeitar os colegas e os professores; cuidar do material da escola; chegar no horário.",
+      "opcoes": [
+        "separar os itens de leis, regras e listas numeradas",
+        "isolar expressões como isto é, ou seja, por exemplo",
+        "introduzir uma citação (palavras de outra pessoa)",
+        "separar orações ligadas por mas, porém, portanto, pois"
+      ],
+      "correta": "separar os itens de leis, regras e listas numeradas",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "📋",
+      "enunciado": "Para que serve o ponto e vírgula depois de “professores”?"
+    },
+    {
+      "destaque": "Psiu! O bebê está dormindo.",
+      "opcoes": [
+        "acompanhar uma interjeição (Ai! Oba! Ufa!)",
+        "mostrar que a fala ou o pensamento foi interrompido",
+        "deixar a ideia no ar, para o leitor completar",
+        "indicar hesitação, dúvida ou timidez"
+      ],
+      "correta": "acompanhar uma interjeição (Ai! Oba! Ufa!)",
+      "explica": "Depois de interjeição (Ai! Oba! Ufa! Psiu!) usa-se o ponto de exclamação.",
+      "imagem": "👶",
+      "enunciado": "Para que serve o ponto de exclamação nesta frase?"
+    },
+    {
+      "destaque": "Saia já daí!",
+      "opcoes": [
+        "reforçar uma ordem, um aviso ou um pedido de socorro",
+        "criar suspense",
+        "deixar a ideia no ar, para o leitor completar",
+        "mostrar que a fala ou o pensamento foi interrompido"
+      ],
+      "correta": "reforçar uma ordem, um aviso ou um pedido de socorro",
+      "explica": "Ordem, aviso ou pedido de socorro com ênfase pede ponto de exclamação.",
+      "imagem": "⚠️",
+      "enunciado": "Para que serve o ponto de exclamação nesta frase?"
+    },
+    {
+      "destaque": "Quero saber por que você chegou atrasado.",
+      "opcoes": [
+        "encerrar uma frase declarativa (afirmativa ou negativa)",
+        "indicar uma pergunta direta",
+        "marcar uma abreviatura (Sr., Dr., pág.)",
+        "criar suspense"
+      ],
+      "correta": "encerrar uma frase declarativa (afirmativa ou negativa)",
+      "explica": "Apesar de falar de uma dúvida, a frase é declarativa (pergunta indireta): por isso, ponto-final.",
+      "imagem": "⏰",
+      "enunciado": "Para que serve o ponto-final nesta frase?"
+    },
+    {
+      "destaque": "Meu livro preferido é “O Menino Maluquinho”.",
+      "opcoes": [
+        "destacar o título de livro, filme, música ou jornal",
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "marcar uma citação (as palavras exatas de alguém)",
+        "indicar ironia (sentido contrário ao comum)"
+      ],
+      "correta": "destacar o título de livro, filme, música ou jornal",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "📕",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Que “ótima” ideia deixar a janela aberta na chuva!",
+      "opcoes": [
+        "indicar ironia (sentido contrário ao comum)",
+        "destacar o título de livro, filme, música ou jornal",
+        "destacar uma explicação no meio da frase",
+        "isolar uma informação extra ou um comentário"
+      ],
+      "correta": "indicar ironia (sentido contrário ao comum)",
+      "explica": "As aspas podem indicar ironia (o sentido é o contrário do comum).",
+      "imagem": "🌧️",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Minha avó sempre diz: “Devagar se vai ao longe.”",
+      "opcoes": [
+        "marcar uma citação (as palavras exatas de alguém)",
+        "destacar o título de livro, filme, música ou jornal",
+        "indicar as rubricas (gestos e ações) no texto teatral",
+        "indicar datas, anos ou referências"
+      ],
+      "correta": "marcar uma citação (as palavras exatas de alguém)",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém.",
+      "imagem": "👵",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "O Instituto Brasileiro de Geografia e Estatística (IBGE) faz o censo.",
+      "opcoes": [
+        "indicar uma sigla ou o significado dela",
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "separar os itens de uma enumeração",
+        "separar o adjunto adverbial deslocado (tempo, lugar, modo...)"
+      ],
+      "correta": "indicar uma sigla ou o significado dela",
+      "explica": "Os parênteses indicam a sigla ou o significado dela.",
+      "imagem": "📊",
+      "enunciado": "Para que servem os parênteses nesta frase?"
+    },
+    {
+      "destaque": "PEDRO (coçando a cabeça): Não sei onde deixei a bola.",
+      "opcoes": [
+        "indicar as rubricas (gestos e ações) no texto teatral",
+        "separar o nome do lugar e a data",
+        "separar o sim ou o não no início da resposta",
+        "separar a oração adverbial que vem antes da principal"
+      ],
+      "correta": "indicar as rubricas (gestos e ações) no texto teatral",
+      "explica": "No texto teatral, os parênteses trazem as rubricas: gestos e ações das personagens.",
+      "imagem": "🎭",
+      "enunciado": "Para que servem os parênteses nesta frase?"
+    },
+    {
+      "destaque": "Carlos Drummond de Andrade (1902-1987) nasceu em Itabira.",
+      "opcoes": [
+        "indicar datas, anos ou referências",
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "separar o sim ou o não no início da resposta",
+        "separar os itens de uma enumeração"
+      ],
+      "correta": "indicar datas, anos ou referências",
+      "explica": "Os parênteses indicam datas, anos e referências.",
+      "imagem": "✒️",
+      "enunciado": "Para que servem os parênteses nesta frase?"
+    },
+    {
+      "destaque": "Criar suspense",
+      "opcoes": [
+        "reticências (...)",
+        "travessão (—)",
+        "vírgula (,)",
+        "parênteses ( )"
+      ],
+      "correta": "reticências (...)",
+      "explica": "As reticências criam suspense.",
+      "imagem": "💭",
+      "enunciado": "Qual sinal se usa para:"
+    },
+    {
+      "destaque": "Marcar uma citação (as palavras exatas de alguém)",
+      "opcoes": [
+        "aspas “ ”",
+        "ponto-final (.)",
+        "vírgula (,)",
+        "ponto e vírgula (;)"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém.",
+      "imagem": "🗨️",
+      "enunciado": "Qual sinal se usa para:"
+    },
+    {
+      "destaque": "Anunciar uma enumeração",
+      "opcoes": [
+        "dois-pontos (:)",
+        "ponto de exclamação (!)",
+        "ponto de interrogação (?)",
+        "aspas “ ”"
+      ],
+      "correta": "dois-pontos (:)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "📋",
+      "enunciado": "Qual sinal se usa para:"
+    },
+    {
+      "destaque": "Deixar a ideia no ar, para o leitor completar",
+      "opcoes": [
+        "reticências (...)",
+        "parênteses ( )",
+        "vírgula (,)",
+        "travessão (—)"
+      ],
+      "correta": "reticências (...)",
+      "explica": "As reticências deixam a ideia no ar, para o leitor completar.",
+      "imagem": "💭",
+      "enunciado": "Qual sinal se usa para:"
+    },
+    {
+      "destaque": "Encerrar uma frase declarativa (afirmativa ou negativa)",
+      "opcoes": [
+        "ponto-final (.)",
+        "aspas “ ”",
+        "ponto de exclamação (!)",
+        "dois-pontos (:)"
+      ],
+      "correta": "ponto-final (.)",
+      "explica": "Frase declarativa (que informa algo, afirmando ou negando) termina com ponto-final.",
+      "imagem": "⚫",
+      "enunciado": "Qual sinal se usa para:"
+    }
+  ]
+}

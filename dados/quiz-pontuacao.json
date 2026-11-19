@@ -1,0 +1,402 @@
+{
+  "titulo": "Quiz da pontuação",
+  "tempoPadrao": 20,
+  "perguntas": [
+    {
+      "pergunta": "Qual sinal completa a frase? A biblioteca da escola abre às sete horas___",
+      "imagem": "📚",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": ". (ponto-final)",
+      "explica": "Frase declarativa (que informa algo, afirmando ou negando) termina com ponto-final."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Como se escreve a palavra exceção___",
+      "imagem": "🔤",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "? (interrogação)",
+      "explica": "É uma pergunta direta: termina com ponto de interrogação."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Parabéns pelo seu aniversário___",
+      "imagem": "🎂",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "! (exclamação)",
+      "explica": "A frase expressa emoção: por isso, ponto de exclamação."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Não___ obrigado, já almocei.",
+      "imagem": "🍽️",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O sim ou o não no início da resposta fica separado por vírgula."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Porto Alegre___ 1º de setembro de 2026.",
+      "imagem": "📅",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "Nas datas, a vírgula separa o nome do lugar."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? O Brasil tem cinco regiões___ Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+      "imagem": "🗺️",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos anunciam uma enumeração."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? — Posso sair mais cedo? ___ perguntou o aluno.",
+      "imagem": "🙋",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...)."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Eu queria te contar uma coisa, mas___",
+      "imagem": "🤐",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "... (reticências)",
+      "explica": "As reticências mostram que a fala ou o pensamento foi interrompido."
+    },
+    {
+      "pergunta": "Qual sinal completa a frase? Na reunião, o diretor falou sobre as provas___ a coordenadora, sobre a festa junina.",
+      "imagem": "🗣️",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto."
+    },
+    {
+      "pergunta": "Que sinal deve ocupar os dois □? Meu livro preferido é □O Menino Maluquinho□.",
+      "imagem": "📕",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais."
+    },
+    {
+      "pergunta": "Que sinal deve ocupar os dois □? O cartaz avisava: □Proibido nadar.□",
+      "imagem": "🚫",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém."
+    },
+    {
+      "pergunta": "Que sinal deve ocupar os dois □? Que □ótima□ ideia deixar a janela aberta na chuva!",
+      "imagem": "🌧️",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas podem indicar ironia (o sentido é o contrário do comum)."
+    },
+    {
+      "pergunta": "Que sinal deve ocupar os dois □? Cecília Meireles □1901-1964□ escreveu poemas para crianças.",
+      "imagem": "📜",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "parênteses ( )",
+      "explica": "Os parênteses indicam datas, anos e referências."
+    },
+    {
+      "pergunta": "Que sinal deve ocupar os dois □? MÃE □entrando na sala□: Quem deixou o tênis no meio do caminho?",
+      "imagem": "🎭",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "parênteses ( )",
+      "explica": "No texto teatral, os parênteses trazem as rubricas: gestos e ações das personagens."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "✏️",
+      "opcoes": [
+        "Preciso comprar estes itens: caderno, lápis e borracha.",
+        "Preciso comprar: estes itens caderno, lápis e borracha.",
+        "Preciso comprar estes itens; caderno, lápis e borracha.",
+        "Preciso: comprar estes itens, caderno, lápis e borracha."
+      ],
+      "correta": "Preciso comprar estes itens: caderno, lápis e borracha.",
+      "explica": "Os dois-pontos vêm depois de “estes itens” e anunciam a lista."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "📅",
+      "opcoes": [
+        "Fortaleza, 10 de junho de 2025.",
+        "Fortaleza 10 de junho de 2025.",
+        "Fortaleza, 10, de junho de 2025.",
+        "Fortaleza; 10 de junho de 2025."
+      ],
+      "correta": "Fortaleza, 10 de junho de 2025.",
+      "explica": "Nas datas, a vírgula separa o nome do lugar."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "👴",
+      "opcoes": [
+        "O Sr. Antônio chegou.",
+        "O Sr Antônio chegou.",
+        "O Sr, Antônio chegou.",
+        "O, Sr. Antônio chegou."
+      ],
+      "correta": "O Sr. Antônio chegou.",
+      "explica": "A abreviatura Sr. (senhor) leva ponto."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "🚫",
+      "opcoes": [
+        "A placa avisava: “Proibido nadar.”",
+        "A placa avisava “: Proibido nadar.”",
+        "A placa: avisava “Proibido nadar.”",
+        "A placa avisava; “Proibido nadar.”"
+      ],
+      "correta": "A placa avisava: “Proibido nadar.”",
+      "explica": "Os dois-pontos vêm antes da citação, e as aspas envolvem as palavras exatas da placa."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "📖",
+      "opcoes": [
+        "O professor explicou a matéria com paciência.",
+        "O professor explicou, a matéria com paciência.",
+        "O professor, explicou a matéria com paciência.",
+        "O professor explicou a, matéria com paciência."
+      ],
+      "correta": "O professor explicou a matéria com paciência.",
+      "explica": "Não se usa vírgula entre o sujeito e o verbo nem entre o verbo e o objeto."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "🏃",
+      "opcoes": [
+        "Ele disse: “Eu volto já.”",
+        "Ele disse “: Eu volto já.”",
+        "Ele disse: Eu volto “já.”",
+        "Ele “disse”: Eu volto já."
+      ],
+      "correta": "Ele disse: “Eu volto já.”",
+      "explica": "Os dois-pontos introduzem a citação, e as aspas envolvem as palavras exatas."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "🌧️",
+      "opcoes": [
+        "Se chover, o jogo será adiado.",
+        "Se, chover o jogo será adiado.",
+        "Se chover o jogo, será adiado.",
+        "Se chover o jogo será, adiado."
+      ],
+      "correta": "Se chover, o jogo será adiado.",
+      "explica": "A oração com “se”, antes da principal, fica separada por vírgula."
+    },
+    {
+      "pergunta": "Qual frase está pontuada corretamente?",
+      "imagem": "☀️",
+      "opcoes": [
+        "Que lindo dia!",
+        "Que lindo, dia!",
+        "Que, lindo dia!",
+        "Que lindo dia?"
+      ],
+      "correta": "Que lindo dia!",
+      "explica": "A frase expressa admiração: termina com exclamação."
+    },
+    {
+      "pergunta": "Em “Não, quero café.”, o que a pessoa quer?",
+      "imagem": "☕",
+      "opcoes": [
+        "quer café",
+        "não quer café",
+        "quer saber se tem café",
+        "quer café e chá"
+      ],
+      "correta": "quer café",
+      "explica": "A vírgula separa o “não” (a resposta) do resto: a pessoa recusou outra coisa e QUER café."
+    },
+    {
+      "pergunta": "Em “Não quero café.”, o que a pessoa quer?",
+      "imagem": "☕",
+      "opcoes": [
+        "não quer café",
+        "quer café",
+        "quer mais café",
+        "quer café sem açúcar"
+      ],
+      "correta": "não quer café",
+      "explica": "Sem vírgula, o “não” nega o verbo: a pessoa NÃO quer café."
+    },
+    {
+      "pergunta": "Em “Maria, a professora chegou.”, quem é Maria?",
+      "imagem": "👩",
+      "opcoes": [
+        "a pessoa com quem se está falando",
+        "a professora que chegou",
+        "a diretora da escola",
+        "uma aluna que chegou"
+      ],
+      "correta": "a pessoa com quem se está falando",
+      "explica": "“Maria” é vocativo: fala-se COM Maria, avisando que a professora chegou."
+    },
+    {
+      "pergunta": "Em “Maria, a professora, chegou.”, quem é Maria?",
+      "imagem": "👩",
+      "opcoes": [
+        "a professora que chegou",
+        "a pessoa com quem se está falando",
+        "a mãe da professora",
+        "uma aluna atrasada"
+      ],
+      "correta": "a professora que chegou",
+      "explica": "“a professora”, entre vírgulas, é aposto: explica quem é Maria. Maria É a professora."
+    },
+    {
+      "pergunta": "Um rei mandou um bilhete sobre um prisioneiro. Qual versão SALVA o prisioneiro?",
+      "imagem": "👑",
+      "opcoes": [
+        "Perdão, impossível mandar para a prisão.",
+        "Perdão impossível, mandar para a prisão.",
+        "Perdão impossível. Mandar para a prisão.",
+        "Perdão impossível: mandar para a prisão."
+      ],
+      "correta": "Perdão, impossível mandar para a prisão.",
+      "explica": "Com a vírgula depois de “Perdão”, o rei concede o perdão e diz que é impossível mandar o prisioneiro para a prisão."
+    },
+    {
+      "pergunta": "Qual sinal se usa para isolar o vocativo (o nome de quem é chamado)?",
+      "imagem": "✒️",
+      "opcoes": [
+        "vírgula (,)",
+        "aspas “ ”",
+        "travessão (—)",
+        "ponto-final (.)"
+      ],
+      "correta": "vírgula (,)",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula."
+    },
+    {
+      "pergunta": "Qual sinal se usa para anunciar uma enumeração?",
+      "imagem": "📋",
+      "opcoes": [
+        "dois-pontos (:)",
+        "ponto-final (.)",
+        "ponto de interrogação (?)",
+        "reticências (...)"
+      ],
+      "correta": "dois-pontos (:)",
+      "explica": "Os dois-pontos anunciam uma enumeração."
+    },
+    {
+      "pergunta": "Qual sinal se usa para indicar o início da fala do personagem?",
+      "imagem": "💬",
+      "opcoes": [
+        "travessão (—)",
+        "parênteses ( )",
+        "ponto-final (.)",
+        "ponto e vírgula (;)"
+      ],
+      "correta": "travessão (—)",
+      "explica": "O travessão indica o início da fala do personagem no diálogo."
+    },
+    {
+      "pergunta": "Qual sinal se usa para indicar hesitação, dúvida ou timidez?",
+      "imagem": "💭",
+      "opcoes": [
+        "reticências (...)",
+        "ponto de interrogação (?)",
+        "vírgula (,)",
+        "ponto-final (.)"
+      ],
+      "correta": "reticências (...)",
+      "explica": "As reticências indicam hesitação, dúvida ou timidez."
+    },
+    {
+      "pergunta": "Qual sinal se usa para destacar o título de livro, filme, música ou jornal?",
+      "imagem": "🗨️",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "ponto de interrogação (?)",
+        "dois-pontos (:)"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais."
+    },
+    {
+      "pergunta": "Qual sinal se usa para indicar uma sigla ou o significado dela?",
+      "imagem": "📎",
+      "opcoes": [
+        "parênteses ( )",
+        "reticências (...)",
+        "ponto e vírgula (;)",
+        "ponto-final (.)"
+      ],
+      "correta": "parênteses ( )",
+      "explica": "Os parênteses indicam a sigla ou o significado dela."
+    }
+  ]
+}

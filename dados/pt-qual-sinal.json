@@ -1,0 +1,372 @@
+{
+  "titulo": "Qual sinal completa a frase?",
+  "emoji": "📍",
+  "instrucao": "Qual sinal completa melhor a frase?",
+  "rodadas": [
+    {
+      "destaque": "Os alunos do 7º ano visitaram o museu na sexta-feira___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": ". (ponto-final)",
+      "explica": "Frase declarativa (que informa algo, afirmando ou negando) termina com ponto-final.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "Por favor, entregue a atividade até sexta-feira___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": ". (ponto-final)",
+      "explica": "Pedido ou ordem dita com calma termina com ponto-final. Com ênfase, seria exclamação.",
+      "imagem": "📄"
+    },
+    {
+      "destaque": "O Sol é uma estrela___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": ". (ponto-final)",
+      "explica": "Frase declarativa (que informa algo, afirmando ou negando) termina com ponto-final.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "De quem é esta mochila___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "? (interrogação)",
+      "explica": "É uma pergunta direta: termina com ponto de interrogação.",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "Por que o céu fica alaranjado no fim da tarde___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "? (interrogação)",
+      "explica": "É uma pergunta direta: termina com ponto de interrogação.",
+      "imagem": "🌇"
+    },
+    {
+      "destaque": "Posso ir ao banheiro, professora___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "? (interrogação)",
+      "explica": "É uma pergunta direta: termina com ponto de interrogação.",
+      "imagem": "🚻"
+    },
+    {
+      "destaque": "Que delícia de bolo___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "! (exclamação)",
+      "explica": "A frase expressa emoção: por isso, ponto de exclamação.",
+      "imagem": "🍰"
+    },
+    {
+      "destaque": "Socorro___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "! (exclamação)",
+      "explica": "Depois de interjeição (Ai! Oba! Ufa! Psiu!) usa-se o ponto de exclamação.",
+      "imagem": "🆘"
+    },
+    {
+      "destaque": "Cuidado com o degrau___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "! (exclamação)",
+      "explica": "Ordem, aviso ou pedido de socorro com ênfase pede ponto de exclamação.",
+      "imagem": "⚠️"
+    },
+    {
+      "destaque": "Ela abriu a caixa devagar e viu___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "... (reticências)",
+      "explica": "As reticências mostram que a fala ou o pensamento foi interrompido.",
+      "imagem": "🎁"
+    },
+    {
+      "destaque": "Bem___ acho que posso ajudar.",
+      "opcoes": [
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": "... (reticências)",
+      "explica": "As reticências indicam hesitação, dúvida ou timidez.",
+      "imagem": "🤔"
+    },
+    {
+      "destaque": "Quando olhei para trás, vi uma sombra se aproximando___",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "! (exclamação)",
+        "... (reticências)"
+      ],
+      "correta": "... (reticências)",
+      "explica": "As reticências criam suspense.",
+      "imagem": "👀",
+      "enunciado": "Qual sinal deixa a frase com suspense?"
+    },
+    {
+      "destaque": "Na semana passada___ fomos ao museu.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O adjunto adverbial deslocado (no começo ou no meio da frase) fica separado por vírgula.",
+      "imagem": "🏛️"
+    },
+    {
+      "destaque": "A bandeira do Brasil tem as cores verde, amarelo___ azul e branco.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A vírgula separa os itens de uma enumeração. Antes do “e” final, não se usa vírgula.",
+      "imagem": "🎨"
+    },
+    {
+      "destaque": "Obrigado pela ajuda___ Lucas.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "O vocativo (o nome de quem é chamado) fica separado por vírgula.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "Manaus___ 20 de novembro de 2025.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "Nas datas, a vírgula separa o nome do lugar.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Uns preferem cinema; outros___ teatro.",
+      "opcoes": [
+        ". (ponto-final)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "A vírgula marca o lugar do verbo que foi omitido para não repetir.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "Estudei bastante___ mas não consegui terminar a prova.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        ", (vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ", (vírgula)",
+      "explica": "Antes de mas, porém, portanto, pois (orações coordenadas) usa-se vírgula.",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "São deveres do aluno: respeitar os colegas e os professores___ cuidar do material da escola; chegar no horário.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "📋"
+    },
+    {
+      "destaque": "O time jogou bem, criou muitas chances___ não conseguiu, porém, marcar nenhum gol.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "A mãe avisou___ — O jantar está pronto!",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "🍲"
+    },
+    {
+      "destaque": "O resultado foi este___ todos passaram de ano.",
+      "opcoes": [
+        "? (interrogação)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos introduzem uma explicação, uma consequência ou uma conclusão.",
+      "imagem": "🎓"
+    },
+    {
+      "destaque": "O Brasil tem cinco regiões___ Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🗺️"
+    },
+    {
+      "destaque": "— Não esqueçam ___ disse a professora — que amanhã tem prova.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "___ Você viu meu estojo? — perguntou Lucas.",
+      "opcoes": [
+        ", (vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "— Vou chegar tarde hoje ___ avisou meu pai.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "👨"
+    },
+    {
+      "destaque": "Minha avó sempre diz: □Devagar se vai ao longe.□",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém.",
+      "imagem": "👵",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Meu livro preferido é □O Menino Maluquinho□.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "📕",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "A Organização das Nações Unidas □ONU□ foi criada em 1945.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "parênteses ( )",
+      "explica": "Os parênteses indicam a sigla ou o significado dela.",
+      "imagem": "🌍",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "MÃE □entrando na sala□: Quem deixou o tênis no meio do caminho?",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "parênteses ( )",
+      "explica": "No texto teatral, os parênteses trazem as rubricas: gestos e ações das personagens.",
+      "imagem": "🎭",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    }
+  ]
+}

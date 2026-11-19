@@ -1,0 +1,395 @@
+{
+  "titulo": "Ponto e vírgula e dois-pontos",
+  "emoji": "🔸",
+  "instrucao": "Qual sinal completa melhor a frase?",
+  "rodadas": [
+    {
+      "destaque": "O time jogou bem, criou muitas chances___ não conseguiu, porém, marcar nenhum gol.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "Na feira, compramos frutas, como maçã e banana___ verduras, como alface e couve; e temperos, como alho e cebola.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "Quando os itens da enumeração já têm vírgulas, o ponto e vírgula separa um item do outro.",
+      "imagem": "🍎"
+    },
+    {
+      "destaque": "São deveres do aluno: respeitar os colegas e os professores___ cuidar do material da escola; chegar no horário.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "📋"
+    },
+    {
+      "destaque": "Na reunião, o diretor falou sobre as provas___ a coordenadora, sobre a festa junina.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto.",
+      "imagem": "🗣️"
+    },
+    {
+      "destaque": "Uns preferem praia, sol e calor___ outros, montanha, frio e silêncio.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "Art. 2º A biblioteca deve: I – emprestar livros aos alunos___ II – organizar o acervo; III – promover a leitura.",
+      "opcoes": [
+        ". (ponto-final)",
+        "? (interrogação)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": "; (ponto e vírgula)",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "A mãe avisou___ — O jantar está pronto!",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "🍲"
+    },
+    {
+      "destaque": "Já dizia o ditado___ “Quem espera sempre alcança.”",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos introduzem uma citação.",
+      "imagem": "📜"
+    },
+    {
+      "destaque": "O segredo do bolo é simples___ ovos frescos e muito carinho.",
+      "opcoes": [
+        "? (interrogação)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos introduzem uma explicação, uma consequência ou uma conclusão.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "Comprei três frutas___ maçã, banana e uva.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🍎"
+    },
+    {
+      "destaque": "O Brasil tem cinco regiões___ Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🗺️"
+    },
+    {
+      "destaque": "Só havia uma explicação___ alguém tinha comido o bolo.",
+      "opcoes": [
+        "? (interrogação)",
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos introduzem uma explicação, uma consequência ou uma conclusão.",
+      "imagem": "🍰"
+    },
+    {
+      "destaque": "A professora disse___ — Abram o livro na página 20.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "Para a viagem, leve o seguinte___ roupas leves, protetor solar e boné.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🎒"
+    },
+    {
+      "destaque": "Minha mãe sempre fala___ “Primeiro a lição, depois a diversão.”",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos introduzem uma citação.",
+      "imagem": "👩"
+    },
+    {
+      "destaque": "Art. 2º A biblioteca deve: I – emprestar livros aos alunos; II – organizar o acervo; III – promover a leitura.",
+      "opcoes": [
+        "separar os itens de leis, regras e listas numeradas",
+        "isolar a oração adjetiva explicativa",
+        "separar a oração adverbial que vem antes da principal",
+        "introduzir a fala do personagem, depois do verbo de dizer"
+      ],
+      "correta": "separar os itens de leis, regras e listas numeradas",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "📚",
+      "enunciado": "Para que serve o ponto e vírgula depois de “alunos”?"
+    },
+    {
+      "destaque": "Na feira, compramos frutas, como maçã e banana; verduras, como alface e couve; e temperos, como alho e cebola.",
+      "opcoes": [
+        "separar itens de uma enumeração que já têm vírgulas",
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "isolar a conjunção deslocada (porém, contudo...)",
+        "isolar o aposto (explicação sobre o termo anterior)"
+      ],
+      "correta": "separar itens de uma enumeração que já têm vírgulas",
+      "explica": "Quando os itens da enumeração já têm vírgulas, o ponto e vírgula separa um item do outro.",
+      "imagem": "🍎",
+      "enunciado": "Para que serve o ponto e vírgula depois de “banana”?"
+    },
+    {
+      "destaque": "Uns preferem praia, sol e calor; outros, montanha, frio e silêncio.",
+      "opcoes": [
+        "separar orações longas (pausa maior que a vírgula)",
+        "marcar a omissão de um verbo, para não repeti-lo",
+        "separar o nome do lugar e a data",
+        "isolar expressões como isto é, ou seja, por exemplo"
+      ],
+      "correta": "separar orações longas (pausa maior que a vírgula)",
+      "explica": "O ponto e vírgula separa orações longas que já têm vírgulas: é uma pausa maior que a vírgula e menor que o ponto.",
+      "imagem": "🏖️",
+      "enunciado": "Para que serve o ponto e vírgula nesta frase?"
+    },
+    {
+      "destaque": "Já dizia o ditado: “Quem espera sempre alcança.”",
+      "opcoes": [
+        "introduzir uma citação (palavras de outra pessoa)",
+        "anunciar uma enumeração",
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "marcar a omissão de um verbo, para não repeti-lo"
+      ],
+      "correta": "introduzir uma citação (palavras de outra pessoa)",
+      "explica": "Os dois-pontos introduzem uma citação.",
+      "imagem": "📜",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "Só havia uma explicação: alguém tinha comido o bolo.",
+      "opcoes": [
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "introduzir uma citação (palavras de outra pessoa)",
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "isolar a conjunção deslocada (porém, contudo...)"
+      ],
+      "correta": "introduzir uma explicação, uma consequência ou uma conclusão",
+      "explica": "Os dois-pontos introduzem uma explicação, uma consequência ou uma conclusão.",
+      "imagem": "🍰",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "O Brasil tem cinco regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.",
+      "opcoes": [
+        "anunciar uma enumeração",
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "introduzir uma citação (palavras de outra pessoa)",
+        "isolar o vocativo (o nome de quem é chamado)"
+      ],
+      "correta": "anunciar uma enumeração",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "🗺️",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "A mãe avisou: — O jantar está pronto!",
+      "opcoes": [
+        "introduzir a fala do personagem, depois do verbo de dizer",
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "anunciar uma enumeração",
+        "separar itens de uma enumeração que já têm vírgulas"
+      ],
+      "correta": "introduzir a fala do personagem, depois do verbo de dizer",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "🍲",
+      "enunciado": "Para que servem os dois-pontos nesta frase?"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Uns gostam de futebol, vôlei e basquete; outros preferem xadrez e damas.",
+        "Uns gostam de futebol; vôlei e basquete, outros preferem xadrez e damas.",
+        "Uns gostam; de futebol, vôlei e basquete, outros preferem xadrez e damas.",
+        "Uns gostam de futebol, vôlei e basquete: outros; preferem xadrez e damas."
+      ],
+      "correta": "Uns gostam de futebol, vôlei e basquete; outros preferem xadrez e damas.",
+      "explica": "O ponto e vírgula separa as duas orações, que já têm vírgulas por dentro.",
+      "imagem": "⚽",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Na festa, uns dançavam, cantavam e riam; outros apenas conversavam.",
+        "Na festa; uns dançavam, cantavam e riam, outros apenas conversavam.",
+        "Na festa, uns dançavam; cantavam; e riam, outros apenas conversavam.",
+        "Na festa, uns dançavam, cantavam e riam: outros; apenas conversavam."
+      ],
+      "correta": "Na festa, uns dançavam, cantavam e riam; outros apenas conversavam.",
+      "explica": "O ponto e vírgula separa as orações longas que já têm vírgulas.",
+      "imagem": "🎉",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Comprei três frutas: maçã, banana e uva.",
+        "Comprei: três frutas maçã, banana e uva.",
+        "Comprei três frutas; maçã, banana e uva.",
+        "Comprei três: frutas, maçã, banana e uva."
+      ],
+      "correta": "Comprei três frutas: maçã, banana e uva.",
+      "explica": "Os dois-pontos anunciam a enumeração (maçã, banana e uva).",
+      "imagem": "🍎",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Preciso comprar estes itens: caderno, lápis e borracha.",
+        "Preciso comprar: estes itens caderno, lápis e borracha.",
+        "Preciso comprar estes itens; caderno, lápis e borracha.",
+        "Preciso: comprar estes itens, caderno, lápis e borracha."
+      ],
+      "correta": "Preciso comprar estes itens: caderno, lápis e borracha.",
+      "explica": "Os dois-pontos vêm depois de “estes itens” e anunciam a lista.",
+      "imagem": "✏️",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "A professora avisou: — Amanhã tem prova.",
+        "A professora: avisou — Amanhã tem prova.",
+        "A professora avisou; — Amanhã tem prova.",
+        "A professora avisou, — Amanhã tem prova."
+      ],
+      "correta": "A professora avisou: — Amanhã tem prova.",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (avisou), antes da fala com travessão.",
+      "imagem": "📝",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Meu avô sempre diz: “Quem planta colhe.”",
+        "Meu avô sempre diz; “Quem planta colhe.”",
+        "Meu avô: sempre diz “Quem planta colhe.”",
+        "Meu avô sempre diz: Quem planta “colhe.”"
+      ],
+      "correta": "Meu avô sempre diz: “Quem planta colhe.”",
+      "explica": "Os dois-pontos introduzem a citação, que fica entre aspas.",
+      "imagem": "👴",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "A placa avisava: “Proibido nadar.”",
+        "A placa avisava “: Proibido nadar.”",
+        "A placa: avisava “Proibido nadar.”",
+        "A placa avisava; “Proibido nadar.”"
+      ],
+      "correta": "A placa avisava: “Proibido nadar.”",
+      "explica": "Os dois-pontos vêm antes da citação, e as aspas envolvem as palavras exatas da placa.",
+      "imagem": "🚫",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Separar os itens de leis, regras e listas numeradas",
+      "opcoes": [
+        "ponto e vírgula (;)",
+        "aspas “ ”",
+        "ponto de interrogação (?)",
+        "parênteses ( )"
+      ],
+      "correta": "ponto e vírgula (;)",
+      "explica": "Em leis, regras e listas de itens, o ponto e vírgula separa cada item.",
+      "imagem": "🔸",
+      "enunciado": "Qual sinal se usa para:"
+    },
+    {
+      "destaque": "Anunciar uma enumeração",
+      "opcoes": [
+        "dois-pontos (:)",
+        "ponto de exclamação (!)",
+        "reticências (...)",
+        "aspas “ ”"
+      ],
+      "correta": "dois-pontos (:)",
+      "explica": "Os dois-pontos anunciam uma enumeração.",
+      "imagem": "📋",
+      "enunciado": "Qual sinal se usa para:"
+    }
+  ]
+}

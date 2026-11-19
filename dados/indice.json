@@ -124,6 +124,11 @@
       "arquivo": "quiz-alfa.json",
       "titulo": "Quiz da alfabetização",
       "qtd": 14
+    },
+    {
+      "arquivo": "quiz-pontuacao.json",
+      "titulo": "Quiz da pontuação",
+      "qtd": 33
     }
   ],
   "stop": [
@@ -244,6 +249,10 @@
     {
       "arquivo": "batata-alfa.json",
       "titulo": "Batata quente da alfabetização"
+    },
+    {
+      "arquivo": "batata-pontuacao.json",
+      "titulo": "Batata quente da pontuação"
     }
   ],
   "trilha": [
@@ -334,6 +343,10 @@
     {
       "arquivo": "trilha-alfa.json",
       "titulo": "Trilha da alfabetização"
+    },
+    {
+      "arquivo": "trilha-pontuacao.json",
+      "titulo": "Trilha da pontuação"
     }
   ],
   "escape": [
@@ -767,6 +780,14 @@
     {
       "arquivo": "morfo-cestos-variaveis.json",
       "titulo": "Cestos: classe variável ou invariável?"
+    },
+    {
+      "arquivo": "pt-cestos-fim.json",
+      "titulo": "Cestos: que sinal termina a frase?"
+    },
+    {
+      "arquivo": "pt-cestos-usos.json",
+      "titulo": "Cestos: para que serve cada sinal?"
     }
   ],
   "morfo-frases": [
@@ -1749,6 +1770,10 @@
     {
       "arquivo": "memoria-alfa-silabas.json",
       "titulo": "Memória: figura e primeira sílaba"
+    },
+    {
+      "arquivo": "memoria-pontuacao.json",
+      "titulo": "Memória da pontuação"
     }
   ],
   "bingo": [
@@ -1829,6 +1854,48 @@
       "arquivo": "ac-regras.json",
       "titulo": "Por que tem acento?",
       "qtd": 24
+    }
+  ],
+  "escolha-pt": [
+    {
+      "arquivo": "pt-qual-sinal.json",
+      "titulo": "Qual sinal completa a frase?",
+      "qtd": 30
+    },
+    {
+      "arquivo": "pt-para-que-serve.json",
+      "titulo": "Para que serve cada sinal?",
+      "qtd": 30
+    },
+    {
+      "arquivo": "pt-fim-frase.json",
+      "titulo": "Ponto-final, interrogação e exclamação",
+      "qtd": 32
+    },
+    {
+      "arquivo": "pt-virgula.json",
+      "titulo": "Vírgula: para que serve?",
+      "qtd": 32
+    },
+    {
+      "arquivo": "pt-pv-dp.json",
+      "titulo": "Ponto e vírgula e dois-pontos",
+      "qtd": 31
+    },
+    {
+      "arquivo": "pt-dialogo.json",
+      "titulo": "Travessão e aspas: diálogo e citação",
+      "qtd": 34
+    },
+    {
+      "arquivo": "pt-ret-par.json",
+      "titulo": "Reticências e parênteses",
+      "qtd": 33
+    },
+    {
+      "arquivo": "pt-sentido.json",
+      "titulo": "A pontuação muda o sentido!",
+      "qtd": 13
     }
   ],
   "escolha-sg": [
@@ -2190,6 +2257,12 @@
       "titulo": "⭐ Banco completo: Acentuação gráfica (587 questões)",
       "grupo": "Acentuação gráfica",
       "qtd": 587
+    },
+    {
+      "arquivo": "banco-pontuacao.json",
+      "titulo": "⭐ Banco completo: Pontuação (471 questões)",
+      "grupo": "Pontuação",
+      "qtd": 471
     },
     {
       "arquivo": "banco-significacao.json",

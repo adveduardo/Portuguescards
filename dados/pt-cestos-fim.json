@@ -1,0 +1,159 @@
+{
+  "titulo": "Cestos: que sinal termina a frase?",
+  "cestos": [
+    {
+      "id": "ponto",
+      "nome": "Ponto-final",
+      "emoji": "⚫",
+      "cor": "#455a64"
+    },
+    {
+      "id": "interrogacao",
+      "nome": "Interrogação",
+      "emoji": "❓",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "exclamacao",
+      "nome": "Exclamação",
+      "emoji": "❗",
+      "cor": "#e53935"
+    },
+    {
+      "id": "reticencias",
+      "nome": "Reticências",
+      "emoji": "💭",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "O Sol nasce cedo",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "Ana mora em Natal",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "A aula começa às sete",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "O gato dorme",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "Choveu ontem",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "Meu tio é médico",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "A loja fecha às seis",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "O trem saiu às nove",
+      "cesto": "ponto"
+    },
+    {
+      "palavra": "Que horas são",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Onde fica a escola",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Você quer suco",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Quem chegou",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Como foi a prova",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Qual é o seu nome",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Será que vai chover",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Por que você riu",
+      "cesto": "interrogacao"
+    },
+    {
+      "palavra": "Que susto",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Que golaço",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Ai, que dor",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Oba, ganhei",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Socorro",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Parabéns",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Que delícia",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Cuidado",
+      "cesto": "exclamacao"
+    },
+    {
+      "palavra": "Eu ia dizer que",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Se eu pudesse",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Bem, eu acho que",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Quem sabe um dia",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Pensei, pensei e",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Ela abriu a porta e",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "Tenho uma coisa para",
+      "cesto": "reticencias"
+    },
+    {
+      "palavra": "E então, de repente",
+      "cesto": "reticencias"
+    }
+  ]
+}

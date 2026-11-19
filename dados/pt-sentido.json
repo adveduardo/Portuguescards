@@ -1,0 +1,176 @@
+{
+  "titulo": "A pontuação muda o sentido!",
+  "emoji": "🔄",
+  "instrucao": "Leia com atenção",
+  "rodadas": [
+    {
+      "destaque": "Não, quero café.",
+      "opcoes": [
+        "quer café",
+        "não quer café",
+        "quer saber se tem café",
+        "quer café e chá"
+      ],
+      "correta": "quer café",
+      "explica": "A vírgula separa o “não” (a resposta) do resto: a pessoa recusou outra coisa e QUER café.",
+      "imagem": "☕",
+      "enunciado": "O que a pessoa quer?"
+    },
+    {
+      "destaque": "Não quero café.",
+      "opcoes": [
+        "não quer café",
+        "quer café",
+        "quer mais café",
+        "quer café sem açúcar"
+      ],
+      "correta": "não quer café",
+      "explica": "Sem vírgula, o “não” nega o verbo: a pessoa NÃO quer café.",
+      "imagem": "☕",
+      "enunciado": "O que a pessoa quer?"
+    },
+    {
+      "destaque": "Qual frase é um convite para as crianças comerem?",
+      "opcoes": [
+        "Vamos comer, crianças!",
+        "Vamos comer crianças!",
+        "Vamos comer crianças.",
+        "Vamos comer crianças?"
+      ],
+      "correta": "Vamos comer, crianças!",
+      "explica": "Com a vírgula, “crianças” é vocativo: as crianças são chamadas para comer. Sem ela, o sentido fica assustador!",
+      "imagem": "🍽️",
+      "enunciado": "Leia com atenção:"
+    },
+    {
+      "destaque": "Os alunos, que estudaram, foram aprovados.",
+      "opcoes": [
+        "todos os alunos (e todos estudaram)",
+        "só os alunos que estudaram",
+        "nenhum aluno",
+        "só os alunos que faltaram"
+      ],
+      "correta": "todos os alunos (e todos estudaram)",
+      "explica": "Entre vírgulas, a oração é explicativa: vale para TODOS os alunos.",
+      "imagem": "🎓",
+      "enunciado": "Quem foi aprovado?"
+    },
+    {
+      "destaque": "Os alunos que estudaram foram aprovados.",
+      "opcoes": [
+        "só os alunos que estudaram",
+        "todos os alunos",
+        "nenhum aluno",
+        "só os alunos que faltaram"
+      ],
+      "correta": "só os alunos que estudaram",
+      "explica": "Sem vírgulas, a oração é restritiva: só os alunos que estudaram foram aprovados.",
+      "imagem": "🎓",
+      "enunciado": "Quem foi aprovado?"
+    },
+    {
+      "destaque": "Maria, a professora chegou.",
+      "opcoes": [
+        "a pessoa com quem se está falando",
+        "a professora que chegou",
+        "a diretora da escola",
+        "uma aluna que chegou"
+      ],
+      "correta": "a pessoa com quem se está falando",
+      "explica": "“Maria” é vocativo: fala-se COM Maria, avisando que a professora chegou.",
+      "imagem": "👩",
+      "enunciado": "Quem é Maria?"
+    },
+    {
+      "destaque": "Maria, a professora, chegou.",
+      "opcoes": [
+        "a professora que chegou",
+        "a pessoa com quem se está falando",
+        "a mãe da professora",
+        "uma aluna atrasada"
+      ],
+      "correta": "a professora que chegou",
+      "explica": "“a professora”, entre vírgulas, é aposto: explica quem é Maria. Maria É a professora.",
+      "imagem": "👩",
+      "enunciado": "Quem é Maria?"
+    },
+    {
+      "destaque": "Não, espere.",
+      "opcoes": [
+        "que o outro espere",
+        "que o outro não espere",
+        "que o outro vá embora",
+        "que o outro corra"
+      ],
+      "correta": "que o outro espere",
+      "explica": "Com vírgula, o “não” é uma resposta e o pedido é: espere! Em “Não espere.”, o pedido seria o contrário.",
+      "imagem": "✋",
+      "enunciado": "O que a pessoa pede?"
+    },
+    {
+      "destaque": "Um rei mandou um bilhete sobre um prisioneiro. Qual versão SALVA o prisioneiro?",
+      "opcoes": [
+        "Perdão, impossível mandar para a prisão.",
+        "Perdão impossível, mandar para a prisão.",
+        "Perdão impossível. Mandar para a prisão.",
+        "Perdão impossível: mandar para a prisão."
+      ],
+      "correta": "Perdão, impossível mandar para a prisão.",
+      "explica": "Com a vírgula depois de “Perdão”, o rei concede o perdão e diz que é impossível mandar o prisioneiro para a prisão.",
+      "imagem": "👑",
+      "enunciado": "Leia com atenção:"
+    },
+    {
+      "destaque": "Qual frase indica que a pessoa tem MAIS DE UM irmão?",
+      "opcoes": [
+        "Meu irmão que mora em Manaus vem me visitar.",
+        "Meu irmão, que mora em Manaus, vem me visitar.",
+        "Meu único irmão vem me visitar.",
+        "Meu irmão vem me visitar."
+      ],
+      "correta": "Meu irmão que mora em Manaus vem me visitar.",
+      "explica": "Sem vírgulas, “que mora em Manaus” restringe: entre os irmãos, é aquele que mora em Manaus. Com vírgulas, é só uma explicação.",
+      "imagem": "👦",
+      "enunciado": "Leia com atenção:"
+    },
+    {
+      "destaque": "Ana, disse a professora, é muito estudiosa.",
+      "opcoes": [
+        "Ana",
+        "a professora",
+        "as duas",
+        "ninguém"
+      ],
+      "correta": "Ana",
+      "explica": "“disse a professora” está entre vírgulas: a professora disse que Ana é muito estudiosa.",
+      "imagem": "📚",
+      "enunciado": "Quem é estudiosa?"
+    },
+    {
+      "destaque": "Ana disse: a professora é muito estudiosa.",
+      "opcoes": [
+        "a professora",
+        "Ana",
+        "as duas",
+        "ninguém"
+      ],
+      "correta": "a professora",
+      "explica": "Os dois-pontos introduzem o que Ana disse: a professora é muito estudiosa.",
+      "imagem": "📚",
+      "enunciado": "Quem é estudiosa?"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Venha jantar, filho.",
+        "Venha jantar filho.",
+        "Venha, jantar filho.",
+        "Venha jantar; filho."
+      ],
+      "correta": "Venha jantar, filho.",
+      "explica": "O vocativo (filho) fica separado por vírgula. Sem ela, a frase muda de sentido!",
+      "imagem": "🍲",
+      "enunciado": "Atenção à pontuação:"
+    }
+  ]
+}

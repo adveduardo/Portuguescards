@@ -1,0 +1,439 @@
+{
+  "titulo": "Travessão e aspas: diálogo e citação",
+  "emoji": "💬",
+  "instrucao": "Qual sinal completa melhor a frase?",
+  "rodadas": [
+    {
+      "destaque": "___ Bom dia, turma! — disse a professora.",
+      "opcoes": [
+        ", (vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "🏫"
+    },
+    {
+      "destaque": "___ Você viu meu estojo? — perguntou Lucas.",
+      "opcoes": [
+        ", (vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "✏️"
+    },
+    {
+      "destaque": "___ Eu adoro dias de chuva — contou Ana.",
+      "opcoes": [
+        ", (vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "— Vou chegar tarde hoje ___ avisou meu pai.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "👨"
+    },
+    {
+      "destaque": "— Que frio! ___ reclamou a menina.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "❄️"
+    },
+    {
+      "destaque": "— Posso sair mais cedo? ___ perguntou o aluno.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "🙋"
+    },
+    {
+      "destaque": "— Não esqueçam ___ disse a professora — que amanhã tem prova.",
+      "opcoes": [
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "— (travessão)",
+        "... (reticências)"
+      ],
+      "correta": "— (travessão)",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "📝"
+    },
+    {
+      "destaque": "A professora disse___ — Abram o livro na página 20.",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "📖"
+    },
+    {
+      "destaque": "O menino perguntou___ — Posso brincar com vocês?",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "👦"
+    },
+    {
+      "destaque": "A mãe avisou___ — O jantar está pronto!",
+      "opcoes": [
+        ", (vírgula)",
+        "; (ponto e vírgula)",
+        ": (dois-pontos)",
+        "... (reticências)"
+      ],
+      "correta": ": (dois-pontos)",
+      "explica": "Os dois-pontos vêm depois do verbo de dizer (disse, perguntou, avisou) e antes da fala do personagem.",
+      "imagem": "🍲"
+    },
+    {
+      "destaque": "— Vou chegar tarde hoje — avisou meu pai.",
+      "opcoes": [
+        "separar a fala do personagem da fala do narrador",
+        "anunciar uma enumeração",
+        "destacar o título de livro, filme, música ou jornal",
+        "isolar uma informação extra ou um comentário"
+      ],
+      "correta": "separar a fala do personagem da fala do narrador",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "👨",
+      "enunciado": "Para que serve o travessão depois de “hoje”?"
+    },
+    {
+      "destaque": "— Você viu meu estojo? — perguntou Lucas.",
+      "opcoes": [
+        "indicar o início da fala do personagem",
+        "destacar o título de livro, filme, música ou jornal",
+        "indicar uma sigla ou o significado dela",
+        "indicar ironia (sentido contrário ao comum)"
+      ],
+      "correta": "indicar o início da fala do personagem",
+      "explica": "O travessão indica o início da fala do personagem no diálogo.",
+      "imagem": "✏️",
+      "enunciado": "Para que serve o travessão do início da frase?"
+    },
+    {
+      "destaque": "— Não esqueçam — disse a professora — que amanhã tem prova.",
+      "opcoes": [
+        "separar a fala do personagem da fala do narrador",
+        "indicar datas, anos ou referências",
+        "anunciar uma enumeração",
+        "destacar o título de livro, filme, música ou jornal"
+      ],
+      "correta": "separar a fala do personagem da fala do narrador",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "📝",
+      "enunciado": "Para que serve o travessão depois de “esqueçam”?"
+    },
+    {
+      "destaque": "— Posso sair mais cedo? — perguntou o aluno.",
+      "opcoes": [
+        "separar a fala do personagem da fala do narrador",
+        "introduzir uma explicação, uma consequência ou uma conclusão",
+        "destacar o título de livro, filme, música ou jornal",
+        "anunciar uma enumeração"
+      ],
+      "correta": "separar a fala do personagem da fala do narrador",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "🙋",
+      "enunciado": "Para que serve o travessão depois de “cedo”?"
+    },
+    {
+      "destaque": "— Não esqueçam □ disse a professora □ que amanhã tem prova.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "travessões —  —",
+        "colchetes [  ]"
+      ],
+      "correta": "travessões —  —",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "📝",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "— Eu acho □ respondeu Lucas □ que o ônibus já passou.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "travessões —  —",
+        "colchetes [  ]"
+      ],
+      "correta": "travessões —  —",
+      "explica": "O travessão separa a fala do personagem da fala do narrador (disse, perguntou...).",
+      "imagem": "🚌",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Meu livro preferido é □O Menino Maluquinho□.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "📕",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Assistimos ao filme □Divertida Mente□ na aula.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "🎬",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Minha avó sempre diz: □Devagar se vai ao longe.□",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém.",
+      "imagem": "👵",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "O cartaz avisava: □Proibido nadar.□",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas marcam a citação: as palavras exatas de alguém.",
+      "imagem": "🚫",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Vamos pedir um □delivery□ de pizza?",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam estrangeirismos, gírias e expressões populares.",
+      "imagem": "🍕",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Para ele, a prova foi □mamão com açúcar□.",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas destacam estrangeirismos, gírias e expressões populares.",
+      "imagem": "🍬",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Que □ótima□ ideia deixar a janela aberta na chuva!",
+      "opcoes": [
+        "aspas “ ”",
+        "parênteses ( )",
+        "vírgulas ,  ,",
+        "travessões —  —"
+      ],
+      "correta": "aspas “ ”",
+      "explica": "As aspas podem indicar ironia (o sentido é o contrário do comum).",
+      "imagem": "🌧️",
+      "enunciado": "Que sinal deve ocupar os dois □?"
+    },
+    {
+      "destaque": "Para ele, a prova foi “mamão com açúcar”.",
+      "opcoes": [
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "destacar o título de livro, filme, música ou jornal",
+        "destacar uma explicação no meio da frase",
+        "indicar uma sigla ou o significado dela"
+      ],
+      "correta": "destacar palavra estrangeira, gíria ou expressão popular",
+      "explica": "As aspas destacam estrangeirismos, gírias e expressões populares.",
+      "imagem": "🍬",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Vamos pedir um “delivery” de pizza?",
+      "opcoes": [
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "destacar o título de livro, filme, música ou jornal",
+        "destacar uma explicação no meio da frase",
+        "indicar uma sigla ou o significado dela"
+      ],
+      "correta": "destacar palavra estrangeira, gíria ou expressão popular",
+      "explica": "As aspas destacam estrangeirismos, gírias e expressões populares.",
+      "imagem": "🍕",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Meu livro preferido é “O Menino Maluquinho”.",
+      "opcoes": [
+        "destacar o título de livro, filme, música ou jornal",
+        "marcar uma citação (as palavras exatas de alguém)",
+        "destacar palavra estrangeira, gíria ou expressão popular",
+        "indicar ironia (sentido contrário ao comum)"
+      ],
+      "correta": "destacar o título de livro, filme, música ou jornal",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "📕",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Assistimos ao filme “Divertida Mente” na aula.",
+      "opcoes": [
+        "destacar o título de livro, filme, música ou jornal",
+        "indicar ironia (sentido contrário ao comum)",
+        "marcar uma citação (as palavras exatas de alguém)",
+        "destacar palavra estrangeira, gíria ou expressão popular"
+      ],
+      "correta": "destacar o título de livro, filme, música ou jornal",
+      "explica": "As aspas destacam títulos de livros, filmes, músicas e jornais.",
+      "imagem": "🎬",
+      "enunciado": "Para que servem as aspas nesta frase?"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "— Vamos embora — disse a mãe.",
+        "Vamos embora — disse a mãe —",
+        "— Vamos embora: disse a mãe.",
+        "— Vamos embora; disse a mãe."
+      ],
+      "correta": "— Vamos embora — disse a mãe.",
+      "explica": "O primeiro travessão abre a fala; o segundo separa a fala do narrador (disse a mãe).",
+      "imagem": "👩",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "— Você viu meu caderno? — perguntou Ana.",
+        "— Você viu meu caderno — perguntou Ana?",
+        "— Você viu meu caderno? perguntou — Ana.",
+        "Você viu meu caderno? — perguntou: Ana."
+      ],
+      "correta": "— Você viu meu caderno? — perguntou Ana.",
+      "explica": "A pergunta da personagem termina com interrogação, e o travessão separa a fala do narrador.",
+      "imagem": "📒",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "O menino perguntou: — Posso sair mais cedo?",
+        "O menino perguntou: — Posso sair mais cedo.",
+        "O menino perguntou? — Posso sair mais cedo.",
+        "O menino perguntou — Posso sair: mais cedo?"
+      ],
+      "correta": "O menino perguntou: — Posso sair mais cedo?",
+      "explica": "Dois-pontos depois de “perguntou”, travessão antes da fala e interrogação no fim da pergunta.",
+      "imagem": "🙋",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "— Cheguei! — gritou Lucas da porta.",
+        "— Cheguei — gritou Lucas da porta!",
+        "Cheguei! — gritou: Lucas da porta.",
+        "— Cheguei!, gritou — Lucas da porta."
+      ],
+      "correta": "— Cheguei! — gritou Lucas da porta.",
+      "explica": "A exclamação fica na fala de Lucas, e o travessão separa a fala do narrador.",
+      "imagem": "🚪",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "— Eu acho — disse Ana — que vai chover.",
+        "— Eu acho, disse Ana — que vai chover.",
+        "— Eu acho — disse Ana que vai chover.",
+        "— Eu acho: disse Ana: que vai chover."
+      ],
+      "correta": "— Eu acho — disse Ana — que vai chover.",
+      "explica": "Quando o narrador interrompe a fala, os travessões envolvem a fala do narrador (disse Ana).",
+      "imagem": "🌧️",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Li o livro “O Pequeno Príncipe” nas férias.",
+        "Li o livro “O Pequeno Príncipe nas férias.”",
+        "Li o livro, O Pequeno Príncipe” nas férias.",
+        "Li “o livro” O Pequeno Príncipe nas férias."
+      ],
+      "correta": "Li o livro “O Pequeno Príncipe” nas férias.",
+      "explica": "As aspas envolvem só o título do livro.",
+      "imagem": "📕",
+      "enunciado": "Atenção à pontuação:"
+    },
+    {
+      "destaque": "Qual frase está pontuada corretamente?",
+      "opcoes": [
+        "Ele disse: “Eu volto já.”",
+        "Ele disse “: Eu volto já.”",
+        "Ele disse: Eu volto “já.”",
+        "Ele “disse”: Eu volto já."
+      ],
+      "correta": "Ele disse: “Eu volto já.”",
+      "explica": "Os dois-pontos introduzem a citação, e as aspas envolvem as palavras exatas.",
+      "imagem": "🏃",
+      "enunciado": "Atenção à pontuação:"
+    }
+  ]
+}
