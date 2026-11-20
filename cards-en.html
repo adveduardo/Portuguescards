@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cards de inglês com revisão</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#1d4ed8} button.principal{background:#1d4ed8;box-shadow:0 3px 0 #163a9e}
+  body,.palco{background:#eaf1ff;background-image:linear-gradient(160deg,#eaf1ff,#f3fff1)}
+  .tela{display:none}.tela.ativa{display:block}
+  .cats{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;max-width:1100px;margin:6px auto}
+  .cat{-webkit-flex:1 1 230px;flex:1 1 230px;margin:5px;background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 3px 10px rgba(29,78,216,.1);cursor:pointer;border:3px solid transparent}
+  .cat.on{border-color:#1d4ed8;background:#f2f6ff}
+  .cat b{font-size:17px} .cat small{display:block;color:#56627a;margin-top:3px}
+  .barra{height:8px;border-radius:8px;background:#e3e8f2;margin-top:6px;overflow:hidden}
+  .barra i{display:block;height:100%;background:#27ae60}
+  .resumo{text-align:center;font-size:18px;margin:8px}
+  .resumo b{color:#1d4ed8}
+  .opcoes{text-align:center;margin:8px}
+  .opcoes label{margin:4px 10px;font-weight:bold}
+  .mesa{max-width:620px;margin:10px auto;-webkit-perspective:1400px;perspective:1400px}
+  .carta{position:relative;height:360px;cursor:pointer;-webkit-transition:-webkit-transform .5s;transition:transform .5s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}
+  .carta.virada{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+  .face{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:30px;background:#fff;box-shadow:0 12px 30px rgba(29,78,216,.18);display:-webkit-box;display:-webkit-flex;display:flex;
+    -webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;text-align:center;padding:18px;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden}
+  .frente{border:6px solid #93b4ff}
+  .verso{border:6px solid #8be0a4;-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+  .emo{font-size:84px;line-height:1.1}
+  .palavra{font-size:48px;font-weight:bold;color:#1f2a44;line-height:1.15}
+  .palavra.longa{font-size:30px}
+  .trad{font-size:30px;font-weight:bold;color:#1d4ed8;margin-top:6px}
+  .pron{font-size:22px;color:#8a5a00;background:#fff6dd;border-radius:12px;padding:4px 12px;margin-top:10px}
+  .dicaVirar{color:#8a94a8;font-size:15px;margin-top:12px}
+  .notas{text-align:center;margin:10px}
+  .notas button{font-size:22px;padding:14px 26px;margin:6px;min-width:190px}
+  #btErrei{background:#e74c3c;color:#fff;box-shadow:0 4px 0 #a93226}
+  #btAcertei{background:#27ae60;color:#fff;box-shadow:0 4px 0 #1e8449}
+  .notas small{display:block;font-size:13px;font-weight:normal;opacity:.9}
+  #progresso{text-align:center;font-weight:bold;font-size:17px}
+  textarea{width:100%;min-height:220px;font:13px Consolas,Menlo,monospace;border:2px solid #d8d2ee;border-radius:12px;padding:8px;box-sizing:border-box}
+  .fim{text-align:center;font-size:20px}
+  .fim .grande{font-size:64px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🗂️ Cards de inglês <small>Vire o card, ouça a pronúncia e diga se acertou. O que você erra volta logo; o que acerta volta cada vez mais tarde.</small></h1>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+
+  <!-- escolher -->
+  <div class="tela ativa" id="tEscolha">
+    <p class="resumo" id="resumo"></p>
+    <div class="opcoes">
+      <label>Lado da frente: <select id="selLado"><option value="en">🇬🇧 Inglês → português</option><option value="pt">🇧🇷 Português → inglês</option><option value="emoji">🖼️ Figura → inglês</option></select></label>
+      <label>Cards novos por vez: <select id="selNovos"><option>10</option><option selected>20</option><option>30</option><option>50</option></select></label>
+      <label><input type="checkbox" id="ckFalar" checked> Falar a palavra ao virar</label>
+    </div>
+    <p class="opcoes"><button type="button" class="principal" id="btEstudar">▶️ Estudar as categorias marcadas</button>
+      <button type="button" id="btTodas">☑️ Marcar todas</button> <button type="button" id="btNenhuma">⬜ Desmarcar</button></p>
+    <div class="cats" id="cats"></div>
+    <p class="opcoes"><button type="button" id="btJson">📋 Colar JSON (meus cards)</button> <button type="button" id="btModelo">📄 Copiar o modelo</button>
+      <button type="button" id="btPadrao" hidden>↩️ Voltar ao banco de 1000 cards</button> <button type="button" id="btZerar">🧹 Zerar meu progresso</button></p>
+    <p class="dica" style="text-align:center">Pronúncia escrita: é um jeito aproximado de ler em português; a parte em MAIÚSCULAS é a sílaba mais forte. O progresso fica guardado neste aparelho.</p>
+  </div>
+
+  <!-- estudar -->
+  <div class="tela" id="tEstudo">
+    <p id="progresso"></p>
+    <div class="mesa"><div class="carta" id="carta" role="button" tabindex="0" aria-label="Virar o card">
+      <div class="face frente" id="frente"></div>
+      <div class="face verso" id="verso"></div>
+    </div></div>
+    <div class="notas" id="notas" style="visibility:hidden">
+      <button type="button" id="btErrei">❌ Errei<small id="sErrei">volta daqui a pouco</small></button>
+      <button type="button" id="btAcertei">✅ Acertei<small id="sAcertei"></small></button>
+    </div>
+    <p class="opcoes"><button type="button" id="btOuvir">🔊 Ouvir</button> <button type="button" id="btSair">⏹️ Parar</button></p>
+    <p class="dica" style="text-align:center">Teclado: espaço vira • 1 = errei • 2 = acertei • O ouve de novo</p>
+  </div>
+
+  <!-- fim -->
+  <div class="tela" id="tFim"><div class="cartao fim" id="cFim"></div></div>
+
+  <!-- json -->
+  <div class="tela" id="tJson"><div class="cartao">
+    <h2>📋 Meus cards (JSON)</h2>
+    <p class="dica">Cole aqui os seus cards no formato do modelo. Eles ficam guardados neste aparelho e aparecem no lugar do banco.</p>
+    <textarea id="txtJson"></textarea>
+    <p id="msgJson" class="dica"></p>
+    <p><button type="button" class="principal" id="btUsarJson">✔️ Usar estes cards</button> <button type="button" id="btCancelarJson">Cancelar</button></p>
+  </div></div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH_PROG = 'cards_en_progresso', CH_JSON = 'cards_en_json', DIA = 86400000;
+  var INTERV = [0, 1, 3, 7, 14, 30, 60];   // dias de espera em cada caixa (revisão espaçada)
+  var banco = null, cats = [], marcadas = {}, prog = Sala.ler(CH_PROG) || {}, fila = [], atual = null, virada = false, sessao = null;
+  EN.lang = 'en-US';
+  function hoje(){ var d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
+  function chave(c){ return (c.cat + '|' + c.en).toLowerCase(); }
+  function estado(c){ return prog[chave(c)] || null; }   // {cx: caixa, dt: data da próxima revisão}
+  function vencido(c){ var e = estado(c); return e && e.dt <= hoje(); }
+  function aprendido(c){ var e = estado(c); return e && e.cx >= 3; }
+  function salvar(){ Sala.gravar(CH_PROG, prog); }
+  function falar(c){ if (c) EN.falar(c.en, {rate: 0.85}); }
+
+  // ---------- banco ----------
+  function usarBanco(d){
+    banco = d; cats = [];
+    (d.categorias || []).forEach(function(k, i){
+      var id = k.id || ('c' + i), lista = (k.cards || []).filter(function(c){ return c && c.en && c.pt; }).map(function(c){ return {en: String(c.en), pt: String(c.pt), pron: c.pron ? String(c.pron) : '', emoji: c.emoji ? String(c.emoji) : '', cat: id}; });
+      if (lista.length) cats.push({id: id, nome: String(k.nome || id), emoji: k.emoji || '🗂️', cards: lista});
+    });
+    var salvas = Sala.ler('cards_en_marcadas'); marcadas = {};
+    cats.forEach(function(k){ marcadas[k.id] = salvas ? !!salvas[k.id] : true; });
+    desenharCats();
+  }
+  function desenharCats(){
+    var totAp = 0, totVen = 0, tot = 0, totEst = 0;
+    $('cats').innerHTML = cats.map(function(k){
+      var ap = 0, ven = 0, novos = 0;
+      k.cards.forEach(function(c){ if (aprendido(c)) ap++; if (vencido(c)) ven++; if (!estado(c)) novos++; else totEst++; });
+      totAp += ap; totVen += ven; tot += k.cards.length;
+      return '<div class="cat' + (marcadas[k.id] ? ' on' : '') + '" data-k="' + Sala.esc(k.id) + '"><b>' + k.emoji + ' ' + Sala.esc(k.nome) + '</b>' +
+        '<small>' + k.cards.length + ' cards • ' + novos + ' novos • ' + ven + ' para revisar</small><div class="barra"><i style="width:' + Math.round(ap / k.cards.length * 100) + '%"></i></div></div>';
+    }).join('');
+    $('resumo').innerHTML = '<b>' + tot + '</b> cards • <b>' + totEst + '</b> já estudados • <b>' + totAp + '</b> bem aprendidos • <b>' + totVen + '</b> para revisar hoje';
+  }
+  $('cats').onclick = function(e){
+    var el = e.target; while (el && el !== this && !el.getAttribute('data-k')) el = el.parentNode;
+    if (!el || el === this) return; var k = el.getAttribute('data-k'); marcadas[k] = !marcadas[k]; Sala.gravar('cards_en_marcadas', marcadas); desenharCats();
+  };
+  $('btTodas').onclick = function(){ cats.forEach(function(k){ marcadas[k.id] = true; }); Sala.gravar('cards_en_marcadas', marcadas); desenharCats(); };
+  $('btNenhuma').onclick = function(){ cats.forEach(function(k){ marcadas[k.id] = false; }); Sala.gravar('cards_en_marcadas', marcadas); desenharCats(); };
+
+  // ---------- sessão ----------
+  function embaralhar(a){ return EN.embaralhar(a); }
+  function estudar(){
+    var rev = [], novos = [], lim = +$('selNovos').value;
+    cats.forEach(function(k){ if (!marcadas[k.id]) return; k.cards.forEach(function(c){ if (vencido(c)) rev.push(c); else if (!estado(c)) novos.push(c); }); });
+    if (!rev.length && !novos.length){ Sala.avisar('Nada para estudar agora nessas categorias. 🎉 Marque outras ou volte amanhã!'); return; }
+    fila = embaralhar(rev).concat(embaralhar(novos).slice(0, lim));
+    sessao = {total: fila.length, acertos: 0, erros: 0, vistos: {}, rev: rev.length};
+    tela('tEstudo'); proximo();
+  }
+  function tela(id){ var ts = document.querySelectorAll('.tela'); for (var i = 0; i < ts.length; i++) ts[i].className = 'tela' + (ts[i].id === id ? ' ativa' : ''); }
+  function longa(t){ return String(t).length > 18 ? ' longa' : ''; }
+  function proximo(){
+    atual = fila.shift(); virada = false; $('carta').className = 'carta'; $('notas').style.visibility = 'hidden';
+    if (!atual){ fim(); return; }
+    var lado = $('selLado').value, c = atual;
+    var frente = lado === 'pt' ? '<div class="palavra' + longa(c.pt) + '">' + Sala.esc(c.pt) + '</div>'
+      : lado === 'emoji' && c.emoji ? '<div class="emo" style="font-size:130px">' + c.emoji + '</div>'
+      : (c.emoji ? '<div class="emo">' + c.emoji + '</div>' : '') + '<div class="palavra' + longa(c.en) + '">' + Sala.esc(c.en) + '</div>';
+    $('frente').innerHTML = frente + '<div class="dicaVirar">toque para virar</div>';
+    $('verso').innerHTML = (c.emoji ? '<div class="emo">' + c.emoji + '</div>' : '') + '<div class="palavra' + longa(c.en) + '">' + Sala.esc(c.en) + '</div>' +
+      '<div class="trad">' + Sala.esc(c.pt) + '</div>' + (c.pron ? '<div class="pron">🗣️ ' + Sala.esc(c.pron) + '</div>' : '');
+    var e = estado(c), cx = e ? e.cx : 0, prox = INTERV[Math.min(INTERV.length - 1, cx + 1)];
+    $('sAcertei').textContent = 'volta em ' + prox + (prox === 1 ? ' dia' : ' dias');
+    $('progresso').textContent = 'Card ' + (sessao.total - fila.length) + ' de ' + sessao.total + (e ? ' • revisão' : ' • novo') + ' • ✅ ' + sessao.acertos + '  ❌ ' + sessao.erros;
+    if (lado === 'en' && $('ckFalar').checked) falar(c);
+  }
+  function virar(){
+    if (!atual) return;
+    virada = !virada; $('carta').className = 'carta' + (virada ? ' virada' : '');
+    if (virada){ $('notas').style.visibility = 'visible'; if ($('ckFalar').checked && $('selLado').value !== 'en') falar(atual); }
+  }
+  function nota(certo){
+    if (!atual || !virada) return;
+    var k = chave(atual), e = prog[k] || {cx: 0, dt: hoje()};
+    if (certo){
+      sessao.acertos++;
+      if (sessao.vistos[k] !== 'errou') e.cx = Math.min(INTERV.length - 1, e.cx + 1);   // errou nesta sessão: só confirma, não sobe
+      e.dt = hoje() + INTERV[Math.max(1, e.cx)] * DIA; Sala.plim();
+    } else {
+      sessao.erros++; e.cx = 0; e.dt = hoje(); sessao.vistos[k] = 'errou';
+      fila.splice(Math.min(fila.length, 4), 0, atual);   // volta depois de 3 cards
+      Sala.tom(220, 0.2);
+    }
+    prog[k] = e; salvar(); proximo();
+  }
+  function fim(){
+    var t = sessao.acertos + sessao.erros, pct = t ? Math.round(sessao.acertos / t * 100) : 0;
+    $('cFim').innerHTML = '<div class="grande">' + (pct >= 80 ? '🏆' : pct >= 50 ? '💪' : '🌱') + '</div><h2>Sessão concluída!</h2>' +
+      '<p>✅ ' + sessao.acertos + ' acertos • ❌ ' + sessao.erros + ' erros • 🎯 ' + pct + '%</p><p class="dica">Os cards que você acertou só voltam nos próximos dias. Volte amanhã para revisar!</p>' +
+      '<p><button type="button" class="principal" id="btDeNovo">🔁 Estudar mais</button> <button type="button" id="btVoltar">🗂️ Categorias</button></p>';
+    tela('tFim'); if (pct >= 80) Sala.confete(60);
+    $('btDeNovo').onclick = estudar; $('btVoltar').onclick = voltar;
+  }
+  function voltar(){ desenharCats(); tela('tEscolha'); }
+  $('btEstudar').onclick = estudar;
+  $('carta').onclick = virar;
+  $('btErrei').onclick = function(){ nota(false); };
+  $('btAcertei').onclick = function(){ nota(true); };
+  $('btOuvir').onclick = function(){ falar(atual); };
+  $('btSair').onclick = function(){ if (sessao && sessao.acertos + sessao.erros) fim(); else voltar(); };
+  document.addEventListener('keydown', function(e){
+    if (!/tEstudo/.test(document.querySelector('.tela.ativa').id)) return;
+    if (e.keyCode === 32){ e.preventDefault(); virar(); }
+    else if (e.keyCode === 49 || e.keyCode === 97) nota(false);
+    else if (e.keyCode === 50 || e.keyCode === 98) nota(true);
+    else if (e.keyCode === 79) falar(atual);
+  });
+
+  // ---------- JSON ----------
+  var MODELO = {titulo: 'Meus cards', categorias: [{id: 'comida', nome: 'Comida', emoji: '🍽️', cards: [{en: 'apple', pt: 'maçã', pron: 'É-pou', emoji: '🍎'}, {en: 'bread', pt: 'pão', pron: 'BRÉD', emoji: '🍞'}]},
+    {id: 'cores', nome: 'Cores', emoji: '🎨', cards: [{en: 'red', pt: 'vermelho', pron: 'RÉD', emoji: '🔴'}]}]};
+  $('btModelo').onclick = function(){
+    var t = JSON.stringify(MODELO, null, 2);
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function(){ Sala.avisar('📋 Modelo copiado!'); }, function(){ abrirJson(t); });
+    else abrirJson(t);
+  };
+  function abrirJson(t){ $('txtJson').value = t || ''; $('msgJson').textContent = ''; tela('tJson'); }
+  $('btJson').onclick = function(){ abrirJson(Sala.ler(CH_JSON) ? JSON.stringify(Sala.ler(CH_JSON), null, 2) : ''); };
+  $('btCancelarJson').onclick = voltar;
+  $('btUsarJson').onclick = function(){
+    var d;
+    try { d = JSON.parse($('txtJson').value); } catch (e) { $('msgJson').textContent = '⚠️ O texto não é um JSON válido: ' + e.message; return; }
+    if (d && d.cards instanceof Array && !d.categorias) d = {titulo: d.titulo || 'Meus cards', categorias: [{id: 'meus', nome: d.titulo || 'Meus cards', emoji: '⭐', cards: d.cards}]};
+    var ok = d && d.categorias instanceof Array && d.categorias.some(function(k){ return k.cards instanceof Array && k.cards.some(function(c){ return c && c.en && c.pt; }); });
+    if (!ok){ $('msgJson').textContent = '⚠️ Precisa ter "categorias" com "cards" e cada card com "en" e "pt" (veja o modelo).'; return; }
+    Sala.gravar(CH_JSON, d); Sala.gravar('cards_en_marcadas', null); usarBanco(d); $('btPadrao').hidden = false; voltar(); Sala.avisar('✔️ Seus cards foram carregados!');
+  };
+  $('btPadrao').onclick = function(){ try { localStorage.removeItem(CH_JSON); } catch (e) {} $('btPadrao').hidden = true; carregarPadrao(); };
+  $('btZerar').onclick = function(){ if (!confirm('Apagar todo o progresso dos cards guardado neste aparelho?')) return; prog = {}; salvar(); desenharCats(); };
+
+  function carregarPadrao(){
+    var arq = (EN.param('arquivo') || 'cards-en.json').replace(/[^\w.-]/g, '');
+    EN.json('dados/' + arq, function(err, d){ if (err || !d){ $('resumo').textContent = 'Não consegui abrir os cards.'; return; } usarBanco(d); });
+  }
+  Sala.botaoSom($('btSom'));
+  var meus = Sala.ler(CH_JSON);
+  if (meus){ usarBanco(meus); $('btPadrao').hidden = false; } else carregarPadrao();
+  window.CARDS = {fila: function(){ return fila; }, atual: function(){ return atual; }, prog: function(){ return prog; }, cats: function(){ return cats; }, sessao: function(){ return sessao; }};
+})();
+</script>
+</body>
+</html>
