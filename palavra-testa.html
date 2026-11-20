@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Palavra na testa</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#c2185b} button.principal{background:#c2185b;box-shadow:0 3px 0 #8e1043}
+  body,.palco{background:#fff0f6;background-image:linear-gradient(160deg,#fff0f6,#eef0ff)}
+  .tela{display:none} .tela.ativa{display:block}
+  .equipesEd input{margin:3px 0}
+  .regras{font-size:16px;line-height:1.45}
+  .vez{text-align:center;padding:40px 16px}
+  .vez h2{font-size:44px;margin:10px 0}
+  .vez p{font-size:21px}
+  .grandeBt{font-size:26px;padding:16px 30px;border-radius:18px}
+  #tJogo{position:fixed;left:0;top:0;right:0;bottom:0;background:#fff;z-index:10;-webkit-user-select:none;user-select:none}
+  #zonaCima,#zonaBaixo{position:absolute;left:0;right:0;height:50%;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:flex-start;align-items:flex-start;-webkit-justify-content:center;justify-content:center;font-size:17px;font-weight:bold;padding:8px;opacity:.85}
+  #zonaCima{top:0;background:#e3f7ee;color:#11613a}
+  #zonaBaixo{bottom:0;background:#fff1de;color:#8a4b00;-webkit-align-items:flex-end;align-items:flex-end}
+  #cartaoPalavra{position:absolute;left:4%;right:4%;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);text-align:center;pointer-events:none}
+  #emojiJ{font-size:90px;line-height:1.1}
+  #palavraJ{font-weight:bold;color:#1f2a44;line-height:1.05;word-wrap:break-word}
+  #relogioJ{position:absolute;right:14px;top:40px;font-size:34px;font-weight:bold;color:#1f2a44;background:#fff;border-radius:14px;padding:2px 12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+  #relogioJ.fim{color:#d62839}
+  #placarJ{position:absolute;left:14px;top:40px;font-size:22px;font-weight:bold;background:#fff;border-radius:14px;padding:4px 12px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+  #flash{position:absolute;left:0;top:0;right:0;bottom:0;display:none;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:120px;font-weight:bold;color:#fff;z-index:12}
+  #flash.ok{display:-webkit-box;display:-webkit-flex;display:flex;background:rgba(31,157,107,.92)}
+  #flash.passa{display:-webkit-box;display:-webkit-flex;display:flex;background:rgba(232,137,12,.92)}
+  #contagem{position:fixed;left:0;top:0;right:0;bottom:0;background:#1f2a44;color:#fff;z-index:14;display:none;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;font-size:180px;font-weight:bold}
+  .lista span{display:inline-block;margin:4px;padding:6px 12px;border-radius:12px;font-size:19px;font-weight:bold}
+  .lista .ok{background:#e3f7ee;color:#11613a}
+  .lista .passa{background:#fff1de;color:#8a4b00}
+  .placar{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:12px 0}
+  .placar div{margin:6px;padding:10px 18px;border-radius:16px;color:#fff;font-size:22px;font-weight:bold;text-align:center;min-width:140px}
+  .placar small{display:block;font-size:30px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <section id="tConfig" class="tela ativa">
+    <div class="topo"><h1>🙆 Palavra na testa <small>Uma pessoa segura o iPad na testa e adivinha a palavra com as dicas da turma.</small></h1><button type="button" id="btSom">🔊</button></div>
+    <div class="duas">
+      <div class="cartao">
+        <label class="campo" for="selBaralho">Baralho de palavras</label>
+        <select id="selBaralho"></select>
+        <label style="display:block;margin:8px 0"><input type="checkbox" id="chkFigura" checked> Mostrar a figura junto (nos temas em inglês)</label>
+        <div class="linha">
+          <div><label class="campo" for="selTempo">Tempo de cada vez</label><select id="selTempo"><option value="60">1 minuto</option><option value="90" selected>1 minuto e meio</option><option value="120">2 minutos</option></select></div>
+          <div><label class="campo" for="selEquipes">Equipes</label><select id="selEquipes"><option value="1">1 (sem disputa)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div>
+        </div>
+        <div class="equipesEd" id="equipesEd"></div>
+        <button type="button" class="principal grandeBt" id="btComecar" style="margin-top:12px">▶️ Começar</button>
+      </div>
+      <div class="cartao regras">
+        <h2>Como jogar</h2>
+        <p>1. Quem vai adivinhar segura o iPad <b>na testa</b>, com a tela virada para a turma.</p>
+        <p>2. A turma dá dicas <b>sem falar a palavra</b>. Nos temas em inglês, as dicas são <b>em inglês</b>: <i>“It’s an animal. It says moo!”</i></p>
+        <p>3. Acertou? Toque <b>na parte de cima</b> da tela. Quer pular? Toque <b>na parte de baixo</b>.</p>
+        <p>4. Cada acerto vale 1 ponto. Quando o tempo acaba, passa para a próxima equipe.</p>
+        <p class="dica">No computador: seta ↑ ou → = acertou • seta ↓ ou ← = passar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tVez" class="tela">
+    <div class="cartao vez">
+      <p id="vezSub">Vez da equipe</p>
+      <h2 id="vezNome"></h2>
+      <p>Quem vai adivinhar: segure o iPad na testa, com a tela para a turma.</p>
+      <div class="placar" id="placarVez"></div>
+      <button type="button" class="principal grandeBt" id="btRodada">▶️ Começar a rodada</button>
+    </div>
+  </section>
+
+  <section id="tFimVez" class="tela">
+    <div class="cartao vez">
+      <h2 id="fimTitulo">⏰ Acabou o tempo!</h2>
+      <p id="fimSub"></p>
+      <div class="lista" id="fimLista"></div>
+      <div class="placar" id="placarFim"></div>
+      <button type="button" class="principal grandeBt" id="btProxima">➡️ Próxima equipe</button>
+      <button type="button" id="btEncerrar">🏁 Encerrar o jogo</button>
+    </div>
+  </section>
+
+  <section id="tFinal" class="tela">
+    <div class="cartao vez">
+      <h2 id="finalTitulo">🏆 Fim de jogo!</h2>
+      <div class="placar" id="placarFinal"></div>
+      <button type="button" class="principal grandeBt" id="btDeNovo">🔁 Jogar de novo</button>
+    </div>
+  </section>
+</div>
+
+<div id="tJogo" class="tela">
+  <div id="zonaCima">▲ ACERTOU: toque aqui</div>
+  <div id="zonaBaixo">▼ PASSAR: toque aqui</div>
+  <div id="placarJ"></div>
+  <div id="relogioJ"></div>
+  <div id="cartaoPalavra"><div id="emojiJ"></div><div id="palavraJ"></div></div>
+  <div id="flash"></div>
+</div>
+<div id="contagem"></div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CORES = ['#2f80ed', '#e8590c', '#1f9d6b', '#8e44ad'], baralhos = [], equipes = [], vez = 0, monte = [], usadas = 0;
+  var tempo = 90, restante = 0, relogio = null, rodada = [], ultimoToque = 0, jogando = false;
+
+  function tela(id){
+    var ts = document.querySelectorAll('.tela');
+    for (var i = 0; i < ts.length; i++) ts[i].className = ts[i].className.replace(/\s*ativa/g, '');
+    $(id).className += ' ativa';
+  }
+  function desenharEquipesEd(){
+    var n = +$('selEquipes').value, h = '';
+    for (var i = 0; i < n; i++) h += '<input type="text" maxlength="20" data-i="' + i + '" value="' + Sala.esc((equipes[i] && equipes[i].nome) || 'Equipe ' + (i + 1)) + '" aria-label="Nome da equipe ' + (i + 1) + '" style="border-color:' + CORES[i] + '">';
+    $('equipesEd').innerHTML = n > 1 ? '<label class="campo">Nomes das equipes</label>' + h : '';
+  }
+  function placarHTML(destaque){
+    return equipes.map(function(e, i){ return '<div style="background:' + CORES[i] + (destaque === i ? ';outline:4px solid #ffd54a' : '') + '">' + Sala.esc(e.nome) + '<small>' + e.pontos + '</small></div>'; }).join('');
+  }
+  function baralhoAtual(){ return baralhos[+$('selBaralho').value]; }
+
+  function comecar(){
+    var b = baralhoAtual(); if (!b || !b.itens.length) return Sala.avisar('Escolha um baralho.');
+    tempo = +$('selTempo').value;
+    var n = +$('selEquipes').value, nomes = $('equipesEd').querySelectorAll('input');
+    equipes = [];
+    for (var i = 0; i < n; i++) equipes.push({nome: (nomes[i] && Sala.aparar(nomes[i].value)) || (n > 1 ? 'Equipe ' + (i + 1) : 'Turma'), pontos: 0});
+    monte = EN.embaralhar(b.itens); usadas = 0; vez = 0;
+    mostrarVez();
+  }
+  function mostrarVez(){
+    $('vezSub').textContent = equipes.length > 1 ? 'Vez da equipe' : 'Vamos jogar!';
+    $('vezNome').textContent = equipes[vez].nome; $('vezNome').style.color = CORES[vez];
+    $('placarVez').innerHTML = equipes.length > 1 ? placarHTML(vez) : '';
+    tela('tVez');
+  }
+  function contagem(fim){
+    var c = $('contagem'), n = 3;
+    c.style.display = '-webkit-box'; c.style.display = '-webkit-flex'; c.style.display = 'flex';
+    (function passo(){
+      if (n === 0){ c.style.display = 'none'; fim(); return; }
+      c.textContent = n; Sala.tom(660, 0.12); n--; setTimeout(passo, 800);
+    })();
+  }
+  function iniciarRodada(){
+    contagem(function(){
+      rodada = []; restante = tempo; jogando = true;
+      tela('tJogo'); proximaPalavra(); atualizarRelogio();
+      clearInterval(relogio);
+      relogio = setInterval(function(){
+        restante--; atualizarRelogio();
+        if (restante > 0 && restante <= 5) Sala.tom(880, 0.08);
+        if (restante <= 0) fimDaVez();
+      }, 1000);
+    });
+  }
+  function atualizarRelogio(){
+    $('relogioJ').textContent = '⏱️ ' + Math.max(0, restante);
+    $('relogioJ').className = restante <= 10 ? 'fim' : '';
+    var pts = 0; rodada.forEach(function(r){ if (r.ok) pts++; });
+    $('placarJ').textContent = '✅ ' + pts;
+  }
+  function palavraAtual(){ return monte[usadas]; }
+  function proximaPalavra(){
+    if (usadas >= monte.length){ fimDaVez(true); return; }
+    var w = palavraAtual(), mostrarFig = $('chkFigura').checked && w.e;
+    $('emojiJ').textContent = mostrarFig ? w.e : ''; $('emojiJ').style.display = mostrarFig ? '' : 'none';
+    var tam = w.t.length > 18 ? 60 : w.t.length > 10 ? 86 : 120;
+    if (window.innerWidth < 700) tam = Math.round(tam * 0.65);
+    $('palavraJ').style.fontSize = tam + 'px'; $('palavraJ').textContent = w.t;
+  }
+  function marcar(ok){
+    if (!jogando) return;
+    var agora = new Date().getTime(); if (agora - ultimoToque < 450) return; ultimoToque = agora;
+    var w = palavraAtual(); if (!w) return;
+    rodada.push({t: w.t, ok: ok}); usadas++;
+    if (ok){ equipes[vez].pontos++; Sala.plim(); } else Sala.tom(300, 0.15, 0, 'sawtooth');
+    var f = $('flash'); f.className = ok ? 'ok' : 'passa'; f.textContent = ok ? '✓' : '➜';
+    setTimeout(function(){ f.className = ''; }, 380);
+    atualizarRelogio(); proximaPalavra();
+  }
+  function fimDaVez(acabouMonte){
+    if (!jogando) return;
+    jogando = false; clearInterval(relogio);
+    Sala.tom(220, 0.5, 0, 'square');
+    var pts = 0; rodada.forEach(function(r){ if (r.ok) pts++; });
+    $('fimTitulo').textContent = acabouMonte ? '🎉 Acabaram as palavras!' : '⏰ Acabou o tempo!';
+    $('fimSub').textContent = equipes[vez].nome + ': ' + pts + (pts === 1 ? ' acerto' : ' acertos') + ' nesta vez.';
+    $('fimLista').innerHTML = rodada.map(function(r){ return '<span class="' + (r.ok ? 'ok' : 'passa') + '">' + (r.ok ? '✓ ' : '➜ ') + Sala.esc(r.t) + '</span>'; }).join('') || '<p class="dica">Nenhuma palavra nesta vez.</p>';
+    $('placarFim').innerHTML = equipes.length > 1 ? placarHTML(vez) : '';
+    $('btProxima').style.display = usadas >= monte.length ? 'none' : '';
+    $('btProxima').innerHTML = equipes.length > 1 ? '➡️ Próxima equipe' : '➡️ Mais uma rodada';
+    tela('tFimVez');
+    if (pts) Sala.confete(50);
+  }
+  function final(){
+    var ord = equipes.map(function(e, i){ return {e: e, i: i}; }).sort(function(a, b){ return b.e.pontos - a.e.pontos; });
+    $('finalTitulo').textContent = equipes.length > 1 ? '🏆 ' + ord[0].e.nome + ' venceu!' : '🏆 ' + equipes[0].pontos + ' acertos!';
+    if (equipes.length > 1 && ord[1] && ord[1].e.pontos === ord[0].e.pontos) $('finalTitulo').textContent = '🙌 Empate!';
+    $('placarFinal').innerHTML = ord.map(function(x, k){ return '<div style="background:' + CORES[x.i] + '">' + (k + 1) + 'º ' + Sala.esc(x.e.nome) + '<small>' + x.e.pontos + '</small></div>'; }).join('');
+    tela('tFinal'); Sala.festa(); Sala.confete();
+  }
+
+  $('zonaCima').onclick = function(){ marcar(true); };
+  $('zonaBaixo').onclick = function(){ marcar(false); };
+  document.addEventListener('keydown', function(e){
+    if (!jogando) return;
+    if (e.keyCode === 38 || e.keyCode === 39){ e.preventDefault(); marcar(true); }
+    else if (e.keyCode === 40 || e.keyCode === 37){ e.preventDefault(); marcar(false); }
+  });
+  $('selEquipes').onchange = desenharEquipesEd;
+  $('btComecar').onclick = comecar;
+  $('btRodada').onclick = iniciarRodada;
+  $('btProxima').onclick = function(){ vez = (vez + 1) % equipes.length; mostrarVez(); };
+  $('btEncerrar').onclick = final;
+  $('btDeNovo').onclick = function(){ tela('tConfig'); };
+  Sala.botaoSom($('btSom'));
+  desenharEquipesEd();
+
+  // baralhos: temas em inglês (en-vocab) + listas da mímica (português e inglês)
+  function preencher(){
+    $('selBaralho').innerHTML = baralhos.map(function(b, i){ return '<option value="' + i + '">' + Sala.esc(b.nome) + ' (' + b.itens.length + ')</option>'; }).join('');
+    var pedido = EN.param('baralho');
+    for (var i = 0; i < baralhos.length; i++) if (baralhos[i].id === pedido) $('selBaralho').value = i;
+  }
+  EN.json('dados/en-vocab.json', function(err, d){
+    if (!err && d && d.temas) d.temas.forEach(function(t){
+      if (t.id === 'classroom' || t.id === 'numbers') return;
+      baralhos.push({id: 'en-' + t.id, nome: '🇬🇧 ' + t.nome, itens: t.palavras.map(function(p){ return {t: p.en, e: p.emoji}; })});
+    });
+    preencher();
+    EN.json('dados/indice.json', function(err2, ind){
+      var arqs = !err2 && ind && ind.mimica ? ind.mimica : [], falta = arqs.length;
+      if (!falta) return;
+      arqs.forEach(function(a){
+        EN.json('dados/' + a.arquivo, function(err3, m){
+          if (!err3 && m && m.palavras instanceof Array) baralhos.push({id: a.arquivo.replace('.json', ''), nome: (/^🇬🇧/.test(a.titulo) ? '' : '🇧🇷 ') + a.titulo,
+            itens: m.palavras.map(function(x){ return {t: typeof x === 'string' ? x : String(x.palavra || ''), e: ''}; }).filter(function(x){ return x.t; })});
+          if (--falta === 0) preencher();
+        });
+      });
+    });
+  });
+  window.TESTA = {equipes: function(){ return equipes; }, rodada: function(){ return rodada; }, restante: function(v){ if (v != null) restante = v; return restante; }, marcar: marcar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

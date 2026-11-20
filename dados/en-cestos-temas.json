@@ -1,0 +1,163 @@
+{
+  "titulo": "Which group? Weather, clothes, house, body, feelings, places",
+  "cestos": [
+    {
+      "id": "weather",
+      "nome": "Weather and seasons",
+      "emoji": "🌦️",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "clothes",
+      "nome": "Clothes",
+      "emoji": "👕",
+      "cor": "#c2185b"
+    },
+    {
+      "id": "house",
+      "nome": "House",
+      "emoji": "🏠",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "body",
+      "nome": "Body",
+      "emoji": "💪",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "feelings",
+      "nome": "Feelings",
+      "emoji": "😀",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "city",
+      "nome": "City and places",
+      "emoji": "🏙️",
+      "cor": "#00838f"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "sunny",
+      "cesto": "weather"
+    },
+    {
+      "palavra": "cloudy",
+      "cesto": "weather"
+    },
+    {
+      "palavra": "rainy",
+      "cesto": "weather"
+    },
+    {
+      "palavra": "stormy",
+      "cesto": "weather"
+    },
+    {
+      "palavra": "snowy",
+      "cesto": "weather"
+    },
+    {
+      "palavra": "T-shirt",
+      "cesto": "clothes"
+    },
+    {
+      "palavra": "shirt",
+      "cesto": "clothes"
+    },
+    {
+      "palavra": "jeans",
+      "cesto": "clothes"
+    },
+    {
+      "palavra": "dress",
+      "cesto": "clothes"
+    },
+    {
+      "palavra": "sneakers",
+      "cesto": "clothes"
+    },
+    {
+      "palavra": "house",
+      "cesto": "house"
+    },
+    {
+      "palavra": "garden",
+      "cesto": "house"
+    },
+    {
+      "palavra": "door",
+      "cesto": "house"
+    },
+    {
+      "palavra": "key",
+      "cesto": "house"
+    },
+    {
+      "palavra": "bed",
+      "cesto": "house"
+    },
+    {
+      "palavra": "eye",
+      "cesto": "body"
+    },
+    {
+      "palavra": "eyes",
+      "cesto": "body"
+    },
+    {
+      "palavra": "ear",
+      "cesto": "body"
+    },
+    {
+      "palavra": "nose",
+      "cesto": "body"
+    },
+    {
+      "palavra": "mouth",
+      "cesto": "body"
+    },
+    {
+      "palavra": "happy",
+      "cesto": "feelings"
+    },
+    {
+      "palavra": "sad",
+      "cesto": "feelings"
+    },
+    {
+      "palavra": "angry",
+      "cesto": "feelings"
+    },
+    {
+      "palavra": "scared",
+      "cesto": "feelings"
+    },
+    {
+      "palavra": "surprised",
+      "cesto": "feelings"
+    },
+    {
+      "palavra": "school",
+      "cesto": "city"
+    },
+    {
+      "palavra": "hospital",
+      "cesto": "city"
+    },
+    {
+      "palavra": "bank",
+      "cesto": "city"
+    },
+    {
+      "palavra": "post office",
+      "cesto": "city"
+    },
+    {
+      "palavra": "store",
+      "cesto": "city"
+    }
+  ]
+}

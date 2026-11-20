@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Música com lacunas</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#7b2cbf} button.principal{background:#7b2cbf;box-shadow:0 3px 0 #561f86}
+  body,.palco{background:#f5efff;background-image:linear-gradient(160deg,#f5efff,#eaf6ff)}
+  textarea#letra{min-height:230px;font-size:17px;line-height:1.45}
+  .tela{display:none} .tela.ativa{display:block}
+  .editor{font-size:22px;line-height:2.1;max-width:1000px;margin:0 auto}
+  .w{cursor:pointer;border-radius:8px;padding:2px 4px}
+  .w:hover{background:#efe3ff}
+  .w.oculta{background:#7b2cbf;color:#fff}
+  .palcoLetra{max-width:1150px;margin:0 auto;background:#fff;border-radius:22px;padding:18px 24px;box-shadow:0 8px 22px rgba(60,20,110,.12);line-height:1.9}
+  .lacuna{display:inline-block;border:none;border-bottom:4px solid #7b2cbf;background:#f6f0ff;color:#7b2cbf;border-radius:8px 8px 0 0;font:inherit;font-weight:bold;padding:0 8px;margin:0 2px;cursor:pointer;box-shadow:none;min-width:2.5em;text-align:center}
+  .lacuna small{font-size:.55em;vertical-align:super;margin-right:3px;color:#9a7cc4}
+  .lacuna.aberta{background:#e3f7ee;color:#11613a;border-bottom-color:#1f9d6b}
+  .banco{max-width:1150px;margin:10px auto;background:#fff7d6;border:3px dashed #f2c94c;border-radius:18px;padding:10px 14px;text-align:center}
+  .banco span{display:inline-block;margin:4px 6px;padding:4px 12px;border-radius:12px;background:#fff;font-weight:bold;font-size:20px}
+  .banco span.usada{text-decoration:line-through;opacity:.45}
+  .barra{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;margin:8px auto;max-width:1150px}
+  #info{text-align:center;font-weight:bold;color:#561f86;margin:6px 0}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo"><h1>🎵 Música com lacunas <small>Cole a letra da música que você vai tocar, escolha as palavras que somem e a turma completa ouvindo.</small></h1><button type="button" id="btSom">🔊</button></div>
+
+  <section id="tConfig" class="tela ativa">
+    <div class="duas">
+      <div class="cartao">
+        <label class="campo" for="selMusica">Letra</label>
+        <select id="selMusica"><option value="">✍️ Colar a letra de uma música</option></select>
+        <textarea id="letra" placeholder="Cole aqui a letra da música (uma linha por verso)." aria-label="Letra da música" style="margin-top:8px"></textarea>
+        <p class="dica">🔒 A letra fica só neste aparelho. Toque a música pelo YouTube, celular ou caixa de som, como de costume.</p>
+      </div>
+      <div class="cartao">
+        <label class="campo" for="selModo">Quais palavras somem?</label>
+        <select id="selModo">
+          <option value="eu">👆 Eu escolho (toco nas palavras)</option>
+          <option value="4">✂️ Uma a cada 4 palavras</option>
+          <option value="grandes" selected>🔠 Algumas palavras grandes (5 letras ou mais)</option>
+        </select>
+        <label class="campo" for="selIdioma">Voz para ler a letra</label>
+        <select id="selIdioma"><option value="en-US">🇬🇧 Inglês</option><option value="pt-BR">🇧🇷 Português</option></select>
+        <button type="button" class="principal" id="btPreparar" style="margin-top:14px;font-size:18px">✂️ Preparar as lacunas</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="tEditor" class="tela">
+    <div class="cartao">
+      <p class="dica" style="text-align:center">Toque nas palavras para esconder ou mostrar. As roxas viram lacunas.</p>
+      <div class="editor" id="editor"></div>
+      <div class="barra">
+        <button type="button" id="btVoltar">⬅️ Trocar a letra</button>
+        <button type="button" id="btLimpar">↺ Mostrar todas</button>
+        <button type="button" class="principal" id="btTurma">▶️ Mostrar para a turma</button>
+      </div>
+      <p id="info"></p>
+    </div>
+  </section>
+
+  <section id="tTurma" class="tela">
+    <div class="barra">
+      <button type="button" id="btEditar">✏️ Editar</button>
+      <button type="button" id="btBanco">🔤 Banco de palavras</button>
+      <button type="button" id="btTudo">👁️ Mostrar tudo</button>
+      <button type="button" id="btEsconder">🙈 Esconder tudo</button>
+      <button type="button" id="btLer">🔊 Ler a letra</button>
+      <button type="button" id="btMenor">A−</button><button type="button" id="btMaior">A+</button>
+      <button type="button" id="btImprimir">🖨️ Imprimir folha</button>
+    </div>
+    <div class="banco" id="banco" hidden></div>
+    <div class="palcoLetra" id="palcoLetra"></div>
+    <p class="dica" style="text-align:center">Toque numa lacuna para mostrar a palavra.</p>
+  </section>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH = 'musica_letra', musicas = [], tokens = [], tamanho = 30;
+  var RE = /[A-Za-zÀ-ÖØ-öø-ÿ0-9]+(?:['’][A-Za-zÀ-ÖØ-öø-ÿ]+)*/g;
+
+  function tela(id){
+    var ts = document.querySelectorAll('.tela');
+    for (var i = 0; i < ts.length; i++) ts[i].className = ts[i].className.replace(/\s*ativa/g, '');
+    $(id).className += ' ativa'; window.scrollTo(0, 0);
+  }
+  // divide a letra em pedaços: {w: palavra, oculta} ou {s: texto entre palavras}
+  function picotar(texto){
+    var out = [], ult = 0, m; RE.lastIndex = 0;
+    while ((m = RE.exec(texto))){
+      if (m.index > ult) out.push({s: texto.slice(ult, m.index)});
+      out.push({w: m[0], oculta: false, aberta: false}); ult = m.index + m[0].length;
+    }
+    if (ult < texto.length) out.push({s: texto.slice(ult)});
+    return out;
+  }
+  function palavras(){ return tokens.filter(function(t){ return t.w; }); }
+  function ocultas(){ return tokens.filter(function(t){ return t.w && t.oculta; }); }
+  function aplicarModo(modo){
+    var ws = palavras(), n = 0;
+    ws.forEach(function(t){ t.oculta = false; t.aberta = false; });
+    if (modo === '4') ws.forEach(function(t){ if (t.w.length >= 2){ n++; if (n % 4 === 0) t.oculta = true; } });
+    if (modo === 'grandes'){
+      var grandes = ws.filter(function(t){ return t.w.replace(/['’]/g, '').length >= 5; }), alvo = Math.max(1, Math.round(grandes.length * 0.35));
+      EN.embaralhar(grandes).slice(0, alvo).forEach(function(t){ t.oculta = true; });
+    }
+  }
+  function desenharEditor(){
+    var h = '';
+    tokens.forEach(function(t, i){
+      if (t.s != null) h += Sala.esc(t.s).replace(/\n/g, '<br>');
+      else h += '<span class="w' + (t.oculta ? ' oculta' : '') + '" data-i="' + i + '">' + Sala.esc(t.w) + '</span>';
+    });
+    $('editor').innerHTML = h;
+    var ws = $('editor').querySelectorAll('.w');
+    for (var k = 0; k < ws.length; k++) ws[k].onclick = function(){ var t = tokens[+this.getAttribute('data-i')]; t.oculta = !t.oculta; this.className = 'w' + (t.oculta ? ' oculta' : ''); contar(); };
+    contar();
+  }
+  function contar(){ var n = ocultas().length; $('info').textContent = n ? n + (n === 1 ? ' lacuna' : ' lacunas') : 'Nenhuma lacuna ainda: toque nas palavras.'; }
+  function riscos(w){ var n = Math.max(3, Math.min(10, w.length)); return new Array(n + 1).join('_'); }
+  function desenharTurma(){
+    var h = '', num = 0;
+    tokens.forEach(function(t, i){
+      if (t.s != null){ h += Sala.esc(t.s).replace(/\n/g, '<br>'); return; }
+      if (!t.oculta){ h += Sala.esc(t.w); return; }
+      num++; t.num = num;
+      h += '<button type="button" class="lacuna' + (t.aberta ? ' aberta' : '') + '" data-i="' + i + '"><small>' + num + '</small>' + (t.aberta ? Sala.esc(t.w) : riscos(t.w)) + '</button>';
+    });
+    $('palcoLetra').innerHTML = h; $('palcoLetra').style.fontSize = tamanho + 'px';
+    var ls = $('palcoLetra').querySelectorAll('.lacuna');
+    for (var k = 0; k < ls.length; k++) ls[k].onclick = function(){ var t = tokens[+this.getAttribute('data-i')]; t.aberta = !t.aberta; if (t.aberta) Sala.plim(); desenharTurma(); };
+    desenharBanco();
+  }
+  function desenharBanco(){
+    var lista = ocultas().map(function(t){ return t; }).sort(function(a, b){ return a.w.toLowerCase() < b.w.toLowerCase() ? -1 : 1; });
+    $('banco').innerHTML = '<b>Banco de palavras:</b><br>' + lista.map(function(t){ return '<span class="' + (t.aberta ? 'usada' : '') + '">' + Sala.esc(t.w) + '</span>'; }).join('');
+  }
+  function textoLetra(){ return tokens.map(function(t){ return t.s != null ? t.s : t.w; }).join(''); }
+
+  $('selMusica').onchange = function(){
+    var m = musicas[+this.value];
+    if (this.value === ''){ $('letra').value = (Sala.ler(CH) || {}).letra || ''; return; }
+    if (m){ $('letra').value = m.letra; $('selIdioma').value = m.idioma === 'pt-BR' ? 'pt-BR' : 'en-US'; }
+  };
+  $('letra').oninput = function(){ if ($('selMusica').value === '') Sala.gravar(CH, {letra: this.value}); };
+  $('btPreparar').onclick = function(){
+    var texto = String($('letra').value || '').replace(/\r/g, '').replace(/^\s+|\s+$/g, '');
+    if (!texto) return Sala.avisar('Cole a letra ou escolha uma das músicas.');
+    tokens = picotar(texto);
+    if (!palavras().length) return Sala.avisar('Não encontrei palavras na letra.');
+    aplicarModo($('selModo').value); desenharEditor(); tela('tEditor');
+  };
+  $('btVoltar').onclick = function(){ tela('tConfig'); };
+  $('btLimpar').onclick = function(){ palavras().forEach(function(t){ t.oculta = false; }); desenharEditor(); };
+  $('btTurma').onclick = function(){
+    if (!ocultas().length) return Sala.avisar('Escolha pelo menos uma palavra para virar lacuna.');
+    ocultas().forEach(function(t){ t.aberta = false; }); desenharTurma(); tela('tTurma');
+  };
+  $('btEditar').onclick = function(){ desenharEditor(); tela('tEditor'); };
+  $('btBanco').onclick = function(){ $('banco').hidden = !$('banco').hidden; };
+  $('btTudo').onclick = function(){ ocultas().forEach(function(t){ t.aberta = true; }); desenharTurma(); };
+  $('btEsconder').onclick = function(){ ocultas().forEach(function(t){ t.aberta = false; }); desenharTurma(); };
+  $('btLer').onclick = function(){ EN.falar(textoLetra().replace(/\n/g, '. '), {lang: $('selIdioma').value, rate: 0.85}); };
+  $('btMaior').onclick = function(){ tamanho = Math.min(56, tamanho + 4); desenharTurma(); };
+  $('btMenor').onclick = function(){ tamanho = Math.max(18, tamanho - 4); desenharTurma(); };
+  $('btImprimir').onclick = function(){
+    var num = 0, folha = '', gab = [];
+    tokens.forEach(function(t){
+      if (t.s != null){ folha += Sala.esc(t.s).replace(/\n/g, '<br>'); return; }
+      if (!t.oculta){ folha += Sala.esc(t.w); return; }
+      num++; gab.push(num + '. ' + Sala.esc(t.w)); folha += '<b>(' + num + ')</b>' + riscos(t.w) + '__';
+    });
+    var banco = ocultas().map(function(t){ return Sala.esc(t.w); }).sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+    var tit = $('selMusica').value !== '' && musicas[+$('selMusica').value] ? musicas[+$('selMusica').value].titulo : 'Música';
+    Sala.imprimir('<div style="max-width:720px;margin:0 auto;font-size:16px">' +
+      '<h1 style="font-size:24px;margin:0 0 6px">🎵 ' + Sala.esc(tit) + '</h1><p>Nome: ________________________________ Data: ___/___</p>' +
+      '<p style="line-height:2.1;font-size:18px">' + folha + '</p>' +
+      '<p style="border:2px dashed #999;border-radius:10px;padding:8px"><b>Banco de palavras:</b> ' + banco.join(' • ') + '</p>' +
+      '<p style="page-break-before:always;font-size:14px"><b>Gabarito:</b> ' + gab.join(' &nbsp; ') + '</p></div>');
+  };
+  Sala.botaoSom($('btSom'));
+  $('letra').value = (Sala.ler(CH) || {}).letra || '';
+  EN.json('dados/musicas.json', function(err, d){
+    if (err || !d || !(d.musicas instanceof Array)) return;
+    musicas = d.musicas;
+    $('selMusica').innerHTML += musicas.map(function(m, i){ return '<option value="' + i + '">' + (m.idioma === 'pt-BR' ? '🇧🇷 ' : '🇬🇧 ') + Sala.esc(m.titulo) + '</option>'; }).join('');
+  });
+  window.MUSICA = {tokens: function(){ return tokens; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

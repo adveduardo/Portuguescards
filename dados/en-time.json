@@ -1,0 +1,205 @@
+{
+  "titulo": "What time is it? (as horas)",
+  "emoji": "🕐",
+  "instrucao": "What time is it?",
+  "rodadas": [
+    {
+      "destaque": "🕒",
+      "opcoes": [
+        "It's three o'clock.",
+        "It's two o'clock.",
+        "It's half past three.",
+        "It's four o'clock."
+      ],
+      "correta": "It's three o'clock.",
+      "explica": "Hora exata: It's … o'clock (três horas em ponto).",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "🕗",
+      "opcoes": [
+        "It's eight o'clock.",
+        "It's seven o'clock.",
+        "It's half past eight.",
+        "It's nine o'clock."
+      ],
+      "correta": "It's eight o'clock.",
+      "explica": "Hora exata: It's eight o'clock.",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "🕜",
+      "opcoes": [
+        "It's half past one.",
+        "It's one o'clock.",
+        "It's half past two.",
+        "It's a quarter past one."
+      ],
+      "correta": "It's half past one.",
+      "explica": "Meia hora depois = half past (1h30).",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "🕤",
+      "opcoes": [
+        "It's half past nine.",
+        "It's nine o'clock.",
+        "It's half past ten.",
+        "It's a quarter to nine."
+      ],
+      "correta": "It's half past nine.",
+      "explica": "Meia hora depois = half past (9h30).",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "7:15",
+      "opcoes": [
+        "It's a quarter past seven.",
+        "It's a quarter to seven.",
+        "It's half past seven.",
+        "It's seven o'clock."
+      ],
+      "correta": "It's a quarter past seven.",
+      "explica": "15 minutos depois = a quarter past. Também se pode dizer “seven fifteen”.",
+      "imagem": "⏰",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "6:45",
+      "opcoes": [
+        "It's a quarter to seven.",
+        "It's a quarter past six.",
+        "It's half past six.",
+        "It's a quarter past seven."
+      ],
+      "correta": "It's a quarter to seven.",
+      "explica": "Faltam 15 minutos para as 7 = a quarter to seven. Também: “six forty-five”.",
+      "imagem": "⏰",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "10:05",
+      "opcoes": [
+        "It's five past ten.",
+        "It's five to ten.",
+        "It's ten past five.",
+        "It's half past ten."
+      ],
+      "correta": "It's five past ten.",
+      "explica": "5 minutos depois das 10 = five past ten.",
+      "imagem": "⏰",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "4:50",
+      "opcoes": [
+        "It's ten to five.",
+        "It's ten past five.",
+        "It's ten to four.",
+        "It's a quarter to five."
+      ],
+      "correta": "It's ten to five.",
+      "explica": "Faltam 10 minutos para as 5 = ten to five.",
+      "imagem": "⏰",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "12:00 ☀️",
+      "opcoes": [
+        "It's noon.",
+        "It's midnight.",
+        "It's half past twelve.",
+        "It's one o'clock."
+      ],
+      "correta": "It's noon.",
+      "explica": "Meio-dia = noon (ou midday). Meia-noite = midnight.",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "12:00 🌙",
+      "opcoes": [
+        "It's midnight.",
+        "It's noon.",
+        "It's a quarter to twelve.",
+        "It's two o'clock."
+      ],
+      "correta": "It's midnight.",
+      "explica": "Meia-noite = midnight.",
+      "enunciado": "What time is it?"
+    },
+    {
+      "destaque": "Como se pergunta as horas em inglês?",
+      "opcoes": [
+        "What time is it?",
+        "How many hours?",
+        "What hour is?",
+        "How time is it?"
+      ],
+      "correta": "What time is it?",
+      "explica": "“What time is it?” = Que horas são? Também: “Do you have the time?”",
+      "imagem": "🕐"
+    },
+    {
+      "destaque": "9 a.m. quer dizer:",
+      "opcoes": [
+        "nove da manhã",
+        "nove da noite",
+        "nove em ponto da tarde",
+        "vinte e uma horas"
+      ],
+      "correta": "nove da manhã",
+      "explica": "a.m. = antes do meio-dia; p.m. = depois do meio-dia.",
+      "imagem": "🌅"
+    },
+    {
+      "destaque": "9 p.m. quer dizer:",
+      "opcoes": [
+        "nove da noite",
+        "nove da manhã",
+        "meio-dia",
+        "nove da madrugada"
+      ],
+      "correta": "nove da noite",
+      "explica": "p.m. = depois do meio-dia (tarde e noite): 9 p.m. = 21h.",
+      "imagem": "🌃"
+    },
+    {
+      "destaque": "The class starts ___ 8 o’clock.",
+      "opcoes": [
+        "at",
+        "in",
+        "on",
+        "to"
+      ],
+      "correta": "at",
+      "explica": "Com horas usamos AT: at 8 o’clock, at noon, at midnight.",
+      "imagem": "🏫",
+      "enunciado": "Choose the preposition"
+    },
+    {
+      "destaque": "What time do you go to school?",
+      "opcoes": [
+        "I go to school at 7 a.m.",
+        "I go to school in 7 a.m.",
+        "I go school at 7.",
+        "I going to school at 7 a.m."
+      ],
+      "correta": "I go to school at 7 a.m.",
+      "explica": "Resposta completa: I go to school AT 7 a.m.",
+      "imagem": "🎒",
+      "enunciado": "Choose the best answer"
+    },
+    {
+      "destaque": "🕕",
+      "opcoes": [
+        "It's six o'clock.",
+        "It's half past six.",
+        "It's five o'clock.",
+        "It's seven o'clock."
+      ],
+      "correta": "It's six o'clock.",
+      "explica": "Hora exata: It's six o'clock.",
+      "enunciado": "What time is it?"
+    }
+  ]
+}

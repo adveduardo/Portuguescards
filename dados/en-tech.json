@@ -1,0 +1,234 @@
+{
+  "titulo": "English in technology (celular e computador)",
+  "emoji": "📱",
+  "instrucao": "Which button?",
+  "rodadas": [
+    {
+      "destaque": "Você quer guardar o arquivo.",
+      "opcoes": [
+        "Save",
+        "Delete",
+        "Share",
+        "Print"
+      ],
+      "correta": "Save",
+      "explica": "Save = salvar.",
+      "imagem": "💾",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer apagar uma foto.",
+      "opcoes": [
+        "Delete",
+        "Download",
+        "Save",
+        "Search"
+      ],
+      "correta": "Delete",
+      "explica": "Delete = apagar.",
+      "imagem": "🗑️",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer mandar a foto para um amigo.",
+      "opcoes": [
+        "Share",
+        "Delete",
+        "Cancel",
+        "Settings"
+      ],
+      "correta": "Share",
+      "explica": "Share = compartilhar.",
+      "imagem": "🔗",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer baixar um aplicativo.",
+      "opcoes": [
+        "Download",
+        "Upload",
+        "Log out",
+        "Undo"
+      ],
+      "correta": "Download",
+      "explica": "Download = baixar. Upload = enviar (carregar).",
+      "imagem": "⬇️",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer entrar na sua conta.",
+      "opcoes": [
+        "Log in",
+        "Log out",
+        "Delete account",
+        "Skip"
+      ],
+      "correta": "Log in",
+      "explica": "Log in (ou Sign in) = entrar na conta.",
+      "imagem": "🔐",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer sair da sua conta.",
+      "opcoes": [
+        "Log out",
+        "Log in",
+        "Sign up",
+        "Download"
+      ],
+      "correta": "Log out",
+      "explica": "Log out (ou Sign out) = sair da conta.",
+      "imagem": "🚪",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer criar uma conta nova.",
+      "opcoes": [
+        "Sign up",
+        "Sign out",
+        "Log out",
+        "Delete"
+      ],
+      "correta": "Sign up",
+      "explica": "Sign up = cadastrar-se, criar conta.",
+      "imagem": "📝",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você esqueceu a senha.",
+      "opcoes": [
+        "Forgot password?",
+        "Change language",
+        "Remember me",
+        "Skip"
+      ],
+      "correta": "Forgot password?",
+      "explica": "Forgot password? = esqueceu a senha?",
+      "imagem": "🔑",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer mudar o idioma do celular.",
+      "opcoes": [
+        "Settings",
+        "Search",
+        "Share",
+        "Delete"
+      ],
+      "correta": "Settings",
+      "explica": "Settings = configurações.",
+      "imagem": "⚙️",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer procurar um vídeo.",
+      "opcoes": [
+        "Search",
+        "Settings",
+        "Save",
+        "Cancel"
+      ],
+      "correta": "Search",
+      "explica": "Search = pesquisar, buscar.",
+      "imagem": "🔍",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "Você quer desistir da ação.",
+      "opcoes": [
+        "Cancel",
+        "Confirm",
+        "Next",
+        "Save"
+      ],
+      "correta": "Cancel",
+      "explica": "Cancel = cancelar.",
+      "imagem": "✖️",
+      "enunciado": "Which button?"
+    },
+    {
+      "destaque": "O que significa “Battery low”?",
+      "opcoes": [
+        "Bateria fraca",
+        "Bateria cheia",
+        "Carregando",
+        "Sem sinal"
+      ],
+      "correta": "Bateria fraca",
+      "explica": "low = baixo, fraco.",
+      "imagem": "🔋"
+    },
+    {
+      "destaque": "O que significa “Update available”?",
+      "opcoes": [
+        "Atualização disponível",
+        "Atualização concluída",
+        "Erro no aplicativo",
+        "Memória cheia"
+      ],
+      "correta": "Atualização disponível",
+      "explica": "update = atualização; available = disponível.",
+      "imagem": "📲"
+    },
+    {
+      "destaque": "O que significa “Allow notifications?”",
+      "opcoes": [
+        "Permitir notificações?",
+        "Bloquear o celular?",
+        "Apagar as mensagens?",
+        "Ligar o wi-fi?"
+      ],
+      "correta": "Permitir notificações?",
+      "explica": "allow = permitir.",
+      "imagem": "🔔"
+    },
+    {
+      "destaque": "O que significa “Wrong password”?",
+      "opcoes": [
+        "Senha errada",
+        "Senha forte",
+        "Senha nova",
+        "Senha salva"
+      ],
+      "correta": "Senha errada",
+      "explica": "wrong = errado(a).",
+      "imagem": "❌"
+    },
+    {
+      "destaque": "O que significa “Next” num cadastro?",
+      "opcoes": [
+        "Próximo (avançar)",
+        "Voltar",
+        "Cancelar",
+        "Fechar"
+      ],
+      "correta": "Próximo (avançar)",
+      "explica": "Next = próximo. Back = voltar.",
+      "imagem": "➡️"
+    },
+    {
+      "destaque": "O que significa “Undo”?",
+      "opcoes": [
+        "Desfazer",
+        "Refazer",
+        "Fechar",
+        "Abrir"
+      ],
+      "correta": "Desfazer",
+      "explica": "Undo = desfazer. Redo = refazer.",
+      "imagem": "↩️"
+    },
+    {
+      "destaque": "O que é “username”?",
+      "opcoes": [
+        "Nome de usuário",
+        "Senha",
+        "Endereço",
+        "Telefone"
+      ],
+      "correta": "Nome de usuário",
+      "explica": "username = nome de usuário (o login).",
+      "imagem": "👤"
+    }
+  ]
+}

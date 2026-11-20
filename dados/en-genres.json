@@ -1,0 +1,119 @@
+{
+  "titulo": "Text genres in English (gêneros textuais do ENEM)",
+  "emoji": "📰",
+  "instrucao": "Leia o texto em inglês e responda",
+  "rodadas": [
+    {
+      "destaque": "O texto é um anúncio que informa:",
+      "opcoes": [
+        "uma promoção de camisetas pela metade do preço neste fim de semana",
+        "a inauguração de uma loja nova",
+        "uma vaga de emprego em uma loja",
+        "o fim das vendas de verão",
+        "que a entrega é grátis para qualquer pedido"
+      ],
+      "correta": "uma promoção de camisetas pela metade do preço neste fim de semana",
+      "explica": "SALE = liquidação; 50% OFF = metade do preço; this weekend only = só neste fim de semana; o frete grátis vale só acima de 30 dólares.",
+      "imagem": "🏷️",
+      "texto": "SUMMER SALE!\nAll T-shirts 50% OFF\nThis weekend only — Saturday and Sunday\nFree delivery for orders over $30"
+    },
+    {
+      "destaque": "Segundo a receita, depois de misturar os ingredientes, deve-se:",
+      "opcoes": [
+        "aquecer uma frigideira",
+        "levar ao forno por uma hora",
+        "acrescentar mais ovos",
+        "deixar descansar na geladeira",
+        "servir frio"
+      ],
+      "correta": "aquecer uma frigideira",
+      "explica": "Mix everything = misture tudo. Heat a pan = aqueça uma frigideira.",
+      "imagem": "🍳",
+      "texto": "PANCAKES\nIngredients: 1 cup of flour, 1 egg, 1 cup of milk, 1 spoon of sugar.\nMethod: Mix everything. Heat a pan. Pour a little batter and cook for 1 minute on each side."
+    },
+    {
+      "destaque": "No e-mail, Carla:",
+      "opcoes": [
+        "propõe mudar a reunião para segunda-feira",
+        "confirma a reunião de sexta-feira",
+        "cancela todas as reuniões",
+        "pede uma consulta médica ao Paulo",
+        "convida o Paulo para ir ao médico"
+      ],
+      "correta": "propõe mudar a reunião para segunda-feira",
+      "explica": "I can’t go … on Friday = não posso ir na sexta. Can we meet on Monday? = podemos nos encontrar na segunda?",
+      "imagem": "📧",
+      "texto": "Hi Paulo,\nThanks for your message. I can't go to the meeting on Friday because I have a doctor's appointment. Can we meet on Monday at 10 a.m.?\nBest,\nCarla"
+    },
+    {
+      "destaque": "A placa tem a função de:",
+      "opcoes": [
+        "alertar que o chão está molhado",
+        "proibir a entrada",
+        "pedir silêncio",
+        "informar o horário da limpeza",
+        "indicar a saída de emergência"
+      ],
+      "correta": "alertar que o chão está molhado",
+      "explica": "CAUTION = cuidado; WET FLOOR = chão molhado.",
+      "imagem": "⚠️",
+      "texto": "CAUTION\nWET FLOOR\nPlease walk carefully"
+    },
+    {
+      "destaque": "O humor da tirinha está no fato de o menino:",
+      "opcoes": [
+        "trocar o pedido para fugir da tarefa de passear com o cachorro",
+        "não gostar de peixes",
+        "querer dois animais",
+        "ter medo de cachorro",
+        "esquecer o que pediu"
+      ],
+      "correta": "trocar o pedido para fugir da tarefa de passear com o cachorro",
+      "explica": "Who will walk it every day? = Quem vai passear com ele todo dia? O peixe não precisa passear.",
+      "imagem": "🐶",
+      "texto": "[Comic strip]\nKid: Mom, can I have a dog?\nMom: Who will walk it every day?\nKid: … Can I have a fish?"
+    },
+    {
+      "destaque": "A manchete informa que:",
+      "opcoes": [
+        "estudantes plantaram 500 árvores num parque da cidade",
+        "um parque foi fechado por estudantes",
+        "500 estudantes visitaram o parque",
+        "árvores foram cortadas no parque",
+        "o parque vai ganhar 500 bancos"
+      ],
+      "correta": "estudantes plantaram 500 árvores num parque da cidade",
+      "explica": "plant = plantar; trees = árvores; city park = parque da cidade.",
+      "imagem": "🌳",
+      "texto": "Local students plant 500 trees in city park"
+    },
+    {
+      "destaque": "A avaliação de Laura é:",
+      "opcoes": [
+        "negativa, principalmente por causa da espera e do atendimento",
+        "totalmente positiva",
+        "negativa por causa da comida",
+        "neutra, sem críticas",
+        "positiva sobre o garçom"
+      ],
+      "correta": "negativa, principalmente por causa da espera e do atendimento",
+      "explica": "The food was good, BUT we waited one hour … and the waiter was rude (grosseiro). Duas estrelas.",
+      "imagem": "⭐",
+      "texto": "★★☆☆☆\nThe food was good, but we waited one hour for our table and the waiter was rude.\n— Laura"
+    },
+    {
+      "destaque": "Segundo as instruções do remédio:",
+      "opcoes": [
+        "deve-se tomar no máximo 3 comprimidos por dia",
+        "deve-se tomar antes das refeições",
+        "crianças podem tomar à vontade",
+        "deve-se tomar 1 comprimido por semana",
+        "deve-se tomar de hora em hora"
+      ],
+      "correta": "deve-se tomar no máximo 3 comprimidos por dia",
+      "explica": "every 8 hours after meals = de 8 em 8 horas, depois das refeições; do not exceed 3 tablets a day = não passe de 3 por dia.",
+      "imagem": "💊",
+      "texto": "Take 1 tablet every 8 hours after meals.\nDo not exceed 3 tablets a day.\nKeep out of reach of children."
+    }
+  ]
+}

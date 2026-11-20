@@ -1,0 +1,368 @@
+{
+  "titulo": "English Bingo: weather, clothes, house, body, feelings, places",
+  "idioma": "pt-BR",
+  "chamadas": [
+    {
+      "id": "sunny",
+      "texto": "☀️ ensolarado"
+    },
+    {
+      "id": "cloudy",
+      "texto": "☁️ nublado"
+    },
+    {
+      "id": "rainy",
+      "texto": "🌧️ chuvoso"
+    },
+    {
+      "id": "stormy",
+      "texto": "⛈️ tempestuoso"
+    },
+    {
+      "id": "snowy",
+      "texto": "🌨️ com neve"
+    },
+    {
+      "id": "windy",
+      "texto": "🌬️ com vento"
+    },
+    {
+      "id": "T-shirt",
+      "texto": "👕 camiseta"
+    },
+    {
+      "id": "shirt",
+      "texto": "👔 camisa"
+    },
+    {
+      "id": "jeans",
+      "texto": "👖 calça jeans"
+    },
+    {
+      "id": "dress",
+      "texto": "👗 vestido"
+    },
+    {
+      "id": "sneakers",
+      "texto": "👟 tênis"
+    },
+    {
+      "id": "shoes",
+      "texto": "👞 sapatos"
+    },
+    {
+      "id": "house",
+      "texto": "🏠 casa"
+    },
+    {
+      "id": "garden",
+      "texto": "🏡 jardim"
+    },
+    {
+      "id": "door",
+      "texto": "🚪 porta"
+    },
+    {
+      "id": "key",
+      "texto": "🔑 chave"
+    },
+    {
+      "id": "bed",
+      "texto": "🛏️ cama"
+    },
+    {
+      "id": "sofa",
+      "texto": "🛋️ sofá"
+    },
+    {
+      "id": "eye",
+      "texto": "👁️ olho"
+    },
+    {
+      "id": "eyes",
+      "texto": "👀 olhos"
+    },
+    {
+      "id": "ear",
+      "texto": "👂 orelha"
+    },
+    {
+      "id": "nose",
+      "texto": "👃 nariz"
+    },
+    {
+      "id": "mouth",
+      "texto": "👄 boca"
+    },
+    {
+      "id": "tongue",
+      "texto": "👅 língua"
+    },
+    {
+      "id": "happy",
+      "texto": "😀 feliz"
+    },
+    {
+      "id": "sad",
+      "texto": "😢 triste"
+    },
+    {
+      "id": "angry",
+      "texto": "😠 bravo, com raiva"
+    },
+    {
+      "id": "scared",
+      "texto": "😱 com medo"
+    },
+    {
+      "id": "surprised",
+      "texto": "😮 surpreso"
+    },
+    {
+      "id": "tired",
+      "texto": "😩 cansado"
+    },
+    {
+      "id": "school",
+      "texto": "🏫 escola"
+    },
+    {
+      "id": "hospital",
+      "texto": "🏥 hospital"
+    },
+    {
+      "id": "bank",
+      "texto": "🏦 banco"
+    },
+    {
+      "id": "post office",
+      "texto": "🏤 correio"
+    },
+    {
+      "id": "store",
+      "texto": "🏪 loja"
+    },
+    {
+      "id": "church",
+      "texto": "⛪ igreja"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "sunny",
+      "t": [
+        "sunny"
+      ]
+    },
+    {
+      "p": "cloudy",
+      "t": [
+        "cloudy"
+      ]
+    },
+    {
+      "p": "rainy",
+      "t": [
+        "rainy"
+      ]
+    },
+    {
+      "p": "stormy",
+      "t": [
+        "stormy"
+      ]
+    },
+    {
+      "p": "snowy",
+      "t": [
+        "snowy"
+      ]
+    },
+    {
+      "p": "windy",
+      "t": [
+        "windy"
+      ]
+    },
+    {
+      "p": "T-shirt",
+      "t": [
+        "T-shirt"
+      ]
+    },
+    {
+      "p": "shirt",
+      "t": [
+        "shirt"
+      ]
+    },
+    {
+      "p": "jeans",
+      "t": [
+        "jeans"
+      ]
+    },
+    {
+      "p": "dress",
+      "t": [
+        "dress"
+      ]
+    },
+    {
+      "p": "sneakers",
+      "t": [
+        "sneakers"
+      ]
+    },
+    {
+      "p": "shoes",
+      "t": [
+        "shoes"
+      ]
+    },
+    {
+      "p": "house",
+      "t": [
+        "house"
+      ]
+    },
+    {
+      "p": "garden",
+      "t": [
+        "garden"
+      ]
+    },
+    {
+      "p": "door",
+      "t": [
+        "door"
+      ]
+    },
+    {
+      "p": "key",
+      "t": [
+        "key"
+      ]
+    },
+    {
+      "p": "bed",
+      "t": [
+        "bed"
+      ]
+    },
+    {
+      "p": "sofa",
+      "t": [
+        "sofa"
+      ]
+    },
+    {
+      "p": "eye",
+      "t": [
+        "eye"
+      ]
+    },
+    {
+      "p": "eyes",
+      "t": [
+        "eyes"
+      ]
+    },
+    {
+      "p": "ear",
+      "t": [
+        "ear"
+      ]
+    },
+    {
+      "p": "nose",
+      "t": [
+        "nose"
+      ]
+    },
+    {
+      "p": "mouth",
+      "t": [
+        "mouth"
+      ]
+    },
+    {
+      "p": "tongue",
+      "t": [
+        "tongue"
+      ]
+    },
+    {
+      "p": "happy",
+      "t": [
+        "happy"
+      ]
+    },
+    {
+      "p": "sad",
+      "t": [
+        "sad"
+      ]
+    },
+    {
+      "p": "angry",
+      "t": [
+        "angry"
+      ]
+    },
+    {
+      "p": "scared",
+      "t": [
+        "scared"
+      ]
+    },
+    {
+      "p": "surprised",
+      "t": [
+        "surprised"
+      ]
+    },
+    {
+      "p": "tired",
+      "t": [
+        "tired"
+      ]
+    },
+    {
+      "p": "school",
+      "t": [
+        "school"
+      ]
+    },
+    {
+      "p": "hospital",
+      "t": [
+        "hospital"
+      ]
+    },
+    {
+      "p": "bank",
+      "t": [
+        "bank"
+      ]
+    },
+    {
+      "p": "post office",
+      "t": [
+        "post office"
+      ]
+    },
+    {
+      "p": "store",
+      "t": [
+        "store"
+      ]
+    },
+    {
+      "p": "church",
+      "t": [
+        "church"
+      ]
+    }
+  ]
+}

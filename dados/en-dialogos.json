@@ -1,0 +1,584 @@
+{
+  "titulo": "Role-play: dialogues",
+  "idioma": "en-US",
+  "dialogos": [
+    {
+      "id": "restaurant",
+      "titulo": "At the restaurant",
+      "emoji": "🍽️",
+      "situacao": "No restaurante: pedir a comida e a conta.",
+      "papeis": [
+        "Waiter (garçom)",
+        "Customer (cliente)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Good evening! Are you ready to order?",
+          "pt": "Boa noite! Está pronto(a) para pedir?"
+        },
+        {
+          "p": 1,
+          "en": "Yes, please. I'd like the chicken with rice.",
+          "pt": "Sim, por favor. Eu gostaria do frango com arroz."
+        },
+        {
+          "p": 0,
+          "en": "Anything to drink?",
+          "pt": "Algo para beber?"
+        },
+        {
+          "p": 1,
+          "en": "An orange juice, please.",
+          "pt": "Um suco de laranja, por favor."
+        },
+        {
+          "p": 0,
+          "en": "Sure. Anything else?",
+          "pt": "Claro. Mais alguma coisa?"
+        },
+        {
+          "p": 1,
+          "en": "No, thank you. That's all.",
+          "pt": "Não, obrigado(a). É só isso."
+        },
+        {
+          "p": 1,
+          "en": "Excuse me, can I have the check, please?",
+          "pt": "Com licença, pode trazer a conta, por favor?"
+        },
+        {
+          "p": 0,
+          "en": "Of course. Here you are.",
+          "pt": "Claro. Aqui está."
+        },
+        {
+          "p": 1,
+          "en": "Can I pay by card?",
+          "pt": "Posso pagar com cartão?"
+        },
+        {
+          "p": 0,
+          "en": "Yes, you can.",
+          "pt": "Sim, pode."
+        }
+      ],
+      "uteis": [
+        {
+          "en": "I'd like…",
+          "pt": "Eu gostaria de…"
+        },
+        {
+          "en": "Can I have…?",
+          "pt": "Pode me trazer…?"
+        },
+        {
+          "en": "The check, please.",
+          "pt": "A conta, por favor."
+        }
+      ]
+    },
+    {
+      "id": "directions",
+      "titulo": "Asking for directions",
+      "emoji": "🗺️",
+      "situacao": "Na rua: perguntar onde fica um lugar.",
+      "papeis": [
+        "Tourist (turista)",
+        "Local (morador)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Excuse me. Where is the bus station?",
+          "pt": "Com licença. Onde fica a rodoviária?"
+        },
+        {
+          "p": 1,
+          "en": "Go straight ahead and turn left at the bank.",
+          "pt": "Siga em frente e vire à esquerda no banco."
+        },
+        {
+          "p": 0,
+          "en": "Is it far from here?",
+          "pt": "É longe daqui?"
+        },
+        {
+          "p": 1,
+          "en": "No, it's about five minutes on foot.",
+          "pt": "Não, fica a uns cinco minutos a pé."
+        },
+        {
+          "p": 0,
+          "en": "Is it next to the supermarket?",
+          "pt": "Fica ao lado do supermercado?"
+        },
+        {
+          "p": 1,
+          "en": "Yes, and it's across from the park.",
+          "pt": "Sim, e fica em frente ao parque."
+        },
+        {
+          "p": 0,
+          "en": "Thank you very much!",
+          "pt": "Muito obrigado(a)!"
+        },
+        {
+          "p": 1,
+          "en": "You're welcome. Have a nice day!",
+          "pt": "De nada. Tenha um bom dia!"
+        }
+      ],
+      "uteis": [
+        {
+          "en": "turn left / turn right",
+          "pt": "vire à esquerda / à direita"
+        },
+        {
+          "en": "go straight ahead",
+          "pt": "siga em frente"
+        },
+        {
+          "en": "next to / across from",
+          "pt": "ao lado de / em frente a"
+        }
+      ]
+    },
+    {
+      "id": "doctor",
+      "titulo": "At the doctor",
+      "emoji": "🏥",
+      "situacao": "No consultório: contar o que está sentindo.",
+      "papeis": [
+        "Doctor (médico/a)",
+        "Patient (paciente)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Good morning. What's the problem?",
+          "pt": "Bom dia. Qual é o problema?"
+        },
+        {
+          "p": 1,
+          "en": "I have a headache and a sore throat.",
+          "pt": "Estou com dor de cabeça e dor de garganta."
+        },
+        {
+          "p": 0,
+          "en": "How long have you felt like this?",
+          "pt": "Há quanto tempo você está assim?"
+        },
+        {
+          "p": 1,
+          "en": "Since yesterday. I also have a fever.",
+          "pt": "Desde ontem. Também estou com febre."
+        },
+        {
+          "p": 0,
+          "en": "Let me check your temperature… It's 38 degrees.",
+          "pt": "Deixe-me medir sua temperatura… Está em 38 graus."
+        },
+        {
+          "p": 1,
+          "en": "Is it serious?",
+          "pt": "É grave?"
+        },
+        {
+          "p": 0,
+          "en": "No, it's a cold. Drink lots of water and rest.",
+          "pt": "Não, é um resfriado. Beba bastante água e descanse."
+        },
+        {
+          "p": 0,
+          "en": "Take this medicine every eight hours.",
+          "pt": "Tome este remédio a cada oito horas."
+        },
+        {
+          "p": 1,
+          "en": "Thank you, doctor.",
+          "pt": "Obrigado(a), doutor(a)."
+        }
+      ],
+      "uteis": [
+        {
+          "en": "I have a headache / a stomachache / a fever.",
+          "pt": "Estou com dor de cabeça / dor de barriga / febre."
+        },
+        {
+          "en": "How long…?",
+          "pt": "Há quanto tempo…?"
+        },
+        {
+          "en": "every eight hours",
+          "pt": "a cada oito horas"
+        }
+      ]
+    },
+    {
+      "id": "shopping",
+      "titulo": "Shopping for clothes",
+      "emoji": "👕",
+      "situacao": "Na loja: procurar uma roupa e perguntar o preço.",
+      "papeis": [
+        "Clerk (vendedor/a)",
+        "Customer (cliente)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Hi! Can I help you?",
+          "pt": "Oi! Posso ajudar?"
+        },
+        {
+          "p": 1,
+          "en": "Yes, I'm looking for a T-shirt.",
+          "pt": "Sim, estou procurando uma camiseta."
+        },
+        {
+          "p": 0,
+          "en": "What size are you?",
+          "pt": "Qual é o seu tamanho?"
+        },
+        {
+          "p": 1,
+          "en": "Medium, please.",
+          "pt": "Médio, por favor."
+        },
+        {
+          "p": 0,
+          "en": "Here you are. The fitting room is over there.",
+          "pt": "Aqui está. O provador fica ali."
+        },
+        {
+          "p": 1,
+          "en": "It fits well. How much is it?",
+          "pt": "Serviu bem. Quanto custa?"
+        },
+        {
+          "p": 0,
+          "en": "It's fifteen dollars.",
+          "pt": "Custa quinze dólares."
+        },
+        {
+          "p": 1,
+          "en": "Great! I'll take it.",
+          "pt": "Ótimo! Vou levar."
+        }
+      ],
+      "uteis": [
+        {
+          "en": "I'm looking for…",
+          "pt": "Estou procurando…"
+        },
+        {
+          "en": "small / medium / large",
+          "pt": "pequeno / médio / grande"
+        },
+        {
+          "en": "How much is it?",
+          "pt": "Quanto custa?"
+        }
+      ]
+    },
+    {
+      "id": "hotel",
+      "titulo": "At the hotel",
+      "emoji": "🏨",
+      "situacao": "Na recepção: fazer o check-in.",
+      "papeis": [
+        "Receptionist (recepcionista)",
+        "Guest (hóspede)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Good afternoon. Welcome to the Sun Hotel. How can I help you?",
+          "pt": "Boa tarde. Bem-vindo(a) ao Hotel Sol. Como posso ajudar?"
+        },
+        {
+          "p": 1,
+          "en": "Hi. I have a reservation. My name is Ana Lima.",
+          "pt": "Oi. Tenho uma reserva. Meu nome é Ana Lima."
+        },
+        {
+          "p": 0,
+          "en": "Let me see… Yes, a single room for two nights.",
+          "pt": "Deixe-me ver… Sim, um quarto de solteiro por duas noites."
+        },
+        {
+          "p": 1,
+          "en": "That's right. What time is breakfast?",
+          "pt": "Isso mesmo. Que horas é o café da manhã?"
+        },
+        {
+          "p": 0,
+          "en": "Breakfast is from 7 to 10 a.m.",
+          "pt": "O café da manhã é das 7 às 10 da manhã."
+        },
+        {
+          "p": 1,
+          "en": "Is there Wi-Fi in the room?",
+          "pt": "Tem wi-fi no quarto?"
+        },
+        {
+          "p": 0,
+          "en": "Yes. The password is on your key card.",
+          "pt": "Sim. A senha está no seu cartão-chave."
+        },
+        {
+          "p": 0,
+          "en": "Your room is 304, on the third floor. Enjoy your stay!",
+          "pt": "Seu quarto é o 304, no terceiro andar. Aproveite a estadia!"
+        },
+        {
+          "p": 1,
+          "en": "Great, thank you!",
+          "pt": "Ótimo, obrigado(a)!"
+        }
+      ],
+      "uteis": [
+        {
+          "en": "I have a reservation.",
+          "pt": "Tenho uma reserva."
+        },
+        {
+          "en": "What time is breakfast?",
+          "pt": "Que horas é o café da manhã?"
+        },
+        {
+          "en": "Is there…?",
+          "pt": "Tem…? / Há…?"
+        }
+      ]
+    },
+    {
+      "id": "interview",
+      "titulo": "Job interview",
+      "emoji": "💼",
+      "situacao": "Na entrevista de emprego: apresentar-se e falar das qualidades.",
+      "papeis": [
+        "Interviewer (entrevistador/a)",
+        "Candidate (candidato/a)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Good morning. Please, have a seat.",
+          "pt": "Bom dia. Por favor, sente-se."
+        },
+        {
+          "p": 1,
+          "en": "Good morning. Thank you.",
+          "pt": "Bom dia. Obrigado(a)."
+        },
+        {
+          "p": 0,
+          "en": "Tell me about yourself.",
+          "pt": "Fale um pouco sobre você."
+        },
+        {
+          "p": 1,
+          "en": "My name is Carlos. I have three years of experience in customer service.",
+          "pt": "Meu nome é Carlos. Tenho três anos de experiência em atendimento ao cliente."
+        },
+        {
+          "p": 0,
+          "en": "Why do you want to work here?",
+          "pt": "Por que você quer trabalhar aqui?"
+        },
+        {
+          "p": 1,
+          "en": "I like working with people, and I want to learn and grow in your company.",
+          "pt": "Gosto de trabalhar com pessoas e quero aprender e crescer na sua empresa."
+        },
+        {
+          "p": 0,
+          "en": "What are your strengths?",
+          "pt": "Quais são seus pontos fortes?"
+        },
+        {
+          "p": 1,
+          "en": "I'm punctual, responsible and a good team player.",
+          "pt": "Sou pontual, responsável e trabalho bem em equipe."
+        },
+        {
+          "p": 0,
+          "en": "Do you have any questions?",
+          "pt": "Você tem alguma pergunta?"
+        },
+        {
+          "p": 1,
+          "en": "Yes. What are the working hours?",
+          "pt": "Sim. Qual é o horário de trabalho?"
+        },
+        {
+          "p": 0,
+          "en": "From 9 a.m. to 6 p.m., Monday to Friday.",
+          "pt": "Das 9h às 18h, de segunda a sexta."
+        },
+        {
+          "p": 1,
+          "en": "Great. Thank you for the opportunity.",
+          "pt": "Ótimo. Obrigado(a) pela oportunidade."
+        }
+      ],
+      "uteis": [
+        {
+          "en": "Tell me about yourself.",
+          "pt": "Fale sobre você."
+        },
+        {
+          "en": "I have … years of experience in…",
+          "pt": "Tenho … anos de experiência em…"
+        },
+        {
+          "en": "What are the working hours?",
+          "pt": "Qual é o horário?"
+        }
+      ]
+    },
+    {
+      "id": "meeting",
+      "titulo": "Meeting someone new",
+      "emoji": "👋",
+      "situacao": "Conhecendo alguém: nome, cidade, idade e gostos.",
+      "papeis": [
+        "Student A",
+        "Student B"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Hi! I'm Júlia. What's your name?",
+          "pt": "Oi! Eu sou a Júlia. Qual é o seu nome?"
+        },
+        {
+          "p": 1,
+          "en": "Hi, Júlia! I'm Pedro. Nice to meet you.",
+          "pt": "Oi, Júlia! Eu sou o Pedro. Prazer em conhecer você."
+        },
+        {
+          "p": 0,
+          "en": "Nice to meet you too. Where are you from?",
+          "pt": "Prazer também. De onde você é?"
+        },
+        {
+          "p": 1,
+          "en": "I'm from Recife. And you?",
+          "pt": "Sou de Recife. E você?"
+        },
+        {
+          "p": 0,
+          "en": "I'm from Belém. How old are you?",
+          "pt": "Sou de Belém. Quantos anos você tem?"
+        },
+        {
+          "p": 1,
+          "en": "I'm fifteen. What do you like to do?",
+          "pt": "Tenho quinze. Do que você gosta de fazer?"
+        },
+        {
+          "p": 0,
+          "en": "I like playing volleyball and listening to music.",
+          "pt": "Gosto de jogar vôlei e ouvir música."
+        },
+        {
+          "p": 1,
+          "en": "Cool! Me too.",
+          "pt": "Legal! Eu também."
+        }
+      ],
+      "uteis": [
+        {
+          "en": "Nice to meet you.",
+          "pt": "Prazer em conhecer você."
+        },
+        {
+          "en": "Where are you from?",
+          "pt": "De onde você é?"
+        },
+        {
+          "en": "What do you like to do?",
+          "pt": "Do que você gosta de fazer?"
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "titulo": "On the phone",
+      "emoji": "📞",
+      "situacao": "Ao telefone: marcar uma consulta.",
+      "papeis": [
+        "Receptionist (recepcionista)",
+        "Caller (quem liga)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "en": "Good morning, City Clinic. How can I help you?",
+          "pt": "Bom dia, Clínica da Cidade. Como posso ajudar?"
+        },
+        {
+          "p": 1,
+          "en": "Hello. I'd like to make an appointment, please.",
+          "pt": "Olá. Eu gostaria de marcar uma consulta, por favor."
+        },
+        {
+          "p": 0,
+          "en": "Sure. What's your name?",
+          "pt": "Claro. Qual é o seu nome?"
+        },
+        {
+          "p": 1,
+          "en": "It's Maria Souza.",
+          "pt": "É Maria Souza."
+        },
+        {
+          "p": 0,
+          "en": "Can you spell your last name, please?",
+          "pt": "Pode soletrar o seu sobrenome, por favor?"
+        },
+        {
+          "p": 1,
+          "en": "S-O-U-Z-A.",
+          "pt": "S-O-U-Z-A."
+        },
+        {
+          "p": 0,
+          "en": "Thank you. Is Tuesday at 3 p.m. OK?",
+          "pt": "Obrigado(a). Terça às 15h está bom?"
+        },
+        {
+          "p": 1,
+          "en": "Yes, that's perfect.",
+          "pt": "Sim, está perfeito."
+        },
+        {
+          "p": 0,
+          "en": "Great. See you on Tuesday!",
+          "pt": "Ótimo. Até terça!"
+        },
+        {
+          "p": 1,
+          "en": "Thank you. Bye!",
+          "pt": "Obrigado(a). Tchau!"
+        }
+      ],
+      "uteis": [
+        {
+          "en": "I'd like to make an appointment.",
+          "pt": "Gostaria de marcar uma consulta."
+        },
+        {
+          "en": "Can you spell…?",
+          "pt": "Pode soletrar…?"
+        },
+        {
+          "en": "See you on…!",
+          "pt": "Até…!"
+        }
+      ]
+    }
+  ]
+}

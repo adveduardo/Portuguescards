@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Role-play</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#1d4ed8} button.principal{background:#1d4ed8;box-shadow:0 3px 0 #163a9e}
+  body,.palco{background:#eef4ff;background-image:linear-gradient(160deg,#eef4ff,#fff4ea)}
+  .escolha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:center;justify-content:center;max-width:1180px;margin:4px auto}
+  .escolha button{min-width:150px;font-size:16px}
+  .escolha button.on{background:#1d4ed8;color:#fff}
+  .controles{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;max-width:1180px;margin:6px auto}
+  .controles select{width:auto;margin:3px}
+  .controles label{margin:3px 8px;font-size:15px}
+  .cena{max-width:900px;margin:0 auto}
+  .situacao{text-align:center;font-size:18px;color:#35506b;margin:4px 0 8px}
+  .papeis{text-align:center;margin:4px 0 10px}
+  .papeis span{display:inline-block;margin:3px 8px;padding:5px 12px;border-radius:999px;color:#fff;font-weight:bold}
+  .fala{display:-webkit-box;display:-webkit-flex;display:flex;margin:8px 0}
+  .fala.b{-webkit-box-pack:end;-webkit-justify-content:flex-end;justify-content:flex-end}
+  .balao{max-width:78%;border-radius:20px;padding:10px 14px;box-shadow:0 4px 12px rgba(31,42,68,.1);position:relative;background:#fff}
+  .fala.a .balao{border:3px solid #2f80ed;border-top-left-radius:4px}
+  .fala.b .balao{border:3px solid #e8890c;border-top-right-radius:4px}
+  .balao .quem{font-size:13px;font-weight:bold;color:#6b778c}
+  .balao .en{font-size:24px;font-weight:bold;color:#1f2a44;line-height:1.3}
+  .balao .pt{font-size:16px;color:#4b5b73;margin-top:3px}
+  .balao .ouvirF{position:absolute;right:-8px;bottom:-12px;padding:4px 8px;font-size:15px}
+  .balao.tocando{background:#fff7d6}
+  .balao.escondida .en{color:#9aa5b8}
+  .uteis{background:#fff7d6;border:3px dashed #f2c94c;border-radius:18px;padding:10px 16px;margin:16px auto;max-width:900px}
+  .uteis p{margin:5px 0;font-size:17px}
+  @media (max-width:600px){ .balao{max-width:92%} .balao .en{font-size:20px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo"><h1>💬 Role-play <small>Diálogos do dia a dia para ouvir, ler e encenar em dupla.</small></h1>
+    <button type="button" id="btImprimir">🖨️ Imprimir roteiro</button><button type="button" id="btSom">🔊</button></div>
+  <div class="escolha" id="escolha"></div>
+  <div class="controles">
+    <button type="button" class="principal" id="btOuvir">▶️ Ouvir o diálogo</button>
+    <label><input type="checkbox" id="chkTrad" checked> Mostrar a tradução</label>
+    <label>Esconder as falas de: <select id="selEsconder"><option value="">ninguém</option><option value="0">papel A</option><option value="1">papel B</option></select></label>
+    <label>Treino de memória: <select id="selMemoria"><option value="0">ver tudo</option><option value="30">esconder 30% das palavras</option><option value="60">esconder 60%</option><option value="100">esconder tudo</option></select></label>
+  </div>
+  <div class="cena">
+    <p class="situacao" id="situacao"></p>
+    <div class="papeis" id="papeis"></div>
+    <div id="falas"></div>
+  </div>
+  <div class="uteis" id="uteis"></div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var dialogos = [], d = null, tocando = -1, reveladas = {};
+  var CORES = ['#2f80ed', '#e8890c'];
+
+  function hash(s){ var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
+  function esconderPalavras(t, pct, semente){
+    if (!pct) return Sala.esc(t);
+    if (pct >= 100) return Sala.esc(t.replace(/[A-Za-z0-9’']+/g, function(w){ return new Array(w.length + 1).join('_'); }));
+    var k = 0;
+    return Sala.esc(t.replace(/[A-Za-z0-9’']+/g, function(w){ k++; return w.length > 1 && hash(semente + ':' + k + w) % 100 < pct ? new Array(w.length + 1).join('_') : w; }));
+  }
+  function desenhar(){
+    if (!d) return;
+    var esc = $('selEsconder').value, mem = +$('selMemoria').value, trad = $('chkTrad').checked;
+    $('situacao').textContent = d.emoji + ' ' + d.situacao;
+    $('papeis').innerHTML = d.papeis.map(function(p, i){ return '<span style="background:' + CORES[i] + '">' + (i ? 'B' : 'A') + ': ' + Sala.esc(p) + '</span>'; }).join('');
+    $('falas').innerHTML = d.falas.map(function(f, i){
+      var oculta = esc !== '' && +esc === f.p && !reveladas[i];
+      var en = oculta ? '👁️ toque para ver a fala' : esconderPalavras(f.en, reveladas[i] ? 0 : mem, d.id + i);
+      return '<div class="fala ' + (f.p ? 'b' : 'a') + '"><div class="balao' + (oculta ? ' escondida' : '') + (tocando === i ? ' tocando' : '') + '" data-i="' + i + '">' +
+        '<div class="quem">' + Sala.esc(d.papeis[f.p]) + '</div><div class="en">' + en + '</div>' +
+        (trad && !oculta ? '<div class="pt">' + Sala.esc(f.pt) + '</div>' : '') +
+        '<button type="button" class="ouvirF" data-o="' + i + '" aria-label="Ouvir esta fala">🔊</button></div></div>';
+    }).join('');
+    $('uteis').innerHTML = '<b>💡 Frases úteis</b>' + d.uteis.map(function(u){ return '<p><b>' + Sala.esc(u.en) + '</b> = ' + Sala.esc(u.pt) + '</p>'; }).join('');
+    var bs = $('falas').querySelectorAll('.balao');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ var i = +this.getAttribute('data-i'); reveladas[i] = !reveladas[i]; desenhar(); };
+    var os = $('falas').querySelectorAll('.ouvirF');
+    for (k = 0; k < os.length; k++) os[k].onclick = function(e){ e.stopPropagation(); falarLinha(+this.getAttribute('data-o')); };
+  }
+  function falarLinha(i, aoFim){ var f = d.falas[i]; EN.falar(f.en, {rate: 0.88, pitch: f.p ? 1.2 : 0.9, aoFim: aoFim}); }
+  var sessao = 0;   // cada "Ouvir" tem um número; parar muda o número e a leitura antiga não continua
+  function tocarTudo(){
+    if (tocando >= 0){ parar(); return; }
+    var i = 0, minha = ++sessao;
+    $('btOuvir').innerHTML = '⏹️ Parar';
+    (function proxima(){
+      if (minha !== sessao) return;
+      if (i >= d.falas.length){ parar(); return; }
+      tocando = i; desenhar();
+      falarLinha(i, function(){ if (minha !== sessao) return; i++; setTimeout(proxima, 350); });
+    })();
+  }
+  function parar(){ sessao++; tocando = -1; EN.calar(); $('btOuvir').innerHTML = '▶️ Ouvir o diálogo'; desenhar(); }
+  function escolher(id){
+    parar(); reveladas = {};
+    for (var i = 0; i < dialogos.length; i++) if (dialogos[i].id === id) d = dialogos[i];
+    if (!d) d = dialogos[0];
+    var bs = $('escolha').querySelectorAll('button');
+    for (i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-id') === d.id ? 'on' : '';
+    desenhar();
+  }
+
+  $('btOuvir').onclick = tocarTudo;
+  $('chkTrad').onchange = desenhar;
+  $('selEsconder').onchange = function(){ reveladas = {}; desenhar(); };
+  $('selMemoria').onchange = function(){ reveladas = {}; desenhar(); };
+  $('btImprimir').onclick = function(){
+    if (!d) return;
+    var h = '<div style="max-width:720px;margin:0 auto;font-size:15px"><h1 style="font-size:24px;margin:0">' + d.emoji + ' ' + Sala.esc(d.titulo) + '</h1>' +
+      '<p style="margin:4px 0 10px">' + Sala.esc(d.situacao) + '</p><table style="width:100%;border-collapse:collapse">';
+    d.falas.forEach(function(f){
+      h += '<tr><td style="vertical-align:top;font-weight:bold;width:150px;padding:4px 6px;border-bottom:1px solid #ccc">' + Sala.esc(d.papeis[f.p]) + '</td>' +
+        '<td style="padding:4px 6px;border-bottom:1px solid #ccc"><b>' + Sala.esc(f.en) + '</b><br><span style="color:#444">' + Sala.esc(f.pt) + '</span></td></tr>';
+    });
+    h += '</table><p style="margin-top:12px"><b>💡 Frases úteis:</b> ' + d.uteis.map(function(u){ return Sala.esc(u.en) + ' = ' + Sala.esc(u.pt); }).join(' • ') + '</p></div>';
+    Sala.imprimir(h);
+  };
+  Sala.botaoSom($('btSom'));
+  EN.json('dados/en-dialogos.json', function(err, data){
+    if (err || !data || !(data.dialogos instanceof Array)){ $('situacao').textContent = 'Não consegui abrir os diálogos.'; return; }
+    dialogos = data.dialogos;
+    $('escolha').innerHTML = dialogos.map(function(x){ return '<button type="button" data-id="' + Sala.esc(x.id) + '">' + x.emoji + ' ' + Sala.esc(x.titulo) + '</button>'; }).join('');
+    var bs = $('escolha').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ escolher(this.getAttribute('data-id')); };
+    escolher(EN.param('dialogo') || dialogos[0].id);
+  });
+  window.ROLEPLAY = {dialogo: function(){ return d; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

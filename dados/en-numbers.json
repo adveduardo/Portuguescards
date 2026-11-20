@@ -1,0 +1,186 @@
+{
+  "titulo": "Numbers: read and listen (números)",
+  "emoji": "🔢",
+  "instrucao": "Choose the right number",
+  "idioma": "en-US",
+  "rodadas": [
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "15",
+        "50"
+      ],
+      "correta": "15",
+      "explica": "FIFTEEN = 15 (força no fim: fif-TEEN). FIFTY = 50 (FIF-ty).",
+      "imagem": "🎧",
+      "ouvir": "fifteen"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "40",
+        "14"
+      ],
+      "correta": "40",
+      "explica": "FORTY = 40 (sem U!). FOURTEEN = 14.",
+      "imagem": "🎧",
+      "ouvir": "forty"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "17",
+        "70"
+      ],
+      "correta": "17",
+      "explica": "SEVENTEEN = 17. SEVENTY = 70.",
+      "imagem": "🎧",
+      "ouvir": "seventeen"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "90",
+        "19"
+      ],
+      "correta": "90",
+      "explica": "NINETY = 90. NINETEEN = 19.",
+      "imagem": "🎧",
+      "ouvir": "ninety"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "12",
+        "20",
+        "2"
+      ],
+      "correta": "12",
+      "explica": "TWELVE = 12. TWENTY = 20.",
+      "imagem": "🎧",
+      "ouvir": "twelve"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "100",
+        "1000",
+        "10"
+      ],
+      "correta": "100",
+      "explica": "ONE HUNDRED = 100. ONE THOUSAND = 1000.",
+      "imagem": "🎧",
+      "ouvir": "one hundred"
+    },
+    {
+      "destaque": "Which number did you hear?",
+      "opcoes": [
+        "80",
+        "18"
+      ],
+      "correta": "80",
+      "explica": "EIGHTY = 80. EIGHTEEN = 18.",
+      "imagem": "🎧",
+      "ouvir": "eighty"
+    },
+    {
+      "destaque": "How do you write 30?",
+      "opcoes": [
+        "thirty",
+        "thirteen",
+        "threety",
+        "therty"
+      ],
+      "correta": "thirty",
+      "explica": "30 = thirty; 13 = thirteen.",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "How do you write 40?",
+      "opcoes": [
+        "forty",
+        "fourty",
+        "fourteen",
+        "fortty"
+      ],
+      "correta": "forty",
+      "explica": "Atenção: 40 = forty (sem U), mas 4 = four e 14 = fourteen.",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "How do you write 12?",
+      "opcoes": [
+        "twelve",
+        "twenty",
+        "twelf",
+        "two-ten"
+      ],
+      "correta": "twelve",
+      "explica": "12 = twelve; 20 = twenty.",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "21",
+      "opcoes": [
+        "twenty-one",
+        "twenty-first",
+        "one-twenty",
+        "twelve-one"
+      ],
+      "correta": "twenty-one",
+      "explica": "Dezenas + unidades com hífen: twenty-one, thirty-five…",
+      "imagem": "🔢",
+      "enunciado": "How do you say it?"
+    },
+    {
+      "destaque": "$4.99",
+      "opcoes": [
+        "four dollars and ninety-nine cents",
+        "forty-nine dollars and nine cents",
+        "four hundred ninety-nine dollars",
+        "nine dollars and forty cents"
+      ],
+      "correta": "four dollars and ninety-nine cents",
+      "explica": "Preço: dólares + centavos. No dia a dia também se diz “four ninety-nine”.",
+      "imagem": "🏷️",
+      "enunciado": "How do you say this price?"
+    },
+    {
+      "destaque": "No número de telefone 0734, como muitas vezes se fala o 0?",
+      "opcoes": [
+        "“oh”, como a letra O",
+        "“ten”",
+        "“nothing”",
+        "“none”"
+      ],
+      "correta": "“oh”, como a letra O",
+      "explica": "No telefone, o 0 costuma ser dito “oh”. “Zero” também está certo.",
+      "imagem": "📞"
+    },
+    {
+      "destaque": "1st, 2nd, 3rd",
+      "opcoes": [
+        "first, second, third",
+        "one, two, three",
+        "oneth, twoth, threeth",
+        "first, twoth, thirdth"
+      ],
+      "correta": "first, second, third",
+      "explica": "Ordinais: first (1st), second (2nd), third (3rd), fourth (4th)…",
+      "imagem": "🏆",
+      "enunciado": "How do you read it?"
+    },
+    {
+      "destaque": "How old are you? – I'm ___. (25)",
+      "opcoes": [
+        "twenty-five",
+        "twenty-fifth",
+        "two-five",
+        "fifty-two"
+      ],
+      "correta": "twenty-five",
+      "explica": "25 = twenty-five.",
+      "imagem": "🎂"
+    }
+  ]
+}

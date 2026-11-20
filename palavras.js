@@ -155,11 +155,12 @@ function propria(){
 function salvarPropria(itens, titulo){ guardar(CHAVE_PROPRIA, paraJSON(itens, titulo)); }
 
 // Lista pronta pedida pelo endereço: pagina.html?lista=arquivo.json (arquivo na pasta dados/)
-let listaUrl = null;
+let listaUrl = null, gruposUrl = [];   // gruposUrl: a lista pronta pode vir dividida em grupos (temas)
 const selectsCategoria = [];
 function lista(cat){
   if (cat === 'propria') return propria().itens;
   if (cat === 'url') return listaUrl ? listaUrl.itens.slice() : [];
+  if (/^url:\d+$/.test(cat)){ const g = gruposUrl[+cat.slice(4)]; return g ? g.itens.slice() : []; }
   if (!cat || cat === 'todas') return BANCO.slice();
   return BANCO.filter(i => i.cats.has(cat));
 }
@@ -257,6 +258,11 @@ function preencherCategorias(select, opcoes = {}){
     const o = document.createElement('option'); o.value = 'url';
     o.textContent = '📄 ' + (listaUrl.titulo || 'Lista da atividade') + ` (${listaUrl.itens.length})`;
     select.appendChild(o);
+    gruposUrl.forEach((g, i) => {
+      const og = document.createElement('option'); og.value = 'url:' + i;
+      og.textContent = '   📄 ' + g.titulo + ` (${g.itens.length})`;
+      select.appendChild(og);
+    });
   }
   const chaves = incluir || Object.keys(CATEGORIAS);
   chaves.forEach(k => {
@@ -374,6 +380,10 @@ document.head.appendChild(css);
   const arq = new URLSearchParams(location.search).get('lista');
   if (!arq || !/^[\w.-]+\.json$/.test(arq)) return;
   fetch('dados/' + arq + '?v=' + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); }).then(d => {
+    if (Array.isArray(d.grupos)){   // lista com temas: cada grupo vira uma opção, e a primeira opção junta todos
+      gruposUrl = d.grupos.map(g => { const y = interpretar(JSON.stringify({titulo: g.titulo || '', palavras: g.palavras || []})); y.titulo = g.titulo || 'Grupo'; return y; }).filter(y => y.itens.length);
+      d = {titulo: d.titulo, idioma: d.idioma, palavras: [].concat(...(d.grupos || []).map(g => g.palavras || []))};
+    }
     const x = interpretar(JSON.stringify(d));
     if (!x.itens.length) return;
     listaUrl = x;

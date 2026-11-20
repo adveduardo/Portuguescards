@@ -1,0 +1,151 @@
+{
+  "titulo": "Idioms (expressões idiomáticas)",
+  "emoji": "💬",
+  "instrucao": "What does it mean?",
+  "rodadas": [
+    {
+      "destaque": "It's raining cats and dogs.",
+      "opcoes": [
+        "Está chovendo muito.",
+        "Está chovendo animais.",
+        "Os animais estão na chuva.",
+        "Está garoando."
+      ],
+      "correta": "Está chovendo muito.",
+      "explica": "Não é literal: significa chover muito.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "Break a leg!",
+      "opcoes": [
+        "Boa sorte!",
+        "Quebre a perna!",
+        "Cuidado ao andar!",
+        "Vá devagar!"
+      ],
+      "correta": "Boa sorte!",
+      "explica": "Diz-se para desejar sorte, por exemplo antes de uma apresentação.",
+      "imagem": "🎭"
+    },
+    {
+      "destaque": "It's a piece of cake.",
+      "opcoes": [
+        "É muito fácil.",
+        "É um pedaço de bolo.",
+        "É muito gostoso.",
+        "É uma festa."
+      ],
+      "correta": "É muito fácil.",
+      "explica": "“Piece of cake” = moleza.",
+      "imagem": "🍰"
+    },
+    {
+      "destaque": "I'm feeling under the weather.",
+      "opcoes": [
+        "Estou me sentindo meio doente.",
+        "Estou com calor.",
+        "Estou embaixo da chuva.",
+        "Estou muito feliz."
+      ],
+      "correta": "Estou me sentindo meio doente.",
+      "explica": "Under the weather = indisposto, meio doente.",
+      "imagem": "🤒"
+    },
+    {
+      "destaque": "I need to hit the books.",
+      "opcoes": [
+        "Preciso estudar muito.",
+        "Preciso bater nos livros.",
+        "Preciso jogar os livros fora.",
+        "Preciso comprar livros."
+      ],
+      "correta": "Preciso estudar muito.",
+      "explica": "Hit the books = estudar com dedicação.",
+      "imagem": "📚"
+    },
+    {
+      "destaque": "Once in a blue moon.",
+      "opcoes": [
+        "Muito raramente.",
+        "Toda noite.",
+        "Quando a lua está azul.",
+        "Sempre."
+      ],
+      "correta": "Muito raramente.",
+      "explica": "Once in a blue moon = quase nunca.",
+      "imagem": "🌙"
+    },
+    {
+      "destaque": "It cost an arm and a leg.",
+      "opcoes": [
+        "Custou muito caro.",
+        "Machucou o braço.",
+        "Custou barato.",
+        "Pagou com o corpo."
+      ],
+      "correta": "Custou muito caro.",
+      "explica": "Parecido com o nosso “custou os olhos da cara”.",
+      "imagem": "💸"
+    },
+    {
+      "destaque": "Don't spill the beans!",
+      "opcoes": [
+        "Não conte o segredo!",
+        "Não derrame o feijão!",
+        "Não cozinhe o feijão!",
+        "Não faça bagunça!"
+      ],
+      "correta": "Não conte o segredo!",
+      "explica": "Spill the beans = revelar um segredo.",
+      "imagem": "🤐"
+    },
+    {
+      "destaque": "Let's break the ice.",
+      "opcoes": [
+        "Vamos quebrar o gelo (puxar conversa).",
+        "Vamos fazer gelo.",
+        "Vamos ficar com frio.",
+        "Vamos brigar com alguém."
+      ],
+      "correta": "Vamos quebrar o gelo (puxar conversa).",
+      "explica": "Igual ao português: deixar o clima mais leve.",
+      "imagem": "❄️"
+    },
+    {
+      "destaque": "Better late than never.",
+      "opcoes": [
+        "Antes tarde do que nunca.",
+        "Melhor nunca chegar.",
+        "Chegue sempre atrasado.",
+        "O tempo voa."
+      ],
+      "correta": "Antes tarde do que nunca.",
+      "explica": "Mesmo sentido do provérbio em português.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "Practice makes perfect.",
+      "opcoes": [
+        "A prática leva à perfeição.",
+        "Ninguém é perfeito.",
+        "Treinar cansa.",
+        "Perfeito é chato."
+      ],
+      "correta": "A prática leva à perfeição.",
+      "explica": "Quanto mais se pratica, melhor se fica.",
+      "imagem": "🏆"
+    },
+    {
+      "destaque": "Time flies.",
+      "opcoes": [
+        "O tempo voa.",
+        "O tempo para.",
+        "O relógio quebrou.",
+        "Tempo é dinheiro."
+      ],
+      "correta": "O tempo voa.",
+      "explica": "Time flies = o tempo passa rápido.",
+      "imagem": "⏳"
+    }
+  ]
+}

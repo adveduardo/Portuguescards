@@ -134,6 +134,11 @@
       "arquivo": "quiz-vida.json",
       "titulo": "Quiz do projeto de vida",
       "qtd": 30
+    },
+    {
+      "arquivo": "quiz-en-temas.json",
+      "titulo": "🇬🇧 Vocabulary quiz (temas novos)",
+      "qtd": 30
     }
   ],
   "stop": [
@@ -829,6 +834,10 @@
     {
       "arquivo": "vida-cestos-necessidade.json",
       "titulo": "Cestos: necessidade ou desejo?"
+    },
+    {
+      "arquivo": "en-cestos-temas.json",
+      "titulo": "🇬🇧 Which group? (temas de vocabulário)"
     }
   ],
   "morfo-frases": [
@@ -1827,6 +1836,30 @@
     {
       "arquivo": "memoria-vida-profissoes.json",
       "titulo": "Memória das profissões"
+    },
+    {
+      "arquivo": "memoria-en-clima.json",
+      "titulo": "🇬🇧 Memory: weather and seasons"
+    },
+    {
+      "arquivo": "memoria-en-roupas.json",
+      "titulo": "🇬🇧 Memory: clothes"
+    },
+    {
+      "arquivo": "memoria-en-casa.json",
+      "titulo": "🇬🇧 Memory: house"
+    },
+    {
+      "arquivo": "memoria-en-corpo.json",
+      "titulo": "🇬🇧 Memory: body"
+    },
+    {
+      "arquivo": "memoria-en-sentimentos.json",
+      "titulo": "🇬🇧 Memory: feelings"
+    },
+    {
+      "arquivo": "memoria-en-cidade.json",
+      "titulo": "🇬🇧 Memory: city and places"
     }
   ],
   "bingo": [
@@ -1861,6 +1894,10 @@
     {
       "arquivo": "bingo-alfa-silabas.json",
       "titulo": "Bingo das sílabas (alfabetização)"
+    },
+    {
+      "arquivo": "bingo-en-temas.json",
+      "titulo": "🇬🇧 English Bingo: temas novos"
     }
   ],
   "escolha-fo": [
@@ -1994,6 +2031,10 @@
     {
       "arquivo": "lista-en-spelling.json",
       "titulo": "🇬🇧 English words (spelling)"
+    },
+    {
+      "arquivo": "lista-en-temas.json",
+      "titulo": "🇬🇧 English: palavras por tema"
     }
   ],
   "escolha-cc": [
@@ -2144,6 +2185,56 @@
       "arquivo": "en-trabalho.json",
       "titulo": "🇬🇧 English at work (entrevista e e-mail)",
       "qtd": 15
+    },
+    {
+      "arquivo": "en-time.json",
+      "titulo": "🇬🇧 What time is it?",
+      "qtd": 16
+    },
+    {
+      "arquivo": "en-numbers.json",
+      "titulo": "🇬🇧 Numbers: read and listen",
+      "qtd": 15
+    },
+    {
+      "arquivo": "en-classroom.json",
+      "titulo": "🇬🇧 Classroom English",
+      "qtd": 16
+    },
+    {
+      "arquivo": "en-minimal-pairs.json",
+      "titulo": "🇬🇧 Minimal pairs (listen)",
+      "qtd": 18
+    },
+    {
+      "arquivo": "en-tech.json",
+      "titulo": "🇬🇧 English in technology",
+      "qtd": 18
+    },
+    {
+      "arquivo": "en-phrasal-verbs.json",
+      "titulo": "🇬🇧 Phrasal verbs",
+      "qtd": 14
+    },
+    {
+      "arquivo": "en-idioms.json",
+      "titulo": "🇬🇧 Idioms",
+      "qtd": 12
+    },
+    {
+      "arquivo": "en-present-perfect.json",
+      "titulo": "🇬🇧 Present perfect or simple past?",
+      "qtd": 12
+    },
+    {
+      "arquivo": "en-connectives.json",
+      "titulo": "🇬🇧 Connectives",
+      "qtd": 12
+    },
+    {
+      "arquivo": "en-genres.json",
+      "titulo": "🇬🇧 Text genres in English (ENEM)",
+      "qtd": 8
     }
   ],
   "escolha-vida": [

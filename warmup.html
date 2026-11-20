@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warm-up do dia</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#e8590c} button.principal{background:#e8590c;box-shadow:0 3px 0 #b34306}
+  body,.palco{background:#fff6e9;background-image:linear-gradient(160deg,#fff6e9,#eaf6ff)}
+  .grade{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+  .grade>.cartao{-webkit-flex:1 1 340px;flex:1 1 340px;margin:8px;min-width:0}
+  .rotulo{font-size:15px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a5a2b}
+  .frase{font-size:30px;font-weight:bold;color:#1f2a44;line-height:1.25;margin:6px 0}
+  .sub{font-size:18px;color:#4b5b73}
+  .ouvir{float:right;margin:-4px -4px 0 6px}
+  .opcoes button{font-size:18px;padding:8px 12px}
+  .opcoes button.on{background:#e8590c;color:#fff}
+  .opcoes button b{display:inline-block;min-width:22px;margin-left:6px;background:rgba(0,0,0,.08);border-radius:999px;padding:0 6px}
+  .emoji{font-size:64px;line-height:1.1}
+  #tradFrase{font-size:19px;color:#4b5b73}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>☀️ Warm-up do dia <small>Cinco minutos em inglês para abrir a aula: data, hora, estação, clima, como estamos e a frase do dia.</small></h1>
+    <button type="button" class="principal" id="btLerTudo">🔊 Ler tudo</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="grade">
+    <div class="cartao"><button type="button" class="ouvir" data-ler="hoje">🔊</button><div class="rotulo">📅 What day is it today?</div>
+      <div class="frase" id="hoje"></div><div class="sub" id="ontem"></div></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="hora">🔊</button><div class="rotulo">🕐 What time is it?</div>
+      <div class="frase" id="hora"></div><div class="sub" id="horaDigital"></div></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="estacao">🔊</button><div class="rotulo">🍂 What season is it?</div>
+      <div class="frase" id="estacao"></div><div class="sub" id="estacaoPt"></div></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="clima">🔊</button><div class="rotulo">🌦️ What's the weather like today?</div>
+      <div class="opcoes" id="opClima"></div><div class="frase" id="clima">Choose with the class!</div></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="humor">🔊</button><div class="rotulo">😀 How are you today?</div>
+      <div class="opcoes" id="opHumor"></div><div class="frase" id="humor">Tap how you feel.</div>
+      <button type="button" id="btZerar" style="font-size:14px">↺ Zerar votos</button></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="palavra">🔊</button><div class="rotulo">⭐ Word of the day</div>
+      <div class="emoji" id="palEmoji"></div><div class="frase" id="palavra"></div><div class="sub" id="palPt"></div>
+      <p class="sub">💬 Make a sentence with this word!</p><button type="button" id="btOutraPalavra">🔀 Outra palavra</button></div>
+    <div class="cartao"><button type="button" class="ouvir" data-ler="fraseDia">🔊</button><div class="rotulo">💬 Phrase of the day</div>
+      <div class="frase" id="fraseDia"></div><div id="tradFrase" hidden></div>
+      <button type="button" id="btTrad">👁️ Tradução</button> <button type="button" id="btOutraFrase">🔀 Outra frase</button></div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var DIAS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MESES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var NUM = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+             'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+  var CLIMA = [['sunny', '☀️'], ['cloudy', '☁️'], ['rainy', '🌧️'], ['windy', '🌬️'], ['stormy', '⛈️'], ['hot', '🌡️'], ['cold', '⛄']];
+  var HUMOR = [['happy', '😀'], ['tired', '😩'], ['sleepy', '😴'], ['excited', '😆'], ['calm', '😌'], ['sad', '😢'], ['nervous', '😬'], ['bored', '😑'], ['sick', '🤒']];
+  var CH = 'warmup_votos', palavras = [], frases = [], iPal = 0, iFrase = 0, climaEsc = '', votos = {};
+  var hojeKey = Sala.hoje(), salvo = Sala.ler(CH);
+  if (salvo && salvo.dia === hojeKey) votos = salvo.votos || {};
+
+  function ordinal(n){ var r = n % 100, u = n % 10; return n + (r >= 11 && r <= 13 ? 'th' : u === 1 ? 'st' : u === 2 ? 'nd' : u === 3 ? 'rd' : 'th'); }
+  function numero(n){ return n <= 20 ? NUM[n] : ['', '', 'twenty', 'thirty', 'forty', 'fifty'][Math.floor(n / 10)] + (n % 10 ? '-' + NUM[n % 10] : ''); }
+  function horaPalavras(h, m){
+    var h12 = h % 12 || 12, prox = (h + 1) % 12 || 12;
+    if (m === 0) return "It's " + numero(h12) + " o'clock.";
+    if (m === 15) return "It's a quarter past " + numero(h12) + '.';
+    if (m === 30) return "It's half past " + numero(h12) + '.';
+    if (m === 45) return "It's a quarter to " + numero(prox) + '.';
+    if (m < 30) return "It's " + numero(m) + (m === 1 ? ' minute' : '') + ' past ' + numero(h12) + '.';
+    return "It's " + numero(60 - m) + (60 - m === 1 ? ' minute' : '') + ' to ' + numero(prox) + '.';
+  }
+  function estacao(d){   // estações no Brasil (hemisfério sul), com as datas aproximadas de início
+    var md = (d.getMonth() + 1) * 100 + d.getDate();
+    if (md >= 1221 || md < 320) return ['summer', 'verão', '🏖️'];
+    if (md < 621) return ['autumn (fall)', 'outono', '🍂'];
+    if (md < 922) return ['winter', 'inverno', '☃️'];
+    return ['spring', 'primavera', '🌷'];
+  }
+  function diaDoAno(d){ return Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(2024, 0, 1)) / 86400000); }
+
+  function atualizarData(){
+    var d = new Date(), ontem = new Date(d.getTime() - 86400000), amanha = new Date(d.getTime() + 86400000);
+    $('hoje').textContent = 'Today is ' + DIAS[d.getDay()] + ', ' + MESES[d.getMonth()] + ' ' + ordinal(d.getDate()) + ', ' + d.getFullYear() + '.';
+    $('ontem').textContent = 'Yesterday was ' + DIAS[ontem.getDay()] + '. Tomorrow is ' + DIAS[amanha.getDay()] + '.';
+    var h = d.getHours(), m = d.getMinutes();
+    $('hora').textContent = horaPalavras(h, m);
+    $('horaDigital').textContent = "It's " + (h % 12 || 12) + ':' + ('0' + m).slice(-2) + (h < 12 ? ' a.m.' : ' p.m.');
+    var e = estacao(d);
+    $('estacao').textContent = "It's " + e[0] + ' in Brazil. ' + e[2];
+    $('estacaoPt').textContent = 'No Brasil, agora é ' + e[1] + '.';
+  }
+  function desenharClima(){
+    $('opClima').innerHTML = CLIMA.map(function(c){ return '<button type="button" data-c="' + c[0] + '"' + (climaEsc === c[0] ? ' class="on"' : '') + '>' + c[1] + ' ' + c[0] + '</button>'; }).join('');
+    var bs = $('opClima').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){
+      climaEsc = this.getAttribute('data-c'); desenharClima();
+      $('clima').textContent = "It's " + climaEsc + ' today.'; EN.falar($('clima').textContent);
+    };
+  }
+  function desenharHumor(){
+    var maior = '', n = 0;
+    HUMOR.forEach(function(x){ if ((votos[x[0]] || 0) > n){ n = votos[x[0]]; maior = x[0]; } });
+    $('opHumor').innerHTML = HUMOR.map(function(x){ return '<button type="button" data-h="' + x[0] + '"' + (maior === x[0] ? ' class="on"' : '') + '>' + x[1] + ' ' + x[0] + (votos[x[0]] ? '<b>' + votos[x[0]] + '</b>' : '') + '</button>'; }).join('');
+    var bs = $('opHumor').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){
+      var h = this.getAttribute('data-h'); votos[h] = (votos[h] || 0) + 1; Sala.gravar(CH, {dia: hojeKey, votos: votos});
+      $('humor').textContent = "I'm " + h + '! And you?'; EN.falar("I'm " + h + '!'); desenharHumor();
+    };
+    if (maior) $('humor').setAttribute('data-turma', 'Most of the class is ' + maior + '.');
+  }
+  function mostrarPalavra(){
+    var p = palavras[iPal % palavras.length]; if (!p) return;
+    $('palEmoji').textContent = p.emoji; $('palavra').textContent = p.en; $('palPt').textContent = p.pt;
+  }
+  function mostrarFrase(){
+    var f = frases[iFrase % frases.length]; if (!f) return;
+    $('fraseDia').textContent = f.en; $('tradFrase').textContent = f.pt; $('tradFrase').hidden = true; $('btTrad').innerHTML = '👁️ Tradução';
+  }
+  function texto(id){ return $(id).textContent; }
+
+  var ls = document.querySelectorAll('[data-ler]');
+  for (var k = 0; k < ls.length; k++) ls[k].onclick = function(){ EN.falar(texto(this.getAttribute('data-ler'))); };
+  $('btLerTudo').onclick = function(){
+    var partes = [texto('hoje'), texto('hora'), texto('estacao').replace(/[^\x20-\x7e]/g, '')];
+    if (climaEsc) partes.push(texto('clima'));
+    partes.push('Phrase of the day: ' + texto('fraseDia'));
+    EN.falar(partes.join(' '), {rate: 0.85});
+  };
+  $('btZerar').onclick = function(){ votos = {}; Sala.gravar(CH, {dia: hojeKey, votos: votos}); $('humor').textContent = 'Tap how you feel.'; desenharHumor(); };
+  $('btOutraPalavra').onclick = function(){ iPal++; mostrarPalavra(); EN.falar(texto('palavra')); };
+  $('btOutraFrase').onclick = function(){ iFrase++; mostrarFrase(); };
+  $('btTrad').onclick = function(){ $('tradFrase').hidden = !$('tradFrase').hidden; this.innerHTML = $('tradFrase').hidden ? '👁️ Tradução' : '🙈 Esconder'; };
+  Sala.botaoSom($('btSom'));
+  atualizarData(); setInterval(atualizarData, 20000); desenharClima(); desenharHumor();
+  var dia = diaDoAno(new Date());
+  EN.json('dados/en-vocab.json', function(err, d){
+    if (err || !d) return;
+    d.temas.forEach(function(t){ if (t.id !== 'classroom' && t.id !== 'numbers') palavras = palavras.concat(t.palavras); });
+    iPal = ((dia * 7) % palavras.length + palavras.length) % palavras.length; mostrarPalavra();
+  });
+  EN.json('dados/en-frases.json', function(err, d){
+    if (err || !d) return;
+    frases = d.frases; iFrase = ((dia % frases.length) + frases.length) % frases.length; mostrarFrase();
+  });
+  window.WARMUP = {horaPalavras: horaPalavras, ordinal: ordinal, estacao: estacao};   // usado nos testes
+})();
+</script>
+</body>
+</html>

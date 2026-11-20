@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flashcards</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#1d4ed8} button.principal{background:#1d4ed8;box-shadow:0 3px 0 #163a9e}
+  body,.palco{background:#eaf1ff;background-image:linear-gradient(160deg,#eaf1ff,#fff1f1)}
+  .controles{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;max-width:1100px;margin:6px auto}
+  .controles select{width:auto;margin:3px}
+  .controles label{margin:3px 8px;font-size:15px}
+  .mesa{max-width:640px;margin:10px auto;-webkit-perspective:1400px;perspective:1400px}
+  .carta{position:relative;height:380px;cursor:pointer;-webkit-transition:-webkit-transform .5s;transition:transform .5s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}
+  .carta.virada{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+  .face{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:30px;background:#fff;box-shadow:0 12px 30px rgba(29,78,216,.18);
+    display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;
+    -webkit-justify-content:center;justify-content:center;text-align:center;padding:18px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+  .frente{border:6px solid #93b4ff}
+  .verso{border:6px solid #ff9b9b;-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}
+  .grande{font-size:150px;line-height:1.1}
+  .texto{font-size:54px;font-weight:bold;color:#1f2a44;line-height:1.15}
+  .texto.longo{font-size:34px}
+  .en{font-size:60px;font-weight:bold;color:#1d4ed8;line-height:1.1}
+  .en.longo{font-size:36px}
+  .pt{font-size:26px;color:#4b5b73;margin-top:10px}
+  .mini{font-size:64px;margin-top:6px}
+  .dica{text-align:center}
+  .nav{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:center;align-items:center;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin:8px auto}
+  .nav button{font-size:18px;padding:11px 16px}
+  #contador{font-size:19px;font-weight:bold;margin:0 10px;min-width:90px;text-align:center}
+  #sei.on{background:#1f9d6b;color:#fff}
+  @media (max-width:600px){ .carta{height:300px} .grande{font-size:110px} .en{font-size:44px} .texto{font-size:40px} .en.longo,.texto.longo{font-size:26px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🃏 Flashcards <small>Toque no cartão para virar: a palavra em inglês, a pronúncia e a tradução.</small></h1>
+    <button type="button" id="btImprimir">🖨️ Imprimir cartaz</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="controles">
+    <select id="selTema" aria-label="Tema"></select>
+    <select id="selModo" aria-label="Como mostrar">
+      <option value="figura">🖼️ Figura → inglês</option>
+      <option value="pt">🇧🇷 Português → inglês</option>
+      <option value="en">🇬🇧 Inglês → português</option>
+    </select>
+    <button type="button" id="btEmbaralhar">🔀 Embaralhar</button>
+    <label><input type="checkbox" id="chkFalta"> Só os que ainda não sei</label>
+  </div>
+  <div class="mesa"><div class="carta" id="carta" role="button" tabindex="0" aria-label="Virar o cartão">
+    <div class="face frente" id="frente"></div>
+    <div class="face verso" id="verso"></div>
+  </div></div>
+  <div class="nav">
+    <button type="button" id="btAnt" aria-label="Anterior">◀</button>
+    <span id="contador">– / –</span>
+    <button type="button" id="btProx" aria-label="Próximo">▶</button>
+    <button type="button" id="btOuvir">🔊 Ouvir</button>
+    <button type="button" id="sei">✅ Já sei</button>
+  </div>
+  <p class="dica" id="resumo"></p>
+  <p class="dica">Teclado: espaço vira o cartão • setas ← → trocam • O ouve de novo</p>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CH = 'flash_conhecidas', temas = [], tema = null, ordem = [], pos = 0, virada = false;
+  var conhecidas = Sala.ler(CH) || {};
+
+  function sabidas(){ return conhecidas[tema.id] || []; }
+  function sabe(en){ return sabidas().indexOf(en) >= 0; }
+  function montarOrdem(embaralhar){
+    var l = tema.palavras.filter(function(p){ return !$('chkFalta').checked || !sabe(p.en); });
+    if (!l.length) l = tema.palavras.slice();
+    ordem = embaralhar ? EN.embaralhar(l) : l; pos = 0; mostrar(false);
+  }
+  function longo(t){ return String(t).length > 16 ? ' longo' : ''; }
+  function mostrar(falar){
+    var p = ordem[pos], modo = $('selModo').value;
+    virada = false; $('carta').className = 'carta';
+    if (!p){ $('frente').innerHTML = ''; return; }
+    var frente = modo === 'figura' ? '<div class="grande">' + p.emoji + '</div>'
+      : modo === 'pt' ? '<div class="texto' + longo(p.pt) + '">' + Sala.esc(p.pt) + '</div>'
+      : '<div class="en' + longo(p.en) + '">' + Sala.esc(p.en) + '</div>';
+    var verso = modo === 'en' ? '<div class="texto' + longo(p.pt) + '">' + Sala.esc(p.pt) + '</div><div class="mini">' + p.emoji + '</div>'
+      : '<div class="en' + longo(p.en) + '">' + Sala.esc(p.en) + '</div><div class="pt">' + Sala.esc(p.pt) + '</div>' + (modo === 'pt' ? '<div class="mini">' + p.emoji + '</div>' : '');
+    $('frente').innerHTML = frente; $('verso').innerHTML = verso;
+    $('contador').textContent = (pos + 1) + ' / ' + ordem.length;
+    $('sei').className = sabe(p.en) ? 'on' : ''; $('sei').innerHTML = sabe(p.en) ? '✅ Já sei' : '☑️ Já sei';
+    $('resumo').textContent = 'Já sei ' + sabidas().length + ' de ' + tema.palavras.length + ' palavras deste tema.';
+    if (falar && modo === 'en') EN.falar(p.en);
+  }
+  function virar(){
+    var p = ordem[pos]; if (!p) return;
+    virada = !virada; $('carta').className = 'carta' + (virada ? ' virada' : '');
+    if (virada && $('selModo').value !== 'en') EN.falar(p.en);
+  }
+  function ir(d){ if (!ordem.length) return; pos = (pos + d + ordem.length) % ordem.length; mostrar(true); }
+  function escolherTema(id){
+    for (var i = 0; i < temas.length; i++) if (temas[i].id === id) tema = temas[i];
+    if (!tema) tema = temas[0];
+    $('selTema').value = tema.id; montarOrdem(false);
+  }
+
+  $('carta').onclick = virar;
+  $('carta').onkeydown = function(e){ if (e.keyCode === 13 || e.keyCode === 32){ e.preventDefault(); virar(); } };
+  $('btAnt').onclick = function(){ ir(-1); };
+  $('btProx').onclick = function(){ ir(1); };
+  $('btOuvir').onclick = function(){ if (ordem[pos]) EN.falar(ordem[pos].en); };
+  $('btEmbaralhar').onclick = function(){ montarOrdem(true); };
+  $('chkFalta').onchange = function(){ montarOrdem(false); };
+  $('selModo').onchange = function(){ mostrar(true); };
+  $('selTema').onchange = function(){ escolherTema(this.value); };
+  $('sei').onclick = function(){
+    var p = ordem[pos]; if (!p) return;
+    var l = sabidas().slice(), i = l.indexOf(p.en);
+    if (i >= 0) l.splice(i, 1); else { l.push(p.en); Sala.plim(); }
+    conhecidas[tema.id] = l; Sala.gravar(CH, conhecidas);
+    if (i < 0 && pos < ordem.length - 1) ir(1); else mostrar(false);
+  };
+  $('btImprimir').onclick = function(){
+    var h = '<style>#salaImpressao .fc{display:inline-block;width:31%;margin:0.8%;border:2px solid #555;border-radius:12px;text-align:center;padding:8px 4px;vertical-align:top;page-break-inside:avoid}' +
+      '#salaImpressao .fc b{display:block;font-size:20px;margin-top:2px}#salaImpressao .fc span{display:block;font-size:14px;color:#333}#salaImpressao .fc i{font-style:normal;font-size:40px;display:block}</style>' +
+      '<h1 style="font-size:24px;margin:0 0 8px">🇬🇧 ' + Sala.esc(tema.nome) + '</h1>';
+    tema.palavras.forEach(function(p){ h += '<div class="fc"><i>' + p.emoji + '</i><b>' + Sala.esc(p.en) + '</b><span>' + Sala.esc(p.pt) + '</span></div>'; });
+    Sala.imprimir(h);
+  };
+  document.addEventListener('keydown', function(e){
+    var t = e.target && e.target.tagName; if (t === 'SELECT' || t === 'INPUT') return;
+    if (e.keyCode === 39) ir(1); else if (e.keyCode === 37) ir(-1);
+    else if (e.keyCode === 32 && e.target === document.body){ e.preventDefault(); virar(); }
+    else if (e.keyCode === 79 && ordem[pos]) EN.falar(ordem[pos].en);
+  });
+  Sala.botaoSom($('btSom'));
+
+  EN.json('dados/en-vocab.json', function(err, d){
+    if (err || !d || !(d.temas instanceof Array)){ $('frente').innerHTML = '<div class="texto">Não consegui abrir os temas.</div>'; return; }
+    temas = d.temas;
+    $('selTema').innerHTML = temas.map(function(t){ return '<option value="' + Sala.esc(t.id) + '">' + t.emoji + ' ' + Sala.esc(t.nome) + ' (' + t.palavras.length + ')</option>'; }).join('');
+    escolherTema(EN.param('tema') || temas[0].id);
+  });
+  window.FLASH = {tema: function(){ return tema; }, ordem: function(){ return ordem; }, pos: function(){ return pos; }, virada: function(){ return virada; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>
