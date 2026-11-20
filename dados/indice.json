@@ -2035,6 +2035,10 @@
     {
       "arquivo": "lista-en-temas.json",
       "titulo": "🇬🇧 English: palavras por tema"
+    },
+    {
+      "arquivo": "lista-alfa-figuras.json",
+      "titulo": "Palavras com figura (Alfabetização)"
     }
   ],
   "escolha-cc": [
@@ -2604,6 +2608,38 @@
       "titulo": "⭐ Banco completo: Quiz geral de Língua Portuguesa (552 questões)",
       "grupo": "🏆 Quizzes prontos",
       "qtd": 552
+    }
+  ],
+  "leitura": [
+    {
+      "arquivo": "leitura-alfabetizacao.json",
+      "titulo": "Alfabetização: frases curtas",
+      "qtd": 40
+    },
+    {
+      "arquivo": "leitura-parlendas.json",
+      "titulo": "Parlendas e trava-línguas (tradicionais)",
+      "qtd": 22
+    },
+    {
+      "arquivo": "leitura-fluencia.json",
+      "titulo": "Fluência (6º ao 9º): textos curtos",
+      "qtd": 20
+    },
+    {
+      "arquivo": "leitura-eja.json",
+      "titulo": "EJA: textos do dia a dia",
+      "qtd": 18
+    },
+    {
+      "arquivo": "leitura-en-basico.json",
+      "titulo": "English: everyday sentences (frases do dia a dia)",
+      "qtd": 39
+    },
+    {
+      "arquivo": "leitura-en-trava-linguas.json",
+      "titulo": "English: tongue twisters (trava-línguas tradicionais)",
+      "qtd": 14
     }
   ]
 }

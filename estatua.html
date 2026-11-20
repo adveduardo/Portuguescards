@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Estátua das Palavras</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #palco{position:fixed;left:0;top:0;right:0;bottom:0;display:none;text-align:center;color:#fff;overflow:hidden;background:#24124a}
+  #palco.ativo{display:block}
+  #palco.danca{background:linear-gradient(120deg,#ff5d8f,#ffbe0b,#3a86ff,#8338ec,#06d6a0);background-size:400% 400%;-webkit-animation:fundo 6s ease infinite;animation:fundo 6s ease infinite}
+  @-webkit-keyframes fundo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes fundo{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  #centro{position:absolute;left:0;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);padding:0 16px}
+  #grande{font-size:120px;font-weight:bold;line-height:1.1;text-shadow:0 6px 0 rgba(0,0,0,.25);word-wrap:break-word}
+  #sub{font-size:34px;font-weight:bold;margin-top:10px;text-shadow:0 3px 0 rgba(0,0,0,.25)}
+  #pose{display:none;margin:18px auto 0;background:#fff;color:#1f2a44;border-radius:28px;padding:14px 26px;max-width:760px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  #pose .e{font-size:110px;line-height:1.1}
+  #pose .n{font-size:40px;font-weight:bold}
+  #pose .c{display:inline-block;color:#fff;border-radius:14px;padding:4px 16px;font-size:26px;font-weight:bold;margin-bottom:6px}
+  .pulsar{-webkit-animation:pulsar .45s ease-in-out infinite alternate;animation:pulsar .45s ease-in-out infinite alternate}
+  @-webkit-keyframes pulsar{to{-webkit-transform:scale(1.12) rotate(-3deg)}}
+  @keyframes pulsar{to{transform:scale(1.12) rotate(-3deg)}}
+  .nota{position:absolute;bottom:-60px;font-size:54px;opacity:.85;-webkit-animation:subir 4s linear forwards;animation:subir 4s linear forwards}
+  @-webkit-keyframes subir{to{-webkit-transform:translateY(-120vh) rotate(40deg);opacity:0}}
+  @keyframes subir{to{transform:translateY(-120vh) rotate(40deg);opacity:0}}
+  #rodape{position:fixed;left:0;right:0;bottom:0;padding:10px;text-align:center;z-index:6;display:none}
+  #btParem{font-size:30px;padding:14px 34px;background:#e74c3c;color:#fff;box-shadow:0 5px 0 #a8281b}
+  .poseCard{display:inline-block;vertical-align:top;width:220px;margin:8px;border-radius:22px;padding:12px;color:#fff}
+  .poseCard .e{font-size:80px;line-height:1.1}
+  .poseCard .n{font-size:24px;font-weight:bold}
+  .poseCard .d{font-size:16px;opacity:.95}
+  .poseCard .x{font-size:15px;background:rgba(255,255,255,.25);border-radius:10px;padding:4px 6px;margin-top:6px}
+  #listaCats label{display:block;text-align:left;margin:6px auto;max-width:620px}
+  #listaCats select{font-size:15px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<div id="hud" style="display:none">
+  <span class="chip" id="hRodada"></span><button type="button" id="btSom">🔊</button><button type="button" id="btSair" title="Terminar">⏹️</button>
+</div>
+<div id="palco"><div id="notas"></div><div id="centro"><div id="grande"></div><div id="sub"></div><div id="pose"></div></div></div>
+<div id="rodape">
+  <button type="button" id="btParem">✋ PAREM!</button>
+  <button type="button" class="principal" id="btContinuar">🎵 Próxima rodada</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🗿 Estátua das Palavras</h1>
+  <p>Toca uma música e a turma dança. Quando a música para, aparece uma palavra, e cada um faz <b>a pose do grupo dela</b>
+    (por exemplo: verbo = pular, substantivo = estátua, adjetivo = braços para cima). Quem errar a pose senta!</p>
+  <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <div id="listaCats"></div>
+  <label>Música: <select id="selMusica"><option value="jogo" selected>🎵 música do jogo</option><option value="minha">📻 a minha música (eu aperto PAREM)</option></select></label>
+  <label>Tempo de dança: <select id="selDanca"><option value="4,8">curto (4 a 8 s)</option><option value="6,12" selected>médio (6 a 12 s)</option><option value="10,18">longo (10 a 18 s)</option></select></label>
+  <label>Rodadas: <select id="selRodadas"><option>8</option><option selected>12</option><option>16</option></select></label>
+  <p id="avisoSom" class="dica" style="display:none">🔇 O som está desligado no Painel. <button type="button" id="btLigarSom">🔊 Ligar o som</button></p>
+  <p><button type="button" class="principal" id="btEnsaio">▶️ Ensaiar as poses</button></p>
+</div></div>
+<div class="tela" id="tEnsaio"><div class="cartao" style="max-width:1000px">
+  <h2>Ensaio: cada grupo tem a sua pose</h2>
+  <div id="cartasPoses"></div>
+  <p class="dica">Ensaiem cada pose juntos antes de começar. Na hora do jogo, a pose só aparece depois de alguns segundos!</p>
+  <p><button type="button" class="principal" id="btDancar">💃 Começar a dança!</button> <button type="button" id="btVoltar">⚙️ Voltar</button></p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao">
+  <h1>🎉 Fim da Estátua das Palavras!</h1>
+  <p style="font-size:22px" id="fimTxt"></p>
+  <p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button> <button type="button" id="btFimConfig">⚙️ Trocar as palavras</button></p>
+</div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, dados = null, jogo = null, timers = [];
+  var POSES = {
+    estatua: {e: '🗿', nome: 'Estátua', dica: 'fiquem parados como uma estátua'},
+    pular: {e: '🐸', nome: 'Pular', dica: 'deem pulinhos como um sapo'},
+    bracos: {e: '🙌', nome: 'Braços para cima', dica: 'levantem os dois braços'},
+    estrela: {e: '⭐', nome: 'Estrela', dica: 'abram bem os braços e as pernas'},
+    agachar: {e: '⬇️', nome: 'Agachar', dica: 'agachem bem baixinho'},
+    olhos: {e: '🙈', nome: 'Mãos nos olhos', dica: 'tapem os olhos com as mãos'},
+    pensador: {e: '🤔', nome: 'Pensador', dica: 'mão no queixo, pensando'},
+    equilibrio: {e: '⚖️', nome: 'Num pé só', dica: 'fiquem equilibrados num pé só'}
+  };
+  var ORDEM = ['estatua', 'pular', 'bracos', 'estrela', 'agachar', 'olhos', 'pensador', 'equilibrio'];
+  var PADRAO = {substantivo: 'estatua', verbo: 'pular', adjetivo: 'bracos'};
+
+  // ---------- música própria (Web Audio): bateria, baixo e melodia que muda a cada 2 compassos ----------
+  var Musica = (function(){
+    var ac = null, mestre = null, ruido = null, proxima = 0, passoN = 0, intervalo = null, melodia = [];
+    var BAIXO = [36, 36, 43, 43, 45, 45, 41, 41], ESCALA = [60, 62, 64, 67, 69, 72, 74, 76];
+    function hz(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+    function nota(m, t, dur, tipo, vol){
+      var o = ac.createOscillator(), g = ac.createGain(); o.type = tipo; o.frequency.value = hz(m); o.connect(g); g.connect(mestre);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur); o.start(t); o.stop(t + dur + 0.03);
+    }
+    function bumbo(t){
+      var o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.16);
+      o.connect(g); g.connect(mestre); g.gain.setValueAtTime(0.7, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2); o.start(t); o.stop(t + 0.22);
+    }
+    function chimbal(t, vol){
+      if (!ruido){ ruido = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.1), ac.sampleRate); var d = ruido.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; }
+      var s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = ruido; f.type = 'highpass'; f.frequency.value = 6500;
+      s.connect(f); f.connect(g); g.connect(mestre); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05); s.start(t); s.stop(t + 0.06);
+    }
+    function novaMelodia(){ melodia = []; for (var i = 0; i < 16; i++) melodia.push(Math.random() < 0.62 ? ESCALA[Math.floor(Math.random() * ESCALA.length)] : 0); }
+    function agendar(){
+      var passo = 60 / 128 / 2;
+      while (proxima < ac.currentTime + 0.15){
+        var s = passoN % 16, t = proxima;
+        if (s % 4 === 0) bumbo(t);
+        chimbal(t, s % 2 ? 0.1 : 0.04);
+        if (s % 2 === 0) nota(BAIXO[(s / 2) % 8], t, passo * 1.8, 'triangle', 0.32);
+        if (melodia[s]) nota(melodia[s], t, passo * 0.9, 'square', 0.07);
+        proxima += passo; passoN++;
+        if (passoN % 32 === 0) novaMelodia();
+      }
+    }
+    return {
+      tocar: function(){
+        if (!Sala.somLigado()) return false;
+        try {
+          var C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
+          ac = ac || new C(); if (ac.state === 'suspended' && ac.resume) ac.resume();
+          mestre = ac.createGain(); mestre.gain.value = window.PAINEL_CALMO ? 0.25 : 0.6; mestre.connect(ac.destination);
+          proxima = ac.currentTime + 0.06; passoN = 0; novaMelodia(); clearInterval(intervalo); intervalo = setInterval(agendar, 25); agendar();
+          return true;
+        } catch (e) { return false; }
+      },
+      parar: function(){
+        clearInterval(intervalo); intervalo = null;
+        if (!mestre) return;
+        var m = mestre; mestre = null;
+        try { m.gain.cancelScheduledValues(ac.currentTime); m.gain.setValueAtTime(m.gain.value, ac.currentTime); m.gain.linearRampToValueAtTime(0, ac.currentTime + 0.03); } catch (e) {}
+        setTimeout(function(){ try { m.disconnect(); } catch (e) {} }, 300);
+      },
+      tocando: function(){ return !!intervalo; }
+    };
+  })();
+
+  // ---------- arquivo e grupos ----------
+  ARC.seletor($('selArquivo'), 'categorias', 'morfo-classes.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; dados = null; $('listaCats').innerHTML = '';
+    ARC.json('dados/' + arq, function(d){
+      dados = ARC.normalizarCategorias(d);
+      if (!dados){ $('infoArq').textContent = 'Este arquivo não tem grupos suficientes.'; return; }
+      $('infoArq').textContent = dados.titulo + ' • ' + dados.palavras.length + ' palavras. Escolham de 2 a 4 grupos (mais do que isso fica difícil de lembrar):';
+      // poses: substantivo = estátua, verbo = pular, adjetivo = braços para cima; os outros grupos ganham as poses que sobrarem
+      var poseDe = {}, usadas = {}, padrao = [], h = '';
+      dados.alvos.forEach(function(id){
+        var n = ARC.semAcento(dados.cats[id].nome).toLowerCase();
+        for (var k in PADRAO) if (n.indexOf(k) >= 0 && !usadas[PADRAO[k]]){ poseDe[id] = PADRAO[k]; usadas[PADRAO[k]] = true; padrao.push(id); break; }
+      });
+      dados.alvos.forEach(function(id){
+        if (poseDe[id]) return;
+        for (var j = 0; j < ORDEM.length; j++) if (!usadas[ORDEM[j]]){ poseDe[id] = ORDEM[j]; usadas[ORDEM[j]] = true; return; }
+        poseDe[id] = ORDEM[0];
+      });
+      var marcados = padrao.length >= 2 ? padrao.slice(0, 3) : dados.alvos.slice(0, 3);
+      dados.alvos.forEach(function(id){
+        var c = dados.cats[id];
+        h += '<label><input type="checkbox" data-id="' + esc(id) + '"' + (marcados.indexOf(id) >= 0 ? ' checked' : '') + '> <span style="color:' + c.cor + '">' + esc(c.nome) + '</span> → ' +
+          '<select data-pose="' + esc(id) + '">' + ORDEM.map(function(p){ return '<option value="' + p + '"' + (p === poseDe[id] ? ' selected' : '') + '>' + POSES[p].e + ' ' + POSES[p].nome + '</option>'; }).join('') + '</select></label>';
+      });
+      $('listaCats').innerHTML = h;
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  function pintarAvisoSom(){ $('avisoSom').style.display = Sala.somLigado() ? 'none' : ''; }
+  $('btLigarSom').onclick = function(){ try { localStorage.setItem('painel_som', '1'); } catch (e) {} pintarAvisoSom(); Sala.plim(); };
+  pintarAvisoSom();
+
+  function escolhidos(){
+    var l = [], cks = $('listaCats').querySelectorAll('input[type=checkbox]');
+    for (var i = 0; i < cks.length; i++) if (cks[i].checked){ var id = cks[i].getAttribute('data-id'), sel = $('listaCats').querySelector('select[data-pose="' + id + '"]'); l.push({id: id, pose: sel.value}); }
+    return l;
+  }
+  function ensaio(){
+    if (!dados) return ARC.aviso('Escolha um arquivo de palavras.');
+    var gs = escolhidos();
+    if (gs.length < 2) return ARC.aviso('Marque pelo menos 2 grupos.');
+    var poses = {}; for (var i = 0; i < gs.length; i++){ if (poses[gs[i].pose]) return ARC.aviso('Cada grupo precisa de uma pose diferente.'); poses[gs[i].pose] = 1; }
+    var ids = gs.map(function(g){ return g.id; }), monte = dados.palavras.filter(function(p){ return ids.indexOf(p.c) >= 0; });
+    if (monte.length < 4) return ARC.aviso('Estes grupos têm poucas palavras.');
+    var faixa = $('selDanca').value.split(',');
+    jogo = {grupos: gs, poseDe: {}, monte: ARC.embaralhar(monte), base: monte, usadas: 0, rodada: 0, total: +$('selRodadas').value, minha: $('selMusica').value === 'minha', dMin: +faixa[0], dMax: +faixa[1]};
+    gs.forEach(function(g){ jogo.poseDe[g.id] = g.pose; });
+    $('cartasPoses').innerHTML = gs.map(function(g){
+      var c = dados.cats[g.id], P = POSES[g.pose], ex = ARC.embaralhar(monte.filter(function(p){ return p.c === g.id; })).slice(0, 3).map(function(p){ return esc(p.t); }).join(', ');
+      return '<div class="poseCard" style="background:' + c.cor + '"><div class="n">' + esc(c.plural || c.nome) + '</div><div class="e">' + P.e + '</div><div class="n">' + P.nome + '</div><div class="d">' + P.dica + '</div><div class="x">ex.: ' + ex + '</div></div>';
+    }).join('');
+    ARC.tela('tEnsaio');
+  }
+  function limpar(){ timers.forEach(clearTimeout); timers = []; }
+  function depois(ms, fn){ timers.push(setTimeout(fn, ms)); }
+  function soltarNota(){
+    if (!jogo || jogo.fase !== 'danca') return;
+    var n = document.createElement('div'); n.className = 'nota'; n.textContent = ARC.sortear(['♪', '♫', '♬', '🎵', '🎶', '💃']);
+    n.style.left = Math.floor(Math.random() * 92) + '%'; $('notas').appendChild(n);
+    setTimeout(function(){ if (n.parentNode) n.parentNode.removeChild(n); }, 4100);
+    depois(350 + Math.random() * 350, soltarNota);
+  }
+  function dancar(){
+    limpar();
+    if (jogo.rodada >= jogo.total) return fim();
+    jogo.rodada++; jogo.fase = 'danca';
+    ARC.tela(null); $('palco').className = 'ativo danca'; $('hud').style.display = ''; $('rodape').style.display = 'block';
+    $('hRodada').textContent = 'Rodada ' + jogo.rodada + '/' + jogo.total;
+    $('grande').textContent = '💃 Dancem! 💃'; $('grande').className = 'pulsar'; $('grande').style.fontSize = '';
+    $('pose').style.display = 'none';
+    $('btParem').style.display = jogo.minha ? '' : 'none'; $('btContinuar').style.display = 'none';
+    if (jogo.minha){ $('sub').textContent = 'Toque a sua música… e aperte PAREM quando quiser (ou a barra de espaço).'; }
+    else {
+      var tocou = Musica.tocar();
+      $('sub').textContent = tocou ? 'Quando a música parar, olhem a palavra!' : '🔇 Ligue o som (botão 🔊) para ouvir a música.';
+      if (!tocou) $('btParem').style.display = '';
+      depois(Math.round((jogo.dMin + Math.random() * (jogo.dMax - jogo.dMin)) * 1000), parem);
+    }
+    soltarNota();
+  }
+  function parem(){
+    if (!jogo || jogo.fase !== 'danca') return;
+    limpar(); Musica.parar(); jogo.fase = 'palavra';
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.base); jogo.usadas = 0; }
+    var p = jogo.p = jogo.monte[jogo.usadas++];
+    $('palco').className = 'ativo'; $('notas').innerHTML = '';
+    $('grande').className = ''; $('grande').textContent = p.t; $('grande').style.fontSize = (p.t.length > 14 ? 76 : p.t.length > 9 ? 100 : 130) + 'px';
+    $('sub').textContent = 'Façam a pose! 3…';
+    $('btParem').style.display = 'none';
+    ARC.tom(1046, 0.12, 0, 'square');
+    depois(1000, function(){ $('sub').textContent = 'Façam a pose! 2…'; ARC.tom(880, 0.08); });
+    depois(2000, function(){ $('sub').textContent = 'Façam a pose! 1…'; ARC.tom(880, 0.08); });
+    depois(3000, revelar);
+  }
+  function revelar(){
+    if (!jogo || jogo.fase !== 'palavra') return;
+    limpar(); jogo.fase = 'revelado';
+    var p = jogo.p, c = dados.cats[p.c], P = POSES[jogo.poseDe[p.c]];
+    $('sub').textContent = '';
+    $('pose').innerHTML = '<div class="c" style="background:' + c.cor + '">' + esc(c.nome) + '</div><div class="e">' + P.e + '</div><div class="n">' + P.nome + '</div>';
+    $('pose').style.display = 'block';
+    ARC.plim();
+    $('btContinuar').textContent = jogo.rodada >= jogo.total ? '🎉 Terminar' : '🎵 Próxima rodada';
+    $('btContinuar').style.display = '';
+  }
+  function fim(){
+    limpar(); Musica.parar(); jogo.fase = 'fim';
+    $('palco').className = ''; $('hud').style.display = 'none'; $('rodape').style.display = 'none';
+    $('fimTxt').textContent = jogo.rodada + ' rodadas dançadas. Quem ficou de pé até o fim?';
+    ARC.tela('tFim'); ARC.festa();
+  }
+  function sair(){ limpar(); Musica.parar(); if (jogo) jogo.fase = 'fim'; $('palco').className = ''; $('hud').style.display = 'none'; $('rodape').style.display = 'none'; ARC.tela('tConfig'); pintarAvisoSom(); }
+
+  $('btEnsaio').onclick = ensaio;
+  $('btVoltar').onclick = function(){ ARC.tela('tConfig'); };
+  $('btDancar').onclick = function(){ jogo.rodada = 0; dancar(); };
+  $('btParem').onclick = parem;
+  $('btContinuar').onclick = dancar;
+  $('btDeNovo').onclick = function(){ jogo.rodada = 0; jogo.monte = ARC.embaralhar(jogo.base); jogo.usadas = 0; dancar(); };
+  $('btFimConfig').onclick = sair;
+  $('btSair').onclick = function(){ if (confirm('Terminar a brincadeira?')) sair(); };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (e.keyCode === 32 || e.keyCode === 13){
+      e.preventDefault();
+      if (jogo.fase === 'danca') parem(); else if (jogo.fase === 'palavra') revelar(); else if (jogo.fase === 'revelado') dancar();
+    }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.ESTATUA = {jogo: function(){ return jogo; }, parem: parem, revelar: revelar, musica: Musica};   // usado nos testes
+})();
+</script>
+</body>
+</html>

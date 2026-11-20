@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Labirinto das Portas</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #painel{position:fixed;left:0;right:0;bottom:0;z-index:6;background:rgba(20,16,40,.9);padding:10px 12px 12px;text-align:center;display:none}
+  #pergunta{color:#fff;font-size:23px;font-weight:bold;margin:0 auto 8px;max-width:1100px}
+  #ops button{font-size:21px;margin:4px 6px;max-width:46%;white-space:normal}
+  #ops button.fechada{opacity:.35;text-decoration:line-through}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hVez"></span><span class="chip" id="hSala"></span><span class="chip" id="hVidas"></span><span class="chip" id="hPontos"></span><button type="button" id="btSom">🔊</button>
+</div>
+<div id="painel"><div id="pergunta"></div><div id="ops"></div></div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>👻 Labirinto das Portas</h1>
+  <p>Guiem o explorador até o tesouro! Em cada sala há uma pergunta e várias portas: <b>a porta da resposta certa</b> leva à próxima sala. A errada tem um fantasma!</p>
+  <label>Perguntas: <select id="selArquivo" style="max-width:560px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Salas até o tesouro: <select id="selSalas"><option>5</option><option selected>7</option><option>9</option></select></label>
+  <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Clique na porta ou use as teclas 1, 2, 3 e 4. Porta certa de primeira: +10; depois de um erro: +5.</p>
+</div></div>
+<div class="tela" id="tVez"><div class="cartao" id="cVez"></div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, perguntas = [], jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
+  var CORES = ['#2f80ed', '#e8590c', '#8e44ad', '#1f9d6b'];
+
+  ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; perguntas = [];
+    ARC.json('dados/' + arq, function(d){
+      perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 260, maxOpLen: 80});
+      $('infoArq').textContent = perguntas.length ? (d.titulo || arq) + ' • ' + perguntas.length + ' perguntas' : 'Este arquivo não tem perguntas de escolha.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  function comecar(){
+    if (perguntas.length < 3) return ARC.aviso('Escolha um arquivo com perguntas.');
+    jogo = {monte: ARC.embaralhar(perguntas), usadas: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, nSalas: +$('selSalas').value};
+    abrirVez();
+  }
+  function abrirVez(){
+    var eq = jogo.equipes[jogo.vez];
+    $('cVez').innerHTML = (jogo.equipes.length > 1 ? '<h2>Vez dos ' + eq.emoji + ' ' + esc(eq.nome) + '</h2>' : '<h2>Para o labirinto!</h2>') +
+      '<p>' + jogo.nSalas + ' salas até o tesouro. Vocês têm 3 corações.</p>' +
+      (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' : '') +
+      '<button type="button" class="principal" id="btIr">🔦 Entrar</button>';
+    ARC.tela('tVez'); $('btIr').onclick = iniciarVez;
+  }
+  // salas em zigue-zague: linha 0 da esquerda para a direita, linha 1 da direita para a esquerda…
+  function montarMapa(n){
+    var cols = Math.min(n, Math.max(3, Math.floor(tela.W / (190 * tela.ESC)))), salas = [];
+    for (var i = 0; i < n; i++){ var lin = Math.floor(i / cols), c = i % cols; salas.push({lin: lin, col: lin % 2 ? cols - 1 - c : c}); }
+    return {cols: cols, linhas: Math.ceil(n / cols), salas: salas};
+  }
+  function iniciarVez(){
+    jogo.vidas = 3; jogo.sala = 0; jogo.mapa = montarMapa(jogo.nSalas + 1); jogo.anda = 0; jogo.fantasma = 0; jogo.fx = []; jogo.acabou = false;
+    novaPergunta();
+    ARC.tela(null); $('hud').style.display = ''; $('painel').style.display = 'block'; laco.iniciar();
+  }
+  function novaPergunta(){
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.monte); jogo.usadas = 0; }
+    jogo.p = jogo.monte[jogo.usadas++]; jogo.fechadas = {}; jogo.errouAqui = false;
+    $('pergunta').textContent = '🚪 Sala ' + (jogo.sala + 1) + ': ' + jogo.p.p;
+    $('ops').innerHTML = jogo.p.ops.map(function(o, i){ return '<button type="button" data-i="' + i + '" style="background:' + CORES[i] + ';color:#fff">' + (i + 1) + ') ' + esc(o) + '</button>'; }).join('');
+    var bs = $('ops').querySelectorAll('button');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ escolher(+this.getAttribute('data-i')); };
+    atualizarHud();
+  }
+  function atualizarHud(){
+    var eq = jogo.equipes[jogo.vez];
+    $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🔦 Explorador';
+    $('hSala').textContent = '🚪 Sala ' + Math.min(jogo.sala + 1, jogo.nSalas) + '/' + jogo.nSalas;
+    $('hVidas').textContent = '❤️❤️❤️'.slice(0, jogo.vidas * 2) + '♡♡♡'.slice(0, 3 - jogo.vidas);
+    $('hPontos').textContent = '⭐ ' + eq.pontos;
+  }
+  function escolher(i){
+    if (!jogo || jogo.acabou || jogo.anda > 0 || jogo.fechadas[i]) return;
+    var eq = jogo.equipes[jogo.vez];
+    if (i === jogo.p.ok){
+      eq.pontos += jogo.errouAqui ? 5 : 10; ARC.plim(); jogo.anda = 1;
+      jogo.fx.push({t: 0, txt: jogo.errouAqui ? '+5' : '+10'});
+      $('ops').innerHTML = ''; $('pergunta').textContent = '✓ ' + jogo.p.ops[jogo.p.ok] + (jogo.p.x ? ' — ' + jogo.p.x : '');
+    } else {
+      jogo.fechadas[i] = true; jogo.errouAqui = true; jogo.vidas--; jogo.fantasma = 1.4; ARC.tom(220, 0.5, 0, 'triangle'); ARC.tom(180, 0.6, 0.2, 'triangle');
+      ARC.aviso('👻 Buuu! Esta porta tinha um fantasma!', 1500);
+      var b = $('ops').querySelector('[data-i="' + i + '"]'); if (b){ b.className = 'fechada'; b.disabled = true; }
+      if (jogo.vidas <= 0){ jogo.acabou = true; setTimeout(function(){ fimDaVez(false); }, 1500); }
+    }
+    atualizarHud();
+  }
+  function passo(dt){
+    if (dt && jogo){
+      if (jogo.anda > 0){
+        jogo.anda -= dt * 0.9;
+        if (jogo.anda <= 0){
+          jogo.anda = 0; jogo.sala++;
+          if (jogo.sala >= jogo.nSalas){ jogo.acabou = true; jogo.equipes[jogo.vez].pontos += 30; ARC.festa(); setTimeout(function(){ fimDaVez(true); }, 1200); }
+          else novaPergunta();
+        }
+      }
+      if (jogo.fantasma > 0) jogo.fantasma -= dt;
+      for (var k = jogo.fx.length - 1; k >= 0; k--){ jogo.fx[k].t += dt; if (jogo.fx[k].t > 1) jogo.fx.splice(k, 1); }
+    }
+    desenhar();
+  }
+  function fimDaVez(tesouro){
+    laco.parar(); $('hud').style.display = 'none'; $('painel').style.display = 'none';
+    var ultima = jogo.vez === jogo.equipes.length - 1;
+    $('cVez').innerHTML = '<h2>' + (tesouro ? '🏆 Acharam o tesouro! +30' : '👻 Os fantasmas ganharam desta vez…') + '</h2>' +
+      '<p>Chegaram até a sala ' + Math.min(jogo.sala + (tesouro ? 0 : 1), jogo.nSalas) + ' de ' + jogo.nSalas + '.</p>' +
+      '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' +
+      '<button type="button" class="principal" id="btSegue">' + (ultima ? '🏆 Resultado' : '➡️ Próxima equipe') + '</button>' + (ultima ? ' <button type="button" id="btMais">🔁 Mais uma rodada</button>' : '');
+    ARC.tela('tVez');
+    $('btSegue').onclick = function(){ if (ultima) fim(); else { jogo.vez++; abrirVez(); } };
+    if ($('btMais')) $('btMais').onclick = function(){ jogo.vez = 0; abrirVez(); };
+  }
+  function fim(){
+    var r = ARC.ranking(jogo.equipes);
+    $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? r[0].e.emoji + ' ' + esc(r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1>' +
+      '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
+    ARC.tela('tFim'); ARC.festa(); $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
+  }
+  function centro(i){
+    var m = jogo.mapa, areaH = tela.H - 230 * tela.ESC, cw = Math.min(200 * tela.ESC, (tela.W - 40) / m.cols), ch = Math.min(170 * tela.ESC, areaH / m.linhas);
+    var x0 = (tela.W - cw * m.cols) / 2, y0 = 60 * tela.ESC + (areaH - ch * m.linhas) / 2, s = m.salas[i];
+    return {x: x0 + s.col * cw + cw / 2, y: y0 + s.lin * ch + ch / 2, w: cw * 0.62, h: ch * 0.58};
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC;
+    ctx.fillStyle = '#1c1633'; ctx.fillRect(0, 0, W, H);
+    if (!jogo || !jogo.mapa) return;
+    var n = jogo.mapa.salas.length, i, a, b;
+    ctx.strokeStyle = '#4b3f78'; ctx.lineWidth = 18 * E; ctx.lineCap = 'round';
+    for (i = 0; i < n - 1; i++){ a = centro(i); b = centro(i + 1); ctx.strokeStyle = i < jogo.sala ? '#c9a227' : '#3a3160'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    for (i = 0; i < n; i++){
+      var c = centro(i), visto = i <= jogo.sala, tesouro = i === n - 1;
+      ctx.fillStyle = visto ? (i === jogo.sala ? '#f6e7b4' : '#d9c48a') : '#2b2450';
+      ARC.rrect(ctx, c.x - c.w / 2, c.y - c.h / 2, c.w, c.h, 14 * E); ctx.fill();
+      ctx.strokeStyle = i === jogo.sala ? '#ffd54a' : '#5a4f8a'; ctx.lineWidth = 4 * E; ctx.stroke();
+      ctx.textBaseline = 'middle'; ctx.fillStyle = visto ? '#5b4a1e' : '#6d64a0';
+      if (tesouro || !visto){ ctx.font = 'bold ' + Math.round(30 * E) + 'px "Trebuchet MS", Arial'; ctx.textAlign = 'center'; ctx.fillText(tesouro ? (visto ? '🏆' : '❔') : '?', c.x, c.y); }
+      else { ctx.font = 'bold ' + Math.round(17 * E) + 'px "Trebuchet MS", Arial'; ctx.textAlign = 'left'; ctx.fillText(String(i + 1), c.x - c.w / 2 + 9 * E, c.y - c.h / 2 + 14 * E); }
+    }
+    var de = centro(Math.min(jogo.sala, n - 1)), para = centro(Math.min(jogo.sala + 1, n - 1)), k = jogo.anda > 0 ? 1 - jogo.anda : 0;
+    var px = de.x + (para.x - de.x) * k, py = de.y + (para.y - de.y) * k - de.h * 0.15, pulo = jogo.anda > 0 ? Math.abs(Math.sin(k * Math.PI * 4)) * 8 * E : 0;
+    ctx.fillStyle = '#ff7a1a'; ctx.beginPath(); ctx.arc(px, py - pulo, 17 * E, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(px - 6 * E, py - 3 * E - pulo, 5 * E, 0, 2 * Math.PI); ctx.arc(px + 6 * E, py - 3 * E - pulo, 5 * E, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#1b1530'; ctx.beginPath(); ctx.arc(px - 6 * E, py - 3 * E - pulo, 2.2 * E, 0, 2 * Math.PI); ctx.arc(px + 6 * E, py - 3 * E - pulo, 2.2 * E, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = 'rgba(255,240,170,.18)'; ctx.beginPath(); ctx.arc(px, py, 70 * E, 0, 2 * Math.PI); ctx.fill();
+    if (jogo.fantasma > 0){
+      var fx = de.x + de.w * 0.55, fy = de.y - de.h * 0.6 - Math.sin(Date.now() / 120) * 8 * E;
+      ctx.globalAlpha = Math.min(1, jogo.fantasma); ctx.fillStyle = '#f4f4ff';
+      ctx.beginPath(); ctx.arc(fx, fy, 30 * E, Math.PI, 0); ctx.lineTo(fx + 30 * E, fy + 34 * E);
+      for (var w = 0; w < 4; w++) ctx.quadraticCurveTo(fx + 30 * E - (w + 0.5) * 15 * E, fy + (w % 2 ? 44 : 26) * E, fx + 30 * E - (w + 1) * 15 * E, fy + 34 * E);
+      ctx.fill(); ctx.fillStyle = '#1b1530'; ctx.beginPath(); ctx.arc(fx - 10 * E, fy, 5 * E, 0, 2 * Math.PI); ctx.arc(fx + 10 * E, fy, 5 * E, 0, 2 * Math.PI); ctx.fill(); ctx.globalAlpha = 1;
+    }
+    jogo.fx.forEach(function(f){ ctx.globalAlpha = 1 - f.t; ARC.fonte(ctx, f.txt, 200, Math.round(40 * E)); ctx.fillStyle = '#ffd54a'; ctx.textAlign = 'center'; ctx.fillText(f.txt, px, py - 50 * E - f.t * 40); ctx.globalAlpha = 1; });
+  }
+  document.addEventListener('keydown', function(e){ if (jogo && laco.rodando && e.keyCode >= 49 && e.keyCode <= 52){ e.preventDefault(); escolher(e.keyCode - 49); } });
+  $('btComecar').onclick = comecar;
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  desenhar();
+  window.LABIRINTO = {jogo: function(){ return jogo; }, escolher: escolher};   // usado nos testes
+})();
+</script>
+</body>
+</html>

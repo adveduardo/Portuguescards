@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corrida das Equipes – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #tCorrida{max-width:1500px}
+  #pista{display:block;width:100%;height:clamp(190px,37vh,430px);border-radius:22px;box-shadow:0 6px 0 #0002;background:#5cb85c}
+  .barraPergunta{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+  .contadorCirculo{flex:0 0 auto;width:clamp(64px,8vw,96px);height:clamp(64px,8vw,96px);border-radius:50%;background:var(--texto);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:bold;box-shadow:0 6px 0 #0002}
+  .contadorCirculo.pouco{background:var(--vermelho);animation:pulsar .5s infinite alternate}
+  @keyframes pulsar{to{transform:scale(1.08)}}
+  .respondidos{flex:0 0 auto;background:#fff;border-radius:18px;padding:6px 14px;font-weight:bold;font-size:1rem;text-align:center;box-shadow:0 4px 0 #0001}
+  .respondidos b{display:block;font-size:1.7rem}
+  #textoPergunta{flex:1;background:#fff;border-radius:22px;padding:12px 18px;text-align:center;font-size:clamp(1.15rem,2.6vw,2rem);font-weight:bold;box-shadow:0 6px 0 #0001}
+  #gruposResp{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;min-height:1.9rem}
+  #gruposResp span{font-size:1.7rem;opacity:.25;transition:opacity .3s,transform .3s}
+  #gruposResp span.ok{opacity:1;transform:scale(1.15)}
+  #opcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0}
+  .opcao{border-radius:18px;color:#fff;padding:8px 16px;font-size:clamp(1.05rem,2.3vw,1.7rem);font-weight:bold;display:flex;align-items:center;gap:12px;
+    box-shadow:0 5px 0 #0002;transition:opacity .3s,transform .3s;min-height:60px}
+  .opcao .l{background:#fff3;border-radius:12px;min-width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+  .opcao .quem{margin-left:auto;font-size:1.5rem;letter-spacing:2px}
+  .opcao.apagada{opacity:.28;transform:scale(.97)}
+  .opcao.certa{outline:5px solid #fff;box-shadow:0 0 0 10px var(--verde);transform:scale(1.02)}
+  .op0{background:#e74c3c} .op1{background:#2f80ed} .op2{background:#f39c12} .op3{background:#27ae60}
+  #tCorrida .linha{position:-webkit-sticky;position:sticky;bottom:0;z-index:5;background:rgba(238,241,246,.94);border-radius:16px;padding:6px;margin:6px 0 0}
+  #explica{text-align:center;font-size:1.15rem;font-weight:bold;margin:6px 0;min-height:1.3em}
+  .podio{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin:20px 0}
+  .degrau{background:#fff;border-radius:20px 20px 0 0;width:min(26vw,220px);text-align:center;padding:12px;box-shadow:0 6px 0 #0001;animation:subir .8s backwards}
+  .degrau .e{font-size:3.2rem}
+  .degrau .n{font-size:1.4rem;font-weight:bold}
+  .degrau .p{font-size:1.6rem;font-weight:bold}
+  @keyframes subir{from{transform:translateY(80px);opacity:0}}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🏎️ Corrida das Equipes (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+  <div class="cartao">
+    <h2>1. Perguntas</h2>
+    <label>Arquivo: <select id="selArquivo" style="max-width:100%"></select></label>
+    <div id="infoArq" class="dica">Carregando…</div>
+  </div>
+  <div class="cartao">
+    <h2>2. Corrida</h2>
+    <label>Pista: <select id="selMeta"><option value="12">curta (12 casas)</option><option value="18" selected>média (18 casas)</option><option value="24">longa (24 casas)</option></select></label>
+    <label>Tempo por pergunta: <select id="selTempo"><option value="15">15 s</option><option value="20" selected>20 s</option><option value="30">30 s</option><option value="45">45 s</option></select></label>
+    <label>No máximo: <select id="selMax"><option value="10">10 perguntas</option><option value="15" selected>15 perguntas</option><option value="20">20 perguntas</option><option value="30">30 perguntas</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Cada iPad é uma equipe e tem um carrinho na pista. Acertou: anda <b>2 casas</b>. Quem acertou primeiro ganha <b>turbo</b> e anda 3. Errou ou não respondeu: fica parado.
+      Vence quem cruzar a chegada primeiro (ou quem estiver na frente quando acabarem as perguntas).</p>
+  </div>
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div>
+      <div class="dica">Nos iPads, abram:</div>
+      <div id="urlJogar" class="url"></div>
+    </div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2>Equipes no grid de largada</h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando as equipes entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">🏁 Dar a largada</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ CORRIDA ============ -->
+<section id="tCorrida" class="tela">
+  <canvas id="pista"></canvas>
+  <div class="barraPergunta">
+    <div class="respondidos">Pergunta<b id="numPergunta">1</b></div>
+    <div id="textoPergunta">Preparar…</div>
+    <div id="contador" class="contadorCirculo">–</div>
+    <div class="respondidos">Responderam<b id="nRespostas">0/0</b></div>
+  </div>
+  <div id="gruposResp"></div>
+  <div id="opcoes"></div>
+  <div id="explica"></div>
+  <div class="linha">
+    <button id="btnEncerrarPergunta">⏭️ Encerrar a pergunta agora</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima pergunta</button>
+    <button id="btnTerminar">🏁 Terminar agora</button>
+  </div>
+</section>
+
+<!-- ============ FIM ============ -->
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🏁 Fim da corrida</h1>
+  <div id="podio" class="podio"></div>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha">
+    <button id="btnNova" class="principal">🔁 Nova corrida (mesma sala)</button>
+    <button id="btnEncerrar2">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script src="quiz-sala.js"></script>
+<script src="arcade.js"></script>
+<script>
+'use strict';
+const $ = id => document.getElementById(id), AV = window.AoVivo, LETRAS = ['A', 'B', 'C', 'D'];
+let perguntas = [], monte = [], usadas = 0, n = 0, meta = 18, maxQ = 15, tempo = 20, totais = {}, fase = 'config', pAtual = null;
+let largada = 0, acabou = false, vencedores = [], timerLargada = [];
+const vis = {};   // carrinho desenhado de cada equipe: {x (casas na tela), alvo, turbo, derrapa}
+
+// ---------- perguntas ----------
+ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', arq => {
+  $('infoArq').textContent = 'Carregando…'; perguntas = [];
+  ARC.json('dados/' + arq, d => {
+    perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 240, maxOpLen: 80});
+    AV.idioma = d.idioma || 'pt-BR';
+    $('infoArq').textContent = perguntas.length ? `${d.titulo || arq} • ${perguntas.length} perguntas` : 'Este arquivo não tem perguntas de escolha.';
+  }, () => { $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+});
+
+// ---------- sala ----------
+const qs = QuizSala({
+  aoMudar, total: () => maxQ, aoResultado: mostrarResultado,
+  aoTique: s => { $('contador').textContent = s; $('contador').classList.toggle('pouco', s <= 5); if (s <= 5 && s > 0) AV.tique(); }
+});
+const grupos = () => qs.grupos(), pistas = () => AV.ordemGrupos(grupos());
+
+$('btnCriar').onclick = () => {
+  if (perguntas.length < 3) return AV.avisar('Escolha um arquivo com perguntas.');
+  AV.som = $('chkSom').checked;
+  $('btnCriar').disabled = true;
+  qs.criar((err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    irPara('sala');
+  });
+};
+function irPara(f){
+  fase = f;
+  AV.mostrarTela({config: 'tConfig', sala: 'tSala', corrida: 'tCorrida', fim: 'tFim'}[f]);
+  if (f === 'corrida'){ medir(); laco.iniciar(); } else laco.parar();
+  aoMudar();
+}
+function aoMudar(){
+  const g = grupos(), ids = Object.keys(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${qs.sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} carrinho${ids.length > 1 ? 's' : ''} no grid de largada!` : 'Esperando as equipes entrarem…';
+  }
+  if (fase === 'corrida' && pAtual && !qs.encerrada){
+    const r = qs.respostas(), nr = ids.filter(id => r[id]).length;
+    $('nRespostas').textContent = `${nr}/${ids.length}`;
+    $('gruposResp').innerHTML = ids.map(id => `<span class="${r[id] ? 'ok' : ''}" title="${AV.esc(g[id].nome)}">${AV.esc(g[id].emoji)}</span>`).join('');
+  }
+}
+
+// ---------- corrida ----------
+$('btnComecar').onclick = () => {
+  if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou ainda. Começar mesmo assim?')) return;
+  novaCorrida();
+};
+function novaCorrida(){
+  meta = +$('selMeta').value; maxQ = +$('selMax').value; tempo = +$('selTempo').value;
+  monte = ARC.embaralhar(perguntas); usadas = 0; n = 0; totais = {}; acabou = false; vencedores = []; pAtual = null;
+  Object.keys(vis).forEach(k => delete vis[k]);
+  pistas().forEach(id => { totais[id] = 0; });
+  $('numPergunta').textContent = '–'; $('textoPergunta').textContent = '🚦 Preparar…'; $('contador').textContent = '–';
+  $('opcoes').innerHTML = ''; $('explica').textContent = ''; $('gruposResp').innerHTML = ''; $('nRespostas').textContent = '0/' + pistas().length;
+  $('btnEncerrarPergunta').hidden = true; $('btnProxima').hidden = true;
+  irPara('corrida');
+  // 3, 2, 1, VAI!
+  largada = 3.6; timerLargada.forEach(clearTimeout);
+  AV.tom(110, .6, 'sawtooth', .06, 0, 230);
+  timerLargada = [0, 900, 1800].map(ms => setTimeout(() => AV.tom(660, .18), ms));
+  timerLargada.push(setTimeout(() => AV.tom(990, .45), 2700), setTimeout(proxima, 3600));
+}
+function proxima(){
+  if (acabou || fase !== 'corrida') return;
+  if (usadas >= monte.length){ monte = ARC.embaralhar(perguntas); usadas = 0; }
+  pAtual = monte[usadas++]; n++;
+  $('numPergunta').textContent = `${n}/${maxQ}`;
+  $('textoPergunta').textContent = pAtual.p;
+  $('opcoes').innerHTML = pAtual.ops.map((o, i) => `<div class="opcao op${i}"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o)}</span><span class="quem"></span></div>`).join('');
+  $('explica').textContent = '';
+  $('btnEncerrarPergunta').hidden = false; $('btnProxima').hidden = true;
+  qs.pergunta(pAtual, n, maxQ, tempo, totais);
+  AV.tom(660, .15); AV.tom(990, .2, 'triangle', .15, .15);
+  AV.falar(pAtual.p);
+  aoMudar();
+}
+function mostrarResultado(info){
+  const g = info.grupos, ids = Object.keys(g), p = info.p, primeiro = info.certosPorTempo[0], porOpcao = p.ops.map(() => []);
+  ids.forEach(id => {
+    const r = info.resultados[id];
+    if (totais[id] == null) totais[id] = 0;
+    if (r.respondeu && porOpcao[r.opcao]) porOpcao[r.opcao].push(g[id].emoji);
+    if (r.certo){ r.pontos = id === primeiro ? 3 : 2; totais[id] += r.pontos; }
+    const v = vis[id] || (vis[id] = {x: 0, alvo: 0, turbo: 0, derrapa: 0});
+    v.alvo = totais[id]; v.turbo = id === primeiro ? 1.8 : 0; v.derrapa = r.respondeu && !r.certo ? 1 : 0;
+  });
+  document.querySelectorAll('#opcoes .opcao').forEach((el, i) => { el.classList.add(i === p.ok ? 'certa' : 'apagada'); el.querySelector('.quem').textContent = porOpcao[i].join(' '); });
+  $('contador').classList.remove('pouco'); $('contador').textContent = '✓'; $('btnEncerrarPergunta').hidden = true;
+  const acertos = info.certosPorTempo.length, max = Math.max(0, ...Object.keys(totais).map(id => totais[id]));
+  acabou = max >= meta || n >= maxQ;
+  vencedores = acabou && max > 0 ? Object.keys(totais).filter(id => totais[id] === max) : [];
+  const nome = id => g[id] ? AV.esc(g[id].emoji + ' ' + g[id].nome) : '';
+  let txt = primeiro ? `🔥 Turbo para ${nome(primeiro)}: acertou primeiro e anda 3 casas! ` : acertos ? '' : '😮 Ninguém acertou: todos ficaram parados. ';
+  if (max >= meta) txt = `🏁 ${vencedores.map(nome).join(' e ')} cruz${vencedores.length > 1 ? 'aram' : 'ou'} a linha de chegada! `;
+  $('explica').innerHTML = txt + (p.x ? `<span class="dica">${AV.esc(p.x)}</span>` : '');
+  AV.falar([{t: `A resposta certa é ${LETRAS[p.ok]}:`, l: 'pt-BR'}, {t: p.ops[p.ok]}]);
+  if (acertos){ AV.tom(120, .8, 'sawtooth', .07, .1, 300); setTimeout(AV.fanfarra, 350); } else AV.erro();
+  $('btnProxima').textContent = acabou ? '🏁 Ver o resultado' : '➡️ Próxima pergunta';
+  $('btnProxima').hidden = false;
+  return totais;
+}
+$('btnEncerrarPergunta').onclick = () => qs.encerrarPergunta();
+$('btnProxima').onclick = () => { if (acabou) mostrarFim(); else proxima(); };
+$('btnTerminar').onclick = () => {   // bateu o sinal: vence quem estiver na frente
+  if (!confirm('Terminar a corrida agora? Vence quem estiver na frente.')) return;
+  timerLargada.forEach(clearTimeout);
+  const max = Math.max(0, ...Object.keys(totais).map(id => totais[id]));
+  acabou = true; vencedores = max > 0 ? Object.keys(totais).filter(id => totais[id] === max) : [];
+  mostrarFim();
+};
+
+function mostrarFim(){
+  const g = grupos(), pos = AV.posicoes(totais);
+  qs.fim(totais, pos);
+  irPara('fim');
+  const nome = id => g[id] ? g[id].emoji + ' ' + g[id].nome : id;
+  $('tituloFim').textContent = vencedores.length > 1 ? '🏁 Empate na chegada: ' + vencedores.map(nome).join(' e ') + '!' : vencedores.length ? `🏆 ${nome(vencedores[0])} venceu a corrida!` : '🏁 Fim da corrida';
+  const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]).slice(0, 3), alturas = ['200px', '150px', '110px'];
+  $('podio').innerHTML = [1, 0, 2].filter(i => ord[i]).map(i => {
+    const id = ord[i], gg = g[id] || {emoji: '❔', nome: id, cor: '#999'};
+    return `<div class="degrau" style="height:${alturas[i]};border-top:10px solid ${gg.cor};animation-delay:${(2 - i) * .4}s">
+      <div class="e">${['🥇', '🥈', '🥉'][pos[id] - 1] || ''} ${AV.esc(gg.emoji)}</div><div class="n">${AV.esc(gg.nome)}</div><div class="p">${totais[id]} casas</div></div>`;
+  }).join('');
+  AV.desenharRanking($('ranking'), g, totais, null, true);
+  AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 700);
+}
+$('btnNova').onclick = () => { qs.reiniciar(); pAtual = null; irPara('sala'); };
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  timerLargada.forEach(clearTimeout); qs.encerrar(); pAtual = null; irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+
+// ---------- pista (canvas) ----------
+const cv = $('pista'), ctx = cv.getContext('2d'), P = {W: 0, H: 0};
+function medir(){
+  const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  P.W = r.width; P.H = r.height; cv.width = Math.round(P.W * dpr); cv.height = Math.round(P.H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', () => { if (fase === 'corrida') medir(); });
+const laco = ARC.laco(passo);
+function passo(dt){
+  if (largada > 0) largada -= dt;
+  Object.keys(vis).forEach(id => {
+    const v = vis[id];
+    if (v.x < v.alvo) v.x = Math.min(v.alvo, v.x + (v.turbo > 0 ? 4.5 : 2.6) * dt);
+    if (v.turbo > 0) v.turbo -= dt;
+    if (v.derrapa > 0) v.derrapa -= dt;
+  });
+  desenhar();
+}
+function desenhar(){
+  const W = P.W, H = P.H; if (!W) return;
+  const g = grupos(), ids = pistas(), nL = Math.max(2, ids.length), m = 10, laneH = (H - 2 * m) / nL;
+  const carH = Math.min(laneH * 0.62, 54), carW = carH * 1.9, labelW = Math.max(110, Math.min(170, W * 0.12)), x0 = labelW + carW + 24, x1 = W - 40;
+  ctx.fillStyle = '#5cb85c'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#54ad54'; for (let k = 0; k < W; k += 80) ctx.fillRect(k, 0, 40, H);
+  for (let i = 0; i < nL; i++){
+    const y = m + i * laneH, id = ids[i], gg = id ? g[id] : null;
+    ctx.fillStyle = '#4a4f5c'; ARC.rrect(ctx, labelW + 6, y + 3, x1 - labelW + 28, laneH - 6, 12); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.35)';
+    for (let k = 1; k < meta; k++){ const x = x0 + (x1 - x0) * k / meta; ctx.fillRect(x - 1, y + laneH - 13, 2, 7); }
+    ctx.strokeStyle = 'rgba(255,255,255,.45)'; ctx.setLineDash([18, 14]); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x0, y + laneH / 2); ctx.lineTo(x1, y + laneH / 2); ctx.stroke(); ctx.setLineDash([]);
+    if (gg){
+      const ly = y + laneH / 2, lh = Math.min(38, laneH - 12);
+      ctx.fillStyle = gg.cor; ARC.rrect(ctx, 6, ly - lh / 2, labelW - 4, lh, lh / 2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ARC.fonte(ctx, gg.emoji + ' ' + gg.nome, labelW - 50, Math.round(Math.min(19, lh * 0.5)));
+      ctx.fillText(gg.emoji + ' ' + gg.nome, 14, ly);
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(labelW - 18, ly, lh * 0.38, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = '#243049'; ctx.textAlign = 'center'; ARC.fonte(ctx, String(totais[id] || 0), lh * 0.7, Math.round(lh * 0.42)); ctx.fillText(String(totais[id] || 0), labelW - 18, ly + 1);
+    }
+  }
+  ctx.fillStyle = '#fff'; ctx.fillRect(x0 - 3, m, 6, H - 2 * m);
+  const q = Math.max(8, Math.min(12, laneH / 6));
+  for (let yy = m, lin = 0; yy < H - m; yy += q, lin++) for (let c = 0; c < 2; c++){ ctx.fillStyle = (lin + c) % 2 ? '#111' : '#fff'; ctx.fillRect(x1 - q + c * q, yy, q, Math.min(q, H - m - yy)); }
+  ids.forEach((id, i) => {
+    const v = vis[id] || (vis[id] = {x: totais[id] || 0, alvo: totais[id] || 0, turbo: 0, derrapa: 0});
+    const y = m + i * laneH + laneH / 2, x = x0 + (x1 - x0) * Math.min(v.x, meta + 0.6) / meta;
+    desenharCarro(x, y, carH, carW, g[id], v);
+  });
+  if (largada > 0){
+    const t = 3.6 - largada, txt = t < 0.9 ? '3' : t < 1.8 ? '2' : t < 2.7 ? '1' : 'VAI!';
+    ctx.fillStyle = 'rgba(20,24,40,.45)'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = txt === 'VAI!' ? '#7CFFB2' : '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = 'bold ' + Math.round(H * 0.45) + 'px "Trebuchet MS", Arial'; ctx.fillText(txt, W / 2, H / 2);
+  }
+}
+function desenharCarro(x, y, h, w, gg, v){
+  const cor = gg ? gg.cor : '#999', t = Date.now() / 1000, andando = v.x < v.alvo - 0.01;
+  const vib = andando ? Math.sin(t * 45) * 1.2 : Math.sin(t * 9) * 0.6, rot = v.derrapa > 0 ? Math.sin(v.derrapa * 20) * 0.13 : 0;
+  ctx.save(); ctx.translate(x - w / 2, y + vib); ctx.rotate(rot);
+  if (andando || v.turbo > 0){   // fogo do turbo ou fumacinha
+    for (let k = 0; k < 3; k++){
+      const r = h * (0.13 + Math.random() * 0.08), dx = -w / 2 - r - k * r * 1.3;
+      ctx.fillStyle = v.turbo > 0 ? (k ? '#ffd23f' : '#ff7a1a') : 'rgba(255,255,255,' + (0.6 - k * 0.15) + ')';
+      ctx.beginPath(); ctx.arc(dx, h * 0.18, r, 0, 2 * Math.PI); ctx.fill();
+    }
+  }
+  ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(0, h * 0.44, w * 0.5, h * 0.11, 0, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = cor; ARC.rrect(ctx, -w / 2, -h * 0.06, w, h * 0.42, h * 0.16); ctx.fill();
+  ARC.rrect(ctx, -w * 0.3, -h * 0.4, w * 0.52, h * 0.42, h * 0.15); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.8)'; ARC.rrect(ctx, -w * 0.24, -h * 0.34, w * 0.4, h * 0.28, h * 0.08); ctx.fill();
+  ctx.font = Math.round(h * 0.3) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(gg ? gg.emoji : '❔', -w * 0.04, -h * 0.19);
+  ctx.fillStyle = '#ffe066'; ctx.fillRect(w * 0.44, h * 0.03, w * 0.06, h * 0.1);
+  ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(-w * 0.45, h * 0.1, w * 0.9, h * 0.05);
+  [-w * 0.3, w * 0.3].forEach(rx => {
+    ctx.fillStyle = '#1b1b24'; ctx.beginPath(); ctx.arc(rx, h * 0.36, h * 0.15, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#c8ccd6'; ctx.beginPath(); ctx.arc(rx, h * 0.36, h * 0.06, 0, 2 * Math.PI); ctx.fill();
+  });
+  ctx.restore();
+}
+
+AV.iniciarConexao($('painelConexao'));
+window.CORRIDA_EQUIPES = {estado: () => ({pAtual, totais, vis, n, acabou, vencedores, largada, fase}), qs};   // usado nos testes
+</script>
+</body>
+</html>

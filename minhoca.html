@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Minhoca Faminta</title>
+<link rel="stylesheet" href="arcade.css">
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hVez"></span><span class="chip" id="hPalavra"></span><span class="chip" id="hVidas"></span><span class="chip" id="hPontos"></span>
+  <button type="button" id="btPausa">⏸️</button><button type="button" id="btSom">🔊</button>
+</div>
+<div class="setas" id="setas" style="display:none">
+  <button type="button" data-d="esq" aria-label="Esquerda">◀</button><button type="button" data-d="cima" aria-label="Cima">▲</button>
+  <button type="button" data-d="baixo" aria-label="Baixo">▼</button><button type="button" data-d="dir" aria-label="Direita">▶</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🐛 Minhoca Faminta</h1>
+  <p>Aparece uma figura. A minhoca precisa comer as <b>letras</b> (ou <b>sílabas</b>) <b>na ordem certa</b> para escrever a palavra. Comeu a errada? Perde um coração!</p>
+  <label>Palavras: <select id="selLista"></select></label>
+  <label>Comer: <select id="selModo"><option value="letras">letra por letra</option><option value="silabas">sílaba por sílaba</option></select></label>
+  <label><input type="checkbox" id="chkMostrar"> Mostrar a palavra escrita (para copiar)</label>
+  <label>Velocidade: <select id="selVel"><option value="0.24">devagar</option><option value="0.17" selected>normal</option><option value="0.12">rápida</option></select></label>
+  <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Setas do teclado (ou W A S D), os botões na tela ou arrastar o dedo. A minhoca atravessa as bordas.</p>
+</div></div>
+<div class="tela" id="tVez"><div class="cartao" id="cVez"></div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, listas = [], jogo = null, tela = ARC.canvas($('cv'), medirGrade), ctx = tela.ctx, laco = ARC.laco(passo);
+  var COLS = 20, ROWS = 12, CEL = 30, X0 = 0, Y0 = 0, PALAVRAS_POR_VEZ = 3;
+  var DIRS = {esq: [-1, 0], dir: [1, 0], cima: [0, -1], baixo: [0, 1]};
+
+  function medirGrade(){
+    var W = tela.W, H = tela.H, topo = 96, base = ('ontouchstart' in window) ? 92 : 20;
+    CEL = Math.max(18, Math.floor(Math.min((W - 20) / 20, (H - topo - base) / 12)));
+    COLS = Math.max(10, Math.floor((W - 20) / CEL)); ROWS = Math.max(8, Math.floor((H - topo - base) / CEL));
+    X0 = Math.floor((W - COLS * CEL) / 2); Y0 = topo;
+    if (!laco.rodando) desenhar();
+  }
+  // listas com figura: Alfabetização e Inglês (cada grupo vira uma opção)
+  function carregarListas(){
+    var arqs = ['lista-alfa-figuras.json', 'lista-en-temas.json', 'lista-en-spelling.json'], falta = arqs.length;
+    arqs.forEach(function(a, k){
+      ARC.json('dados/' + a, function(d){
+        var gs = d.grupos instanceof Array ? d.grupos : [{titulo: d.titulo, palavras: d.palavras}];
+        listas[k] = {titulo: d.titulo, idioma: d.idioma || 'pt-BR', grupos: gs.map(function(g){ return {titulo: g.titulo, itens: (g.palavras || []).filter(function(p){ return p && p.palavra && p.emoji && ARC.figuraOk(p.emoji) && !/[\s'-]/.test(p.palavra); })}; })};
+        if (--falta === 0) preencher();
+      }, function(){ if (--falta === 0) preencher(); });
+    });
+  }
+  function preencher(){
+    var h = '';
+    listas.forEach(function(l, i){ if (!l) return; h += '<optgroup label="' + esc(l.titulo) + '">' + l.grupos.map(function(g, j){ return g.itens.length >= 3 ? '<option value="' + i + ':' + j + '">' + esc(g.titulo) + ' (' + g.itens.length + ')</option>' : ''; }).join('') + '</optgroup>'; });
+    $('selLista').innerHTML = h;
+  }
+  function escolhida(){ var v = $('selLista').value.split(':'), l = listas[+v[0]]; return l ? {idioma: l.idioma, itens: l.grupos[+v[1]].itens} : null; }
+
+  function comecar(){
+    var e = escolhida(); if (!e) return ARC.aviso('Escolha as palavras.');
+    var modo = $('selModo').value, itens = e.itens.filter(function(p){ return modo === 'letras' || p.silabas; });
+    if (itens.length < 3) return ARC.aviso('Estas palavras não têm sílabas separadas: escolha “letra por letra”.');
+    jogo = {idioma: e.idioma, modo: modo, monte: ARC.embaralhar(itens), usadas: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, tick: +$('selVel').value};
+    abrirVez();
+  }
+  function abrirVez(){
+    var eq = jogo.equipes[jogo.vez];
+    $('cVez').innerHTML = (jogo.equipes.length > 1 ? '<h2>Vez dos ' + eq.emoji + ' ' + esc(eq.nome) + '</h2>' : '<h2>Vamos lá!</h2>') +
+      '<p>Escrevam ' + PALAVRAS_POR_VEZ + ' palavras. Vocês têm 3 corações.</p>' +
+      (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' : '') +
+      '<button type="button" class="principal" id="btIr">🐛 Começar</button>';
+    ARC.tela('tVez'); $('btIr').onclick = iniciarVez;
+  }
+  function iniciarVez(){
+    jogo.vidas = 3; jogo.feitas = 0; jogo.cobra = []; var cx = Math.floor(COLS / 2), cy = Math.floor(ROWS / 2);
+    for (var i = 0; i < 3; i++) jogo.cobra.push({x: cx - i, y: cy});
+    jogo.dir = [1, 0]; jogo.prox = [1, 0]; jogo.acum = 0; jogo.cresce = 0; jogo.fx = [];
+    novaPalavra();
+    ARC.tela(null); $('hud').style.display = ''; if ('ontouchstart' in window) $('setas').style.display = '';
+    laco.pausado = false; laco.iniciar();
+  }
+  function pecasDa(p){ return jogo.modo === 'silabas' ? String(p.silabas).split('-') : p.palavra.split(''); }
+  function novaPalavra(){
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.monte); jogo.usadas = 0; }
+    jogo.palavra = jogo.monte[jogo.usadas++]; jogo.partes = pecasDa(jogo.palavra).map(function(s){ return s.toUpperCase(); });
+    jogo.feito = 0; jogo.errosPalavra = 0; espalhar(); atualizarHud();
+  }
+  function livre(x, y){
+    for (var i = 0; i < jogo.cobra.length; i++) if (jogo.cobra[i].x === x && jogo.cobra[i].y === y) return false;
+    for (i = 0; i < (jogo.pecas || []).length; i++) if (jogo.pecas[i].x === x && jogo.pecas[i].y === y) return false;
+    var c = jogo.cobra[0]; return Math.abs(c.x - x) + Math.abs(c.y - y) > 2;
+  }
+  function lugar(){ for (var t = 0; t < 400; t++){ var x = Math.floor(Math.random() * COLS), y = Math.floor(Math.random() * ROWS); if (livre(x, y)) return {x: x, y: y}; } return {x: 0, y: 0}; }
+  function distrator(certa){
+    var pool = [];
+    if (jogo.modo === 'silabas') jogo.monte.forEach(function(p){ if (p.silabas) String(p.silabas).split('-').forEach(function(s){ pool.push(s.toUpperCase()); }); });
+    else pool = 'ABCDEFGHIJLMNOPQRSTUVXZ'.split('');
+    var d; for (var t = 0; t < 50; t++){ d = ARC.sortear(pool); if (d !== certa) return d; }
+    return d === certa ? '?' : d;
+  }
+  function espalhar(){
+    jogo.pecas = []; var certa = jogo.partes[jogo.feito], l = lugar();
+    jogo.pecas.push({x: l.x, y: l.y, t: certa, ok: true});
+    for (var i = 0; i < 4; i++){ var q = lugar(); jogo.pecas.push({x: q.x, y: q.y, t: distrator(certa), ok: false}); }
+  }
+  function atualizarHud(){
+    var eq = jogo.equipes[jogo.vez], slots = jogo.partes.map(function(s, i){ return i < jogo.feito ? s : (jogo.modo === 'silabas' ? '__' : '_'); }).join(jogo.modo === 'silabas' ? '-' : ' ');
+    $('hVez').textContent = (jogo.equipes.length > 1 ? eq.emoji + ' ' : '') + 'Palavra ' + (jogo.feitas + 1) + '/' + PALAVRAS_POR_VEZ;
+    $('hPalavra').textContent = jogo.palavra.emoji + '  ' + slots + ($('chkMostrar').checked ? '   (' + jogo.palavra.palavra.toUpperCase() + ')' : '');
+    $('hVidas').textContent = '❤️❤️❤️'.slice(0, jogo.vidas * 2) + '♡♡♡'.slice(0, 3 - jogo.vidas);
+    $('hPontos').textContent = '⭐ ' + eq.pontos;
+  }
+  function passo(dt){
+    if (dt && jogo && jogo.cobra){
+      jogo.acum += dt;
+      while (jogo.acum >= jogo.tick){ jogo.acum -= jogo.tick; mover(); if (!laco.rodando) return; }
+      for (var k = jogo.fx.length - 1; k >= 0; k--){ jogo.fx[k].t += dt; if (jogo.fx[k].t > 0.6) jogo.fx.splice(k, 1); }
+    }
+    desenhar();
+  }
+  function mover(){
+    if (jogo.prox[0] !== -jogo.dir[0] || jogo.prox[1] !== -jogo.dir[1]) jogo.dir = jogo.prox;
+    var c = jogo.cobra[0], nx = (c.x + jogo.dir[0] + COLS) % COLS, ny = (c.y + jogo.dir[1] + ROWS) % ROWS;
+    jogo.cobra.unshift({x: nx, y: ny});
+    if (jogo.cresce > 0) jogo.cresce--; else jogo.cobra.pop();
+    for (var i = 0; i < jogo.pecas.length; i++){ var p = jogo.pecas[i]; if (p.x === nx && p.y === ny){ comer(i); break; } }
+  }
+  function comer(i){
+    var p = jogo.pecas[i];
+    jogo.fx.push({x: p.x, y: p.y, t: 0, ok: p.ok});
+    if (p.ok){
+      jogo.feito++; jogo.cresce += 1; ARC.tom(660 + jogo.feito * 80, 0.1);
+      if (jogo.feito >= jogo.partes.length) return palavraPronta();
+      espalhar(); atualizarHud();
+    } else {
+      jogo.vidas--; jogo.errosPalavra++; ARC.erro();
+      ARC.aviso('Ops! Precisava de <b>' + esc(jogo.partes[jogo.feito]) + '</b>, não ' + esc(p.t) + '.');
+      jogo.pecas.splice(i, 1); var q = lugar(); jogo.pecas.push({x: q.x, y: q.y, t: distrator(jogo.partes[jogo.feito]), ok: false});
+      atualizarHud();
+      if (jogo.vidas <= 0) fimDaVez(false);
+    }
+  }
+  function palavraPronta(){
+    var eq = jogo.equipes[jogo.vez], pts = 10 + (jogo.errosPalavra ? 0 : 5); eq.pontos += pts; jogo.feitas++;
+    ARC.aviso('🎉 ' + esc(jogo.palavra.emoji + ' ' + jogo.palavra.palavra.toUpperCase()) + '  +' + pts, 1800); ARC.plim();
+    if (window.EN) EN.falar(jogo.palavra.palavra, {lang: jogo.idioma, rate: 0.8});
+    if (window.Sala) Sala.confete(40);
+    if (jogo.feitas >= PALAVRAS_POR_VEZ) return fimDaVez(true);
+    novaPalavra();
+  }
+  function fimDaVez(completa){
+    laco.parar(); $('hud').style.display = 'none'; $('setas').style.display = 'none';
+    var eq = jogo.equipes[jogo.vez], ultimaVez = jogo.vez === jogo.equipes.length - 1;
+    $('cVez').innerHTML = '<h2>' + (completa ? '🎉 ' + PALAVRAS_POR_VEZ + ' palavras escritas!' : '💔 Acabaram os corações') + '</h2>' +
+      (completa ? '' : '<p>A palavra era: <b>' + esc(jogo.palavra.emoji + ' ' + jogo.palavra.palavra.toUpperCase()) + '</b></p>') +
+      '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' +
+      '<button type="button" class="principal" id="btSegue">' + (ultimaVez ? '🏆 Resultado' : '➡️ Próxima equipe') + '</button>' +
+      (ultimaVez ? ' <button type="button" id="btMais">🔁 Mais uma rodada</button>' : '');
+    ARC.tela('tVez');
+    $('btSegue').onclick = function(){ if (ultimaVez) fim(); else { jogo.vez++; abrirVez(); } };
+    if ($('btMais')) $('btMais').onclick = function(){ jogo.vez = 0; abrirVez(); };
+  }
+  function fim(){
+    var r = ARC.ranking(jogo.equipes);
+    $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? r[0].e.emoji + ' ' + esc(r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1>' +
+      '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
+    ARC.tela('tFim'); ARC.festa(); $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H;
+    ctx.fillStyle = '#7cc56b'; ctx.fillRect(0, 0, W, H);
+    for (var y = 0; y < ROWS; y++) for (var x = 0; x < COLS; x++){ ctx.fillStyle = (x + y) % 2 ? '#a9dc8e' : '#b6e39b'; ctx.fillRect(X0 + x * CEL, Y0 + y * CEL, CEL, CEL); }
+    if (!jogo || !jogo.cobra) return;
+    jogo.pecas.forEach(function(p){
+      var cx = X0 + p.x * CEL + CEL / 2, cy = Y0 + p.y * CEL + CEL / 2;
+      ctx.fillStyle = '#fff'; ctx.strokeStyle = '#e8590c'; ctx.lineWidth = 3; ARC.rrect(ctx, cx - CEL * 0.48, cy - CEL * 0.48, CEL * 0.96, CEL * 0.96, CEL * 0.25); ctx.fill(); ctx.stroke();
+      ARC.fonte(ctx, p.t, CEL * 0.86, Math.round(CEL * 0.62)); ctx.fillStyle = '#1b2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(p.t, cx, cy + 1);
+    });
+    for (var i = jogo.cobra.length - 1; i >= 0; i--){
+      var s = jogo.cobra[i], sx = X0 + s.x * CEL + CEL / 2, sy = Y0 + s.y * CEL + CEL / 2;
+      ctx.fillStyle = i === 0 ? '#e5487a' : (i % 2 ? '#f27aa0' : '#f598b6'); ctx.beginPath(); ctx.arc(sx, sy, CEL * (i === 0 ? 0.5 : 0.44), 0, Math.PI * 2); ctx.fill();
+      if (i === 0){
+        var ox = jogo.dir[0] * CEL * 0.15, oy = jogo.dir[1] * CEL * 0.15;
+        ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(sx - CEL * 0.16 + ox, sy - CEL * 0.12 + oy, CEL * 0.13, 0, 2 * Math.PI); ctx.arc(sx + CEL * 0.16 + ox, sy - CEL * 0.12 + oy, CEL * 0.13, 0, 2 * Math.PI); ctx.fill();
+        ctx.fillStyle = '#1b2440'; ctx.beginPath(); ctx.arc(sx - CEL * 0.16 + ox * 1.5, sy - CEL * 0.12 + oy * 1.5, CEL * 0.06, 0, 2 * Math.PI); ctx.arc(sx + CEL * 0.16 + ox * 1.5, sy - CEL * 0.12 + oy * 1.5, CEL * 0.06, 0, 2 * Math.PI); ctx.fill();
+      }
+    }
+    jogo.fx.forEach(function(f){ var k = f.t / 0.6; ctx.globalAlpha = 1 - k; ctx.fillStyle = f.ok ? '#ffd54a' : '#d62839'; ctx.beginPath(); ctx.arc(X0 + f.x * CEL + CEL / 2, Y0 + f.y * CEL + CEL / 2, CEL * (0.5 + k), 0, 2 * Math.PI); ctx.fill(); ctx.globalAlpha = 1; });
+  }
+  function virar(d){ if (jogo && DIRS[d]) jogo.prox = DIRS[d]; }
+  document.addEventListener('keydown', function(e){
+    if (!jogo || !laco.rodando) return;
+    var k = e.keyCode, m = {37: 'esq', 65: 'esq', 39: 'dir', 68: 'dir', 38: 'cima', 87: 'cima', 40: 'baixo', 83: 'baixo'}[k];
+    if (m){ e.preventDefault(); virar(m); } else if (k === 32){ e.preventDefault(); $('btPausa').onclick(); }
+  });
+  var bs = $('setas').querySelectorAll('button');
+  for (var b = 0; b < bs.length; b++) bs[b].addEventListener('touchstart', function(e){ virar(this.getAttribute('data-d')); e.preventDefault(); }, false), bs[b].onclick = function(){ virar(this.getAttribute('data-d')); };
+  var ini = null;
+  $('cv').addEventListener('touchstart', function(e){ var t = e.changedTouches[0]; ini = [t.clientX, t.clientY]; e.preventDefault(); }, {passive: false});
+  $('cv').addEventListener('touchend', function(e){
+    if (!ini) return; var t = e.changedTouches[0], dx = t.clientX - ini[0], dy = t.clientY - ini[1]; ini = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+    virar(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'dir' : 'esq') : (dy > 0 ? 'baixo' : 'cima'));
+  });
+  $('btPausa').onclick = function(){ laco.pausado = !laco.pausado; this.textContent = laco.pausado ? '▶️' : '⏸️'; if (laco.pausado) ARC.aviso('⏸️ Pausado', 100000); else $('aviso').style.display = 'none'; };
+  $('btComecar').onclick = comecar;
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  carregarListas(); medirGrade();
+  window.MINHOCA = {jogo: function(){ return jogo; }, comer: comer, virar: virar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

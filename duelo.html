@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duelo de Monstrinhos – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #tDuelo{max-width:1500px}
+  #arena{position:relative}
+  #palco{display:block;width:100%;height:clamp(200px,39vh,450px);border-radius:22px;box-shadow:0 6px 0 #0002;background:#bfe6ff}
+  .bandeja{position:absolute;top:10px;display:flex;flex-direction:column;gap:6px;max-width:150px}
+  #cartasA{left:10px} #cartasB{right:10px;align-items:flex-end}
+  .carta{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:.95rem;border-radius:14px;background:#fff;box-shadow:0 3px 0 #0003;animation:entrar .35s;text-align:left}
+  .carta span{font-size:1.5rem}
+  .bandeja .ativa{background:#243049;color:#fff;border-radius:12px;padding:4px 8px;font-size:.85rem;font-weight:bold}
+  .bandeja .vazia{background:#fff8;border-radius:12px;padding:4px 8px;font-size:.85rem}
+  .barraPergunta{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+  .contadorCirculo{flex:0 0 auto;width:clamp(64px,8vw,96px);height:clamp(64px,8vw,96px);border-radius:50%;background:var(--texto);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:bold;box-shadow:0 6px 0 #0002}
+  .contadorCirculo.pouco{background:var(--vermelho);animation:pulsar .5s infinite alternate}
+  @keyframes pulsar{to{transform:scale(1.08)}}
+  .respondidos{flex:0 0 auto;background:#fff;border-radius:18px;padding:6px 14px;font-weight:bold;font-size:1rem;text-align:center;box-shadow:0 4px 0 #0001}
+  .respondidos b{display:block;font-size:1.7rem}
+  #textoPergunta{flex:1;background:#fff;border-radius:22px;padding:12px 18px;text-align:center;font-size:clamp(1.15rem,2.6vw,2rem);font-weight:bold;box-shadow:0 6px 0 #0001}
+  #gruposResp{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;min-height:1.9rem}
+  #gruposResp span{font-size:1.7rem;opacity:.25;transition:opacity .3s,transform .3s}
+  #gruposResp span.ok{opacity:1;transform:scale(1.15)}
+  #opcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0}
+  .opcao{border-radius:18px;color:#fff;padding:8px 16px;font-size:clamp(1.05rem,2.3vw,1.7rem);font-weight:bold;display:flex;align-items:center;gap:12px;
+    box-shadow:0 5px 0 #0002;transition:opacity .3s,transform .3s;min-height:60px}
+  .opcao .l{background:#fff3;border-radius:12px;min-width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+  .opcao .quem{margin-left:auto;font-size:1.5rem;letter-spacing:2px}
+  .opcao.apagada{opacity:.28;transform:scale(.97)}
+  .opcao.certa{outline:5px solid #fff;box-shadow:0 0 0 10px var(--verde);transform:scale(1.02)}
+  .op0{background:#e74c3c} .op1{background:#2f80ed} .op2{background:#f39c12} .op3{background:#27ae60}
+  #tDuelo .linha{position:-webkit-sticky;position:sticky;bottom:0;z-index:5;background:rgba(238,241,246,.94);border-radius:16px;padding:6px;margin:6px 0 0}
+  #explica{text-align:center;font-size:1.15rem;font-weight:bold;margin:6px 0;min-height:1.3em}
+  .times{display:flex;gap:16px;align-items:stretch;justify-content:center;margin:12px 0}
+  .time{flex:1;max-width:520px;background:#fff;border-radius:22px;padding:10px 14px;box-shadow:0 5px 0 #0001;border-top:10px solid}
+  #colA{border-color:#ff6b35} #colB{border-color:#3fa7ff}
+  .vs{align-self:center;font-size:2.6rem;font-weight:bold}
+  .time .grupoChip{cursor:pointer}
+  #final{text-align:center}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>⚔️ Duelo de Monstrinhos (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+  <div class="cartao">
+    <h2>1. Perguntas</h2>
+    <label>Arquivo: <select id="selArquivo" style="max-width:100%"></select></label>
+    <div id="infoArq" class="dica">Carregando…</div>
+  </div>
+  <div class="cartao">
+    <h2>2. Duelo</h2>
+    <label>Vida dos monstrinhos: <select id="selVida"><option value="60">60 (duelo rápido)</option><option value="100" selected>100 (normal)</option><option value="150">150 (duelo longo)</option></select></label>
+    <label>Tempo por pergunta: <select id="selTempo"><option value="15">15 s</option><option value="20" selected>20 s</option><option value="30">30 s</option><option value="45">45 s</option></select></label>
+    <label>No máximo: <select id="selMax"><option value="10">10 perguntas</option><option value="15" selected>15 perguntas</option><option value="20">20 perguntas</option><option value="30">30 perguntas</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Os iPads formam dois times, cada um com um monstrinho. Acertar faz o seu monstrinho <b>atacar</b> o outro (20 de dano por time).
+      Quem acertou primeiro ataca primeiro, dá um <b>golpe crítico</b> (+10) e ganha uma <b>carta de poder</b>:
+      🛡️ Escudo (bloqueia o próximo ataque), ⚡ Ataque duplo (o próximo ataque vale o dobro) ou 🍀 Roubar vida (tira 15 do outro monstrinho e dá para o seu).
+      Quando o time pedir, o professor clica na carta. Vence quem derrubar o outro monstrinho, ou quem tiver mais vida no fim das perguntas.</p>
+  </div>
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div>
+      <div class="dica">Nos iPads, abram:</div>
+      <div id="urlJogar" class="url"></div>
+    </div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <div class="times">
+    <div class="time" id="colA"><h2>🔥 Time Brasinha</h2><div class="grupos" id="gruposA"></div></div>
+    <div class="vs">⚔️</div>
+    <div class="time" id="colB"><h2>💧 Time Bolota</h2><div class="grupos" id="gruposB"></div></div>
+  </div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando as equipes entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">⚔️ Começar o duelo</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ DUELO ============ -->
+<section id="tDuelo" class="tela">
+  <div id="arena">
+    <canvas id="palco"></canvas>
+    <div class="bandeja" id="cartasA"></div>
+    <div class="bandeja" id="cartasB"></div>
+  </div>
+  <div id="areaPergunta">
+    <div class="barraPergunta">
+      <div class="respondidos">Pergunta<b id="numPergunta">1</b></div>
+      <div id="textoPergunta">Preparar…</div>
+      <div id="contador" class="contadorCirculo">–</div>
+      <div class="respondidos">Responderam<b id="nRespostas">0/0</b></div>
+    </div>
+    <div id="gruposResp"></div>
+    <div id="opcoes"></div>
+    <div id="explica"></div>
+    <div class="linha">
+      <button id="btnEncerrarPergunta">⏭️ Encerrar a pergunta agora</button>
+      <button id="btnProxima" class="principal" hidden>➡️ Próxima pergunta</button>
+      <button id="btnTerminar">🏳️ Terminar agora</button>
+    </div>
+  </div>
+  <div id="final" hidden>
+    <h1 id="tituloFinal"></h1>
+    <p class="dica">Dano causado por cada equipe</p>
+    <div id="ranking" class="ranking"></div>
+    <div class="linha">
+      <button id="btnRevanche" class="principal">🔁 Revanche</button>
+      <button id="btnEncerrar2">✖️ Encerrar sala</button>
+    </div>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script src="quiz-sala.js"></script>
+<script src="arcade.js"></script>
+<script>
+'use strict';
+const $ = id => document.getElementById(id), AV = window.AoVivo, LETRAS = ['A', 'B', 'C', 'D'];
+const TIMES = {
+  A: {nome: 'Time Brasinha', emoji: '🔥', cor: '#ff6b35', escuro: '#b93a12', claro: '#ffd8b8'},
+  B: {nome: 'Time Bolota', emoji: '💧', cor: '#3fa7ff', escuro: '#1a5fb4', claro: '#d6eeff'}
+};
+const CARTAS = {
+  escudo: {nome: 'Escudo', emoji: '🛡️', dica: 'Bloqueia o próximo ataque'},
+  duplo: {nome: 'Ataque duplo', emoji: '⚡', dica: 'O próximo ataque vale o dobro'},
+  roubar: {nome: 'Roubar vida', emoji: '🍀', dica: 'Tira 15 do outro monstrinho e dá para o seu'}
+};
+const outro = t => t === 'A' ? 'B' : 'A';
+let perguntas = [], monte = [], usadas = 0, n = 0, maxQ = 15, tempo = 20, totais = {}, fase = 'config', pAtual = null, times = {}, duelo = null;
+
+// ---------- perguntas ----------
+ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', arq => {
+  $('infoArq').textContent = 'Carregando…'; perguntas = [];
+  ARC.json('dados/' + arq, d => {
+    perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 240, maxOpLen: 80});
+    AV.idioma = d.idioma || 'pt-BR';
+    $('infoArq').textContent = perguntas.length ? `${d.titulo || arq} • ${perguntas.length} perguntas` : 'Este arquivo não tem perguntas de escolha.';
+  }, () => { $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+});
+
+// ---------- sala e times ----------
+const qs = QuizSala({
+  aoMudar, total: () => maxQ, aoResultado: mostrarResultado,
+  aoTique: s => { $('contador').textContent = s; $('contador').classList.toggle('pouco', s <= 5); if (s <= 5 && s > 0) AV.tique(); }
+});
+const grupos = () => qs.grupos();
+function distribuir(){   // quem entra vai para o time com menos equipes
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  Object.keys(times).forEach(id => { if (!g[id]) delete times[id]; });
+  ids.forEach(id => {
+    if (times[id]) return;
+    const nA = ids.filter(x => times[x] === 'A').length, nB = ids.filter(x => times[x] === 'B').length;
+    times[id] = nA <= nB ? 'A' : 'B';
+  });
+}
+const membros = t => AV.ordemGrupos(grupos()).filter(id => times[id] === t);
+
+$('btnCriar').onclick = () => {
+  if (perguntas.length < 3) return AV.avisar('Escolha um arquivo com perguntas.');
+  AV.som = $('chkSom').checked;
+  $('btnCriar').disabled = true;
+  qs.criar((err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    times = {};
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    irPara('sala');
+  });
+};
+function irPara(f){
+  fase = f;
+  AV.mostrarTela({config: 'tConfig', sala: 'tSala', duelo: 'tDuelo'}[f]);
+  if (f === 'duelo'){ medir(); laco.iniciar(); } else laco.parar();
+  aoMudar();
+}
+function aoMudar(){
+  distribuir();
+  const g = grupos(), ids = Object.keys(g);
+  if (fase === 'sala'){
+    ['A', 'B'].forEach(t => {
+      const el = $('grupos' + t), lista = membros(t);
+      el.innerHTML = lista.map(id => `<div class="grupoChip" data-id="${AV.esc(id)}" style="background:${g[id].cor}" title="Trocar de time"><span class="e">${AV.esc(g[id].emoji)}</span><span>${AV.esc(g[id].nome)}</span></div>`).join('') || '<p class="dica">ninguém ainda</p>';
+      el.querySelectorAll('.grupoChip').forEach(c => c.onclick = () => { times[c.dataset.id] = outro(times[c.dataset.id]); aoMudar(); });
+    });
+    $('dicaGrupos').textContent = ids.length ? 'Toque numa equipe para trocá-la de time.' : 'Esperando as equipes entrarem…';
+  }
+  if (fase === 'duelo' && pAtual && !qs.encerrada){
+    const r = qs.respostas(), nr = ids.filter(id => r[id]).length;
+    $('nRespostas').textContent = `${nr}/${ids.length}`;
+    $('gruposResp').innerHTML = ids.map(id => `<span class="${r[id] ? 'ok' : ''}" title="${AV.esc(g[id].nome)}">${AV.esc(g[id].emoji)}</span>`).join('');
+  }
+}
+
+// ---------- duelo ----------
+const sortearCarta = () => ARC.sortear(Object.keys(CARTAS));
+$('btnComecar').onclick = () => {
+  if ((!membros('A').length || !membros('B').length) && !confirm('Um dos times está sem equipe. Começar mesmo assim?')) return;
+  novoDuelo();
+};
+function novoDuelo(){
+  maxQ = +$('selMax').value; tempo = +$('selTempo').value;
+  const max = +$('selVida').value;
+  monte = ARC.embaralhar(perguntas); usadas = 0; n = 0; totais = {}; pAtual = null;
+  Object.keys(grupos()).forEach(id => { totais[id] = 0; });
+  duelo = {max, vida: {A: max, B: max}, mostrada: {A: max, B: max}, barra: {A: max, B: max}, cartas: {A: [sortearCarta()], B: [sortearCarta()]},
+    escudo: {A: false, B: false}, duplo: {A: false, B: false}, fila: [], anim: null, fx: [], tremer: {A: 0, B: 0}, flash: {A: 0, B: 0}, ko: {A: 0, B: 0},
+    caiu: {A: false, B: false}, acabou: false, vencedor: null, aoEsvaziar: null};
+  $('areaPergunta').hidden = false; $('final').hidden = true;
+  $('numPergunta').textContent = '–'; $('textoPergunta').textContent = '⚔️ Os monstrinhos estão chegando…'; $('contador').textContent = '–';
+  $('opcoes').innerHTML = ''; $('explica').textContent = 'Cada time começa com uma carta de poder.'; $('gruposResp').innerHTML = '';
+  $('btnEncerrarPergunta').hidden = true; $('btnProxima').hidden = true;
+  irPara('duelo'); desenharCartas();
+  AV.tom(196, .25, 'square', .08); AV.tom(262, .25, 'square', .08, .25); AV.tom(392, .4, 'square', .08, .5);
+  setTimeout(proxima, 2200);
+}
+function proxima(){
+  if (!duelo || duelo.acabou || fase !== 'duelo') return;
+  if (usadas >= monte.length){ monte = ARC.embaralhar(perguntas); usadas = 0; }
+  pAtual = monte[usadas++]; n++;
+  $('numPergunta').textContent = `${n}/${maxQ}`;
+  $('textoPergunta').textContent = pAtual.p;
+  $('opcoes').innerHTML = pAtual.ops.map((o, i) => `<div class="opcao op${i}"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o)}</span><span class="quem"></span></div>`).join('');
+  $('explica').textContent = '';
+  $('btnEncerrarPergunta').hidden = false; $('btnProxima').hidden = true;
+  qs.pergunta(pAtual, n, maxQ, tempo, totais);
+  AV.tom(660, .15); AV.tom(990, .2, 'triangle', .15, .15);
+  AV.falar(pAtual.p);
+  aoMudar();
+}
+function mostrarResultado(info){
+  const g = info.grupos, ids = Object.keys(g), p = info.p, primeiro = info.certosPorTempo[0], porOpcao = p.ops.map(() => []);
+  const tam = {A: membros('A').length, B: membros('B').length}, forca = {A: 0, B: 0}, critico = {A: false, B: false};
+  ids.forEach(id => {
+    const r = info.resultados[id], t = times[id];
+    if (totais[id] == null) totais[id] = 0;
+    if (r.respondeu && porOpcao[r.opcao]) porOpcao[r.opcao].push(g[id].emoji);
+    if (r.certo && t){
+      let pts = Math.round(20 / Math.max(1, tam[t])) + (id === primeiro ? 10 : 0);
+      if (duelo.duplo[t]) pts *= 2;
+      r.pontos = pts; totais[id] += pts; forca[t] += pts;
+      if (id === primeiro) critico[t] = true;
+    }
+  });
+  const tPrim = primeiro ? times[primeiro] : null, msgs = [];
+  (tPrim === 'B' ? ['B', 'A'] : ['A', 'B']).forEach(t => {
+    const o = outro(t);
+    if (!forca[t] || duelo.vida[t] <= 0 || duelo.vida[o] <= 0) return;
+    const duplo = duelo.duplo[t]; duelo.duplo[t] = false;
+    if (duelo.escudo[o]){
+      duelo.escudo[o] = false;
+      duelo.fila.push({tipo: 'ataque', de: t, para: o, dano: forca[t], bloqueado: true, critico: critico[t], duplo, dur: 1.3});
+      msgs.push(`🛡️ O escudo do ${TIMES[o].nome} bloqueou o ataque!`);
+      return;
+    }
+    duelo.vida[o] = Math.max(0, duelo.vida[o] - forca[t]);
+    duelo.fila.push({tipo: 'ataque', de: t, para: o, dano: forca[t], critico: critico[t], duplo, dur: 1.3});
+    if (duelo.vida[o] <= 0){ duelo.fila.push({tipo: 'ko', time: o, dur: 1.3}); msgs.push(`💫 O monstrinho do ${TIMES[o].nome} desmaiou!`); }
+  });
+  if (tPrim && duelo.cartas[tPrim].length < 3 && !(duelo.vida.A <= 0 || duelo.vida.B <= 0)){
+    const c = sortearCarta(); duelo.cartas[tPrim].push(c);
+    msgs.unshift(`🃏 ${AV.esc(g[primeiro].emoji + ' ' + g[primeiro].nome)} acertou primeiro: o ${TIMES[tPrim].nome} ganhou a carta ${CARTAS[c].emoji} ${CARTAS[c].nome}!`);
+  } else if (!info.certosPorTempo.length) msgs.push('😮 Ninguém acertou: os monstrinhos só se encararam.');
+  document.querySelectorAll('#opcoes .opcao').forEach((el, i) => { el.classList.add(i === p.ok ? 'certa' : 'apagada'); el.querySelector('.quem').textContent = porOpcao[i].join(' '); });
+  $('contador').classList.remove('pouco'); $('contador').textContent = '✓'; $('btnEncerrarPergunta').hidden = true;
+  $('explica').innerHTML = msgs.join(' ') + (p.x ? ` <span class="dica">${AV.esc(p.x)}</span>` : '');
+  AV.falar([{t: `A resposta certa é ${LETRAS[p.ok]}:`, l: 'pt-BR'}, {t: p.ops[p.ok]}]);
+  if (!info.certosPorTempo.length) AV.erro();
+  const ko = duelo.vida.A <= 0 || duelo.vida.B <= 0;
+  if (ko || n >= maxQ){
+    duelo.acabou = true;
+    duelo.vencedor = duelo.vida.A === duelo.vida.B ? 'empate' : duelo.vida.A > duelo.vida.B ? 'A' : 'B';
+  }
+  $('btnProxima').disabled = true; $('btnProxima').hidden = false;
+  $('btnProxima').textContent = duelo.acabou ? '🏆 Ver o resultado' : '➡️ Próxima pergunta';
+  duelo.aoEsvaziar = () => { $('btnProxima').disabled = false; };   // libera o botão quando as animações terminarem
+  desenharCartas();
+  return totais;
+}
+$('btnEncerrarPergunta').onclick = () => qs.encerrarPergunta();
+$('btnProxima').onclick = () => { if (duelo.acabou) mostrarFim(); else proxima(); };
+$('btnTerminar').onclick = () => {   // bateu o sinal: vence quem tiver mais vida
+  if (!duelo || !confirm('Terminar o duelo agora? Vence o monstrinho com mais vida.')) return;
+  duelo.acabou = true; duelo.fila = []; duelo.anim = null; duelo.aoEsvaziar = null;
+  duelo.vencedor = duelo.vida.A === duelo.vida.B ? 'empate' : duelo.vida.A > duelo.vida.B ? 'A' : 'B';
+  ['A', 'B'].forEach(t => { duelo.mostrada[t] = duelo.vida[t]; });
+  mostrarFim();
+};
+
+function usarCarta(t, i){
+  if (!duelo || duelo.acabou) return;
+  const c = duelo.cartas[t][i], o = outro(t); if (!c) return;
+  if (c === 'roubar'){
+    const q = Math.min(15, duelo.vida[o] - 1);
+    if (!duelo.escudo[o] && q <= 0) return AV.avisar('O outro monstrinho está quase sem vida: não dá para roubar agora.');
+    duelo.cartas[t].splice(i, 1);
+    if (duelo.escudo[o]){ duelo.escudo[o] = false; duelo.fila.push({tipo: 'roubar', de: t, para: o, qtd: 0, bloqueado: true, dur: 1.2}); AV.avisar(`🛡️ O escudo do ${TIMES[o].nome} bloqueou o roubo!`); }
+    else { duelo.vida[o] -= q; duelo.vida[t] = Math.min(duelo.max, duelo.vida[t] + q); duelo.fila.push({tipo: 'roubar', de: t, para: o, qtd: q, dur: 1.2}); AV.avisar(`🍀 O ${TIMES[t].nome} roubou ${q} de vida!`); }
+  } else {
+    duelo.cartas[t].splice(i, 1);
+    duelo[c][t] = true;
+    AV.avisar(c === 'escudo' ? `🛡️ O ${TIMES[t].nome} levantou o escudo!` : `⚡ O próximo ataque do ${TIMES[t].nome} vale o dobro!`);
+    AV.tom(c === 'escudo' ? 520 : 880, .3, 'triangle', .12); AV.tom(c === 'escudo' ? 780 : 1320, .3, 'triangle', .12, .12);
+  }
+  desenharCartas();
+}
+function desenharCartas(){
+  ['A', 'B'].forEach(t => {
+    const el = $('cartas' + t);
+    if (!duelo){ el.innerHTML = ''; return; }
+    el.innerHTML = duelo.cartas[t].map((c, i) => `<button class="carta" data-i="${i}" title="${CARTAS[c].dica}"><span>${CARTAS[c].emoji}</span>${CARTAS[c].nome}</button>`).join('') +
+      (duelo.cartas[t].length ? '' : '<div class="vazia">sem cartas</div>') +
+      (duelo.escudo[t] ? '<div class="ativa">🛡️ escudo ligado</div>' : '') + (duelo.duplo[t] ? '<div class="ativa">⚡ ataque duplo pronto</div>' : '');
+    el.querySelectorAll('button').forEach(b => b.onclick = () => usarCarta(t, +b.dataset.i));
+  });
+}
+function mostrarFim(){
+  const g = grupos(), pos = {};
+  Object.keys(totais).forEach(id => { pos[id] = duelo.vencedor === 'empate' || times[id] === duelo.vencedor ? 1 : 2; });
+  qs.fim(totais, pos);
+  $('areaPergunta').hidden = true; $('final').hidden = false;
+  $('tituloFinal').textContent = duelo.vencedor === 'empate' ? '🤝 Empate! Os dois monstrinhos lutaram muito bem.' : `🏆 O ${TIMES[duelo.vencedor].nome} ${TIMES[duelo.vencedor].emoji} venceu o duelo!`;
+  AV.desenharRanking($('ranking'), g, totais, null, true);
+  AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 700);
+}
+$('btnRevanche').onclick = () => { qs.reiniciar(); duelo = null; pAtual = null; desenharCartas(); irPara('sala'); };
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return;
+  qs.encerrar(); duelo = null; pAtual = null; desenharCartas(); irPara('config');
+}
+$('btnEncerrar').onclick = encerrar;
+$('btnEncerrar2').onclick = encerrar;
+
+// ---------- arena (canvas) ----------
+const cv = $('palco'), ctx = cv.getContext('2d'), P = {W: 0, H: 0};
+function medir(){
+  const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  P.W = r.width; P.H = r.height; cv.width = Math.round(P.W * dpr); cv.height = Math.round(P.H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', () => { if (fase === 'duelo') medir(); });
+const laco = ARC.laco(passo);
+const posX = t => P.W * (t === 'A' ? 0.3 : 0.7), chao = () => P.H * 0.88, tamanho = () => Math.min(P.H * 0.3, P.W * 0.11);
+function passo(dt){
+  if (duelo){
+    const d = duelo;
+    if (!d.anim && d.fila.length){ d.anim = d.fila.shift(); d.anim.t = 0; somInicio(d.anim); }
+    if (d.anim){
+      const a = d.anim; a.t += dt;
+      if (!a.aplicado && a.t >= a.dur * 0.55){ a.aplicado = true; aplicar(a); }
+      if (a.t >= a.dur){ d.anim = null; if (!d.fila.length && d.aoEsvaziar){ const f = d.aoEsvaziar; d.aoEsvaziar = null; f(); } }
+    } else if (d.aoEsvaziar){ const f = d.aoEsvaziar; d.aoEsvaziar = null; f(); }
+    ['A', 'B'].forEach(t => {
+      d.barra[t] += (d.mostrada[t] - d.barra[t]) * Math.min(1, dt * 6);
+      if (d.tremer[t] > 0) d.tremer[t] -= dt;
+      if (d.flash[t] > 0) d.flash[t] -= dt;
+      if (d.caiu[t] && d.ko[t] < 1) d.ko[t] = Math.min(1, d.ko[t] + dt * 2);
+    });
+    for (let k = d.fx.length - 1; k >= 0; k--){ d.fx[k].t += dt; if (d.fx[k].t > 1.4) d.fx.splice(k, 1); }
+  }
+  desenhar();
+}
+function somInicio(a){
+  if (a.tipo === 'ataque'){ if (a.de === 'A'){ AV.tom(300, .35, 'sawtooth', .07, 0, 900); } else { AV.tom(900, .35, 'sine', .1, 0, 300); } }
+  else if (a.tipo === 'roubar') AV.tom(500, .4, 'triangle', .1, 0, 1000);
+  else if (a.tipo === 'ko'){ AV.tom(440, .9, 'triangle', .12, 0, 110); }
+}
+function aplicar(a){
+  const d = duelo, S = tamanho();
+  if (a.tipo === 'ataque'){
+    if (a.bloqueado){ d.fx.push({x: posX(a.para), y: chao() - S * 1.5, txt: '🛡️ Bloqueado!', cor: '#243049', t: 0}); AV.tom(1200, .15, 'square', .06); return; }
+    d.mostrada[a.para] = Math.max(0, d.mostrada[a.para] - a.dano); d.tremer[a.para] = 0.5; d.flash[a.para] = 0.25;
+    d.fx.push({x: posX(a.para), y: chao() - S * 1.5, txt: (a.critico ? 'CRÍTICO! ' : '') + '−' + a.dano + (a.duplo ? ' ⚡×2' : ''), cor: a.critico ? '#e67e00' : '#d62839', t: 0});
+    AV.tom(150, .25, 'square', .1); if (a.critico) AV.tom(1046, .2, 'triangle', .12, .1);
+  } else if (a.tipo === 'roubar'){
+    if (a.bloqueado){ d.fx.push({x: posX(a.para), y: chao() - S * 1.5, txt: '🛡️ Bloqueado!', cor: '#243049', t: 0}); return; }
+    d.mostrada[a.para] = Math.max(0, d.mostrada[a.para] - a.qtd); d.mostrada[a.de] = Math.min(d.max, d.mostrada[a.de] + a.qtd); d.tremer[a.para] = 0.4;
+    d.fx.push({x: posX(a.para), y: chao() - S * 1.5, txt: '−' + a.qtd, cor: '#d62839', t: 0}, {x: posX(a.de), y: chao() - S * 1.5, txt: '+' + a.qtd + ' 🍀', cor: '#1f9d6b', t: 0});
+  } else if (a.tipo === 'ko'){ d.caiu[a.time] = true; }
+}
+function desenhar(){
+  const W = P.W, H = P.H; if (!W) return;
+  const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#9fd8ff'); g.addColorStop(1, '#e9f7ff'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#ffffffcc'; [[0.12, 0.2], [0.55, 0.12], [0.85, 0.25]].forEach(([nx, ny]) => { const x = nx * W, y = ny * H; ctx.beginPath(); ctx.arc(x, y, 22, 0, 2 * Math.PI); ctx.arc(x + 26, y - 8, 28, 0, 2 * Math.PI); ctx.arc(x + 54, y, 22, 0, 2 * Math.PI); ctx.fill(); });
+  ctx.fillStyle = '#8fd16a'; ctx.fillRect(0, chao() - 4, W, H - chao() + 4);
+  ctx.fillStyle = '#7cc25a'; ctx.beginPath(); ctx.ellipse(W / 2, chao() + (H - chao()) * 0.4, W * 0.42, (H - chao()) * 0.45 + 6, 0, 0, 2 * Math.PI); ctx.fill();
+  if (!duelo) return;
+  const d = duelo, S = tamanho(), a = d.anim;
+  ['A', 'B'].forEach(t => {
+    let avanco = 0;
+    if (a && (a.tipo === 'ataque' || a.tipo === 'roubar') && a.de === t){ const k = a.t / a.dur; avanco = k < 0.15 ? k / 0.15 : k < 0.4 ? 1 - (k - 0.15) / 0.25 : 0; }
+    const pulo = d.acabou && d.vencedor === t && !d.anim && !d.fila.length ? Math.abs(Math.sin(Date.now() / 160)) * S * 0.25 : 0;
+    desenharMonstro(t, posX(t), chao(), S, {avanco, pulo, tremer: d.tremer[t], flash: d.flash[t], ko: d.ko[t], escudo: d.escudo[t], duplo: d.duplo[t]});
+    desenharVida(t, S);
+  });
+  if (a && (a.tipo === 'ataque' || a.tipo === 'roubar')){
+    const k = (a.t / a.dur - 0.15) / 0.4;
+    if (k > 0 && k < 1){
+      const ida = a.tipo === 'ataque', de = ida ? a.de : a.para, para = ida ? a.para : a.de, dir = posX(para) > posX(de) ? 1 : -1;
+      const x0 = posX(de) + dir * S * 0.6, x1 = posX(para) - dir * S * 0.6, x = x0 + (x1 - x0) * k, y = chao() - S * 0.65 - Math.sin(k * Math.PI) * S * 0.7;
+      const r = S * (a.critico ? 0.24 : 0.18);
+      if (a.tipo === 'roubar'){ ctx.fillStyle = '#2ecc71'; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#eafff1'; ctx.beginPath(); ctx.arc(x - r * 0.3, y - r * 0.3, r * 0.35, 0, 2 * Math.PI); ctx.fill(); }
+      else if (a.de === 'A'){
+        for (let j = 1; j < 5; j++){ ctx.fillStyle = `rgba(255,${120 + j * 25},40,${0.5 - j * 0.1})`; ctx.beginPath(); ctx.arc(x - dir * j * r * 0.7, y + Math.sin(k * 20 + j) * 3, r * (1 - j * 0.15), 0, 2 * Math.PI); ctx.fill(); }
+        ctx.fillStyle = '#ff6b1a'; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#ffd23f'; ctx.beginPath(); ctx.arc(x, y, r * 0.55, 0, 2 * Math.PI); ctx.fill();
+      } else {
+        for (let j = 1; j < 5; j++){ ctx.fillStyle = `rgba(90,180,255,${0.45 - j * 0.09})`; ctx.beginPath(); ctx.arc(x - dir * j * r * 0.75, y + Math.cos(k * 18 + j) * 3, r * 0.35, 0, 2 * Math.PI); ctx.fill(); }
+        ctx.fillStyle = 'rgba(63,167,255,.85)'; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x - r * 0.35, y - r * 0.35, r * 0.25, 0, 2 * Math.PI); ctx.fill();
+      }
+    }
+  }
+  d.fx.forEach(f => {
+    ctx.globalAlpha = Math.max(0, 1 - f.t / 1.4); ctx.fillStyle = f.cor; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ARC.fonte(ctx, f.txt, W * 0.3, Math.round(Math.max(20, S * 0.32))); ctx.lineWidth = 5; ctx.strokeStyle = '#fff'; ctx.strokeText(f.txt, f.x, f.y - f.t * 50); ctx.fillText(f.txt, f.x, f.y - f.t * 50); ctx.globalAlpha = 1;
+  });
+}
+function desenharVida(t, S){
+  const d = duelo, T = TIMES[t], w = Math.min(P.W * 0.28, 380), h = Math.max(18, S * 0.2), x = posX(t) - w / 2, y = 14;
+  ctx.fillStyle = '#243049'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+  const nomes = membros(t).map(id => grupos()[id].emoji).join(' ');
+  ARC.fonte(ctx, T.emoji + ' ' + T.nome + (nomes ? '  ' + nomes : ''), w, Math.round(Math.max(15, S * 0.17))); ctx.fillText(T.emoji + ' ' + T.nome + (nomes ? '  ' + nomes : ''), posX(t), y);
+  const yb = y + Math.max(20, S * 0.22), frac = Math.max(0, d.barra[t]) / d.max;
+  ctx.fillStyle = '#ffffffcc'; ARC.rrect(ctx, x, yb, w, h, h / 2); ctx.fill();
+  ctx.fillStyle = frac > 0.5 ? '#2ecc71' : frac > 0.25 ? '#f1c40f' : '#e74c3c'; if (frac > 0){ ARC.rrect(ctx, x, yb, Math.max(h, w * frac), h, h / 2); ctx.fill(); }
+  ctx.strokeStyle = '#243049'; ctx.lineWidth = 2; ARC.rrect(ctx, x, yb, w, h, h / 2); ctx.stroke();
+  ctx.fillStyle = '#243049'; ctx.textBaseline = 'middle'; ARC.fonte(ctx, '♥ ' + Math.round(Math.max(0, d.barra[t])) + '/' + d.max, w, Math.round(h * 0.72)); ctx.fillText('♥ ' + Math.round(Math.max(0, d.barra[t])) + '/' + d.max, posX(t), yb + h / 2 + 1);
+}
+function estrela(x, y, r, giro){   // estrelinhas de tontura do nocaute
+  ctx.fillStyle = '#ffd23f'; ctx.strokeStyle = '#c99700'; ctx.lineWidth = 1.5; ctx.beginPath();
+  for (let i = 0; i < 10; i++){ const a = giro + i * Math.PI / 5 - Math.PI / 2, rr = i % 2 ? r * 0.45 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); }
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+}
+function desenharMonstro(t, cx, base, s, e){
+  const T = TIMES[t], dir = t === 'A' ? 1 : -1, agora = Date.now() / 1000, resp = 1 + Math.sin(agora * 2.4 + (t === 'A' ? 0 : 1.7)) * 0.03;
+  const x = cx + dir * e.avanco * s * 0.55 + (e.tremer > 0 ? Math.sin(agora * 70) * 7 : 0), y = base - e.pulo;
+  ctx.fillStyle = 'rgba(0,0,0,.18)'; ctx.beginPath(); ctx.ellipse(cx, base + 2, s * 0.62, s * 0.12, 0, 0, 2 * Math.PI); ctx.fill();
+  ctx.save(); ctx.translate(x, y);
+  if (e.ko > 0){ ctx.rotate(-dir * 1.25 * e.ko); ctx.translate(0, s * 0.1 * e.ko); }
+  ctx.scale(1, resp);
+  const corpo = e.flash > 0 ? '#ffffff' : T.cor;
+  ctx.fillStyle = T.escuro; ctx.beginPath(); ctx.ellipse(-s * 0.28, -s * 0.05, s * 0.17, s * 0.09, 0, 0, 2 * Math.PI); ctx.ellipse(s * 0.28, -s * 0.05, s * 0.17, s * 0.09, 0, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = corpo; ctx.beginPath(); ctx.ellipse(-dir * s * 0.55, -s * 0.5, s * 0.13, s * 0.2, dir * 0.6, 0, 2 * Math.PI); ctx.ellipse(dir * s * 0.55, -s * 0.52 - e.avanco * s * 0.15, s * 0.13, s * 0.2, -dir * 0.6, 0, 2 * Math.PI); ctx.fill();
+  if (t === 'A'){   // chifres
+    ctx.fillStyle = T.escuro; [-1, 1].forEach(k => { ctx.beginPath(); ctx.moveTo(k * s * 0.22 - s * 0.08, -s * 0.98); ctx.lineTo(k * s * 0.32, -s * 1.28); ctx.lineTo(k * s * 0.22 + s * 0.1, -s * 0.95); ctx.fill(); });
+  } else {          // antena
+    ctx.strokeStyle = T.escuro; ctx.lineWidth = Math.max(2, s * 0.04); ctx.beginPath(); ctx.moveTo(0, -s * 1.02); ctx.quadraticCurveTo(dir * s * 0.15, -s * 1.25, dir * s * 0.08, -s * 1.38); ctx.stroke();
+    ctx.fillStyle = '#ffd23f'; ctx.beginPath(); ctx.arc(dir * s * 0.08, -s * 1.4, s * 0.08, 0, 2 * Math.PI); ctx.fill();
+  }
+  ctx.fillStyle = corpo; ctx.beginPath(); ctx.ellipse(0, -s * 0.55, s * 0.56, s * 0.52, 0, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = e.flash > 0 ? '#ffffff' : T.claro; ctx.beginPath(); ctx.ellipse(dir * s * 0.06, -s * 0.38, s * 0.32, s * 0.27, 0, 0, 2 * Math.PI); ctx.fill();
+  const olhoY = -s * 0.72, pisca = (agora + (t === 'A' ? 0 : 1.3)) % 3.4 < 0.13;
+  [-1, 1].forEach(k => {
+    const ox = dir * s * 0.1 + k * s * 0.19;
+    if (e.ko > 0.3){ ctx.strokeStyle = '#1b1530'; ctx.lineWidth = Math.max(2, s * 0.05); ctx.beginPath(); ctx.moveTo(ox - s * 0.07, olhoY - s * 0.07); ctx.lineTo(ox + s * 0.07, olhoY + s * 0.07); ctx.moveTo(ox + s * 0.07, olhoY - s * 0.07); ctx.lineTo(ox - s * 0.07, olhoY + s * 0.07); ctx.stroke(); return; }
+    if (pisca){ ctx.strokeStyle = '#1b1530'; ctx.lineWidth = Math.max(2, s * 0.04); ctx.beginPath(); ctx.moveTo(ox - s * 0.1, olhoY); ctx.lineTo(ox + s * 0.1, olhoY); ctx.stroke(); return; }
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ox, olhoY, s * 0.14, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#1b1530'; ctx.beginPath(); ctx.arc(ox + dir * s * 0.05, olhoY + s * 0.01, s * 0.07, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ox + dir * s * 0.07, olhoY - s * 0.03, s * 0.025, 0, 2 * Math.PI); ctx.fill();
+  });
+  ctx.strokeStyle = '#1b1530'; ctx.lineWidth = Math.max(2, s * 0.035); ctx.beginPath();
+  if (e.ko > 0.3) ctx.arc(dir * s * 0.1, -s * 0.38, s * 0.1, Math.PI + 0.3, -0.3);
+  else ctx.arc(dir * s * 0.1, -s * 0.5, s * 0.15, 0.25, Math.PI - 0.25);
+  ctx.stroke();
+  if (t === 'A' && e.ko <= 0.3){ ctx.fillStyle = '#fff'; [-1, 1].forEach(k => { const fx = dir * s * 0.1 + k * s * 0.07; ctx.beginPath(); ctx.moveTo(fx - s * 0.03, -s * 0.38); ctx.lineTo(fx + s * 0.03, -s * 0.38); ctx.lineTo(fx, -s * 0.31); ctx.fill(); }); }
+  if (t === 'B' && e.ko <= 0.3){ ctx.fillStyle = 'rgba(255,120,150,.5)'; [-1, 1].forEach(k => { ctx.beginPath(); ctx.arc(dir * s * 0.1 + k * s * 0.33, -s * 0.52, s * 0.06, 0, 2 * Math.PI); ctx.fill(); }); }
+  ctx.restore();
+  if (e.ko > 0.5){ for (let k = 0; k < 3; k++){ const ang = agora * 3 + k * 2.1; estrela(cx + Math.cos(ang) * s * 0.45, base - s * 1.1 + Math.sin(ang) * s * 0.12, s * 0.1, ang); } }
+  if (e.escudo){ ctx.strokeStyle = 'rgba(80,160,255,.9)'; ctx.fillStyle = 'rgba(120,190,255,.22)'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(cx, base - s * 0.62, s * (0.88 + Math.sin(agora * 4) * 0.03), 0, 2 * Math.PI); ctx.fill(); ctx.stroke(); }
+  if (e.duplo){ ctx.fillStyle = '#f1c40f'; ctx.font = Math.round(s * 0.34) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('⚡', cx + dir * s * 0.75, base - s * 1.15 + Math.sin(agora * 5) * 5); }
+}
+
+AV.iniciarConexao($('painelConexao'));
+window.DUELO = {estado: () => ({pAtual, totais, duelo, times, n, fase}), qs, usarCarta};   // usado nos testes
+</script>
+</body>
+</html>

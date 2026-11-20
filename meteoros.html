@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Chuva de Meteoros</title>
+<link rel="stylesheet" href="arcade.css">
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hFase"></span><span class="chip alvo" id="hAlvo"></span><span class="chip" id="hEscudos"></span>
+  <span class="chip" id="hMeta"></span><span class="chip" id="hPontos"></span>
+  <button type="button" id="btPausa">⏸️</button><button type="button" id="btSom">🔊</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>☄️ Chuva de Meteoros</h1>
+  <p>Palavras caem do céu. Atire <b>só nos meteoros do grupo pedido</b> antes que atinjam a cidade! Atirar no meteoro errado gasta um escudo.</p>
+  <label>Palavras: <select id="selArquivo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Fases: <select id="selFases"><option>3</option><option selected>5</option><option>7</option></select></label>
+  <label>Meteoros certos por fase: <select id="selMeta"><option>6</option><option selected>8</option><option>12</option></select></label>
+  <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Clique ou toque no meteoro para atirar. Barra de espaço: pausa.</p>
+</div></div>
+<div class="tela" id="tFase"><div class="cartao" id="cFase"></div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, dados = null, jogo = null, tela = ARC.canvas($('cv'), function(){ if (!laco.rodando) desenhar(); });
+  var ctx = tela.ctx, laco = ARC.laco(passo), estrelas = [];
+  for (var i = 0; i < 90; i++) estrelas.push([Math.random(), Math.random() * 0.8, Math.random() * 1.6 + 0.4]);
+
+  ARC.seletor($('selArquivo'), 'categorias', 'morfo-classes.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; dados = null;
+    ARC.json('dados/' + arq, function(d){
+      dados = ARC.normalizarCategorias(d);
+      $('infoArq').textContent = dados ? dados.titulo + ' • ' + dados.palavras.length + ' palavras • grupos: ' + dados.alvos.map(function(id){ return dados.cats[id].nome; }).join(', ') : 'Este arquivo não tem grupos suficientes.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  function comecar(){
+    if (!dados) return ARC.aviso('Escolha um arquivo de palavras.');
+    var nf = +$('selFases').value, fases = [], alvos = ARC.embaralhar(dados.alvos);
+    for (var k = 0; k < nf; k++) fases.push({alvo: alvos[k % alvos.length]});
+    jogo = {fases: fases, f: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), meta: +$('selMeta').value};
+    abrirFase();
+  }
+  function equipeVez(){ return jogo.equipes[jogo.f % jogo.equipes.length]; }
+  function abrirFase(){
+    var fa = jogo.fases[jogo.f], c = dados.cats[fa.alvo], eq = equipeVez();
+    $('cFase').innerHTML = '<h2>Fase ' + (jogo.f + 1) + ' de ' + jogo.fases.length + '</h2>' +
+      (jogo.equipes.length > 1 ? '<p style="font-size:24px">Vez dos ' + eq.emoji + ' <b>' + esc(eq.nome) + '</b></p>' : '') +
+      '<p>Atire só em:</p><div class="alvoGrande" style="background:' + c.cor + '">' + esc(c.plural || c.nome) + '</div>' +
+      '<p class="dica">Destrua ' + jogo.meta + ' meteoros desse grupo. Você tem 5 escudos.</p>' +
+      (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.f % jogo.equipes.length) + '</div>' : '') +
+      '<button type="button" class="principal" id="btIr">🚀 Ir!</button>';
+    ARC.tela('tFase');
+    $('btIr').onclick = iniciarFase;
+  }
+  function iniciarFase(){
+    var fa = jogo.fases[jogo.f];
+    jogo.meteoros = []; jogo.fx = []; jogo.escudos = 5; jogo.acertos = 0; jogo.serie = 0; jogo.pontosFase = 0; jogo.fimFase = 0;
+    jogo.vel = 1 + jogo.f * 0.16; jogo.gerar = 0.4; jogo.alvo = fa.alvo;
+    ARC.tela(null); $('hud').style.display = ''; atualizarHud(); laco.pausado = false; laco.iniciar();
+  }
+  function atualizarHud(){
+    var c = dados.cats[jogo.alvo], eq = equipeVez();
+    $('hFase').textContent = 'Fase ' + (jogo.f + 1) + '/' + jogo.fases.length + (jogo.equipes.length > 1 ? ' • ' + eq.emoji : '');
+    $('hAlvo').textContent = '🎯 ' + (c.plural || c.nome); $('hAlvo').style.background = c.cor;
+    $('hEscudos').textContent = '🛡️ ' + jogo.escudos; $('hMeta').textContent = '☄️ ' + jogo.acertos + '/' + jogo.meta;
+    $('hPontos').textContent = '⭐ ' + (eq.pontos);
+  }
+  function novoMeteoro(){
+    var alvo = Math.random() < 0.45, lista = dados.palavras.filter(function(p){ return (p.c === jogo.alvo) === alvo; });
+    if (!lista.length) lista = dados.palavras;
+    var p = ARC.sortear(lista), r = 30 * tela.ESC, margem = 90 * tela.ESC;
+    jogo.meteoros.push({x: ARC.aleat(margem, tela.W - margem), y: -r - 20, vy: ARC.aleat(38, 62) * tela.ESC * jogo.vel, vx: ARC.aleat(-8, 8) * tela.ESC, r: r, t: p.t, c: p.c, rot: Math.random() * 6});
+  }
+  function chao(){ return tela.H - 95 * tela.ESC; }
+  function passo(dt){
+    if (dt && !jogo.fimFase){
+      jogo.gerar -= dt;
+      if (jogo.gerar <= 0){ novoMeteoro(); jogo.gerar = ARC.aleat(1.0, 1.7) / jogo.vel; }
+      for (var i = jogo.meteoros.length - 1; i >= 0; i--){
+        var m = jogo.meteoros[i]; m.y += m.vy * dt; m.x += m.vx * dt; m.rot += dt * 2;
+        if (m.y + m.r > chao()){
+          jogo.meteoros.splice(i, 1);
+          if (m.c === jogo.alvo){
+            jogo.escudos--; jogo.serie = 0; explodir(m.x, chao(), '#ff5a3c'); ARC.erro();
+            ARC.aviso('💥 Um meteoro de ' + esc(dados.cats[jogo.alvo].nome) + ' passou: “' + esc(m.t) + '”'); atualizarHud();
+            if (jogo.escudos <= 0) terminarFase(false);
+          } else explodir(m.x, chao(), '#9aa5b8', true);
+        }
+      }
+    }
+    for (var k = jogo.fx.length - 1; k >= 0; k--){ jogo.fx[k].t += dt; if (jogo.fx[k].t > 0.7) jogo.fx.splice(k, 1); }
+    desenhar();
+  }
+  function explodir(x, y, cor, fraco){ jogo.fx.push({x: x, y: y, cor: cor, t: 0, fraco: !!fraco}); }
+  function atirar(x, y){
+    if (!jogo || jogo.fimFase || laco.pausado) return;
+    for (var i = jogo.meteoros.length - 1; i >= 0; i--){
+      var m = jogo.meteoros[i], dx = x - m.x, dy = y - m.y;
+      if (dx * dx + dy * dy < Math.pow(m.r + 34 * tela.ESC, 2)){ acertar(i); return; }
+    }
+  }
+  function acertar(i){
+    var m = jogo.meteoros[i], eq = equipeVez(); jogo.meteoros.splice(i, 1);
+    jogo.fx.push({x: m.x, y: m.y, cor: '#ffd54a', t: 0, laser: true});
+    if (m.c === jogo.alvo){
+      jogo.serie++; var pts = 10 + Math.min(10, (jogo.serie - 1) * 2); eq.pontos += pts; jogo.acertos++;
+      explodir(m.x, m.y, '#ffb703'); ARC.tom(880, 0.08); ARC.tom(1320, 0.1, 0.06);
+      if (jogo.serie >= 3) ARC.aviso('🔥 Sequência de ' + jogo.serie + '! +' + pts, 1200);
+      atualizarHud();
+      if (jogo.acertos >= jogo.meta) terminarFase(true);
+    } else {
+      jogo.escudos--; jogo.serie = 0; explodir(m.x, m.y, '#8a94a8', true); ARC.erro();
+      ARC.aviso('❌ “' + esc(m.t) + '” é ' + esc(dados.cats[m.c].nome) + ', não ' + esc(dados.cats[jogo.alvo].nome) + '!');
+      atualizarHud();
+      if (jogo.escudos <= 0) terminarFase(false);
+    }
+  }
+  function terminarFase(venceu){
+    jogo.fimFase = 1; var eq = equipeVez(), bonus = venceu ? jogo.escudos * 5 : 0; eq.pontos += bonus;
+    setTimeout(function(){
+      laco.parar(); $('hud').style.display = 'none';
+      var ultima = jogo.f >= jogo.fases.length - 1;
+      $('cFase').innerHTML = '<h2>' + (venceu ? '🎉 Cidade salva!' : '🛡️ Acabaram os escudos!') + '</h2>' +
+        '<p>' + (venceu ? 'Bônus dos escudos que sobraram: +' + bonus : 'Destruíram ' + jogo.acertos + ' de ' + jogo.meta + ' meteoros.') + '</p>' +
+        '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.f % jogo.equipes.length) + '</div>' +
+        '<button type="button" class="principal" id="btSegue">' + (ultima ? '🏆 Resultado' : '➡️ Próxima fase') + '</button>';
+      ARC.tela('tFase'); if (venceu) ARC.festa();
+      $('btSegue').onclick = function(){ if (ultima) fim(); else { jogo.f++; abrirFase(); } };
+    }, 700);
+  }
+  function fim(){
+    var r = ARC.ranking(jogo.equipes);
+    $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? r[0].e.emoji + ' ' + esc(r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1>' +
+      '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
+    ARC.tela('tFim'); ARC.festa();
+    $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
+  }
+
+  // ---------- desenho ----------
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC, g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#0b1030'); g.addColorStop(1, '#2b2f6b'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fff'; estrelas.forEach(function(s){ ctx.globalAlpha = 0.5 + 0.5 * Math.sin(Date.now() / 600 + s[0] * 20); ctx.fillRect(s[0] * W, s[1] * H, s[2], s[2]); }); ctx.globalAlpha = 1;
+    var y0 = chao();
+    if (jogo && jogo.escudos > 0){ ctx.strokeStyle = 'rgba(120,200,255,' + (0.15 + jogo.escudos * 0.1) + ')'; ctx.lineWidth = 6 * E; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(W / 2, H + 40 * E, W * 0.62, H - y0 + 90 * E, 0, Math.PI, 2 * Math.PI) : ctx.arc(W / 2, H, W * 0.6, Math.PI, 2 * Math.PI); ctx.stroke(); }
+    for (var b = 0; b < 16; b++){
+      var bw = W / 16, bh = (40 + ((b * 37) % 60)) * E, bx = b * bw;
+      ctx.fillStyle = b % 2 ? '#1e2950' : '#243263'; ctx.fillRect(bx, H - bh, bw - 2, bh);
+      ctx.fillStyle = '#ffd86b';
+      for (var wy = H - bh + 8 * E; wy < H - 8 * E; wy += 14 * E) for (var wx = bx + 6; wx < bx + bw - 10; wx += 12) if ((wx + wy) % 3 < 1.6) ctx.fillRect(wx, wy, 5, 6);
+    }
+    ctx.fillStyle = '#9aa5b8'; ARC.rrect(ctx, W / 2 - 26 * E, H - 70 * E, 52 * E, 40 * E, 10 * E); ctx.fill();
+    ctx.fillStyle = '#ffb703'; ctx.fillRect(W / 2 - 6 * E, H - 98 * E, 12 * E, 32 * E);
+    if (!jogo || !jogo.meteoros) return;
+    jogo.meteoros.forEach(function(m){
+      ctx.save(); ctx.translate(m.x, m.y);
+      var cauda = ctx.createLinearGradient(0, -m.r * 3.2, 0, 0); cauda.addColorStop(0, 'rgba(255,120,40,0)'); cauda.addColorStop(1, 'rgba(255,170,60,.85)');
+      ctx.fillStyle = cauda; ctx.beginPath(); ctx.moveTo(-m.r * 0.8, 0); ctx.lineTo(0, -m.r * 3.4); ctx.lineTo(m.r * 0.8, 0); ctx.fill();
+      var rg = ctx.createRadialGradient(-m.r * 0.3, -m.r * 0.3, 2, 0, 0, m.r); rg.addColorStop(0, '#c9a27a'); rg.addColorStop(1, '#6b4a33');
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(0, 0, m.r, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      var tam = ARC.fonte(ctx, m.t, 200 * E, Math.round(24 * E)), w = ctx.measureText(m.t).width + 18 * E;
+      ctx.fillStyle = 'rgba(255,255,255,.95)'; ARC.rrect(ctx, m.x - w / 2, m.y + m.r + 4 * E, w, tam + 12 * E, 10 * E); ctx.fill();
+      ctx.fillStyle = '#1b2440'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(m.t, m.x, m.y + m.r + 10 * E + tam / 2);
+    });
+    jogo.fx.forEach(function(f){
+      var k = f.t / 0.7;
+      if (f.laser){ ctx.strokeStyle = 'rgba(255,230,120,' + (1 - k) + ')'; ctx.lineWidth = 5 * E; ctx.beginPath(); ctx.moveTo(W / 2, H - 98 * E); ctx.lineTo(f.x, f.y); ctx.stroke(); return; }
+      ctx.globalAlpha = 1 - k; ctx.fillStyle = f.cor; ctx.beginPath(); ctx.arc(f.x, f.y, (f.fraco ? 22 : 46) * E * (0.4 + k), 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+    });
+  }
+
+  $('cv').addEventListener('mousedown', function(e){ atirar(e.clientX, e.clientY); });
+  $('cv').addEventListener('touchstart', function(e){ var t = e.changedTouches[0]; atirar(t.clientX, t.clientY); e.preventDefault(); }, {passive: false});
+  document.addEventListener('keydown', function(e){ if (e.keyCode === 32 && jogo && laco.rodando){ e.preventDefault(); $('btPausa').onclick(); } });
+  $('btPausa').onclick = function(){ laco.pausado = !laco.pausado; this.textContent = laco.pausado ? '▶️' : '⏸️'; if (laco.pausado) ARC.aviso('⏸️ Pausado', 100000); else $('aviso').style.display = 'none'; };
+  $('btComecar').onclick = comecar;
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  desenhar();
+  window.METEOROS = {jogo: function(){ return jogo; }, acertar: acertar, novo: novoMeteoro};   // usado nos testes
+})();
+</script>
+</body>
+</html>

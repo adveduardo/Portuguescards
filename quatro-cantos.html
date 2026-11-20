@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Quatro Cantos</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #jogo{position:fixed;left:0;top:0;right:0;bottom:0;display:none;-webkit-flex-direction:column;flex-direction:column;padding:50px 12px 70px}
+  #jogo.ativo{display:-webkit-box;display:-webkit-flex;display:flex}
+  #pergunta{-webkit-flex:0 0 auto;flex:0 0 auto;background:#fff;border-radius:22px;padding:12px 22px;text-align:center;font-weight:bold;margin:0 auto 10px;width:100%;max-width:1400px;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+  #cantos{-webkit-flex:1 1 auto;flex:1 1 auto;position:relative;width:100%;max-width:1400px;margin:0 auto}
+  .canto{position:absolute;width:49.4%;height:48.8%;border-radius:24px;color:#fff;padding:12px 18px 12px 110px;box-shadow:0 6px 0 rgba(0,0,0,.25);
+    display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-transition:opacity .4s,-webkit-transform .4s;transition:opacity .4s,transform .4s}
+  .c0{left:0;top:0;background:#e74c3c} .c1{right:0;top:0;background:#2f80ed} .c2{left:0;bottom:0;background:#f1c40f;color:#3a2f00} .c3{right:0;bottom:0;background:#27ae60}
+  .canto .forma{position:absolute;left:14px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:84px;text-align:center;font-size:66px;line-height:1}
+  .canto .forma small{display:block;font-size:26px;font-weight:bold}
+  .canto .txt{font-weight:bold;line-height:1.2}
+  .canto .selo{position:absolute;right:12px;top:10px;background:rgba(0,0,0,.35);color:#fff;border-radius:12px;padding:4px 12px;font-size:20px;font-weight:bold;display:none}
+  .c2 .selo{right:auto;left:12px}
+  .canto.certo{-webkit-transform:scale(1.03);transform:scale(1.03);box-shadow:0 0 0 8px #fff,0 0 50px 12px rgba(255,255,255,.75);z-index:2}
+  .canto.certo .selo,.canto.errado .selo{display:block}
+  .canto.errado{opacity:.22}
+  .canto.vazio{opacity:.1}
+  #relogio{position:absolute;left:50%;top:50%;width:118px;height:118px;margin:-59px 0 0 -59px;border-radius:50%;background:#1f2a44;color:#fff;border:6px solid #fff;z-index:3;
+    font-size:54px;font-weight:bold;line-height:106px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+  #relogio.pouco{background:#e74c3c}
+  #rodape{position:fixed;left:0;right:0;bottom:0;padding:8px 10px;text-align:center;background:rgba(15,25,50,.85);z-index:6}
+  #estado{color:#fff;font-size:21px;font-weight:bold;margin:0 0 4px}
+  #estado small{font-weight:normal;font-size:17px;opacity:.9}
+  #hEmPe button{padding:2px 12px;font-size:20px;margin:0 4px}
+  .placa{page-break-after:always;text-align:center;padding-top:30px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<div id="hud" style="display:none">
+  <span class="chip" id="hRodada"></span>
+  <span class="chip" id="hEmPe"><button type="button" id="btMenos" title="Um aluno sentou">−</button>🙋 <b id="nEmPe">0</b> em pé<button type="button" id="btMaisUm" title="Um aluno levantou">+</button></span>
+  <button type="button" id="btSom">🔊</button><button type="button" id="btConfig" title="Trocar as perguntas">⚙️</button>
+</div>
+<div id="jogo">
+  <div id="pergunta"></div>
+  <div id="cantos">
+    <div class="canto c0" id="canto0"><div class="forma">●<small>A</small></div><div class="txt"></div><div class="selo"></div></div>
+    <div class="canto c1" id="canto1"><div class="forma">▲<small>B</small></div><div class="txt"></div><div class="selo"></div></div>
+    <div class="canto c2" id="canto2"><div class="forma">■<small>C</small></div><div class="txt"></div><div class="selo"></div></div>
+    <div class="canto c3" id="canto3"><div class="forma">◆<small>D</small></div><div class="txt"></div><div class="selo"></div></div>
+    <div id="relogio"></div>
+  </div>
+</div>
+<div id="rodape" style="display:none">
+  <div id="estado"></div>
+  <button type="button" id="btRevelar">👀 Revelar agora</button>
+  <button type="button" class="principal" id="btProxima">➡️ Próxima pergunta</button>
+  <button type="button" id="btCampeao">🏆 Temos um campeão!</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🏃 Quatro Cantos</h1>
+  <p>Cada canto da sala tem uma cor e uma forma. A pergunta aparece no projetor e cada aluno <b>vai até o canto da resposta</b> que escolheu.
+    Quando o tempo acaba, ninguém troca mais de canto, e o projetor mostra o canto certo.</p>
+  <label>Perguntas: <select id="selArquivo" style="max-width:560px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Tempo para escolher o canto: <select id="selTempo"><option value="10">10 s</option><option value="15" selected>15 s</option><option value="20">20 s</option><option value="30">30 s</option></select></label>
+  <label>Jeito de jogar: <select id="selModo"><option value="elim" selected>quem errou senta (o último em pé vence)</option><option value="todos">ninguém sai (só para treinar)</option></select></label>
+  <label id="lAlunos">Alunos em pé no começo: <input type="text" id="inAlunos" value="30" inputmode="numeric" style="width:70px"></label>
+  <label><input type="checkbox" id="chkLer" checked> Ler a pergunta em voz alta</label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button> <button type="button" id="btPlacas">🖨️ Imprimir as placas dos cantos</button></p>
+  <p class="dica">Combine com a turma: canto ● vermelho (A), ▲ azul (B), ■ amarelo (C) e ◆ verde (D), na mesma posição em que aparecem na tela.
+    Se ninguém acertar, todos voltam a ficar de pé. Barra de espaço: revelar ou ir para a próxima pergunta.</p>
+</div></div>
+<div class="tela" id="tCampeao"><div class="cartao">
+  <h1>🏆 Temos um campeão!</h1>
+  <p style="font-size:24px">Parabéns ao último que ficou de pé! 👏👏👏</p>
+  <p><button type="button" class="principal" id="btNovaPartida">🔄 Todos de pé: nova partida</button> <button type="button" id="btVoltarConfig">⚙️ Trocar as perguntas</button></p>
+</div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, perguntas = [], idioma = 'pt-BR', jogo = null, timer = null, espera = null;
+  var FORMAS = ['●', '▲', '■', '◆'], CORES = ['VERMELHO', 'AZUL', 'AMARELO', 'VERDE'], LETRAS = ['A', 'B', 'C', 'D'];
+
+  ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; perguntas = [];
+    ARC.json('dados/' + arq, function(d){
+      perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 260, maxOpLen: 90});
+      idioma = d.idioma || 'pt-BR';
+      $('infoArq').textContent = perguntas.length ? (d.titulo || arq) + ' • ' + perguntas.length + ' perguntas' : 'Este arquivo não tem perguntas de escolha.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  $('selModo').onchange = function(){ $('lAlunos').style.display = this.value === 'elim' ? '' : 'none'; };
+
+  function falar(t, lang){
+    if (!Sala.somLigado() || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    try { var u = new SpeechSynthesisUtterance(t); u.lang = lang || idioma; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {}
+  }
+  function tamanho(n, limites, tams){ for (var i = 0; i < limites.length; i++) if (n < limites[i]) return tams[i]; return tams[tams.length - 1]; }
+
+  function comecar(){
+    if (perguntas.length < 3) return ARC.aviso('Escolha um arquivo com perguntas.');
+    var n = parseInt($('inAlunos').value, 10);
+    jogo = {monte: ARC.embaralhar(perguntas), usadas: 0, rodada: 0, tempo: +$('selTempo').value, elim: $('selModo').value === 'elim', ler: $('chkLer').checked, inicioEmPe: n > 0 ? n : 0};
+    jogo.emPe = jogo.inicioEmPe;
+    ARC.tela(null); $('jogo').className = 'ativo'; $('hud').style.display = ''; $('rodape').style.display = '';
+    $('hEmPe').style.display = jogo.elim ? '' : 'none';
+    pintarEmPe(); proxima();
+  }
+  function pintarEmPe(){ $('nEmPe').textContent = jogo.emPe; }
+  function ajustar(){ if ($('rodape').style.display !== 'none') $('jogo').style.paddingBottom = ($('rodape').offsetHeight + 10) + 'px'; }
+  window.addEventListener('resize', ajustar);
+  function proxima(){
+    clearInterval(timer); clearTimeout(espera);
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.monte); jogo.usadas = 0; }
+    var p = jogo.p = jogo.monte[jogo.usadas++], maior = 0, i;
+    jogo.rodada++; jogo.fase = 'pensar'; jogo.resta = jogo.tempo;
+    $('pergunta').textContent = p.p; $('pergunta').style.fontSize = tamanho(p.p.length, [50, 100, 170], [44, 36, 30, 25]) + 'px';
+    for (i = 0; i < 4; i++) if (p.ops[i] && p.ops[i].length > maior) maior = p.ops[i].length;
+    for (i = 0; i < 4; i++){
+      var c = $('canto' + i), o = p.ops[i];
+      c.className = 'canto c' + i + (o ? '' : ' vazio');
+      c.querySelector('.txt').textContent = o || '—';
+      c.querySelector('.txt').style.fontSize = tamanho(maior, [14, 30, 55], [46, 36, 28, 23]) + 'px';
+      c.querySelector('.selo').textContent = '';
+    }
+    $('relogio').textContent = jogo.resta; $('relogio').className = '';
+    $('estado').textContent = '🏃 Vão para o canto da resposta!';
+    $('btRevelar').style.display = ''; $('btProxima').style.display = 'none'; $('btCampeao').style.display = 'none';
+    $('hRodada').textContent = 'Pergunta ' + jogo.rodada;
+    if (jogo.ler) falar(p.p);
+    ARC.tom(660, 0.12); ARC.tom(990, 0.18, 0.12);
+    timer = setInterval(tique, 1000); ajustar();
+  }
+  function tique(){
+    if (!jogo || jogo.fase !== 'pensar') return;
+    jogo.resta--; $('relogio').textContent = Math.max(0, jogo.resta);
+    if (jogo.resta <= 5 && jogo.resta > 0){ ARC.tom(880, 0.06); $('relogio').className = 'pouco'; }
+    if (jogo.resta <= 0) parou();
+  }
+  function parou(){
+    clearInterval(timer); jogo.fase = 'suspense';
+    $('relogio').textContent = '✋'; $('relogio').className = '';
+    $('estado').textContent = '⏰ Parou! Ninguém troca mais de canto…'; ajustar();
+    ARC.tom(330, 0.35, 0, 'square');
+    for (var k = 0; k < 9; k++) ARC.tom(180 + k * 25, 0.05, 0.45 + k * 0.12, 'square');   // rufar dos tambores
+    espera = setTimeout(revelar, 1700);
+  }
+  function revelar(){
+    if (!jogo || jogo.fase === 'revelado') return;
+    clearInterval(timer); clearTimeout(espera); jogo.fase = 'revelado';
+    var p = jogo.p;
+    for (var i = 0; i < 4; i++){
+      if (!p.ops[i]) continue;
+      var c = $('canto' + i);
+      c.className = 'canto c' + i + (i === p.ok ? ' certo' : ' errado');
+      c.querySelector('.selo').textContent = i === p.ok ? '✓ FICA DE PÉ' : (jogo.elim ? 'SENTA' : '');
+    }
+    $('relogio').textContent = FORMAS[p.ok]; $('relogio').className = '';
+    var nome = FORMAS[p.ok] + ' ' + CORES[p.ok];
+    $('estado').innerHTML = (jogo.elim ? 'Quem está no canto <b>' + nome + '</b> continua de pé. Os outros sentam! <small>(Se ninguém acertou, todos continuam.)</small>'
+      : 'A resposta certa é o canto <b>' + nome + '</b>!') + (p.x ? '<br><small>' + esc(p.x) + '</small>' : '');
+    ARC.plim();
+    if (jogo.ler) falar((idioma.indexOf('pt') === 0 ? 'Resposta certa: ' : '') + p.ops[p.ok]);
+    $('btRevelar').style.display = 'none'; $('btProxima').style.display = ''; $('btCampeao').style.display = jogo.elim ? '' : 'none';
+    ajustar();
+  }
+  function campeao(){
+    clearInterval(timer); clearTimeout(espera);
+    ARC.tela('tCampeao'); ARC.festa(); setTimeout(function(){ if (window.Sala) Sala.confete(); }, 700);
+  }
+  function imprimirPlacas(){
+    var cores = ['#e74c3c', '#2f80ed', '#e6b800', '#27ae60'], h = '';
+    for (var i = 0; i < 4; i++){
+      h += '<div class="placa"><div style="font-size:330px;line-height:1.1;color:' + cores[i] + '">' + FORMAS[i] + '</div>' +
+        '<div style="font-size:96px;font-weight:bold">' + LETRAS[i] + ' • ' + CORES[i] + '</div>' +
+        '<div style="font-size:26px;margin-top:24px">Quatro Cantos: cole esta placa num canto da sala</div></div>';
+    }
+    Sala.imprimir(h);
+  }
+
+  $('btComecar').onclick = comecar;
+  $('btRevelar').onclick = revelar;
+  $('btProxima').onclick = proxima;
+  $('btCampeao').onclick = campeao;
+  $('btNovaPartida').onclick = function(){ jogo.emPe = jogo.inicioEmPe; pintarEmPe(); ARC.tela(null); proxima(); };
+  function irConfig(){ clearInterval(timer); clearTimeout(espera); jogo = null; $('jogo').className = ''; $('hud').style.display = 'none'; $('rodape').style.display = 'none'; ARC.tela('tConfig'); }
+  $('btVoltarConfig').onclick = irConfig;
+  $('btConfig').onclick = function(){ if (confirm('Voltar para a escolha das perguntas?')) irConfig(); };
+  $('btMenos').onclick = function(){ if (!jogo) return; jogo.emPe = Math.max(0, jogo.emPe - 1); pintarEmPe(); if (jogo.emPe === 1) ARC.aviso('🏆 Só falta um em pé!', 2200); };
+  $('btMaisUm').onclick = function(){ if (!jogo) return; jogo.emPe++; pintarEmPe(); };
+  $('btPlacas').onclick = imprimirPlacas;
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (e.keyCode === 32 || e.keyCode === 13){ e.preventDefault(); if (jogo.fase === 'revelado') proxima(); else revelar(); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.QUATRO = {jogo: function(){ return jogo; }, revelar: revelar, proxima: proxima};   // usado nos testes
+})();
+</script>
+</body>
+</html>

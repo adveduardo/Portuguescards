@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Karaokê de leitura</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #palco{position:fixed;left:0;top:0;right:0;bottom:0;display:none;background:#fff8e7;overflow:auto;-webkit-overflow-scrolling:touch;padding:58px 16px 96px;text-align:center}
+  #palco.ativo{display:block}
+  #figura{font-size:120px;line-height:1.15;min-height:0}
+  #grupoTxt{font-size:18px;color:#8a6d3b;font-weight:bold;min-height:22px}
+  #texto{position:relative;max-width:1250px;margin:30px auto 10px;line-height:1.75;font-weight:bold;color:#2b2550}
+  #texto .w{display:inline-block;border-radius:12px;padding:0 6px;margin:2px 1px;-webkit-transition:background .25s,color .25s;transition:background .25s,color .25s;cursor:pointer}
+  #texto .w.ok{background:#c8f7d4;color:#11613a}
+  #texto .w.pulou{background:#ffe0b2;color:#8a4b00}
+  #texto .w.erro{background:#ffd0d0;color:#a01622;text-decoration:underline}
+  #texto .w.atual{background:#fff1a6;box-shadow:0 0 0 3px #ffd54a}
+  #texto .w.neutro{cursor:default}
+  #bolinha{position:absolute;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:#ff7a1a;box-shadow:0 3px 0 #c45500;display:none;
+    -webkit-transition:left .25s,top .25s;transition:left .25s,top .25s}
+  #bolinha i{display:block;width:100%;height:100%;border-radius:50%;-webkit-animation:quica .5s ease-in-out infinite alternate;animation:quica .5s ease-in-out infinite alternate}
+  @-webkit-keyframes quica{to{-webkit-transform:translateY(-12px)}}
+  @keyframes quica{to{transform:translateY(-12px)}}
+  #status{font-size:22px;font-weight:bold;color:#5a4a8a;margin:14px 0 4px;min-height:28px}
+  #ouvi{font-size:17px;color:#8a8aa0;min-height:22px;font-style:italic}
+  #resultado{display:none;margin:14px auto 0;max-width:820px;background:#fff;border-radius:22px;padding:12px 18px;font-size:22px;font-weight:bold;color:#1f2a44;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+  #resultado small{display:block;font-size:17px;font-weight:normal;color:#56627a;margin-top:6px}
+  #rodape{position:fixed;left:0;right:0;bottom:0;padding:8px;text-align:center;background:rgba(43,37,80,.92);z-index:6;display:none}
+  #rodape button{font-size:19px}
+  #rodape button.principal{font-size:24px;min-width:220px}
+  #modoMic.indisponivel{color:#999}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<div id="hud" style="display:none">
+  <span class="chip" id="hFrase"></span><span class="chip" id="hModo"></span><span class="chip" id="hLidas"></span>
+  <button type="button" id="btSom">🔊</button><button type="button" id="btConfig" title="Trocar o texto ou o modo">⚙️</button>
+</div>
+<div id="palco">
+  <div id="grupoTxt"></div>
+  <div id="figura"></div>
+  <div id="texto"><div id="bolinha"><i></i></div></div>
+  <div id="status"></div>
+  <div id="ouvi"></div>
+  <div id="resultado"></div>
+</div>
+<div id="rodape">
+  <button type="button" id="btAnterior" title="Frase anterior">◀</button>
+  <button type="button" id="btOuvir">🔊 Ouvir</button>
+  <button type="button" class="principal" id="btAcao">🎤 Ler</button>
+  <button type="button" id="btRecomecar" title="Começar esta frase de novo">🔁</button>
+  <button type="button" id="btProxima">Próxima ▶</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🎤 Karaokê de leitura</h1>
+  <p>O aluno lê a frase em voz alta e as palavras <b>acendem</b> conforme ele lê. Serve para fluência em Português e para pronúncia em Inglês.</p>
+  <label>Texto: <select id="selArquivo" style="max-width:560px"></select></label>
+  <label id="lGrupo" style="display:none">Grupo: <select id="selGrupo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Modo: <select id="selModo">
+    <option value="mic" id="modoMic">🎤 Microfone: as palavras acendem quando o aluno lê certo</option>
+    <option value="auto">🎵 Karaokê automático: leitura em coro, no ritmo da bolinha</option>
+    <option value="prof">👆 Professor marca: toque nas palavras lidas certo (ou erradas)</option>
+  </select></label>
+  <label id="lVel">Ritmo da bolinha: <select id="selVel"><option value="50">devagar</option><option value="80" selected>médio</option><option value="110">rápido</option></select></label>
+  <label><input type="checkbox" id="chkEmbaralhar"> Embaralhar a ordem</label>
+  <p class="dica" id="dicaMic"></p>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+</div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var arquivo = null, idioma = 'pt-BR', itens = [], k = 0, modo = 'prof', frase = null, sessao = {lidas: 0}, rec = null, auto = {t: null, rodando: false};
+  var NUMS = {
+    '0': ['zero'], '1': ['um', 'uma', 'one'], '2': ['dois', 'duas', 'two'], '3': ['tres', 'three'], '4': ['quatro', 'four'], '5': ['cinco', 'five'],
+    '6': ['seis', 'six'], '7': ['sete', 'seven'], '8': ['oito', 'eight'], '9': ['nove', 'nine'], '10': ['dez', 'ten'], '11': ['onze', 'eleven'],
+    '12': ['doze', 'twelve'], '13': ['treze', 'thirteen'], '14': ['quatorze', 'catorze', 'fourteen'], '15': ['quinze', 'fifteen'], '16': ['dezesseis', 'sixteen'],
+    '17': ['dezessete', 'seventeen'], '18': ['dezoito', 'eighteen'], '19': ['dezenove', 'nineteen'], '20': ['vinte', 'twenty'], '30': ['trinta', 'thirty'], '50': ['cinquenta', 'fifty'], '100': ['cem', 'hundred']
+  };
+
+  // ---------- conteúdo ----------
+  if (!Rec){ $('modoMic').disabled = true; $('modoMic').className = 'indisponivel'; $('selModo').value = 'prof';
+    $('dicaMic').textContent = '🎤 O modo Microfone só funciona no Google Chrome do computador, com internet. Os outros modos funcionam em qualquer aparelho.'; }
+  else $('dicaMic').textContent = 'No modo Microfone, o Chrome vai pedir permissão para usar o microfone. É preciso estar com internet.';
+  function pintarVel(){ $('lVel').style.display = $('selModo').value === 'auto' ? '' : 'none'; }
+  $('selModo').onchange = pintarVel; pintarVel();
+  function itensDe(d, grupo){
+    var l = [];
+    (d.frases || []).forEach(function(f){ if (typeof f === 'string') l.push({t: f}); else if (f && f.texto) l.push({t: String(f.texto), img: f.emoji || ''}); });
+    (d.grupos || []).forEach(function(g, gi){
+      if (grupo !== '' && grupo != null && +grupo !== gi) return;
+      (g.palavras || []).forEach(function(p){ var w = typeof p === 'string' ? p : p && p.palavra; if (w) l.push({t: String(w), img: p.emoji || '', grupo: g.titulo || ''}); });
+    });
+    (d.palavras || []).forEach(function(p){ var w = typeof p === 'string' ? p : p && p.palavra; if (w) l.push({t: String(w), img: p.emoji || ''}); });
+    return l;
+  }
+  function pintarInfo(){
+    var l = itensDe(arquivo, $('selGrupo').value);
+    $('infoArq').textContent = (arquivo.titulo || '') + ' • ' + l.length + (arquivo.frases ? ' textos' : ' palavras') + (idioma.indexOf('en') === 0 ? ' • em inglês' : '');
+  }
+  ARC.seletor($('selArquivo'), 'leitura', 'leitura-alfabetizacao.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; arquivo = null;
+    ARC.json('dados/' + arq, function(d){
+      arquivo = d; idioma = d.idioma || 'pt-BR';
+      if (d.grupos && d.grupos.length > 1){
+        $('selGrupo').innerHTML = '<option value="">todos os grupos</option>' + d.grupos.map(function(g, i){ return '<option value="' + i + '">' + esc(g.titulo || ('Grupo ' + (i + 1))) + '</option>'; }).join('');
+        $('lGrupo').style.display = '';
+      } else { $('selGrupo').innerHTML = '<option value=""></option>'; $('lGrupo').style.display = 'none'; }
+      pintarInfo();
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  $('selGrupo').onchange = function(){ if (arquivo) pintarInfo(); };
+
+  // ---------- palavras ----------
+  function norm(w){ return ARC.semAcento(String(w).toLowerCase()).replace(/[^a-z0-9]/g, ''); }
+  function lev(a, b){
+    var m = a.length, n = b.length, d = [], i, j;
+    for (i = 0; i <= m; i++){ d[i] = [i]; } for (j = 1; j <= n; j++) d[0][j] = j;
+    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+    return d[m][n];
+  }
+  function parecido(a, b){
+    if (!a || !b) return false;
+    if (a === b) return true;
+    if (NUMS[a] && NUMS[a].indexOf(b) >= 0 || NUMS[b] && NUMS[b].indexOf(a) >= 0) return true;
+    var m = Math.max(a.length, b.length);
+    if (m <= 4) return false;            // palavras curtas: só vale igual (gato ≠ pato)
+    return lev(a, b) <= (m <= 7 ? 1 : 2);
+  }
+  function alinhar(alvos, ouvidas){   // segue a leitura na ordem; aceita uma palavra pulada
+    var marcas = [], i = 0, h, prox;
+    for (h = 0; h < alvos.length; h++) marcas.push(alvos[h] ? '' : 'neutro');
+    function andar(){ while (i < alvos.length && !alvos[i]) i++; }
+    andar();
+    for (h = 0; h < ouvidas.length && i < alvos.length; h++){
+      var w = ouvidas[h];
+      prox = i + 1; while (prox < alvos.length && !alvos[prox]) prox++;
+      if (parecido(w, alvos[i])){ marcas[i] = 'ok'; i++; }
+      else if (h + 1 < ouvidas.length && parecido(w + ouvidas[h + 1], alvos[i])){ marcas[i] = 'ok'; i++; h++; }
+      else if (prox < alvos.length && w === alvos[i] + alvos[prox]){ marcas[i] = 'ok'; marcas[prox] = 'ok'; i = prox + 1; }   // ex.: “furabolo” = fura-bolo
+      else if (prox < alvos.length && parecido(w, alvos[prox])){ marcas[i] = 'pulou'; marcas[prox] = 'ok'; i = prox + 1; }
+      andar();
+    }
+    return {marcas: marcas, i: i};
+  }
+  function palavrasDe(t){ return String(t).replace(/[-–—]/g, ' ').split(/\s+/).map(norm).filter(function(w){ return w; }); }
+
+  // ---------- frase na tela ----------
+  function abrir(n){
+    pararTudo();
+    k = (n + itens.length) % itens.length;
+    var it = itens[k], partes = it.t.split(/\s+/).filter(function(x){ return x; });
+    frase = {it: it, partes: partes, alvos: partes.map(norm), marcas: [], t0: 0, t1: 0, completa: false, ouvidoBase: '', clique: 0};
+    frase.marcas = frase.alvos.map(function(a){ return a ? '' : 'neutro'; });
+    var fig = it.img && ARC.figuraOk(it.img) ? it.img : '';   // no iPad antigo, figura nova demais fica de fora
+    $('figura').textContent = fig; $('figura').style.display = fig ? '' : 'none';
+    $('grupoTxt').textContent = it.grupo || '';
+    var tam = it.t.length < 16 ? 84 : it.t.length < 40 ? 64 : it.t.length < 90 ? 50 : it.t.length < 160 ? 40 : 33;
+    $('texto').style.fontSize = tam + 'px';
+    var h = '<div id="bolinha"><i></i></div>';
+    partes.forEach(function(p, i){ h += '<span class="w' + (frase.alvos[i] ? '' : ' neutro') + '" data-i="' + i + '">' + esc(p) + '</span> '; });
+    $('texto').innerHTML = h;
+    var ws = $('texto').querySelectorAll('.w');
+    for (var j = 0; j < ws.length; j++) ws[j].onclick = function(){ clicarPalavra(+this.getAttribute('data-i')); };
+    $('resultado').style.display = 'none'; $('ouvi').textContent = '';
+    $('hFrase').textContent = (arquivo.frases ? 'Texto ' : 'Palavra ') + (k + 1) + '/' + itens.length;
+    pintar(); pintarBotoes();
+    status(modo === 'mic' ? 'Toque em 🎤 Ler e leia em voz alta.' : modo === 'auto' ? 'Toque em ▶️ Tocar e leiam juntos, seguindo a bolinha.' : 'Toque nas palavras que o aluno leu certo (2 toques = errou). Barra de espaço: próxima palavra.');
+  }
+  function status(t){ $('status').textContent = t; }
+  function atual(){ for (var i = 0; i < frase.marcas.length; i++) if (frase.marcas[i] === '') return i; return -1; }
+  function pintar(){
+    var ws = $('texto').querySelectorAll('.w'), a = frase.completa ? -1 : atual();
+    for (var i = 0; i < ws.length; i++) ws[i].className = 'w' + (frase.marcas[i] && frase.marcas[i] !== 'neutro' ? ' ' + frase.marcas[i] : frase.marcas[i] === 'neutro' ? ' neutro' : '') + (i === a && modo !== 'auto' ? ' atual' : '');
+    var alvoBola = modo === 'auto' ? frase.bola : a;
+    moverBolinha(alvoBola != null && alvoBola >= 0 ? alvoBola : -1);
+  }
+  function moverBolinha(i){
+    var b = $('bolinha'), w = $('texto').querySelector('.w[data-i="' + i + '"]');
+    if (!w || i < 0){ b.style.display = 'none'; return; }
+    b.style.display = 'block'; b.style.left = (w.offsetLeft + w.offsetWidth / 2) + 'px'; b.style.top = (w.offsetTop - 26) + 'px';
+  }
+  function contar(){
+    var total = 0, ok = 0, rever = [];
+    frase.marcas.forEach(function(m, i){ if (m === 'neutro') return; total++; if (m === 'ok') ok++; else rever.push(frase.partes[i].replace(/[.,;:!?…"“”()]/g, '')); });
+    return {total: total, ok: ok, rever: rever};
+  }
+  function concluir(){
+    if (frase.completa) return;
+    frase.completa = true; frase.t1 = frase.t1 || Date.now(); pararTudo(); pintar();
+    var c = contar(), seg = frase.t0 ? Math.max(0.1, (frase.t1 - frase.t0) / 1000) : 0, ppm = c.total >= 3 && seg >= 1 ? Math.round(c.total / (seg / 60)) : 0;
+    var estrelas = c.ok === c.total ? 3 : c.ok >= c.total * 0.8 ? 2 : 1, h = '';
+    if (modo === 'auto') h = '🎶 Muito bem, turma! Leram juntos até o fim.';
+    else {
+      for (var i = 0; i < estrelas; i++) h += '⭐';
+      h = (c.ok === c.total ? '🎉 Leitura perfeita! ' : '👏 Muito bem! ') + h + '<small>✅ ' + c.ok + ' de ' + c.total + ' palavras' + (seg ? ' • ⏱️ ' + String(seg.toFixed(1)).replace('.', ',') + ' s' : '') +
+        (ppm ? ' • 🗣️ ' + ppm + ' palavras por minuto' : '') + '</small>' + (c.rever.length ? '<small>Para treinar: <b>' + esc(c.rever.join(', ')) + '</b></small>' : '');
+    }
+    $('resultado').innerHTML = h; $('resultado').style.display = 'block';
+    status(''); sessao.lidas++; $('hLidas').textContent = '✅ ' + sessao.lidas + ' lida' + (sessao.lidas > 1 ? 's' : '');
+    if (c.ok === c.total) ARC.festa(); else ARC.plim();
+    pintarBotoes();
+  }
+  function reiniciarFrase(){ abrir(k); }
+
+  // ---------- modo microfone ----------
+  function escolherAlt(res, prefixo){
+    var melhor = res[0] ? res[0].transcript : '', nota = -1;
+    for (var a = 0; a < res.length; a++){ var n = alinhar(frase.alvos, palavrasDe(prefixo + ' ' + res[a].transcript)).i; if (n > nota){ nota = n; melhor = res[a].transcript; } }
+    return melhor;
+  }
+  function aplicarOuvido(texto){
+    if (!frase || frase.completa) return;
+    var r = alinhar(frase.alvos, palavrasDe(texto)), antes = contar().ok;
+    frase.marcas = r.marcas;
+    if (!frase.t0 && r.marcas.indexOf('ok') >= 0) frase.t0 = Date.now();
+    pintar();
+    if (contar().ok > antes) ARC.tom(1180, 0.04);
+    if (r.i >= frase.alvos.length){ frase.t1 = Date.now(); concluir(); }
+  }
+  function escutar(){
+    if (!Rec || frase.completa) return;
+    pararEscuta();
+    var r = new Rec(), base = frase.ouvidoBase;
+    rec = r;
+    r.lang = idioma; r.continuous = true; r.interimResults = true; r.maxAlternatives = 3;
+    r.onresult = function(ev){
+      if (r !== rec) return;
+      var txt = '';
+      for (var i = 0; i < ev.results.length; i++) txt += ' ' + escolherAlt(ev.results[i], base + txt);
+      frase.ouvido = (base + ' ' + txt).replace(/^\s+/, '');
+      $('ouvi').textContent = '👂 ' + txt.replace(/^\s+/, '');
+      aplicarOuvido(frase.ouvido);
+    };
+    r.onerror = function(e){
+      if (r !== rec) return;
+      var msg = {'not-allowed': '🎤 O navegador bloqueou o microfone. Clique no cadeado ao lado do endereço e permita o microfone.',
+        'service-not-allowed': '🎤 O navegador bloqueou o reconhecimento de voz. Use o Google Chrome.',
+        'network': '📶 O reconhecimento de voz precisa de internet.', 'no-speech': '🙉 Não ouvi nada. Fale mais perto do microfone.',
+        'audio-capture': '🎤 Não encontrei um microfone neste computador.', 'language-not-supported': 'Este idioma não está disponível no reconhecimento de voz.'}[e.error];
+      if (msg){ r.erro = true; status(msg); }
+    };
+    r.onend = function(){
+      if (r !== rec) return;
+      rec = null; frase.ouvidoBase = frase.ouvido || base; pintarBotoes();
+      if (!frase.completa && !r.erro) status('⏸️ Parei de ouvir. Toque em 🎤 para continuar de onde parou.');
+    };
+    try { r.start(); status('🎙️ Pode ler em voz alta…'); } catch (e) { rec = null; status('Não consegui ligar o microfone. Tente de novo.'); }
+    pintarBotoes();
+  }
+  function pararEscuta(){ var r = rec; rec = null; if (r){ if (frase && frase.ouvido) frase.ouvidoBase = frase.ouvido; try { r.onend = null; r.abort(); } catch (e) {} } }
+
+  // ---------- modo karaokê automático ----------
+  function tocar(){
+    if (frase.completa) reiniciarFrase();
+    auto.rodando = true; pintarBotoes(); status('🎵 Leiam juntos!');
+    passoAuto();
+  }
+  function passoAuto(){
+    if (!auto.rodando) return;
+    var i = atual(); if (i < 0) return concluir();
+    if (!frase.t0) frase.t0 = Date.now();
+    frase.marcas[i] = 'ok'; frase.bola = i; pintar();
+    var ppm = +$('selVel').value, p = frase.partes[i], dur = 60000 / ppm * (0.6 + 0.4 * Math.min(2.2, frase.alvos[i].length / 5));
+    if (/[.!?…]["”]?$/.test(p)) dur += 500; else if (/[,;:]$/.test(p)) dur += 220;
+    auto.t = setTimeout(passoAuto, dur);
+  }
+  function pausar(){ auto.rodando = false; clearTimeout(auto.t); pintarBotoes(); status('⏸️ Pausado. Toque em ▶️ para continuar.'); }
+
+  // ---------- modo professor ----------
+  function clicarPalavra(i){
+    if (modo !== 'prof' || !frase || frase.completa || frase.marcas[i] === 'neutro') return;
+    if (!frase.t0) frase.t0 = Date.now();
+    frase.marcas[i] = frase.marcas[i] === '' ? 'ok' : frase.marcas[i] === 'ok' ? 'erro' : '';
+    pintar(); if (atual() < 0){ frase.t1 = Date.now(); concluir(); }
+  }
+  function proximaPalavra(){ var i = atual(); if (i >= 0) clicarPalavra(i); }
+  function desfazer(){
+    if (modo !== 'prof' || !frase || frase.completa) return;
+    for (var i = frase.marcas.length - 1; i >= 0; i--) if (frase.marcas[i] === 'ok' || frase.marcas[i] === 'erro'){ frase.marcas[i] = ''; break; }
+    pintar();
+  }
+
+  // ---------- botões ----------
+  function pararTudo(){ pararEscuta(); auto.rodando = false; clearTimeout(auto.t); }
+  function pintarBotoes(){
+    var b = $('btAcao');
+    if (!frase) return;
+    if (modo === 'mic') b.textContent = frase.completa ? '🎤 Ler de novo' : rec ? '⏹️ Parar' : '🎤 Ler';
+    else if (modo === 'auto') b.textContent = frase.completa ? '▶️ De novo' : auto.rodando ? '⏸️ Pausar' : '▶️ Tocar';
+    else b.textContent = frase.completa ? '🔁 Ler de novo' : '✓ Próxima palavra';
+  }
+  function acao(){
+    if (!frase) return;
+    if (modo === 'mic'){ if (frase.completa) { reiniciarFrase(); escutar(); } else if (rec){ var r = rec; try { r.stop(); } catch (e) {} } else escutar(); }
+    else if (modo === 'auto'){ if (auto.rodando) pausar(); else tocar(); }
+    else { if (frase.completa) reiniciarFrase(); else proximaPalavra(); }
+  }
+  function ouvir(){
+    if (!frase || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    if (!Sala.somLigado()) return ARC.aviso('🔇 O som está desligado (botão 🔊).');
+    pararEscuta();
+    try {
+      var u = new SpeechSynthesisUtterance(frase.it.t), vozes = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+      u.lang = idioma; u.rate = 0.9;
+      for (var i = 0; i < vozes.length; i++) if (vozes[i].lang && vozes[i].lang.replace('_', '-').indexOf(idioma) === 0){ u.voice = vozes[i]; break; }
+      window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+    } catch (e) {}
+    pintarBotoes();
+  }
+  function comecar(){
+    if (!arquivo) return ARC.aviso('Escolha um texto.');
+    itens = itensDe(arquivo, $('selGrupo').value);
+    if (!itens.length) return ARC.aviso('Este arquivo não tem textos para ler.');
+    if ($('chkEmbaralhar').checked) itens = ARC.embaralhar(itens);
+    modo = $('selModo').value; if (modo === 'mic' && !Rec) modo = 'prof';
+    $('hModo').textContent = modo === 'mic' ? '🎤 Microfone' : modo === 'auto' ? '🎵 Karaokê' : '👆 Professor marca';
+    $('hLidas').textContent = '✅ ' + sessao.lidas + ' lida' + (sessao.lidas === 1 ? '' : 's');
+    ARC.tela(null); $('palco').className = 'ativo'; $('hud').style.display = ''; $('rodape').style.display = 'block';
+    abrir(0);
+  }
+
+  $('btComecar').onclick = comecar;
+  $('btAcao').onclick = acao;
+  $('btOuvir').onclick = ouvir;
+  $('btRecomecar').onclick = reiniciarFrase;
+  $('btProxima').onclick = function(){ abrir(k + 1); };
+  $('btAnterior').onclick = function(){ abrir(k - 1); };
+  $('btConfig').onclick = function(){ pararTudo(); $('palco').className = ''; $('hud').style.display = 'none'; $('rodape').style.display = 'none'; ARC.tela('tConfig'); };
+  window.addEventListener('resize', function(){ if (frase) pintar(); });
+  document.addEventListener('keydown', function(e){
+    if (!frase || document.querySelector('.tela.ativa')) return;
+    if (e.keyCode === 32){ e.preventDefault(); acao(); }
+    else if (e.keyCode === 39 && modo === 'prof'){ e.preventDefault(); proximaPalavra(); }
+    else if (e.keyCode === 37 && modo === 'prof'){ e.preventDefault(); desfazer(); }
+    else if (e.keyCode === 34 || e.keyCode === 13){ e.preventDefault(); abrir(k + 1); }
+    else if (e.keyCode === 33){ e.preventDefault(); abrir(k - 1); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.KARAOKE = {frase: function(){ return frase; }, ouvir: aplicarOuvido, alinhar: alinhar, palavrasDe: palavrasDe, abrir: abrir};   // usado nos testes
+})();
+</script>
+</body>
+</html>

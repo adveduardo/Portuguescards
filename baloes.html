@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Estoura-Balões</title>
+<link rel="stylesheet" href="arcade.css">
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hVez"></span><span class="chip alvo" id="hAlvo"></span><span class="chip" id="hTempo"></span><span class="chip" id="hPontos"></span>
+  <button type="button" id="btPausa">⏸️</button><button type="button" id="btSom">🔊</button>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🎈 Estoura-Balões</h1>
+  <p>Balões com palavras sobem pelo céu. Estoure <b>só os balões do grupo pedido</b>! Balão certo: +10. Balão errado: −5.</p>
+  <label>Palavras: <select id="selArquivo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Tempo de cada vez: <select id="selTempo"><option value="30">30 s</option><option value="45" selected>45 s</option><option value="60">60 s</option></select></label>
+  <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <label>Rodadas: <select id="selRodadas"><option value="1">1 vez para cada equipe</option><option value="2" selected>2 vezes</option><option value="3">3 vezes</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Toque ou clique no balão. Funciona também nos iPads.</p>
+</div></div>
+<div class="tela" id="tVez"><div class="cartao" id="cVez"></div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, dados = null, jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
+  var CORES_B = ['#ff5d8f', '#ffbe0b', '#3a86ff', '#8338ec', '#06d6a0', '#fb5607', '#ff8fab', '#4cc9f0'];
+  var nuvens = [[0.12, 0.18], [0.7, 0.12], [0.42, 0.3], [0.85, 0.4]];
+
+  ARC.seletor($('selArquivo'), 'categorias', 'morfo-classes.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; dados = null;
+    ARC.json('dados/' + arq, function(d){
+      dados = ARC.normalizarCategorias(d);
+      $('infoArq').textContent = dados ? dados.titulo + ' • ' + dados.palavras.length + ' palavras • grupos: ' + dados.alvos.map(function(id){ return dados.cats[id].nome; }).join(', ') : 'Este arquivo não tem grupos suficientes.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  function comecar(){
+    if (!dados) return ARC.aviso('Escolha um arquivo de palavras.');
+    var eqs = ARC.criarEquipes(+$('selEquipes').value), total = eqs.length * +$('selRodadas').value, alvos = ARC.embaralhar(dados.alvos), vezes = [];
+    for (var i = 0; i < total; i++) vezes.push({eq: i % eqs.length, alvo: alvos[Math.floor(i / eqs.length) % alvos.length]});
+    jogo = {equipes: eqs, vezes: vezes, v: 0, tempo: +$('selTempo').value};
+    abrirVez();
+  }
+  function vezAtual(){ return jogo.vezes[jogo.v]; }
+  function abrirVez(){
+    var vz = vezAtual(), eq = jogo.equipes[vz.eq], c = dados.cats[vz.alvo];
+    $('cVez').innerHTML = '<h2>' + (jogo.equipes.length > 1 ? 'Vez dos ' + eq.emoji + ' ' + esc(eq.nome) : 'Rodada ' + (jogo.v + 1)) + '</h2>' +
+      '<p>Estourem só os balões de:</p><div class="alvoGrande" style="background:' + c.cor + '">' + esc(c.plural || c.nome) + '</div>' +
+      '<p class="dica">' + jogo.tempo + ' segundos. Balão certo +10, balão errado −5.</p>' +
+      (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, vz.eq) + '</div>' : '') +
+      '<button type="button" class="principal" id="btIr">🎈 Começar</button>';
+    ARC.tela('tVez'); $('btIr').onclick = iniciarVez;
+  }
+  function iniciarVez(){
+    jogo.baloes = []; jogo.fx = []; jogo.resta = jogo.tempo; jogo.gerar = 0; jogo.certos = 0; jogo.errados = 0; jogo.acabou = false;
+    ARC.tela(null); $('hud').style.display = ''; atualizarHud(); laco.pausado = false; laco.iniciar();
+  }
+  function atualizarHud(){
+    var vz = vezAtual(), eq = jogo.equipes[vz.eq], c = dados.cats[vz.alvo];
+    $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : 'Rodada ' + (jogo.v + 1);
+    $('hAlvo').textContent = '🎯 ' + (c.plural || c.nome); $('hAlvo').style.background = c.cor;
+    $('hTempo').textContent = '⏱️ ' + Math.ceil(jogo.resta); $('hPontos').textContent = '⭐ ' + eq.pontos;
+  }
+  function novoBalao(){
+    var vz = vezAtual(), certo = Math.random() < 0.45, lista = dados.palavras.filter(function(p){ return (p.c === vz.alvo) === certo; });
+    if (!lista.length) lista = dados.palavras;
+    var p = ARC.sortear(lista), E = tela.ESC, r = 46 * E;
+    var acel = 1 + (1 - jogo.resta / jogo.tempo) * 0.8;
+    jogo.baloes.push({x: ARC.aleat(r + 10, tela.W - r - 10), y: tela.H + r, vy: ARC.aleat(55, 85) * E * acel, fase: Math.random() * 6, r: r, t: p.t, c: p.c, cor: ARC.sortear(CORES_B)});
+  }
+  function passo(dt){
+    if (dt && jogo && !jogo.acabou){
+      jogo.resta -= dt; jogo.gerar -= dt;
+      if (jogo.gerar <= 0){ novoBalao(); jogo.gerar = ARC.aleat(0.55, 0.95); }
+      for (var i = jogo.baloes.length - 1; i >= 0; i--){ var b = jogo.baloes[i]; b.y -= b.vy * dt; b.fase += dt * 2; if (b.y < -b.r * 3) jogo.baloes.splice(i, 1); }
+      for (var k = jogo.fx.length - 1; k >= 0; k--){ jogo.fx[k].t += dt; if (jogo.fx[k].t > 0.8) jogo.fx.splice(k, 1); }
+      if (Math.ceil(jogo.resta) !== Math.ceil(jogo.resta + dt)) atualizarHud();
+      if (jogo.resta <= 5 && Math.ceil(jogo.resta) !== Math.ceil(jogo.resta + dt) && jogo.resta > 0) ARC.tom(880, 0.06);
+      if (jogo.resta <= 0) fimDaVez();
+    }
+    desenhar();
+  }
+  function estourar(x, y){
+    if (!jogo || jogo.acabou || laco.pausado || !jogo.baloes) return;
+    for (var i = jogo.baloes.length - 1; i >= 0; i--){
+      var b = jogo.baloes[i], dx = x - (b.x + Math.sin(b.fase) * 10), dy = y - b.y;
+      if (dx * dx / (b.r * b.r * 1.1) + dy * dy / (b.r * b.r * 1.5) < 1.2){ pop(i); return; }
+    }
+  }
+  function pop(i){
+    var b = jogo.baloes[i], vz = vezAtual(), eq = jogo.equipes[vz.eq]; jogo.baloes.splice(i, 1);
+    if (b.c === vz.alvo){ eq.pontos += 10; jogo.certos++; jogo.fx.push({x: b.x, y: b.y, t: 0, cor: b.cor, txt: '+10'}); ARC.tom(990, 0.06); ARC.tom(1480, 0.08, 0.05); }
+    else { eq.pontos = Math.max(0, eq.pontos - 5); jogo.errados++; jogo.fx.push({x: b.x, y: b.y, t: 0, cor: '#8a94a8', txt: '−5'}); ARC.erro();
+      ARC.aviso('“' + esc(b.t) + '” é ' + esc(dados.cats[b.c].nome) + '!', 1600); }
+    atualizarHud();
+  }
+  function fimDaVez(){
+    jogo.acabou = true; ARC.tom(330, 0.4, 0, 'square');
+    setTimeout(function(){
+      laco.parar(); $('hud').style.display = 'none';
+      var vz = vezAtual(), ultima = jogo.v >= jogo.vezes.length - 1;
+      $('cVez').innerHTML = '<h2>⏰ Acabou o tempo!</h2><p>Balões certos: <b>' + jogo.certos + '</b> • errados: <b>' + jogo.errados + '</b></p>' +
+        '<div class="placar">' + ARC.placarHTML(jogo.equipes, vz.eq) + '</div>' +
+        '<button type="button" class="principal" id="btSegue">' + (ultima ? '🏆 Resultado' : '➡️ Próxima vez') + '</button>';
+      ARC.tela('tVez'); if (jogo.certos) Sala.confete(40);
+      $('btSegue').onclick = function(){ if (ultima) fim(); else { jogo.v++; abrirVez(); } };
+    }, 600);
+  }
+  function fim(){
+    var r = ARC.ranking(jogo.equipes);
+    $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? r[0].e.emoji + ' ' + esc(r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1>' +
+      '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
+    ARC.tela('tFim'); ARC.festa(); $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC, g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#7fd3ff'); g.addColorStop(1, '#e8f8ff'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,255,255,.85)';
+    nuvens.forEach(function(n){ var x = ((n[0] * W + Date.now() / 60) % (W + 200)) - 100, y = n[1] * H; ctx.beginPath(); ctx.arc(x, y, 30 * E, 0, 2 * Math.PI); ctx.arc(x + 34 * E, y - 10 * E, 38 * E, 0, 2 * Math.PI); ctx.arc(x + 72 * E, y, 30 * E, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.fillStyle = '#8fd16a'; ctx.fillRect(0, H - 24 * E, W, 24 * E);
+    if (!jogo || !jogo.baloes) return;
+    jogo.baloes.forEach(function(b){
+      var x = b.x + Math.sin(b.fase) * 10, y = b.y;
+      ctx.strokeStyle = 'rgba(60,60,60,.5)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, y + b.r * 1.2); ctx.quadraticCurveTo(x + 10, y + b.r * 1.7, x - 4, y + b.r * 2.4); ctx.stroke();
+      ctx.fillStyle = b.cor; ctx.beginPath(); ctx.save(); ctx.translate(x, y); ctx.scale(1, 1.2); ctx.arc(0, 0, b.r, 0, 2 * Math.PI); ctx.restore(); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(x - 6, y + b.r * 1.2 + 8); ctx.lineTo(x + 6, y + b.r * 1.2 + 8); ctx.lineTo(x, y + b.r * 1.15); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,.45)'; ctx.beginPath(); ctx.arc(x - b.r * 0.35, y - b.r * 0.5, b.r * 0.18, 0, 2 * Math.PI); ctx.fill();
+      ARC.fonte(ctx, b.t, b.r * 1.85, Math.round(21 * E)); ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 3; ctx.strokeText(b.t, x, y); ctx.fillText(b.t, x, y);
+    });
+    jogo.fx.forEach(function(f){
+      var k = f.t / 0.8; ctx.globalAlpha = 1 - k; ctx.fillStyle = f.cor;
+      for (var a = 0; a < 8; a++){ var ang = a * Math.PI / 4; ctx.beginPath(); ctx.arc(f.x + Math.cos(ang) * 50 * k * E, f.y + Math.sin(ang) * 50 * k * E, 6 * E, 0, 2 * Math.PI); ctx.fill(); }
+      ARC.fonte(ctx, f.txt, 200, Math.round(34 * E)); ctx.fillStyle = f.txt === '−5' ? '#d62839' : '#1f9d6b'; ctx.fillText(f.txt, f.x, f.y - 40 * k * E); ctx.globalAlpha = 1;
+    });
+  }
+  $('cv').addEventListener('mousedown', function(e){ estourar(e.clientX, e.clientY); });
+  $('cv').addEventListener('touchstart', function(e){ for (var i = 0; i < e.changedTouches.length; i++) estourar(e.changedTouches[i].clientX, e.changedTouches[i].clientY); e.preventDefault(); }, {passive: false});
+  document.addEventListener('keydown', function(e){ if (e.keyCode === 32 && jogo && laco.rodando){ e.preventDefault(); $('btPausa').onclick(); } });
+  $('btPausa').onclick = function(){ laco.pausado = !laco.pausado; this.textContent = laco.pausado ? '▶️' : '⏸️'; if (laco.pausado) ARC.aviso('⏸️ Pausado', 100000); else $('aviso').style.display = 'none'; };
+  $('btComecar').onclick = comecar;
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  desenhar();
+  window.BALOES = {jogo: function(){ return jogo; }, pop: pop, novo: novoBalao};   // usado nos testes
+})();
+</script>
+</body>
+</html>
