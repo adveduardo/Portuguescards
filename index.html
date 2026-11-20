@@ -110,6 +110,7 @@
         <select id="tool-selector" onchange="changeTool()">
             <option value="">🏠 Tela Inicial</option>
             <option value="quiz.html">🃏 PortuguêsCards (Jogo de Português)</option>
+            <optgroup label="🗂️ Projetos temp"></optgroup>
             <optgroup label="🧰 Ferramentas da sala">
                 <option value="ruido.html">🔊 Medidor de Ruído</option>
                 <option value="semaforo.html">🚦 Semáforo da Turma</option>
@@ -1068,7 +1069,7 @@
         function grupoHtml(no) {
             const aberto = MENU.abertos.has(no.chave);
             return `<div class="m-grupo${aberto ? ' aberto' : ''}" data-k="${no.chave}"><button type="button" class="m-cab"><span class="m-sinal">${aberto ? '−' : '+'}</span><span>${no.nome}</span></button>` +
-                `<div class="m-filhos">${no.itens.map(i => itemHtml(i)).join('')}${no.filhos.map(grupoHtml).join('')}</div></div>`;
+                `<div class="m-filhos">${no.itens.map(i => itemHtml(i)).join('')}${no.filhos.map(grupoHtml).join('')}${!no.itens.length && !no.filhos.length ? '<div class="m-vazio">Vazio por enquanto.</div>' : ''}</div></div>`;
         }
         function desenharMenu() {
             const busca = semAcento(document.getElementById('menu-busca').value.trim());
