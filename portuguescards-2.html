@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PortuguêsCards 2.0 (protótipo)</title>
 <!-- Protótipo do visual novo do PortuguêsCards. O original (quiz.html) não muda.
+     Tecnologias: GSAP (animações), D3 (roleta e pista da corrida), Chart.js (gráfico do fim), canvas-confetti, SVG, CSS 3D e Web Audio.
      Lê o mesmo JSON do original ("padrão card": q, a, b, c, d, correct, exp, pts, tema, texto) e os bancos do painel.
      Fontes Lexend e Fredoka (SIL OFL 1.1, em fontes/). Ícones: Lucide (ISC, em libs/licencas/lucide-ISC.txt). -->
 <style>
@@ -216,6 +217,8 @@
   .carta .assunto{position:absolute;top:9%;left:9%;right:9%;display:flex;align-items:center;justify-content:center;gap:.3em;font-size:max(10px,calc(var(--w,160px) * .085));font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .carta .assunto span{overflow:hidden;text-overflow:ellipsis}
   .tabuleiro.mini .carta .assunto span{display:none}
+  .tabuleiro.micro .carta .assunto,.tabuleiro.micro .carta .pts{display:none}
+  .tabuleiro.micro .carta .num{font-size:max(18px,calc(var(--w,160px) * .5))}
   .carta .num{font-family:var(--titulo);font-weight:700;font-size:calc(var(--w,160px) * .44);line-height:1;text-shadow:0 4px 0 rgba(0,0,0,.16);position:relative}
   .carta .pts{position:absolute;bottom:8%;background:rgba(255,255,255,.24);border-radius:999px;padding:.2em .8em;font-weight:700;font-size:max(10px,calc(var(--w,160px) * .08))}
   .carta .valor{font-family:var(--titulo);font-weight:700;font-size:calc(var(--w,160px) * .36);line-height:1;text-shadow:0 4px 0 rgba(0,0,0,.16);position:relative}
@@ -259,6 +262,124 @@
   .carta.mem.achada .frente{border-color:var(--cor-time);border-width:5px}
   .carta.mem .selo-time{position:absolute;top:5%;right:6%;font-size:calc(var(--w,160px) * .16)}
   .carta.mem.achada:hover,.carta.mem.virada:hover{transform:none}
+
+  /* ---------- cena dos modos Corrida, Palavra Secreta e Roleta ---------- */
+  .cena{position:relative;margin-top:10px;background:var(--sup);border:1px solid var(--borda);border-radius:22px;box-shadow:var(--sombra);padding:10px 12px;overflow:hidden;flex:0 0 auto}
+  .tabuleiro.escondido{display:none}
+  .time .pts small{font-size:.5em;color:var(--suave);margin-left:1px}
+  .cena.corrida svg{display:block;width:100%;overflow:visible}
+  .cena.corrida .casa{stroke:rgba(255,255,255,.7);stroke-width:1.5}
+  .cena.corrida .especial-txt,.cena.corrida .peao text,.cena.corrida .marco{dominant-baseline:central;text-anchor:middle;pointer-events:none}
+  .cena.corrida .marco{font-family:var(--titulo);font-weight:700;fill:var(--suave)}
+  .cena.corrida .balao{font-family:var(--titulo);font-weight:700;text-anchor:middle;paint-order:stroke;stroke:var(--sup);stroke-width:4px}
+  .cena.palavra{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 14px}
+  .palavra-topo{display:flex;gap:6px 18px;align-items:center;justify-content:center;flex-wrap:wrap;font-weight:600;color:var(--suave);font-size:clamp(13px,1.2vw,18px);text-align:center}
+  .palavra-topo b{color:var(--texto)}
+  .letras{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--lg,8px);perspective:900px;max-width:100%}
+  .letra-t{width:var(--lt,56px);height:calc(var(--lt,56px) * 1.18);position:relative;flex:none}
+  .letra-t .lt-dentro{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,1.4,.5,1)}
+  .letra-t.aberta .lt-dentro{transform:rotateX(180deg)}
+  .letra-t .lt-f,.letra-t .lt-v{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:calc(var(--lt,56px) * .2);display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;font-family:var(--titulo);font-weight:700;font-size:calc(var(--lt,56px) * .62);line-height:1}
+  .letra-t .lt-f{background:linear-gradient(160deg,#6366f1,#4338ca);color:rgba(255,255,255,.45);box-shadow:0 5px 0 #312e81}
+  .letra-t .lt-v{background:var(--sup);color:var(--texto);border:3px solid var(--pri);transform:rotateX(180deg);box-shadow:0 5px 0 rgba(0,0,0,.12)}
+  .letra-t.nova .lt-v{background:#fef3c7;border-color:#f59e0b;color:#1e1b4b}
+  .letra-t.ganhou .lt-v{background:var(--ok-claro);border-color:var(--ok)}
+  .letra-esp{width:calc(var(--lt,56px) * .4);height:calc(var(--lt,56px) * 1.18);display:grid;place-items:center;font-family:var(--titulo);font-weight:700;font-size:calc(var(--lt,56px) * .6);flex:none}
+  .palavra-acoes{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
+  .palavra-acoes .btn-pri{padding:11px 20px;font-size:clamp(15px,1.3vw,18px)}
+  .cena.roleta{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,44px);padding:12px}
+  .roda-caixa{position:relative;flex:0 0 auto;width:var(--roda,420px);height:var(--roda,420px)}
+  .roda-caixa svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 14px 22px rgba(0,0,0,.2))}
+  .roda-caixa .fatia{stroke:#fff;stroke-width:1.2}
+  .roda-caixa .fatia.vencedora{stroke:#facc15;stroke-width:4}
+  .roda-caixa .fatia-txt{fill:#fff;font-family:var(--titulo);font-weight:700;dominant-baseline:central;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:rgba(0,0,0,.22);stroke-width:1.4px}
+  .ponteiro{position:absolute;left:calc(50% - var(--roda,420px) * .045);top:calc(var(--roda,420px) * -.03);width:0;height:0;transform-origin:50% 0;border-left:calc(var(--roda,420px) * .045) solid transparent;border-right:calc(var(--roda,420px) * .045) solid transparent;border-top:calc(var(--roda,420px) * .085) solid var(--texto);filter:drop-shadow(0 3px 2px rgba(0,0,0,.3));z-index:2}
+  .btn-girar{position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;border:5px solid #fff;background:radial-gradient(circle at 35% 30%,#fbbf24,#d97706);color:#fff;font-family:var(--titulo);font-weight:700;font-size:calc(var(--roda,420px) * .052);box-shadow:0 6px 0 #92400e,0 12px 24px rgba(0,0,0,.25);z-index:2;padding:0}
+  .btn-girar:disabled{filter:grayscale(.5);cursor:default}
+  .roleta-lado{display:flex;flex-direction:column;gap:12px;min-width:0;flex:0 1 400px;max-width:440px}
+  .roleta-vez{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;font-size:clamp(18px,1.8vw,26px);font-weight:600}
+  .roleta-vez .m{font-size:1.7em;line-height:1}
+  .roleta-vez b{color:var(--cor-time)}
+  .roleta-res{min-height:2.6em;display:flex;align-items:center;gap:10px;background:var(--sup2);border:2px dashed var(--borda);border-radius:16px;padding:8px 12px;font-weight:600;font-size:clamp(15px,1.3vw,19px)}
+  .roleta-temas{display:grid;gap:7px;max-height:36vh;overflow:auto}
+  .rt{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+  .rt .cor{width:14px;height:14px;border-radius:4px;flex:none}
+  .rt .nome-rt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+  .rt .barra-rt{flex:1;height:8px;border-radius:999px;background:var(--borda);overflow:hidden;min-width:40px}
+  .rt .barra-rt i{display:block;height:100%;border-radius:999px;transition:width .5s}
+  .rt small{color:var(--suave);min-width:34px;text-align:right}
+  .rt.vazio{opacity:.45}
+  .dobro-ativo{display:inline-flex;align-items:center;gap:6px;background:#fef3c7;color:#92400e;border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px}
+  .grafico-fim{width:100%;max-width:900px;margin:4px 0 16px;background:var(--sup);border:1px solid var(--borda);border-radius:20px;box-shadow:var(--sombra);padding:12px 16px}
+  .grafico-fim h2{font-family:var(--titulo);font-size:20px;margin:0 0 6px;text-align:left}
+  .grafico-caixa{position:relative;height:clamp(180px,28vh,300px)}
+  .modo-opcoes{display:flex;flex-direction:column;gap:8px;background:var(--sup2);border-radius:12px;padding:10px 12px;font-size:14px}
+  .modo-opcoes .linha{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:600}
+  .modo-opcoes input{flex:1;min-width:140px;border:2px solid var(--borda);background:var(--sup);border-radius:10px;padding:8px 10px;font-size:16px}
+  .modo-opcoes input:focus{outline:none;border-color:var(--pri)}
+  .modo-opcoes input.secreto:not(:focus){color:transparent;text-shadow:0 0 9px rgba(30,27,75,.55)}
+  .modo-opcoes .sub{margin:0}
+  .cena.corrida{flex:1 1 auto;min-height:110px;display:flex;align-items:center;justify-content:center;padding:10px 12px}
+  .cena.corrida .fundo-faixa{fill-opacity:.07;stroke-opacity:0;stroke-width:3;transition:fill-opacity .3s,stroke-opacity .3s}
+  .cena.corrida .faixa.vez .fundo-faixa{fill-opacity:.18;stroke-opacity:.95}
+  .cena.corrida .largada{stroke:var(--suave);stroke-width:2;stroke-dasharray:4 4;opacity:.55}
+  .cena.corrida .sombra{fill:rgba(0,0,0,.2)}
+  .cena.corrida .poeira{fill:rgba(120,113,108,.6)}
+  .cena.corrida .balao.turbo{fill:#b45309}
+  .cena.corrida .balao.escorrega{fill:#0369a1}
+  :root[data-tema="escuro"] .cena.corrida .balao.turbo{fill:#fcd34d}
+  :root[data-tema="escuro"] .cena.corrida .balao.escorrega{fill:#7dd3fc}
+  .tabuleiro.montes{flex:0 0 auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;align-content:center;gap:clamp(10px,2.2vw,30px);padding:12px 0 4px}
+  .montes-vez{flex:0 1 auto;max-width:280px;font-weight:600;font-size:clamp(15px,1.4vw,20px);color:var(--suave);text-align:center}
+  .montes-vez b{color:var(--texto)}
+  .monte{--mw:clamp(50px,9vh,84px);display:flex;align-items:center;gap:14px;background:var(--sup);border:2px solid var(--borda);border-radius:20px;padding:10px 18px 10px 14px;box-shadow:var(--sombra);text-align:left;transition:transform .15s,border-color .15s}
+  @media(hover:hover){.monte:not(:disabled):hover{transform:translateY(-4px);border-color:var(--cor)}}
+  .monte:not(:disabled):active{transform:translateY(2px)}
+  .monte:disabled{opacity:.4;cursor:default;box-shadow:none}
+  .pilha{position:relative;width:var(--mw);height:calc(var(--mw) * 1.3);flex:none}
+  .carta-m{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:12px;background:var(--cor);background:linear-gradient(150deg,var(--cor),var(--cor-esc));border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#fff;font-family:var(--titulo);font-weight:700;line-height:1}
+  .carta-m.c3{transform:rotate(-9deg) translate(-5px,3px)}
+  .carta-m.c2{transform:rotate(6deg) translate(5px,1px)}
+  .carta-m .mi{font-size:calc(var(--mw,74px) * .34)}
+  .carta-m b{font-size:calc(var(--mw,74px) * .3)}
+  .monte-txt{display:flex;flex-direction:column;gap:3px}
+  .monte-txt b{font-family:var(--titulo);font-size:clamp(16px,1.5vw,21px)}
+  .monte-txt small{color:var(--suave);font-weight:600;font-size:13px}
+  .dado-area{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:120px}
+  .dado-cena{--S:clamp(46px,7.5vh,76px);width:var(--S);height:var(--S);perspective:520px}
+  .dado{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+  .df{position:absolute;left:0;top:0;width:100%;height:100%;background:#fff;border:2px solid #cbd5e1;border-radius:18%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:13%;box-shadow:inset 0 0 10px rgba(0,0,0,.1)}
+  .df i{display:block;width:74%;height:74%;border-radius:50%;background:#1e1b4b;place-self:center}
+  .df.fr{transform:translateZ(calc(var(--S) / 2))}
+  .df.tr{transform:rotateY(180deg) translateZ(calc(var(--S) / 2))}
+  .df.di{transform:rotateY(90deg) translateZ(calc(var(--S) / 2))}
+  .df.es{transform:rotateY(-90deg) translateZ(calc(var(--S) / 2))}
+  .df.ci{transform:rotateX(90deg) translateZ(calc(var(--S) / 2))}
+  .df.ba{transform:rotateX(-90deg) translateZ(calc(var(--S) / 2))}
+  .dado-txt{font-weight:600;font-size:14px;color:var(--suave);text-align:center;max-width:180px}
+  .dado-txt b{color:var(--texto);font-size:1.25em}
+  .mini-letras{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:100%}
+  .mini-letras .ml{min-width:30px;height:38px;border-radius:8px;background:var(--sup2);border:2px solid var(--borda);display:grid;place-items:center;font-family:var(--titulo);font-weight:700;font-size:22px;padding:0 4px}
+  .mini-letras .ml.oculta{background:linear-gradient(160deg,#6366f1,#4338ca);border-color:#4338ca}
+  .mini-letras .ml.esp{background:none;border:none;min-width:10px}
+  .mini-letras.ganhou .ml:not(.esp){background:var(--ok-claro);border-color:var(--ok)}
+  .arriscar-voz{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:14px;color:var(--suave)}
+  .arriscar-voz .btn-sec{padding:8px 14px;font-size:15px}
+  .especial .sub{color:var(--suave);font-size:15px}
+  .valor-palavra{font-weight:600;color:var(--suave);font-size:clamp(14px,1.2vw,17px)}
+  .valor-palavra b{color:var(--texto)}
+  .cor-res{display:inline-block;width:14px;height:14px;border-radius:4px;flex:none}
+  .roda-caixa .aro{fill:#312e81;stroke:rgba(255,255,255,.55);stroke-width:1.5}
+  .roda-caixa .pino{fill:#fff;stroke:rgba(0,0,0,.25);stroke-width:.6}
+  .roda-caixa .miolo{fill:#fff}
+  .roleta-lado{overflow:auto}
+  .cena.roleta.empilhada{flex-direction:column;justify-content:center}
+  .cena.roleta.empilhada .roleta-lado{flex:0 1 auto;max-width:560px;width:100%}
+  @media(max-height:500px){.tabuleiro.montes{flex-wrap:nowrap;padding:6px 0 0;gap:10px}.montes-vez{display:none}.monte{--mw:40px;padding:6px 12px 6px 8px;gap:8px;border-radius:14px}
+    .monte-txt b{font-size:15px}.monte-txt small{font-size:12px}.dado-area{flex-direction:row;min-width:0;gap:8px}.dado-cena{--S:40px}.dado-txt{font-size:12px;max-width:130px;text-align:left}.cena.corrida{padding:6px 10px}
+    .cena.palavra{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;padding:6px 10px}.palavra-topo{flex:1 1 100%;font-size:12px;gap:2px 12px}
+    .palavra-acoes{flex-direction:column;gap:2px}.palavra-acoes .btn-pri{padding:8px 14px;font-size:14px}.valor-palavra{font-size:12px}.cena:not([hidden]) + .tabuleiro{padding-top:12px}}
+  @media(max-width:600px){.monte{--mw:clamp(44px,7vh,62px);flex-direction:column;gap:6px;padding:8px 10px;text-align:center}.monte-txt{align-items:center}.monte-txt b{font-size:13px;max-width:110px}.monte-txt small{font-size:11px}.dado-area{min-width:0}.dado-txt{font-size:12px;max-width:120px}}
 
   /* ---------- pergunta ---------- */
   #palco{position:fixed;left:0;top:0;right:0;bottom:0;z-index:20;display:none;align-items:center;justify-content:center}
@@ -418,6 +539,7 @@
           <button type="button" class="btn-sec" id="btnArquivo">📂 Abrir arquivo .json</button>
           <input type="file" id="arquivoJson" accept=".json,.txt,application/json,text/plain" hidden>
           <button type="button" class="btn-sec" id="btnModelo">📋 Copiar o modelo</button>
+          <button type="button" class="btn-sec" id="btnBaixarModelo">⬇️ Baixar o modelo</button>
           <button type="button" class="btn-sec" id="btnPrompt">🤖 Pedir para a IA</button>
           <button type="button" class="btn-sec" id="btnLimparJson">Limpar</button>
         </div>
@@ -435,6 +557,7 @@
       <h2 id="t2"><span class="n">2</span>Modo de jogo</h2>
       <div class="modos" id="modos" role="group" aria-label="Modo de jogo"></div>
       <div class="modo-desc" id="modoDesc"></div>
+      <div class="modo-opcoes" id="modoOpcoes" hidden></div>
     </section>
     <section class="passo passo-e" id="passoEquipes" aria-labelledby="t3">
       <h2 id="t3"><span class="n">3</span>Equipes</h2>
@@ -467,6 +590,7 @@
       <button type="button" class="icobtn" data-acao="encerrar"><span data-ico="trofeu"></span><span class="rot">Encerrar</span></button>
     </div>
   </header>
+  <section class="cena" id="cena" hidden></section>
   <main class="tabuleiro" id="tabuleiro" aria-label="Cartas"></main>
 </div>
 
@@ -505,6 +629,7 @@
   <div class="podio" id="podio"></div>
   <div class="outros" id="outros"></div>
   <div class="estatisticas" id="estatisticas"></div>
+  <div class="grafico-fim" id="graficoFim" hidden><h2>📈 Como o placar foi mudando</h2><div class="grafico-caixa"><canvas id="graficoCanvas" aria-label="Gráfico do placar ao longo do jogo"></canvas></div></div>
   <div class="lista-red" id="listaRed" hidden></div>
   <div class="fim-botoes">
     <button type="button" class="btn-sec" id="btnCopiarLista" hidden>📋 Copiar a lista</button>
@@ -517,6 +642,8 @@
 
 <script src="libs/gsap.min.js"></script>
 <script src="libs/canvas-confetti.js"></script>
+<script src="libs/d3.min.js"></script>
+<script src="libs/chart.umd.js"></script>
 <script>
 (function(){
 'use strict';
@@ -596,21 +723,28 @@ const EXEMPLO_REDACAO = [
 ];
 const MODOS = {
   padrao: {nome: 'Modo Padrão', ic: '🃏', desc: 'Cada carta é uma pergunta. Acertou, a equipe ganha os pontos da carta. Com as <b>cartas surpresa</b>, às vezes vem Sorte ou Azar.'},
+  corrida: {nome: 'Corrida na Trilha', ic: '🏁', desc: 'Cada acerto faz o mascote andar na pista: carta de <b>10 pts anda 1 casa, 20 anda 2 e 30 anda 3</b>. Casa ⭐ dá um empurrão e 🌀 faz escorregar. Quem cruzar a chegada vence.'},
+  palavra: {nome: 'Palavra Secreta', ic: '🔤', desc: 'Cada acerto revela uma letra da palavra escondida. Na sua vez, a equipe pode <b>arriscar a palavra</b> em vez de abrir uma carta: quanto mais letras escondidas, mais pontos.'},
+  roleta: {nome: 'Roleta dos Temas', ic: '🎡', desc: 'Gire a roleta: ela escolhe o <b>tema da pergunta</b> ou um bônus (vale o dobro, +5 ou passa a vez). Use "tema" no JSON.'},
   velha: {nome: 'Jogo da Velha', ic: '⭕', desc: 'Duas equipes e 9 casas. Acertou a pergunta, a casa fica com a equipe. Quem fizer <b>uma linha</b> ganha +10 e vence.'},
   memoria: {nome: 'Jogo da Memória', ic: '🧠', desc: 'Vire duas cartas: pergunta e resposta formam um par. Achou, ganha 10 e <b>joga de novo</b>.'},
   temas: {nome: 'Tabuleiro de Temas', ic: '🏛️', desc: 'Uma coluna por tema e cartas de <b>10, 20, 30… pontos</b>: quanto mais difícil, mais vale. Use "tema" e "pts" no JSON.'},
   sequencia: {nome: 'Sequência', ic: '➡️', desc: 'As perguntas aparecem <b>uma depois da outra</b>, na ordem, e a vez passa de equipe em equipe.'},
   redacao: {nome: 'Temas de Redação', ic: '✍️', desc: 'Cada carta é um tema. Abra, leia a orientação e <b>anote o aluno</b> que vai escrever. No fim, sai a lista.'}
 };
-const ORDEM_MODOS = ['padrao', 'velha', 'memoria', 'temas', 'sequencia', 'redacao'];
-const VALE = {tempo: ['padrao', 'velha', 'temas', 'sequencia'], rebote: ['padrao', 'velha', 'temas', 'sequencia'], surpresa: ['padrao']};
+const ORDEM_MODOS = ['padrao', 'corrida', 'palavra', 'roleta', 'velha', 'memoria', 'temas', 'sequencia', 'redacao'];
+const VALE = {tempo: ['padrao', 'corrida', 'palavra', 'roleta', 'velha', 'temas', 'sequencia'], rebote: ['padrao', 'corrida', 'palavra', 'roleta', 'velha', 'temas', 'sequencia'], surpresa: ['padrao']};
+const EXEMPLO_PALAVRAS = [{palavra: 'CONCORDÂNCIA', dica: 'Quando o verbo combina com o sujeito'}, {palavra: 'PONTUAÇÃO', dica: 'Vírgula, ponto, dois-pontos…'},
+  {palavra: 'ORTOGRAFIA', dica: 'O jeito certo de escrever as palavras'}, {palavra: 'INTERJEIÇÃO', dica: 'Oba! Ufa! Ai!'}, {palavra: 'SUBSTANTIVO', dica: 'A classe que dá nome aos seres'},
+  {palavra: 'ACENTUAÇÃO', dica: 'Agudo, circunflexo e til'}, {palavra: 'SINÔNIMO', dica: 'Palavra de sentido parecido'}, {palavra: 'CRÔNICA', dica: 'Texto curto sobre o dia a dia'}];
+const BONUS_ROLETA = [{tipo: 'dobro', nome: 'Vale o dobro', ic: '⭐', cor: '#f59e0b'}, {tipo: 'mais5', nome: '+5 pontos', ic: '🎁', cor: '#10b981'}, {tipo: 'passa', nome: 'Passa a vez', ic: '🔄', cor: '#64748b'}];
 
 // ---------- configuração ----------
 const calmoPainel = (() => { try { return localStorage.getItem('painel_visual') === 'calmo'; } catch (e) { return false; } })();
 const reduzido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const somPainel = (() => { try { return localStorage.getItem('painel_som') !== '0'; } catch (e) { return true; } })();
 const cfg = Object.assign({
-  modo: 'padrao', fonte: 'banco', bancos: ['__exemplo'], qtd: 12, tempo: true, segundos: 30, rebote: true, surpresa: true,
+  modo: 'padrao', fonte: 'banco', bancos: ['__exemplo'], qtd: 12, tempo: true, segundos: 30, rebote: true, surpresa: true, trilha: 15, palavraSecreta: '', dicaSecreta: '',
   som: somPainel, confete: true, calmo: calmoPainel || reduzido,
   equipes: MASCOTES.slice(0, 3).map(x => ({m: x.m, nome: x.nome, cor: x.cor}))
 }, ler('pc2_config', {}));
@@ -695,15 +829,20 @@ function erroDeJson(e, t){
 }
 function lerJson(txt){
   const t = String(txt || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
-  if (!t) return {lista: [], erro: ''};
+  if (!t) return {lista: [], palavras: [], erro: ''};
   let d;
-  try { d = JSON.parse(t); } catch (e) { return {lista: [], erro: erroDeJson(e, t)}; }
-  let lista;
-  if (Array.isArray(d)) lista = d.map(questaoDeCard).filter(Boolean);
+  try { d = JSON.parse(t); } catch (e) { return {lista: [], palavras: [], erro: erroDeJson(e, t)}; }
+  let lista, palavras = [];
+  // itens com "palavra" são as palavras secretas (modo Palavra Secreta); o resto são questões no padrão card
+  const ehPalavra = it => it && typeof it === 'object' && it.palavra != null && String(it.palavra).trim() && it.q == null;
+  if (Array.isArray(d)){
+    palavras = d.filter(ehPalavra).map(it => ({palavra: String(it.palavra).trim(), dica: String(it.dica || '').trim()}));
+    lista = d.filter(it => !ehPalavra(it)).map(questaoDeCard).filter(Boolean);
+  }
   else if (d && Array.isArray(d.questions)) lista = d.questions.map(questaoDeCard).filter(Boolean);
   else if (d && (Array.isArray(d.perguntas) || Array.isArray(d.rodadas))) lista = questoesDoPainel(d);
-  else return {lista: [], erro: 'O JSON precisa ser uma lista [ … ] de questões, como no modelo.'};
-  return {lista, erro: lista.length ? '' : 'Não achei nenhuma questão nesse JSON.'};
+  else return {lista: [], palavras: [], erro: 'O JSON precisa ser uma lista [ … ] de questões, como no modelo.'};
+  return {lista, palavras, erro: lista.length ? '' : palavras.length ? 'Achei as palavras secretas, mas nenhuma questão: coloque as questões na mesma lista.' : 'Não achei nenhuma questão nesse JSON.'};
 }
 const serveNoModo = (q, modo) => modo === 'redacao' ? !!q.q : modo === 'memoria' ? !!(q.q && q.certa) : !!(q.q && q.certa && q.ops.length >= 2);
 const MODELOS = {
@@ -714,13 +853,26 @@ const MODELOS = {
     {tema: 'Crase', q: 'Qual frase está certa?', a: 'Andei à cavalo.', b: 'Fui à praia.', c: 'Comecei à ler.', d: 'Falei à ele.', correct: 'B', pts: 20, exp: 'Sem crase antes de masculino, verbo e pronome.'},
     {tema: 'Ortografia', q: 'Qual está correta?', a: 'analizar', b: 'analisar', c: 'analissar', d: 'annalisar', correct: 'B', pts: 10, exp: 'Vem de análise.'}],
   memoria: [{q: 'Gato', a: 'Substantivo', correct: 'A', b: '', c: '', d: '', pts: 10, exp: 'Gato nomeia um animal.'}, {q: 'Bonito', a: 'Adjetivo', correct: 'A', b: '', c: '', d: '', pts: 10, exp: 'Dá uma qualidade.'}],
-  redacao: [{q: 'Os desafios do uso do celular na escola', exp: 'Texto dissertativo-argumentativo, com proposta de intervenção.'}, {q: 'A importância da leitura', exp: 'Use um exemplo da sua vida.'}]
+  redacao: [{q: 'Os desafios do uso do celular na escola', exp: 'Texto dissertativo-argumentativo, com proposta de intervenção.'}, {q: 'A importância da leitura', exp: 'Use um exemplo da sua vida.'}],
+  corrida: [{tema: 'Crase', q: 'Complete: “Vou ___ escola.”', a: 'a', b: 'à', c: 'há', d: 'ah', correct: 'B', pts: 10, exp: 'A + A escola = À escola.'},
+    {tema: 'Crase', q: 'Qual frase está certa?', a: 'Andei à cavalo.', b: 'Fui à praia.', c: 'Comecei à ler.', d: 'Falei à ele.', correct: 'B', pts: 20, exp: 'Sem crase antes de masculino, verbo e pronome.'},
+    {tema: 'Concordância', q: '“Faz dez anos” ou “Fazem dez anos”?', a: 'Fazem dez anos', b: 'Faz dez anos', c: 'Fizeram dez anos', d: 'Fazem-se dez anos', correct: 'B', pts: 30, exp: 'O verbo fazer indicando tempo fica no singular.'}],
+  palavra: [{palavra: 'CONCORDÂNCIA', dica: 'Quando o verbo combina com o sujeito'}, {palavra: 'PONTUAÇÃO', dica: 'Vírgula, ponto e dois-pontos'},
+    {q: 'Complete: “Os alunos ___ cedo.”', a: 'chegou', b: 'chegaram', c: 'chegamos', d: 'chegará', correct: 'B', pts: 10, exp: 'Sujeito no plural pede verbo no plural.'},
+    {q: 'Qual frase está pontuada corretamente?', a: 'Maria, venha aqui!', b: 'Maria venha, aqui!', c: 'Maria venha aqui,!', d: ', Maria venha aqui!', correct: 'A', pts: 10, exp: 'O vocativo fica separado por vírgula.'}],
+  roleta: [{tema: 'Crase', q: 'Complete: “Vou ___ escola.”', a: 'a', b: 'à', c: 'há', d: 'ah', correct: 'B', pts: 10, exp: 'A + A = À.'},
+    {tema: 'Ortografia', q: 'Qual está correta?', a: 'analizar', b: 'analisar', c: 'analissar', d: 'annalisar', correct: 'B', pts: 10, exp: 'Vem de análise.'},
+    {tema: 'Pontuação', q: 'Os dois-pontos anunciam:', a: 'uma pergunta', b: 'uma enumeração', c: 'um susto', d: 'o fim da frase', correct: 'B', pts: 20, exp: 'Depois dos dois-pontos vem a lista.'},
+    {tema: 'Interpretação', q: 'Por que Caio escreveu o bilhete?', a: 'Para pedir dinheiro', b: 'Para reclamar', c: 'Para avisar onde estava', d: 'Para convidar a mãe', correct: 'C', pts: 30, exp: 'Ele avisa aonde foi.', texto: 'Mãe, fui jogar bola na quadra. Volto antes do jantar. Caio.'}]
 };
 const modeloDoModo = () => MODELOS[cfg.modo] || MODELOS.padrao;
 function pedidoIa(){
   const tema = ($('#iaTema').value || '').trim() || 'o tema da aula', n = Math.max(4, Math.min(40, parseInt($('#iaQtd').value, 10) || 12));
   if (cfg.modo === 'memoria') return `Atue como professor de Português. Gere ${n} pares de associação para um Jogo da Memória sobre: ${tema}. Os textos devem ser curtos e não se repetir. Retorne APENAS um JSON neste formato: [{"q":"Palavra (ex.: Gato)","a":"Par (ex.: Substantivo comum)","correct":"A","b":"","c":"","d":"","pts":10,"exp":"Breve explicação"}]`;
   if (cfg.modo === 'temas') return `Atue como professor de Português. Gere ${n} questões de múltipla escolha sobre ${tema}, divididas em 4 temas (subassuntos), com dificuldade crescente dentro de cada tema. Cada questão tem 4 alternativas e só uma certa; varie a letra certa. Retorne APENAS um JSON neste formato: [{"tema":"Nome do tema","q":"Pergunta","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":"Explicação curta"}]. Use "pts" 10, 20, 30, 40 ou 50 conforme a dificuldade.`;
+  if (cfg.modo === 'corrida') return `Atue como professor de Português. Gere ${n} questões de múltipla escolha sobre ${tema} para um jogo de corrida. Cada questão tem 4 alternativas e só uma certa; varie a letra certa. Use "pts" para a dificuldade: 10 (fácil, anda 1 casa), 20 (média, anda 2) ou 30 (difícil, anda 3), com um pouco de cada. Retorne APENAS um JSON neste formato: [{"tema":"Subassunto","q":"Pergunta","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":"Explicação curta"}]`;
+  if (cfg.modo === 'palavra') return `Atue como professor de Português. Crie um jogo de Palavra Secreta sobre ${tema}: escolha 3 palavras secretas importantes do assunto (só letras, até 14), cada uma com uma dica curta, e gere ${n} questões de múltipla escolha com 4 alternativas e só uma certa (varie a letra certa). Retorne APENAS um JSON (uma lista) neste formato, com as palavras primeiro: [{"palavra":"PALAVRA","dica":"Dica curta"},{"q":"Pergunta","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":"Explicação curta"}]`;
+  if (cfg.modo === 'roleta') return `Atue como professor de Português. Gere ${n} questões de múltipla escolha sobre ${tema}, divididas em 4 a 6 temas (subassuntos) com nomes curtos (até 14 letras), para uma roleta de temas. Cada questão tem 4 alternativas e só uma certa; varie a letra certa. Retorne APENAS um JSON neste formato: [{"tema":"Nome curto","q":"Pergunta","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":"Explicação curta"}]. Use "pts" 10, 20 ou 30 conforme a dificuldade.`;
   if (cfg.modo === 'redacao') return `Atue como professor de Português. Gere ${n} temas de redação sobre ${tema}, para alunos do ensino fundamental, médio e EJA. Retorne APENAS um JSON neste formato: [{"q":"Tema da redação","exp":"Orientação curta: tipo de texto e o que o aluno deve fazer"}]`;
   return `Atue como professor de Português. Gere ${n} questões de múltipla escolha sobre ${tema}. Cada questão tem 4 alternativas e só uma certa; varie a letra certa. Retorne APENAS um JSON neste formato: [{"q":"Pergunta","a":"","b":"","c":"","d":"","correct":"A","pts":10,"exp":"Explicação curta"}]. Para interpretação, acrescente "texto" com o texto base.`;
 }
@@ -731,14 +883,14 @@ function desenharFonte(){
   $('#fonteBanco').hidden = cfg.fonte !== 'banco';
   $('#fonteJson').hidden = cfg.fonte !== 'json';
   $('#notaRedacaoBanco').hidden = cfg.modo !== 'redacao';
-  $('#linhaQtd').hidden = ['velha', 'redacao'].includes(cfg.modo);
+  $('#linhaQtd').hidden = ['velha', 'redacao', 'corrida'].includes(cfg.modo);
   $('#jsonTexto').placeholder = 'Cole aqui o JSON no mesmo formato do PortuguêsCards, por exemplo:\n' + JSON.stringify(modeloDoModo().slice(0, 1), null, 1);
   if ($('#jsonTexto').value !== jsonTexto) $('#jsonTexto').value = jsonTexto;
   desenharStatusJson();
   if (!$('#promptIa').hidden) $('#iaTexto').textContent = pedidoIa();
 }
 function desenharStatusJson(){
-  const el = $('#jsonStatus'), {lista, erro} = lerJson(jsonTexto);
+  const el = $('#jsonStatus'), {lista, palavras, erro} = lerJson(jsonTexto);
   if (!jsonTexto.trim()){ el.className = 'json-status'; el.textContent = 'Cole o JSON, abra um arquivo .json ou copie o modelo para começar.'; return; }
   if (erro){ el.className = 'json-status erro'; el.textContent = '⚠️ ' + erro; return; }
   const boas = lista.filter(q => serveNoModo(q, cfg.modo)), fora = lista.length - boas.length;
@@ -746,7 +898,7 @@ function desenharStatusJson(){
   if (!boas.length){ el.className = 'json-status erro'; el.textContent = `⚠️ Nenhuma das ${lista.length} questões serve para ${MODOS[cfg.modo].nome} (${cfg.modo === 'memoria' ? 'cada par precisa de "q" e da resposta certa' : 'cada questão precisa de alternativas e da letra certa em "correct"'}).`; return; }
   const nome = cfg.modo === 'redacao' ? (boas.length === 1 ? 'tema' : 'temas') : cfg.modo === 'memoria' ? (boas.length === 1 ? 'par' : 'pares') : (boas.length === 1 ? 'questão' : 'questões');
   el.className = 'json-status ok';
-  el.textContent = `✅ ${boas.length} ${nome} ${boas.length === 1 ? 'pronto' : 'prontos'}`.replace(/questões prontos/, 'questões prontas').replace(/questão pronto/, 'questão pronta') + (temas > 1 ? ` · ${temas} temas` : '') + (fora ? ` · ${fora} ${fora === 1 ? 'item ficou' : 'itens ficaram'} de fora (sem resposta certa)` : '');
+  el.textContent = `✅ ${boas.length} ${nome} ${boas.length === 1 ? 'pronto' : 'prontos'}`.replace(/questões prontos/, 'questões prontas').replace(/questão pronto/, 'questão pronta') + (temas > 1 ? ` · ${temas} temas` : '') + (cfg.modo === 'palavra' ? (palavras.length ? ` · ${palavras.length} ${palavras.length === 1 ? 'palavra secreta' : 'palavras secretas'}` : ' · sem "palavra" no JSON: vale a palavra digitada ou as de exemplo') : '') + (fora ? ` · ${fora} ${fora === 1 ? 'item ficou' : 'itens ficaram'} de fora (sem resposta certa)` : '');
 }
 function desenharBancos(){
   BANCOS[0].det = detExemplo() + (bancoFalhou ? ' · o banco completo só abre pelo site do painel' : '');
@@ -769,6 +921,29 @@ function desenharModos(){
   $('#modos').innerHTML = ORDEM_MODOS.map(k => `<button type="button" class="modo" data-m="${k}" aria-pressed="${cfg.modo === k}"><span class="ic">${MODOS[k].ic}</span><span>${MODOS[k].nome}</span></button>`).join('');
   $('#modoDesc').innerHTML = `<b>${MODOS[cfg.modo].ic} ${MODOS[cfg.modo].nome}:</b> ${MODOS[cfg.modo].desc}`;
   $$('#modos .modo').forEach(b => b.onclick = () => { cfg.modo = b.dataset.m; salvarCfg(); desenharModos(); desenharFonte(); desenharBancos(); desenharEquipes(); desenharRegras(); desenharResumo(); });
+  desenharModoOpcoes();
+}
+function desenharModoOpcoes(){
+  const box = $('#modoOpcoes'), m = cfg.modo;
+  let h = '';
+  if (m === 'corrida') h = `<div class="linha">🏁 Tamanho da trilha <div class="segmentos" id="segTrilha">${[10, 15, 20].map(n => `<button type="button" class="seg" data-n="${n}" aria-pressed="${cfg.trilha === n}">${n} casas</button>`).join('')}</div></div>
+    <p class="sub">No banco, o jogo separa cartas suficientes para a trilha. Com poucas questões no JSON, a trilha fica mais curta.</p>`;
+  else if (m === 'palavra') h = `<div class="linha">🔤 Palavra <input type="text" class="secreto" id="inPalavra" maxlength="24" placeholder="ex.: CONCORDÂNCIA" value="${esc(cfg.palavraSecreta)}" autocomplete="off" spellcheck="false" aria-label="Palavra secreta"></div>
+    <div class="linha">💡 Dica <input type="text" id="inDica" maxlength="80" placeholder="ex.: quando o verbo combina com o sujeito" value="${esc(cfg.dicaSecreta)}" autocomplete="off" aria-label="Dica"></div>
+    <p class="sub">Digite antes de projetar (fica borrada fora da caixa). Se o JSON tiver "palavra", valem as do JSON; em branco, o jogo usa palavras de exemplo.</p>`;
+  else if (m === 'roleta') h = `<p class="sub">🎡 As fatias são os temas do JSON ("tema") ou os assuntos escolhidos no banco. Com um tema só, a roleta sorteia o valor da pergunta: 10, 20 ou 30 pontos.</p>`;
+  box.hidden = !h; box.innerHTML = h;
+  if (m === 'corrida') $$('#segTrilha .seg').forEach(b => b.onclick = () => { cfg.trilha = +b.dataset.n; salvarCfg(); desenharModoOpcoes(); desenharResumo(); });
+  if (m === 'palavra'){
+    $('#inPalavra').oninput = () => { cfg.palavraSecreta = $('#inPalavra').value; salvarCfg(); desenharResumo(); };
+    $('#inDica').oninput = () => { cfg.dicaSecreta = $('#inDica').value; salvarCfg(); };
+  }
+}
+function palavrasDoJogo(sortear){
+  if (cfg.fonte === 'json'){ const {palavras} = lerJson(jsonTexto); if (palavras.length) return palavras.slice(0, 8); }
+  const p = (cfg.palavraSecreta || '').trim();
+  if (p) return [{palavra: p, dica: (cfg.dicaSecreta || '').trim()}];
+  return sortear ? embaralhar(EXEMPLO_PALAVRAS).slice(0, 2) : EXEMPLO_PALAVRAS.slice(0, 2);
 }
 function desenharEquipes(){
   const velha = cfg.modo === 'velha', red = cfg.modo === 'redacao';
@@ -811,25 +986,29 @@ function quantosNoTabuleiro(n){
   if (m === 'memoria') return `${n} pares`;
   if (m === 'redacao') return `${n} temas`;
   if (m === 'sequencia') return `${n} perguntas`;
+  if (m === 'corrida') return `${n} cartas no monte`;
+  if (m === 'roleta') return `${n} perguntas na roleta`;
   return `${n} cartas`;
 }
 function desenharResumo(){
   const m = cfg.modo, partes = [`<b>${MODOS[m].ic} ${MODOS[m].nome}</b>`];
-  let pronto = true;
+  let pronto = true, n = 0;
   if (cfg.fonte === 'json'){
     const {lista, erro} = lerJson(jsonTexto), boas = lista.filter(q => serveNoModo(q, m));
     if (erro || !boas.length) pronto = false;
-    else partes.push(`<b>${quantosNoTabuleiro(m === 'memoria' ? Math.min(boas.length, 12) : Math.min(boas.length, 48))}</b>`, 'JSON colado');
+    else { n = Math.min(boas.length, m === 'memoria' ? 12 : m === 'corrida' ? 80 : 48); partes.push(`<b>${quantosNoTabuleiro(n)}</b>`, 'JSON colado'); }
   } else {
     const nomes = cfg.bancos.map(a => (BANCOS.find(b => b.arquivo === a) || {}).nome).filter(Boolean), so = cfg.bancos.length === 1 && cfg.bancos[0] === '__exemplo';
     if (m === 'redacao') partes.push(`<b>${quantosNoTabuleiro(EXEMPLO_REDACAO.length)}</b>`, 'temas de exemplo');
     else if (!nomes.length) pronto = false;
     else {
-      const n = m === 'memoria' ? (so ? EXEMPLO_MEMORIA.length : Math.max(3, Math.floor(cfg.qtd / 2))) : (so ? EXEMPLO.length : cfg.qtd);
+      n = m === 'memoria' ? (so ? EXEMPLO_MEMORIA.length : Math.max(3, Math.floor(cfg.qtd / 2))) : so ? EXEMPLO.length : m === 'corrida' ? cartasDaCorrida() : cfg.qtd;
       partes.push(`<b>${quantosNoTabuleiro(n)}</b>`, esc(nomes.length > 2 ? nomes.slice(0, 2).join(', ') + ` e mais ${nomes.length - 2}` : nomes.join(' e ')));
     }
   }
   if (m !== 'redacao') partes.splice(2, 0, `<b>${m === 'velha' ? 2 : cfg.equipes.length} equipes</b>`);
+  if (m === 'corrida' && pronto) partes.push(`trilha de ${trilhaPara(n)} casas`);
+  if (m === 'palavra'){ const np = palavrasDoJogo(false).length; partes.push(`${np} ${np === 1 ? 'palavra secreta' : 'palavras secretas'}`); }
   if (regra('tempo')) partes.push(cfg.segundos + ' s por pergunta');
   $('#resumo').innerHTML = pronto ? partes.join(' · ') : (cfg.fonte === 'json' ? 'Cole um JSON com questões que sirvam para este modo.' : 'Escolha pelo menos um assunto para começar.');
   $('#btnComecar').disabled = !pronto || (m !== 'redacao' && cfg.equipes.length < 2);
@@ -841,12 +1020,14 @@ function som(tipo){
   if (!cfg.som) return;
   try {
     ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-    const notas = {virar: [[540, 0]], acerto: [[660, 0], [880, .11]], erro: [[240, 0], [190, .16]], fim: [[523, 0], [659, .14], [784, .28], [1046, .42]]}[tipo] || [];
+    const notas = {virar: [[540, 0]], acerto: [[660, 0], [880, .11]], erro: [[240, 0], [190, .16]], fim: [[523, 0], [659, .14], [784, .28], [1046, .42]],
+      passo: [[420, 0]], turbo: [[523, 0], [784, .08], [1046, .16]], escorrega: [[600, 0], [400, .1], [260, .2]], letra: [[880, 0], [1320, .07]], tique: [[1500, 0]], palavra: [[523, 0], [659, .1], [784, .2], [1046, .3], [1318, .42]]}[tipo] || [];
+    const curto = tipo === 'tique' || tipo === 'passo';
     notas.forEach(([f, t]) => {
-      const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + t;
-      o.type = 'triangle'; o.frequency.value = f;
-      g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(.16, t0 + .02); g.gain.exponentialRampToValueAtTime(.0001, t0 + .26);
-      o.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + .3);
+      const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + t, dur = curto ? .05 : .26;
+      o.type = tipo === 'tique' ? 'square' : 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(tipo === 'tique' ? .05 : .16, t0 + .01); g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+      o.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + dur + .04);
     });
   } catch (e) {}
 }
@@ -888,12 +1069,12 @@ async function prepararQuestoes(){
     const temas = [...new Set(boas.map(q => q.tema).filter(Boolean))];
     boas.forEach(q => { q.assunto = q.tema ? {nome: q.tema, ic: ICONE_ASSUNTO[q.tema] || '📝', cor: CORES[temas.indexOf(q.tema) % CORES.length]} : ASSUNTO_PADRAO; });
     if (m === 'memoria') return boas.slice(0, 12);
-    return boas.slice(0, 48);
+    return boas.slice(0, m === 'corrida' ? 80 : 48);
   }
   if (m === 'redacao') return exemploDoModo('redacao');
   const so = cfg.bancos.length === 1 && cfg.bancos[0] === '__exemplo';
   if (so) return exemploDoModo(m);
-  const alvo = m === 'velha' ? 9 : m === 'memoria' ? Math.max(3, Math.floor(cfg.qtd / 2)) : cfg.qtd;
+  const alvo = m === 'velha' ? 9 : m === 'memoria' ? Math.max(3, Math.floor(cfg.qtd / 2)) : m === 'corrida' ? cartasDaCorrida() : cfg.qtd;
   const filas = [];
   for (const a of cfg.bancos){
     if (a === '__exemplo'){ filas.push(embaralhar(exemploDoModo(m === 'memoria' ? 'memoria' : 'padrao'))); continue; }
@@ -940,6 +1121,19 @@ function montarCartas(lista){
     return {cartas: embaralhar(cartas), pares};
   }
   if (m === 'temas') return montarTemas(lista);
+  if (m === 'corrida'){
+    // carta de 10 pts anda 1 casa, 20 anda 2 e 30 anda 3; sem pontos diferentes no JSON, quem decide é o dado
+    const cartas = lista.map(q => celula(q)), porDado = cartas.every(c => c.pts === cartas[0].pts);
+    cartas.forEach(c => { c.passos = porDado ? 0 : c.pts >= 25 ? 3 : c.pts >= 15 ? 2 : 1; });
+    const trilha = trilhaPara(cartas.length);
+    return {cartas, porDado, trilha, especiais: casasEspeciais(trilha)};
+  }
+  if (m === 'palavra'){
+    let palavras = palavrasDoJogo(true).map(prepararPalavra).filter(w => w.base.some(Boolean));
+    if (!palavras.length) palavras = EXEMPLO_PALAVRAS.slice(0, 2).map(prepararPalavra);
+    return {cartas: lista.map(q => celula(q)), palavras, pAtual: 0};
+  }
+  if (m === 'roleta'){ const cartas = lista.map(q => celula(q)); return Object.assign({cartas, rot: 0, dobro: null}, montarRoleta(cartas)); }
   return {cartas: lista.map(q => celula(q))};
 }
 async function comecar(){
@@ -948,11 +1142,13 @@ async function comecar(){
   try {
     const lista = await prepararQuestoes(), montado = montarCartas(lista);
     const equipes = (cfg.modo === 'velha' ? cfg.equipes.slice(0, 2) : cfg.modo === 'redacao' ? [] : cfg.equipes)
-      .map((t, k) => ({m: t.m, nome: (t.nome || '').trim() || 'Equipe ' + (k + 1), cor: t.cor, pts: 0, acertos: 0, erros: 0}));
-    jogo = Object.assign({modo: cfg.modo, equipes, vez: 0, encerrado: false, mem: {abertas: [], trava: false}, seq: 0}, montado);
+      .map((t, k) => ({m: t.m, nome: (t.nome || '').trim() || 'Equipe ' + (k + 1), cor: t.cor, pts: 0, pos: 0, acertos: 0, erros: 0}));
+    jogo = Object.assign({modo: cfg.modo, equipes, vez: 0, encerrado: false, mem: {abertas: [], trava: false}, seq: 0, animando: false, voltas: 0, dadoRot: {x: -18, y: 24}}, montado);
+    jogo.hist = [equipes.map(() => 0)];
+    if (jogo.modo === 'roleta') jogo.fatias = montarFatias();
     mostrarTela('telaJogo');
-    desenharPlacar(); atualizarProgresso(); ajustarBarra(); desenharTabuleiro();
-    if (animar()) gsap.from('#tabuleiro .carta, #tabuleiro .cab-tema', {y: 40, opacity: 0, rotation: () => (Math.random() - .5) * 10, stagger: Math.min(.035, .9 / jogo.cartas.length), duration: .45, ease: 'back.out(1.6)', clearProps: 'transform,opacity'});
+    desenharPlacar(); atualizarProgresso(); ajustarBarra(); desenharCena(); desenharTabuleiro();
+    entradaDoJogo();
     if (jogo.modo === 'sequencia') setTimeout(() => { if (jogo && jogo.modo === 'sequencia' && !atual) abrirCarta(0); }, animar() ? 1300 : 200);
   } catch (e) {
     alert((e && e.message && e.message !== 'vazio' ? e.message : 'Não consegui carregar as questões agora.') + ' Tente de novo ou use o "Exemplo rápido".');
@@ -969,7 +1165,7 @@ function desenharPlacar(){
   if (jogo.modo === 'redacao') p.innerHTML = `<span class="titulo-modo">${MODOS.redacao.ic} ${MODOS.redacao.nome}</span>`;
   else {
     p.innerHTML = jogo.equipes.map((t, i) => `<div class="time" data-t="${i}" style="--cor:${t.cor}"><span class="masc">${t.m}</span>
-      <span class="info"><span class="nome">${esc(t.nome)}</span><span class="pts">${t.pts}</span></span></div>`).join('');
+      <span class="info"><span class="nome">${esc(t.nome)}</span><span class="pts">${ptsHtml(t)}</span></span></div>`).join('');
     atualizarVez();
   }
   ajustarBarra();
@@ -985,8 +1181,11 @@ function ajustarBarra(){
 }
 function atualizarVez(){
   if (!jogo.equipes.length) return;
-  const max = Math.max(...jogo.equipes.map(t => t.pts));
-  $$('#placar .time').forEach(el => { const i = +el.dataset.t; el.classList.toggle('vez', i === jogo.vez && !jogo.encerrado); el.classList.toggle('lider', max > 0 && jogo.equipes[i].pts === max); });
+  const max = Math.max(...jogo.equipes.map(valorRank));
+  $$('#placar .time').forEach(el => { const i = +el.dataset.t; el.classList.toggle('vez', i === jogo.vez && !jogo.encerrado); el.classList.toggle('lider', max > 0 && valorRank(jogo.equipes[i]) === max); });
+  if (jogo.modo === 'corrida') marcarVezCorrida();
+  else if (jogo.modo === 'palavra') pintarArriscar();
+  else if (jogo.modo === 'roleta') pintarVezRoleta();
 }
 function somarPontos(ti, pts){
   const el = $(`#placar .time[data-t="${ti}"]`), t = jogo.equipes[ti], de = t.pts;
@@ -1005,7 +1204,7 @@ function somarPontos(ti, pts){
 }
 function reordenarPlacar(){
   const box = $('#placar'), els = [...box.querySelectorAll('.time')], antes = new Map(els.map(el => [el, el.getBoundingClientRect()]));
-  const ordem = jogo.equipes.map((t, i) => i).sort((a, b) => jogo.equipes[b].pts - jogo.equipes[a].pts || a - b);
+  const ordem = jogo.equipes.map((t, i) => i).sort((a, b) => valorRank(jogo.equipes[b]) - valorRank(jogo.equipes[a]) || a - b);
   ordem.forEach(i => box.appendChild(box.querySelector(`[data-t="${i}"]`)));
   atualizarVez();
   if (!animar()) return;
@@ -1017,7 +1216,7 @@ function atualizarProgresso(){
   if (m === 'memoria'){ total = jogo.pares.length; f = jogo.cartas.filter(c => c.achada).length / 2; txt = `${f} de ${total} pares`; }
   else {
     f = jogo.cartas.filter(c => c.feita).length;
-    txt = m === 'velha' ? `${f} de 9 casas` : m === 'redacao' ? `${f} de ${n} temas` : m === 'sequencia' ? `Pergunta ${Math.min(f + 1, n)} de ${n}` : `${f} de ${n} cartas`;
+    txt = m === 'velha' ? `${f} de 9 casas` : m === 'redacao' ? `${f} de ${n} temas` : m === 'sequencia' ? `Pergunta ${Math.min(f + 1, n)} de ${n}` : m === 'roleta' ? `${f} de ${n} perguntas` : `${f} de ${n} cartas`;
   }
   $('#progTxt').textContent = txt;
   $('#progBarra').style.width = (100 * f / total) + '%';
@@ -1054,6 +1253,8 @@ function cartaHtml(c, i){
 }
 function desenharTabuleiro(){
   const tab = $('#tabuleiro'), m = jogo.modo;
+  if (m === 'corrida'){ desenharMontes(); tab.onclick = e => { const b = e.target.closest('.monte'); if (b && !b.disabled) tirarCarta(+b.dataset.p); }; return; }
+  if (m === 'roleta'){ tab.innerHTML = ''; tab.onclick = null; return; }
   let h = '';
   if (m === 'temas'){
     const linhas = Math.max(...jogo.colunas.map(c => c.idxs.length));
@@ -1075,7 +1276,7 @@ function redesenharCarta(i, efeito){
   if (efeito && animar() && novo) gsap.from(novo, {scale: .6, rotation: -8, opacity: 0, duration: .5, ease: 'back.out(2)', clearProps: 'transform,opacity'});
 }
 function ajustarTabuleiro(){
-  if (!jogo) return;
+  if (!jogo || jogo.modo === 'corrida' || jogo.modo === 'roleta') return;
   const tab = $('#tabuleiro'), m = jogo.modo, n = jogo.cartas.length, cs = getComputedStyle(tab);
   const W = tab.clientWidth, H = tab.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 10;
   if (W <= 0 || H <= 0) return;
@@ -1095,11 +1296,613 @@ function ajustarTabuleiro(){
   }
   w = Math.floor(w);
   tab.style.setProperty('--w', w + 'px'); tab.style.setProperty('--h', Math.floor(w * p) + 'px'); tab.style.setProperty('--gap', gap + 'px');
-  tab.classList.toggle('mini', w < 104);
+  tab.classList.toggle('mini', w < 104); tab.classList.toggle('micro', w < 70);
   tab.style.gridTemplateColumns = `repeat(${cols}, ${w}px)`;
 }
-window.addEventListener('resize', () => { ajustarBarra(); ajustarTabuleiro(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { ajustarBarra(); ajustarTabuleiro(); });
+window.addEventListener('resize', () => { ajustarBarra(); ajustarTabuleiro(); clearTimeout(tmCena); tmCena = setTimeout(redesenharCena, 140); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { ajustarBarra(); ajustarTabuleiro(); redesenharCena(); });
+
+// ---------- cena dos modos Corrida na Trilha, Palavra Secreta e Roleta dos Temas ----------
+const NS = 'http://www.w3.org/2000/svg';
+const esperar = ms => new Promise(r => setTimeout(r, ms));
+const usaCena = m => m === 'corrida' || m === 'palavra' || m === 'roleta';
+const valorRank = t => jogo && jogo.modo === 'corrida' ? (t.pos || 0) : t.pts;
+const ptsHtml = t => jogo.modo === 'corrida' ? `${t.pos}<small>/${jogo.trilha}</small>` : String(t.pts);
+function registrarHistorico(){ if (jogo && jogo.hist && jogo.equipes.length) jogo.hist.push(jogo.equipes.map(valorRank)); }
+function desenharCena(){
+  const cena = $('#cena'), tab = $('#tabuleiro'), m = jogo.modo;
+  cena.hidden = !usaCena(m);
+  tab.classList.toggle('escondido', m === 'roleta');
+  tab.classList.toggle('montes', m === 'corrida');
+  if (!usaCena(m)){ cena.className = 'cena'; cena.innerHTML = ''; return; }
+  if (m === 'corrida'){ desenharMontes(); desenharCorrida(); }
+  else if (m === 'palavra') desenharPalavra();
+  else desenharRoleta();
+}
+let tmCena = null;
+function redesenharCena(){
+  if (!jogo || !usaCena(jogo.modo) || !$('#telaJogo').classList.contains('ativa')) return;
+  if (jogo.modo === 'palavra') return ajustarLetras();
+  if (jogo.modo === 'roleta') return ajustarRoleta();
+  if (jogo.animando){ jogo.cenaPendente = true; return; }
+  desenharCorrida();
+}
+function entradaDoJogo(){
+  if (!animar()) return;
+  if ($('#tabuleiro .carta, #tabuleiro .cab-tema')) gsap.from('#tabuleiro .carta, #tabuleiro .cab-tema', {y: 40, opacity: 0, rotation: () => (Math.random() - .5) * 10, stagger: Math.min(.035, .9 / jogo.cartas.length), duration: .45, ease: 'back.out(1.6)', clearProps: 'transform,opacity'});
+  if (jogo.modo === 'corrida'){
+    gsap.from('#cena .faixa, #cena .peao', {opacity: 0, stagger: .07, duration: .5, ease: 'power1.out', clearProps: 'opacity'});
+    gsap.from('#tabuleiro .monte, #tabuleiro .dado-area', {y: 36, opacity: 0, stagger: .1, duration: .5, delay: .25, ease: 'back.out(1.6)', clearProps: 'transform,opacity'});
+  }
+  if (jogo.modo === 'palavra') gsap.from('#letras > *', {y: -36, opacity: 0, stagger: .04, duration: .45, ease: 'back.out(1.8)', clearProps: 'transform,opacity'});
+  if (jogo.modo === 'roleta'){
+    gsap.from('#rodaCaixa', {scale: .5, rotation: -140, opacity: 0, duration: .9, ease: 'back.out(1.3)', clearProps: 'transform,opacity'});
+    gsap.from('.roleta-lado > *', {x: 30, opacity: 0, stagger: .08, duration: .45, delay: .3, ease: 'power2.out', clearProps: 'transform,opacity'});
+  }
+}
+// painel de aviso (bônus da roleta, palpite da palavra)
+function montarAviso(o){
+  $('#painel').style.setProperty('--cor', o.cor);
+  $('#pAssunto').innerHTML = o.assunto; $('#pNum').textContent = o.num || '';
+  pintarVezPainel();
+  $('#pAnel').hidden = true; $('#pFechar').hidden = true;
+  $('#pCorpo').hidden = true;
+  const box = $('#pEspecial'); box.hidden = false; box.innerHTML = o.html;
+  prepararRodape(true);
+  if (o.rot){ $('#btnProxima').hidden = false; $('#btnProxima').querySelector('.rot').textContent = o.rot; }
+}
+
+// ----- Corrida na Trilha: pista em SVG desenhada com D3, pulos e efeitos com GSAP, dado em CSS 3D -----
+const cartasDaCorrida = () => Math.min(60, Math.max(cfg.qtd, Math.ceil(cfg.trilha * cfg.equipes.length / 1.8)));
+const trilhaPara = n => Math.min(cfg.trilha, Math.max(6, Math.floor(n * 1.8 / Math.max(2, cfg.equipes.length))));
+function casasEspeciais(N){
+  const esp = {}, poe = (f, tipo) => { let k = Math.round(N * f); while (k > 1 && (esp[k] || esp[k - 1] || esp[k + 1])) k++; if (k > 1 && k < N - 1) esp[k] = tipo; };
+  const plano = N >= 16 ? [[.18, 'turbo'], [.4, 'escorrega'], [.55, 'turbo'], [.74, 'escorrega'], [.88, 'turbo']]
+    : N >= 9 ? [[.3, 'turbo'], [.5, 'escorrega'], [.68, 'turbo'], [.84, 'escorrega']] : [[.35, 'turbo'], [.7, 'escorrega']];
+  plano.forEach(([f, tipo]) => poe(f, tipo));
+  return esp;
+}
+function desenharCorrida(){
+  const cena = $('#cena'), N = jogo.trilha, eq = jogo.equipes, n = eq.length;
+  cena.className = 'cena corrida'; cena.innerHTML = '';
+  const cs = getComputedStyle(cena), W = Math.max(260, cena.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)), Hd = Math.max(100, cena.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom));
+  const topo = Hd < 170 ? 16 : 24, base = 4, faixa = Math.max(14, Math.min(160, (Hd - topo - base) / n)), H = Math.round(topo + faixa * n + base);
+  // margens que cabem meio peão na largada e meia casa na chegada
+  let esq = Math.max(36, Math.min(88, W * .075)), dir = Math.max(30, Math.min(64, W * .05)), x, passo, lado;
+  for (let k = 0; k < 3; k++){
+    x = d3.scaleLinear().domain([0, N]).range([esq, W - dir]); passo = x(1) - x(0);
+    lado = Math.max(12, Math.min(passo * .84, faixa * .7));
+    if (k < 2){ esq = Math.max(esq, lado / 2 + 8); dir = Math.max(dir, lado / 2 + 8); }
+  }
+  const svg = d3.select(cena).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H).attr('role', 'img');
+  const pat = svg.append('defs').append('pattern').attr('id', 'xadrez').attr('width', 8).attr('height', 8).attr('patternUnits', 'userSpaceOnUse');
+  pat.append('rect').attr('width', 8).attr('height', 8).attr('fill', '#fff');
+  pat.append('rect').attr('width', 4).attr('height', 4).attr('fill', '#1e1b4b');
+  pat.append('rect').attr('x', 4).attr('y', 4).attr('width', 4).attr('height', 4).attr('fill', '#1e1b4b');
+  const fsM = Math.max(9, Math.min(14, passo * .42));
+  svg.append('g').selectAll('text').data(d3.range(1, N + 1).filter(d => N <= 15 || d === 1 || d % 5 === 0 || d === N)).join('text')
+    .attr('class', 'marco').attr('x', d => x(d)).attr('y', topo / 2).attr('font-size', fsM).text(d => d === N ? '🏁' : d);
+  svg.append('text').attr('class', 'marco').attr('x', x(0)).attr('y', topo / 2).attr('font-size', Math.min(fsM, 12)).text('largada');
+  const faixas = svg.append('g').selectAll('g').data(eq).join('g').attr('class', 'faixa').attr('data-t', (t, i) => i).attr('transform', (t, i) => `translate(0,${topo + i * faixa})`);
+  faixas.append('rect').attr('class', 'fundo-faixa').attr('x', 1.5).attr('y', 2).attr('width', W - 3).attr('height', faixa - 4).attr('rx', Math.min(16, faixa / 3)).attr('fill', t => t.cor).attr('stroke', t => t.cor);
+  faixas.append('line').attr('class', 'largada').attr('x1', x(.5)).attr('x2', x(.5)).attr('y1', 7).attr('y2', faixa - 7);
+  const especiais = Object.keys(jogo.especiais).map(Number);
+  faixas.each(function(t){
+    const g = d3.select(this), cy = faixa / 2;
+    g.selectAll('rect.casa').data(d3.range(1, N + 1)).join('rect').attr('class', 'casa')
+      .attr('x', d => x(d) - lado / 2).attr('y', cy - lado / 2).attr('width', lado).attr('height', lado).attr('rx', lado * .24)
+      .attr('fill', d => d === N ? 'url(#xadrez)' : jogo.especiais[d] === 'turbo' ? '#fde68a' : jogo.especiais[d] === 'escorrega' ? '#bae6fd' : t.cor)
+      .attr('fill-opacity', d => d === N || jogo.especiais[d] ? 1 : d % 2 ? .32 : .2);
+    g.selectAll('text.especial-txt').data(especiais).join('text').attr('class', 'especial-txt').attr('x', d => x(d)).attr('y', cy).attr('font-size', lado * .56)
+      .text(d => jogo.especiais[d] === 'turbo' ? '⭐' : '🌀');
+  });
+  const peoes = svg.append('g').attr('class', 'peoes').selectAll('g').data(eq).join('g').attr('class', 'peao').attr('data-t', (t, i) => i);
+  peoes.append('ellipse').attr('class', 'sombra').attr('cx', 0).attr('cy', lado * .48).attr('rx', lado * .38).attr('ry', lado * .1);
+  const corpo = peoes.append('g').attr('class', 'corpo');
+  corpo.append('circle').attr('r', lado * .5).attr('fill', '#fff').attr('stroke', t => t.cor).attr('stroke-width', Math.max(2, lado * .08));
+  corpo.append('text').attr('font-size', lado * .6).attr('y', lado * .04).text(t => t.m);
+  jogo.geo = {x, faixa, topo, lado, W};
+  jogo.peoes = eq.map((t, i) => ({x: x(t.pos), y: topo + i * faixa + faixa / 2, h: 0, r: 0}));
+  eq.forEach((t, i) => pintarPeao(i));
+  descreverPista(); marcarVezCorrida();
+}
+function descreverPista(){ const s = $('#cena.corrida svg'); if (s) s.setAttribute('aria-label', `Pista com ${jogo.trilha} casas: ` + jogo.equipes.map(t => `${t.nome} na casa ${t.pos}`).join(', ')); }
+function pintarPeao(i){
+  const st = jogo.peoes && jogo.peoes[i], g = $(`#cena .peao[data-t="${i}"]`);
+  if (!st || !g) return;
+  g.setAttribute('transform', `translate(${st.x.toFixed(1)},${st.y.toFixed(1)})`);
+  g.querySelector('.corpo').setAttribute('transform', `translate(0,${(-st.h).toFixed(1)}) rotate(${st.r.toFixed(1)})`);
+  g.querySelector('.sombra').setAttribute('rx', (jogo.geo.lado * .38 * (1 - Math.min(.55, st.h / (jogo.geo.lado * 1.5)))).toFixed(1));
+}
+function marcarVezCorrida(){
+  $$('#cena .faixa').forEach(f => f.classList.toggle('vez', +f.getAttribute('data-t') === jogo.vez && !jogo.encerrado));
+  const v = $('#montesVez'); if (!v) return;
+  const t = jogo.equipes[jogo.vez];
+  v.innerHTML = jogo.encerrado ? '🏁 Fim da corrida' : jogo.animando ? `${t.m} <b>${esc(t.nome)}</b> está andando…` : `${t.m} Vez de <b>${esc(t.nome)}</b>: ${jogo.porDado ? 'tirem uma carta' : 'escolham um monte'}`;
+}
+function atualizarChip(ti){
+  const el = $(`#placar .time[data-t="${ti}"]`); if (!el) return;
+  el.querySelector('.pts').innerHTML = ptsHtml(jogo.equipes[ti]);
+  if (animar()) gsap.fromTo(el, {scale: 1.12}, {scale: 1, duration: .6, ease: 'elastic.out(1,.5)', clearProps: 'scale'});
+}
+function andar(ti, passos){
+  const t = jogo.equipes[ti], N = jogo.trilha, de = t.pos, dir = passos < 0 ? -1 : 1;
+  const alvo = Math.max(0, Math.min(N, de + passos)), esp = passos > 0 && alvo < N ? jogo.especiais[alvo] : null;
+  const final = esp === 'turbo' ? Math.min(N, alvo + 1) : esp === 'escorrega' ? Math.max(0, alvo - 1) : alvo, j = jogo;
+  return new Promise(resolve => {
+    const fim = () => {
+      if (jogo !== j) return resolve(false);
+      t.pos = final;
+      if (jogo.peoes && jogo.peoes[ti]){ Object.assign(jogo.peoes[ti], {x: jogo.geo.x(final), h: 0, r: 0}); pintarPeao(ti); }
+      atualizarChip(ti); reordenarPlacar(); descreverPista();
+      anunciar(`${t.nome} está na casa ${final}${esp === 'turbo' ? ' (turbo: andou mais uma)' : esp === 'escorrega' ? ' (escorregou uma casa)' : ''}.`);
+      resolve(final >= N);
+    };
+    if (!animar() || !$(`#cena .peao[data-t="${ti}"]`) || (alvo === de && !esp)){ if (esp) som(esp); fim(); return; }
+    const tl = gsap.timeline({onComplete: fim});
+    for (let p = de + dir; dir > 0 ? p <= alvo : p >= alvo; p += dir) tl.add(pulo(ti, p));
+    if (esp){ tl.add(balao(ti, esp)); tl.add(esp === 'turbo' ? pulo(ti, final, true) : escorregar(ti, final)); }
+    if (final >= N) tl.add(festaChegada(ti));
+  });
+}
+function pulo(ti, p, turbo){
+  const st = jogo.peoes[ti], lado = jogo.geo.lado, d = turbo ? .44 : .3, pinta = () => pintarPeao(ti), tl = gsap.timeline();
+  tl.call(() => som(turbo ? 'turbo' : 'passo'));
+  tl.to(st, {x: jogo.geo.x(p), duration: d, ease: 'power1.inOut', onUpdate: pinta});
+  tl.to(st, {h: lado * (turbo ? 1.15 : .55), duration: d / 2, ease: 'power2.out', yoyo: true, repeat: 1, onUpdate: pinta}, '<');
+  if (turbo) tl.fromTo(st, {r: 0}, {r: 360, duration: d, ease: 'power1.inOut', onUpdate: pinta}, '<');
+  tl.call(() => poeira(ti));
+  return tl;
+}
+function poeira(ti){
+  const svg = $('#cena svg'), st = jogo.peoes && jogo.peoes[ti]; if (!svg || !st) return;
+  const lado = jogo.geo.lado, y = st.y + lado * .45, ref = svg.querySelector('g.peoes');
+  for (let k = 0; k < 5; k++){
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('class', 'poeira'); c.setAttribute('cx', st.x); c.setAttribute('cy', y); c.setAttribute('r', Math.max(1.5, lado * .06));
+    svg.insertBefore(c, ref);
+    gsap.to(c, {attr: {cx: st.x + (k - 2) * lado * .24, cy: y - 2 - Math.random() * lado * .22, r: .4}, opacity: 0, duration: .5, ease: 'power2.out', onComplete: () => c.remove()});
+  }
+}
+function balao(ti, tipo){
+  const tl = gsap.timeline();
+  tl.call(() => {
+    const svg = $('#cena svg'), st = jogo.peoes[ti], lado = jogo.geo.lado; if (!svg) return;
+    const fs = Math.max(13, Math.min(24, lado * .46)), meia = fs * 3.4, tx = document.createElementNS(NS, 'text');
+    tx.setAttribute('class', 'balao ' + tipo);
+    tx.setAttribute('x', Math.max(meia, Math.min(jogo.geo.W - meia, st.x)));
+    tx.setAttribute('y', Math.max(fs * .9, st.y - lado * .8));
+    tx.setAttribute('font-size', fs);
+    tx.textContent = tipo === 'turbo' ? '⭐ Turbo! +1' : '🌀 Escorregou! −1';
+    svg.appendChild(tx);
+    som(tipo);
+    gsap.fromTo(tx, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: .3, ease: 'back.out(2)'});
+    gsap.to(tx, {opacity: 0, y: -14, duration: .45, delay: 1.25, onComplete: () => tx.remove()});
+  });
+  tl.to({}, {duration: .65});
+  return tl;
+}
+function escorregar(ti, p){
+  const st = jogo.peoes[ti];
+  return gsap.timeline().to(st, {x: jogo.geo.x(p), r: -360, duration: .75, ease: 'power2.inOut', onUpdate: () => pintarPeao(ti)});
+}
+function festaChegada(ti){
+  const st = jogo.peoes[ti];
+  return gsap.timeline().call(() => { som('fim'); confete(false); })
+    .to(st, {h: jogo.geo.lado * 1.1, duration: .24, ease: 'power2.out', yoyo: true, repeat: 3, onUpdate: () => pintarPeao(ti)});
+}
+const PASSO_INFO = {1: {nome: 'Fácil', cor: '#10b981'}, 2: {nome: 'Média', cor: '#f59e0b'}, 3: {nome: 'Difícil', cor: '#ef4444'}};
+const PIPS = {1: [5], 2: [1, 9], 3: [1, 5, 9]};
+const FACES_DADO = [['fr', 1], ['tr', 1], ['di', 2], ['es', 2], ['ci', 3], ['ba', 3]];
+function desenharMontes(){
+  const tab = $('#tabuleiro'), livre = i => !jogo.cartas[i].feita, todos = jogo.cartas.map((c, i) => i);
+  const grupos = jogo.porDado ? [{p: 0, n: todos.filter(livre).length}]
+    : [1, 2, 3].filter(p => jogo.cartas.some(c => c.passos === p)).map(p => ({p, n: todos.filter(i => livre(i) && jogo.cartas[i].passos === p).length}));
+  let h = '<div class="montes-vez" id="montesVez"></div>' + grupos.map(g => {
+    const info = PASSO_INFO[g.p] || {nome: 'Monte', cor: '#6366f1'}, vars = varsCor(info.cor), nc = `${g.n} ${g.n === 1 ? 'carta' : 'cartas'}`;
+    const titulo = g.p ? info.nome : 'Tirar uma carta', anda = g.p ? `anda ${g.p} ${g.p === 1 ? 'casa' : 'casas'}` : '';
+    const pilha = (g.n >= 3 ? '<span class="carta-m c3"></span>' : '') + (g.n >= 2 ? '<span class="carta-m c2"></span>' : '') +
+      (g.n ? `<span class="carta-m topo" style="${vars}">${g.p ? `<span class="mi">🏃</span><b>+${g.p}</b>` : '<span class="mi">🃏</span><b>?</b>'}</span>` : '');
+    return `<button type="button" class="monte" data-p="${g.p}" style="${vars}" ${g.n && !jogo.animando ? '' : 'disabled'} aria-label="${titulo}${anda ? ', ' + anda : ''}: ${nc}">
+      <span class="pilha">${pilha}</span><span class="monte-txt"><b>${titulo}</b><small>${anda ? anda + ' · ' : ''}${nc}</small></span></button>`;
+  }).join('');
+  if (jogo.porDado){
+    const r = jogo.dadoRot, faces = FACES_DADO.map(([f, v]) => `<span class="df ${f}">${PIPS[v].map(p => `<i style="grid-area:${Math.ceil(p / 3)} / ${(p - 1) % 3 + 1}"></i>`).join('')}</span>`).join('');
+    h += `<div class="dado-area"><div class="dado-cena"><div class="dado" id="dado" style="transform:rotateX(${r.x}deg) rotateY(${r.y}deg)">${faces}</div></div>
+      <span class="dado-txt" id="dadoTxt">${jogo.ultimoDado ? `Saiu <b>${jogo.ultimoDado}</b>` : '🎲 1, 2 ou 3 casas'}</span></div>`;
+  }
+  tab.innerHTML = h;
+  marcarVezCorrida();
+}
+let forcarDado = null;
+async function tirarCarta(p){
+  if (atual || !jogo || jogo.encerrado || jogo.animando || jogo.modo !== 'corrida') return;
+  const j = jogo, livres = j.cartas.map((c, i) => i).filter(i => !j.cartas[i].feita && (j.porDado || j.cartas[i].passos === p));
+  if (!livres.length) return;
+  const i = livres[Math.floor(Math.random() * livres.length)], c = j.cartas[i];
+  if (j.porDado){
+    j.animando = true;
+    $$('#tabuleiro .monte').forEach(b => { b.disabled = true; });
+    const v = await jogarDado(forcarDado);
+    j.animando = false;
+    if (jogo !== j || j.encerrado) return;
+    c.passos = v; c.pts = v * 10;
+  }
+  abrirCarta(i, $(`#tabuleiro .monte[data-p="${p}"] .carta-m.topo`));
+}
+function jogarDado(forcar){
+  const v = forcar >= 1 && forcar <= 3 ? forcar : 1 + Math.floor(Math.random() * 3);
+  jogo.ultimoDado = v;
+  const d = $('#dado'), txt = $('#dadoTxt'), r = jogo.dadoRot;
+  const alvo = {1: [0, 0], 2: [0, -90], 3: [-90, 0]}[v], tx = alvo[0] - 18, ty = alvo[1] + 24;
+  const frente = (de, a) => a + 360 * Math.ceil((de + 720 - a) / 360);
+  const mostrar = () => { if (txt) txt.innerHTML = `Saiu <b>${v}</b>: se acertar, anda ${v} ${v === 1 ? 'casa' : 'casas'}`; anunciar(`O dado deu ${v}.`); };
+  if (!d || !animar()){ r.x = tx; r.y = ty; if (d) d.style.transform = `rotateX(${tx}deg) rotateY(${ty}deg)`; mostrar(); return Promise.resolve(v); }
+  const fx = frente(r.x, tx), fy = frente(r.y, ty);
+  if (txt) txt.textContent = 'Rolando…';
+  som('virar');
+  return new Promise(res => {
+    let ultimo = null;
+    gsap.timeline({onComplete: () => { mostrar(); som('acerto'); setTimeout(() => res(v), 700); }})
+      .to(r, {x: fx, y: fy, duration: 1.3, ease: 'power3.out', onUpdate: () => {
+        d.style.transform = `rotateX(${r.x.toFixed(1)}deg) rotateY(${r.y.toFixed(1)}deg)`;
+        const q = Math.floor((r.x + r.y) / 120); if (q !== ultimo){ if (ultimo !== null) som('tique'); ultimo = q; }
+      }})
+      .to(d.parentNode, {y: -38, scale: 1.25, duration: .32, ease: 'power2.out', yoyo: true, repeat: 1}, 0);
+  });
+}
+async function seguirCorrida(a, prox){
+  const j = jogo;
+  let chegou = false;
+  if (a.acertou){
+    const ti = a.acertou.time;
+    j.equipes[ti].pts += a.acertou.pts;
+    if (a.acertou.passos){
+      j.vez = ti; j.animando = true; desenharMontes(); atualizarVez();
+      chegou = await andar(ti, a.acertou.passos);
+      if (jogo !== j || j.encerrado) return;
+      j.animando = false;
+    }
+  }
+  j.vez = prox;
+  if (chegou) j.vencedor = a.acertou.time;
+  registrarHistorico();
+  if (j.cenaPendente){ j.cenaPendente = false; desenharCorrida(); }
+  desenharMontes(); atualizarProgresso();
+  if (chegou){ j.encerrado = true; atualizarVez(); setTimeout(() => { if (jogo === j) mostrarFim(); }, animar() ? 1400 : 0); return; }
+  atualizarVez();
+  if (!j.cartas.every(c => c.feita)) return;
+  // as cartas que ninguém acertou voltam uma vez para o monte
+  const voltam = j.voltas < 1 ? j.cartas.filter(c => c.feita && !c.feita.ok) : [];
+  if (voltam.length){
+    j.voltas++;
+    voltam.forEach(c => { c.feita = null; });
+    desenharMontes(); atualizarProgresso();
+    anunciarVisivel(voltam.length === 1 ? '🔁 A carta que ninguém acertou voltou para o monte!' : `🔁 As ${voltam.length} cartas que ninguém acertou voltaram para o monte!`);
+    if (animar()) gsap.from('#tabuleiro .monte', {scale: .8, duration: .5, ease: 'back.out(2)', clearProps: 'transform'});
+    return;
+  }
+  j.encerrado = true; atualizarVez(); setTimeout(() => { if (jogo === j) mostrarFim(); }, animar() ? 1100 : 0);
+}
+
+// ----- Palavra Secreta: peças com virada 3D em CSS e animações com GSAP -----
+const normPalavra = t => semAcento(t).replace(/[^a-z]/g, '');
+const escondidas = w => w.base.filter((b, k) => b && !w.abertas[k]).length;
+const valorPalavra = w => Math.max(10, 5 * escondidas(w));
+function prepararPalavra(w){
+  const letras = [...String(w.palavra || '').normalize('NFC').toUpperCase().replace(/\s+/g, ' ').trim()].slice(0, 24);
+  const base = letras.map(ch => semAcento(ch).replace(/[^a-z]/g, ''));
+  return {palavra: letras.join(''), dica: String(w.dica || '').trim(), letras, base, abertas: base.map(b => !b), resolvida: false, quem: null};
+}
+function desenharPalavra(){
+  const cena = $('#cena'), w = jogo.palavras[jogo.pAtual];
+  cena.className = 'cena palavra';
+  if (!w){ cena.innerHTML = ''; return; }
+  const nL = w.base.filter(Boolean).length;
+  cena.innerHTML = `<div class="palavra-topo"><span>🔤 Palavra secreta${jogo.palavras.length > 1 ? ` <b>${jogo.pAtual + 1} de ${jogo.palavras.length}</b>` : ''} · <b>${nL} letras</b></span>${w.dica ? `<span>💡 Dica: <b>${esc(w.dica)}</b></span>` : ''}</div>
+    <div class="letras" id="letras" role="img">${w.letras.map((ch, k) => w.base[k]
+      ? `<span class="letra-t${w.abertas[k] ? ' aberta' : ''}${w.resolvida ? ' ganhou' : ''}" data-k="${k}" aria-hidden="true"><span class="lt-dentro"><span class="lt-f">?</span><span class="lt-v">${esc(ch)}</span></span></span>`
+      : `<span class="letra-esp" aria-hidden="true">${ch === ' ' ? '' : esc(ch)}</span>`).join('')}</div>
+    <div class="palavra-acoes"><button type="button" class="btn-pri" id="btnArriscar"></button><span class="valor-palavra" id="palavraValor"></span></div>`;
+  $('#btnArriscar').onclick = abrirArriscar;
+  ajustarLetras(); pintarArriscar();
+}
+function ajustarLetras(){
+  const box = $('#letras'), w = jogo && jogo.palavras && jogo.palavras[jogo.pAtual]; if (!box || !w) return;
+  const W = $('#cena').clientWidth - 28, n = w.letras.reduce((s, ch, k) => s + (w.base[k] ? 1 : .4), 0);
+  const gap = Math.round(Math.max(4, Math.min(10, W * .008)));
+  const lt = Math.floor(Math.max(24, Math.min(78, (W - gap * (w.letras.length - 1)) / n, innerHeight * .11)));
+  box.style.setProperty('--lt', lt + 'px'); box.style.setProperty('--lg', gap + 'px');
+  box.setAttribute('aria-label', 'Palavra secreta: ' + w.letras.map((ch, k) => w.base[k] ? (w.abertas[k] ? ch : 'lacuna') : (ch === ' ' ? 'espaço' : ch)).join(', '));
+}
+function pintarArriscar(){
+  const b = $('#btnArriscar'); if (!b || !jogo) return;
+  const w = jogo.palavras[jogo.pAtual], t = jogo.equipes[jogo.vez], ok = w && !w.resolvida && !jogo.encerrado;
+  b.disabled = !ok || !!jogo.animando;
+  b.innerHTML = ok ? `🎯 ${t.m} ${esc(t.nome)}: arriscar a palavra` : w && w.resolvida ? '🎉 Palavra descoberta!' : '🏁 Fim de jogo';
+  $('#palavraValor').innerHTML = ok ? `vale <b>${valorPalavra(w)} pontos</b> · errar custa 5` : '';
+}
+function abrirArriscar(){
+  if (atual || !jogo || jogo.encerrado || jogo.animando || jogo.modo !== 'palavra') return;
+  const w = jogo.palavras[jogo.pAtual]; if (!w || w.resolvida) return;
+  const ti = jogo.vez, t = jogo.equipes[ti], valor = valorPalavra(w);
+  atual = {i: -1, c: null, timeOriginal: ti, timeAtual: ti, rebote: false, tentou: false, respondida: false, timer: null, acertou: null, especial: true, arriscar: true};
+  const mini = w.letras.map((ch, k) => w.base[k] ? `<span class="ml${w.abertas[k] ? '' : ' oculta'}">${w.abertas[k] ? esc(ch) : ''}</span>` : `<span class="ml esp">${ch === ' ' ? '' : esc(ch)}</span>`).join('');
+  montarAviso({cor: t.cor, assunto: '🔤 Palavra secreta', num: `vale ${valor} pontos`, html: `<div class="grande">🎯</div><h2>Qual é a palavra?</h2>
+    <div class="mini-letras" aria-hidden="true">${mini}</div>${w.dica ? `<p>💡 ${esc(w.dica)}</p>` : ''}
+    <form class="red-form" id="arriscarForm"><input type="text" id="arriscarTxt" maxlength="30" placeholder="Digite a palavra" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Palavra secreta"><button type="submit" class="btn-pri">Conferir ✓</button></form>
+    <div class="arriscar-voz"><span>ou confira em voz alta:</span><button type="button" class="btn-sec" id="btnVozCerto">✅ Acertaram</button><button type="button" class="btn-sec" id="btnVozErro">❌ Erraram</button></div>
+    <p class="sub">Acertou: <b>+${valor}</b> · errou: <b>−5</b> e a vez passa.</p>`});
+  $('#pFechar').hidden = false;
+  $('#arriscarForm').onsubmit = e => { e.preventDefault(); conferirPalavra($('#arriscarTxt').value); };
+  $('#btnVozCerto').onclick = () => conferirPalavra(true);
+  $('#btnVozErro').onclick = () => conferirPalavra(false);
+  abrirPalco(null, t.cor, () => { const inp = $('#arriscarTxt'); if (inp && temTeclado()) inp.focus({preventScroll: true}); });
+}
+function conferirPalavra(palpite){
+  if (!atual || !atual.arriscar || atual.respondida) return;
+  const w = jogo.palavras[jogo.pAtual], ti = atual.timeOriginal, t = jogo.equipes[ti];
+  if (typeof palpite === 'string' && !normPalavra(palpite)){ const inp = $('#arriscarTxt'); if (inp) inp.focus(); anunciarVisivel('Digite a palavra.'); return; }
+  const ok = palpite === true || (typeof palpite === 'string' && normPalavra(palpite) === normPalavra(w.palavra)), valor = valorPalavra(w);
+  atual.respondida = true; atual.tentou = true;
+  $('#pFechar').hidden = true;
+  const box = $('#pEspecial');
+  if (ok){
+    t.acertos++;
+    atual.acertou = {time: ti, pts: valor};
+    box.innerHTML = `<div class="grande">🎉</div><h2>ACERTOU!</h2><div class="mini-letras ganhou" aria-hidden="true">${w.letras.map((ch, k) => `<span class="ml${w.base[k] ? '' : ' esp'}">${ch === ' ' ? '' : esc(ch)}</span>`).join('')}</div>
+      <p><b>+${valor} pontos</b> para ${t.m} <b>${esc(t.nome)}</b>!</p>`;
+    $('#painel').style.setProperty('--cor', '#059669');
+    som('palavra'); confete(true);
+    anunciar(`Acertou! A palavra era ${w.palavra}. Mais ${valor} pontos para ${t.nome}.`);
+  } else {
+    t.erros++;
+    atual.acertou = {time: ti, pts: -5};
+    box.innerHTML = `<div class="grande">😬</div><h2>NÃO É ESSA!</h2>${typeof palpite === 'string' ? `<p>“${esc(palpite.trim())}” não é a palavra secreta.</p>` : ''}<p><b>−5 pontos</b> para ${t.m} <b>${esc(t.nome)}</b> e a vez passa.</p>`;
+    $('#painel').style.setProperty('--cor', '#dc2626');
+    som('erro');
+    anunciar('Não é essa palavra. Menos 5 pontos.');
+  }
+  if (animar()) gsap.from(box.children, {y: 14, opacity: 0, stagger: .05, duration: .3, clearProps: 'transform,opacity'});
+  $('#btnProxima').hidden = false; $('#btnProxima').querySelector('.rot').textContent = 'Continuar';
+  $('#btnProxima').focus({preventScroll: true});
+}
+function revelarLetra(w){
+  const opcoes = [...new Set(w.base.filter((b, k) => b && !w.abertas[k]))];
+  if (!opcoes.length) return Promise.resolve();
+  const letra = opcoes[Math.floor(Math.random() * opcoes.length)];
+  const ks = w.base.map((b, k) => b === letra && !w.abertas[k] ? k : -1).filter(k => k >= 0);
+  ks.forEach(k => { w.abertas[k] = true; });
+  ajustarLetras();
+  anunciar(`Apareceu a letra ${letra.toUpperCase()}!`);
+  const els = ks.map(k => $(`#letras .letra-t[data-k="${k}"]`)).filter(Boolean);
+  if (!animar()){ els.forEach(el => el.classList.add('aberta')); som('letra'); return Promise.resolve(); }
+  return new Promise(res => {
+    els.forEach((el, j) => setTimeout(() => {
+      el.classList.add('aberta', 'nova'); som('letra');
+      gsap.fromTo(el, {y: 0}, {y: -14, duration: .22, yoyo: true, repeat: 1, ease: 'power2.out'});
+    }, j * 220));
+    setTimeout(() => { els.forEach(el => el.classList.remove('nova')); res(); }, 1200 + els.length * 220);
+  });
+}
+function resolverPalavra(w, ti){
+  w.resolvida = true; w.quem = ti;
+  const ks = w.base.map((b, k) => b && !w.abertas[k] ? k : -1).filter(k => k >= 0);
+  ks.forEach(k => { w.abertas[k] = true; });
+  ajustarLetras();
+  if (ti === null) anunciarVisivel(`🔤 A palavra era ${w.palavra}!`);
+  const todas = () => $$('#letras .letra-t').forEach(el => el.classList.add('aberta', 'ganhou'));
+  if (!animar()){ todas(); return Promise.resolve(); }
+  return new Promise(res => {
+    ks.forEach((k, j) => setTimeout(() => { const el = $(`#letras .letra-t[data-k="${k}"]`); if (el) el.classList.add('aberta'); if (j % 2 === 0) som('letra'); }, j * 120));
+    setTimeout(() => {
+      todas();
+      gsap.fromTo('#letras .letra-t', {y: 0}, {y: -16, duration: .25, yoyo: true, repeat: 1, stagger: .04, ease: 'power2.out'});
+      if (ti !== null){ som('palavra'); confete(false); }
+      res();
+    }, 350 + ks.length * 120);
+  }).then(() => esperar(1000));
+}
+async function seguirPalavra(a){
+  const j = jogo, w = j.palavras[j.pAtual];
+  atualizarProgresso();
+  if (w && !w.resolvida && a.acertou && a.acertou.pts > 0){
+    j.animando = true; pintarArriscar();
+    if (a.arriscar) await resolverPalavra(w, a.acertou.time);
+    else { await revelarLetra(w); if (!escondidas(w)) await resolverPalavra(w, null); }
+    if (jogo !== j || j.encerrado) return;
+    j.animando = false;
+  }
+  const acabou = j.cartas.every(c => c.feita);
+  if (w && w.resolvida && j.pAtual + 1 < j.palavras.length && !acabou){
+    j.pAtual++;
+    desenharPalavra();
+    if (animar()) gsap.from('#letras > *', {y: -40, opacity: 0, stagger: .05, duration: .45, ease: 'back.out(1.8)', clearProps: 'transform,opacity'});
+    anunciarVisivel('🔤 Nova palavra secreta!');
+    return;
+  }
+  if ((w && w.resolvida) || acabou){
+    if (w && !w.resolvida){ j.animando = true; await resolverPalavra(w, null); if (jogo !== j || j.encerrado) return; j.animando = false; }
+    j.encerrado = true; atualizarVez(); pintarArriscar();
+    setTimeout(() => { if (jogo === j) mostrarFim(); }, animar() ? 1200 : 0);
+    return;
+  }
+  pintarArriscar();
+}
+
+// ----- Roleta dos Temas: roda em SVG feita com d3.pie e d3.arc, giro com GSAP -----
+function montarRoleta(cartas){
+  const grupos = [], porNome = {};
+  cartas.forEach((c, i) => {
+    const n = c.qz.tema || (c.assunto !== ASSUNTO_PADRAO ? c.assunto.nome : '');
+    if (!porNome[n]){ porNome[n] = {nome: n || 'Perguntas', ic: c.assunto.ic || '📝', cor: c.assunto.cor, idxs: []}; grupos.push(porNome[n]); }
+    porNome[n].idxs.push(i);
+  });
+  if (grupos.length < 2){
+    // um tema só: a roleta sorteia quanto a pergunta vale
+    const gs = [10, 20, 30].map((v, k) => ({nome: v + ' pontos', ic: '💰', cor: ['#0284c7', '#7c3aed', '#e11d48'][k], valor: v, idxs: []}));
+    embaralhar(cartas.map((c, i) => i)).forEach((i, k) => { const g = gs[k % 3]; g.idxs.push(i); cartas[i].pts = g.valor; });
+    return {grupos: gs.filter(g => g.idxs.length)};
+  }
+  let gs = grupos;
+  if (gs.length > 8){
+    gs = gs.slice().sort((a, b) => b.idxs.length - a.idxs.length);
+    gs = gs.slice(0, 7).concat([{nome: 'Mistura', ic: '🎲', cor: null, idxs: [].concat(...gs.slice(7).map(g => g.idxs))}]);
+  }
+  const usadas = new Set(BONUS_ROLETA.map(b => b.cor));
+  gs.forEach((g, k) => { if (!g.cor || usadas.has(g.cor)) g.cor = CORES.find(c => !usadas.has(c)) || CORES[k % CORES.length]; usadas.add(g.cor); });
+  return {grupos: gs};
+}
+function montarFatias(){
+  let base = jogo.grupos.filter(g => g.idxs.some(i => !jogo.cartas[i].feita)).map(g => ({tipo: 'tema', g, nome: g.nome, ic: g.ic, cor: g.cor}));
+  const nb = base.length >= 4 ? 3 : base.length >= 2 ? 2 : base.length ? 1 : 0;
+  if (base.length && base.length < 3) base = base.concat(base.map(f => Object.assign({}, f)));
+  const bonus = BONUS_ROLETA.slice(0, nb).map(b => Object.assign({}, b)), fat = [], passo = Math.max(1, Math.round(base.length / (bonus.length || 1)));
+  base.forEach((f, k) => { fat.push(f); if ((k + 1) % passo === 0 && bonus.length) fat.push(bonus.shift()); });
+  return fat.concat(bonus);
+}
+const rotuloFatia = f => f.tipo === 'tema' ? `${f.ic} ${f.nome.length > 13 ? f.nome.slice(0, 12) + '…' : f.nome}` : `${f.ic} ${{dobro: 'Dobro', mais5: '+5', passa: 'Passa'}[f.tipo]}`;
+function desenharRoleta(){
+  const cena = $('#cena');
+  cena.className = 'cena roleta';
+  cena.innerHTML = `<div class="roda-caixa" id="rodaCaixa"><svg id="roda" viewBox="-112 -112 224 224" role="img" aria-label="Roleta dos temas"><circle class="aro" r="109"></circle><g class="giro"></g><circle class="miolo" r="17"></circle></svg>
+      <div class="ponteiro" aria-hidden="true"></div><button type="button" class="btn-girar" id="btnGirarCentro" aria-label="Girar a roleta">GIRAR</button></div>
+    <div class="roleta-lado"><div class="roleta-vez" id="roletaVez"></div><button type="button" class="btn-pri" id="btnGirar">🎡 Girar a roleta</button>
+      <div class="roleta-res" id="roletaRes" aria-live="polite">${jogo.ultimoRes || 'Gire a roleta para sortear o tema da pergunta.'}</div><div class="roleta-temas" id="roletaTemas"></div></div>`;
+  $('#btnGirar').onclick = $('#btnGirarCentro').onclick = () => girar();
+  desenharRoda(); desenharTemasRoleta(); pintarVezRoleta(); ajustarRoleta();
+}
+function desenharRoda(){
+  const g = d3.select('#roda .giro'); if (g.empty()) return;
+  const arcos = d3.pie().sort(null).value(f => f.tipo === 'tema' ? 2 : 1)(jogo.fatias), arco = d3.arc().innerRadius(17).outerRadius(102).padAngle(.006);
+  g.selectAll('*').remove();
+  g.selectAll('path').data(arcos).join('path').attr('class', 'fatia').attr('data-k', (d, k) => k).attr('d', arco).attr('fill', d => d.data.cor);
+  g.selectAll('text').data(arcos).join('text').attr('class', 'fatia-txt')
+    .attr('transform', d => { const a = (d.startAngle + d.endAngle) * 90 / Math.PI; return `rotate(${a - 90}) translate(60,0)${a > 180 ? ' rotate(180)' : ''}`; })
+    .attr('font-size', d => { const r = rotuloFatia(d.data); return Math.max(5, Math.min(11, (d.endAngle - d.startAngle) * 60 * .62, 80 / (r.length * .58))).toFixed(1); })
+    .text(d => rotuloFatia(d.data));
+  g.selectAll('circle').data(arcos).join('circle').attr('class', 'pino').attr('r', 2.6).attr('cx', d => 105.5 * Math.sin(d.startAngle)).attr('cy', d => -105.5 * Math.cos(d.startAngle));
+  jogo.arcos = arcos.map(d => ({a0: d.startAngle * 180 / Math.PI, a1: d.endAngle * 180 / Math.PI}));
+  g.attr('transform', `rotate(${jogo.rot})`);
+}
+function desenharTemasRoleta(){
+  const box = $('#roletaTemas'); if (!box) return;
+  box.innerHTML = jogo.grupos.map(g => { const n = g.idxs.length, f = g.idxs.filter(i => jogo.cartas[i].feita).length;
+    return `<div class="rt${f >= n ? ' vazio' : ''}"><span class="cor" style="background:${g.cor}"></span><span class="nome-rt">${g.ic} ${esc(g.nome)}</span><span class="barra-rt"><i style="width:${100 * f / n}%;background:${g.cor}"></i></span><small>${f}/${n}</small></div>`; }).join('');
+}
+function pintarVezRoleta(){
+  const box = $('#roletaVez'); if (!box || !jogo) return;
+  const t = jogo.equipes[jogo.vez];
+  box.style.setProperty('--cor-time', t.cor);
+  box.innerHTML = jogo.encerrado ? '🏁 Fim de jogo' : `<span class="m">${t.m}</span><span>Vez de <b>${esc(t.nome)}</b></span>${jogo.dobro === jogo.vez ? '<span class="dobro-ativo">⭐ vale o dobro</span>' : ''}`;
+  $('#btnGirar').disabled = $('#btnGirarCentro').disabled = jogo.encerrado || !!jogo.girando || !!atual;
+}
+function ajustarRoleta(){
+  const cena = $('#cena'), caixa = $('#rodaCaixa'), lado = $('.roleta-lado'); if (!caixa) return;
+  const W = cena.clientWidth - 24, H = cena.clientHeight - 24, empilhar = W < H * 1.15;
+  cena.classList.toggle('empilhada', empilhar);
+  const roda = empilhar ? Math.min(W - 10, H * .6, 560) : Math.min(H - 30, W * .56, 680);
+  caixa.style.setProperty('--roda', Math.max(150, Math.floor(roda)) + 'px');
+  lado.style.maxHeight = (empilhar ? Math.max(120, H - roda - 20) : H) + 'px';
+}
+function fatiaNoPonteiro(rot){
+  const a = ((360 - rot) % 360 + 360) % 360;
+  return jogo.arcos.findIndex(x => a >= x.a0 && a < x.a1);
+}
+function girar(forcar){
+  if (!jogo || jogo.modo !== 'roleta' || jogo.encerrado || jogo.girando || atual) return;
+  const fat = jogo.fatias, arcos = jogo.arcos; if (!fat.length || !arcos) return;
+  let k = -1;
+  if (forcar !== undefined && forcar !== null) k = typeof forcar === 'number' ? forcar : fat.findIndex(f => f.tipo === forcar || (f.g && f.g.nome === forcar));
+  if (k < 0 || k >= fat.length){ const a = Math.random() * 360; k = Math.max(0, arcos.findIndex(x => a >= x.a0 && a < x.a1)); }
+  const {a0, a1} = arcos[k], alvo = a0 + (a1 - a0) * (.2 + Math.random() * .6);
+  const delta = ((360 - alvo) - (((jogo.rot % 360) + 360) % 360) + 720) % 360;
+  const final = jogo.rot + (animar() ? (5 + Math.floor(Math.random() * 2)) * 360 : 0) + delta;
+  jogo.girando = true; pintarVezRoleta();
+  $('#roletaRes').innerHTML = '🎡 Girando…';
+  $$('#roda .fatia').forEach(p => p.classList.remove('vencedora'));
+  const terminou = () => { jogo.girando = false; jogo.rot = final; resultadoRoleta(k); };
+  if (!animar()){ const g = $('#roda .giro'); if (g) g.setAttribute('transform', `rotate(${final})`); terminou(); return; }
+  som('virar');
+  const st = {r: jogo.rot}, j = jogo;
+  let ultimo = fatiaNoPonteiro(jogo.rot);
+  gsap.to(st, {r: final, duration: 4.6 + Math.random() * .8, ease: 'power4.out', onComplete: () => { if (jogo === j) terminou(); }, onUpdate: () => {
+    if (jogo !== j) return;
+    jogo.rot = st.r;
+    const g = $('#roda .giro'); if (g) g.setAttribute('transform', `rotate(${st.r.toFixed(2)})`);
+    const f = fatiaNoPonteiro(st.r);
+    if (f !== ultimo){ ultimo = f; som('tique'); const p = $('.ponteiro'); if (p) gsap.fromTo(p, {rotation: -24}, {rotation: 0, duration: .3, ease: 'elastic.out(1,.35)', overwrite: true}); }
+  }});
+}
+function resultadoRoleta(k){
+  if (!jogo || jogo.encerrado) return;
+  const f = jogo.fatias[k], ti = jogo.vez, t = jogo.equipes[ti], res = $('#roletaRes'), el = $(`#roda .fatia[data-k="${k}"]`);
+  if (el){ el.classList.add('vencedora'); if (animar()) gsap.fromTo(el, {scale: 1}, {scale: 1.07, svgOrigin: '0 0', duration: .22, yoyo: true, repeat: 3}); }
+  if (f.tipo === 'tema'){
+    const livres = f.g.idxs.filter(i => !jogo.cartas[i].feita), i = livres[Math.floor(Math.random() * livres.length)];
+    jogo.ultimoRes = `<span class="cor-res" style="background:${f.cor}"></span><span>Tema sorteado: <b>${f.ic} ${esc(f.nome)}</b></span>`;
+    if (res) res.innerHTML = jogo.ultimoRes;
+    som('acerto'); anunciar(`A roleta parou em ${f.nome}.`);
+    setTimeout(() => { if (jogo && !jogo.encerrado && !atual) abrirCarta(i, null); }, animar() ? 900 : 0);
+    return;
+  }
+  atual = {i: -1, c: null, timeOriginal: ti, timeAtual: ti, rebote: false, tentou: true, respondida: true, timer: null, acertou: null, especial: true, bonus: f.tipo};
+  let html;
+  if (f.tipo === 'dobro'){ jogo.dobro = ti; atual.passaVez = false; html = `<div class="grande">⭐</div><h2>VALE O DOBRO!</h2><p>${t.m} <b>${esc(t.nome)}</b> gira de novo, e a próxima pergunta vale o dobro.</p>`; }
+  else if (f.tipo === 'mais5'){ atual.acertou = {time: ti, pts: 5}; html = `<div class="grande">🎁</div><h2>PRESENTE!</h2><p><b>+5 pontos</b> para ${t.m} <b>${esc(t.nome)}</b>.</p>`; }
+  else html = `<div class="grande">🔄</div><h2>PASSA A VEZ!</h2><p>Que pena, ${t.m} <b>${esc(t.nome)}</b>. A vez vai para a próxima equipe.</p>`;
+  jogo.ultimoRes = `<span class="cor-res" style="background:${f.cor}"></span><span>${f.ic} <b>${esc(f.nome)}</b></span>`;
+  if (res) res.innerHTML = jogo.ultimoRes;
+  anunciar(`A roleta parou em ${f.nome}.`);
+  const j = jogo;
+  setTimeout(() => {
+    if (jogo !== j || j.encerrado || !atual || atual.bonus !== f.tipo) return;
+    montarAviso({cor: f.cor, assunto: '🎡 Roleta', num: f.nome, html, rot: 'Continuar'});
+    abrirPalco(null, f.cor, () => $('#btnProxima').focus({preventScroll: true}));
+    som(f.tipo === 'passa' ? 'erro' : 'acerto'); if (f.tipo !== 'passa') setTimeout(() => confete(true), 350);
+  }, animar() ? 700 : 0);
+}
+function seguirRoleta(a){
+  if (a.c && jogo.dobro === a.timeOriginal) jogo.dobro = null;
+  if (jogo.dobro !== null && jogo.dobro !== undefined && jogo.dobro !== jogo.vez) jogo.dobro = null;
+  atualizarProgresso();
+  if (jogo.cartas.every(c => c.feita)){ jogo.encerrado = true; atualizarVez(); setTimeout(mostrarFim, animar() ? 1100 : 0); return; }
+  if (a.c){ jogo.fatias = montarFatias(); desenharRoda(); }
+  desenharTemasRoleta(); pintarVezRoleta();
+}
+
+// ----- gráfico do fim (Chart.js) -----
+let grafico = null;
+const ESTILOS_PONTO = ['circle', 'rect', 'triangle', 'rectRot', 'star', 'crossRot'];
+function desenharGrafico(){
+  const box = $('#graficoFim'), h = (jogo && jogo.hist) || [];
+  if (grafico){ grafico.destroy(); grafico = null; }
+  box.hidden = !window.Chart || !jogo || jogo.modo === 'redacao' || h.length < 3;
+  if (box.hidden) return;
+  const cs = getComputedStyle(document.documentElement), cor = v => cs.getPropertyValue(v).trim(), corrida = jogo.modo === 'corrida', eq = jogo.equipes;
+  box.querySelector('h2').textContent = corrida ? '📈 Como a corrida foi mudando' : '📈 Como o placar foi mudando';
+  Chart.defaults.font.family = "'Lexend', system-ui, sans-serif";
+  // o mascote de cada equipe no fim da linha (rótulo direto, além da legenda)
+  const mascotes = {id: 'mascotesNoFim', afterDatasetsDraw(ch){
+    const ctx = ch.ctx, usados = [];
+    ch.data.datasets.map((ds, i) => { const meta = ch.getDatasetMeta(i), p = meta.data[meta.data.length - 1]; return !meta.hidden && p ? {i, x: p.x, y: p.y} : null; })
+      .filter(Boolean).sort((a, b) => a.y - b.y)
+      .forEach(o => { let y = o.y; usados.forEach(u => { if (Math.abs(u - y) < 20) y = u + 20; }); usados.push(y); ctx.save(); ctx.font = '20px sans-serif'; ctx.textBaseline = 'middle'; ctx.fillText(eq[o.i].m, o.x + 10, y); ctx.restore(); });
+  }};
+  grafico = new Chart($('#graficoCanvas'), {
+    type: 'line',
+    data: {labels: h.map((_, k) => k ? String(k) : 'início'),
+      datasets: eq.map((t, i) => ({label: `${t.m} ${t.nome}`, data: h.map(r => r[i]), borderColor: t.cor, backgroundColor: t.cor, borderWidth: 2.5, cubicInterpolationMode: 'monotone',
+        pointStyle: ESTILOS_PONTO[i % ESTILOS_PONTO.length], pointRadius: h.length > 40 ? 0 : 4, pointHoverRadius: 7, pointBorderColor: cor('--sup'), pointBorderWidth: 2}))},
+    options: {responsive: true, maintainAspectRatio: false, animation: animar() ? {duration: 1100} : false,
+      layout: {padding: {right: 34, top: 6}}, interaction: {mode: 'index', intersect: false},
+      plugins: {legend: {labels: {color: cor('--texto'), usePointStyle: true, boxWidth: 10, font: {size: 13}}},
+        tooltip: {callbacks: {title: it => it.length && it[0].label !== 'início' ? `Jogada ${it[0].label}` : 'Início', label: it => ` ${it.dataset.label}: ${corrida ? 'casa ' + it.parsed.y : it.parsed.y + ' pts'}`}}},
+      scales: {x: {ticks: {color: cor('--suave'), maxTicksLimit: 12, maxRotation: 0}, grid: {display: false}, border: {color: cor('--borda')}, title: {display: true, text: 'jogadas', color: cor('--suave')}},
+        y: {beginAtZero: true, suggestedMax: corrida ? jogo.trilha : undefined, ticks: {color: cor('--suave'), precision: 0}, grid: {color: cor('--borda')}, border: {display: false}, title: {display: true, text: corrida ? 'casa na trilha' : 'pontos', color: cor('--suave')}}}},
+    plugins: [mascotes]
+  });
+}
 
 // ---------- pergunta ----------
 function textoHtml(t){
@@ -1124,7 +1927,8 @@ function montarPainel(c, i){
   p.style.setProperty('--cor', cor);
   $('#pCorpo').hidden = false; $('#pEspecial').hidden = true;
   $('#pAssunto').innerHTML = m === 'velha' ? `⭕ ${c.rotulo}` : `${c.assunto.ic} ${esc(c.assunto.nome)}`;
-  $('#pNum').textContent = m === 'temas' ? `${c.pts} pontos` : m === 'velha' ? `${c.pts} pts` : `${m === 'sequencia' ? 'Pergunta' : 'Carta'} ${i + 1} · ${c.pts} pts`;
+  $('#pNum').textContent = m === 'temas' ? `${c.pts} pontos` : m === 'velha' ? `${c.pts} pts` : m === 'corrida' ? `🏃 vale ${c.passos} ${c.passos === 1 ? 'casa' : 'casas'}`
+    : m === 'roleta' ? `${c.pts} pts${jogo.dobro === jogo.vez ? ' × 2' : ''}` : `${m === 'sequencia' ? 'Pergunta' : 'Carta'} ${i + 1} · ${c.pts} pts${m === 'palavra' ? ' · 🔤 vale uma letra' : ''}`;
   pintarVezPainel();
   const qz = c.qz;
   $('#pCorpo').classList.toggle('com-texto', !!qz.texto);
@@ -1140,13 +1944,18 @@ function montarPainel(c, i){
   const anel = $('#pAnel'), prog = anel.querySelector('.prog');
   anel.hidden = !regra('tempo'); anel.classList.remove('parado');
   prog.style.strokeDashoffset = '0'; prog.style.stroke = ''; anel.querySelector('span').textContent = cfg.segundos;
-  $('#pFechar').hidden = m === 'sequencia';
+  $('#pFechar').hidden = ['sequencia', 'corrida', 'roleta'].includes(m);
 }
 function abrirPalco(el, cor, depois){
   const palco = $('#palco'), painel = $('#painel');
   palco.classList.add('ativo');
   som('virar');
-  if (!animar() || !el){ depois(); return; }
+  if (!animar()){ depois(); return; }
+  if (!el){
+    gsap.fromTo('.vela', {opacity: 0}, {opacity: 1, duration: .35});
+    gsap.fromTo(painel, {scale: .72, opacity: 0}, {scale: 1, opacity: 1, duration: .5, ease: 'back.out(1.7)', clearProps: 'transform,opacity', onComplete: depois});
+    return;
+  }
   const r0 = el.getBoundingClientRect();
   painel.style.opacity = '0';
   const r1 = painel.getBoundingClientRect(), voa = document.createElement('div');
@@ -1164,12 +1973,12 @@ function abrirPalco(el, cor, depois){
   }}).to(voa, {left: r1.left, top: r1.top, width: r1.width, height: r1.height, rotationY: 180, duration: .8, ease: 'power3.inOut'});
 }
 let forcarSurpresa = null;
-function abrirCarta(i){
-  if (atual || !jogo || jogo.encerrado) return;
+function abrirCarta(i, origem){
+  if (atual || !jogo || jogo.encerrado || jogo.animando) return;
   const c = jogo.cartas[i];
   if (!c || (c.feita && jogo.modo !== 'redacao')) return;
   if (jogo.modo === 'sequencia' && i !== jogo.seq) return;
-  const el = $(`#tabuleiro .carta[data-i="${i}"]`);
+  const el = origem !== undefined ? origem : $(`#tabuleiro .carta[data-i="${i}"]`);
   atual = {i, c, timeOriginal: jogo.vez, timeAtual: jogo.vez, rebote: false, tentou: false, respondida: false, timer: null, acertou: null};
   if (jogo.modo === 'redacao'){ montarRedacao(c, i); abrirPalco(el, c.assunto.cor, () => { const inp = $('#redAluno'); if (inp) inp.focus({preventScroll: true}); else $('#btnProxima').focus({preventScroll: true}); }); return; }
   const surpresa = regra('surpresa') && (forcarSurpresa !== null ? forcarSurpresa : Math.random() < .15);
@@ -1206,14 +2015,16 @@ function responder(k){
   pararTimer(); atual.respondida = true;
   marcar(b, true);
   $$('#pOpcoes .opcao').forEach((o, j) => { o.disabled = true; if (j !== k && !o.classList.contains('errada')) o.classList.add('apagada'); });
-  const t = jogo.equipes[atual.timeAtual], meia = Math.ceil(c.pts / 2);
-  const pts = atual.rebote ? meia : c.pts;
-  let extra = '';
-  if (jogo.modo === 'velha') extra = `${t.m} A casa ${atual.i + 1} agora é de ${t.nome}.`;
+  const t = jogo.equipes[atual.timeAtual], meia = Math.ceil(c.pts / 2), m = jogo.modo;
+  let pts = atual.rebote ? meia : c.pts, extra = '', passos = 0;
+  if (m === 'velha') extra = `${t.m} A casa ${atual.i + 1} agora é de ${t.nome}.`;
+  if (m === 'corrida'){ passos = atual.rebote ? Math.ceil(c.passos / 2) : c.passos; extra = `🏃 ${t.m} ${t.nome} anda ${passos} ${passos === 1 ? 'casa' : 'casas'} na trilha!`; }
+  if (m === 'palavra') extra = '🔤 Uma letra da palavra secreta vai aparecer!';
+  if (m === 'roleta' && jogo.dobro === atual.timeOriginal && !atual.rebote){ pts *= 2; extra = `⭐ Valeu o dobro: +${pts} pontos!`; }
   t.acertos++;
-  atual.acertou = {time: atual.timeAtual, pts};
+  atual.acertou = {time: atual.timeAtual, pts, passos};
   c.feita = {time: atual.timeAtual, ok: true};
-  som('acerto'); confete(true); anunciar(`Resposta certa! +${pts} pontos para ${t.nome}.`);
+  som('acerto'); confete(true); anunciar(m === 'corrida' ? `Resposta certa! ${t.nome} anda ${passos} ${passos === 1 ? 'casa' : 'casas'}.` : `Resposta certa! +${pts} pontos para ${t.nome}.`);
   if (animar()) gsap.fromTo(b, {scale: 1}, {scale: 1.04, duration: .18, yoyo: true, repeat: 1});
   mostrarExplicacao(true, extra);
 }
@@ -1226,7 +2037,7 @@ function errou(k){
     $$('#pOpcoes .opcao').forEach(o => { o.disabled = true; });
     const prox = (atual.timeAtual + 1) % jogo.equipes.length, e = jogo.equipes[prox];
     atual.proxRebote = prox;
-    $('#btnRebote').innerHTML = `🏀 Rebote para ${e.m} ${esc(e.nome)} (vale ${Math.ceil(atual.c.pts / 2)})`;
+    $('#btnRebote').innerHTML = `🏀 Rebote para ${e.m} ${esc(e.nome)} (${jogo.modo === 'corrida' ? 'anda ' + Math.ceil(atual.c.passos / 2) : 'vale ' + Math.ceil(atual.c.pts / 2)})`;
     $('#btnRebote').hidden = false; $('#btnRevelar').hidden = false;
     $('#btnRebote').focus({preventScroll: true});
     anunciar((k === null ? 'Tempo esgotado! ' : 'Resposta errada. ') + 'Rebote ou mostrar a resposta?');
@@ -1337,7 +2148,7 @@ function clicarMemoria(i){
       a.virada = b.virada = false;
       t.acertos++;
       redesenharCarta(ia); redesenharCarta(ib);
-      som('acerto'); somarPontos(jogo.vez, 10);
+      som('acerto'); somarPontos(jogo.vez, 10); registrarHistorico();
       anunciar(`Par certo! +10 para ${t.nome}. A equipe joga de novo.`);
       mm.abertas = []; mm.trava = false; atualizarProgresso();
       if (jogo.cartas.every(x => x.achada)){ jogo.encerrado = true; atualizarVez(); setTimeout(mostrarFim, animar() ? 1300 : 0); }
@@ -1348,7 +2159,7 @@ function clicarMemoria(i){
     setTimeout(() => {
       [ia, ib].forEach(k => { jogo.cartas[k].virada = false; const e2 = $(`#tabuleiro .carta[data-i="${k}"]`); if (e2) e2.classList.remove('virada'); });
       mm.abertas = []; mm.trava = false;
-      jogo.vez = (jogo.vez + 1) % jogo.equipes.length; atualizarVez();
+      jogo.vez = (jogo.vez + 1) % jogo.equipes.length; atualizarVez(); registrarHistorico();
       anunciar('Não formam par. Vez de ' + jogo.equipes[jogo.vez].nome + '.');
     }, animar() ? 1500 : 400);
   }
@@ -1364,7 +2175,7 @@ function fecharPainel(depois){
   gsap.to(painel, {scale: .94, opacity: 0, duration: .22, ease: 'power2.in', onComplete: () => { gsap.set(painel, {clearProps: 'scale,opacity'}); fim(); }});
 }
 function fecharSemResponder(){
-  if (!atual || atual.tentou || (jogo.modo === 'sequencia')) return;
+  if (!atual || atual.tentou || ['sequencia', 'corrida', 'roleta'].includes(jogo.modo)) return;
   if (atual.respondida && jogo.modo !== 'redacao') return;
   if (jogo.modo === 'redacao' && atual.respondida){ proxima(); return; }
   const i = atual.i;
@@ -1377,14 +2188,19 @@ function proxima(){
   fecharPainel(() => {
     atual = null;
     const m = jogo.modo;
-    redesenharCarta(a.i, true);
+    if (a.i >= 0 && m !== 'corrida') redesenharCarta(a.i, true);
     if (m === 'redacao'){
       atualizarProgresso();
       if (jogo.cartas.every(c => c.feita)) setTimeout(mostrarFim, animar() ? 900 : 0);
       return;
     }
-    jogo.vez = (a.timeOriginal + 1) % jogo.equipes.length;
-    if (a.acertou) somarPontos(a.acertou.time, a.acertou.pts); else atualizarVez();
+    const prox = a.passaVez === false ? a.timeOriginal : (a.timeOriginal + 1) % jogo.equipes.length;
+    if (m === 'corrida'){ seguirCorrida(a, prox); return; }
+    jogo.vez = prox;
+    if (a.acertou && a.acertou.pts) somarPontos(a.acertou.time, a.acertou.pts); else atualizarVez();
+    registrarHistorico();
+    if (m === 'palavra'){ seguirPalavra(a); return; }
+    if (m === 'roleta'){ seguirRoleta(a); return; }
     if (m === 'sequencia') jogo.seq = a.i + 1;
     atualizarProgresso();
     if (m === 'velha' && a.acertou){
@@ -1393,7 +2209,7 @@ function proxima(){
         jogo.vencedor = dono; jogo.encerrado = true;
         linha.forEach(k => { jogo.cartas[k].linha = true; redesenharCarta(k); });
         jogo.cartas.forEach((c, k) => { if (!c.feita){ c.feita = {time: dono, ok: false, marca: 'fechada'}; redesenharCarta(k); } });
-        setTimeout(() => { somarPontos(dono, 10); som('fim'); }, animar() ? 700 : 0);
+        setTimeout(() => { somarPontos(dono, 10); registrarHistorico(); som('fim'); }, animar() ? 700 : 0);
         atualizarVez();
         setTimeout(mostrarFim, animar() ? 2300 : 0);
         return;
@@ -1413,7 +2229,7 @@ function mostrarFim(){
   if (atual){ pararTimer(); $('#palco').classList.remove('ativo'); atual = null; }
   jogo.encerrado = true;
   const m = jogo.modo, titulo = $('#fimTitulo'), sub = $('#fimSub');
-  $('#listaRed').hidden = m !== 'redacao'; $('#btnCopiarLista').hidden = m !== 'redacao';
+  $('#listaRed').hidden = m !== 'redacao'; $('#btnCopiarLista').hidden = m !== 'redacao'; $('#graficoFim').hidden = true;
   $('#podio').innerHTML = $('#outros').innerHTML = $('#estatisticas').innerHTML = '';
   sub.hidden = true;
   if (m === 'redacao'){
@@ -1425,22 +2241,27 @@ function mostrarFim(){
     if (animar()) gsap.from('.lista-red .item', {y: 16, opacity: 0, stagger: .05, duration: .35, clearProps: 'transform,opacity'});
     return;
   }
-  const ord = jogo.equipes.map((t, i) => Object.assign({i}, t)).sort((a, b) => b.pts - a.pts || b.acertos - a.acertos || a.i - b.i);
+  const ord = jogo.equipes.map((t, i) => Object.assign({i}, t)).sort((a, b) => valorRank(b) - valorRank(a) || b.pts - a.pts || b.acertos - a.acertos || a.i - b.i);
+  const marca = t => m === 'corrida' ? (t.pos >= jogo.trilha ? '🏁 chegou' : `casa ${t.pos}`) : `${t.pts} pts`;
   titulo.innerHTML = `${ico('trofeu')}Resultado`;
   if (m === 'velha' && jogo.vencedor !== undefined){ const v = jogo.equipes[jogo.vencedor]; titulo.innerHTML = `${ico('trofeu')}Vitória de ${v.m} ${esc(v.nome)}!`; sub.hidden = false; sub.textContent = 'Linha completa no Jogo da Velha (+10).'; }
   else if (m === 'velha'){ sub.hidden = false; sub.textContent = 'Deu velha: ninguém fechou uma linha. Vence quem fez mais pontos.'; }
+  else if (m === 'corrida' && jogo.vencedor !== undefined){ const v = jogo.equipes[jogo.vencedor]; titulo.innerHTML = `🏁 Vitória de ${v.m} ${esc(v.nome)}!`; sub.hidden = false; sub.textContent = `Primeira equipe a cruzar a chegada da trilha de ${jogo.trilha} casas.`; }
+  else if (m === 'corrida'){ sub.hidden = false; sub.textContent = 'Ninguém cruzou a chegada: vence quem foi mais longe na trilha.'; }
+  else if (m === 'palavra'){ sub.hidden = false; sub.innerHTML = (jogo.palavras.length > 1 ? 'Palavras secretas: ' : 'Palavra secreta: ') + jogo.palavras.map(w => `<b>${esc(w.palavra)}</b> (${w.quem != null ? jogo.equipes[w.quem].m + ' ' + esc(jogo.equipes[w.quem].nome) : w.resolvida ? 'apareceu inteira' : 'ninguém descobriu'})`).join(' · '); }
   const lugares = [1, 0, 2].filter(k => ord[k]);
   $('#podio').innerHTML = lugares.map(k => { const t = ord[k]; return `<div class="degrau p${k + 1}" style="${varsCor(t.cor)}">
-      <span class="masc">${t.m}</span><span class="nome">${esc(t.nome)}</span><span class="pts">${t.pts} pts</span><div class="bloco">${k + 1}º</div></div>`; }).join('');
-  $('#outros').innerHTML = ord.slice(3).map((t, k) => `<div class="outro"><span>${k + 4}º</span><span class="m">${t.m}</span><span>${esc(t.nome)}</span><b>${t.pts} pts</b></div>`).join('');
+      <span class="masc">${t.m}</span><span class="nome">${esc(t.nome)}</span><span class="pts">${marca(t)}</span><div class="bloco">${k + 1}º</div></div>`; }).join('');
+  $('#outros').innerHTML = ord.slice(3).map((t, k) => `<div class="outro"><span>${k + 4}º</span><span class="m">${t.m}</span><span>${esc(t.nome)}</span><b>${marca(t)}</b></div>`).join('');
   const rotAc = m === 'memoria' ? ['par', 'pares'] : ['acerto', 'acertos'], rotEr = m === 'memoria' ? ['tentativa errada', 'tentativas erradas'] : ['erro', 'erros'];
   $('#estatisticas').innerHTML = ord.map(t => `<div class="est" style="--cor:${t.cor}">${t.m} <b>${esc(t.nome)}</b> · ✔ ${t.acertos} ${rotAc[t.acertos === 1 ? 0 : 1]} · ✘ ${t.erros} ${rotEr[t.erros === 1 ? 0 : 1]}</div>`).join('');
   mostrarTela('telaFim');
   som('fim');
+  desenharGrafico();
   if (animar()){
     gsap.from('#podio .bloco', {height: 0, duration: .9, stagger: .18, ease: 'back.out(1.4)', clearProps: 'height'});
     gsap.from('#podio .masc, #podio .nome, #podio .pts', {y: -30, opacity: 0, duration: .5, stagger: .06, delay: .5, ease: 'back.out(2)', clearProps: 'transform,opacity'});
-    gsap.from('.est, .outro, .fim-botoes', {y: 20, opacity: 0, duration: .4, stagger: .05, delay: .9, clearProps: 'transform,opacity'});
+    gsap.from('.est, .outro, .grafico-fim, .fim-botoes', {y: 20, opacity: 0, duration: .4, stagger: .05, delay: .9, clearProps: 'transform,opacity'});
     setTimeout(() => confete(false), 700);
   }
 }
@@ -1459,7 +2280,7 @@ document.addEventListener('click', e => {
 });
 if (!(document.fullscreenEnabled || document.webkitFullscreenEnabled)) $$('[data-acao="cheia"]').forEach(b => { b.hidden = true; });
 const pintarSom = () => $$('[data-acao="som"]').forEach(b => { b.querySelector('svg').outerHTML = ico(cfg.som ? 'som' : 'mudo'); b.querySelector('.rot').textContent = cfg.som ? 'Som' : 'Sem som'; });
-const pintarCheia = () => { const cheio = document.fullscreenElement || document.webkitFullscreenElement; $$('[data-acao="cheia"]').forEach(b => { b.querySelector('svg').outerHTML = ico(cheio ? 'sairCheia' : 'cheia'); b.querySelector('.rot').textContent = cheio ? 'Sair' : 'Tela cheia'; }); setTimeout(ajustarTabuleiro, 80); };
+const pintarCheia = () => { const cheio = document.fullscreenElement || document.webkitFullscreenElement; $$('[data-acao="cheia"]').forEach(b => { b.querySelector('svg').outerHTML = ico(cheio ? 'sairCheia' : 'cheia'); b.querySelector('.rot').textContent = cheio ? 'Sair' : 'Tela cheia'; }); setTimeout(() => { ajustarTabuleiro(); redesenharCena(); }, 80); };
 document.addEventListener('fullscreenchange', pintarCheia); document.addEventListener('webkitfullscreenchange', pintarCheia);
 $('#busca').oninput = desenharBancos;
 $$('.aba').forEach(a => a.onclick = () => { cfg.fonte = a.dataset.fonte; salvarCfg(); desenharFonte(); desenharResumo(); if (cfg.fonte === 'json') $('#jsonTexto').focus(); });
@@ -1472,6 +2293,15 @@ $('#arquivoJson').onchange = () => {
   r.readAsText(f, 'utf-8'); $('#arquivoJson').value = '';
 };
 $('#btnModelo').onclick = () => copiarTexto(JSON.stringify(modeloDoModo(), null, 2), '📋 Modelo copiado. Cole no bloco de notas ou numa IA e troque as perguntas.');
+$('#btnBaixarModelo').onclick = () => {
+  const txt = JSON.stringify(modeloDoModo(), null, 2), nome = `modelo-portuguescards-${cfg.modo}.json`;
+  try {
+    const url = URL.createObjectURL(new Blob([txt], {type: 'application/json'})), a = document.createElement('a');
+    a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    anunciarVisivel('⬇️ Modelo baixado: ' + nome);
+  } catch (e) { copiarTexto(txt, '📋 Não deu para baixar; o modelo foi copiado.'); }
+};
 $('#btnPrompt').onclick = () => { $('#promptIa').hidden = !$('#promptIa').hidden; $('#iaTexto').textContent = pedidoIa(); };
 $('#iaTema').oninput = $('#iaQtd').oninput = () => { $('#iaTexto').textContent = pedidoIa(); };
 $('#btnCopiarPrompt').onclick = () => copiarTexto(pedidoIa(), '📋 Pedido copiado. Cole na IA e traga o JSON de volta.');
@@ -1491,8 +2321,9 @@ $('#btnDeNovo').onclick = () => { mostrarTela('telaInicio'); comecar(); };
 $('#btnVoltarInicio').onclick = () => { mostrarTela('telaInicio'); desenharEquipes(); desenharResumo(); };
 $('#btnCopiarLista').onclick = () => copiarTexto(jogo.cartas.map((c, i) => `${i + 1}. ${c.qz.q} — ${c.feita ? c.feita.aluno : 'sem aluno'}`).join('\n'), '📋 Lista copiada.');
 document.addEventListener('keydown', e => {
+  if (!atual && jogo && jogo.modo === 'roleta' && !jogo.encerrado && $('#telaJogo').classList.contains('ativa') && (e.key === ' ' || e.key === 'Enter') && !(e.target && e.target.closest && e.target.closest('button, input, textarea, select, a'))){ e.preventDefault(); girar(); return; }
   if (!atual || !$('#palco').classList.contains('ativo') || e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.target && e.target.id === 'redAluno'){ if (e.key === 'Escape'){ e.preventDefault(); fecharSemResponder(); } return; }
+  if (e.target && (e.target.id === 'redAluno' || e.target.id === 'arriscarTxt')){ if (e.key === 'Escape'){ e.preventDefault(); fecharSemResponder(); } return; }
   const k = e.key.toLowerCase(), letras = ['a', 'b', 'c', 'd'], idx = letras.indexOf(k) >= 0 ? letras.indexOf(k) : ['1', '2', '3', '4'].indexOf(k);
   if (idx >= 0 && !atual.respondida && !atual.especial){ e.preventDefault(); responder(idx); }
   else if ((k === 'enter' || k === ' ') && !$('#btnProxima').hidden){ e.preventDefault(); proxima(); }
@@ -1506,6 +2337,8 @@ aplicarCalmo(); aplicarTema(); pintarSom();
 desenharFonte(); desenharBancos(); desenharQtd(); desenharModos(); desenharEquipes(); desenharRegras(); desenharResumo();
 carregarBancos();
 window.PC2 = {cfg, jogo: () => jogo, atual: () => atual, abrirCarta, responder, fazerRebote, revelar, proxima, mostrarFim, clicarMemoria, bancos: () => BANCOS,
+  tirarCarta, girar, arriscar: abrirArriscar, conferirPalavra, dado: v => { forcarDado = v; }, grafico: () => grafico,
+  redesenhar: () => { desenharPlacar(); desenharCena(); desenharTabuleiro(); },
   lerJson, surpresa: v => { forcarSurpresa = v; }, definirJson: t => { jsonTexto = t; gravar('pc2_json', t); $('#jsonTexto').value = t; desenharStatusJson(); desenharResumo(); }};   // usado nos testes
 })();
 </script>
