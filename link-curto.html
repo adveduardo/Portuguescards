@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Link curto e QR Code</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#243049;background:#eef1f6;padding:10px 10px 30px}
+  h1{font-size:22px;margin:4px 0 4px}
+  .tela{max-width:1100px;margin:0 auto}
+  .dica{font-size:14px;color:#566078;margin:4px 0 8px}
+  .painel{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);margin:0 0 10px}
+  .rotulo{font-weight:bold;font-size:16px;margin:10px 0 6px}
+  .rotulo:first-child{margin-top:2px}
+  .rotulo small{font-weight:normal;color:#7a849a}
+  button{font:inherit;font-weight:bold;font-size:15px;border:2px solid #d8deea;border-radius:10px;padding:9px 13px;margin:3px;cursor:pointer;background:#fff;color:#243049;box-shadow:0 2px 0 rgba(0,0,0,.1)}
+  button.forte{background:#2f80ed;color:#fff;border-color:#2f80ed}
+  button.grande{font-size:18px;padding:12px 20px;margin:12px 0 2px}
+  button[disabled]{opacity:.45;cursor:default}
+  input[type=text],input[type=url]{font:inherit;font-size:16px;padding:8px 10px;border:2px solid #d8deea;border-radius:9px;background:#fff;color:#243049;width:100%;margin:0 0 6px}
+  .alertaGoogle{display:none;font-size:14px;background:#fff8d6;border:1px solid #f0d77a;border-radius:10px;padding:8px 10px;margin:0 0 6px}
+  .notaGoogle{font-size:14px;background:#eef4ff;border:1px solid #c9dafc;border-radius:10px;padding:8px 10px;margin:0 0 6px}
+  .opcoesGoogle label{display:block;margin:6px 0;font-size:15px;cursor:pointer;padding-left:30px;text-indent:-30px}
+  .opcoesGoogle input{width:20px;height:20px;margin:0 8px 0 2px;vertical-align:-4px}
+  .opcoesGoogle small{color:#566078}
+  details.ajuda{font-size:14px;background:#f6f8fb;border-radius:10px;padding:6px 10px;margin:4px 0 2px}
+  details.ajuda summary{cursor:pointer;font-weight:bold}
+  details.ajuda ol{margin:6px 0 4px;padding-left:22px}
+  details.ajuda li{margin:3px 0}
+  .apelidoLinha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center}
+  .apelidoLinha .prefixo{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;font-size:18px;font-weight:bold;color:#566078;margin-right:6px}
+  .apelidoLinha input{margin:0;font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace}
+  .resultado{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center}
+  .qr{width:280px;height:280px;margin:4px 16px 4px 0;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .qr svg,#telaoQR svg{display:block;width:100%;height:100%;shape-rendering:crispEdges}
+  .vazioQR{width:100%;height:100%;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;
+    border:3px dashed #c9d2e3;border-radius:14px;color:#7a849a;text-align:center;padding:20px;font-size:16px}
+  .ladoQR{-webkit-flex:1 1 300px;flex:1 1 300px;min-width:240px}
+  .tituloQR{font-size:24px;font-weight:bold;margin:0 0 4px}
+  .curto{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;font-size:36px;font-weight:bold;color:#1d4ed8;word-break:break-all;line-height:1.15;margin:2px 0}
+  .curto small{display:block;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;font-size:13px;color:#566078;font-weight:normal}
+  .esperando{font-size:16px;color:#566078;margin:6px 0}
+  .endereco{font-size:13px;color:#7a849a;word-break:break-all;margin:4px 0 8px}
+  .item{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;border-top:1px solid #e6eaf2;padding:8px 0}
+  .itemTexto{-webkit-flex:1 1 260px;flex:1 1 260px;min-width:200px;margin-right:8px}
+  .itemTexto b{display:block;font-size:16px}
+  .itemCurto{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;color:#1d4ed8;font-weight:bold;word-break:break-all}
+  .itemCurto.longo{color:#566078;font-weight:normal;font-size:13px}
+  .itemTexto small{display:block;color:#7a849a;font-size:12px}
+  .item button{padding:6px 10px;font-size:14px}
+  .telao{position:fixed;left:0;top:0;right:0;bottom:0;background:#fff;z-index:50;display:none;padding:2vh 2vw;overflow:auto}
+  .telaoConteudo{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;min-height:100%;text-align:center}
+  #telao.largo .telaoConteudo{-webkit-flex-direction:row;flex-direction:row}
+  #telaoQR{margin:1vh 2vw;-webkit-flex:0 0 auto;flex:0 0 auto}
+  .telaoTextos{-webkit-flex:0 0 auto;flex:0 0 auto;margin:1vh 2vw}
+  #telaoTitulo{font-size:40px;font-weight:bold;line-height:1.15;margin:0 0 2vh}
+  .telaoDica{font-size:24px;color:#566078;line-height:1.3}
+  #telaoCurto{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;font-size:64px;font-weight:bold;color:#1d4ed8;word-break:break-all;line-height:1.1;margin:.5vh 0 2vh}
+  #telaoEnd{font-size:18px;color:#333;word-break:break-all;margin:1vh 0}
+  #telaoFechar{position:absolute;right:10px;top:10px;z-index:2}
+  #avisoFlutuante{position:fixed;left:50%;bottom:16px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:60;background:#243049;color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;display:none;max-width:92%;text-align:center}
+  #impressao{display:none}
+  @media print{
+    @page{margin:12mm}
+    html.visual-adulto body:not(.escuro),body{background:#fff !important;padding:0}
+    .tela,.telao,#avisoFlutuante{display:none !important}
+    #impressao{display:block;color:#000;font-family:Arial,Helvetica,sans-serif}
+    .cartaz{text-align:center;padding-top:.8cm}
+    .cTitulo{font-size:30pt;font-weight:bold;margin-bottom:.5cm}
+    .cQR{width:13cm;height:13cm;margin:0 auto}
+    .cQR svg{display:block;width:100%;height:100%}
+    .cInstr{font-size:17pt;margin-top:.5cm}
+    .cCurto{font-size:30pt;font-weight:bold;margin-top:.3cm;font-family:"Courier New",monospace}
+    .cEnd{font-size:10pt;margin-top:.4cm;word-break:break-all;color:#333}
+  }
+</style>
+<script src="visual.js"></script>
+<script src="qrcode-lib.js"></script>
+</head>
+<body>
+<div class="tela">
+  <h1>🔗 Link curto e QR Code para a turma</h1>
+  <p class="dica">Cole o link de um arquivo do Google Drive (PDF, Docs, Slides…), de um formulário ou de um vídeo. O painel cria um <b>link curto</b> para os alunos digitarem e um <b>QR Code</b> para apontarem a câmera.</p>
+
+  <div class="painel">
+    <p class="rotulo">1. Cole o link</p>
+    <input type="url" id="link" placeholder="https://drive.google.com/file/d/…" aria-label="Link" autocomplete="off" spellcheck="false">
+    <div class="alertaGoogle" id="alertaGoogle">⚠️ No Google Drive, abra <b>Compartilhar</b> e mude o acesso para <b>"Qualquer pessoa com o link"</b> (Leitor). Se ficar "Restrito", os alunos veem "Solicitar acesso".</div>
+    <div class="opcoesGoogle" id="opcoesGoogle"></div>
+    <details class="ajuda">
+      <summary>📄 Como pegar o link de um PDF no Google Drive</summary>
+      <ol>
+        <li>Entre em <b>drive.google.com</b>, clique em <b>+ Novo → Upload de arquivo</b> e escolha o PDF.</li>
+        <li>Clique com o botão direito no arquivo e escolha <b>Compartilhar</b>.</li>
+        <li>Em <b>Acesso geral</b>, troque <b>Restrito</b> por <b>Qualquer pessoa com o link</b> (Leitor).</li>
+        <li>Clique em <b>Copiar link</b> e cole aqui em cima.</li>
+      </ol>
+      No celular: toque nos <b>⋮</b> do arquivo → <b>Compartilhar</b> → <b>Gerenciar acesso</b>.
+      O arquivo continua no seu Drive: o painel não guarda arquivos. Quem tiver o link consegue abrir, então não use para documentos com dados pessoais dos alunos.
+    </details>
+
+    <p class="rotulo">2. Nome do material <small>(aparece no telão; se quiser)</small></p>
+    <input type="text" id="titulo" maxlength="80" placeholder="ex.: Texto: A Cigarra e a Formiga" aria-label="Nome do material">
+
+    <p class="rotulo">3. Nome do link curto <small>(se quiser)</small></p>
+    <div class="apelidoLinha"><span class="prefixo">is.gd/</span><input type="text" id="apelido" maxlength="40" placeholder="ex.: cigarra7ano" aria-label="Nome do link curto" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+    <p class="dica" id="dicaApelido"></p>
+
+    <button type="button" id="btnCriar" class="forte grande">✂️ Criar link curto e QR Code</button>
+  </div>
+
+  <div class="painel resultado">
+    <div class="qr" id="qr"></div>
+    <div class="ladoQR">
+      <div class="tituloQR" id="tituloQR"></div>
+      <div id="curtoBox"></div>
+      <div class="endereco" id="endereco"></div>
+      <div>
+        <button type="button" id="btnTela" class="forte precisaLink">🖥️ Mostrar grande no telão</button>
+        <button type="button" id="btnCopiar" class="precisaLink">📋 Copiar o link</button>
+        <button type="button" id="btnCartaz" class="precisaLink">🖨️ Imprimir cartaz</button>
+        <button type="button" id="btnAbrir" class="precisaLink">↗️ Testar o link</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="painel">
+    <p class="rotulo">📚 Meus links <small>(ficam guardados neste computador)</small></p>
+    <div id="lista"></div>
+  </div>
+  <p class="dica">💡 O link curto não expira. Para tirar o acesso dos alunos, pare de compartilhar o arquivo no Google Drive.</p>
+</div>
+
+<div class="telao" id="telao">
+  <button type="button" id="telaoFechar">✖ Fechar</button>
+  <div class="telaoConteudo">
+    <div id="telaoQR"></div>
+    <div class="telaoTextos">
+      <div id="telaoTitulo"></div>
+      <div class="telaoDica" id="telaoDigite">Digite no navegador:</div>
+      <div id="telaoCurto"></div>
+      <div id="telaoEnd"></div>
+      <div class="telaoDica">📷 ou aponte a câmera para o código</div>
+    </div>
+  </div>
+</div>
+<div id="impressao"></div>
+<div id="avisoFlutuante"></div>
+
+<script src="jogo-ao-vivo.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var CHAVE_LISTA = 'links_turma', CHAVE_FORM = 'links_turma_form';
+  var urlFinal = '', curtoAtual = '', tituloAtual = '', criando = false, modo = 'normal', tipoGoogle = '';
+  var temQR = typeof qrcode !== 'undefined';
+  if (temQR) qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+
+  var ACENTOS = {'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+    'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', 'ñ': 'n'};
+  function semAcento(t){ return String(t).toLowerCase().replace(/[áàâãäéèêëíìîïóòôõöúùûüçñ]/g, function(c){ return ACENTOS[c]; }); }
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  function aparar(s){ return String(s == null ? '' : s).replace(/^\s+|\s+$/g, ''); }
+  function semProt(u){ return String(u || '').replace(/^https?:\/\//i, '').replace(/\/+$/, ''); }
+  function avisar(t){ var a = $('avisoFlutuante'); a.innerHTML = t; a.style.display = 'block'; clearTimeout(avisar.t); avisar.t = setTimeout(function(){ a.style.display = 'none'; }, 4200); }
+  function lerLS(k){ try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }
+  function gravarLS(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  // ---------- links do Google: avisos e versão em PDF ----------
+  function analisarGoogle(u){
+    var m;
+    if ((m = /^https?:\/\/drive\.google\.com\/(?:file\/(?:u\/\d+\/)?d\/|open\?(?:[^#]*&)?id=|uc\?(?:[^#]*&)?id=)([\-\w]{15,})/i.exec(u)))
+      return {tipo: 'arquivo', pdf: 'https://drive.google.com/uc?export=download&id=' + m[1]};
+    if ((m = /^https?:\/\/docs\.google\.com\/(document|presentation|spreadsheets)\/(?:u\/\d+\/)?d\/([\-\w]{15,})/i.exec(u))){
+      var base = 'https://docs.google.com/' + m[1].toLowerCase() + '/d/' + m[2];
+      return {tipo: m[1].toLowerCase(), pdf: base + (m[1].toLowerCase() === 'presentation' ? '/export/pdf' : '/export?format=pdf')};
+    }
+    if (/^https?:\/\/drive\.google\.com\/drive\/(?:u\/\d+\/)?folders\//i.test(u)) return {tipo: 'pasta'};
+    if (/^https?:\/\/(?:docs\.google\.com\/forms\/|forms\.gle\/)/i.test(u)) return {tipo: 'formulario'};
+    if (/^https?:\/\/(?:drive|docs)\.google\.com\//i.test(u)) return {tipo: 'google'};
+    return null;
+  }
+  var NOMES_PDF = {arquivo: '📄 Abrir o arquivo direto, sem a tela do Google Drive <small>(melhor para PDF nos iPads antigos)</small>',
+    document: '📄 Abrir como PDF <small>(os alunos não precisam de conta Google)</small>',
+    presentation: '📄 Abrir os slides como PDF <small>(os alunos não precisam de conta Google)</small>',
+    spreadsheets: '📄 Abrir a planilha como PDF <small>(os alunos não precisam de conta Google)</small>'};
+  function desenharOpcoes(g){
+    var tipo = g ? g.tipo : '';
+    $('alertaGoogle').style.display = g && tipo !== 'formulario' ? 'block' : 'none';
+    if (tipo === tipoGoogle) return;   // só refaz quando muda o tipo (não perde a escolha)
+    tipoGoogle = tipo; modo = 'normal';
+    var h = '';
+    if (g && g.pdf) h = '<label><input type="radio" name="modo" value="normal" checked>🌐 Abrir no Google, como está</label>' +
+      '<label><input type="radio" name="modo" value="pdf">' + NOMES_PDF[tipo] + '</label>';
+    else if (tipo === 'pasta') h = '<div class="notaGoogle">📁 Este link é de uma <b>pasta</b>: os alunos veem a lista de arquivos. Para um arquivo só, abra o arquivo no Drive e copie o link dele.</div>';
+    else if (tipo === 'formulario') h = '<div class="notaGoogle">📝 <b>Formulário:</b> em Configurações, confira se ele não está limitado a contas da escola. Se estiver, os alunos precisam entrar com a conta para responder.</div>';
+    $('opcoesGoogle').innerHTML = h;
+  }
+  $('opcoesGoogle').onclick = function(e){ var t = e.target; if (t && t.name === 'modo' && t.value !== modo){ modo = t.value; atualizar(); } };
+
+  // ---------- endereço, QR e link curto ----------
+  function lerLink(){
+    var l = aparar($('link').value);
+    if (l && !/^[a-z][a-z0-9+.\-]*:/i.test(l) && /^[^\s\/]+\.[^\s]+$/.test(l)) l = 'https://' + l;
+    return /^https?:\/\/[^\s\/]+\.[^\s]+$/i.test(l) ? l : '';
+  }
+  function apelidoLimpo(){ return semAcento(aparar($('apelido').value)).replace(/\s+/g, '').replace(/[^a-z0-9_]/g, '').slice(0, 30); }
+  function desenharApelido(){
+    var a = apelidoLimpo(), bruto = aparar($('apelido').value), d = $('dicaApelido');
+    if (!bruto) d.innerHTML = 'Um nome fácil de digitar (só letras sem acento, números e _). Em branco, o is.gd escolhe um nome.';
+    else if (a.length < 5) d.innerHTML = '✏️ Faltam ' + (5 - a.length) + (5 - a.length === 1 ? ' letra' : ' letras') + ': o nome precisa ter pelo menos 5.';
+    else d.innerHTML = 'Vai ficar assim: <b>is.gd/' + esc(a) + '</b>' + (a !== bruto ? ' (sem acentos, espaços e maiúsculas)' : '');
+  }
+  function guardadoPara(u){ var l = lista(); for (var i = 0; i < l.length; i++) if (l[i].u === u) return l[i]; return null; }
+  function svgQR(texto){ var qr = qrcode(0, 'M'); qr.addData(texto); qr.make(); return qr.createSvgTag({cellSize: 1, margin: 4, scalable: true}); }
+  function atualizar(){
+    var l = lerLink(), g = l ? analisarGoogle(l) : null;
+    desenharOpcoes(g);
+    var url = !l ? '' : (modo === 'pdf' && g && g.pdf ? g.pdf : l);
+    if (url !== urlFinal){ urlFinal = url; var e = url ? guardadoPara(url) : null; curtoAtual = e && e.c ? e.c : ''; }
+    tituloAtual = aparar($('titulo').value);
+    desenharApelido();
+    desenharResultado();
+    gravarLS(CHAVE_FORM, {link: $('link').value, titulo: $('titulo').value, apelido: $('apelido').value});
+  }
+  function desenharResultado(){
+    var msg = aparar($('link').value) ? 'Esse link não parece um endereço de internet (deve começar com https://)' : 'Cole um link para ver o QR Code', okQR = false;
+    if (urlFinal && temQR){ try { $('qr').innerHTML = svgQR(urlFinal); okQR = true; } catch (e){ msg = 'Esse link é grande demais para caber num QR Code. Crie o link curto.'; } }
+    else if (urlFinal) msg = 'Não consegui carregar o gerador de QR Code. Recarregue a página.';
+    if (!okQR) $('qr').innerHTML = '<div class="vazioQR">' + esc(msg) + '</div>';
+    $('tituloQR').innerHTML = urlFinal ? esc(tituloAtual) : '';
+    $('curtoBox').innerHTML = !urlFinal ? '' : criando ? '<p class="esperando">⏳ Criando o link curto…</p>'
+      : curtoAtual ? '<div class="curto">' + esc(semProt(curtoAtual)) + '<small>Os alunos digitam isso no navegador do iPad, Chromebook ou celular.</small></div>'
+      : '<p class="esperando">Clique em <b>✂️ Criar link curto e QR Code</b> para ter um endereço pequeno.</p>';
+    $('endereco').innerHTML = urlFinal ? esc(semProt(urlFinal)) : '';
+    var bs = document.querySelectorAll('.precisaLink');
+    for (var i = 0; i < bs.length; i++) bs[i].disabled = !urlFinal;
+    $('btnCriar').disabled = criando;
+  }
+  function criar(){
+    atualizar();
+    if (!urlFinal){ avisar(aparar($('link').value) ? 'Esse link não parece um endereço de internet.' : 'Cole um link primeiro.'); $('link').focus(); return; }
+    var ap = apelidoLimpo();
+    if (aparar($('apelido').value) && ap.length < 5){ avisar('O nome do link precisa ter pelo menos 5 letras ou números (ou deixe em branco).'); $('apelido').focus(); return; }
+    if (!window.AoVivo || !window.AoVivo.encurtar){ guardar(urlFinal, '', tituloAtual); avisar('Este navegador não consegue criar o link curto. O QR Code funciona e ficou na sua lista.'); return; }
+    var alvo = urlFinal, titulo = tituloAtual;
+    criando = true; desenharResultado();
+    window.AoVivo.encurtar(alvo, ap ? [ap] : [], {semGuardado: !!ap}).then(function(c){
+      criando = false; guardar(alvo, c, titulo);
+      if (urlFinal === alvo) curtoAtual = c;
+      desenharResultado();
+      if (ap && semProt(c) !== 'is.gd/' + ap) avisar('O nome <b>' + esc(ap) + '</b> já era de outra pessoa. O is.gd escolheu <b>' + esc(semProt(c)) + '</b>. Se quiser, tente outro nome.');
+      else avisar('🔗 Link curto pronto: <b>' + esc(semProt(c)) + '</b>');
+    }, function(e){
+      criando = false; guardar(alvo, '', titulo); desenharResultado();
+      var m = e && e.message;
+      avisar(m === 'limite' ? 'O is.gd pediu uma pausa. Tente de novo daqui a alguns minutos. O QR Code já funciona.'
+        : m === 'recusado' ? 'O is.gd não aceitou encurtar este endereço. O QR Code funciona e ficou na sua lista.'
+        : 'Não consegui criar o link curto agora (sem internet, ou a rede da escola bloqueia o is.gd). O QR Code funciona e ficou na sua lista.');
+    });
+  }
+  $('btnCriar').onclick = criar;
+  $('link').oninput = atualizar; $('link').onchange = atualizar;
+  $('titulo').oninput = atualizar;
+  $('apelido').oninput = atualizar;
+  $('apelido').onkeydown = $('titulo').onkeydown = $('link').onkeydown = function(e){ if (e.keyCode === 13) criar(); };
+
+  // ---------- meus links ----------
+  function lista(){ var l = lerLS(CHAVE_LISTA); return Object.prototype.toString.call(l) === '[object Array]' ? l : []; }
+  function guardar(u, c, t){
+    var l = lista(), e = null;
+    for (var i = 0; i < l.length; i++) if (l[i].u === u){ e = l.splice(i, 1)[0]; break; }
+    e = e || {u: u};
+    if (c) e.c = c;
+    if (t) e.t = t;
+    e.d = new Date().getTime();
+    l.unshift(e); if (l.length > 100) l.length = 100;
+    gravarLS(CHAVE_LISTA, l); desenharLista();
+  }
+  function quando(d){
+    if (!d) return '';
+    var x = new Date(d), dd = x.getDate(), mm = x.getMonth() + 1;
+    return 'criado em ' + (dd < 10 ? '0' : '') + dd + '/' + (mm < 10 ? '0' : '') + mm + '/' + x.getFullYear();
+  }
+  function desenharLista(){
+    var l = lista(), h = '';
+    if (!l.length){ $('lista').innerHTML = '<p class="dica">Os links que você criar aparecem aqui, para mostrar de novo em outra aula.</p>'; return; }
+    for (var i = 0; i < l.length; i++){
+      var e = l[i];
+      h += '<div class="item" data-i="' + i + '"><div class="itemTexto"><b>' + esc(e.t || 'Sem nome') + '</b>' +
+        '<span class="itemCurto' + (e.c ? '' : ' longo') + '">' + esc(semProt(e.c || e.u)) + '</span><small>' + quando(e.d) + (e.c ? '' : ' · sem link curto (o QR Code funciona)') + '</small></div>' +
+        '<div><button type="button" data-acao="telao">🖥️ Telão</button><button type="button" data-acao="abrir">✏️ Abrir</button>' +
+        '<button type="button" data-acao="copiar" title="Copiar o link">📋</button><button type="button" data-acao="apagar" title="Apagar da lista">🗑️</button></div></div>';
+    }
+    $('lista').innerHTML = h;
+  }
+  function carregar(e){
+    $('link').value = e.u; $('titulo').value = e.t || ''; $('apelido').value = '';
+    tipoGoogle = 'recarregar'; urlFinal = '';
+    atualizar();
+  }
+  $('lista').onclick = function(ev){
+    var b = ev.target;
+    while (b && b !== this && !(b.getAttribute && b.getAttribute('data-acao'))) b = b.parentNode;
+    if (!b || b === this) return;
+    var item = b;
+    while (item && item !== this && !item.getAttribute('data-i')) item = item.parentNode;
+    var l = lista(), e = l[+item.getAttribute('data-i')], acao = b.getAttribute('data-acao');
+    if (!e) return;
+    if (acao === 'abrir'){ carregar(e); try { window.scrollTo(0, 0); } catch (x) {} }
+    else if (acao === 'telao'){ carregar(e); mostrarTelao(); }
+    else if (acao === 'copiar') copiar(e.c || e.u);
+    else if (acao === 'apagar' && window.confirm('Apagar "' + (e.t || semProt(e.c || e.u)) + '" da lista? (O link continua funcionando.)')){
+      l.splice(+item.getAttribute('data-i'), 1); gravarLS(CHAVE_LISTA, l); desenharLista();
+    }
+  };
+
+  // ---------- telão ----------
+  function telaoAberto(){ return $('telao').style.display === 'block'; }
+  // telão largo (projetor): QR à esquerda e textos à direita; estreito: um embaixo do outro. As letras se ajustam ao espaço.
+  function tamanhoTelao(){
+    var w = window.innerWidth, h = window.innerHeight, largo = w > h * 1.15;
+    var lado = Math.floor(largo ? Math.min(h * 0.8, w * 0.42) : Math.min(w * 0.84, h * 0.48));
+    var texto = Math.floor(largo ? w * 0.86 - lado - 20 : w * 0.9), curto = $('telaoCurto').textContent || '';
+    $('telao').className = 'telao' + (largo ? ' largo' : '');
+    $('telaoQR').style.width = lado + 'px'; $('telaoQR').style.height = lado + 'px';
+    $('telaoTitulo').parentNode.style.width = texto + 'px';
+    $('telaoCurto').style.fontSize = Math.floor(Math.min(h * (largo ? 0.13 : 0.085), texto / Math.max(8, curto.length * 0.62))) + 'px';
+    $('telaoTitulo').style.fontSize = Math.floor(Math.min(h * (largo ? 0.075 : 0.05), texto / 11)) + 'px';
+    var dicas = document.querySelectorAll('.telaoDica'), fd = Math.floor(Math.min(h * 0.04, texto / 22)) + 'px';
+    for (var i = 0; i < dicas.length; i++) dicas[i].style.fontSize = fd;
+    $('telaoEnd').style.fontSize = Math.floor(Math.min(h * 0.03, texto / 38)) + 'px';
+  }
+  function mostrarTelao(){
+    if (!urlFinal) return;
+    $('telaoTitulo').innerHTML = esc(tituloAtual);
+    $('telaoTitulo').style.display = tituloAtual ? '' : 'none';
+    $('telaoCurto').innerHTML = curtoAtual ? esc(semProt(curtoAtual)) : '';
+    $('telaoCurto').style.display = $('telaoDigite').style.display = curtoAtual ? '' : 'none';
+    $('telaoEnd').innerHTML = curtoAtual ? '' : esc(semProt(urlFinal));
+    $('telaoQR').innerHTML = temQR ? (function(){ try { return svgQR(urlFinal); } catch (e) { return ''; } })() : '';
+    $('telao').style.display = 'block'; tamanhoTelao();
+    var el = $('telao'), pedir = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (pedir) try { var p = pedir.call(el); if (p && p['catch']) p['catch'](function(){}); } catch (e) {}
+  }
+  function telaCheia(){ return document.fullscreenElement || document.webkitFullscreenElement; }
+  function fecharTelao(){
+    $('telao').style.display = 'none';
+    if (telaCheia()){ var sair = document.exitFullscreen || document.webkitExitFullscreen; if (sair) try { var p = sair.call(document); if (p && p['catch']) p['catch'](function(){}); } catch (e) {} }
+  }
+  function aoMudarTelaCheia(){ if (!telaCheia() && telaoAberto()) fecharTelao(); else if (telaoAberto()) setTimeout(tamanhoTelao, 60); }
+  document.addEventListener('fullscreenchange', aoMudarTelaCheia);
+  document.addEventListener('webkitfullscreenchange', aoMudarTelaCheia);
+  $('btnTela').onclick = mostrarTelao;
+  $('telaoFechar').onclick = fecharTelao;
+  window.addEventListener('resize', function(){ if (telaoAberto()) tamanhoTelao(); });
+  document.addEventListener('keydown', function(e){ if ((e.key === 'Escape' || e.keyCode === 27) && telaoAberto()) fecharTelao(); });
+
+  // ---------- copiar, imprimir, testar ----------
+  function copiar(t){
+    function velho(){
+      var ta = document.createElement('textarea'), ok = false;
+      ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); return ok;
+    }
+    function feito(ok){ if (ok) avisar('📋 Copiado: <b>' + esc(semProt(t)) + '</b>. Cole no grupo da turma, se quiser.'); else window.prompt('Copie o link:', t); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function(){ feito(true); }, function(){ feito(velho()); });
+    else feito(velho());
+  }
+  $('btnCopiar').onclick = function(){ if (urlFinal) copiar(curtoAtual || urlFinal); };
+  $('btnCartaz').onclick = function(){
+    if (!urlFinal || !temQR) return;
+    var qr = ''; try { qr = svgQR(urlFinal); } catch (e) {}
+    $('impressao').innerHTML = '<div class="cartaz"><div class="cTitulo">' + esc(tituloAtual || 'Abra no celular ou no iPad') + '</div><div class="cQR">' + qr + '</div>' +
+      '<div class="cInstr">📷 Aponte a câmera para o código</div>' + (curtoAtual ? '<div class="cCurto">ou digite: ' + esc(semProt(curtoAtual)) + '</div>' : '') +
+      '<div class="cEnd">' + esc(urlFinal) + '</div></div>';
+    setTimeout(function(){ window.print(); }, 120);
+  };
+  $('btnAbrir').onclick = function(){ if (urlFinal) window.open(curtoAtual || urlFinal, '_blank'); };
+
+  // ---------- início ----------
+  var f = lerLS(CHAVE_FORM) || {}, m = /[?&]link=([^&#]+)/.exec(location.search);
+  if (m){ try { f = {link: decodeURIComponent(m[1])}; } catch (e) {} }
+  $('link').value = f.link || ''; $('titulo').value = f.titulo || ''; $('apelido').value = f.apelido || '';
+  desenharLista();
+  atualizar();
+  window.LINKS = {url: function(){ return urlFinal; }, curto: function(){ return curtoAtual; }, lista: lista, modo: function(){ return modo; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -451,12 +451,13 @@ const pedirLink = url => pedirJsonp(url).catch(e => {
   if (e.message !== 'sem-jsonp' || !window.fetch) throw e;
   return fetch(url, {cache: 'no-store'}).then(r => r.json());
 });
-// AV.encurtar(endereço, apelidos?) → Promise com o link curto. Tenta os apelidos (ex.: sala4821) na ordem;
+// AV.encurtar(endereço, apelidos?, {semGuardado}) → Promise com o link curto. Tenta os apelidos (ex.: sala4821) na ordem;
 // apelido que já existe só serve se já aponta para o mesmo endereço. Sem apelido livre, o is.gd escolhe um.
-AV.encurtar = (longo, apelidos) => {
+// O link criado fica guardado neste computador; semGuardado: true pede de novo (ex.: para tentar um nome novo).
+AV.encurtar = (longo, apelidos, op) => {
   let guardados = {};
   try { guardados = JSON.parse(lsLer(LINK.guardados)) || {}; } catch (e) {}
-  if (guardados[longo]) return Promise.resolve(guardados[longo]);
+  if (guardados[longo] && !(op && op.semGuardado)) return Promise.resolve(guardados[longo]);
   const API = 'https://is.gd/';
   const criar = apelido => pedirLink(API + 'create.php?format=json&url=' + encodeURIComponent(longo) + (apelido ? '&shorturl=' + encodeURIComponent(apelido) : ''));
   const ehNosso = apelido => pedirLink(API + 'forward.php?format=json&shorturl=' + encodeURIComponent(apelido)).then(r => mesmoEndereco(r.url, longo), () => false);

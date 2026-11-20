@@ -16,6 +16,9 @@ Painel de aula para Língua Portuguesa e Inglês (6º ao 9º ano, EJA, Ensino M�
   **✏️ Meu link** usa um link seu (bit.ly, TinyURL…).
 - **Com o corpo e a voz**: Quatro Cantos, Estátua das Palavras e Karaokê de leitura.
 - **Ferramentas da sala**: chamada, fila do banheiro, pote de conquistas, lousa, prova impressa, QR Code e mais.
+- **🔗 Link curto e QR Code** (logo abaixo do PortuguêsCards no menu): cole o link de um PDF do Google Drive (ou Docs,
+  formulário, vídeo) e mostre no telão um link curto, como `is.gd/cigarra7ano`, e um QR Code. Os links ficam guardados
+  em "Meus links" para usar de novo em outra aula.
 
 ## Como o conteúdo funciona
 
@@ -31,7 +34,7 @@ A cada atualização no `main`, o GitHub Actions roda `testes/rodar.js`, que:
 2. confere se o menu não tem atividade repetida nem link quebrado;
 3. confere se as páginas que rodam nos iPads antigos (iOS 9) usam JavaScript compatível (ES5) e só emoji que eles mostram;
 4. abre **todas as páginas** num navegador de verdade e procura erros;
-5. confere se as salas com iPads mostram o botão ✂️ Link curto e se ele funciona (com o is.gd simulado).
+5. confere se as salas com iPads mostram o botão ✂️ Link curto e se a página Link curto e QR Code funciona (com o is.gd simulado).
 
 O selo lá em cima fica verde quando está tudo certo. Para rodar no computador:
 

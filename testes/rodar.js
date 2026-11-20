@@ -6,7 +6,8 @@
      2) Menu: nenhuma atividade repetida, toda opção abre uma página (e um arquivo de conteúdo) que existe.
      3) iPads antigos (iOS 9): JavaScript ES5 e emoji até o Unicode 8 nas páginas que rodam nos iPads.
      4) Fumaça: abre todas as páginas num navegador de verdade e procura erros de JavaScript.
-     5) Link curto: as salas com iPads têm o botão ✂️ e ele mostra is.gd/sala + código (o is.gd é simulado). */
+     5) Link curto: as salas com iPads têm o botão ✂️ e ele mostra is.gd/sala + código; a página link-curto.html
+        transforma um link do Google Drive em link curto + QR Code (o is.gd é simulado). */
 'use strict';
 const fs = require('fs'), path = require('path'), http = require('http');
 const RAIZ = path.resolve(__dirname, '..');
@@ -109,6 +110,21 @@ servidor.listen(0, async () => {
   } catch (e) { errosLink.push(e.message.split('\n')[0]); }
   ok(link.curto === 'is.gd/sala' + link.codigo && !errosLink.length, 'Link curto: o botão ✂️ mostra is.gd/sala + o código da sala', [JSON.stringify(link)].concat(errosLink));
   await pl.close();
+  const pd = await ctx.newPage(), errosDrive = [];
+  pd.on('pageerror', e => errosDrive.push(e.message));
+  let drive = {};
+  try {
+    await pd.goto(base + 'link-curto.html');
+    await pd.fill('#link', 'https://drive.google.com/file/d/1AbCdEfGhIjKlMnOpQrStUvWxYz012345/view?usp=sharing');
+    await pd.check('#opcoesGoogle input[value=pdf]');
+    await pd.fill('#apelido', 'teste_ci');
+    await pd.click('#btnCriar');
+    await pd.waitForFunction(() => LINKS.curto(), null, {timeout: 10000});
+    drive = await pd.evaluate(() => ({url: LINKS.url(), curto: LINKS.curto(), qr: !!document.querySelector('#qr svg'), n: LINKS.lista().length}));
+  } catch (e) { errosDrive.push(e.message.split('\n')[0]); }
+  ok(drive.curto === 'https://is.gd/teste_ci' && drive.qr && /uc\?export=download&id=/.test(drive.url) && drive.n >= 1 && !errosDrive.length,
+    'Link curto e QR Code: um link do Google Drive vira is.gd + QR Code e entra em "Meus links"', [JSON.stringify(drive)].concat(errosDrive));
+  await pd.close();
   await nav.close(); servidor.close();
   console.log(falhas ? `\n${falhas} teste(s) com problema.` : '\nTudo certo! 🎉');
   process.exit(falhas ? 1 : 0);
