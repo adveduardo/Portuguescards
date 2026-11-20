@@ -1,0 +1,783 @@
+{
+  "titulo": "Bingo da morfologia: classes e tipos (substantivo próprio, verbo no passado, advérbio de lugar…)",
+  "idioma": "pt-BR",
+  "chamadas": [
+    {
+      "id": "m0",
+      "texto": "Maria"
+    },
+    {
+      "id": "m1",
+      "texto": "Recife"
+    },
+    {
+      "id": "m2",
+      "texto": "Amazonas"
+    },
+    {
+      "id": "m3",
+      "texto": "Brasil"
+    },
+    {
+      "id": "m4",
+      "texto": "Pedro"
+    },
+    {
+      "id": "m5",
+      "texto": "janela"
+    },
+    {
+      "id": "m6",
+      "texto": "sapato"
+    },
+    {
+      "id": "m7",
+      "texto": "cadeira"
+    },
+    {
+      "id": "m8",
+      "texto": "menino"
+    },
+    {
+      "id": "m9",
+      "texto": "árvore"
+    },
+    {
+      "id": "m10",
+      "texto": "cardume"
+    },
+    {
+      "id": "m11",
+      "texto": "rebanho"
+    },
+    {
+      "id": "m12",
+      "texto": "enxame"
+    },
+    {
+      "id": "m13",
+      "texto": "alcateia"
+    },
+    {
+      "id": "m14",
+      "texto": "turma"
+    },
+    {
+      "id": "m15",
+      "texto": "saudade"
+    },
+    {
+      "id": "m16",
+      "texto": "coragem"
+    },
+    {
+      "id": "m17",
+      "texto": "alegria"
+    },
+    {
+      "id": "m18",
+      "texto": "medo"
+    },
+    {
+      "id": "m19",
+      "texto": "amizade"
+    },
+    {
+      "id": "m20",
+      "texto": "brasileiro"
+    },
+    {
+      "id": "m21",
+      "texto": "baiano"
+    },
+    {
+      "id": "m22",
+      "texto": "carioca"
+    },
+    {
+      "id": "m23",
+      "texto": "paulista"
+    },
+    {
+      "id": "m24",
+      "texto": "mineiro"
+    },
+    {
+      "id": "m25",
+      "texto": "macio"
+    },
+    {
+      "id": "m26",
+      "texto": "cheiroso"
+    },
+    {
+      "id": "m27",
+      "texto": "gentil"
+    },
+    {
+      "id": "m28",
+      "texto": "colorido"
+    },
+    {
+      "id": "m29",
+      "texto": "teimoso"
+    },
+    {
+      "id": "m30",
+      "texto": "pular"
+    },
+    {
+      "id": "m31",
+      "texto": "nadar"
+    },
+    {
+      "id": "m32",
+      "texto": "comer"
+    },
+    {
+      "id": "m33",
+      "texto": "vender"
+    },
+    {
+      "id": "m34",
+      "texto": "partir"
+    },
+    {
+      "id": "m35",
+      "texto": "pulei"
+    },
+    {
+      "id": "m36",
+      "texto": "comemos"
+    },
+    {
+      "id": "m37",
+      "texto": "venderam"
+    },
+    {
+      "id": "m38",
+      "texto": "saiu"
+    },
+    {
+      "id": "m39",
+      "texto": "falou"
+    },
+    {
+      "id": "m40",
+      "texto": "viajarei"
+    },
+    {
+      "id": "m41",
+      "texto": "comeremos"
+    },
+    {
+      "id": "m42",
+      "texto": "sairá"
+    },
+    {
+      "id": "m43",
+      "texto": "cantarão"
+    },
+    {
+      "id": "m44",
+      "texto": "estudarei"
+    },
+    {
+      "id": "m45",
+      "texto": "eu"
+    },
+    {
+      "id": "m46",
+      "texto": "tu"
+    },
+    {
+      "id": "m47",
+      "texto": "ele"
+    },
+    {
+      "id": "m48",
+      "texto": "nós"
+    },
+    {
+      "id": "m49",
+      "texto": "eles"
+    },
+    {
+      "id": "m50",
+      "texto": "meu"
+    },
+    {
+      "id": "m51",
+      "texto": "tua"
+    },
+    {
+      "id": "m52",
+      "texto": "nosso"
+    },
+    {
+      "id": "m53",
+      "texto": "seus"
+    },
+    {
+      "id": "m54",
+      "texto": "minha"
+    },
+    {
+      "id": "m55",
+      "texto": "este"
+    },
+    {
+      "id": "m56",
+      "texto": "essa"
+    },
+    {
+      "id": "m57",
+      "texto": "aquilo"
+    },
+    {
+      "id": "m58",
+      "texto": "isto"
+    },
+    {
+      "id": "m59",
+      "texto": "aquela"
+    },
+    {
+      "id": "m60",
+      "texto": "alguém"
+    },
+    {
+      "id": "m61",
+      "texto": "ninguém"
+    },
+    {
+      "id": "m62",
+      "texto": "tudo"
+    },
+    {
+      "id": "m63",
+      "texto": "nada"
+    },
+    {
+      "id": "m64",
+      "texto": "algum"
+    },
+    {
+      "id": "m65",
+      "texto": "o"
+    },
+    {
+      "id": "m66",
+      "texto": "a"
+    },
+    {
+      "id": "m67",
+      "texto": "os"
+    },
+    {
+      "id": "m68",
+      "texto": "as"
+    },
+    {
+      "id": "m69",
+      "texto": "um"
+    },
+    {
+      "id": "m70",
+      "texto": "uma"
+    },
+    {
+      "id": "m71",
+      "texto": "uns"
+    },
+    {
+      "id": "m72",
+      "texto": "umas"
+    },
+    {
+      "id": "m73",
+      "texto": "dois"
+    },
+    {
+      "id": "m74",
+      "texto": "quinze"
+    },
+    {
+      "id": "m75",
+      "texto": "cem"
+    },
+    {
+      "id": "m76",
+      "texto": "mil"
+    },
+    {
+      "id": "m77",
+      "texto": "vinte"
+    },
+    {
+      "id": "m78",
+      "texto": "primeiro"
+    },
+    {
+      "id": "m79",
+      "texto": "segundo"
+    },
+    {
+      "id": "m80",
+      "texto": "décimo"
+    },
+    {
+      "id": "m81",
+      "texto": "terceiro"
+    },
+    {
+      "id": "m82",
+      "texto": "quinto"
+    },
+    {
+      "id": "m83",
+      "texto": "dobro"
+    },
+    {
+      "id": "m84",
+      "texto": "triplo"
+    },
+    {
+      "id": "m85",
+      "texto": "metade"
+    },
+    {
+      "id": "m86",
+      "texto": "terço"
+    },
+    {
+      "id": "m87",
+      "texto": "quádruplo"
+    },
+    {
+      "id": "m88",
+      "texto": "ontem"
+    },
+    {
+      "id": "m89",
+      "texto": "hoje"
+    },
+    {
+      "id": "m90",
+      "texto": "amanhã"
+    },
+    {
+      "id": "m91",
+      "texto": "cedo"
+    },
+    {
+      "id": "m92",
+      "texto": "sempre"
+    },
+    {
+      "id": "m93",
+      "texto": "aqui"
+    },
+    {
+      "id": "m94",
+      "texto": "ali"
+    },
+    {
+      "id": "m95",
+      "texto": "lá"
+    },
+    {
+      "id": "m96",
+      "texto": "longe"
+    },
+    {
+      "id": "m97",
+      "texto": "perto"
+    },
+    {
+      "id": "m98",
+      "texto": "devagar"
+    },
+    {
+      "id": "m99",
+      "texto": "depressa"
+    },
+    {
+      "id": "m100",
+      "texto": "bem"
+    },
+    {
+      "id": "m101",
+      "texto": "mal"
+    },
+    {
+      "id": "m102",
+      "texto": "calmamente"
+    },
+    {
+      "id": "m103",
+      "texto": "muito"
+    },
+    {
+      "id": "m104",
+      "texto": "pouco"
+    },
+    {
+      "id": "m105",
+      "texto": "bastante"
+    },
+    {
+      "id": "m106",
+      "texto": "demais"
+    },
+    {
+      "id": "m107",
+      "texto": "tão"
+    },
+    {
+      "id": "m108",
+      "texto": "não"
+    },
+    {
+      "id": "m109",
+      "texto": "nunca"
+    },
+    {
+      "id": "m110",
+      "texto": "jamais"
+    },
+    {
+      "id": "m111",
+      "texto": "talvez"
+    },
+    {
+      "id": "m112",
+      "texto": "provavelmente"
+    },
+    {
+      "id": "m113",
+      "texto": "de"
+    },
+    {
+      "id": "m114",
+      "texto": "em"
+    },
+    {
+      "id": "m115",
+      "texto": "para"
+    },
+    {
+      "id": "m116",
+      "texto": "com"
+    },
+    {
+      "id": "m117",
+      "texto": "sem"
+    },
+    {
+      "id": "m118",
+      "texto": "por"
+    },
+    {
+      "id": "m119",
+      "texto": "e"
+    },
+    {
+      "id": "m120",
+      "texto": "mas"
+    },
+    {
+      "id": "m121",
+      "texto": "porque"
+    },
+    {
+      "id": "m122",
+      "texto": "embora"
+    },
+    {
+      "id": "m123",
+      "texto": "portanto"
+    },
+    {
+      "id": "m124",
+      "texto": "oba!"
+    },
+    {
+      "id": "m125",
+      "texto": "ai!"
+    },
+    {
+      "id": "m126",
+      "texto": "ufa!"
+    },
+    {
+      "id": "m127",
+      "texto": "credo!"
+    },
+    {
+      "id": "m128",
+      "texto": "viva!"
+    }
+  ],
+  "palavras": [
+    {
+      "p": "Substantivo próprio",
+      "t": [
+        "m0",
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ]
+    },
+    {
+      "p": "Substantivo comum",
+      "t": [
+        "m5",
+        "m6",
+        "m7",
+        "m8",
+        "m9"
+      ]
+    },
+    {
+      "p": "Substantivo coletivo",
+      "t": [
+        "m10",
+        "m11",
+        "m12",
+        "m13",
+        "m14"
+      ]
+    },
+    {
+      "p": "Substantivo abstrato",
+      "t": [
+        "m15",
+        "m16",
+        "m17",
+        "m18",
+        "m19"
+      ]
+    },
+    {
+      "p": "Adjetivo pátrio",
+      "t": [
+        "m20",
+        "m21",
+        "m22",
+        "m23",
+        "m24"
+      ]
+    },
+    {
+      "p": "Adjetivo",
+      "t": [
+        "m25",
+        "m26",
+        "m27",
+        "m28",
+        "m29"
+      ]
+    },
+    {
+      "p": "Verbo no infinitivo",
+      "t": [
+        "m30",
+        "m31",
+        "m32",
+        "m33",
+        "m34"
+      ]
+    },
+    {
+      "p": "Verbo no passado",
+      "t": [
+        "m35",
+        "m36",
+        "m37",
+        "m38",
+        "m39"
+      ]
+    },
+    {
+      "p": "Verbo no futuro",
+      "t": [
+        "m40",
+        "m41",
+        "m42",
+        "m43",
+        "m44"
+      ]
+    },
+    {
+      "p": "Pronome pessoal",
+      "t": [
+        "m45",
+        "m46",
+        "m47",
+        "m48",
+        "m49"
+      ]
+    },
+    {
+      "p": "Pronome possessivo",
+      "t": [
+        "m50",
+        "m51",
+        "m52",
+        "m53",
+        "m54"
+      ]
+    },
+    {
+      "p": "Pronome demonstrativo",
+      "t": [
+        "m55",
+        "m56",
+        "m57",
+        "m58",
+        "m59"
+      ]
+    },
+    {
+      "p": "Pronome indefinido",
+      "t": [
+        "m60",
+        "m61",
+        "m62",
+        "m63",
+        "m64"
+      ]
+    },
+    {
+      "p": "Artigo definido",
+      "t": [
+        "m65",
+        "m66",
+        "m67",
+        "m68"
+      ]
+    },
+    {
+      "p": "Artigo indefinido",
+      "t": [
+        "m69",
+        "m70",
+        "m71",
+        "m72"
+      ]
+    },
+    {
+      "p": "Numeral cardinal",
+      "t": [
+        "m73",
+        "m74",
+        "m75",
+        "m76",
+        "m77"
+      ]
+    },
+    {
+      "p": "Numeral ordinal",
+      "t": [
+        "m78",
+        "m79",
+        "m80",
+        "m81",
+        "m82"
+      ]
+    },
+    {
+      "p": "Numeral multiplicativo ou fracionário",
+      "t": [
+        "m83",
+        "m84",
+        "m85",
+        "m86",
+        "m87"
+      ]
+    },
+    {
+      "p": "Advérbio de tempo",
+      "t": [
+        "m88",
+        "m89",
+        "m90",
+        "m91",
+        "m92"
+      ]
+    },
+    {
+      "p": "Advérbio de lugar",
+      "t": [
+        "m93",
+        "m94",
+        "m95",
+        "m96",
+        "m97"
+      ]
+    },
+    {
+      "p": "Advérbio de modo",
+      "t": [
+        "m98",
+        "m99",
+        "m100",
+        "m101",
+        "m102"
+      ]
+    },
+    {
+      "p": "Advérbio de intensidade",
+      "t": [
+        "m103",
+        "m104",
+        "m105",
+        "m106",
+        "m107"
+      ]
+    },
+    {
+      "p": "Advérbio de negação ou dúvida",
+      "t": [
+        "m108",
+        "m109",
+        "m110",
+        "m111",
+        "m112"
+      ]
+    },
+    {
+      "p": "Preposição",
+      "t": [
+        "m113",
+        "m114",
+        "m115",
+        "m116",
+        "m117",
+        "m118"
+      ]
+    },
+    {
+      "p": "Conjunção",
+      "t": [
+        "m119",
+        "m120",
+        "m121",
+        "m122",
+        "m123"
+      ]
+    },
+    {
+      "p": "Interjeição",
+      "t": [
+        "m124",
+        "m125",
+        "m126",
+        "m127",
+        "m128"
+      ]
+    }
+  ]
+}
