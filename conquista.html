@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conquista do Mapa – Projetor</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  #tJogo{max-width:1500px}
+  #mapa{display:block;width:100%;height:clamp(220px,44vh,480px);border-radius:22px;box-shadow:0 6px 0 #0002;background:#3d8fd1}
+  .barraPergunta{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+  .contadorCirculo{flex:0 0 auto;width:clamp(64px,8vw,96px);height:clamp(64px,8vw,96px);border-radius:50%;background:var(--texto);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:bold;box-shadow:0 6px 0 #0002}
+  .contadorCirculo.pouco{background:var(--vermelho);animation:pulsar .5s infinite alternate}
+  @keyframes pulsar{to{transform:scale(1.08)}}
+  .respondidos{flex:0 0 auto;background:#fff;border-radius:18px;padding:6px 14px;font-weight:bold;font-size:1rem;text-align:center;box-shadow:0 4px 0 #0001}
+  .respondidos b{display:block;font-size:1.7rem}
+  #textoPergunta{flex:1;background:#fff;border-radius:22px;padding:12px 18px;text-align:center;font-size:clamp(1.15rem,2.6vw,2rem);font-weight:bold;box-shadow:0 6px 0 #0001}
+  #gruposResp{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;min-height:1.9rem}
+  #gruposResp span{font-size:1.7rem;opacity:.25;transition:opacity .3s,transform .3s}
+  #gruposResp span.ok{opacity:1;transform:scale(1.15)}
+  #opcoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0}
+  .opcao{border-radius:18px;color:#fff;padding:8px 16px;font-size:clamp(1.05rem,2.3vw,1.7rem);font-weight:bold;display:flex;align-items:center;gap:12px;box-shadow:0 5px 0 #0002;transition:opacity .3s,transform .3s;min-height:60px}
+  .opcao .l{background:#fff3;border-radius:12px;min-width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+  .opcao .quem{margin-left:auto;font-size:1.5rem;letter-spacing:2px}
+  .opcao.apagada{opacity:.28;transform:scale(.97)}
+  .opcao.certa{outline:5px solid #fff;box-shadow:0 0 0 10px var(--verde);transform:scale(1.02)}
+  .op0{background:#e74c3c} .op1{background:#2f80ed} .op2{background:#f39c12} .op3{background:#27ae60}
+  #explica{text-align:center;font-size:1.15rem;font-weight:bold;margin:6px 0;min-height:1.3em}
+  #tJogo .linha{position:-webkit-sticky;position:sticky;bottom:0;z-index:5;background:rgba(238,241,246,.94);border-radius:16px;padding:6px;margin:6px 0 0}
+  .podio{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin:20px 0}
+  .degrau{background:#fff;border-radius:20px 20px 0 0;width:min(26vw,220px);text-align:center;padding:12px;box-shadow:0 6px 0 #0001;animation:subir .8s backwards}
+  .degrau .e{font-size:2.6rem} .degrau .n{font-size:1.4rem;font-weight:bold} .degrau .p{font-size:1.6rem;font-weight:bold}
+  @keyframes subir{from{transform:translateY(80px);opacity:0}}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+<section id="tConfig" class="tela ativa">
+  <h1>🗺️ Conquista do Mapa (com os iPads)</h1>
+  <div id="painelConexao" class="cartao"></div>
+  <div class="cartao">
+    <h2>1. Perguntas</h2>
+    <label>Arquivo: <select id="selArquivo" style="max-width:100%"></select></label>
+    <div id="infoArq" class="dica">Carregando…</div>
+  </div>
+  <div class="cartao">
+    <h2>2. Mapa</h2>
+    <label>Tamanho da ilha: <select id="selTam"><option value="5x4">pequena</option><option value="7x5" selected>média</option><option value="9x6">grande</option></select></label>
+    <label>Tempo por pergunta: <select id="selTempo"><option value="15">15 s</option><option value="20" selected>20 s</option><option value="30">30 s</option><option value="45">45 s</option></select></label>
+    <label>Perguntas: <select id="selMax"><option value="8">8</option><option value="12" selected>12</option><option value="16">16</option><option value="24">24</option></select></label>
+    <label><input type="checkbox" id="chkSom" checked> Sons e voz</label>
+    <p class="dica">Cada iPad é uma equipe e começa com uma capital na ilha. A cada pergunta, quem acerta conquista uma região vizinha; quem acertou primeiro conquista duas.
+      As regiões com ⭐ valem 3 pontos. Sem região livre por perto? Aí dá para tomar uma região de outra equipe!</p>
+  </div>
+  <button id="btnCriar" class="principal">▶️ Criar sala</button>
+</section>
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos iPads, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2>Equipes exploradoras</h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando as equipes entrarem…</p>
+  <div class="linha"><button id="btnComecar" class="principal">🗺️ Começar a conquista</button><button id="btnEncerrar">✖️ Encerrar sala</button></div>
+</section>
+<section id="tJogo" class="tela">
+  <canvas id="mapa"></canvas>
+  <div class="barraPergunta">
+    <div class="respondidos">Pergunta<b id="numPergunta">–</b></div>
+    <div id="textoPergunta">🗺️ Explorando a ilha…</div>
+    <div id="contador" class="contadorCirculo">–</div>
+    <div class="respondidos">Responderam<b id="nRespostas">0/0</b></div>
+  </div>
+  <div id="gruposResp"></div>
+  <div id="opcoes"></div>
+  <div id="explica"></div>
+  <div class="linha">
+    <button id="btnEncerrarPergunta">⏭️ Encerrar a pergunta agora</button>
+    <button id="btnProxima" class="principal" hidden>➡️ Próxima pergunta</button>
+    <button id="btnTerminar">🏁 Terminar agora</button>
+  </div>
+</section>
+<section id="tFim" class="tela">
+  <h1 id="tituloFim">🗺️ Fim da conquista</h1>
+  <div id="podio" class="podio"></div>
+  <div id="ranking" class="ranking"></div>
+  <div class="linha"><button id="btnNova" class="principal">🔁 Nova ilha (mesma sala)</button><button id="btnEncerrar2">✖️ Encerrar sala</button></div>
+</section>
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script src="quiz-sala.js"></script>
+<script src="arcade.js"></script>
+<script>
+'use strict';
+const $ = id => document.getElementById(id), AV = window.AoVivo, LETRAS = ['A', 'B', 'C', 'D'];
+let perguntas = [], monte = [], usadas = 0, n = 0, maxQ = 12, tempo = 20, totais = {}, fase = 'config', pAtual = null, ilha = null, acabou = false;
+const MW = 1000, MH = 560;   // coordenadas do mapa (escaladas no desenho)
+
+ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', arq => {
+  $('infoArq').textContent = 'Carregando…'; perguntas = [];
+  ARC.json('dados/' + arq, d => {
+    perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 240, maxOpLen: 80}); AV.idioma = d.idioma || 'pt-BR';
+    $('infoArq').textContent = perguntas.length ? `${d.titulo || arq} • ${perguntas.length} perguntas` : 'Este arquivo não tem perguntas de escolha.';
+  }, () => { $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+});
+
+// ---------- ilha: diagrama de Voronoi por recorte de semiplanos; vizinhas = regiões que dividem uma aresta ----------
+function recortar(poli, a, b, c, rotulo){   // mantém a*x + b*y <= c; cada vértice guarda o rótulo da aresta que sai dele
+  const out = [];
+  for (let i = 0; i < poli.length; i++){
+    const P = poli[i], Q = poli[(i + 1) % poli.length], dp = a * P.x + b * P.y - c, dq = a * Q.x + b * Q.y - c;
+    if (dp <= 0){ out.push({x: P.x, y: P.y, e: P.e}); if (dq > 0){ const t = dp / (dp - dq); out.push({x: P.x + t * (Q.x - P.x), y: P.y + t * (Q.y - P.y), e: rotulo}); } }
+    else if (dq <= 0){ const t = dp / (dp - dq); out.push({x: P.x + t * (Q.x - P.x), y: P.y + t * (Q.y - P.y), e: P.e}); }
+  }
+  return out;
+}
+function gerarIlha(cols, rows){
+  const sem = [], cw = MW / cols, ch = MH / rows, f1 = Math.random() * 6, f2 = Math.random() * 6;
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) sem.push({x: (c + 0.2 + Math.random() * 0.6) * cw, y: (r + 0.2 + Math.random() * 0.6) * ch});
+  const regs = sem.map((s, i) => {
+    let poli = [{x: 0, y: 0, e: -1}, {x: MW, y: 0, e: -1}, {x: MW, y: MH, e: -1}, {x: 0, y: MH, e: -1}];
+    sem.forEach((o, j) => { if (j !== i && poli.length) poli = recortar(poli, o.x - s.x, o.y - s.y, (o.x * o.x + o.y * o.y - s.x * s.x - s.y * s.y) / 2, j); });
+    let cx = 0, cy = 0; poli.forEach(p => { cx += p.x; cy += p.y; }); cx /= poli.length || 1; cy /= poli.length || 1;
+    const viz = new Set();
+    poli.forEach((p, k) => { const q = poli[(k + 1) % poli.length]; if (p.e >= 0 && Math.hypot(q.x - p.x, q.y - p.y) > 6) viz.add(p.e); });
+    const dx = (cx - MW / 2) / (MW * 0.47), dy = (cy - MH / 2) / (MH * 0.47), ang = Math.atan2(dy, dx), raio = 1 + 0.16 * Math.sin(3 * ang + f1) + 0.1 * Math.sin(5 * ang + f2);
+    return {id: i, poli, cx, cy, viz: [...viz], terra: Math.hypot(dx, dy) < 0.97 * raio, dono: null, valor: 1, anim: 0};
+  });
+  // só a parte de terra ligada ao centro (sem ilhotas soltas)
+  const terra = regs.filter(r => r.terra); if (!terra.length) return gerarIlha(cols, rows);
+  let ini = terra.reduce((m, r) => Math.hypot(r.cx - MW / 2, r.cy - MH / 2) < Math.hypot(m.cx - MW / 2, m.cy - MH / 2) ? r : m), vistos = new Set([ini.id]), fila = [ini];
+  while (fila.length){ const r = fila.shift(); r.viz.forEach(v => { if (!vistos.has(v) && regs[v].terra){ vistos.add(v); fila.push(regs[v]); } }); }
+  regs.forEach(r => { if (!vistos.has(r.id)) r.terra = false; });
+  const livres = ARC.embaralhar(regs.filter(r => r.terra));
+  livres.slice(0, Math.max(2, Math.round(livres.length / 7))).forEach(r => { r.valor = 3; });
+  return {regs, capitais: {}};
+}
+const terras = () => ilha.regs.filter(r => r.terra);
+function escolherCapital(id){   // a região de terra mais longe das capitais que já existem
+  const caps = Object.keys(ilha.capitais).map(k => ilha.regs[ilha.capitais[k]]), livres = terras().filter(r => r.dono === null && r.valor === 1);
+  if (!livres.length) return;
+  let melhor = livres[0], md = -1;
+  livres.forEach(r => { const d = caps.length ? Math.min(...caps.map(c => Math.hypot(c.cx - r.cx, c.cy - r.cy))) : Math.hypot(r.cx - MW * 0.1, r.cy - MH / 2) * -1 + 1e5; if (d > md){ md = d; melhor = r; } });
+  ilha.capitais[id] = melhor.id; melhor.dono = id; melhor.anim = 1;
+}
+function valorDe(id){ return terras().reduce((s, r) => s + (r.dono === id ? r.valor : 0), 0); }
+function conquistar(id, podeTomar){   // escolhe a melhor região vizinha: ⭐ primeiro, depois a mais perto do centro
+  const meus = terras().filter(r => r.dono === id);
+  if (!meus.length){ escolherCapital(id); return ilha.capitais[id] !== undefined ? ilha.regs[ilha.capitais[id]] : null; }
+  const viz = new Set(); meus.forEach(r => r.viz.forEach(v => { const o = ilha.regs[v]; if (o.terra && o.dono !== id) viz.add(o); }));
+  let cand = [...viz].filter(r => r.dono === null);
+  if (!cand.length && podeTomar) cand = [...viz].filter(r => !(Object.keys(ilha.capitais).some(k => ilha.capitais[k] === r.id)));
+  if (!cand.length) return null;
+  cand.sort((a, b) => (b.valor - a.valor) || (Math.hypot(a.cx - MW / 2, a.cy - MH / 2) - Math.hypot(b.cx - MW / 2, b.cy - MH / 2)) + (Math.random() - 0.5) * 60);
+  const r = cand[0], antigo = r.dono; r.dono = id; r.anim = 1; r.tomada = antigo !== null;
+  return r;
+}
+
+// ---------- sala ----------
+const qs = QuizSala({
+  aoMudar, total: () => maxQ, aoResultado: mostrarResultado,
+  aoTique: s => { $('contador').textContent = s; $('contador').classList.toggle('pouco', s <= 5); if (s <= 5 && s > 0) AV.tique(); }
+});
+const grupos = () => qs.grupos();
+$('btnCriar').onclick = () => {
+  if (perguntas.length < 3) return AV.avisar('Escolha um arquivo com perguntas.');
+  AV.som = $('chkSom').checked; $('btnCriar').disabled = true;
+  qs.criar((err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar(); irPara('sala');
+  });
+};
+function irPara(f){ fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', jogo: 'tJogo', fim: 'tFim'}[f]); if (f === 'jogo'){ medir(); laco.iniciar(); } else laco.parar(); aoMudar(); }
+function aoMudar(){
+  const g = grupos(), ids = Object.keys(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${qs.sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''} para explorar!` : 'Esperando as equipes entrarem…';
+  }
+  if (fase === 'jogo' && ilha){
+    AV.ordemGrupos(g).forEach(id => { if (ilha.capitais[id] === undefined) escolherCapital(id); if (totais[id] == null) totais[id] = valorDe(id); });
+    if (pAtual && !qs.encerrada){
+      const r = qs.respostas(), nr = ids.filter(id => r[id]).length;
+      $('nRespostas').textContent = `${nr}/${ids.length}`;
+      $('gruposResp').innerHTML = ids.map(id => `<span class="${r[id] ? 'ok' : ''}" title="${AV.esc(g[id].nome)}">${AV.esc(g[id].emoji)}</span>`).join('');
+    }
+  }
+}
+$('btnComecar').onclick = () => { if (!Object.keys(grupos()).length && !confirm('Nenhuma equipe entrou ainda. Começar mesmo assim?')) return; novaIlha(); };
+function novaIlha(){
+  const [c, r] = $('selTam').value.split('x').map(Number);
+  maxQ = +$('selMax').value; tempo = +$('selTempo').value; monte = ARC.embaralhar(perguntas); usadas = 0; n = 0; totais = {}; acabou = false; pAtual = null;
+  ilha = gerarIlha(c, r);
+  AV.ordemGrupos(grupos()).forEach(id => { escolherCapital(id); totais[id] = valorDe(id); });
+  $('numPergunta').textContent = '–'; $('textoPergunta').textContent = '🗺️ Explorando a ilha…'; $('contador').textContent = '–';
+  $('opcoes').innerHTML = ''; $('explica').textContent = ''; $('btnEncerrarPergunta').hidden = true; $('btnProxima').hidden = true;
+  irPara('jogo'); AV.tom(392, .2); AV.tom(523, .2, 'triangle', .15, .2); AV.tom(659, .35, 'triangle', .15, .4);
+  setTimeout(proxima, 1800);
+}
+function proxima(){
+  if (acabou || fase !== 'jogo') return;
+  if (usadas >= monte.length){ monte = ARC.embaralhar(perguntas); usadas = 0; }
+  pAtual = monte[usadas++]; n++;
+  $('numPergunta').textContent = `${n}/${maxQ}`; $('textoPergunta').textContent = pAtual.p;
+  $('opcoes').innerHTML = pAtual.ops.map((o, i) => `<div class="opcao op${i}"><span class="l">${LETRAS[i]}</span><span>${AV.esc(o)}</span><span class="quem"></span></div>`).join('');
+  $('explica').textContent = ''; $('btnEncerrarPergunta').hidden = false; $('btnProxima').hidden = true;
+  qs.pergunta(pAtual, n, maxQ, tempo, totais);
+  AV.tom(660, .15); AV.tom(990, .2, 'triangle', .15, .15); AV.falar(pAtual.p); aoMudar();
+}
+function mostrarResultado(info){
+  const g = info.grupos, ids = Object.keys(g), p = info.p, porOpcao = p.ops.map(() => []), msgs = [], antes = {};
+  ids.forEach(id => { if (ilha.capitais[id] === undefined) escolherCapital(id); antes[id] = valorDe(id); });
+  ids.forEach(id => { const r = info.resultados[id]; if (r.respondeu && porOpcao[r.opcao]) porOpcao[r.opcao].push(g[id].emoji); });
+  // a ordem das conquistas segue a ordem das respostas certas (o mais rápido primeiro)
+  info.certosPorTempo.forEach((id, k) => {
+    const vezes = k === 0 ? 2 : 1;
+    for (let v = 0; v < vezes; v++){ const reg = conquistar(id, true); if (reg && reg.tomada) msgs.push(`${g[id].emoji} tomou uma região!`); if (reg && reg.valor === 3) msgs.push(`${g[id].emoji} achou um tesouro ⭐!`); }
+  });
+  ids.forEach(id => { totais[id] = valorDe(id); const r = info.resultados[id]; r.pontos = Math.max(0, totais[id] - antes[id]); });
+  Object.keys(totais).forEach(id => { if (!g[id]) totais[id] = valorDe(id); });
+  document.querySelectorAll('#opcoes .opcao').forEach((el, i) => { el.classList.add(i === p.ok ? 'certa' : 'apagada'); el.querySelector('.quem').textContent = porOpcao[i].join(' '); });
+  $('contador').classList.remove('pouco'); $('contador').textContent = '✓'; $('btnEncerrarPergunta').hidden = true;
+  const prim = info.certosPorTempo[0];
+  $('explica').innerHTML = (prim ? `⚡ ${AV.esc(g[prim].emoji + ' ' + g[prim].nome)} acertou primeiro e conquistou duas regiões! ` : info.certosPorTempo.length ? '' : '😮 Ninguém acertou: o mapa ficou igual. ') + AV.esc(msgs.join(' ')) + (p.x ? ` <span class="dica">${AV.esc(p.x)}</span>` : '');
+  AV.falar([{t: `A resposta certa é ${LETRAS[p.ok]}:`, l: 'pt-BR'}, {t: p.ops[p.ok]}]);
+  if (info.certosPorTempo.length){ AV.tom(523, .12); AV.tom(784, .2, 'triangle', .15, .12); } else AV.erro();
+  acabou = n >= maxQ;
+  $('btnProxima').textContent = acabou ? '🏁 Ver o resultado' : '➡️ Próxima pergunta'; $('btnProxima').hidden = false;
+  return totais;
+}
+$('btnEncerrarPergunta').onclick = () => qs.encerrarPergunta();
+$('btnProxima').onclick = () => { if (acabou) mostrarFim(); else proxima(); };
+$('btnTerminar').onclick = () => { if (!confirm('Terminar a conquista agora? Vence quem tiver mais território.')) return; acabou = true; mostrarFim(); };
+function mostrarFim(){
+  const g = grupos(); Object.keys(ilha.capitais).forEach(id => { totais[id] = valorDe(id); });
+  const pos = AV.posicoes(totais); qs.fim(totais, pos); irPara('fim');
+  const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]), nome = id => g[id] ? g[id].emoji + ' ' + g[id].nome : id;
+  const venc = ord.filter(id => totais[id] === totais[ord[0]]);
+  $('tituloFim').textContent = !ord.length ? '🗺️ Fim da conquista' : venc.length > 1 ? '🤝 Empate: ' + venc.map(nome).join(' e ') + '!' : `🏆 ${nome(ord[0])} conquistou a ilha!`;
+  const alturas = ['215px', '175px', '145px'];
+  $('podio').innerHTML = [1, 0, 2].filter(i => ord[i]).map(i => { const id = ord[i], gg = g[id] || {emoji: '❔', nome: id, cor: '#999'};
+    return `<div class="degrau" style="height:${alturas[i]};border-top:10px solid ${gg.cor};animation-delay:${(2 - i) * .4}s"><div class="e">${['🥇', '🥈', '🥉'][pos[id] - 1] || ''} ${AV.esc(gg.emoji)}</div><div class="n">${AV.esc(gg.nome)}</div><div class="p">${totais[id]} pts</div></div>`; }).join('');
+  AV.desenharRanking($('ranking'), g, totais, null, true); AV.fanfarra(); AV.confete(); setTimeout(AV.confete, 700);
+}
+$('btnNova').onclick = () => { qs.reiniciar(); pAtual = null; ilha = null; irPara('sala'); };
+function encerrar(){ if (!confirm('Encerrar a sala? Os iPads voltarão para a tela inicial.')) return; qs.encerrar(); pAtual = null; ilha = null; irPara('config'); }
+$('btnEncerrar').onclick = encerrar; $('btnEncerrar2').onclick = encerrar;
+
+// ---------- desenho ----------
+const cv = $('mapa'), ctx = cv.getContext('2d'), P = {W: 0, H: 0, k: 1, ox: 0, oy: 0};
+function medir(){
+  const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  P.W = r.width; P.H = r.height; cv.width = Math.round(P.W * dpr); cv.height = Math.round(P.H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  P.k = Math.min(P.W / MW, P.H / MH); P.ox = (P.W - MW * P.k) / 2; P.oy = (P.H - MH * P.k) / 2;
+}
+window.addEventListener('resize', () => { if (fase === 'jogo') medir(); });
+const laco = ARC.laco(dt => { if (ilha) ilha.regs.forEach(r => { if (r.anim > 0) r.anim = Math.max(0, r.anim - dt * 1.4); }); desenhar(); });
+const X = x => P.ox + x * P.k, Y = y => P.oy + y * P.k;
+function desenhar(){
+  if (!P.W) return;
+  ctx.fillStyle = '#3d8fd1'; ctx.fillRect(0, 0, P.W, P.H);
+  const t = Date.now() / 900; ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.lineWidth = 2;
+  for (let yy = 12; yy < P.H; yy += 26){ ctx.beginPath(); for (let xx = 0; xx <= P.W; xx += 16){ const y = yy + Math.sin(xx / 30 + t + yy) * 3; if (xx) ctx.lineTo(xx, y); else ctx.moveTo(xx, y); } ctx.stroke(); }
+  if (!ilha) return;
+  const g = grupos();
+  ilha.regs.forEach(r => {
+    if (!r.terra) return;
+    ctx.beginPath(); r.poli.forEach((p, i) => { if (i) ctx.lineTo(X(p.x), Y(p.y)); else ctx.moveTo(X(p.x), Y(p.y)); }); ctx.closePath();
+    const dono = r.dono !== null ? (g[r.dono] || {cor: '#888'}) : null;
+    ctx.fillStyle = dono ? dono.cor : (r.valor === 3 ? '#f6e27a' : '#c9e7a6'); ctx.fill();
+    if (r.anim > 0){ ctx.fillStyle = `rgba(255,255,255,${r.anim * 0.7})`; ctx.fill(); }
+    ctx.strokeStyle = '#2f5d2b'; ctx.lineWidth = 2; ctx.stroke();
+  });
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ilha.regs.forEach(r => {
+    if (!r.terra) return;
+    const cap = Object.keys(ilha.capitais).find(k => ilha.capitais[k] === r.id), s = 1 + r.anim * 0.6;
+    if (cap && g[cap]){ ctx.font = Math.round(30 * P.k * s + 6) + 'px sans-serif'; ctx.fillText(g[cap].emoji, X(r.cx), Y(r.cy)); }
+    else if (r.valor === 3){ ctx.font = Math.round(24 * P.k * s + 6) + 'px sans-serif'; ctx.fillText('⭐', X(r.cx), Y(r.cy)); }
+    else if (r.dono !== null && r.anim > 0){ ctx.font = Math.round(22 * P.k * s + 6) + 'px sans-serif'; ctx.fillText('🚩', X(r.cx), Y(r.cy)); }
+  });
+  // placar no canto do mapa
+  const ord = Object.keys(totais).filter(id => g[id]).sort((a, b) => totais[b] - totais[a]);
+  ord.forEach((id, i) => { const txt = g[id].emoji + ' ' + totais[id]; ctx.font = 'bold 18px Arial'; const w = ctx.measureText(txt).width + 18;
+    ctx.fillStyle = 'rgba(255,255,255,.9)'; ARC.rrect(ctx, 10, 10 + i * 34, w, 28, 10); ctx.fill(); ctx.fillStyle = g[id].cor; ctx.fillRect(10, 10 + i * 34, 6, 28); ctx.fillStyle = '#243049'; ctx.textAlign = 'left'; ctx.fillText(txt, 22, 24 + i * 34); ctx.textAlign = 'center'; });
+}
+
+AV.iniciarConexao($('painelConexao'));
+window.CONQUISTA = {estado: () => ({ilha, totais, n, acabou, pAtual, fase}), qs, gerarIlha};   // usado nos testes
+</script>
+</body>
+</html>

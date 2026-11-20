@@ -1,0 +1,12 @@
+{
+  "name": "testes-painel-de-aula",
+  "private": true,
+  "description": "Testes automáticos do Painel de Aula (conteúdo, menu, iPads antigos e todas as páginas no navegador)",
+  "scripts": {
+    "testar": "node rodar.js"
+  },
+  "devDependencies": {
+    "acorn": "8.14.0",
+    "playwright": "1.48.2"
+  }
+}

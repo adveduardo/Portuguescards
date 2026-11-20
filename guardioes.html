@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Guardiões da Biblioteca</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #painel{position:fixed;left:0;right:0;bottom:0;z-index:6;text-align:center;padding:8px;background:rgba(15,22,40,.92);display:none}
+  #painel .tit{color:#fff;font-size:20px;font-weight:bold;margin-bottom:4px}
+  #painel button{font-size:20px;color:#fff;min-width:150px}
+  #painel button.cinza{background:#5b6474;color:#fff}
+  #onda{position:fixed;left:50%;bottom:6px;-webkit-transform:translateX(-50%);transform:translateX(-50%);z-index:5;display:none;text-align:center;white-space:nowrap}
+  #onda .prev{display:inline-block;vertical-align:middle;background:rgba(15,22,40,.9);color:#fff;border-radius:14px;padding:8px 14px;font-weight:bold;margin-right:6px;font-size:17px}
+  #onda button{vertical-align:middle}
+  #listaCats label{display:block;text-align:left;max-width:520px;margin:4px auto}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hOnda"></span><span class="chip" id="hVidas"></span><span class="chip" id="hMoedas"></span>
+  <button type="button" id="btPausa">⏸️</button><button type="button" id="btVel">⏩</button><button type="button" id="btSom">🔊</button><button type="button" id="btSair">⏹️</button>
+</div>
+<div id="painel"></div>
+<div id="onda"><div class="prev" id="prevOnda"></div><button type="button" class="principal" id="btOnda">▶️ Soltar a onda</button></div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🏰 Guardiões da Biblioteca</h1>
+  <p>Monstros-palavra querem invadir a biblioteca! Eles chegam <b>cinzentos</b>: toque num monstro e digam <b>a que grupo a palavra pertence</b>.
+    Só depois disso as torres daquele grupo conseguem atacá-lo. Toque nos pedestais ⊕ para construir torres e nas torres para melhorá-las.</p>
+  <label>Palavras: <select id="selArquivo" style="max-width:520px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <div id="listaCats"></div>
+  <label>Ondas: <select id="selOndas"><option>5</option><option selected>8</option><option>12</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Defender a biblioteca</button></p>
+  <p class="dica">Quando um monstro está escolhido, o tempo fica em câmera lenta para a turma pensar. Classificar certo dá moedas; errar deixa o monstro bravo (mais rápido)!</p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, dados = null, jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ medir(); if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
+  var G = {cols: 14, rows: 8, cel: 50, ox: 0, oy: 0}, CUSTO = 15, MELHORA = [0, 20, 30];
+
+  ARC.seletor($('selArquivo'), 'categorias', 'morfo-classes.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; dados = null; $('listaCats').innerHTML = '';
+    ARC.json('dados/' + arq, function(d){
+      dados = ARC.normalizarCategorias(d);
+      if (!dados){ $('infoArq').textContent = 'Este arquivo não tem grupos suficientes.'; return; }
+      var ord = dados.alvos.slice().sort(function(a, b){ return dados.conta[b] - dados.conta[a]; });
+      $('infoArq').textContent = dados.titulo + ' • escolham de 2 a 4 grupos (cada grupo vira um tipo de torre):';
+      $('listaCats').innerHTML = dados.alvos.map(function(id){ var c = dados.cats[id];
+        return '<label><input type="checkbox" data-id="' + esc(id) + '"' + (ord.indexOf(id) < 3 ? ' checked' : '') + '> <b style="color:' + c.cor + '">' + esc(c.nome) + '</b> <small>(' + dados.conta[id] + ' palavras)</small></label>'; }).join('');
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  // ---------- mapa: caminho sinuoso gerado a cada partida ----------
+  function gerarMapa(){
+    var r = 1 + Math.floor(Math.random() * (G.rows - 2)), c = 0, cam = [{c: 0, r: r}], i;
+    while (c < G.cols - 1){
+      var reto = 1 + Math.floor(Math.random() * 3);
+      for (i = 0; i < reto && c < G.cols - 1; i++){ c++; cam.push({c: c, r: r}); }
+      if (c >= G.cols - 2) continue;
+      var alvo = Math.max(0, Math.min(G.rows - 1, r + (Math.random() < 0.5 ? -1 : 1) * (2 + Math.floor(Math.random() * 3))));
+      while (r !== alvo){ r += alvo > r ? 1 : -1; cam.push({c: c, r: r}); }
+    }
+    var noCam = {}; cam.forEach(function(p){ noCam[p.c + ',' + p.r] = 1; });
+    var spots = [], vistos = {};
+    cam.forEach(function(p, k){
+      if (k % 2) return;
+      [[0, -1], [0, 1], [-1, 0], [1, 0], [1, 1], [-1, -1]].forEach(function(d){
+        var nc = p.c + d[0], nr = p.r + d[1], key = nc + ',' + nr;
+        if (nc < 0 || nr < 0 || nc >= G.cols || nr >= G.rows || noCam[key] || vistos[key]) return;
+        vistos[key] = 1; spots.push({c: nc, r: nr, torre: null});
+      });
+    });
+    spots = ARC.embaralhar(spots).slice(0, 14);
+    return {cam: cam, spots: spots};
+  }
+  function medir(){
+    var W = tela.W, H = tela.H;
+    G.cel = Math.floor(Math.min(W / G.cols, (H - 132) / G.rows)); G.ox = Math.floor((W - G.cel * G.cols) / 2); G.oy = Math.floor(52 + (H - 132 - G.cel * G.rows) / 2);   // espaço em cima (placar) e embaixo (onda)
+  }
+  function centro(c, r){ return {x: G.ox + (c + 0.5) * G.cel, y: G.oy + (r + 0.5) * G.cel}; }
+  function posNoCaminho(d){
+    var cam = jogo.mapa.cam, i = Math.min(cam.length - 2, Math.floor(d)), f = Math.min(1, d - i), a = centro(cam[i].c, cam[i].r), b = centro(cam[i + 1].c, cam[i + 1].r);
+    return {x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f};
+  }
+
+  // ---------- partida ----------
+  function escolhidos(){ var l = [], cks = $('listaCats').querySelectorAll('input'); for (var i = 0; i < cks.length; i++) if (cks[i].checked) l.push(cks[i].getAttribute('data-id')); return l; }
+  function comecar(){
+    if (!dados) return ARC.aviso('Escolha um arquivo de palavras.');
+    var cats = escolhidos();
+    if (cats.length < 2 || cats.length > 4) return ARC.aviso('Marque de 2 a 4 grupos.');
+    jogo = {cats: cats, palavras: ARC.embaralhar(dados.palavras.filter(function(p){ return cats.indexOf(p.c) >= 0; })), usadas: 0, mapa: gerarMapa(), onda: 0, totalOndas: +$('selOndas').value,
+      vidas: 10, moedas: 40, monstros: [], tiros: [], fx: [], fila: [], gerar: 0, emOnda: false, sel: null, selSpot: null, escala: 1, rapido: false, seq: 0, acabou: false};
+    ARC.tela(null); $('hud').style.display = ''; medir(); laco.pausado = false; laco.iniciar(); pintarHud(); prepararOnda();
+  }
+  function pintarHud(){
+    $('hOnda').textContent = '🌊 Onda ' + Math.max(1, jogo.onda) + '/' + jogo.totalOndas;
+    $('hVidas').textContent = '📚 ' + jogo.vidas; $('hMoedas').textContent = '💰 ' + jogo.moedas;
+  }
+  function prepararOnda(){
+    jogo.emOnda = false; jogo.onda++;
+    var n = 4 + jogo.onda * 2, conta = {}, fila = [];
+    for (var i = 0; i < n; i++){
+      if (jogo.usadas >= jogo.palavras.length){ jogo.palavras = ARC.embaralhar(jogo.palavras); jogo.usadas = 0; }
+      var p = jogo.palavras[jogo.usadas++]; fila.push(p); conta[p.c] = (conta[p.c] || 0) + 1;
+    }
+    jogo.fila = fila;
+    $('prevOnda').innerHTML = 'Próxima onda: ' + n + ' monstros • ' + Object.keys(conta).map(function(c){ return '<span style="color:' + dados.cats[c].cor + '">' + conta[c] + ' ' + esc(dados.cats[c].plural || dados.cats[c].nome) + '</span>'; }).join(' • ');
+    $('btOnda').textContent = '▶️ Soltar a onda ' + jogo.onda;
+    $('onda').style.display = 'block'; pintarHud();
+  }
+  function soltarOnda(){ $('onda').style.display = 'none'; jogo.emOnda = true; jogo.gerar = 0.3; ARC.tom(220, 0.3, 0, 'sawtooth'); ARC.tom(330, 0.3, 0.15, 'sawtooth'); }
+  function novoMonstro(p){
+    var hp = 2 + jogo.onda;
+    jogo.monstros.push({id: ++jogo.seq, p: p, marcado: false, hp: hp, hpMax: hp, d: 0, vel: 0.55 + jogo.onda * 0.04 + Math.random() * 0.1, raiva: 0, fase: Math.random() * 6});
+  }
+  // ---------- toque: monstro, pedestal ou torre ----------
+  function tocar(x, y){
+    if (!jogo || jogo.acabou) return;
+    var melhor = null, dm = G.cel * 0.55;
+    jogo.monstros.forEach(function(m){ var q = posNoCaminho(m.d), dd = Math.sqrt((q.x - x) * (q.x - x) + (q.y - y) * (q.y - y)); if (!m.marcado && dd < dm){ dm = dd; melhor = m; } });
+    if (melhor) return escolherMonstro(melhor);
+    for (var i = 0; i < jogo.mapa.spots.length; i++){
+      var s = jogo.mapa.spots[i], c = centro(s.c, s.r);
+      if (Math.abs(c.x - x) < G.cel / 2 && Math.abs(c.y - y) < G.cel / 2) return escolherSpot(s);
+    }
+    fecharPainel();
+  }
+  function escolherMonstro(m){
+    jogo.sel = m; jogo.selSpot = null; jogo.escala = 0.22;
+    var h = '<div class="tit">“' + esc(m.p.t) + '” é…</div>' + jogo.cats.map(function(c){ return '<button type="button" data-c="' + esc(c) + '" style="background:' + dados.cats[c].cor + '">' + esc(dados.cats[c].nome) + '</button>'; }).join('') + ' <button type="button" class="cinza" id="btFechar">✖</button>';
+    abrirPainel(h);
+    var bs = $('painel').querySelectorAll('[data-c]');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ classificar(this.getAttribute('data-c')); };
+  }
+  function classificar(c){
+    var m = jogo.sel; if (!m || jogo.monstros.indexOf(m) < 0) return fecharPainel();
+    var q = posNoCaminho(m.d);
+    if (c === m.p.c){ m.marcado = true; jogo.moedas += 2; jogo.fx.push({x: q.x, y: q.y - G.cel * 0.6, t: 0, txt: '✓ +2💰', cor: '#7CFFB2'}); ARC.plim(); }
+    else { m.raiva = 2.5; jogo.fx.push({x: q.x, y: q.y - G.cel * 0.6, t: 0, txt: '✗ bravo!', cor: '#ff6b6b'}); ARC.erro(); ARC.aviso('“' + esc(m.p.t) + '” não é ' + esc(dados.cats[c].nome.toLowerCase()) + '. Tentem de novo!', 1800); }
+    pintarHud(); fecharPainel();
+  }
+  function escolherSpot(s){
+    jogo.selSpot = s; jogo.sel = null; jogo.escala = 1;
+    var h;
+    if (!s.torre){
+      h = '<div class="tit">Construir uma torre (💰 ' + CUSTO + ')</div>' + jogo.cats.map(function(c){ return '<button type="button" data-t="' + esc(c) + '" style="background:' + dados.cats[c].cor + '"' + (jogo.moedas < CUSTO ? ' disabled' : '') + '>🗼 ' + esc(dados.cats[c].plural || dados.cats[c].nome) + '</button>'; }).join('');
+    } else {
+      var t = s.torre, cst = MELHORA[t.nivel];
+      h = '<div class="tit">🗼 Torre de ' + esc(dados.cats[t.c].plural || dados.cats[t.c].nome) + ' • nível ' + t.nivel + '</div>' + (t.nivel < 3 ? '<button type="button" id="btMelhorar"' + (jogo.moedas < cst ? ' disabled' : '') + ' style="background:#2f80ed">⬆️ Melhorar (💰 ' + cst + ')</button>' : '<b style="color:#fff">Nível máximo! </b>');
+    }
+    abrirPainel(h + ' <button type="button" class="cinza" id="btFechar">✖</button>');
+    var bs = $('painel').querySelectorAll('[data-t]');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ construir(s, this.getAttribute('data-t')); };
+    if ($('btMelhorar')) $('btMelhorar').onclick = function(){ melhorar(s); };
+  }
+  function construir(s, c){ if (jogo.moedas < CUSTO || s.torre) return; jogo.moedas -= CUSTO; s.torre = {c: c, nivel: 1, t: 0, ang: 0}; ARC.tom(520, 0.08); ARC.tom(780, 0.1, 0.08); pintarHud(); fecharPainel(); }
+  function melhorar(s){ var t = s.torre, cst = MELHORA[t.nivel]; if (!t || t.nivel >= 3 || jogo.moedas < cst) return; jogo.moedas -= cst; t.nivel++; ARC.plim(); pintarHud(); fecharPainel(); }
+  function abrirPainel(h){ $('painel').innerHTML = h; $('painel').style.display = 'block'; if ($('btFechar')) $('btFechar').onclick = fecharPainel; }
+  function fecharPainel(){ if (!jogo) return; jogo.sel = null; jogo.selSpot = null; jogo.escala = 1; $('painel').style.display = 'none'; }
+
+  // ---------- simulação ----------
+  function passo(dtReal){
+    if (dtReal && jogo && !jogo.acabou){
+      var dt = dtReal * jogo.escala * (jogo.rapido ? 2 : 1), i, m;
+      if (jogo.emOnda){
+        jogo.gerar -= dt;
+        if (jogo.gerar <= 0 && jogo.fila.length){ novoMonstro(jogo.fila.shift()); jogo.gerar = Math.max(0.7, 1.6 - jogo.onda * 0.08); }
+      }
+      var fim = jogo.mapa.cam.length - 1;
+      for (i = jogo.monstros.length - 1; i >= 0; i--){
+        m = jogo.monstros[i]; m.fase += dt * 6; if (m.raiva > 0) m.raiva -= dt;
+        m.d += m.vel * (m.raiva > 0 ? 1.6 : 1) * dt;
+        if (m.d >= fim){
+          jogo.monstros.splice(i, 1); jogo.vidas--; if (jogo.sel === m) fecharPainel();
+          ARC.tom(140, 0.4, 0, 'sawtooth'); ARC.aviso('📚 “' + esc(m.p.t) + '” (' + esc(dados.cats[m.p.c].nome.toLowerCase()) + ') entrou na biblioteca!', 2200); pintarHud();
+          if (jogo.vidas <= 0) return terminar(false);
+        }
+      }
+      // torres atiram só nos monstros já classificados do seu grupo
+      jogo.mapa.spots.forEach(function(s){
+        var t = s.torre; if (!t) return;
+        t.t -= dt; var c = centro(s.c, s.r), alcance = G.cel * (2 + t.nivel * 0.45), alvo = null;
+        jogo.monstros.forEach(function(mm){ if (!mm.marcado || mm.p.c !== t.c) return; var q = posNoCaminho(mm.d), dd = Math.sqrt((q.x - c.x) * (q.x - c.x) + (q.y - c.y) * (q.y - c.y)); if (dd <= alcance && (!alvo || mm.d > alvo.d)) alvo = mm; });
+        if (alvo){ var qa = posNoCaminho(alvo.d); t.ang = Math.atan2(qa.y - c.y, qa.x - c.x);
+          if (t.t <= 0){ t.t = Math.max(0.35, 1 - t.nivel * 0.2); jogo.tiros.push({x: c.x, y: c.y - G.cel * 0.2, alvo: alvo, dano: t.nivel, cor: dados.cats[t.c].cor}); ARC.tom(900 + t.nivel * 120, 0.03); } }
+      });
+      for (i = jogo.tiros.length - 1; i >= 0; i--){
+        var tr = jogo.tiros[i];
+        if (jogo.monstros.indexOf(tr.alvo) < 0){ jogo.tiros.splice(i, 1); continue; }
+        var qa2 = posNoCaminho(tr.alvo.d), dx = qa2.x - tr.x, dy = qa2.y - tr.y, dist = Math.sqrt(dx * dx + dy * dy), v = G.cel * 9 * dt;
+        if (dist <= v){
+          jogo.tiros.splice(i, 1); tr.alvo.hp -= tr.dano;
+          if (tr.alvo.hp <= 0){ var k = jogo.monstros.indexOf(tr.alvo); jogo.monstros.splice(k, 1); jogo.moedas += 3; jogo.fx.push({x: qa2.x, y: qa2.y, t: 0, txt: '+3💰', cor: '#ffd54a', puf: true}); ARC.tom(660, 0.06); pintarHud(); }
+        } else { tr.x += dx / dist * v; tr.y += dy / dist * v; }
+      }
+      for (i = jogo.fx.length - 1; i >= 0; i--){ jogo.fx[i].t += dtReal; if (jogo.fx[i].t > 1.1) jogo.fx.splice(i, 1); }
+      if (jogo.emOnda && !jogo.fila.length && !jogo.monstros.length){
+        if (jogo.onda >= jogo.totalOndas) return terminar(true);
+        jogo.moedas += 10; ARC.festa(); ARC.aviso('🌊 Onda ' + jogo.onda + ' vencida! +10💰', 2000); prepararOnda();
+      }
+    }
+    desenhar();
+  }
+  function terminar(venceu){
+    jogo.acabou = true; laco.parar(); fecharPainel(); $('onda').style.display = 'none';
+    $('cFim').innerHTML = '<h1>' + (venceu ? '🏰 A biblioteca está salva!' : '👾 Os monstros invadiram a biblioteca!') + '</h1>' +
+      '<p style="font-size:22px">' + (venceu ? 'Vocês venceram as ' + jogo.totalOndas + ' ondas com ' + jogo.vidas + ' livros a salvo.' : 'Vocês chegaram à onda ' + jogo.onda + '.') + '</p>' +
+      '<p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button></p>';
+    ARC.tela('tFim'); if (venceu) ARC.festa();
+    $('btDeNovo').onclick = function(){ $('hud').style.display = 'none'; ARC.tela('tConfig'); };
+  }
+
+  // ---------- desenho ----------
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC, c = G.cel, i;
+    ctx.fillStyle = '#3e7c4a'; ctx.fillRect(0, 0, W, H);
+    if (!jogo){ return; }
+    for (var gc = 0; gc < G.cols; gc++) for (var gr = 0; gr < G.rows; gr++){ if ((gc + gr) % 2) continue; ctx.fillStyle = 'rgba(255,255,255,.035)'; ctx.fillRect(G.ox + gc * c, G.oy + gr * c, c, c); }
+    // caminho
+    ctx.strokeStyle = '#c9a66b'; ctx.lineWidth = c * 0.78; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.beginPath();
+    jogo.mapa.cam.forEach(function(p, k){ var q = centro(p.c, p.r); if (k) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x - c, q.y); });
+    ctx.stroke(); ctx.strokeStyle = 'rgba(0,0,0,.08)'; ctx.lineWidth = c * 0.5; ctx.stroke();
+    // biblioteca no fim do caminho
+    var u = jogo.mapa.cam[jogo.mapa.cam.length - 1], b = centro(u.c, u.r);
+    ctx.fillStyle = '#8e5a2b'; ctx.fillRect(b.x - c * 0.1, b.y - c * 0.9, c * 1.1, c * 1.3);
+    ctx.fillStyle = '#6b3e17'; ctx.beginPath(); ctx.moveTo(b.x - c * 0.25, b.y - c * 0.9); ctx.lineTo(b.x + c * 0.45, b.y - c * 1.4); ctx.lineTo(b.x + c * 1.15, b.y - c * 0.9); ctx.fill();
+    ctx.font = Math.round(c * 0.6) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('📚', b.x + c * 0.45, b.y - c * 0.25);
+    // pedestais e torres
+    jogo.mapa.spots.forEach(function(s){
+      var q = centro(s.c, s.r), sel = jogo.selSpot === s;
+      if (!s.torre){
+        ctx.fillStyle = sel ? '#ffd54a' : 'rgba(220,220,230,.75)'; ctx.beginPath(); ctx.arc(q.x, q.y, c * 0.32, 0, 2 * Math.PI); ctx.fill();
+        ctx.strokeStyle = '#5b6474'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(q.x - c * 0.14, q.y); ctx.lineTo(q.x + c * 0.14, q.y); ctx.moveTo(q.x, q.y - c * 0.14); ctx.lineTo(q.x, q.y + c * 0.14); ctx.stroke();
+      } else {
+        var t = s.torre, cor = dados.cats[t.c].cor;
+        if (sel){ ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(q.x, q.y, c * (2 + t.nivel * 0.45), 0, 2 * Math.PI); ctx.stroke(); }
+        ctx.fillStyle = '#6b7383'; ARC.rrect(ctx, q.x - c * 0.36, q.y - c * 0.1, c * 0.72, c * 0.46, c * 0.08); ctx.fill();
+        ctx.fillStyle = cor; ARC.rrect(ctx, q.x - c * 0.28, q.y - c * 0.5, c * 0.56, c * 0.5, c * 0.1); ctx.fill();
+        ctx.save(); ctx.translate(q.x, q.y - c * 0.28); ctx.rotate(t.ang); ctx.fillStyle = '#2b3242'; ctx.fillRect(0, -c * 0.06, c * 0.42, c * 0.12); ctx.restore();
+        ctx.fillStyle = '#fff'; ctx.font = 'bold ' + Math.round(c * 0.24) + 'px Arial'; ctx.fillText('★★★'.slice(0, t.nivel), q.x, q.y + c * 0.12);
+      }
+    });
+    // monstros
+    jogo.monstros.forEach(function(m){
+      var q = posNoCaminho(m.d), r = c * 0.3, bob = Math.sin(m.fase) * c * 0.04, cor = m.marcado ? dados.cats[m.p.c].cor : '#8a8f99';
+      if (m.raiva > 0){ ctx.fillStyle = 'rgba(255,60,60,.35)'; ctx.beginPath(); ctx.arc(q.x, q.y + bob, r * 1.45, 0, 2 * Math.PI); ctx.fill(); }
+      if (jogo.sel === m){ ctx.strokeStyle = '#ffd54a'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(q.x, q.y + bob, r * 1.4, 0, 2 * Math.PI); ctx.stroke(); }
+      ctx.fillStyle = cor; ctx.beginPath(); ctx.arc(q.x, q.y + bob, r, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(q.x - r * 0.35, q.y - r * 0.15 + bob, r * 0.28, 0, 2 * Math.PI); ctx.fill(); ctx.beginPath(); ctx.arc(q.x + r * 0.35, q.y - r * 0.15 + bob, r * 0.28, 0, 2 * Math.PI); ctx.fill();
+      ctx.fillStyle = '#1b1530'; ctx.beginPath(); ctx.arc(q.x - r * 0.3, q.y - r * 0.12 + bob, r * 0.13, 0, 2 * Math.PI); ctx.fill(); ctx.beginPath(); ctx.arc(q.x + r * 0.4, q.y - r * 0.12 + bob, r * 0.13, 0, 2 * Math.PI); ctx.fill();
+      if (!m.marcado){ ctx.fillStyle = '#fff'; ctx.font = 'bold ' + Math.round(r * 0.8) + 'px Arial'; ctx.fillText('?', q.x, q.y + r * 0.45 + bob); }
+      var txt = m.p.t, tam = ARC.fonte(ctx, txt, c * 2.2, Math.round(c * 0.3)), w = ctx.measureText(txt).width + 12;
+      ctx.fillStyle = 'rgba(255,255,255,.95)'; ARC.rrect(ctx, q.x - w / 2, q.y - r - tam - 12 + bob, w, tam + 8, 6); ctx.fill();
+      ctx.fillStyle = '#1f2a44'; ctx.fillText(txt, q.x, q.y - r - tam / 2 - 8 + bob);
+      if (m.hp < m.hpMax){ ctx.fillStyle = '#300'; ctx.fillRect(q.x - r, q.y + r + 3, r * 2, 5); ctx.fillStyle = '#2ecc71'; ctx.fillRect(q.x - r, q.y + r + 3, r * 2 * m.hp / m.hpMax, 5); }
+    });
+    jogo.tiros.forEach(function(t){ ctx.fillStyle = t.cor; ctx.beginPath(); ctx.arc(t.x, t.y, c * 0.1, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); });
+    jogo.fx.forEach(function(f){ ctx.globalAlpha = Math.max(0, 1 - f.t / 1.1); if (f.puf){ ctx.fillStyle = 'rgba(255,255,255,.6)'; ctx.beginPath(); ctx.arc(f.x, f.y, c * 0.3 * (1 + f.t * 2), 0, 2 * Math.PI); ctx.fill(); }
+      ctx.fillStyle = f.cor; ARC.fonte(ctx, f.txt, 300, Math.round(c * 0.36)); ctx.fillText(f.txt, f.x, f.y - f.t * c * 0.8); ctx.globalAlpha = 1; });
+    if (jogo.escala < 1){ ctx.fillStyle = 'rgba(20,30,60,.18)'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#fff'; ctx.font = 'bold ' + Math.round(18 * E) + 'px Arial'; ctx.textAlign = 'right'; ctx.fillText('🐢 câmera lenta', W - 14, 70); ctx.textAlign = 'center'; }
+  }
+  $('cv').addEventListener('mousedown', function(e){ tocar(e.clientX, e.clientY); });
+  $('cv').addEventListener('touchstart', function(e){ tocar(e.changedTouches[0].clientX, e.changedTouches[0].clientY); e.preventDefault(); }, {passive: false});
+  $('btComecar').onclick = comecar;
+  $('btOnda').onclick = soltarOnda;
+  $('btPausa').onclick = function(){ laco.pausado = !laco.pausado; this.textContent = laco.pausado ? '▶️' : '⏸️'; };
+  $('btVel').onclick = function(){ jogo.rapido = !jogo.rapido; this.textContent = jogo.rapido ? '⏩×2' : '⏩'; };
+  $('btSair').onclick = function(){ if (!confirm('Sair do jogo?')) return; laco.parar(); jogo = null; fecharPainel(); $('painel').style.display = 'none'; $('onda').style.display = 'none'; $('hud').style.display = 'none'; ARC.tela('tConfig'); desenhar(); };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (jogo.sel && e.keyCode >= 49 && e.keyCode < 49 + jogo.cats.length){ e.preventDefault(); classificar(jogo.cats[e.keyCode - 49]); }
+    else if (e.keyCode === 27) fecharPainel();
+    else if (e.keyCode === 32 && $('onda').style.display === 'block'){ e.preventDefault(); soltarOnda(); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  medir(); desenhar();
+  window.GUARDIOES = {jogo: function(){ return jogo; }, tocar: tocar, escolherMonstro: escolherMonstro, classificar: classificar, construir: construir, melhorar: melhorar, soltarOnda: soltarOnda, centro: centro, pos: function(m){ return posNoCaminho(m.d); }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

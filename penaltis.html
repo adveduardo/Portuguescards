@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Disputa de Pênaltis</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #placar{position:fixed;left:10px;top:10px;z-index:5;background:rgba(8,16,36,.9);color:#fff;border-radius:16px;padding:8px 12px;font-weight:bold;display:none;min-width:270px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  #placar .lin{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin:4px 0;font-size:18px}
+  #placar .nome{-webkit-flex:1;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;padding:2px 8px;border-radius:8px}
+  #placar .nome.vez{box-shadow:0 0 0 3px #ffd54a}
+  #placar .gols{font-size:24px;min-width:34px;text-align:center;background:#fff;color:#14213d;border-radius:8px;margin:0 8px}
+  #placar .bolas span{display:inline-block;width:14px;height:14px;border-radius:50%;margin:0 2px;border:2px solid rgba(255,255,255,.7);vertical-align:middle}
+  #placar .bolas .g{background:#2ecc71;border-color:#2ecc71} #placar .bolas .x{background:#e74c3c;border-color:#e74c3c}
+  #placar .rodada{font-size:14px;color:#ffd54a;text-align:center;margin-top:2px}
+  #pergunta{position:fixed;left:300px;right:110px;top:10px;z-index:5;background:#fff;border-radius:18px;padding:10px 16px;text-align:center;font-weight:bold;font-size:24px;display:none;box-shadow:0 6px 0 rgba(0,0,0,.25)}
+  #pergunta small{display:block;font-size:15px;color:#56627a;font-weight:normal}
+  #relogio{position:fixed;right:14px;top:12px;width:80px;height:80px;border-radius:50%;background:#1f2a44;color:#fff;border:4px solid #fff;z-index:5;font-size:34px;font-weight:bold;line-height:72px;text-align:center;display:none}
+  #relogio.pouco{background:#e74c3c}
+  #alvos{position:fixed;left:0;top:0;width:0;height:0;z-index:4}
+  #alvos button{position:absolute;margin:0;padding:6px 8px;background:rgba(255,255,255,.9);border:4px solid #2f80ed;border-radius:16px;font-size:18px;line-height:1.15;white-space:normal;overflow:hidden;
+    display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;text-align:center}
+  #alvos button b{display:inline-block;background:#2f80ed;color:#fff;border-radius:8px;padding:0 7px;margin-right:6px}
+  #rodape{position:fixed;left:0;right:0;bottom:12px;text-align:center;z-index:6;display:none}
+  #explica{display:inline-block;max-width:92%;background:rgba(8,16,36,.9);color:#fff;font-size:20px;font-weight:bold;border-radius:16px;padding:8px 16px;margin-bottom:6px}
+  #explica small{display:block;font-weight:normal;font-size:16px;opacity:.9}
+  .times input{width:170px}
+  @media (max-width:900px){ #pergunta{left:10px;right:100px;top:118px;font-size:19px} #alvos button{font-size:15px} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="placar"></div>
+<div id="pergunta"></div>
+<div id="relogio"></div>
+<div id="alvos"></div>
+<div id="rodape"><div id="explica"></div><br><button type="button" class="principal" id="btProxima">➡️ Próxima cobrança</button></div>
+<div id="hud" style="display:none;left:auto;right:0;top:auto;bottom:0"><button type="button" id="btSom">🔊</button><button type="button" id="btSair" title="Terminar">⏹️</button></div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>⚽ Disputa de Pênaltis</h1>
+  <p>Cada cobrança é uma pergunta. As respostas ficam <b>nos cantos do gol</b>: quem cobra escolhe o canto da resposta certa.
+    Acertou? O goleiro pula para o outro lado e é GOL! Errou? Defesa, trave ou bola pra fora.</p>
+  <p class="times"><label>Time 1: <input type="text" id="inTime0" value="Leões" maxlength="18"></label> <label>Time 2: <input type="text" id="inTime1" value="Golfinhos" maxlength="18"></label></p>
+  <label>Perguntas: <select id="selArquivo" style="max-width:560px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Cobranças por time: <select id="selCobr"><option value="3">3</option><option value="5" selected>5</option><option value="7">7</option></select></label>
+  <label>Tempo para chutar: <select id="selTempo"><option value="0">sem tempo</option><option value="15">15 s</option><option value="20" selected>20 s</option><option value="30">30 s</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar a disputa</button></p>
+  <p class="dica">Clique no canto do gol (ou use as teclas 1, 2, 3 e 4). Empatou depois das cobranças? Vai para as alternadas (morte súbita).</p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, perguntas = [], jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ medir(); if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
+  var geo = {}, torcidaCv = null, timer = null;
+  var ZONAS4 = [[0.17, 0.27], [0.83, 0.27], [0.17, 0.74], [0.83, 0.74]], ZONAS3 = [[0.17, 0.27], [0.83, 0.27], [0.5, 0.74]], ZONAS2 = [[0.17, 0.5], [0.83, 0.5]];
+
+  // ---------- sons próprios: torcida (ruído filtrado), apito e chute ----------
+  var Som = (function(){
+    var ac = null, ruido = null;
+    function A(){
+      if (!Sala.somLigado()) return null;
+      try { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ac = ac || new C(); if (ac.state === 'suspended' && ac.resume) ac.resume(); return ac; } catch (e) { return null; }
+    }
+    function buf(a){ if (!ruido){ ruido = a.createBuffer(1, a.sampleRate * 2, a.sampleRate); var d = ruido.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } return ruido; }
+    return {
+      torcida: function(dur, vol, f0, f1){
+        var a = A(); if (!a) return;
+        var s = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain(), t = a.currentTime;
+        s.buffer = buf(a); s.loop = true; f.type = 'bandpass'; f.Q.value = 0.8;
+        f.frequency.setValueAtTime(f0, t); f.frequency.linearRampToValueAtTime(f1, t + dur);
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.3); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        s.connect(f); f.connect(g); g.connect(a.destination); s.start(t); s.stop(t + dur + 0.05);
+      },
+      apito: function(){
+        var a = A(); if (!a) return;
+        [0, 0.28].forEach(function(atraso, k){
+          var o = a.createOscillator(), g = a.createGain(), l = a.createOscillator(), lg = a.createGain(), t = a.currentTime + atraso, d = k ? 0.5 : 0.18;
+          o.type = 'square'; o.frequency.value = 2600; l.frequency.value = 28; lg.gain.value = 140; l.connect(lg); lg.connect(o.frequency);
+          o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(0.05, t); g.gain.setValueAtTime(0.05, t + d - 0.03); g.gain.linearRampToValueAtTime(0, t + d);
+          o.start(t); l.start(t); o.stop(t + d + 0.02); l.stop(t + d + 0.02);
+        });
+      },
+      chute: function(){
+        var a = A(); if (!a) return;
+        var o = a.createOscillator(), g = a.createGain(), t = a.currentTime;
+        o.frequency.setValueAtTime(180, t); o.frequency.exponentialRampToValueAtTime(50, t + 0.12); o.connect(g); g.connect(a.destination);
+        g.gain.setValueAtTime(0.5, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.15); o.start(t); o.stop(t + 0.16);
+      }
+    };
+  })();
+
+  ARC.seletor($('selArquivo'), 'perguntas', 'banco-quiz-geral.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; perguntas = [];
+    ARC.json('dados/' + arq, function(d){
+      perguntas = ARC.normalizarPerguntas(d, {maxOps: 4, maxLen: 210, maxOpLen: 60});
+      $('infoArq').textContent = perguntas.length ? (d.titulo || arq) + ' • ' + perguntas.length + ' perguntas' : 'Este arquivo não tem perguntas que caibam no gol.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  // ---------- geometria da cena ----------
+  function medir(){
+    var W = tela.W, H = tela.H, gw = Math.min(W * 0.64, H * 1.15), gh = gw * 0.36;
+    geo = {gw: gw, gh: gh, gx: (W - gw) / 2, gy: Math.max(H * 0.3, 130), bolaX: W / 2, bolaY: H * 0.86};
+    geo.chao = geo.gy + gh; geo.arqY = geo.gy - gh * 0.95;
+    preRenderTorcida();
+    if (jogo && jogo.fase === 'pergunta') posicionarAlvos();
+  }
+  function zonasDe(n){ return n >= 4 ? ZONAS4 : n === 3 ? ZONAS3 : ZONAS2; }
+  function pontoZona(n, i){ var z = zonasDe(n)[i]; return {x: geo.gx + geo.gw * z[0], y: geo.gy + geo.gh * z[1]}; }
+  function preRenderTorcida(){   // a torcida é desenhada uma vez (2 quadros) e só é copiada a cada quadro
+    var W = tela.W, E = tela.ESC, h = Math.max(40, geo.gy - 20), cores = ['#e74c3c', '#2f80ed', '#ffd54a', '#ffffff', '#27ae60', '#ff7a1a', '#c0392b', '#5dade2'];
+    if (jogo){ cores = [jogo.times[0].cor, jogo.times[0].cor, jogo.times[1].cor, jogo.times[1].cor, '#ffffff', '#ffd54a']; }
+    torcidaCv = [0, 1].map(function(q){
+      var c = document.createElement('canvas'); c.width = Math.ceil(W); c.height = Math.ceil(h); var x2 = c.getContext('2d'), passo = 13 * E, lin = 0;
+      for (var y = h - 8 * E; y > 8; y -= passo, lin++){
+        for (var x = (lin % 2) * passo / 2; x < W; x += passo){
+          var k = Math.abs(Math.floor(x * 7 + lin * 131)) % cores.length, pulo = q && ((Math.floor(x / passo) + lin) % 3 === 0) ? -4 * E : 0;
+          x2.fillStyle = cores[k]; x2.beginPath(); x2.arc(x, y + pulo, 4.2 * E, 0, 2 * Math.PI); x2.fill();
+        }
+      }
+      return c;
+    });
+  }
+
+  // ---------- jogo ----------
+  function comecar(){
+    if (perguntas.length < 4) return ARC.aviso('Escolha um arquivo com perguntas.');
+    var t0 = ARC.EQUIPES[0], t1 = ARC.EQUIPES[1];
+    jogo = {monte: ARC.embaralhar(perguntas), usadas: 0, total: +$('selCobr').value, tempo: +$('selTempo').value, vez: 0, morteSubita: false, fase: 'pronto',
+      times: [{nome: $('inTime0').value.trim() || t0.nome, emoji: t0.emoji, cor: t0.cor, gols: 0, cobr: []}, {nome: $('inTime1').value.trim() || t1.nome, emoji: t1.emoji, cor: t1.cor, gols: 0, cobr: []}],
+      anim: null, goleiro: {x: 0, rot: 0, alvoX: 0, alvoRot: 0}, rede: null, fx: [], comemorar: 0};
+    ARC.tela(null); $('placar').style.display = 'block'; $('hud').style.display = '';
+    medir(); laco.iniciar(); Som.apito(); proximaCobranca();
+  }
+  function pintarPlacar(){
+    var h = '';
+    jogo.times.forEach(function(t, k){
+      var bolas = '', n = Math.max(jogo.total, t.cobr.length, jogo.times[1 - k].cobr.length);
+      for (var i = 0; i < n; i++) bolas += '<span class="' + (t.cobr[i] === 1 ? 'g' : t.cobr[i] === 0 ? 'x' : '') + '"></span>';
+      h += '<div class="lin"><span class="nome' + (k === jogo.vez && jogo.fase !== 'fim' ? ' vez' : '') + '" style="background:' + t.cor + '">' + esc(t.emoji + ' ' + t.nome) + '</span><span class="gols">' + t.gols + '</span><span class="bolas">' + bolas + '</span></div>';
+    });
+    h += '<div class="rodada">' + (jogo.morteSubita ? '⚡ Alternadas (morte súbita)' : 'Cobrança ' + Math.min(jogo.total, jogo.times[jogo.vez].cobr.length + 1) + ' de ' + jogo.total) + '</div>';
+    $('placar').innerHTML = h;
+  }
+  function proximaCobranca(){
+    clearInterval(timer);
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(perguntas); jogo.usadas = 0; }
+    jogo.p = jogo.monte[jogo.usadas++]; jogo.fase = 'pergunta'; jogo.anim = null; jogo.rede = null; jogo.comemorar = 0; jogo.fx = [];
+    jogo.goleiro = {x: 0, rot: 0, alvoX: 0, alvoRot: 0};
+    var t = jogo.times[jogo.vez];
+    $('pergunta').innerHTML = esc(jogo.p.p) + '<small>Vez dos ' + esc(t.emoji + ' ' + t.nome) + ': escolham o canto da resposta certa!</small>'; $('pergunta').style.display = 'block';
+    $('rodape').style.display = 'none';
+    posicionarAlvos(); pintarPlacar();
+    jogo.resta = jogo.tempo;
+    if (jogo.tempo){ $('relogio').style.display = 'block'; $('relogio').className = ''; $('relogio').textContent = jogo.resta; timer = setInterval(tique, 1000); }
+    else $('relogio').style.display = 'none';
+  }
+  function posicionarAlvos(){
+    var n = jogo.p.ops.length, h = '', w = geo.gw * 0.31, hh = geo.gh * 0.44;
+    for (var i = 0; i < n; i++){
+      var pt = pontoZona(n, i);
+      h += '<button type="button" data-i="' + i + '" style="left:' + Math.round(pt.x - w / 2) + 'px;top:' + Math.round(pt.y - hh / 2) + 'px;width:' + Math.round(w) + 'px;height:' + Math.round(hh) + 'px"><span><b>' + (i + 1) + '</b>' + esc(jogo.p.ops[i]) + '</span></button>';
+    }
+    $('alvos').innerHTML = h;
+    var bs = $('alvos').querySelectorAll('button');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ chutar(+this.getAttribute('data-i')); };
+  }
+  function tique(){
+    if (!jogo || jogo.fase !== 'pergunta') return clearInterval(timer);
+    jogo.resta--; $('relogio').textContent = Math.max(0, jogo.resta);
+    if (jogo.resta <= 5 && jogo.resta > 0){ $('relogio').className = 'pouco'; ARC.tom(880, 0.05); }
+    if (jogo.resta <= 0) chutar(-1);
+  }
+  // i = canto escolhido (-1 = acabou o tempo)
+  function chutar(i){
+    if (!jogo || jogo.fase !== 'pergunta') return;
+    clearInterval(timer); jogo.fase = 'chute'; $('alvos').innerHTML = ''; $('relogio').style.display = 'none';
+    var n = jogo.p.ops.length, certo = i === jogo.p.ok, desfecho, alvoBola, alvoGoleiro, outras = [];
+    for (var k = 0; k < n; k++) if (k !== i) outras.push(k);
+    if (i < 0){ desfecho = 'fraco'; alvoBola = {x: geo.bolaX, y: geo.chao - geo.gh * 0.15}; alvoGoleiro = -1; }
+    else {
+      alvoBola = pontoZona(n, i);
+      desfecho = certo ? 'gol' : ARC.sortear(['defesa', 'defesa', 'defesa', 'trave', 'fora']);
+      alvoGoleiro = certo ? ARC.sortear(outras) : desfecho === 'defesa' ? i : ARC.sortear(outras);
+      if (desfecho === 'trave') alvoBola = {x: alvoBola.x < tela.W / 2 ? geo.gx + 4 : geo.gx + geo.gw - 4, y: alvoBola.y};
+      if (desfecho === 'fora') alvoBola = {x: alvoBola.x, y: geo.gy - geo.gh * 0.35};
+    }
+    var gx = alvoGoleiro < 0 ? 0 : pontoZona(n, alvoGoleiro).x - tela.W / 2, gy = alvoGoleiro < 0 ? 0 : pontoZona(n, alvoGoleiro).y;
+    jogo.goleiro.alvoX = gx * (desfecho === 'defesa' ? 1 : 0.92);
+    jogo.goleiro.alvoRot = gx === 0 ? 0 : (gx < 0 ? -1 : 1) * (gy < geo.gy + geo.gh * 0.5 ? 1.2 : 1.45);
+    jogo.anim = {t: 0, desfecho: desfecho, de: {x: geo.bolaX, y: geo.bolaY}, para: alvoBola, escolha: i, resolvido: false};
+  }
+  function resolver(){
+    var a = jogo.anim, t = jogo.times[jogo.vez], gol = a.desfecho === 'gol', p = jogo.p;
+    a.resolvido = true; t.cobr.push(gol ? 1 : 0); if (gol) t.gols++;
+    var txt = {gol: '⚽ GOOOOL!', defesa: '✋ DEFENDEU!', trave: '😱 NA TRAVE!', fora: '🙈 PRA FORA!', fraco: '⏰ Demorou… o goleiro pegou!'}[a.desfecho];
+    jogo.fx.push({txt: txt, t: 0, cor: gol ? '#ffd54a' : '#ffffff'});
+    if (gol){ jogo.rede = {x: a.para.x, y: a.para.y, t: 0}; jogo.comemorar = 2.6; Som.torcida(2.6, 0.5, 700, 1300); ARC.plim(); if (window.Sala) Sala.confete(50); }
+    else { Som.torcida(1.6, 0.3, 500, 260); ARC.erro(); }
+    $('explica').innerHTML = (gol ? '✓ ' : '✗ A resposta certa era: ') + '<b>' + esc(p.ops[p.ok]) + '</b>' + (p.x ? '<small>' + esc(p.x) + '</small>' : '');
+    jogo.fase = 'resultado';
+    var fim = verificarFim();
+    $('btProxima').textContent = fim ? '🏆 Ver o campeão' : '➡️ Próxima cobrança';
+    setTimeout(function(){ if (jogo && jogo.fase === 'resultado') $('rodape').style.display = 'block'; }, 900);
+    pintarPlacar();
+  }
+  function verificarFim(){
+    var a = jogo.times[0], b = jogo.times[1], n = jogo.total;
+    if (!jogo.morteSubita){
+      var ra = n - a.cobr.length, rb = n - b.cobr.length;
+      if (a.gols + ra < b.gols || b.gols + rb < a.gols) return true;   // um time já não alcança o outro
+      if (ra === 0 && rb === 0){ if (a.gols !== b.gols) return true; jogo.morteSubita = true; }
+      return false;
+    }
+    return a.cobr.length === b.cobr.length && a.gols !== b.gols;
+  }
+  function avancar(){
+    if (!jogo || jogo.fase !== 'resultado') return;
+    if (verificarFimFinal()) return fim();
+    jogo.vez = 1 - jogo.vez; proximaCobranca();
+  }
+  function verificarFimFinal(){
+    var a = jogo.times[0], b = jogo.times[1], n = jogo.total;
+    if (!jogo.morteSubita) return a.gols + (n - a.cobr.length) < b.gols || b.gols + (n - b.cobr.length) < a.gols || (a.cobr.length >= n && b.cobr.length >= n && a.gols !== b.gols);
+    return a.cobr.length === b.cobr.length && a.gols !== b.gols;
+  }
+  function fim(){
+    jogo.fase = 'fim'; clearInterval(timer); laco.parar();
+    $('pergunta').style.display = 'none'; $('rodape').style.display = 'none'; $('relogio').style.display = 'none'; $('alvos').innerHTML = '';
+    var v = jogo.times[0].gols > jogo.times[1].gols ? 0 : 1, t = jogo.times[v];
+    $('cFim').innerHTML = '<h1>🏆 ' + esc(t.emoji + ' ' + t.nome) + ' é campeão!</h1><p style="font-size:30px;font-weight:bold">' + esc(jogo.times[0].nome) + ' ' + jogo.times[0].gols + ' × ' + jogo.times[1].gols + ' ' + esc(jogo.times[1].nome) + '</p>' +
+      (jogo.morteSubita ? '<p>Decidido nas alternadas! ⚡</p>' : '') + '<p><button type="button" class="principal" id="btDeNovo">🔁 Nova disputa</button></p>';
+    ARC.tela('tFim'); ARC.festa(); Som.torcida(3, 0.5, 800, 1400);
+    $('btDeNovo').onclick = function(){ pintarPlacar(); ARC.tela('tConfig'); $('placar').style.display = 'none'; $('hud').style.display = 'none'; jogo = null; desenhar(); };
+  }
+
+  // ---------- animação ----------
+  function passo(dt){
+    if (dt && jogo){
+      var a = jogo.anim, g = jogo.goleiro;
+      if (a){
+        a.t += dt;
+        if (a.t >= 0.35 && !a.chutou){ a.chutou = true; Som.chute(); }
+        if (a.t >= 0.45){ var k = Math.min(1, (a.t - 0.45) / 0.4); g.x = g.alvoX * k; g.rot = g.alvoRot * k; }
+        if (!a.resolvido && a.t >= 0.95) resolver();
+      } else { g.x = Math.sin(Date.now() / 420) * geo.gw * 0.05; }
+      if (jogo.rede) jogo.rede.t += dt;
+      if (jogo.comemorar > 0) jogo.comemorar -= dt;
+      for (var i = jogo.fx.length - 1; i >= 0; i--){ jogo.fx[i].t += dt; if (jogo.fx[i].t > 2.2) jogo.fx.splice(i, 1); }
+    }
+    desenhar();
+  }
+  function posBola(){
+    var a = jogo && jogo.anim;
+    if (!a || a.t < 0.35) return {x: geo.bolaX, y: geo.bolaY, r: geo.gh * 0.085, giro: 0};
+    var k = Math.min(1, (a.t - 0.35) / 0.6), e = 1 - Math.pow(1 - k, 2), x = a.de.x + (a.para.x - a.de.x) * e, y = a.de.y + (a.para.y - a.de.y) * e - Math.sin(k * Math.PI) * geo.gh * 0.25;
+    var r = geo.gh * (0.085 - 0.04 * e);
+    if (k >= 1){
+      var depois = a.t - 0.95;
+      if (a.desfecho === 'defesa' || a.desfecho === 'fraco'){ x = a.para.x; y = Math.min(geo.chao - r, a.para.y + depois * 260); }
+      else if (a.desfecho === 'trave'){ x = a.para.x + (a.para.x < tela.W / 2 ? -1 : 1) * depois * 300; y = a.para.y + depois * depois * 600 - depois * 120; }
+      else if (a.desfecho === 'fora'){ y = a.para.y - depois * 300; r *= Math.max(0.3, 1 - depois); }
+      else { y = Math.min(geo.chao - r, a.para.y + depois * depois * 300); }
+    }
+    return {x: x, y: y, r: r, giro: a.t * 14};
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC;
+    if (!geo.gw) medir();
+    var g = ctx.createLinearGradient(0, 0, 0, geo.gy); g.addColorStop(0, '#081530'); g.addColorStop(1, '#1d3b78'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, geo.gy);
+    if (torcidaCv){ var q = jogo && jogo.comemorar > 0 && Math.floor(Date.now() / 140) % 2 ? 1 : 0; ctx.drawImage(torcidaCv[q], 0, 0, torcidaCv[q].width, torcidaCv[q].height, 0, 10, W, torcidaCv[q].height); }
+    [0.08, 0.92].forEach(function(px){ var rg = ctx.createRadialGradient(W * px, 18, 2, W * px, 18, 90 * E); rg.addColorStop(0, 'rgba(255,255,230,.95)'); rg.addColorStop(1, 'rgba(255,255,230,0)'); ctx.fillStyle = rg; ctx.fillRect(W * px - 90 * E, 0, 180 * E, 110 * E); });
+    // gramado listrado
+    var y0 = geo.gy - geo.gh * 0.08;
+    ctx.fillStyle = '#2e8b3e'; ctx.fillRect(0, y0, W, H - y0);
+    for (var s = 0, yy = y0, alt = 14 * E; yy < H; s++, yy += alt, alt *= 1.18){ if (s % 2){ ctx.fillStyle = '#34a047'; ctx.fillRect(0, yy, W, alt); } }
+    ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(0, geo.chao); ctx.lineTo(W, geo.chao); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(geo.gx - geo.gw * 0.2, geo.chao); ctx.lineTo(geo.gx - geo.gw * 0.32, geo.chao + geo.gh * 0.55); ctx.lineTo(geo.gx + geo.gw * 1.32, geo.chao + geo.gh * 0.55); ctx.lineTo(geo.gx + geo.gw * 1.2, geo.chao); ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(geo.bolaX, geo.bolaY + geo.gh * 0.06, 5 * E, 0, 2 * Math.PI); ctx.fill();
+    desenharGol();
+    var b = posBola(), atras = jogo && jogo.anim && jogo.anim.t >= 0.95 && jogo.anim.desfecho === 'gol';
+    if (atras) desenharBola(b);
+    desenharGoleiro();
+    if (!atras) desenharBola(b);
+    desenharBatedor();
+    if (jogo) jogo.fx.forEach(function(f){
+      var k = Math.min(1, f.t * 3), tam = Math.round(70 * E * (0.6 + 0.4 * k));
+      ctx.globalAlpha = f.t > 1.7 ? Math.max(0, 1 - (f.t - 1.7) / 0.5) : 1; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ARC.fonte(ctx, f.txt, W * 0.9, tam); ctx.lineWidth = 8; ctx.strokeStyle = 'rgba(0,0,0,.55)'; ctx.strokeText(f.txt, W / 2, H * 0.6); ctx.fillStyle = f.cor; ctx.fillText(f.txt, W / 2, H * 0.6); ctx.globalAlpha = 1;
+    });
+  }
+  function desenharGol(){
+    var x = geo.gx, y = geo.gy, w = geo.gw, h = geo.gh, d = h * 0.32, r = jogo && jogo.rede, i, px, py, amp;
+    ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(x + d * 0.6, y - d * 0.4, w - d * 1.2, h + d * 0.4);
+    ctx.strokeStyle = 'rgba(235,240,255,.55)'; ctx.lineWidth = 1.2;
+    function onda(px2, py2){ if (!r) return 0; var dist = Math.sqrt((px2 - r.x) * (px2 - r.x) + (py2 - r.y) * (py2 - r.y)); return Math.max(0, 1 - dist / (w * 0.35)) * Math.sin(r.t * 22 - dist * 0.05) * 14 * Math.max(0, 1 - r.t / 1.4); }
+    for (i = 0; i <= 18; i++){ px = x + w * i / 18; ctx.beginPath(); for (var j = 0; j <= 8; j++){ py = y + h * j / 8; amp = onda(px, py); if (j === 0) ctx.moveTo(px, py - amp); else ctx.lineTo(px, py - amp); } ctx.stroke(); }
+    for (i = 0; i <= 8; i++){ py = y + h * i / 8; ctx.beginPath(); for (var k = 0; k <= 18; k++){ px = x + w * k / 18; amp = onda(px, py); if (k === 0) ctx.moveTo(px, py - amp); else ctx.lineTo(px, py - amp); } ctx.stroke(); }
+    ctx.fillStyle = '#ffffff'; var tr = Math.max(6, h * 0.045);
+    ctx.fillRect(x - tr, y - tr, tr, h + tr); ctx.fillRect(x + w, y - tr, tr, h + tr); ctx.fillRect(x - tr, y - tr, w + tr * 2, tr);
+  }
+  function desenharGoleiro(){
+    if (!geo.gw) return;
+    var g = jogo ? jogo.goleiro : {x: 0, rot: 0}, h = geo.gh * 0.72, cx = tela.W / 2 + g.x, base = geo.chao - (Math.abs(g.rot) > 0.3 ? h * 0.25 * Math.min(1, Math.abs(g.rot)) : 0);
+    ctx.save(); ctx.translate(cx, base); ctx.rotate(g.rot);
+    ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(0, 4, h * 0.25, h * 0.05, 0, 0, 2 * Math.PI) : ctx.arc(0, 4, h * 0.2, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#1b1b2f'; ctx.fillRect(-h * 0.13, -h * 0.36, h * 0.1, h * 0.36); ctx.fillRect(h * 0.03, -h * 0.36, h * 0.1, h * 0.36);
+    ctx.fillStyle = '#c6ff1a'; ARC.rrect(ctx, -h * 0.2, -h * 0.78, h * 0.4, h * 0.44, h * 0.08); ctx.fill();
+    ctx.fillStyle = '#1b1b2f'; ctx.font = 'bold ' + Math.round(h * 0.16) + 'px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('1', 0, -h * 0.56);
+    var bracoY = -h * 0.72, abre = jogo && jogo.anim ? 1 : 0.5 + Math.sin(Date.now() / 300) * 0.1;
+    ctx.strokeStyle = '#c6ff1a'; ctx.lineWidth = h * 0.08; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(-h * 0.18, bracoY); ctx.lineTo(-h * (0.3 + 0.12 * abre), bracoY - h * 0.22 * abre); ctx.moveTo(h * 0.18, bracoY); ctx.lineTo(h * (0.3 + 0.12 * abre), bracoY - h * 0.22 * abre); ctx.stroke();
+    ctx.fillStyle = '#ffffff'; [-1, 1].forEach(function(s){ ctx.beginPath(); ctx.arc(s * h * (0.3 + 0.12 * abre), bracoY - h * 0.22 * abre, h * 0.065, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.fillStyle = '#f2c094'; ctx.beginPath(); ctx.arc(0, -h * 0.88, h * 0.11, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#3b2314'; ctx.beginPath(); ctx.arc(0, -h * 0.92, h * 0.11, Math.PI, 2 * Math.PI); ctx.fill();
+    ctx.restore();
+  }
+  function desenharBola(b){
+    ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.beginPath(); ctx.arc(b.x, Math.max(b.y + b.r * 0.9, Math.min(geo.bolaY + geo.gh * 0.08, b.y + geo.gh * 0.2)), b.r * 0.8, 0, 2 * Math.PI); ctx.fill();
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.giro);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, 0, b.r, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#333'; ctx.lineWidth = Math.max(1, b.r * 0.08); ctx.stroke();
+    ctx.fillStyle = '#222';
+    for (var i = 0; i < 5; i++){ var a = i * 2 * Math.PI / 5, px = Math.cos(a) * b.r * 0.62, py = Math.sin(a) * b.r * 0.62; ctx.beginPath(); for (var k = 0; k < 5; k++){ var a2 = a + k * 2 * Math.PI / 5; ctx.lineTo(px + Math.cos(a2) * b.r * 0.2, py + Math.sin(a2) * b.r * 0.2); } ctx.fill(); }
+    ctx.beginPath(); for (var j = 0; j < 5; j++){ var a3 = j * 2 * Math.PI / 5 - Math.PI / 2; ctx.lineTo(Math.cos(a3) * b.r * 0.26, Math.sin(a3) * b.r * 0.26); } ctx.fill();
+    ctx.restore();
+  }
+  function desenharBatedor(){
+    if (!jogo || !geo.gw) return;
+    var t = jogo.times[jogo.vez], a = jogo.anim, h = geo.gh * 0.95, corre = a ? Math.min(1, a.t / 0.35) : 0;
+    var x = geo.bolaX - geo.gw * 0.16 * (1 - corre) - h * 0.12, y = tela.H * 0.99 - geo.gh * 0.12 * corre;
+    ctx.save(); ctx.translate(x, y);
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(-h * 0.12, -h * 0.36, h * 0.1, h * 0.36); ctx.fillRect(h * 0.02, -h * 0.36, h * 0.1, h * 0.36);
+    ctx.fillStyle = '#14213d'; ARC.rrect(ctx, -h * 0.15, -h * 0.5, h * 0.3, h * 0.18, h * 0.04); ctx.fill();
+    ctx.fillStyle = t.cor; ARC.rrect(ctx, -h * 0.19, -h * 0.9, h * 0.38, h * 0.44, h * 0.08); ctx.fill();
+    ctx.fillStyle = '#ffffff'; ctx.font = 'bold ' + Math.round(h * 0.2) + 'px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('10', 0, -h * 0.68);
+    ctx.fillStyle = '#3b2314'; ctx.beginPath(); ctx.arc(0, -h * 1.0, h * 0.11, 0, 2 * Math.PI); ctx.fill();
+    ctx.restore();
+  }
+
+  $('btComecar').onclick = comecar;
+  $('btProxima').onclick = avancar;
+  $('btSair').onclick = function(){ if (!confirm('Terminar a disputa?')) return; clearInterval(timer); laco.parar(); jogo = null; $('placar').style.display = 'none'; $('pergunta').style.display = 'none'; $('rodape').style.display = 'none'; $('relogio').style.display = 'none'; $('alvos').innerHTML = ''; $('hud').style.display = 'none'; ARC.tela('tConfig'); desenhar(); };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (jogo.fase === 'pergunta' && e.keyCode >= 49 && e.keyCode <= 52 && e.keyCode - 49 < jogo.p.ops.length){ e.preventDefault(); chutar(e.keyCode - 49); }
+    else if (jogo.fase === 'resultado' && (e.keyCode === 13 || e.keyCode === 32) && $('rodape').style.display === 'block'){ e.preventDefault(); avancar(); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  medir(); desenhar();
+  window.PENALTIS = {jogo: function(){ return jogo; }, chutar: chutar, avancar: avancar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

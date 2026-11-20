@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Detetive do Mistério</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #mesa{position:fixed;left:0;top:0;right:0;bottom:0;display:none;overflow:auto;-webkit-overflow-scrolling:touch;padding:54px 12px 16px;
+    background:#3b2a20 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><path d='M0 60h120M60 0v120' stroke='%23432f24' stroke-width='2'/></svg>")}
+  #mesa.ativa{display:block}
+  #suspeitos{text-align:center;margin:0 auto 10px;max-width:1400px}
+  .susp{display:inline-block;vertical-align:top;width:215px;margin:6px;background:#fffdf5;border-radius:16px;padding:10px 10px 8px;text-align:left;box-shadow:0 6px 0 rgba(0,0,0,.3);position:relative;cursor:pointer;
+    -webkit-transform:rotate(-1deg);transform:rotate(-1deg);-webkit-transition:-webkit-transform .2s,opacity .3s;transition:transform .2s,opacity .3s}
+  .susp:nth-child(2n){-webkit-transform:rotate(1.2deg);transform:rotate(1.2deg)}
+  .susp .e{font-size:60px;text-align:center;line-height:1.1}
+  .susp .n{font-size:24px;font-weight:bold;text-align:center;color:#3b2a20;margin-bottom:4px}
+  .susp .f{font-size:16px;margin:3px 0;color:#3b3b3b}
+  .susp .f b{color:#7a4b1e}
+  .susp.fora{opacity:.45}
+  .susp.fora:after{content:'✗';position:absolute;left:0;right:0;top:2px;text-align:center;font-size:86px;line-height:1;color:rgba(214,40,57,.85);font-weight:bold;pointer-events:none}
+  .susp.destaque{-webkit-animation:balanca .4s 4;animation:balanca .4s 4;box-shadow:0 0 0 5px #ffd54a,0 6px 0 rgba(0,0,0,.3)}
+  @-webkit-keyframes balanca{50%{-webkit-transform:rotate(4deg) scale(1.04)}} @keyframes balanca{50%{transform:rotate(4deg) scale(1.04)}}
+  #mesa.acusando .susp:not(.fora){box-shadow:0 0 0 4px #e74c3c,0 6px 0 rgba(0,0,0,.3)}
+  #pistasBox{max-width:1100px;margin:0 auto;background:#f6e7b4;border-radius:18px;padding:12px 16px;box-shadow:0 6px 0 rgba(0,0,0,.3)}
+  #pistasBox h2{margin:0 0 8px;font-size:22px;color:#3b2a20}
+  .pista{background:#fffdf5;border-left:8px solid #c0392b;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:21px;line-height:1.35;color:#2b2b2b;animation:entrar .4s}
+  .pista b{color:#c0392b}
+  .pista button{float:right;padding:2px 8px;font-size:16px;margin:0 0 0 8px}
+  #acoes{text-align:center;margin-top:8px}
+  #acoes button{font-size:19px}
+  #btAcusar.ligado{background:#e74c3c;color:#fff}
+  #historia{font-size:23px;line-height:1.5;text-align:left}
+  .caso{display:inline-block;vertical-align:top;width:230px;margin:8px;padding:12px;border-radius:18px;background:#fffdf5;box-shadow:0 5px 0 rgba(0,0,0,.15);cursor:pointer;text-align:center}
+  .caso .e{font-size:54px} .caso .t{font-size:19px;font-weight:bold;margin:4px 0} .caso .nv{font-size:14px;color:#7a4b1e}
+  .caso.feito{background:#e3f7ee}
+  #explicacao{text-align:left;font-size:17px;line-height:1.45;background:#f6f8fb;border-radius:12px;padding:8px 12px}
+  @keyframes entrar{from{opacity:0;transform:translateY(8px)}}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<div id="hud" style="display:none">
+  <span class="chip" id="hCaso"></span><span class="chip" id="hTempo">⏱️ 0:00</span><span class="chip" id="hEstrelas"></span>
+  <button type="button" id="btDica">💡 Dica</button><button type="button" id="btSom">🔊</button><button type="button" id="btCasos" title="Escolher outro caso">📁</button>
+</div>
+<div id="mesa">
+  <div id="suspeitos"></div>
+  <div id="pistasBox"><h2>🔎 Pistas</h2><div id="pistas"></div>
+    <div id="acoes"><button type="button" class="principal" id="btPista">🔎 Revelar a pista 1</button> <button type="button" id="btAcusar">👉 Acusar</button></div>
+    <p class="dica" style="margin:6px 0 0;text-align:center">Leiam cada pista com atenção e toquem nos suspeitos que ela inocenta (✗). Quando sobrar um só, acusem!</p>
+  </div>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tCasos"><div class="cartao" style="max-width:1100px">
+  <h1>🕵️ Detetive do Mistério</h1>
+  <p>Escolham um caso. Leiam a história, revelem as pistas uma por uma e descubram o culpado <b>pela lógica</b>: cada pista inocenta alguém!</p>
+  <div id="listaCasos">Carregando…</div>
+  <p class="dica">Bom para interpretação de texto e inferência: a resposta nunca está escrita direto, é preciso pensar no que a pista quer dizer.</p>
+</div></div>
+<div class="tela" id="tHistoria"><div class="cartao" style="max-width:900px">
+  <h1 id="hTitulo"></h1>
+  <p id="historia"></p>
+  <p><button type="button" id="btOuvirHist">🔊 Ouvir</button> <button type="button" class="principal" id="btInvestigar">🔍 Começar a investigar</button></p>
+</div></div>
+<div class="tela" id="tResultado"><div class="cartao" style="max-width:900px" id="cResultado"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, casos = [], caso = null, est = null, relogio = null, feitos = {};
+  try { feitos = JSON.parse(localStorage.getItem('misterio_feitos') || '{}') || {}; } catch (e) {}
+
+  function falar(t){
+    if (!Sala.somLigado() || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+    try { var u = new SpeechSynthesisUtterance(t); u.lang = caso && caso.idioma || 'pt-BR'; u.rate = 0.95; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {}
+  }
+  // ---------- motor de lógica ----------
+  function elimina(p, s){ var v = s.fatos[p.campo]; return (p.so && p.so.indexOf(v) < 0) || (p.nao && p.nao.indexOf(v) >= 0); }
+  function eliminadoPor(s, ate){ for (var i = 0; i < ate; i++) if (elimina(caso.pistas[i], s)) return i; return -1; }
+  function validar(c){
+    if (!c || !c.suspeitos || !c.pistas || !c.culpado) return false;
+    var vivos = c.suspeitos.filter(function(s){ return !c.pistas.some(function(p){ var v = s.fatos[p.campo]; return (p.so && p.so.indexOf(v) < 0) || (p.nao && p.nao.indexOf(v) >= 0); }); });
+    return vivos.length === 1 && vivos[0].id === c.culpado;
+  }
+
+  ARC.json('dados/' + (/^[\w.-]+\.json$/.test(ARC.param('arquivo')) ? ARC.param('arquivo') : 'misterios.json'), function(d){
+    casos = (d.casos || []).filter(validar);
+    $('listaCasos').innerHTML = casos.map(function(c, i){
+      return '<div class="caso' + (feitos[c.id] ? ' feito' : '') + '" data-i="' + i + '"><div class="e">' + c.emoji + '</div><div class="t">' + esc(c.titulo) + '</div><div class="nv">' + esc(c.nivel || '') + (feitos[c.id] ? ' • ✅ resolvido' : '') + '</div></div>';
+    }).join('') || 'Nenhum caso válido neste arquivo.';
+    var cs = $('listaCasos').querySelectorAll('.caso');
+    for (var k = 0; k < cs.length; k++) cs[k].onclick = function(){ abrirCaso(+this.getAttribute('data-i')); };
+  }, function(){ $('listaCasos').textContent = 'Não consegui abrir os casos.'; });
+
+  function abrirCaso(i){
+    caso = casos[i];
+    $('hTitulo').textContent = caso.emoji + ' ' + caso.titulo; $('historia').textContent = caso.historia;
+    ARC.tela('tHistoria'); falar(caso.historia);
+  }
+  function investigar(){
+    est = {reveladas: 0, fora: {}, erros: 0, dicas: 0, inicio: Date.now(), acusando: false};
+    ARC.tela(null); $('mesa').className = 'ativa'; $('hud').style.display = '';
+    $('hCaso').textContent = caso.emoji + ' ' + caso.titulo;
+    pintarSuspeitos(); pintarPistas(); pintarHud();
+    clearInterval(relogio); relogio = setInterval(pintarTempo, 1000);
+    revelar();
+  }
+  function pintarTempo(){ if (!est) return; var s = Math.floor((Date.now() - est.inicio) / 1000); $('hTempo').textContent = '⏱️ ' + Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+  function estrelas(){ return Math.max(1, 3 - est.erros - est.dicas); }
+  function pintarHud(){ var n = estrelas(); $('hEstrelas').textContent = '⭐⭐⭐'.slice(0, n) + '☆☆☆'.slice(0, 3 - n); }
+  function pintarSuspeitos(){
+    $('suspeitos').innerHTML = caso.suspeitos.map(function(s){
+      return '<div class="susp' + (est.fora[s.id] ? ' fora' : '') + '" data-id="' + esc(s.id) + '"><div class="e">' + s.emoji + '</div><div class="n">' + esc(s.nome) + '</div>' +
+        caso.campos.map(function(c){ return '<div class="f">' + c.icone + ' ' + esc(c.nome) + ': <b>' + esc(s.fatos[c.id]) + '</b></div>'; }).join('') + '</div>';
+    }).join('');
+    var cs = $('suspeitos').querySelectorAll('.susp');
+    for (var k = 0; k < cs.length; k++) cs[k].onclick = function(){ tocarSuspeito(this.getAttribute('data-id')); };
+  }
+  function pintarPistas(){
+    var h = '';
+    for (var i = 0; i < est.reveladas; i++) h += '<div class="pista"><button type="button" data-i="' + i + '">🔊</button><b>Pista ' + (i + 1) + ':</b> ' + esc(caso.pistas[i].texto) + '</div>';
+    $('pistas').innerHTML = h;
+    var bs = $('pistas').querySelectorAll('button');
+    for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ falar(caso.pistas[+this.getAttribute('data-i')].texto); };
+    var resta = caso.pistas.length - est.reveladas;
+    $('btPista').style.display = resta ? '' : 'none';
+    $('btPista').textContent = '🔎 Revelar a pista ' + (est.reveladas + 1) + ' de ' + caso.pistas.length;
+  }
+  function revelar(){
+    if (est.reveladas >= caso.pistas.length) return;
+    est.reveladas++; pintarPistas(); ARC.tom(660, 0.08); ARC.tom(880, 0.1, 0.08);
+    falar(caso.pistas[est.reveladas - 1].texto);
+  }
+  function tocarSuspeito(id){
+    var s = suspeito(id);
+    if (est.acusando) return acusar(s);
+    est.fora[id] = !est.fora[id]; ARC.tom(est.fora[id] ? 300 : 600, 0.06); pintarSuspeitos();
+  }
+  function suspeito(id){ for (var i = 0; i < caso.suspeitos.length; i++) if (caso.suspeitos[i].id === id) return caso.suspeitos[i]; return null; }
+  function acusar(s){
+    est.acusando = false; $('mesa').className = 'ativa'; $('btAcusar').className = '';
+    if (s.id === caso.culpado){
+      if (est.reveladas < caso.pistas.length){
+        est.erros++; pintarHud(); ARC.erro();
+        return ARC.aviso('🤔 Ainda não dá para ter certeza! Um bom detetive revela todas as pistas antes de acusar.', 3500);
+      }
+      return resolvido();
+    }
+    est.erros++; pintarHud(); ARC.erro();
+    var i = eliminadoPor(s, est.reveladas);
+    ARC.aviso(i >= 0 ? '❌ Não foi ' + esc(s.nome) + '! Releiam a <b>pista ' + (i + 1) + '</b>.' : '❌ Não foi ' + esc(s.nome) + '. Revelem mais pistas antes de acusar!', 3500);
+    if (i >= 0){ est.fora[s.id] = true; pintarSuspeitos(); }
+  }
+  function dica(){
+    if (!est) return;
+    for (var k = 0; k < caso.suspeitos.length; k++){
+      var s = caso.suspeitos[k], i = eliminadoPor(s, est.reveladas);
+      if (i >= 0 && !est.fora[s.id]){
+        est.dicas++; pintarHud();
+        var el = $('suspeitos').querySelector('[data-id="' + s.id + '"]'); if (el){ el.className = 'susp destaque'; setTimeout(function(){ pintarSuspeitos(); }, 1700); }
+        return ARC.aviso('💡 Olhem para ' + esc(s.nome) + ' e releiam a pista ' + (i + 1) + '.', 3500);
+      }
+    }
+    ARC.aviso(est.reveladas < caso.pistas.length ? '💡 Com essas pistas, vocês já descartaram quem dava. Revelem a próxima pista!' : '💡 Já dá para acusar: sobrou só uma pessoa!', 3000);
+  }
+  function resolvido(){
+    clearInterval(relogio);
+    var n = estrelas(), s = Math.floor((Date.now() - est.inicio) / 1000), c = suspeito(caso.culpado);
+    feitos[caso.id] = 1; try { localStorage.setItem('misterio_feitos', JSON.stringify(feitos)); } catch (e) {}
+    var exp = caso.suspeitos.filter(function(x){ return x.id !== caso.culpado; }).map(function(x){
+      var i = eliminadoPor(x, caso.pistas.length), p = caso.pistas[i], campo = caso.campos.filter(function(cc){ return cc.id === p.campo; })[0];
+      return '<li><b>' + esc(x.nome) + '</b>: ' + esc(campo.nome.toLowerCase()) + ' = ' + esc(x.fatos[p.campo]) + ' → inocentado pela pista ' + (i + 1) + '</li>';
+    }).join('');
+    $('cResultado').innerHTML = '<h1>🎉 Caso resolvido!</h1><div style="font-size:70px">' + c.emoji + '</div><p style="font-size:22px">' + esc(caso.final) + '</p>' +
+      '<p style="font-size:26px">' + '⭐⭐⭐'.slice(0, n) + '☆☆☆'.slice(0, 3 - n) + ' • ⏱️ ' + Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2) + '</p>' +
+      '<div id="explicacao"><b>Como dava para saber:</b><ul>' + exp + '</ul></div>' +
+      '<p><button type="button" class="principal" id="btOutro">📁 Outro caso</button></p>';
+    ARC.tela('tResultado'); ARC.festa(); falar(caso.final);
+    $('btOutro').onclick = voltarCasos;
+  }
+  function voltarCasos(){
+    clearInterval(relogio); est = null; $('mesa').className = ''; $('hud').style.display = 'none';
+    var cs = $('listaCasos').querySelectorAll('.caso');
+    for (var k = 0; k < cs.length; k++){ var c = casos[+cs[k].getAttribute('data-i')]; if (feitos[c.id]){ cs[k].className = 'caso feito'; cs[k].querySelector('.nv').textContent = (c.nivel || '') + ' • ✅ resolvido'; } }
+    ARC.tela('tCasos');
+  }
+  $('btInvestigar').onclick = investigar;
+  $('btOuvirHist').onclick = function(){ falar(caso.historia); };
+  $('btPista').onclick = revelar;
+  $('btAcusar').onclick = function(){ est.acusando = !est.acusando; $('mesa').className = est.acusando ? 'ativa acusando' : 'ativa'; this.className = est.acusando ? 'ligado' : ''; if (est.acusando) ARC.aviso('👉 Toquem no suspeito que vocês acusam.', 2500); };
+  $('btDica').onclick = dica;
+  $('btCasos').onclick = function(){ if (confirm('Voltar para a lista de casos?')) voltarCasos(); };
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.MISTERIO = {caso: function(){ return caso; }, est: function(){ return est; }, abrirCaso: abrirCaso, validar: validar};   // usado nos testes
+})();
+</script>
+</body>
+</html>

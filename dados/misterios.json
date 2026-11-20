@@ -1,0 +1,652 @@
+{
+ "titulo": "Casos do Detetive do Mistério",
+ "casos": [
+  {
+   "id": "bola",
+   "titulo": "Quem pegou a bola?",
+   "nivel": "Alfabetização e 6º ano",
+   "emoji": "⚽",
+   "idioma": "pt-BR",
+   "historia": "A bola nova da turma sumiu do pátio. Quatro amigos estavam brincando perto dela. Leia as pistas e descubra quem pegou a bola!",
+   "campos": [
+    {
+     "id": "cor",
+     "nome": "Cor do pelo",
+     "icone": "🎨"
+    },
+    {
+     "id": "bone",
+     "nome": "Boné",
+     "icone": "👒"
+    },
+    {
+     "id": "lugar",
+     "nome": "Onde estava",
+     "icone": "📍"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "rex",
+     "nome": "Rex",
+     "emoji": "🐶",
+     "fatos": {
+      "cor": "marrom",
+      "bone": "com boné",
+      "lugar": "jardim"
+     }
+    },
+    {
+     "id": "mimi",
+     "nome": "Mimi",
+     "emoji": "🐱",
+     "fatos": {
+      "cor": "branca",
+      "bone": "sem boné",
+      "lugar": "telhado"
+     }
+    },
+    {
+     "id": "lili",
+     "nome": "Lili",
+     "emoji": "🐰",
+     "fatos": {
+      "cor": "branca",
+      "bone": "com boné",
+      "lugar": "jardim"
+     }
+    },
+    {
+     "id": "bolota",
+     "nome": "Bolota",
+     "emoji": "🐻",
+     "fatos": {
+      "cor": "marrom",
+      "bone": "sem boné",
+      "lugar": "jardim"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "Quem pegou a bola estava no jardim.",
+     "campo": "lugar",
+     "so": [
+      "jardim"
+     ]
+    },
+    {
+     "texto": "Quem pegou a bola tem o pelo marrom.",
+     "campo": "cor",
+     "so": [
+      "marrom"
+     ]
+    },
+    {
+     "texto": "Quem pegou a bola estava sem boné.",
+     "campo": "bone",
+     "so": [
+      "sem boné"
+     ]
+    }
+   ],
+   "culpado": "bolota",
+   "final": "Foi o Bolota! Ele pegou a bola para brincar e esqueceu de devolver. Pediu desculpas e chamou todo mundo para jogar. ⚽"
+  },
+  {
+   "id": "bolo",
+   "titulo": "O sumiço do bolo da festa",
+   "nivel": "6º e 7º ano",
+   "emoji": "🎂",
+   "idioma": "pt-BR",
+   "historia": "A turma preparou uma festa surpresa para a professora Lúcia. O bolo de chocolate ficou guardado na sala dos professores. Na hora da festa, metade do bolo tinha sumido! Só cinco alunos entraram naquela sala durante o recreio.",
+   "campos": [
+    {
+     "id": "camiseta",
+     "nome": "Camiseta",
+     "icone": "👕"
+    },
+    {
+     "id": "oculos",
+     "nome": "Óculos",
+     "icone": "👓"
+    },
+    {
+     "id": "recreio",
+     "nome": "No recreio",
+     "icone": "📍"
+    },
+    {
+     "id": "lanche",
+     "nome": "Lanche de casa",
+     "icone": "🍎"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "bruno",
+     "nome": "Bruno",
+     "emoji": "👦🏻",
+     "fatos": {
+      "camiseta": "azul",
+      "oculos": "usa óculos",
+      "recreio": "quadra",
+      "lanche": "pão de queijo"
+     }
+    },
+    {
+     "id": "carla",
+     "nome": "Carla",
+     "emoji": "👧🏾",
+     "fatos": {
+      "camiseta": "verde",
+      "oculos": "não usa",
+      "recreio": "biblioteca",
+      "lanche": "maçã"
+     }
+    },
+    {
+     "id": "davi",
+     "nome": "Davi",
+     "emoji": "👦🏽",
+     "fatos": {
+      "camiseta": "azul",
+      "oculos": "não usa",
+      "recreio": "cantina",
+      "lanche": "não trouxe"
+     }
+    },
+    {
+     "id": "elisa",
+     "nome": "Elisa",
+     "emoji": "👧🏼",
+     "fatos": {
+      "camiseta": "amarela",
+      "oculos": "não usa",
+      "recreio": "quadra",
+      "lanche": "bolacha"
+     }
+    },
+    {
+     "id": "fabio",
+     "nome": "Fábio",
+     "emoji": "👦🏿",
+     "fatos": {
+      "camiseta": "verde",
+      "oculos": "usa óculos",
+      "recreio": "cantina",
+      "lanche": "não trouxe"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "O vídeo da câmera do corredor está escuro, mas dá para ver que a pessoa usava uma camiseta azul ou verde.",
+     "campo": "camiseta",
+     "so": [
+      "azul",
+      "verde"
+     ]
+    },
+    {
+     "texto": "Durante todo o recreio, o professor de Educação Física ficou na quadra com os alunos que jogavam bola, e ninguém saiu de lá.",
+     "campo": "recreio",
+     "nao": [
+      "quadra"
+     ]
+    },
+    {
+     "texto": "A merendeira viu um aluno sem óculos passar correndo com um guardanapo sujo de chocolate.",
+     "campo": "oculos",
+     "so": [
+      "não usa"
+     ]
+    },
+    {
+     "texto": "A bibliotecária garante: quem estava na biblioteca só saiu de lá quando o sinal tocou.",
+     "campo": "recreio",
+     "nao": [
+      "biblioteca"
+     ]
+    }
+   ],
+   "culpado": "davi",
+   "final": "Foi o Davi! Ele estava de camiseta azul, não usa óculos e estava perto da cantina. Como não tinha trazido lanche, a fome falou mais alto. Ele pediu desculpas e prometeu ajudar a fazer um bolo novo para a professora. 🎂"
+  },
+  {
+   "id": "livro",
+   "titulo": "O mistério do livro rasgado",
+   "nivel": "7º ao 9º ano",
+   "emoji": "📖",
+   "idioma": "pt-BR",
+   "historia": "O livro mais antigo da biblioteca, uma edição rara de poemas, apareceu com uma página arrancada. A biblioteca abre das 8h às 11h, e cinco alunos usaram o livro naquela manhã. Cada um ficou com ele num horário diferente.",
+   "campos": [
+    {
+     "id": "mao",
+     "nome": "Escreve com",
+     "icone": "✋"
+    },
+    {
+     "id": "horario",
+     "nome": "Usou o livro",
+     "icone": "⏰"
+    },
+    {
+     "id": "mochila",
+     "nome": "Mochila",
+     "icone": "🎒"
+    },
+    {
+     "id": "ano",
+     "nome": "Turma",
+     "icone": "🏫"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "helena",
+     "nome": "Helena",
+     "emoji": "👧🏻",
+     "fatos": {
+      "mao": "mão esquerda",
+      "horario": "9h às 10h",
+      "mochila": "preta",
+      "ano": "9º ano"
+     }
+    },
+    {
+     "id": "igor",
+     "nome": "Igor",
+     "emoji": "👦🏾",
+     "fatos": {
+      "mao": "mão direita",
+      "horario": "10h às 11h",
+      "mochila": "azul",
+      "ano": "8º ano"
+     }
+    },
+    {
+     "id": "julia",
+     "nome": "Júlia",
+     "emoji": "👧🏽",
+     "fatos": {
+      "mao": "mão esquerda",
+      "horario": "8h às 9h",
+      "mochila": "azul",
+      "ano": "7º ano"
+     }
+    },
+    {
+     "id": "kaua",
+     "nome": "Kauã",
+     "emoji": "👦🏽",
+     "fatos": {
+      "mao": "mão esquerda",
+      "horario": "10h às 11h",
+      "mochila": "preta",
+      "ano": "9º ano"
+     }
+    },
+    {
+     "id": "livia",
+     "nome": "Lívia",
+     "emoji": "👧🏿",
+     "fatos": {
+      "mao": "mão esquerda",
+      "horario": "10h às 11h",
+      "mochila": "azul",
+      "ano": "8º ano"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "O rasgo começa no canto direito da página e foi puxado para a esquerda, do jeito de quem usa a mão esquerda.",
+     "campo": "mao",
+     "so": [
+      "mão esquerda"
+     ]
+    },
+    {
+     "texto": "A bibliotecária conferiu o livro às 9h em ponto, e ele ainda estava inteiro.",
+     "campo": "horario",
+     "nao": [
+      "8h às 9h"
+     ]
+    },
+    {
+     "texto": "Um fiapo de tecido preto, igual ao de uma mochila, ficou preso na capa do livro.",
+     "campo": "mochila",
+     "so": [
+      "preta"
+     ]
+    },
+    {
+     "texto": "A câmera da porta mostra o culpado saindo da biblioteca com pressa às 10h45.",
+     "campo": "horario",
+     "so": [
+      "10h às 11h"
+     ]
+    }
+   ],
+   "culpado": "kaua",
+   "final": "Foi o Kauã! Ele escreve com a mão esquerda, estava com o livro das 10h às 11h e tem mochila preta. Ele arrancou a página do poema que ia cair na prova, mas acabou confessando. A página foi colada com cuidado, e ele vai ajudar na biblioteca por uma semana. 📖"
+  },
+  {
+   "id": "marmita",
+   "titulo": "A marmita desaparecida",
+   "nivel": "EJA",
+   "emoji": "🍱",
+   "idioma": "pt-BR",
+   "historia": "Na fábrica de roupas, a marmita da Dona Rosa sumiu da geladeira do refeitório, mesmo com o nome dela escrito na tampa. Cinco colegas usaram a geladeira naquela manhã.",
+   "campos": [
+    {
+     "id": "setor",
+     "nome": "Setor",
+     "icone": "🏭"
+    },
+    {
+     "id": "almoco",
+     "nome": "Almoço",
+     "icone": "🍽️"
+    },
+    {
+     "id": "chegada",
+     "nome": "Chegou às",
+     "icone": "⏰"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "jorge",
+     "nome": "Seu Jorge",
+     "emoji": "👴🏽",
+     "fatos": {
+      "setor": "embalagem",
+      "almoco": "traz marmita",
+      "chegada": "7h"
+     }
+    },
+    {
+     "id": "marta",
+     "nome": "Marta",
+     "emoji": "👩🏻",
+     "fatos": {
+      "setor": "costura",
+      "almoco": "não traz comida",
+      "chegada": "8h"
+     }
+    },
+    {
+     "id": "paulo",
+     "nome": "Paulo",
+     "emoji": "👨🏿",
+     "fatos": {
+      "setor": "corte",
+      "almoco": "não traz comida",
+      "chegada": "7h"
+     }
+    },
+    {
+     "id": "sueli",
+     "nome": "Sueli",
+     "emoji": "👩🏾",
+     "fatos": {
+      "setor": "escritório",
+      "almoco": "traz marmita",
+      "chegada": "9h"
+     }
+    },
+    {
+     "id": "tiao",
+     "nome": "Tião",
+     "emoji": "👨🏽",
+     "fatos": {
+      "setor": "costura",
+      "almoco": "não traz comida",
+      "chegada": "9h"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "Quem pegou a marmita estava com fome porque não tinha trazido comida de casa.",
+     "campo": "almoco",
+     "so": [
+      "não traz comida"
+     ]
+    },
+    {
+     "texto": "A tampa da marmita foi achada no lixo da costura, e só quem trabalha na costura entra naquela sala.",
+     "campo": "setor",
+     "so": [
+      "costura"
+     ]
+    },
+    {
+     "texto": "A marmita sumiu às 8h40. Nessa hora, os colegas que chegam às 9h ainda estavam no ônibus.",
+     "campo": "chegada",
+     "nao": [
+      "9h"
+     ]
+    }
+   ],
+   "culpado": "marta",
+   "final": "Foi a Marta! Ela trabalha na costura, não tinha trazido comida e já estava na fábrica às 8h40. Ela estava sem dinheiro naquela semana e teve vergonha de pedir ajuda. Pediu desculpas à Dona Rosa, e os colegas combinaram de dividir o almoço com quem precisar. 🤗"
+  },
+  {
+   "id": "celular",
+   "titulo": "O celular sumido na excursão",
+   "nivel": "7º ao 9º ano",
+   "emoji": "📱",
+   "idioma": "pt-BR",
+   "historia": "Na volta da excursão ao museu, o celular da professora sumiu do banco da frente do ônibus. Cinco alunos se levantaram durante a viagem. O celular apareceu no dia seguinte, mas quem pegou?",
+   "campos": [
+    {
+     "id": "banco",
+     "nome": "Sentou no",
+     "icone": "🚌"
+    },
+    {
+     "id": "lanche",
+     "nome": "Lanche",
+     "icone": "🍞"
+    },
+    {
+     "id": "bone",
+     "nome": "Boné",
+     "icone": "👒"
+    },
+    {
+     "id": "grupo",
+     "nome": "Grupo no museu",
+     "icone": "🏛️"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "rafa",
+     "nome": "Rafa",
+     "emoji": "👦🏼",
+     "fatos": {
+      "banco": "fundo",
+      "lanche": "salgadinho",
+      "bone": "com boné",
+      "grupo": "Dinossauros"
+     }
+    },
+    {
+     "id": "bia",
+     "nome": "Bia",
+     "emoji": "👧🏾",
+     "fatos": {
+      "banco": "meio",
+      "lanche": "fruta",
+      "bone": "sem boné",
+      "grupo": "Planetas"
+     }
+    },
+    {
+     "id": "caio",
+     "nome": "Caio",
+     "emoji": "👦🏿",
+     "fatos": {
+      "banco": "fundo",
+      "lanche": "sanduíche",
+      "bone": "com boné",
+      "grupo": "Arte"
+     }
+    },
+    {
+     "id": "duda",
+     "nome": "Duda",
+     "emoji": "👧🏻",
+     "fatos": {
+      "banco": "frente",
+      "lanche": "salgadinho",
+      "bone": "com boné",
+      "grupo": "Arte"
+     }
+    },
+    {
+     "id": "enzo",
+     "nome": "Enzo",
+     "emoji": "👦🏽",
+     "fatos": {
+      "banco": "fundo",
+      "lanche": "salgadinho",
+      "bone": "sem boné",
+      "grupo": "Dinossauros"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "O motorista viu pelo espelho alguém se levantar dos últimos bancos e andar até a frente.",
+     "campo": "banco",
+     "so": [
+      "fundo"
+     ]
+    },
+    {
+     "texto": "Na capinha do celular ficaram farelos laranja, iguais aos de salgadinho.",
+     "campo": "lanche",
+     "so": [
+      "salgadinho"
+     ]
+    },
+    {
+     "texto": "O motorista não conseguiu ver o cabelo da pessoa, porque estava coberto.",
+     "campo": "bone",
+     "so": [
+      "com boné"
+     ]
+    }
+   ],
+   "culpado": "rafa",
+   "final": "Foi o Rafa! Ele estava no fundo, comia salgadinho e usava boné. Ele queria ver de novo as fotos dos dinossauros que a professora tirou, e ficou com medo de devolver. No dia seguinte, ele entregou o celular e pediu desculpas. 📸"
+  },
+  {
+   "id": "cat",
+   "titulo": "The missing cat (em inglês)",
+   "nivel": "Inglês: 8º, 9º ano e EM",
+   "emoji": "🐈",
+   "idioma": "en-US",
+   "historia": "Mrs. Brown's cat, Pepper, disappeared on Saturday morning. A neighbor saw someone carrying a big box out of her garden. Five neighbors were near the garden that morning. Who took Pepper?",
+   "campos": [
+    {
+     "id": "car",
+     "nome": "Car",
+     "icone": "🚗"
+    },
+    {
+     "id": "morning",
+     "nome": "Saturday morning",
+     "icone": "⏰"
+    },
+    {
+     "id": "animals",
+     "nome": "Animals",
+     "icone": "🐾"
+    }
+   ],
+   "suspeitos": [
+    {
+     "id": "tom",
+     "nome": "Tom",
+     "emoji": "👨🏻",
+     "fatos": {
+      "car": "no car",
+      "morning": "at home",
+      "animals": "loves animals"
+     }
+    },
+    {
+     "id": "lily",
+     "nome": "Lily",
+     "emoji": "👩🏽",
+     "fatos": {
+      "car": "has a car",
+      "morning": "at the market",
+      "animals": "loves animals"
+     }
+    },
+    {
+     "id": "jack",
+     "nome": "Jack",
+     "emoji": "👨🏾",
+     "fatos": {
+      "car": "has a car",
+      "morning": "at home",
+      "animals": "afraid of cats"
+     }
+    },
+    {
+     "id": "emma",
+     "nome": "Emma",
+     "emoji": "👩🏼",
+     "fatos": {
+      "car": "no car",
+      "morning": "at the park",
+      "animals": "afraid of cats"
+     }
+    },
+    {
+     "id": "sam",
+     "nome": "Sam",
+     "emoji": "👨🏿",
+     "fatos": {
+      "car": "has a car",
+      "morning": "at home",
+      "animals": "loves animals"
+     }
+    }
+   ],
+   "pistas": [
+    {
+     "texto": "A neighbor saw the person put the box into the back seat of a car.",
+     "campo": "car",
+     "so": [
+      "has a car"
+     ]
+    },
+    {
+     "texto": "The person was at home all morning, right next to Mrs. Brown's garden.",
+     "campo": "morning",
+     "so": [
+      "at home"
+     ]
+    },
+    {
+     "texto": "Pepper is a shy cat. She only lets people who love animals pick her up.",
+     "campo": "animals",
+     "so": [
+      "loves animals"
+     ]
+    }
+   ],
+   "culpado": "sam",
+   "final": "It was Sam! He has a car, he was at home and he loves animals. Pepper was hurt, so Sam took her to the vet. He wanted to tell Mrs. Brown later. Mystery solved: Pepper is fine! 🐈"
+  }
+ ]
+}

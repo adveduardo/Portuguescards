@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Robô Soletrador</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  body{background:#e8f1fb}
+  #jogo{position:fixed;left:0;top:0;right:0;bottom:0;display:none;padding:48px 10px 10px}
+  #jogo.ativo{display:-webkit-box;display:-webkit-flex;display:flex}
+  #lado1{-webkit-flex:1 1 auto;flex:1 1 auto;position:relative;min-width:0;height:calc(100vh - 58px)}
+  #grade{display:block;width:100%;height:100%}
+  #lado2{-webkit-flex:0 0 360px;flex:0 0 360px;margin-left:10px;overflow:auto;-webkit-overflow-scrolling:touch}
+  .bloco{background:#fff;border-radius:18px;padding:10px 12px;margin-bottom:10px;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+  .bloco h3{margin:0 0 6px;font-size:17px;color:#33415c}
+  #figura{font-size:64px;text-align:center;line-height:1.1}
+  #slots{text-align:center;white-space:nowrap}
+  #slots span{display:inline-block;min-width:38px;height:46px;margin:2px;border-radius:10px;border:3px dashed #9fb3d1;font-size:28px;font-weight:bold;line-height:40px;color:#1f2a44;vertical-align:top}
+  #slots span.ok{border:3px solid #18a84e;background:#c8f7d4}
+  #slots span.dica{color:#b6c3d8}
+  #paleta button{width:72px;height:66px;font-size:34px;margin:3px;background:#2f80ed;color:#fff;box-shadow:0 4px 0 #1d5fb8}
+  #programa{min-height:62px;line-height:0}
+  #programa .cmd{display:inline-block;position:relative;width:56px;height:52px;margin:3px;border-radius:12px;background:#ffd54a;color:#1f2a44;font-size:28px;font-weight:bold;line-height:52px;text-align:center;cursor:pointer;box-shadow:0 3px 0 #c9a227}
+  #programa .cmd b{position:absolute;right:-6px;top:-8px;background:#e8590c;color:#fff;border-radius:10px;font-size:14px;line-height:20px;padding:0 6px}
+  #programa .cmd.agora{background:#7CFFB2;box-shadow:0 0 0 3px #18a84e}
+  #programa .vazio{line-height:1.4;color:#8a96ab;font-size:15px}
+  #controles button{font-size:18px}
+  #mensagem{font-size:19px;font-weight:bold;color:#1f2a44;min-height:26px}
+  #estrelas{font-size:30px;text-align:center}
+  @media (max-width:900px){ #jogo.ativo{display:block;overflow:auto} #lado1{height:52vh} #lado2{margin:8px 0 0} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body>
+<div id="hud" style="display:none">
+  <span class="chip" id="hNivel"></span><span class="chip" id="hEstrelas"></span><button type="button" id="btSom">🔊</button><button type="button" id="btSair" title="Terminar">⏹️</button>
+</div>
+<div id="jogo">
+  <div id="lado1"><canvas id="grade"></canvas></div>
+  <div id="lado2">
+    <div class="bloco"><div id="figura"></div><div id="slots"></div></div>
+    <div class="bloco"><h3>Comandos (toque para pôr no programa)</h3><div id="paleta">
+      <button type="button" data-d="U" title="Para cima">↑</button><button type="button" data-d="D" title="Para baixo">↓</button><button type="button" data-d="L" title="Para a esquerda">←</button><button type="button" data-d="R" title="Para a direita">→</button>
+    </div><p class="dica" style="margin:4px 0 0">Tocar duas vezes na mesma seta vira <b>×2</b> (repetir). Toque num bloco do programa para diminuir ou tirar.</p></div>
+    <div class="bloco"><h3>📋 Programa do robô <span id="contaBlocos"></span></h3><div id="programa"></div></div>
+    <div class="bloco" id="controles">
+      <button type="button" class="principal" id="btExecutar">▶️ Executar</button>
+      <button type="button" id="btApagar">⌫</button><button type="button" id="btLimpar">🗑️</button><button type="button" id="btVel" title="Velocidade">🐢</button>
+      <div id="mensagem"></div><div id="estrelas"></div>
+    </div>
+  </div>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🤖 Robô Soletrador</h1>
+  <p>Programe o robô para <b>pegar as letras na ordem certa</b> e escrever a palavra! Monte o programa com as setas e aperte Executar.
+    Cuidado: se ele passar por uma letra fora de ordem ou bater numa caixa, o programa para.</p>
+  <label>Palavras: <select id="selArquivo" style="max-width:520px"></select></label>
+  <label id="lGrupo" style="display:none">Grupo: <select id="selGrupo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Dificuldade: <select id="selDif"><option value="0" selected>começa fácil e vai ficando difícil</option><option value="1">fácil (sem caixas)</option><option value="2">médio (caixas e uma letra intrusa)</option><option value="3">difícil (labirinto e letras intrusas)</option></select></label>
+  <label>Fases: <select id="selFases"><option>5</option><option selected>8</option><option>12</option></select></label>
+  <label><input type="checkbox" id="chkMostrar" checked> Mostrar a palavra (para copiar)</label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Pensamento computacional: sequência, repetição (×2, ×3…) e depuração (achar o erro e consertar). Menos blocos = mais estrelas ⭐⭐⭐.</p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, arquivo = null, idioma = 'pt-BR', jogo = null, nivel = null, prog = [], exec = null, lento = true;
+  var DIR = {U: [0, -1, '↑'], D: [0, 1, '↓'], L: [-1, 0, '←'], R: [1, 0, '→']}, ORDEM_D = ['U', 'D', 'L', 'R'];
+  var cv = $('grade'), ctx = cv.getContext('2d'), G = {W: 0, H: 0, cel: 40, ox: 0, oy: 0};
+  var laco = ARC.laco(passo);
+
+  ARC.seletor($('selArquivo'), 'palavras', 'lista-alfa-figuras.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; arquivo = null;
+    ARC.json('dados/' + arq, function(d){
+      arquivo = d; idioma = d.idioma || 'pt-BR';
+      if (d.grupos && d.grupos.length > 1){
+        $('selGrupo').innerHTML = '<option value="">todos os grupos</option>' + d.grupos.map(function(g, i){ return '<option value="' + i + '">' + esc(g.titulo || ('Grupo ' + (i + 1))) + '</option>'; }).join('');
+        $('lGrupo').style.display = '';
+      } else { $('selGrupo').innerHTML = '<option value=""></option>'; $('lGrupo').style.display = 'none'; }
+      $('infoArq').textContent = (d.titulo || arq) + ' • ' + palavras().length + ' palavras de 3 a 7 letras';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  $('selGrupo').onchange = function(){ if (arquivo) $('infoArq').textContent = (arquivo.titulo || '') + ' • ' + palavras().length + ' palavras de 3 a 7 letras'; };
+  function letrasDe(t){ return String(t).toUpperCase().split('').filter(function(c){ return /[A-ZÀ-ÖØ-Þ]/.test(c); }); }
+  function palavras(){ return ARC.normalizarPalavras(arquivo, $('selGrupo').value).filter(function(p){ var l = letrasDe(p.t); return /^[A-Za-zÀ-ÿ]+$/.test(p.t) && l.length >= 3 && l.length <= 7; }); }
+
+  // ---------- gerador de fases + solucionador (busca 0-1: menor número de blocos) ----------
+  function chave(x, y){ return x + ',' + y; }
+  function resolver(nv){
+    var L = nv.letras.length, inf = 1e9, dist = {}, fila = [], ini = {x: nv.ini.x, y: nv.ini.y, d: 4, k: 0};
+    function id(s){ return s.x + ',' + s.y + ',' + s.d + ',' + s.k; }
+    function livre(x, y, k){
+      if (x < 0 || y < 0 || x >= nv.w || y >= nv.h || nv.paredes[chave(x, y)] || nv.intrusas[chave(x, y)]) return false;
+      var l = nv.mapa[chave(x, y)]; return l === undefined || l <= k;   // letra ainda não pega e fora da vez = obstáculo
+    }
+    dist[id(ini)] = 0; fila.push(ini);
+    while (fila.length){
+      var s = fila.shift(), c = dist[id(s)];
+      if (s.k === L) return c;
+      for (var i = 0; i < 4; i++){
+        var dd = DIR[ORDEM_D[i]], nx = s.x + dd[0], ny = s.y + dd[1];
+        if (!livre(nx, ny, s.k)) continue;
+        var nk = nv.mapa[chave(nx, ny)] === s.k ? s.k + 1 : s.k, ns = {x: nx, y: ny, d: i, k: nk}, custo = c + (i === s.d ? 0 : 1);
+        if (dist[id(ns)] === undefined || custo < dist[id(ns)]){ dist[id(ns)] = custo; if (i === s.d) fila.unshift(ns); else fila.push(ns); }
+      }
+    }
+    return inf;
+  }
+  function gerar(p, dif){
+    var letras = letrasDe(p.t), w = dif === 1 ? 7 : 8, h = dif === 1 ? 5 : 6, ALFA = 'ABCDEFGHIJLMNOPRSTUVZ';
+    for (var tent = 0; tent < 400; tent++){
+      var nv = {w: w, h: h, paredes: {}, intrusas: {}, mapa: {}, letras: [], lista: [], palavra: p}, k, x, y, livres = [];
+      var nPar = dif === 1 ? 0 : Math.floor(w * h * (dif === 2 ? 0.12 : 0.2));
+      for (k = 0; k < nPar; k++) nv.paredes[chave(Math.floor(Math.random() * w), Math.floor(Math.random() * h))] = 1;
+      for (x = 0; x < w; x++) for (y = 0; y < h; y++) if (!nv.paredes[chave(x, y)]) livres.push({x: x, y: y});
+      if (livres.length < letras.length + 6) continue;
+      nv.ini = ARC.sortear(livres);
+      var ocup = {}, atual = nv.ini, ok = true; ocup[chave(nv.ini.x, nv.ini.y)] = 1;
+      for (k = 0; k < letras.length && ok; k++){
+        var cand = livres.filter(function(c){ var dm = Math.abs(c.x - atual.x) + Math.abs(c.y - atual.y); return !ocup[chave(c.x, c.y)] && dm >= (dif === 1 ? 1 : 2) && dm <= (dif === 1 ? 3 : 5); });
+        if (!cand.length){ ok = false; break; }
+        var c = ARC.sortear(cand); ocup[chave(c.x, c.y)] = 1; nv.mapa[chave(c.x, c.y)] = k; nv.letras.push({x: c.x, y: c.y, ch: letras[k]}); atual = c;
+      }
+      if (!ok) continue;
+      var nIntr = dif === 1 ? 0 : dif === 2 ? 1 : 3;
+      for (k = 0; k < nIntr; k++){
+        var cl = livres.filter(function(c){ return !ocup[chave(c.x, c.y)]; }); if (!cl.length) break;
+        var ci = ARC.sortear(cl), ch = dif === 3 && k === 0 ? ARC.sortear(letras) : ALFA.charAt(Math.floor(Math.random() * ALFA.length));
+        ocup[chave(ci.x, ci.y)] = 1; nv.intrusas[chave(ci.x, ci.y)] = ch;
+      }
+      nv.melhor = resolver(nv);
+      if (nv.melhor < 1e9 && nv.melhor >= Math.min(3, letras.length)) return nv;
+    }
+    return null;
+  }
+
+  // ---------- jogo ----------
+  function comecar(){
+    var lista = arquivo ? palavras() : [];
+    if (lista.length < 2) return ARC.aviso('Escolha um arquivo com palavras de 3 a 7 letras.');
+    jogo = {monte: ARC.embaralhar(lista), fase: 0, total: +$('selFases').value, dif: +$('selDif').value, estrelas: 0};
+    ARC.tela(null); $('jogo').className = 'ativo'; $('hud').style.display = '';
+    medir(); laco.iniciar(); novaFase();
+  }
+  function difDaFase(){ if (jogo.dif) return jogo.dif; var f = jogo.fase / jogo.total; return f <= 0.34 ? 1 : f <= 0.67 ? 2 : 3; }
+  function novaFase(){
+    jogo.fase++;
+    var p = jogo.monte[(jogo.fase - 1) % jogo.monte.length];
+    nivel = gerar(p, difDaFase());
+    if (!nivel){ nivel = gerar(p, 1); }
+    prog = []; exec = null;
+    var fig = p.emoji && ARC.figuraOk(p.emoji) ? p.emoji : '';
+    $('figura').textContent = fig; $('figura').style.display = fig ? '' : 'none';
+    $('mensagem').textContent = 'Monte o programa para escrever a palavra' + (p.dica ? ' (' + p.dica + ')' : '') + '.'; $('estrelas').textContent = '';
+    $('btExecutar').textContent = '▶️ Executar';
+    pintarSlots(); pintarPrograma(); pintarHud(); medir();
+    falar(p.t);
+  }
+  function pintarHud(){ $('hNivel').textContent = '🤖 Fase ' + jogo.fase + '/' + jogo.total + ' • ' + ['', 'fácil', 'médio', 'difícil'][difDaFase()]; $('hEstrelas').textContent = '⭐ ' + jogo.estrelas; }
+  function pintarSlots(){
+    var k = exec ? exec.k : 0, mostrar = $('chkMostrar').checked;
+    $('slots').innerHTML = nivel.letras.map(function(l, i){ return '<span class="' + (i < k ? 'ok' : mostrar ? 'dica' : '') + '">' + (i < k || mostrar ? esc(l.ch) : '') + '</span>'; }).join('');
+  }
+  function pintarPrograma(){
+    var h = prog.map(function(b, i){ return '<span class="cmd' + (exec && exec.bloco === i && exec.rodando ? ' agora' : '') + '" data-i="' + i + '">' + DIR[b.d][2] + (b.n > 1 ? '<b>×' + b.n + '</b>' : '') + '</span>'; }).join('');
+    $('programa').innerHTML = h || '<span class="vazio">O programa está vazio. Toque nas setas acima.</span>';
+    $('contaBlocos').textContent = prog.length ? '(' + prog.length + ' bloco' + (prog.length > 1 ? 's' : '') + ')' : '';
+    var cs = $('programa').querySelectorAll('.cmd');
+    for (var j = 0; j < cs.length; j++) cs[j].onclick = function(){ if (exec && exec.rodando) return; var b = prog[+this.getAttribute('data-i')]; b.n--; if (b.n <= 0) prog.splice(+this.getAttribute('data-i'), 1); pararExec(); pintarPrograma(); };
+  }
+  function addCmd(d){
+    if (!nivel || (exec && exec.rodando)) return;
+    pararExec();
+    var u = prog[prog.length - 1];
+    if (u && u.d === d && u.n < 9) u.n++; else if (prog.length < 24) prog.push({d: d, n: 1}); else return ARC.aviso('Programa muito grande! Use a repetição (toque duas vezes na mesma seta).');
+    ARC.tom(620, 0.04); pintarPrograma();
+  }
+  function pararExec(){ if (exec){ exec = null; pintarSlots(); $('btExecutar').textContent = '▶️ Executar'; } }
+  function executar(){
+    if (!nivel) return;
+    if (exec && exec.rodando){ pararExec(); return; }
+    if (!prog.length) return ARC.aviso('Monte o programa primeiro!');
+    var passos = [];
+    prog.forEach(function(b, i){ for (var r = 0; r < b.n; r++) passos.push({d: b.d, bloco: i}); });
+    exec = {passos: passos, i: 0, t: 0, x: nivel.ini.x, y: nivel.ini.y, vx: nivel.ini.x, vy: nivel.ini.y, dir: 'R', k: 0, rodando: true, bloco: 0, fx: []};
+    $('btExecutar').textContent = '⏹️ Parar'; $('mensagem').textContent = '🤖 Executando…'; $('estrelas').textContent = '';
+    pintarSlots(); pintarPrograma();
+  }
+  function passoExec(){
+    var s = exec.passos[exec.i], d = DIR[s.d], nx = exec.x + d[0], ny = exec.y + d[1], cel = chave(nx, ny);
+    exec.dir = s.d; exec.bloco = s.bloco; pintarPrograma();
+    if (nx < 0 || ny < 0 || nx >= nivel.w || ny >= nivel.h || nivel.paredes[cel]){ return falha('💥 O robô bateu' + (nivel.paredes[cel] ? ' numa caixa' : ' na parede') + ' no bloco ' + (s.bloco + 1) + '!', nx, ny); }
+    exec.x = nx; exec.y = ny;
+    if (nivel.intrusas[cel]) return falha('❌ Ops! “' + nivel.intrusas[cel] + '” não faz parte da palavra (bloco ' + (s.bloco + 1) + ').');
+    var l = nivel.mapa[cel];
+    if (l !== undefined && l > exec.k && nivel.letras[l].ch === nivel.letras[exec.k].ch){   // letra repetida (ex.: os dois O de BOLO): vale qualquer uma
+      var a = nivel.letras[exec.k], cA = chave(a.x, a.y), tmp = {x: a.x, y: a.y};
+      nivel.mapa[cA] = l; nivel.mapa[cel] = exec.k; a.x = nx; a.y = ny; nivel.letras[l].x = tmp.x; nivel.letras[l].y = tmp.y; l = exec.k;
+    }
+    if (l !== undefined && l >= exec.k){
+      if (l === exec.k){ exec.k++; exec.fx.push({x: nx, y: ny, t: 0, txt: nivel.letras[l].ch}); ARC.tom(880 + exec.k * 80, 0.09); pintarSlots();
+        if (exec.k === nivel.letras.length) return sucesso(); }
+      else return falha('❌ Letra fora de ordem: o robô pegou “' + nivel.letras[l].ch + '”, mas precisava de “' + nivel.letras[exec.k].ch + '” (bloco ' + (s.bloco + 1) + ').');
+    }
+    exec.i++;
+    if (exec.i >= exec.passos.length){
+      exec.rodando = false; $('btExecutar').textContent = '🔁 Tentar de novo';
+      $('mensagem').textContent = '🤔 O programa acabou, mas faltaram letras: ' + nivel.letras.slice(exec.k).map(function(x){ return x.ch; }).join(' ') + '. Continue o programa!';
+      ARC.tom(330, 0.2); pintarPrograma();
+    }
+  }
+  function falha(msg, bx, by){
+    exec.rodando = false; exec.bateu = bx !== undefined ? {x: bx, y: by, t: 0} : null; ARC.erro();
+    $('mensagem').textContent = msg + ' Toque nos blocos para consertar.'; $('btExecutar').textContent = '🔁 Tentar de novo'; pintarPrograma();
+  }
+  function sucesso(){
+    exec.rodando = false; exec.venceu = true;
+    var est = prog.length <= nivel.melhor ? 3 : prog.length <= nivel.melhor + 2 ? 2 : 1;
+    jogo.estrelas += est; pintarHud(); pintarPrograma(); ARC.festa(); falar(nivel.palavra.t);
+    $('estrelas').textContent = '⭐⭐⭐'.slice(0, est) + '☆☆☆'.slice(0, 3 - est);
+    $('mensagem').innerHTML = '🎉 ' + esc(nivel.palavra.t.toUpperCase()) + '! Você usou ' + prog.length + ' bloco' + (prog.length > 1 ? 's' : '') + (est < 3 ? ' (dá para fazer com ' + nivel.melhor + ')' : ' (o menor programa possível!)') + '.' +
+      '<br><button type="button" class="principal" id="btSegue">' + (jogo.fase >= jogo.total ? '🏆 Terminar' : '➡️ Próxima fase') + '</button>';
+    $('btExecutar').textContent = '▶️ Executar';
+    $('btSegue').onclick = function(){ if (jogo.fase >= jogo.total) fim(); else novaFase(); };
+  }
+  function fim(){
+    laco.parar();
+    $('cFim').innerHTML = '<h1>🤖 Missão cumprida!</h1><p style="font-size:26px">⭐ ' + jogo.estrelas + ' de ' + jogo.total * 3 + ' estrelas</p><p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button></p>';
+    ARC.tela('tFim'); ARC.festa();
+    $('btDeNovo').onclick = function(){ $('jogo').className = ''; $('hud').style.display = 'none'; ARC.tela('tConfig'); };
+  }
+  function falar(t){ if (!Sala.somLigado() || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return; try { var u = new SpeechSynthesisUtterance(t); u.lang = idioma; u.rate = 0.85; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {} }
+
+  // ---------- desenho ----------
+  function medir(){
+    var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    G.W = r.width; G.H = r.height; cv.width = Math.round(G.W * dpr); cv.height = Math.round(G.H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (nivel){ G.cel = Math.floor(Math.min((G.W - 20) / nivel.w, (G.H - 20) / nivel.h)); G.ox = (G.W - G.cel * nivel.w) / 2; G.oy = (G.H - G.cel * nivel.h) / 2; }
+  }
+  window.addEventListener('resize', function(){ if (jogo) medir(); });
+  function passo(dt){
+    if (exec){
+      var dur = lento ? 0.42 : 0.18;
+      exec.vx += (exec.x - exec.vx) * Math.min(1, dt * (lento ? 9 : 18)); exec.vy += (exec.y - exec.vy) * Math.min(1, dt * (lento ? 9 : 18));
+      if (exec.rodando){ exec.t += dt; if (exec.t >= dur){ exec.t = 0; passoExec(); } }
+      for (var i = exec.fx.length - 1; i >= 0; i--){ exec.fx[i].t += dt; if (exec.fx[i].t > 1) exec.fx.splice(i, 1); }
+      if (exec && exec.bateu) exec.bateu.t += dt;
+    }
+    desenhar();
+  }
+  function celXY(x, y){ return {x: G.ox + x * G.cel, y: G.oy + y * G.cel}; }
+  function desenhar(){
+    if (!G.W) return;
+    ctx.fillStyle = '#e8f1fb'; ctx.fillRect(0, 0, G.W, G.H);
+    if (!nivel) return;
+    var c = G.cel, x, y, p;
+    for (x = 0; x < nivel.w; x++) for (y = 0; y < nivel.h; y++){ p = celXY(x, y); ctx.fillStyle = (x + y) % 2 ? '#d4e3f5' : '#c6d9f0'; ctx.fillRect(p.x, p.y, c, c); }
+    ctx.strokeStyle = '#a9c1e0'; ctx.lineWidth = 1; ctx.strokeRect(G.ox, G.oy, c * nivel.w, c * nivel.h);
+    for (var k in nivel.paredes){ var xy = k.split(','); p = celXY(+xy[0], +xy[1]);
+      ctx.fillStyle = '#b07a43'; ARC.rrect(ctx, p.x + c * 0.08, p.y + c * 0.08, c * 0.84, c * 0.84, c * 0.1); ctx.fill();
+      ctx.strokeStyle = '#7d5124'; ctx.lineWidth = Math.max(2, c * 0.05); ctx.beginPath(); ctx.moveTo(p.x + c * 0.15, p.y + c * 0.15); ctx.lineTo(p.x + c * 0.85, p.y + c * 0.85); ctx.moveTo(p.x + c * 0.85, p.y + c * 0.15); ctx.lineTo(p.x + c * 0.15, p.y + c * 0.85); ctx.stroke();
+      ctx.strokeRect(p.x + c * 0.08, p.y + c * 0.08, c * 0.84, c * 0.84); }
+    var kk = exec ? exec.k : 0;
+    function ficha(px, py, ch, cor){ ctx.fillStyle = cor; ctx.beginPath(); ctx.arc(px + c / 2, py + c / 2, c * 0.38, 0, 2 * Math.PI); ctx.fill(); ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold ' + Math.round(c * 0.42) + 'px "Trebuchet MS", Arial'; ctx.fillText(ch, px + c / 2, py + c / 2 + 1); }
+    nivel.letras.forEach(function(l, i){ if (i < kk) return; p = celXY(l.x, l.y); ficha(p.x, p.y, l.ch, '#8e44ad'); });
+    for (var ki in nivel.intrusas){ var a = ki.split(','); p = celXY(+a[0], +a[1]); ficha(p.x, p.y, nivel.intrusas[ki], '#8e44ad'); }
+    p = celXY(nivel.ini.x, nivel.ini.y); ctx.strokeStyle = '#18a84e'; ctx.lineWidth = 3; ctx.setLineDash([6, 5]); ctx.strokeRect(p.x + 4, p.y + 4, c - 8, c - 8); ctx.setLineDash([]);
+    var rx = exec ? exec.vx : nivel.ini.x, ry = exec ? exec.vy : nivel.ini.y, dir = exec ? exec.dir : 'R';
+    desenharRobo(G.ox + (rx + 0.5) * c, G.oy + (ry + 0.5) * c, c, dir, exec && exec.venceu);
+    if (exec) exec.fx.forEach(function(f){ var q = celXY(f.x, f.y); ctx.globalAlpha = 1 - f.t; ctx.fillStyle = '#18a84e'; ctx.font = 'bold ' + Math.round(c * 0.5) + 'px Arial'; ctx.textAlign = 'center'; ctx.fillText('✓ ' + f.txt, q.x + c / 2, q.y - f.t * c * 0.8); ctx.globalAlpha = 1; });
+    if (exec && exec.bateu && exec.bateu.t < 1){ var b = celXY(exec.bateu.x, exec.bateu.y); ctx.globalAlpha = 1 - exec.bateu.t; ctx.font = Math.round(c * 0.7) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('💥', b.x + c / 2, b.y + c / 2); ctx.globalAlpha = 1; }
+  }
+  function desenharRobo(x, y, c, dir, festa){
+    var s = c * 0.36, pulo = festa ? Math.abs(Math.sin(Date.now() / 150)) * c * 0.15 : 0, ox = DIR[dir][0] * s * 0.18, oy = DIR[dir][1] * s * 0.18;
+    y -= pulo;
+    ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.beginPath(); ctx.arc(x, y + s + pulo, s * 0.8, 0, 2 * Math.PI); ctx.fill();
+    ctx.strokeStyle = '#4b5262'; ctx.lineWidth = Math.max(2, s * 0.08); ctx.beginPath(); ctx.moveTo(x, y - s); ctx.lineTo(x, y - s * 1.35); ctx.stroke();
+    ctx.fillStyle = '#ff7a1a'; ctx.beginPath(); ctx.arc(x, y - s * 1.4, s * 0.14, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#5dade2'; ARC.rrect(ctx, x - s, y - s, s * 2, s * 1.8, s * 0.35); ctx.fill();
+    ctx.fillStyle = '#eaf6ff'; ARC.rrect(ctx, x - s * 0.75, y - s * 0.72, s * 1.5, s * 0.9, s * 0.25); ctx.fill();
+    ctx.fillStyle = '#1f2a44'; [-1, 1].forEach(function(k){ ctx.beginPath(); ctx.arc(x + k * s * 0.33 + ox, y - s * 0.28 + oy, s * 0.14, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.strokeStyle = '#1f2a44'; ctx.lineWidth = Math.max(1.5, s * 0.06); ctx.beginPath(); ctx.arc(x, y + s * 0.3, s * 0.25, 0.2, Math.PI - 0.2); ctx.stroke();
+  }
+
+  var bs = $('paleta').querySelectorAll('button');
+  for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ addCmd(this.getAttribute('data-d')); };
+  $('btComecar').onclick = comecar;
+  $('btExecutar').onclick = executar;
+  $('btApagar').onclick = function(){ if (exec && exec.rodando) return; var u = prog[prog.length - 1]; if (!u) return; u.n--; if (u.n <= 0) prog.pop(); pararExec(); pintarPrograma(); };
+  $('btLimpar').onclick = function(){ if (exec && exec.rodando) return; prog = []; pararExec(); pintarPrograma(); };
+  $('btVel').onclick = function(){ lento = !lento; this.textContent = lento ? '🐢' : '🐇'; };
+  $('btSair').onclick = function(){ if (!confirm('Sair do jogo?')) return; laco.parar(); jogo = null; nivel = null; $('jogo').className = ''; $('hud').style.display = 'none'; ARC.tela('tConfig'); };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    var m = {38: 'U', 40: 'D', 37: 'L', 39: 'R'}[e.keyCode];
+    if (m){ e.preventDefault(); addCmd(m); }
+    else if (e.keyCode === 13 || e.keyCode === 32){ e.preventDefault(); if ($('btSegue')) $('btSegue').onclick(); else executar(); }
+    else if (e.keyCode === 8){ e.preventDefault(); $('btApagar').onclick(); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.ROBO = {nivel: function(){ return nivel; }, exec: function(){ return exec; }, prog: function(){ return prog; }, resolver: resolver, addCmd: addCmd, executar: executar, jogo: function(){ return jogo; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -219,13 +219,13 @@
 <!-- 7) MÍMICA E DESENHO (só aparece no iPad da equipe da vez) -->
 <section class="tela" id="tMimica">
   <div class="topo" id="topoMimica"><span class="nome"></span><span class="info" id="mimRelogio"></span></div>
-  <div class="aviso-secreto">🤫 Não mostre esta tela para ninguém!</div>
+  <div class="aviso-secreto">🙊 Não mostre esta tela para ninguém!</div>
   <div id="mimPalavra"></div>
   <div id="mimCategoria"></div>
   <div id="mimAreaDesenho">
     <canvas id="mimCanvas"></canvas>
     <div class="paleta" id="mimPaleta">
-      <button data-cor="#243049" style="background:#243049" class="ativa"></button><button data-cor="#e74c3c" style="background:#e74c3c"></button><button data-cor="#2f80ed" style="background:#2f80ed"></button><button data-cor="#27ae60" style="background:#27ae60"></button><button data-cor="#f39c12" style="background:#f39c12"></button><button data-cor="#8e44ad" style="background:#8e44ad"></button><button data-cor="#ffffff" style="background:#fff" title="Borracha">🧽</button>
+      <button data-cor="#243049" style="background:#243049" class="ativa"></button><button data-cor="#e74c3c" style="background:#e74c3c"></button><button data-cor="#2f80ed" style="background:#2f80ed"></button><button data-cor="#27ae60" style="background:#27ae60"></button><button data-cor="#f39c12" style="background:#f39c12"></button><button data-cor="#8e44ad" style="background:#8e44ad"></button><button data-cor="#ffffff" style="background:#fff" title="Borracha">⌫</button>
       <button class="pequeno" id="mimDesfazer">↩️ Desfazer</button>
       <button class="pequeno" id="mimLimpar">🗑️ Limpar</button>
     </div>
@@ -770,7 +770,7 @@ function renderMimica(){
   pararMimica();
   if (f === 'preparar' && souAtor){
     telaEspera('🌟 É a vez de vocês!', '<b>' + modoTxt + '</b><br>Escolham quem vai ' + (estado.modo === 'desenho' ? 'desenhar' : 'fazer a mímica') +
-      '. Só essa pessoa pode olhar o iPad! 🤫<br>Esperem o professor começar a vez.');
+      '. Só essa pessoa pode olhar o iPad! 🙊<br>Esperem o professor começar a vez.');
   } else if (f === 'preparar' || f === 'vez'){
     telaEspera('Vez da equipe ' + nomeEq, modoTxt + ' • Olhem para o telão 👀');
   } else if (f === 'fimVez'){

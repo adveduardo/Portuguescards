@@ -104,11 +104,12 @@
     'escolha-red': 'Redação', 'escolha-fo': 'Fonologia', 'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-pt': 'Pontuação',
     'escolha-sg': 'Significação das palavras', 'escolha-em': 'Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês', 'escolha-qs': 'As palavras QUE e SE',
     'escolha-fg': 'Figuras de linguagem', 'escolha-vida': '🌱 Projeto de Vida (EJA)', 'escolha-alfa': 'Alfabetização', 'detetive': '🕵️ Detetive (palavra errada)',
-    'leitura': '🎤 Textos para ler', 'listas': '📝 Listas de palavras'};
-  // modo: 'categorias' (Cestos), 'perguntas' (bancos, quizzes e escolha), 'detetive' ou 'leitura' (textos e listas de palavras)
+    'leitura': '🎤 Textos para ler', 'listas': '📝 Listas de palavras', 'morfo-frases': '🖍️ Frases (Pinte a frase)', 'silaba': '🔤 Sílaba tônica'};
+  // modo: 'categorias' (Cestos), 'perguntas' (bancos, quizzes e escolha), 'detetive', 'leitura' (textos e listas),
+  // 'palavras' (listas e Cestos) ou 'frases' (Pinte a frase e textos para ler)
   ARC.seletor = function(sel, modo, padrao, aoEscolher){
     ARC.json('dados/indice.json', function(ind){
-      var chaves = modo === 'categorias' ? ['morfo-cestos'] : modo === 'detetive' ? ['detetive'] : modo === 'leitura' ? ['leitura', 'listas']
+      var chaves = modo === 'categorias' ? ['morfo-cestos'] : modo === 'detetive' ? ['detetive'] : modo === 'leitura' ? ['leitura', 'listas'] : modo === 'palavras' ? ['listas', 'morfo-cestos'] : modo === 'frases' ? ['morfo-frases', 'leitura'] : modo === 'silabas' ? ['silaba', 'listas']
         : ['banco', 'quiz'].concat(Object.keys(ind).filter(function(k){ return k.indexOf('escolha-') === 0; }));
       var pedido = ARC.param('arquivo'), h = '', achou = false;
       chaves.forEach(function(k){
@@ -123,6 +124,31 @@
       sel.onchange = function(){ aoEscolher(sel.value); };
       aoEscolher(sel.value);
     }, function(){ sel.innerHTML = '<option value="' + ARC.esc(padrao) + '">' + ARC.esc(padrao) + '</option>'; aoEscolher(padrao); });
+  };
+
+  // ---------- sorteio com semente (ex.: "desafio do dia": a mesma escolha em todas as turmas no mesmo dia) ----------
+  ARC.rng = function(texto){
+    var h = 1779033703 ^ String(texto).length, i;
+    for (i = 0; i < String(texto).length; i++){ h = Math.imul ? Math.imul(h ^ String(texto).charCodeAt(i), 3432918353) : (h ^ String(texto).charCodeAt(i)) * 3432918353; h = (h << 13) | (h >>> 19); }
+    var a = h >>> 0;
+    return function(){   // mulberry32
+      a = (a + 0x6D2B79F5) | 0; var t = a;
+      t = Math.imul ? Math.imul(t ^ (t >>> 15), t | 1) : (t ^ (t >>> 15)) * (t | 1);
+      t ^= t + (Math.imul ? Math.imul(t ^ (t >>> 7), t | 61) : (t ^ (t >>> 7)) * (t | 61));
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+  ARC.hoje = function(){ var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); };
+  // palavras de qualquer arquivo de listas ou dos Cestos: [{t, dica, emoji}]
+  ARC.normalizarPalavras = function(d, grupo){
+    var l = [];
+    function add(p, g){ var w = typeof p === 'string' ? p : p && p.palavra; if (w) l.push({t: String(w), emoji: p && p.emoji || '', dica: p && p.dica || '', silabas: p && p.silabas || '', grupo: g || ''}); }
+    (d.grupos || []).forEach(function(g, gi){ if (grupo !== '' && grupo != null && +grupo !== gi) return; (g.palavras || []).forEach(function(p){ add(p, g.titulo); }); });
+    if (d.palavras && (d.cestos || (d.palavras[0] && d.palavras[0].classe))){
+      var c = ARC.normalizarCategorias(d);
+      if (c) c.palavras.forEach(function(p){ l.push({t: p.t, emoji: '', dica: 'Grupo: ' + c.cats[p.c].nome, silabas: '', grupo: c.cats[p.c].nome}); });
+    } else (d.palavras || []).forEach(function(p){ add(p); });
+    return l;
   };
 
   // ---------- iPads antigos: o iOS 9 só mostra emoji até o Unicode 8 (os mais novos viram quadradinho) ----------

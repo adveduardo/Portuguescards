@@ -313,9 +313,9 @@ Rede.agora = function(){ return Date.now() + Rede.offset; };
 Rede.EQUIPES = [
   {id:'leoes',     nome:'Leões',     emoji:'🦁', cor:'#e74c3c'},
   {id:'golfinhos', nome:'Golfinhos', emoji:'🐬', cor:'#2f80ed'},
-  {id:'papagaios', nome:'Papagaios', emoji:'🦜', cor:'#27ae60'},
+  {id:'papagaios', nome:'Papagaios', emoji:'🐦', cor:'#27ae60'},   // o papagaio e a raposa (emoji novos) não aparecem no iOS 9
   {id:'abelhas',   nome:'Abelhas',   emoji:'🐝', cor:'#e6a800'},
-  {id:'raposas',   nome:'Raposas',   emoji:'🦊', cor:'#e67e22'},
+  {id:'raposas',   nome:'Tigres',    emoji:'🐯', cor:'#e67e22'},
   {id:'pandas',    nome:'Pandas',    emoji:'🐼', cor:'#8e44ad'}
 ];
 

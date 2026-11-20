@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ponte das Frases</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #tabuas{position:fixed;left:0;right:0;bottom:0;z-index:6;text-align:center;padding:10px 8px 12px;background:rgba(40,28,18,.9);display:none}
+  #tabuas .pecas button{background:#d9a35b;color:#3b2410;font-size:22px;box-shadow:0 4px 0 #8a5a24;border-radius:10px;padding:10px 16px}
+  #tabuas .ctl{margin-top:6px}
+  #tabuas .ctl button{font-size:18px}
+  #tabuas #btAtravessar{background:#27ae60;color:#fff;box-shadow:0 4px 0 #1b7a43;font-size:22px}
+  #msg{color:#fff;font-size:19px;font-weight:bold;min-height:24px;margin-bottom:4px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hRodada"></span><span class="chip" id="hVez"></span><span class="chip" id="hPlacar"></span>
+  <button type="button" id="btSom">🔊</button><button type="button" id="btSair">⏹️</button>
+</div>
+<div id="tabuas"><div id="msg"></div><div class="pecas" id="pecas"></div>
+  <div class="ctl"><button type="button" id="btTirar">⌫ Tirar a última</button> <button type="button" id="btAtravessar" disabled>🚚 Atravessar!</button> <button type="button" id="btSeguir" class="principal" style="display:none">➡️ Próxima frase</button></div>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🌉 Ponte das Frases</h1>
+  <p>O caminhão precisa atravessar o rio! Cada tábua da ponte é uma palavra: coloquem as tábuas <b>na ordem certa da frase</b>.
+    Se alguma estiver fora do lugar, a ponte quebra bem ali… e o caminhão cai na água! 💦</p>
+  <label>Frases: <select id="selArquivo" style="max-width:520px"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Pistas: <select id="selPistas"><option value="1" selected>com pistas (maiúscula no começo e ponto no fim)</option><option value="0">sem pistas (tudo minúsculo, sem pontuação)</option></select></label>
+  <label>Frases: <select id="selQtd"><option>6</option><option selected>10</option><option>15</option></select></label>
+  <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, frases = [], jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ if (jogo && jogo.frase) montarPonte(); if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
+  var F = {pts: [], cons: [], g: 2200}, cena = {};
+
+  ARC.seletor($('selArquivo'), 'frases', 'morfo-frases.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; frases = [];
+    ARC.json('dados/' + arq, function(d){
+      var l = [];
+      (d.frases || []).forEach(function(f){ var t = typeof f === 'string' ? f : f && f.texto; if (!t) return; t = String(t).replace(/\/[A-Za-zçÇ0-9_-]+/g, '').replace(/\s+/g, ' ').trim(); var n = t.split(' ').length; if (n >= 3 && n <= 9 && t.length <= 70) l.push(t); });
+      frases = l;
+      $('infoArq').textContent = l.length ? (d.titulo || arq) + ' • ' + l.length + ' frases de 3 a 9 palavras' : 'Este arquivo não tem frases curtas o bastante.';
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+
+  // ---------- física (Verlet): a ponte é uma corrente de pontos presos nas duas margens ----------
+  function geometria(){
+    var W = tela.W, H = tela.H;
+    cena = {W: W, H: H, xL: W * 0.16, xR: W * 0.84, yTopo: H * 0.5, agua: H * 0.78};
+  }
+  function montarPonte(){
+    geometria();
+    var n = jogo.frase.certas.length, i;
+    F.pts = []; F.cons = [];
+    for (i = 0; i <= n; i++){ var x = cena.xL + (cena.xR - cena.xL) * i / n; F.pts.push({x: x, y: cena.yTopo, px: x, py: cena.yTopo, fixo: i === 0 || i === n}); }
+    for (i = 0; i < n; i++) F.cons.push({a: i, b: i + 1, len: (cena.xR - cena.xL) / n * 1.015, ok: true});
+  }
+  function fisica(dt){
+    var passos = 4, h = dt / passos, s, i, k, carga = jogo.caminhao && jogo.caminhao.naPonte ? jogo.caminhao.x : null;
+    for (s = 0; s < passos; s++){
+      F.pts.forEach(function(p, j){
+        if (p.fixo) return;
+        var vx = (p.x - p.px) * 0.985, vy = (p.y - p.py) * 0.985, extra = 0;
+        if (carga !== null && Math.abs(p.x - carga) < (cena.xR - cena.xL) / F.cons.length) extra = 2600;   // peso do caminhão
+        p.px = p.x; p.py = p.y; p.x += vx; p.y += vy + (F.g + extra) * h * h;
+      });
+      for (k = 0; k < 12; k++) F.cons.forEach(function(c){
+        if (!c.ok) return;
+        var a = F.pts[c.a], b = F.pts[c.b], dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 0.001, dif = (d - c.len) / d;
+        if (a.fixo && b.fixo) return;
+        var fa = a.fixo ? 0 : b.fixo ? 1 : 0.5, fb = b.fixo ? 0 : a.fixo ? 1 : 0.5;
+        a.x += dx * dif * fa; a.y += dy * dif * fa; b.x -= dx * dif * fb; b.y -= dy * dif * fb;
+      });
+    }
+  }
+  function alturaPonte(x){   // y da ponte embaixo do caminhão (interpolação entre os pontos)
+    for (var i = 0; i < F.cons.length; i++){ var a = F.pts[i], b = F.pts[i + 1]; if (x >= a.x && x <= b.x) return {y: a.y + (b.y - a.y) * (x - a.x) / ((b.x - a.x) || 1), seg: i, ang: Math.atan2(b.y - a.y, b.x - a.x)}; }
+    return null;
+  }
+
+  // ---------- jogo ----------
+  function comecar(){
+    if (frases.length < 3) return ARC.aviso('Escolha um arquivo com frases.');
+    jogo = {monte: ARC.embaralhar(frases), usadas: 0, rodada: 0, total: +$('selQtd').value, pistas: $('selPistas').value === '1', equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, fx: [], respingos: []};
+    ARC.tela(null); $('hud').style.display = ''; $('tabuas').style.display = 'block'; laco.iniciar(); novaFrase();
+  }
+  function prepararPalavras(t){
+    var ws = t.split(' ');
+    if (!jogo.pistas) ws = ws.map(function(w){ return w.replace(/[.,;:!?…"“”()]/g, '').toLowerCase(); }).filter(function(w){ return w; });
+    return ws;
+  }
+  function novaFrase(){
+    jogo.rodada++;
+    if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(frases); jogo.usadas = 0; }
+    var t = jogo.monte[jogo.usadas++], certas = prepararPalavras(t), pool;
+    var tent = 0;
+    do { pool = ARC.embaralhar(certas.map(function(w, i){ return {w: w, id: i}; })); tent++; } while (tent < 20 && certas.length > 1 && pool.map(function(x){ return x.w; }).join(' ') === certas.join(' '));
+    jogo.frase = {texto: t, certas: certas, pool: pool, postas: [], tentativas: 0};
+    jogo.caminhao = null; jogo.fx = []; jogo.respingos = []; jogo.queda = null;
+    montarPonte(); pintarPecas(); pintarHud();
+    $('btSeguir').style.display = 'none'; $('btTirar').style.display = ''; $('btAtravessar').style.display = '';
+    $('msg').textContent = (jogo.equipes.length > 1 ? 'Vez dos ' + jogo.equipes[jogo.vez].emoji + ' ' + jogo.equipes[jogo.vez].nome + ': ' : '') + 'toquem nas tábuas na ordem da frase.';
+  }
+  function pintarHud(){
+    $('hRodada').textContent = '🌉 Frase ' + jogo.rodada + '/' + jogo.total;
+    if (jogo.equipes.length > 1){ var e = jogo.equipes[jogo.vez]; $('hVez').style.display = ''; $('hVez').textContent = e.emoji + ' ' + e.nome; $('hVez').style.background = e.cor; $('hVez').style.color = '#fff'; }
+    else $('hVez').style.display = 'none';
+    $('hPlacar').textContent = jogo.equipes.map(function(e){ return e.emoji + ' ' + e.pontos; }).join('   ');
+  }
+  function pintarPecas(){
+    var f = jogo.frase, usados = {};
+    f.postas.forEach(function(p){ usados[p.id] = 1; });
+    $('pecas').innerHTML = f.pool.filter(function(p){ return !usados[p.id]; }).map(function(p){ return '<button type="button" data-id="' + p.id + '">' + esc(p.w) + '</button>'; }).join('');
+    var bs = $('pecas').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ por(+this.getAttribute('data-id')); };
+    $('btAtravessar').disabled = f.postas.length < f.certas.length;
+  }
+  function por(id){
+    var f = jogo.frase; if (jogo.caminhao || f.postas.length >= f.certas.length) return;
+    for (var i = 0; i < f.pool.length; i++) if (f.pool[i].id === id){ f.postas.push(f.pool[i]); break; }
+    ARC.tom(500 + f.postas.length * 60, 0.05); pintarPecas();
+  }
+  function tirar(){ var f = jogo.frase; if (jogo.caminhao || !f.postas.length) return; f.postas.pop(); pintarPecas(); }
+  function atravessar(){
+    var f = jogo.frase; if (jogo.caminhao || f.postas.length < f.certas.length) return;
+    f.tentativas++;
+    var erro = -1; for (var i = 0; i < f.certas.length; i++) if (f.postas[i].w !== f.certas[i]){ erro = i; break; }
+    jogo.caminhao = {x: cena.xL - tela.W * 0.12, y: cena.yTopo, vy: 0, ang: 0, erro: erro, caindo: false, naPonte: false, fim: false, roda: 0};
+    $('btAtravessar').disabled = true; $('msg').textContent = '🚚 Lá vai o caminhão…'; ARC.tom(110, 0.6, 0, 'sawtooth');
+  }
+  function resultado(ok){
+    var f = jogo.frase, e = jogo.equipes[jogo.vez];
+    $('btTirar').style.display = 'none'; $('btAtravessar').style.display = 'none';
+    if (ok){
+      var pts = f.tentativas === 1 ? 10 : 5; e.pontos += pts; ARC.festa();
+      $('msg').innerHTML = '🎉 A ponte aguentou! +' + pts + (jogo.equipes.length > 1 ? ' para os ' + esc(e.emoji + ' ' + e.nome) : '') + '.';
+      seguirBotao(true);
+    } else {
+      $('msg').innerHTML = '💦 A ponte quebrou na tábua <b>“' + esc(f.postas[jogo.caminhao.erro].w) + '”</b>! A ordem certa é: <b>' + esc(f.certas.join(' ')) + '</b>';
+      if (f.tentativas < 2){ $('btSeguir').textContent = '🔁 Tentar de novo'; $('btSeguir').style.display = ''; $('btSeguir').onclick = function(){ f.postas = []; f.pool = ARC.embaralhar(f.pool); jogo.caminhao = null; jogo.queda = null; montarPonte(); pintarPecas(); $('btSeguir').style.display = 'none'; $('btTirar').style.display = ''; $('btAtravessar').style.display = ''; $('msg').textContent = 'Mais uma chance! Agora a frase vale 5 pontos.'; }; }
+      else seguirBotao(false);
+    }
+    pintarHud();
+  }
+  function seguirBotao(){   // botão para a próxima frase ou para o resultado
+    var ultima = jogo.rodada >= jogo.total;
+    $('btSeguir').textContent = ultima ? '🏆 Resultado' : '➡️ Próxima frase'; $('btSeguir').style.display = '';
+    $('btSeguir').onclick = function(){ if (ultima) return fim(); jogo.vez = (jogo.vez + 1) % jogo.equipes.length; novaFrase(); };
+  }
+  function fim(){
+    laco.parar(); $('tabuas').style.display = 'none';
+    var r = ARC.ranking(jogo.equipes);
+    $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? esc(r[0].e.emoji + ' ' + r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1><div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button></p>';
+    ARC.tela('tFim'); ARC.festa();
+    $('btDeNovo').onclick = function(){ $('hud').style.display = 'none'; ARC.tela('tConfig'); };
+  }
+
+  // ---------- animação ----------
+  function passo(dt){
+    if (dt && jogo && jogo.frase){
+      fisica(Math.min(dt, 1 / 30));
+      var c = jogo.caminhao;
+      if (c && !c.fim){
+        c.roda += dt * 10;
+        if (!c.caindo){
+          c.x += tela.W * 0.16 * dt;
+          var pb = alturaPonte(c.x);
+          c.naPonte = !!pb;
+          if (pb){
+            c.y = pb.y; c.ang = pb.ang;
+            if (c.erro >= 0 && pb.seg === c.erro && F.cons[c.erro].ok && c.x > F.pts[c.erro].x + (F.pts[c.erro + 1].x - F.pts[c.erro].x) * 0.35){
+              F.cons[c.erro].ok = false; c.caindo = true; c.naPonte = false; c.vy = 0; ARC.tom(90, 0.5, 0, 'sawtooth'); ARC.erro();
+              var pa = F.pts[c.erro], pb2 = F.pts[c.erro + 1];   // a tábua errada se solta e cai girando no rio
+              jogo.queda = {x: (pa.x + pb2.x) / 2, y: (pa.y + pb2.y) / 2, ang: Math.atan2(pb2.y - pa.y, pb2.x - pa.x), len: F.cons[c.erro].len, vy: -60, va: 2.4, w: jogo.frase.postas[c.erro].w};
+            }
+          } else { c.y = cena.yTopo; c.ang = 0; }
+          if (c.x > cena.xR + tela.W * 0.06){ c.fim = true; resultado(true); }
+        } else {
+          c.vy += F.g * 0.6 * dt; c.y += c.vy * dt; c.x += tela.W * 0.05 * dt; c.ang += dt * 1.6;
+          if (c.y > cena.agua){ c.fim = true; for (var k = 0; k < 24; k++) jogo.respingos.push({x: c.x, y: cena.agua, vx: (Math.random() - 0.5) * 420, vy: -200 - Math.random() * 380, t: 0}); ARC.tom(200, 0.4, 0, 'triangle'); resultado(false); }
+        }
+      }
+      if (jogo.queda){ jogo.queda.vy += F.g * 0.5 * dt; jogo.queda.y += jogo.queda.vy * dt; jogo.queda.ang += jogo.queda.va * dt; if (jogo.queda.y > tela.H + 80) jogo.queda = null; }
+      for (var i = jogo.respingos.length - 1; i >= 0; i--){ var r = jogo.respingos[i]; r.t += dt; r.vy += 900 * dt; r.x += r.vx * dt; r.y += r.vy * dt; if (r.t > 1.5) jogo.respingos.splice(i, 1); }
+    }
+    desenhar();
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC; geometria();
+    var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#7fd0ff'); g.addColorStop(0.6, '#d8f2ff'); g.addColorStop(1, '#d8f2ff'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,255,255,.85)'; [[0.2, 0.14], [0.62, 0.1], [0.85, 0.22]].forEach(function(n){ var x = ((n[0] * W + Date.now() / 80) % (W + 200)) - 100, y = n[1] * H; ctx.beginPath(); ctx.arc(x, y, 26 * E, 0, 2 * Math.PI); ctx.arc(x + 30 * E, y - 10 * E, 32 * E, 0, 2 * Math.PI); ctx.arc(x + 62 * E, y, 26 * E, 0, 2 * Math.PI); ctx.fill(); });
+    ctx.fillStyle = '#2d8ccf'; ctx.fillRect(0, cena.agua, W, H - cena.agua);
+    ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 3; for (var o = 0; o < 4; o++){ ctx.beginPath(); for (var x = 0; x <= W; x += 20){ var y = cena.agua + 18 + o * 26 + Math.sin(x / 40 + Date.now() / 400 + o) * 5; if (x) ctx.lineTo(x, y); else ctx.moveTo(x, y); } ctx.stroke(); }
+    [[0, cena.xL], [cena.xR, W]].forEach(function(m){ ctx.fillStyle = '#8b5a2b'; ctx.fillRect(m[0], cena.yTopo, m[1] - m[0], H - cena.yTopo); ctx.fillStyle = '#5cb85c'; ctx.fillRect(m[0], cena.yTopo - 10 * E, m[1] - m[0], 14 * E); });
+    if (!jogo || !jogo.frase){ return; }
+    var f = jogo.frase, n = f.certas.length;
+    // cordas
+    ctx.strokeStyle = '#6b4423'; ctx.lineWidth = 3;
+    F.cons.forEach(function(c){ if (!c.ok) return; var a = F.pts[c.a], b = F.pts[c.b]; ctx.beginPath(); ctx.moveTo(a.x, a.y - 42 * E); ctx.lineTo(b.x, b.y - 42 * E); ctx.stroke(); });
+    F.pts.forEach(function(p){ ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x, p.y - 42 * E); ctx.stroke(); });
+    // tábuas (as já colocadas) e espaços vazios
+    for (var i = 0; i < n; i++){
+      if (!F.cons[i].ok) continue;   // a tábua que quebrou é desenhada caindo (jogo.queda)
+      var a = F.pts[i], b = F.pts[i + 1], ang = Math.atan2(b.y - a.y, b.x - a.x), len = Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)), p = f.postas[i];
+      ctx.save(); ctx.translate(a.x, a.y); ctx.rotate(ang);
+      if (p){
+        ctx.fillStyle = '#d9a35b'; ARC.rrect(ctx, 1, -9 * E, len - 2, 22 * E, 4); ctx.fill(); ctx.strokeStyle = '#8a5a24'; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = '#3b2410'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ARC.fonte(ctx, p.w, len - 8, Math.round(17 * E)); ctx.fillText(p.w, len / 2, 2 * E);
+      } else { ctx.strokeStyle = 'rgba(80,50,20,.5)'; ctx.setLineDash([6, 5]); ctx.lineWidth = 2; ctx.strokeRect(1, -9 * E, len - 2, 22 * E); ctx.setLineDash([]); }
+      ctx.restore();
+    }
+    if (jogo.queda){ var q = jogo.queda; ctx.save(); ctx.translate(q.x, q.y); ctx.rotate(q.ang); ctx.fillStyle = '#d9a35b'; ARC.rrect(ctx, -q.len / 2, -9 * E, q.len, 22 * E, 4); ctx.fill(); ctx.strokeStyle = '#8a5a24'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#3b2410'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ARC.fonte(ctx, q.w, q.len - 8, Math.round(17 * E)); ctx.fillText(q.w, 0, 2 * E); ctx.restore(); }
+    var c = jogo.caminhao;
+    if (c) desenharCaminhao(c);
+    else desenharCaminhao({x: cena.xL - W * 0.08, y: cena.yTopo, ang: 0, roda: 0});
+    ctx.fillStyle = '#9fd8ff'; jogo.respingos.forEach(function(r){ ctx.globalAlpha = Math.max(0, 1 - r.t / 1.5); ctx.beginPath(); ctx.arc(r.x, r.y, 6 * E, 0, 2 * Math.PI); ctx.fill(); }); ctx.globalAlpha = 1;
+  }
+  function desenharCaminhao(c){
+    var E = tela.ESC, w = 90 * E, h = 46 * E;
+    ctx.save(); ctx.translate(c.x, c.y - 8 * E); ctx.rotate(c.ang);
+    ctx.fillStyle = '#f4b400'; ARC.rrect(ctx, -w / 2, -h, w * 0.66, h * 0.8, 6 * E); ctx.fill();
+    ctx.fillStyle = '#e8590c'; ARC.rrect(ctx, w * 0.18, -h * 0.85, w * 0.32, h * 0.65, 6 * E); ctx.fill();
+    ctx.fillStyle = '#cdeeff'; ARC.rrect(ctx, w * 0.26, -h * 0.75, w * 0.17, h * 0.26, 3 * E); ctx.fill();
+    ctx.fillStyle = '#ffffff'; ctx.font = 'bold ' + Math.round(13 * E) + 'px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('ABC', -w * 0.17, -h * 0.6);
+    [-w * 0.3, w * 0.32].forEach(function(rx){ ctx.fillStyle = '#222'; ctx.beginPath(); ctx.arc(rx, -2 * E, 11 * E, 0, 2 * Math.PI); ctx.fill(); ctx.strokeStyle = '#bbb'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(rx, -2 * E); ctx.lineTo(rx + Math.cos(c.roda) * 8 * E, -2 * E + Math.sin(c.roda) * 8 * E); ctx.stroke(); });
+    ctx.restore();
+  }
+
+  $('btComecar').onclick = comecar;
+  $('btTirar').onclick = tirar;
+  $('btAtravessar').onclick = atravessar;
+  $('btSair').onclick = function(){ if (!confirm('Sair do jogo?')) return; laco.parar(); jogo = null; $('tabuas').style.display = 'none'; $('hud').style.display = 'none'; ARC.tela('tConfig'); desenhar(); };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (e.keyCode === 8){ e.preventDefault(); tirar(); }
+    else if (e.keyCode === 13 || e.keyCode === 32){ e.preventDefault(); if ($('btSeguir').style.display !== 'none') $('btSeguir').onclick(); else atravessar(); }
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  desenhar();
+  window.PONTE = {jogo: function(){ return jogo; }, por: por, atravessar: atravessar, fisica: F};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Ritmo das Sílabas</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  #botoes{position:fixed;left:0;right:0;bottom:0;z-index:6;display:none;padding:10px;text-align:center}
+  #botoes button{width:44%;max-width:420px;height:96px;font-size:32px;margin:0 1%;border-radius:22px;color:#fff}
+  #btPalma{background:#2f80ed;box-shadow:0 6px 0 #1d5fb8} #btForte{background:#e8590c;box-shadow:0 6px 0 #a63f08}
+  #botoes button small{display:block;font-size:15px;font-weight:normal;opacity:.9}
+  #calib{display:none}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<canvas id="cv" class="palcoJogo"></canvas>
+<div id="hud" style="display:none">
+  <span class="chip" id="hPontos"></span><span class="chip" id="hCombo"></span><span class="chip" id="hPrecisao"></span><button type="button" id="btSair">⏹️</button>
+</div>
+<div id="botoes"><button type="button" id="btPalma">👏 Palma<small>barra de espaço</small></button><button type="button" id="btForte">💥 Forte<small>Enter</small></button></div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🎵 Ritmo das Sílabas</h1>
+  <p>As sílabas das palavras vêm andando no ritmo da música. Batam palma <b>👏 em cada sílaba</b>, bem na hora em que ela passa pelo círculo!
+    No modo da sílaba tônica, a sílaba mais forte vem dourada e pede uma batida <b>💥 Forte</b>.</p>
+  <label>Palavras: <select id="selArquivo" style="max-width:520px"></select></label>
+  <label id="lGrupo" style="display:none">Grupo: <select id="selGrupo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Modo: <select id="selModo"><option value="contar">👏 contar as sílabas (uma palma por sílaba)</option><option value="tonica" selected>💥 sílaba tônica (palma + batida forte)</option></select></label>
+  <label>Velocidade: <select id="selBpm"><option value="72">devagar</option><option value="92" selected>média</option><option value="112">rápida</option></select></label>
+  <label>Palavras: <select id="selQtd"><option>8</option><option selected>12</option><option>16</option></select></label>
+  <label><input type="checkbox" id="chkGuia" checked> Som guia em cada sílaba</label>
+  <p id="avisoSom" class="dica" style="display:none">🔇 O som do Painel está desligado: o jogo funciona, mas sem música. <button type="button" id="btLigarSom">🔊 Ligar o som</button></p>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar a música</button> <button type="button" id="btCalibrar">🎯 Calibrar o atraso do som</button></p>
+  <p class="dica" id="infoCalib"></p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim" style="max-width:900px"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, arquivo = null, jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ if (!laco.rodando) desenhar(); }), ctx = tela.ctx, calib = null;
+  var atraso = 0; try { atraso = parseFloat(localStorage.getItem('ritmo_atraso')) || 0; } catch (e) {}
+  var JANELA = {perfeito: 0.08, bom: 0.16, max: 0.22};
+
+  // ---------- tônica pelas regras de acentuação do português ----------
+  function tonicaPt(sil){
+    var n = sil.length, i;
+    if (n === 1) return 0;
+    for (i = n - 1; i >= 0; i--) if (/[áéíóúâêô]/i.test(sil[i])) return i;
+    for (i = n - 1; i >= 0; i--) if (/[ãõ]/i.test(sil[i])) return i;
+    return /(a|e|o|as|es|os|am|em|ens)$/i.test(sil.join('')) ? n - 2 : n - 1;
+  }
+  function nomeTonica(n, t){ if (n === 1) return 'monossílabo'; var d = n - 1 - t; return d === 0 ? 'oxítona' : d === 1 ? 'paroxítona' : 'proparoxítona'; }
+  function itensDe(d, grupo){
+    var l = [];
+    function add(p, emoji){
+      if (!p) return;
+      var sil = p.silabas, ton = typeof p.tonica === 'number' ? p.tonica : null;
+      if (typeof sil === 'string') sil = sil.split('-');
+      if (!sil || !sil.length || sil.length > 6) return;
+      sil = sil.map(function(x){ return String(x).trim(); }).filter(function(x){ return x; });
+      if (!sil.length) return;
+      l.push({sil: sil, tonica: ton === null ? tonicaPt(sil) : ton, emoji: p.emoji || emoji || ''});
+    }
+    (d.grupos || []).forEach(function(g, gi){ if (grupo !== '' && grupo != null && +grupo !== gi) return; (g.palavras || []).forEach(function(p){ add(p); }); });
+    (d.palavras || []).forEach(function(p){ add(p); });
+    return l;
+  }
+
+  // ---------- áudio: o relógio do jogo é o do Web Audio (precisão de milissegundos) ----------
+  var A = (function(){
+    var ac = null, mestre = null, ruido = null, t0p = 0, mudo = false;
+    function criar(){
+      if (ac) return ac;
+      try { var C = window.AudioContext || window.webkitAudioContext; if (C) ac = new C(); } catch (e) { ac = null; }
+      return ac;
+    }
+    function buf(){ if (!ruido){ ruido = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.25), ac.sampleRate); var d = ruido.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; } return ruido; }
+    function env(g, t, v, dur){ g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + dur); }
+    var api = {
+      com: function(){ return !mudo && Sala.somLigado() && !!criar(); },
+      // prepara o áudio e só então chama cb; se o navegador não liberar o som em 0,8 s, segue sem som (relógio do sistema)
+      iniciar: function(cb){
+        t0p = Date.now() / 1000; mudo = false;
+        var feito = false, fim = function(){ if (feito) return; feito = true; if (ac && ac.state === 'suspended') mudo = true; t0p = Date.now() / 1000;
+          if (api.com()){ if (mestre) try { mestre.disconnect(); } catch (e) {} mestre = ac.createGain(); mestre.gain.value = window.PAINEL_CALMO ? 0.35 : 0.8; mestre.connect(ac.destination); }
+          if (cb) cb(); };
+        if (!api.com()) return fim();
+        if (ac.state === 'suspended' && ac.resume){ var pr = ac.resume(); if (pr && pr.then) pr.then(fim, fim); setTimeout(fim, 800); }
+        else fim();
+      },
+      agora: function(){ return api.com() && ac ? ac.currentTime : Date.now() / 1000 - t0p; },
+      parar: function(){ if (mestre){ try { mestre.disconnect(); } catch (e) {} mestre = null; } },
+      bumbo: function(t){ if (!mestre) return; var o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.14); o.connect(g); g.connect(mestre); env(g, t, 0.6, 0.18); o.start(t); o.stop(t + 0.2); },
+      chimbal: function(t){ if (!mestre) return; var s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = buf(); f.type = 'highpass'; f.frequency.value = 7000; s.connect(f); f.connect(g); g.connect(mestre); env(g, t, 0.07, 0.04); s.start(t); s.stop(t + 0.05); },
+      palma: function(t, v){ if (!mestre) return; var s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = buf(); f.type = 'bandpass'; f.frequency.value = 1500; f.Q.value = 1.2; s.connect(f); f.connect(g); g.connect(mestre); env(g, t, v || 0.5, 0.09); s.start(t); s.stop(t + 0.12); },
+      forte: function(t, v){ if (!mestre) return; var o = ac.createOscillator(), g = ac.createGain(); o.frequency.setValueAtTime(110, t); o.frequency.exponentialRampToValueAtTime(60, t + 0.25); o.connect(g); g.connect(mestre); env(g, t, v || 0.8, 0.3); o.start(t); o.stop(t + 0.32); api.palma(t, (v || 0.8) * 0.6); },
+      bloco: function(t, f, v){ if (!mestre) return; var o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = f; o.connect(g); g.connect(mestre); env(g, t, v, 0.07); o.start(t); o.stop(t + 0.08); }
+    };
+    return api;
+  })();
+
+  ARC.seletor($('selArquivo'), 'silabas', 'lista-alfa-figuras.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; arquivo = null;
+    ARC.json('dados/' + arq, function(d){
+      arquivo = d;
+      if (d.grupos && d.grupos.length > 1){
+        $('selGrupo').innerHTML = '<option value="">todos os grupos</option>' + d.grupos.map(function(g, i){ return '<option value="' + i + '">' + esc(g.titulo || ('Grupo ' + (i + 1))) + '</option>'; }).join('');
+        $('lGrupo').style.display = '';
+      } else { $('selGrupo').innerHTML = '<option value=""></option>'; $('lGrupo').style.display = 'none'; }
+      contar();
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  function contar(){ var n = itensDe(arquivo, $('selGrupo').value).length; $('infoArq').textContent = (arquivo.titulo || '') + ' • ' + (n ? n + ' palavras com as sílabas separadas' : '⚠️ este arquivo não tem a separação das sílabas'); }
+  $('selGrupo').onchange = function(){ if (arquivo) contar(); };
+  function pintarSom(){ $('avisoSom').style.display = Sala.somLigado() ? 'none' : ''; $('infoCalib').textContent = 'Atraso do som calibrado: ' + Math.round(atraso * 1000) + ' ms (use a calibração se as batidas parecerem atrasadas).'; }
+  $('btLigarSom').onclick = function(){ try { localStorage.setItem('painel_som', '1'); } catch (e) {} pintarSom(); };
+  pintarSom();
+
+  // ---------- montar a música ----------
+  function comecar(){
+    var lista = arquivo ? itensDe(arquivo, $('selGrupo').value) : [];
+    if (lista.length < 3) return ARC.aviso('Escolha um arquivo com sílabas separadas.');
+    var bpm = +$('selBpm').value, beat = 60 / bpm, modo = $('selModo').value, palavras = ARC.embaralhar(lista).slice(0, +$('selQtd').value), notas = [], t = 4 * beat, pals = [];
+    palavras.forEach(function(w, wi){
+      pals.push({sil: w.sil, tonica: w.tonica, emoji: w.emoji, t0: t, t1: t + (w.sil.length - 1) * beat});
+      w.sil.forEach(function(s, si){ notas.push({t: t, sil: s, p: wi, si: si, forte: modo === 'tonica' && si === w.tonica, estado: '', jt: 0}); t += beat; });
+      t += 2 * beat;
+    });
+    jogo = {modo: modo, bpm: bpm, beat: beat, notas: notas, palavras: pals, fim: t + beat, pontos: 0, combo: 0, maxCombo: 0, acertos: 0, fx: [], guia: $('chkGuia').checked, inicio: 1e9};
+    ARC.tela(null); $('hud').style.display = ''; $('botoes').style.display = 'block'; $('btForte').style.display = modo === 'tonica' ? '' : 'none';
+    $('btPalma').style.width = modo === 'tonica' ? '' : '80%';
+    pintarHud(); laco.iniciar();
+    A.iniciar(function(){ tocarMusica(); });
+  }
+  function tocarMusica(){
+    var beat = jogo.beat, notas = jogo.notas;
+    jogo.inicio = A.agora() + 0.4;
+    // agenda a música inteira de uma vez (o Web Audio toca no tempo exato)
+    for (var k = 0; jogo.inicio + k * beat < jogo.inicio + jogo.fim; k++){
+      var tb = jogo.inicio + k * beat;
+      if (k < 4) A.bloco(tb, k === 0 ? 1320 : 990, 0.25); else { A.bumbo(tb); }
+      A.chimbal(tb + beat / 2);
+    }
+    if (jogo.guia) notas.forEach(function(n){ A.bloco(jogo.inicio + n.t, n.forte ? 660 : 880, n.forte ? 0.16 : 0.08); });
+  }
+  function agoraMusica(){ return A.agora() - jogo.inicio; }
+  function bater(tipo){
+    if (calib) return marcarCalib();
+    if (!jogo || jogo.acabou || jogo.inicio >= 1e9) return;
+    var t = agoraMusica() - atraso, melhor = null, dmin = 9;
+    jogo.notas.forEach(function(n){ if (n.estado) return; var d = Math.abs(n.t - t); if (d < dmin){ dmin = d; melhor = n; } });
+    if (tipo === 'forte') A.forte(A.agora(), 0.5); else A.palma(A.agora(), 0.35);
+    if (!melhor || dmin > JANELA.max){ jogo.combo = 0; fx('fora do ritmo', '#b8c2d9'); pintarHud(); return; }
+    var tipoCerto = jogo.modo === 'tonica' ? (melhor.forte ? 'forte' : 'palma') : tipo;
+    melhor.jt = t;
+    if (tipo !== tipoCerto){ melhor.estado = 'forca'; jogo.combo = 0; fx(melhor.forte ? 'era a FORTE! 💥' : 'essa era fraca 👏', '#ff8a65'); ARC.tom(220, 0.12, 0, 'sawtooth'); pintarHud(); return; }
+    melhor.estado = dmin <= JANELA.perfeito ? 'perfeito' : dmin <= JANELA.bom ? 'bom' : 'quase';
+    var base = melhor.estado === 'perfeito' ? 100 : melhor.estado === 'bom' ? 60 : 25;
+    jogo.combo++; jogo.maxCombo = Math.max(jogo.maxCombo, jogo.combo); jogo.acertos++;
+    jogo.pontos += base + Math.min(50, jogo.combo * 2);
+    fx({perfeito: 'Perfeito!', bom: 'Bom!', quase: 'Quase!'}[melhor.estado] + (jogo.combo >= 5 ? ' ×' + jogo.combo : ''), {perfeito: '#7CFFB2', bom: '#ffd54a', quase: '#ffb74d'}[melhor.estado]);
+    pintarHud();
+  }
+  function fx(txt, cor){ jogo.fx.push({txt: txt, cor: cor, t: 0}); }
+  function pintarHud(){
+    var julgadas = jogo.notas.filter(function(n){ return n.estado; }).length;
+    $('hPontos').textContent = '⭐ ' + jogo.pontos; $('hCombo').textContent = '🔥 ' + jogo.combo;
+    $('hPrecisao').textContent = '🎯 ' + (julgadas ? Math.round(jogo.acertos / julgadas * 100) : 100) + '%';
+  }
+  function terminar(){
+    jogo.acabou = true; laco.parar(); A.parar(); $('botoes').style.display = 'none';
+    var total = jogo.notas.length, prec = Math.round(jogo.acertos / total * 100), est = prec >= 90 ? 3 : prec >= 70 ? 2 : 1;
+    var lista = jogo.palavras.map(function(p){
+      var sil = p.sil.map(function(s, i){ return jogo.modo === 'tonica' && i === p.tonica ? '<b style="color:#e8590c">' + esc(s.toUpperCase()) + '</b>' : esc(s); }).join('-');
+      return '<li>' + (p.emoji && ARC.figuraOk(p.emoji) ? p.emoji + ' ' : '') + sil + ' • ' + p.sil.length + ' sílaba' + (p.sil.length > 1 ? 's' : '') + (jogo.modo === 'tonica' ? ' • ' + nomeTonica(p.sil.length, p.tonica) : '') + '</li>';
+    }).join('');
+    $('cFim').innerHTML = '<h1>🎵 Fim da música!</h1><p style="font-size:30px">' + '⭐⭐⭐'.slice(0, est) + '☆☆☆'.slice(0, 3 - est) + '</p>' +
+      '<p style="font-size:21px">⭐ ' + jogo.pontos + ' pontos • 🎯 ' + prec + '% das sílabas • 🔥 maior sequência: ' + jogo.maxCombo + '</p>' +
+      '<div style="text-align:left;max-width:620px;margin:0 auto;font-size:18px"><b>As palavras da música:</b><ul>' + lista + '</ul></div>' +
+      '<p><button type="button" class="principal" id="btDeNovo">🔁 Tocar outra música</button></p>';
+    ARC.tela('tFim'); if (est >= 2) ARC.festa();
+    $('btDeNovo').onclick = function(){ $('hud').style.display = 'none'; ARC.tela('tConfig'); pintarSom(); };
+  }
+
+  // ---------- calibração: o aluno bate junto com 8 cliques; a mediana do atraso vira a correção ----------
+  function calibrar(){
+    if (!Sala.somLigado()) return ARC.aviso('Ligue o som para calibrar.');
+    A.iniciar(function(){ if (!A.com()) return ARC.aviso('O navegador não liberou o som. Toque em algum botão e tente de novo.'); comecarCalib(); });
+  }
+  function comecarCalib(){
+    calib = {inicio: A.agora() + 0.6, beat: 0.6, toques: []};
+    for (var k = 0; k < 10; k++) A.bloco(calib.inicio + k * calib.beat, k < 2 ? 1320 : 990, 0.3);
+    ARC.tela(null); $('botoes').style.display = 'block'; $('btForte').style.display = 'none'; $('btPalma').style.width = '80%';
+    ARC.aviso('🎯 Bata palma (barra de espaço) junto com cada clique, a partir do 3º.', 6200);
+    setTimeout(fimCalib, (0.6 + 10 * 0.6 + 0.5) * 1000);
+  }
+  function marcarCalib(){
+    var t = A.agora() - calib.inicio, k = Math.round(t / calib.beat);
+    if (k >= 2 && k < 10) calib.toques.push(t - k * calib.beat);
+  }
+  function fimCalib(){
+    var l = calib.toques.slice().sort(function(a, b){ return a - b; });
+    calib = null; $('botoes').style.display = 'none';
+    if (l.length < 4){ ARC.tela('tConfig'); return ARC.aviso('Poucas batidas: tente de novo.'); }
+    atraso = Math.max(-0.05, Math.min(0.35, l[Math.floor(l.length / 2)]));
+    try { localStorage.setItem('ritmo_atraso', String(atraso)); } catch (e) {}
+    ARC.tela('tConfig'); pintarSom(); ARC.aviso('🎯 Pronto! Atraso do som: ' + Math.round(atraso * 1000) + ' ms.', 3000);
+  }
+
+  // ---------- quadro ----------
+  function passo(dt){
+    if (jogo && !jogo.acabou && jogo.inicio < 1e9){
+      var t = agoraMusica() - atraso;
+      jogo.notas.forEach(function(n){ if (!n.estado && t > n.t + JANELA.max){ n.estado = 'perdeu'; jogo.combo = 0; pintarHud(); } });
+      for (var i = jogo.fx.length - 1; i >= 0; i--){ jogo.fx[i].t += dt; if (jogo.fx[i].t > 0.8) jogo.fx.splice(i, 1); }
+      if (agoraMusica() > jogo.fim) return terminar();
+    }
+    desenhar();
+  }
+  function desenhar(){
+    var W = tela.W, H = tela.H, E = tela.ESC, g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#1b1440'); g.addColorStop(1, '#3a1f5d'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    if (!jogo || jogo.inicio >= 1e9) return;
+    var tm = agoraMusica(), fase = tm >= 0 ? (tm / jogo.beat) % 1 : 0, pulso = Math.max(0, 1 - fase * 3), laneY = H * 0.52, hitX = W * 0.2, vel = (W - hitX) / 2.4, i;
+    // equalizador no fundo, no ritmo da batida
+    for (i = 0; i < 24; i++){ var h = (0.25 + 0.75 * Math.abs(Math.sin(i * 1.7 + Math.floor(tm / jogo.beat) * 0.9))) * pulso * H * 0.18 + 6; ctx.fillStyle = 'rgba(124,255,178,' + (0.08 + pulso * 0.1) + ')'; ctx.fillRect(i * W / 24 + 3, H - h, W / 24 - 6, h); }
+    ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.fillRect(0, laneY - 70 * E, W, 140 * E);
+    ctx.strokeStyle = 'rgba(255,255,255,' + (0.4 + pulso * 0.6) + ')'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(hitX, laneY, (54 + pulso * 8) * E, 0, 2 * Math.PI); ctx.stroke();
+    if (tm < 0 || tm < 4 * jogo.beat){ ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold ' + Math.round(80 * E) + 'px Arial'; ctx.fillText(tm < 0 ? '🎵' : String(Math.floor(tm / jogo.beat) + 1), W / 2, H * 0.25); }
+    // notas
+    var t = tm - atraso;
+    jogo.notas.forEach(function(n){
+      var x = hitX + (n.t - t) * vel; if (x < -80 || x > W + 80) return;
+      if (n.estado === 'perfeito' || n.estado === 'bom' || n.estado === 'quase'){ var k = Math.min(1, (t - n.jt) / 0.3); if (k >= 1) return; ctx.globalAlpha = 1 - k; ctx.fillStyle = n.estado === 'perfeito' ? '#7CFFB2' : '#ffd54a'; ctx.beginPath(); ctx.arc(hitX, laneY, (50 + k * 40) * E, 0, 2 * Math.PI); ctx.fill(); ctx.globalAlpha = 1; return; }
+      var r = (n.forte ? 56 : 46) * E;
+      ctx.fillStyle = n.estado === 'perdeu' || n.estado === 'forca' ? 'rgba(140,140,160,.6)' : n.forte ? '#ffb300' : '#4dabf7';
+      ctx.beginPath(); ctx.arc(x, laneY, r, 0, 2 * Math.PI); ctx.fill();
+      if (n.forte){ ctx.strokeStyle = '#fff3c4'; ctx.lineWidth = 5; ctx.stroke(); }
+      ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ARC.fonte(ctx, n.sil.toUpperCase(), r * 1.7, Math.round((n.forte ? 30 : 26) * E)); ctx.fillText(n.sil.toUpperCase(), x, laneY + 1);
+    });
+    // a palavra da vez (com as sílabas acendendo)
+    var atual = null; for (i = 0; i < jogo.palavras.length; i++){ var p = jogo.palavras[i]; if (t < p.t1 + jogo.beat * 1.5){ atual = p; break; } }
+    if (atual){
+      var nts = jogo.notas.filter(function(n){ return n.p === jogo.palavras.indexOf(atual); }), tam = Math.round(46 * E), x0, larg = 0, pedacos = [];
+      ctx.font = 'bold ' + tam + 'px "Trebuchet MS", Arial';
+      atual.sil.forEach(function(s, si){ var w = ctx.measureText(s.toUpperCase()).width + 26 * E; pedacos.push(w); larg += w + 8 * E; });
+      x0 = (W - larg) / 2;
+      if (atual.emoji && ARC.figuraOk(atual.emoji)){ ctx.font = Math.round(64 * E) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(atual.emoji, W / 2, H * 0.14); ctx.font = 'bold ' + tam + 'px "Trebuchet MS", Arial'; }
+      atual.sil.forEach(function(s, si){
+        var n = nts[si], ok = n && (n.estado === 'perfeito' || n.estado === 'bom' || n.estado === 'quase'), forte = jogo.modo === 'tonica' && si === atual.tonica;
+        ctx.fillStyle = ok ? '#2ecc71' : n && (n.estado === 'perdeu' || n.estado === 'forca') ? '#6b6b80' : 'rgba(255,255,255,.14)';
+        ARC.rrect(ctx, x0, H * 0.27, pedacos[si], tam * 1.5, 14 * E); ctx.fill();
+        if (forte){ ctx.strokeStyle = '#ffb300'; ctx.lineWidth = 4; ctx.stroke(); }
+        ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(s.toUpperCase(), x0 + pedacos[si] / 2, H * 0.27 + tam * 0.78);
+        x0 += pedacos[si] + 8 * E;
+      });
+    }
+    jogo.fx.forEach(function(f){ ctx.globalAlpha = Math.max(0, 1 - f.t / 0.8); ctx.fillStyle = f.cor; ctx.textAlign = 'center'; ARC.fonte(ctx, f.txt, 400, Math.round(34 * E)); ctx.fillText(f.txt, hitX, laneY - 95 * E - f.t * 40); ctx.globalAlpha = 1; });
+  }
+
+  $('btComecar').onclick = comecar;
+  $('btCalibrar').onclick = calibrar;
+  function toque(tipo){ return function(e){ if (e && e.preventDefault) e.preventDefault(); bater(tipo); }; }
+  $('btPalma').addEventListener('touchstart', toque('palma'), {passive: false}); $('btPalma').addEventListener('mousedown', toque('palma'));
+  $('btForte').addEventListener('touchstart', toque('forte'), {passive: false}); $('btForte').addEventListener('mousedown', toque('forte'));
+  $('btSair').onclick = function(){ if (!confirm('Parar a música?')) return; laco.parar(); A.parar(); jogo = null; $('botoes').style.display = 'none'; $('hud').style.display = 'none'; ARC.tela('tConfig'); desenhar(); };
+  document.addEventListener('keydown', function(e){
+    if (e.repeat) return;
+    if (!calib && (!jogo || jogo.acabou || document.querySelector('.tela.ativa'))) return;
+    if (e.keyCode === 32){ e.preventDefault(); bater(jogo && jogo.modo === 'contar' ? 'palma' : 'palma'); }
+    else if (e.keyCode === 13){ e.preventDefault(); bater(jogo && jogo.modo === 'contar' ? 'palma' : 'forte'); }
+  });
+  desenhar();
+  window.RITMO = {jogo: function(){ return jogo; }, bater: bater, tonicaPt: tonicaPt, agora: function(){ return jogo ? agoraMusica() : 0; }, atraso: function(){ return atraso; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Cofre das Palavras</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  body{background:radial-gradient(circle at 50% 30%,#3a4660,#141a29)}
+  #jogo{position:fixed;left:0;top:0;right:0;bottom:0;display:none;padding:50px 10px 10px;overflow:auto;-webkit-overflow-scrolling:touch}
+  #jogo.ativo{display:block}
+  #area{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:flex-start;align-items:flex-start;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  #cofre{position:relative;margin:6px 10px;padding:24px 26px 18px;border-radius:30px;background:linear-gradient(145deg,#c8ced8,#7d8796);box-shadow:inset 0 0 0 6px #5b6474,0 16px 40px rgba(0,0,0,.5);text-align:center;
+    -webkit-transition:-webkit-transform 1.2s ease;transition:transform 1.2s ease;-webkit-transform-origin:0 50%;transform-origin:0 50%}
+  #cofre.aberto{-webkit-transform:perspective(1200px) rotateY(-75deg);transform:perspective(1200px) rotateY(-75deg)}
+  #cofre.alarme{-webkit-animation:alarme .35s linear 6;animation:alarme .35s linear 6}
+  @-webkit-keyframes alarme{50%{box-shadow:inset 0 0 0 6px #e74c3c,0 0 60px 20px rgba(231,76,60,.8)}}
+  @keyframes alarme{50%{box-shadow:inset 0 0 0 6px #e74c3c,0 0 60px 20px rgba(231,76,60,.8)}}
+  .rebite{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#6b7383)}
+  #titulo{font-size:20px;font-weight:bold;color:#2b3242;letter-spacing:2px;margin-bottom:8px}
+  #lampadas,#discos{white-space:nowrap}
+  .lamp{display:inline-block;width:30px;height:30px;border-radius:50%;margin:0 13px 10px;background:radial-gradient(circle at 35% 35%,#777,#333);box-shadow:inset 0 0 0 3px #444}
+  .lamp.certo{background:radial-gradient(circle at 35% 35%,#b9ffcf,#18a84e);box-shadow:0 0 18px 6px rgba(46,204,113,.85)}
+  .lamp.quase{background:radial-gradient(circle at 35% 35%,#fff1b0,#e0a400);box-shadow:0 0 18px 6px rgba(241,196,15,.85)}
+  .lamp.nao{background:radial-gradient(circle at 35% 35%,#555,#1c1c1c)}
+  .disco{display:inline-block;width:56px;height:76px;margin:0 0px;border-radius:12px;background:linear-gradient(#1d2333,#3b4459 45%,#1d2333);color:#fff;font-size:42px;font-weight:bold;line-height:76px;
+    box-shadow:inset 0 0 0 3px #11151f,0 3px 0 rgba(0,0,0,.4);vertical-align:top;margin:0 1px}
+  .disco.atual{box-shadow:inset 0 0 0 3px #ffd54a,0 0 12px rgba(255,213,74,.8)}
+  .disco.gira{-webkit-animation:gira .5s ease-out;animation:gira .5s ease-out}
+  @-webkit-keyframes gira{0%{-webkit-transform:rotateX(0)}100%{-webkit-transform:rotateX(720deg)}}
+  @keyframes gira{0%{transform:rotateX(0)}100%{transform:rotateX(720deg)}}
+  #roda{position:absolute;right:22px;top:10px;width:40px;height:40px;border-radius:50%;border:6px solid #4b5262;background:#9aa2b1;-webkit-transition:-webkit-transform .8s;transition:transform .8s}
+  #roda:before,#roda:after{content:'';position:absolute;left:50%;top:-4px;bottom:-4px;width:6px;margin-left:-3px;background:#4b5262;border-radius:3px}
+  #roda:after{-webkit-transform:rotate(90deg);transform:rotate(90deg)}
+  #dicas{margin-top:10px;min-height:30px;font-size:22px;font-weight:bold;color:#2b3242}
+  #dicas .emo{font-size:46px;vertical-align:middle}
+  #painelLado{margin:6px 10px;min-width:260px;max-width:340px;background:rgba(10,14,24,.75);border-radius:20px;padding:10px 12px;color:#fff}
+  #painelLado h3{margin:2px 0 8px;font-size:18px}
+  .tent{margin:4px 0;white-space:nowrap}
+  .tent span.l{display:inline-block;width:26px;height:30px;margin:0 1px;border-radius:6px;background:#444;color:#fff;font-weight:bold;text-align:center;line-height:30px;font-size:17px}
+  .tent span.certo{background:#18a84e} .tent span.quase{background:#e0a400;color:#2b2000} .tent span.nao{background:#3a3a3a;color:#aaa}
+  .tent .quem{font-size:18px;margin-left:6px}
+  #teclado{text-align:center;margin:8px auto 0;max-width:760px}
+  #teclado div{white-space:nowrap}
+  #teclado button{min-width:46px;height:52px;margin:3px 2px;padding:0 6px;font-size:20px;background:#e9edf3}
+  #teclado button.certo{background:#18a84e;color:#fff} #teclado button.quase{background:#e0a400;color:#2b2000} #teclado button.nao{background:#555;color:#bbb}
+  #teclado button.larga{min-width:84px}
+  #mensagem{text-align:center;color:#fff;font-size:21px;font-weight:bold;min-height:28px;margin:6px 0}
+  #tesouro{position:absolute;left:0;top:0;right:0;bottom:0;display:none;text-align:center;font-size:60px;padding-top:40px}
+  @media (max-width:700px){ .disco{width:40px;height:58px;font-size:30px;line-height:58px} .lamp{width:22px;height:22px;margin:0 9px 8px} #teclado button{min-width:30px;height:46px;font-size:17px;margin:2px 1px} #roda{display:none} }
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<div id="hud" style="display:none">
+  <span class="chip" id="hRodada"></span><span class="chip" id="hVez"></span><span class="chip" id="hTent"></span><span class="chip" id="hPlacar"></span>
+  <button type="button" id="btDica">💡 Dica</button><button type="button" id="btSom">🔊</button><button type="button" id="btSair" title="Terminar">⏹️</button>
+</div>
+<div id="jogo">
+  <div id="area">
+    <div id="cofre">
+      <span class="rebite" style="left:10px;top:10px"></span><span class="rebite" style="right:10px;top:10px"></span><span class="rebite" style="left:10px;bottom:10px"></span><span class="rebite" style="right:10px;bottom:10px"></span>
+      <div id="titulo">🔐 COFRE</div>
+      <div id="lampadas"></div>
+      <div id="discos"></div>
+      <div id="dicas"></div>
+      <div id="roda"></div>
+    </div>
+    <div id="painelLado"><h3>📜 Tentativas</h3><div id="registro"></div></div>
+  </div>
+  <div id="mensagem"></div>
+  <div id="teclado"></div>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>🔐 Cofre das Palavras</h1>
+  <p>Descubram a <b>palavra secreta</b> para abrir o cofre! A cada palpite, as lâmpadas acendem:
+    <b style="color:#18a84e">verde</b> = letra certa no lugar certo, <b style="color:#c48f00">amarela</b> = a letra existe, mas em outro lugar, apagada = não tem essa letra.</p>
+  <label>Palavras: <select id="selArquivo" style="max-width:520px"></select></label>
+  <label id="lGrupo" style="display:none">Grupo: <select id="selGrupo"></select></label>
+  <p class="dica" id="infoArq">Carregando…</p>
+  <label>Tamanho: <select id="selTam"><option value="0">4 a 7 letras</option><option value="4">4 letras</option><option value="5" selected>5 letras</option><option value="6">6 letras</option><option value="7">7 letras</option></select></label>
+  <label>Tentativas: <select id="selTent"><option>5</option><option selected>6</option><option>8</option></select></label>
+  <label>Jogar: <select id="selModo"><option value="1">turma toda junta</option><option value="2" selected>2 equipes (um palpite cada)</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></label>
+  <label>Cofres: <select id="selRodadas"><option>3</option><option selected>5</option><option>8</option></select></label>
+  <label><input type="checkbox" id="chkDia"> 🗓️ Cofre do dia (a mesma palavra para todas as turmas hoje)</label>
+  <p class="dica" id="infoTam"></p>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
+  <p class="dica">Acentos e ç não precisam ser digitados. Use o teclado da tela ou o do computador (Enter confirma, ⌫ apaga).</p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, arquivo = null, idioma = 'pt-BR', jogo = null;
+  var LINHAS = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+  function norm(w){ return ARC.semAcento(String(w).toLowerCase()).replace(/[^a-z]/g, ''); }
+  function valida(w){ return /^[A-Za-zÀ-ÿ]+$/.test(w); }
+
+  ARC.seletor($('selArquivo'), 'palavras', 'lista-ortografia.json', function(arq){
+    $('infoArq').textContent = 'Carregando…'; arquivo = null;
+    ARC.json('dados/' + arq, function(d){
+      arquivo = d; idioma = d.idioma || 'pt-BR';
+      if (d.grupos && d.grupos.length > 1){
+        $('selGrupo').innerHTML = '<option value="">todos os grupos</option>' + d.grupos.map(function(g, i){ return '<option value="' + i + '">' + esc(g.titulo || ('Grupo ' + (i + 1))) + '</option>'; }).join('');
+        $('lGrupo').style.display = '';
+      } else { $('selGrupo').innerHTML = '<option value=""></option>'; $('lGrupo').style.display = 'none'; }
+      contar();
+    }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
+  });
+  function candidatas(){
+    if (!arquivo) return [];
+    var tam = +$('selTam').value, vistos = {};
+    return ARC.normalizarPalavras(arquivo, $('selGrupo').value).filter(function(p){
+      var n = norm(p.t), ok = valida(p.t) && (tam ? n.length === tam : n.length >= 4 && n.length <= 7) && !vistos[n];
+      if (ok) vistos[n] = 1; return ok;
+    });
+  }
+  function contar(){
+    var l = candidatas();
+    $('infoArq').textContent = (arquivo.titulo || '') + (idioma.indexOf('en') === 0 ? ' • em inglês' : '');
+    $('infoTam').textContent = l.length ? l.length + ' palavras com esse tamanho.' : '⚠️ Nenhuma palavra com esse tamanho neste arquivo: escolha outro tamanho.';
+  }
+  $('selGrupo').onchange = function(){ if (arquivo) contar(); };
+  $('selTam').onchange = function(){ if (arquivo) contar(); };
+
+  // ---------- regra das lâmpadas (com letras repetidas) ----------
+  function avaliar(palpite, segredo){
+    var res = [], resto = {}, i;
+    for (i = 0; i < segredo.length; i++){ if (palpite[i] === segredo[i]) res[i] = 'certo'; else { res[i] = ''; resto[segredo[i]] = (resto[segredo[i]] || 0) + 1; } }
+    for (i = 0; i < segredo.length; i++){ if (res[i]) continue; if (resto[palpite[i]] > 0){ res[i] = 'quase'; resto[palpite[i]]--; } else res[i] = 'nao'; }
+    return res;
+  }
+
+  function comecar(){
+    var lista = candidatas();
+    if (!lista.length) return ARC.aviso('Nenhuma palavra com esse tamanho: escolha outro.');
+    var dia = $('chkDia').checked, n = +$('selModo').value, rnd = dia ? ARC.rng(ARC.hoje() + '|' + $('selArquivo').value + '|' + $('selTam').value + '|' + $('selGrupo').value) : Math.random;
+    var monte = lista.slice(); for (var i = monte.length - 1; i > 0; i--){ var j = Math.floor(rnd() * (i + 1)), t = monte[i]; monte[i] = monte[j]; monte[j] = t; }
+    jogo = {monte: monte, usadas: 0, rodada: 0, total: dia ? 1 : +$('selRodadas').value, maxTent: +$('selTent').value, equipes: n > 1 ? ARC.criarEquipes(n) : [], vez: 0, dia: dia, abertos: 0};
+    ARC.tela(null); $('jogo').className = 'ativo'; $('hud').style.display = '';
+    montarTeclado(); novaRodada();
+  }
+  function novaRodada(){
+    jogo.rodada++;
+    var p = jogo.p = jogo.monte[jogo.usadas++ % jogo.monte.length];
+    jogo.segredo = norm(p.t).split(''); jogo.tent = []; jogo.atual = ''; jogo.dicas = 0; jogo.acabou = false; jogo.teclas = {};
+    $('cofre').className = ''; $('dicas').innerHTML = ''; $('registro').innerHTML = ''; $('mensagem').textContent = '';
+    var h = '', d = '';
+    for (var i = 0; i < jogo.segredo.length; i++){ h += '<span class="lamp"></span>'; d += '<span class="disco"></span>'; }
+    $('lampadas').innerHTML = h; $('discos').innerHTML = d;
+    pintarTeclado(); pintarDiscos(); pintarHud();
+    $('mensagem').textContent = '🔐 ' + jogo.segredo.length + ' letras. ' + (jogo.equipes.length ? 'Vez dos ' + jogo.equipes[jogo.vez].emoji + ' ' + jogo.equipes[jogo.vez].nome + '!' : 'Qual é a palavra?');
+  }
+  function pintarHud(){
+    $('hRodada').textContent = jogo.dia ? '🗓️ Cofre do dia' : 'Cofre ' + jogo.rodada + '/' + jogo.total;
+    $('hTent').textContent = '🔑 ' + (jogo.maxTent - jogo.tent.length) + ' tentativa' + (jogo.maxTent - jogo.tent.length === 1 ? '' : 's');
+    if (jogo.equipes.length){
+      var e = jogo.equipes[jogo.vez];
+      $('hVez').style.display = ''; $('hVez').textContent = 'Vez: ' + e.emoji + ' ' + e.nome; $('hVez').style.background = e.cor; $('hVez').style.color = '#fff';
+      $('hPlacar').style.display = ''; $('hPlacar').textContent = jogo.equipes.map(function(x){ return x.emoji + ' ' + x.pontos; }).join('   ');
+    } else { $('hVez').style.display = 'none'; $('hPlacar').style.display = ''; $('hPlacar').textContent = '🏆 ' + jogo.abertos + ' aberto' + (jogo.abertos === 1 ? '' : 's'); }
+  }
+  function pintarDiscos(){
+    var ds = $('discos').querySelectorAll('.disco');
+    for (var i = 0; i < ds.length; i++){ ds[i].textContent = (jogo.atual.charAt(i) || '').toUpperCase(); ds[i].className = 'disco' + (i === jogo.atual.length && !jogo.acabou ? ' atual' : ''); }
+  }
+  function montarTeclado(){
+    var h = '';
+    LINHAS.forEach(function(l, k){
+      h += '<div>' + (k === 2 ? '<button type="button" class="larga" data-k="ENTER">↵ OK</button>' : '');
+      for (var i = 0; i < l.length; i++) h += '<button type="button" data-k="' + l.charAt(i) + '">' + l.charAt(i) + '</button>';
+      h += (k === 2 ? '<button type="button" class="larga" data-k="APAGA">⌫</button>' : '') + '</div>';
+    });
+    $('teclado').innerHTML = h;
+    var bs = $('teclado').querySelectorAll('button');
+    for (var j = 0; j < bs.length; j++) bs[j].onclick = function(){ tecla(this.getAttribute('data-k')); };
+  }
+  function pintarTeclado(){
+    var bs = $('teclado').querySelectorAll('button');
+    for (var j = 0; j < bs.length; j++){ var k = bs[j].getAttribute('data-k').toLowerCase(), st = jogo.teclas[k]; bs[j].className = (bs[j].className.indexOf('larga') >= 0 ? 'larga' : '') + (st ? ' ' + st : ''); }
+  }
+  function tecla(k){
+    if (!jogo || jogo.acabou || jogo.girando) return;
+    if (k === 'ENTER') return enviar();
+    if (k === 'APAGA'){ jogo.atual = jogo.atual.slice(0, -1); return pintarDiscos(); }
+    if (jogo.atual.length < jogo.segredo.length && /^[A-Z]$/.test(k)){ jogo.atual += k.toLowerCase(); ARC.tom(700 + jogo.atual.length * 40, 0.04); pintarDiscos(); }
+  }
+  function enviar(){
+    if (jogo.atual.length < jogo.segredo.length){ $('mensagem').textContent = '✋ Faltam letras: a palavra tem ' + jogo.segredo.length + '.'; return; }
+    var palpite = jogo.atual.split(''), res = avaliar(palpite, jogo.segredo), quem = jogo.equipes.length ? jogo.equipes[jogo.vez] : null;
+    jogo.tent.push({p: palpite, r: res, quem: quem}); jogo.girando = true;
+    var ds = $('discos').querySelectorAll('.disco'), ls = $('lampadas').querySelectorAll('.lamp');
+    $('roda').style.webkitTransform = $('roda').style.transform = 'rotate(' + (jogo.tent.length * 120) + 'deg)';
+    palpite.forEach(function(ch, i){
+      setTimeout(function(){
+        ds[i].className = 'disco gira'; ls[i].className = 'lamp ' + res[i];
+        ARC.tom(res[i] === 'certo' ? 1046 : res[i] === 'quase' ? 784 : 330, 0.07);
+        var ant = jogo.teclas[ch]; if (res[i] === 'certo' || (res[i] === 'quase' && ant !== 'certo') || (!ant)) jogo.teclas[ch] = res[i] === 'nao' && ant ? ant : res[i];
+      }, i * 160);
+    });
+    setTimeout(depois, palpite.length * 160 + 350);
+  }
+  function depois(){
+    jogo.girando = false;
+    var u = jogo.tent[jogo.tent.length - 1], acertou = u.r.every(function(x){ return x === 'certo'; });
+    $('registro').innerHTML += '<div class="tent">' + u.p.map(function(ch, i){ return '<span class="l ' + u.r[i] + '">' + ch.toUpperCase() + '</span>'; }).join('') + (u.quem ? '<span class="quem">' + u.quem.emoji + '</span>' : '') + '</div>';
+    pintarTeclado(); jogo.atual = '';
+    if (acertou) return abrir(u.quem);
+    if (jogo.tent.length >= jogo.maxTent) return alarme();
+    if (jogo.equipes.length) jogo.vez = (jogo.vez + 1) % jogo.equipes.length;
+    pintarDiscos(); pintarHud();
+    var certas = u.r.filter(function(x){ return x === 'certo'; }).length, quase = u.r.filter(function(x){ return x === 'quase'; }).length;
+    $('mensagem').textContent = (certas || quase ? '💚 ' + certas + ' no lugar • 💛 ' + quase + ' fora do lugar. ' : 'Nenhuma dessas letras! ') + (jogo.equipes.length ? 'Agora: ' + jogo.equipes[jogo.vez].emoji + ' ' + jogo.equipes[jogo.vez].nome + '.' : '');
+  }
+  function revelarPalavra(){ return esc(jogo.p.t.toUpperCase()) + (jogo.p.emoji && ARC.figuraOk(jogo.p.emoji) ? ' ' + jogo.p.emoji : ''); }
+  function falar(t){ if (!Sala.somLigado() || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return; try { var u = new SpeechSynthesisUtterance(t); u.lang = idioma; u.rate = 0.9; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } catch (e) {} }
+  function abrir(quem){
+    jogo.acabou = true; jogo.abertos++;
+    var pts = Math.max(1, jogo.maxTent - jogo.tent.length + 1 - jogo.dicas);
+    if (quem) quem.pontos += pts;
+    $('cofre').className = 'aberto'; ARC.festa(); falar(jogo.p.t);
+    $('mensagem').innerHTML = '💰 Cofre aberto' + (quem ? ' pelos ' + esc(quem.emoji + ' ' + quem.nome) + ' (+' + pts + ')' : '') + '! A palavra era: ' + revelarPalavra();
+    pintarHud(); botaoSeguir();
+  }
+  function alarme(){
+    jogo.acabou = true; $('cofre').className = 'alarme';
+    for (var k = 0; k < 6; k++){ ARC.tom(880, 0.16, k * 0.35, 'square'); ARC.tom(660, 0.16, k * 0.35 + 0.17, 'square'); }
+    $('mensagem').innerHTML = '🚨 O alarme disparou! A palavra era: ' + revelarPalavra();
+    falar(jogo.p.t); pintarHud(); botaoSeguir();
+  }
+  function botaoSeguir(){
+    var ultima = jogo.rodada >= jogo.total;
+    $('mensagem').innerHTML += '<br><button type="button" class="principal" id="btSeguir">' + (ultima ? '🏆 Resultado' : '➡️ Próximo cofre') + '</button>';
+    $('btSeguir').onclick = function(){ if (ultima) fim(); else { if (jogo.equipes.length) jogo.vez = jogo.rodada % jogo.equipes.length; novaRodada(); } };
+  }
+  function dica(){
+    if (!jogo || jogo.acabou) return;
+    var p = jogo.p, l = [];
+    if (p.emoji && ARC.figuraOk(p.emoji)) l.push('<span class="emo">' + p.emoji + '</span>');
+    if (p.dica) l.push(esc(p.dica));
+    l.push('Começa com <b>' + esc(p.t.charAt(0).toUpperCase()) + '</b>');
+    l.push('Termina com <b>' + esc(p.t.charAt(p.t.length - 1).toUpperCase()) + '</b>');
+    if (jogo.dicas >= l.length) return ARC.aviso('Não há mais dicas!');
+    jogo.dicas++;
+    $('dicas').innerHTML = '💡 ' + l.slice(0, jogo.dicas).join(' • ');
+    ARC.tom(1200, 0.08);
+  }
+  function fim(){
+    var h;
+    if (jogo.equipes.length){
+      var r = ARC.ranking(jogo.equipes);
+      h = '<h1>🏆 ' + esc(r[0].e.emoji + ' ' + r[0].e.nome) + ' venceu!</h1><div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div>';
+    } else h = '<h1>🔐 ' + jogo.abertos + ' de ' + jogo.total + ' cofres abertos!</h1>';
+    $('cFim').innerHTML = h + '<p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button></p>';
+    ARC.tela('tFim'); ARC.festa();
+    $('btDeNovo').onclick = function(){ $('jogo').className = ''; $('hud').style.display = 'none'; ARC.tela('tConfig'); };
+  }
+  $('btComecar').onclick = comecar;
+  $('btDica').onclick = dica;
+  $('btSair').onclick = function(){ if (confirm('Sair do cofre?')){ jogo = null; $('jogo').className = ''; $('hud').style.display = 'none'; ARC.tela('tConfig'); } };
+  document.addEventListener('keydown', function(e){
+    if (!jogo || document.querySelector('.tela.ativa')) return;
+    if (e.keyCode === 13){ e.preventDefault(); if (jogo.acabou && $('btSeguir')) $('btSeguir').onclick(); else tecla('ENTER'); }
+    else if (e.keyCode === 8){ e.preventDefault(); tecla('APAGA'); }
+    else if (e.keyCode >= 65 && e.keyCode <= 90) tecla(String.fromCharCode(e.keyCode));
+  });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.COFRE = {jogo: function(){ return jogo; }, avaliar: avaliar, tecla: tecla};   // usado nos testes
+})();
+</script>
+</body>
+</html>

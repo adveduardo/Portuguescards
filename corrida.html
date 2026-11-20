@@ -31,7 +31,7 @@
   #explica{text-align:center;font-size:1.15rem;font-weight:bold;margin:6px 0;min-height:1.3em}
   .podio{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin:20px 0}
   .degrau{background:#fff;border-radius:20px 20px 0 0;width:min(26vw,220px);text-align:center;padding:12px;box-shadow:0 6px 0 #0001;animation:subir .8s backwards}
-  .degrau .e{font-size:3.2rem}
+  .degrau .e{font-size:2.6rem}
   .degrau .n{font-size:1.4rem;font-weight:bold}
   .degrau .p{font-size:1.6rem;font-weight:bold}
   @keyframes subir{from{transform:translateY(80px);opacity:0}}
@@ -243,7 +243,7 @@ function mostrarFim(){
   irPara('fim');
   const nome = id => g[id] ? g[id].emoji + ' ' + g[id].nome : id;
   $('tituloFim').textContent = vencedores.length > 1 ? '🏁 Empate na chegada: ' + vencedores.map(nome).join(' e ') + '!' : vencedores.length ? `🏆 ${nome(vencedores[0])} venceu a corrida!` : '🏁 Fim da corrida';
-  const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]).slice(0, 3), alturas = ['200px', '150px', '110px'];
+  const ord = Object.keys(totais).sort((a, b) => totais[b] - totais[a]).slice(0, 3), alturas = ['215px', '175px', '145px'];
   $('podio').innerHTML = [1, 0, 2].filter(i => ord[i]).map(i => {
     const id = ord[i], gg = g[id] || {emoji: '❔', nome: id, cor: '#999'};
     return `<div class="degrau" style="height:${alturas[i]};border-top:10px solid ${gg.cor};animation-delay:${(2 - i) * .4}s">
