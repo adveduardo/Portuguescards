@@ -48,7 +48,7 @@
           <option value="grandes" selected>🔠 Algumas palavras grandes (5 letras ou mais)</option>
         </select>
         <label class="campo" for="selIdioma">Voz para ler a letra</label>
-        <select id="selIdioma"><option value="en-US">🇬🇧 Inglês</option><option value="pt-BR">🇧🇷 Português</option></select>
+        <select id="selIdioma"><option value="en-US">🇬🇧 Inglês</option><option value="es-ES">🇪🇸 Espanhol</option><option value="pt-BR">🇧🇷 Português</option></select>
         <button type="button" class="principal" id="btPreparar" style="margin-top:14px;font-size:18px">✂️ Preparar as lacunas</button>
       </div>
     </div>
@@ -150,7 +150,7 @@
   $('selMusica').onchange = function(){
     var m = musicas[+this.value];
     if (this.value === ''){ $('letra').value = (Sala.ler(CH) || {}).letra || ''; return; }
-    if (m){ $('letra').value = m.letra; $('selIdioma').value = m.idioma === 'pt-BR' ? 'pt-BR' : 'en-US'; }
+    if (m){ $('letra').value = m.letra; $('selIdioma').value = m.idioma === 'pt-BR' || m.idioma === 'es-ES' ? m.idioma : 'en-US'; }
   };
   $('letra').oninput = function(){ if ($('selMusica').value === '') Sala.gravar(CH, {letra: this.value}); };
   $('btPreparar').onclick = function(){
@@ -193,7 +193,10 @@
   EN.json('dados/musicas.json', function(err, d){
     if (err || !d || !(d.musicas instanceof Array)) return;
     musicas = d.musicas;
-    $('selMusica').innerHTML += musicas.map(function(m, i){ return '<option value="' + i + '">' + (m.idioma === 'pt-BR' ? '🇧🇷 ' : '🇬🇧 ') + Sala.esc(m.titulo) + '</option>'; }).join('');
+    $('selMusica').innerHTML += musicas.map(function(m, i){ return '<option value="' + i + '">' + (m.idioma === 'pt-BR' ? '🇧🇷 ' : m.idioma === 'es-ES' ? '🇪🇸 ' : '🇬🇧 ') + Sala.esc(m.titulo) + '</option>'; }).join('');
+    if (EN.param('lingua') === 'es'){   // aberto pelo grupo de Espanhol: já começa com uma cantiga em espanhol
+      for (var i = 0; i < musicas.length; i++) if (musicas[i].idioma === 'es-ES'){ $('selMusica').value = String(i); $('selMusica').onchange(); break; }
+    }
   });
   window.MUSICA = {tokens: function(){ return tokens; }};   // usado nos testes
 })();

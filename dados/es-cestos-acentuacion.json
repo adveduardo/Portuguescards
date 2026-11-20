@@ -1,0 +1,98 @@
+{
+  "titulo": "¿Aguda, llana o esdrújula?",
+  "idioma": "es-ES",
+  "cestos": [
+    {
+      "id": "aguda",
+      "nome": "Aguda (fuerte en la última)",
+      "emoji": "➡️",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "llana",
+      "nome": "Llana (fuerte en la penúltima)",
+      "emoji": "⏺️",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "esdrujula",
+      "nome": "Esdrújula (fuerte en la antepenúltima)",
+      "emoji": "⬅️",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "café",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "canción",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "reloj",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "papel",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "ciudad",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "jabón",
+      "cesto": "aguda"
+    },
+    {
+      "palavra": "árbol",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "casa",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "lápiz",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "mesa",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "fácil",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "libro",
+      "cesto": "llana"
+    },
+    {
+      "palavra": "música",
+      "cesto": "esdrujula"
+    },
+    {
+      "palavra": "pájaro",
+      "cesto": "esdrujula"
+    },
+    {
+      "palavra": "teléfono",
+      "cesto": "esdrujula"
+    },
+    {
+      "palavra": "médico",
+      "cesto": "esdrujula"
+    },
+    {
+      "palavra": "sábado",
+      "cesto": "esdrujula"
+    },
+    {
+      "palavra": "miércoles",
+      "cesto": "esdrujula"
+    }
+  ]
+}

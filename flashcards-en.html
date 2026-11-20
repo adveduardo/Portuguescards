@@ -40,7 +40,7 @@
 <body>
 <div class="palco">
   <div class="topo">
-    <h1>🃏 Flashcards <small>Toque no cartão para virar: a palavra em inglês, a pronúncia e a tradução.</small></h1>
+    <h1>🃏 Flashcards <small id="subtitulo">Toque no cartão para virar: a palavra em inglês, a pronúncia e a tradução.</small></h1>
     <button type="button" id="btImprimir">🖨️ Imprimir cartaz</button>
     <button type="button" id="btSom">🔊</button>
   </div>
@@ -72,7 +72,12 @@
 (function(){
   'use strict';
   var $ = function(id){ return document.getElementById(id); };
-  var CH = 'flash_conhecidas', temas = [], tema = null, ordem = [], pos = 0, virada = false;
+  var LG = EN.lingua(), CH = LG.cod === 'en' ? 'flash_conhecidas' : 'flash_conhecidas_' + LG.cod, temas = [], tema = null, ordem = [], pos = 0, virada = false;
+  if (LG.cod !== 'en'){   // mesma tela, outro idioma
+    $('subtitulo').textContent = 'Toque no cartão para virar: a palavra em ' + LG.nome + ', a pronúncia e a tradução.';
+    var ops = $('selModo').options; ops[0].text = '🖼️ Figura → ' + LG.nome; ops[1].text = '🇧🇷 Português → ' + LG.nome; ops[2].text = LG.bandeira + ' ' + LG.Nome + ' → português';
+    document.title = 'Flashcards em ' + LG.nome;
+  }
   var conhecidas = Sala.ler(CH) || {};
 
   function sabidas(){ return conhecidas[tema.id] || []; }
@@ -129,7 +134,7 @@
   $('btImprimir').onclick = function(){
     var h = '<style>#salaImpressao .fc{display:inline-block;width:31%;margin:0.8%;border:2px solid #555;border-radius:12px;text-align:center;padding:8px 4px;vertical-align:top;page-break-inside:avoid}' +
       '#salaImpressao .fc b{display:block;font-size:20px;margin-top:2px}#salaImpressao .fc span{display:block;font-size:14px;color:#333}#salaImpressao .fc i{font-style:normal;font-size:40px;display:block}</style>' +
-      '<h1 style="font-size:24px;margin:0 0 8px">🇬🇧 ' + Sala.esc(tema.nome) + '</h1>';
+      '<h1 style="font-size:24px;margin:0 0 8px">' + LG.bandeira + ' ' + Sala.esc(tema.nome) + '</h1>';
     tema.palavras.forEach(function(p){ h += '<div class="fc"><i>' + p.emoji + '</i><b>' + Sala.esc(p.en) + '</b><span>' + Sala.esc(p.pt) + '</span></div>'; });
     Sala.imprimir(h);
   };
@@ -141,9 +146,10 @@
   });
   Sala.botaoSom($('btSom'));
 
-  EN.json('dados/en-vocab.json', function(err, d){
+  EN.json('dados/' + LG.cod + '-vocab.json', function(err, d){
     if (err || !d || !(d.temas instanceof Array)){ $('frente').innerHTML = '<div class="texto">Não consegui abrir os temas.</div>'; return; }
     temas = d.temas;
+    temas.forEach(function(t){ t.palavras.forEach(function(p){ if (p.en === undefined && p[LG.cod] !== undefined) p.en = p[LG.cod]; }); });   // "en" = a palavra no idioma estrangeiro
     $('selTema').innerHTML = temas.map(function(t){ return '<option value="' + Sala.esc(t.id) + '">' + t.emoji + ' ' + Sala.esc(t.nome) + ' (' + t.palavras.length + ')</option>'; }).join('');
     escolherTema(EN.param('tema') || temas[0].id);
   });

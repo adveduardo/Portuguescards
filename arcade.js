@@ -102,7 +102,7 @@
     'escolha-cc': 'Concordância', 'escolha-cl': 'Colocação pronominal', 'escolha-verbo': 'Verbo', 'escolha-adj': 'Adjetivo', 'escolha-num': 'Numeral',
     'escolha-prep': 'Preposição', 'escolha-conj': 'Conjunção', 'escolha-interj': 'Interjeição', 'escolha-inv': 'Invariáveis', 'escolha-interp': 'Interpretação de texto',
     'escolha-red': 'Redação', 'escolha-fo': 'Fonologia', 'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-pt': 'Pontuação',
-    'escolha-sg': 'Significação das palavras', 'escolha-em': 'Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês', 'escolha-qs': 'As palavras QUE e SE',
+    'escolha-sg': 'Significação das palavras', 'escolha-em': 'Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês', 'escolha-es': '🇪🇸 Espanhol', 'escolha-qs': 'As palavras QUE e SE',
     'escolha-fg': 'Figuras de linguagem', 'escolha-vida': '🌱 Projeto de Vida (EJA)', 'escolha-mat': '🔢 Matemática', 'escolha-alfa': 'Alfabetização', 'detetive': '🕵️ Detetive (palavra errada)',
     'leitura': '🎤 Textos para ler', 'listas': '📝 Listas de palavras', 'morfo-frases': '🖍️ Frases (Pinte a frase)', 'silaba': '🔤 Sílaba tônica'};
   // modo: 'categorias' (Cestos), 'perguntas' (bancos, quizzes e escolha), 'detetive', 'leitura' (textos e listas),

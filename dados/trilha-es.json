@@ -1,0 +1,189 @@
+{
+  "titulo": "Juego de mesa en español (trilha)",
+  "casas": 30,
+  "especiais": true,
+  "idioma": "es-ES",
+  "tipos": {
+    "vocab": {
+      "nome": "Vocabulario",
+      "emoji": "🔤",
+      "cor": "#2f80ed"
+    },
+    "gram": {
+      "nome": "Gramática",
+      "emoji": "🧩",
+      "cor": "#e74c3c"
+    },
+    "hablar": {
+      "nome": "Hablar",
+      "emoji": "🗣️",
+      "cor": "#27ae60"
+    },
+    "deletrear": {
+      "nome": "Deletrear",
+      "emoji": "🔡",
+      "cor": "#8e44ad"
+    },
+    "traducir": {
+      "nome": "Traducir",
+      "emoji": "🔁",
+      "cor": "#e67e22"
+    }
+  },
+  "desafios": {
+    "vocab": [
+      {
+        "texto": "¿Cómo se dice en español? 🐶",
+        "resposta": "perro"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 🍎",
+        "resposta": "manzana"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 🏠",
+        "resposta": "casa"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 📚",
+        "resposta": "libro"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 🚗",
+        "resposta": "coche / carro"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 👟",
+        "resposta": "zapatillas"
+      },
+      {
+        "texto": "¿Cómo se dice en español? ☀️",
+        "resposta": "sol"
+      },
+      {
+        "texto": "¿Cómo se dice en español? 🔑",
+        "resposta": "llave"
+      }
+    ],
+    "gram": [
+      {
+        "texto": "Completa: Yo ___ (ser) estudiante.",
+        "resposta": "soy"
+      },
+      {
+        "texto": "Completa: Madrid ___ (estar) en España.",
+        "resposta": "está"
+      },
+      {
+        "texto": "Completa: Voy ___ (a + el) parque.",
+        "resposta": "al"
+      },
+      {
+        "texto": "Completa: A mí me ___ (gustar) las fresas.",
+        "resposta": "gustan"
+      },
+      {
+        "texto": "Completa: ___ (haber) un gato en el sofá.",
+        "resposta": "Hay"
+      },
+      {
+        "texto": "Plural de \"pez\":",
+        "resposta": "peces"
+      },
+      {
+        "texto": "Completa: Ayer yo ___ (comer) arroz.",
+        "resposta": "comí"
+      },
+      {
+        "texto": "Completa: Estoy ___ (muy/mucho) feliz.",
+        "resposta": "muy"
+      }
+    ],
+    "hablar": [
+      {
+        "texto": "Preséntate: nombre, edad y ciudad.",
+        "resposta": "Me llamo… Tengo… años. Vivo en…"
+      },
+      {
+        "texto": "Di qué te gusta hacer los fines de semana.",
+        "resposta": "Me gusta…"
+      },
+      {
+        "texto": "Describe a tu mejor amigo o amiga.",
+        "resposta": "Es… / Tiene…"
+      },
+      {
+        "texto": "Di qué comiste hoy.",
+        "resposta": "Hoy he comido… / Hoy comí…"
+      },
+      {
+        "texto": "Pide una pizza en un restaurante.",
+        "resposta": "Una pizza, por favor."
+      },
+      {
+        "texto": "Di qué hora es ahora.",
+        "resposta": "Son las… / Es la…"
+      }
+    ],
+    "deletrear": [
+      {
+        "texto": "Deletrea: perro",
+        "resposta": "P - E - R - R - O"
+      },
+      {
+        "texto": "Deletrea: llave",
+        "resposta": "L - L - A - V - E"
+      },
+      {
+        "texto": "Deletrea: niño",
+        "resposta": "N - I - Ñ - O"
+      },
+      {
+        "texto": "Deletrea: queso",
+        "resposta": "Q - U - E - S - O"
+      },
+      {
+        "texto": "Deletrea: zapato",
+        "resposta": "Z - A - P - A - T - O"
+      },
+      {
+        "texto": "Deletrea: ciudad",
+        "resposta": "C - I - U - D - A - D"
+      }
+    ],
+    "traducir": [
+      {
+        "texto": "Traduce: bom dia",
+        "resposta": "buenos días"
+      },
+      {
+        "texto": "Traduce: obrigado",
+        "resposta": "gracias"
+      },
+      {
+        "texto": "Traduce: cachorro",
+        "resposta": "perro"
+      },
+      {
+        "texto": "Traduce: janela",
+        "resposta": "ventana"
+      },
+      {
+        "texto": "Traduce: escritório",
+        "resposta": "oficina"
+      },
+      {
+        "texto": "Traduce: xícara",
+        "resposta": "taza"
+      },
+      {
+        "texto": "Traduce: grávida",
+        "resposta": "embarazada"
+      },
+      {
+        "texto": "Traduce: sobrenome",
+        "resposta": "apellido"
+      }
+    ]
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "titulo": "Conectores: sin embargo, aunque, además, por lo tanto…",
+  "emoji": "🔗",
+  "instrucao": "Elige el conector correcto",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Estudié mucho; ___, no aprobé el examen.",
+      "opcoes": [
+        "sin embargo",
+        "por lo tanto",
+        "además",
+        "porque"
+      ],
+      "correta": "sin embargo",
+      "explica": "SIN EMBARGO = no entanto (oposição)."
+    },
+    {
+      "destaque": "No fui a la fiesta ___ estaba enfermo.",
+      "opcoes": [
+        "porque",
+        "aunque",
+        "sin embargo",
+        "mientras"
+      ],
+      "correta": "porque",
+      "explica": "PORQUE = porque (causa)."
+    },
+    {
+      "destaque": "Llovía mucho; ___, nos quedamos en casa.",
+      "opcoes": [
+        "por lo tanto",
+        "aunque",
+        "sin embargo",
+        "mientras"
+      ],
+      "correta": "por lo tanto",
+      "explica": "POR LO TANTO = portanto (conclusão)."
+    },
+    {
+      "destaque": "___ hace frío, voy a la playa.",
+      "opcoes": [
+        "Aunque",
+        "Porque",
+        "Por lo tanto",
+        "Además"
+      ],
+      "correta": "Aunque",
+      "explica": "AUNQUE = embora, mesmo que (concessão)."
+    },
+    {
+      "destaque": "Es inteligente y, ___, muy trabajador.",
+      "opcoes": [
+        "además",
+        "sin embargo",
+        "aunque",
+        "pero"
+      ],
+      "correta": "además",
+      "explica": "ADEMÁS = além disso (adição)."
+    },
+    {
+      "destaque": "Te llamo ___ llegue a casa.",
+      "opcoes": [
+        "cuando",
+        "aunque",
+        "pero",
+        "además"
+      ],
+      "correta": "cuando",
+      "explica": "CUANDO = quando (tempo)."
+    },
+    {
+      "destaque": "Leo un libro ___ escucho música.",
+      "opcoes": [
+        "mientras",
+        "aunque",
+        "pero",
+        "sin embargo"
+      ],
+      "correta": "mientras",
+      "explica": "MIENTRAS = enquanto."
+    },
+    {
+      "destaque": "Mi tía es bilingüe, ___, habla dos lenguas.",
+      "opcoes": [
+        "es decir",
+        "sin embargo",
+        "aunque",
+        "pero"
+      ],
+      "correta": "es decir",
+      "explica": "ES DECIR = ou seja (explicação)."
+    },
+    {
+      "destaque": "___ la lluvia, el partido se jugó.",
+      "opcoes": [
+        "A pesar de",
+        "Porque",
+        "Además",
+        "Es decir"
+      ],
+      "correta": "A pesar de",
+      "explica": "A PESAR DE = apesar de."
+    },
+    {
+      "destaque": "No me gusta el té ___ el café.",
+      "opcoes": [
+        "ni",
+        "o",
+        "pero",
+        "y"
+      ],
+      "correta": "ni",
+      "explica": "Na negação: no… ni… (nem)."
+    },
+    {
+      "destaque": "¿Quieres siete ___ ocho caramelos?",
+      "opcoes": [
+        "u",
+        "o",
+        "y",
+        "e"
+      ],
+      "correta": "u",
+      "explica": "O vira U antes de palavra que começa com o/ho: siete u ocho."
+    },
+    {
+      "destaque": "Vinieron los padres ___ hijos.",
+      "opcoes": [
+        "e",
+        "y",
+        "u",
+        "o"
+      ],
+      "correta": "e",
+      "explica": "Y vira E antes de palavra que começa com i/hi: padres e hijos."
+    },
+    {
+      "destaque": "Quería ir al cine, ___ no tenía dinero.",
+      "opcoes": [
+        "pero",
+        "porque",
+        "además",
+        "es decir"
+      ],
+      "correta": "pero",
+      "explica": "PERO = mas. (Perro, com RR, é cachorro!)"
+    }
+  ]
+}

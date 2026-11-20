@@ -1,0 +1,198 @@
+{
+  "titulo": "¿De qué grupo es? Animales, comida, ropa, escuela o cuerpo",
+  "idioma": "es-ES",
+  "cestos": [
+    {
+      "id": "animales",
+      "nome": "Los animales",
+      "emoji": "🐾",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "comida",
+      "nome": "La comida y las bebidas",
+      "emoji": "🍽️",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "ropa",
+      "nome": "La ropa",
+      "emoji": "👕",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "escuela",
+      "nome": "En la escuela",
+      "emoji": "🏫",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "cuerpo",
+      "nome": "El cuerpo",
+      "emoji": "💪",
+      "cor": "#e84393"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "perro",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "gato",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "pájaro",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "pez",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "caballo",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "vaca",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "cerdo",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "gallina",
+      "cesto": "animales"
+    },
+    {
+      "palavra": "manzana",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "plátano",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "naranja",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "uva",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "fresa",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "sandía",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "piña",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "limón",
+      "cesto": "comida"
+    },
+    {
+      "palavra": "camiseta",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "pantalones",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "vestido",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "zapatos",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "zapatillas",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "sombrero",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "gafas",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "bolso",
+      "cesto": "ropa"
+    },
+    {
+      "palavra": "lápiz",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "bolígrafo",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "libro",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "cuaderno",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "regla",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "tijeras",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "mochila",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "ordenador",
+      "cesto": "escuela"
+    },
+    {
+      "palavra": "ojo",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "nariz",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "boca",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "oreja",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "mano",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "pie",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "brazo",
+      "cesto": "cuerpo"
+    },
+    {
+      "palavra": "lengua",
+      "cesto": "cuerpo"
+    }
+  ]
+}

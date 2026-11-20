@@ -1,0 +1,249 @@
+{
+  "titulo": "Falsos amigos (heterosemánticos)",
+  "emoji": "🎭",
+  "instrucao": "¿Qué significa la palabra destacada?",
+  "idioma": "es-ES",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "Mi hermana está [embarazada].",
+      "opcoes": [
+        "grávida",
+        "envergonhada",
+        "embaraçada",
+        "cansada"
+      ],
+      "correta": "grávida",
+      "explica": "EMBARAZADA = grávida. \"Envergonhada\" é avergonzada.",
+      "imagem": "🤰"
+    },
+    {
+      "destaque": "La comida está [exquisita].",
+      "opcoes": [
+        "esquisita",
+        "deliciosa",
+        "estragada",
+        "salgada"
+      ],
+      "correta": "deliciosa",
+      "explica": "EXQUISITO = delicioso. \"Esquisito\" (estranho) é raro.",
+      "imagem": "😋"
+    },
+    {
+      "destaque": "Mi padre trabaja en una [oficina].",
+      "opcoes": [
+        "escritório",
+        "oficina mecânica",
+        "fábrica",
+        "loja"
+      ],
+      "correta": "escritório",
+      "explica": "OFICINA = escritório. Oficina mecânica é taller.",
+      "imagem": "🏢"
+    },
+    {
+      "destaque": "Voy a [borrar] la pizarra.",
+      "opcoes": [
+        "borrar de tinta",
+        "apagar",
+        "lavar",
+        "desenhar"
+      ],
+      "correta": "apagar",
+      "explica": "BORRAR = apagar (a lousa, um arquivo).",
+      "imagem": "🧽"
+    },
+    {
+      "destaque": "Espérame un [rato], por favor.",
+      "opcoes": [
+        "momento",
+        "rato (animal)",
+        "minuto exato",
+        "lugar"
+      ],
+      "correta": "momento",
+      "explica": "RATO = momento, pouco tempo. O animal é ratón.",
+      "imagem": "⏳"
+    },
+    {
+      "destaque": "¿Cuál es tu [apellido]?",
+      "opcoes": [
+        "apelido",
+        "sobrenome",
+        "nome",
+        "endereço"
+      ],
+      "correta": "sobrenome",
+      "explica": "APELLIDO = sobrenome. Apelido é apodo.",
+      "imagem": "🪪"
+    },
+    {
+      "destaque": "Vamos a [cenar] a las nueve.",
+      "opcoes": [
+        "jantar",
+        "encenar",
+        "almoçar",
+        "dormir"
+      ],
+      "correta": "jantar",
+      "explica": "CENAR = jantar (cena = jantar). Almoçar é almorzar.",
+      "imagem": "🍽️"
+    },
+    {
+      "destaque": "Hay mucho [polvo] en la mesa.",
+      "opcoes": [
+        "polvo (animal)",
+        "poeira",
+        "açúcar",
+        "farinha"
+      ],
+      "correta": "poeira",
+      "explica": "POLVO = poeira, pó. O animal é pulpo.",
+      "imagem": "🌫️"
+    },
+    {
+      "destaque": "Quiero una [taza] de café.",
+      "opcoes": [
+        "xícara",
+        "taça",
+        "garrafa",
+        "colher"
+      ],
+      "correta": "xícara",
+      "explica": "TAZA = xícara. Taça é copa.",
+      "imagem": "☕"
+    },
+    {
+      "destaque": "Necesito un [vaso] de agua.",
+      "opcoes": [
+        "vaso de flores",
+        "copo",
+        "balde",
+        "prato"
+      ],
+      "correta": "copo",
+      "explica": "VASO = copo. Vaso de flores é florero.",
+      "imagem": "🥛"
+    },
+    {
+      "destaque": "Ana tiene el pelo muy [largo].",
+      "opcoes": [
+        "comprido",
+        "largo (largura)",
+        "curto",
+        "cacheado"
+      ],
+      "correta": "comprido",
+      "explica": "LARGO = comprido. \"Largo\" de largura é ancho.",
+      "imagem": "💇"
+    },
+    {
+      "destaque": "Mi hermano es [zurdo].",
+      "opcoes": [
+        "surdo",
+        "canhoto",
+        "teimoso",
+        "alto"
+      ],
+      "correta": "canhoto",
+      "explica": "ZURDO = canhoto. Surdo é sordo.",
+      "imagem": "✍️"
+    },
+    {
+      "destaque": "Mi abuela hace un [pastel] riquísimo.",
+      "opcoes": [
+        "bolo",
+        "pastel frito",
+        "pão",
+        "biscoito"
+      ],
+      "correta": "bolo",
+      "explica": "PASTEL = bolo (doce). O pastel de feira é empanada.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "La [cola] del cine es muy larga.",
+      "opcoes": [
+        "cola de colar",
+        "fila",
+        "porta",
+        "bilheteria"
+      ],
+      "correta": "fila",
+      "explica": "COLA = fila (e também rabo). Cola de colar é pegamento.",
+      "imagem": "🚶"
+    },
+    {
+      "destaque": "Mi [novio] se llama Luis.",
+      "opcoes": [
+        "namorado",
+        "novo",
+        "amigo",
+        "vizinho"
+      ],
+      "correta": "namorado",
+      "explica": "NOVIO = namorado. \"Novo\" é nuevo.",
+      "imagem": "💑"
+    },
+    {
+      "destaque": "Dejé el libro sobre el [escritorio].",
+      "opcoes": [
+        "escritório",
+        "escrivaninha",
+        "armário",
+        "estante"
+      ],
+      "correta": "escrivaninha",
+      "explica": "ESCRITORIO = escrivaninha, mesa de trabalho. Escritório é oficina.",
+      "imagem": "🪑"
+    },
+    {
+      "destaque": "Estoy [constipado], tengo tos.",
+      "opcoes": [
+        "resfriado",
+        "com prisão de ventre",
+        "cansado",
+        "preocupado"
+      ],
+      "correta": "resfriado",
+      "explica": "CONSTIPADO = resfriado. Prisão de ventre é estreñimiento.",
+      "imagem": "🤧"
+    },
+    {
+      "destaque": "La perra tuvo cuatro [cachorros].",
+      "opcoes": [
+        "cachorros adultos",
+        "filhotes",
+        "gatinhos",
+        "brinquedos"
+      ],
+      "correta": "filhotes",
+      "explica": "CACHORRO = filhote. Cachorro (cão) é perro.",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "Tengo una [cita] con el médico.",
+      "opcoes": [
+        "consulta, encontro marcado",
+        "cidade",
+        "carta",
+        "receita"
+      ],
+      "correta": "consulta, encontro marcado",
+      "explica": "CITA = encontro marcado, consulta.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "Mi tío es muy [gracioso].",
+      "opcoes": [
+        "elegante",
+        "engraçado",
+        "gordo",
+        "gentil"
+      ],
+      "correta": "engraçado",
+      "explica": "GRACIOSO = engraçado.",
+      "imagem": "😂"
+    }
+  ]
+}

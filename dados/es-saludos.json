@@ -1,0 +1,140 @@
+{
+  "titulo": "Saludos y presentaciones",
+  "emoji": "👋",
+  "instrucao": "Elige la respuesta adecuada",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "—¡Hola! ¿Cómo estás?",
+      "opcoes": [
+        "Bien, gracias. ¿Y tú?",
+        "Me llamo Ana.",
+        "Tengo doce años.",
+        "Soy de Brasil."
+      ],
+      "correta": "Bien, gracias. ¿Y tú?",
+      "explica": "Pergunta sobre como você está → Bien, gracias. ¿Y tú?"
+    },
+    {
+      "destaque": "—¿Cómo te llamas?",
+      "opcoes": [
+        "Me llamo Pedro.",
+        "Estoy bien.",
+        "Soy profesor.",
+        "Vivo en Recife."
+      ],
+      "correta": "Me llamo Pedro.",
+      "explica": "¿Cómo te llamas? → Me llamo…"
+    },
+    {
+      "destaque": "—Mucho gusto.",
+      "opcoes": [
+        "Encantado.",
+        "De nada.",
+        "Adiós.",
+        "Lo siento."
+      ],
+      "correta": "Encantado.",
+      "explica": "Resposta a \"mucho gusto\": encantado/encantada, igualmente."
+    },
+    {
+      "destaque": "—¿De dónde eres?",
+      "opcoes": [
+        "Soy de Brasil.",
+        "Tengo trece años.",
+        "Estoy en casa.",
+        "Me llamo Lía."
+      ],
+      "correta": "Soy de Brasil.",
+      "explica": "Origem: Soy de…"
+    },
+    {
+      "destaque": "—¿Cuántos años tienes?",
+      "opcoes": [
+        "Tengo trece años.",
+        "Soy trece años.",
+        "Estoy trece años.",
+        "Hay trece años."
+      ],
+      "correta": "Tengo trece años.",
+      "explica": "Idade usa TENER: tengo trece años."
+    },
+    {
+      "destaque": "—Muchas gracias.",
+      "opcoes": [
+        "De nada.",
+        "Por favor.",
+        "Buenas noches.",
+        "Perdón."
+      ],
+      "correta": "De nada.",
+      "explica": "Gracias → de nada."
+    },
+    {
+      "destaque": "São 8 horas da manhã. Você chega à escola e diz:",
+      "opcoes": [
+        "¡Buenos días!",
+        "¡Buenas noches!",
+        "¡Buenas tardes!",
+        "¡Hasta mañana!"
+      ],
+      "correta": "¡Buenos días!",
+      "explica": "Pela manhã: buenos días."
+    },
+    {
+      "destaque": "São 10 da noite. Você se despede para dormir:",
+      "opcoes": [
+        "¡Buenas noches!",
+        "¡Buenos días!",
+        "¡Buenas tardes!",
+        "¡Hola!"
+      ],
+      "correta": "¡Buenas noches!",
+      "explica": "À noite: buenas noches (para cumprimentar ou se despedir)."
+    },
+    {
+      "destaque": "—¿Cómo se dice \"janela\" en español?",
+      "opcoes": [
+        "Ventana.",
+        "Janela.",
+        "Puerta.",
+        "Ventanilla de coche."
+      ],
+      "correta": "Ventana.",
+      "explica": "Janela = ventana."
+    },
+    {
+      "destaque": "Você esbarra em alguém sem querer e diz:",
+      "opcoes": [
+        "¡Perdón!",
+        "¡Salud!",
+        "¡Felicidades!",
+        "¡Buen provecho!"
+      ],
+      "correta": "¡Perdón!",
+      "explica": "Para pedir desculpas: perdón, disculpa, lo siento."
+    },
+    {
+      "destaque": "Alguém espirra perto de você. Você diz:",
+      "opcoes": [
+        "¡Salud!",
+        "¡Perdón!",
+        "¡Gracias!",
+        "¡Suerte!"
+      ],
+      "correta": "¡Salud!",
+      "explica": "Quando alguém espirra: ¡Salud! (saúde)."
+    },
+    {
+      "destaque": "Antes de comer, em espanhol se costuma dizer:",
+      "opcoes": [
+        "¡Buen provecho!",
+        "¡Buen viaje!",
+        "¡Salud!",
+        "¡Felicidades!"
+      ],
+      "correta": "¡Buen provecho!",
+      "explica": "Buen provecho = bom apetite."
+    }
+  ]
+}

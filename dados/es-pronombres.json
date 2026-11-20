@@ -1,0 +1,164 @@
+{
+  "titulo": "Pronombres (yo, tú, usted, vosotros, se lo)",
+  "emoji": "🙋",
+  "instrucao": "Elige el pronombre correcto",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "___ me llamo Ana.",
+      "opcoes": [
+        "Yo",
+        "Tú",
+        "Él",
+        "Me"
+      ],
+      "correta": "Yo",
+      "explica": "Yo = eu. \"Me llamo\" = eu me chamo."
+    },
+    {
+      "destaque": "Para falar de forma educada com o diretor da escola, usamos…",
+      "opcoes": [
+        "usted",
+        "tú",
+        "vos",
+        "vosotros"
+      ],
+      "correta": "usted",
+      "explica": "USTED é o tratamento formal (o senhor/a senhora). O verbo vai na 3ª pessoa: ¿Cómo está usted?"
+    },
+    {
+      "destaque": "Ana y Pedro: ___ son hermanos.",
+      "opcoes": [
+        "ellos",
+        "ellas",
+        "nosotros",
+        "ustedes"
+      ],
+      "correta": "ellos",
+      "explica": "Grupo misto (homem e mulher) = ELLOS."
+    },
+    {
+      "destaque": "María y Lucía: ___ son amigas.",
+      "opcoes": [
+        "ellas",
+        "ellos",
+        "nosotras",
+        "vosotras"
+      ],
+      "correta": "ellas",
+      "explica": "Só mulheres = ELLAS."
+    },
+    {
+      "destaque": "¿___ queréis ir al cine?",
+      "opcoes": [
+        "Vosotros",
+        "Ustedes",
+        "Ellos",
+        "Nosotros"
+      ],
+      "correta": "Vosotros",
+      "explica": "QUERÉIS é a forma de VOSOTROS (vocês, informal, usado na Espanha).",
+      "enunciado": "Na Espanha, falando com dois amigos:"
+    },
+    {
+      "destaque": "¿___ quieren ir al cine?",
+      "opcoes": [
+        "Ustedes",
+        "Vosotros",
+        "Nosotros",
+        "Tú"
+      ],
+      "correta": "Ustedes",
+      "explica": "Na América Latina, \"vocês\" é sempre USTEDES (com o verbo na 3ª pessoa do plural).",
+      "enunciado": "Na América Latina, falando com dois amigos:"
+    },
+    {
+      "destaque": "¿Tienes el libro? —Sí, ___ tengo.",
+      "opcoes": [
+        "lo",
+        "le",
+        "la",
+        "se"
+      ],
+      "correta": "lo",
+      "explica": "Libro é masculino: LO tengo (eu o tenho)."
+    },
+    {
+      "destaque": "¿Compraste las flores? —Sí, ___ compré.",
+      "opcoes": [
+        "las",
+        "les",
+        "los",
+        "la"
+      ],
+      "correta": "las",
+      "explica": "Flores é feminino plural: LAS compré."
+    },
+    {
+      "destaque": "Le doy el regalo a María. → ___ lo doy.",
+      "opcoes": [
+        "Se",
+        "Le",
+        "La",
+        "Me"
+      ],
+      "correta": "Se",
+      "explica": "LE + LO vira SE LO: se lo doy (eu o dou a ela)."
+    },
+    {
+      "destaque": "A mí ___ gusta el chocolate.",
+      "opcoes": [
+        "me",
+        "mi",
+        "yo",
+        "te"
+      ],
+      "correta": "me",
+      "explica": "A mí ME gusta (eu gosto)."
+    },
+    {
+      "destaque": "Entre tú y ___, este secreto es nuestro.",
+      "opcoes": [
+        "yo",
+        "mí",
+        "me",
+        "conmigo"
+      ],
+      "correta": "yo",
+      "explica": "Em espanhol se diz \"entre tú y yo\" (em português, \"entre mim e você\")."
+    },
+    {
+      "destaque": "¿Vienes ___ al parque?",
+      "opcoes": [
+        "conmigo",
+        "con mí",
+        "con yo",
+        "migo"
+      ],
+      "correta": "conmigo",
+      "explica": "Comigo = CONMIGO; contigo = CONTIGO."
+    },
+    {
+      "destaque": "Nosotros ___ levantamos a las siete.",
+      "opcoes": [
+        "nos",
+        "se",
+        "os",
+        "me"
+      ],
+      "correta": "nos",
+      "explica": "Levantarse com nosotros: NOS levantamos."
+    },
+    {
+      "destaque": "¿A qué hora ___ despiertas tú?",
+      "opcoes": [
+        "te",
+        "se",
+        "me",
+        "os"
+      ],
+      "correta": "te",
+      "explica": "Despertarse com tú: TE despiertas."
+    }
+  ]
+}

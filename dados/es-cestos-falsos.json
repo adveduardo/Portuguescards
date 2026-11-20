@@ -1,0 +1,116 @@
+{
+  "titulo": "¿Falso amigo o cognado?",
+  "idioma": "es-ES",
+  "cestos": [
+    {
+      "id": "falso",
+      "nome": "Falso amigo (sentido diferente)",
+      "emoji": "🎭",
+      "cor": "#e74c3c"
+    },
+    {
+      "id": "cognado",
+      "nome": "Cognado (mesmo sentido)",
+      "emoji": "🤝",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "embarazada",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "exquisito",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "oficina",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "rato",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "polvo",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "taza",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "escritorio",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "largo",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "cena",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "apellido",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "borrar",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "zurdo",
+      "cesto": "falso"
+    },
+    {
+      "palavra": "problema",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "teléfono",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "animal",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "hospital",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "música",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "importante",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "historia",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "familia",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "perfecto",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "verde",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "mapa",
+      "cesto": "cognado"
+    },
+    {
+      "palavra": "fruta",
+      "cesto": "cognado"
+    }
+  ]
+}

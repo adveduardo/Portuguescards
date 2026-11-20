@@ -1,0 +1,184 @@
+{
+  "titulo": "Pasado: pretérito indefinido y perfecto",
+  "emoji": "⏪",
+  "instrucao": "Conjuga el verbo en pasado",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Ayer yo ___ (comer) paella.",
+      "opcoes": [
+        "comí",
+        "comé",
+        "comió",
+        "como"
+      ],
+      "correta": "comí",
+      "explica": "Indefinido -ER/-IR: comí, comiste, comió."
+    },
+    {
+      "destaque": "El año pasado nosotros ___ (viajar) a Chile.",
+      "opcoes": [
+        "viajamos",
+        "viajemos",
+        "viajaron",
+        "viajábamos"
+      ],
+      "correta": "viajamos",
+      "explica": "Nosotros -AR no indefinido: -amos (igual ao presente)."
+    },
+    {
+      "destaque": "Anoche ellos ___ (ver) una película.",
+      "opcoes": [
+        "vieron",
+        "veron",
+        "vieran",
+        "ven"
+      ],
+      "correta": "vieron",
+      "explica": "Ver: vi, viste, vio, vimos, visteis, vieron."
+    },
+    {
+      "destaque": "Ayer tú ___ (hablar) con Ana.",
+      "opcoes": [
+        "hablaste",
+        "hablastes",
+        "habló",
+        "hablabas"
+      ],
+      "correta": "hablaste",
+      "explica": "Tú no indefinido: -aste (sem S no fim: hablaste)."
+    },
+    {
+      "destaque": "El sábado ella ___ (ir) a la playa.",
+      "opcoes": [
+        "fue",
+        "iba",
+        "fui",
+        "ió"
+      ],
+      "correta": "fue",
+      "explica": "Ir e ser no indefinido: fui, fuiste, fue, fuimos, fuisteis, fueron."
+    },
+    {
+      "destaque": "Ayer yo ___ (tener) un examen.",
+      "opcoes": [
+        "tuve",
+        "tení",
+        "tuvo",
+        "tenía"
+      ],
+      "correta": "tuve",
+      "explica": "Tener: tuve, tuviste, tuvo."
+    },
+    {
+      "destaque": "¿Qué ___ (hacer) tú el fin de semana?",
+      "opcoes": [
+        "hiciste",
+        "haciste",
+        "hizo",
+        "hacías"
+      ],
+      "correta": "hiciste",
+      "explica": "Hacer: hice, hiciste, hizo."
+    },
+    {
+      "destaque": "En 2010 mi tío ___ (estar) en Madrid.",
+      "opcoes": [
+        "estuvo",
+        "estó",
+        "estaba",
+        "estuve"
+      ],
+      "correta": "estuvo",
+      "explica": "Estar: estuve, estuviste, estuvo."
+    },
+    {
+      "destaque": "Anoche yo no ___ (poder) dormir.",
+      "opcoes": [
+        "pude",
+        "podí",
+        "pudo",
+        "puedí"
+      ],
+      "correta": "pude",
+      "explica": "Poder: pude, pudiste, pudo."
+    },
+    {
+      "destaque": "Hoy ___ (comer, yo) muy bien.",
+      "opcoes": [
+        "he comido",
+        "ha comido",
+        "he comí",
+        "hemos comido"
+      ],
+      "correta": "he comido",
+      "explica": "Perfecto: haber + particípio (he, has, ha, hemos, habéis, han + comido). Usado com hoy, esta semana, ya, todavía."
+    },
+    {
+      "destaque": "Esta semana nosotros ___ (trabajar) mucho.",
+      "opcoes": [
+        "hemos trabajado",
+        "habemos trabajado",
+        "han trabajado",
+        "hemos trabajo"
+      ],
+      "correta": "hemos trabajado",
+      "explica": "Nosotros: hemos (e não \"habemos\")."
+    },
+    {
+      "destaque": "¿___ (estar, tú) alguna vez en México?",
+      "opcoes": [
+        "Has estado",
+        "Ha estado",
+        "Has estuvo",
+        "Hay estado"
+      ],
+      "correta": "Has estado",
+      "explica": "Experiência de vida: ¿has estado alguna vez…?"
+    },
+    {
+      "destaque": "Todavía no ___ (terminar, yo) la tarea.",
+      "opcoes": [
+        "he terminado",
+        "ha terminado",
+        "he terminó",
+        "terminé"
+      ],
+      "correta": "he terminado",
+      "explica": "Todavía no + perfecto: todavía no he terminado."
+    },
+    {
+      "destaque": "Ya ___ (escribir, yo) la carta.",
+      "opcoes": [
+        "he escrito",
+        "he escribido",
+        "ha escrito",
+        "escribiré"
+      ],
+      "correta": "he escrito",
+      "explica": "Particípio irregular: escribir → escrito (e não \"escribido\")."
+    },
+    {
+      "destaque": "¿Dónde ___ (poner, tú) mis llaves?",
+      "opcoes": [
+        "has puesto",
+        "has ponido",
+        "pusistes",
+        "pondrás"
+      ],
+      "correta": "has puesto",
+      "explica": "Particípio irregular: poner → puesto."
+    },
+    {
+      "destaque": "Hoy los niños ___ (decir) la verdad.",
+      "opcoes": [
+        "han dicho",
+        "han decido",
+        "han dizido",
+        "dicen"
+      ],
+      "correta": "han dicho",
+      "explica": "Particípio irregular: decir → dicho."
+    }
+  ]
+}

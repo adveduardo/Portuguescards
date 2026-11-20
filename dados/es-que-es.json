@@ -1,0 +1,296 @@
+{
+  "titulo": "¿Qué es esto? (figura → palabra)",
+  "emoji": "🔎",
+  "instrucao": "Elige la palabra correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "pájaro",
+        "vaca",
+        "gato",
+        "araña"
+      ],
+      "correta": "vaca",
+      "explica": "Vaca = vaca.",
+      "imagem": "🐮"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "pájaro",
+        "gato",
+        "gallina",
+        "abeja"
+      ],
+      "correta": "pájaro",
+      "explica": "Pájaro = pássaro.",
+      "imagem": "🐦"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "conejo",
+        "oveja",
+        "pájaro",
+        "cerdo"
+      ],
+      "correta": "cerdo",
+      "explica": "Cerdo = porco.",
+      "imagem": "🐷"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "plátano",
+        "sopa",
+        "uva",
+        "palomitas"
+      ],
+      "correta": "uva",
+      "explica": "Uva = uva.",
+      "imagem": "🍇"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "fresa",
+        "queso",
+        "chocolate",
+        "arroz"
+      ],
+      "correta": "arroz",
+      "explica": "Arroz = arroz.",
+      "imagem": "🍚"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "carne",
+        "chocolate",
+        "palomitas",
+        "queso"
+      ],
+      "correta": "carne",
+      "explica": "Carne = carne.",
+      "imagem": "🍖"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "bolígrafo",
+        "tijeras",
+        "carpeta",
+        "examen"
+      ],
+      "correta": "tijeras",
+      "explica": "Tijeras = tesoura.",
+      "imagem": "✂️"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "reloj",
+        "papel",
+        "biblioteca",
+        "bolígrafo"
+      ],
+      "correta": "bolígrafo",
+      "explica": "Bolígrafo = caneta.",
+      "imagem": "🖊️"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "ordenador",
+        "reloj",
+        "carpeta",
+        "tijeras"
+      ],
+      "correta": "reloj",
+      "explica": "Reloj = relógio.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "bañador",
+        "corbata",
+        "zapatillas",
+        "anillo"
+      ],
+      "correta": "anillo",
+      "explica": "Anillo = anel.",
+      "imagem": "💍"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "zapatos",
+        "botas",
+        "pantalones",
+        "sombrero"
+      ],
+      "correta": "zapatos",
+      "explica": "Zapatos = sapatos.",
+      "imagem": "👞"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "cartera",
+        "zapatos",
+        "gafas",
+        "pantalones"
+      ],
+      "correta": "pantalones",
+      "explica": "Pantalones = calça.",
+      "imagem": "👖"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "lámpara",
+        "bañera",
+        "televisión",
+        "cocina"
+      ],
+      "correta": "televisión",
+      "explica": "Televisión = televisão.",
+      "imagem": "📺"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "puerta",
+        "cama",
+        "llave",
+        "televisión"
+      ],
+      "correta": "puerta",
+      "explica": "Puerta = porta.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "llave",
+        "teléfono",
+        "puerta",
+        "cocina"
+      ],
+      "correta": "llave",
+      "explica": "Llave = chave.",
+      "imagem": "🔑"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "corazón",
+        "mano",
+        "lengua",
+        "brazo"
+      ],
+      "correta": "corazón",
+      "explica": "Corazón = coração.",
+      "imagem": "❤️"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "corazón",
+        "uña",
+        "boca",
+        "pie"
+      ],
+      "correta": "uña",
+      "explica": "Uña = unha.",
+      "imagem": "💅"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "oreja",
+        "boca",
+        "cara",
+        "mano"
+      ],
+      "correta": "cara",
+      "explica": "Cara = rosto, cara.",
+      "imagem": "😊"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "camión",
+        "moto",
+        "taxi",
+        "metro"
+      ],
+      "correta": "camión",
+      "explica": "Camión = caminhão.",
+      "imagem": "🚚"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "metro",
+        "bicicleta",
+        "autobús",
+        "camión"
+      ],
+      "correta": "autobús",
+      "explica": "Autobús = ônibus.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "tren",
+        "autobús",
+        "barco",
+        "avión"
+      ],
+      "correta": "tren",
+      "explica": "Tren = trem.",
+      "imagem": "🚆"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "supermercado",
+        "playa",
+        "museo",
+        "tienda"
+      ],
+      "correta": "playa",
+      "explica": "Playa = praia.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "aeropuerto",
+        "iglesia",
+        "semáforo",
+        "playa"
+      ],
+      "correta": "iglesia",
+      "explica": "Iglesia = igreja.",
+      "imagem": "⛪"
+    },
+    {
+      "destaque": "¿Qué es esto?",
+      "opcoes": [
+        "restaurante",
+        "puente",
+        "estación",
+        "hospital"
+      ],
+      "correta": "hospital",
+      "explica": "Hospital = hospital.",
+      "imagem": "🏥"
+    }
+  ]
+}

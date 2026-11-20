@@ -1,0 +1,190 @@
+{
+  "titulo": "Los números (leer y escuchar)",
+  "emoji": "🔢",
+  "instrucao": "Elige el número correcto",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿Cómo se escribe 15?",
+      "opcoes": [
+        "quince",
+        "cincuenta",
+        "cinco",
+        "quinientos"
+      ],
+      "correta": "quince",
+      "explica": "15 = quince."
+    },
+    {
+      "destaque": "¿Cómo se escribe 16?",
+      "opcoes": [
+        "dieciséis",
+        "dieziséis",
+        "sesenta",
+        "seisdiez"
+      ],
+      "correta": "dieciséis",
+      "explica": "De 16 a 19 tudo junto: dieciséis, diecisiete, dieciocho, diecinueve."
+    },
+    {
+      "destaque": "¿Cómo se escribe 21?",
+      "opcoes": [
+        "veintiuno",
+        "ventiuno",
+        "vinte e um",
+        "veintuno"
+      ],
+      "correta": "veintiuno",
+      "explica": "De 21 a 29 tudo junto: veintiuno, veintidós…"
+    },
+    {
+      "destaque": "¿Cómo se escribe 31?",
+      "opcoes": [
+        "treinta y uno",
+        "treintiuno",
+        "treinta uno",
+        "trinta e um"
+      ],
+      "correta": "treinta y uno",
+      "explica": "A partir de 31, separado com Y: treinta y uno."
+    },
+    {
+      "destaque": "¿Cómo se escribe 100?",
+      "opcoes": [
+        "cien",
+        "ciento",
+        "cento",
+        "cién"
+      ],
+      "correta": "cien",
+      "explica": "100 exato = cien. De 101 a 199: ciento uno, ciento dos…"
+    },
+    {
+      "destaque": "¿Cómo se escribe 101?",
+      "opcoes": [
+        "ciento uno",
+        "cien uno",
+        "cien y uno",
+        "cento e um"
+      ],
+      "correta": "ciento uno",
+      "explica": "101 = ciento uno (sem Y)."
+    },
+    {
+      "destaque": "¿Cómo se escribe 500?",
+      "opcoes": [
+        "quinientos",
+        "cincocientos",
+        "quincientos",
+        "quinhentos"
+      ],
+      "correta": "quinientos",
+      "explica": "Forma especial: quinientos."
+    },
+    {
+      "destaque": "¿Cómo se escribe 700?",
+      "opcoes": [
+        "setecientos",
+        "sietecientos",
+        "setencientos",
+        "setecentos"
+      ],
+      "correta": "setecientos",
+      "explica": "Forma especial: setecientos (e novecientos para 900)."
+    },
+    {
+      "destaque": "¿Cómo se escribe 1000?",
+      "opcoes": [
+        "mil",
+        "un mil",
+        "miles",
+        "mile"
+      ],
+      "correta": "mil",
+      "explica": "1000 = mil (sem \"un\")."
+    },
+    {
+      "destaque": "¿Qué número es \"cuarenta y cuatro\"?",
+      "opcoes": [
+        "44",
+        "14",
+        "40",
+        "34"
+      ],
+      "correta": "44",
+      "explica": "Cuarenta y cuatro = 44."
+    },
+    {
+      "destaque": "¿Qué número es \"noventa\"?",
+      "opcoes": [
+        "90",
+        "19",
+        "9",
+        "900"
+      ],
+      "correta": "90",
+      "explica": "Noventa = 90."
+    },
+    {
+      "destaque": "¿Qué número es \"trece\"?",
+      "opcoes": [
+        "13",
+        "30",
+        "3",
+        "33"
+      ],
+      "correta": "13",
+      "explica": "Trece = 13; treinta = 30."
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "14",
+        "40",
+        "4",
+        "44"
+      ],
+      "correta": "14",
+      "explica": "Catorce = 14; cuarenta = 40.",
+      "ouvir": "catorce",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "200",
+        "2000",
+        "12",
+        "20"
+      ],
+      "correta": "200",
+      "explica": "Doscientos = 200.",
+      "ouvir": "doscientos",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "99",
+        "19",
+        "90",
+        "9"
+      ],
+      "correta": "99",
+      "explica": "Noventa y nueve = 99.",
+      "ouvir": "noventa y nueve",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "Dos más dos son…",
+      "opcoes": [
+        "cuatro",
+        "cinco",
+        "tres",
+        "catorce"
+      ],
+      "correta": "cuatro",
+      "explica": "2 + 2 = 4: dos más dos son cuatro."
+    }
+  ]
+}

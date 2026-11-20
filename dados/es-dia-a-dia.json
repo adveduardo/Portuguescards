@@ -1,0 +1,189 @@
+{
+  "titulo": "Español en el día a día (carteles, etiquetas y celular)",
+  "emoji": "🪧",
+  "instrucao": "¿Qué significa?",
+  "idioma": "es-ES",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "[SALIDA DE EMERGENCIA]",
+      "opcoes": [
+        "saída de emergência",
+        "entrada principal",
+        "proibido entrar",
+        "sala de espera"
+      ],
+      "correta": "saída de emergência",
+      "explica": "Salida de emergencia = saída de emergência.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "[PROHIBIDO FUMAR]",
+      "opcoes": [
+        "área de fumantes",
+        "proibido fumar",
+        "proibido comer",
+        "vende-se cigarro"
+      ],
+      "correta": "proibido fumar",
+      "explica": "Prohibido fumar = proibido fumar.",
+      "imagem": "🚭"
+    },
+    {
+      "destaque": "[ABIERTO]",
+      "opcoes": [
+        "fechado",
+        "em reforma",
+        "abre amanhã",
+        "aberto"
+      ],
+      "correta": "aberto",
+      "explica": "Abierto = aberto.",
+      "imagem": "🔓"
+    },
+    {
+      "destaque": "[CERRADO]",
+      "opcoes": [
+        "fechado",
+        "aberto",
+        "perto",
+        "certo"
+      ],
+      "correta": "fechado",
+      "explica": "Cerrado = fechado.",
+      "imagem": "🔒"
+    },
+    {
+      "destaque": "[EMPUJE]",
+      "opcoes": [
+        "puxe",
+        "empurre",
+        "aperte",
+        "espere"
+      ],
+      "correta": "empurre",
+      "explica": "Empuje = empurre.",
+      "imagem": "👐"
+    },
+    {
+      "destaque": "[TIRE]",
+      "opcoes": [
+        "jogue fora",
+        "empurre",
+        "atire",
+        "puxe"
+      ],
+      "correta": "puxe",
+      "explica": "Tire = puxe.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "[OFERTA: 2 x 1]",
+      "opcoes": [
+        "leve 2, pague 1",
+        "2 por 1 real",
+        "pague 2, leve 1",
+        "desconto de 2%"
+      ],
+      "correta": "leve 2, pague 1",
+      "explica": "Oferta: 2 x 1 = leve 2, pague 1.",
+      "imagem": "🏷️"
+    },
+    {
+      "destaque": "[FECHA DE CADUCIDAD]",
+      "opcoes": [
+        "data de fabricação",
+        "data de validade",
+        "data de entrega",
+        "preço"
+      ],
+      "correta": "data de validade",
+      "explica": "Fecha de caducidad = data de validade.",
+      "imagem": "📅"
+    },
+    {
+      "destaque": "[ASEOS / SERVICIOS]",
+      "opcoes": [
+        "serviços de limpeza",
+        "atendimento",
+        "saída",
+        "banheiros"
+      ],
+      "correta": "banheiros",
+      "explica": "Aseos / servicios = banheiros.",
+      "imagem": "🚻"
+    },
+    {
+      "destaque": "[ASCENSOR]",
+      "opcoes": [
+        "elevador",
+        "escada rolante",
+        "subida",
+        "portaria"
+      ],
+      "correta": "elevador",
+      "explica": "Ascensor = elevador.",
+      "imagem": "⬆️"
+    },
+    {
+      "destaque": "[REBAJAS]",
+      "opcoes": [
+        "aumento de preço",
+        "liquidação, promoção",
+        "troca",
+        "devolução"
+      ],
+      "correta": "liquidação, promoção",
+      "explica": "Rebajas = liquidação, promoção.",
+      "imagem": "🛍️"
+    },
+    {
+      "destaque": "[CAJERO AUTOMÁTICO]",
+      "opcoes": [
+        "caixa do mercado",
+        "cofre",
+        "loja automática",
+        "caixa eletrônico"
+      ],
+      "correta": "caixa eletrônico",
+      "explica": "Cajero automático = caixa eletrônico.",
+      "imagem": "🏧"
+    },
+    {
+      "destaque": "[BATERÍA BAJA]",
+      "opcoes": [
+        "bateria fraca",
+        "bateria cheia",
+        "sem sinal",
+        "carregando"
+      ],
+      "correta": "bateria fraca",
+      "explica": "Batería baja = bateria fraca.",
+      "imagem": "🔋"
+    },
+    {
+      "destaque": "[CONTRASEÑA]",
+      "opcoes": [
+        "contrassenha",
+        "senha",
+        "usuário",
+        "código de barras"
+      ],
+      "correta": "senha",
+      "explica": "Contraseña = senha.",
+      "imagem": "🔑"
+    },
+    {
+      "destaque": "[SE ALQUILA]",
+      "opcoes": [
+        "vende-se",
+        "alugado",
+        "procura-se",
+        "aluga-se"
+      ],
+      "correta": "aluga-se",
+      "explica": "Se alquila = aluga-se.",
+      "imagem": "🏠"
+    }
+  ]
+}

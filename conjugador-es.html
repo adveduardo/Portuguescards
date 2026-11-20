@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conjugador de verbos en español</title>
+<link rel="stylesheet" href="vida.css">
+<style>
+  h1{color:#c0392b} button.principal{background:#c0392b;box-shadow:0 3px 0 #922b21}
+  body,.palco{background:#fff4e6;background-image:linear-gradient(160deg,#fff4e6,#fde8e8)}
+  .barra{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-align-items:center;align-items:center;max-width:1150px;margin:6px auto}
+  .barra select{width:auto;margin:3px;font-size:18px}
+  .tempos button{margin:3px;font-size:16px}
+  .tempos button.on{background:#c0392b;color:#fff}
+  .quadro{max-width:1150px;margin:8px auto;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  .quadro>.cartao{margin:8px;min-width:0}
+  #cartTabela{-webkit-flex:2 1 520px;flex:2 1 520px}
+  #cartInfo{-webkit-flex:1 1 300px;flex:1 1 300px}
+  table.conj{width:100%;border-collapse:collapse;font-size:28px}
+  table.conj td{padding:8px 10px;border-bottom:2px solid #f3d9c9}
+  table.conj td.pr{color:#6b7280;font-size:20px;width:38%}
+  table.conj td.ou{width:48px;text-align:right}
+  table.conj td.ou button{padding:4px 9px;font-size:16px}
+  .raiz{color:#1f2a44;font-weight:bold}
+  .fim{color:#2f80ed;font-weight:bold}
+  .irr{color:#e67e22;font-weight:bold}
+  .aux{color:#8e44ad;font-weight:bold}
+  .oculta{background:#fde2c8;color:transparent;border-radius:8px;cursor:pointer;padding:0 6px}
+  #verboTit{font-size:42px;font-weight:bold;color:#c0392b;margin:0}
+  #verboPt{font-size:20px;color:#4b5b73}
+  .legenda span{display:inline-block;margin:3px 8px 3px 0;font-weight:bold}
+  #exemplo{font-size:20px;background:#fff7ef;border-radius:12px;padding:8px 10px}
+  #desafio{max-width:820px;margin:8px auto;text-align:center}
+  #dPerg{font-size:30px;font-weight:bold;margin:8px 0}
+  #dOps button{font-size:26px;min-width:180px;margin:6px;padding:12px 16px}
+  #dOps button.certa{background:#27ae60;color:#fff}
+  #dOps button.errada{background:#e74c3c;color:#fff}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="ingles.js"></script>
+</head>
+<body>
+<div class="palco">
+  <div class="topo">
+    <h1>🔄 Conjugador de verbos <small>Os verbos em espanhol, tempo por tempo: a terminação em azul, o que é irregular em laranja.</small></h1>
+    <button type="button" class="principal" id="btDesafio">🎯 Desafio</button>
+    <button type="button" id="btSom">🔊</button>
+  </div>
+  <div class="barra">
+    <label><b>Verbo:</b> <select id="selVerbo"></select></label>
+    <span class="tempos" id="tempos"></span>
+  </div>
+  <div class="quadro" id="quadro">
+    <div class="cartao" id="cartTabela">
+      <table class="conj" id="tabela"></table>
+      <p><button type="button" id="btLer">🔊 Leer todo</button> <button type="button" id="btEsconder">🙈 Esconder as terminações</button></p>
+    </div>
+    <div class="cartao" id="cartInfo">
+      <p id="verboTit"></p><p id="verboPt"></p>
+      <p class="legenda"><span class="raiz">raiz</span><span class="fim">terminação</span><span class="irr">irregular</span><span class="aux">verbo haber</span></p>
+      <div id="exemplo"></div>
+      <p id="dicaTempo" class="sub"></p>
+    </div>
+  </div>
+  <div class="cartao" id="desafio" hidden>
+    <p class="sub">Qual é a forma certa? Responda antes de tocar!</p>
+    <div id="dPerg"></div>
+    <div id="dOps"></div>
+    <p id="dRes" class="sub"></p>
+    <p style="font-size:20px">✅ <b id="dAc">0</b> &nbsp; ❌ <b id="dEr">0</b> &nbsp;
+      <button type="button" id="dProx">➡️ Próxima</button> <button type="button" id="dSair">📋 Voltar à tabela</button></p>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  EN.lang = 'es-ES';
+  var PESSOAS = ['yo', 'tú', 'él / ella / usted', 'nosotros / nosotras', 'vosotros / vosotras', 'ellos / ellas / ustedes'];
+  var LER = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos'];
+  var TEMPOS = [
+    {id: 'pres', nome: 'Presente', dica: 'Presente: o que acontece agora ou sempre. Yo hablo español.'},
+    {id: 'indef', nome: 'Pretérito indefinido', dica: 'Pretérito indefinido: ação terminada num momento do passado (ayer, el año pasado). Ayer comí paella.'},
+    {id: 'imperf', nome: 'Pretérito imperfecto', dica: 'Pretérito imperfecto: costumes e descrições no passado. Cuando era niño, jugaba mucho.'},
+    {id: 'perf', nome: 'Pretérito perfecto', dica: 'Pretérito perfecto: haber + particípio, para um passado ligado ao presente (hoy, esta semana, ya). Hoy he estudiado.'},
+    {id: 'fut', nome: 'Futuro', dica: 'Futuro simples: o infinitivo inteiro + é, ás, á, emos, éis, án. Mañana lloverá.'},
+    {id: 'cond', nome: 'Condicional', dica: 'Condicional: o infinitivo + ía, ías, ía, íamos, íais, ían. Me gustaría viajar.'}
+  ];
+  var FINS = {
+    pres: {ar: ['o', 'as', 'a', 'amos', 'áis', 'an'], er: ['o', 'es', 'e', 'emos', 'éis', 'en'], ir: ['o', 'es', 'e', 'imos', 'ís', 'en']},
+    indef: {ar: ['é', 'aste', 'ó', 'amos', 'asteis', 'aron'], er: ['í', 'iste', 'ió', 'imos', 'isteis', 'ieron'], ir: ['í', 'iste', 'ió', 'imos', 'isteis', 'ieron']},
+    imperf: {ar: ['aba', 'abas', 'aba', 'ábamos', 'abais', 'aban'], er: ['ía', 'ías', 'ía', 'íamos', 'íais', 'ían'], ir: ['ía', 'ías', 'ía', 'íamos', 'íais', 'ían']},
+    fut: ['é', 'ás', 'á', 'emos', 'éis', 'án'],
+    cond: ['ía', 'ías', 'ía', 'íamos', 'íais', 'ían']
+  };
+  var HABER = ['he', 'has', 'ha', 'hemos', 'habéis', 'han'];
+  // irregularidades (o resto segue as regras)
+  var VERBOS = [
+    {v: 'hablar', pt: 'falar', ex: ['Yo hablo español con mis amigos.', 'Eu falo espanhol com meus amigos.'], g: 'Regulares -AR'},
+    {v: 'estudiar', pt: 'estudar', ex: ['Nosotros estudiamos por la tarde.', 'Nós estudamos à tarde.'], g: 'Regulares -AR'},
+    {v: 'trabajar', pt: 'trabalhar', ex: ['Mi madre trabaja en un hospital.', 'Minha mãe trabalha num hospital.'], g: 'Regulares -AR'},
+    {v: 'bailar', pt: 'dançar', ex: ['¿Bailas conmigo?', 'Você dança comigo?'], g: 'Regulares -AR'},
+    {v: 'comer', pt: 'comer', ex: ['Ellos comen pizza los viernes.', 'Eles comem pizza às sextas.'], g: 'Regulares -ER'},
+    {v: 'beber', pt: 'beber', ex: ['Bebo mucha agua.', 'Bebo muita água.'], g: 'Regulares -ER'},
+    {v: 'aprender', pt: 'aprender', ex: ['Aprendemos español en la escuela.', 'Aprendemos espanhol na escola.'], g: 'Regulares -ER'},
+    {v: 'leer', pt: 'ler', ex: ['Leo un libro cada mes.', 'Leio um livro por mês.'], g: 'Regulares -ER', indef: ['leí', 'leíste', 'leyó', 'leímos', 'leísteis', 'leyeron'], part: 'leído'},
+    {v: 'vivir', pt: 'viver, morar', ex: ['Vivo en Brasil.', 'Moro no Brasil.'], g: 'Regulares -IR'},
+    {v: 'escribir', pt: 'escrever', ex: ['Escribo un mensaje a mi abuela.', 'Escrevo uma mensagem para minha avó.'], g: 'Regulares -IR', part: 'escrito'},
+    {v: 'abrir', pt: 'abrir', ex: ['¿Abres la ventana, por favor?', 'Você abre a janela, por favor?'], g: 'Regulares -IR', part: 'abierto'},
+    {v: 'ser', pt: 'ser', ex: ['Soy brasileño y soy estudiante.', 'Sou brasileiro e sou estudante.'], g: 'Irregulares',
+     pres: ['soy', 'eres', 'es', 'somos', 'sois', 'son'], indef: ['fui', 'fuiste', 'fue', 'fuimos', 'fuisteis', 'fueron'], imperf: ['era', 'eras', 'era', 'éramos', 'erais', 'eran'], part: 'sido'},
+    {v: 'estar', pt: 'estar', ex: ['Hoy estoy muy contento.', 'Hoje estou muito contente.'], g: 'Irregulares',
+     pres: ['estoy', 'estás', 'está', 'estamos', 'estáis', 'están'], indef: ['estuve', 'estuviste', 'estuvo', 'estuvimos', 'estuvisteis', 'estuvieron']},
+    {v: 'tener', pt: 'ter', ex: ['Tengo dos hermanos.', 'Tenho dois irmãos.'], g: 'Irregulares',
+     pres: ['tengo', 'tienes', 'tiene', 'tenemos', 'tenéis', 'tienen'], indef: ['tuve', 'tuviste', 'tuvo', 'tuvimos', 'tuvisteis', 'tuvieron'], fut: 'tendr'},
+    {v: 'ir', pt: 'ir', ex: ['Voy a la escuela en autobús.', 'Vou para a escola de ônibus.'], g: 'Irregulares',
+     pres: ['voy', 'vas', 'va', 'vamos', 'vais', 'van'], indef: ['fui', 'fuiste', 'fue', 'fuimos', 'fuisteis', 'fueron'], imperf: ['iba', 'ibas', 'iba', 'íbamos', 'ibais', 'iban']},
+    {v: 'hacer', pt: 'fazer', ex: ['Hago los deberes después de comer.', 'Faço a lição depois de comer.'], g: 'Irregulares',
+     pres: ['hago', 'haces', 'hace', 'hacemos', 'hacéis', 'hacen'], indef: ['hice', 'hiciste', 'hizo', 'hicimos', 'hicisteis', 'hicieron'], fut: 'har', part: 'hecho'},
+    {v: 'poder', pt: 'poder', ex: ['¿Puedo ir al baño?', 'Posso ir ao banheiro?'], g: 'Irregulares',
+     pres: ['puedo', 'puedes', 'puede', 'podemos', 'podéis', 'pueden'], indef: ['pude', 'pudiste', 'pudo', 'pudimos', 'pudisteis', 'pudieron'], fut: 'podr'},
+    {v: 'querer', pt: 'querer', ex: ['Quiero un helado de fresa.', 'Quero um sorvete de morango.'], g: 'Irregulares',
+     pres: ['quiero', 'quieres', 'quiere', 'queremos', 'queréis', 'quieren'], indef: ['quise', 'quisiste', 'quiso', 'quisimos', 'quisisteis', 'quisieron'], fut: 'querr'},
+    {v: 'decir', pt: 'dizer', ex: ['Siempre digo la verdad.', 'Sempre digo a verdade.'], g: 'Irregulares',
+     pres: ['digo', 'dices', 'dice', 'decimos', 'decís', 'dicen'], indef: ['dije', 'dijiste', 'dijo', 'dijimos', 'dijisteis', 'dijeron'], fut: 'dir', part: 'dicho'},
+    {v: 'venir', pt: 'vir', ex: ['¿Vienes a mi fiesta?', 'Você vem à minha festa?'], g: 'Irregulares',
+     pres: ['vengo', 'vienes', 'viene', 'venimos', 'venís', 'vienen'], indef: ['vine', 'viniste', 'vino', 'vinimos', 'vinisteis', 'vinieron'], fut: 'vendr'},
+    {v: 'salir', pt: 'sair', ex: ['Salgo de casa a las siete.', 'Saio de casa às sete.'], g: 'Irregulares',
+     pres: ['salgo', 'sales', 'sale', 'salimos', 'salís', 'salen'], fut: 'saldr'},
+    {v: 'poner', pt: 'pôr, colocar', ex: ['Pongo la mesa para cenar.', 'Ponho a mesa para jantar.'], g: 'Irregulares',
+     pres: ['pongo', 'pones', 'pone', 'ponemos', 'ponéis', 'ponen'], indef: ['puse', 'pusiste', 'puso', 'pusimos', 'pusisteis', 'pusieron'], fut: 'pondr', part: 'puesto'},
+    {v: 'saber', pt: 'saber', ex: ['No sé la respuesta.', 'Não sei a resposta.'], g: 'Irregulares',
+     pres: ['sé', 'sabes', 'sabe', 'sabemos', 'sabéis', 'saben'], indef: ['supe', 'supiste', 'supo', 'supimos', 'supisteis', 'supieron'], fut: 'sabr'},
+    {v: 'ver', pt: 'ver', ex: ['Vemos una película el sábado.', 'Vemos um filme no sábado.'], g: 'Irregulares',
+     pres: ['veo', 'ves', 've', 'vemos', 'veis', 'ven'], indef: ['vi', 'viste', 'vio', 'vimos', 'visteis', 'vieron'], imperf: ['veía', 'veías', 'veía', 'veíamos', 'veíais', 'veían'], part: 'visto'},
+    {v: 'dar', pt: 'dar', ex: ['Te doy mi número de teléfono.', 'Eu te dou meu número de telefone.'], g: 'Irregulares',
+     pres: ['doy', 'das', 'da', 'damos', 'dais', 'dan'], indef: ['di', 'diste', 'dio', 'dimos', 'disteis', 'dieron']},
+    {v: 'jugar', pt: 'jogar, brincar', ex: ['Juego al fútbol los domingos.', 'Jogo futebol aos domingos.'], g: 'Com mudança na raiz',
+     pres: ['juego', 'juegas', 'juega', 'jugamos', 'jugáis', 'juegan'], indef: ['jugué', 'jugaste', 'jugó', 'jugamos', 'jugasteis', 'jugaron']},
+    {v: 'dormir', pt: 'dormir', ex: ['Duermo ocho horas por noche.', 'Durmo oito horas por noite.'], g: 'Com mudança na raiz',
+     pres: ['duermo', 'duermes', 'duerme', 'dormimos', 'dormís', 'duermen'], indef: ['dormí', 'dormiste', 'durmió', 'dormimos', 'dormisteis', 'durmieron']},
+    {v: 'pedir', pt: 'pedir', ex: ['Siempre pido pizza.', 'Sempre peço pizza.'], g: 'Com mudança na raiz',
+     pres: ['pido', 'pides', 'pide', 'pedimos', 'pedís', 'piden'], indef: ['pedí', 'pediste', 'pidió', 'pedimos', 'pedisteis', 'pidieron']},
+    {v: 'conocer', pt: 'conhecer', ex: ['Conozco a tu hermano.', 'Conheço seu irmão.'], g: 'Com mudança na raiz',
+     pres: ['conozco', 'conoces', 'conoce', 'conocemos', 'conocéis', 'conocen']}
+  ];
+  function tipo(v){ return v.slice(-2); }
+  function regular(v, t, i){   // a forma que o verbo teria se fosse regular
+    var raiz = v.slice(0, -2), tp = tipo(v);
+    if (t === 'fut') return v + FINS.fut[i];
+    if (t === 'cond') return v + FINS.cond[i];
+    if (t === 'perf') return HABER[i] + ' ' + raiz + (tp === 'ar' ? 'ado' : 'ido');
+    return raiz + FINS[t][tp][i];
+  }
+  function forma(o, t, i){
+    if (t === 'perf') return HABER[i] + ' ' + (o.part || regular(o.v, 'perf', 0).split(' ')[1]);
+    if ((t === 'fut' || t === 'cond') && o.fut) return o.fut + FINS[t][i];
+    if (o[t]) return o[t][i];
+    return regular(o.v, t, i);
+  }
+  function fimRegular(o, t, i){ var tp = tipo(o.v); return t === 'fut' || t === 'cond' ? FINS[t][i] : t === 'perf' ? (tp === 'ar' ? 'ado' : 'ido') : FINS[t][tp][i]; }
+  function pintar(o, t, i){   // HTML com raiz, terminação e parte irregular coloridas
+    var f = forma(o, t, i), fim = fimRegular(o, t, i), reg = regular(o.v, t, i);
+    if (t === 'perf'){
+      var p = f.split(' '), part = p[1], partReg = reg.split(' ')[1];
+      var corpo = part === partReg ? '<span class="raiz">' + part.slice(0, -fim.length) + '</span><span class="fim">' + fim + '</span>' : '<span class="irr">' + part + '</span>';
+      return '<span class="aux">' + p[0] + '</span> ' + corpo;
+    }
+    if (f.length > fim.length && f.slice(-fim.length) === fim){
+      var raiz = f.slice(0, -fim.length), raizReg = reg.slice(0, -fim.length);
+      return '<span class="' + (raiz === raizReg ? 'raiz' : 'irr') + '">' + raiz + '</span><span class="fim">' + fim + '</span>';
+    }
+    return '<span class="irr">' + f + '</span>';
+  }
+  var verbo = VERBOS[0], tempo = 'pres', escondido = false;
+  function desenhar(){
+    var tm = null; TEMPOS.forEach(function(x){ if (x.id === tempo) tm = x; });
+    $('verboTit').textContent = verbo.v; $('verboPt').textContent = '= ' + verbo.pt + ' • ' + verbo.g;
+    $('exemplo').innerHTML = '💬 <b>' + Sala.esc(verbo.ex[0]) + '</b><br><span class="sub">' + Sala.esc(verbo.ex[1]) + '</span>';
+    $('dicaTempo').textContent = tm.dica;
+    var h = '';
+    for (var i = 0; i < 6; i++){
+      var html = pintar(verbo, tempo, i);
+      if (escondido) html = html.replace(/<span class="fim">([^<]*)<\/span>/, '<span class="fim oculta" data-r="1">$1</span>');
+      h += '<tr><td class="pr">' + PESSOAS[i] + '</td><td>' + html + '</td><td class="ou"><button type="button" data-o="' + i + '" aria-label="Ouvir">🔊</button></td></tr>';
+    }
+    $('tabela').innerHTML = h;
+    var bs = $('tempos').querySelectorAll('button'); for (i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-t') === tempo ? 'on' : '';
+  }
+  $('tabela').onclick = function(e){
+    var b = e.target.closest ? e.target.closest('[data-o]') : null, oc = e.target.getAttribute && e.target.getAttribute('data-r');
+    if (oc){ e.target.className = 'fim'; Sala.tom(700, 0.08); return; }
+    if (b){ var i = +b.getAttribute('data-o'); EN.falar(LER[i] + ' ' + forma(verbo, tempo, i)); }
+  };
+  $('selVerbo').innerHTML = (function(){
+    var grupos = [], h = '';
+    VERBOS.forEach(function(o){ if (grupos.indexOf(o.g) < 0) grupos.push(o.g); });
+    grupos.forEach(function(g){ h += '<optgroup label="' + g + '">' + VERBOS.filter(function(o){ return o.g === g; }).map(function(o){ return '<option value="' + o.v + '">' + o.v + ' (' + o.pt + ')</option>'; }).join('') + '</optgroup>'; });
+    return h;
+  })();
+  $('tempos').innerHTML = TEMPOS.map(function(t){ return '<button type="button" data-t="' + t.id + '">' + t.nome + '</button>'; }).join('');
+  $('tempos').onclick = function(e){ var b = e.target.closest ? e.target.closest('[data-t]') : null; if (b){ tempo = b.getAttribute('data-t'); desenhar(); } };
+  $('selVerbo').onchange = function(){ VERBOS.forEach(function(o){ if (o.v === $('selVerbo').value) verbo = o; }); desenhar(); EN.falar(verbo.v); };
+  $('btLer').onclick = function(){ var p = []; for (var i = 0; i < 6; i++) p.push(LER[i] + ' ' + forma(verbo, tempo, i)); EN.falar(p.join(', '), {rate: 0.85}); };
+  $('btEsconder').onclick = function(){ escondido = !escondido; this.innerHTML = escondido ? '👁️ Mostrar as terminações' : '🙈 Esconder as terminações'; desenhar(); };
+
+  // ---------- desafio ----------
+  var dAtual = null, dAc = 0, dEr = 0;
+  function embaralhar(a){ return EN.embaralhar(a); }
+  function novoDesafio(){
+    var o = VERBOS[Math.floor(Math.random() * VERBOS.length)], t = TEMPOS[Math.floor(Math.random() * TEMPOS.length)], i = Math.floor(Math.random() * 6);
+    var certa = forma(o, t.id, i), ops = [certa], cand = [];
+    for (var k = 0; k < 6; k++) if (k !== i) cand.push(forma(o, t.id, k));
+    TEMPOS.forEach(function(x){ if (x.id !== t.id) cand.push(forma(o, x.id, i)); });
+    var reg = regular(o.v, t.id, i);   // a forma "regularizada" é o erro mais comum
+    cand = [reg].concat(embaralhar(cand));
+    cand.forEach(function(c){ if (ops.length < 4 && ops.indexOf(c) < 0) ops.push(c); });
+    dAtual = {o: o, t: t, i: i, certa: certa, feito: false};
+    $('dPerg').innerHTML = '<span style="color:#6b7280">' + PESSOAS[i] + '</span> · <span style="color:#c0392b">' + o.v + '</span> · ' + t.nome;
+    $('dOps').innerHTML = embaralhar(ops).map(function(c){ return '<button type="button" data-c="' + Sala.esc(c) + '">' + Sala.esc(c) + '</button>'; }).join('');
+    $('dRes').textContent = '';
+  }
+  $('dOps').onclick = function(e){
+    var b = e.target.closest ? e.target.closest('[data-c]') : null; if (!b || !dAtual || dAtual.feito) return;
+    dAtual.feito = true; var c = b.getAttribute('data-c'), ok = c === dAtual.certa;
+    var bs = $('dOps').querySelectorAll('button'); for (var k = 0; k < bs.length; k++) if (bs[k].getAttribute('data-c') === dAtual.certa) bs[k].className = 'certa';
+    if (ok){ dAc++; Sala.plim(); $('dRes').textContent = '✅ ¡Muy bien! ' + LER[dAtual.i] + ' ' + dAtual.certa + '.'; }
+    else { dEr++; b.className = 'errada'; Sala.tom(220, 0.3); $('dRes').textContent = '❌ O certo é: ' + dAtual.certa + (c === regular(dAtual.o.v, dAtual.t.id, dAtual.i) ? ' (esse verbo é irregular aqui!)' : '') + '.'; }
+    EN.falar(LER[dAtual.i] + ' ' + dAtual.certa);
+    $('dAc').textContent = dAc; $('dEr').textContent = dEr;
+  };
+  $('btDesafio').onclick = function(){ $('quadro').hidden = true; $('desafio').hidden = false; novoDesafio(); };
+  $('dProx').onclick = novoDesafio;
+  $('dSair').onclick = function(){ $('quadro').hidden = false; $('desafio').hidden = true; };
+  Sala.botaoSom($('btSom'));
+  var pedido = EN.param('verbo'); VERBOS.forEach(function(o){ if (o.v === pedido) verbo = o; }); $('selVerbo').value = verbo.v;
+  desenhar();
+  window.CONJ = {forma: function(v, t, i){ var o = null; VERBOS.forEach(function(x){ if (x.v === v) o = x; }); return forma(o, t, i); }, desafio: function(){ return dAtual; }, placar: function(){ return {ac: dAc, er: dEr}; }};
+})();
+</script>
+</body>
+</html>

@@ -164,6 +164,16 @@
       "arquivo": "quiz-tabuada.json",
       "titulo": "✖️ Quiz da tabuada (do 2 ao 9)",
       "qtd": 40
+    },
+    {
+      "arquivo": "quiz-es.json",
+      "titulo": "🇪🇸 Quiz de español: vocabulario y cultura",
+      "qtd": 20
+    },
+    {
+      "arquivo": "quiz-es-gramatica.json",
+      "titulo": "🇪🇸 Quiz de gramática española",
+      "qtd": 20
     }
   ],
   "stop": [
@@ -186,6 +196,10 @@
     {
       "arquivo": "stop-en.json",
       "titulo": "🇬🇧 English Stop"
+    },
+    {
+      "arquivo": "stop-es.json",
+      "titulo": "🇪🇸 Stop en español"
     }
   ],
   "batata": [
@@ -300,6 +314,10 @@
     {
       "arquivo": "batata-matematica.json",
       "titulo": "Batata quente da matemática"
+    },
+    {
+      "arquivo": "batata-es.json",
+      "titulo": "🇪🇸 Patata caliente en español"
     }
   ],
   "trilha": [
@@ -398,6 +416,10 @@
     {
       "arquivo": "trilha-vida.json",
       "titulo": "Trilha da vida"
+    },
+    {
+      "arquivo": "trilha-es.json",
+      "titulo": "🇪🇸 Juego de mesa en español"
     }
   ],
   "escape": [
@@ -502,6 +524,10 @@
     {
       "arquivo": "mimica-vida.json",
       "titulo": "Mímica das profissões"
+    },
+    {
+      "arquivo": "mimica-es.json",
+      "titulo": "🇪🇸 Mímica en español"
     }
   ],
   "historias": [
@@ -556,6 +582,10 @@
     {
       "arquivo": "historias-vida.json",
       "titulo": "Dados da conversa (projeto de vida)"
+    },
+    {
+      "arquivo": "historias-es-hablar.json",
+      "titulo": "🇪🇸 Dado de conversación"
     }
   ],
   "caminho": [
@@ -903,6 +933,26 @@
     {
       "arquivo": "mat-cestos-racionais.json",
       "titulo": "Matemática: racional ou irracional?"
+    },
+    {
+      "arquivo": "es-cestos-temas.json",
+      "titulo": "🇪🇸 ¿De qué grupo es? (vocabulario)"
+    },
+    {
+      "arquivo": "es-cestos-falsos.json",
+      "titulo": "🇪🇸 ¿Falso amigo o cognado?"
+    },
+    {
+      "arquivo": "es-cestos-ser-estar.json",
+      "titulo": "🇪🇸 ¿Ser o estar?"
+    },
+    {
+      "arquivo": "es-cestos-genero.json",
+      "titulo": "🇪🇸 ¿El o la? (heterogenéricos)"
+    },
+    {
+      "arquivo": "es-cestos-acentuacion.json",
+      "titulo": "🇪🇸 ¿Aguda, llana o esdrújula?"
     }
   ],
   "morfo-frases": [
@@ -1104,6 +1154,10 @@
     {
       "arquivo": "alfa-ordene.json",
       "titulo": "Forme a frase (alfabetização)"
+    },
+    {
+      "arquivo": "es-ordene.json",
+      "titulo": "🇪🇸 Ordena en español"
     }
   ],
   "morfo-onde": [
@@ -1949,6 +2003,42 @@
     {
       "arquivo": "memoria-mat-figuras.json",
       "titulo": "Memória dos polígonos"
+    },
+    {
+      "arquivo": "memoria-es-animales.json",
+      "titulo": "🇪🇸 Memoria: los animales"
+    },
+    {
+      "arquivo": "memoria-es-comida.json",
+      "titulo": "🇪🇸 Memoria: la comida"
+    },
+    {
+      "arquivo": "memoria-es-escuela.json",
+      "titulo": "🇪🇸 Memoria: en la escuela"
+    },
+    {
+      "arquivo": "memoria-es-cuerpo.json",
+      "titulo": "🇪🇸 Memoria: el cuerpo"
+    },
+    {
+      "arquivo": "memoria-es-ropa.json",
+      "titulo": "🇪🇸 Memoria: la ropa"
+    },
+    {
+      "arquivo": "memoria-es-verbos.json",
+      "titulo": "🇪🇸 Memoria: los verbos"
+    },
+    {
+      "arquivo": "memoria-es-familia.json",
+      "titulo": "🇪🇸 Memoria: la familia"
+    },
+    {
+      "arquivo": "memoria-es-numeros.json",
+      "titulo": "🇪🇸 Memoria: los números"
+    },
+    {
+      "arquivo": "memoria-es-falsos.json",
+      "titulo": "🇪🇸 Memoria: falsos amigos"
     }
   ],
   "bingo": [
@@ -1991,6 +2081,14 @@
     {
       "arquivo": "bingo-tabuada.json",
       "titulo": "Bingo da tabuada"
+    },
+    {
+      "arquivo": "bingo-es.json",
+      "titulo": "🇪🇸 Bingo en español (vocabulario)"
+    },
+    {
+      "arquivo": "bingo-es-numeros.json",
+      "titulo": "🇪🇸 Bingo de los números (cantados en español)"
     }
   ],
   "escolha-fo": [
@@ -2132,6 +2230,14 @@
     {
       "arquivo": "lista-alfa-figuras.json",
       "titulo": "Palavras com figura (Alfabetização)"
+    },
+    {
+      "arquivo": "lista-es-temas.json",
+      "titulo": "🇪🇸 Español: palabras por tema"
+    },
+    {
+      "arquivo": "lista-es-palabras.json",
+      "titulo": "🇪🇸 Palabras para deletrear (ñ, ll, rr, ch, j, z)"
     }
   ],
   "escolha-cc": [
@@ -2733,6 +2839,14 @@
       "arquivo": "leitura-en-trava-linguas.json",
       "titulo": "English: tongue twisters (trava-línguas tradicionais)",
       "qtd": 14
+    },
+    {
+      "arquivo": "leitura-es-basico.json",
+      "titulo": "🇪🇸 Español: frases del día a día"
+    },
+    {
+      "arquivo": "leitura-es-trabalenguas.json",
+      "titulo": "🇪🇸 Español: trabalenguas tradicionales"
     }
   ],
   "escolha-mat": [
@@ -2905,6 +3019,178 @@
       "arquivo": "mat-radicais.json",
       "titulo": "🌀 Números irracionais e radicais (9º ano)",
       "qtd": 20
+    }
+  ],
+  "escolha-es": [
+    {
+      "arquivo": "es-que-es.json",
+      "titulo": "🇪🇸 ¿Qué es esto? (figura → palabra)",
+      "qtd": 24
+    },
+    {
+      "arquivo": "es-articulos.json",
+      "titulo": "🇪🇸 Artículos y contracciones (el, la, lo, al, del)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-genero-numero.json",
+      "titulo": "🇪🇸 Género y número (plurales y heterogenéricos)",
+      "qtd": 18
+    },
+    {
+      "arquivo": "es-pronombres.json",
+      "titulo": "🇪🇸 Pronombres (yo, tú, usted, vosotros, se lo)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-ser-estar.json",
+      "titulo": "🇪🇸 Ser o estar",
+      "qtd": 17
+    },
+    {
+      "arquivo": "es-tener-hay.json",
+      "titulo": "🇪🇸 Tener, hay y estar",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-presente.json",
+      "titulo": "🇪🇸 Presente de los verbos regulares (-ar, -er, -ir)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-irregulares.json",
+      "titulo": "🇪🇸 Presente irregular (tengo, quiero, puedo, voy…)",
+      "qtd": 16
+    },
+    {
+      "arquivo": "es-gustar.json",
+      "titulo": "🇪🇸 Gustar, encantar y doler",
+      "qtd": 13
+    },
+    {
+      "arquivo": "es-posesivos-demostrativos.json",
+      "titulo": "🇪🇸 Posesivos y demostrativos (mi, tu, su, este, ese, aquel)",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-muy-mucho.json",
+      "titulo": "🇪🇸 Muy o mucho",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-interrogativos.json",
+      "titulo": "🇪🇸 Los interrogativos (qué, cuál, quién, dónde…)",
+      "qtd": 13
+    },
+    {
+      "arquivo": "es-futuro.json",
+      "titulo": "🇪🇸 Futuro: ir a + infinitivo y futuro simple",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-pasado.json",
+      "titulo": "🇪🇸 Pasado: pretérito indefinido y perfecto",
+      "qtd": 16
+    },
+    {
+      "arquivo": "es-imperativo.json",
+      "titulo": "🇪🇸 Imperativo (abre, ven, no hables…)",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-comparativos.json",
+      "titulo": "🇪🇸 Comparativos (más… que, tan… como, mejor, peor)",
+      "qtd": 10
+    },
+    {
+      "arquivo": "es-preposiciones.json",
+      "titulo": "🇪🇸 Preposiciones (a, en, de, por, para)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-falsos-amigos.json",
+      "titulo": "🇪🇸 Falsos amigos (heterosemánticos)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "es-heterotonicos.json",
+      "titulo": "🇪🇸 Heterotónicos: la sílaba fuerte cambia",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-paises.json",
+      "titulo": "🇪🇸 Países hispanohablantes y sus capitales",
+      "qtd": 19
+    },
+    {
+      "arquivo": "es-cultura.json",
+      "titulo": "🇪🇸 Cultura hispánica: fiestas, comidas y personajes",
+      "qtd": 19
+    },
+    {
+      "arquivo": "es-variantes.json",
+      "titulo": "🇪🇸 Español de España y de América",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-lectura.json",
+      "titulo": "🇪🇸 Lectura: textos cortos",
+      "qtd": 18
+    },
+    {
+      "arquivo": "es-enem.json",
+      "titulo": "🇪🇸 Español en el ENEM (texto en español, preguntas en portugués)",
+      "qtd": 10
+    },
+    {
+      "arquivo": "es-conectores.json",
+      "titulo": "🇪🇸 Conectores: sin embargo, aunque, además, por lo tanto…",
+      "qtd": 13
+    },
+    {
+      "arquivo": "es-expresiones.json",
+      "titulo": "🇪🇸 Expresiones idiomáticas",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-dia-a-dia.json",
+      "titulo": "🇪🇸 Español en el día a día (carteles, etiquetas y celular)",
+      "qtd": 15
+    },
+    {
+      "arquivo": "es-trabajo.json",
+      "titulo": "🇪🇸 Español en el trabajo (entrevista y correo)",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-saludos.json",
+      "titulo": "🇪🇸 Saludos y presentaciones",
+      "qtd": 12
+    },
+    {
+      "arquivo": "es-clase.json",
+      "titulo": "🇪🇸 Frases de la clase (escucha y entiende)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-escuchar.json",
+      "titulo": "🇪🇸 Escucha y elige",
+      "qtd": 16
+    },
+    {
+      "arquivo": "es-numeros.json",
+      "titulo": "🇪🇸 Los números (leer y escuchar)",
+      "qtd": 16
+    },
+    {
+      "arquivo": "es-horas.json",
+      "titulo": "🇪🇸 ¿Qué hora es? (las horas)",
+      "qtd": 14
+    },
+    {
+      "arquivo": "es-dias-meses.json",
+      "titulo": "🇪🇸 Los días, los meses y las estaciones",
+      "qtd": 12
     }
   ]
 }

@@ -1,0 +1,177 @@
+{
+  "titulo": "Frases de la clase (escucha y entiende)",
+  "emoji": "🙋",
+  "instrucao": "¿Qué significa la frase?",
+  "idioma": "es-ES",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "[¿Puedo ir al baño?]",
+      "opcoes": [
+        "Posso ir ao banheiro?",
+        "Não entendo.",
+        "O que significa esta palavra?",
+        "Trabalhem em duplas."
+      ],
+      "correta": "Posso ir ao banheiro?",
+      "explica": "¿Puedo ir al baño? = Posso ir ao banheiro?",
+      "ouvir": "¿Puedo ir al baño?"
+    },
+    {
+      "destaque": "[No entiendo.]",
+      "opcoes": [
+        "Pode repetir, por favor?",
+        "Não entendo.",
+        "Abram o livro na página dez.",
+        "Levantem a mão."
+      ],
+      "correta": "Não entendo.",
+      "explica": "No entiendo. = Não entendo.",
+      "ouvir": "No entiendo."
+    },
+    {
+      "destaque": "[¿Puede repetir, por favor?]",
+      "opcoes": [
+        "Mais devagar, por favor.",
+        "Escutem com atenção.",
+        "Pode repetir, por favor?",
+        "Posso beber água?"
+      ],
+      "correta": "Pode repetir, por favor?",
+      "explica": "¿Puede repetir, por favor? = Pode repetir, por favor?",
+      "ouvir": "¿Puede repetir, por favor?"
+    },
+    {
+      "destaque": "[Más despacio, por favor.]",
+      "opcoes": [
+        "O que significa esta palavra?",
+        "Trabalhem em duplas.",
+        "Desculpe, cheguei atrasado.",
+        "Mais devagar, por favor."
+      ],
+      "correta": "Mais devagar, por favor.",
+      "explica": "Más despacio, por favor. = Mais devagar, por favor.",
+      "ouvir": "Más despacio, por favor."
+    },
+    {
+      "destaque": "[¿Qué significa esta palabra?]",
+      "opcoes": [
+        "O que significa esta palavra?",
+        "Abram o livro na página dez.",
+        "Levantem a mão.",
+        "Como se escreve?"
+      ],
+      "correta": "O que significa esta palavra?",
+      "explica": "¿Qué significa esta palabra? = O que significa esta palavra?",
+      "ouvir": "¿Qué significa esta palabra?"
+    },
+    {
+      "destaque": "[Abran el libro en la página diez.]",
+      "opcoes": [
+        "Escutem com atenção.",
+        "Abram o livro na página dez.",
+        "Posso beber água?",
+        "Tenho uma pergunta."
+      ],
+      "correta": "Abram o livro na página dez.",
+      "explica": "Abran el libro en la página diez. = Abram o livro na página dez.",
+      "ouvir": "Abran el libro en la página diez."
+    },
+    {
+      "destaque": "[Escuchen con atención.]",
+      "opcoes": [
+        "Trabalhem em duplas.",
+        "Desculpe, cheguei atrasado.",
+        "Escutem com atenção.",
+        "Terminei!"
+      ],
+      "correta": "Escutem com atenção.",
+      "explica": "Escuchen con atención. = Escutem com atenção.",
+      "ouvir": "Escuchen con atención."
+    },
+    {
+      "destaque": "[Trabajen en parejas.]",
+      "opcoes": [
+        "Levantem a mão.",
+        "Como se escreve?",
+        "Posso ir ao banheiro?",
+        "Trabalhem em duplas."
+      ],
+      "correta": "Trabalhem em duplas.",
+      "explica": "Trabajen en parejas. = Trabalhem em duplas.",
+      "ouvir": "Trabajen en parejas."
+    },
+    {
+      "destaque": "[Levanten la mano.]",
+      "opcoes": [
+        "Levantem a mão.",
+        "Posso beber água?",
+        "Tenho uma pergunta.",
+        "Não entendo."
+      ],
+      "correta": "Levantem a mão.",
+      "explica": "Levanten la mano. = Levantem a mão.",
+      "ouvir": "Levanten la mano."
+    },
+    {
+      "destaque": "[¿Puedo beber agua?]",
+      "opcoes": [
+        "Desculpe, cheguei atrasado.",
+        "Posso beber água?",
+        "Terminei!",
+        "Pode repetir, por favor?"
+      ],
+      "correta": "Posso beber água?",
+      "explica": "¿Puedo beber agua? = Posso beber água?",
+      "ouvir": "¿Puedo beber agua?"
+    },
+    {
+      "destaque": "[Perdón, llegué tarde.]",
+      "opcoes": [
+        "Como se escreve?",
+        "Posso ir ao banheiro?",
+        "Desculpe, cheguei atrasado.",
+        "Mais devagar, por favor."
+      ],
+      "correta": "Desculpe, cheguei atrasado.",
+      "explica": "Perdón, llegué tarde. = Desculpe, cheguei atrasado.",
+      "ouvir": "Perdón, llegué tarde."
+    },
+    {
+      "destaque": "[¿Cómo se escribe?]",
+      "opcoes": [
+        "Tenho uma pergunta.",
+        "Não entendo.",
+        "O que significa esta palavra?",
+        "Como se escreve?"
+      ],
+      "correta": "Como se escreve?",
+      "explica": "¿Cómo se escribe? = Como se escreve?",
+      "ouvir": "¿Cómo se escribe?"
+    },
+    {
+      "destaque": "[Tengo una pregunta.]",
+      "opcoes": [
+        "Tenho uma pergunta.",
+        "Terminei!",
+        "Pode repetir, por favor?",
+        "Abram o livro na página dez."
+      ],
+      "correta": "Tenho uma pergunta.",
+      "explica": "Tengo una pregunta. = Tenho uma pergunta.",
+      "ouvir": "Tengo una pregunta."
+    },
+    {
+      "destaque": "[¡Terminé!]",
+      "opcoes": [
+        "Posso ir ao banheiro?",
+        "Terminei!",
+        "Mais devagar, por favor.",
+        "Escutem com atenção."
+      ],
+      "correta": "Terminei!",
+      "explica": "¡Terminé! = Terminei!",
+      "ouvir": "¡Terminé!"
+    }
+  ]
+}

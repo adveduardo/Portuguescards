@@ -1,0 +1,151 @@
+{
+  "titulo": "Gustar, encantar y doler",
+  "emoji": "❤️",
+  "instrucao": "Completa correctamente",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "A mí me ___ el chocolate.",
+      "opcoes": [
+        "gusta",
+        "gustan",
+        "gusto",
+        "gustas"
+      ],
+      "correta": "gusta",
+      "explica": "O verbo concorda com o que se gosta: el chocolate (singular) → gusta."
+    },
+    {
+      "destaque": "A mí me ___ los perros.",
+      "opcoes": [
+        "gustan",
+        "gusta",
+        "gusto",
+        "gustamos"
+      ],
+      "correta": "gustan",
+      "explica": "Los perros (plural) → gustan."
+    },
+    {
+      "destaque": "A ella ___ gusta bailar.",
+      "opcoes": [
+        "le",
+        "la",
+        "se",
+        "lo"
+      ],
+      "correta": "le",
+      "explica": "A ella LE gusta. (Com verbo no infinitivo: gusta, no singular.)"
+    },
+    {
+      "destaque": "A nosotros ___ gusta la playa.",
+      "opcoes": [
+        "nos",
+        "os",
+        "les",
+        "se"
+      ],
+      "correta": "nos",
+      "explica": "Me, te, le, NOS, os, les."
+    },
+    {
+      "destaque": "A mis padres ___ gusta viajar.",
+      "opcoes": [
+        "les",
+        "le",
+        "los",
+        "se"
+      ],
+      "correta": "les",
+      "explica": "A ellos/ellas: LES gusta."
+    },
+    {
+      "destaque": "¿Te gusta el fútbol? —Sí, ¡a mí ___!",
+      "opcoes": [
+        "también",
+        "tampoco",
+        "sí",
+        "no"
+      ],
+      "correta": "también",
+      "explica": "Concordar com algo positivo: a mí también (eu também)."
+    },
+    {
+      "destaque": "No me gusta el café. —A mí ___.",
+      "opcoes": [
+        "tampoco",
+        "también",
+        "sí",
+        "no"
+      ],
+      "correta": "tampoco",
+      "explica": "Concordar com algo negativo: a mí tampoco (eu também não)."
+    },
+    {
+      "destaque": "Me gusta el pescado. —Pues a mí ___.",
+      "opcoes": [
+        "no",
+        "tampoco",
+        "también",
+        "sí"
+      ],
+      "correta": "no",
+      "explica": "Discordar de algo positivo: a mí no (eu não)."
+    },
+    {
+      "destaque": "No me gusta el frío. —Pues a mí ___.",
+      "opcoes": [
+        "sí",
+        "también",
+        "no",
+        "tampoco"
+      ],
+      "correta": "sí",
+      "explica": "Discordar de algo negativo: a mí sí (eu sim)."
+    },
+    {
+      "destaque": "Me ___ la cabeza.",
+      "opcoes": [
+        "duele",
+        "duelen",
+        "dolo",
+        "dolor"
+      ],
+      "correta": "duele",
+      "explica": "Doler funciona como gustar: me duele la cabeza."
+    },
+    {
+      "destaque": "Me ___ los pies después de correr.",
+      "opcoes": [
+        "duelen",
+        "duele",
+        "doelen",
+        "dolen"
+      ],
+      "correta": "duelen",
+      "explica": "Los pies (plural) → duelen."
+    },
+    {
+      "destaque": "Me encantan ___ películas de aventura.",
+      "opcoes": [
+        "las",
+        "unas",
+        "los",
+        "les"
+      ],
+      "correta": "las",
+      "explica": "Com gustar/encantar, o substantivo leva artigo: me encantan las películas."
+    },
+    {
+      "destaque": "A Juan le ___ (interessar) la historia.",
+      "opcoes": [
+        "interesa",
+        "interesan",
+        "interesas",
+        "interes"
+      ],
+      "correta": "interesa",
+      "explica": "Interesar também é como gustar: le interesa la historia."
+    }
+  ]
+}

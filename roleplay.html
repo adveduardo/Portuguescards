@@ -59,15 +59,15 @@
 (function(){
   'use strict';
   var $ = function(id){ return document.getElementById(id); };
-  var dialogos = [], d = null, tocando = -1, reveladas = {};
+  var LG = EN.lingua(), dialogos = [], d = null, tocando = -1, reveladas = {};
   var CORES = ['#2f80ed', '#e8890c'];
 
   function hash(s){ var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
   function esconderPalavras(t, pct, semente){
     if (!pct) return Sala.esc(t);
-    if (pct >= 100) return Sala.esc(t.replace(/[A-Za-z0-9’']+/g, function(w){ return new Array(w.length + 1).join('_'); }));
+    if (pct >= 100) return Sala.esc(t.replace(/[A-Za-zÀ-ÖØ-öø-ÿ0-9’']+/g, function(w){ return new Array(w.length + 1).join('_'); }));
     var k = 0;
-    return Sala.esc(t.replace(/[A-Za-z0-9’']+/g, function(w){ k++; return w.length > 1 && hash(semente + ':' + k + w) % 100 < pct ? new Array(w.length + 1).join('_') : w; }));
+    return Sala.esc(t.replace(/[A-Za-zÀ-ÖØ-öø-ÿ0-9’']+/g, function(w){ k++; return w.length > 1 && hash(semente + ':' + k + w) % 100 < pct ? new Array(w.length + 1).join('_') : w; }));
   }
   function desenhar(){
     if (!d) return;
@@ -127,9 +127,10 @@
     Sala.imprimir(h);
   };
   Sala.botaoSom($('btSom'));
-  EN.json('dados/en-dialogos.json', function(err, data){
+  EN.json('dados/' + LG.cod + '-dialogos.json', function(err, data){
     if (err || !data || !(data.dialogos instanceof Array)){ $('situacao').textContent = 'Não consegui abrir os diálogos.'; return; }
     dialogos = data.dialogos;
+    dialogos.forEach(function(x){ (x.falas || []).concat(x.uteis || []).forEach(function(f){ if (f.en === undefined && f[LG.cod] !== undefined) f.en = f[LG.cod]; }); });   // "en" = a fala no idioma estrangeiro
     $('escolha').innerHTML = dialogos.map(function(x){ return '<button type="button" data-id="' + Sala.esc(x.id) + '">' + x.emoji + ' ' + Sala.esc(x.titulo) + '</button>'; }).join('');
     var bs = $('escolha').querySelectorAll('button');
     for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ escolher(this.getAttribute('data-id')); };

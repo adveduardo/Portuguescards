@@ -1,0 +1,162 @@
+{
+  "titulo": "Artículos y contracciones (el, la, lo, al, del)",
+  "emoji": "📌",
+  "instrucao": "Completa con el artículo correcto",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "___ libro es muy interesante.",
+      "opcoes": [
+        "El",
+        "La",
+        "Lo",
+        "Los"
+      ],
+      "correta": "El",
+      "explica": "Libro é masculino singular: EL libro."
+    },
+    {
+      "destaque": "Me gusta mucho ___ leche.",
+      "opcoes": [
+        "la",
+        "el",
+        "lo",
+        "los"
+      ],
+      "correta": "la",
+      "explica": "Em espanhol é LA leche (feminino), embora em português seja \"o leite\"."
+    },
+    {
+      "destaque": "Mañana voy ___ cine.",
+      "opcoes": [
+        "al",
+        "a el",
+        "el",
+        "del"
+      ],
+      "correta": "al",
+      "explica": "A + EL = AL (contração obrigatória): voy al cine."
+    },
+    {
+      "destaque": "Vengo ___ mercado.",
+      "opcoes": [
+        "del",
+        "de el",
+        "al",
+        "el"
+      ],
+      "correta": "del",
+      "explica": "DE + EL = DEL: vengo del mercado."
+    },
+    {
+      "destaque": "___ importante es estudiar todos los días.",
+      "opcoes": [
+        "Lo",
+        "El",
+        "La",
+        "Los"
+      ],
+      "correta": "Lo",
+      "explica": "LO é o artigo neutro: lo importante = o (que é) importante."
+    },
+    {
+      "destaque": "Hay ___ manzanas en la mesa.",
+      "opcoes": [
+        "unas",
+        "las",
+        "el",
+        "lo"
+      ],
+      "correta": "unas",
+      "explica": "Depois de HAY não se usa artigo definido: hay unas manzanas (há umas maçãs)."
+    },
+    {
+      "destaque": "___ agua del mar está fría.",
+      "opcoes": [
+        "El",
+        "La",
+        "Lo",
+        "Los"
+      ],
+      "correta": "El",
+      "explica": "Agua é feminina, mas leva EL por começar com \"a\" tônico: el agua fría, las aguas."
+    },
+    {
+      "destaque": "Me duele ___ cabeza.",
+      "opcoes": [
+        "la",
+        "mi",
+        "el",
+        "lo"
+      ],
+      "correta": "la",
+      "explica": "Com partes do corpo o espanhol usa o artigo: me duele la cabeza (minha cabeça dói)."
+    },
+    {
+      "destaque": "___ lunes tengo clase de español.",
+      "opcoes": [
+        "El",
+        "En",
+        "Lo",
+        "Al"
+      ],
+      "correta": "El",
+      "explica": "Com os dias da semana usa-se o artigo, sem \"en\": el lunes = na segunda-feira."
+    },
+    {
+      "destaque": "Son ___ tres de la tarde.",
+      "opcoes": [
+        "las",
+        "los",
+        "a",
+        "en"
+      ],
+      "correta": "las",
+      "explica": "As horas levam artigo feminino: son las tres, es la una."
+    },
+    {
+      "destaque": "___ señor García es mi profesor.",
+      "opcoes": [
+        "El",
+        "La",
+        "Lo",
+        "Un"
+      ],
+      "correta": "El",
+      "explica": "Ao falar de alguém com título, usa-se artigo: el señor García, la doctora Ruiz."
+    },
+    {
+      "destaque": "Los domingos vamos ___ playa.",
+      "opcoes": [
+        "a la",
+        "al",
+        "en la",
+        "la"
+      ],
+      "correta": "a la",
+      "explica": "Só \"a + el\" vira \"al\". Com feminino fica separado: a la playa."
+    },
+    {
+      "destaque": "El perro ___ vecino es muy grande.",
+      "opcoes": [
+        "del",
+        "de el",
+        "al",
+        "de lo"
+      ],
+      "correta": "del",
+      "explica": "O cachorro do vizinho = el perro DEL vecino."
+    },
+    {
+      "destaque": "No me gustan ___ películas de terror.",
+      "opcoes": [
+        "las",
+        "los",
+        "les",
+        "el"
+      ],
+      "correta": "las",
+      "explica": "Película é feminino: las películas."
+    }
+  ]
+}

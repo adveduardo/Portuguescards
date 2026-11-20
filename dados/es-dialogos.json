@@ -1,0 +1,586 @@
+{
+  "titulo": "Role-play: diálogos en español",
+  "idioma": "es-ES",
+  "dialogos": [
+    {
+      "id": "presentarse",
+      "titulo": "Presentarse en la escuela",
+      "emoji": "🙋",
+      "situacao": "No primeiro dia de aula: apresentar-se a um colega novo.",
+      "papeis": [
+        "Alumno A",
+        "Alumno B"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "¡Hola! ¿Cómo te llamas?",
+          "pt": "Oi! Como você se chama?"
+        },
+        {
+          "p": 1,
+          "es": "Me llamo Sofía. ¿Y tú?",
+          "pt": "Eu me chamo Sofia. E você?"
+        },
+        {
+          "p": 0,
+          "es": "Yo me llamo Mateo. Mucho gusto.",
+          "pt": "Eu me chamo Mateus. Muito prazer."
+        },
+        {
+          "p": 1,
+          "es": "Encantada. ¿De dónde eres?",
+          "pt": "Encantada. De onde você é?"
+        },
+        {
+          "p": 0,
+          "es": "Soy de Brasil, de Salvador. ¿Y tú?",
+          "pt": "Sou do Brasil, de Salvador. E você?"
+        },
+        {
+          "p": 1,
+          "es": "Yo soy de Argentina. ¿Cuántos años tienes?",
+          "pt": "Eu sou da Argentina. Quantos anos você tem?"
+        },
+        {
+          "p": 0,
+          "es": "Tengo trece años. ¿Te gusta el fútbol?",
+          "pt": "Tenho treze anos. Você gosta de futebol?"
+        },
+        {
+          "p": 1,
+          "es": "¡Sí, me encanta! Juego todos los sábados.",
+          "pt": "Sim, adoro! Jogo todos os sábados."
+        },
+        {
+          "p": 0,
+          "es": "¡Genial! Hasta luego, Sofía.",
+          "pt": "Legal! Até logo, Sofia."
+        },
+        {
+          "p": 1,
+          "es": "¡Hasta luego!",
+          "pt": "Até logo!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "¿Cómo te llamas?",
+          "pt": "Como você se chama?"
+        },
+        {
+          "es": "Mucho gusto / Encantado(a)",
+          "pt": "Muito prazer"
+        },
+        {
+          "es": "¿De dónde eres?",
+          "pt": "De onde você é?"
+        },
+        {
+          "es": "Tengo … años",
+          "pt": "Tenho … anos"
+        }
+      ]
+    },
+    {
+      "id": "restaurante",
+      "titulo": "En el restaurante",
+      "emoji": "🍽️",
+      "situacao": "No restaurante: pedir a comida, a bebida e a conta.",
+      "papeis": [
+        "Camarero (garçom)",
+        "Cliente"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "¡Buenas noches! ¿Qué desean tomar?",
+          "pt": "Boa noite! O que desejam pedir?"
+        },
+        {
+          "p": 1,
+          "es": "Buenas noches. Para mí, el pollo con arroz, por favor.",
+          "pt": "Boa noite. Para mim, o frango com arroz, por favor."
+        },
+        {
+          "p": 0,
+          "es": "Muy bien. ¿Y para beber?",
+          "pt": "Muito bem. E para beber?"
+        },
+        {
+          "p": 1,
+          "es": "Un jugo de naranja, por favor.",
+          "pt": "Um suco de laranja, por favor."
+        },
+        {
+          "p": 0,
+          "es": "¿Algo más?",
+          "pt": "Mais alguma coisa?"
+        },
+        {
+          "p": 1,
+          "es": "No, gracias. Eso es todo.",
+          "pt": "Não, obrigado(a). É só isso."
+        },
+        {
+          "p": 1,
+          "es": "Perdone, ¿me trae la cuenta, por favor?",
+          "pt": "Com licença, pode me trazer a conta, por favor?"
+        },
+        {
+          "p": 0,
+          "es": "Claro. Son quince euros.",
+          "pt": "Claro. São quinze euros."
+        },
+        {
+          "p": 1,
+          "es": "Aquí tiene. ¡Muchas gracias!",
+          "pt": "Aqui está. Muito obrigado(a)!"
+        },
+        {
+          "p": 0,
+          "es": "A usted. ¡Que tenga buena noche!",
+          "pt": "Eu que agradeço. Tenha uma boa noite!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "¿Qué desea tomar?",
+          "pt": "O que deseja pedir?"
+        },
+        {
+          "es": "Para mí…",
+          "pt": "Para mim…"
+        },
+        {
+          "es": "La cuenta, por favor.",
+          "pt": "A conta, por favor."
+        },
+        {
+          "es": "¡Buen provecho!",
+          "pt": "Bom apetite!"
+        }
+      ]
+    },
+    {
+      "id": "ropa",
+      "titulo": "En la tienda de ropa",
+      "emoji": "👕",
+      "situacao": "Na loja de roupas: pedir um tamanho, experimentar e pagar.",
+      "papeis": [
+        "Dependienta (vendedora)",
+        "Cliente"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "Hola, ¿puedo ayudarle?",
+          "pt": "Olá, posso ajudar?"
+        },
+        {
+          "p": 1,
+          "es": "Sí, busco una camiseta azul.",
+          "pt": "Sim, procuro uma camiseta azul."
+        },
+        {
+          "p": 0,
+          "es": "¿Qué talla usa?",
+          "pt": "Que tamanho você usa?"
+        },
+        {
+          "p": 1,
+          "es": "La talla mediana, por favor.",
+          "pt": "O tamanho médio, por favor."
+        },
+        {
+          "p": 0,
+          "es": "Aquí tiene. El probador está al fondo.",
+          "pt": "Aqui está. O provador fica no fundo."
+        },
+        {
+          "p": 1,
+          "es": "Gracias. … Me queda muy bien. ¿Cuánto cuesta?",
+          "pt": "Obrigado(a). … Ficou muito bem. Quanto custa?"
+        },
+        {
+          "p": 0,
+          "es": "Cuesta veinte euros. Hoy tiene un descuento del diez por ciento.",
+          "pt": "Custa vinte euros. Hoje tem um desconto de dez por cento."
+        },
+        {
+          "p": 1,
+          "es": "¡Perfecto! ¿Puedo pagar con tarjeta?",
+          "pt": "Perfeito! Posso pagar com cartão?"
+        },
+        {
+          "p": 0,
+          "es": "Sí, claro.",
+          "pt": "Sim, claro."
+        }
+      ],
+      "uteis": [
+        {
+          "es": "¿Qué talla usa?",
+          "pt": "Que tamanho você usa?"
+        },
+        {
+          "es": "¿Puedo probármelo?",
+          "pt": "Posso experimentar?"
+        },
+        {
+          "es": "¿Cuánto cuesta?",
+          "pt": "Quanto custa?"
+        },
+        {
+          "es": "Me queda grande / pequeño",
+          "pt": "Ficou grande / pequeno"
+        }
+      ]
+    },
+    {
+      "id": "direcciones",
+      "titulo": "Pedir direcciones en la calle",
+      "emoji": "🗺️",
+      "situacao": "Na rua: perguntar como chegar a um lugar.",
+      "papeis": [
+        "Turista",
+        "Vecino (morador)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "Perdone, ¿dónde está la estación de tren?",
+          "pt": "Com licença, onde fica a estação de trem?"
+        },
+        {
+          "p": 1,
+          "es": "Está cerca. Siga todo recto hasta el semáforo.",
+          "pt": "Fica perto. Siga em frente até o semáforo."
+        },
+        {
+          "p": 1,
+          "es": "Después gire a la derecha y cruce la plaza.",
+          "pt": "Depois vire à direita e atravesse a praça."
+        },
+        {
+          "p": 0,
+          "es": "¿Está lejos para ir a pie?",
+          "pt": "É longe para ir a pé?"
+        },
+        {
+          "p": 1,
+          "es": "No, son unos diez minutos andando.",
+          "pt": "Não, são uns dez minutos a pé."
+        },
+        {
+          "p": 0,
+          "es": "Muchas gracias, muy amable.",
+          "pt": "Muito obrigado(a), muito gentil."
+        },
+        {
+          "p": 1,
+          "es": "De nada. ¡Buen viaje!",
+          "pt": "De nada. Boa viagem!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "Todo recto",
+          "pt": "Sempre em frente"
+        },
+        {
+          "es": "A la derecha / a la izquierda",
+          "pt": "À direita / à esquerda"
+        },
+        {
+          "es": "Cerca / lejos",
+          "pt": "Perto / longe"
+        },
+        {
+          "es": "La esquina",
+          "pt": "A esquina"
+        }
+      ]
+    },
+    {
+      "id": "medico",
+      "titulo": "En el médico",
+      "emoji": "🏥",
+      "situacao": "Na consulta: explicar o que está sentindo.",
+      "papeis": [
+        "Médica",
+        "Paciente"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "Buenos días. ¿Qué le pasa?",
+          "pt": "Bom dia. O que o(a) senhor(a) está sentindo?"
+        },
+        {
+          "p": 1,
+          "es": "Me duele mucho la garganta y tengo fiebre.",
+          "pt": "Minha garganta dói muito e estou com febre."
+        },
+        {
+          "p": 0,
+          "es": "¿Desde cuándo se siente así?",
+          "pt": "Desde quando está assim?"
+        },
+        {
+          "p": 1,
+          "es": "Desde ayer por la noche.",
+          "pt": "Desde ontem à noite."
+        },
+        {
+          "p": 0,
+          "es": "Abra la boca, por favor. … Tiene la garganta inflamada.",
+          "pt": "Abra a boca, por favor. … Sua garganta está inflamada."
+        },
+        {
+          "p": 0,
+          "es": "Tome este jarabe tres veces al día y beba mucha agua.",
+          "pt": "Tome este xarope três vezes ao dia e beba muita água."
+        },
+        {
+          "p": 1,
+          "es": "¿Puedo ir a la escuela mañana?",
+          "pt": "Posso ir à escola amanhã?"
+        },
+        {
+          "p": 0,
+          "es": "Mejor descanse dos días. ¡Que se mejore!",
+          "pt": "Melhor descansar dois dias. Melhoras!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "¿Qué le pasa?",
+          "pt": "O que está sentindo?"
+        },
+        {
+          "es": "Me duele…",
+          "pt": "Dói…"
+        },
+        {
+          "es": "Tengo fiebre / tos",
+          "pt": "Estou com febre / tosse"
+        },
+        {
+          "es": "¡Que te mejores!",
+          "pt": "Melhoras!"
+        }
+      ]
+    },
+    {
+      "id": "hotel",
+      "titulo": "En el hotel",
+      "emoji": "🏨",
+      "situacao": "Na recepção do hotel: fazer o check-in.",
+      "papeis": [
+        "Recepcionista",
+        "Huésped (hóspede)"
+      ],
+      "falas": [
+        {
+          "p": 0,
+          "es": "Buenas tardes, bienvenido. ¿Tiene una reserva?",
+          "pt": "Boa tarde, bem-vindo. Tem uma reserva?"
+        },
+        {
+          "p": 1,
+          "es": "Sí, a nombre de Ana Souza.",
+          "pt": "Sim, em nome de Ana Souza."
+        },
+        {
+          "p": 0,
+          "es": "Un momento… Sí, una habitación doble para tres noches.",
+          "pt": "Um momento… Sim, um quarto duplo para três noites."
+        },
+        {
+          "p": 0,
+          "es": "¿Me deja su pasaporte, por favor?",
+          "pt": "Pode me mostrar seu passaporte, por favor?"
+        },
+        {
+          "p": 1,
+          "es": "Aquí tiene. ¿A qué hora es el desayuno?",
+          "pt": "Aqui está. A que horas é o café da manhã?"
+        },
+        {
+          "p": 0,
+          "es": "De siete a diez, en el comedor de la planta baja.",
+          "pt": "Das sete às dez, no refeitório do térreo."
+        },
+        {
+          "p": 0,
+          "es": "Su habitación es la 305. Aquí tiene la llave.",
+          "pt": "Seu quarto é o 305. Aqui está a chave."
+        },
+        {
+          "p": 1,
+          "es": "Muchas gracias.",
+          "pt": "Muito obrigada."
+        }
+      ],
+      "uteis": [
+        {
+          "es": "Una habitación doble / individual",
+          "pt": "Um quarto duplo / individual"
+        },
+        {
+          "es": "El desayuno",
+          "pt": "O café da manhã"
+        },
+        {
+          "es": "La llave",
+          "pt": "A chave"
+        },
+        {
+          "es": "La planta baja",
+          "pt": "O térreo"
+        }
+      ]
+    },
+    {
+      "id": "telefono",
+      "titulo": "Por teléfono: invitar a un amigo",
+      "emoji": "📞",
+      "situacao": "Ao telefone: convidar um amigo para sair.",
+      "papeis": [
+        "Lucas",
+        "Paula"
+      ],
+      "falas": [
+        {
+          "p": 1,
+          "es": "¿Diga?",
+          "pt": "Alô?"
+        },
+        {
+          "p": 0,
+          "es": "Hola, Paula. Soy Lucas. ¿Qué tal?",
+          "pt": "Oi, Paula. É o Lucas. Tudo bem?"
+        },
+        {
+          "p": 1,
+          "es": "¡Hola, Lucas! Muy bien, ¿y tú?",
+          "pt": "Oi, Lucas! Tudo ótimo, e você?"
+        },
+        {
+          "p": 0,
+          "es": "Bien. ¿Quieres ir al cine el sábado?",
+          "pt": "Bem. Quer ir ao cinema no sábado?"
+        },
+        {
+          "p": 1,
+          "es": "El sábado no puedo, tengo un cumpleaños. ¿Y el domingo?",
+          "pt": "No sábado não posso, tenho um aniversário. E no domingo?"
+        },
+        {
+          "p": 0,
+          "es": "Vale, el domingo. ¿Quedamos a las cinco en la entrada?",
+          "pt": "Combinado, no domingo. Marcamos às cinco na entrada?"
+        },
+        {
+          "p": 1,
+          "es": "¡Perfecto! Hasta el domingo.",
+          "pt": "Perfeito! Até domingo."
+        },
+        {
+          "p": 0,
+          "es": "¡Chao!",
+          "pt": "Tchau!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "¿Diga? / ¿Aló? / ¿Bueno?",
+          "pt": "Alô? (Espanha / América / México)"
+        },
+        {
+          "es": "¿Quieres…?",
+          "pt": "Você quer…?"
+        },
+        {
+          "es": "No puedo",
+          "pt": "Não posso"
+        },
+        {
+          "es": "¿Quedamos a las…?",
+          "pt": "Marcamos às…?"
+        }
+      ]
+    },
+    {
+      "id": "estacion",
+      "titulo": "En la estación: comprar un billete",
+      "emoji": "🚆",
+      "situacao": "Na estação: comprar uma passagem de trem.",
+      "papeis": [
+        "Taquillero (bilheteiro)",
+        "Viajera"
+      ],
+      "falas": [
+        {
+          "p": 1,
+          "es": "Buenos días. Un billete para Barcelona, por favor.",
+          "pt": "Bom dia. Uma passagem para Barcelona, por favor."
+        },
+        {
+          "p": 0,
+          "es": "¿De ida o de ida y vuelta?",
+          "pt": "Só de ida ou ida e volta?"
+        },
+        {
+          "p": 1,
+          "es": "De ida y vuelta. ¿A qué hora sale el próximo tren?",
+          "pt": "Ida e volta. A que horas sai o próximo trem?"
+        },
+        {
+          "p": 0,
+          "es": "Sale a las diez y cuarto, del andén tres.",
+          "pt": "Sai às dez e quinze, da plataforma três."
+        },
+        {
+          "p": 1,
+          "es": "¿Cuánto cuesta?",
+          "pt": "Quanto custa?"
+        },
+        {
+          "p": 0,
+          "es": "Son cuarenta y cinco euros.",
+          "pt": "São quarenta e cinco euros."
+        },
+        {
+          "p": 1,
+          "es": "Aquí tiene. Gracias.",
+          "pt": "Aqui está. Obrigada."
+        },
+        {
+          "p": 0,
+          "es": "¡Buen viaje!",
+          "pt": "Boa viagem!"
+        }
+      ],
+      "uteis": [
+        {
+          "es": "Un billete de ida y vuelta",
+          "pt": "Uma passagem de ida e volta"
+        },
+        {
+          "es": "El andén",
+          "pt": "A plataforma"
+        },
+        {
+          "es": "¿A qué hora sale…?",
+          "pt": "A que horas sai…?"
+        },
+        {
+          "es": "El próximo tren",
+          "pt": "O próximo trem"
+        }
+      ]
+    }
+  ]
+}

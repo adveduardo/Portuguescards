@@ -1,0 +1,195 @@
+{
+  "titulo": "Ser o estar",
+  "emoji": "🟰",
+  "instrucao": "Completa con SER o ESTAR",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Yo ___ (ser/estar) brasileño.",
+      "opcoes": [
+        "soy",
+        "estoy",
+        "es",
+        "está"
+      ],
+      "correta": "soy",
+      "explica": "Nacionalidade = SER: soy brasileño."
+    },
+    {
+      "destaque": "Madrid ___ (ser/estar) en España.",
+      "opcoes": [
+        "está",
+        "es",
+        "son",
+        "están"
+      ],
+      "correta": "está",
+      "explica": "Localização = ESTAR: Madrid está en España."
+    },
+    {
+      "destaque": "Hoy ___ (ser/estar) muy cansada.",
+      "opcoes": [
+        "estoy",
+        "soy",
+        "es",
+        "estás"
+      ],
+      "correta": "estoy",
+      "explica": "Estado passageiro = ESTAR: estoy cansada."
+    },
+    {
+      "destaque": "Mi hermano ___ (ser/estar) médico.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estoy"
+      ],
+      "correta": "es",
+      "explica": "Profissão = SER: es médico."
+    },
+    {
+      "destaque": "La fiesta ___ (ser/estar) en mi casa.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estamos"
+      ],
+      "correta": "es",
+      "explica": "Cuidado! Lugar de um EVENTO usa SER: la fiesta es en mi casa. (Lugar de coisas e pessoas usa estar.)"
+    },
+    {
+      "destaque": "___ (ser/estar) las tres de la tarde.",
+      "opcoes": [
+        "Son",
+        "Están",
+        "Es",
+        "Está"
+      ],
+      "correta": "Son",
+      "explica": "Horas = SER: son las tres, es la una."
+    },
+    {
+      "destaque": "La sopa ___ (ser/estar) fría, ¡caliéntala!",
+      "opcoes": [
+        "está",
+        "es",
+        "son",
+        "estoy"
+      ],
+      "correta": "está",
+      "explica": "Estado do momento = ESTAR: la sopa está fría."
+    },
+    {
+      "destaque": "El hielo ___ (ser/estar) frío.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estoy"
+      ],
+      "correta": "es",
+      "explica": "Característica natural = SER: el hielo es frío (sempre é)."
+    },
+    {
+      "destaque": "Mi abuela ___ (ser/estar) muy simpática.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estás"
+      ],
+      "correta": "es",
+      "explica": "Personalidade = SER."
+    },
+    {
+      "destaque": "La puerta ___ (ser/estar) abierta.",
+      "opcoes": [
+        "está",
+        "es",
+        "son",
+        "estoy"
+      ],
+      "correta": "está",
+      "explica": "Resultado de uma ação = ESTAR: la puerta está abierta."
+    },
+    {
+      "destaque": "Este libro ___ (ser/estar) de Pablo.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estás"
+      ],
+      "correta": "es",
+      "explica": "Posse = SER: es de Pablo."
+    },
+    {
+      "destaque": "Nosotros ___ (ser/estar) en la escuela.",
+      "opcoes": [
+        "estamos",
+        "somos",
+        "están",
+        "son"
+      ],
+      "correta": "estamos",
+      "explica": "Localização = ESTAR."
+    },
+    {
+      "destaque": "Juan sacó un diez: ___ muy listo (inteligente).",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estoy"
+      ],
+      "correta": "es",
+      "explica": "SER listo = ser inteligente. ESTAR listo = estar pronto."
+    },
+    {
+      "destaque": "Ya me vestí: ___ lista para salir.",
+      "opcoes": [
+        "estoy",
+        "soy",
+        "es",
+        "está"
+      ],
+      "correta": "estoy",
+      "explica": "ESTAR lista = estar pronta."
+    },
+    {
+      "destaque": "La mesa ___ (ser/estar) de madera.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "estamos"
+      ],
+      "correta": "es",
+      "explica": "Material = SER: es de madera."
+    },
+    {
+      "destaque": "¿Cómo ___ tu madre? —Bien, gracias.",
+      "opcoes": [
+        "está",
+        "es",
+        "son",
+        "estás"
+      ],
+      "correta": "está",
+      "explica": "Pergunta sobre saúde/estado = ESTAR."
+    },
+    {
+      "destaque": "¿Cómo ___ tu madre? —Alta y morena.",
+      "opcoes": [
+        "es",
+        "está",
+        "son",
+        "eres"
+      ],
+      "correta": "es",
+      "explica": "Pergunta sobre aparência = SER."
+    }
+  ]
+}

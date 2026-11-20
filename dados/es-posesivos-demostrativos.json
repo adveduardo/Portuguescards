@@ -1,0 +1,140 @@
+{
+  "titulo": "Posesivos y demostrativos (mi, tu, su, este, ese, aquel)",
+  "emoji": "👉",
+  "instrucao": "Elige la palabra correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Esta es ___ casa (de mim).",
+      "opcoes": [
+        "mi",
+        "mí",
+        "mía",
+        "me"
+      ],
+      "correta": "mi",
+      "explica": "Antes do substantivo: MI casa (sem acento; \"mí\" com acento é pronome: para mí)."
+    },
+    {
+      "destaque": "___ libros (meus) están en la mochila.",
+      "opcoes": [
+        "Mis",
+        "Mi",
+        "Míos",
+        "Mios"
+      ],
+      "correta": "Mis",
+      "explica": "Plural: MIS libros."
+    },
+    {
+      "destaque": "¿Es ___ mochila (sua, de tú)?",
+      "opcoes": [
+        "tu",
+        "tú",
+        "tuya",
+        "su"
+      ],
+      "correta": "tu",
+      "explica": "TU (sem acento) = teu/seu. TÚ (com acento) = você."
+    },
+    {
+      "destaque": "Pedro vive con ___ hermana (de Pedro).",
+      "opcoes": [
+        "su",
+        "sus",
+        "suya",
+        "tu"
+      ],
+      "correta": "su",
+      "explica": "De ele/ela/usted: SU."
+    },
+    {
+      "destaque": "___ escuela (de nós) es grande.",
+      "opcoes": [
+        "Nuestra",
+        "Nuestro",
+        "Nuestras",
+        "Nosa"
+      ],
+      "correta": "Nuestra",
+      "explica": "Nuestro concorda com a coisa possuída: nuestra escuela."
+    },
+    {
+      "destaque": "Este bolígrafo es ___ (meu, depois do verbo).",
+      "opcoes": [
+        "mío",
+        "mi",
+        "mía",
+        "mis"
+      ],
+      "correta": "mío",
+      "explica": "Depois do verbo usa-se a forma longa: es mío, es tuya, es suyo."
+    },
+    {
+      "destaque": "___ libro (perto de mim) es nuevo.",
+      "opcoes": [
+        "Este",
+        "Ese",
+        "Aquel",
+        "Esto"
+      ],
+      "correta": "Este",
+      "explica": "Perto de quem fala: este/esta (aqui)."
+    },
+    {
+      "destaque": "___ chica (perto de você) es mi prima.",
+      "opcoes": [
+        "Esa",
+        "Esta",
+        "Aquella",
+        "Eso"
+      ],
+      "correta": "Esa",
+      "explica": "Perto de quem ouve: ese/esa (aí)."
+    },
+    {
+      "destaque": "___ montañas (longe de nós dois) son altas.",
+      "opcoes": [
+        "Aquellas",
+        "Estas",
+        "Esas",
+        "Aquellos"
+      ],
+      "correta": "Aquellas",
+      "explica": "Longe dos dois: aquel/aquella (lá)."
+    },
+    {
+      "destaque": "¿Qué es ___ (isto)?",
+      "opcoes": [
+        "esto",
+        "este",
+        "esta",
+        "ese"
+      ],
+      "correta": "esto",
+      "explica": "ESTO é neutro (para algo que não se sabe o que é): ¿qué es esto?"
+    },
+    {
+      "destaque": "___ zapatos (perto de mim) son caros.",
+      "opcoes": [
+        "Estos",
+        "Estes",
+        "Esos",
+        "Estas"
+      ],
+      "correta": "Estos",
+      "explica": "Plural masculino perto de quem fala: estos (e não \"estes\")."
+    },
+    {
+      "destaque": "En ___ época (há muito tempo) no había internet.",
+      "opcoes": [
+        "aquella",
+        "esta",
+        "esa",
+        "aquel"
+      ],
+      "correta": "aquella",
+      "explica": "Para um tempo distante, aquel/aquella."
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "titulo": "Género y número (plurales y heterogenéricos)",
+  "emoji": "⚖️",
+  "instrucao": "Elige la forma correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Plural de \"el árbol\":",
+      "opcoes": [
+        "los árboles",
+        "los árbols",
+        "las árboles",
+        "los árbol"
+      ],
+      "correta": "los árboles",
+      "explica": "Palavra terminada em consoante: + ES (árbol → árboles)."
+    },
+    {
+      "destaque": "Plural de \"el lápiz\":",
+      "opcoes": [
+        "los lápices",
+        "los lápizes",
+        "los lápiz",
+        "las lápices"
+      ],
+      "correta": "los lápices",
+      "explica": "Z vira C antes de -ES: lápiz → lápices, pez → peces, luz → luces."
+    },
+    {
+      "destaque": "Plural de \"la flor\":",
+      "opcoes": [
+        "las flores",
+        "las flors",
+        "los flores",
+        "las flor"
+      ],
+      "correta": "las flores",
+      "explica": "Flor termina em consoante: flores."
+    },
+    {
+      "destaque": "Plural de \"el pez\":",
+      "opcoes": [
+        "los peces",
+        "los pezes",
+        "los pez",
+        "las peces"
+      ],
+      "correta": "los peces",
+      "explica": "Pez → peces (z vira c)."
+    },
+    {
+      "destaque": "Plural de \"la ciudad\":",
+      "opcoes": [
+        "las ciudades",
+        "las ciudads",
+        "los ciudades",
+        "las ciudade"
+      ],
+      "correta": "las ciudades",
+      "explica": "Ciudad termina em D: + ES."
+    },
+    {
+      "destaque": "Plural de \"el autobús\":",
+      "opcoes": [
+        "los autobuses",
+        "los autobúses",
+        "los autobús",
+        "las autobuses"
+      ],
+      "correta": "los autobuses",
+      "explica": "No plural o acento some: autobús → autobuses (a sílaba tônica continua a mesma)."
+    },
+    {
+      "destaque": "Plural de \"el lunes\":",
+      "opcoes": [
+        "los lunes",
+        "los luneses",
+        "las lunes",
+        "los lune"
+      ],
+      "correta": "los lunes",
+      "explica": "Palavras terminadas em -s com tônica antes não mudam: el lunes → los lunes."
+    },
+    {
+      "destaque": "Em espanhol, \"viaje\" é…",
+      "opcoes": [
+        "el viaje",
+        "la viaje"
+      ],
+      "correta": "el viaje",
+      "explica": "Heterogenérico: o gênero muda. A viagem → EL viaje (todas as -aje são masculinas: el garaje, el paisaje, el mensaje)."
+    },
+    {
+      "destaque": "Em espanhol, \"nariz\" é…",
+      "opcoes": [
+        "la nariz",
+        "el nariz"
+      ],
+      "correta": "la nariz",
+      "explica": "O nariz → LA nariz."
+    },
+    {
+      "destaque": "Em espanhol, \"sal\" é…",
+      "opcoes": [
+        "la sal",
+        "el sal"
+      ],
+      "correta": "la sal",
+      "explica": "O sal → LA sal."
+    },
+    {
+      "destaque": "Em espanhol, \"color\" é…",
+      "opcoes": [
+        "el color",
+        "la color"
+      ],
+      "correta": "el color",
+      "explica": "A cor → EL color."
+    },
+    {
+      "destaque": "Em espanhol, \"dolor\" é…",
+      "opcoes": [
+        "el dolor",
+        "la dolor"
+      ],
+      "correta": "el dolor",
+      "explica": "A dor → EL dolor."
+    },
+    {
+      "destaque": "Em espanhol, \"puente\" é…",
+      "opcoes": [
+        "el puente",
+        "la puente"
+      ],
+      "correta": "el puente",
+      "explica": "A ponte → EL puente."
+    },
+    {
+      "destaque": "Em espanhol, \"sangre\" é…",
+      "opcoes": [
+        "la sangre",
+        "el sangre"
+      ],
+      "correta": "la sangre",
+      "explica": "O sangue → LA sangre."
+    },
+    {
+      "destaque": "Em espanhol, \"costumbre\" é…",
+      "opcoes": [
+        "la costumbre",
+        "el costumbre"
+      ],
+      "correta": "la costumbre",
+      "explica": "O costume → LA costumbre."
+    },
+    {
+      "destaque": "Feminino de \"el actor\":",
+      "opcoes": [
+        "la actriz",
+        "la actora",
+        "la actoresa",
+        "la actor"
+      ],
+      "correta": "la actriz",
+      "explica": "Actor → actriz (como em português: ator → atriz)."
+    },
+    {
+      "destaque": "Feminino de \"el rey\":",
+      "opcoes": [
+        "la reina",
+        "la reya",
+        "la reyna",
+        "la rey"
+      ],
+      "correta": "la reina",
+      "explica": "Rey → reina."
+    },
+    {
+      "destaque": "Feminino de \"el hombre\":",
+      "opcoes": [
+        "la mujer",
+        "la hombra",
+        "la mujera",
+        "la madre"
+      ],
+      "correta": "la mujer",
+      "explica": "Hombre (homem) → mujer (mulher)."
+    }
+  ]
+}

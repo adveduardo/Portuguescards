@@ -1,0 +1,136 @@
+{
+  "titulo": "Ordena en español (frases, días y meses)",
+  "idioma": "es-ES",
+  "sequencias": [
+    {
+      "titulo": "Los días de la semana",
+      "esquerda": "primero",
+      "direita": "último",
+      "itens": [
+        "lunes",
+        "martes",
+        "miércoles",
+        "jueves",
+        "viernes",
+        "sábado",
+        "domingo"
+      ],
+      "explica": "Em espanhol a semana começa na segunda (lunes)."
+    },
+    {
+      "titulo": "Los meses (del primero al sexto)",
+      "esquerda": "primero",
+      "direita": "último",
+      "itens": [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio"
+      ],
+      "explica": "Enero, febrero, marzo, abril, mayo, junio."
+    },
+    {
+      "titulo": "Los meses (del séptimo al último)",
+      "esquerda": "primero",
+      "direita": "último",
+      "itens": [
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+      ],
+      "explica": "Julio, agosto, septiembre (ou setiembre), octubre, noviembre, diciembre."
+    },
+    {
+      "titulo": "Forma la frase",
+      "esquerda": "inicio",
+      "direita": "fin",
+      "itens": [
+        "Yo",
+        "me",
+        "llamo",
+        "Ana."
+      ],
+      "explica": "O pronome \"me\" vem antes do verbo: yo me llamo."
+    },
+    {
+      "titulo": "Forma la pregunta",
+      "esquerda": "inicio",
+      "direita": "fin",
+      "itens": [
+        "¿Dónde",
+        "vives",
+        "tú?"
+      ],
+      "explica": "Pergunta com ¿ no começo e ? no fim."
+    },
+    {
+      "titulo": "Forma la frase",
+      "esquerda": "inicio",
+      "direita": "fin",
+      "itens": [
+        "Mañana",
+        "voy",
+        "a",
+        "estudiar."
+      ],
+      "explica": "Ir a + infinitivo: voy a estudiar."
+    },
+    {
+      "titulo": "Forma la frase",
+      "esquerda": "inicio",
+      "direita": "fin",
+      "itens": [
+        "No",
+        "me",
+        "gusta",
+        "el",
+        "café."
+      ],
+      "explica": "Na negação o \"no\" vem antes do pronome: no me gusta."
+    },
+    {
+      "titulo": "Forma la frase",
+      "esquerda": "inicio",
+      "direita": "fin",
+      "itens": [
+        "Los",
+        "niños",
+        "juegan",
+        "en",
+        "el",
+        "parque."
+      ],
+      "explica": "Sujeito + verbo + complemento."
+    },
+    {
+      "titulo": "Del más pequeño al más grande",
+      "esquerda": "pequeño",
+      "direita": "grande",
+      "itens": [
+        "ratón",
+        "gato",
+        "perro",
+        "caballo",
+        "elefante"
+      ],
+      "explica": "Ratón < gato < perro < caballo < elefante."
+    },
+    {
+      "titulo": "Las horas del día",
+      "esquerda": "temprano",
+      "direita": "tarde",
+      "itens": [
+        "por la mañana",
+        "al mediodía",
+        "por la tarde",
+        "por la noche"
+      ],
+      "explica": "Mañana, mediodía, tarde, noche."
+    }
+  ]
+}

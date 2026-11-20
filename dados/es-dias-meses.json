@@ -1,0 +1,140 @@
+{
+  "titulo": "Los días, los meses y las estaciones",
+  "emoji": "📅",
+  "instrucao": "Elige la respuesta correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿Qué día viene después del lunes?",
+      "opcoes": [
+        "martes",
+        "miércoles",
+        "domingo",
+        "jueves"
+      ],
+      "correta": "martes",
+      "explica": "Lunes, martes, miércoles, jueves, viernes, sábado, domingo."
+    },
+    {
+      "destaque": "Hoy es viernes. Mañana es…",
+      "opcoes": [
+        "sábado",
+        "jueves",
+        "domingo",
+        "lunes"
+      ],
+      "correta": "sábado",
+      "explica": "Depois de viernes vem sábado."
+    },
+    {
+      "destaque": "El día entre el martes y el jueves es el…",
+      "opcoes": [
+        "miércoles",
+        "lunes",
+        "viernes",
+        "sábado"
+      ],
+      "correta": "miércoles",
+      "explica": "Miércoles = quarta-feira."
+    },
+    {
+      "destaque": "El primer mes del año es…",
+      "opcoes": [
+        "enero",
+        "febrero",
+        "diciembre",
+        "marzo"
+      ],
+      "correta": "enero",
+      "explica": "Enero = janeiro."
+    },
+    {
+      "destaque": "El mes después de abril es…",
+      "opcoes": [
+        "mayo",
+        "marzo",
+        "junio",
+        "julio"
+      ],
+      "correta": "mayo",
+      "explica": "Abril, mayo, junio."
+    },
+    {
+      "destaque": "El último mes del año es…",
+      "opcoes": [
+        "diciembre",
+        "noviembre",
+        "enero",
+        "octubre"
+      ],
+      "correta": "diciembre",
+      "explica": "Diciembre = dezembro."
+    },
+    {
+      "destaque": "En Brasil, la Navidad (25 de diciembre) es en…",
+      "opcoes": [
+        "verano",
+        "invierno",
+        "otoño",
+        "primavera"
+      ],
+      "correta": "verano",
+      "explica": "No hemisfério sul, dezembro é verão. Na Espanha, é inverno!"
+    },
+    {
+      "destaque": "En España, el verano es en…",
+      "opcoes": [
+        "julio",
+        "enero",
+        "diciembre",
+        "febrero"
+      ],
+      "correta": "julio",
+      "explica": "Na Espanha (hemisfério norte), o verão vai de junho a setembro."
+    },
+    {
+      "destaque": "Los días del fin de semana son…",
+      "opcoes": [
+        "sábado y domingo",
+        "lunes y martes",
+        "viernes y lunes",
+        "jueves y viernes"
+      ],
+      "correta": "sábado y domingo",
+      "explica": "Fin de semana = fim de semana."
+    },
+    {
+      "destaque": "\"Ayer\" significa…",
+      "opcoes": [
+        "ontem",
+        "hoje",
+        "amanhã",
+        "depois"
+      ],
+      "correta": "ontem",
+      "explica": "Ayer = ontem; hoy = hoje; mañana = amanhã."
+    },
+    {
+      "destaque": "\"Pasado mañana\" significa…",
+      "opcoes": [
+        "depois de amanhã",
+        "ontem",
+        "amanhã cedo",
+        "anteontem"
+      ],
+      "correta": "depois de amanhã",
+      "explica": "Pasado mañana = depois de amanhã."
+    },
+    {
+      "destaque": "En español, los días y los meses se escriben…",
+      "opcoes": [
+        "con minúscula",
+        "con mayúscula",
+        "siempre en inglés",
+        "con número"
+      ],
+      "correta": "con minúscula",
+      "explica": "Como em português: lunes, enero (com minúscula)."
+    }
+  ]
+}

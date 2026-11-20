@@ -1,0 +1,140 @@
+{
+  "titulo": "Español de España y de América",
+  "emoji": "🗺️",
+  "instrucao": "Elige la palabra correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "En España: coche. En gran parte de América: ___.",
+      "opcoes": [
+        "carro",
+        "coche",
+        "camión",
+        "tren"
+      ],
+      "correta": "carro",
+      "explica": "Na América também se diz auto (Argentina, Chile, Uruguai)."
+    },
+    {
+      "destaque": "En España: ordenador. En América: ___.",
+      "opcoes": [
+        "computadora",
+        "ordenadora",
+        "calculadora",
+        "pantalla"
+      ],
+      "correta": "computadora",
+      "explica": "Ordenador (Espanha) = computadora (América)."
+    },
+    {
+      "destaque": "En España: móvil. En América: ___.",
+      "opcoes": [
+        "celular",
+        "teléfono fijo",
+        "tableta",
+        "radio"
+      ],
+      "correta": "celular",
+      "explica": "Móvil (Espanha) = celular (América)."
+    },
+    {
+      "destaque": "En España: zumo. En América: ___.",
+      "opcoes": [
+        "jugo",
+        "suco",
+        "refresco",
+        "batido"
+      ],
+      "correta": "jugo",
+      "explica": "Zumo de naranja = jugo de naranja."
+    },
+    {
+      "destaque": "En España: patata. En América: ___.",
+      "opcoes": [
+        "papa",
+        "batata",
+        "camote",
+        "yuca"
+      ],
+      "correta": "papa",
+      "explica": "Patata (Espanha) = papa (América)."
+    },
+    {
+      "destaque": "En España: conducir. En gran parte de América: ___.",
+      "opcoes": [
+        "manejar",
+        "guiar",
+        "dirigir",
+        "llevar"
+      ],
+      "correta": "manejar",
+      "explica": "Conducir un coche = manejar un carro."
+    },
+    {
+      "destaque": "En España: coger el autobús. En América: ___ el autobús.",
+      "opcoes": [
+        "tomar",
+        "coger",
+        "bajar",
+        "llevar"
+      ],
+      "correta": "tomar",
+      "explica": "Na América se diz tomar el autobús (ou el camión, en México)."
+    },
+    {
+      "destaque": "En España: vosotros. En América: ___.",
+      "opcoes": [
+        "ustedes",
+        "vos",
+        "nosotros",
+        "ellos"
+      ],
+      "correta": "ustedes",
+      "explica": "Na América Latina não se usa vosotros: \"vocês\" é sempre ustedes."
+    },
+    {
+      "destaque": "En España: piso. En muchos países de América: ___.",
+      "opcoes": [
+        "departamento",
+        "pieza",
+        "casa",
+        "habitación"
+      ],
+      "correta": "departamento",
+      "explica": "Apartamento: piso (Espanha), departamento (México, Argentina, Chile)."
+    },
+    {
+      "destaque": "En España: melocotón. En América: ___.",
+      "opcoes": [
+        "durazno",
+        "manzana",
+        "ciruela",
+        "pera"
+      ],
+      "correta": "durazno",
+      "explica": "Pêssego: melocotón ou durazno."
+    },
+    {
+      "destaque": "En Argentina y Uruguay, en lugar de \"tú eres\" se dice…",
+      "opcoes": [
+        "vos sos",
+        "vos eres",
+        "tú sos",
+        "usted es"
+      ],
+      "correta": "vos sos",
+      "explica": "É o voseo: vos sos, vos tenés, vos querés."
+    },
+    {
+      "destaque": "En América Latina, la \"z\" de \"zapato\" suena como \"s\". Esto se llama…",
+      "opcoes": [
+        "seseo",
+        "ceceo",
+        "yeísmo",
+        "voseo"
+      ],
+      "correta": "seseo",
+      "explica": "No seseo, casa e caza soam igual."
+    }
+  ]
+}

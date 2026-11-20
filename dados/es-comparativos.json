@@ -1,0 +1,118 @@
+{
+  "titulo": "Comparativos (más… que, tan… como, mejor, peor)",
+  "emoji": "📏",
+  "instrucao": "Completa la comparación",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Juan es ___ alto que Pedro.",
+      "opcoes": [
+        "más",
+        "tan",
+        "mucho",
+        "muy"
+      ],
+      "correta": "más",
+      "explica": "Superioridade: más… que."
+    },
+    {
+      "destaque": "Ana es ___ alta como su madre.",
+      "opcoes": [
+        "tan",
+        "tanta",
+        "más",
+        "tanto"
+      ],
+      "correta": "tan",
+      "explica": "Igualdade com adjetivo: tan… como."
+    },
+    {
+      "destaque": "Este libro es ___ que aquel (bom → melhor).",
+      "opcoes": [
+        "mejor",
+        "más bueno",
+        "buenísimo",
+        "menor"
+      ],
+      "correta": "mejor",
+      "explica": "Bueno → mejor (comparativo irregular)."
+    },
+    {
+      "destaque": "Mi nota es ___ que la tuya (ruim → pior).",
+      "opcoes": [
+        "peor",
+        "más mala",
+        "pior",
+        "menor"
+      ],
+      "correta": "peor",
+      "explica": "Malo → peor."
+    },
+    {
+      "destaque": "Tengo ___ libros como tú.",
+      "opcoes": [
+        "tantos",
+        "tan",
+        "tanto",
+        "tantas"
+      ],
+      "correta": "tantos",
+      "explica": "Igualdade com substantivo: tanto/tanta/tantos/tantas… como."
+    },
+    {
+      "destaque": "Mi hermano es ___ que yo (tem mais idade).",
+      "opcoes": [
+        "mayor",
+        "mejor",
+        "más viejo de",
+        "grande"
+      ],
+      "correta": "mayor",
+      "explica": "Para idade: mayor (mais velho) e menor (mais novo)."
+    },
+    {
+      "destaque": "Mi prima es ___ que yo (tem menos idade).",
+      "opcoes": [
+        "menor",
+        "peor",
+        "más pequeña de",
+        "mayor"
+      ],
+      "correta": "menor",
+      "explica": "Menor = mais novo."
+    },
+    {
+      "destaque": "Es el chico ___ alto de la clase.",
+      "opcoes": [
+        "más",
+        "mayor",
+        "muy",
+        "tan"
+      ],
+      "correta": "más",
+      "explica": "Superlativo: el más… de."
+    },
+    {
+      "destaque": "Este coche cuesta 10.000 € y aquel 20.000 €: este es ___ caro.",
+      "opcoes": [
+        "menos",
+        "más",
+        "tan",
+        "mucho"
+      ],
+      "correta": "menos",
+      "explica": "Inferioridade: menos… que."
+    },
+    {
+      "destaque": "Mi perro corre ___ rápido como el tuyo: llegan juntos.",
+      "opcoes": [
+        "tan",
+        "más",
+        "menos",
+        "tanto"
+      ],
+      "correta": "tan",
+      "explica": "Igualdade com adjetivo ou advérbio: tan rápido como."
+    }
+  ]
+}

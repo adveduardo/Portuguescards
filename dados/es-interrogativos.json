@@ -1,0 +1,151 @@
+{
+  "titulo": "Los interrogativos (qué, cuál, quién, dónde…)",
+  "emoji": "❓",
+  "instrucao": "Elige la palabra interrogativa",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿___ te llamas?",
+      "opcoes": [
+        "Cómo",
+        "Qué",
+        "Cuál",
+        "Dónde"
+      ],
+      "correta": "Cómo",
+      "explica": "¿Cómo te llamas? = Como você se chama?"
+    },
+    {
+      "destaque": "¿___ vives? —En Recife.",
+      "opcoes": [
+        "Dónde",
+        "Cuándo",
+        "Cómo",
+        "Quién"
+      ],
+      "correta": "Dónde",
+      "explica": "Lugar: ¿dónde?"
+    },
+    {
+      "destaque": "¿___ años tienes?",
+      "opcoes": [
+        "Cuántos",
+        "Cuántas",
+        "Cuánto",
+        "Qué"
+      ],
+      "correta": "Cuántos",
+      "explica": "Años é masculino plural: ¿cuántos años?"
+    },
+    {
+      "destaque": "¿___ es tu cumpleaños? —El 5 de mayo.",
+      "opcoes": [
+        "Cuándo",
+        "Dónde",
+        "Qué",
+        "Cuál"
+      ],
+      "correta": "Cuándo",
+      "explica": "Tempo/data: ¿cuándo?"
+    },
+    {
+      "destaque": "¿___ es ese chico? —Es mi primo.",
+      "opcoes": [
+        "Quién",
+        "Qué",
+        "Cuál",
+        "Cómo"
+      ],
+      "correta": "Quién",
+      "explica": "Pessoa: ¿quién?"
+    },
+    {
+      "destaque": "¿___ estudias español? —Porque me gusta.",
+      "opcoes": [
+        "Por qué",
+        "Porque",
+        "Porqué",
+        "Para qué"
+      ],
+      "correta": "Por qué",
+      "explica": "Pergunta: POR QUÉ (separado, com acento). Resposta: PORQUE."
+    },
+    {
+      "destaque": "¿___ hora es?",
+      "opcoes": [
+        "Qué",
+        "Cuál",
+        "Cuánta",
+        "Cómo"
+      ],
+      "correta": "Qué",
+      "explica": "¿Qué hora es? = Que horas são?"
+    },
+    {
+      "destaque": "¿___ es tu color favorito?",
+      "opcoes": [
+        "Cuál",
+        "Qué",
+        "Quién",
+        "Cómo"
+      ],
+      "correta": "Cuál",
+      "explica": "Com SER + algo a escolher, usa-se CUÁL: ¿cuál es tu color favorito?"
+    },
+    {
+      "destaque": "¿___ cuesta? —Diez euros.",
+      "opcoes": [
+        "Cuánto",
+        "Cuántos",
+        "Qué",
+        "Cómo"
+      ],
+      "correta": "Cuánto",
+      "explica": "Preço: ¿cuánto cuesta?"
+    },
+    {
+      "destaque": "¿De ___ eres? —Soy de Brasil.",
+      "opcoes": [
+        "dónde",
+        "qué",
+        "cuál",
+        "quién"
+      ],
+      "correta": "dónde",
+      "explica": "Origem: ¿de dónde eres?"
+    },
+    {
+      "destaque": "¿___ quieres beber? —Agua, por favor.",
+      "opcoes": [
+        "Qué",
+        "Cuál",
+        "Quién",
+        "Dónde"
+      ],
+      "correta": "Qué",
+      "explica": "Coisa em geral: ¿qué?"
+    },
+    {
+      "destaque": "¿Con ___ vas al cine?",
+      "opcoes": [
+        "quién",
+        "qué",
+        "cuál",
+        "dónde"
+      ],
+      "correta": "quién",
+      "explica": "Pessoa depois de preposição: ¿con quién?"
+    },
+    {
+      "destaque": "¿___ son esos chicos? —Son mis compañeros.",
+      "opcoes": [
+        "Quiénes",
+        "Quién",
+        "Qué",
+        "Cuáles"
+      ],
+      "correta": "Quiénes",
+      "explica": "Plural de quién: quiénes."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "titulo": "Español en el trabajo (entrevista y correo)",
+  "emoji": "💼",
+  "instrucao": "¿Qué significa?",
+  "idioma": "es-ES",
+  "idiomaOpcoes": "pt-BR",
+  "rodadas": [
+    {
+      "destaque": "[¿Cuál es su experiencia laboral?]",
+      "opcoes": [
+        "pergunta sobre a experiência de trabalho",
+        "pergunta sobre a idade",
+        "pergunta sobre a família",
+        "pergunta sobre o salário"
+      ],
+      "correta": "pergunta sobre a experiência de trabalho",
+      "explica": "¿Cuál es su experiencia laboral? = pergunta sobre a experiência de trabalho.",
+      "imagem": "💼"
+    },
+    {
+      "destaque": "[Estimado señor:]",
+      "opcoes": [
+        "despedida informal",
+        "assinatura",
+        "saudação formal no começo de um e-mail ou carta",
+        "pedido de desculpas"
+      ],
+      "correta": "saudação formal no começo de um e-mail ou carta",
+      "explica": "Estimado señor: = saudação formal no começo de um e-mail ou carta.",
+      "imagem": "✉️"
+    },
+    {
+      "destaque": "[Adjunto mi currículum.]",
+      "opcoes": [
+        "envio meu currículo em anexo",
+        "peço meu currículo de volta",
+        "não tenho currículo",
+        "meu currículo está atrasado"
+      ],
+      "correta": "envio meu currículo em anexo",
+      "explica": "Adjunto mi currículum. = envio meu currículo em anexo.",
+      "imagem": "📎"
+    },
+    {
+      "destaque": "[Atentamente,]",
+      "opcoes": [
+        "atenção!",
+        "urgente",
+        "atenciosamente (despedida formal)",
+        "com carinho"
+      ],
+      "correta": "atenciosamente (despedida formal)",
+      "explica": "Atentamente, = atenciosamente (despedida formal).",
+      "imagem": "🖊️"
+    },
+    {
+      "destaque": "[Horario de trabajo]",
+      "opcoes": [
+        "horário de trabalho",
+        "dia de folga",
+        "hora extra",
+        "salário por hora"
+      ],
+      "correta": "horário de trabalho",
+      "explica": "Horario de trabajo = horário de trabalho.",
+      "imagem": "🕘"
+    },
+    {
+      "destaque": "[Sueldo]",
+      "opcoes": [
+        "sonho",
+        "solteiro",
+        "salário",
+        "folga"
+      ],
+      "correta": "salário",
+      "explica": "Sueldo = salário.",
+      "imagem": "💰"
+    },
+    {
+      "destaque": "[Media jornada]",
+      "opcoes": [
+        "meio período",
+        "período integral",
+        "jornada noturna",
+        "férias"
+      ],
+      "correta": "meio período",
+      "explica": "Media jornada = meio período.",
+      "imagem": "⏱️"
+    },
+    {
+      "destaque": "[Puesto de trabajo]",
+      "opcoes": [
+        "posto de gasolina",
+        "local da entrevista",
+        "vaga, cargo",
+        "demissão"
+      ],
+      "correta": "vaga, cargo",
+      "explica": "Puesto de trabajo = vaga, cargo.",
+      "imagem": "🪪"
+    },
+    {
+      "destaque": "[Jefe]",
+      "opcoes": [
+        "chefe",
+        "colega",
+        "cliente",
+        "estagiário"
+      ],
+      "correta": "chefe",
+      "explica": "Jefe = chefe.",
+      "imagem": "👔"
+    },
+    {
+      "destaque": "[Vacaciones]",
+      "opcoes": [
+        "vagas",
+        "vacinas",
+        "férias",
+        "faltas"
+      ],
+      "correta": "férias",
+      "explica": "Vacaciones = férias.",
+      "imagem": "🏖️"
+    },
+    {
+      "destaque": "[Estoy disponible de inmediato.]",
+      "opcoes": [
+        "posso começar imediatamente",
+        "estou ocupado agora",
+        "não tenho tempo",
+        "só posso amanhã à noite"
+      ],
+      "correta": "posso começar imediatamente",
+      "explica": "Estoy disponible de inmediato. = posso começar imediatamente.",
+      "imagem": "✅"
+    },
+    {
+      "destaque": "[¿Por qué quiere trabajar con nosotros?]",
+      "opcoes": [
+        "pergunta sobre o endereço",
+        "pergunta sobre o transporte",
+        "pergunta sobre a motivação para a vaga",
+        "pergunta sobre o horário de almoço"
+      ],
+      "correta": "pergunta sobre a motivação para a vaga",
+      "explica": "¿Por qué quiere trabajar con nosotros? = pergunta sobre a motivação para a vaga.",
+      "imagem": "❓"
+    }
+  ]
+}

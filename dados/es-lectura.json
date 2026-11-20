@@ -1,0 +1,242 @@
+{
+  "titulo": "Lectura: textos cortos",
+  "emoji": "📖",
+  "instrucao": "Lee el texto y contesta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿Cuántos años tiene Lucía?",
+      "opcoes": [
+        "12",
+        "15",
+        "2",
+        "20"
+      ],
+      "correta": "12",
+      "explica": "\"Tengo 12 años\". Quem tem 15 é o irmão, Pablo.",
+      "texto": "¡Hola! Me llamo Lucía y tengo 12 años. Vivo en Sevilla, en el sur de España, con mis padres y mi hermano Pablo, que tiene 15 años. Me encanta bailar flamenco y leer cómics. Mi comida favorita es la tortilla de patatas, pero no me gustan las espinacas. Los sábados voy al parque con mis amigas.",
+      "imagem": "🎂"
+    },
+    {
+      "destaque": "¿Dónde vive Lucía?",
+      "opcoes": [
+        "en Madrid",
+        "en Sevilla",
+        "en México",
+        "en Brasil"
+      ],
+      "correta": "en Sevilla",
+      "explica": "\"Vivo en Sevilla, en el sur de España\".",
+      "texto": "¡Hola! Me llamo Lucía y tengo 12 años. Vivo en Sevilla, en el sur de España, con mis padres y mi hermano Pablo, que tiene 15 años. Me encanta bailar flamenco y leer cómics. Mi comida favorita es la tortilla de patatas, pero no me gustan las espinacas. Los sábados voy al parque con mis amigas.",
+      "imagem": "🏠"
+    },
+    {
+      "destaque": "¿Qué NO le gusta a Lucía?",
+      "opcoes": [
+        "la tortilla de patatas",
+        "el flamenco",
+        "los cómics",
+        "las espinacas"
+      ],
+      "correta": "las espinacas",
+      "explica": "\"No me gustan las espinacas\" = não gosto de espinafre.",
+      "texto": "¡Hola! Me llamo Lucía y tengo 12 años. Vivo en Sevilla, en el sur de España, con mis padres y mi hermano Pablo, que tiene 15 años. Me encanta bailar flamenco y leer cómics. Mi comida favorita es la tortilla de patatas, pero no me gustan las espinacas. Los sábados voy al parque con mis amigas.",
+      "imagem": "🥬"
+    },
+    {
+      "destaque": "¿A qué hora se levanta Carlos?",
+      "opcoes": [
+        "a las siete",
+        "a las nueve",
+        "a las diez y media",
+        "a las seis"
+      ],
+      "correta": "a las siete",
+      "explica": "\"Se levanta a las siete\".",
+      "texto": "Carlos se levanta a las siete. Desayuna pan con mantequilla y un vaso de leche. Va a la escuela en autobús. Por la tarde juega al fútbol con sus amigos y después hace los deberes. Cena con su familia a las nueve y se acuesta a las diez y media.",
+      "imagem": "⏰"
+    },
+    {
+      "destaque": "¿Cómo va Carlos a la escuela?",
+      "opcoes": [
+        "a pie",
+        "en autobús",
+        "en coche",
+        "en bicicleta"
+      ],
+      "correta": "en autobús",
+      "explica": "\"Va a la escuela en autobús\".",
+      "texto": "Carlos se levanta a las siete. Desayuna pan con mantequilla y un vaso de leche. Va a la escuela en autobús. Por la tarde juega al fútbol con sus amigos y después hace los deberes. Cena con su familia a las nueve y se acuesta a las diez y media.",
+      "imagem": "🚌"
+    },
+    {
+      "destaque": "¿Qué hace Carlos por la tarde?",
+      "opcoes": [
+        "cena con su familia",
+        "duerme la siesta",
+        "ve la televisión",
+        "juega al fútbol y hace los deberes"
+      ],
+      "correta": "juega al fútbol y hace los deberes",
+      "explica": "\"Por la tarde juega al fútbol (...) y después hace los deberes\".",
+      "texto": "Carlos se levanta a las siete. Desayuna pan con mantequilla y un vaso de leche. Va a la escuela en autobús. Por la tarde juega al fútbol con sus amigos y después hace los deberes. Cena con su familia a las nueve y se acuesta a las diez y media.",
+      "imagem": "⚽"
+    },
+    {
+      "destaque": "¿Qué busca el anuncio?",
+      "opcoes": [
+        "un perro perdido",
+        "un gato",
+        "un dueño para un perro",
+        "una casa"
+      ],
+      "correta": "un perro perdido",
+      "explica": "\"Se busca perro perdido\" = procura-se cachorro perdido.",
+      "texto": "SE BUSCA PERRO PERDIDO. Se llama Toby. Es pequeño, blanco y tiene una mancha negra en la oreja. Se perdió el domingo cerca del parque Central. Si lo ve, llame al 555 23 41. ¡Gracias!",
+      "imagem": "🐶"
+    },
+    {
+      "destaque": "¿Cómo es Toby?",
+      "opcoes": [
+        "grande y negro",
+        "pequeño y blanco, con una mancha negra",
+        "marrón y blanco",
+        "pequeño y gris"
+      ],
+      "correta": "pequeño y blanco, con una mancha negra",
+      "explica": "\"Es pequeño, blanco y tiene una mancha negra en la oreja\".",
+      "texto": "SE BUSCA PERRO PERDIDO. Se llama Toby. Es pequeño, blanco y tiene una mancha negra en la oreja. Se perdió el domingo cerca del parque Central. Si lo ve, llame al 555 23 41. ¡Gracias!",
+      "imagem": "🐕"
+    },
+    {
+      "destaque": "¿Dónde se perdió Toby?",
+      "opcoes": [
+        "en la playa",
+        "en la escuela",
+        "en el centro comercial",
+        "cerca del parque Central"
+      ],
+      "correta": "cerca del parque Central",
+      "explica": "\"Se perdió (...) cerca del parque Central\".",
+      "texto": "SE BUSCA PERRO PERDIDO. Se llama Toby. Es pequeño, blanco y tiene una mancha negra en la oreja. Se perdió el domingo cerca del parque Central. Si lo ve, llame al 555 23 41. ¡Gracias!",
+      "imagem": "🌳"
+    },
+    {
+      "destaque": "¿Qué tipo de texto es?",
+      "opcoes": [
+        "una receta",
+        "un poema",
+        "una noticia",
+        "una carta"
+      ],
+      "correta": "una receta",
+      "explica": "Ingredientes + modo de preparo = receita.",
+      "texto": "BATIDO DE PLÁTANO. Ingredientes: 1 plátano, 1 vaso de leche y 1 cucharada de miel. Preparación: pela el plátano y córtalo en trozos. Pon todo en la batidora y bate durante un minuto. ¡Sírvelo frío!",
+      "imagem": "🍌"
+    },
+    {
+      "destaque": "¿Cuántos ingredientes tiene el batido?",
+      "opcoes": [
+        "dos",
+        "tres",
+        "cuatro",
+        "uno"
+      ],
+      "correta": "tres",
+      "explica": "Plátano, leche y miel: tres ingredientes.",
+      "texto": "BATIDO DE PLÁTANO. Ingredientes: 1 plátano, 1 vaso de leche y 1 cucharada de miel. Preparación: pela el plátano y córtalo en trozos. Pon todo en la batidora y bate durante un minuto. ¡Sírvelo frío!",
+      "imagem": "🥛"
+    },
+    {
+      "destaque": "Los verbos \"pela\", \"pon\" y \"bate\" están en…",
+      "opcoes": [
+        "pasado",
+        "futuro",
+        "infinitivo",
+        "imperativo"
+      ],
+      "correta": "imperativo",
+      "explica": "Receitas dão instruções no imperativo.",
+      "texto": "BATIDO DE PLÁTANO. Ingredientes: 1 plátano, 1 vaso de leche y 1 cucharada de miel. Preparación: pela el plátano y córtalo en trozos. Pon todo en la batidora y bate durante un minuto. ¡Sírvelo frío!",
+      "imagem": "📢"
+    },
+    {
+      "destaque": "¿Para qué escribe Elena?",
+      "opcoes": [
+        "para invitar a Marta al cine",
+        "para cancelar el cine",
+        "para pedir dinero",
+        "para contar una película"
+      ],
+      "correta": "para invitar a Marta al cine",
+      "explica": "\"¿Vienes al cine mañana?\" é um convite.",
+      "texto": "Hola, Marta: ¿vienes al cine mañana? La película empieza a las seis y media. Te espero en la puerta del cine a las seis y cuarto. Si no puedes, mándame un mensaje. Besos, Elena.",
+      "imagem": "🎬"
+    },
+    {
+      "destaque": "¿A qué hora empieza la película?",
+      "opcoes": [
+        "a las seis y cuarto",
+        "a las seis y media",
+        "a las seis",
+        "a las siete"
+      ],
+      "correta": "a las seis y media",
+      "explica": "\"La película empieza a las seis y media\". O encontro é às seis e quinze.",
+      "texto": "Hola, Marta: ¿vienes al cine mañana? La película empieza a las seis y media. Te espero en la puerta del cine a las seis y cuarto. Si no puedes, mándame un mensaje. Besos, Elena.",
+      "imagem": "🕡"
+    },
+    {
+      "destaque": "¿Dónde se van a encontrar?",
+      "opcoes": [
+        "en casa de Marta",
+        "en la escuela",
+        "en el parque",
+        "en la puerta del cine"
+      ],
+      "correta": "en la puerta del cine",
+      "explica": "\"Te espero en la puerta del cine\".",
+      "texto": "Hola, Marta: ¿vienes al cine mañana? La película empieza a las seis y media. Te espero en la puerta del cine a las seis y cuarto. Si no puedes, mándame un mensaje. Besos, Elena.",
+      "imagem": "🚪"
+    },
+    {
+      "destaque": "¿Qué tiempo hará en el norte?",
+      "opcoes": [
+        "lluvia y frío",
+        "sol y calor",
+        "nieve",
+        "viento y calor"
+      ],
+      "correta": "lluvia y frío",
+      "explica": "\"En el norte habrá lluvias y temperaturas bajas\".",
+      "texto": "PRONÓSTICO PARA MAÑANA: en el norte habrá lluvias y temperaturas bajas, entre 8 y 12 grados. En el sur hará sol y calor, con máximas de 30 grados. En la costa habrá viento fuerte por la tarde.",
+      "imagem": "🌧️"
+    },
+    {
+      "destaque": "¿Dónde hará calor?",
+      "opcoes": [
+        "en el norte",
+        "en el sur",
+        "en la costa",
+        "en todas partes"
+      ],
+      "correta": "en el sur",
+      "explica": "\"En el sur hará sol y calor\".",
+      "texto": "PRONÓSTICO PARA MAÑANA: en el norte habrá lluvias y temperaturas bajas, entre 8 y 12 grados. En el sur hará sol y calor, con máximas de 30 grados. En la costa habrá viento fuerte por la tarde.",
+      "imagem": "☀️"
+    },
+    {
+      "destaque": "¿Cuándo habrá viento fuerte en la costa?",
+      "opcoes": [
+        "por la mañana",
+        "por la noche",
+        "todo el día",
+        "por la tarde"
+      ],
+      "correta": "por la tarde",
+      "explica": "\"En la costa habrá viento fuerte por la tarde\".",
+      "texto": "PRONÓSTICO PARA MAÑANA: en el norte habrá lluvias y temperaturas bajas, entre 8 y 12 grados. En el sur hará sol y calor, con máximas de 30 grados. En la costa habrá viento fuerte por la tarde.",
+      "imagem": "🌬️"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "titulo": "Presente de los verbos regulares (-ar, -er, -ir)",
+  "emoji": "🔁",
+  "instrucao": "Conjuga el verbo en presente",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Yo ___ (hablar) español.",
+      "opcoes": [
+        "hablo",
+        "habla",
+        "hablas",
+        "hablamos"
+      ],
+      "correta": "hablo",
+      "explica": "-AR: yo hablo, tú hablas, él habla, nosotros hablamos, vosotros habláis, ellos hablan."
+    },
+    {
+      "destaque": "Tú ___ (comer) mucho.",
+      "opcoes": [
+        "comes",
+        "comas",
+        "come",
+        "comés"
+      ],
+      "correta": "comes",
+      "explica": "-ER: yo como, tú comes, él come."
+    },
+    {
+      "destaque": "Ella ___ (vivir) en Lima.",
+      "opcoes": [
+        "vive",
+        "vives",
+        "vivo",
+        "viva"
+      ],
+      "correta": "vive",
+      "explica": "-IR: yo vivo, tú vives, ella vive."
+    },
+    {
+      "destaque": "Nosotros ___ (estudiar) por la tarde.",
+      "opcoes": [
+        "estudiamos",
+        "estudiemos",
+        "estudian",
+        "estudiáis"
+      ],
+      "correta": "estudiamos",
+      "explica": "Nosotros + -AR: -amos."
+    },
+    {
+      "destaque": "Vosotros ___ (beber) agua.",
+      "opcoes": [
+        "bebéis",
+        "bebís",
+        "beben",
+        "bebemos"
+      ],
+      "correta": "bebéis",
+      "explica": "Vosotros + -ER: -éis."
+    },
+    {
+      "destaque": "Ellos ___ (escribir) cartas.",
+      "opcoes": [
+        "escriben",
+        "escribin",
+        "escribe",
+        "escribimos"
+      ],
+      "correta": "escriben",
+      "explica": "Ellos + -IR: -en (igual ao -ER)."
+    },
+    {
+      "destaque": "Usted ___ (trabajar) mucho.",
+      "opcoes": [
+        "trabaja",
+        "trabajas",
+        "trabajo",
+        "trabajan"
+      ],
+      "correta": "trabaja",
+      "explica": "USTED usa a forma de él/ella: usted trabaja."
+    },
+    {
+      "destaque": "Yo ___ (aprender) rápido.",
+      "opcoes": [
+        "aprendo",
+        "aprende",
+        "aprendes",
+        "aprenden"
+      ],
+      "correta": "aprendo",
+      "explica": "Yo + -ER: -o."
+    },
+    {
+      "destaque": "Mis amigos ___ (bailar) muy bien.",
+      "opcoes": [
+        "bailan",
+        "baila",
+        "bailáis",
+        "bailamos"
+      ],
+      "correta": "bailan",
+      "explica": "Mis amigos = ellos: bailan."
+    },
+    {
+      "destaque": "¿Tú ___ (abrir) la ventana, por favor?",
+      "opcoes": [
+        "abres",
+        "abre",
+        "abrís",
+        "abro"
+      ],
+      "correta": "abres",
+      "explica": "Tú + -IR: -es."
+    },
+    {
+      "destaque": "Nosotros ___ (vivir) cerca del colegio.",
+      "opcoes": [
+        "vivimos",
+        "vivemos",
+        "viven",
+        "vivís"
+      ],
+      "correta": "vivimos",
+      "explica": "Nosotros + -IR: -imos (diferente do -ER: -emos)."
+    },
+    {
+      "destaque": "Ustedes ___ (leer) el periódico.",
+      "opcoes": [
+        "leen",
+        "lee",
+        "leéis",
+        "leemos"
+      ],
+      "correta": "leen",
+      "explica": "USTEDES usa a forma de ellos: leen."
+    },
+    {
+      "destaque": "María ___ (cantar) en el coro.",
+      "opcoes": [
+        "canta",
+        "cantas",
+        "canto",
+        "cantan"
+      ],
+      "correta": "canta",
+      "explica": "Ella/María + -AR: -a."
+    },
+    {
+      "destaque": "Yo siempre ___ (escuchar) música.",
+      "opcoes": [
+        "escucho",
+        "escucha",
+        "escuchas",
+        "escuchan"
+      ],
+      "correta": "escucho",
+      "explica": "Yo + -AR: -o."
+    }
+  ]
+}

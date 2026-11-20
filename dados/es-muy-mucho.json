@@ -1,0 +1,140 @@
+{
+  "titulo": "Muy o mucho",
+  "emoji": "💪",
+  "instrucao": "Completa con MUY o MUCHO",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "Hoy hace ___ calor.",
+      "opcoes": [
+        "mucho",
+        "muy",
+        "mucha",
+        "muchos"
+      ],
+      "correta": "mucho",
+      "explica": "Antes de substantivo: MUCHO (calor é masculino)."
+    },
+    {
+      "destaque": "Estoy ___ cansado.",
+      "opcoes": [
+        "muy",
+        "mucho",
+        "mucha",
+        "muito"
+      ],
+      "correta": "muy",
+      "explica": "Antes de adjetivo: MUY."
+    },
+    {
+      "destaque": "Mi hermano come ___.",
+      "opcoes": [
+        "mucho",
+        "muy",
+        "mucha",
+        "muchos"
+      ],
+      "correta": "mucho",
+      "explica": "Depois do verbo: MUCHO."
+    },
+    {
+      "destaque": "Ya es ___ tarde.",
+      "opcoes": [
+        "muy",
+        "mucho",
+        "mucha",
+        "muchas"
+      ],
+      "correta": "muy",
+      "explica": "Antes de advérbio: MUY tarde."
+    },
+    {
+      "destaque": "Tengo ___ amigos en la escuela.",
+      "opcoes": [
+        "muchos",
+        "mucho",
+        "muy",
+        "muchas"
+      ],
+      "correta": "muchos",
+      "explica": "Mucho concorda com o substantivo: muchos amigos."
+    },
+    {
+      "destaque": "Hay ___ gente en la playa.",
+      "opcoes": [
+        "mucha",
+        "mucho",
+        "muy",
+        "muchos"
+      ],
+      "correta": "mucha",
+      "explica": "Gente é feminino singular: mucha gente."
+    },
+    {
+      "destaque": "El examen salió ___ bien.",
+      "opcoes": [
+        "muy",
+        "mucho",
+        "mucha",
+        "muito"
+      ],
+      "correta": "muy",
+      "explica": "Antes de advérbio (bien): MUY."
+    },
+    {
+      "destaque": "Me gusta ___ el chocolate.",
+      "opcoes": [
+        "mucho",
+        "muy",
+        "mucha",
+        "muito"
+      ],
+      "correta": "mucho",
+      "explica": "Intensificando o verbo: me gusta mucho."
+    },
+    {
+      "destaque": "Así es ___ mejor.",
+      "opcoes": [
+        "mucho",
+        "muy",
+        "mucha",
+        "muito"
+      ],
+      "correta": "mucho",
+      "explica": "Exceção: com mejor, peor, más, menos, mayor e menor usa-se MUCHO."
+    },
+    {
+      "destaque": "Ellas son ___ simpáticas.",
+      "opcoes": [
+        "muy",
+        "muchas",
+        "mucho",
+        "muitas"
+      ],
+      "correta": "muy",
+      "explica": "Antes de adjetivo, MUY não varia: muy simpáticas."
+    },
+    {
+      "destaque": "Hoy hay ___ tareas.",
+      "opcoes": [
+        "muchas",
+        "muy",
+        "mucho",
+        "muchos"
+      ],
+      "correta": "muchas",
+      "explica": "Tareas é feminino plural: muchas tareas."
+    },
+    {
+      "destaque": "El café está ___ caliente.",
+      "opcoes": [
+        "muy",
+        "mucho",
+        "mucha",
+        "muito"
+      ],
+      "correta": "muy",
+      "explica": "Antes de adjetivo: muy caliente."
+    }
+  ]
+}

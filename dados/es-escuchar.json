@@ -1,0 +1,204 @@
+{
+  "titulo": "Escucha y elige",
+  "emoji": "🎧",
+  "instrucao": "Escucha y elige lo que oíste",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "perro",
+        "pero"
+      ],
+      "correta": "perro",
+      "explica": "PERRO (cachorro) tem o R forte, vibrado. PERO (mas) tem R fraco.",
+      "ouvir": "perro",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "caro",
+        "carro"
+      ],
+      "correta": "caro",
+      "explica": "CARO (caro) tem R fraco. CARRO tem RR forte.",
+      "ouvir": "caro",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "carro",
+        "caro"
+      ],
+      "correta": "carro",
+      "explica": "CARRO: RR vibrado.",
+      "ouvir": "carro",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "pena",
+        "peña"
+      ],
+      "correta": "peña",
+      "explica": "Ñ soa como \"nh\": peña ≈ \"penha\".",
+      "ouvir": "peña",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "mono",
+        "moño"
+      ],
+      "correta": "moño",
+      "explica": "MOÑO (coque) tem Ñ; MONO (macaco) tem N.",
+      "ouvir": "moño",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué palabra escuchaste?",
+      "opcoes": [
+        "pollo",
+        "polo"
+      ],
+      "correta": "pollo",
+      "explica": "LL soa parecido com \"i\" ou \"j\" (depende do país): pollo ≈ \"poio\".",
+      "ouvir": "pollo",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "16",
+        "60",
+        "6",
+        "66"
+      ],
+      "correta": "16",
+      "explica": "Dieciséis = 16.",
+      "ouvir": "dieciséis",
+      "imagem": "🔢"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "70",
+        "60",
+        "17",
+        "7"
+      ],
+      "correta": "70",
+      "explica": "Setenta = 70 (sesenta = 60).",
+      "ouvir": "setenta",
+      "imagem": "🔢"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "60",
+        "70",
+        "16",
+        "6"
+      ],
+      "correta": "60",
+      "explica": "Sesenta = 60.",
+      "ouvir": "sesenta",
+      "imagem": "🔢"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "15",
+        "50",
+        "5",
+        "55"
+      ],
+      "correta": "15",
+      "explica": "Quince = 15; cincuenta = 50.",
+      "ouvir": "quince",
+      "imagem": "🔢"
+    },
+    {
+      "destaque": "¿Qué número escuchaste?",
+      "opcoes": [
+        "500",
+        "50",
+        "5000",
+        "105"
+      ],
+      "correta": "500",
+      "explica": "Quinientos = 500.",
+      "ouvir": "quinientos",
+      "imagem": "🔢"
+    },
+    {
+      "destaque": "¿Qué escuchaste?",
+      "opcoes": [
+        "🍓",
+        "🍎",
+        "🍌",
+        "🍇"
+      ],
+      "correta": "🍓",
+      "explica": "Fresa = morango.",
+      "ouvir": "fresa",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué escuchaste?",
+      "opcoes": [
+        "🐻",
+        "🐶",
+        "🐱",
+        "🐭"
+      ],
+      "correta": "🐻",
+      "explica": "Oso = urso.",
+      "ouvir": "oso",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué escuchaste?",
+      "opcoes": [
+        "🔑",
+        "🚪",
+        "🛏️",
+        "💡"
+      ],
+      "correta": "🔑",
+      "explica": "Llave = chave.",
+      "ouvir": "llave",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué escuchaste?",
+      "opcoes": [
+        "🌧️",
+        "☀️",
+        "❄️",
+        "🌈"
+      ],
+      "correta": "🌧️",
+      "explica": "Lluvia = chuva.",
+      "ouvir": "lluvia",
+      "imagem": "🎧"
+    },
+    {
+      "destaque": "¿Qué escuchaste?",
+      "opcoes": [
+        "👓",
+        "👟",
+        "👗",
+        "👒"
+      ],
+      "correta": "👓",
+      "explica": "Gafas = óculos.",
+      "ouvir": "gafas",
+      "imagem": "🎧"
+    }
+  ]
+}

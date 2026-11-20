@@ -1,0 +1,176 @@
+{
+  "titulo": "¿Qué hora es? (las horas)",
+  "emoji": "🕐",
+  "instrucao": "¿Qué hora es?",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "🕐",
+      "opcoes": [
+        "Es la una.",
+        "Son las una.",
+        "Es la dos.",
+        "Son la una."
+      ],
+      "correta": "Es la una.",
+      "explica": "Uma hora usa o singular: ES LA una.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕑",
+      "opcoes": [
+        "Es la dos.",
+        "Son las dos.",
+        "Son los dos.",
+        "Son las doce."
+      ],
+      "correta": "Son las dos.",
+      "explica": "A partir das duas: SON LAS dos.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕒",
+      "opcoes": [
+        "Son las tres.",
+        "Son las dos.",
+        "Son las tres y media.",
+        "Es la tres."
+      ],
+      "correta": "Son las tres.",
+      "explica": "Hora exata: son las tres (en punto).",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕞",
+      "opcoes": [
+        "Son las tres y cuarto.",
+        "Son las tres y media.",
+        "Son las cuatro y media.",
+        "Son las tres."
+      ],
+      "correta": "Son las tres y media.",
+      "explica": "Y media = e meia (30 minutos).",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕜",
+      "opcoes": [
+        "Es la una y media.",
+        "Son las una y media.",
+        "Es la una y cuarto.",
+        "Son las dos y media."
+      ],
+      "correta": "Es la una y media.",
+      "explica": "Uma e meia: es la una y media.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕖",
+      "opcoes": [
+        "Son las seis.",
+        "Son las siete.",
+        "Son las siete y media.",
+        "Son las ocho."
+      ],
+      "correta": "Son las siete.",
+      "explica": "Sete horas: son las siete.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "🕛",
+      "opcoes": [
+        "Son las doce.",
+        "Son las dos.",
+        "Es la doce.",
+        "Son las once."
+      ],
+      "correta": "Son las doce.",
+      "explica": "Doze horas: son las doce (ou es mediodía / es medianoche).",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "2:15",
+      "opcoes": [
+        "Son las dos menos cuarto.",
+        "Son las dos y cuarto.",
+        "Son las tres menos cuarto.",
+        "Son las dos y media."
+      ],
+      "correta": "Son las dos y cuarto.",
+      "explica": "Y cuarto = e quinze.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "2:45",
+      "opcoes": [
+        "Son las tres menos cuarto.",
+        "Son las dos menos cuarto.",
+        "Son las tres y cuarto.",
+        "Son las dos y cuarto."
+      ],
+      "correta": "Son las tres menos cuarto.",
+      "explica": "Menos cuarto = quinze para: faltam 15 minutos para as três.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "4:50",
+      "opcoes": [
+        "Son las cuatro menos diez.",
+        "Son las cinco menos diez.",
+        "Son las cinco y diez.",
+        "Son las cuatro y diez."
+      ],
+      "correta": "Son las cinco menos diez.",
+      "explica": "Depois da meia, conta-se o que falta para a próxima hora: cinco menos diez.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "7:20",
+      "opcoes": [
+        "Son las siete y veinte.",
+        "Son las ocho menos veinte.",
+        "Son las siete menos veinte.",
+        "Son las veinte y siete."
+      ],
+      "correta": "Son las siete y veinte.",
+      "explica": "Até a meia: hora + Y + minutos.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "9:05",
+      "opcoes": [
+        "Son las cinco y nueve.",
+        "Son las nueve y cinco.",
+        "Son las nueve menos cinco.",
+        "Son las diez menos cinco."
+      ],
+      "correta": "Son las nueve y cinco.",
+      "explica": "Nove e cinco: son las nueve y cinco.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "12:45",
+      "opcoes": [
+        "Es la una menos cuarto.",
+        "Son las doce menos cuarto.",
+        "Son la una menos cuarto.",
+        "Es la una y cuarto."
+      ],
+      "correta": "Es la una menos cuarto.",
+      "explica": "Falta um quarto para UMA hora: es la una menos cuarto.",
+      "enunciado": "¿Qué hora es?"
+    },
+    {
+      "destaque": "11:35",
+      "opcoes": [
+        "Son las once menos veinticinco.",
+        "Son las doce menos veinticinco.",
+        "Son las once y veinticinco.",
+        "Es la doce menos veinticinco."
+      ],
+      "correta": "Son las doce menos veinticinco.",
+      "explica": "Onze e trinta e cinco = faltam 25 para as doze.",
+      "enunciado": "¿Qué hora es?"
+    }
+  ]
+}

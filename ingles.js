@@ -3,6 +3,7 @@
 (function(){
   'use strict';
   var EN = {}, vozes = [];
+  EN.lang = 'en-US';   // idioma padrão da voz (as telas abertas com ?lingua=es trocam para 'es-ES')
   function carregarVozes(){ try { vozes = window.speechSynthesis ? window.speechSynthesis.getVoices() : []; } catch (e) { vozes = []; } }
   carregarVozes();
   try { if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = carregarVozes; } catch (e) {}
@@ -23,7 +24,7 @@
     try {
       if (!op.fila) window.speechSynthesis.cancel();
       var u = new SpeechSynthesisUtterance(String(texto).replace(/…/g, '...'));
-      u.lang = op.lang || 'en-US'; u.rate = op.rate || 0.9; u.pitch = op.pitch || 1;
+      u.lang = op.lang || EN.lang || 'en-US'; u.rate = op.rate || 0.9; u.pitch = op.pitch || 1;
       var v = EN.voz(u.lang); if (v) u.voice = v;
       if (fim){ u.onend = fim; u.onerror = fim; }
       window.speechSynthesis.speak(u);
@@ -48,5 +49,8 @@
     t = String(t); for (i = 0; i < t.length; i++){ j = de.indexOf(t.charAt(i)); s += j >= 0 ? para.charAt(j) : t.charAt(i); }
     return s;
   };
+  // ?lingua=es: as telas de Inglês (flashcards, role-play) também servem para o Espanhol
+  EN.LINGUAS = {en: {cod: 'en', voz: 'en-US', nome: 'inglês', Nome: 'Inglês', bandeira: '🇬🇧'}, es: {cod: 'es', voz: 'es-ES', nome: 'espanhol', Nome: 'Espanhol', bandeira: '🇪🇸'}};
+  EN.lingua = function(){ var l = EN.LINGUAS[EN.param('lingua')] || EN.LINGUAS.en; EN.lang = l.voz; return l; };
   window.EN = EN;
 })();

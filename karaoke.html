@@ -102,7 +102,7 @@
   }
   function pintarInfo(){
     var l = itensDe(arquivo, $('selGrupo').value);
-    $('infoArq').textContent = (arquivo.titulo || '') + ' • ' + l.length + (arquivo.frases ? ' textos' : ' palavras') + (idioma.indexOf('en') === 0 ? ' • em inglês' : '');
+    $('infoArq').textContent = (arquivo.titulo || '') + ' • ' + l.length + (arquivo.frases ? ' textos' : ' palavras') + (idioma.indexOf('en') === 0 ? ' • em inglês' : idioma.indexOf('es') === 0 ? ' • em espanhol' : '');
   }
   ARC.seletor($('selArquivo'), 'leitura', 'leitura-alfabetizacao.json', function(arq){
     $('infoArq').textContent = 'Carregando…'; arquivo = null;

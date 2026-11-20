@@ -1,0 +1,93 @@
+{
+  "titulo": "Dado de conversación (habla en español)",
+  "idioma": "es-ES",
+  "dados": [
+    {
+      "nome": "Tema",
+      "cor": "#e74c3c",
+      "faces": [
+        {
+          "emoji": "👪",
+          "texto": "mi familia"
+        },
+        {
+          "emoji": "🍕",
+          "texto": "mi comida favorita"
+        },
+        {
+          "emoji": "🤝",
+          "texto": "mi mejor amigo"
+        },
+        {
+          "emoji": "🏖️",
+          "texto": "mi fin de semana"
+        },
+        {
+          "emoji": "💼",
+          "texto": "el trabajo de mis sueños"
+        },
+        {
+          "emoji": "🏙️",
+          "texto": "mi ciudad"
+        },
+        {
+          "emoji": "🐶",
+          "texto": "los animales"
+        },
+        {
+          "emoji": "⚽",
+          "texto": "los deportes"
+        },
+        {
+          "emoji": "🎵",
+          "texto": "la música"
+        },
+        {
+          "emoji": "🏫",
+          "texto": "mi escuela"
+        }
+      ]
+    },
+    {
+      "nome": "Desafío",
+      "cor": "#f1c40f",
+      "faces": [
+        {
+          "emoji": "3️⃣",
+          "texto": "di tres frases"
+        },
+        {
+          "emoji": "❓",
+          "texto": "haz una pregunta a un compañero"
+        },
+        {
+          "emoji": "😂",
+          "texto": "cuéntalo de forma divertida"
+        },
+        {
+          "emoji": "⏱️",
+          "texto": "habla durante 30 segundos"
+        },
+        {
+          "emoji": "🎭",
+          "texto": "actúa sin hablar"
+        },
+        {
+          "emoji": "✏️",
+          "texto": "escríbelo en la pizarra"
+        }
+      ]
+    }
+  ],
+  "inicios": [
+    "¡Habla en español!",
+    "¡Habla con un compañero!",
+    "¿Listos? ¡A hablar!"
+  ],
+  "conectivos": [
+    "Me gusta… / No me gusta… / Me encanta…",
+    "Mi… favorito es…",
+    "y • pero • porque • también",
+    "¿Te gusta…? / ¿Cuál es tu… favorito?"
+  ]
+}

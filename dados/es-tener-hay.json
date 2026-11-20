@@ -1,0 +1,162 @@
+{
+  "titulo": "Tener, hay y estar",
+  "emoji": "📦",
+  "instrucao": "Elige la forma correcta",
+  "idioma": "es-ES",
+  "rodadas": [
+    {
+      "destaque": "___ un libro en la mesa.",
+      "opcoes": [
+        "Hay",
+        "Está",
+        "Tiene",
+        "Es"
+      ],
+      "correta": "Hay",
+      "explica": "HAY (há, tem) apresenta algo novo, sem artigo definido."
+    },
+    {
+      "destaque": "El libro ___ en la mesa.",
+      "opcoes": [
+        "está",
+        "hay",
+        "tiene",
+        "es"
+      ],
+      "correta": "está",
+      "explica": "Com artigo definido (el libro), a localização usa ESTAR."
+    },
+    {
+      "destaque": "Yo ___ (tener) dos hermanos.",
+      "opcoes": [
+        "tengo",
+        "tiene",
+        "hay",
+        "tenho"
+      ],
+      "correta": "tengo",
+      "explica": "Tener na 1ª pessoa: tengo."
+    },
+    {
+      "destaque": "¿Cuántos años ___ (tener, tú)?",
+      "opcoes": [
+        "tienes",
+        "tiene",
+        "eres",
+        "hay"
+      ],
+      "correta": "tienes",
+      "explica": "Idade usa TENER: ¿cuántos años tienes? — Tengo trece años."
+    },
+    {
+      "destaque": "En mi ciudad ___ muchos parques.",
+      "opcoes": [
+        "hay",
+        "han",
+        "hayan",
+        "están"
+      ],
+      "correta": "hay",
+      "explica": "HAY não vai para o plural: hay un parque / hay muchos parques."
+    },
+    {
+      "destaque": "¿Dónde ___ las llaves?",
+      "opcoes": [
+        "están",
+        "hay",
+        "tienen",
+        "son"
+      ],
+      "correta": "están",
+      "explica": "Las llaves (definido) → ESTAR: ¿dónde están?"
+    },
+    {
+      "destaque": "Mañana tengo ___ estudiar.",
+      "opcoes": [
+        "que",
+        "de",
+        "a",
+        "para"
+      ],
+      "correta": "que",
+      "explica": "TENER QUE + infinitivo = ter que (obrigação pessoal)."
+    },
+    {
+      "destaque": "Para aprobar, ___ que estudiar (é preciso, de modo geral).",
+      "opcoes": [
+        "hay",
+        "es",
+        "está",
+        "ha"
+      ],
+      "correta": "hay",
+      "explica": "HAY QUE + infinitivo = é preciso (obrigação impessoal)."
+    },
+    {
+      "destaque": "Tengo ___ (fome).",
+      "opcoes": [
+        "hambre",
+        "fame",
+        "hombre",
+        "hambriento"
+      ],
+      "correta": "hambre",
+      "explica": "Tener hambre = estar com fome. (Hombre = homem!)"
+    },
+    {
+      "destaque": "Tengo mucho ___ (frio).",
+      "opcoes": [
+        "frío",
+        "fría",
+        "friaje",
+        "calor"
+      ],
+      "correta": "frío",
+      "explica": "Tener frío = estar com frio."
+    },
+    {
+      "destaque": "Tengo ___ (sono), me voy a la cama.",
+      "opcoes": [
+        "sueño",
+        "sono",
+        "sueña",
+        "dormir"
+      ],
+      "correta": "sueño",
+      "explica": "Tener sueño = estar com sono. Sueño também é \"sonho\"."
+    },
+    {
+      "destaque": "Tienes ___ (razão).",
+      "opcoes": [
+        "razón",
+        "rasón",
+        "razão",
+        "cierto"
+      ],
+      "correta": "razón",
+      "explica": "Tener razón = ter razão."
+    },
+    {
+      "destaque": "Tengo ___ (medo) de las arañas.",
+      "opcoes": [
+        "miedo",
+        "medo",
+        "mido",
+        "susto"
+      ],
+      "correta": "miedo",
+      "explica": "Tener miedo = ter medo."
+    },
+    {
+      "destaque": "¿___ (você tem) hermanos? —Sí, tengo dos.",
+      "opcoes": [
+        "Tienes",
+        "Hay",
+        "Estás",
+        "Eres"
+      ],
+      "correta": "Tienes",
+      "explica": "Perguntar se alguém tem algo: ¿Tienes…?"
+    }
+  ]
+}

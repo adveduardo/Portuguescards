@@ -48,7 +48,7 @@
       <div class="cartao">
         <label class="campo" for="selBaralho">Baralho de palavras</label>
         <select id="selBaralho"></select>
-        <label style="display:block;margin:8px 0"><input type="checkbox" id="chkFigura" checked> Mostrar a figura junto (nos temas em inglês)</label>
+        <label style="display:block;margin:8px 0"><input type="checkbox" id="chkFigura" checked> Mostrar a figura junto (nos temas em inglês e espanhol)</label>
         <div class="linha">
           <div><label class="campo" for="selTempo">Tempo de cada vez</label><select id="selTempo"><option value="60">1 minuto</option><option value="90" selected>1 minuto e meio</option><option value="120">2 minutos</option></select></div>
           <div><label class="campo" for="selEquipes">Equipes</label><select id="selEquipes"><option value="1">1 (sem disputa)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div>
@@ -59,7 +59,7 @@
       <div class="cartao regras">
         <h2>Como jogar</h2>
         <p>1. Quem vai adivinhar segura o iPad <b>na testa</b>, com a tela virada para a turma.</p>
-        <p>2. A turma dá dicas <b>sem falar a palavra</b>. Nos temas em inglês, as dicas são <b>em inglês</b>: <i>“It’s an animal. It says moo!”</i></p>
+        <p>2. A turma dá dicas <b>sem falar a palavra</b>. Nos temas em inglês, as dicas são <b>em inglês</b>: <i>“It’s an animal. It says moo!”</i> Nos de espanhol, <b>em espanhol</b>: <i>“Es un animal. Dice muu.”</i></p>
         <p>3. Acertou? Toque <b>na parte de cima</b> da tela. Quer pular? Toque <b>na parte de baixo</b>.</p>
         <p>4. Cada acerto vale 1 ponto. Quando o tempo acaba, passa para a próxima equipe.</p>
         <p class="dica">No computador: seta ↑ ou → = acertou • seta ↓ ou ← = passar.</p>
@@ -239,6 +239,13 @@
       baralhos.push({id: 'en-' + t.id, nome: '🇬🇧 ' + t.nome, itens: t.palavras.map(function(p){ return {t: p.en, e: p.emoji}; })});
     });
     preencher();
+    EN.json('dados/es-vocab.json', function(errEs, dEs){   // temas em espanhol
+      if (!errEs && dEs && dEs.temas) dEs.temas.forEach(function(t){
+        if (t.sem_testa) return;
+        baralhos.push({id: 'es-' + t.id, nome: '🇪🇸 ' + t.nome, itens: t.palavras.map(function(p){ return {t: p.es, e: p.emoji}; })});
+      });
+      preencher();
+    });
     EN.json('dados/indice.json', function(err2, ind){
       var arqs = !err2 && ind && ind.mimica ? ind.mimica : [], falta = arqs.length;
       if (!falta) return;
