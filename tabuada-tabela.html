@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabela da Tabuada</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  #grade{display:grid;gap:4px;user-select:none;-webkit-user-select:none;margin:0 auto}
+  .cel{background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:clamp(.8rem,1.6vw,1.25rem);aspect-ratio:1/1;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.08);position:relative;transform-style:preserve-3d}
+  .cab{background:#1f2a44;color:#fff;cursor:default}
+  .cab.canto{background:#e74c3c}
+  .cel.linha,.cel.col{background:#dbe9ff}
+  .cel.foco{background:#ffd54a !important;transform:scale(1.12);z-index:2;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+  .cel.oculta{background:#8e44ad;color:transparent}
+  .cel.oculta:after{content:'?';color:#fff;position:absolute}
+  .cel.alvo{outline:4px solid #e74c3c;outline-offset:2px}
+  #conta{min-height:1.2em}
+  #pontos{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:360px;margin:10px auto}
+  #pontos i{display:block;width:22px;height:22px;border-radius:50%;background:#2f80ed}
+  #pontos i.nova{background:#e74c3c}
+  #painelPad button{margin:3px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/gsap.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>🔢 Tabela da Tabuada</h1>
+  <div class="mt-tabs mt-linha" id="abas">
+    <button class="ativo" data-m="explorar">🔍 Explorar</button><button data-m="padroes">🎨 Padrões</button><button data-m="esconde">🙈 Esconde-esconde</button><button data-m="desafio">🏁 Desafio</button>
+  </div>
+  <label class="mt-dica">Tamanho: <select id="selTam"><option value="10" selected>10 × 10</option><option value="12">12 × 12</option></select></label>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap mt-colunas">
+  <div class="mt-card"><div id="grade"></div></div>
+  <div class="mt-card" id="lado">
+    <div id="painelExplorar">
+      <h2>Toque numa casa</h2>
+      <div class="mt-grande" id="conta">7 × 8 = 56</div>
+      <div id="pontos"></div>
+      <p class="mt-dica" id="comut"></p>
+    </div>
+    <div id="painelPad" hidden>
+      <h2>Padrões escondidos na tabela</h2>
+      <div><button data-p="quad">⬛ Quadrados perfeitos</button><button data-p="pares">✌️ Números pares</button><button data-p="espelho">↔️ Ordem não importa</button><button data-p="nove">9️⃣ Tabuada do 9</button></div>
+      <p class="mt-linha">Múltiplos de <select id="selMult"></select> <button data-p="mult">🎯 Mostrar</button></p>
+      <p id="txtPad" class="mt-dica" style="font-size:1.05rem"></p>
+    </div>
+    <div id="painelEsconde" hidden>
+      <h2>Esconde-esconde</h2>
+      <p class="mt-dica">Algumas casas ficaram escondidas (?). A turma fala o resultado e alguém toca para conferir!</p>
+      <p class="mt-linha"><button id="btEsconder" class="principal">🙈 Esconder casas</button> <select id="selQtd"><option value="10">10 casas</option><option value="20" selected>20 casas</option><option value="35">35 casas</option></select></p>
+      <p class="mt-grande" id="faltam"></p>
+    </div>
+    <div id="painelDesafio" hidden>
+      <h2>Desafio: complete a tabela</h2>
+      <p class="mt-dica">A casa marcada de vermelho está vazia. Quanto vale?</p>
+      <div class="mt-grande" id="pergDes"></div>
+      <p class="mt-linha"><input type="number" id="inResp" style="width:140px;font-size:1.6rem"> <button class="principal" id="btConf">✔ Conferir</button></p>
+      <p class="mt-grande"><span id="acertos">0</span> ✅ &nbsp; <span id="seq">0</span> 🔥</p>
+      <p id="fbDes" style="font-size:1.2rem;font-weight:bold;min-height:1.4em"></p>
+    </div>
+  </div>
+</div>
+<div class="mt-aviso" id="aviso"></div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); }, N = 10, modo = 'explorar', cels = {}, alvo = null, acertos = 0, seq = 0;
+  var temGsap = !!window.gsap;
+  function falar(t){ if (window.Sala) Sala.falar(t); }
+  function montar(){
+    N = +$('selTam').value; cels = {};
+    var g = $('grade'), h = '';
+    g.style.gridTemplateColumns = 'repeat(' + (N + 1) + ', minmax(0, 1fr))';
+    g.style.maxWidth = Math.min(window.innerHeight - 110, 760) + 'px';
+    for (var r = 0; r <= N; r++) for (var c = 0; c <= N; c++){
+      if (!r && !c) h += '<div class="cel cab canto">×</div>';
+      else if (!r || !c) h += '<div class="cel cab">' + (r || c) + '</div>';
+      else h += '<div class="cel" data-r="' + r + '" data-c="' + c + '">' + (r * c) + '</div>';
+    }
+    g.innerHTML = h;
+    var l = g.querySelectorAll('.cel[data-r]');
+    for (var i = 0; i < l.length; i++){ cels[l[i].getAttribute('data-r') + 'x' + l[i].getAttribute('data-c')] = l[i]; l[i].onclick = tocar; l[i].onmouseenter = passar; }
+    $('selMult').innerHTML = ''; for (var m = 2; m <= N; m++) $('selMult').innerHTML += '<option>' + m + '</option>';
+    if (temGsap) gsap.from('#grade .cel', {scale: 0, opacity: 0, duration: 0.35, ease: 'back.out(2)', stagger: {each: 0.004, grid: [N + 1, N + 1], from: 'center'}});
+    if (modo === 'esconde') esconder(); if (modo === 'desafio') novoDesafio();
+  }
+  function cel(r, c){ return cels[r + 'x' + c]; }
+  function limpar(){ for (var k in cels) cels[k].className = 'cel' + (cels[k].className.indexOf('oculta') >= 0 && modo === 'esconde' ? ' oculta' : ''); }
+  function realcar(r, c){
+    for (var k in cels){ var p = k.split('x'), cl = 'cel'; if (+p[0] === r) cl += ' linha'; if (+p[1] === c) cl += ' col'; if (cels[k].className.indexOf('oculta') >= 0) cl += ' oculta'; if (alvo && alvo.r === +p[0] && alvo.c === +p[1]) cl += ' alvo'; cels[k].className = cl; }
+    var e = cel(r, c); if (e) e.className += ' foco';
+  }
+  function passar(){ if (modo === 'explorar') mostrar(+this.getAttribute('data-r'), +this.getAttribute('data-c'), false); }
+  function tocar(){
+    var r = +this.getAttribute('data-r'), c = +this.getAttribute('data-c');
+    if (modo === 'explorar') mostrar(r, c, true);
+    else if (modo === 'esconde' && this.className.indexOf('oculta') >= 0) revelar(this, r, c);
+  }
+  function mostrar(r, c, voz){
+    realcar(r, c);
+    $('conta').textContent = r + ' × ' + c + ' = ' + (r * c);
+    $('comut').textContent = r !== c ? 'E ' + c + ' × ' + r + ' também dá ' + (r * c) + ': a ordem não muda o resultado!' : r + ' × ' + r + ' é um quadrado perfeito: ' + r + ' linhas com ' + r + ' bolinhas.';
+    var h = '', lado = Math.max(12, Math.min(24, Math.floor(340 / Math.max(r, c)) - 5));
+    $('pontos').style.maxWidth = (c * (lado + 5)) + 'px';
+    for (var i = 0; i < r * c; i++) h += '<i style="width:' + lado + 'px;height:' + lado + 'px"></i>';
+    $('pontos').innerHTML = h;
+    if (temGsap && voz){ gsap.from('#pontos i', {scale: 0, duration: 0.25, stagger: 0.012, ease: 'back.out(3)'}); gsap.fromTo('#conta', {scale: 0.6}, {scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)'}); }
+    if (voz){ falar(r + ' vezes ' + c + ', ' + (r * c)); if (window.Sala) Sala.tom(600 + r * c * 3, 0.08); }
+  }
+  // ---------- padrões ----------
+  var TXT = {
+    quad: 'Os quadrados perfeitos (1, 4, 9, 16, 25…) ficam na diagonal: são as contas de um número por ele mesmo.',
+    pares: 'Todo número vezes um número par dá par. Só ímpar × ímpar dá ímpar: repare nas casas sem cor!',
+    espelho: 'A tabela é um espelho na diagonal: 3 × 7 = 7 × 3. Quem sabe uma metade da tabela já sabe a outra!',
+    nove: 'Na tabuada do 9, a soma dos algarismos do resultado é sempre 9 (18 → 1 + 8, 27 → 2 + 7…), e a dezena sobe enquanto a unidade desce.'
+  };
+  function padrao(p){
+    limpar();
+    var m = +$('selMult').value, lista = [];
+    for (var k in cels){
+      var q = k.split('x'), r = +q[0], c = +q[1], v = r * c, ok = false, cor = '#ffd54a';
+      if (p === 'quad') ok = r === c;
+      else if (p === 'pares') ok = v % 2 === 0, cor = '#bfe3ff';
+      else if (p === 'espelho') ok = r !== c, cor = r < c ? '#c8f7d4' : '#ffd8b8';
+      else if (p === 'nove') ok = r === 9 || c === 9, cor = '#e8d5ff';
+      else if (p === 'mult') ok = v % m === 0, cor = '#ffe08a';
+      cels[k].style.background = ok ? cor : '';
+      if (ok) lista.push(cels[k]);
+    }
+    $('txtPad').textContent = p === 'mult' ? 'Os múltiplos de ' + m + ' formam linhas e colunas inteiras (a linha e a coluna do ' + m + ') e aparecem também em outras casas, como ' + (m * 2) + ' e ' + (m * 3) + '.' : TXT[p];
+    if (temGsap) gsap.from(lista, {scale: 0.3, duration: 0.4, ease: 'back.out(2)', stagger: {each: 0.008, from: 'start'}});
+  }
+  function semCores(){ for (var k in cels) cels[k].style.background = ''; }
+  // ---------- esconde-esconde ----------
+  function esconder(){
+    semCores(); limpar();
+    var ks = Object.keys(cels), q = Math.min(+$('selQtd').value, ks.length);
+    for (var i = ks.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = ks[i]; ks[i] = ks[j]; ks[j] = t; }
+    ks.slice(0, q).forEach(function(k){ cels[k].className = 'cel oculta'; });
+    contarOcultas();
+  }
+  function contarOcultas(){ var n = document.querySelectorAll('#grade .oculta').length; $('faltam').textContent = n ? 'Faltam ' + n + ' 🙈' : '🎉 Tabela completa!'; if (!n && window.Sala){ Sala.festa(); Sala.confete(); } }
+  function revelar(el, r, c){
+    if (temGsap) gsap.fromTo(el, {rotationY: 90}, {rotationY: 0, duration: 0.45, ease: 'back.out(2)'});
+    el.className = 'cel'; el.style.background = '#c8f7d4';
+    falar(r + ' vezes ' + c + ', ' + (r * c)); if (window.Sala) Sala.plim();
+    contarOcultas();
+  }
+  // ---------- desafio ----------
+  function novoDesafio(){
+    semCores();
+    var r = 2 + Math.floor(Math.random() * (N - 1)), c = 2 + Math.floor(Math.random() * (N - 1));
+    if (alvo){ var a = cel(alvo.r, alvo.c); if (a){ a.textContent = alvo.r * alvo.c; } }
+    alvo = {r: r, c: c}; var e = cel(r, c); e.textContent = '?';
+    realcar(r, c); e.className = 'cel alvo';
+    $('pergDes').textContent = r + ' × ' + c + ' = ?'; $('inResp').value = ''; $('fbDes').textContent = '';
+    try { $('inResp').focus(); } catch (x) {}
+    if (temGsap) gsap.fromTo(e, {scale: 1.6}, {scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)'});
+  }
+  function conferir(){
+    if (!alvo) return;
+    var v = parseInt($('inResp').value, 10), certo = alvo.r * alvo.c;
+    if (v === certo){
+      acertos++; seq++; $('fbDes').innerHTML = '<span class="mt-ok">✔ Isso! ' + alvo.r + ' × ' + alvo.c + ' = ' + certo + '</span>';
+      if (window.Sala) Sala.plim(); var e = cel(alvo.r, alvo.c); e.textContent = certo; e.style.background = '#c8f7d4';
+      setTimeout(novoDesafio, 900);
+    } else { seq = 0; $('fbDes').innerHTML = '<span class="mt-erro">✗ Ainda não. Dica: ' + alvo.r + ' × ' + (alvo.c - 1) + ' = ' + (alvo.r * (alvo.c - 1)) + '; some mais ' + alvo.r + '.</span>'; if (window.Sala) Sala.tom(220, 0.2, 0, 'sawtooth'); }
+    $('acertos').textContent = acertos; $('seq').textContent = seq;
+  }
+  function trocarModo(m){
+    modo = m; alvo = null; semCores(); limpar();
+    var bs = $('abas').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-m') === m ? 'ativo' : '';
+    $('painelExplorar').hidden = m !== 'explorar'; $('painelPad').hidden = m !== 'padroes'; $('painelEsconde').hidden = m !== 'esconde'; $('painelDesafio').hidden = m !== 'desafio';
+    for (var k in cels){ var p = k.split('x'); cels[k].textContent = +p[0] * +p[1]; }
+    if (m === 'esconde') esconder(); else if (m === 'desafio') novoDesafio(); else if (m === 'padroes') padrao('quad'); else mostrar(7, 8, false);
+  }
+  var abas = $('abas').querySelectorAll('button'); for (var i = 0; i < abas.length; i++) abas[i].onclick = function(){ trocarModo(this.getAttribute('data-m')); };
+  var pads = $('painelPad').querySelectorAll('button[data-p]'); for (var j = 0; j < pads.length; j++) pads[j].onclick = function(){ padrao(this.getAttribute('data-p')); };
+  $('btEsconder').onclick = esconder; $('btConf').onclick = conferir;
+  $('inResp').onkeydown = function(e){ if (e.keyCode === 13) conferir(); };
+  $('selTam').onchange = function(){ montar(); trocarModo(modo); };
+  window.addEventListener('resize', function(){ $('grade').style.maxWidth = Math.min(window.innerHeight - 110, 760) + 'px'; });
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  montar(); mostrar(7, 8, false);
+  window.TABELA = {modo: function(){ return modo; }, alvo: function(){ return alvo; }, trocarModo: trocarModo, padrao: padrao};   // usado nos testes
+})();
+</script>
+</body>
+</html>

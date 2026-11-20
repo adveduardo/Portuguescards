@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aulas de Matemática em slides</title>
+<link rel="stylesheet" href="libs/reveal/reset.css">
+<link rel="stylesheet" href="libs/reveal/reveal.css">
+<link rel="stylesheet" href="libs/reveal/theme/white.css">
+<style>
+  .reveal{font-family:"Source Sans Pro","Trebuchet MS",sans-serif}
+  .reveal h1,.reveal h2{text-transform:none;color:#1f2a44;font-weight:700}
+  .reveal h1{font-size:2.6em}.reveal h2{font-size:1.75em;margin-bottom:.45em}
+  .reveal p,.reveal li{font-size:.95em;line-height:1.35}
+  .reveal .grande{font-size:1.9em;font-weight:bold;color:#2f80ed}
+  .reveal .destaque{background:#fff3c4;border-radius:12px;padding:.25em .5em}
+  .reveal .caixa{background:#eef4ff;border-radius:18px;padding:.5em .8em;margin:.3em 0;text-align:left}
+  .reveal .ok{color:#27ae60}.reveal .roxo{color:#8e44ad}.reveal .laranja{color:#d35400}.reveal .verm{color:#e74c3c}
+  .reveal .duas{display:grid;grid-template-columns:1fr 1fr;gap:.8em;align-items:center}
+  .reveal .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em}
+  .reveal .cartoes{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}
+  .reveal .cartoes a{display:block;background:#eef4ff;border-radius:22px;padding:.5em;color:#1f2a44;text-decoration:none;box-shadow:0 6px 0 rgba(0,0,0,.08);font-weight:bold;font-size:.8em}
+  .reveal .cartoes a span{display:block;font-size:2.2em}
+  .reveal .cartoes a small{display:block;font-weight:normal;color:#56627a}
+  .reveal .links a{display:inline-block;margin:.2em;padding:.25em .6em;background:#2f80ed;color:#fff;border-radius:14px;font-size:.8em;text-decoration:none}
+  .reveal .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1;margin:0 .1em}
+  .reveal .fr span:first-child{border-bottom:.08em solid currentColor;padding:0 .15em}
+  .reveal table{font-size:.85em;margin:auto}
+  .reveal table td,.reveal table th{border:2px solid #d6dbe8 !important;padding:.2em .6em !important;text-align:center}
+  .reveal ul{display:block;text-align:left}
+  .reveal .fragment.highlight-current-blue.current-fragment{color:#2f80ed}
+  .voltar{position:fixed;left:12px;top:10px;z-index:30;background:#fff;border-radius:12px;padding:6px 12px;font:bold 15px "Trebuchet MS",sans-serif;color:#1f2a44;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+</style>
+<script src="visual.js"></script>
+<script src="libs/reveal/reveal.js"></script>
+</head>
+<body class="escuro">
+<a class="voltar" href="aula-matematica.html">📚 Todas as aulas</a>
+<div class="reveal"><div class="slides" id="slides"></div></div>
+<script>
+(function(){
+  'use strict';
+  function fr(a, b){ return '<span class="fr"><span>' + a + '</span><span>' + b + '</span></span>'; }
+  function f(t, efeito){ return '<span class="fragment' + (efeito ? ' ' + efeito : '') + '">' + t + '</span>'; }
+  function pf(t){ return '<p class="fragment">' + t + '</p>'; }
+  // ---------- desenhos ----------
+  function pizza(num, den, r){
+    r = r || 110; var s = '<svg width="' + (2 * r + 10) + '" height="' + (2 * r + 10) + '" viewBox="0 0 ' + (2 * r + 10) + ' ' + (2 * r + 10) + '">', c = r + 5;
+    for (var i = 0; i < den; i++){
+      var a0 = (i * 360 / den - 90) * Math.PI / 180, a1 = ((i + 1) * 360 / den - 90) * Math.PI / 180;
+      s += '<path d="M' + c + ',' + c + ' L' + (c + r * Math.cos(a0)).toFixed(1) + ',' + (c + r * Math.sin(a0)).toFixed(1) + ' A' + r + ',' + r + ' 0 0,1 ' + (c + r * Math.cos(a1)).toFixed(1) + ',' + (c + r * Math.sin(a1)).toFixed(1) + ' Z" fill="' + (i < num ? '#ffcf5c' : '#fff7e6') + '" stroke="#c47f17" stroke-width="3"/>';
+    }
+    return s + '</svg>';
+  }
+  function barra(num, den, larg, cor){
+    larg = larg || 520; var w = larg / den, s = '<svg width="' + (larg + 6) + '" height="56" viewBox="0 0 ' + (larg + 6) + ' 56">';
+    for (var i = 0; i < den; i++) s += '<rect x="' + (3 + i * w).toFixed(1) + '" y="3" width="' + w.toFixed(1) + '" height="50" fill="' + (i < num ? (cor || '#8e44ad') : '#f0eaf5') + '" stroke="#4a235a" stroke-width="2.5"/>';
+    return s + '</svg>';
+  }
+  function pontos(lin, col, cor){
+    var s = '<svg width="' + (col * 46 + 10) + '" height="' + (lin * 46 + 10) + '">';
+    for (var i = 0; i < lin; i++) for (var j = 0; j < col; j++) s += '<circle cx="' + (28 + j * 46) + '" cy="' + (28 + i * 46) + '" r="17" fill="' + (cor || '#2f80ed') + '"/>';
+    return s + '</svg>';
+  }
+  function grade100(k){
+    var s = '<svg width="320" height="320" viewBox="0 0 320 320">';
+    for (var i = 0; i < 100; i++) s += '<rect x="' + (10 + (i % 10) * 30) + '" y="' + (10 + Math.floor(i / 10) * 30) + '" width="28" height="28" rx="4" fill="' + (i < k ? '#e74c3c' : '#eef1f6') + '"/>';
+    return s + '</svg>';
+  }
+  function quadrado(l, cor){
+    var t = 34, s = '<svg width="' + (l * t + 8) + '" height="' + (l * t + 8) + '">';
+    for (var i = 0; i < l; i++) for (var j = 0; j < l; j++) s += '<rect x="' + (4 + j * t) + '" y="' + (4 + i * t) + '" width="' + (t - 3) + '" height="' + (t - 3) + '" rx="4" fill="' + (cor || '#27ae60') + '"/>';
+    return s + '</svg>';
+  }
+  function pitagoras(){   // triângulo 3-4-5 com os quadrados em cada lado
+    var u = 28, s = '<svg width="420" height="459" viewBox="-94 -122 300 328">';
+    function grid(x0, y0, n, ang, cor){
+      var g = '<g transform="translate(' + x0 + ',' + y0 + ') rotate(' + ang + ')">';
+      for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) g += '<rect x="' + (j * u) + '" y="' + (i * u) + '" width="' + u + '" height="' + u + '" fill="' + cor + '" stroke="#fff" stroke-width="2"/>';
+      return g + '</g>';
+    }
+    var ang = Math.atan2(3, 4) * 180 / Math.PI;
+    s += grid(0, 3 * u, 4, 0, '#9ad0f5');          // cateto 4 (embaixo)
+    s += grid(-3 * u, 0, 3, 0, '#ffcf5c');         // cateto 3 (à esquerda)
+    s += grid(3 * u, -4 * u, 5, ang, '#c39bff');    // hipotenusa 5 (por fora)
+    s += '<polygon points="0,0 0,' + (3 * u) + ' ' + (4 * u) + ',' + (3 * u) + '" fill="#fff" stroke="#1f2a44" stroke-width="4"/>';
+    s += '<rect x="0" y="' + (3 * u - 16) + '" width="16" height="16" fill="none" stroke="#1f2a44" stroke-width="3"/>';
+    s += '<text x="' + (-1.5 * u) + '" y="' + (1.5 * u + 9) + '" font-size="26" font-weight="bold" text-anchor="middle" fill="#8a6d00">9</text>';
+    s += '<text x="' + (2 * u) + '" y="' + (5 * u + 9) + '" font-size="26" font-weight="bold" text-anchor="middle" fill="#1d5d8c">16</text>';
+    s += '<text x="' + (3.5 * u) + '" y="' + (-0.5 * u + 10) + '" font-size="28" font-weight="bold" text-anchor="middle" fill="#5b2c6f">25</text>';
+    return s + '</svg>';
+  }
+  function triangulo(b, c, rb, rc, ra){
+    var esc = 300 / Math.max(b, c), w = c * esc, h = b * esc, s = '<svg width="' + (w + 160) + '" height="' + (h + 90) + '" viewBox="-80 -20 ' + (w + 160) + ' ' + (h + 90) + '">';
+    s += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" fill="#eef4ff" stroke="#1f2a44" stroke-width="5"/><rect x="0" y="' + (h - 24) + '" width="24" height="24" fill="none" stroke="#1f2a44" stroke-width="3"/>';
+    s += '<text x="-14" y="' + (h / 2) + '" font-size="30" font-weight="bold" text-anchor="end" fill="#d35400">' + rb + '</text>';
+    s += '<text x="' + (w / 2) + '" y="' + (h + 44) + '" font-size="30" font-weight="bold" text-anchor="middle" fill="#2f80ed">' + rc + '</text>';
+    s += '<text x="' + (w / 2 + 16) + '" y="' + (h / 2 - 12) + '" font-size="30" font-weight="bold" fill="#8e44ad">' + ra + '</text>';
+    return s + '</svg>';
+  }
+  function balanca(esq, dir){
+    return '<svg width="560" height="250" viewBox="0 0 560 250"><polygon points="280,60 240,230 320,230" fill="#8a6d4b"/><rect x="60" y="54" width="440" height="12" rx="6" fill="#6e5236"/>' +
+      '<path d="M40,150 L200,150 L180,166 L60,166 Z" fill="#b9c3d6"/><path d="M360,150 L520,150 L500,166 L380,166 Z" fill="#b9c3d6"/>' +
+      '<line x1="120" y1="60" x2="60" y2="150" stroke="#56627a" stroke-width="3"/><line x1="120" y1="60" x2="180" y2="150" stroke="#56627a" stroke-width="3"/>' +
+      '<line x1="440" y1="60" x2="380" y2="150" stroke="#56627a" stroke-width="3"/><line x1="440" y1="60" x2="500" y2="150" stroke="#56627a" stroke-width="3"/>' +
+      '<text x="120" y="140" text-anchor="middle" font-size="34" font-weight="bold" fill="#8e44ad">' + esq + '</text><text x="440" y="140" text-anchor="middle" font-size="34" font-weight="bold" fill="#1f2a44">' + dir + '</text></svg>';
+  }
+  function treinar(lista){ return '<div class="links">' + lista.map(function(l){ return '<a href="' + l[0] + '">' + l[1] + '</a>'; }).join(' ') + '</div>'; }
+  function desafio(itens){ return '<ol>' + itens.map(function(q){ return '<li>' + q[0] + ' ' + f('<b class="ok">→ ' + q[1] + '</b>') + '</li>'; }).join('') + '</ol>'; }
+
+  // ---------- as aulas ----------
+  var AULAS = {
+    tabuada: {emoji: '✖️', titulo: 'Tabuada', sub: 'Entender para memorizar', ano: 'revisão para o 6º ano', slides: [
+      '<h2>Multiplicar é somar parcelas iguais</h2><div class="duas"><div>' + pontos(3, 4) + '</div><div><p class="grande">3 × 4</p>' + pf('= 4 + 4 + 4') + pf('= <b>12</b>') + pf('3 fileiras com 4 bolinhas em cada') + '</div></div>',
+      '<h2>A ordem não muda o resultado</h2><div class="duas"><div>' + pontos(3, 4, '#27ae60') + '<p>3 × 4 = 12</p></div><div class="fragment">' + pontos(4, 3, '#e67e22') + '<p>4 × 3 = 12</p></div></div>' + pf('É a propriedade <b>comutativa</b>: quem sabe 3 × 8 também sabe 8 × 3. A tabuada fica com metade das contas!'),
+      '<h2>Truques que ajudam</h2><div class="caixa">' + ['<b>× 2</b>: é o dobro → 2 × 8 = 8 + 8 = 16', '<b>× 4</b>: dobro do dobro → 4 × 7: 14 → 28', '<b>× 5</b>: metade do × 10 → 5 × 8 = 80 ÷ 2 = 40', '<b>× 9</b>: × 10 menos uma vez → 9 × 7 = 70 − 7 = 63', '<b>× 10</b>: acrescenta um zero → 10 × 6 = 60'].map(function(t){ return pf(t); }).join('') + '</div>',
+      '<h2>O segredo da tabuada do 9</h2><table><tr>' + [9, 18, 27, 36, 45, 54, 63, 72, 81, 90].map(function(v){ return '<td>' + v + '</td>'; }).join('') + '</tr></table>' + pf('As dezenas <b class="ok">sobem</b>: 0, 1, 2, 3…') + pf('As unidades <b class="verm">descem</b>: 9, 8, 7, 6…') + pf('E os algarismos sempre somam 9: 6 + 3 = 9, 7 + 2 = 9 ✨'),
+      '<h2>Quadrados perfeitos</h2><div class="tres"><div>' + quadrado(2) + '<p>2 × 2 = 4</p></div><div>' + quadrado(3) + '<p>3 × 3 = 9</p></div><div>' + quadrado(4) + '<p>4 × 4 = 16</p></div></div>' + pf('1, 4, 9, 16, 25, 36, 49, 64, 81, 100: formam quadrados certinhos!'),
+      '<h2>⚡ Desafio relâmpago</h2>' + desafio([['7 × 8 =', '56'], ['6 × 7 =', '42'], ['9 × 6 =', '54'], ['8 × 4 =', '32'], ['12 × 5 =', '60'], ['7 × 7 =', '49']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['tabuada-turbo.html', '⚡ Tabuada Turbo'], ['tabuada-tabela.html', '🔢 Tabela da tabuada'], ['cabo-de-guerra.html', '💪 Cabo de guerra'], ['sapo-saltador.html', '🐸 Sapo saltador'], ['aventura-numeros.html', '⭐ Aventura dos Números']])
+    ]},
+    fracoes: {emoji: '🍕', titulo: 'Frações', sub: 'Partes de um inteiro', ano: '6º ano', slides: [
+      '<h2>O que é uma fração?</h2><div class="duas"><div>' + pizza(3, 4) + '</div><div><p class="grande">' + fr(3, 4) + '</p>' + pf('<b class="laranja">Denominador (4)</b>: em quantas partes <u>iguais</u> o inteiro foi dividido') + pf('<b class="ok">Numerador (3)</b>: quantas partes foram pegas') + '</div></div>',
+      '<h2>Como se lê</h2><table><tr><td>' + fr(1, 2) + '</td><td>um meio</td><td>' + fr(1, 3) + '</td><td>um terço</td></tr><tr><td>' + fr(3, 4) + '</td><td>três quartos</td><td>' + fr(2, 5) + '</td><td>dois quintos</td></tr><tr><td>' + fr(5, 8) + '</td><td>cinco oitavos</td><td>' + fr(7, 10) + '</td><td>sete décimos</td></tr><tr><td>' + fr(4, 11) + '</td><td>quatro onze avos</td><td>' + fr(9, 100) + '</td><td>nove centésimos</td></tr></table>' + pf('Depois do 10, usamos <b>avos</b>: ' + fr(5, 12) + ' = cinco doze avos.'),
+      '<h2>Tipos de fração</h2><div class="tres"><div class="caixa"><b>Própria</b><br>' + fr(2, 5) + '<br><small>menor que 1</small></div><div class="caixa fragment"><b>Imprópria</b><br>' + fr(7, 4) + ' = 1 ' + fr(3, 4) + '<br><small>maior que 1 (número misto)</small></div><div class="caixa fragment"><b>Aparente</b><br>' + fr(6, 3) + ' = 2<br><small>vale um inteiro exato</small></div></div>',
+      '<h2>Frações equivalentes</h2><div>' + barra(1, 2) + '<br>' + f(barra(2, 4)) + '<br>' + f(barra(4, 8)) + '</div><p class="fragment">' + fr(1, 2) + ' = ' + fr(2, 4) + ' = ' + fr(4, 8) + ': a mesma quantidade! Multiplique ou divida em cima e embaixo <b>pelo mesmo número</b>.</p>',
+      '<h2>Simplificar</h2><p class="grande">' + fr(12, 18) + f(' = ' + fr(6, 9) + ' <small>(÷2)</small>') + f(' = ' + fr(2, 3) + ' <small>(÷3)</small>') + '</p>' + pf('Ou de uma vez, pelo <b>MDC(12, 18) = 6</b>: ' + fr(12, 18) + ' ÷ 6 = ' + fr(2, 3)) + pf('Quando não dá mais para dividir, a fração é <b>irredutível</b>.'),
+      '<h2>Comparar frações</h2><div class="caixa">' + pf('Mesmo denominador: ganha o maior numerador → ' + fr(5, 8) + ' &gt; ' + fr(3, 8)) + pf('Denominadores diferentes: iguale os denominadores (MMC).') + pf(fr(3, 4) + ' ou ' + fr(2, 3) + '? → ' + fr(9, 12) + ' e ' + fr(8, 12) + ' → ' + fr(3, 4) + ' &gt; ' + fr(2, 3)) + '</div>',
+      '<h2>Somar e subtrair</h2><p class="grande">' + fr(1, 2) + ' + ' + fr(1, 3) + '</p>' + pf('MMC(2, 3) = 6') + pf('= ' + fr(3, 6) + ' + ' + fr(2, 6)) + pf('= <b class="ok">' + fr(5, 6) + '</b>') + pf('Com o mesmo denominador, soma só em cima: ' + fr(2, 7) + ' + ' + fr(3, 7) + ' = ' + fr(5, 7)),
+      '<h2>Fração de uma quantidade</h2><p class="grande">' + fr(3, 4) + ' de 20 balas</p>' + pf('Divide pelo denominador: 20 ÷ 4 = 5 (cada quarto tem 5)') + pf('Multiplica pelo numerador: 5 × 3 = <b class="ok">15 balas</b>'),
+      '<h2>⚡ Desafio</h2>' + desafio([['Simplifique ' + fr(8, 12), fr(2, 3)], [fr(2, 5) + ' + ' + fr(1, 5) + ' =', fr(3, 5)], [fr(1, 4) + ' + ' + fr(1, 2) + ' =', fr(3, 4)], [fr(2, 3) + ' de 30 =', '20'], ['Quem é maior: ' + fr(3, 5) + ' ou ' + fr(4, 7) + '?', fr(3, 5) + ' (21/35 > 20/35)']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['fracoes-pizza.html', '🍕 Frações com pizzas'], ['morfo-escolha.html?arquivo=mat-fracoes.json', '🔢 Exercícios de frações'], ['memoria.html?arquivo=memoria-mat-fracoes.json', '🧠 Memória das frações'], ['meteoros.html?arquivo=mat-cestos-fracoes.json', '☄️ Meteoros: própria ou imprópria']])
+    ]},
+    porcentagem: {emoji: '💯', titulo: 'Porcentagem', sub: 'Partes de 100', ano: '6º e 7º anos', slides: [
+      '<h2>Por cento = por cem</h2><div class="duas"><div>' + grade100(25) + '</div><div><p class="grande">25%</p>' + pf('= 25 de cada 100') + pf('= ' + fr(25, 100) + ' = ' + fr(1, 4)) + pf('= 0,25') + '</div></div>',
+      '<h2>Porcentagens famosas</h2><table><tr><th>%</th><th>fração</th><th>quer dizer</th></tr><tr><td>100%</td><td>' + fr(1, 1) + '</td><td>tudo</td></tr><tr class="fragment"><td>50%</td><td>' + fr(1, 2) + '</td><td>metade</td></tr><tr class="fragment"><td>25%</td><td>' + fr(1, 4) + '</td><td>um quarto</td></tr><tr class="fragment"><td>75%</td><td>' + fr(3, 4) + '</td><td>três quartos</td></tr><tr class="fragment"><td>10%</td><td>' + fr(1, 10) + '</td><td>um décimo</td></tr><tr class="fragment"><td>1%</td><td>' + fr(1, 100) + '</td><td>um centésimo</td></tr></table>',
+      '<h2>O truque dos 10%</h2><p class="grande">10% de 350</p>' + pf('Dividir por 10: <b class="ok">35</b>') + pf('20% = o dobro de 10% = 70') + pf('5% = metade de 10% = 17,50') + pf('30% = 3 × 10% = 105'),
+      '<h2>Qualquer porcentagem</h2><p class="grande">30% de 80</p>' + pf('Jeito 1: 80 ÷ 100 × 30 = 0,8 × 30 = <b class="ok">24</b>') + pf('Jeito 2: 0,30 × 80 = <b class="ok">24</b>') + pf('Jeito 3: 10% de 80 = 8 → 30% = 3 × 8 = <b class="ok">24</b>'),
+      '<h2>🏷️ Desconto</h2><p>Uma camisa custa <b>R$ 60,00</b> e está com <b>15% de desconto</b>.</p>' + pf('10% de 60 = 6 &nbsp;•&nbsp; 5% = 3') + pf('15% = 6 + 3 = <b>R$ 9,00</b> de desconto') + pf('Preço final: 60 − 9 = <b class="ok">R$ 51,00</b>') + pf('Atalho: pagar 85% → 0,85 × 60 = 51'),
+      '<h2>📈 Aumento</h2><p>Um salário de <b>R$ 1.500,00</b> teve <b>8% de aumento</b>.</p>' + pf('8% de 1.500 = 0,08 × 1.500 = 120') + pf('Novo salário: 1.500 + 120 = <b class="ok">R$ 1.620,00</b>') + pf('Atalho: 108% → 1,08 × 1.500 = 1.620'),
+      '<h2>Que porcentagem é?</h2><p>Acertei <b>12</b> de <b>48</b> questões. Quantos por cento?</p>' + pf(fr(12, 48) + ' = ' + fr(1, 4)) + pf('= 0,25 = <b class="ok">25%</b>') + pf('Regra: parte ÷ todo × 100'),
+      '<h2>⚡ Desafio</h2>' + desafio([['50% de 86 =', '43'], ['10% de 230 =', '23'], ['25% de 120 =', '30'], ['Um tênis de R$ 200 com 20% de desconto custa…', 'R$ 160'], ['18 de 60 alunos usam óculos. Que %?', '30%']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['morfo-escolha.html?arquivo=mat-porcentagem.json', '💯 Exercícios de porcentagem'], ['morfo-escolha.html?arquivo=mat-juros.json', '💰 Juros simples'], ['estatistica-turma.html', '📊 Pesquisa da turma (%)']])
+    ]},
+    equacoes: {emoji: '⚖️', titulo: 'Equações do 1º grau', sub: 'Descobrindo o valor desconhecido', ano: '7º ano', slides: [
+      '<h2>O que é uma equação?</h2>' + balanca('x + 5', '12') + '<p>Uma <b>igualdade</b> com um valor desconhecido: a <b class="roxo">incógnita</b> (x).</p>' + pf('x + 5 = 12 → que número somado com 5 dá 12? <b class="ok">x = 7</b>'),
+      '<h2>O princípio da balança</h2><div class="caixa">' + pf('A equação é uma balança <b>equilibrada</b>.') + pf('Se tirarmos (ou pusermos) o mesmo peso <b>dos dois lados</b>, ela continua equilibrada.') + pf('Também podemos <b>multiplicar ou dividir</b> os dois lados pelo mesmo número (diferente de zero).') + pf('O objetivo: deixar o <b class="roxo">x sozinho</b> de um lado.') + '</div>',
+      '<h2>Resolvendo passo a passo</h2><p class="grande">3x + 4 = 19</p>' + pf('3x + 4 <b class="verm">− 4</b> = 19 <b class="verm">− 4</b> → 3x = 15') + pf('3x <b class="verm">÷ 3</b> = 15 <b class="verm">÷ 3</b> → <b class="ok">x = 5</b>') + pf('Prova real: 3 · 5 + 4 = 19 ✔️'),
+      '<h2>Com x dos dois lados</h2><p class="grande">5x − 3 = 2x + 9</p>' + pf('Tira 2x dos dois lados: 3x − 3 = 9') + pf('Soma 3 dos dois lados: 3x = 12') + pf('Divide por 3: <b class="ok">x = 4</b>') + pf('Prova real: 5 · 4 − 3 = 17 e 2 · 4 + 9 = 17 ✔️'),
+      '<h2>Do problema para a equação</h2><div class="caixa">' + pf('“O dobro de um número mais 7 é 31.” → <b>2x + 7 = 31</b> → 2x = 24 → <b class="ok">x = 12</b>') + pf('“A soma de dois números consecutivos é 45.” → <b>x + (x + 1) = 45</b> → 2x = 44 → <b class="ok">22 e 23</b>') + pf('“Ana tem o triplo da idade de Bia; juntas têm 48 anos.” → <b>x + 3x = 48</b> → <b class="ok">Bia 12, Ana 36</b>') + '</div>',
+      '<h2>“Passar para o outro lado”</h2><p>É um atalho da balança: o termo vai para o outro lado com a <b>operação inversa</b>.</p><table><tr><th>estava</th><th>vai como</th></tr><tr class="fragment"><td>+ somando</td><td>− subtraindo</td></tr><tr class="fragment"><td>− subtraindo</td><td>+ somando</td></tr><tr class="fragment"><td>× multiplicando</td><td>÷ dividindo</td></tr><tr class="fragment"><td>÷ dividindo</td><td>× multiplicando</td></tr></table>',
+      '<h2>⚡ Desafio</h2>' + desafio([['x + 9 = 23', 'x = 14'], ['4x = 36', 'x = 9'], ['2x − 5 = 11', 'x = 8'], ['7x + 2 = 3x + 18', 'x = 4'], ['Um número mais a sua metade dá 30. Que número é?', '20']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['balanca-equacoes.html', '⚖️ Balança das equações'], ['morfo-escolha.html?arquivo=mat-equacoes-1grau.json', '📝 Exercícios de equações'], ['morfo-escolha.html?arquivo=mat-sistemas.json', '🔗 Sistemas (8º ano)']])
+    ]},
+    pitagoras: {emoji: '📐', titulo: 'Teorema de Pitágoras', sub: 'Os lados do triângulo retângulo', ano: '9º ano', slides: [
+      '<h2>O triângulo retângulo</h2><div class="duas"><div>' + triangulo(3, 4, 'c', 'b', 'a') + '</div><div>' + pf('Tem um ângulo <b>reto</b> (90°) ⌐') + pf('<b class="roxo">Hipotenusa (a)</b>: o lado oposto ao ângulo reto. É o maior lado.') + pf('<b class="laranja">Catetos (b e c)</b>: os dois lados que formam o ângulo reto.') + '</div></div>',
+      '<h2>O teorema</h2><div class="duas"><div>' + pitagoras() + '</div><div><p class="grande">a² = b² + c²</p>' + pf('O quadrado da hipotenusa é igual à soma dos quadrados dos catetos.') + pf('No desenho: <b class="roxo">25</b> = <b class="laranja">9</b> + <b style="color:#1d5d8c">16</b> ✔️') + '</div></div>',
+      '<h2>Achando a hipotenusa</h2><p>Catetos medem <b>6 cm</b> e <b>8 cm</b>.</p>' + pf('a² = 6² + 8²') + pf('a² = 36 + 64 = 100') + pf('a = √100 = <b class="ok">10 cm</b>'),
+      '<h2>Achando um cateto</h2><p>Hipotenusa <b>13 cm</b>, um cateto <b>5 cm</b>.</p>' + pf('13² = 5² + b²') + pf('169 = 25 + b² → b² = 144') + pf('b = √144 = <b class="ok">12 cm</b>'),
+      '<h2>Ternos pitagóricos</h2><table><tr><th>catetos</th><th>hipotenusa</th><th>conta</th></tr><tr><td>3 e 4</td><td>5</td><td>9 + 16 = 25</td></tr><tr class="fragment"><td>5 e 12</td><td>13</td><td>25 + 144 = 169</td></tr><tr class="fragment"><td>8 e 15</td><td>17</td><td>64 + 225 = 289</td></tr><tr class="fragment"><td>6 e 8</td><td>10</td><td>o dobro de 3, 4, 5</td></tr></table>',
+      '<h2>No dia a dia</h2><div class="caixa">' + pf('🪜 Uma escada de 5 m está com o pé a 3 m do muro. Até que altura ela chega? → 5² = 3² + h² → <b class="ok">h = 4 m</b>') + pf('📺 Uma TV com 30″ de largura e 16″ de altura tem diagonal √(900 + 256) ≈ <b class="ok">34″</b>') + pf('⬛ Diagonal do quadrado de lado ℓ: <b>d = ℓ√2</b>') + '</div>',
+      '<h2>⚡ Desafio</h2>' + desafio([['Catetos 9 e 12. Hipotenusa?', '15'], ['Hipotenusa 10 e cateto 6. O outro cateto?', '8'], ['O triângulo 7, 24, 25 é retângulo?', 'Sim: 49 + 576 = 625'], ['Diagonal de um quadrado de lado 5?', '5√2 ≈ 7,07']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['morfo-escolha.html?arquivo=mat-pitagoras.json', '📐 Exercícios de Pitágoras'], ['morfo-escolha.html?arquivo=mat-trigonometria.json', '📏 Trigonometria'], ['morfo-escolha.html?arquivo=mat-radicais.json', '√ Radicais']])
+    ]},
+    potencias: {emoji: '⚡', titulo: 'Potências', sub: 'Multiplicações de fatores iguais', ano: '6º ao 8º ano', slides: [
+      '<h2>O que é uma potência?</h2><p class="grande">2<sup>5</sup> = 2 · 2 · 2 · 2 · 2 = 32</p>' + pf('<b class="laranja">2</b> é a <b>base</b> (o fator que se repete)') + pf('<b class="laranja">5</b> é o <b>expoente</b> (quantas vezes ele aparece)') + pf('<b class="laranja">32</b> é a <b>potência</b> (o resultado)'),
+      '<h2>Quadrado e cubo</h2><div class="duas"><div>' + quadrado(3, '#2f80ed') + '<p>3² = 9 → “três ao quadrado”<br><small>a área do quadrado de lado 3</small></p></div><div class="fragment"><p class="grande">2³ = 8</p><p>“dois ao cubo”<br><small>o volume do cubo de aresta 2: 2 × 2 × 2 cubinhos</small></p></div></div>',
+      '<h2>Casos especiais</h2><div class="caixa">' + pf('Expoente 1: a¹ = a → 7¹ = 7') + pf('Expoente 0: a⁰ = 1 (a ≠ 0) → 2023⁰ = 1') + pf('Base 1: 1ⁿ = 1 → 1¹⁰⁰ = 1') + pf('Base 10: 10ⁿ = 1 seguido de n zeros → 10⁴ = 10 000') + pf('Base negativa: (−2)² = 4, mas (−2)³ = −8') + '</div>',
+      '<h2>Propriedades (mesma base)</h2><table><tr><td>multiplicação: soma os expoentes</td><td>2³ · 2⁴ = 2⁷</td></tr><tr class="fragment"><td>divisão: subtrai os expoentes</td><td>5⁶ ÷ 5² = 5⁴</td></tr><tr class="fragment"><td>potência de potência: multiplica</td><td>(3²)³ = 3⁶</td></tr><tr class="fragment"><td>expoente negativo: inverte</td><td>2⁻³ = ' + fr(1, 8) + '</td></tr></table>',
+      '<h2>Notação científica</h2><div class="caixa">' + pf('Velocidade da luz: 300 000 000 m/s = <b>3 × 10⁸</b> m/s') + pf('Distância da Terra ao Sol ≈ 150 000 000 km = <b>1,5 × 10⁸</b> km') + pf('Tamanho de uma bactéria ≈ 0,000 002 m = <b>2 × 10⁻⁶</b> m') + pf('Número entre 1 e 10 vezes uma potência de 10.') + '</div>',
+      '<h2>Raiz quadrada: o caminho de volta</h2><p class="grande">√49 = 7</p>' + pf('porque 7² = 49') + pf('√81 = 9 &nbsp;•&nbsp; √144 = 12 &nbsp;•&nbsp; √1 = 1') + pf('Raiz cúbica: ∛8 = 2, porque 2³ = 8'),
+      '<h2>⚡ Desafio</h2>' + desafio([['3⁴ =', '81'], ['10⁵ =', '100 000'], ['(−3)² =', '9'], ['2³ · 2² =', '2⁵ = 32'], ['√64 + 5⁰ =', '9']]),
+      '<h2>Para treinar no painel</h2>' + treinar([['morfo-escolha.html?arquivo=mat-potencias.json', '⚡ Exercícios de potências'], ['morfo-escolha.html?arquivo=mat-potencias-raizes.json', '√ Potências e raízes (8º)'], ['memoria.html?arquivo=memoria-mat-potencias.json', '🧠 Memória das potências']])
+    ]}
+  };
+  var ORDEM = ['tabuada', 'fracoes', 'porcentagem', 'equacoes', 'potencias', 'pitagoras'];
+  var m = /[?&]aula=([a-z]+)/.exec(location.search), id = m && AULAS[m[1]] ? m[1] : null, h = '';
+  if (!id){
+    document.querySelector('.voltar').style.display = 'none';
+    h = '<section><h1>📚 Aulas de Matemática</h1><p>Escolha uma aula para projetar (use as setas ou toque para avançar):</p><div class="cartoes">' +
+      ORDEM.map(function(k){ var a = AULAS[k]; return '<a href="?aula=' + k + '"><span>' + a.emoji + '</span>' + a.titulo + '<small>' + a.ano + '</small></a>'; }).join('') + '</div></section>';
+  } else {
+    var a = AULAS[id]; document.title = a.titulo + ' · Aula em slides';
+    h = '<section data-background-gradient="linear-gradient(135deg,#eaf4ff,#fff7e6)"><p style="font-size:4em;margin:0">' + a.emoji + '</p><h1>' + a.titulo + '</h1><p>' + a.sub + '</p><p><small>' + a.ano + ' · aperte → ou a barra de espaço</small></p></section>';
+    h += a.slides.map(function(s){ return '<section>' + s + '</section>'; }).join('');
+  }
+  document.getElementById('slides').innerHTML = h;
+  Reveal.initialize({hash: true, slideNumber: id ? 'c/t' : false, transition: 'slide', center: true, width: 1280, height: 760, margin: 0.05, controls: true, progress: true});
+  window.AULA = {id: id, total: function(){ return Reveal.getTotalSlides(); }};
+})();
+</script>
+</body>
+</html>

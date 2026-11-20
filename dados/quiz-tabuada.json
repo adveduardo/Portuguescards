@@ -1,0 +1,486 @@
+{
+ "titulo": "Quiz da tabuada (do 2 ao 9)",
+ "tempoPadrao": 15,
+ "perguntas": [
+  {
+   "pergunta": "Quanto é? 5 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "40",
+    "35",
+    "30",
+    "42"
+   ],
+   "correta": "35",
+   "explica": "5 × 7 = 35."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 2 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "15",
+    "12",
+    "10",
+    "5"
+   ],
+   "correta": "10",
+   "explica": "5 × 2 = 10 (é o mesmo que somar 5 2 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "63",
+    "48",
+    "64",
+    "56"
+   ],
+   "correta": "56",
+   "explica": "8 × 7 = 56."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "56",
+    "49",
+    "42",
+    "94"
+   ],
+   "correta": "49",
+   "explica": "7 × 7 = 49."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 8 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "56",
+    "63",
+    "49",
+    "64"
+   ],
+   "correta": "56",
+   "explica": "7 × 8 = 56."
+  },
+  {
+   "pergunta": "Quanto é? 4 × 9 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "40",
+    "45",
+    "36",
+    "32"
+   ],
+   "correta": "36",
+   "explica": "4 × 9 = 36."
+  },
+  {
+   "pergunta": "Quanto é? 3 × 3 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "12",
+    "19",
+    "9",
+    "6"
+   ],
+   "correta": "9",
+   "explica": "3 × 3 = 9 (é o mesmo que somar 3 3 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 1 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "7",
+    "21",
+    "14",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "7 × 1 = 7 (é o mesmo que somar 7 1 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 9 × 8 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "63",
+    "81",
+    "80",
+    "72"
+   ],
+   "correta": "72",
+   "explica": "9 × 8 = 72."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 8 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "46",
+    "56",
+    "72",
+    "64"
+   ],
+   "correta": "64",
+   "explica": "8 × 8 = 64."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 10 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "80",
+    "77",
+    "70",
+    "63"
+   ],
+   "correta": "70",
+   "explica": "7 × 10 = 70."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 5 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "30",
+    "20",
+    "25",
+    "52"
+   ],
+   "correta": "25",
+   "explica": "5 × 5 = 25 (é o mesmo que somar 5 5 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 1 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "5",
+    "6",
+    "10",
+    "15"
+   ],
+   "correta": "5",
+   "explica": "5 × 1 = 5 (é o mesmo que somar 5 1 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 6 × 5 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "36",
+    "30",
+    "24",
+    "35"
+   ],
+   "correta": "30",
+   "explica": "6 × 5 = 30 (é o mesmo que somar 6 5 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 4 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "40",
+    "32",
+    "36",
+    "24"
+   ],
+   "correta": "32",
+   "explica": "8 × 4 = 32 (é o mesmo que somar 8 4 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 6 × 2 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "14",
+    "12",
+    "18",
+    "6"
+   ],
+   "correta": "12",
+   "explica": "6 × 2 = 12 (é o mesmo que somar 6 2 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 9 × 6 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "63",
+    "60",
+    "54",
+    "45"
+   ],
+   "correta": "54",
+   "explica": "9 × 6 = 54."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 8 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "35",
+    "40",
+    "45",
+    "48"
+   ],
+   "correta": "40",
+   "explica": "5 × 8 = 40."
+  },
+  {
+   "pergunta": "Quanto é? 4 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "24",
+    "32",
+    "35",
+    "28"
+   ],
+   "correta": "28",
+   "explica": "4 × 7 = 28."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 6 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "36",
+    "25",
+    "35",
+    "30"
+   ],
+   "correta": "30",
+   "explica": "5 × 6 = 30."
+  },
+  {
+   "pergunta": "Quanto é? 6 × 1 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "7",
+    "12",
+    "18",
+    "6"
+   ],
+   "correta": "6",
+   "explica": "6 × 1 = 6 (é o mesmo que somar 6 1 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 5 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "40",
+    "32",
+    "48",
+    "45"
+   ],
+   "correta": "40",
+   "explica": "8 × 5 = 40 (é o mesmo que somar 8 5 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 9 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "63",
+    "54",
+    "70",
+    "72"
+   ],
+   "correta": "63",
+   "explica": "9 × 7 = 63."
+  },
+  {
+   "pergunta": "Quanto é? 9 × 1 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "18",
+    "9",
+    "10",
+    "27"
+   ],
+   "correta": "9",
+   "explica": "9 × 1 = 9 (é o mesmo que somar 9 1 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 5 × 3 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "10",
+    "20",
+    "15",
+    "18"
+   ],
+   "correta": "15",
+   "explica": "5 × 3 = 15 (é o mesmo que somar 5 3 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 2 × 6 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "12",
+    "10",
+    "14",
+    "18"
+   ],
+   "correta": "12",
+   "explica": "2 × 6 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 4 × 5 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "24",
+    "25",
+    "16",
+    "20"
+   ],
+   "correta": "20",
+   "explica": "4 × 5 = 20 (é o mesmo que somar 4 5 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 4 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "21",
+    "35",
+    "28",
+    "32"
+   ],
+   "correta": "28",
+   "explica": "7 × 4 = 28 (é o mesmo que somar 7 4 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 7 × 2 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "16",
+    "14",
+    "21",
+    "7"
+   ],
+   "correta": "14",
+   "explica": "7 × 2 = 14 (é o mesmo que somar 7 2 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 1 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "16",
+    "8",
+    "24",
+    "9"
+   ],
+   "correta": "8",
+   "explica": "8 × 1 = 8 (é o mesmo que somar 8 1 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 2 × 9 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "27",
+    "18",
+    "20",
+    "16"
+   ],
+   "correta": "18",
+   "explica": "2 × 9 = 18."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 9 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "81",
+    "72",
+    "64",
+    "80"
+   ],
+   "correta": "72",
+   "explica": "8 × 9 = 72."
+  },
+  {
+   "pergunta": "Quanto é? 4 × 2 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "4",
+    "12",
+    "10",
+    "8"
+   ],
+   "correta": "8",
+   "explica": "4 × 2 = 8 (é o mesmo que somar 4 2 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 4 × 6 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "24",
+    "20",
+    "28",
+    "30"
+   ],
+   "correta": "24",
+   "explica": "4 × 6 = 24."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 2 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "16",
+    "18",
+    "24",
+    "8"
+   ],
+   "correta": "16",
+   "explica": "8 × 2 = 16 (é o mesmo que somar 8 2 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 3 × 8 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "27",
+    "32",
+    "21",
+    "24"
+   ],
+   "correta": "24",
+   "explica": "3 × 8 = 24."
+  },
+  {
+   "pergunta": "Quanto é? 8 × 10 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "88",
+    "72",
+    "90",
+    "80"
+   ],
+   "correta": "80",
+   "explica": "8 × 10 = 80."
+  },
+  {
+   "pergunta": "Quanto é? 9 × 4 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "27",
+    "40",
+    "36",
+    "45"
+   ],
+   "correta": "36",
+   "explica": "9 × 4 = 36 (é o mesmo que somar 9 4 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 2 × 4 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "8",
+    "6",
+    "12",
+    "10"
+   ],
+   "correta": "8",
+   "explica": "2 × 4 = 8 (é o mesmo que somar 2 4 vezes)."
+  },
+  {
+   "pergunta": "Quanto é? 3 × 7 = ?",
+   "imagem": "✖️",
+   "opcoes": [
+    "28",
+    "24",
+    "21",
+    "18"
+   ],
+   "correta": "21",
+   "explica": "3 × 7 = 21."
+  }
+ ]
+}

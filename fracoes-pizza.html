@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frações com pizzas</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  .painel{display:none}.painel.ativo{display:block}
+  .passo{display:inline-flex;align-items:center;gap:6px;font-weight:bold}
+  .passo button{width:44px;height:44px;font-size:1.4rem;padding:0}
+  .passo output{font-size:1.8rem;min-width:44px;text-align:center}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-weight:bold;line-height:1.05;margin:0 4px}
+  .fr span:first-child{border-bottom:4px solid currentColor;padding:0 6px}
+  .grandeFr{font-size:clamp(2.4rem,6vw,4.4rem);color:#d35400}
+  .pizzas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+  .pizzas svg{max-width:100%}
+  .info div{background:#eef1f6;border-radius:12px;padding:7px 12px;margin:5px 0;font-size:1.1rem}
+  .info b{color:#d35400}
+  .comparar{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center}
+  #sinal{font-size:clamp(3rem,9vw,6rem);font-weight:bold;color:#2f80ed;min-width:80px}
+  .linhaEq{display:flex;align-items:center;gap:14px;margin:6px 0}
+  .linhaEq .rot{min-width:90px;text-align:right;font-size:1.5rem}
+  #opcoesQuiz{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  #opcoesQuiz button{font-size:2rem;padding:14px 0}
+  #opcoesQuiz button.certa{background:#27ae60;color:#fff}
+  #opcoesQuiz button.errada{background:#e74c3c;color:#fff}
+  .explica{font-size:1.15rem;line-height:1.6}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/gsap.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>🍕 Frações com pizzas</h1>
+  <span class="mt-tabs" id="abas"><button class="ativo" data-p="exp">🍕 Explorar</button><button data-p="cmp">⚖️ Comparar</button><button data-p="eq">🟰 Equivalentes</button><button data-p="soma">➕ Somar e subtrair</button><button data-p="quiz">❓ Qual é a fração?</button></span>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap">
+  <!-- explorar -->
+  <section class="painel ativo" id="p-exp">
+    <div class="mt-colunas">
+      <div class="mt-card">
+        <p class="mt-linha" style="justify-content:center"><span class="passo">Numerador <button data-f="eN" data-d="-1">−</button><output id="eN">3</output><button data-f="eN" data-d="1">+</button></span>
+          <span class="passo">Denominador <button data-f="eD" data-d="-1">−</button><output id="eD">4</output><button data-f="eD" data-d="1">+</button></span>
+          <label><select id="eForma"><option value="pizza">🍕 Pizza</option><option value="barra">🍫 Barra de chocolate</option></select></label></p>
+        <div class="pizzas" id="eDesenho"></div>
+        <div id="eReta" style="margin-top:10px"></div>
+      </div>
+      <div class="mt-card">
+        <div style="text-align:center"><span class="fr grandeFr" id="eFr"></span></div>
+        <div class="info" id="eInfo"></div>
+      </div>
+    </div>
+  </section>
+  <!-- comparar -->
+  <section class="painel" id="p-cmp">
+    <div class="mt-card">
+      <div class="comparar">
+        <div><p><span class="passo"><button data-f="c1N" data-d="-1">−</button><output id="c1N">3</output><button data-f="c1N" data-d="1">+</button></span><br><span class="passo"><button data-f="c1D" data-d="-1">−</button><output id="c1D">4</output><button data-f="c1D" data-d="1">+</button></span></p><div class="pizzas" id="c1"></div></div>
+        <div id="sinal">&gt;</div>
+        <div><p><span class="passo"><button data-f="c2N" data-d="-1">−</button><output id="c2N">2</output><button data-f="c2N" data-d="1">+</button></span><br><span class="passo"><button data-f="c2D" data-d="-1">−</button><output id="c2D">3</output><button data-f="c2D" data-d="1">+</button></span></p><div class="pizzas" id="c2"></div></div>
+      </div>
+      <div id="cBarras" style="margin-top:10px"></div>
+      <p class="explica" id="cExplica"></p>
+    </div>
+  </section>
+  <!-- equivalentes -->
+  <section class="painel" id="p-eq">
+    <div class="mt-card">
+      <p class="mt-linha"><span class="passo">Fração: <button data-f="qN" data-d="-1">−</button><output id="qN">1</output><button data-f="qN" data-d="1">+</button> / <button data-f="qD" data-d="-1">−</button><output id="qD">2</output><button data-f="qD" data-d="1">+</button></span></p>
+      <div id="qBarras"></div>
+      <p class="explica" id="qExplica"></p>
+    </div>
+  </section>
+  <!-- somar -->
+  <section class="painel" id="p-soma">
+    <div class="mt-card">
+      <p class="mt-linha" style="justify-content:center;font-size:1.2rem">
+        <span class="passo"><button data-f="sAN" data-d="-1">−</button><output id="sAN">1</output><button data-f="sAN" data-d="1">+</button> / <button data-f="sAD" data-d="-1">−</button><output id="sAD">2</output><button data-f="sAD" data-d="1">+</button></span>
+        <select id="sOp" style="font-size:1.6rem"><option value="+">+</option><option value="-">−</option></select>
+        <span class="passo"><button data-f="sBN" data-d="-1">−</button><output id="sBN">1</output><button data-f="sBN" data-d="1">+</button> / <button data-f="sBD" data-d="-1">−</button><output id="sBD">3</output><button data-f="sBD" data-d="1">+</button></span>
+      </p>
+      <div id="sBarras"></div>
+      <p class="explica" id="sExplica"></p>
+    </div>
+  </section>
+  <!-- quiz -->
+  <section class="painel" id="p-quiz">
+    <div class="mt-card" style="text-align:center">
+      <h2>Que fração da figura está pintada?</h2>
+      <div class="pizzas" id="zDesenho"></div>
+      <div id="opcoesQuiz"></div>
+      <p class="explica" id="zExplica"></p>
+      <p><span class="mt-chip">✅ <b id="zAc">0</b></span> <span class="mt-chip">❌ <b id="zEr">0</b></span> <button class="principal" id="zProx">➡️ Próxima</button></p>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  var temG = !!window.gsap;
+  var V = {eN: 3, eD: 4, c1N: 3, c1D: 4, c2N: 2, c2D: 3, qN: 1, qD: 2, sAN: 1, sAD: 2, sBN: 1, sBD: 3};
+  var LIM = {eN: [0, 36], eD: [1, 12], c1N: [0, 24], c1D: [1, 12], c2N: [0, 24], c2D: [1, 12], qN: [1, 11], qD: [2, 12], sAN: [0, 12], sAD: [1, 12], sBN: [0, 12], sBD: [1, 12]};
+  function mdc(a, b){ return b ? mdc(b, a % b) : a; }
+  function mmc(a, b){ return a / mdc(a, b) * b; }
+  function fr(a, b, cor){ return '<span class="fr"' + (cor ? ' style="color:' + cor + '"' : '') + '><span>' + a + '</span><span>' + b + '</span></span>'; }
+  var UN = ['zero', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez', 'onze', 'doze', 'treze', 'catorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove'];
+  function extenso(k){ if (k < 20) return UN[k]; var d = Math.floor(k / 10), u = k % 10, dz = ['', '', 'vinte', 'trinta', 'quarenta'][d]; return u ? dz + ' e ' + UN[u] : dz; }
+  var DEN = {1: ['inteiro', 'inteiros'], 2: ['meio', 'meios'], 3: ['terço', 'terços'], 4: ['quarto', 'quartos'], 5: ['quinto', 'quintos'], 6: ['sexto', 'sextos'], 7: ['sétimo', 'sétimos'], 8: ['oitavo', 'oitavos'], 9: ['nono', 'nonos'], 10: ['décimo', 'décimos'], 11: ['onze avos', 'onze avos'], 12: ['doze avos', 'doze avos']};
+  function leitura(a, b){ return extenso(a) + ' ' + DEN[b][a === 1 ? 0 : 1]; }
+  // ---------- desenhos ----------
+  var COR = {cheia: '#ffcf5c', borda: '#c47f17', vazia: '#fff7e6', calab: '#d64545'};
+  function fatia(cx, cy, r, a0, a1){
+    if (a1 - a0 >= 359.999) return 'M' + (cx - r) + ',' + cy + ' a' + r + ',' + r + ' 0 1,0 ' + 2 * r + ',0 a' + r + ',' + r + ' 0 1,0 ' + (-2 * r) + ',0';
+    var p = function(a){ var t = (a - 90) * Math.PI / 180; return (cx + r * Math.cos(t)).toFixed(2) + ',' + (cy + r * Math.sin(t)).toFixed(2); };
+    return 'M' + cx + ',' + cy + ' L' + p(a0) + ' A' + r + ',' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ',1 ' + p(a1) + ' Z';
+  }
+  function pizzas(num, den, r, corCheia){
+    var qt = Math.max(1, Math.ceil(num / den)), s = '', k = 0, tam = 2 * r + 12;
+    for (var q = 0; q < qt; q++){
+      s += '<svg width="' + tam + '" height="' + tam + '" viewBox="0 0 ' + tam + ' ' + tam + '">';
+      var cx = tam / 2, cy = tam / 2;
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 5) + '" fill="#e9b872"/>';
+      for (var i = 0; i < den; i++, k++){
+        var a0 = i * 360 / den, a1 = (i + 1) * 360 / den, cheia = k < num;
+        s += '<g class="fatia' + (cheia ? ' cheia' : '') + '" data-k="' + k + '"><path d="' + fatia(cx, cy, r, a0, a1) + '" fill="' + (cheia ? (corCheia || COR.cheia) : COR.vazia) + '" stroke="' + COR.borda + '" stroke-width="2.5"/>';
+        if (cheia && den <= 12){   // calabresas
+          var am = ((a0 + a1) / 2 - 90) * Math.PI / 180, rr = den === 1 ? 0 : r * 0.58, pr = Math.max(4, r * 0.11 * Math.min(1, 4 / Math.sqrt(den)));
+          s += '<circle cx="' + (cx + rr * Math.cos(am)).toFixed(1) + '" cy="' + (cy + rr * Math.sin(am)).toFixed(1) + '" r="' + pr.toFixed(1) + '" fill="' + COR.calab + '"/>';
+          if (den <= 4){ var am2 = am + 0.35 * 2 * Math.PI / den; s += '<circle cx="' + (cx + r * 0.32 * Math.cos(am2)).toFixed(1) + '" cy="' + (cy + r * 0.32 * Math.sin(am2)).toFixed(1) + '" r="' + (pr * 0.8).toFixed(1) + '" fill="' + COR.calab + '"/>'; }
+        }
+        s += '</g>';
+      }
+      s += '</svg>';
+    }
+    return s;
+  }
+  function barras(num, den, larg, alt, cor, minimo){
+    var qt = Math.max(minimo || 1, Math.ceil(num / den)), s = '', k = 0, w = larg / den;
+    for (var q = 0; q < qt; q++){
+      s += '<svg width="' + (larg + 6) + '" height="' + (alt + 6) + '" viewBox="0 0 ' + (larg + 6) + ' ' + (alt + 6) + '" style="display:block;margin:4px auto">';
+      for (var i = 0; i < den; i++, k++){
+        var cheia = k < num;
+        s += '<g class="fatia' + (cheia ? ' cheia' : '') + '" data-k="' + k + '"><rect x="' + (3 + i * w).toFixed(2) + '" y="3" width="' + w.toFixed(2) + '" height="' + alt + '" fill="' + (cheia ? (cor || '#8d5524') : '#f3e5d8') + '" stroke="#5d3a1a" stroke-width="2.5" rx="3"/></g>';
+      }
+      s += '</svg>';
+    }
+    return s;
+  }
+  function animarNovas(sel, desde){
+    if (!temG) return;
+    var els = document.querySelectorAll(sel + ' .fatia.cheia'), novas = [];
+    for (var i = 0; i < els.length; i++) if (+els[i].getAttribute('data-k') >= desde) novas.push(els[i]);
+    if (novas.length) gsap.from(novas, {scale: 0.2, opacity: 0, transformOrigin: '50% 50%', duration: 0.45, stagger: 0.06, ease: 'back.out(2)'});
+  }
+  function decimal(a, b){
+    var d = b / mdc(a, b); while (d % 2 === 0) d /= 2; while (d % 5 === 0) d /= 5;
+    var v = a / b, exato = d === 1;
+    return {txt: (exato ? '' : '≈ ') + String(Math.round(v * 1000) / 1000).replace('.', ',') + (exato ? '' : '… (dízima periódica)'), pct: (exato && Math.abs(v * 100 - Math.round(v * 100)) < 1e-9 ? '' : '≈ ') + String(Math.round(v * 1000) / 10).replace('.', ',') + '%'};
+  }
+  function reta(num, den){
+    var max = Math.max(1, Math.ceil(num / den)), W = 760, x0 = 30, L = W - 60, s = '<svg width="100%" viewBox="0 0 ' + W + ' 80">';
+    s += '<line x1="' + x0 + '" y1="40" x2="' + (x0 + L) + '" y2="40" stroke="#1f2a44" stroke-width="3"/>';
+    for (var i = 0; i <= max * den; i++){
+      var x = x0 + L * i / (max * den), inteiro = i % den === 0;
+      s += '<line x1="' + x + '" y1="' + (inteiro ? 26 : 32) + '" x2="' + x + '" y2="' + (inteiro ? 54 : 48) + '" stroke="#1f2a44" stroke-width="' + (inteiro ? 3 : 1.5) + '"/>';
+      if (inteiro) s += '<text x="' + x + '" y="74" text-anchor="middle" font-size="18" font-weight="bold">' + (i / den) + '</text>';
+    }
+    var xm = x0 + L * num / (max * den);
+    s += '<circle id="marca" cx="' + xm + '" cy="40" r="10" fill="#d35400" stroke="#fff" stroke-width="3"/><text x="' + xm + '" y="18" text-anchor="middle" font-size="17" font-weight="bold" fill="#d35400">' + num + '/' + den + '</text></svg>';
+    return s;
+  }
+  // ---------- explorar ----------
+  var antes = {n: 0, d: 0};
+  function explorar(){
+    var a = V.eN, b = V.eD, forma = $('eForma').value;
+    $('eDesenho').innerHTML = forma === 'pizza' ? pizzas(a, b, b > 8 ? 110 : 120) : barras(a, b, 520, 70);
+    animarNovas('#eDesenho', antes.d === b && antes.f === forma ? antes.n : 0); antes = {n: a, d: b, f: forma};
+    $('eReta').innerHTML = reta(a, b);
+    $('eFr').innerHTML = '<span>' + a + '</span><span>' + b + '</span>';
+    var tipo, d = decimal(a, b), g = mdc(a, b);
+    if (a === 0) tipo = 'Numerador zero: nenhuma parte foi pega, a fração vale 0.';
+    else if (a % b === 0) tipo = '🟰 Fração <b>aparente</b>: vale um número inteiro (' + a + ' ÷ ' + b + ' = ' + (a / b) + ').';
+    else if (a < b) tipo = '✅ Fração <b>própria</b>: menor que 1 inteiro (numerador menor que o denominador).';
+    else tipo = '⬆️ Fração <b>imprópria</b>: maior que 1 inteiro. Como número misto: <b>' + Math.floor(a / b) + ' ' + fr(a % b, b) + '</b>';
+    $('eInfo').innerHTML = '<div>🗣️ Lê-se: <b>' + leitura(a, b) + '</b></div>' +
+      '<div>🔢 O <b>denominador ' + b + '</b> diz em quantas partes iguais o inteiro foi dividido; o <b>numerador ' + a + '</b> diz quantas partes foram pegas.</div>' +
+      '<div>' + tipo + '</div>' +
+      '<div>➗ Como decimal: ' + a + ' ÷ ' + b + ' = <b>' + d.txt + '</b></div>' +
+      '<div>💯 Em porcentagem: <b>' + d.pct + '</b></div>' +
+      (g > 1 && a > 0 ? '<div>✂️ Forma irredutível: ' + fr(a, b) + ' = ' + fr(a / g, b / g) + ' (dividindo por ' + g + ')</div>' : '');
+  }
+  $('eForma').onchange = explorar;
+  // ---------- comparar ----------
+  function comparar(){
+    $('c1').innerHTML = pizzas(V.c1N, V.c1D, 90, '#ffcf5c'); $('c2').innerHTML = pizzas(V.c2N, V.c2D, 90, '#9ad0f5');
+    var a = V.c1N * V.c2D, b = V.c2N * V.c1D, sinal = a > b ? '&gt;' : a < b ? '&lt;' : '=', m = mmc(V.c1D, V.c2D);
+    $('sinal').innerHTML = sinal; if (temG) gsap.fromTo('#sinal', {scale: 0.3, rotation: -30}, {scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(3)'});
+    $('cBarras').innerHTML = '<div class="linhaEq"><span class="rot">' + fr(V.c1N, V.c1D) + '</span><div style="flex:1">' + barras(V.c1N, V.c1D, 600, 46, '#e0a526') + '</div></div>' +
+      '<div class="linhaEq"><span class="rot">' + fr(V.c2N, V.c2D) + '</span><div style="flex:1">' + barras(V.c2N, V.c2D, 600, 46, '#3d9ae8') + '</div></div>';
+    var exp = V.c1D === V.c2D ? 'Mesmo denominador: basta comparar os numeradores (' + V.c1N + ' e ' + V.c2N + ').' :
+      'Denominadores diferentes: deixe com o mesmo denominador (MMC de ' + V.c1D + ' e ' + V.c2D + ' = ' + m + '). ' + fr(V.c1N, V.c1D) + ' = ' + fr(V.c1N * m / V.c1D, m) + ' e ' + fr(V.c2N, V.c2D) + ' = ' + fr(V.c2N * m / V.c2D, m) + '. Agora compare ' + (V.c1N * m / V.c1D) + ' com ' + (V.c2N * m / V.c2D) + '.';
+    $('cExplica').innerHTML = exp + ' Resultado: ' + fr(V.c1N, V.c1D) + ' ' + sinal + ' ' + fr(V.c2N, V.c2D);
+  }
+  // ---------- equivalentes ----------
+  function equivalentes(){
+    if (V.qN >= V.qD) V.qN = V.qD - 1; $('qN').textContent = V.qN;
+    var h = '', cores = ['#d35400', '#8e44ad', '#16a085', '#2f80ed', '#c0392b'];
+    for (var k = 1; k <= 5; k++) h += '<div class="linhaEq"><span class="rot">' + fr(V.qN * k, V.qD * k, cores[k - 1]) + '</span><div style="flex:1" class="barraEq">' + barras(V.qN * k, V.qD * k, 640, 44, cores[k - 1]) + '</div>' + (k > 1 ? '<span class="mt-dica">×' + k + '</span>' : '<span class="mt-dica">base</span>') + '</div>';
+    $('qBarras').innerHTML = h;
+    if (temG) gsap.from('#qBarras .linhaEq', {x: -60, opacity: 0, duration: 0.45, stagger: 0.12});
+    var g = mdc(V.qN, V.qD);
+    $('qExplica').innerHTML = 'As partes pintadas têm <b>o mesmo tamanho</b> em todas as barras: são frações <b>equivalentes</b>. Para achar uma equivalente, multiplique (ou divida) o numerador e o denominador pelo mesmo número.' +
+      (g > 1 ? '<br>✂️ Simplificando: ' + fr(V.qN, V.qD) + ' ÷ ' + g + ' = ' + fr(V.qN / g, V.qD / g) + ' (forma irredutível).' : '<br>✔️ ' + fr(V.qN, V.qD) + ' já está na forma irredutível (não dá para simplificar).');
+  }
+  // ---------- somar e subtrair ----------
+  function somar(){
+    var op = $('sOp').value, a = V.sAN, b = V.sAD, c = V.sBN, d = V.sBD, m = mmc(b, d), A = a * m / b, C = c * m / d, R = op === '+' ? A + C : A - C;
+    var h = '<div class="linhaEq"><span class="rot">' + fr(a, b) + '</span><div style="flex:1">' + barras(a, b, 600, 40, '#e0a526') + '</div></div>' +
+      '<div class="linhaEq"><span class="rot">' + fr(c, d) + '</span><div style="flex:1">' + barras(c, d, 600, 40, '#3d9ae8') + '</div></div>';
+    if (b !== d) h += '<p class="mt-dica" style="text-align:center">⬇️ cortando todas em pedaços de 1/' + m + ' (MMC de ' + b + ' e ' + d + ' = ' + m + ')</p>' +
+      '<div class="linhaEq"><span class="rot">' + fr(A, m) + '</span><div style="flex:1">' + barras(A, m, 600, 40, '#e0a526') + '</div></div>' +
+      '<div class="linhaEq"><span class="rot">' + fr(C, m) + '</span><div style="flex:1">' + barras(C, m, 600, 40, '#3d9ae8') + '</div></div>';
+    if (R < 0){ h += '<p class="mt-erro" style="text-align:center;font-weight:bold">A primeira fração é menor: o resultado seria negativo. Troque os valores.</p>'; $('sBarras').innerHTML = h; $('sExplica').innerHTML = ''; return; }
+    h += '<div class="linhaEq" id="linhaRes"><span class="rot" style="color:#27ae60">' + fr(R, m) + '</span><div style="flex:1">' + barras(R, m, 600, 40, '#27ae60') + '</div></div>';
+    $('sBarras').innerHTML = h;
+    if (temG) gsap.from('#linhaRes', {y: 40, opacity: 0, duration: 0.6, ease: 'back.out(2)'});
+    var g = mdc(R, m), sig = op === '+' ? ' + ' : ' − ';
+    $('sExplica').innerHTML = (b === d ? 'Mesmo denominador: ' + (op === '+' ? 'somamos' : 'subtraímos') + ' só os numeradores e mantemos o denominador.' : 'Denominadores diferentes: primeiro deixamos com o mesmo denominador (' + m + ').') +
+      '<br>' + fr(a, b) + sig + fr(c, d) + (b !== d ? ' = ' + fr(A, m) + sig + fr(C, m) : '') + ' = ' + fr(R, m) + (g > 1 && R ? ' = ' + fr(R / g, m / g) : '') + (R > m && R % m ? ' = ' + Math.floor(R / m) + ' ' + fr((R / g) % (m / g), m / g) : R && R % m === 0 ? ' = ' + R / m : '');
+  }
+  $('sOp').onchange = somar;
+  // ---------- quiz ----------
+  var zAc = 0, zEr = 0, zAtual = null;
+  function proxQuiz(){
+    var d = 2 + Math.floor(Math.random() * 9), n = 1 + Math.floor(Math.random() * (d - 1)), forma = Math.random() < 0.5 ? 'pizza' : 'barra';
+    zAtual = {n: n, d: d};
+    $('zDesenho').innerHTML = forma === 'pizza' ? pizzas(n, d, 130) : barras(n, d, 560, 80);
+    animarNovas('#zDesenho', 0);
+    var ops = [[n, d], [d, n], [n, d - n], [d - n, d]], vistos = {}, lista = [];
+    ops.forEach(function(o){ var k = o[0] + '/' + o[1]; if (!vistos[k] && o[1] > 0){ vistos[k] = 1; lista.push(o); } });
+    while (lista.length < 4){ var o2 = [1 + Math.floor(Math.random() * 11), 2 + Math.floor(Math.random() * 11)], k2 = o2[0] + '/' + o2[1]; if (!vistos[k2] && o2[0] < o2[1] && o2[0] * d !== n * o2[1]){ vistos[k2] = 1; lista.push(o2); } }
+    lista = Sala.embaralhar(lista);
+    $('opcoesQuiz').innerHTML = lista.map(function(o){ return '<button data-o="' + o[0] + '/' + o[1] + '">' + fr(o[0], o[1]) + '</button>'; }).join('');
+    $('zExplica').innerHTML = '';
+  }
+  $('opcoesQuiz').onclick = function(e){
+    var b = e.target.closest('button'); if (!b || !zAtual || zAtual.feito) return;
+    zAtual.feito = true; var p = b.getAttribute('data-o').split('/'), certo = +p[0] === zAtual.n && +p[1] === zAtual.d;
+    var bs = $('opcoesQuiz').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) if (bs[i].getAttribute('data-o') === zAtual.n + '/' + zAtual.d) bs[i].className = 'certa';
+    if (certo){ zAc++; Sala.plim(); if (temG) gsap.fromTo(b, {scale: 1.25}, {scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.3)'}); $('zExplica').innerHTML = '✅ Isso! ' + zAtual.d + ' partes iguais, ' + zAtual.n + ' pintada' + (zAtual.n > 1 ? 's' : '') + ': ' + leitura(zAtual.n, zAtual.d) + '.'; }
+    else { zEr++; b.className = 'errada'; Sala.tom(220, 0.3); if (temG) gsap.fromTo(b, {x: -10}, {x: 0, duration: 0.5, ease: 'elastic.out(1, 0.2)'});
+      var dica = +p[0] === zAtual.d && +p[1] === zAtual.n ? 'Inverteu: o denominador (embaixo) é o total de partes.' : +p[1] === zAtual.d - zAtual.n || (+p[0] === zAtual.n && +p[1] === zAtual.d - zAtual.n) ? 'Cuidado: embaixo vai o total de partes, não só as que não foram pintadas.' : +p[0] === zAtual.d - zAtual.n ? 'Essa é a parte que NÃO está pintada.' : 'Conte quantas partes iguais há no total (denominador) e quantas estão pintadas (numerador).';
+      $('zExplica').innerHTML = '❌ ' + dica; }
+    $('zAc').textContent = zAc; $('zEr').textContent = zEr;
+  };
+  $('zProx').onclick = proxQuiz;
+  // ---------- botões + e − ----------
+  var PAINEIS = {exp: explorar, cmp: comparar, eq: equivalentes, soma: somar, quiz: function(){ if (!zAtual) proxQuiz(); }}, painel = 'exp';
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-f]'); if (!b) return;
+    var f = b.getAttribute('data-f'), v = V[f] + (+b.getAttribute('data-d'));
+    if (v < LIM[f][0] || v > LIM[f][1]) return;
+    V[f] = v; $(f).textContent = v; Sala.tom(500 + v * 12, 0.05); PAINEIS[painel]();
+  });
+  $('abas').onclick = function(e){
+    var b = e.target.closest('button'); if (!b) return; painel = b.getAttribute('data-p');
+    var bs = $('abas').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) bs[i].className = bs[i] === b ? 'ativo' : '';
+    var ps = document.querySelectorAll('.painel'); for (i = 0; i < ps.length; i++) ps[i].className = 'painel' + (ps[i].id === 'p-' + painel ? ' ativo' : '');
+    PAINEIS[painel]();
+  };
+  window.FRACOES = {V: V, ir: function(p){ painel = p; PAINEIS[p](); }, quiz: function(){ return zAtual; }, placar: function(){ return {ac: zAc, er: zEr}; }};
+  explorar();
+})();
+</script>
+</body>
+</html>

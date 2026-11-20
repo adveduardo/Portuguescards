@@ -1,0 +1,245 @@
+{
+ "titulo": "Teorema de Pitágoras (9º ano)",
+ "emoji": "📐",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "10 m e um cateto mede 6 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "9 m",
+    "4 m",
+    "16 m",
+    "8 m"
+   ],
+   "correta": "8 m",
+   "explica": "10² − 6² = 100 − 36 = 64; √64 = 8 m."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "12 cm e 16 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "96 cm",
+    "28 cm",
+    "21 cm",
+    "20 cm"
+   ],
+   "correta": "20 cm",
+   "explica": "a² = b² + c²: 12² + 16² = 144 + 256 = 400; √400 = 20 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "6 cm?",
+   "opcoes": [
+    "12 cm",
+    "36 cm",
+    "6√3 cm",
+    "6√2 cm"
+   ],
+   "correta": "6√2 cm",
+   "explica": "d² = 6² + 6² = 72 → d = 6√2 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "5 cm?",
+   "opcoes": [
+    "25 cm",
+    "10 cm",
+    "5√2 cm",
+    "5√3 cm"
+   ],
+   "correta": "5√2 cm",
+   "explica": "d² = 5² + 5² = 50 → d = 5√2 cm."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "6 cm e 8 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "10 cm",
+    "24 cm",
+    "11 cm",
+    "14 cm"
+   ],
+   "correta": "10 cm",
+   "explica": "a² = b² + c²: 6² + 8² = 36 + 64 = 100; √100 = 10 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "3 cm?",
+   "opcoes": [
+    "3√2 cm",
+    "9 cm",
+    "3√3 cm",
+    "6 cm"
+   ],
+   "correta": "3√2 cm",
+   "explica": "d² = 3² + 3² = 18 → d = 3√2 cm."
+  },
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "20 m e um cateto mede 12 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "16 m",
+    "32 m",
+    "17 m",
+    "8 m"
+   ],
+   "correta": "16 m",
+   "explica": "20² − 12² = 400 − 144 = 256; √256 = 16 m."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "5 cm e 12 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "30 cm",
+    "17 cm",
+    "14 cm",
+    "13 cm"
+   ],
+   "correta": "13 cm",
+   "explica": "a² = b² + c²: 5² + 12² = 25 + 144 = 169; √169 = 13 cm."
+  },
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "29 m e um cateto mede 20 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "22 m",
+    "21 m",
+    "9 m",
+    "49 m"
+   ],
+   "correta": "21 m",
+   "explica": "29² − 20² = 841 − 400 = 441; √441 = 21 m."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "8 cm e 15 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "17 cm",
+    "23 cm",
+    "18 cm",
+    "60 cm"
+   ],
+   "correta": "17 cm",
+   "explica": "a² = b² + c²: 8² + 15² = 64 + 225 = 289; √289 = 17 cm."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "9 cm e 12 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "15 cm",
+    "21 cm",
+    "16 cm",
+    "54 cm"
+   ],
+   "correta": "15 cm",
+   "explica": "a² = b² + c²: 9² + 12² = 81 + 144 = 225; √225 = 15 cm."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "3 cm e 4 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "7 cm",
+    "5 cm",
+    "6 cm"
+   ],
+   "correta": "5 cm",
+   "explica": "a² = b² + c²: 3² + 4² = 9 + 16 = 25; √25 = 5 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "4 cm?",
+   "opcoes": [
+    "16 cm",
+    "4√3 cm",
+    "4√2 cm",
+    "8 cm"
+   ],
+   "correta": "4√2 cm",
+   "explica": "d² = 4² + 4² = 32 → d = 4√2 cm."
+  },
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "25 m e um cateto mede 7 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "24 m",
+    "25 m",
+    "32 m",
+    "18 m"
+   ],
+   "correta": "24 m",
+   "explica": "25² − 7² = 625 − 49 = 576; √576 = 24 m."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "2 cm?",
+   "opcoes": [
+    "2√2 cm",
+    "4 cm",
+    "2√3 cm"
+   ],
+   "correta": "2√2 cm",
+   "explica": "d² = 2² + 2² = 8 → d = 2√2 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "9 cm?",
+   "opcoes": [
+    "81 cm",
+    "18 cm",
+    "9√2 cm",
+    "9√3 cm"
+   ],
+   "correta": "9√2 cm",
+   "explica": "d² = 9² + 9² = 162 → d = 9√2 cm."
+  },
+  {
+   "enunciado": "Os catetos de um triângulo retângulo medem:",
+   "destaque": "20 cm e 21 cm. Quanto mede a hipotenusa?",
+   "opcoes": [
+    "41 cm",
+    "29 cm",
+    "30 cm",
+    "210 cm"
+   ],
+   "correta": "29 cm",
+   "explica": "a² = b² + c²: 20² + 21² = 400 + 441 = 841; √841 = 29 cm."
+  },
+  {
+   "enunciado": "Qual é a diagonal de um quadrado de lado:",
+   "destaque": "7 cm?",
+   "opcoes": [
+    "14 cm",
+    "7√2 cm",
+    "7√3 cm",
+    "49 cm"
+   ],
+   "correta": "7√2 cm",
+   "explica": "d² = 7² + 7² = 98 → d = 7√2 cm."
+  },
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "15 m e um cateto mede 9 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "13 m",
+    "12 m",
+    "24 m",
+    "6 m"
+   ],
+   "correta": "12 m",
+   "explica": "15² − 9² = 225 − 81 = 144; √144 = 12 m."
+  },
+  {
+   "enunciado": "Num triângulo retângulo, a hipotenusa mede:",
+   "destaque": "5 m e um cateto mede 3 m. Quanto mede o outro cateto?",
+   "opcoes": [
+    "5 m",
+    "4 m",
+    "2 m",
+    "8 m"
+   ],
+   "correta": "4 m",
+   "explica": "5² − 3² = 25 − 9 = 16; √16 = 4 m."
+  }
+ ]
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balança das equações</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  #cena{width:100%;height:auto;display:block;background:linear-gradient(#eaf4ff,#fdfdff);border-radius:16px}
+  #equacao{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:bold;text-align:center;margin:4px 0;letter-spacing:1px}
+  #equacao .x{color:#8e44ad}
+  #status{text-align:center;font-weight:bold;font-size:1.2rem;min-height:1.5em}
+  .acoes button{font-size:1.05rem;margin:3px}
+  #passos{font-size:1.15rem;line-height:1.7}
+  #passos .op{display:inline-block;background:#fff3c4;border-radius:8px;padding:0 8px;margin:0 6px;font-size:.95rem;color:#8a6d00}
+  .item{cursor:default}
+  .livre .item{cursor:pointer}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/gsap.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>⚖️ Balança das equações</h1>
+  <label>Nível: <select id="selNivel"><option value="1">1 · x + 3 = 7</option><option value="2">2 · 3x = 12</option><option value="3" selected>3 · 2x + 3 = 11</option><option value="4">4 · 3x + 2 = x + 10</option></select></label>
+  <button class="principal" id="btNova">🎲 Nova equação</button>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap mt-colunas">
+  <div class="mt-card" id="caixaCena">
+    <div id="equacao"></div>
+    <svg id="cena" viewBox="0 0 1000 520">
+      <rect x="0" y="470" width="1000" height="50" fill="#d9c8a9"/>
+      <polygon points="500,150 430,470 570,470" fill="#8a6d4b"/>
+      <rect x="400" y="455" width="200" height="22" rx="8" fill="#6e5236"/>
+      <g id="pratoE"></g><g id="pratoD"></g>
+      <g id="travessao"><rect x="140" y="142" width="720" height="16" rx="8" fill="#6e5236"/></g>
+      <circle cx="500" cy="150" r="16" fill="#ffd54a" stroke="#b38f00" stroke-width="4"/>
+      <polygon id="ponteiro" points="492,150 508,150 500,92" fill="#e74c3c"/>
+    </svg>
+    <div id="status"></div>
+    <p class="mt-linha acoes" style="justify-content:center">
+      <button id="btMenos1">➖ Tirar 1 dos dois lados</button>
+      <button id="btMenosN">➖ Tirar <span id="qN">3</span> dos dois lados</button>
+      <button id="btMenosX">➖ Tirar 1 x dos dois lados</button>
+      <button id="btDividir">➗ Dividir os dois lados por <span id="qD">2</span></button>
+      <button id="btDesfazer">↩️ Desfazer</button>
+    </p>
+    <p class="mt-linha" style="justify-content:center"><label><input type="checkbox" id="ckLivre"> 🖐️ Modo livre: tocar num peso tira só daquele lado</label>
+      <span id="addLivre" style="display:none"><button data-add="E1">+1 ⬅️</button><button data-add="Ex">+x ⬅️</button><button data-add="D1">➡️ +1</button><button data-add="Dx">➡️ +x</button></span></p>
+  </div>
+  <div>
+    <div class="mt-card"><h2>📝 Passo a passo</h2><div id="passos"></div></div>
+    <div class="mt-card"><h2>💡 A ideia</h2>
+      <p>A equação é uma balança <b>em equilíbrio</b>: os dois lados pesam igual. Cada caixa 🟪 <b>x</b> esconde o mesmo peso.</p>
+      <p>Para descobrir o x, tire pesos <b>dos dois lados ao mesmo tempo</b> (ou divida os dois lados igualmente). Assim a balança continua equilibrada e o x vai ficando sozinho.</p>
+      <p class="mt-dica">No modo livre, mexa só de um lado e veja a balança pender: a igualdade vira uma desigualdade (&lt; ou &gt;).</p></div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  var temG = !!window.gsap, PIV = {x: 500, y: 150}, BRACO = 340, CORDA = 150;
+  var est = null, segredo = 1, hist = [], passos = [], ang = {v: 0}, idSeq = 0, resolvido = false;
+  var lados = {E: [], D: []};   // itens desenhados: {id, t: 'x' | '1', el}
+  function ri(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }
+  function mdc(a, b){ return b ? mdc(b, a % b) : a; }
+  // ---------- equações ----------
+  function gerar(nivel){
+    var s, a, b, c, d;
+    if (nivel === 1){ s = ri(1, 9); a = ri(1, 9); return {s: s, E: {x: 1, n: a}, D: {x: 0, n: s + a}}; }
+    if (nivel === 2){ a = ri(2, 5); s = ri(1, Math.floor(20 / a)); return {s: s, E: {x: a, n: 0}, D: {x: 0, n: a * s}}; }
+    if (nivel === 3){ a = ri(2, 4); s = ri(1, 5); b = ri(1, 8); return {s: s, E: {x: a, n: b}, D: {x: 0, n: a * s + b}}; }
+    do { a = ri(2, 5); c = ri(1, a - 1); s = ri(1, 5); b = ri(0, 6); d = (a - c) * s + b; } while (d > 20 || d === b);
+    return {s: s, E: {x: a, n: b}, D: {x: c, n: d}};
+  }
+  function textoLado(l){
+    var t = l.x ? (l.x === 1 ? '<span class="x">x</span>' : l.x + '<span class="x">x</span>') : '';
+    if (l.n) t += (t ? ' + ' : '') + l.n;
+    return t || '0';
+  }
+  function peso(l){ return l.x * segredo + l.n; }
+  function sinal(){ var a = peso(est.E), b = peso(est.D); return a === b ? '=' : a < b ? '&lt;' : '&gt;'; }
+  function textoEq(){ return textoLado(est.E) + ' ' + sinal() + ' ' + textoLado(est.D); }
+  // ---------- desenho ----------
+  function svgEl(tag, at){ var e = document.createElementNS('http://www.w3.org/2000/svg', tag); for (var k in at) e.setAttribute(k, at[k]); return e; }
+  function criarItem(t){
+    var g = svgEl('g', {'class': 'item'});
+    if (t === 'x'){ g.appendChild(svgEl('rect', {x: -22, y: -44, width: 44, height: 44, rx: 8, fill: '#8e44ad', stroke: '#5b2c6f', 'stroke-width': 3}));
+      var tx = svgEl('text', {x: 0, y: -14, 'text-anchor': 'middle', 'font-size': 26, 'font-weight': 'bold', fill: '#fff'}); tx.textContent = 'x'; g.appendChild(tx); }
+    else { g.appendChild(svgEl('path', {d: 'M-15,-34 L15,-34 L19,0 L-19,0 Z', fill: '#95a5a6', stroke: '#566573', 'stroke-width': 3}));
+      g.appendChild(svgEl('rect', {x: -6, y: -40, width: 12, height: 8, rx: 3, fill: '#566573'}));
+      var t1 = svgEl('text', {x: 0, y: -9, 'text-anchor': 'middle', 'font-size': 20, 'font-weight': 'bold', fill: '#1f2a44'}); t1.textContent = '1'; g.appendChild(t1); }
+    return g;
+  }
+  function pratoBase(id){
+    var g = $(id); g.innerHTML = '';
+    g.appendChild(svgEl('line', {x1: 0, y1: -CORDA, x2: -120, y2: 0, stroke: '#56627a', 'stroke-width': 3}));
+    g.appendChild(svgEl('line', {x1: 0, y1: -CORDA, x2: 120, y2: 0, stroke: '#56627a', 'stroke-width': 3}));
+    g.appendChild(svgEl('path', {d: 'M-140,0 L140,0 L110,22 L-110,22 Z', fill: '#b9c3d6', stroke: '#56627a', 'stroke-width': 3}));
+    var itens = svgEl('g', {'class': 'itens'}); g.appendChild(itens); return itens;
+  }
+  var gItens = {E: pratoBase('pratoE'), D: pratoBase('pratoD')};
+  function posicionar(){
+    var a = ang.v * Math.PI / 180, dx = BRACO * Math.cos(a), dy = BRACO * Math.sin(a);
+    $('travessao').setAttribute('transform', 'rotate(' + ang.v + ' ' + PIV.x + ' ' + PIV.y + ')');
+    $('ponteiro').setAttribute('transform', 'rotate(' + ang.v + ' ' + PIV.x + ' ' + PIV.y + ')');
+    $('pratoE').setAttribute('transform', 'translate(' + (PIV.x - dx) + ',' + (PIV.y - dy + CORDA) + ')');
+    $('pratoD').setAttribute('transform', 'translate(' + (PIV.x + dx) + ',' + (PIV.y + dy + CORDA) + ')');
+  }
+  function slots(lista){   // caixas x numa fileira de baixo, pesos 1 em cima (até 8 por fileira)
+    var xs = lista.filter(function(i){ return i.t === 'x'; }), us = lista.filter(function(i){ return i.t === '1'; }), pos = {}, linha = 0;
+    function arrumar(grupo, larg, alt){
+      for (var k = 0; k < grupo.length; k += 6){
+        var fil = grupo.slice(k, k + 6);
+        fil.forEach(function(it, j){ pos[it.id] = {x: (j - (fil.length - 1) / 2) * larg, y: -linha * alt}; });
+        linha++;
+      }
+    }
+    arrumar(xs, 48, 48); arrumar(us, 42, 40);
+    return pos;
+  }
+  function arrumarLado(L, imediato){
+    var pos = slots(lados[L]);
+    lados[L].forEach(function(it){
+      var p = pos[it.id];
+      if (temG && !imediato) gsap.to(it.el, {x: p.x, y: p.y, duration: 0.45, ease: 'power2.out'});
+      else it.el.setAttribute('transform', 'translate(' + p.x + ',' + p.y + ')');
+    });
+  }
+  function adicionar(L, t, qt, imediato){
+    for (var i = 0; i < qt; i++){
+      var it = {id: ++idSeq, t: t, el: criarItem(t)}; it.el.setAttribute('data-id', it.id); it.el.setAttribute('data-l', L);
+      gItens[L].appendChild(it.el); lados[L].push(it);
+      if (temG && !imediato) gsap.fromTo(it.el, {x: 0, y: -260, opacity: 0}, {opacity: 1, duration: 0.3});
+    }
+    arrumarLado(L, imediato);
+  }
+  function remover(L, t, qt){
+    var tirados = 0;
+    for (var i = lados[L].length - 1; i >= 0 && tirados < qt; i--){
+      if (lados[L][i].t !== t) continue;
+      var it = lados[L].splice(i, 1)[0]; tirados++;
+      (function(el){ if (temG) gsap.to(el, {y: '-=220', opacity: 0, duration: 0.5, ease: 'power1.in', onComplete: function(){ if (el.parentNode) el.parentNode.removeChild(el); }}); else el.parentNode.removeChild(el); })(it.el);
+    }
+    arrumarLado(L);
+  }
+  function inclinar(){
+    var dif = peso(est.D) - peso(est.E), alvo = Math.max(-16, Math.min(16, dif * 4));
+    if (temG) gsap.to(ang, {v: alvo, duration: 1.4, ease: 'elastic.out(1, 0.35)', onUpdate: posicionar}); else { ang.v = alvo; posicionar(); }
+  }
+  // ---------- estado e interface ----------
+  function redesenharTudo(){
+    ['E', 'D'].forEach(function(L){ lados[L].forEach(function(it){ if (it.el.parentNode) it.el.parentNode.removeChild(it.el); }); lados[L] = []; adicionar(L, 'x', est[L].x, true); adicionar(L, '1', est[L].n, true); });
+  }
+  function atualizar(){
+    $('equacao').innerHTML = textoEq();
+    var eq = sinal() === '=';
+    var soloE = est.E.x === 1 && est.E.n === 0 && est.D.x === 0, soloD = est.D.x === 1 && est.D.n === 0 && est.E.x === 0;
+    var nTirar = Math.min(est.E.n, est.D.n), xTirar = Math.min(est.E.x, est.D.x);
+    var g = 0; [est.E.x, est.E.n, est.D.x, est.D.n].forEach(function(v){ if (v) g = mdc(g, v); });
+    $('qN').textContent = nTirar; $('btMenosN').disabled = nTirar < 2 || !eq; $('btMenos1').disabled = nTirar < 1 || !eq;
+    $('btMenosX').disabled = xTirar < 1 || !eq; $('qD').textContent = g >= 2 ? g : '…'; $('btDividir').disabled = g < 2 || !eq;
+    $('btDesfazer').disabled = !hist.length;
+    if (!eq){ $('status').innerHTML = '⚠️ Desequilibrou! Agora é uma <b>desigualdade</b>. Para voltar ao equilíbrio, faça o mesmo do outro lado (ou desfaça).'; $('status').className = 'mt-erro'; }
+    else if ((soloE || soloD) && !resolvido){
+      resolvido = true; var val = soloE ? est.D.n : est.E.n;
+      $('status').innerHTML = '🎉 Descobrimos: <b>x = ' + val + '</b>! Prova real: ' + provaReal(val); $('status').className = 'mt-ok';
+      revelar(val); Sala.festa(); Sala.confete(70);
+    } else if (!resolvido){ $('status').textContent = 'Equilibrada ✔️ Qual operação deixa o x mais sozinho?'; $('status').className = ''; }
+    $('passos').innerHTML = passos.map(function(p){ return p.op ? '<span class="op">' + p.op + '</span><br>' + p.eq + '<br>' : p.eq + '<br>'; }).join('');
+    inclinar();
+  }
+  function provaReal(val){
+    var o = est0, f = function(l){ var t = (l.x ? (l.x === 1 ? '' : l.x + ' · ') + val : ''); if (l.n) t += (t ? ' + ' : '') + l.n; return t || '0'; };
+    return f(o.E) + ' = ' + f(o.D) + ' → ' + (o.E.x * val + o.E.n) + ' = ' + (o.D.x * val + o.D.n) + ' ✔️';
+  }
+  function revelar(val){
+    ['E', 'D'].forEach(function(L){ lados[L].forEach(function(it){ if (it.t !== 'x') return; var t = it.el.querySelector('text');
+      if (temG) gsap.to(it.el, {scaleX: 0, duration: 0.2, yoyo: true, repeat: 1, onRepeat: function(){ t.textContent = val; it.el.querySelector('rect').setAttribute('fill', '#27ae60'); }}); else t.textContent = val; }); });
+  }
+  var est0 = null;
+  function nova(){
+    var g = gerar(+$('selNivel').value); segredo = g.s; est = {E: g.E, D: g.D}; est0 = JSON.parse(JSON.stringify(est)); hist = []; resolvido = false;
+    passos = [{eq: textoEq()}]; redesenharTudo(); ang.v = 0; posicionar(); atualizar();
+  }
+  function aplicar(op, fn){
+    if (resolvido) return;
+    hist.push({est: JSON.parse(JSON.stringify(est)), passos: passos.length});
+    fn(); passos.push({op: op, eq: textoEq()}); Sala.tom(600, 0.1); atualizar();
+  }
+  $('btMenos1').onclick = function(){ aplicar('−1 dos dois lados', function(){ est.E.n--; est.D.n--; remover('E', '1', 1); remover('D', '1', 1); }); };
+  $('btMenosN').onclick = function(){ var k = Math.min(est.E.n, est.D.n); aplicar('−' + k + ' dos dois lados', function(){ est.E.n -= k; est.D.n -= k; remover('E', '1', k); remover('D', '1', k); }); };
+  $('btMenosX').onclick = function(){ aplicar('−x dos dois lados', function(){ est.E.x--; est.D.x--; remover('E', 'x', 1); remover('D', 'x', 1); }); };
+  $('btDividir').onclick = function(){
+    var g = 0; [est.E.x, est.E.n, est.D.x, est.D.n].forEach(function(v){ if (v) g = mdc(g, v); });
+    aplicar('÷' + g + ' nos dois lados', function(){
+      ['E', 'D'].forEach(function(L){ var l = est[L], tx = l.x - l.x / g, tn = l.n - l.n / g; l.x /= g; l.n /= g; remover(L, 'x', tx); remover(L, '1', tn); });
+    });
+  };
+  $('btDesfazer').onclick = function(){
+    var h = hist.pop(); if (!h) return; est = h.est; passos = passos.slice(0, h.passos); resolvido = false; redesenharTudo(); atualizar();
+  };
+  $('btNova').onclick = nova; $('selNivel').onchange = nova;
+  // ---------- modo livre ----------
+  $('ckLivre').onchange = function(){ $('caixaCena').className = 'mt-card' + (this.checked ? ' livre' : ''); $('addLivre').style.display = this.checked ? '' : 'none'; };
+  $('cena').addEventListener('click', function(e){
+    if (!$('ckLivre').checked || resolvido) return;
+    var g = e.target.closest('.item'); if (!g) return;
+    var L = g.getAttribute('data-l'), id = +g.getAttribute('data-id'), it = null;
+    lados[L].forEach(function(i){ if (i.id === id) it = i; }); if (!it) return;
+    aplicar((it.t === 'x' ? '−x' : '−1') + ' só ' + (L === 'E' ? 'na esquerda' : 'na direita'), function(){ if (it.t === 'x') est[L].x--; else est[L].n--; remover(L, it.t, 1); });
+  });
+  $('addLivre').onclick = function(e){
+    var b = e.target.closest('[data-add]'); if (!b || resolvido) return;
+    var k = b.getAttribute('data-add'), L = k[0], t = k[1];
+    if (est[L].x + est[L].n >= 26){ Sala.avisar('Esse prato já está cheio.'); return; }
+    aplicar((t === 'x' ? '+x' : '+1') + ' só ' + (L === 'E' ? 'na esquerda' : 'na direita'), function(){ if (t === 'x') est[L].x++; else est[L].n++; adicionar(L, t === 'x' ? 'x' : '1', 1); });
+  };
+  window.BALANCA = {estado: function(){ return {est: est, segredo: segredo, resolvido: resolvido, ang: ang.v, itensE: lados.E.length, itensD: lados.D.length}; }, nova: nova};
+  nova();
+})();
+</script>
+</body>
+</html>

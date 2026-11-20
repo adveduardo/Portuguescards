@@ -1,0 +1,247 @@
+{
+ "titulo": "MMC e MDC (6º ano)",
+ "emoji": "🚌",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule o mínimo múltiplo comum:",
+   "destaque": "MMC(9, 12)",
+   "opcoes": [
+    "45",
+    "36",
+    "108",
+    "3"
+   ],
+   "correta": "36",
+   "explica": "Múltiplos de 9: 9, 18, 27, 36… e de 12: 12, 24, 36… O primeiro em comum é 36."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(6, 9)",
+   "opcoes": [
+    "4",
+    "3",
+    "1",
+    "18"
+   ],
+   "correta": "3",
+   "explica": "Divisores de 6: 1, 2, 3, 6. Divisores de 9: 1, 3, 9. O maior em comum é 3."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(8, 12)",
+   "opcoes": [
+    "4",
+    "24",
+    "1",
+    "5"
+   ],
+   "correta": "4",
+   "explica": "Divisores de 8: 1, 2, 4, 8. Divisores de 12: 1, 2, 3, 4, 6, 12. O maior em comum é 4."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(15, 20)",
+   "opcoes": [
+    "60",
+    "10",
+    "1",
+    "5"
+   ],
+   "correta": "5",
+   "explica": "Divisores de 15: 1, 3, 5, 15. Divisores de 20: 1, 2, 4, 5, 10, 20. O maior em comum é 5."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Dois ônibus saem juntos do terminal. Um passa a cada 8 minutos e o outro a cada 12 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "opcoes": [
+    "96 minutos",
+    "20 minutos",
+    "24 minutos",
+    "4 minutos"
+   ],
+   "correta": "24 minutos",
+   "explica": "É o MMC(8, 12) = 24."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(12, 20)",
+   "opcoes": [
+    "1",
+    "8",
+    "4",
+    "60"
+   ],
+   "correta": "4",
+   "explica": "Divisores de 12: 1, 2, 3, 4, 6, 12. Divisores de 20: 1, 2, 4, 5, 10, 20. O maior em comum é 4."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Dois ônibus saem juntos do terminal. Um passa a cada 18 minutos e o outro a cada 24 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "opcoes": [
+    "6 minutos",
+    "42 minutos",
+    "432 minutos",
+    "72 minutos"
+   ],
+   "correta": "72 minutos",
+   "explica": "É o MMC(18, 24) = 72."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(18, 24)",
+   "opcoes": [
+    "6",
+    "12",
+    "1",
+    "72"
+   ],
+   "correta": "6",
+   "explica": "Divisores de 18: 1, 2, 3, 6, 9, 18. Divisores de 24: 1, 2, 3, 4, 6, 8, 12, 24. O maior em comum é 6."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Dois ônibus saem juntos do terminal. Um passa a cada 6 minutos e o outro a cada 9 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "opcoes": [
+    "18 minutos",
+    "3 minutos",
+    "15 minutos",
+    "54 minutos"
+   ],
+   "correta": "18 minutos",
+   "explica": "É o MMC(6, 9) = 18."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(14, 21)",
+   "opcoes": [
+    "7",
+    "8",
+    "1",
+    "42"
+   ],
+   "correta": "7",
+   "explica": "Divisores de 14: 1, 2, 7, 14. Divisores de 21: 1, 3, 7, 21. O maior em comum é 7."
+  },
+  {
+   "enunciado": "Calcule o mínimo múltiplo comum:",
+   "destaque": "MMC(12, 20)",
+   "opcoes": [
+    "240",
+    "4",
+    "72",
+    "60"
+   ],
+   "correta": "60",
+   "explica": "Múltiplos de 12: 12, 24, 36, 48, 60… e de 20: 20, 40, 60… O primeiro em comum é 60."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Dois ônibus saem juntos do terminal. Um passa a cada 15 minutos e o outro a cada 20 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "opcoes": [
+    "60 minutos",
+    "300 minutos",
+    "5 minutos",
+    "35 minutos"
+   ],
+   "correta": "60 minutos",
+   "explica": "É o MMC(15, 20) = 60."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(12, 18)",
+   "opcoes": [
+    "6",
+    "1",
+    "36",
+    "7"
+   ],
+   "correta": "6",
+   "explica": "Divisores de 12: 1, 2, 3, 4, 6, 12. Divisores de 18: 1, 2, 3, 6, 9, 18. O maior em comum é 6."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(10, 15)",
+   "opcoes": [
+    "6",
+    "5",
+    "1",
+    "30"
+   ],
+   "correta": "5",
+   "explica": "Divisores de 10: 1, 2, 5, 10. Divisores de 15: 1, 3, 5, 15. O maior em comum é 5."
+  },
+  {
+   "enunciado": "Calcule o mínimo múltiplo comum:",
+   "destaque": "MMC(4, 6)",
+   "opcoes": [
+    "2",
+    "12",
+    "16",
+    "24"
+   ],
+   "correta": "12",
+   "explica": "Múltiplos de 4: 4, 8, 12… e de 6: 6, 12… O primeiro em comum é 12."
+  },
+  {
+   "enunciado": "Calcule o mínimo múltiplo comum:",
+   "destaque": "MMC(16, 24)",
+   "opcoes": [
+    "64",
+    "384",
+    "48",
+    "8"
+   ],
+   "correta": "48",
+   "explica": "Múltiplos de 16: 16, 32, 48… e de 24: 24, 48… O primeiro em comum é 48."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Dois ônibus saem juntos do terminal. Um passa a cada 4 minutos e o outro a cada 6 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "opcoes": [
+    "10 minutos",
+    "2 minutos",
+    "24 minutos",
+    "12 minutos"
+   ],
+   "correta": "12 minutos",
+   "explica": "É o MMC(4, 6) = 12."
+  },
+  {
+   "enunciado": "Calcule o mínimo múltiplo comum:",
+   "destaque": "MMC(15, 20)",
+   "opcoes": [
+    "75",
+    "300",
+    "5",
+    "60"
+   ],
+   "correta": "60",
+   "explica": "Múltiplos de 15: 15, 30, 45, 60… e de 20: 20, 40, 60… O primeiro em comum é 60."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(16, 24)",
+   "opcoes": [
+    "1",
+    "9",
+    "8",
+    "48"
+   ],
+   "correta": "8",
+   "explica": "Divisores de 16: 1, 2, 4, 8, 16. Divisores de 24: 1, 2, 3, 4, 6, 8, 12, 24. O maior em comum é 8."
+  },
+  {
+   "enunciado": "Calcule o máximo divisor comum:",
+   "destaque": "MDC(4, 6)",
+   "opcoes": [
+    "12",
+    "3",
+    "2",
+    "1"
+   ],
+   "correta": "2",
+   "explica": "Divisores de 4: 1, 2, 4. Divisores de 6: 1, 2, 3, 6. O maior em comum é 2."
+  }
+ ]
+}

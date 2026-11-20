@@ -1,0 +1,244 @@
+{
+ "titulo": "Equação do 2º grau (9º ano)",
+ "emoji": "🎯",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 36",
+   "opcoes": [
+    "x = 6",
+    "x = 12",
+    "x = −6 ou x = 6",
+    "x = 18"
+   ],
+   "correta": "x = −6 ou x = 6",
+   "explica": "Os números que ao quadrado dão 36 são 6 e −6."
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 2x − 8 = 0",
+   "opcoes": [
+    "x = −2 ou x = 5",
+    "x = 2 ou x = −8",
+    "x = −2 ou x = 4",
+    "x = 2 ou x = −4"
+   ],
+   "correta": "x = −2 ou x = 4",
+   "explica": "As raízes somam 2 e multiplicadas dão −8: −2 e 4. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 4",
+   "opcoes": [
+    "x = 4",
+    "x = 2",
+    "x = −2 ou x = 2"
+   ],
+   "correta": "x = −2 ou x = 2",
+   "explica": "Os números que ao quadrado dão 4 são 2 e −2."
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 9x + 8 = 0",
+   "opcoes": [
+    "x = −1 ou x = −8",
+    "x = 1 ou x = 8",
+    "x = 9 ou x = 8",
+    "x = 1 ou x = 9"
+   ],
+   "correta": "x = 1 ou x = 8",
+   "explica": "As raízes somam 9 e multiplicadas dão 8: 1 e 8. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 12x + 32 = 0",
+   "opcoes": [
+    "x = −4 ou x = −8",
+    "x = 12 ou x = 32",
+    "x = 4 ou x = 8",
+    "x = 4 ou x = 9"
+   ],
+   "correta": "x = 4 ou x = 8",
+   "explica": "As raízes somam 12 e multiplicadas dão 32: 4 e 8. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 3x − 28 = 0",
+   "opcoes": [
+    "x = −4 ou x = 7",
+    "x = −4 ou x = 8",
+    "x = 3 ou x = −28",
+    "x = 4 ou x = −7"
+   ],
+   "correta": "x = −4 ou x = 7",
+   "explica": "As raízes somam 3 e multiplicadas dão −28: −4 e 7. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 4 = 0",
+   "opcoes": [
+    "x = 2 ou x = −2",
+    "x = 0 ou x = −4",
+    "x = −2 ou x = 2",
+    "x = −2 ou x = 3"
+   ],
+   "correta": "x = −2 ou x = 2",
+   "explica": "As raízes somam 0 e multiplicadas dão −4: −2 e 2. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Calcule o discriminante Δ = b² − 4ac:",
+   "destaque": "x² − 9 = 0",
+   "opcoes": [
+    "Δ = 0",
+    "Δ = −36",
+    "Δ = 36 (duas raízes reais diferentes)"
+   ],
+   "correta": "Δ = 36 (duas raízes reais diferentes)",
+   "explica": "Δ = (0)² − 4 × 1 × (−9) = 36: duas raízes reais diferentes."
+  },
+  {
+   "enunciado": "Calcule o discriminante Δ = b² − 4ac:",
+   "destaque": "2x² − 3x + 1 = 0",
+   "opcoes": [
+    "Δ = 1 (duas raízes reais diferentes)",
+    "Δ = 9",
+    "Δ = 17",
+    "Δ = −1"
+   ],
+   "correta": "Δ = 1 (duas raízes reais diferentes)",
+   "explica": "Δ = (−3)² − 4 × 2 × 1 = 1: duas raízes reais diferentes."
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 16",
+   "opcoes": [
+    "x = −4 ou x = 4",
+    "x = 4",
+    "x = 8"
+   ],
+   "correta": "x = −4 ou x = 4",
+   "explica": "Os números que ao quadrado dão 16 são 4 e −4."
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 13x + 40 = 0",
+   "opcoes": [
+    "x = 13 ou x = 40",
+    "x = −5 ou x = −8",
+    "x = 5 ou x = 9",
+    "x = 5 ou x = 8"
+   ],
+   "correta": "x = 5 ou x = 8",
+   "explica": "As raízes somam 13 e multiplicadas dão 40: 5 e 8. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 144",
+   "opcoes": [
+    "x = −12 ou x = 12",
+    "x = 12",
+    "x = 24",
+    "x = 72"
+   ],
+   "correta": "x = −12 ou x = 12",
+   "explica": "Os números que ao quadrado dão 144 são 12 e −12."
+  },
+  {
+   "enunciado": "Calcule o discriminante Δ = b² − 4ac:",
+   "destaque": "x² − 4x + 4 = 0",
+   "opcoes": [
+    "Δ = 32",
+    "Δ = 16",
+    "Δ = 4",
+    "Δ = 0 (uma raiz real (duas iguais))"
+   ],
+   "correta": "Δ = 0 (uma raiz real (duas iguais))",
+   "explica": "Δ = (−4)² − 4 × 1 × 4 = 0: uma raiz real (duas iguais)."
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 121",
+   "opcoes": [
+    "x = 60",
+    "x = 11",
+    "x = −11 ou x = 11",
+    "x = 22"
+   ],
+   "correta": "x = −11 ou x = 11",
+   "explica": "Os números que ao quadrado dão 121 são 11 e −11."
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 49",
+   "opcoes": [
+    "x = 14",
+    "x = 24",
+    "x = −7 ou x = 7",
+    "x = 7"
+   ],
+   "correta": "x = −7 ou x = 7",
+   "explica": "Os números que ao quadrado dão 49 são 7 e −7."
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 5x − 14 = 0",
+   "opcoes": [
+    "x = 2 ou x = −7",
+    "x = −2 ou x = 7",
+    "x = 5 ou x = −14",
+    "x = −2 ou x = 8"
+   ],
+   "correta": "x = −2 ou x = 7",
+   "explica": "As raízes somam 5 e multiplicadas dão −14: −2 e 7. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² − 4x − 12 = 0",
+   "opcoes": [
+    "x = 4 ou x = −12",
+    "x = −2 ou x = 6",
+    "x = 2 ou x = −6",
+    "x = −2 ou x = 7"
+   ],
+   "correta": "x = −2 ou x = 6",
+   "explica": "As raízes somam 4 e multiplicadas dão −12: −2 e 6. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 100",
+   "opcoes": [
+    "x = 10",
+    "x = −10 ou x = 10",
+    "x = 20",
+    "x = 50"
+   ],
+   "correta": "x = −10 ou x = 10",
+   "explica": "Os números que ao quadrado dão 100 são 10 e −10."
+  },
+  {
+   "enunciado": "Resolva a equação:",
+   "destaque": "x² = 25",
+   "opcoes": [
+    "x = 12",
+    "x = −5 ou x = 5",
+    "x = 10",
+    "x = 5"
+   ],
+   "correta": "x = −5 ou x = 5",
+   "explica": "Os números que ao quadrado dão 25 são 5 e −5."
+  },
+  {
+   "enunciado": "Resolva a equação do 2º grau (dica: soma e produto das raízes):",
+   "destaque": "x² + 3x − 4 = 0",
+   "opcoes": [
+    "x = −3 ou x = −4",
+    "x = −4 ou x = 2",
+    "x = −4 ou x = 1",
+    "x = 4 ou x = −1"
+   ],
+   "correta": "x = −4 ou x = 1",
+   "explica": "As raízes somam −3 e multiplicadas dão −4: −4 e 1. (Bhaskara dá o mesmo resultado.)"
+  }
+ ]
+}

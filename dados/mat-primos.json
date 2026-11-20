@@ -1,0 +1,247 @@
+{
+ "titulo": "Números primos e fatoração (6º ano)",
+ "emoji": "🌳",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "91",
+    "39",
+    "23",
+    "95"
+   ],
+   "correta": "23",
+   "explica": "23 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 91 = 7 × 13)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "49",
+    "31",
+    "25",
+    "33"
+   ],
+   "correta": "31",
+   "explica": "31 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 33 = 3 × 11)."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 12 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2 × 6",
+    "2³ × 3",
+    "2² × 3",
+    "2² × 3²"
+   ],
+   "correta": "2² × 3",
+   "explica": "12 = 2² × 3. Confira multiplicando: o resultado é 12."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 84 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2 × 42",
+    "2² × 3 × 7²",
+    "2² × 3 × 7",
+    "2³ × 3 × 7"
+   ],
+   "correta": "2² × 3 × 7",
+   "explica": "84 = 2² × 3 × 7. Confira multiplicando: o resultado é 84."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "85",
+    "17",
+    "117",
+    "57"
+   ],
+   "correta": "17",
+   "explica": "17 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 85 = 5 × 17)."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 40 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2 × 20",
+    "2⁴ × 5",
+    "2³ × 5²",
+    "2³ × 5"
+   ],
+   "correta": "2³ × 5",
+   "explica": "40 = 2³ × 5. Confira multiplicando: o resultado é 40."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "39",
+    "57",
+    "25",
+    "109"
+   ],
+   "correta": "109",
+   "explica": "109 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 57 = 3 × 19)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "13",
+    "45",
+    "63",
+    "39"
+   ],
+   "correta": "13",
+   "explica": "13 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 45 = 3² × 5)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "29",
+    "49",
+    "63",
+    "93"
+   ],
+   "correta": "29",
+   "explica": "29 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 49 = 7²)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "27",
+    "45",
+    "89",
+    "91"
+   ],
+   "correta": "89",
+   "explica": "89 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 45 = 3² × 5)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "57",
+    "25",
+    "111",
+    "101"
+   ],
+   "correta": "101",
+   "explica": "101 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 111 = 3 × 37)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "39",
+    "47",
+    "85",
+    "45"
+   ],
+   "correta": "47",
+   "explica": "47 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 39 = 3 × 13)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "87",
+    "97",
+    "15",
+    "85"
+   ],
+   "correta": "97",
+   "explica": "97 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 15 = 3 × 5)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "43",
+    "27",
+    "115",
+    "65"
+   ],
+   "correta": "43",
+   "explica": "43 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 65 = 5 × 13)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "105",
+    "51",
+    "21",
+    "37"
+   ],
+   "correta": "37",
+   "explica": "37 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 21 = 3 × 7)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "53",
+    "117",
+    "87",
+    "49"
+   ],
+   "correta": "53",
+   "explica": "53 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 49 = 7²)."
+  },
+  {
+   "enunciado": "Qual destes números é primo?",
+   "destaque": "",
+   "opcoes": [
+    "71",
+    "65",
+    "69",
+    "75"
+   ],
+   "correta": "71",
+   "explica": "71 só é divisível por 1 e por ele mesmo. Os outros têm mais divisores (ex.: 69 = 3 × 23)."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 100 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2² × 5²",
+    "2³ × 5²",
+    "2² × 5",
+    "2 × 50"
+   ],
+   "correta": "2² × 5²",
+   "explica": "100 = 2² × 5². Confira multiplicando: o resultado é 100."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 20 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2² × 5²",
+    "2³ × 5",
+    "2 × 10",
+    "2² × 5"
+   ],
+   "correta": "2² × 5",
+   "explica": "20 = 2² × 5. Confira multiplicando: o resultado é 20."
+  },
+  {
+   "enunciado": "Qual é a decomposição de 24 em fatores primos?",
+   "destaque": "",
+   "opcoes": [
+    "2³ × 3²",
+    "2 × 12",
+    "2⁴ × 3",
+    "2³ × 3"
+   ],
+   "correta": "2³ × 3",
+   "explica": "24 = 2³ × 3. Confira multiplicando: o resultado é 24."
+  }
+ ]
+}

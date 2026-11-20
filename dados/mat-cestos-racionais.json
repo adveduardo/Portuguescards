@@ -1,0 +1,99 @@
+{
+ "titulo": "Matemática: racional ou irracional?",
+ "cestos": [
+  {
+   "id": "racional",
+   "nome": "Racional",
+   "emoji": "✔️",
+   "cor": "#27ae60"
+  },
+  {
+   "id": "irracional",
+   "nome": "Irracional",
+   "emoji": "🌀",
+   "cor": "#8e44ad"
+  }
+ ],
+ "palavras": [
+  {
+   "palavra": "√9",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "0,5",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "3/4",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "−2",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "√16",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "1,333…",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "√25",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "0,25",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "7",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "−1/2",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "√100",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "2,5",
+   "cesto": "racional"
+  },
+  {
+   "palavra": "√2",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "√3",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "π",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "√5",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "√7",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "√10",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "2√3",
+   "cesto": "irracional"
+  },
+  {
+   "palavra": "√11",
+   "cesto": "irracional"
+  }
+ ]
+}

@@ -1,0 +1,242 @@
+{
+ "titulo": "Semelhança e Teorema de Tales (9º ano)",
+ "emoji": "🔍",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Proporção com sombras:",
+   "destaque": "Uma vara de 3 m faz sombra de 4 m. Na mesma hora, um prédio faz sombra de 20 m. Qual é a altura do prédio?",
+   "opcoes": [
+    "30 m",
+    "19 m",
+    "15 m",
+    "24 m"
+   ],
+   "correta": "15 m",
+   "explica": "3/4 = H/20 → H = 3 × 20 ÷ 4 = 15 m."
+  },
+  {
+   "enunciado": "Teorema de Tales (feixe de paralelas): a/b = c/x",
+   "destaque": "a = 2, b = 3, c = 4. Quanto vale x?",
+   "opcoes": [
+    "7",
+    "6",
+    "8"
+   ],
+   "correta": "6",
+   "explica": "2/3 = 4/x → 2x = 3 × 4 → x = 6."
+  },
+  {
+   "enunciado": "Proporção com sombras:",
+   "destaque": "Uma vara de 2 m faz sombra de 3 m. Na mesma hora, um prédio faz sombra de 12 m. Qual é a altura do prédio?",
+   "opcoes": [
+    "11 m",
+    "18 m",
+    "16 m",
+    "8 m"
+   ],
+   "correta": "8 m",
+   "explica": "2/3 = H/12 → H = 2 × 12 ÷ 3 = 8 m."
+  },
+  {
+   "enunciado": "Teorema de Tales (feixe de paralelas): a/b = c/x",
+   "destaque": "a = 4, b = 6, c = 6. Quanto vale x?",
+   "opcoes": [
+    "13",
+    "12",
+    "24",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "4/6 = 6/x → 4x = 6 × 6 → x = 9."
+  },
+  {
+   "enunciado": "Teorema de Tales (feixe de paralelas): a/b = c/x",
+   "destaque": "a = 3, b = 5, c = 6. Quanto vale x?",
+   "opcoes": [
+    "11",
+    "18",
+    "10"
+   ],
+   "correta": "10",
+   "explica": "3/5 = 6/x → 3x = 5 × 6 → x = 10."
+  },
+  {
+   "enunciado": "Teorema de Tales (feixe de paralelas): a/b = c/x",
+   "destaque": "a = 2, b = 5, c = 4. Quanto vale x?",
+   "opcoes": [
+    "9",
+    "8",
+    "10"
+   ],
+   "correta": "10",
+   "explica": "2/5 = 4/x → 2x = 5 × 4 → x = 10."
+  },
+  {
+   "enunciado": "Proporção com sombras:",
+   "destaque": "Uma vara de 2 m faz sombra de 5 m. Na mesma hora, um prédio faz sombra de 15 m. Qual é a altura do prédio?",
+   "opcoes": [
+    "20 m",
+    "12 m",
+    "6 m"
+   ],
+   "correta": "6 m",
+   "explica": "2/5 = H/15 → H = 2 × 15 ÷ 5 = 6 m."
+  },
+  {
+   "enunciado": "Proporção com sombras:",
+   "destaque": "Uma vara de 1 m faz sombra de 2 m. Na mesma hora, um prédio faz sombra de 10 m. Qual é a altura do prédio?",
+   "opcoes": [
+    "5 m",
+    "20 m",
+    "9 m",
+    "10 m"
+   ],
+   "correta": "5 m",
+   "explica": "1/2 = H/10 → H = 1 × 10 ÷ 2 = 5 m."
+  },
+  {
+   "enunciado": "Teorema de Tales (feixe de paralelas): a/b = c/x",
+   "destaque": "a = 3, b = 4, c = 9. Quanto vale x?",
+   "opcoes": [
+    "13",
+    "27",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "3/4 = 9/x → 3x = 4 × 9 → x = 12."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "2. Um lado de 6 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "3 cm",
+    "12 cm",
+    "8 cm",
+    "24 cm"
+   ],
+   "correta": "12 cm",
+   "explica": "Lados correspondentes são proporcionais: 6 × 2 = 12 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "3. Um lado de 12 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "36 cm",
+    "15 cm",
+    "4 cm",
+    "72 cm"
+   ],
+   "correta": "36 cm",
+   "explica": "Lados correspondentes são proporcionais: 12 × 3 = 36 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "1/2. Um lado de 8 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "16 cm",
+    "8 cm",
+    "8,5 cm",
+    "4 cm"
+   ],
+   "correta": "4 cm",
+   "explica": "Lados correspondentes são proporcionais: 8 × 1/2 = 4 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "1/2. Um lado de 12 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "24 cm",
+    "12 cm",
+    "12,5 cm",
+    "6 cm"
+   ],
+   "correta": "6 cm",
+   "explica": "Lados correspondentes são proporcionais: 12 × 1/2 = 6 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "2. Um lado de 4 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "16 cm",
+    "6 cm",
+    "8 cm",
+    "2 cm"
+   ],
+   "correta": "8 cm",
+   "explica": "Lados correspondentes são proporcionais: 4 × 2 = 8 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "2. Um lado de 12 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "6 cm",
+    "14 cm",
+    "48 cm",
+    "24 cm"
+   ],
+   "correta": "24 cm",
+   "explica": "Lados correspondentes são proporcionais: 12 × 2 = 24 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "3. Um lado de 6 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "2 cm",
+    "36 cm",
+    "18 cm",
+    "9 cm"
+   ],
+   "correta": "18 cm",
+   "explica": "Lados correspondentes são proporcionais: 6 × 3 = 18 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "1/2. Um lado de 4 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "4,5 cm",
+    "2 cm",
+    "8 cm",
+    "4 cm"
+   ],
+   "correta": "2 cm",
+   "explica": "Lados correspondentes são proporcionais: 4 × 1/2 = 2 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "4. Um lado de 6 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "48 cm",
+    "1,5 cm",
+    "24 cm",
+    "10 cm"
+   ],
+   "correta": "24 cm",
+   "explica": "Lados correspondentes são proporcionais: 6 × 4 = 24 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "2. Um lado de 10 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "5 cm",
+    "12 cm",
+    "20 cm",
+    "40 cm"
+   ],
+   "correta": "20 cm",
+   "explica": "Lados correspondentes são proporcionais: 10 × 2 = 20 cm."
+  },
+  {
+   "enunciado": "Dois triângulos são semelhantes com razão de semelhança:",
+   "destaque": "1/2. Um lado de 10 cm corresponde a quanto no outro triângulo?",
+   "opcoes": [
+    "10 cm",
+    "5 cm",
+    "10,5 cm",
+    "20 cm"
+   ],
+   "correta": "5 cm",
+   "explica": "Lados correspondentes são proporcionais: 10 × 1/2 = 5 cm."
+  }
+ ]
+}

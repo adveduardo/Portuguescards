@@ -1,0 +1,292 @@
+{
+ "titulo": "Quiz de Matemática do 7º ano",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "Resolva a equação: 7x − 1 = 2x − 21",
+   "imagem": "✏️",
+   "opcoes": [
+    "x = −4",
+    "x = −2",
+    "x = 4"
+   ],
+   "correta": "x = −4",
+   "explica": "7x − 2x = −21 + 1 → 5x = −20 → x = −4."
+  },
+  {
+   "pergunta": "Duas retas se cruzam. Um dos ângulos mede: 76°. Quanto mede o ângulo oposto pelo vértice?",
+   "imagem": "📐",
+   "opcoes": [
+    "14°",
+    "104°",
+    "76°",
+    "284°"
+   ],
+   "correta": "76°",
+   "explica": "Ângulos opostos pelo vértice têm a mesma medida."
+  },
+  {
+   "pergunta": "Qual é a razão (simplificada) entre os números? 10 e 25",
+   "imagem": "⚖️",
+   "opcoes": [
+    "10/5",
+    "5/2",
+    "3/6",
+    "2/5"
+   ],
+   "correta": "2/5",
+   "explica": "10/25: dividindo por 5, fica 2/5."
+  },
+  {
+   "pergunta": "Calcule: 14 − 13 = ?",
+   "imagem": "🌡️",
+   "opcoes": [
+    "−1",
+    "27",
+    "3",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Subtrair é somar o oposto: 14 + (−13) = 1."
+  },
+  {
+   "pergunta": "Num triângulo, dois ângulos medem: 30° e 58°. Quanto mede o terceiro?",
+   "imagem": "📐",
+   "opcoes": [
+    "272°",
+    "118°",
+    "92°",
+    "88°"
+   ],
+   "correta": "92°",
+   "explica": "A soma dos ângulos internos do triângulo é 180°: 180° − 30° − 58° = 92°."
+  },
+  {
+   "pergunta": "Qual é a média aritmética destas notas? 2, 9, 7, 5, 12",
+   "imagem": "📊",
+   "opcoes": [
+    "8",
+    "7",
+    "12",
+    "35"
+   ],
+   "correta": "7",
+   "explica": "Soma 2 + 9 + 7 + 5 + 12 = 35; dividida por 5: 7."
+  },
+  {
+   "pergunta": "Resolva a equação: 2x = 2",
+   "imagem": "✏️",
+   "opcoes": [
+    "x = 1",
+    "x = −1",
+    "x = 4",
+    "x = 0"
+   ],
+   "correta": "x = 1",
+   "explica": "x = 2 ÷ 2 = 1."
+  },
+  {
+   "pergunta": "Resolva a equação: 9x = −54",
+   "imagem": "✏️",
+   "opcoes": [
+    "x = −6",
+    "x = −486",
+    "x = −63",
+    "x = 6"
+   ],
+   "correta": "x = −6",
+   "explica": "x = −54 ÷ 9 = −6."
+  },
+  {
+   "pergunta": "Qual é a área do paralelogramo? base 8 m e altura 8 m",
+   "imagem": "🔺",
+   "opcoes": [
+    "32 m²",
+    "16 m²",
+    "64 m²"
+   ],
+   "correta": "64 m²",
+   "explica": "Área do paralelogramo = base × altura = 8 × 8 = 64 m²."
+  },
+  {
+   "pergunta": "Calcule: 12 × (−2) = ?",
+   "imagem": "🌡️",
+   "opcoes": [
+    "−22",
+    "24",
+    "−24",
+    "10"
+   ],
+   "correta": "−24",
+   "explica": "Sinais diferentes: resultado negativo. 12 × 2 = 24, então −24."
+  },
+  {
+   "pergunta": "Problema: O dobro de um número mais 4 é igual a 36. Que número é esse?",
+   "imagem": "✏️",
+   "opcoes": [
+    "18",
+    "16",
+    "32",
+    "20"
+   ],
+   "correta": "16",
+   "explica": "2x + 4 = 36 → 2x = 32 → x = 16."
+  },
+  {
+   "pergunta": "Regra de três: Se 3 cadernos custam R$ 4,00… quanto custam 12 cadernos?",
+   "imagem": "⚖️",
+   "opcoes": [
+    "R$ 48,00",
+    "R$ 1,00",
+    "R$ 13,00",
+    "R$ 16,00"
+   ],
+   "correta": "R$ 16,00",
+   "explica": "Cada caderno custa R$ 1,33. 12 × R$ 1,33 = R$ 16,00."
+  },
+  {
+   "pergunta": "Calcule: 8 ÷ (−2) = ?",
+   "imagem": "🌡️",
+   "opcoes": [
+    "10",
+    "−4",
+    "−8",
+    "4"
+   ],
+   "correta": "−4",
+   "explica": "Sinais diferentes: negativo. 8 ÷ 2 = 4."
+  },
+  {
+   "pergunta": "Escala: Num mapa na escala 1 : 100, 5 cm no mapa valem quanto na realidade?",
+   "imagem": "⚖️",
+   "opcoes": [
+    "500 m",
+    "50 m",
+    "0,5 m",
+    "5 m"
+   ],
+   "correta": "5 m",
+   "explica": "5 cm × 100 = 500 cm = 5 m."
+  },
+  {
+   "pergunta": "Qual é a média aritmética destas notas? 7, 10, 8, 7",
+   "imagem": "📊",
+   "opcoes": [
+    "9",
+    "10",
+    "32",
+    "8"
+   ],
+   "correta": "8",
+   "explica": "Soma 7 + 10 + 8 + 7 = 32; dividida por 4: 8."
+  },
+  {
+   "pergunta": "Qual é o complemento do ângulo? 66°",
+   "imagem": "📐",
+   "opcoes": [
+    "66°",
+    "114°",
+    "156°",
+    "24°"
+   ],
+   "correta": "24°",
+   "explica": "Complementares somam 90°: 90° − 66° = 24°."
+  },
+  {
+   "pergunta": "Qual é a média aritmética destas notas? 3, 10, 9, 10",
+   "imagem": "📊",
+   "opcoes": [
+    "10",
+    "9",
+    "32",
+    "8"
+   ],
+   "correta": "8",
+   "explica": "Soma 3 + 10 + 9 + 10 = 32; dividida por 4: 8."
+  },
+  {
+   "pergunta": "Qual é a área do triângulo? base 10 cm e altura 3 cm",
+   "imagem": "🔺",
+   "opcoes": [
+    "26 cm²",
+    "30 cm²",
+    "13 cm²",
+    "15 cm²"
+   ],
+   "correta": "15 cm²",
+   "explica": "Área do triângulo = base × altura ÷ 2 = 10 × 3 ÷ 2 = 15 cm²."
+  },
+  {
+   "pergunta": "Calcule: (−8) × 3 = ?",
+   "imagem": "🌡️",
+   "opcoes": [
+    "−24",
+    "−5",
+    "24",
+    "−21"
+   ],
+   "correta": "−24",
+   "explica": "Sinais diferentes: resultado negativo. 8 × 3 = 24, então −24."
+  },
+  {
+   "pergunta": "Qual é a média aritmética destas notas? 8, 7, 10, 11",
+   "imagem": "📊",
+   "opcoes": [
+    "36",
+    "11",
+    "10",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "Soma 8 + 7 + 10 + 11 = 36; dividida por 4: 9."
+  },
+  {
+   "pergunta": "Regra de três: Se 5 cadernos custam R$ 7,00… quanto custam 10 cadernos?",
+   "imagem": "⚖️",
+   "opcoes": [
+    "R$ 70,00",
+    "R$ 12,00",
+    "R$ 3,50",
+    "R$ 14,00"
+   ],
+   "correta": "R$ 14,00",
+   "explica": "Cada caderno custa R$ 1,40. 10 × R$ 1,40 = R$ 14,00."
+  },
+  {
+   "pergunta": "Qual é a área do trapézio? base maior 13 cm, base menor 5 cm e altura 2 cm",
+   "imagem": "🔺",
+   "opcoes": [
+    "18 cm²",
+    "130 cm²",
+    "26 cm²",
+    "36 cm²"
+   ],
+   "correta": "18 cm²",
+   "explica": "Área = (B + b) × h ÷ 2 = (13 + 5) × 2 ÷ 2 = 18 cm²."
+  },
+  {
+   "pergunta": "Qual é a área do paralelogramo? base 7 m e altura 9 m",
+   "imagem": "🔺",
+   "opcoes": [
+    "64 m²",
+    "16 m²",
+    "32 m²",
+    "63 m²"
+   ],
+   "correta": "63 m²",
+   "explica": "Área do paralelogramo = base × altura = 7 × 9 = 63 m²."
+  },
+  {
+   "pergunta": "Qual é o suplemento do ângulo? 107°",
+   "imagem": "📐",
+   "opcoes": [
+    "287°",
+    "73°",
+    "107°",
+    "253°"
+   ],
+   "correta": "73°",
+   "explica": "Suplementares somam 180°: 180° − 107° = 73°."
+  }
+ ]
+}

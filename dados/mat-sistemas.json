@@ -1,0 +1,246 @@
+{
+ "titulo": "Sistemas de equações (8º ano)",
+ "emoji": "🚗",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 12   e   x − y = −4",
+   "opcoes": [
+    "x = 5 e y = 7",
+    "x = 12 e y = 4",
+    "x = 8 e y = 4",
+    "x = 4 e y = 8"
+   ],
+   "correta": "x = 4 e y = 8",
+   "explica": "Somando as equações: 2x = 8 → x = 4. Então y = 12 − 4 = 8."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 26 veículos entre carros e motos, com 82 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "15 carros",
+    "20 carros",
+    "11 carros",
+    "13 carros"
+   ],
+   "correta": "15 carros",
+   "explica": "c + m = 26 e 4c + 2m = 82. Tirando 2 × (c + m): 2c = 30 → c = 15."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 24 veículos entre carros e motos, com 82 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "17 carros",
+    "20 carros",
+    "7 carros",
+    "12 carros"
+   ],
+   "correta": "17 carros",
+   "explica": "c + m = 24 e 4c + 2m = 82. Tirando 2 × (c + m): 2c = 34 → c = 17."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 18   e   x − y = 4",
+   "opcoes": [
+    "x = 11 e y = 7",
+    "x = 18 e y = 4",
+    "x = 12 e y = 6",
+    "x = 7 e y = 11"
+   ],
+   "correta": "x = 11 e y = 7",
+   "explica": "Somando as equações: 2x = 22 → x = 11. Então y = 18 − 11 = 7."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 16   e   x − y = 2",
+   "opcoes": [
+    "x = 7 e y = 9",
+    "x = 16 e y = 2",
+    "x = 9 e y = 7",
+    "x = 10 e y = 6"
+   ],
+   "correta": "x = 9 e y = 7",
+   "explica": "Somando as equações: 2x = 18 → x = 9. Então y = 16 − 9 = 7."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 9   e   x − y = 5",
+   "opcoes": [
+    "x = 8 e y = 1",
+    "x = 2 e y = 7",
+    "x = 9 e y = 5",
+    "x = 7 e y = 2"
+   ],
+   "correta": "x = 7 e y = 2",
+   "explica": "Somando as equações: 2x = 14 → x = 7. Então y = 9 − 7 = 2."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 13   e   x − y = −9",
+   "opcoes": [
+    "x = 2 e y = 11",
+    "x = 13 e y = 9",
+    "x = 11 e y = 2",
+    "x = 3 e y = 10"
+   ],
+   "correta": "x = 2 e y = 11",
+   "explica": "Somando as equações: 2x = 4 → x = 2. Então y = 13 − 2 = 11."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 15   e   x − y = 7",
+   "opcoes": [
+    "x = 11 e y = 4",
+    "x = 12 e y = 3",
+    "x = 15 e y = 7",
+    "x = 4 e y = 11"
+   ],
+   "correta": "x = 11 e y = 4",
+   "explica": "Somando as equações: 2x = 22 → x = 11. Então y = 15 − 11 = 4."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 21 veículos entre carros e motos, com 68 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "17 carros",
+    "8 carros",
+    "10 carros",
+    "13 carros"
+   ],
+   "correta": "13 carros",
+   "explica": "c + m = 21 e 4c + 2m = 68. Tirando 2 × (c + m): 2c = 26 → c = 13."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 13   e   x − y = 9",
+   "opcoes": [
+    "x = 11 e y = 2",
+    "x = 12 e y = 1",
+    "x = 2 e y = 11",
+    "x = 13 e y = 9"
+   ],
+   "correta": "x = 11 e y = 2",
+   "explica": "Somando as equações: 2x = 22 → x = 11. Então y = 13 − 11 = 2."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 14 veículos entre carros e motos, com 48 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "7 carros",
+    "12 carros",
+    "10 carros",
+    "4 carros"
+   ],
+   "correta": "10 carros",
+   "explica": "c + m = 14 e 4c + 2m = 48. Tirando 2 × (c + m): 2c = 20 → c = 10."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 33 veículos entre carros e motos, com 102 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "25 carros",
+    "18 carros",
+    "16 carros",
+    "15 carros"
+   ],
+   "correta": "18 carros",
+   "explica": "c + m = 33 e 4c + 2m = 102. Tirando 2 × (c + m): 2c = 36 → c = 18."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 15   e   x − y = −1",
+   "opcoes": [
+    "x = 8 e y = 7",
+    "x = 7 e y = 8",
+    "x = 15 e y = 1"
+   ],
+   "correta": "x = 7 e y = 8",
+   "explica": "Somando as equações: 2x = 14 → x = 7. Então y = 15 − 7 = 8."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 9   e   x − y = −5",
+   "opcoes": [
+    "x = 2 e y = 7",
+    "x = 9 e y = 5",
+    "x = 3 e y = 6",
+    "x = 7 e y = 2"
+   ],
+   "correta": "x = 2 e y = 7",
+   "explica": "Somando as equações: 2x = 4 → x = 2. Então y = 9 − 2 = 7."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 11   e   x − y = −3",
+   "opcoes": [
+    "x = 5 e y = 6",
+    "x = 4 e y = 7",
+    "x = 11 e y = 3",
+    "x = 7 e y = 4"
+   ],
+   "correta": "x = 4 e y = 7",
+   "explica": "Somando as equações: 2x = 8 → x = 4. Então y = 11 − 4 = 7."
+  },
+  {
+   "enunciado": "Problema (sistema):",
+   "destaque": "Num estacionamento há 25 veículos entre carros e motos, com 86 rodas no total. Quantos são carros?",
+   "opcoes": [
+    "21 carros",
+    "7 carros",
+    "12 carros",
+    "18 carros"
+   ],
+   "correta": "18 carros",
+   "explica": "c + m = 25 e 4c + 2m = 86. Tirando 2 × (c + m): 2c = 36 → c = 18."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 18   e   x − y = −4",
+   "opcoes": [
+    "x = 8 e y = 10",
+    "x = 18 e y = 4",
+    "x = 7 e y = 11",
+    "x = 11 e y = 7"
+   ],
+   "correta": "x = 7 e y = 11",
+   "explica": "Somando as equações: 2x = 14 → x = 7. Então y = 18 − 7 = 11."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 9   e   x − y = 1",
+   "opcoes": [
+    "x = 6 e y = 3",
+    "x = 5 e y = 4",
+    "x = 4 e y = 5",
+    "x = 9 e y = 1"
+   ],
+   "correta": "x = 5 e y = 4",
+   "explica": "Somando as equações: 2x = 10 → x = 5. Então y = 9 − 5 = 4."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 20   e   x − y = −2",
+   "opcoes": [
+    "x = 20 e y = 2",
+    "x = 9 e y = 11",
+    "x = 10 e y = 10",
+    "x = 11 e y = 9"
+   ],
+   "correta": "x = 9 e y = 11",
+   "explica": "Somando as equações: 2x = 18 → x = 9. Então y = 20 − 9 = 11."
+  },
+  {
+   "enunciado": "Resolva o sistema:",
+   "destaque": "x + y = 16   e   x − y = −2",
+   "opcoes": [
+    "x = 8 e y = 8",
+    "x = 9 e y = 7",
+    "x = 16 e y = 2",
+    "x = 7 e y = 9"
+   ],
+   "correta": "x = 7 e y = 9",
+   "explica": "Somando as equações: 2x = 14 → x = 7. Então y = 16 − 7 = 9."
+  }
+ ]
+}

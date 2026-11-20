@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Tabuada Turbo</title>
+<link rel="stylesheet" href="arcade.css">
+<style>
+  body{background:#1b2440}
+  #jogo{position:fixed;left:0;top:0;right:0;bottom:0;display:none;text-align:center;padding:52px 10px 10px;background:linear-gradient(160deg,#243b6b,#1b2440);color:#fff;overflow:auto}
+  #jogo.ativo{display:block}
+  #barra{height:12px;border-radius:6px;background:rgba(255,255,255,.2);max-width:560px;margin:4px auto 10px;overflow:hidden}
+  #barra i{display:block;height:100%;width:100%;background:#7CFFB2;-webkit-transition:width .25s linear;transition:width .25s linear}
+  #conta{font-size:80px;font-weight:bold;line-height:1.1;margin:6px 0}
+  #resp{display:inline-block;min-width:170px;font-size:64px;font-weight:bold;background:#fff;color:#1f2a44;border-radius:18px;padding:2px 18px;margin:4px 0 8px;min-height:84px}
+  #resp.ok{background:#7CFFB2} #resp.erro{background:#ff8a80}
+  #fb{min-height:30px;font-size:22px;font-weight:bold}
+  #teclado{max-width:420px;margin:8px auto 0}
+  #teclado button{width:30%;height:70px;font-size:34px;margin:1%;background:#fff}
+  #teclado button.ok{background:#27ae60;color:#fff} #teclado button.apaga{background:#f6c26b}
+  #mapa{display:inline-block;margin:8px auto;border-collapse:separate;border-spacing:3px}
+  #mapa td{width:28px;height:28px;border-radius:6px;font-size:12px;font-weight:bold;color:#1f2a44}
+  #mapa th{font-size:13px;color:#56627a}
+  .tabs label{display:inline-block;margin:3px;padding:6px 10px;background:#eef1f6;border-radius:10px;cursor:pointer;font-size:18px}
+  .tabs input{width:20px;height:20px;vertical-align:middle}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="arcade.js"></script>
+</head>
+<body class="escuro">
+<div id="hud" style="display:none">
+  <span class="chip" id="hModo"></span><span class="chip" id="hPontos"></span><span class="chip" id="hTempo"></span>
+  <button type="button" id="btSom">🔊</button><button type="button" id="btParar">⏹️</button>
+</div>
+<div id="jogo">
+  <div id="barra"><i id="barraI"></i></div>
+  <div id="conta"></div>
+  <div id="resp"></div>
+  <div id="fb"></div>
+  <div id="teclado"></div>
+</div>
+<div id="aviso"></div>
+<div class="tela ativa" id="tConfig"><div class="cartao">
+  <h1>⏱️ Tabuada Turbo</h1>
+  <p>Treino individual da tabuada. O jogo <b>lembra das contas que você erra</b> e faz elas voltarem mais vezes até você dominar (repetição espaçada).</p>
+  <p class="tabs" id="tabs"></p>
+  <p><button type="button" id="btTodas">Marcar todas</button> <button type="button" id="btNenhuma">Desmarcar</button></p>
+  <label>Jeito de jogar: <select id="selModo">
+    <option value="treino">🐢 Treino (sem pressa, com dicas)</option>
+    <option value="desafio" selected>⚡ Desafio de 60 segundos</option>
+    <option value="revisao">🔁 Revisão das contas difíceis</option>
+  </select></label>
+  <p><button type="button" class="principal" id="btComecar">▶️ Começar</button> <button type="button" id="btMapa">🗺️ Meu mapa da tabuada</button></p>
+  <p class="dica" id="recorde"></p>
+</div></div>
+<div class="tela" id="tFim"><div class="cartao" id="cFim"></div></div>
+<div class="tela" id="tMapa"><div class="cartao"><h2>🗺️ Mapa da tabuada</h2><p class="dica">Cinza = ainda não treinou • vermelho = ainda erra • amarelo = aprendendo • verde = domina</p><div id="mapaBox"></div>
+  <p><button type="button" class="principal" id="btFecharMapa">Voltar</button> <button type="button" id="btZerar">🗑️ Começar do zero</button></p></div></div>
+<script>
+(function(){
+  'use strict';
+  var $ = ARC.$, esc = ARC.esc, CHAVE = 'tabuada_caixas', caixas = {}, jogo = null, timer = null;
+  try { caixas = JSON.parse(localStorage.getItem(CHAVE) || '{}') || {}; } catch (e) { caixas = {}; }
+  function salvar(){ try { localStorage.setItem(CHAVE, JSON.stringify(caixas)); } catch (e) {} }
+  function caixa(a, b){ return caixas[a + 'x' + b] || 0; }   // 0 a 4 (sistema de caixas de Leitner)
+  var h = ''; for (var t = 2; t <= 10; t++) h += '<label><input type="checkbox" value="' + t + '"' + (t <= 9 ? ' checked' : '') + '> ' + t + '</label>';
+  $('tabs').innerHTML = h;
+  function marcadas(){ var l = [], cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) if (cs[i].checked) l.push(+cs[i].value); return l; }
+  $('btTodas').onclick = function(){ var cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) cs[i].checked = true; };
+  $('btNenhuma').onclick = function(){ var cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) cs[i].checked = false; };
+  function chaveRecorde(){ return 'tabuada_recorde_' + marcadas().join('-'); }
+  function mostrarRecorde(){ var r = 0; try { r = +localStorage.getItem(chaveRecorde()) || 0; } catch (e) {} $('recorde').textContent = r ? '🏆 Seu recorde no desafio com essas tabuadas: ' + r + ' acertos em 60 s.' : ''; }
+  $('tabs').onchange = mostrarRecorde; mostrarRecorde();
+
+  // ---------- sorteio com peso: contas que você erra aparecem mais ----------
+  function fatos(tabs){ var l = []; tabs.forEach(function(a){ for (var b = 1; b <= 10; b++) l.push({a: a, b: b}); }); return l; }
+  function sortear(){
+    var l = jogo.fatos, tot = 0, pesos = [], i;
+    for (i = 0; i < l.length; i++){
+      var cx = caixa(l[i].a, l[i].b), p = jogo.modo === 'revisao' ? (cx <= 1 ? 6 : 0.3) : 5 - cx;
+      if (jogo.ultimo && jogo.ultimo.a === l[i].a && jogo.ultimo.b === l[i].b) p = 0;
+      pesos.push(p); tot += p;
+    }
+    var x = Math.random() * tot;
+    for (i = 0; i < l.length; i++){ x -= pesos[i]; if (x <= 0) break; }
+    var f = l[Math.min(i, l.length - 1)];
+    return Math.random() < 0.5 ? {a: f.a, b: f.b, base: f} : {a: f.b, b: f.a, inv: true, base: f};   // às vezes troca a ordem (7 × 3 ou 3 × 7)
+  }
+  function comecar(){
+    var tabs = marcadas(); if (!tabs.length) return ARC.aviso('Marque pelo menos uma tabuada.');
+    jogo = {modo: $('selModo').value, tabs: tabs, fatos: fatos(tabs), acertos: 0, erros: 0, errados: {}, resta: 60, digitado: '', bloqueado: false, ultimo: null};
+    ARC.tela(null); $('jogo').className = 'ativo'; $('hud').style.display = '';
+    $('hModo').textContent = {treino: '🐢 Treino', desafio: '⚡ Desafio', revisao: '🔁 Revisão'}[jogo.modo];
+    $('barra').style.display = jogo.modo === 'desafio' ? '' : 'none'; $('hTempo').style.display = jogo.modo === 'desafio' ? '' : 'none';
+    clearInterval(timer);
+    if (jogo.modo === 'desafio'){ timer = setInterval(function(){ jogo.resta--; pintar(); if (jogo.resta <= 0) fim(); }, 1000); }
+    proxima(); pintar();
+  }
+  function proxima(){
+    var f = sortear(); jogo.q = f; jogo.ultimo = f.base;
+    jogo.digitado = ''; jogo.bloqueado = false;
+    $('conta').textContent = f.a + ' × ' + f.b + ' = ?'; $('resp').textContent = ''; $('resp').className = ''; $('fb').textContent = '';
+  }
+  function pintar(){
+    $('hPontos').textContent = '✅ ' + jogo.acertos + '   ❌ ' + jogo.erros;
+    $('hTempo').textContent = '⏱️ ' + jogo.resta + ' s'; $('barraI').style.width = (jogo.resta / 60 * 100) + '%';
+  }
+  function dica(a, b){
+    if (b === 9 || a === 9){ var o = a === 9 ? b : a; return 'Truque do 9: ' + o + ' × 10 − ' + o + ' = ' + (o * 10) + ' − ' + o + ' = ' + (o * 9) + '.'; }
+    if (b % 2 === 0 && b > 2) return 'Dica: ' + a + ' × ' + b + ' é o dobro de ' + a + ' × ' + (b / 2) + ' = ' + (a * b / 2) + '.';
+    return 'Dica: ' + a + ' × ' + (b - 1) + ' = ' + (a * (b - 1)) + '; mais ' + a + ' dá ' + (a * b) + '.';
+  }
+  function tecla(k){
+    if (!jogo || jogo.bloqueado) return;
+    if (k === 'OK') return conferir();
+    if (k === '⌫'){ jogo.digitado = jogo.digitado.slice(0, -1); $('resp').textContent = jogo.digitado; return; }
+    if (jogo.digitado.length < 3){ jogo.digitado += k; $('resp').textContent = jogo.digitado; ARC.tom(500 + jogo.digitado.length * 60, 0.03); }
+  }
+  function conferir(){
+    if (!jogo.digitado) return;
+    var q = jogo.q, certo = q.a * q.b, v = parseInt(jogo.digitado, 10), chave = q.base.a + 'x' + q.base.b;
+    jogo.bloqueado = true;
+    if (v === certo){
+      jogo.acertos++; caixas[chave] = Math.min(4, (caixas[chave] || 0) + 1); salvar();
+      $('resp').className = 'ok'; $('fb').textContent = jogo.modo === 'desafio' ? '✔' : '✔ Isso!'; ARC.plim();
+      setTimeout(proxima, jogo.modo === 'desafio' ? 280 : 650);
+    } else {
+      jogo.erros++; caixas[chave] = 0; salvar(); jogo.errados[q.a + ' × ' + q.b] = certo;
+      $('resp').className = 'erro'; ARC.erro();
+      $('fb').textContent = '✗ ' + q.a + ' × ' + q.b + ' = ' + certo + (jogo.modo === 'desafio' ? '' : '. ' + dica(q.a, q.b));
+      setTimeout(proxima, jogo.modo === 'desafio' ? 1300 : 2600);
+    }
+    pintar();
+  }
+  function fim(){
+    clearInterval(timer); if (!jogo) return;
+    var novoRec = false;
+    if (jogo.modo === 'desafio'){ var r = 0; try { r = +localStorage.getItem(chaveRecorde()) || 0; } catch (e) {} if (jogo.acertos > r){ novoRec = r > 0 || jogo.acertos > 0; try { localStorage.setItem(chaveRecorde(), String(jogo.acertos)); } catch (e) {} } }
+    var err = Object.keys(jogo.errados);
+    $('cFim').innerHTML = '<h1>' + (novoRec ? '🏆 Novo recorde!' : '⏱️ Fim!') + '</h1><p style="font-size:30px">✅ ' + jogo.acertos + ' &nbsp; ❌ ' + jogo.erros + '</p>' +
+      (err.length ? '<p>Para treinar: <b>' + err.map(function(k){ return esc(k) + ' = ' + jogo.errados[k]; }).join(' • ') + '</b></p>' : '<p>Nenhum erro! 🌟</p>') +
+      '<div>' + mapaHTML(jogo.tabs) + '</div><p><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button></p>';
+    $('jogo').className = ''; $('hud').style.display = 'none'; ARC.tela('tFim'); if (novoRec || !jogo.erros) ARC.festa();
+    $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); mostrarRecorde(); };
+    jogo = null;
+  }
+  var CORES = ['#ff8a80', '#ffb74d', '#ffe082', '#c5e1a5', '#69d391'];
+  function mapaHTML(tabs){
+    var h = '<table id="mapa"><tr><th>×</th>', a, b;
+    for (b = 1; b <= 10; b++) h += '<th>' + b + '</th>';
+    h += '</tr>';
+    (tabs || [2, 3, 4, 5, 6, 7, 8, 9, 10]).forEach(function(a2){ h += '<tr><th>' + a2 + '</th>'; for (b = 1; b <= 10; b++){ var visto = (a2 + 'x' + b) in caixas || (b + 'x' + a2) in caixas, cx = Math.max(caixa(a2, b), caixa(b, a2)); h += '<td style="background:' + (visto ? CORES[cx] : '#e3e8f2') + '">' + (a2 * b) + '</td>'; } h += '</tr>'; });
+    return h + '</table>';
+  }
+  var tk = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '⌫', '0', 'OK'], th = '';
+  tk.forEach(function(k){ th += '<button type="button" data-k="' + k + '"' + (k === 'OK' ? ' class="ok"' : k === '⌫' ? ' class="apaga"' : '') + '>' + k + '</button>'; });
+  $('teclado').innerHTML = th;
+  var bs = $('teclado').querySelectorAll('button');
+  for (var i = 0; i < bs.length; i++){ bs[i].addEventListener('touchstart', function(e){ e.preventDefault(); tecla(this.getAttribute('data-k')); }, false); bs[i].addEventListener('mousedown', function(){ tecla(this.getAttribute('data-k')); }, false); }
+  document.addEventListener('keydown', function(e){
+    if (!jogo) return;
+    if (e.keyCode >= 48 && e.keyCode <= 57) tecla(String(e.keyCode - 48));
+    else if (e.keyCode >= 96 && e.keyCode <= 105) tecla(String(e.keyCode - 96));
+    else if (e.keyCode === 13){ e.preventDefault(); tecla('OK'); }
+    else if (e.keyCode === 8){ e.preventDefault(); tecla('⌫'); }
+  });
+  $('btComecar').onclick = comecar;
+  $('btParar').onclick = function(){ if (confirm('Terminar agora?')) fim(); };
+  $('btMapa').onclick = function(){ $('mapaBox').innerHTML = mapaHTML(); ARC.tela('tMapa'); };
+  $('btFecharMapa').onclick = function(){ ARC.tela('tConfig'); };
+  $('btZerar').onclick = function(){ if (!confirm('Apagar o progresso guardado neste aparelho?')) return; caixas = {}; salvar(); $('mapaBox').innerHTML = mapaHTML(); };
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.TURBO = {jogo: function(){ return jogo; }, tecla: tecla, caixas: function(){ return caixas; }};   // usado nos testes
+})();
+</script>
+</body>
+</html>

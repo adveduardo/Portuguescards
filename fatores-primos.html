@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fatores primos, MMC e MDC</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  .aba{display:none}.aba.ativa{display:block}
+  #arvore{width:100%;height:clamp(300px,58vh,620px);display:block}
+  .lig{fill:none;stroke:#8a9bbd;stroke-width:3}
+  .no circle{stroke-width:3}
+  .no.comp circle{fill:#dbe9ff;stroke:#2f80ed}
+  .no.primo circle{fill:#27ae60;stroke:#1e8449}
+  .no.primo text{fill:#fff}
+  .no.oculto circle{fill:#fff;stroke:#27ae60;stroke-dasharray:6 4}
+  .no.oculto text{fill:#27ae60}
+  .no text{font-weight:bold;text-anchor:middle;fill:#1f2a44;pointer-events:none}
+  .no.oculto{cursor:pointer}
+  #resultado{font-size:clamp(1.4rem,3.4vw,2.4rem);font-weight:bold;text-align:center;margin:6px 0}
+  #extenso{text-align:center;color:#56627a;font-size:1.05rem}
+  table.escada{border-collapse:collapse;font-size:1.35rem;margin:6px auto}
+  table.escada td{padding:3px 14px;text-align:right}
+  table.escada td.p{border-left:3px solid #1f2a44;text-align:left;color:#27ae60;font-weight:bold}
+  table.escada td.p.ambos::after{content:" ●";color:#e74c3c}
+  #venn{width:100%;max-width:640px;display:block;margin:auto}
+  .chip circle{stroke:#fff;stroke-width:3}
+  .chip text{fill:#fff;font-weight:bold;text-anchor:middle}
+  .resposta{font-size:1.25rem;margin:8px 0}
+  .resposta b{color:#2f80ed}
+  #problema{background:#fff8e1;border-radius:14px;padding:10px 14px;font-size:1.1rem;display:none}
+  .divs span{display:inline-block;background:#eef1f6;border-radius:999px;padding:4px 12px;margin:3px;font-weight:bold;font-size:1.15rem}
+  #retangulos{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+  #retangulos figure{margin:0;text-align:center;font-weight:bold}
+  #retangulos svg{display:block;margin:auto}
+  input[type=number]{width:120px;font-size:1.3rem}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/d3.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>🌳 Fatores primos, MMC e MDC</h1>
+  <span class="mt-tabs" id="abas"><button class="ativo" data-a="arv">🌳 Árvore de fatores</button><button data-a="mmc">🔗 MMC e MDC</button><button data-a="div">🧱 Divisores</button></span>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap">
+  <!-- árvore -->
+  <section class="aba ativa" id="aba-arv">
+    <div class="mt-card">
+      <p class="mt-linha">
+        <label>Número: <input type="number" id="nArv" min="2" max="100000" value="360"></label>
+        <button class="principal" id="btArv">🌳 Decompor</button>
+        <button id="btSurpresa">🎲 Número surpresa</button>
+        <label>Dividir em: <select id="selModo"><option value="prox">dois fatores parecidos</option><option value="menor">menor primo primeiro</option></select></label>
+        <label><input type="checkbox" id="ckEsconder"> Esconder os primos (a turma descobre)</label>
+      </p>
+    </div>
+    <div class="mt-colunas">
+      <div class="mt-card"><svg id="arvore"></svg><p class="mt-dica">🔵 número composto (ainda dá para dividir) • 🟢 número primo (só divide por 1 e por ele mesmo)</p></div>
+      <div class="mt-card">
+        <h2>Resultado</h2>
+        <div id="resultado"></div><div id="extenso"></div>
+        <h2 style="margin-top:14px">Divisões sucessivas</h2>
+        <table class="escada" id="escada"></table>
+        <p class="mt-dica">Divida sempre pelo menor primo possível até chegar a 1. Os primos da direita são os fatores.</p>
+      </div>
+    </div>
+  </section>
+  <!-- mmc e mdc -->
+  <section class="aba" id="aba-mmc">
+    <div class="mt-card">
+      <p class="mt-linha">
+        <label>A = <input type="number" id="nA" min="2" max="100000" value="12"></label>
+        <label>B = <input type="number" id="nB" min="2" max="100000" value="18"></label>
+        <button class="principal" id="btMmc">🔗 Calcular</button>
+        <button id="btProblema">📖 Situação-problema</button>
+      </p>
+      <div id="problema"></div>
+    </div>
+    <div class="mt-colunas">
+      <div class="mt-card"><svg id="venn" viewBox="0 0 640 360"></svg>
+        <div class="resposta" id="rMdc"></div><div class="resposta" id="rMmc"></div></div>
+      <div class="mt-card"><h2>Decomposição simultânea</h2><table class="escada" id="escada2"></table>
+        <p class="mt-dica">Divida pelo menor primo que divide pelo menos um dos números (quem não divide é só copiado).<br>MMC = produto de todos os primos da direita. MDC = produto dos primos marcados com ● (dividiram os dois ao mesmo tempo).</p></div>
+    </div>
+  </section>
+  <!-- divisores -->
+  <section class="aba" id="aba-div">
+    <div class="mt-card">
+      <p class="mt-linha"><label>Número: <input type="number" id="nDiv" min="1" max="10000" value="12"></label> <button class="principal" id="btDiv">🧱 Ver divisores</button> <button id="btDivSurpresa">🎲 Surpresa</button></p>
+      <div class="divs" id="listaDiv"></div>
+      <p class="resposta" id="rDiv"></p>
+    </div>
+    <div class="mt-card"><h2>Retângulos que dá para montar com <span id="qtdQuad">12</span> quadradinhos</h2><div id="retangulos"></div>
+      <p class="mt-dica">Cada retângulo mostra um par de divisores (linhas × colunas). Número primo só forma um retângulo: uma fileira só!</p></div>
+  </section>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  // ---------- abas ----------
+  $('abas').onclick = function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var bs = $('abas').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) bs[i].className = bs[i] === b ? 'ativo' : '';
+    var ss = document.querySelectorAll('.aba'); for (i = 0; i < ss.length; i++) ss[i].className = 'aba' + (ss[i].id === 'aba-' + b.getAttribute('data-a') ? ' ativa' : '');
+    if (b.getAttribute('data-a') === 'mmc') calcularMmc(); else if (b.getAttribute('data-a') === 'div') divisores(); else desenharArvore();
+  };
+  // ---------- matemática ----------
+  function ehPrimo(n){ if (n < 2) return false; for (var d = 2; d * d <= n; d++) if (n % d === 0) return false; return true; }
+  function fatorar(n){ var f = [], p = 2; while (n > 1 && p * p <= n){ while (n % p === 0){ f.push(p); n /= p; } p++; } if (n > 1) f.push(n); return f; }
+  function potencias(f){ var r = []; f.forEach(function(p){ var u = r[r.length - 1]; if (u && u[0] === p) u[1]++; else r.push([p, 1]); }); return r; }
+  function formaPot(f){ return potencias(f).map(function(pe){ return pe[0] + (pe[1] > 1 ? '<sup>' + pe[1] + '</sup>' : ''); }).join(' × '); }
+  function ler(id, min, max){ var v = Math.round(+$(id).value); if (!(v >= min && v <= max)){ Sala.avisar('Use um número de ' + min + ' a ' + max.toLocaleString('pt-BR') + '.'); return null; } return v; }
+  function arvore(n, modo){
+    if (ehPrimo(n)) return {v: n};
+    var a = 1;
+    if (modo === 'menor') a = fatorar(n)[0];
+    else for (var d = Math.floor(Math.sqrt(n)); d > 1; d--) if (n % d === 0){ a = d; break; }
+    return {v: n, children: [arvore(a, modo), arvore(n / a, modo)]};
+  }
+  function sortearBonito(){   // números com vários fatores pequenos, bons para a árvore
+    var ps = [2, 2, 2, 3, 3, 5, 7, 11], n = 1, k = 3 + Math.floor(Math.random() * 3);
+    for (var i = 0; i < k; i++) n *= ps[Math.floor(Math.random() * ps.length)];
+    return n < 12 ? n * 6 : n;
+  }
+  // ---------- árvore (D3) ----------
+  var revelados = 0, totalFolhas = 0, numArv = 360;
+  function desenharArvore(){
+    var n = ler('nArv', 2, 100000); if (n === null) return; numArv = n;
+    var esconder = $('ckEsconder').checked, svg = d3.select('#arvore'); svg.selectAll('*').remove();
+    var raiz = d3.hierarchy(arvore(n, $('selModo').value));
+    d3.tree().nodeSize([78, 96])(raiz);
+    var nos = raiz.descendants(), x0 = d3.min(nos, function(d){ return d.x; }) - 50, x1 = d3.max(nos, function(d){ return d.x; }) + 50, y1 = d3.max(nos, function(d){ return d.y; }) + 50;
+    svg.attr('viewBox', [x0, -45, Math.max(320, x1 - x0), y1 + 45].join(' '));
+    var g = svg.append('g'), passo = 520;
+    g.selectAll('path.lig').data(raiz.links()).join('path').attr('class', 'lig')
+      .attr('d', d3.linkVertical().x(function(d){ return d.x; }).y(function(d){ return d.y; }))
+      .each(function(){ var L = this.getTotalLength(); d3.select(this).attr('stroke-dasharray', L + ' ' + L).attr('stroke-dashoffset', L); })
+      .transition().delay(function(d){ return d.source.depth * passo + 260; }).duration(380).attr('stroke-dashoffset', 0);
+    var no = g.selectAll('g.no').data(nos).join('g')
+      .attr('class', function(d){ return 'no ' + (d.children ? 'comp' : 'primo' + (esconder && d.depth > 0 ? ' oculto' : '')); })
+      .attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ') scale(0.01)'; });
+    no.append('circle').attr('r', 29);
+    no.append('text').attr('dy', '0.36em').attr('font-size', function(d){ return d.data.v >= 10000 ? 13 : d.data.v >= 1000 ? 16 : 21; })
+      .text(function(d){ return !d.children && esconder && d.depth > 0 ? '?' : d.data.v; });
+    no.transition().delay(function(d){ return d.depth * passo; }).duration(460).ease(d3.easeBackOut)
+      .attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ') scale(1)'; });
+    totalFolhas = raiz.leaves().length; revelados = 0;
+    no.filter('.oculto').on('click', function(ev, d){
+      var el = d3.select(this); if (!el.classed('oculto')) return;
+      el.classed('oculto', false).select('text').text(d.data.v); revelados++; Sala.plim();
+      el.transition().duration(160).attr('transform', 'translate(' + d.x + ',' + d.y + ') scale(1.25)').transition().duration(200).attr('transform', 'translate(' + d.x + ',' + d.y + ') scale(1)');
+      if (revelados === totalFolhas){ mostrarResultado(n); Sala.festa(); }
+    });
+    if (esconder && totalFolhas > 1){ $('resultado').innerHTML = n + ' = ?'; $('extenso').textContent = 'Toque nos círculos com “?” para revelar os primos.'; $('escada').innerHTML = ''; }
+    else mostrarResultado(n);
+  }
+  function mostrarResultado(n){
+    var f = fatorar(n);
+    $('resultado').innerHTML = f.length === 1 ? n + ' é primo!' : n + ' = ' + formaPot(f);
+    $('extenso').textContent = f.length === 1 ? 'Só é divisível por 1 e por ele mesmo.' : 'Por extenso: ' + f.join(' × ');
+    var h = '', m = n; f.forEach(function(p){ h += '<tr><td>' + m + '</td><td class="p">' + p + '</td></tr>'; m /= p; }); h += '<tr><td>1</td><td class="p"></td></tr>';
+    $('escada').innerHTML = h;
+  }
+  $('btArv').onclick = desenharArvore;
+  $('nArv').onkeydown = function(e){ if (e.key === 'Enter') desenharArvore(); };
+  $('btSurpresa').onclick = function(){ $('nArv').value = sortearBonito(); desenharArvore(); };
+  $('selModo').onchange = desenharArvore; $('ckEsconder').onchange = desenharArvore;
+
+  // ---------- MMC e MDC ----------
+  var CORA = '#e67e22', CORB = '#2f80ed', CORC = '#8e44ad';
+  function calcularMmc(){
+    var a = ler('nA', 2, 100000), b = ler('nB', 2, 100000); if (a === null || b === null) return;
+    var fa = fatorar(a), fb = fatorar(b), comum = [], soA = [], soB = fb.slice();
+    fa.forEach(function(p){ var i = soB.indexOf(p); if (i >= 0){ comum.push(p); soB.splice(i, 1); } else soA.push(p); });
+    var mdc = comum.reduce(function(x, y){ return x * y; }, 1), todos = soA.concat(comum, soB), mmc = todos.reduce(function(x, y){ return x * y; }, 1);
+    var svg = d3.select('#venn'); svg.selectAll('*').remove();
+    svg.append('circle').attr('cx', 235).attr('cy', 185).attr('r', 150).attr('fill', CORA).attr('fill-opacity', 0.16).attr('stroke', CORA).attr('stroke-width', 4);
+    svg.append('circle').attr('cx', 405).attr('cy', 185).attr('r', 150).attr('fill', CORB).attr('fill-opacity', 0.16).attr('stroke', CORB).attr('stroke-width', 4);
+    svg.append('text').attr('x', 150).attr('y', 26).attr('text-anchor', 'middle').attr('font-weight', 'bold').attr('font-size', 20).attr('fill', CORA).text('Fatores de ' + a);
+    svg.append('text').attr('x', 490).attr('y', 26).attr('text-anchor', 'middle').attr('font-weight', 'bold').attr('font-size', 20).attr('fill', CORB).text('Fatores de ' + b);
+    svg.append('text').attr('x', 320).attr('y', 352).attr('text-anchor', 'middle').attr('font-size', 15).attr('fill', '#56627a').text('no meio: os fatores comuns');
+    var chips = [];
+    function arrumar(lista, cx, larg, cor){
+      var col = Math.max(1, Math.min(3, Math.floor(larg / 46))), lin = Math.ceil(lista.length / col);
+      lista.forEach(function(p, i){ var c = i % col, l = Math.floor(i / col), nl = Math.min(col, lista.length - l * col);
+        chips.push({p: p, x: cx + (c - (nl - 1) / 2) * 46, y: 185 + (l - (lin - 1) / 2) * 46, cor: cor}); });
+    }
+    arrumar(soA, 160, 130, CORA); arrumar(comum, 320, 80, CORC); arrumar(soB, 480, 130, CORB);
+    var gc = svg.selectAll('g.chip').data(chips).join('g').attr('class', 'chip').attr('transform', function(d){ return 'translate(' + d.x + ',-40)'; });
+    gc.append('circle').attr('r', 20).attr('fill', function(d){ return d.cor; });
+    gc.append('text').attr('dy', '0.36em').attr('font-size', function(d){ return d.p > 99 ? 12 : 17; }).text(function(d){ return d.p; });
+    gc.transition().delay(function(d, i){ return i * 140; }).duration(650).ease(d3.easeBounceOut).attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
+    $('rMdc').innerHTML = '🟣 <b>MDC(' + a + ', ' + b + ') = ' + (comum.length ? comum.join(' × ') + ' = ' + mdc : '1') + '</b> → o produto dos fatores <u>comuns</u> (o meio).' + (mdc === 1 ? ' Os números são primos entre si.' : '');
+    $('rMmc').innerHTML = '🟠🔵 <b>MMC(' + a + ', ' + b + ') = ' + todos.join(' × ') + ' = ' + mmc.toLocaleString('pt-BR') + '</b> → o produto de <u>todos</u> os fatores do diagrama.';
+    // decomposição simultânea
+    var x = a, y = b, h = '';
+    while (x > 1 || y > 1){
+      var p = 2; while (x % p !== 0 && y % p !== 0) p++;
+      var ambos = x % p === 0 && y % p === 0;
+      h += '<tr><td>' + x + ', ' + y + '</td><td class="p' + (ambos ? ' ambos' : '') + '">' + p + '</td></tr>';
+      if (x % p === 0) x /= p; if (y % p === 0) y /= p;
+    }
+    $('escada2').innerHTML = h + '<tr><td>1, 1</td><td class="p"></td></tr>';
+  }
+  var PROBLEMAS = [
+    {a: 12, b: 18, t: 'Dois ônibus saem juntos do terminal às 7h. Um sai a cada 12 minutos e o outro a cada 18 minutos. Depois de quantos minutos eles vão sair juntos de novo?', r: 'MMC: 36 minutos (às 7h36).'},
+    {a: 24, b: 36, t: 'Uma professora tem 24 lápis e 36 borrachas e quer montar kits iguais, sem sobrar nada. Qual é o maior número de kits que ela consegue montar?', r: 'MDC: 12 kits (cada um com 2 lápis e 3 borrachas).'},
+    {a: 6, b: 8, t: 'Um pisca-pisca vermelho acende a cada 6 segundos e um azul a cada 8 segundos. Se acenderam juntos agora, daqui a quantos segundos vão acender juntos de novo?', r: 'MMC: 24 segundos.'},
+    {a: 48, b: 60, t: 'Duas fitas medem 48 cm e 60 cm. Queremos cortá-las em pedaços do mesmo tamanho, o maior possível, sem sobra. Quanto medirá cada pedaço?', r: 'MDC: 12 cm (4 + 5 = 9 pedaços).'},
+    {a: 15, b: 20, t: 'Ana visita a avó a cada 15 dias e Beto a cada 20 dias. Hoje os dois visitaram. Daqui a quantos dias vão se encontrar lá de novo?', r: 'MMC: 60 dias.'},
+    {a: 30, b: 45, t: 'Numa gincana há 30 meninas e 45 meninos. Queremos formar equipes com o mesmo número de meninas e o mesmo número de meninos em cada uma. Qual é o maior número de equipes?', r: 'MDC: 15 equipes (2 meninas e 3 meninos em cada).'},
+    {a: 10, b: 14, t: 'Um remédio é tomado a cada 10 horas e outro a cada 14 horas. Se foram tomados juntos agora, depois de quantas horas serão tomados juntos de novo?', r: 'MMC: 70 horas.'},
+    {a: 84, b: 126, t: 'Uma sala tem 84 cm × 126 cm de mural. Queremos cobri-lo com quadrados de papel iguais, os maiores possíveis, sem cortar. Qual é o lado de cada quadrado?', r: 'MDC: 42 cm.'}
+  ], probAtual = -1;
+  $('btProblema').onclick = function(){
+    probAtual = (probAtual + 1 + Math.floor(Math.random() * (PROBLEMAS.length - 1))) % PROBLEMAS.length;
+    var p = PROBLEMAS[probAtual], box = $('problema');
+    box.style.display = 'block'; box.innerHTML = '📖 ' + p.t + ' <button id="btResp">👀 Resposta</button><span id="respProb"></span>';
+    $('nA').value = p.a; $('nB').value = p.b; calcularMmc();
+    $('btResp').onclick = function(){ $('respProb').innerHTML = ' <b>' + p.r + '</b>'; Sala.plim(); };
+  };
+  $('btMmc').onclick = function(){ $('problema').style.display = 'none'; calcularMmc(); };
+
+  // ---------- divisores ----------
+  function divisores(){
+    var n = ler('nDiv', 1, 10000); if (n === null) return;
+    var ds = [], pares = [], i, soma = 0;
+    for (i = 1; i * i <= n; i++) if (n % i === 0){ ds.push(i); if (i * i !== n) ds.push(n / i); pares.push([i, n / i]); }
+    ds.sort(function(x, y){ return x - y; });
+    ds.forEach(function(d){ if (d < n) soma += d; });
+    $('listaDiv').innerHTML = 'D(' + n + ') = ' + ds.map(function(d){ return '<span>' + d + '</span>'; }).join('');
+    var tipo = n === 1 ? 'O 1 não é primo nem composto (tem um divisor só).' : ds.length === 2 ? '🟢 ' + n + ' é <b>primo</b>: só tem 2 divisores.' : '🔵 ' + n + ' é <b>composto</b>: tem ' + ds.length + ' divisores.';
+    if (n > 1 && soma === n) tipo += ' ✨ E é um <b>número perfeito</b>: a soma dos outros divisores dá ' + n + '!';
+    if (n > 1 && ds.length > 2){ var pot = potencias(fatorar(n)); tipo += '<br>Contando pelos expoentes: ' + formaPot(fatorar(n)) + ' → ' + pot.map(function(pe){ return '(' + pe[1] + ' + 1)'; }).join(' × ') + ' = ' + ds.length + ' divisores.'; }
+    $('rDiv').innerHTML = tipo; $('qtdQuad').textContent = n;
+    var box = d3.select('#retangulos'); box.selectAll('*').remove();
+    if (n > 400){ box.append('p').attr('class', 'mt-dica').text('Para números até 400 aparecem os retângulos de quadradinhos.'); return; }
+    var lado = Math.max(4, Math.min(26, Math.floor(560 / pares[0][1])));
+    pares.forEach(function(pr, k){
+      var lin = pr[0], col = pr[1], q = Math.max(3, Math.min(lado * (pr[1] >= 30 ? 1 : 1.6), Math.floor(420 / col))), fig = box.append('figure');
+      var svg = fig.append('svg').attr('width', col * q + 2).attr('height', lin * q + 2), cel = [];
+      for (var r = 0; r < lin; r++) for (var c = 0; c < col; c++) cel.push({r: r, c: c});
+      svg.selectAll('rect').data(cel).join('rect').attr('x', function(d){ return 1 + d.c * q; }).attr('y', function(d){ return 1 + d.r * q; }).attr('width', q - 1).attr('height', q - 1)
+        .attr('rx', 2).attr('fill', d3.schemeTableau10[k % 10]).attr('opacity', 0)
+        .transition().delay(function(d, i){ return k * 250 + i * Math.min(12, 600 / cel.length); }).duration(200).attr('opacity', 1);
+      fig.append('figcaption').text(lin + ' × ' + col);
+    });
+  }
+  $('btDiv').onclick = divisores;
+  $('nDiv').onkeydown = function(e){ if (e.key === 'Enter') divisores(); };
+  $('btDivSurpresa').onclick = function(){ var l = [6, 7, 12, 13, 16, 18, 20, 23, 24, 28, 29, 30, 36, 37, 40, 48, 60, 64, 72, 97, 100]; $('nDiv').value = l[Math.floor(Math.random() * l.length)]; divisores(); };
+  $('nA').onkeydown = $('nB').onkeydown = function(e){ if (e.key === 'Enter') calcularMmc(); };
+
+  window.FATORES = {fatorar: fatorar, arvore: desenharArvore, mmc: calcularMmc, divisores: divisores};
+  desenharArvore();
+})();
+</script>
+</body>
+</html>

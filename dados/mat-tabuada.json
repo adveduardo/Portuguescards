@@ -1,0 +1,487 @@
+{
+ "titulo": "Tabuada (do 2 ao 9)",
+ "emoji": "✖️",
+ "instrucao": "Quanto é?",
+ "rodadas": [
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "2 × 6 = ___",
+   "opcoes": [
+    "18",
+    "10",
+    "12",
+    "14"
+   ],
+   "correta": "12",
+   "explica": "2 × 6 = 12."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "8 × 3 = ___",
+   "opcoes": [
+    "24",
+    "16",
+    "32",
+    "27"
+   ],
+   "correta": "24",
+   "explica": "8 × 3 = 24 (é o mesmo que somar 8 3 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 1 = ___",
+   "opcoes": [
+    "4",
+    "6",
+    "9",
+    "3"
+   ],
+   "correta": "3",
+   "explica": "3 × 1 = 3 (é o mesmo que somar 3 1 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 2 = ___",
+   "opcoes": [
+    "4",
+    "10",
+    "12",
+    "8"
+   ],
+   "correta": "8",
+   "explica": "4 × 2 = 8 (é o mesmo que somar 4 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "6 × 5 = ___",
+   "opcoes": [
+    "36",
+    "35",
+    "24",
+    "30"
+   ],
+   "correta": "30",
+   "explica": "6 × 5 = 30 (é o mesmo que somar 6 5 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "5 × 10 = ___",
+   "opcoes": [
+    "45",
+    "50",
+    "60",
+    "55"
+   ],
+   "correta": "50",
+   "explica": "5 × 10 = 50."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "6 × 8 = ___",
+   "opcoes": [
+    "56",
+    "42",
+    "54",
+    "48"
+   ],
+   "correta": "48",
+   "explica": "6 × 8 = 48."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 8 = ___",
+   "opcoes": [
+    "28",
+    "32",
+    "40",
+    "36"
+   ],
+   "correta": "32",
+   "explica": "4 × 8 = 32."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "8 × 4 = ___",
+   "opcoes": [
+    "36",
+    "32",
+    "24",
+    "40"
+   ],
+   "correta": "32",
+   "explica": "8 × 4 = 32 (é o mesmo que somar 8 4 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "2 × 2 = ___",
+   "opcoes": [
+    "14",
+    "2",
+    "6",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "2 × 2 = 4 (é o mesmo que somar 2 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "8 × 7 = ___",
+   "opcoes": [
+    "48",
+    "63",
+    "56",
+    "64"
+   ],
+   "correta": "56",
+   "explica": "8 × 7 = 56."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "9 × 2 = ___",
+   "opcoes": [
+    "20",
+    "18",
+    "9",
+    "27"
+   ],
+   "correta": "18",
+   "explica": "9 × 2 = 18 (é o mesmo que somar 9 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "9 × 7 = ___",
+   "opcoes": [
+    "63",
+    "70",
+    "72",
+    "54"
+   ],
+   "correta": "63",
+   "explica": "9 × 7 = 63."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 4 = ___",
+   "opcoes": [
+    "35",
+    "21",
+    "32",
+    "28"
+   ],
+   "correta": "28",
+   "explica": "7 × 4 = 28 (é o mesmo que somar 7 4 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 2 = ___",
+   "opcoes": [
+    "16",
+    "7",
+    "21",
+    "14"
+   ],
+   "correta": "14",
+   "explica": "7 × 2 = 14 (é o mesmo que somar 7 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 3 = ___",
+   "opcoes": [
+    "15",
+    "12",
+    "16",
+    "8"
+   ],
+   "correta": "12",
+   "explica": "4 × 3 = 12 (é o mesmo que somar 4 3 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 9 = ___",
+   "opcoes": [
+    "32",
+    "36",
+    "45",
+    "40"
+   ],
+   "correta": "36",
+   "explica": "4 × 9 = 36."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "2 × 5 = ___",
+   "opcoes": [
+    "8",
+    "12",
+    "10",
+    "15"
+   ],
+   "correta": "10",
+   "explica": "2 × 5 = 10 (é o mesmo que somar 2 5 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 10 = ___",
+   "opcoes": [
+    "50",
+    "44",
+    "36",
+    "40"
+   ],
+   "correta": "40",
+   "explica": "4 × 10 = 40."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 5 = ___",
+   "opcoes": [
+    "40",
+    "35",
+    "42",
+    "28"
+   ],
+   "correta": "35",
+   "explica": "7 × 5 = 35 (é o mesmo que somar 7 5 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 9 = ___",
+   "opcoes": [
+    "72",
+    "70",
+    "63",
+    "56"
+   ],
+   "correta": "63",
+   "explica": "7 × 9 = 63."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 2 = ___",
+   "opcoes": [
+    "3",
+    "8",
+    "6",
+    "9"
+   ],
+   "correta": "6",
+   "explica": "3 × 2 = 6 (é o mesmo que somar 3 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "8 × 2 = ___",
+   "opcoes": [
+    "18",
+    "24",
+    "16",
+    "8"
+   ],
+   "correta": "16",
+   "explica": "8 × 2 = 16 (é o mesmo que somar 8 2 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 1 = ___",
+   "opcoes": [
+    "8",
+    "4",
+    "5",
+    "12"
+   ],
+   "correta": "4",
+   "explica": "4 × 1 = 4 (é o mesmo que somar 4 1 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "6 × 4 = ___",
+   "opcoes": [
+    "24",
+    "18",
+    "28",
+    "30"
+   ],
+   "correta": "24",
+   "explica": "6 × 4 = 24 (é o mesmo que somar 6 4 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "9 × 1 = ___",
+   "opcoes": [
+    "18",
+    "27",
+    "9",
+    "10"
+   ],
+   "correta": "9",
+   "explica": "9 × 1 = 9 (é o mesmo que somar 9 1 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "8 × 8 = ___",
+   "opcoes": [
+    "72",
+    "64",
+    "56",
+    "46"
+   ],
+   "correta": "64",
+   "explica": "8 × 8 = 64."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "4 × 7 = ___",
+   "opcoes": [
+    "32",
+    "35",
+    "24",
+    "28"
+   ],
+   "correta": "28",
+   "explica": "4 × 7 = 28."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 3 = ___",
+   "opcoes": [
+    "21",
+    "24",
+    "28",
+    "14"
+   ],
+   "correta": "21",
+   "explica": "7 × 3 = 21 (é o mesmo que somar 7 3 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "6 × 1 = ___",
+   "opcoes": [
+    "7",
+    "18",
+    "12",
+    "6"
+   ],
+   "correta": "6",
+   "explica": "6 × 1 = 6 (é o mesmo que somar 6 1 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 3 = ___",
+   "opcoes": [
+    "19",
+    "9",
+    "12",
+    "6"
+   ],
+   "correta": "9",
+   "explica": "3 × 3 = 9 (é o mesmo que somar 3 3 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "5 × 8 = ___",
+   "opcoes": [
+    "48",
+    "45",
+    "40",
+    "35"
+   ],
+   "correta": "40",
+   "explica": "5 × 8 = 40."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "9 × 4 = ___",
+   "opcoes": [
+    "27",
+    "40",
+    "45",
+    "36"
+   ],
+   "correta": "36",
+   "explica": "9 × 4 = 36 (é o mesmo que somar 9 4 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "7 × 10 = ___",
+   "opcoes": [
+    "80",
+    "77",
+    "63",
+    "70"
+   ],
+   "correta": "70",
+   "explica": "7 × 10 = 70."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "2 × 3 = ___",
+   "opcoes": [
+    "6",
+    "4",
+    "9",
+    "8"
+   ],
+   "correta": "6",
+   "explica": "2 × 3 = 6 (é o mesmo que somar 2 3 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "5 × 5 = ___",
+   "opcoes": [
+    "30",
+    "20",
+    "52",
+    "25"
+   ],
+   "correta": "25",
+   "explica": "5 × 5 = 25 (é o mesmo que somar 5 5 vezes)."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "9 × 10 = ___",
+   "opcoes": [
+    "81",
+    "100",
+    "90",
+    "99"
+   ],
+   "correta": "90",
+   "explica": "9 × 10 = 90."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 7 = ___",
+   "opcoes": [
+    "28",
+    "18",
+    "21",
+    "24"
+   ],
+   "correta": "21",
+   "explica": "3 × 7 = 21."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 6 = ___",
+   "opcoes": [
+    "15",
+    "21",
+    "24",
+    "18"
+   ],
+   "correta": "18",
+   "explica": "3 × 6 = 18."
+  },
+  {
+   "enunciado": "Quanto é?",
+   "destaque": "3 × 9 = ___",
+   "opcoes": [
+    "24",
+    "36",
+    "27",
+    "30"
+   ],
+   "correta": "27",
+   "explica": "3 × 9 = 27."
+  }
+ ]
+}

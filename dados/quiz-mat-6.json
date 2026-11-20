@@ -1,0 +1,365 @@
+{
+ "titulo": "Quiz de Matemática do 6º ano",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "Problema: Dois ônibus saem juntos do terminal. Um passa a cada 12 minutos e o outro a cada 20 minutos. Depois de quantos minutos eles saem juntos de novo?",
+   "imagem": "🚌",
+   "opcoes": [
+    "32 minutos",
+    "60 minutos",
+    "240 minutos",
+    "4 minutos"
+   ],
+   "correta": "60 minutos",
+   "explica": "É o MMC(12, 20) = 60."
+  },
+  {
+   "pergunta": "Calcule: 93 × 7 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "661",
+    "658",
+    "644",
+    "651"
+   ],
+   "correta": "651",
+   "explica": "93 × 7 = 651."
+  },
+  {
+   "pergunta": "Resolva a expressão: (4 + 3) × 8",
+   "imagem": "🔣",
+   "opcoes": [
+    "35",
+    "56",
+    "28",
+    "64"
+   ],
+   "correta": "56",
+   "explica": "Primeiro o parêntese: 4 + 3 = 7; depois 7 × 8 = 56."
+  },
+  {
+   "pergunta": "Um quadrado tem lado de: 13 m. Qual é a sua área?",
+   "imagem": "📐",
+   "opcoes": [
+    "26 m²",
+    "169 m²",
+    "182 m²",
+    "52 m²"
+   ],
+   "correta": "169 m²",
+   "explica": "Área do quadrado = lado × lado = 13 × 13 = 169 m²."
+  },
+  {
+   "pergunta": "Converta: 7 km = ? m",
+   "imagem": "📏",
+   "opcoes": [
+    "700 m",
+    "7.000 m",
+    "70 m",
+    "70.000 m"
+   ],
+   "correta": "7.000 m",
+   "explica": "1 km = 1.000 m. 7 × 1.000 = 7.000 m."
+  },
+  {
+   "pergunta": "Calcule (mesmo denominador): 9/12 + 2/12 = ?",
+   "imagem": "🍕",
+   "opcoes": [
+    "11/24",
+    "12/12",
+    "18/12",
+    "11/12"
+   ],
+   "correta": "11/12",
+   "explica": "Com o mesmo denominador, somam-se os numeradores: 9 + 2 = 11. Resultado: 11/12."
+  },
+  {
+   "pergunta": "Qual destes números é divisor de 48?",
+   "imagem": "🔢",
+   "opcoes": [
+    "12",
+    "21",
+    "23",
+    "14"
+   ],
+   "correta": "12",
+   "explica": "48 ÷ 12 = 4, divisão exata."
+  },
+  {
+   "pergunta": "Problema: Um salário de R$ 1.200,00 teve aumento de 5%. Qual é o novo salário?",
+   "imagem": "💯",
+   "opcoes": [
+    "R$ 60,00",
+    "R$ 1.140,00",
+    "R$ 1.205,00",
+    "R$ 1.260,00"
+   ],
+   "correta": "R$ 1.260,00",
+   "explica": "5% de 1200 = 60. R$ 1.200,00 + R$ 60,00 = R$ 1.260,00."
+  },
+  {
+   "pergunta": "Qual destes números é divisível por 3?",
+   "imagem": "➗",
+   "opcoes": [
+    "508",
+    "174",
+    "206",
+    "1.279"
+   ],
+   "correta": "174",
+   "explica": "Um número é divisível por 3 quando a soma dos algarismos é divisível por 3: 174 (soma: 12)."
+  },
+  {
+   "pergunta": "Qual destes números é múltiplo de 8?",
+   "imagem": "🔢",
+   "opcoes": [
+    "40",
+    "146",
+    "97",
+    "94"
+   ],
+   "correta": "40",
+   "explica": "40 = 8 × 5, então é múltiplo de 8."
+  },
+  {
+   "pergunta": "Qual é o quadrado de 16? 16²",
+   "imagem": "⚡",
+   "opcoes": [
+    "255",
+    "32",
+    "256",
+    "272"
+   ],
+   "correta": "256",
+   "explica": "16² = 16 × 16 = 256."
+  },
+  {
+   "pergunta": "Calcule: 3.508 + 1.487 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "5.005",
+    "4.995",
+    "4.985",
+    "5.095"
+   ],
+   "correta": "4.995",
+   "explica": "3.508 + 1.487 = 4.995."
+  },
+  {
+   "pergunta": "Qual é a decomposição de 60 em fatores primos?",
+   "imagem": "🌳",
+   "opcoes": [
+    "2³ × 3 × 5",
+    "2² × 3 × 5",
+    "2 × 30",
+    "2² × 3 × 5²"
+   ],
+   "correta": "2² × 3 × 5",
+   "explica": "60 = 2² × 3 × 5. Confira multiplicando: o resultado é 60."
+  },
+  {
+   "pergunta": "Converta: 400 g = ? kg",
+   "imagem": "📏",
+   "opcoes": [
+    "0,4 kg",
+    "4 kg",
+    "400.000 kg",
+    "0,04 kg"
+   ],
+   "correta": "0,4 kg",
+   "explica": "1 kg = 1.000 g. 400 ÷ 1.000 = 0,4 kg."
+  },
+  {
+   "pergunta": "Quantos divisores tem o número 12?",
+   "imagem": "🔢",
+   "opcoes": [
+    "8",
+    "7",
+    "5",
+    "6"
+   ],
+   "correta": "6",
+   "explica": "Divisores de 12: 1, 2, 3, 4, 6, 12 (6 divisores)."
+  },
+  {
+   "pergunta": "Calcule (expoente zero): 57⁰ = ?",
+   "imagem": "⚡",
+   "opcoes": [
+    "1",
+    "0",
+    "10",
+    "57"
+   ],
+   "correta": "1",
+   "explica": "Todo número diferente de zero elevado a zero é igual a 1."
+  },
+  {
+   "pergunta": "Calcule: 3/4 de 36",
+   "imagem": "🍕",
+   "opcoes": [
+    "27",
+    "30",
+    "9",
+    "108"
+   ],
+   "correta": "27",
+   "explica": "36 ÷ 4 = 9; 9 × 3 = 27."
+  },
+  {
+   "pergunta": "Calcule: 25% de 40",
+   "imagem": "💯",
+   "opcoes": [
+    "35",
+    "30",
+    "10",
+    "100"
+   ],
+   "correta": "10",
+   "explica": "25% = 25/100. 40 × 25 ÷ 100 = 10."
+  },
+  {
+   "pergunta": "Calcule: 5,2 + 0,73 = ?",
+   "imagem": "🔟",
+   "opcoes": [
+    "6,03",
+    "5,92",
+    "1,25",
+    "5,93"
+   ],
+   "correta": "5,93",
+   "explica": "Alinhe as vírgulas: 5,20 + 0,73 = 5,93."
+  },
+  {
+   "pergunta": "Calcule: 8,2 + 0,13 = ?",
+   "imagem": "🔟",
+   "opcoes": [
+    "0,95",
+    "8,32",
+    "8,43",
+    "8,33"
+   ],
+   "correta": "8,33",
+   "explica": "Alinhe as vírgulas: 8,20 + 0,13 = 8,33."
+  },
+  {
+   "pergunta": "Calcule: 6,1 + 0,71 = ?",
+   "imagem": "🔟",
+   "opcoes": [
+    "6,91",
+    "1,32",
+    "6,8",
+    "6,81"
+   ],
+   "correta": "6,81",
+   "explica": "Alinhe as vírgulas: 6,10 + 0,71 = 6,81."
+  },
+  {
+   "pergunta": "Calcule: 8.578 − 3.535 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "5.053",
+    "5.143",
+    "5.033",
+    "5.043"
+   ],
+   "correta": "5.043",
+   "explica": "8.578 − 3.535 = 5.043. Confira: 5.043 + 3.535 = 8.578."
+  },
+  {
+   "pergunta": "Converta: 1 kg = ? g",
+   "imagem": "📏",
+   "opcoes": [
+    "10.000 g",
+    "100 g",
+    "10 g",
+    "1.000 g"
+   ],
+   "correta": "1.000 g",
+   "explica": "1 kg = 1.000 g. 1 × 1.000 = 1.000 g."
+  },
+  {
+   "pergunta": "Calcule (expoente zero): 52⁰ = ?",
+   "imagem": "⚡",
+   "opcoes": [
+    "10",
+    "52",
+    "0",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Todo número diferente de zero elevado a zero é igual a 1."
+  },
+  {
+   "pergunta": "Qual número é maior? 0,7 ou 0,25",
+   "imagem": "🔟",
+   "opcoes": [
+    "0,25",
+    "0,7",
+    "São iguais"
+   ],
+   "correta": "0,7",
+   "explica": "Compare com o mesmo número de casas: 0,70 e 0,25. O maior é 0,7."
+  },
+  {
+   "pergunta": "Calcule: 351 ÷ 3 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "116",
+    "117",
+    "1.170",
+    "118"
+   ],
+   "correta": "117",
+   "explica": "351 ÷ 3 = 117, porque 117 × 3 = 351."
+  },
+  {
+   "pergunta": "Qual é a decomposição de 20 em fatores primos?",
+   "imagem": "🌳",
+   "opcoes": [
+    "2² × 5²",
+    "2 × 10",
+    "2³ × 5",
+    "2² × 5"
+   ],
+   "correta": "2² × 5",
+   "explica": "20 = 2² × 5. Confira multiplicando: o resultado é 20."
+  },
+  {
+   "pergunta": "Calcule o máximo divisor comum: MDC(4, 6)",
+   "imagem": "🚌",
+   "opcoes": [
+    "3",
+    "2",
+    "1",
+    "12"
+   ],
+   "correta": "2",
+   "explica": "Divisores de 4: 1, 2, 4. Divisores de 6: 1, 2, 3, 6. O maior em comum é 2."
+  },
+  {
+   "pergunta": "Quantos divisores tem o número 6?",
+   "imagem": "🔢",
+   "opcoes": [
+    "5",
+    "3",
+    "6",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "Divisores de 6: 1, 2, 3, 6 (4 divisores)."
+  },
+  {
+   "pergunta": "Resolva a expressão: 13 − 18 ÷ 2",
+   "imagem": "🔣",
+   "opcoes": [
+    "3",
+    "6",
+    "4",
+    "−3"
+   ],
+   "correta": "4",
+   "explica": "Primeiro a divisão: 18 ÷ 2 = 9; depois 13 − 9 = 4."
+  }
+ ]
+}

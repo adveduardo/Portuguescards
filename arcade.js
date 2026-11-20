@@ -103,7 +103,7 @@
     'escolha-prep': 'Preposição', 'escolha-conj': 'Conjunção', 'escolha-interj': 'Interjeição', 'escolha-inv': 'Invariáveis', 'escolha-interp': 'Interpretação de texto',
     'escolha-red': 'Redação', 'escolha-fo': 'Fonologia', 'escolha-or': 'Ortografia', 'escolha-ac': 'Acentuação gráfica', 'escolha-pt': 'Pontuação',
     'escolha-sg': 'Significação das palavras', 'escolha-em': 'Ensino Médio / ENEM', 'escolha-en': '🇬🇧 Inglês', 'escolha-qs': 'As palavras QUE e SE',
-    'escolha-fg': 'Figuras de linguagem', 'escolha-vida': '🌱 Projeto de Vida (EJA)', 'escolha-alfa': 'Alfabetização', 'detetive': '🕵️ Detetive (palavra errada)',
+    'escolha-fg': 'Figuras de linguagem', 'escolha-vida': '🌱 Projeto de Vida (EJA)', 'escolha-mat': '🔢 Matemática', 'escolha-alfa': 'Alfabetização', 'detetive': '🕵️ Detetive (palavra errada)',
     'leitura': '🎤 Textos para ler', 'listas': '📝 Listas de palavras', 'morfo-frases': '🖍️ Frases (Pinte a frase)', 'silaba': '🔤 Sílaba tônica'};
   // modo: 'categorias' (Cestos), 'perguntas' (bancos, quizzes e escolha), 'detetive', 'leitura' (textos e listas),
   // 'palavras' (listas e Cestos) ou 'frases' (Pinte a frase e textos para ler)

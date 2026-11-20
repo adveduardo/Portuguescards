@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano cartesiano e funções</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  #plano{width:100%;height:auto;display:block;background:#fff;border-radius:14px;touch-action:none;user-select:none;-webkit-user-select:none}
+  .painel{display:none}.painel.ativo{display:block}
+  .controle{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+  .controle span{min-width:34px;font-weight:bold;font-size:1.3rem}
+  .controle input[type=range]{flex:1;min-width:160px}
+  .controle output{font-weight:bold;font-size:1.3rem;min-width:56px;text-align:right}
+  .lei{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:bold;text-align:center;margin:6px 0;color:#2f80ed}
+  .lei.q{color:#8e44ad}
+  .info{font-size:1.05rem;line-height:1.55}
+  .info b{color:#1f2a44}
+  table.valores{border-collapse:collapse;margin:8px auto;font-size:1.05rem}
+  table.valores td,table.valores th{border:2px solid #d6dbe8;padding:4px 10px;text-align:center}
+  table.valores th{background:#eef1f6}
+  .placar{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+  .placar span{border-radius:12px;padding:6px 12px;font-weight:bold;color:#fff}
+  .placar span.vez{outline:4px solid #ffd54a}
+  #pista,#rPonto{font-size:1.25rem;font-weight:bold;min-height:1.6em;margin:8px 0}
+  .coord input{width:70px;font-size:1.3rem;text-align:center}
+  .tick{font-size:13px;fill:#56627a}
+  .rotulo{font-size:15px;font-weight:bold;paint-order:stroke;stroke:#fff;stroke-width:4px}
+  .quad{font-size:46px;font-weight:bold;fill:#e9edf5}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/d3.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>📈 Plano cartesiano e funções</h1>
+  <span class="mt-tabs" id="abas"><button class="ativo" data-p="afim">📈 Função afim</button><button data-p="quad">🌈 Função quadrática</button><button data-p="tesouro">🏴‍☠️ Caça ao tesouro</button><button data-p="ponto">📍 Onde está o ponto?</button></span>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap mt-colunas">
+  <div class="mt-card">
+    <svg id="plano" viewBox="0 0 900 600"></svg>
+    <p class="mt-linha mt-dica" id="dicaPlano"><button id="btCentro">🎯 Centralizar</button> Role a roda do mouse (ou faça pinça) para aproximar e arraste para mover o plano.</p>
+  </div>
+  <div>
+    <!-- afim -->
+    <div class="mt-card painel ativo" id="p-afim">
+      <div class="lei" id="leiAfim">f(x) = 2x + 1</div>
+      <div class="controle"><span>a</span><input type="range" id="aA" min="-5" max="5" step="0.5" value="2"><output id="oA">2</output></div>
+      <div class="controle"><span>b</span><input type="range" id="aB" min="-10" max="10" step="0.5" value="1"><output id="oB">1</output></div>
+      <div class="info" id="infoAfim"></div>
+      <table class="valores" id="tabAfim"></table>
+      <p class="mt-linha"><button id="btFixar">📌 Fixar esta reta para comparar</button> <button id="btLimpar">🧹 Limpar as fixadas</button></p>
+    </div>
+    <!-- quadrática -->
+    <div class="mt-card painel" id="p-quad">
+      <div class="lei q" id="leiQuad"></div>
+      <div class="controle"><span>a</span><input type="range" id="qA" min="-3" max="3" step="0.25" value="1"><output id="oqA">1</output></div>
+      <div class="controle"><span>b</span><input type="range" id="qB" min="-6" max="6" step="0.5" value="-2"><output id="oqB">-2</output></div>
+      <div class="controle"><span>c</span><input type="range" id="qC" min="-8" max="8" step="0.5" value="-3"><output id="oqC">-3</output></div>
+      <div class="info" id="infoQuad"></div>
+    </div>
+    <!-- tesouro -->
+    <div class="mt-card painel" id="p-tesouro">
+      <h2>🏴‍☠️ Caça ao tesouro</h2>
+      <p class="mt-dica">Há um tesouro escondido num ponto de coordenadas inteiras. Cada equipe, na sua vez, diz um ponto (x, y): toque no plano ou digite abaixo.</p>
+      <p class="mt-linha"><label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+        <label>Pistas: <select id="selPista"><option value="dir">direção (→ ↑)</option><option value="temp">só quente ou frio</option></select></label>
+        <button class="principal" id="btTesouro">🗺️ Novo tesouro</button></p>
+      <div class="placar" id="placarT"></div>
+      <p class="mt-linha coord">( <input type="number" id="tx" placeholder="x"> ; <input type="number" id="ty" placeholder="y"> ) <button id="btTentar">📍 Tentar</button></p>
+      <div id="pista"></div>
+    </div>
+    <!-- onde está o ponto -->
+    <div class="mt-card painel" id="p-ponto">
+      <h2>📍 Onde está o ponto?</h2>
+      <p class="mt-linha"><label>Jogo: <select id="selPonto"><option value="ler">⭐ Ler as coordenadas do ponto</option><option value="marcar">👆 Marcar o ponto no plano</option></select></label>
+        <button class="principal" id="btPontoNovo">➡️ Próximo</button> <button id="btPontoVer">👀 Mostrar resposta</button></p>
+      <div class="lei" id="pedido"></div>
+      <div id="rPonto"></div>
+      <p><span class="mt-chip">✅ <b id="pAc">0</b></span> <span class="mt-chip">❌ <b id="pEr">0</b></span></p>
+      <p class="mt-dica">Lembrete: no par ordenado (x, y) vem primeiro o x (andar na horizontal) e depois o y (subir ou descer).</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  var W = 900, H = 600, svg = d3.select('#plano');
+  function n(v){ var r = Math.round(v * 100) / 100; if (Object.is ? Object.is(r, -0) : r === 0) r = 0; return String(r).replace('-', '−').replace('.', ','); }
+  function np(v){ return v < 0 ? '(' + n(v) + ')' : n(v); }   // negativo entre parênteses nas contas
+  function par(a, b){ var s = n(a) + (String(n(a)).indexOf(',') >= 0 || String(n(b)).indexOf(',') >= 0 ? '; ' : ', ') + n(b); return '(' + s + ')'; }
+  var defs = svg.append('defs');
+  defs.append('clipPath').attr('id', 'recorte').append('rect').attr('width', W).attr('height', H);
+  [['seta', '#1f2a44']].forEach(function(s){ defs.append('marker').attr('id', s[0]).attr('viewBox', '0 0 10 10').attr('refX', 9).attr('refY', 5).attr('markerWidth', 8).attr('markerHeight', 8).attr('orient', 'auto-start-reverse').append('path').attr('d', 'M0,0 L10,5 L0,10 z').attr('fill', s[1]); });
+  var gQuad = svg.append('g'), gGrade = svg.append('g'), gEixos = svg.append('g'), gConteudo = svg.append('g').attr('clip-path', 'url(#recorte)'), gPontos = svg.append('g').attr('clip-path', 'url(#recorte)');
+  var xB, yB, x, y, modo = 'afim', fixadas = [];
+  var zoom = d3.zoom().scaleExtent([0.25, 10]).on('zoom', function(e){ x = e.transform.rescaleX(xB); y = e.transform.rescaleY(yB); redesenhar(); });
+  function dominio(xmax, comZoom){
+    var ymax = xmax * H / W; xB = d3.scaleLinear().domain([-xmax, xmax]).range([0, W]); yB = d3.scaleLinear().domain([-ymax, ymax]).range([H, 0]); x = xB; y = yB;
+    if (comZoom){ svg.call(zoom); svg.call(zoom.transform, d3.zoomIdentity); } else { svg.on('.zoom', null); svg.property('__zoom', d3.zoomIdentity); }
+    $('dicaPlano').style.visibility = comZoom ? 'visible' : 'hidden';
+  }
+  function grade(){
+    gGrade.selectAll('*').remove(); gEixos.selectAll('*').remove();
+    var tx = x.ticks(Math.round(W / 50)), ty = y.ticks(Math.round(H / 50)), ox = Math.max(0, Math.min(W, x(0))), oy = Math.max(0, Math.min(H, y(0)));
+    var inteiros = modo === 'tesouro' || modo === 'ponto';
+    if (inteiros){ tx = d3.range(Math.ceil(x.domain()[0]), Math.floor(x.domain()[1]) + 1); ty = d3.range(Math.ceil(y.domain()[0]), Math.floor(y.domain()[1]) + 1); }
+    gGrade.selectAll('line.v').data(tx).join('line').attr('x1', x).attr('x2', x).attr('y1', 0).attr('y2', H).attr('stroke', '#dfe5f0').attr('stroke-width', 1.5);
+    gGrade.selectAll('line.h').data(ty).join('line').attr('y1', y).attr('y2', y).attr('x1', 0).attr('x2', W).attr('stroke', '#dfe5f0').attr('stroke-width', 1.5);
+    gEixos.append('line').attr('x1', 2).attr('x2', W - 2).attr('y1', oy).attr('y2', oy).attr('stroke', '#1f2a44').attr('stroke-width', 2.5).attr('marker-end', 'url(#seta)');
+    gEixos.append('line').attr('y1', H - 2).attr('y2', 2).attr('x1', ox).attr('x2', ox).attr('stroke', '#1f2a44').attr('stroke-width', 2.5).attr('marker-end', 'url(#seta)');
+    gEixos.append('text').attr('x', W - 14).attr('y', oy - 10).attr('class', 'rotulo').attr('text-anchor', 'end').text('x');
+    gEixos.append('text').attr('x', ox + 12).attr('y', 20).attr('class', 'rotulo').text('y');
+    gEixos.selectAll('text.tx').data(tx.filter(function(t){ return t !== 0; })).join('text').attr('class', 'tick').attr('x', x).attr('y', Math.min(H - 6, oy + 18)).attr('text-anchor', 'middle').text(function(t){ return n(t); });
+    gEixos.selectAll('text.ty').data(ty.filter(function(t){ return t !== 0; })).join('text').attr('class', 'tick').attr('x', Math.max(14, ox - 8)).attr('y', function(t){ return y(t) + 4; }).attr('text-anchor', 'end').text(function(t){ return n(t); });
+    gEixos.append('text').attr('class', 'tick').attr('x', ox - 8).attr('y', oy + 18).attr('text-anchor', 'end').text('0');
+    gQuad.selectAll('*').remove();
+    if (inteiros){
+      [['2º Q', -1, 1], ['1º Q', 1, 1], ['3º Q', -1, -1], ['4º Q', 1, -1]].forEach(function(q){
+        gQuad.append('text').attr('class', 'quad').attr('text-anchor', 'middle').attr('x', ox + q[1] * W / 4).attr('y', oy - q[2] * H / 4 + 16).text(q[0]);
+      });
+    }
+  }
+  var linha = d3.line().defined(function(d){ return isFinite(d[1]) && Math.abs(d[1]) < 1e5; }).x(function(d){ return x(d[0]); }).y(function(d){ return y(d[1]); });
+  function curva(f, cor, larg, tracejado){
+    var d0 = x.domain(), pts = [], N = 500;
+    for (var i = 0; i <= N; i++){ var xv = d0[0] + (d0[1] - d0[0]) * i / N; pts.push([xv, f(xv)]); }
+    gConteudo.append('path').attr('d', linha(pts)).attr('fill', 'none').attr('stroke', cor).attr('stroke-width', larg || 4).attr('stroke-dasharray', tracejado ? '8 6' : null).attr('stroke-linecap', 'round');
+  }
+  function ponto(px, py, cor, texto, lado){
+    gPontos.append('circle').attr('cx', x(px)).attr('cy', y(py)).attr('r', 7).attr('fill', cor).attr('stroke', '#fff').attr('stroke-width', 2.5);
+    if (texto) gPontos.append('text').attr('class', 'rotulo').attr('fill', cor).attr('x', x(px) + (lado === 'e' ? -12 : 12)).attr('y', y(py) - 12).attr('text-anchor', lado === 'e' ? 'end' : 'start').text(texto);
+  }
+  // ---------- função afim ----------
+  function leiAfim(a, b){
+    var s = a === 0 ? '' : (a === 1 ? 'x' : a === -1 ? '−x' : n(a) + 'x');
+    if (b !== 0 || a === 0) s += (s ? (b < 0 ? ' − ' : ' + ') + n(Math.abs(b)) : n(b));
+    return 'f(x) = ' + s;
+  }
+  function desenharAfim(){
+    var a = +$('aA').value, b = +$('aB').value; $('oA').textContent = n(a); $('oB').textContent = n(b);
+    fixadas.forEach(function(fx){ curva(function(v){ return fx[0] * v + fx[1]; }, '#b8c2d6', 3, true); });
+    curva(function(v){ return a * v + b; }, '#2f80ed', 4.5);
+    ponto(0, b, '#e67e22', par(0, b));
+    if (a !== 0) ponto(-b / a, 0, '#27ae60', 'raiz ' + par(-b / a, 0), 'e');
+    $('leiAfim').textContent = leiAfim(a, b);
+    var cresc = a > 0 ? '📈 <b>crescente</b> (a &gt; 0: quando x aumenta, y aumenta)' : a < 0 ? '📉 <b>decrescente</b> (a &lt; 0: quando x aumenta, y diminui)' : '➖ <b>constante</b> (a = 0: a reta fica deitada)';
+    $('infoAfim').innerHTML = '• A função é ' + cresc + '.<br>• <b>a = ' + n(a) + '</b> (taxa de variação): a cada 1 passo para a direita, a reta ' + (a === 0 ? 'não sobe nem desce' : (a > 0 ? 'sobe ' : 'desce ') + n(Math.abs(a))) + '.<br>' +
+      '• <b>b = ' + n(b) + '</b>: a reta corta o eixo y no ponto 🟠 ' + par(0, b) + '.<br>' +
+      (a !== 0 ? '• <b>Raiz</b> (onde corta o eixo x): ax + b = 0 → x = −b ÷ a = ' + n(-b / a) + ' 🟢' : '• Sem raiz: a reta é paralela ao eixo x' + (b === 0 ? ' (e fica em cima dele!)' : '') + '.');
+    var h = '<tr><th>x</th>', h2 = '<tr><th>f(x)</th>';
+    [-2, -1, 0, 1, 2].forEach(function(v){ h += '<td>' + n(v) + '</td>'; h2 += '<td>' + n(a * v + b) + '</td>'; });
+    $('tabAfim').innerHTML = h + '</tr>' + h2 + '</tr>';
+  }
+  $('btFixar').onclick = function(){ fixadas.push([+$('aA').value, +$('aB').value]); if (fixadas.length > 6) fixadas.shift(); redesenhar(); Sala.tom(660, 0.12); };
+  $('btLimpar').onclick = function(){ fixadas = []; redesenhar(); };
+  // ---------- função quadrática ----------
+  function leiQuad(a, b, c){
+    function termo(coef, sufixo, primeiro){ if (coef === 0) return ''; var abs = Math.abs(coef), sinal = coef < 0 ? (primeiro ? '−' : ' − ') : (primeiro ? '' : ' + ');
+      return sinal + (abs === 1 && sufixo ? '' : n(abs)) + sufixo; }
+    var s = termo(a, 'x²', true); s += termo(b, 'x', !s); s += termo(c, '', !s);
+    return 'f(x) = ' + (s || '0');
+  }
+  function desenharQuad(){
+    var a = +$('qA').value, b = +$('qB').value, c = +$('qC').value;
+    $('oqA').textContent = n(a); $('oqB').textContent = n(b); $('oqC').textContent = n(c);
+    $('leiQuad').textContent = leiQuad(a, b, c);
+    var f = function(v){ return a * v * v + b * v + c; };
+    if (a === 0){ curva(f, '#8e44ad', 4.5); $('infoQuad').innerHTML = '⚠️ Com <b>a = 0</b> não existe o termo x²: a função vira afim e o gráfico é uma <b>reta</b>, não uma parábola.'; return; }
+    var D = b * b - 4 * a * c, xv = -b / (2 * a), yv = -D / (4 * a);
+    gConteudo.append('line').attr('x1', x(xv)).attr('x2', x(xv)).attr('y1', 0).attr('y2', H).attr('stroke', '#c39bff').attr('stroke-width', 2).attr('stroke-dasharray', '6 6');
+    curva(f, '#8e44ad', 4.5);
+    ponto(0, c, '#e67e22', par(0, c));
+    var raizes = '';
+    if (D > 0){ var r1 = (-b - Math.sqrt(D)) / (2 * a), r2 = (-b + Math.sqrt(D)) / (2 * a); ponto(Math.min(r1, r2), 0, '#27ae60', 'x₁ = ' + n(Math.min(r1, r2)), 'e'); ponto(Math.max(r1, r2), 0, '#27ae60', 'x₂ = ' + n(Math.max(r1, r2)));
+      raizes = 'Δ &gt; 0 → <b>duas raízes reais</b>: x₁ ≈ ' + n(Math.min(r1, r2)) + ' e x₂ ≈ ' + n(Math.max(r1, r2)) + ' 🟢 (a parábola corta o eixo x em 2 pontos).'; }
+    else if (D === 0){ raizes = 'Δ = 0 → <b>uma raiz real</b> (dupla): x = ' + n(xv) + ' 🟢 (a parábola só encosta no eixo x).'; ponto(xv, 0, '#27ae60', ''); }
+    else raizes = 'Δ &lt; 0 → <b>nenhuma raiz real</b> (a parábola não toca o eixo x).';
+    ponto(xv, yv, '#e74c3c', 'vértice ' + par(xv, yv), xv < 0 ? 'e' : 'd');
+    $('infoQuad').innerHTML = '• ' + (a > 0 ? '😊 a &gt; 0: concavidade <b>para cima</b> (o vértice é o ponto mais baixo: valor mínimo).' : '☹️ a &lt; 0: concavidade <b>para baixo</b> (o vértice é o ponto mais alto: valor máximo).') +
+      '<br>• Δ = b² − 4ac = ' + np(b) + '² − 4 · ' + np(a) + ' · ' + np(c) + ' = <b>' + n(D) + '</b><br>• ' + raizes +
+      '<br>• 🔴 Vértice: xᵥ = −b ÷ 2a = ' + n(xv) + ' e yᵥ = −Δ ÷ 4a = ' + n(yv) + '<br>• 🟠 Corta o eixo y em ' + par(0, c) + ' (é o c).<br>• A linha tracejada x = ' + n(xv) + ' é o <b>eixo de simetria</b>.';
+  }
+  // ---------- caça ao tesouro ----------
+  var EQ = [['🔴', '#e74c3c'], ['🔵', '#2f80ed'], ['🟢', '#27ae60'], ['🟡', '#f1c40f']], tes = null, tentativas = [], vez = 0, pontosEq = [0, 0, 0, 0];
+  function placarT(){
+    var k = +$('selEquipes').value, h = '';
+    for (var i = 0; i < k; i++) h += '<span style="background:' + EQ[i][1] + '" class="' + (i === vez && k > 1 ? 'vez' : '') + '">' + EQ[i][0] + ' ' + pontosEq[i] + ' 🏆</span>';
+    $('placarT').innerHTML = h + (k > 1 ? '<span style="background:#56627a">Vez: ' + EQ[vez][0] + '</span>' : '');
+  }
+  function novoTesouro(){
+    do { tes = {x: Math.round(Math.random() * 12) - 6, y: Math.round(Math.random() * 8) - 4}; } while (tes.x === 0 && tes.y === 0);
+    tentativas = []; $('pista').innerHTML = '🗺️ Tesouro escondido! ' + EQ[vez][0] + ' começa.'; placarT(); redesenhar();
+  }
+  function tentar(gx, gy){
+    if (!tes || tes.achado){ Sala.avisar('Toque em “Novo tesouro”.'); return; }
+    if (Math.abs(gx) > 9 || Math.abs(gy) > 6){ Sala.avisar('Esse ponto fica fora do mapa.'); return; }
+    var k = +$('selEquipes').value, quem = vez;
+    tentativas.push({x: gx, y: gy, eq: quem});
+    var dx = tes.x - gx, dy = tes.y - gy, txt;
+    if (!dx && !dy){
+      tes.achado = true; pontosEq[quem]++; txt = '💰 ' + EQ[quem][0] + ' achou o tesouro em ' + par(gx, gy) + ' com ' + tentativas.length + ' tentativa(s)!';
+      Sala.festa(); Sala.confete(80);
+    } else {
+      if ($('selPista').value === 'dir'){
+        txt = par(gx, gy) + ': o tesouro está ' + [dx > 0 ? 'mais para a direita →' : dx < 0 ? 'mais para a esquerda ←' : 'nesta coluna (x certo!)', dy > 0 ? 'mais para cima ↑' : dy < 0 ? 'mais para baixo ↓' : 'nesta linha (y certo!)'].join(' e ');
+      } else {
+        var d = Math.sqrt(dx * dx + dy * dy);
+        txt = par(gx, gy) + ': ' + (d <= 1.5 ? '🔥 Pelando!' : d <= 3 ? '♨️ Quente!' : d <= 5 ? '🌤️ Morno.' : '🧊 Frio...');
+      }
+      Sala.tom(330, 0.15); vez = (vez + 1) % k;
+      txt += k > 1 ? '<br>Agora é a vez de ' + EQ[vez][0] + '.' : '';
+    }
+    $('pista').innerHTML = txt; placarT(); redesenhar();
+  }
+  function desenharTesouro(){
+    tentativas.forEach(function(t, i){
+      var ult = i === tentativas.length - 1;
+      gPontos.append('circle').attr('cx', x(t.x)).attr('cy', y(t.y)).attr('r', ult ? 11 : 8).attr('fill', EQ[t.eq][1]).attr('stroke', '#fff').attr('stroke-width', 3).attr('opacity', ult ? 1 : 0.75);
+    });
+    if (tes && tes.achado){
+      gPontos.append('text').attr('x', x(tes.x)).attr('y', y(tes.y) + 16).attr('text-anchor', 'middle').attr('font-size', 46).text('💰')
+        .attr('transform', 'translate(0,-40)').transition().duration(700).ease(d3.easeBounceOut).attr('transform', 'translate(0,0)');
+    }
+  }
+  $('btTesouro').onclick = novoTesouro;
+  $('btTentar').onclick = function(){ var a = $('tx').value, b = $('ty').value; if (a === '' || b === ''){ Sala.avisar('Digite x e y.'); return; } tentar(Math.round(+a), Math.round(+b)); $('tx').value = ''; $('ty').value = ''; $('tx').focus(); };
+  $('ty').onkeydown = function(e){ if (e.key === 'Enter') $('btTentar').click(); };
+  $('selEquipes').onchange = function(){ vez = 0; pontosEq = [0, 0, 0, 0]; placarT(); };
+  // ---------- onde está o ponto ----------
+  var alvo = null, respondido = false, acPonto = 0, erPonto = 0, marcado = null;
+  function quadrante(px, py){ if (!px && !py) return 'é a origem'; if (!px) return 'fica no eixo y'; if (!py) return 'fica no eixo x'; return (px > 0 ? (py > 0 ? '1º' : '4º') : (py > 0 ? '2º' : '3º')) + ' quadrante'; }
+  function novoPonto(){
+    var ant = alvo;
+    do { alvo = {x: Math.round(Math.random() * 14) - 7, y: Math.round(Math.random() * 10) - 5}; } while (ant && ant.x === alvo.x && ant.y === alvo.y);
+    if (Math.random() < 0.15) alvo[Math.random() < 0.5 ? 'x' : 'y'] = 0;
+    respondido = false; marcado = null; $('rPonto').innerHTML = '';
+    $('pedido').innerHTML = $('selPonto').value === 'ler' ? 'Quais são as coordenadas do ⭐?' : 'Marque o ponto ' + par(alvo.x, alvo.y);
+    redesenhar();
+  }
+  function mostrarPonto(){ if (!alvo) return; respondido = true; $('rPonto').innerHTML = '⭐ = ' + par(alvo.x, alvo.y) + ' → ' + quadrante(alvo.x, alvo.y); Sala.plim(); redesenhar(); }
+  function marcar(gx, gy){
+    if (!alvo || respondido) return;
+    marcado = {x: gx, y: gy}; respondido = true;
+    if (gx === alvo.x && gy === alvo.y){ acPonto++; $('rPonto').innerHTML = '✅ Isso! ' + par(gx, gy) + ' ' + quadrante(gx, gy) + '.'; Sala.plim(); }
+    else { erPonto++; $('rPonto').innerHTML = '❌ Você marcou ' + par(gx, gy) + '.' + (gx === alvo.y && gy === alvo.x ? ' Trocou a ordem! Primeiro o x (horizontal), depois o y (vertical).' : ' O certo está em verde.'); Sala.tom(220, 0.3); }
+    $('pAc').textContent = acPonto; $('pEr').textContent = erPonto; redesenhar();
+  }
+  function desenharPonto(){
+    if (!alvo) return;
+    var ler = $('selPonto').value === 'ler';
+    if (respondido){
+      gConteudo.append('path').attr('d', 'M' + x(alvo.x) + ',' + y(0) + ' V' + y(alvo.y) + ' H' + x(0)).attr('fill', 'none').attr('stroke', '#27ae60').attr('stroke-width', 3).attr('stroke-dasharray', '7 6');
+    }
+    if (ler || respondido) gPontos.append('text').attr('x', x(alvo.x)).attr('y', y(alvo.y) + 13).attr('text-anchor', 'middle').attr('font-size', 38).text(ler ? '⭐' : '✅').style('pointer-events', 'none');
+    if (marcado && (marcado.x !== alvo.x || marcado.y !== alvo.y)) gPontos.append('circle').attr('cx', x(marcado.x)).attr('cy', y(marcado.y)).attr('r', 10).attr('fill', '#e74c3c').attr('stroke', '#fff').attr('stroke-width', 3);
+  }
+  $('btPontoNovo').onclick = novoPonto; $('btPontoVer').onclick = mostrarPonto;
+  $('selPonto').onchange = novoPonto;
+  // ---------- toques no plano (jogos) ----------
+  svg.on('click', function(ev){
+    if (modo !== 'tesouro' && modo !== 'ponto') return;
+    var p = d3.pointer(ev, svg.node()), gx = Math.round(x.invert(p[0])), gy = Math.round(y.invert(p[1]));
+    if (modo === 'tesouro') tentar(gx, gy);
+    else if ($('selPonto').value === 'marcar') marcar(gx, gy);
+  });
+  // ---------- geral ----------
+  function redesenhar(){
+    gConteudo.selectAll('*').remove(); gPontos.selectAll('*').remove(); grade();
+    if (modo === 'afim') desenharAfim(); else if (modo === 'quad') desenharQuad(); else if (modo === 'tesouro') desenharTesouro(); else desenharPonto();
+  }
+  function trocar(m){
+    modo = m;
+    var bs = $('abas').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) bs[i].className = bs[i].getAttribute('data-p') === m ? 'ativo' : '';
+    var ps = document.querySelectorAll('.painel'); for (i = 0; i < ps.length; i++) ps[i].className = 'mt-card painel' + (ps[i].id === 'p-' + m ? ' ativo' : '');
+    dominio(m === 'tesouro' || m === 'ponto' ? 9.5 : 10, m === 'afim' || m === 'quad');
+    svg.style('cursor', m === 'tesouro' || m === 'ponto' ? 'crosshair' : 'grab');
+    if (m === 'tesouro' && !tes) novoTesouro(); else if (m === 'ponto' && !alvo) novoPonto(); else redesenhar();
+  }
+  $('abas').onclick = function(e){ var b = e.target.closest('button'); if (b) trocar(b.getAttribute('data-p')); };
+  $('btCentro').onclick = function(){ svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity); };
+  ['aA', 'aB', 'qA', 'qB', 'qC'].forEach(function(id){ $(id).oninput = redesenhar; });
+  window.FUNCOES = {trocar: trocar, tentar: tentar, marcar: marcar, estado: function(){ return {modo: modo, tes: tes, alvo: alvo, vez: vez, pontos: pontosEq.slice(), ac: acPonto, er: erPonto}; }};
+  trocar('afim');
+})();
+</script>
+</body>
+</html>

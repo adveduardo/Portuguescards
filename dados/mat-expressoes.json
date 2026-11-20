@@ -1,0 +1,247 @@
+{
+ "titulo": "Expressões numéricas (ordem das operações) (6º ano)",
+ "emoji": "🔣",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(3 + 2) × 6",
+   "opcoes": [
+    "15",
+    "20",
+    "30",
+    "36"
+   ],
+   "correta": "30",
+   "explica": "Primeiro o parêntese: 3 + 2 = 5; depois 5 × 6 = 30."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "40 − 36 ÷ 9",
+   "opcoes": [
+    "35",
+    "36",
+    "13",
+    "38"
+   ],
+   "correta": "36",
+   "explica": "Primeiro a divisão: 36 ÷ 9 = 4; depois 40 − 4 = 36."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "31 − 24 ÷ 3",
+   "opcoes": [
+    "22",
+    "10",
+    "23",
+    "25"
+   ],
+   "correta": "23",
+   "explica": "Primeiro a divisão: 24 ÷ 3 = 8; depois 31 − 8 = 23."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "5 × 3 − 9 + 4",
+   "opcoes": [
+    "2",
+    "12",
+    "10",
+    "8"
+   ],
+   "correta": "10",
+   "explica": "5 × 3 = 15; depois, da esquerda para a direita: 15 − 9 + 4 = 10."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "2 × 2 − 6 + 6",
+   "opcoes": [
+    "6",
+    "−8",
+    "2",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "2 × 2 = 4; depois, da esquerda para a direita: 4 − 6 + 6 = 4."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "21 − 54 ÷ 6",
+   "opcoes": [
+    "−27",
+    "11",
+    "14",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "Primeiro a divisão: 54 ÷ 6 = 9; depois 21 − 9 = 12."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(4 + 5) × 8",
+   "opcoes": [
+    "37",
+    "72",
+    "44",
+    "80"
+   ],
+   "correta": "72",
+   "explica": "Primeiro o parêntese: 4 + 5 = 9; depois 9 × 8 = 72."
+  },
+  {
+   "enunciado": "Resolva a expressão (atenção à ordem das operações):",
+   "destaque": "19 + 8 × 2",
+   "opcoes": [
+    "29",
+    "35",
+    "36",
+    "54"
+   ],
+   "correta": "35",
+   "explica": "Primeiro a multiplicação: 8 × 2 = 16; depois 19 + 16 = 35."
+  },
+  {
+   "enunciado": "Resolva a expressão (atenção à ordem das operações):",
+   "destaque": "19 + 2 × 9",
+   "opcoes": [
+    "38",
+    "37",
+    "30",
+    "189"
+   ],
+   "correta": "37",
+   "explica": "Primeiro a multiplicação: 2 × 9 = 18; depois 19 + 18 = 37."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(12 + 5) × 4",
+   "opcoes": [
+    "53",
+    "68",
+    "72",
+    "32"
+   ],
+   "correta": "68",
+   "explica": "Primeiro o parêntese: 12 + 5 = 17; depois 17 × 4 = 68."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "4 × 5 − 9 + 7",
+   "opcoes": [
+    "16",
+    "20",
+    "4",
+    "18"
+   ],
+   "correta": "18",
+   "explica": "4 × 5 = 20; depois, da esquerda para a direita: 20 − 9 + 7 = 18."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(7 + 4) × 6",
+   "opcoes": [
+    "66",
+    "72",
+    "31",
+    "46"
+   ],
+   "correta": "66",
+   "explica": "Primeiro o parêntese: 7 + 4 = 11; depois 11 × 6 = 66."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "26 − 36 ÷ 9",
+   "opcoes": [
+    "21",
+    "22",
+    "24",
+    "−1"
+   ],
+   "correta": "22",
+   "explica": "Primeiro a divisão: 36 ÷ 9 = 4; depois 26 − 4 = 22."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "21 − 15 ÷ 3",
+   "opcoes": [
+    "15",
+    "2",
+    "9",
+    "16"
+   ],
+   "correta": "16",
+   "explica": "Primeiro a divisão: 15 ÷ 3 = 5; depois 21 − 5 = 16."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "7 − 32 ÷ 8",
+   "opcoes": [
+    "−17",
+    "5",
+    "3",
+    "2"
+   ],
+   "correta": "3",
+   "explica": "Primeiro a divisão: 32 ÷ 8 = 4; depois 7 − 4 = 3."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(3 + 6) × 5",
+   "opcoes": [
+    "45",
+    "33",
+    "21",
+    "50"
+   ],
+   "correta": "45",
+   "explica": "Primeiro o parêntese: 3 + 6 = 9; depois 9 × 5 = 45."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "(3 + 6) × 3",
+   "opcoes": [
+    "21",
+    "30",
+    "27",
+    "15"
+   ],
+   "correta": "27",
+   "explica": "Primeiro o parêntese: 3 + 6 = 9; depois 9 × 3 = 27."
+  },
+  {
+   "enunciado": "Resolva a expressão (atenção à ordem das operações):",
+   "destaque": "13 + 4 × 3",
+   "opcoes": [
+    "20",
+    "25",
+    "51",
+    "26"
+   ],
+   "correta": "25",
+   "explica": "Primeiro a multiplicação: 4 × 3 = 12; depois 13 + 12 = 25."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "22 − 28 ÷ 7",
+   "opcoes": [
+    "20",
+    "1",
+    "18",
+    "17"
+   ],
+   "correta": "18",
+   "explica": "Primeiro a divisão: 28 ÷ 7 = 4; depois 22 − 4 = 18."
+  },
+  {
+   "enunciado": "Resolva a expressão:",
+   "destaque": "4 × 5 − 1 + 1",
+   "opcoes": [
+    "18",
+    "22",
+    "17",
+    "20"
+   ],
+   "correta": "20",
+   "explica": "4 × 5 = 20; depois, da esquerda para a direita: 20 − 1 + 1 = 20."
+  }
+ ]
+}

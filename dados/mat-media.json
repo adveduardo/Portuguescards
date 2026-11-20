@@ -1,0 +1,246 @@
+{
+ "titulo": "Média aritmética (7º ano)",
+ "emoji": "📊",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "2, 10, 9",
+   "opcoes": [
+    "7",
+    "21",
+    "10",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Soma 2 + 10 + 9 = 21; dividida por 3: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "5, 4, 3",
+   "opcoes": [
+    "12",
+    "5",
+    "4",
+    "3"
+   ],
+   "correta": "4",
+   "explica": "Soma 5 + 4 + 3 = 12; dividida por 3: 4."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "6, 2, 8, 12",
+   "opcoes": [
+    "28",
+    "7",
+    "8",
+    "12"
+   ],
+   "correta": "7",
+   "explica": "Soma 6 + 2 + 8 + 12 = 28; dividida por 4: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "3, 5, 3, 7, 7",
+   "opcoes": [
+    "6",
+    "5",
+    "7",
+    "25"
+   ],
+   "correta": "5",
+   "explica": "Soma 3 + 5 + 3 + 7 + 7 = 25; dividida por 5: 5."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "5, 10, 6",
+   "opcoes": [
+    "7",
+    "21",
+    "8",
+    "10"
+   ],
+   "correta": "7",
+   "explica": "Soma 5 + 10 + 6 = 21; dividida por 3: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "8, 9, 7",
+   "opcoes": [
+    "7",
+    "24",
+    "8",
+    "9"
+   ],
+   "correta": "8",
+   "explica": "Soma 8 + 9 + 7 = 24; dividida por 3: 8."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "2, 2, 4, 12",
+   "opcoes": [
+    "12",
+    "5",
+    "6",
+    "20"
+   ],
+   "correta": "5",
+   "explica": "Soma 2 + 2 + 4 + 12 = 20; dividida por 4: 5."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "4, 3, 8, 9, 11",
+   "opcoes": [
+    "11",
+    "35",
+    "7",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Soma 4 + 3 + 8 + 9 + 11 = 35; dividida por 5: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "7, 10, 10",
+   "opcoes": [
+    "9",
+    "27",
+    "8",
+    "10"
+   ],
+   "correta": "9",
+   "explica": "Soma 7 + 10 + 10 = 27; dividida por 3: 9."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "4, 4, 8, 9, 5",
+   "opcoes": [
+    "9",
+    "7",
+    "30",
+    "6"
+   ],
+   "correta": "6",
+   "explica": "Soma 4 + 4 + 8 + 9 + 5 = 30; dividida por 5: 6."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "4, 9, 3, 8, 6",
+   "opcoes": [
+    "6",
+    "7",
+    "30",
+    "9"
+   ],
+   "correta": "6",
+   "explica": "Soma 4 + 9 + 3 + 8 + 6 = 30; dividida por 5: 6."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "8, 5, 2, 13",
+   "opcoes": [
+    "28",
+    "7",
+    "8",
+    "13"
+   ],
+   "correta": "7",
+   "explica": "Soma 8 + 5 + 2 + 13 = 28; dividida por 4: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "6, 2, 2, 10",
+   "opcoes": [
+    "10",
+    "20",
+    "6",
+    "5"
+   ],
+   "correta": "5",
+   "explica": "Soma 6 + 2 + 2 + 10 = 20; dividida por 4: 5."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "3, 5, 9, 7",
+   "opcoes": [
+    "7",
+    "24",
+    "9",
+    "6"
+   ],
+   "correta": "6",
+   "explica": "Soma 3 + 5 + 9 + 7 = 24; dividida por 4: 6."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "9, 9, 9",
+   "opcoes": [
+    "10",
+    "9",
+    "27"
+   ],
+   "correta": "9",
+   "explica": "Soma 9 + 9 + 9 = 27; dividida por 3: 9."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "3, 7, 6, 3, 6",
+   "opcoes": [
+    "25",
+    "6",
+    "5",
+    "7"
+   ],
+   "correta": "5",
+   "explica": "Soma 3 + 7 + 6 + 3 + 6 = 25; dividida por 5: 5."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "7, 8, 2, 11",
+   "opcoes": [
+    "7",
+    "8",
+    "28",
+    "11"
+   ],
+   "correta": "7",
+   "explica": "Soma 7 + 8 + 2 + 11 = 28; dividida por 4: 7."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "7, 5, 3, 9",
+   "opcoes": [
+    "6",
+    "9",
+    "7",
+    "24"
+   ],
+   "correta": "6",
+   "explica": "Soma 7 + 5 + 3 + 9 = 24; dividida por 4: 6."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "2, 4, 5, 9",
+   "opcoes": [
+    "20",
+    "6",
+    "5",
+    "9"
+   ],
+   "correta": "5",
+   "explica": "Soma 2 + 4 + 5 + 9 = 20; dividida por 4: 5."
+  },
+  {
+   "enunciado": "Qual é a média aritmética destas notas?",
+   "destaque": "9, 7, 10, 2, 7",
+   "opcoes": [
+    "35",
+    "7",
+    "10",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Soma 9 + 7 + 10 + 2 + 7 = 35; dividida por 5: 7."
+  }
+ ]
+}

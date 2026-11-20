@@ -1,0 +1,91 @@
+{
+ "titulo": "Matemática: o resultado é positivo ou negativo?",
+ "cestos": [
+  {
+   "id": "positivo",
+   "nome": "Positivo",
+   "emoji": "➕",
+   "cor": "#27ae60"
+  },
+  {
+   "id": "negativo",
+   "nome": "Negativo",
+   "emoji": "➖",
+   "cor": "#e74c3c"
+  }
+ ],
+ "palavras": [
+  {
+   "palavra": "(−2) × (−5)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−3) × 4",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "6 × (−2)",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "(−7) × (−1)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "5 × 3",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−4) × 8",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "(−9) × (−2)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "3 × (−3)",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "(−6) × (−6)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "8 × 2",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−8) + 3",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "5 + (−2)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−1) + (−6)",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "10 + (−4)",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−12) + 7",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "4 + 9",
+   "cesto": "positivo"
+  },
+  {
+   "palavra": "(−3) + 2",
+   "cesto": "negativo"
+  },
+  {
+   "palavra": "7 + (−9)",
+   "cesto": "negativo"
+  }
+ ]
+}

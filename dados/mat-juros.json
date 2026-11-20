@@ -1,0 +1,247 @@
+{
+ "titulo": "Juros simples e compostos (9º ano)",
+ "emoji": "💰",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 2.000,00 a 5% ao mês durante 3 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 315,25",
+    "R$ 2.300,00",
+    "R$ 300,00",
+    "R$ 100,00"
+   ],
+   "correta": "R$ 300,00",
+   "explica": "J = C × i × t = 2.000 × 5% × 3 = R$ 300,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 1.500,00 a 10% ao ano durante 3 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 3.496,50",
+    "R$ 1.950,00",
+    "R$ 1.996,50",
+    "R$ 450,00"
+   ],
+   "correta": "R$ 1.996,50",
+   "explica": "M = C × (1 + i)ⁿ = 1.500 × 1,1³ = R$ 1.996,50."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 500,00 a 2% ao mês durante 3 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 30,00",
+    "R$ 30,60",
+    "R$ 10,00",
+    "R$ 530,00"
+   ],
+   "correta": "R$ 30,00",
+   "explica": "J = C × i × t = 500 × 2% × 3 = R$ 30,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 800,00 a 10% ao ano durante 2 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 968,00",
+    "R$ 160,00",
+    "R$ 960,00",
+    "R$ 1.768,00"
+   ],
+   "correta": "R$ 968,00",
+   "explica": "M = C × (1 + i)ⁿ = 800 × 1,1² = R$ 968,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 800,00 a 2% ao mês durante 2 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 32,32",
+    "R$ 32,00",
+    "R$ 832,00",
+    "R$ 16,00"
+   ],
+   "correta": "R$ 32,00",
+   "explica": "J = C × i × t = 800 × 2% × 2 = R$ 32,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 500,00 a 5% ao ano durante 4 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 607,75",
+    "R$ 600,00",
+    "R$ 1.107,75",
+    "R$ 100,00"
+   ],
+   "correta": "R$ 607,75",
+   "explica": "M = C × (1 + i)ⁿ = 500 × 1,05⁴ = R$ 607,75."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 800,00 a 10% ao mês durante 2 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 80,00",
+    "R$ 168,00",
+    "R$ 960,00",
+    "R$ 160,00"
+   ],
+   "correta": "R$ 160,00",
+   "explica": "J = C × i × t = 800 × 10% × 2 = R$ 160,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 1.500,00 a 5% ao ano durante 4 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 3.323,26",
+    "R$ 1.800,00",
+    "R$ 1.823,26",
+    "R$ 300,00"
+   ],
+   "correta": "R$ 1.823,26",
+   "explica": "M = C × (1 + i)ⁿ = 1.500 × 1,05⁴ = R$ 1.823,26."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 1.500,00 a 5% ao mês durante 3 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 236,44",
+    "R$ 225,00",
+    "R$ 75,00",
+    "R$ 1.725,00"
+   ],
+   "correta": "R$ 225,00",
+   "explica": "J = C × i × t = 1.500 × 5% × 3 = R$ 225,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 1.500,00 a 5% ao mês durante 4 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 300,00",
+    "R$ 75,00",
+    "R$ 1.800,00",
+    "R$ 323,26"
+   ],
+   "correta": "R$ 300,00",
+   "explica": "J = C × i × t = 1.500 × 5% × 4 = R$ 300,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 1.000,00 a 2% ao mês durante 4 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 80,00",
+    "R$ 82,43",
+    "R$ 1.080,00",
+    "R$ 20,00"
+   ],
+   "correta": "R$ 80,00",
+   "explica": "J = C × i × t = 1.000 × 2% × 4 = R$ 80,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 800,00 a 10% ao mês durante 4 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 371,28",
+    "R$ 80,00",
+    "R$ 1.120,00",
+    "R$ 320,00"
+   ],
+   "correta": "R$ 320,00",
+   "explica": "J = C × i × t = 800 × 10% × 4 = R$ 320,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 2.000,00 a 10% ao mês durante 3 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 2.600,00",
+    "R$ 200,00",
+    "R$ 662,00",
+    "R$ 600,00"
+   ],
+   "correta": "R$ 600,00",
+   "explica": "J = C × i × t = 2.000 × 10% × 3 = R$ 600,00."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 1.500,00 a 5% ao mês durante 2 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 150,00",
+    "R$ 1.650,00",
+    "R$ 75,00",
+    "R$ 153,75"
+   ],
+   "correta": "R$ 150,00",
+   "explica": "J = C × i × t = 1.500 × 5% × 2 = R$ 150,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 1.500,00 a 2% ao ano durante 3 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 3.091,81",
+    "R$ 1.591,81",
+    "R$ 90,00",
+    "R$ 1.590,00"
+   ],
+   "correta": "R$ 1.591,81",
+   "explica": "M = C × (1 + i)ⁿ = 1.500 × 1,02³ = R$ 1.591,81."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 500,00 a 2% ao ano durante 4 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 540,00",
+    "R$ 40,00",
+    "R$ 541,22",
+    "R$ 1.041,22"
+   ],
+   "correta": "R$ 541,22",
+   "explica": "M = C × (1 + i)ⁿ = 500 × 1,02⁴ = R$ 541,22."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 1.500,00 a 5% ao ano durante 3 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 1.725,00",
+    "R$ 225,00",
+    "R$ 1.736,44",
+    "R$ 3.236,44"
+   ],
+   "correta": "R$ 1.736,44",
+   "explica": "M = C × (1 + i)ⁿ = 1.500 × 1,05³ = R$ 1.736,44."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 1.500,00 a 2% ao mês durante 2 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 60,60",
+    "R$ 1.560,00",
+    "R$ 60,00",
+    "R$ 30,00"
+   ],
+   "correta": "R$ 60,00",
+   "explica": "J = C × i × t = 1.500 × 2% × 2 = R$ 60,00."
+  },
+  {
+   "enunciado": "Juros compostos:",
+   "destaque": "Capital de R$ 1.000,00 a 10% ao ano durante 4 anos. Qual é o montante?",
+   "opcoes": [
+    "R$ 1.400,00",
+    "R$ 2.464,10",
+    "R$ 1.464,10",
+    "R$ 400,00"
+   ],
+   "correta": "R$ 1.464,10",
+   "explica": "M = C × (1 + i)ⁿ = 1.000 × 1,1⁴ = R$ 1.464,10."
+  },
+  {
+   "enunciado": "Juros simples:",
+   "destaque": "Capital de R$ 2.000,00 a 10% ao mês durante 2 meses. Quanto rende de juros?",
+   "opcoes": [
+    "R$ 400,00",
+    "R$ 420,00",
+    "R$ 200,00",
+    "R$ 2.400,00"
+   ],
+   "correta": "R$ 400,00",
+   "explica": "J = C × i × t = 2.000 × 10% × 2 = R$ 400,00."
+  }
+ ]
+}

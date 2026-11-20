@@ -1,0 +1,246 @@
+{
+ "titulo": "Potências, raízes e notação científica (8º ano)",
+ "emoji": "🚀",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0,16 = ___",
+   "opcoes": [
+    "0,04",
+    "4",
+    "0,4",
+    "0,016"
+   ],
+   "correta": "0,4",
+   "explica": "0,4 × 0,4 = 0,16."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√289 = ___",
+   "opcoes": [
+    "17",
+    "18",
+    "34",
+    "144"
+   ],
+   "correta": "17",
+   "explica": "17 × 17 = 289, então √289 = 17."
+  },
+  {
+   "enunciado": "Escreva em notação científica:",
+   "destaque": "4.100.000",
+   "opcoes": [
+    "41 × 10⁵",
+    "4,1 × 10⁷",
+    "4,1 × 10⁵",
+    "4,1 × 10⁶"
+   ],
+   "correta": "4,1 × 10⁶",
+   "explica": "Leve a vírgula para depois do primeiro algarismo: 4,1 e conte as casas (6)."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√400 = ___",
+   "opcoes": [
+    "200",
+    "40",
+    "20",
+    "21"
+   ],
+   "correta": "20",
+   "explica": "20 × 20 = 400, então √400 = 20."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0,04 = ___",
+   "opcoes": [
+    "0,004",
+    "2",
+    "0,02",
+    "0,2"
+   ],
+   "correta": "0,2",
+   "explica": "0,2 × 0,2 = 0,04."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "(10³)² = ?",
+   "opcoes": [
+    "10⁶",
+    "10⁵",
+    "10⁹",
+    "20³"
+   ],
+   "correta": "10⁶",
+   "explica": "Potência de potência: multiplica os expoentes (3 × 2 = 6)."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0,81 = ___",
+   "opcoes": [
+    "0,09",
+    "0,9",
+    "9",
+    "0,081"
+   ],
+   "correta": "0,9",
+   "explica": "0,9 × 0,9 = 0,81."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "(2⁴)² = ?",
+   "opcoes": [
+    "2⁸",
+    "4⁴",
+    "2¹⁶",
+    "2⁶"
+   ],
+   "correta": "2⁸",
+   "explica": "Potência de potência: multiplica os expoentes (4 × 2 = 8)."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "10⁴ × 10² = ___",
+   "opcoes": [
+    "10⁶",
+    "10⁸",
+    "100⁶",
+    "10²"
+   ],
+   "correta": "10⁶",
+   "explica": "Multiplicação de mesma base: conserva a base e soma os expoentes (4 + 2 = 6)."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "3⁴ × 3³ = ___",
+   "opcoes": [
+    "3¹",
+    "9⁷",
+    "3¹²",
+    "3⁷"
+   ],
+   "correta": "3⁷",
+   "explica": "Multiplicação de mesma base: conserva a base e soma os expoentes (4 + 3 = 7)."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "(5⁴)³ = ?",
+   "opcoes": [
+    "15⁴",
+    "5¹²",
+    "5⁶⁴",
+    "5⁷"
+   ],
+   "correta": "5¹²",
+   "explica": "Potência de potência: multiplica os expoentes (4 × 3 = 12)."
+  },
+  {
+   "enunciado": "Escreva em notação científica:",
+   "destaque": "82.000.000",
+   "opcoes": [
+    "8,2 × 10⁸",
+    "8,2 × 10⁷",
+    "82 × 10⁶",
+    "8,2 × 10⁶"
+   ],
+   "correta": "8,2 × 10⁷",
+   "explica": "Leve a vírgula para depois do primeiro algarismo: 8,2 e conte as casas (7)."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0,25 = ___",
+   "opcoes": [
+    "5",
+    "0,025",
+    "0,5",
+    "0,05"
+   ],
+   "correta": "0,5",
+   "explica": "0,5 × 0,5 = 0,25."
+  },
+  {
+   "enunciado": "Escreva em notação científica:",
+   "destaque": "0,002",
+   "opcoes": [
+    "2 × 10⁻³",
+    "2 × 10⁻⁴",
+    "2 × 10⁻²",
+    "2 × 10³"
+   ],
+   "correta": "2 × 10⁻³",
+   "explica": "A vírgula anda 3 casas para a direita até o 2: expoente −3."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0,09 = ___",
+   "opcoes": [
+    "0,03",
+    "3",
+    "0,009",
+    "0,3"
+   ],
+   "correta": "0,3",
+   "explica": "0,3 × 0,3 = 0,09."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√64 = ___",
+   "opcoes": [
+    "9",
+    "32",
+    "8",
+    "16"
+   ],
+   "correta": "8",
+   "explica": "8 × 8 = 64, então √64 = 8."
+  },
+  {
+   "enunciado": "Escreva em notação científica:",
+   "destaque": "99.000",
+   "opcoes": [
+    "9,9 × 10⁴",
+    "99 × 10³",
+    "9,9 × 10⁵",
+    "9,9 × 10³"
+   ],
+   "correta": "9,9 × 10⁴",
+   "explica": "Leve a vírgula para depois do primeiro algarismo: 9,9 e conte as casas (4)."
+  },
+  {
+   "enunciado": "Aplique a propriedade das potências:",
+   "destaque": "10² × 10² = ___",
+   "opcoes": [
+    "100⁴",
+    "10⁵",
+    "10⁴"
+   ],
+   "correta": "10⁴",
+   "explica": "Multiplicação de mesma base: conserva a base e soma os expoentes (2 + 2 = 4)."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√361 = ___",
+   "opcoes": [
+    "180",
+    "19",
+    "38",
+    "20"
+   ],
+   "correta": "19",
+   "explica": "19 × 19 = 361, então √361 = 19."
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√256 = ___",
+   "opcoes": [
+    "17",
+    "32",
+    "16",
+    "128"
+   ],
+   "correta": "16",
+   "explica": "16 × 16 = 256, então √256 = 16."
+  }
+ ]
+}

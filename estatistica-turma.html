@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pesquisa da turma: estatística</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  .painel{display:none}.painel.ativo{display:block}
+  .caixaGraf{position:relative;height:clamp(300px,52vh,560px)}
+  #opcoes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:8px 0}
+  .opc{border-radius:16px;padding:8px;text-align:center;color:#fff;font-weight:bold;cursor:pointer;user-select:none;-webkit-user-select:none;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+  .opc:active{transform:translateY(2px)}
+  .opc .nome{font-size:1.1rem;min-height:2.4em;display:flex;align-items:center;justify-content:center}
+  .opc .qt{font-size:2.4rem;line-height:1.1}
+  .opc .menos{background:rgba(255,255,255,.9);color:#1f2a44;border-radius:10px;padding:2px 12px;font-size:1rem;box-shadow:none}
+  table.freq{border-collapse:collapse;width:100%;font-size:1.05rem}
+  table.freq th,table.freq td{border:2px solid #d6dbe8;padding:5px 8px;text-align:center}
+  table.freq th{background:#eef1f6}
+  table.freq tr.total td{font-weight:bold;background:#f7f9fc}
+  .medida{background:#eef1f6;border-radius:14px;padding:8px 12px;margin:6px 0;font-size:1.05rem}
+  .medida b{color:#2f80ed}
+  .rol span{display:inline-block;min-width:34px;padding:3px 6px;margin:2px;border-radius:8px;background:#eef1f6;text-align:center;font-weight:bold}
+  .rol span.meio{background:#ffd54a}
+  textarea{width:100%;min-height:90px;font:inherit;font-size:1.1rem;border:2px solid #d6dbe8;border-radius:12px;padding:8px}
+  #picto div{margin:4px 0;font-size:1.5rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #picto b{display:inline-block;min-width:150px;font-size:1rem}
+  .serie input{width:74px;text-align:center}
+  .serie td{padding:3px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/chart.umd.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>📊 Pesquisa da turma</h1>
+  <span class="mt-tabs" id="abas"><button class="ativo" data-p="pesq">🗳️ Pesquisa</button><button data-p="num">🔢 Dados numéricos</button><button data-p="tempo">📈 Ao longo do tempo</button></span>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap">
+  <!-- pesquisa -->
+  <section class="painel ativo" id="p-pesq">
+    <div class="mt-card">
+      <p class="mt-linha"><label>Pesquisa: <select id="selModelo"></select></label>
+        <input type="text" id="tituloLivre" placeholder="Pergunta da pesquisa" style="display:none;min-width:240px">
+        <input type="text" id="opcoesLivre" placeholder="Opções separadas por vírgula" style="display:none;min-width:300px">
+        <button id="btCriar" style="display:none">✔️ Criar</button>
+        <button class="perigo" id="btZerar">🧹 Zerar votos</button></p>
+      <p class="mt-dica">Toque no cartão para somar 1 voto (use o − para corrigir). A turma pode levantar a mão e o professor vai contando.</p>
+      <div id="opcoes"></div>
+    </div>
+    <div class="mt-colunas">
+      <div class="mt-card">
+        <p class="mt-linha"><b id="tituloGraf"></b> <span style="flex:1"></span>
+          <label>Gráfico: <select id="selTipo"><option value="bar">📊 Colunas</option><option value="barH">📊 Barras deitadas</option><option value="pie">🥧 Setores (pizza)</option><option value="doughnut">🍩 Rosca</option><option value="line">📈 Linha</option><option value="picto">🙂 Pictograma</option></select></label></p>
+        <div class="caixaGraf" id="caixaPesq"><canvas id="grafPesq"></canvas></div>
+        <div id="picto" style="display:none"></div>
+      </div>
+      <div class="mt-card">
+        <h2>Tabela de frequências</h2>
+        <table class="freq" id="tabPesq"></table>
+        <div id="medidasPesq"></div>
+      </div>
+    </div>
+  </section>
+  <!-- dados numéricos -->
+  <section class="painel" id="p-num">
+    <div class="mt-card">
+      <p class="mt-linha"><b>Exemplos:</b> <button data-ex="notas">📝 Notas da prova</button> <button data-ex="alturas">📏 Alturas (m)</button> <button data-ex="idades">🎂 Idades</button> <button data-ex="gols">⚽ Gols por jogo</button> <button data-ex="tempo">⏱️ Tempo de tela (h)</button></p>
+      <textarea id="txtDados" placeholder="Digite os valores separados por espaço ou ponto e vírgula. Use vírgula só para decimais: 7 8,5 6 9 10"></textarea>
+      <p class="mt-linha"><button class="principal" id="btAnalisar">🔍 Analisar</button> <span class="mt-dica">Separe com espaço ou ponto e vírgula. Exemplo: 1,52 1,60 1,48</span></p>
+    </div>
+    <div class="mt-colunas">
+      <div class="mt-card"><b id="tituloNum">Distribuição dos valores</b><div class="caixaGraf"><canvas id="grafNum"></canvas></div></div>
+      <div class="mt-card" id="medidasNum"></div>
+    </div>
+  </section>
+  <!-- ao longo do tempo -->
+  <section class="painel" id="p-tempo">
+    <div class="mt-card">
+      <p class="mt-linha"><label>Situação: <select id="selSerie"></select></label> <button id="btSerieAleatoria">🎲 Valores novos</button></p>
+      <table class="serie" id="tabSerie"></table>
+    </div>
+    <div class="mt-colunas">
+      <div class="mt-card"><b id="tituloSerie"></b><div class="caixaGraf"><canvas id="grafSerie"></canvas></div></div>
+      <div class="mt-card" id="analiseSerie"></div>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  Chart.defaults.font.size = 15; Chart.defaults.font.family = '"Trebuchet MS","Segoe UI",system-ui,sans-serif'; Chart.defaults.color = '#1f2a44';
+  var CORES = ['#2f80ed', '#e74c3c', '#27ae60', '#f39c12', '#8e44ad', '#16a085', '#e84393', '#d35400', '#2c3e50', '#7f8c8d', '#c0392b', '#6c5ce7'];
+  function n(v, casas){ var m = Math.pow(10, casas === undefined ? 2 : casas), r = Math.round(v * m) / m; return String(r).replace('-', '−').replace('.', ','); }
+  function pct(v){ return n(v * 100, 1) + '%'; }
+  // rótulos com os valores em cima das barras e dentro dos setores
+  var rotulos = {id: 'rotulos', afterDatasetsDraw: function(ch){
+    var ctx = ch.ctx, tipo = ch.config.type, horiz = ch.options.indexAxis === 'y', tot = 0;
+    var ds = ch.data.datasets[0]; if (!ds) return; ds.data.forEach(function(v){ tot += v || 0; });
+    ch.getDatasetMeta(0).data.forEach(function(el, j){
+      var v = ds.data[j]; if (!v) return; var p = el.tooltipPosition(); ctx.save(); ctx.font = 'bold 16px "Trebuchet MS",sans-serif';
+      if (tipo === 'pie' || tipo === 'doughnut'){ ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(v + ' (' + pct(v / tot) + ')', p.x, p.y); }
+      else if (horiz){ ctx.fillStyle = '#1f2a44'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(ch.$fmt ? ch.$fmt(v) : v, p.x + 6, p.y); }
+      else { ctx.fillStyle = '#1f2a44'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillText(ch.$fmt ? ch.$fmt(v) : v, p.x, p.y - 6); }
+      ctx.restore();
+    });
+  }};
+  function grafico(canvas, antigo, tipo, rotulosX, dados, titulo, extra){
+    if (antigo) antigo.destroy();
+    var horiz = tipo === 'barH', t = horiz ? 'bar' : tipo, redondo = t === 'pie' || t === 'doughnut';
+    var ds = {label: titulo || 'Votos', data: dados, backgroundColor: t === 'line' ? 'rgba(47,128,237,.15)' : rotulosX.map(function(_, i){ return CORES[i % CORES.length]; }),
+      borderColor: t === 'line' ? '#2f80ed' : '#fff', borderWidth: t === 'line' ? 4 : 2, fill: t === 'line', tension: 0.25, pointRadius: t === 'line' ? 6 : 0, pointBackgroundColor: '#2f80ed', borderRadius: t === 'bar' ? 8 : 0};
+    var op = {responsive: true, maintainAspectRatio: false, animation: {duration: 650}, indexAxis: horiz ? 'y' : 'x', layout: {padding: {top: 24, right: 30}},
+      plugins: {legend: {display: redondo, position: 'right'}, tooltip: {enabled: true}}};
+    if (!redondo) op.scales = {x: {beginAtZero: true, ticks: {precision: 0}}, y: {beginAtZero: true, ticks: {precision: 0}}};
+    if (extra) extra(op);
+    var ch = new Chart(canvas, {type: t, data: {labels: rotulosX, datasets: [ds]}, options: op, plugins: [rotulos]});
+    return ch;
+  }
+  // ---------- abas ----------
+  $('abas').onclick = function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var bs = $('abas').querySelectorAll('button'); for (var i = 0; i < bs.length; i++) bs[i].className = bs[i] === b ? 'ativo' : '';
+    var ps = document.querySelectorAll('.painel'); for (i = 0; i < ps.length; i++) ps[i].className = 'painel' + (ps[i].id === 'p-' + b.getAttribute('data-p') ? ' ativo' : '');
+    if (b.getAttribute('data-p') === 'num' && !gNum) analisar(); if (b.getAttribute('data-p') === 'tempo' && !gSerie) carregarSerie();
+  };
+
+  // ================= PESQUISA =================
+  var MODELOS = [
+    {t: 'Qual é a sua fruta preferida?', o: ['🍎 Maçã', '🍌 Banana', '🍇 Uva', '🥭 Manga', '🍉 Melancia', '🍓 Morango']},
+    {t: 'Qual é o seu esporte favorito?', o: ['⚽ Futebol', '🏐 Vôlei', '🏀 Basquete', '🏊 Natação', '🥋 Luta', '🎮 E-sports']},
+    {t: 'Que animal de estimação você tem?', o: ['🐶 Cachorro', '🐱 Gato', '🐦 Pássaro', '🐟 Peixe', '🐢 Outro', '🚫 Nenhum']},
+    {t: 'Como você vem para a escola?', o: ['🚶 A pé', '🚌 Ônibus', '🚗 Carro', '🚲 Bicicleta', '🏍️ Moto', '🚐 Van escolar']},
+    {t: 'Qual estação do ano você prefere?', o: ['☀️ Verão', '🍂 Outono', '❄️ Inverno', '🌸 Primavera']},
+    {t: 'Quantos irmãos você tem?', o: ['0', '1', '2', '3', '4', '5'], num: true},
+    {t: 'Quantas horas você dorme por noite?', o: ['5', '6', '7', '8', '9', '10'], num: true},
+    {t: 'Em que mês você faz aniversário?', o: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']},
+    {t: 'Qual é o seu tipo de música preferido?', o: ['🎤 Funk', '🤠 Sertanejo', '🎸 Rock', '🎧 Pop', '🎹 Gospel', '🥁 Rap/Trap', '🪕 Forró']}
+  ];
+  var pesq = Sala.ler('estat_pesquisa') || {t: MODELOS[0].t, o: MODELOS[0].o.slice(), v: MODELOS[0].o.map(function(){ return 0; }), num: false}, gPesq = null;
+  $('selModelo').innerHTML = MODELOS.map(function(m, i){ return '<option value="' + i + '">' + m.t + '</option>'; }).join('') + '<option value="livre">✏️ Criar a minha pesquisa…</option>';
+  var idx = -1; MODELOS.forEach(function(m, i){ if (m.t === pesq.t) idx = i; }); $('selModelo').value = idx >= 0 ? String(idx) : 'livre';
+  function salvar(){ Sala.gravar('estat_pesquisa', pesq); }
+  function usarModelo(m){ pesq = {t: m.t, o: m.o.slice(), v: m.o.map(function(){ return 0; }), num: !!m.num}; salvar(); desenharPesquisa(true); }
+  $('selModelo').onchange = function(){
+    var v = this.value, livre = v === 'livre';
+    $('tituloLivre').style.display = $('opcoesLivre').style.display = $('btCriar').style.display = livre ? '' : 'none';
+    if (!livre) usarModelo(MODELOS[+v]);
+  };
+  $('btCriar').onclick = function(){
+    var o = $('opcoesLivre').value.split(',').map(function(s){ return Sala.aparar(s); }).filter(Boolean);
+    if (o.length < 2){ Sala.avisar('Escreva pelo menos 2 opções separadas por vírgula.'); return; }
+    var num = o.every(function(s){ return /^-?\d+([.,]\d+)?$/.test(s); });
+    usarModelo({t: Sala.aparar($('tituloLivre').value) || 'Pesquisa da turma', o: o.slice(0, 12), num: num});
+  };
+  $('btZerar').onclick = function(){ if (!confirm('Zerar todos os votos?')) return; pesq.v = pesq.o.map(function(){ return 0; }); salvar(); desenharPesquisa(true); };
+  function cartoes(){
+    $('opcoes').innerHTML = pesq.o.map(function(o, i){ return '<div class="opc" data-i="' + i + '" style="background:' + CORES[i % CORES.length] + '"><div class="nome">' + Sala.esc(o) + '</div><div class="qt">' + pesq.v[i] + '</div><button class="menos" data-m="' + i + '">−</button></div>'; }).join('');
+  }
+  $('opcoes').onclick = function(e){
+    var m = e.target.closest('[data-m]'), c = e.target.closest('.opc'); if (!c) return;
+    var i = +(m ? m.getAttribute('data-m') : c.getAttribute('data-i'));
+    if (m){ if (pesq.v[i] > 0) pesq.v[i]--; } else { pesq.v[i]++; Sala.tom(520 + i * 40, 0.08); }
+    c.querySelector('.qt').textContent = pesq.v[i]; salvar(); desenharPesquisa(false);
+  };
+  function valorNum(s){ return +String(s).replace(',', '.'); }
+  function desenharPesquisa(refazer){
+    if (refazer) cartoes();
+    $('tituloGraf').textContent = pesq.t;
+    var tipo = $('selTipo').value, tot = pesq.v.reduce(function(a, b){ return a + b; }, 0);
+    $('caixaPesq').style.display = tipo === 'picto' ? 'none' : ''; $('picto').style.display = tipo === 'picto' ? '' : 'none';
+    if (tipo === 'picto'){
+      var max = Math.max.apply(null, pesq.v.concat([1])), cada = max > 20 ? Math.ceil(max / 20) : 1;
+      $('picto').innerHTML = pesq.o.map(function(o, i){ var k = Math.ceil(pesq.v[i] / cada), ico = (o.match(/^\S+\s/) && !/^[0-9A-Za-z]/.test(o)) ? o.split(' ')[0] : '🙂', s = ''; for (var j = 0; j < k; j++) s += ico; return '<div><b>' + Sala.esc(o) + ' (' + pesq.v[i] + ')</b> ' + s + '</div>'; }).join('') +
+        '<p class="mt-dica">Legenda: cada figura vale ' + cada + ' voto' + (cada > 1 ? 's (a última pode estar incompleta)' : '') + '.</p>';
+      if (gPesq){ gPesq.destroy(); gPesq = null; }
+    } else if (!refazer && gPesq && gPesq.$tipo === tipo){ gPesq.data.datasets[0].data = pesq.v.slice(); gPesq.update(); }
+    else { gPesq = grafico($('grafPesq'), gPesq, tipo, pesq.o, pesq.v.slice(), pesq.t); gPesq.$tipo = tipo; }
+    // tabela
+    var h = '<tr><th>Resposta</th><th>Frequência absoluta</th><th>Frequência relativa</th></tr>';
+    pesq.o.forEach(function(o, i){ h += '<tr><td>' + Sala.esc(o) + '</td><td>' + pesq.v[i] + '</td><td>' + (tot ? pesq.v[i] + '/' + tot + ' = ' + pct(pesq.v[i] / tot) : '–') + '</td></tr>'; });
+    h += '<tr class="total"><td>Total</td><td>' + tot + '</td><td>' + (tot ? '100%' : '–') + '</td></tr>';
+    $('tabPesq').innerHTML = h;
+    // medidas
+    var med = '';
+    if (tot){
+      var max2 = Math.max.apply(null, pesq.v), modas = pesq.o.filter(function(_, i){ return pesq.v[i] === max2; });
+      med += '<div class="medida">🏆 <b>Moda</b> (a resposta mais frequente): ' + (modas.length === pesq.o.length ? 'não há moda (todas empataram)' : modas.map(Sala.esc).join(' e ') + ' com ' + max2 + ' voto' + (max2 > 1 ? 's' : '') + (modas.length > 1 ? ' (empate: ' + (modas.length === 2 ? 'bimodal' : 'multimodal') + ')' : '')) + '</div>';
+      if (pesq.num){
+        var lista = []; pesq.o.forEach(function(o, i){ for (var j = 0; j < pesq.v[i]; j++) lista.push(valorNum(o)); });
+        med += medidasNumericas(lista, true);
+      } else med += '<p class="mt-dica">Como as respostas são palavras (dados qualitativos), não dá para calcular média nem mediana. A moda é a medida que serve aqui.</p>';
+    } else med = '<p class="mt-dica">Ainda não há votos.</p>';
+    $('medidasPesq').innerHTML = med;
+  }
+  $('selTipo').onchange = function(){ desenharPesquisa(false); };
+
+  // ================= MEDIDAS NUMÉRICAS =================
+  function medidasNumericas(lista, curto){
+    var v = lista.slice().sort(function(a, b){ return a - b; }), k = v.length, soma = 0, i;
+    if (!k) return '';
+    v.forEach(function(x){ soma += x; });
+    var media = soma / k, meio = k % 2 ? [(k - 1) / 2] : [k / 2 - 1, k / 2], mediana = meio.length === 1 ? v[meio[0]] : (v[meio[0]] + v[meio[1]]) / 2;
+    var cont = {}, maxc = 0; v.forEach(function(x){ cont[x] = (cont[x] || 0) + 1; if (cont[x] > maxc) maxc = cont[x]; });
+    var modas = Object.keys(cont).filter(function(c){ return cont[c] === maxc; }).map(Number).sort(function(a, b){ return a - b; });
+    var h = '';
+    if (!curto){
+      h += '<h2>Rol (valores em ordem)</h2><div class="rol">' + v.map(function(x, j){ return '<span class="' + (meio.indexOf(j) >= 0 ? 'meio' : '') + '">' + n(x) + '</span>'; }).join('') + '</div><p class="mt-dica">Em amarelo: o meio do rol (mediana).</p>';
+    }
+    h += '<div class="medida">➗ <b>Média</b> = soma ÷ quantidade = ' + n(soma) + ' ÷ ' + k + ' ≈ <b>' + n(media) + '</b></div>';
+    h += '<div class="medida">🎯 <b>Mediana</b> (o valor do meio do rol) = <b>' + n(mediana) + '</b>' + (meio.length === 2 ? ' (média dos dois do meio: ' + n(v[meio[0]]) + ' e ' + n(v[meio[1]]) + ')' : '') + '</div>';
+    if (!curto) h += '<div class="medida">🏆 <b>Moda</b> = ' + (maxc === 1 ? 'não há (nenhum valor se repete)' : modas.length > 3 ? 'não há uma moda clara: ' + modas.length + ' valores empatam, aparecendo ' + maxc + ' vezes cada' : '<b>' + modas.map(function(m){ return n(m); }).join(' e ') + '</b> (aparece' + (modas.length > 1 ? 'm' : '') + ' ' + maxc + ' vezes)') + '</div>';
+    h += '<div class="medida">↔️ <b>Amplitude</b> = maior − menor = ' + n(v[k - 1]) + ' − ' + n(v[0]) + ' = <b>' + n(v[k - 1] - v[0]) + '</b></div>';
+    return h;
+  }
+
+  // ================= DADOS NUMÉRICOS =================
+  var gNum = null;
+  function lerDados(txt){
+    var out = [];
+    txt.split(/[;\s]+/).forEach(function(tk){
+      tk = tk.replace(/^,+|,+$/g, ''); if (!tk) return;
+      if (/^-?\d+(,\d+)?$/.test(tk)) out.push(+tk.replace(',', '.'));
+      else if (tk.indexOf(',') >= 0) tk.split(',').forEach(function(p){ if (p !== '' && isFinite(+p)) out.push(+p); });
+      else if (isFinite(+tk)) out.push(+tk);
+    });
+    return out;
+  }
+  function aleat(min, max, casas, qt){ var r = [], m = Math.pow(10, casas); for (var i = 0; i < qt; i++) r.push(Math.round((min + Math.random() * (max - min)) * m) / m); return r; }
+  var EXEMPLOS = {
+    notas: function(){ return aleat(3, 10, 0, 25).map(function(x){ return Math.random() < 0.3 ? x - 0.5 < 0 ? x : x - 0.5 : x; }); },
+    alturas: function(){ return aleat(1.38, 1.74, 2, 24); },
+    idades: function(){ return aleat(11, 15, 0, 28); },
+    gols: function(){ return [0, 1, 1, 2, 0, 3, 1, 2, 4, 1, 0, 2, 1, 5, 2, 1]; },
+    tempo: function(){ return aleat(1, 8, 0, 22); }
+  };
+  var tituloEx = {notas: 'Notas da prova', alturas: 'Alturas da turma (m)', idades: 'Idades da turma', gols: 'Gols por jogo do time', tempo: 'Horas de tela por dia'};
+  document.querySelector('#p-num').addEventListener('click', function(e){
+    var b = e.target.closest('[data-ex]'); if (!b) return; var k = b.getAttribute('data-ex');
+    $('txtDados').value = EXEMPLOS[k]().map(function(x){ return n(x); }).join('  '); $('tituloNum').textContent = tituloEx[k]; analisar();
+  });
+  function analisar(){
+    if (!$('txtDados').value.trim()){ $('txtDados').value = '7 8 6 9 10 7 5 8 7 9 6 7'; }
+    var v = lerDados($('txtDados').value);
+    if (v.length < 2){ Sala.avisar('Digite pelo menos 2 números.'); return; }
+    var dist = {}, chaves; v.forEach(function(x){ dist[x] = (dist[x] || 0) + 1; });
+    chaves = Object.keys(dist).map(Number).sort(function(a, b){ return a - b; });
+    var rot, dados;
+    if (chaves.length <= 16){ rot = chaves.map(function(c){ return n(c); }); dados = chaves.map(function(c){ return dist[c]; }); }
+    else {   // histograma com classes
+      var min = chaves[0], max = chaves[chaves.length - 1], k = Math.max(4, Math.min(8, Math.round(Math.sqrt(v.length)))), larg = (max - min) / k;
+      rot = []; dados = [];
+      for (var i = 0; i < k; i++){ var a = min + i * larg, b = a + larg; rot.push(n(a) + ' ⊢ ' + n(b)); dados.push(v.filter(function(x){ return x >= a && (i === k - 1 ? x <= b : x < b); }).length); }
+    }
+    gNum = grafico($('grafNum'), gNum, 'bar', rot, dados, 'Frequência', function(op){ op.scales.x.title = {display: true, text: 'valor'}; op.scales.y.title = {display: true, text: 'frequência'}; });
+    $('medidasNum').innerHTML = '<p><b>' + v.length + ' valores</b></p>' + medidasNumericas(v, false);
+  }
+  $('btAnalisar').onclick = analisar;
+
+  // ================= AO LONGO DO TEMPO =================
+  var SERIES = [
+    {t: 'Temperatura máxima na semana (°C)', x: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'], v: [24, 26, 29, 31, 27, 22, 25], un: '°C', min: 12, max: 38},
+    {t: 'Altura de uma planta (cm)', x: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8'], v: [2, 3, 5, 8, 12, 15, 17, 18], un: 'cm', min: 0, max: 30, cresce: true},
+    {t: 'Lanches vendidos na cantina', x: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Ago', 'Set', 'Out', 'Nov'], v: [320, 410, 380, 450, 300, 360, 470, 430, 390], un: 'lanches', min: 200, max: 520},
+    {t: 'Chuva no mês (mm)', x: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'], v: [240, 210, 180, 90, 60, 40, 30, 35, 70, 120, 160, 220], un: 'mm', min: 10, max: 300},
+    {t: 'Alunos que leram livros no bimestre', x: ['1º bim', '2º bim', '3º bim', '4º bim'], v: [12, 17, 15, 23], un: 'alunos', min: 5, max: 30}
+  ], serie = null, gSerie = null;
+  $('selSerie').innerHTML = SERIES.map(function(s, i){ return '<option value="' + i + '">' + s.t + '</option>'; }).join('');
+  function carregarSerie(){ var s = SERIES[+$('selSerie').value]; serie = {t: s.t, x: s.x.slice(), v: s.v.slice(), un: s.un, base: s}; tabelaSerie(); desenharSerie(); }
+  function tabelaSerie(){
+    $('tabSerie').innerHTML = '<tr>' + serie.x.map(function(x){ return '<td><b>' + x + '</b></td>'; }).join('') + '</tr><tr>' + serie.v.map(function(v, i){ return '<td><input type="number" data-i="' + i + '" value="' + v + '"></td>'; }).join('') + '</tr>';
+  }
+  $('tabSerie').oninput = function(e){ var i = e.target.getAttribute('data-i'); if (i === null) return; serie.v[+i] = +e.target.value || 0; desenharSerie(true); };
+  function desenharSerie(soAtualizar){
+    $('tituloSerie').textContent = serie.t;
+    if (soAtualizar && gSerie){ gSerie.data.datasets[0].data = serie.v.slice(); gSerie.update(); }
+    else { gSerie = grafico($('grafSerie'), gSerie, 'line', serie.x, serie.v.slice(), serie.t, function(op){ op.scales.y.beginAtZero = false; }); gSerie.$fmt = function(v){ return n(v); }; }
+    var v = serie.v, iMax = 0, iMin = 0, soma = 0, sub = -Infinity, iSub = -1, des = Infinity, iDes = -1;
+    v.forEach(function(x, i){ soma += x; if (x > v[iMax]) iMax = i; if (x < v[iMin]) iMin = i; if (i){ var d = x - v[i - 1]; if (d > sub){ sub = d; iSub = i; } if (d < des){ des = d; iDes = i; } } });
+    var h = '<h2>Lendo o gráfico</h2>';
+    h += '<div class="medida">⬆️ Maior valor: <b>' + n(v[iMax]) + ' ' + serie.un + '</b> em ' + serie.x[iMax] + '</div>';
+    h += '<div class="medida">⬇️ Menor valor: <b>' + n(v[iMin]) + ' ' + serie.un + '</b> em ' + serie.x[iMin] + '</div>';
+    if (sub > 0) h += '<div class="medida">📈 Maior subida: <b>+' + n(sub) + '</b> de ' + serie.x[iSub - 1] + ' para ' + serie.x[iSub] + '</div>';
+    if (des < 0) h += '<div class="medida">📉 Maior descida: <b>' + n(des) + '</b> de ' + serie.x[iDes - 1] + ' para ' + serie.x[iDes] + '</div>';
+    h += '<div class="medida">➗ Média: ' + n(soma) + ' ÷ ' + v.length + ' ≈ <b>' + n(soma / v.length) + ' ' + serie.un + '</b></div>';
+    h += '<p class="mt-dica">O gráfico de linha mostra como um valor <b>muda com o tempo</b>: linha subindo = aumentou; descendo = diminuiu; reta deitada = ficou igual. Mude os números da tabela e veja a linha se mexer!</p>';
+    $('analiseSerie').innerHTML = h;
+  }
+  $('selSerie').onchange = carregarSerie;
+  $('btSerieAleatoria').onclick = function(){
+    var b = serie.base, k = serie.x.length, ac = b.min + Math.random() * (b.max - b.min) * 0.3;
+    serie.v = serie.x.map(function(_, i){ if (b.cresce){ ac += Math.random() * (b.max - b.min) / k * 1.6; return Math.round(Math.min(b.max, ac)); } return Math.round(b.min + Math.random() * (b.max - b.min)); });
+    tabelaSerie(); desenharSerie(true);
+  };
+
+  window.ESTAT = {pesq: function(){ return pesq; }, lerDados: lerDados, medidas: medidasNumericas, analisar: analisar};
+  desenharPesquisa(true);
+})();
+</script>
+</body>
+</html>

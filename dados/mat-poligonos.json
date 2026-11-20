@@ -1,0 +1,244 @@
+{
+ "titulo": "Polígonos e seus ângulos (8º ano)",
+ "emoji": "⬡",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Quantas diagonais tem um dodecágono?",
+   "destaque": "12 lados",
+   "opcoes": [
+    "54",
+    "12",
+    "108",
+    "66"
+   ],
+   "correta": "54",
+   "explica": "d = n × (n − 3) ÷ 2 = 12 × 9 ÷ 2 = 54."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um octógono regular?",
+   "destaque": "8 lados iguais",
+   "opcoes": [
+    "45°",
+    "1.080°",
+    "145°",
+    "135°"
+   ],
+   "correta": "135°",
+   "explica": "(8 − 2) × 180° ÷ 8 = 1.080° ÷ 8 = 135°."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um pentágono regular?",
+   "destaque": "5 lados iguais",
+   "opcoes": [
+    "72°",
+    "108°",
+    "118°",
+    "540°"
+   ],
+   "correta": "108°",
+   "explica": "(5 − 2) × 180° ÷ 5 = 540° ÷ 5 = 108°."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um hexágono regular?",
+   "destaque": "6 lados iguais",
+   "opcoes": [
+    "60°",
+    "720°",
+    "130°",
+    "120°"
+   ],
+   "correta": "120°",
+   "explica": "(6 − 2) × 180° ÷ 6 = 720° ÷ 6 = 120°."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um dodecágono?",
+   "destaque": "12 lados",
+   "opcoes": [
+    "1.800°",
+    "2.160°",
+    "360°",
+    "1.620°"
+   ],
+   "correta": "1.800°",
+   "explica": "Soma = (n − 2) × 180° = (12 − 2) × 180° = 1.800°."
+  },
+  {
+   "enunciado": "Quantas diagonais tem um eneágono?",
+   "destaque": "9 lados",
+   "opcoes": [
+    "36",
+    "27",
+    "54",
+    "9"
+   ],
+   "correta": "27",
+   "explica": "d = n × (n − 3) ÷ 2 = 9 × 6 ÷ 2 = 27."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um hexágono?",
+   "destaque": "6 lados",
+   "opcoes": [
+    "540°",
+    "1.080°",
+    "360°",
+    "720°"
+   ],
+   "correta": "720°",
+   "explica": "Soma = (n − 2) × 180° = (6 − 2) × 180° = 720°."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um pentágono?",
+   "destaque": "5 lados",
+   "opcoes": [
+    "360°",
+    "540°",
+    "900°"
+   ],
+   "correta": "540°",
+   "explica": "Soma = (n − 2) × 180° = (5 − 2) × 180° = 540°."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um eneágono?",
+   "destaque": "9 lados",
+   "opcoes": [
+    "360°",
+    "1.080°",
+    "1.620°",
+    "1.260°"
+   ],
+   "correta": "1.260°",
+   "explica": "Soma = (n − 2) × 180° = (9 − 2) × 180° = 1.260°."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um eneágono regular?",
+   "destaque": "9 lados iguais",
+   "opcoes": [
+    "40°",
+    "1.260°",
+    "150°",
+    "140°"
+   ],
+   "correta": "140°",
+   "explica": "(9 − 2) × 180° ÷ 9 = 1.260° ÷ 9 = 140°."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um octógono?",
+   "destaque": "8 lados",
+   "opcoes": [
+    "900°",
+    "1.080°",
+    "1.440°",
+    "360°"
+   ],
+   "correta": "1.080°",
+   "explica": "Soma = (n − 2) × 180° = (8 − 2) × 180° = 1.080°."
+  },
+  {
+   "enunciado": "Quantas diagonais tem um octógono?",
+   "destaque": "8 lados",
+   "opcoes": [
+    "8",
+    "28",
+    "20",
+    "40"
+   ],
+   "correta": "20",
+   "explica": "d = n × (n − 3) ÷ 2 = 8 × 5 ÷ 2 = 20."
+  },
+  {
+   "enunciado": "Quantas diagonais tem um quadrilátero?",
+   "destaque": "4 lados",
+   "opcoes": [
+    "6",
+    "2",
+    "4"
+   ],
+   "correta": "2",
+   "explica": "d = n × (n − 3) ÷ 2 = 4 × 1 ÷ 2 = 2."
+  },
+  {
+   "enunciado": "Quantas diagonais tem um hexágono?",
+   "destaque": "6 lados",
+   "opcoes": [
+    "9",
+    "18",
+    "15",
+    "6"
+   ],
+   "correta": "9",
+   "explica": "d = n × (n − 3) ÷ 2 = 6 × 3 ÷ 2 = 9."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um decágono?",
+   "destaque": "10 lados",
+   "opcoes": [
+    "1.260°",
+    "1.440°",
+    "360°",
+    "1.800°"
+   ],
+   "correta": "1.440°",
+   "explica": "Soma = (n − 2) × 180° = (10 − 2) × 180° = 1.440°."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um quadrilátero regular?",
+   "destaque": "4 lados iguais",
+   "opcoes": [
+    "360°",
+    "90°",
+    "100°"
+   ],
+   "correta": "90°",
+   "explica": "(4 − 2) × 180° ÷ 4 = 360° ÷ 4 = 90°."
+  },
+  {
+   "enunciado": "Quantas diagonais tem um decágono?",
+   "destaque": "10 lados",
+   "opcoes": [
+    "10",
+    "70",
+    "45",
+    "35"
+   ],
+   "correta": "35",
+   "explica": "d = n × (n − 3) ÷ 2 = 10 × 7 ÷ 2 = 35."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um decágono regular?",
+   "destaque": "10 lados iguais",
+   "opcoes": [
+    "144°",
+    "36°",
+    "1.440°",
+    "154°"
+   ],
+   "correta": "144°",
+   "explica": "(10 − 2) × 180° ÷ 10 = 1.440° ÷ 10 = 144°."
+  },
+  {
+   "enunciado": "Quanto mede cada ângulo interno de um dodecágono regular?",
+   "destaque": "12 lados iguais",
+   "opcoes": [
+    "1.800°",
+    "150°",
+    "160°",
+    "30°"
+   ],
+   "correta": "150°",
+   "explica": "(12 − 2) × 180° ÷ 12 = 1.800° ÷ 12 = 150°."
+  },
+  {
+   "enunciado": "Qual é a soma dos ângulos internos de um quadrilátero?",
+   "destaque": "4 lados",
+   "opcoes": [
+    "720°",
+    "180°",
+    "540°",
+    "360°"
+   ],
+   "correta": "360°",
+   "explica": "Soma = (n − 2) × 180° = (4 − 2) × 180° = 360°."
+  }
+ ]
+}

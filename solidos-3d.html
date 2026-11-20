@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sólidos geométricos em 3D</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  #palco{position:relative;width:100%;height:clamp(320px,60vh,640px);border-radius:16px;overflow:hidden;background:linear-gradient(#e3f0ff,#f8fbff);touch-action:none;cursor:grab;margin-top:8px}
+  #palco canvas{display:block;width:100%;height:100%}
+  #semGL{position:absolute;left:0;top:0;right:0;bottom:0;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;font-weight:bold;color:#56627a;font-size:1.1rem}
+  #solidos button{margin:2px}
+  .contagem{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin:8px 0}
+  .contagem div{background:#eef1f6;border-radius:14px;padding:8px;font-weight:bold;color:#56627a}
+  .contagem b{display:block;font-size:2.2rem;color:#1f2a44}
+  #euler{font-size:1.15rem;font-weight:bold;text-align:center;padding:8px;border-radius:12px;background:#e9f7ef}
+  .controle{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  .controle span{min-width:150px;font-weight:bold}
+  .controle output{font-weight:bold;font-size:1.2rem;min-width:60px}
+  .formula{font-size:1.08rem;margin:8px 0;line-height:1.5}
+  .formula .res{color:#2f80ed;font-weight:bold;white-space:nowrap}
+  #redeSvg svg{width:100%;height:auto;max-height:300px;display:block;margin:auto}
+  #desafio input{width:76px;text-align:center;font-size:1.3rem}
+  #desafio .campos{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+  #desafio .campos label{font-weight:bold;display:flex;flex-direction:column;align-items:center;gap:4px}
+  #dRes{font-size:1.1rem;font-weight:bold}
+  .dicaGiro{position:absolute;left:10px;bottom:8px;font-size:.85rem;color:#56627a;background:rgba(255,255,255,.85);border-radius:8px;padding:3px 8px;pointer-events:none}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/three.min.js"></script>
+<script src="libs/gsap.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>🧊 Sólidos geométricos em 3D</h1>
+  <button id="btDesafio">🎲 Desafio: que sólido é?</button>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap mt-colunas">
+  <div class="mt-card">
+    <div id="solidos" class="mt-linha"></div>
+    <div id="palco"><div id="semGL">Este aparelho não conseguiu abrir os gráficos em 3D.<br>As medidas, as fórmulas e as planificações continuam funcionando ao lado.</div><span class="dicaGiro">Arraste para girar • role ou faça pinça para aproximar</span></div>
+    <p class="mt-linha">
+      <button class="principal" id="btPlanificar">📐 Planificar</button>
+      <label><input type="checkbox" id="ckGirar" checked> Girar sozinho</label>
+      <label><input type="checkbox" id="ckArestas" checked> Arestas</label>
+      <label><input type="checkbox" id="ckVertices" checked> Vértices</label>
+      <label><input type="checkbox" id="ckTransp"> Transparente</label>
+      <label><input type="checkbox" id="ckGrade" checked> Malha de 1 cm</label>
+    </p>
+  </div>
+  <div>
+    <div class="mt-card" id="info">
+      <h2 id="nome">Cubo</h2>
+      <p class="mt-dica" id="descricao"></p>
+      <div class="contagem" id="contagem"><div>Faces<b id="nF">6</b></div><div>Arestas<b id="nA">12</b></div><div>Vértices<b id="nV">8</b></div></div>
+      <div id="euler"></div>
+    </div>
+    <div class="mt-card" id="desafio" hidden>
+      <h2>🎲 Desafio</h2>
+      <p class="mt-dica">Observe o sólido girando. Que sólido é? Quantas faces, arestas e vértices ele tem?</p>
+      <p><label>Nome: <select id="dNome"></select></label></p>
+      <div class="campos"><label>Faces<input type="number" id="dF" min="0"></label><label>Arestas<input type="number" id="dA" min="0"></label><label>Vértices<input type="number" id="dV" min="0"></label></div>
+      <p class="mt-linha"><button class="principal" id="dConferir">✅ Conferir</button> <button id="dOutro">🎲 Outro sólido</button> <button id="dSair">Sair do desafio</button></p>
+      <p id="dRes"></p>
+    </div>
+    <div class="mt-card" id="cartaoMedidas"><h2>📏 Medidas (em cm)</h2><div id="controles"></div><div id="formulas"></div><p class="mt-dica">π ≈ 3,14. Os valores com “≈” foram arredondados.</p></div>
+    <div class="mt-card" id="rede" hidden><h2>📐 Planificação</h2><div id="redeSvg"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  Sala.botaoSom($('btSom'));
+  var PI = Math.PI, R3 = Math.sqrt(3);
+  var SOLIDOS = {
+    cubo:     {nome: 'Cubo', ico: '🧊', F: 6, A: 12, V: 8, med: [['a', 'Aresta (a)', 4]], plan: '3d',
+               desc: 'Prisma com 6 faces quadradas iguais. Exemplos: dado, cubo mágico, caixa de presente quadrada.'},
+    caixa:    {nome: 'Paralelepípedo', ico: '📦', F: 6, A: 12, V: 8, med: [['c', 'Comprimento (c)', 6], ['l', 'Largura (l)', 3], ['h', 'Altura (h)', 4]], plan: '3d',
+               desc: 'Prisma de faces retangulares. Exemplos: caixa de sapato, tijolo, livro.'},
+    prisma3:  {nome: 'Prisma triangular', ico: '⛺', F: 5, A: 9, V: 6, med: [['a', 'Lado da base (a)', 4], ['h', 'Altura (h)', 6]], plan: 'svg',
+               desc: 'Duas bases triangulares iguais e três faces laterais retangulares. Exemplos: barraca, embalagem de chocolate.'},
+    prisma6:  {nome: 'Prisma hexagonal', ico: '✏️', F: 8, A: 18, V: 12, med: [['a', 'Lado da base (a)', 2], ['h', 'Altura (h)', 6]], plan: 'svg',
+               desc: 'Bases com 6 lados. Exemplos: lápis sextavado, porca de parafuso, alvéolo do favo de mel.'},
+    piramide: {nome: 'Pirâmide de base quadrada', ico: '🔺', F: 5, A: 8, V: 5, med: [['a', 'Lado da base (a)', 5], ['h', 'Altura (h)', 5]], plan: '3d',
+               desc: 'Base quadrada e 4 faces triangulares que se encontram num só vértice. Exemplo: as pirâmides do Egito.'},
+    tetra:    {nome: 'Tetraedro', ico: '🔻', F: 4, A: 6, V: 4, med: [['a', 'Aresta (a)', 5]], plan: '3d',
+               desc: 'Pirâmide de base triangular com 4 faces triangulares iguais: o poliedro com menos faces que existe.'},
+    cilindro: {nome: 'Cilindro', ico: '🥫', redondo: true, med: [['r', 'Raio (r)', 3], ['h', 'Altura (h)', 6]], plan: 'svg',
+               desc: 'Duas bases circulares e uma superfície curva. Exemplos: lata, cano, rolo de papel.'},
+    cone:     {nome: 'Cone', ico: '🍦', redondo: true, med: [['r', 'Raio (r)', 3], ['h', 'Altura (h)', 6]], plan: 'svg',
+               desc: 'Base circular e uma superfície curva que termina num vértice. Exemplos: casquinha de sorvete, chapéu de aniversário.'},
+    esfera:   {nome: 'Esfera', ico: '⚽', redondo: true, med: [['r', 'Raio (r)', 3]], plan: 'nao',
+               desc: 'Todos os pontos da superfície ficam à mesma distância do centro. Exemplos: bola, bolha de sabão, planeta.'}
+  };
+  var ORDEM = ['cubo', 'caixa', 'prisma3', 'prisma6', 'piramide', 'tetra', 'cilindro', 'cone', 'esfera'];
+  var atual = 'cubo', medidas = {}, planificado = false, modoDesafio = false, segredo = null;
+
+  // ---------- números em português ----------
+  function exato(x){ return Math.abs(x * 100 - Math.round(x * 100)) < 1e-6; }
+  function n(x){ var r = Math.round(x * 100) / 100; return String(r).replace('-', '−').replace('.', ','); }
+  function igual(x){ return (exato(x) ? '= ' : '≈ ') + n(x); }
+
+  // ---------- fórmulas ----------
+  function formulas(id, m){
+    var L = [], B, g, V, A;
+    function f(nomeF, conta, valor, un){ L.push('<div class="formula"><b>' + nomeF + ':</b> ' + conta + ' <span class="res">' + igual(valor) + ' ' + un + '</span></div>'); }
+    switch (id){
+      case 'cubo': f('Volume', 'V = a³ = ' + n(m.a) + '³', Math.pow(m.a, 3), 'cm³'); f('Área total', 'A = 6 · a² = 6 · ' + n(m.a) + '²', 6 * m.a * m.a, 'cm²'); break;
+      case 'caixa': f('Volume', 'V = c · l · h = ' + n(m.c) + ' · ' + n(m.l) + ' · ' + n(m.h), m.c * m.l * m.h, 'cm³');
+        f('Área total', 'A = 2 · (c·l + c·h + l·h) = 2 · (' + n(m.c * m.l) + ' + ' + n(m.c * m.h) + ' + ' + n(m.l * m.h) + ')', 2 * (m.c * m.l + m.c * m.h + m.l * m.h), 'cm²'); break;
+      case 'prisma3': B = m.a * m.a * R3 / 4; f('Área da base', 'triângulo equilátero: a² · √3 ÷ 4', B, 'cm²'); f('Volume', 'V = área da base · h ≈ ' + n(B) + ' · ' + n(m.h), B * m.h, 'cm³');
+        f('Área total', 'A = 2 · base + 3 · a · h ≈ 2 · ' + n(B) + ' + 3 · ' + n(m.a) + ' · ' + n(m.h), 2 * B + 3 * m.a * m.h, 'cm²'); break;
+      case 'prisma6': B = 6 * m.a * m.a * R3 / 4; f('Área da base', 'hexágono = 6 triângulos: 6 · a² · √3 ÷ 4', B, 'cm²'); f('Volume', 'V = área da base · h ≈ ' + n(B) + ' · ' + n(m.h), B * m.h, 'cm³');
+        f('Área total', 'A = 2 · base + 6 · a · h ≈ 2 · ' + n(B) + ' + 6 · ' + n(m.a) + ' · ' + n(m.h), 2 * B + 6 * m.a * m.h, 'cm²'); break;
+      case 'piramide': g = Math.sqrt(m.h * m.h + m.a * m.a / 4); f('Volume', 'V = a² · h ÷ 3 = ' + n(m.a) + '² · ' + n(m.h) + ' ÷ 3', m.a * m.a * m.h / 3, 'cm³');
+        f('Altura de cada triângulo (apótema)', 'g = √(h² + (a÷2)²)', g, 'cm'); f('Área total', 'A = a² + 4 · (a · g ÷ 2)', m.a * m.a + 2 * m.a * g, 'cm²'); break;
+      case 'tetra': f('Altura', 'h = a · √(2÷3)', m.a * Math.sqrt(2 / 3), 'cm'); f('Volume', 'V = a³ ÷ (6 · √2)', Math.pow(m.a, 3) / (6 * Math.SQRT2), 'cm³'); f('Área total', 'A = 4 triângulos = a² · √3', m.a * m.a * R3, 'cm²'); break;
+      case 'cilindro': V = PI * m.r * m.r * m.h; A = 2 * PI * m.r * m.r + 2 * PI * m.r * m.h;
+        f('Volume', 'V = π · r² · h ≈ 3,14 · ' + n(m.r) + '² · ' + n(m.h), V, 'cm³'); f('Área total', 'A = 2 · π · r² + 2 · π · r · h', A, 'cm²'); break;
+      case 'cone': g = Math.sqrt(m.r * m.r + m.h * m.h); f('Geratriz', 'g = √(r² + h²)', g, 'cm');
+        f('Volume', 'V = π · r² · h ÷ 3 ≈ 3,14 · ' + n(m.r) + '² · ' + n(m.h) + ' ÷ 3', PI * m.r * m.r * m.h / 3, 'cm³'); f('Área total', 'A = π · r² + π · r · g', PI * m.r * m.r + PI * m.r * g, 'cm²'); break;
+      case 'esfera': f('Volume', 'V = 4 · π · r³ ÷ 3 ≈ 4 · 3,14 · ' + n(m.r) + '³ ÷ 3', 4 * PI * Math.pow(m.r, 3) / 3, 'cm³'); f('Área da superfície', 'A = 4 · π · r²', 4 * PI * m.r * m.r, 'cm²'); break;
+    }
+    return L.join('');
+  }
+
+  // ---------- planificação desenhada (prismas, cilindro, cone, esfera) ----------
+  function redeSVG(id, m){
+    var W = 420, H = 300, P = 14, s = [], e, cor = '#ffd59e', borda = '#1f2a44', i;
+    function poli(pts, c){ s.push('<polygon points="' + pts.map(function(p){ return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '" fill="' + (c || cor) + '" stroke="' + borda + '" stroke-width="2"/>'); }
+    function txt(x, y, t){ s.push('<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" font-size="14" font-weight="bold" text-anchor="middle" fill="#1f2a44">' + t + '</text>'); }
+    if (id === 'cilindro'){
+      var L = 2 * PI * m.r; e = Math.min((W - 2 * P) / L, (H - 2 * P) / (m.h + 4 * m.r));
+      var x0 = (W - L * e) / 2, y0 = (H - (m.h + 4 * m.r) * e) / 2 + 2 * m.r * e, cx = W / 2;
+      s.push('<rect x="' + x0.toFixed(1) + '" y="' + y0.toFixed(1) + '" width="' + (L * e).toFixed(1) + '" height="' + (m.h * e).toFixed(1) + '" fill="' + cor + '" stroke="' + borda + '" stroke-width="2"/>');
+      s.push('<circle cx="' + cx + '" cy="' + (y0 - m.r * e).toFixed(1) + '" r="' + (m.r * e).toFixed(1) + '" fill="#9fd3ff" stroke="' + borda + '" stroke-width="2"/>');
+      s.push('<circle cx="' + cx + '" cy="' + (y0 + (m.h + m.r) * e).toFixed(1) + '" r="' + (m.r * e).toFixed(1) + '" fill="#9fd3ff" stroke="' + borda + '" stroke-width="2"/>');
+      txt(cx, y0 + m.h * e / 2 + 5, '2·π·r ≈ ' + n(L) + ' cm (contorno da base)'); txt(cx, y0 - m.r * e + 5, 'r = ' + n(m.r));
+      return {svg: s, txt: 'O cilindro aberto vira um <b>retângulo</b> (a superfície curva) e <b>dois círculos</b> (as bases). O comprimento do retângulo é o contorno do círculo: 2 · π · r.'};
+    }
+    if (id === 'cone'){
+      var g = Math.sqrt(m.r * m.r + m.h * m.h), ang = 2 * PI * m.r / g, meia = ang / 2;
+      var larg = meia >= PI / 2 ? 2 * g : 2 * g * Math.sin(meia), alt = g + 2 * m.r, topoArco = meia >= PI ? g : (meia > PI / 2 ? -g * Math.cos(meia) : 0);
+      alt = g + 2 * m.r + topoArco; e = Math.min((W - 2 * P) / larg, (H - 2 * P) / alt);
+      var cx2 = W / 2, cy = (H - alt * e) / 2 + topoArco * e, gx = g * e;
+      var a1 = PI / 2 - meia, a2 = PI / 2 + meia, grande = ang > PI ? 1 : 0;
+      s.push('<path d="M' + cx2 + ',' + cy.toFixed(1) + ' L' + (cx2 + gx * Math.cos(a1)).toFixed(1) + ',' + (cy + gx * Math.sin(a1)).toFixed(1) + ' A' + gx.toFixed(1) + ',' + gx.toFixed(1) + ' 0 ' + grande + ' 1 ' + (cx2 + gx * Math.cos(a2)).toFixed(1) + ',' + (cy + gx * Math.sin(a2)).toFixed(1) + ' Z" fill="' + cor + '" stroke="' + borda + '" stroke-width="2"/>');
+      s.push('<circle cx="' + cx2 + '" cy="' + (cy + gx + m.r * e).toFixed(1) + '" r="' + (m.r * e).toFixed(1) + '" fill="#9fd3ff" stroke="' + borda + '" stroke-width="2"/>');
+      txt(cx2, cy + gx * 0.55, 'g ≈ ' + n(g)); txt(cx2, cy + gx + m.r * e + 5, 'r = ' + n(m.r));
+      return {svg: s, txt: 'O cone aberto vira um <b>setor circular</b> (com raio igual à geratriz g) e um <b>círculo</b> (a base). Ângulo do setor ≈ ' + n(ang * 180 / PI) + '°.'};
+    }
+    if (id === 'prisma3' || id === 'prisma6'){
+      var k = id === 'prisma3' ? 3 : 6, a = m.a, hp = id === 'prisma3' ? a * R3 / 2 : a * R3, Wt = k * a, Ht = m.h + 2 * hp;
+      e = Math.min((W - 2 * P) / Wt, (H - 2 * P) / Ht);
+      var X = (W - Wt * e) / 2, Y = (H - Ht * e) / 2 + hp * e, ae = a * e, he = m.h * e, xb = X + ae;
+      for (i = 0; i < k; i++) poli([[X + i * ae, Y], [X + (i + 1) * ae, Y], [X + (i + 1) * ae, Y + he], [X + i * ae, Y + he]]);
+      if (k === 3){ poli([[xb, Y], [xb + ae, Y], [xb + ae / 2, Y - ae * R3 / 2]], '#9fd3ff'); poli([[xb, Y + he], [xb + ae, Y + he], [xb + ae / 2, Y + he + ae * R3 / 2]], '#9fd3ff'); }
+      else {
+        var q = ae * R3 / 2;
+        poli([[xb, Y], [xb + ae, Y], [xb + 1.5 * ae, Y - q], [xb + ae, Y - 2 * q], [xb, Y - 2 * q], [xb - 0.5 * ae, Y - q]], '#9fd3ff');
+        poli([[xb, Y + he], [xb + ae, Y + he], [xb + 1.5 * ae, Y + he + q], [xb + ae, Y + he + 2 * q], [xb, Y + he + 2 * q], [xb - 0.5 * ae, Y + he + q]], '#9fd3ff');
+      }
+      txt(X + ae * 2.5, Y + he / 2 + 5, 'h = ' + n(m.h)); txt(X + ae / 2, Y - 6, 'a = ' + n(a));
+      return {svg: s, txt: 'Aberto, o prisma vira <b>' + k + ' retângulos</b> lado a lado (as faces laterais) e <b>2 ' + (k === 3 ? 'triângulos' : 'hexágonos') + '</b> (as bases).'};
+    }
+    return {svg: ['<text x="210" y="120" font-size="64" text-anchor="middle">🌍</text>'], txt: 'A esfera <b>não pode ser planificada</b> sem esticar ou rasgar. É por isso que todo mapa-múndi deforma um pouco o tamanho dos países!'};
+  }
+
+  // ---------- 3D ----------
+  function temWebGL(){ try { var c = document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl'))); } catch (e) { return false; } }
+  var gl = !!window.THREE && temWebGL(), cena, camera, render, grade, raiz = null, pontos = null, dobras = [], faces = [], linhas = [];
+  var orb = {th: 0.7, ph: 1.08, r: 14, alvoR: 14, alvoPh: 1.08, y: 2, alvoY: 2, z: 0, alvoZ: 0}, arrastando = false;
+  var CORES = [0x7fb3ff, 0xffb86b, 0x8be0a4, 0xff8fa3, 0xc39bff, 0xffe066], matLinha;
+  if (gl){
+    try {
+      render = new THREE.WebGLRenderer({antialias: true, alpha: true});
+      render.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      $('palco').insertBefore(render.domElement, $('palco').firstChild);
+      cena = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(40, 1, 0.1, 500);
+      cena.add(new THREE.AmbientLight(0xffffff, 1.3));
+      var luz = new THREE.DirectionalLight(0xffffff, 2.2); luz.position.set(6, 12, 8); cena.add(luz);
+      var luz2 = new THREE.DirectionalLight(0xffffff, 0.8); luz2.position.set(-8, 4, -6); cena.add(luz2);
+      grade = new THREE.GridHelper(30, 30, 0x8fa0c0, 0xc9d3e6); grade.position.y = -0.01; cena.add(grade);
+      matLinha = new THREE.LineBasicMaterial({color: 0x1f2a44});
+    } catch (e) { gl = false; }
+  }
+  if (!gl){ $('semGL').style.display = 'flex'; $('palco').style.cursor = 'default'; }
+
+  function material(cor, liso){
+    return new THREE.MeshStandardMaterial({color: cor, roughness: 0.55, metalness: 0, side: THREE.DoubleSide, flatShading: !liso,
+      transparent: true, opacity: $('ckTransp').checked ? 0.5 : 1, depthWrite: !$('ckTransp').checked, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1});
+  }
+  function malha(geo, cor, liso, limiar){
+    var m = new THREE.Mesh(geo, material(cor, liso)), l = new THREE.LineSegments(new THREE.EdgesGeometry(geo, limiar || 1), matLinha);
+    l.visible = $('ckArestas').checked; m.add(l); faces.push(m); linhas.push(l); return m;
+  }
+  function planoCentro(w, d){ var g = new THREE.PlaneGeometry(w, d); g.rotateX(-PI / 2); return g; }
+  function ret(w, comp){ var g = new THREE.PlaneGeometry(w, comp); g.rotateX(-PI / 2); g.translate(0, 0, comp / 2); return g; }   // de z = 0 até z = comp
+  function tri(base, alt){ var g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([-base / 2, 0, 0, 0, 0, alt, base / 2, 0, 0], 3)); g.computeVertexNormals(); return g; }
+  function lado(grupo, giroY, dist, geo, cor, dobra){   // face presa numa dobradiça: deitada (planificada) com rotação 0
+    var sup = new THREE.Group(); sup.rotation.y = giroY; grupo.add(sup);
+    var piv = new THREE.Group(); piv.position.z = dist; sup.add(piv); piv.add(malha(geo, cor));
+    dobras.push({obj: piv, dobrado: dobra}); piv.rotation.x = dobra; return piv;
+  }
+  function montar(id, m){
+    var g = new THREE.Group(), vs = [], k, R, h;
+    if (id === 'cubo' || id === 'caixa'){
+      var w = id === 'cubo' ? m.a : m.c, d = id === 'cubo' ? m.a : m.l; h = id === 'cubo' ? m.a : m.h;
+      g.add(malha(planoCentro(w, d), CORES[0]));
+      var info = [[w, d / 2], [d, w / 2], [w, d / 2], [d, w / 2]];
+      for (k = 0; k < 4; k++){
+        var piv = lado(g, k * PI / 2, info[k][1], ret(info[k][0], h), CORES[k + 1], -PI / 2);
+        if (k === 0){ var topo = new THREE.Group(); topo.position.z = h; piv.add(topo); topo.add(malha(ret(w, d), CORES[5])); dobras.push({obj: topo, dobrado: -PI / 2}); topo.rotation.x = -PI / 2; }
+      }
+      [0, h].forEach(function(y){ vs.push([-w / 2, y, -d / 2], [w / 2, y, -d / 2], [w / 2, y, d / 2], [-w / 2, y, d / 2]); });
+      g.userData = {redeZ: d / 2, redeT: Math.max(w + 2 * h, 2 * d + 2 * h), alt: h, tam: Math.max(w, d, h)};
+    } else if (id === 'piramide'){
+      var lat = Math.sqrt(m.h * m.h + m.a * m.a / 4), ang = PI - Math.atan2(m.h, m.a / 2);
+      g.add(malha(planoCentro(m.a, m.a), CORES[0]));
+      for (k = 0; k < 4; k++) lado(g, k * PI / 2, m.a / 2, tri(m.a, lat), CORES[k + 1], -ang);
+      vs.push([-m.a / 2, 0, -m.a / 2], [m.a / 2, 0, -m.a / 2], [m.a / 2, 0, m.a / 2], [-m.a / 2, 0, m.a / 2], [0, m.h, 0]);
+      g.userData = {redeZ: 0, redeT: m.a + 2 * lat, alt: m.h, tam: Math.max(m.a, m.h)};
+    } else if (id === 'tetra'){
+      var a = m.a, Rc = a / R3, r = a / (2 * R3), t = a * R3 / 2, angT = PI - Math.acos(1 / 3), base = new THREE.BufferGeometry();
+      base.setAttribute('position', new THREE.Float32BufferAttribute([-a / 2, 0, r, a / 2, 0, r, 0, 0, -Rc], 3)); base.computeVertexNormals();
+      g.add(malha(base, CORES[0]));
+      for (k = 0; k < 3; k++) lado(g, k * 2 * PI / 3, r, tri(a, t), CORES[k + 1], -angT);
+      vs.push([-a / 2, 0, r], [a / 2, 0, r], [0, 0, -Rc], [0, a * Math.sqrt(2 / 3), 0]);
+      g.userData = {redeZ: 0, redeT: 2 * a, alt: a * Math.sqrt(2 / 3), tam: a};
+    } else if (id === 'prisma3' || id === 'prisma6'){
+      var lados = id === 'prisma3' ? 3 : 6; R = id === 'prisma3' ? m.a / R3 : m.a;
+      var gp = new THREE.CylinderGeometry(R, R, m.h, lados); gp.translate(0, m.h / 2, 0); g.add(malha(gp, id === 'prisma3' ? CORES[1] : CORES[4]));
+      for (k = 0; k < lados; k++){ var th = 2 * PI * k / lados; vs.push([R * Math.sin(th), 0, R * Math.cos(th)], [R * Math.sin(th), m.h, R * Math.cos(th)]); }
+      g.userData = {alt: m.h, tam: Math.max(2 * R, m.h)};
+    } else if (id === 'cilindro'){
+      var gc = new THREE.CylinderGeometry(m.r, m.r, m.h, 64); gc.translate(0, m.h / 2, 0); g.add(malha(gc, CORES[2], true, 10));
+      g.userData = {alt: m.h, tam: Math.max(2 * m.r, m.h)};
+    } else if (id === 'cone'){
+      var gk = new THREE.ConeGeometry(m.r, m.h, 64); gk.translate(0, m.h / 2, 0); g.add(malha(gk, CORES[5], true, 10)); vs.push([0, m.h, 0]);
+      g.userData = {alt: m.h, tam: Math.max(2 * m.r, m.h)};
+    } else {
+      var ge = new THREE.SphereGeometry(m.r, 48, 32); ge.translate(0, m.r, 0); g.add(malha(ge, CORES[3], true, 30));
+      g.userData = {alt: 2 * m.r, tam: 2 * m.r};
+    }
+    // vértices (bolinhas vermelhas)
+    pontos = new THREE.Group(); var tam = g.userData.tam, bola = new THREE.SphereGeometry(0.06 + tam * 0.022, 16, 12), mb = new THREE.MeshStandardMaterial({color: 0xe74c3c, roughness: 0.4});
+    vs.forEach(function(p){ var b = new THREE.Mesh(bola, mb); b.position.set(p[0], p[1], p[2]); pontos.add(b); });
+    pontos.visible = $('ckVertices').checked; g.add(pontos);
+    return g;
+  }
+  function limpar(){
+    if (!raiz) return;
+    cena.remove(raiz);
+    raiz.traverse(function(o){ if (o.geometry) o.geometry.dispose(); if (o.material && o.material !== matLinha) o.material.dispose(); });
+    raiz = null; pontos = null; dobras = []; faces = []; linhas = [];
+  }
+  function enquadrar(){
+    if (!raiz) return; var u = raiz.userData;
+    if (planificado){ orb.alvoPh = 0.32; orb.alvoY = 0; orb.alvoZ = u.redeZ || 0; orb.alvoR = Math.max(9, u.redeT * 1.9); }
+    else { orb.alvoPh = 1.08; orb.alvoY = u.alt / 2; orb.alvoZ = 0; orb.alvoR = Math.max(11, u.tam * 3.3); }
+  }
+  function redesenhar3D(){
+    if (!gl) return;
+    limpar(); planificado = false; raiz = montar(atual, medidas); cena.add(raiz); enquadrar();
+  }
+  function ajustar(){
+    if (!gl) return; var p = $('palco'), w = p.clientWidth || 600, h = p.clientHeight || 400;
+    render.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  function posCamera(){
+    camera.position.set(orb.r * Math.sin(orb.ph) * Math.sin(orb.th), orb.y + orb.r * Math.cos(orb.ph), orb.z + orb.r * Math.sin(orb.ph) * Math.cos(orb.th));
+    camera.lookAt(0, orb.y, orb.z);
+  }
+  function laco(){
+    requestAnimationFrame(laco);
+    if ($('ckGirar').checked && !arrastando && !planificado) orb.th += 0.005;
+    orb.r += (orb.alvoR - orb.r) * 0.08; orb.y += (orb.alvoY - orb.y) * 0.08; orb.z += (orb.alvoZ - orb.z) * 0.08;
+    if (!arrastando) orb.ph += (orb.alvoPh - orb.ph) * 0.06;
+    posCamera(); render.render(cena, camera);
+  }
+  if (gl){
+    ajustar(); window.addEventListener('resize', ajustar);
+    // arrastar para girar (mouse e toque), roda e pinça para aproximar
+    var px = 0, py = 0, dist0 = 0, p = $('palco');
+    var inicio = function(x, y){ arrastando = true; px = x; py = y; p.style.cursor = 'grabbing'; };
+    var mover = function(x, y){ if (!arrastando) return; orb.th -= (x - px) * 0.008; orb.ph = Math.max(0.12, Math.min(1.5, orb.ph - (y - py) * 0.008)); orb.alvoPh = orb.ph; px = x; py = y; };
+    var fim = function(){ arrastando = false; p.style.cursor = 'grab'; };
+    p.addEventListener('mousedown', function(e){ inicio(e.clientX, e.clientY); e.preventDefault(); });
+    window.addEventListener('mousemove', function(e){ mover(e.clientX, e.clientY); });
+    window.addEventListener('mouseup', fim);
+    p.addEventListener('wheel', function(e){ e.preventDefault(); orb.alvoR = Math.max(4, Math.min(80, orb.alvoR * (e.deltaY > 0 ? 1.1 : 0.9))); }, {passive: false});
+    var distT = function(t){ var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); };
+    p.addEventListener('touchstart', function(e){ if (e.touches.length === 2){ dist0 = distT(e.touches); arrastando = false; } else inicio(e.touches[0].clientX, e.touches[0].clientY); }, {passive: true});
+    p.addEventListener('touchmove', function(e){
+      e.preventDefault();
+      if (e.touches.length === 2){ var d = distT(e.touches); if (dist0) orb.alvoR = Math.max(4, Math.min(80, orb.alvoR * dist0 / d)); dist0 = d; }
+      else mover(e.touches[0].clientX, e.touches[0].clientY);
+    }, {passive: false});
+    p.addEventListener('touchend', fim);
+  }
+
+  // ---------- interface ----------
+  function botoesSolidos(){
+    $('solidos').innerHTML = ORDEM.map(function(id){ return '<button data-s="' + id + '">' + SOLIDOS[id].ico + ' ' + SOLIDOS[id].nome.split(' (')[0] + '</button>'; }).join('');
+    $('solidos').onclick = function(e){ var b = e.target.closest('button'); if (b && !modoDesafio) escolher(b.getAttribute('data-s')); };
+  }
+  function controles(){
+    var s = SOLIDOS[atual];
+    $('controles').innerHTML = s.med.map(function(md){
+      return '<div class="controle"><span>' + md[1] + '</span><input type="range" min="1" max="10" step="1" value="' + medidas[md[0]] + '" data-m="' + md[0] + '"><output>' + medidas[md[0]] + ' cm</output></div>';
+    }).join('');
+    var ins = $('controles').querySelectorAll('input');
+    for (var i = 0; i < ins.length; i++) ins[i].oninput = function(){ medidas[this.getAttribute('data-m')] = +this.value; this.nextSibling.textContent = this.value + ' cm'; atualizarTextos(); redesenhar3D(); if (!$('rede').hidden) mostrarRede(); botaoPlan(); };
+  }
+  function atualizarTextos(){
+    var s = SOLIDOS[atual];
+    $('nome').textContent = s.ico + ' ' + s.nome; $('descricao').textContent = s.desc;
+    if (s.redondo){
+      $('contagem').style.display = 'none';
+      $('euler').innerHTML = '🟢 Corpo redondo: tem superfície curva, por isso <u>não</u> é um poliedro' + (atual === 'cone' ? ' (o cone tem 1 vértice, na ponta).' : '.');
+    } else {
+      $('contagem').style.display = ''; $('nF').textContent = s.F; $('nA').textContent = s.A; $('nV').textContent = s.V;
+      $('euler').innerHTML = 'Relação de Euler: V − A + F = 2<br>' + s.V + ' − ' + s.A + ' + ' + s.F + ' = ' + (s.V - s.A + s.F) + ' ✅';
+    }
+    $('formulas').innerHTML = formulas(atual, medidas);
+  }
+  function mostrarRede(){ var r = redeSVG(atual, medidas); $('redeSvg').innerHTML = '<svg viewBox="0 0 420 300">' + r.svg.join('') + '</svg><p>' + r.txt + '</p>'; $('rede').hidden = false; }
+  function botaoPlan(){ var s = SOLIDOS[atual]; $('btPlanificar').textContent = s.plan === '3d' && planificado ? '🧊 Montar o sólido' : (s.plan === '3d' ? '📐 Planificar (abrir o sólido)' : '📐 Ver a planificação'); }
+  function escolher(id, dims){
+    atual = id; planificado = false; medidas = {};
+    SOLIDOS[id].med.forEach(function(md){ medidas[md[0]] = dims && dims[md[0]] ? dims[md[0]] : md[2]; });
+    var bs = $('solidos').querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].className = !modoDesafio && bs[i].getAttribute('data-s') === id ? 'ativo' : '';
+    $('rede').hidden = true; controles(); atualizarTextos(); redesenhar3D(); botaoPlan();
+  }
+  $('btPlanificar').onclick = function(){
+    var s = SOLIDOS[atual];
+    if (s.plan !== '3d' || !gl){ if ($('rede').hidden) mostrarRede(); else $('rede').hidden = true; return; }
+    planificado = !planificado; botaoPlan(); enquadrar();
+    if (pontos) pontos.visible = !planificado && $('ckVertices').checked;
+    var n2 = dobras.length;
+    dobras.forEach(function(d, i){
+      var alvo = planificado ? 0 : d.dobrado, atraso = (planificado ? i : n2 - 1 - i) * 0.22;
+      if (window.gsap) gsap.to(d.obj.rotation, {x: alvo, duration: 1.1, delay: atraso, ease: 'power2.inOut'}); else d.obj.rotation.x = alvo;
+    });
+    if (planificado) Sala.tom(523, 0.15);
+  };
+  $('ckArestas').onchange = function(){ linhas.forEach(function(l){ l.visible = $('ckArestas').checked; }); };
+  $('ckVertices').onchange = function(){ if (pontos) pontos.visible = $('ckVertices').checked && !planificado; };
+  $('ckTransp').onchange = function(){ var t = $('ckTransp').checked; faces.forEach(function(f){ f.material.opacity = t ? 0.5 : 1; f.material.depthWrite = !t; f.material.needsUpdate = true; }); };
+  $('ckGrade').onchange = function(){ if (grade) grade.visible = $('ckGrade').checked; };
+
+  // ---------- desafio ----------
+  var POLI = ['cubo', 'caixa', 'prisma3', 'prisma6', 'piramide', 'tetra'];
+  $('dNome').innerHTML = '<option value="">— escolha —</option>' + ORDEM.map(function(id){ return '<option value="' + id + '">' + SOLIDOS[id].nome + '</option>'; }).join('');
+  function novoDesafio(){
+    var id = POLI[Math.floor(Math.random() * POLI.length)];
+    if (segredo && POLI.length > 1) while (id === segredo) id = POLI[Math.floor(Math.random() * POLI.length)];
+    segredo = id; var dims = {}; SOLIDOS[id].med.forEach(function(md){ dims[md[0]] = 2 + Math.floor(Math.random() * 6); });
+    if (id === 'caixa' && dims.c === dims.l && dims.l === dims.h) dims.c++;
+    escolher(id, dims);
+    $('dNome').value = ''; $('dF').value = ''; $('dA').value = ''; $('dV').value = ''; $('dRes').innerHTML = '';
+    $('ckGirar').checked = true;
+  }
+  function entrarDesafio(sim){
+    modoDesafio = sim;
+    $('info').hidden = sim; $('cartaoMedidas').hidden = sim; $('desafio').hidden = !sim; $('rede').hidden = true; $('btPlanificar').disabled = sim;
+    $('solidos').style.opacity = sim ? 0.4 : 1;
+    if (sim) novoDesafio(); else { segredo = null; escolher(atual); }
+  }
+  $('btDesafio').onclick = function(){ entrarDesafio(!modoDesafio); };
+  $('dOutro').onclick = novoDesafio;
+  $('dSair').onclick = function(){ entrarDesafio(false); };
+  $('dConferir').onclick = function(){
+    var s = SOLIDOS[segredo], r = [], certos = 0;
+    function item(rot, dado, certo){ var ok = String(dado) === String(certo); if (ok) certos++; r.push((ok ? '✅ ' : '❌ ') + rot + ': ' + certo); }
+    item('Nome', $('dNome').value ? SOLIDOS[$('dNome').value].nome : '—', s.nome);
+    item('Faces', $('dF').value, s.F); item('Arestas', $('dA').value, s.A); item('Vértices', $('dV').value, s.V);
+    r.push('Euler: ' + s.V + ' − ' + s.A + ' + ' + s.F + ' = 2');
+    $('dRes').innerHTML = r.join('<br>');
+    if (certos === 4){ Sala.festa(); Sala.confete(70); } else Sala.tom(220, 0.3);
+  };
+
+  // teste automático
+  window.SOLIDOS3D = {escolher: escolher, estado: function(){ return {atual: atual, planificado: planificado, gl: gl, dobras: dobras.map(function(d){ return +d.obj.rotation.x.toFixed(3); }), faces: faces.length, vertices: pontos ? pontos.children.length : 0}; }};
+
+  botoesSolidos(); escolher('cubo');
+  if (gl) laco();
+})();
+</script>
+</body>
+</html>

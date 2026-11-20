@@ -1,0 +1,337 @@
+{
+ "titulo": "Quiz de Matemática do 9º ano",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "Num triângulo retângulo, a hipotenusa mede: 15 m e um cateto mede 9 m. Quanto mede o outro cateto?",
+   "imagem": "📐",
+   "opcoes": [
+    "13 m",
+    "12 m",
+    "24 m",
+    "6 m"
+   ],
+   "correta": "12 m",
+   "explica": "15² − 9² = 225 − 81 = 144; √144 = 12 m."
+  },
+  {
+   "pergunta": "Qual é o valor (ângulo notável)? cos 0°",
+   "imagem": "📏",
+   "opcoes": [
+    "1",
+    "√3/2",
+    "1/2",
+    "√2/2"
+   ],
+   "correta": "1",
+   "explica": "Tabela dos ângulos notáveis: cos 0° = 1."
+  },
+  {
+   "pergunta": "Qual é o zero (raiz) da função? f(x) = -3x + 18",
+   "imagem": "📉",
+   "opcoes": [
+    "x = 6",
+    "x = 18",
+    "x = −3",
+    "x = −6"
+   ],
+   "correta": "x = 6",
+   "explica": "f(x) = 0 → -3x = −18 → x = 6."
+  },
+  {
+   "pergunta": "Qual é o zero (raiz) da função? f(x) = 5x + 5",
+   "imagem": "📉",
+   "opcoes": [
+    "x = 5",
+    "x = −1",
+    "x = 1"
+   ],
+   "correta": "x = −1",
+   "explica": "f(x) = 0 → 5x = −5 → x = −1."
+  },
+  {
+   "pergunta": "Calcule o valor da função quadrática: f(x) = x² + 1; f(−1) = ?",
+   "imagem": "📉",
+   "opcoes": [
+    "2",
+    "0",
+    "−1"
+   ],
+   "correta": "2",
+   "explica": "f(−1) = (−1)² + 1 = 1 + 1 = 2."
+  },
+  {
+   "pergunta": "Juros simples: Capital de R$ 800,00 a 2% ao mês durante 4 meses. Quanto rende de juros?",
+   "imagem": "💰",
+   "opcoes": [
+    "R$ 64,00",
+    "R$ 65,95",
+    "R$ 864,00",
+    "R$ 16,00"
+   ],
+   "correta": "R$ 64,00",
+   "explica": "J = C × i × t = 800 × 2% × 4 = R$ 64,00."
+  },
+  {
+   "pergunta": "Teorema de Tales (feixe de paralelas): a/b = c/x a = 2, b = 3, c = 4. Quanto vale x?",
+   "imagem": "🔍",
+   "opcoes": [
+    "7",
+    "6",
+    "8"
+   ],
+   "correta": "6",
+   "explica": "2/3 = 4/x → 2x = 3 × 4 → x = 6."
+  },
+  {
+   "pergunta": "Juros simples: Capital de R$ 1.500,00 a 2% ao mês durante 2 meses. Quanto rende de juros?",
+   "imagem": "💰",
+   "opcoes": [
+    "R$ 1.560,00",
+    "R$ 60,60",
+    "R$ 30,00",
+    "R$ 60,00"
+   ],
+   "correta": "R$ 60,00",
+   "explica": "J = C × i × t = 1.500 × 2% × 2 = R$ 60,00."
+  },
+  {
+   "pergunta": "Qual é o valor (ângulo notável)? tg 60°",
+   "imagem": "📏",
+   "opcoes": [
+    "√2/2",
+    "√3/2",
+    "√3",
+    "1/2"
+   ],
+   "correta": "√3",
+   "explica": "Tabela dos ângulos notáveis: tg 60° = √3."
+  },
+  {
+   "pergunta": "Calcule o discriminante Δ = b² − 4ac: x² − 4x + 4 = 0",
+   "imagem": "🎯",
+   "opcoes": [
+    "Δ = 4",
+    "Δ = 0 (uma raiz real (duas iguais))",
+    "Δ = 16",
+    "Δ = 32"
+   ],
+   "correta": "Δ = 0 (uma raiz real (duas iguais))",
+   "explica": "Δ = (−4)² − 4 × 1 × 4 = 0: uma raiz real (duas iguais)."
+  },
+  {
+   "pergunta": "Calcule o valor da função: f(x) = 3x + 4; f(−2) = ?",
+   "imagem": "📉",
+   "opcoes": [
+    "5",
+    "6",
+    "−10",
+    "−2"
+   ],
+   "correta": "−2",
+   "explica": "f(−2) = 3 × (−2) + 4 = −2."
+  },
+  {
+   "pergunta": "Teorema de Tales (feixe de paralelas): a/b = c/x a = 3, b = 4, c = 9. Quanto vale x?",
+   "imagem": "🔍",
+   "opcoes": [
+    "27",
+    "13",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "3/4 = 9/x → 3x = 4 × 9 → x = 12."
+  },
+  {
+   "pergunta": "Qual é o valor (ângulo notável)? sen 60°",
+   "imagem": "📏",
+   "opcoes": [
+    "1",
+    "√2/2",
+    "1/2",
+    "√3/2"
+   ],
+   "correta": "√3/2",
+   "explica": "Tabela dos ângulos notáveis: sen 60° = √3/2."
+  },
+  {
+   "pergunta": "Qual destes números é IRRACIONAL?",
+   "imagem": "🌀",
+   "opcoes": [
+    "√9",
+    "√11",
+    "3/4",
+    "−2"
+   ],
+   "correta": "√11",
+   "explica": "√11 tem infinitas casas decimais sem repetição: não pode ser escrito como fração. Os outros são racionais (ex.: √9 = 3)."
+  },
+  {
+   "pergunta": "Qual destes números é IRRACIONAL?",
+   "imagem": "🌀",
+   "opcoes": [
+    "1,333...",
+    "√36",
+    "√15",
+    "0,5"
+   ],
+   "correta": "√15",
+   "explica": "√15 tem infinitas casas decimais sem repetição: não pode ser escrito como fração. Os outros são racionais (ex.: √9 = 3)."
+  },
+  {
+   "pergunta": "Os catetos de um triângulo retângulo medem: 3 cm e 4 cm. Quanto mede a hipotenusa?",
+   "imagem": "📐",
+   "opcoes": [
+    "6 cm",
+    "7 cm",
+    "5 cm"
+   ],
+   "correta": "5 cm",
+   "explica": "a² = b² + c²: 3² + 4² = 9 + 16 = 25; √25 = 5 cm."
+  },
+  {
+   "pergunta": "Qual é a diagonal de um quadrado de lado: 7 cm?",
+   "imagem": "📐",
+   "opcoes": [
+    "49 cm",
+    "7√2 cm",
+    "7√3 cm",
+    "14 cm"
+   ],
+   "correta": "7√2 cm",
+   "explica": "d² = 7² + 7² = 98 → d = 7√2 cm."
+  },
+  {
+   "pergunta": "Num triângulo retângulo, a hipotenusa mede: 29 m e um cateto mede 20 m. Quanto mede o outro cateto?",
+   "imagem": "📐",
+   "opcoes": [
+    "49 m",
+    "21 m",
+    "22 m",
+    "9 m"
+   ],
+   "correta": "21 m",
+   "explica": "29² − 20² = 841 − 400 = 441; √441 = 21 m."
+  },
+  {
+   "pergunta": "Simplifique o radical: √40 = ?",
+   "imagem": "🌀",
+   "opcoes": [
+    "√2 + √10",
+    "10√2",
+    "2√10",
+    "4√10"
+   ],
+   "correta": "2√10",
+   "explica": "√40 = √(4 × 10) = 2√10."
+  },
+  {
+   "pergunta": "Juros compostos: Capital de R$ 500,00 a 2% ao ano durante 4 anos. Qual é o montante?",
+   "imagem": "💰",
+   "opcoes": [
+    "R$ 540,00",
+    "R$ 40,00",
+    "R$ 1.041,22",
+    "R$ 541,22"
+   ],
+   "correta": "R$ 541,22",
+   "explica": "M = C × (1 + i)ⁿ = 500 × 1,02⁴ = R$ 541,22."
+  },
+  {
+   "pergunta": "Resolva a equação do 2º grau (dica: soma e produto das raízes): x² − 3x + 2 = 0",
+   "imagem": "🎯",
+   "opcoes": [
+    "x = 1 ou x = 2",
+    "x = 3 ou x = 2",
+    "x = −1 ou x = −2",
+    "x = 1 ou x = 3"
+   ],
+   "correta": "x = 1 ou x = 2",
+   "explica": "As raízes somam 3 e multiplicadas dão 2: 1 e 2. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "pergunta": "Dois triângulos são semelhantes com razão de semelhança: 1/2. Um lado de 8 cm corresponde a quanto no outro triângulo?",
+   "imagem": "🔍",
+   "opcoes": [
+    "16 cm",
+    "8 cm",
+    "8,5 cm",
+    "4 cm"
+   ],
+   "correta": "4 cm",
+   "explica": "Lados correspondentes são proporcionais: 8 × 1/2 = 4 cm."
+  },
+  {
+   "pergunta": "Juros simples: Capital de R$ 2.000,00 a 5% ao mês durante 2 meses. Quanto rende de juros?",
+   "imagem": "💰",
+   "opcoes": [
+    "R$ 200,00",
+    "R$ 100,00",
+    "R$ 205,00",
+    "R$ 2.200,00"
+   ],
+   "correta": "R$ 200,00",
+   "explica": "J = C × i × t = 2.000 × 5% × 2 = R$ 200,00."
+  },
+  {
+   "pergunta": "Qual é o valor (ângulo notável)? cos 30°",
+   "imagem": "📏",
+   "opcoes": [
+    "1/2",
+    "√2/2",
+    "√3/2",
+    "1"
+   ],
+   "correta": "√3/2",
+   "explica": "Tabela dos ângulos notáveis: cos 30° = √3/2."
+  },
+  {
+   "pergunta": "Qual destes números é IRRACIONAL?",
+   "imagem": "🌀",
+   "opcoes": [
+    "−0,8",
+    "7/3",
+    "√36",
+    "√10"
+   ],
+   "correta": "√10",
+   "explica": "√10 tem infinitas casas decimais sem repetição: não pode ser escrito como fração. Os outros são racionais (ex.: √9 = 3)."
+  },
+  {
+   "pergunta": "Resolva a equação do 2º grau (dica: soma e produto das raízes): x² − 10x + 9 = 0",
+   "imagem": "🎯",
+   "opcoes": [
+    "x = 10 ou x = 9",
+    "x = 1 ou x = 10",
+    "x = −1 ou x = −9",
+    "x = 1 ou x = 9"
+   ],
+   "correta": "x = 1 ou x = 9",
+   "explica": "As raízes somam 10 e multiplicadas dão 9: 1 e 9. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "pergunta": "Resolva a equação do 2º grau (dica: soma e produto das raízes): x² − 16x + 63 = 0",
+   "imagem": "🎯",
+   "opcoes": [
+    "x = −7 ou x = −9",
+    "x = 16 ou x = 63",
+    "x = 7 ou x = 10",
+    "x = 7 ou x = 9"
+   ],
+   "correta": "x = 7 ou x = 9",
+   "explica": "As raízes somam 16 e multiplicadas dão 63: 7 e 9. (Bhaskara dá o mesmo resultado.)"
+  },
+  {
+   "pergunta": "Dois triângulos são semelhantes com razão de semelhança: 3/2. Um lado de 6 cm corresponde a quanto no outro triângulo?",
+   "imagem": "🔍",
+   "opcoes": [
+    "7,5 cm",
+    "4 cm",
+    "9 cm",
+    "18 cm"
+   ],
+   "correta": "9 cm",
+   "explica": "Lados correspondentes são proporcionais: 6 × 3/2 = 9 cm."
+  }
+ ]
+}

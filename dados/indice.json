@@ -139,6 +139,31 @@
       "arquivo": "quiz-en-temas.json",
       "titulo": "🇬🇧 Vocabulary quiz (temas novos)",
       "qtd": 30
+    },
+    {
+      "arquivo": "quiz-mat-6.json",
+      "titulo": "🔢 Quiz de Matemática do 6º ano",
+      "qtd": 30
+    },
+    {
+      "arquivo": "quiz-mat-7.json",
+      "titulo": "🔢 Quiz de Matemática do 7º ano",
+      "qtd": 24
+    },
+    {
+      "arquivo": "quiz-mat-8.json",
+      "titulo": "🔢 Quiz de Matemática do 8º ano",
+      "qtd": 30
+    },
+    {
+      "arquivo": "quiz-mat-9.json",
+      "titulo": "🔢 Quiz de Matemática do 9º ano",
+      "qtd": 28
+    },
+    {
+      "arquivo": "quiz-tabuada.json",
+      "titulo": "✖️ Quiz da tabuada (do 2 ao 9)",
+      "qtd": 40
     }
   ],
   "stop": [
@@ -267,6 +292,14 @@
     {
       "arquivo": "batata-vida.json",
       "titulo": "Batata quente: conversa sobre a vida"
+    },
+    {
+      "arquivo": "batata-tabuada.json",
+      "titulo": "Batata quente da tabuada"
+    },
+    {
+      "arquivo": "batata-matematica.json",
+      "titulo": "Batata quente da matemática"
     }
   ],
   "trilha": [
@@ -838,6 +871,38 @@
     {
       "arquivo": "en-cestos-temas.json",
       "titulo": "🇬🇧 Which group? (temas de vocabulário)"
+    },
+    {
+      "arquivo": "mat-cestos-primos.json",
+      "titulo": "Matemática: primo ou composto?"
+    },
+    {
+      "arquivo": "mat-cestos-paridade.json",
+      "titulo": "Matemática: par ou ímpar?"
+    },
+    {
+      "arquivo": "mat-cestos-angulos.json",
+      "titulo": "Matemática: ângulo agudo, reto ou obtuso?"
+    },
+    {
+      "arquivo": "mat-cestos-fracoes.json",
+      "titulo": "Matemática: fração própria, imprópria ou aparente?"
+    },
+    {
+      "arquivo": "mat-cestos-sinais.json",
+      "titulo": "Matemática: o resultado é positivo ou negativo?"
+    },
+    {
+      "arquivo": "mat-cestos-tabuada-6-7.json",
+      "titulo": "Tabuada: resultado do 6 ou do 7?"
+    },
+    {
+      "arquivo": "mat-cestos-tabuada-8-9.json",
+      "titulo": "Tabuada: resultado do 8 ou do 9?"
+    },
+    {
+      "arquivo": "mat-cestos-racionais.json",
+      "titulo": "Matemática: racional ou irracional?"
     }
   ],
   "morfo-frases": [
@@ -1860,6 +1925,30 @@
     {
       "arquivo": "memoria-en-cidade.json",
       "titulo": "🇬🇧 Memory: city and places"
+    },
+    {
+      "arquivo": "memoria-tabuada-2a5.json",
+      "titulo": "Memória da tabuada (do 2 ao 5)"
+    },
+    {
+      "arquivo": "memoria-tabuada-6a9.json",
+      "titulo": "Memória da tabuada (do 6 ao 9)"
+    },
+    {
+      "arquivo": "memoria-mat-fracoes.json",
+      "titulo": "Memória: fração, decimal e porcentagem"
+    },
+    {
+      "arquivo": "memoria-mat-potencias.json",
+      "titulo": "Memória das potências"
+    },
+    {
+      "arquivo": "memoria-mat-raizes.json",
+      "titulo": "Memória das raízes quadradas"
+    },
+    {
+      "arquivo": "memoria-mat-figuras.json",
+      "titulo": "Memória dos polígonos"
     }
   ],
   "bingo": [
@@ -1898,6 +1987,10 @@
     {
       "arquivo": "bingo-en-temas.json",
       "titulo": "🇬🇧 English Bingo: temas novos"
+    },
+    {
+      "arquivo": "bingo-tabuada.json",
+      "titulo": "Bingo da tabuada"
     }
   ],
   "escolha-fo": [
@@ -2640,6 +2733,178 @@
       "arquivo": "leitura-en-trava-linguas.json",
       "titulo": "English: tongue twisters (trava-línguas tradicionais)",
       "qtd": 14
+    }
+  ],
+  "escolha-mat": [
+    {
+      "arquivo": "mat-tabuada.json",
+      "titulo": "✖️ Tabuada (do 2 ao 9)",
+      "qtd": 40
+    },
+    {
+      "arquivo": "mat-operacoes.json",
+      "titulo": "➕ Operações com números naturais (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-expressoes.json",
+      "titulo": "🔣 Expressões numéricas (ordem das operações) (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-multiplos-divisores.json",
+      "titulo": "🔢 Múltiplos e divisores (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-divisibilidade.json",
+      "titulo": "➗ Critérios de divisibilidade (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-primos.json",
+      "titulo": "🌳 Números primos e fatoração (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-mmc-mdc.json",
+      "titulo": "🚌 MMC e MDC (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-fracoes.json",
+      "titulo": "🍕 Frações (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-decimais.json",
+      "titulo": "🔟 Números decimais (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-porcentagem.json",
+      "titulo": "💯 Porcentagem (6º e 7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-potencias.json",
+      "titulo": "⚡ Potenciação (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-medidas.json",
+      "titulo": "📏 Unidades de medida (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-perimetro-area.json",
+      "titulo": "📐 Perímetro e área (6º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-inteiros.json",
+      "titulo": "🌡️ Números inteiros (positivos e negativos) (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-proporcao.json",
+      "titulo": "⚖️ Razão, proporção e regra de três (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-equacoes-1grau.json",
+      "titulo": "✏️ Equações do 1º grau (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-angulos.json",
+      "titulo": "📐 Ângulos e triângulos (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-media.json",
+      "titulo": "📊 Média aritmética (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-areas.json",
+      "titulo": "🔺 Área de triângulo, trapézio e paralelogramo (7º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-potencias-raizes.json",
+      "titulo": "🚀 Potências, raízes e notação científica (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-sistemas.json",
+      "titulo": "🚗 Sistemas de equações (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-produtos-notaveis.json",
+      "titulo": "✖️ Produtos notáveis (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-poligonos.json",
+      "titulo": "⬡ Polígonos e seus ângulos (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-circulo.json",
+      "titulo": "⭕ Circunferência e círculo (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-volume.json",
+      "titulo": "📦 Volume (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-estatistica.json",
+      "titulo": "📈 Estatística: moda, mediana e amplitude (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-probabilidade.json",
+      "titulo": "🎲 Probabilidade e contagem (8º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-equacao-2grau.json",
+      "titulo": "🎯 Equação do 2º grau (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-pitagoras.json",
+      "titulo": "📐 Teorema de Pitágoras (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-funcoes.json",
+      "titulo": "📉 Funções (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-semelhanca.json",
+      "titulo": "🔍 Semelhança e Teorema de Tales (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-trigonometria.json",
+      "titulo": "📏 Trigonometria no triângulo retângulo (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-juros.json",
+      "titulo": "💰 Juros simples e compostos (9º ano)",
+      "qtd": 20
+    },
+    {
+      "arquivo": "mat-radicais.json",
+      "titulo": "🌀 Números irracionais e radicais (9º ano)",
+      "qtd": 20
     }
   ]
 }

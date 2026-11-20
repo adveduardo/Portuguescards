@@ -1,0 +1,247 @@
+{
+ "titulo": "Trigonometria no triângulo retângulo (9º ano)",
+ "emoji": "📏",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "sen 60°",
+   "opcoes": [
+    "1",
+    "√2/2",
+    "√3/2",
+    "1/2"
+   ],
+   "correta": "√3/2",
+   "explica": "Tabela dos ângulos notáveis: sen 60° = √3/2."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "sen 90°",
+   "opcoes": [
+    "1",
+    "√3/2",
+    "1/2",
+    "√2/2"
+   ],
+   "correta": "1",
+   "explica": "Tabela dos ângulos notáveis: sen 90° = 1."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 5, cateto adjacente = 12, hipotenusa = 13. Qual é o valor de…",
+   "destaque": "sen α",
+   "opcoes": [
+    "12/5",
+    "5/12",
+    "5/13",
+    "12/13"
+   ],
+   "correta": "5/13",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "cos 30°",
+   "opcoes": [
+    "1",
+    "1/2",
+    "√3/2",
+    "√2/2"
+   ],
+   "correta": "√3/2",
+   "explica": "Tabela dos ângulos notáveis: cos 30° = √3/2."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 8, cateto adjacente = 15, hipotenusa = 17. Qual é o valor de…",
+   "destaque": "sen α",
+   "opcoes": [
+    "15/8",
+    "15/17",
+    "8/15",
+    "8/17"
+   ],
+   "correta": "8/17",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 9, cateto adjacente = 12, hipotenusa = 15. Qual é o valor de…",
+   "destaque": "sen α",
+   "opcoes": [
+    "12/9",
+    "12/15",
+    "9/12",
+    "9/15"
+   ],
+   "correta": "9/15",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 5, cateto adjacente = 12, hipotenusa = 13. Qual é o valor de…",
+   "destaque": "tg α",
+   "opcoes": [
+    "12/13",
+    "12/5",
+    "5/13",
+    "5/12"
+   ],
+   "correta": "5/12",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "sen 45°",
+   "opcoes": [
+    "1/2",
+    "1",
+    "√3/2",
+    "√2/2"
+   ],
+   "correta": "√2/2",
+   "explica": "Tabela dos ângulos notáveis: sen 45° = √2/2."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 3, cateto adjacente = 4, hipotenusa = 5. Qual é o valor de…",
+   "destaque": "cos α",
+   "opcoes": [
+    "4/3",
+    "4/5",
+    "3/5",
+    "3/4"
+   ],
+   "correta": "4/5",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "cos 0°",
+   "opcoes": [
+    "1",
+    "1/2",
+    "√3/2",
+    "√2/2"
+   ],
+   "correta": "1",
+   "explica": "Tabela dos ângulos notáveis: cos 0° = 1."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 6, cateto adjacente = 8, hipotenusa = 10. Qual é o valor de…",
+   "destaque": "sen α",
+   "opcoes": [
+    "8/10",
+    "6/10",
+    "6/8",
+    "8/6"
+   ],
+   "correta": "6/10",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "tg 45°",
+   "opcoes": [
+    "1/2",
+    "1",
+    "√2/2",
+    "√3/2"
+   ],
+   "correta": "1",
+   "explica": "Tabela dos ângulos notáveis: tg 45° = 1."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 8, cateto adjacente = 15, hipotenusa = 17. Qual é o valor de…",
+   "destaque": "tg α",
+   "opcoes": [
+    "15/17",
+    "15/8",
+    "8/15",
+    "8/17"
+   ],
+   "correta": "8/15",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "sen 30°",
+   "opcoes": [
+    "1/2",
+    "√3/2",
+    "√2/2",
+    "1"
+   ],
+   "correta": "1/2",
+   "explica": "Tabela dos ângulos notáveis: sen 30° = 1/2."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 5, cateto adjacente = 12, hipotenusa = 13. Qual é o valor de…",
+   "destaque": "cos α",
+   "opcoes": [
+    "5/13",
+    "12/13",
+    "5/12",
+    "12/5"
+   ],
+   "correta": "12/13",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 3, cateto adjacente = 4, hipotenusa = 5. Qual é o valor de…",
+   "destaque": "tg α",
+   "opcoes": [
+    "4/5",
+    "3/5",
+    "4/3",
+    "3/4"
+   ],
+   "correta": "3/4",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 9, cateto adjacente = 12, hipotenusa = 15. Qual é o valor de…",
+   "destaque": "cos α",
+   "opcoes": [
+    "12/15",
+    "12/9",
+    "9/15",
+    "9/12"
+   ],
+   "correta": "12/15",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Num triângulo retângulo: cateto oposto ao ângulo α = 9, cateto adjacente = 12, hipotenusa = 15. Qual é o valor de…",
+   "destaque": "tg α",
+   "opcoes": [
+    "12/15",
+    "9/12",
+    "9/15",
+    "12/9"
+   ],
+   "correta": "9/12",
+   "explica": "sen = oposto ÷ hipotenusa; cos = adjacente ÷ hipotenusa; tg = oposto ÷ adjacente."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "tg 60°",
+   "opcoes": [
+    "√3",
+    "1/2",
+    "√3/2",
+    "√2/2"
+   ],
+   "correta": "√3",
+   "explica": "Tabela dos ângulos notáveis: tg 60° = √3."
+  },
+  {
+   "enunciado": "Qual é o valor (ângulo notável)?",
+   "destaque": "cos 60°",
+   "opcoes": [
+    "1",
+    "1/2",
+    "√2/2",
+    "√3/2"
+   ],
+   "correta": "1/2",
+   "explica": "Tabela dos ângulos notáveis: cos 60° = 1/2."
+  }
+ ]
+}

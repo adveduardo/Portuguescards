@@ -1,0 +1,243 @@
+{
+ "titulo": "Frações (6º ano)",
+ "emoji": "🍕",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Qual fração é maior?",
+   "destaque": "2/5 ou 5/8",
+   "opcoes": [
+    "2/5",
+    "5/8",
+    "São iguais"
+   ],
+   "correta": "5/8",
+   "explica": "Com o mesmo denominador (40): 2/5 = 16/40 e 5/8 = 25/40. A maior é 5/8."
+  },
+  {
+   "enunciado": "Qual fração é equivalente a esta?",
+   "destaque": "3/4",
+   "opcoes": [
+    "3/16",
+    "7/8",
+    "12/16",
+    "12/4"
+   ],
+   "correta": "12/16",
+   "explica": "Multiplicando numerador e denominador por 4: 3/4 = 12/16."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "3/5 de 35",
+   "opcoes": [
+    "7",
+    "24",
+    "105",
+    "21"
+   ],
+   "correta": "21",
+   "explica": "35 ÷ 5 = 7; 7 × 3 = 21."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1/2 de 10",
+   "opcoes": [
+    "6",
+    "10",
+    "5",
+    "7"
+   ],
+   "correta": "5",
+   "explica": "10 ÷ 2 = 5; 5 × 1 = 5."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1/2 de 20",
+   "opcoes": [
+    "11",
+    "20",
+    "10",
+    "12"
+   ],
+   "correta": "10",
+   "explica": "20 ÷ 2 = 10; 10 × 1 = 10."
+  },
+  {
+   "enunciado": "Simplifique a fração (forma irredutível):",
+   "destaque": "5/20 = ___",
+   "opcoes": [
+    "2/5",
+    "1/4",
+    "1/20",
+    "4/1"
+   ],
+   "correta": "1/4",
+   "explica": "Dividindo numerador e denominador por 5: 5/20 = 1/4."
+  },
+  {
+   "enunciado": "Calcule (mesmo denominador):",
+   "destaque": "2/5 + 1/5 = ___",
+   "opcoes": [
+    "2/5",
+    "4/5",
+    "3/5",
+    "3/10"
+   ],
+   "correta": "3/5",
+   "explica": "Com o mesmo denominador, somam-se os numeradores: 2 + 1 = 3. Resultado: 3/5."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "3/5 de 55",
+   "opcoes": [
+    "11",
+    "33",
+    "165",
+    "36"
+   ],
+   "correta": "33",
+   "explica": "55 ÷ 5 = 11; 11 × 3 = 33."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5/6 de 30",
+   "opcoes": [
+    "5",
+    "150",
+    "30",
+    "25"
+   ],
+   "correta": "25",
+   "explica": "30 ÷ 6 = 5; 5 × 5 = 25."
+  },
+  {
+   "enunciado": "Simplifique a fração (forma irredutível):",
+   "destaque": "20/25 = ___",
+   "opcoes": [
+    "5/4",
+    "5/6",
+    "4/5",
+    "4/25"
+   ],
+   "correta": "4/5",
+   "explica": "Dividindo numerador e denominador por 5: 20/25 = 4/5."
+  },
+  {
+   "enunciado": "Calcule (mesmo denominador):",
+   "destaque": "6/10 + 1/10 = ___",
+   "opcoes": [
+    "7/10",
+    "7/20",
+    "6/10",
+    "8/10"
+   ],
+   "correta": "7/10",
+   "explica": "Com o mesmo denominador, somam-se os numeradores: 6 + 1 = 7. Resultado: 7/10."
+  },
+  {
+   "enunciado": "Qual fração é equivalente a esta?",
+   "destaque": "5/6",
+   "opcoes": [
+    "10/6",
+    "5/12",
+    "7/8",
+    "10/12"
+   ],
+   "correta": "10/12",
+   "explica": "Multiplicando numerador e denominador por 2: 5/6 = 10/12."
+  },
+  {
+   "enunciado": "Simplifique a fração (forma irredutível):",
+   "destaque": "8/20 = ___",
+   "opcoes": [
+    "4/10",
+    "2/20",
+    "2/5",
+    "3/6"
+   ],
+   "correta": "2/5",
+   "explica": "Dividindo numerador e denominador por 4: 8/20 = 2/5."
+  },
+  {
+   "enunciado": "Simplifique a fração (forma irredutível):",
+   "destaque": "10/15 = ___",
+   "opcoes": [
+    "3/4",
+    "3/2",
+    "2/15",
+    "2/3"
+   ],
+   "correta": "2/3",
+   "explica": "Dividindo numerador e denominador por 5: 10/15 = 2/3."
+  },
+  {
+   "enunciado": "Qual fração é maior?",
+   "destaque": "3/4 ou 1/2",
+   "opcoes": [
+    "1/2",
+    "São iguais",
+    "3/4"
+   ],
+   "correta": "3/4",
+   "explica": "Com o mesmo denominador (4): 3/4 = 3/4 e 1/2 = 2/4. A maior é 3/4."
+  },
+  {
+   "enunciado": "Qual fração é equivalente a esta?",
+   "destaque": "3/5",
+   "opcoes": [
+    "15/25",
+    "3/25",
+    "8/10",
+    "15/5"
+   ],
+   "correta": "15/25",
+   "explica": "Multiplicando numerador e denominador por 5: 3/5 = 15/25."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1/4 de 28",
+   "opcoes": [
+    "8",
+    "28",
+    "7",
+    "9"
+   ],
+   "correta": "7",
+   "explica": "28 ÷ 4 = 7; 7 × 1 = 7."
+  },
+  {
+   "enunciado": "Simplifique a fração (forma irredutível):",
+   "destaque": "3/12 = ___",
+   "opcoes": [
+    "1/4",
+    "4/1",
+    "2/5",
+    "1/12"
+   ],
+   "correta": "1/4",
+   "explica": "Dividindo numerador e denominador por 3: 3/12 = 1/4."
+  },
+  {
+   "enunciado": "Qual fração é maior?",
+   "destaque": "7/10 ou 2/5",
+   "opcoes": [
+    "2/5",
+    "7/10",
+    "São iguais"
+   ],
+   "correta": "7/10",
+   "explica": "Com o mesmo denominador (10): 7/10 = 7/10 e 2/5 = 4/10. A maior é 7/10."
+  },
+  {
+   "enunciado": "Qual fração é maior?",
+   "destaque": "3/4 ou 5/8",
+   "opcoes": [
+    "São iguais",
+    "5/8",
+    "3/4"
+   ],
+   "correta": "3/4",
+   "explica": "Com o mesmo denominador (8): 3/4 = 6/8 e 5/8 = 5/8. A maior é 3/4."
+  }
+ ]
+}

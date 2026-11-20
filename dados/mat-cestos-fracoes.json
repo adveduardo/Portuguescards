@@ -1,0 +1,105 @@
+{
+ "titulo": "Matemática: fração própria, imprópria ou aparente?",
+ "cestos": [
+  {
+   "id": "propria",
+   "nome": "Própria (menor que 1)",
+   "emoji": "🍰",
+   "cor": "#27ae60"
+  },
+  {
+   "id": "impropria",
+   "nome": "Imprópria (maior que 1)",
+   "emoji": "🎂",
+   "cor": "#e74c3c"
+  },
+  {
+   "id": "aparente",
+   "nome": "Aparente (número inteiro)",
+   "emoji": "🍕",
+   "cor": "#2f80ed"
+  }
+ ],
+ "palavras": [
+  {
+   "palavra": "1/2",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "3/4",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "2/5",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "5/8",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "7/10",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "4/9",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "5/3",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "7/4",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "9/5",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "11/6",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "13/10",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "8/3",
+   "cesto": "impropria"
+  },
+  {
+   "palavra": "4/2",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "6/3",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "10/5",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "12/4",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "9/3",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "15/5",
+   "cesto": "aparente"
+  },
+  {
+   "palavra": "2/7",
+   "cesto": "propria"
+  },
+  {
+   "palavra": "3/8",
+   "cesto": "propria"
+  }
+ ]
+}
