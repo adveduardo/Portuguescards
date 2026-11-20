@@ -415,5 +415,145 @@ AV.iniciarConexao = el => {
   });
 };
 
+// ---------- link curto para os alunos copiarem do quadro ----------
+// Toda tela que mostra o endereço (#urlJogar) ganha o botão "✂️ Link curto". O is.gd (gratuito, sem conta)
+// devolve algo como is.gd/sala4821, que abre o jogar.html já com o código da sala preenchido.
+// "✏️ Meu link" guarda um link curto do próprio professor (bit.ly, TinyURL…) no lugar do is.gd.
+// A escolha fica neste computador: nas próximas salas o link curto já aparece sozinho.
+const LINK = {modo: 'painel_link_modo', meu: 'painel_link_meu', guardados: 'painel_links_curtos'};
+const lsLer = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const lsGravar = (k, v) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} };
+const semProtocolo = u => String(u || '').trim().replace(/^https?:\/\//i, '').replace(/\/+$/, '');
+const mesmoEndereco = (a, b) => {
+  const n = u => { let t = String(u || '').replace(/&amp;/g, '&'); try { t = decodeURIComponent(t); } catch (e) {} return semProtocolo(t); };
+  return n(a) !== '' && n(a) === n(b);
+};
+let nLink = 0;
+// pede ao is.gd com JSONP (funciona sem permissão especial do site); se o JSONP não responder, tenta fetch
+const pedirJsonp = url => new Promise((ok, falha) => {
+  const nome = 'avLinkCurto' + (++nLink) + '_' + Date.now().toString(36), s = document.createElement('script');
+  let fim = false, relogio = null;
+  const acabar = (erro, dados) => {
+    if (fim) return;
+    fim = true; clearTimeout(relogio);
+    window[nome] = () => {};   // resposta atrasada não vira erro
+    s.remove();
+    if (erro) falha(erro); else ok(dados || {});
+  };
+  window[nome] = dados => acabar(null, dados);
+  s.onerror = () => acabar(new Error('rede'));
+  s.onload = () => setTimeout(() => acabar(new Error('sem-jsonp')), 30);
+  relogio = setTimeout(() => acabar(new Error('tempo')), 10000);
+  s.src = url + '&callback=' + nome;
+  document.head.appendChild(s);
+});
+const pedirLink = url => pedirJsonp(url).catch(e => {
+  if (e.message !== 'sem-jsonp' || !window.fetch) throw e;
+  return fetch(url, {cache: 'no-store'}).then(r => r.json());
+});
+// AV.encurtar(endereço, apelidos?) → Promise com o link curto. Tenta os apelidos (ex.: sala4821) na ordem;
+// apelido que já existe só serve se já aponta para o mesmo endereço. Sem apelido livre, o is.gd escolhe um.
+AV.encurtar = (longo, apelidos) => {
+  let guardados = {};
+  try { guardados = JSON.parse(lsLer(LINK.guardados)) || {}; } catch (e) {}
+  if (guardados[longo]) return Promise.resolve(guardados[longo]);
+  const API = 'https://is.gd/';
+  const criar = apelido => pedirLink(API + 'create.php?format=json&url=' + encodeURIComponent(longo) + (apelido ? '&shorturl=' + encodeURIComponent(apelido) : ''));
+  const ehNosso = apelido => pedirLink(API + 'forward.php?format=json&shorturl=' + encodeURIComponent(apelido)).then(r => mesmoEndereco(r.url, longo), () => false);
+  const recusa = r => new Error(r && +r.errorcode === 3 ? 'limite' : 'recusado');
+  const tentar = lista => {
+    if (!lista.length) return criar('').then(r => { if (r.shorturl) return r.shorturl; throw recusa(r); });
+    const apelido = lista[0];
+    return criar(apelido).then(r => {
+      if (r.shorturl) return r.shorturl;
+      if (+r.errorcode !== 2) throw recusa(r);
+      return ehNosso(apelido).then(nosso => nosso ? API + apelido : tentar(lista.slice(1)));
+    });
+  };
+  return tentar((apelidos || []).slice()).then(curto => {
+    curto = String(curto).trim().replace(/^http:\/\//i, 'https://');
+    guardados[longo] = curto;
+    const chaves = Object.keys(guardados);
+    chaves.slice(0, Math.max(0, chaves.length - 200)).forEach(k => { delete guardados[k]; });
+    lsGravar(LINK.guardados, JSON.stringify(guardados));
+    return curto;
+  });
+};
+const copiarTexto = t => {
+  const velho = () => {
+    const ta = document.createElement('textarea');
+    ta.value = t; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+    document.body.appendChild(ta); ta.select();
+    let feito = false; try { feito = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); return feito;
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).then(() => true, () => velho());
+  return Promise.resolve(velho());
+};
+AV.linkCurto = () => {
+  const longoEl = document.getElementById('urlJogar');
+  if (!longoEl || longoEl.dataset.linkCurto) return;
+  longoEl.dataset.linkCurto = '1';
+  const grande = document.createElement('div');
+  grande.className = 'avCurto'; grande.hidden = true;
+  longoEl.parentNode.insertBefore(grande, longoEl);
+  const barra = document.createElement('div');
+  barra.className = 'avCurtoBarra';
+  barra.innerHTML = '<button type="button" class="avCurtoGerar" title="Mostrar um link curto para os alunos copiarem do quadro">✂️ Link curto</button>' +
+    '<button type="button" class="avCurtoCopiar" hidden title="Copiar o link (para mandar no grupo da turma, por exemplo)">📋 Copiar</button>' +
+    '<button type="button" class="avCurtoMeu" title="Usar um link curto seu (bit.ly, TinyURL…)">✏️ Meu link</button>';
+  longoEl.parentNode.insertBefore(barra, longoEl.nextSibling);
+  const bGerar = barra.querySelector('.avCurtoGerar'), bCopiar = barra.querySelector('.avCurtoCopiar'), bMeu = barra.querySelector('.avCurtoMeu');
+  let atual = '', vez = 0;
+  const codigo = () => { const c = document.getElementById('codigoSala'), t = c ? c.textContent.trim() : ''; return /^\d{4}$/.test(t) ? t : ''; };
+  const mostrar = link => {
+    atual = link || '';
+    grande.textContent = semProtocolo(atual); grande.hidden = !atual;
+    longoEl.classList.toggle('avLongoMiudo', !!atual);
+    bCopiar.hidden = !atual;
+    bGerar.disabled = false;
+    bGerar.textContent = atual ? '↩️ Link comprido' : '✂️ Link curto';
+  };
+  const voltarAoComprido = () => { vez++; lsGravar(LINK.modo, null); mostrar(''); };
+  const gerar = () => {
+    const meu = lsLer(LINK.meu);
+    vez++;
+    if (meu){ lsGravar(LINK.modo, 'curto'); return mostrar(meu); }
+    const c = codigo(), minha = vez;
+    bGerar.disabled = true; bGerar.textContent = '⏳ Encurtando…';
+    AV.encurtar(AV.urlJogar() + (c ? '?sala=' + c : ''), c ? ['sala' + c, 'jogo' + c, 'turma' + c] : []).then(link => {
+      if (minha !== vez) return;
+      lsGravar(LINK.modo, 'curto'); mostrar(link);
+    }, e => {
+      if (minha !== vez) return;
+      mostrar('');
+      AV.avisar(e.message === 'limite' ? 'O site de links curtos pediu uma pausa. Tente de novo daqui a alguns minutos.'
+        : e.message === 'recusado' ? 'O is.gd não aceitou encurtar este endereço agora. Dá para colar um link seu em ✏️ Meu link.'
+        : 'Não deu para encurtar agora (sem internet ou o is.gd está bloqueado na rede). Dá para colar um link seu em ✏️ Meu link.');
+    });
+  };
+  bGerar.onclick = () => { if (atual) voltarAoComprido(); else gerar(); };
+  bCopiar.onclick = () => { const t = atual; copiarTexto(/^https?:\/\//i.test(t) ? t : 'https://' + t).then(feito => AV.avisar(feito ? '📋 Copiado: ' + semProtocolo(t) : 'Não deu para copiar. Selecione o link e copie.')); };
+  bMeu.onclick = () => {
+    const antes = lsLer(LINK.meu) || '';
+    const v = prompt('Cole o seu link curto (ex.: bit.ly/minhaturma).\nEle precisa abrir este endereço:\n' + AV.urlJogar() + '\n\nPara apagar o seu link, deixe em branco.', antes);
+    if (v === null) return;
+    const t = v.trim();
+    if (!t){
+      lsGravar(LINK.meu, null);
+      if (antes && atual === antes) voltarAoComprido();
+      if (antes) AV.avisar('Seu link foi apagado.');
+      return;
+    }
+    if (!/^(https?:\/\/)?[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(t)) return AV.avisar('Isso não parece um link. Exemplo: bit.ly/minhaturma');
+    lsGravar(LINK.meu, t); lsGravar(LINK.modo, 'curto'); vez++; mostrar(t);
+  };
+  // sala nova (o jogo escreve o endereço de novo): refaz o link curto se ele estava em uso
+  const aplicar = () => { vez++; if (lsLer(LINK.modo) === 'curto' && longoEl.textContent.trim()) gerar(); else mostrar(''); };
+  new MutationObserver(aplicar).observe(longoEl, {childList: true, characterData: true, subtree: true});
+  aplicar();
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', AV.linkCurto); else AV.linkCurto();
+
 window.AoVivo = AV;
 })();

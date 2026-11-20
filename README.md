@@ -11,7 +11,9 @@ Painel de aula para Língua Portuguesa e Inglês (6º ao 9º ano, EJA, Ensino M�
 - **Jogos para a turma no projetor**: Lagoa, Ilha, Meteoros, Minhoca, Zumbis, Labirinto, Pênaltis, Cofre das Palavras,
   Robô Soletrador, Detetive do Mistério, Guardiões da Biblioteca, Ponte das Frases, Ritmo das Sílabas e outros.
 - **Jogos com os iPads** (cada iPad é uma equipe, pelo `jogar.html`): Quiz ao Vivo, Stop, Bingo, Escape Room,
-  Corrida das Equipes, Duelo de Monstrinhos, Conquista do Mapa…
+  Corrida das Equipes, Duelo de Monstrinhos, Conquista do Mapa… No telão, o botão **✂️ Link curto** troca o endereço
+  comprido por um curto (ex.: `is.gd/sala4821`, que já abre com o código da sala) para os alunos copiarem do quadro;
+  **✏️ Meu link** usa um link seu (bit.ly, TinyURL…).
 - **Com o corpo e a voz**: Quatro Cantos, Estátua das Palavras e Karaokê de leitura.
 - **Ferramentas da sala**: chamada, fila do banheiro, pote de conquistas, lousa, prova impressa, QR Code e mais.
 
@@ -28,7 +30,8 @@ A cada atualização no `main`, o GitHub Actions roda `testes/rodar.js`, que:
 1. confere se todos os arquivos de conteúdo (JSON) abrem e se o índice só aponta para arquivos que existem;
 2. confere se o menu não tem atividade repetida nem link quebrado;
 3. confere se as páginas que rodam nos iPads antigos (iOS 9) usam JavaScript compatível (ES5) e só emoji que eles mostram;
-4. abre **todas as páginas** num navegador de verdade e procura erros.
+4. abre **todas as páginas** num navegador de verdade e procura erros;
+5. confere se as salas com iPads mostram o botão ✂️ Link curto e se ele funciona (com o is.gd simulado).
 
 O selo lá em cima fica verde quando está tudo certo. Para rodar no computador:
 

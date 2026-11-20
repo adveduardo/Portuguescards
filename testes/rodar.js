@@ -5,7 +5,8 @@
      1) Conteúdo: todos os JSON abrem e o índice só aponta para arquivos que existem.
      2) Menu: nenhuma atividade repetida, toda opção abre uma página (e um arquivo de conteúdo) que existe.
      3) iPads antigos (iOS 9): JavaScript ES5 e emoji até o Unicode 8 nas páginas que rodam nos iPads.
-     4) Fumaça: abre todas as páginas num navegador de verdade e procura erros de JavaScript. */
+     4) Fumaça: abre todas as páginas num navegador de verdade e procura erros de JavaScript.
+     5) Link curto: as salas com iPads têm o botão ✂️ e ele mostra is.gd/sala + código (o is.gd é simulado). */
 'use strict';
 const fs = require('fs'), path = require('path'), http = require('http');
 const RAIZ = path.resolve(__dirname, '..');
@@ -71,21 +72,43 @@ servidor.listen(0, async () => {
   await ctx.route('**/rede-config.json*', r => r.fulfill({contentType: 'application/json', body: '{"firebase":""}'}));   // nunca toca no banco de verdade
   await ctx.addInitScript(() => { try { localStorage.setItem('painel_som', '0'); } catch (e) {} });
   const todas = paginas.concat(fs.existsSync(path.join(RAIZ, 'projetos')) ? fs.readdirSync(path.join(RAIZ, 'projetos')).filter(f => f.endsWith('.html')).map(f => 'projetos/' + f) : []);
-  const comErro = [];
+  const comErro = [], salasIpad = paginas.filter(f => ler(f).indexOf('id="urlJogar"') >= 0), semLinkCurto = [];
   for (const f of todas){
     const p = await ctx.newPage(), erros = [];
     p.on('pageerror', e => erros.push(e.message)); p.on('dialog', d => d.dismiss().catch(() => {}));
-    try { await p.goto(base + f, {waitUntil: 'load', timeout: 20000}); await p.waitForTimeout(600); } catch (e) { erros.push('não abriu: ' + e.message.split('\n')[0]); }
+    try {
+      await p.goto(base + f, {waitUntil: 'load', timeout: 20000}); await p.waitForTimeout(600);
+      if (salasIpad.indexOf(f) >= 0 && !(await p.$('#urlJogar + .avCurtoBarra .avCurtoGerar'))) semLinkCurto.push(f);
+    } catch (e) { erros.push('não abriu: ' + e.message.split('\n')[0]); }
     if (erros.length) comErro.push(f + ': ' + erros[0]);
     await p.close();
   }
   ok(!comErro.length, `Fumaça: ${todas.length} páginas abertas no navegador sem erro de JavaScript`, comErro);
+  ok(salasIpad.length >= 12 && !semLinkCurto.length, `Salas com iPads: as ${salasIpad.length} telas mostram o botão ✂️ Link curto`, semLinkCurto);
   // o menu monta a árvore com todas as atividades
   const p = await ctx.newPage(), errosMenu = [];
   p.on('pageerror', e => errosMenu.push(e.message));
   await p.goto(base + 'index.html'); await p.waitForTimeout(500);
   const arvore = await p.evaluate(() => { if (typeof MENU === 'undefined' || !MENU.raiz) return -1; let n = 0; const conta = no => { n += no.itens.length; no.filhos.forEach(conta); }; conta(MENU.raiz); return n; });
   ok(arvore === totalOpcoes && !errosMenu.length, `Árvore do menu com todas as ${totalOpcoes} opções do seletor`, ['árvore: ' + arvore].concat(errosMenu));
+  // ---------- 5) link curto (o is.gd é simulado: nada sai para a internet) ----------
+  await ctx.route('https://is.gd/**', r => {
+    const u = new URL(r.request().url()), apelido = u.searchParams.get('shorturl') || 'Ab3dEf';
+    r.fulfill({contentType: 'text/javascript', body: u.searchParams.get('callback') + '(' + JSON.stringify({shorturl: 'https://is.gd/' + apelido}) + ');'});
+  });
+  const pl = await ctx.newPage(), errosLink = [];
+  pl.on('pageerror', e => errosLink.push(e.message));
+  let link = {};
+  try {
+    await pl.goto(base + 'stop.html'); await pl.waitForSelector('#listaCats input', {timeout: 10000});
+    await pl.evaluate(() => { const c = document.querySelectorAll('#listaCats input'); if (![].some.call(c, i => i.checked)) c[0].checked = true; });
+    await pl.click('#btnCriar'); await pl.waitForSelector('#tSala.ativa', {timeout: 10000});
+    await pl.click('.avCurtoGerar');
+    await pl.waitForFunction(() => !document.querySelector('.avCurto').hidden, null, {timeout: 10000});
+    link = await pl.evaluate(() => ({curto: document.querySelector('.avCurto').textContent, codigo: document.getElementById('codigoSala').textContent.trim()}));
+  } catch (e) { errosLink.push(e.message.split('\n')[0]); }
+  ok(link.curto === 'is.gd/sala' + link.codigo && !errosLink.length, 'Link curto: o botão ✂️ mostra is.gd/sala + o código da sala', [JSON.stringify(link)].concat(errosLink));
+  await pl.close();
   await nav.close(); servidor.close();
   console.log(falhas ? `\n${falhas} teste(s) com problema.` : '\nTudo certo! 🎉');
   process.exit(falhas ? 1 : 0);

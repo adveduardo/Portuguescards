@@ -38,6 +38,11 @@ button.vermelho{background:var(--vermelho);color:#fff;font-size:1.3rem}
 .url{font-size:clamp(1.1rem,2.8vw,1.7rem);font-weight:bold;color:var(--azul);word-break:break-all}
 .codigoBox{text-align:center;font-weight:bold;font-size:1.1rem}
 .codigoBox b{display:block;font-size:clamp(3.5rem,10vw,6rem);letter-spacing:10px;line-height:1;background:var(--texto);color:#fff;border-radius:20px;padding:8px 20px;margin-top:4px}
+/* ✂️ link curto para copiar do quadro (montado pelo jogo-ao-vivo.js) */
+.avCurto{font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;font-size:clamp(2rem,6vw,3.4rem);font-weight:bold;color:var(--texto);line-height:1.1;letter-spacing:1px;word-break:break-all;margin:2px 0}
+.url.avLongoMiudo{font-size:.85rem;font-weight:normal;opacity:.55}
+.avCurtoBarra{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.avCurtoBarra button{font-size:.9rem;padding:6px 12px;border-radius:12px;background:#eef3ff;box-shadow:0 3px 0 #0002}
 .grupos{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0;min-height:60px}
 .grupoChip{display:flex;align-items:center;gap:10px;color:#fff;border-radius:18px;padding:10px 16px;font-size:1.4rem;font-weight:bold;box-shadow:0 4px 0 #0002;animation:entrar .35s}
 .grupoChip .e{font-size:2.2rem}
