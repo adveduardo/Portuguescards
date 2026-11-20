@@ -1,0 +1,33 @@
+# Testes automáticos do Painel do Professor.
+# A cada atualização no main, o GitHub abre todas as páginas num navegador de verdade e confere
+# o conteúdo, o menu e a compatibilidade com os iPads antigos. O resultado aparece na aba "Actions"
+# e no selo do README (verde = tudo certo).
+name: Testes do painel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Instalar as ferramentas de teste
+        working-directory: testes
+        run: npm install --no-audit --no-fund
+      - name: Instalar o navegador (Chromium)
+        working-directory: testes
+        run: npx playwright install --with-deps chromium
+      - name: Rodar os testes
+        working-directory: testes
+        run: node rodar.js
