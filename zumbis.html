@@ -28,6 +28,7 @@
   <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>. No modo <b>🏷️ Classes de palavras</b>, o zumbi traz uma palavra e vocês escolhem a classe dela. Se um zumbi chegar à escola, vocês perdem um coração; sem corações, a escola é destruída!</p>
   <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
   <p class="dica" id="infoArq">Carregando…</p>
+  <p><button type="button" id="btMeuJson">📋 Colar o meu JSON (palavras novas)</button></p>
   <div id="jsonCaixa" style="display:none;max-width:620px;margin:6px auto;text-align:left">
     <p class="dica">Cole aqui as suas palavras. <b>Ortografia:</b> "frases" com a frase, a palavra errada, a certa e outras opções. <b>Classes:</b> "palavras" com a palavra e a classe (ou "rodadas" com a palavra entre colchetes na frase).</p>
     <textarea id="jsonTexto" spellcheck="false" style="width:100%;min-height:130px;font:inherit;font-size:15px;border-radius:10px;padding:8px" placeholder='{"frases": [{"frase": "Abriram uma excessão.", "errada": "excessão", "correta": "exceção", "opcoes": ["exceção", "esceção"]}]}'></textarea>
@@ -96,6 +97,12 @@
   $('btModeloOrto').onclick = function(){ copiar(MODELO_ORTO, '📋 Modelo de ortografia copiado (e colado na caixa).'); };
   $('btModeloClasses').onclick = function(){ copiar(MODELO_CLASSES, '📋 Modelo de classes copiado (e colado na caixa).'); };
   $('jsonTexto').oninput = usarJson;
+  $('btMeuJson').onclick = function(){   // atalho visível para o modo "O meu JSON"
+    var sel = $('selArquivo');
+    if (!sel.querySelector('option[value="meu-json"]')) return;
+    sel.value = 'meu-json'; if (sel.onchange) sel.onchange();
+    setTimeout(function(){ try { $('jsonTexto').focus(); $('jsonCaixa').scrollIntoView({block: 'center'}); } catch (e) {} }, 50);
+  };
   try { $('jsonTexto').value = localStorage.getItem('zumbis_json') || ''; } catch (e) {}
   ARC.seletor($('selArquivo'), 'detetive', 'detetive-padrao.json', function(arq){
     var sel = $('selArquivo');
