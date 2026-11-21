@@ -182,7 +182,8 @@
     if (f === jogo.frente) return;
     jogo.frente = f;
     if (!f){ $('frase').innerHTML = jogo.criados < jogo.qtd ? 'Lá vem mais um…' : ''; $('ops').innerHTML = ''; return; }
-    var fr = esc(f.it.frase).replace(esc(f.it.errada), '<mark>' + esc(f.it.errada) + '</mark>');
+    var er = esc(f.it.errada).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), re = new RegExp('(^|[^A-Za-zÀ-ÿ])(' + er + ')(?![A-Za-zÀ-ÿ])');   // marca só a palavra inteira
+    var fr = esc(f.it.frase); fr = re.test(fr) ? fr.replace(re, '$1<mark>$2</mark>') : fr.replace(esc(f.it.errada), '<mark>' + esc(f.it.errada) + '</mark>');
     $('frase').innerHTML = (f.it.frase ? fr : '<mark>' + esc(f.it.errada) + '</mark>') + ' &nbsp;→ ' + (f.it.classe ? 'qual é a classe?' : 'como se escreve?');
     $('ops').innerHTML = f.ops.map(function(o, i){ return '<button type="button" data-i="' + i + '">' + (i + 1) + ') ' + esc(o) + '</button>'; }).join('');
     var bs = $('ops').querySelectorAll('button');
