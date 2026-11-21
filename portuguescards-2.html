@@ -64,7 +64,8 @@
   .nota{font-size:13px;background:var(--nota-fundo);color:var(--nota-texto);border-radius:12px;padding:8px 12px;line-height:1.4}
 
   /* ---------- início ---------- */
-  #telaInicio{overflow-y:auto;padding:clamp(14px,2.4vw,34px) clamp(14px,2.4vw,34px) 0}
+  #telaInicio{--lado:clamp(14px,2.4vw,34px)}
+  .inicio-rolagem{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--lado) var(--lado) 18px}
   .cabecalho{display:flex;align-items:center;gap:16px;margin:0 auto 6px;max-width:1360px;width:100%;flex-wrap:wrap}
   .cabecalho .esp{flex:1}
   .aviso-proto{max-width:1360px;width:100%;margin:6px auto 16px;color:var(--suave);font-size:15px}
@@ -139,12 +140,13 @@
   .chave[aria-checked="true"]{background:var(--ok)}
   .chave[aria-checked="true"]::after{transform:translateX(24px)}
   .chave:disabled{cursor:default}
-  .rodape-inicio{position:sticky;bottom:0;max-width:1360px;width:100%;margin:18px auto 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-    background:var(--sup);border:1px solid var(--borda);border-bottom:none;border-radius:24px 24px 0 0;padding:14px 16px 14px 22px;box-shadow:var(--sombra-forte)}
+  .rodape-inicio{position:relative;flex:none;width:min(1360px,calc(100% - 2 * var(--lado)));margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    background:var(--sup);border:1px solid var(--borda);border-bottom:none;border-radius:24px 24px 0 0;padding:14px 16px 14px 22px;padding-bottom:max(14px,env(safe-area-inset-bottom));box-shadow:var(--sombra-forte)}
   .resumo{flex:1;font-size:16px;color:var(--suave);min-width:220px}
   .resumo b{color:var(--texto)}
   @media(max-width:760px){
-    #telaInicio{padding:12px 12px 0}
+    #telaInicio{--lado:12px}
+    .inicio-rolagem{padding-bottom:12px}
     .cabecalho{gap:10px}
     .logo{font-size:26px}
     .aviso-proto{font-size:13px;margin:4px auto 12px}
@@ -153,7 +155,7 @@
     .passo h2{font-size:21px}
     .lista-bancos{grid-template-columns:1fr}
     .aba{font-size:14px;padding:8px 6px}
-    .rodape-inicio{padding:10px 12px;gap:8px;border-radius:18px 18px 0 0;margin-top:12px}
+    .rodape-inicio{padding:10px 12px;padding-bottom:max(10px,env(safe-area-inset-bottom));gap:8px;border-radius:18px 18px 0 0}
     .rodape-inicio .resumo{font-size:13px;min-width:0;flex:1 1 100%}
     .rodape-inicio .btn-pri{flex:1 1 100%;justify-content:center;padding:12px 20px}
   }
@@ -205,6 +207,9 @@
   .flutua{position:fixed;z-index:15;font-family:var(--titulo);font-weight:700;font-size:28px;color:var(--ok);pointer-events:none;text-shadow:0 2px 0 var(--sup)}
   .flutua.menos{color:var(--erro)}
   .tabuleiro{flex:1;display:grid;justify-content:center;align-content:center;gap:var(--gap,16px);padding:22px 0 8px;min-height:0}
+  .tabuleiro.rola{align-content:start;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-bottom:18px}
+  .tabuleiro.rola-x{justify-content:start;overflow-x:auto}
+  .tabuleiro.rola .cab-tema{position:sticky;top:0;z-index:2;box-shadow:0 6px 12px rgba(0,0,0,.16)}
   .carta{--cor:#4f46e5;position:relative;width:var(--w,160px);height:var(--h,200px);border:none;border-radius:22px;color:#fff;padding:0;overflow:hidden;
     background:var(--cor);background:linear-gradient(155deg,var(--cor),var(--cor-esc,#312e81));
     box-shadow:0 8px 0 var(--cor-esc,#312e81),0 16px 28px rgba(0,0,0,.18);
@@ -513,6 +518,7 @@
 <body>
 
 <div id="telaInicio" class="tela ativa">
+ <div class="inicio-rolagem">
   <header class="cabecalho">
     <div class="logo"><span class="marca">🃏</span>PortuguêsCards <span class="v2">2.0</span></div>
     <span class="selo">Protótipo do visual novo</span>
@@ -560,17 +566,18 @@
       <div class="modo-opcoes" id="modoOpcoes" hidden></div>
     </section>
     <section class="passo passo-e" id="passoEquipes" aria-labelledby="t3">
-      <h2 id="t3"><span class="n">3</span>Equipes</h2>
-      <p class="sub">Toque no mascote para trocar. De 2 a 6 equipes.</p>
+      <h2 id="t3"><span class="n">3</span>Grupos</h2>
+      <p class="sub">Toque no mascote para trocar. De 2 a 6 grupos.</p>
       <p class="nota" id="notaEquipes" hidden></p>
       <div class="equipes" id="equipes"></div>
-      <div class="mais-equipe"><button type="button" class="btn-sec" id="btnMaisEquipe"><span data-ico="mais"></span>Equipe</button></div>
+      <div class="mais-equipe"><button type="button" class="btn-sec" id="btnMaisEquipe"><span data-ico="mais"></span>Grupo</button></div>
     </section>
     <section class="passo passo-r" aria-labelledby="t4">
       <h2 id="t4"><span class="n">4</span>Regras</h2>
       <div id="regras"></div>
     </section>
   </main>
+ </div>
   <footer class="rodape-inicio">
     <div class="resumo" id="resumo"></div>
     <button type="button" class="btn-pri" id="btnComecar"><span data-ico="play"></span><span class="rot">Começar</span></button>
@@ -722,14 +729,14 @@ const EXEMPLO_REDACAO = [
   ['Lixo eletrônico: um problema de todos', 'Explique por que o tema é importante e proponha uma solução.']
 ];
 const MODOS = {
-  padrao: {nome: 'Modo Padrão', ic: '🃏', desc: 'Cada carta é uma pergunta. Acertou, a equipe ganha os pontos da carta. Com as <b>cartas surpresa</b>, às vezes vem Sorte ou Azar.'},
+  padrao: {nome: 'Modo Padrão', ic: '🃏', desc: 'Cada carta é uma pergunta. Acertou, o grupo ganha os pontos da carta. Com as <b>cartas surpresa</b>, às vezes vem Sorte ou Azar.'},
   corrida: {nome: 'Corrida na Trilha', ic: '🏁', desc: 'Cada acerto faz o mascote andar na pista: carta de <b>10 pts anda 1 casa, 20 anda 2 e 30 anda 3</b>. Casa ⭐ dá um empurrão e 🌀 faz escorregar. Quem cruzar a chegada vence.'},
-  palavra: {nome: 'Palavra Secreta', ic: '🔤', desc: 'Cada acerto revela uma letra da palavra escondida. Na sua vez, a equipe pode <b>arriscar a palavra</b> em vez de abrir uma carta: quanto mais letras escondidas, mais pontos.'},
+  palavra: {nome: 'Palavra Secreta', ic: '🔤', desc: 'Cada acerto revela uma letra da palavra escondida. Na sua vez, o grupo pode <b>arriscar a palavra</b> em vez de abrir uma carta: quanto mais letras escondidas, mais pontos.'},
   roleta: {nome: 'Roleta dos Temas', ic: '🎡', desc: 'Gire a roleta: ela escolhe o <b>tema da pergunta</b> ou um bônus (vale o dobro, +5 ou passa a vez). Use "tema" no JSON.'},
-  velha: {nome: 'Jogo da Velha', ic: '⭕', desc: 'Duas equipes e 9 casas. Acertou a pergunta, a casa fica com a equipe. Quem fizer <b>uma linha</b> ganha +10 e vence.'},
+  velha: {nome: 'Jogo da Velha', ic: '⭕', desc: 'Dois grupos e 9 casas. Acertou a pergunta, a casa fica com o grupo. Quem fizer <b>uma linha</b> ganha +10 e vence.'},
   memoria: {nome: 'Jogo da Memória', ic: '🧠', desc: 'Vire duas cartas: pergunta e resposta formam um par. Achou, ganha 10 e <b>joga de novo</b>.'},
   temas: {nome: 'Tabuleiro de Temas', ic: '🏛️', desc: 'Uma coluna por tema e cartas de <b>10, 20, 30… pontos</b>: quanto mais difícil, mais vale. Use "tema" e "pts" no JSON.'},
-  sequencia: {nome: 'Sequência', ic: '➡️', desc: 'As perguntas aparecem <b>uma depois da outra</b>, na ordem, e a vez passa de equipe em equipe.'},
+  sequencia: {nome: 'Sequência', ic: '➡️', desc: 'As perguntas aparecem <b>uma depois da outra</b>, na ordem, e a vez passa de grupo em grupo.'},
   redacao: {nome: 'Temas de Redação', ic: '✍️', desc: 'Cada carta é um tema. Abra, leia a orientação e <b>anote o aluno</b> que vai escrever. No fim, sai a lista.'}
 };
 const ORDEM_MODOS = ['padrao', 'corrida', 'palavra', 'roleta', 'velha', 'memoria', 'temas', 'sequencia', 'redacao'];
@@ -746,11 +753,15 @@ const somPainel = (() => { try { return localStorage.getItem('painel_som') !== '
 const cfg = Object.assign({
   modo: 'padrao', fonte: 'banco', bancos: ['__exemplo'], qtd: 12, tempo: true, segundos: 30, rebote: true, surpresa: true, trilha: 15, palavraSecreta: '', dicaSecreta: '',
   som: somPainel, confete: true, calmo: calmoPainel || reduzido,
-  equipes: MASCOTES.slice(0, 3).map(x => ({m: x.m, nome: x.nome, cor: x.cor}))
+  equipes: MASCOTES.slice(0, 3).map((x, k) => ({m: x.m, nome: 'Grupo ' + (k + 1), cor: x.cor}))
 }, ler('pc2_config', {}));
 if (!MODOS[cfg.modo]) cfg.modo = 'padrao';
 let jsonTexto = ler('pc2_json', '');
 const salvarCfg = () => gravar('pc2_config', cfg);
+// os nomes padrão são "Grupo 1, Grupo 2…", como no PortuguêsCards original; um nome digitado pelo professor fica como está
+const grupoAuto = nome => !String(nome || '').trim() || /^Grupo \d+$/.test(String(nome).trim());
+const renumerarGrupos = () => cfg.equipes.forEach((t, k) => { if (grupoAuto(t.nome)) t.nome = 'Grupo ' + (k + 1); });
+if (!cfg.nomesGrupo){ cfg.equipes.forEach((t, k) => { if (grupoAuto(t.nome) || MASCOTES.some(x => x.nome === t.nome)) t.nome = 'Grupo ' + (k + 1); }); cfg.nomesGrupo = true; salvarCfg(); }
 const animar = () => !cfg.calmo && !!window.gsap;
 const regra = k => !!cfg[k] && (!VALE[k] || VALE[k].includes(cfg.modo));
 const aplicarCalmo = () => document.documentElement.classList.toggle('calmo', !!cfg.calmo);
@@ -844,6 +855,7 @@ function lerJson(txt){
   else return {lista: [], palavras: [], erro: 'O JSON precisa ser uma lista [ … ] de questões, como no modelo.'};
   return {lista, palavras, erro: lista.length ? '' : palavras.length ? 'Achei as palavras secretas, mas nenhuma questão: coloque as questões na mesma lista.' : 'Não achei nenhuma questão nesse JSON.'};
 }
+const limiteJson = m => m === 'memoria' ? 25 : m === 'corrida' ? 80 : 50;   // até 50 cartas (25 pares na memória)
 const serveNoModo = (q, modo) => modo === 'redacao' ? !!q.q : modo === 'memoria' ? !!(q.q && q.certa) : !!(q.q && q.certa && q.ops.length >= 2);
 const MODELOS = {
   padrao: [{q: 'Qual palavra está escrita corretamente?', a: 'exceção', b: 'excessão', c: 'esceção', d: 'execção', correct: 'A', exp: 'Exceção vem de “exceto”.', pts: 10},
@@ -898,7 +910,8 @@ function desenharStatusJson(){
   if (!boas.length){ el.className = 'json-status erro'; el.textContent = `⚠️ Nenhuma das ${lista.length} questões serve para ${MODOS[cfg.modo].nome} (${cfg.modo === 'memoria' ? 'cada par precisa de "q" e da resposta certa' : 'cada questão precisa de alternativas e da letra certa em "correct"'}).`; return; }
   const nome = cfg.modo === 'redacao' ? (boas.length === 1 ? 'tema' : 'temas') : cfg.modo === 'memoria' ? (boas.length === 1 ? 'par' : 'pares') : (boas.length === 1 ? 'questão' : 'questões');
   el.className = 'json-status ok';
-  el.textContent = `✅ ${boas.length} ${nome} ${boas.length === 1 ? 'pronto' : 'prontos'}`.replace(/questões prontos/, 'questões prontas').replace(/questão pronto/, 'questão pronta') + (temas > 1 ? ` · ${temas} temas` : '') + (cfg.modo === 'palavra' ? (palavras.length ? ` · ${palavras.length} ${palavras.length === 1 ? 'palavra secreta' : 'palavras secretas'}` : ' · sem "palavra" no JSON: vale a palavra digitada ou as de exemplo') : '') + (fora ? ` · ${fora} ${fora === 1 ? 'item ficou' : 'itens ficaram'} de fora (sem resposta certa)` : '');
+  el.textContent = `✅ ${boas.length} ${nome} ${boas.length === 1 ? 'pronto' : 'prontos'}`.replace(/questões prontos/, 'questões prontas').replace(/questão pronto/, 'questão pronta') + (temas > 1 ? ` · ${temas} temas` : '') + (cfg.modo === 'palavra' ? (palavras.length ? ` · ${palavras.length} ${palavras.length === 1 ? 'palavra secreta' : 'palavras secretas'}` : ' · sem "palavra" no JSON: vale a palavra digitada ou as de exemplo') : '') + (fora ? ` · ${fora} ${fora === 1 ? 'item ficou' : 'itens ficaram'} de fora (sem resposta certa)` : '')
+    + (boas.length > limiteJson(cfg.modo) ? ` · o jogo usa ${['memoria', 'redacao'].includes(cfg.modo) ? 'os primeiros' : 'as primeiras'} ${limiteJson(cfg.modo)}` : '');
 }
 function desenharBancos(){
   BANCOS[0].det = detExemplo() + (bancoFalhou ? ' · o banco completo só abre pelo site do painel' : '');
@@ -914,7 +927,7 @@ function desenharBancos(){
   });
 }
 function desenharQtd(){
-  $('#qtd').innerHTML = [9, 12, 16, 20].map(n => `<button type="button" class="seg" data-n="${n}" aria-pressed="${cfg.qtd === n}">${n}</button>`).join('');
+  $('#qtd').innerHTML = [9, 12, 16, 20, 30, 40, 50].map(n => `<button type="button" class="seg" data-n="${n}" aria-pressed="${cfg.qtd === n}">${n}</button>`).join('');
   $$('#qtd .seg').forEach(b => b.onclick = () => { cfg.qtd = +b.dataset.n; salvarCfg(); desenharQtd(); desenharResumo(); });
 }
 function desenharModos(){
@@ -949,26 +962,26 @@ function desenharEquipes(){
   const velha = cfg.modo === 'velha', red = cfg.modo === 'redacao';
   $('#passoEquipes').classList.toggle('apagado', red);
   $('#notaEquipes').hidden = !(velha || red);
-  $('#notaEquipes').textContent = red ? 'Em Temas de Redação não há equipes: você anota o nome do aluno em cada tema.' : 'No Jogo da Velha jogam só as 2 primeiras equipes.';
+  $('#notaEquipes').textContent = red ? 'Em Temas de Redação não há grupos: você anota o nome do aluno em cada tema.' : 'No Jogo da Velha jogam só os 2 primeiros grupos.';
   $('#equipes').innerHTML = cfg.equipes.map((t, i) => `<div class="equipe${velha && i > 1 ? ' fora' : ''}" style="--cor:${t.cor}">
       <button type="button" class="masc" data-i="${i}" title="Trocar o mascote" aria-label="Trocar o mascote de ${esc(t.nome)}">${t.m}</button>
-      <input type="text" value="${esc(t.nome)}" maxlength="18" data-i="${i}" aria-label="Nome da equipe ${i + 1}">
-      ${cfg.equipes.length > 2 ? `<button type="button" class="tirar" data-i="${i}" title="Tirar esta equipe" aria-label="Tirar ${esc(t.nome)}">${ico('x')}</button>` : ''}</div>`).join('');
+      <input type="text" value="${esc(t.nome)}" maxlength="18" data-i="${i}" aria-label="Nome do grupo ${i + 1}">
+      ${cfg.equipes.length > 2 ? `<button type="button" class="tirar" data-i="${i}" title="Tirar este grupo" aria-label="Tirar ${esc(t.nome)}">${ico('x')}</button>` : ''}</div>`).join('');
   $$('#equipes .masc').forEach(b => b.onclick = () => {
     const t = cfg.equipes[+b.dataset.i], usados = cfg.equipes.map(x => x.m);
     let k = MASCOTES.findIndex(x => x.m === t.m);
     for (let n = 0; n < MASCOTES.length; n++){ k = (k + 1) % MASCOTES.length; if (!usados.includes(MASCOTES[k].m)) break; }
-    const novo = MASCOTES[k], eraPadrao = MASCOTES.some(x => x.nome === t.nome);
-    t.m = novo.m; t.cor = novo.cor; if (eraPadrao) t.nome = novo.nome;
+    const novo = MASCOTES[k];
+    t.m = novo.m; t.cor = novo.cor;
     salvarCfg(); desenharEquipes(); desenharResumo();
   });
   $$('#equipes input').forEach(inp => inp.oninput = () => { cfg.equipes[+inp.dataset.i].nome = inp.value; salvarCfg(); desenharResumo(); });
-  $$('#equipes .tirar').forEach(b => b.onclick = () => { cfg.equipes.splice(+b.dataset.i, 1); salvarCfg(); desenharEquipes(); desenharResumo(); });
+  $$('#equipes .tirar').forEach(b => b.onclick = () => { cfg.equipes.splice(+b.dataset.i, 1); renumerarGrupos(); salvarCfg(); desenharEquipes(); desenharResumo(); });
   $('#btnMaisEquipe').disabled = cfg.equipes.length >= 6;
 }
 const REGRAS = [
   {k: 'tempo', emo: '⏱️', t: 'Tempo por pergunta', s: '30 segundos, com um anel que muda de cor'},
-  {k: 'rebote', emo: '🏀', t: 'Rebote', s: 'Se a equipe errar, a próxima tenta valendo metade'},
+  {k: 'rebote', emo: '🏀', t: 'Rebote', s: 'Se o grupo errar, o próximo tenta valendo metade'},
   {k: 'surpresa', emo: '🎲', t: 'Cartas surpresa', s: 'Às vezes a carta é Sorte ou Azar (só no Modo Padrão)'},
   {k: 'som', emo: '🔊', t: 'Som', s: 'Sons curtos ao virar a carta, acertar e errar'},
   {k: 'confete', emo: '🎉', t: 'Confete', s: 'Sai das laterais, sem cobrir a pergunta'},
@@ -996,7 +1009,7 @@ function desenharResumo(){
   if (cfg.fonte === 'json'){
     const {lista, erro} = lerJson(jsonTexto), boas = lista.filter(q => serveNoModo(q, m));
     if (erro || !boas.length) pronto = false;
-    else { n = Math.min(boas.length, m === 'memoria' ? 12 : m === 'corrida' ? 80 : 48); partes.push(`<b>${quantosNoTabuleiro(n)}</b>`, 'JSON colado'); }
+    else { n = Math.min(boas.length, limiteJson(m)); partes.push(`<b>${quantosNoTabuleiro(n)}</b>`, 'JSON colado'); }
   } else {
     const nomes = cfg.bancos.map(a => (BANCOS.find(b => b.arquivo === a) || {}).nome).filter(Boolean), so = cfg.bancos.length === 1 && cfg.bancos[0] === '__exemplo';
     if (m === 'redacao') partes.push(`<b>${quantosNoTabuleiro(EXEMPLO_REDACAO.length)}</b>`, 'temas de exemplo');
@@ -1006,7 +1019,7 @@ function desenharResumo(){
       partes.push(`<b>${quantosNoTabuleiro(n)}</b>`, esc(nomes.length > 2 ? nomes.slice(0, 2).join(', ') + ` e mais ${nomes.length - 2}` : nomes.join(' e ')));
     }
   }
-  if (m !== 'redacao') partes.splice(2, 0, `<b>${m === 'velha' ? 2 : cfg.equipes.length} equipes</b>`);
+  if (m !== 'redacao') partes.splice(2, 0, `<b>${m === 'velha' ? 2 : cfg.equipes.length} grupos</b>`);
   if (m === 'corrida' && pronto) partes.push(`trilha de ${trilhaPara(n)} casas`);
   if (m === 'palavra'){ const np = palavrasDoJogo(false).length; partes.push(`${np} ${np === 1 ? 'palavra secreta' : 'palavras secretas'}`); }
   if (regra('tempo')) partes.push(cfg.segundos + ' s por pergunta');
@@ -1068,8 +1081,7 @@ async function prepararQuestoes(){
     if (!boas.length) throw new Error('Nenhuma questão desse JSON serve para ' + MODOS[m].nome + '.');
     const temas = [...new Set(boas.map(q => q.tema).filter(Boolean))];
     boas.forEach(q => { q.assunto = q.tema ? {nome: q.tema, ic: ICONE_ASSUNTO[q.tema] || '📝', cor: CORES[temas.indexOf(q.tema) % CORES.length]} : ASSUNTO_PADRAO; });
-    if (m === 'memoria') return boas.slice(0, 12);
-    return boas.slice(0, m === 'corrida' ? 80 : 48);
+    return boas.slice(0, limiteJson(m));
   }
   if (m === 'redacao') return exemploDoModo('redacao');
   const so = cfg.bancos.length === 1 && cfg.bancos[0] === '__exemplo';
@@ -1096,10 +1108,10 @@ function montarTemas(lista){
   const nomeDe = q => q.tema || (q.assunto && q.assunto !== ASSUNTO_PADRAO ? q.assunto.nome : '') || 'Bloco';
   lista.forEach(q => { const n = nomeDe(q); if (!porNome[n]){ porNome[n] = {nome: n, assunto: q.assunto, itens: []}; grupos.push(porNome[n]); } porNome[n].itens.push(q); });
   let colunas = [];
-  const maxLinhas = grupos.length === 1 ? 4 : 5;
+  const maxLinhas = Math.max(grupos.length === 1 ? 4 : 5, Math.ceil(lista.length / 8));
   grupos.forEach(g => {
     if (g.itens.length <= maxLinhas) colunas.push(g);
-    else { const partes = Math.ceil(g.itens.length / maxLinhas), por = Math.ceil(g.itens.length / partes); for (let k = 0; k < partes; k++) colunas.push({nome: g.nome + ' ' + (k + 1), assunto: g.assunto, itens: g.itens.slice(k * por, (k + 1) * por)}); }
+    else { const partes = Math.ceil(g.itens.length / maxLinhas), por = Math.ceil(g.itens.length / partes); for (let k = 0; k < partes; k++) colunas.push({nome: g.nome + ' ' + (k + 1), assunto: g.assunto, itens: g.itens.slice(Math.round(k * g.itens.length / partes), Math.round((k + 1) * g.itens.length / partes))}); }
   });
   const cartas = [];
   colunas = colunas.map((col, ci) => {
@@ -1142,7 +1154,7 @@ async function comecar(){
   try {
     const lista = await prepararQuestoes(), montado = montarCartas(lista);
     const equipes = (cfg.modo === 'velha' ? cfg.equipes.slice(0, 2) : cfg.modo === 'redacao' ? [] : cfg.equipes)
-      .map((t, k) => ({m: t.m, nome: (t.nome || '').trim() || 'Equipe ' + (k + 1), cor: t.cor, pts: 0, pos: 0, acertos: 0, erros: 0}));
+      .map((t, k) => ({m: t.m, nome: (t.nome || '').trim() || 'Grupo ' + (k + 1), cor: t.cor, pts: 0, pos: 0, acertos: 0, erros: 0}));
     jogo = Object.assign({modo: cfg.modo, equipes, vez: 0, encerrado: false, mem: {abertas: [], trava: false}, seq: 0, animando: false, voltas: 0, dadoRot: {x: -18, y: 24}}, montado);
     jogo.hist = [equipes.map(() => 0)];
     if (jogo.modo === 'roleta') jogo.fatias = montarFatias();
@@ -1253,6 +1265,7 @@ function cartaHtml(c, i){
 }
 function desenharTabuleiro(){
   const tab = $('#tabuleiro'), m = jogo.modo;
+  tab.classList.remove('rola', 'rola-x');
   if (m === 'corrida'){ desenharMontes(); tab.onclick = e => { const b = e.target.closest('.monte'); if (b && !b.disabled) tirarCarta(+b.dataset.p); }; return; }
   if (m === 'roleta'){ tab.innerHTML = ''; tab.onclick = null; return; }
   let h = '';
@@ -1276,25 +1289,34 @@ function redesenharCarta(i, efeito){
   if (efeito && animar() && novo) gsap.from(novo, {scale: .6, rotation: -8, opacity: 0, duration: .5, ease: 'back.out(2)', clearProps: 'transform,opacity'});
 }
 function ajustarTabuleiro(){
-  if (!jogo || jogo.modo === 'corrida' || jogo.modo === 'roleta') return;
-  const tab = $('#tabuleiro'), m = jogo.modo, n = jogo.cartas.length, cs = getComputedStyle(tab);
-  const W = tab.clientWidth, H = tab.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 10;
+  if (!jogo) return;
+  const tab = $('#tabuleiro'), m = jogo.modo, n = jogo.cartas.length;
+  tab.classList.remove('rola', 'rola-x');
+  if (m === 'corrida' || m === 'roleta') return;
+  const cs = getComputedStyle(tab);
+  let W = tab.clientWidth;
+  const H = tab.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 10;
   if (W <= 0 || H <= 0) return;
   const gap = Math.round(Math.max(8, Math.min(22, W * .013)));
-  let cols, w, p = 1.25;
+  // abaixo deste tamanho a carta fica difícil de ler: aí só o tabuleiro rola e a barra de cima fica parada no lugar
+  const minW = m === 'memoria' ? 80 : m === 'temas' ? 60 : 72;
+  let cols, w, p = 1.25, rola = false, rolaX = false;
   if (m === 'velha'){ p = 1; cols = 3; w = Math.min((W - 2 * gap) / 3, (H - 2 * gap) / 3); w = Math.min(w, 220); }
   else if (m === 'temas'){
     p = .72; cols = jogo.colunas.length;
     const linhas = Math.max(...jogo.colunas.map(c => c.idxs.length)), cab = 46;
     w = Math.min((W - (cols - 1) * gap) / cols, (H - cab - linhas * gap) / linhas / p); w = Math.min(w, 260);
+    if (w < minW){ rola = true; tab.classList.add('rola'); W = tab.clientWidth; w = Math.min(260, Math.max(minW, (W - (cols - 1) * gap) / cols)); rolaX = cols * w + (cols - 1) * gap > W + 1; }
     tab.style.setProperty('--cab', cab + 'px');
   } else {
     if (m === 'memoria') p = 1.1;
     let melhor = {w: 0, c: 1};
     for (let c = 1; c <= n; c++){ const r = Math.ceil(n / c), ww = Math.min((W - (c - 1) * gap) / c, ((H - (r - 1) * gap) / r) / p); if (ww > melhor.w) melhor = {w: ww, c}; }
     cols = melhor.c; w = Math.min(melhor.w, 250);
+    if (w < minW){ rola = true; tab.classList.add('rola'); W = tab.clientWidth; cols = Math.max(1, Math.min(n, Math.floor((W + gap) / (minW + gap)))); w = Math.min(250, (W - (cols - 1) * gap) / cols); }
   }
   w = Math.floor(w);
+  tab.classList.toggle('rola', rola); tab.classList.toggle('rola-x', rolaX);
   tab.style.setProperty('--w', w + 'px'); tab.style.setProperty('--h', Math.floor(w * p) + 'px'); tab.style.setProperty('--gap', gap + 'px');
   tab.classList.toggle('mini', w < 104); tab.classList.toggle('micro', w < 70);
   tab.style.gridTemplateColumns = `repeat(${cols}, ${w}px)`;
@@ -1850,7 +1872,7 @@ function resultadoRoleta(k){
   let html;
   if (f.tipo === 'dobro'){ jogo.dobro = ti; atual.passaVez = false; html = `<div class="grande">⭐</div><h2>VALE O DOBRO!</h2><p>${t.m} <b>${esc(t.nome)}</b> gira de novo, e a próxima pergunta vale o dobro.</p>`; }
   else if (f.tipo === 'mais5'){ atual.acertou = {time: ti, pts: 5}; html = `<div class="grande">🎁</div><h2>PRESENTE!</h2><p><b>+5 pontos</b> para ${t.m} <b>${esc(t.nome)}</b>.</p>`; }
-  else html = `<div class="grande">🔄</div><h2>PASSA A VEZ!</h2><p>Que pena, ${t.m} <b>${esc(t.nome)}</b>. A vez vai para a próxima equipe.</p>`;
+  else html = `<div class="grande">🔄</div><h2>PASSA A VEZ!</h2><p>Que pena, ${t.m} <b>${esc(t.nome)}</b>. A vez vai para o próximo grupo.</p>`;
   jogo.ultimoRes = `<span class="cor-res" style="background:${f.cor}"></span><span>${f.ic} <b>${esc(f.nome)}</b></span>`;
   if (res) res.innerHTML = jogo.ultimoRes;
   anunciar(`A roleta parou em ${f.nome}.`);
@@ -1979,6 +2001,7 @@ function abrirCarta(i, origem){
   if (!c || (c.feita && jogo.modo !== 'redacao')) return;
   if (jogo.modo === 'sequencia' && i !== jogo.seq) return;
   const el = origem !== undefined ? origem : $(`#tabuleiro .carta[data-i="${i}"]`);
+  if (el && el.closest && el.closest('.tabuleiro.rola')){ try { el.scrollIntoView({block: 'nearest', inline: 'nearest'}); } catch (e) {} }
   atual = {i, c, timeOriginal: jogo.vez, timeAtual: jogo.vez, rebote: false, tentou: false, respondida: false, timer: null, acertou: null};
   if (jogo.modo === 'redacao'){ montarRedacao(c, i); abrirPalco(el, c.assunto.cor, () => { const inp = $('#redAluno'); if (inp) inp.focus({preventScroll: true}); else $('#btnProxima').focus({preventScroll: true}); }); return; }
   const surpresa = regra('surpresa') && (forcarSurpresa !== null ? forcarSurpresa : Math.random() < .15);
@@ -2149,7 +2172,7 @@ function clicarMemoria(i){
       t.acertos++;
       redesenharCarta(ia); redesenharCarta(ib);
       som('acerto'); somarPontos(jogo.vez, 10); registrarHistorico();
-      anunciar(`Par certo! +10 para ${t.nome}. A equipe joga de novo.`);
+      anunciar(`Par certo! +10 para ${t.nome}. O grupo joga de novo.`);
       mm.abertas = []; mm.trava = false; atualizarProgresso();
       if (jogo.cartas.every(x => x.achada)){ jogo.encerrado = true; atualizarVez(); setTimeout(mostrarFim, animar() ? 1300 : 0); }
     }, espera);
@@ -2246,7 +2269,7 @@ function mostrarFim(){
   titulo.innerHTML = `${ico('trofeu')}Resultado`;
   if (m === 'velha' && jogo.vencedor !== undefined){ const v = jogo.equipes[jogo.vencedor]; titulo.innerHTML = `${ico('trofeu')}Vitória de ${v.m} ${esc(v.nome)}!`; sub.hidden = false; sub.textContent = 'Linha completa no Jogo da Velha (+10).'; }
   else if (m === 'velha'){ sub.hidden = false; sub.textContent = 'Deu velha: ninguém fechou uma linha. Vence quem fez mais pontos.'; }
-  else if (m === 'corrida' && jogo.vencedor !== undefined){ const v = jogo.equipes[jogo.vencedor]; titulo.innerHTML = `🏁 Vitória de ${v.m} ${esc(v.nome)}!`; sub.hidden = false; sub.textContent = `Primeira equipe a cruzar a chegada da trilha de ${jogo.trilha} casas.`; }
+  else if (m === 'corrida' && jogo.vencedor !== undefined){ const v = jogo.equipes[jogo.vencedor]; titulo.innerHTML = `🏁 Vitória de ${v.m} ${esc(v.nome)}!`; sub.hidden = false; sub.textContent = `Primeiro grupo a cruzar a chegada da trilha de ${jogo.trilha} casas.`; }
   else if (m === 'corrida'){ sub.hidden = false; sub.textContent = 'Ninguém cruzou a chegada: vence quem foi mais longe na trilha.'; }
   else if (m === 'palavra'){ sub.hidden = false; sub.innerHTML = (jogo.palavras.length > 1 ? 'Palavras secretas: ' : 'Palavra secreta: ') + jogo.palavras.map(w => `<b>${esc(w.palavra)}</b> (${w.quem != null ? jogo.equipes[w.quem].m + ' ' + esc(jogo.equipes[w.quem].nome) : w.resolvida ? 'apareceu inteira' : 'ninguém descobriu'})`).join(' · '); }
   const lugares = [1, 0, 2].filter(k => ord[k]);
@@ -2309,7 +2332,7 @@ $('#btnLimparJson').onclick = () => { if (jsonTexto && !confirm('Apagar o JSON d
 $('#btnMaisEquipe').onclick = () => {
   if (cfg.equipes.length >= 6) return;
   const livre = MASCOTES.find(x => !cfg.equipes.some(t => t.m === x.m)) || MASCOTES[0];
-  cfg.equipes.push({m: livre.m, nome: livre.nome, cor: livre.cor}); salvarCfg(); desenharEquipes(); desenharResumo();
+  cfg.equipes.push({m: livre.m, nome: 'Grupo ' + (cfg.equipes.length + 1), cor: livre.cor}); renumerarGrupos(); salvarCfg(); desenharEquipes(); desenharResumo();
 };
 $('#btnComecar').onclick = comecar;
 $('#pOpcoes').onclick = e => { const b = e.target.closest('.opcao'); if (b) responder(+b.dataset.k); };
