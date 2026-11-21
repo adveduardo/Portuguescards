@@ -9,12 +9,33 @@
   #arena{display:block;width:100%;height:clamp(200px,36vh,380px);background:linear-gradient(#bfe6ff 0 62%,#8fd16a 62%);border-radius:18px}
   #centro{text-align:center}
   #pergunta{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:bold;margin:6px 0}
-  .lados{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  #pergunta.fim{font-size:clamp(2rem,4.2vw,3.6rem)}
+  [hidden]{display:none !important}
+  /* no jogo, cada grupo fica do seu lado da corda: 🔴 à esquerda, corda e conta no meio, 🔵 à direita */
+  #area.jogando{display:grid;gap:10px;max-width:1500px;grid-template-columns:minmax(230px,1fr) minmax(0,1.7fr) minmax(230px,1fr);grid-template-areas:"v meio a";align-items:start}
+  #area.jogando #ladoV{grid-area:v} #area.jogando #ladoA{grid-area:a} #area.jogando #meio{grid-area:meio;margin:0}
+  #area.jogando #arena{height:clamp(160px,30vh,340px)}
+  #botoesJogo{justify-content:center;margin:10px 0 0}
+  #area[data-modo="digitar"] .lado .q{display:none}
+  @media (max-width:900px),(orientation:portrait){
+    #area.jogando{grid-template-columns:1fr 1fr;grid-template-areas:"meio meio" "v a"}
+    #area.jogando #arena{height:clamp(120px,22vh,300px)}
+  }
   .lado{border-radius:18px;padding:10px;text-align:center;color:#fff}
   .lado.v{background:#e74c3c} .lado.a{background:#2f80ed}
   .lado .q{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:bold}
-  .lado .r{display:inline-block;min-width:120px;background:#fff;color:#1f2a44;border-radius:12px;font-size:2.2rem;font-weight:bold;min-height:52px;margin:6px 0;padding:0 10px}
-  .lado .tec button{width:30%;height:54px;font-size:1.6rem;margin:1%;background:#fff}
+  .lado .nome-lado{font-weight:bold;font-size:1.25rem}
+  .lado .campo{display:block;width:min(230px,82%);margin:8px auto 6px;text-align:center;font-size:2.4rem;font-weight:bold;padding:4px 10px;border-radius:14px;border:4px solid rgba(255,255,255,.9);background:#fff;color:#1f2a44}
+  .lado .campo::placeholder{color:#c3cad8}
+  .lado .campo:focus{outline:none;border-color:#ffd54a}
+  .lado .campo.certo{background:#d1fae5;border-color:#22c55e}
+  .lado .campo.errado{background:#fee2e2;border-color:#fecaca;color:#b91c1c}
+  .lado .tec button{width:30%;height:clamp(40px,7vh,54px);font-size:1.6rem;margin:1%;background:#fff}
+  .lado .tec button.ok{background:#22c55e;color:#fff}
+  .lado.travado .tec button{opacity:.35}
+  .lado .placar-fim{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:bold;margin:10px 0}
+  .lado .estado{min-height:1.6em;font-weight:bold;font-size:1.15rem;margin-top:2px}
+
   .lado .acerto{font-size:1.3rem;padding:14px 18px;background:#fff;color:#1f2a44}
   #placar{font-size:1.4rem;font-weight:bold}
   #tempo{font-size:1.6rem;font-weight:bold;min-width:80px;text-align:center}
@@ -30,18 +51,23 @@
   <span id="placar">🔴 0 × 0 🔵</span><span id="tempo" class="mt-chip">–</span>
   <button id="btSom">🔊</button>
 </header>
-<div class="mt-wrap">
+<div class="mt-wrap" id="area">
   <div class="mt-card" id="config">
     <h2>Preparar a disputa</h2>
     <p class="tabs" id="tabs"></p>
     <p class="mt-linha">
-      <label>Jeito de jogar: <select id="selModo"><option value="prof" selected>🗣️ A turma fala e o professor marca quem acertou primeiro</option><option value="tela">⌨️ Dois jogadores na tela (cada um com seu teclado)</option></select></label>
+      <label>Jeito de jogar: <select id="selModo"><option value="digitar" selected>⌨️ Cada grupo digita a resposta (a mesma conta para os dois)</option><option value="tela">⌨️ Cada grupo com a sua conta (dois teclados na tela)</option><option value="prof">🗣️ A turma fala e só o professor marca quem acertou</option></select></label>
       <label>Tempo: <select id="selTempo"><option value="60">1 min</option><option value="90" selected>1 min 30 s</option><option value="120">2 min</option><option value="0">sem tempo</option></select></label>
       <button class="principal" id="btComecar">▶️ Começar</button>
     </p>
-    <p class="mt-dica">Cada acerto puxa a corda 1 passo para o seu lado. Quem trouxer a fita até a sua linha (5 passos) vence! No modo do professor: tecla A ou ← para o 🔴 e L ou → para o 🔵.</p>
+    <p class="mt-dica">Cada acerto puxa a corda 1 passo para o seu lado. Quem trouxer a fita até a sua linha (5 passos) vence!</p>
+    <p class="mt-dica">⌨️ Nos jeitos de digitar, cada grupo escreve o resultado no seu campo (com o teclado da tela ou o do computador) e aperta OK. Só a resposta certa puxa a corda. Quem erra fica esperando 2 segundos para tentar de novo, e a espera cresce a cada erro seguido (até 5 s). Assim, clicar sem pensar não adianta.</p>
+    <p class="mt-dica">🗣️ No jeito do professor: tecla A ou ← para o 🔴 e L ou → para o 🔵. Depois de cada ponto há uma pausa curta, para toques repetidos não contarem.</p>
   </div>
-  <div class="mt-card"><svg id="arena" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMid meet">
+  <div class="lado v" id="ladoV" hidden></div>
+  <div class="mt-card" id="meio">
+    <div id="centro" hidden><div id="pergunta">7 × 8</div><p class="mt-dica" id="dica"></p></div>
+    <svg id="arena" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMid meet">
     <line x1="500" y1="40" x2="500" y2="330" stroke="#fff" stroke-width="6" stroke-dasharray="14 10"/>
     <line x1="350" y1="200" x2="350" y2="330" stroke="#e74c3c" stroke-width="8"/><line x1="650" y1="200" x2="650" y2="330" stroke="#2f80ed" stroke-width="8"/>
     <g id="corda">
@@ -49,15 +75,10 @@
       <rect x="490" y="205" width="20" height="55" rx="4" fill="#ffd54a" stroke="#c99700" stroke-width="3"/>
       <g id="timeV"></g><g id="timeA"></g>
     </g>
-  </svg></div>
-  <div class="mt-card" id="jogo" hidden>
-    <div id="centro"><div id="pergunta">7 × 8</div><p class="mt-dica" id="dica"></p></div>
-    <div class="lados">
-      <div class="lado v" id="ladoV"></div>
-      <div class="lado a" id="ladoA"></div>
-    </div>
-    <p class="mt-linha" style="justify-content:center"><button id="btPular">⏭️ Pular (ninguém acertou)</button> <button class="perigo" id="btFim">🏁 Terminar</button></p>
+  </svg>
+    <p class="mt-linha" id="botoesJogo" hidden><button id="btPular">⏭️ Pular (ninguém acertou)</button> <button class="perigo" id="btFim">🏁 Terminar</button></p>
   </div>
+  <div class="lado a" id="ladoA" hidden></div>
 </div>
 <div class="mt-aviso" id="aviso"></div>
 <script>
@@ -76,55 +97,118 @@
   function aviso(t){ var a = $('aviso'); a.textContent = t; a.style.display = 'block'; clearTimeout(a._t); a._t = setTimeout(function(){ a.style.display = 'none'; }, 2200); }
   function tabs(){ var l = [], cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) if (cs[i].checked) l.push(+cs[i].value); return l; }
   function conta(){ var ts = jogo.tabs, a = ts[Math.floor(Math.random() * ts.length)], b = 1 + Math.floor(Math.random() * 10); return Math.random() < 0.5 ? {a: a, b: b} : {a: b, b: a}; }
-  function teclado(lado){
-    var k = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '⌫', '0', 'OK'], s = '<div class="q" data-q></div><div class="r" data-r></div><div class="tec">';
-    k.forEach(function(x){ s += '<button data-k="' + x + '">' + x + '</button>'; }); return s + '</div>';
+  // no tablet ou na lousa de toque o campo não abre o teclado do aparelho: cada grupo usa o teclado da sua metade da tela (os dois ao mesmo tempo)
+  var soToque = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches);
+  var relogioTrava = null;
+  function ladoEl(l){ return $(l === 'v' ? 'ladoV' : 'ladoA'); }
+  function campo(l){ var el = ladoEl(l); return el && el.querySelector('[data-campo]'); }
+  function painelLado(l){
+    var nome = l === 'v' ? 'Vermelho' : 'Azul', k = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '⌫', '0', 'OK'];
+    var s = '<div class="nome-lado">' + (l === 'v' ? '🔴 ' : '🔵 ') + nome + '</div><div class="q" data-q></div>' +
+      '<input class="campo" data-campo type="text" inputmode="numeric" maxlength="3" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta do ' + nome + '"' + (soToque ? ' readonly' : '') + '><div class="tec">';
+    k.forEach(function(x){ s += '<button type="button" data-k="' + x + '"' + (x === 'OK' ? ' class="ok"' : '') + '>' + x + '</button>'; });
+    return s + '</div><div class="estado" data-estado aria-live="polite"></div>';
   }
   function comecar(){
     var ts = tabs(); if (!ts.length) return aviso('Marque pelo menos uma tabuada.');
-    jogo = {tabs: ts, modo: $('selModo').value, pos: 0, pontos: {v: 0, a: 0}, resta: +$('selTempo').value, acabou: false, lados: {v: {dig: ''}, a: {dig: ''}}};
-    $('config').hidden = true; $('jogo').hidden = false;
+    jogo = {tabs: ts, modo: $('selModo').value, pos: 0, pontos: {v: 0, a: 0}, resta: +$('selTempo').value, acabou: false, pausa: 0,
+      lados: {v: {dig: '', erros: 0, trava: 0, msg: '', msgAte: 0}, a: {dig: '', erros: 0, trava: 0, msg: '', msgAte: 0}}};
+    $('config').hidden = true; $('area').className = 'mt-wrap jogando'; $('area').setAttribute('data-modo', jogo.modo);
+    $('ladoV').hidden = $('ladoA').hidden = $('botoesJogo').hidden = false;
     if (jogo.modo === 'prof'){
       $('centro').hidden = false;
       $('ladoV').innerHTML = '<button class="acerto" id="btV">🔴 Vermelho acertou primeiro</button>'; $('ladoA').innerHTML = '<button class="acerto" id="btA">🔵 Azul acertou primeiro</button>';
       $('btV').onclick = function(){ ponto('v'); }; $('btA').onclick = function(){ ponto('a'); };
       novaCentral();
     } else {
-      $('centro').hidden = true; $('ladoV').innerHTML = teclado('v'); $('ladoA').innerHTML = teclado('a');
-      ['v', 'a'].forEach(function(l){ var bs = $(l === 'v' ? 'ladoV' : 'ladoA').querySelectorAll('[data-k]'); for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ teclaLado(l, this.getAttribute('data-k')); }; novaLado(l); });
+      $('centro').hidden = jogo.modo !== 'digitar';
+      ['v', 'a'].forEach(function(l){
+        var el = ladoEl(l), bs, c, i;
+        el.innerHTML = painelLado(l);
+        bs = el.querySelectorAll('[data-k]');
+        for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ teclaLado(l, this.getAttribute('data-k')); this.blur(); };
+        c = el.querySelector('[data-campo]');
+        c.oninput = function(){ var v = c.value.replace(/\D/g, '').slice(0, 3); if (c.value !== v) c.value = v; if (travado(l)){ c.value = jogo.lados[l].dig; return; } jogo.lados[l].dig = v; c.className = 'campo'; };
+        c.onkeydown = function(e){ if (e.keyCode === 13){ e.preventDefault(); conferir(l); } };
+      });
+      if (jogo.modo === 'digitar') novaCentral(); else { novaLado('v'); novaLado('a'); }
     }
-    clearInterval(timer);
+    clearInterval(timer); clearInterval(relogioTrava);
     if (jogo.resta){ timer = setInterval(function(){ jogo.resta--; pintar(); if (jogo.resta <= 0) terminar(); }, 1000); }
-    mover(); pintar();
+    if (jogo.modo !== 'prof') relogioTrava = setInterval(pintarTravas, 200);
+    mover(); pintar(); pintarTravas();
     if (window.Sala) Sala.tom(392, 0.15);
   }
   function novaCentral(){
-    jogo.q = conta(); $('pergunta').textContent = jogo.q.a + ' × ' + jogo.q.b; $('dica').textContent = 'Quem falar o resultado certo primeiro puxa a corda!';
+    jogo.q = conta(); $('pergunta').textContent = jogo.q.a + ' × ' + jogo.q.b; $('pergunta').className = '';
+    $('dica').textContent = jogo.modo === 'prof' ? 'Quem falar o resultado certo primeiro puxa a corda!' : 'Digite o resultado no campo do seu grupo e aperte OK. Quem acertar primeiro puxa a corda!';
+    if (jogo.modo === 'digitar') ['v', 'a'].forEach(limparCampo);
     if (temGsap) gsap.fromTo('#pergunta', {scale: 0.4, opacity: 0}, {scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2.5)'});
   }
   function novaLado(l){
-    var el = $(l === 'v' ? 'ladoV' : 'ladoA'), q = conta(); jogo.lados[l].q = q; jogo.lados[l].dig = '';
-    el.querySelector('[data-q]').textContent = q.a + ' × ' + q.b; el.querySelector('[data-r]').textContent = '';
+    var el = ladoEl(l), q = conta(); jogo.lados[l].q = q;
+    el.querySelector('[data-q]').textContent = q.a + ' × ' + q.b;
+    limparCampo(l);
   }
+  function limparCampo(l){ var c = campo(l); jogo.lados[l].dig = ''; if (c){ c.value = ''; c.className = travado(l) ? 'campo errado' : 'campo'; } }
+  function travado(l){ return !!jogo && Date.now() < jogo.lados[l].trava; }
   function teclaLado(l, k){
-    if (!jogo || jogo.acabou) return;
-    var L = jogo.lados[l], el = $(l === 'v' ? 'ladoV' : 'ladoA');
+    if (!jogo || jogo.acabou || jogo.modo === 'prof' || travado(l)) return;
+    var L = jogo.lados[l], c = campo(l);
+    if (k === 'OK') return conferir(l);
     if (k === '⌫') L.dig = L.dig.slice(0, -1);
-    else if (k === 'OK'){
-      if (!L.dig) return;
-      if (+L.dig === L.q.a * L.q.b){ ponto(l); }
-      else { if (window.Sala) Sala.tom(200, 0.15, 0, 'sawtooth'); if (temGsap) gsap.fromTo(el, {x: -8}, {x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)'}); }
-      return novaLado(l);
-    } else if (L.dig.length < 3) L.dig += k;
-    el.querySelector('[data-r]').textContent = L.dig;
+    else if (L.dig.length < 3) L.dig += k;
+    if (c){ c.value = L.dig; c.className = 'campo'; }
+  }
+  function conferir(l){
+    if (!jogo || jogo.acabou || jogo.modo === 'prof' || travado(l)) return;
+    var L = jogo.lados[l], el = ladoEl(l), c = campo(l), q = jogo.modo === 'digitar' ? jogo.q : L.q, seg;
+    if (!L.dig){ L.msg = '✏️ Digite o resultado'; L.msgAte = Date.now() + 1500; pintarTravas(); return; }
+    if (+L.dig === q.a * q.b){
+      L.erros = 0; L.msg = '✔️ Acertou!'; L.msgAte = Date.now() + 1200;
+      if (c) c.className = 'campo certo';
+      ponto(l);
+      if (jogo.modo === 'tela' && !jogo.acabou) novaLado(l);
+    } else {
+      // resposta errada: o grupo espera para tentar de novo (2 s, 3 s, 4 s… até 5 s), então chutar não compensa
+      L.erros++; seg = Math.min(5, 1 + L.erros); L.trava = Date.now() + seg * 1000;
+      if (c) c.className = 'campo errado';
+      if (window.Sala) Sala.tom(200, 0.15, 0, 'sawtooth');
+      if (temGsap) gsap.fromTo(el, {x: -10}, {x: 0, duration: 0.45, ease: 'elastic.out(1, 0.3)'});
+    }
+    pintarTravas();
+  }
+  function pintarTravas(){
+    if (!jogo || jogo.modo === 'prof') return;
+    var agora = Date.now();
+    ['v', 'a'].forEach(function(l){
+      var L = jogo.lados[l], el = ladoEl(l), est = el && el.querySelector('[data-estado]'), c = campo(l), bs, i, preso = !jogo.acabou && agora < L.trava;
+      if (!est) return;
+      el.className = 'lado ' + l + (preso ? ' travado' : '');
+      bs = el.querySelectorAll('[data-k]'); for (i = 0; i < bs.length; i++) bs[i].disabled = preso;
+      if (c) c.disabled = preso;
+      if (preso) est.textContent = '⏳ Não é essa! Espere ' + Math.ceil((L.trava - agora) / 1000) + ' s';
+      else {
+        if (L.trava){ L.trava = 0; L.dig = ''; if (c){ c.value = ''; c.className = 'campo'; } }
+        est.textContent = agora < L.msgAte ? L.msg : '';
+      }
+    });
   }
   function ponto(l){
     if (!jogo || jogo.acabou) return;
+    if (jogo.modo === 'prof' && Date.now() < jogo.pausa) return;   // toques repetidos logo depois de um ponto não contam
     jogo.pontos[l]++; jogo.pos += l === 'v' ? -1 : 1;
     if (window.Sala){ Sala.tom(l === 'v' ? 330 : 440, 0.12); Sala.tom(l === 'v' ? 495 : 660, 0.16, 0.1); }
-    if (jogo.modo === 'prof'){ aviso((l === 'v' ? '🔴' : '🔵') + ' ' + jogo.q.a + ' × ' + jogo.q.b + ' = ' + (jogo.q.a * jogo.q.b)); novaCentral(); }
+    if (jogo.modo !== 'tela'){ aviso((l === 'v' ? '🔴' : '🔵') + ' ' + jogo.q.a + ' × ' + jogo.q.b + ' = ' + (jogo.q.a * jogo.q.b)); }
+    if (jogo.modo === 'prof'){ jogo.pausa = Date.now() + 1200; pausaProf(); }
+    if (jogo.modo !== 'tela') novaCentral();
     mover(); pintar();
     if (Math.abs(jogo.pos) >= 5) terminar();
+  }
+  function pausaProf(){
+    var bs = [$('btV'), $('btA')];
+    bs.forEach(function(b){ if (b) b.disabled = true; });
+    setTimeout(function(){ if (jogo && !jogo.acabou) bs.forEach(function(b){ if (b) b.disabled = false; }); }, 1200);
   }
   function mover(){
     var x = jogo.pos * PASSO;
@@ -139,23 +223,33 @@
   }
   function terminar(){
     if (!jogo || jogo.acabou) return;
-    jogo.acabou = true; clearInterval(timer);
+    jogo.acabou = true; clearInterval(timer); clearInterval(relogioTrava);
     var v = jogo.pos < 0 ? 'v' : jogo.pos > 0 ? 'a' : null;
-    $('pergunta').textContent = v ? (v === 'v' ? '🔴 Vermelho venceu!' : '🔵 Azul venceu!') : '🤝 Empate!'; $('centro').hidden = false; $('dica').textContent = '🔴 ' + jogo.pontos.v + ' acertos × ' + jogo.pontos.a + ' acertos 🔵';
-    $('ladoV').innerHTML = ''; $('ladoA').innerHTML = '<button class="acerto" id="btNovo">🔁 Nova disputa</button>';
-    $('btNovo').onclick = function(){ $('config').hidden = false; $('jogo').hidden = true; if (temGsap) gsap.to('#corda', {x: 0, duration: 0.5}); };
+    $('pergunta').textContent = v ? (v === 'v' ? '🔴 Vermelho venceu!' : '🔵 Azul venceu!') : '🤝 Empate!'; $('pergunta').className = 'fim'; $('centro').hidden = false; $('dica').textContent = '🔴 ' + jogo.pontos.v + ' acertos × ' + jogo.pontos.a + ' acertos 🔵';
+    $('ladoV').className = 'lado v'; $('ladoA').className = 'lado a';
+    $('ladoV').innerHTML = '<div class="nome-lado">🔴 Vermelho</div><div class="placar-fim">' + jogo.pontos.v + (jogo.pontos.v === 1 ? ' acerto' : ' acertos') + '</div>';
+    $('ladoA').innerHTML = '<div class="nome-lado">🔵 Azul</div><div class="placar-fim">' + jogo.pontos.a + (jogo.pontos.a === 1 ? ' acerto' : ' acertos') + '</div><button class="acerto" id="btNovo">🔁 Nova disputa</button>';
+    $('botoesJogo').hidden = true;
+    $('btNovo').onclick = function(){
+      $('config').hidden = false; $('area').className = 'mt-wrap'; $('ladoV').hidden = $('ladoA').hidden = $('centro').hidden = true;
+      if (temGsap) gsap.to('#corda', {x: 0, duration: 0.5}); else $('corda').setAttribute('transform', '');
+    };
     if (temGsap && v) gsap.fromTo(v === 'v' ? '#timeV' : '#timeA', {y: 0}, {y: -30, duration: 0.25, yoyo: true, repeat: 5, ease: 'power1.out'});
     if (window.Sala){ Sala.festa(); Sala.confete(); }
   }
   $('btComecar').onclick = comecar;
-  $('btPular').onclick = function(){ if (jogo && !jogo.acabou && jogo.modo === 'prof') novaCentral(); };
+  $('btPular').onclick = function(){
+    if (!jogo || jogo.acabou) return;
+    if (jogo.modo === 'tela'){ novaLado('v'); novaLado('a'); return; }
+    aviso('A resposta era ' + jogo.q.a + ' × ' + jogo.q.b + ' = ' + (jogo.q.a * jogo.q.b)); novaCentral();
+  };
   $('btFim').onclick = function(){ if (confirm('Terminar a disputa agora?')) terminar(); };
   document.addEventListener('keydown', function(e){
     if (!jogo || jogo.acabou || jogo.modo !== 'prof') return;
-    if (e.keyCode === 65 || e.keyCode === 37) ponto('v'); else if (e.keyCode === 76 || e.keyCode === 39) ponto('a'); else if (e.keyCode === 32){ e.preventDefault(); novaCentral(); }
+    if (e.keyCode === 65 || e.keyCode === 37) ponto('v'); else if (e.keyCode === 76 || e.keyCode === 39) ponto('a'); else if (e.keyCode === 32){ e.preventDefault(); if (Date.now() >= jogo.pausa) novaCentral(); }
   });
   if (window.Sala) Sala.botaoSom($('btSom'));
-  window.CABO = {jogo: function(){ return jogo; }, ponto: ponto, teclaLado: teclaLado};   // usado nos testes
+  window.CABO = {jogo: function(){ return jogo; }, ponto: ponto, teclaLado: teclaLado, conferir: conferir};   // usado nos testes
 })();
 </script>
 </body>
