@@ -25,7 +25,7 @@
 <div id="aviso"></div>
 <div class="tela ativa" id="tConfig"><div class="cartao">
   <h1>💀 Zumbis da Ortografia</h1>
-  <p>Zumbis vêm andando até a casa com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>! Se um zumbi chegar à casa, vocês perdem um coração.</p>
+  <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>! Se um zumbi chegar à escola, vocês perdem um coração.</p>
   <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
   <p class="dica" id="infoArq">Carregando…</p>
   <label>Zumbis por onda: <select id="selQtd"><option>6</option><option selected>8</option><option>12</option></select></label>
@@ -63,7 +63,7 @@
   function abrirVez(){
     var eq = jogo.equipes[jogo.vez];
     $('cVez').innerHTML = '<h2>🌙 Onda ' + jogo.onda + (jogo.equipes.length > 1 ? ': vez dos ' + eq.emoji + ' ' + esc(eq.nome) : '') + '</h2>' +
-      '<p>Vêm aí ' + jogo.qtd + ' zumbis. Protejam a casa: vocês têm 3 corações!</p>' +
+      '<p>Vêm aí ' + jogo.qtd + ' zumbis. Protejam a escola: vocês têm 3 corações!</p>' +
       (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' : '') +
       '<button type="button" class="principal" id="btIr">💀 Que venham!</button>';
     ARC.tela('tVez'); $('btIr').onclick = iniciarOnda;
@@ -74,12 +74,12 @@
   }
   function atualizarHud(){
     var eq = jogo.equipes[jogo.vez];
-    $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🏠 Casa';
+    $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🏫 Escola';
     $('hOnda').textContent = '💀 ' + jogo.curados + '/' + jogo.qtd + ' curados';
     $('hVidas').textContent = '❤️❤️❤️'.slice(0, jogo.vidas * 2) + '♡♡♡'.slice(0, 3 - jogo.vidas);
     $('hPontos').textContent = '⭐ ' + eq.pontos;
   }
-  function casaX(){ return 150 * tela.ESC; }
+  function casaX(){ return 190 * tela.ESC; }
   function novoZumbi(){
     if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.monte); jogo.usadas = 0; }
     var it = jogo.monte[jogo.usadas++], E = tela.ESC, acel = 1 + jogo.criados * 0.06;
@@ -123,7 +123,7 @@
         z.x -= z.v * dt; z.passo += dt * 4;
         if (z.x < casaX() + 40 * tela.ESC){
           jogo.zumbis.splice(i, 1); jogo.vidas--; jogo.tremer = 0.6; jogo.escaparam++; ARC.tom(140, 0.5, 0, 'sawtooth');
-          ARC.aviso('🏠 Um zumbi entrou! A escrita certa era: <b>' + esc(z.it.correta) + '</b>', 2600);
+          ARC.aviso('🏫 Um zumbi entrou na escola! A escrita certa era: <b>' + esc(z.it.correta) + '</b>', 2600);
           jogo.frente = undefined; atualizarHud();
           if (jogo.vidas <= 0 || jogo.curados + jogo.escaparam >= jogo.qtd){ fimDaOnda(); break; }
         }
@@ -139,7 +139,7 @@
     setTimeout(function(){
       laco.parar(); $('hud').style.display = 'none'; $('painel').style.display = 'none';
       var ultima = jogo.vez === jogo.equipes.length - 1;
-      $('cVez').innerHTML = '<h2>' + (jogo.vidas > 0 ? '🌅 A casa está salva!' : '💀 Os zumbis venceram desta vez!') + '</h2>' +
+      $('cVez').innerHTML = '<h2>' + (jogo.vidas > 0 ? '🌅 A escola está salva!' : '💀 Os zumbis venceram desta vez!') + '</h2>' +
         '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' +
         '<button type="button" class="principal" id="btSegue">' + (ultima ? '🏆 Resultado' : '➡️ Próxima equipe') + '</button>' + (ultima ? ' <button type="button" id="btMais">🔁 Mais uma onda</button>' : '');
       ARC.tela('tVez'); if (jogo.vidas > 0) ARC.festa();
@@ -153,34 +153,78 @@
       '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
     ARC.tela('tFim'); ARC.festa(); $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
   }
+  // ---------- sprites em pixel art (desenhados uma vez em telinhas e ampliados sem borrar) ----------
+  var PAL = {k: '#16130f', g: '#86a95f', G: '#5f7d3f', w: '#ece6c8', r: '#c0392b', h: '#3a2a1e', s: '#6b7c8f', S: '#4b5866', p: '#8a6a4a', m: '#3b1f1a', n: '#3e3a5c', N: '#2a2742', b: '#2b2b2b', f: '#f2c48d', F: '#d9a066', c: '#3fae6a', C: '#2c7d4c', y: '#ffd54a'};
+  var SPR = {
+    a: ['....kkkkkk......', '...khhhhhhk.....', '..khhhhhhhhk....', '..kgggggghhk....', '..kgwwggwwgk....', '..kgwrggwrGk....', '..kggggggGGk....', '..kgmmmmgGGk....', '...kggggGGk.....', '....kkggkk......',
+      'kkkkkksssSSk....', 'kggggksssSSk....', 'kggggkspSSSk....', 'kkkkkksspsSk....', '.....ksssSSk....', '.....kSsSkSk....', '.....kkkkkkk....', '.....knnnNNk....', '.....knnkNNk....', '....knnk.kNNk...', '....knk...kNk...', '...kbbk...kbbk..', '...kbbbk..kbbbk.', '................'],
+    b: ['....kkkkkk......', '...khhhhhhk.....', '..khhhhhhhhk....', '..kgggggghhk....', '..kgwwggwwgk....', '..kgwrggwrGk....', '..kggggggGGk....', '..kgmmmmgGGk....', '...kggggGGk.....', '....kkggkk......',
+      '.....ksssSSk....', 'kkkkkksssSSk....', 'kggggkspSSSk....', 'kggggksspsSk....', 'kkkkkksssSSk....', '.....kSsSkSk....', '.....kkkkkkk....', '.....knnnNNk....', '......knnNk.....', '......knNNk.....', '......knNNk.....', '.....kbbbbk.....', '.....kbbbbbk....', '................'],
+    c: ['....kkkkkk......', '...khhhhhhk.....', '..khhhhhhhhk....', '..kffffffhhk....', '..kfkffkffhk....', '..kffffffffk....', '..kfmffffmfk....', '..kffmmmmfFk....', '...kffffFFk.....', 'kk..kkffkk..kk..',
+      'kfk.kccccck.kfk.', '.kfkkcccCCkkfk..', '..kkcccccCCkk...', '....kcccCCCk....', '....kccyyCCk....', '....kcccCCCk....', '....kkkkkkkk....', '....knnnnNNk....', '....knnkkNNk....', '....knk..kNk....', '....knk..kNk....', '...kbbk..kbbk...', '...kbbbk.kbbbk..', '................']
+  };
+  var telinhas = {};
+  function sprite(nome){
+    if (telinhas[nome]) return telinhas[nome];
+    var lin = SPR[nome], c = document.createElement('canvas'), cx = c.getContext('2d'), x, y, ch;
+    c.width = 16; c.height = lin.length;
+    for (y = 0; y < lin.length; y++) for (x = 0; x < 16; x++){ ch = lin[y].charAt(x); if (ch && ch !== '.' && PAL[ch]){ cx.fillStyle = PAL[ch]; cx.fillRect(x, y, 1, 1); } }
+    return (telinhas[nome] = c);
+  }
+  function desenharSprite(nome, x, pe, px){   // x = meio, pe = chão, px = tamanho do pixel
+    var c = sprite(nome);
+    ctx.imageSmoothingEnabled = false; ctx.webkitImageSmoothingEnabled = false; ctx.mozImageSmoothingEnabled = false;
+    ctx.drawImage(c, Math.round(x - 8 * px), Math.round(pe - c.height * px), Math.round(16 * px), Math.round(c.height * px));
+  }
+  // ---------- o prédio da escola ----------
+  function desenharEscola(cx, base, E){
+    var x0 = 6 * E, x1 = cx + 40 * E, w = x1 - x0, h = 230 * E, topo = base - h, i, j, mx = x0 + w / 2;
+    ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(x0 + 8 * E, topo + 10 * E, w, h);   // sombra
+    ctx.fillStyle = '#b5523a'; ctx.fillRect(x0, topo, w, h);   // tijolos
+    ctx.strokeStyle = 'rgba(255,220,200,.25)'; ctx.lineWidth = Math.max(1, E);
+    for (j = topo + 10 * E; j < base; j += 12 * E){ ctx.beginPath(); ctx.moveTo(x0, j); ctx.lineTo(x1, j); ctx.stroke(); for (i = x0 + ((Math.round((j - topo) / (12 * E)) % 2) ? 12 : 0) * E; i < x1; i += 24 * E){ ctx.beginPath(); ctx.moveTo(i, j); ctx.lineTo(i, j + 12 * E); ctx.stroke(); } }
+    ctx.fillStyle = '#7d2f22'; ctx.beginPath(); ctx.moveTo(x0 - 14 * E, topo); ctx.lineTo(mx, topo - 62 * E); ctx.lineTo(x1 + 14 * E, topo); ctx.closePath(); ctx.fill();   // frontão
+    ctx.fillStyle = '#f4ead2'; ctx.beginPath(); ctx.arc(mx, topo - 26 * E, 17 * E, 0, 2 * Math.PI); ctx.fill();   // relógio
+    ctx.strokeStyle = '#3b2a1e'; ctx.lineWidth = 2.5 * E; ctx.beginPath(); ctx.moveTo(mx, topo - 26 * E); ctx.lineTo(mx, topo - 38 * E); ctx.moveTo(mx, topo - 26 * E); ctx.lineTo(mx + 8 * E, topo - 22 * E); ctx.stroke();
+    ctx.strokeStyle = '#ddd'; ctx.lineWidth = 3 * E; ctx.beginPath(); ctx.moveTo(mx, topo - 62 * E); ctx.lineTo(mx, topo - 112 * E); ctx.stroke();   // bandeira
+    var ond = Math.sin(Date.now() / 300) * 3 * E;
+    ctx.fillStyle = '#2f80ed'; ctx.beginPath(); ctx.moveTo(mx, topo - 112 * E); ctx.lineTo(mx + 34 * E, topo - 104 * E + ond); ctx.lineTo(mx, topo - 92 * E); ctx.fill();
+    ctx.fillStyle = '#fff3c4'; ARC.rrect(ctx, mx - 52 * E, topo + 10 * E, 104 * E, 26 * E, 5 * E); ctx.fill();   // placa
+    ctx.strokeStyle = '#7d2f22'; ctx.lineWidth = 3 * E; ctx.stroke();
+    ctx.fillStyle = '#7d2f22'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold ' + Math.round(17 * E) + 'px "Trebuchet MS", sans-serif'; ctx.fillText('ESCOLA', mx, topo + 23 * E);
+    var jw = 26 * E, jh = 30 * E, cols = Math.max(2, Math.floor((w - 70 * E) / (jw + 14 * E)));   // janelas acesas
+    for (j = 0; j < 2; j++) for (i = 0; i < cols; i++){
+      var wx = x0 + 14 * E + i * (jw + 14 * E), wy = topo + 50 * E + j * (jh + 26 * E);
+      ctx.fillStyle = '#f5f0e1'; ctx.fillRect(wx - 3 * E, wy - 3 * E, jw + 6 * E, jh + 6 * E);
+      ctx.fillStyle = (i + j) % 3 ? '#ffe48a' : '#ffd166'; ctx.fillRect(wx, wy, jw, jh);
+      ctx.fillStyle = '#c9b07a'; ctx.fillRect(wx + jw / 2 - E, wy, 2 * E, jh); ctx.fillRect(wx, wy + jh / 2 - E, jw, 2 * E);
+    }
+    ctx.fillStyle = '#5b3a1e'; ARC.rrect(ctx, x1 - 48 * E, base - 78 * E, 38 * E, 78 * E, 6 * E); ctx.fill();   // porta (do lado dos zumbis)
+    ctx.fillStyle = '#ffd54a'; ctx.beginPath(); ctx.arc(x1 - 18 * E, base - 38 * E, 3 * E, 0, 2 * Math.PI); ctx.fill();
+    ctx.fillStyle = '#9aa0a6'; ctx.fillRect(x1 - 56 * E, base - 6 * E, 56 * E, 6 * E); ctx.fillStyle = '#b8bec4'; ctx.fillRect(x1 - 52 * E, base - 12 * E, 46 * E, 6 * E);   // escada
+  }
   function desenhar(){
     var W = tela.W, H = tela.H, E = tela.ESC, g = ctx.createLinearGradient(0, 0, 0, H);
     g.addColorStop(0, '#1a1440'); g.addColorStop(0.7, '#3d2c6b'); g.addColorStop(1, '#2b2147'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,255,255,.7)'; for (var st = 0; st < 30; st++) ctx.fillRect((st * 137) % W, (st * 71) % (H * 0.5), 2 * E, 2 * E);
     ctx.fillStyle = '#fff6c9'; ctx.beginPath(); ctx.arc(W * 0.82, H * 0.16, 44 * E, 0, 2 * Math.PI); ctx.fill();
     ctx.fillStyle = '#2f5d34'; ctx.fillRect(0, H - 120 * E, W, 120 * E);
+    ctx.fillStyle = '#27502c'; for (var gx = 0; gx < W; gx += 18 * E) ctx.fillRect(gx, H - 120 * E, 9 * E, 6 * E);
+    ctx.fillStyle = '#6b6f76'; ctx.fillRect(0, H - 40 * E, W, 40 * E); ctx.fillStyle = '#80858c'; for (var cx2 = 0; cx2 < W; cx2 += 60 * E) ctx.fillRect(cx2, H - 40 * E, 2 * E, 40 * E);   // calçada
     var tx = jogo && jogo.tremer > 0 ? Math.sin(Date.now() / 25) * 6 : 0, cx = casaX() + tx, base = H - 120 * E;
-    ctx.fillStyle = '#c0703b'; ctx.fillRect(cx - 110 * E, base - 150 * E, 150 * E, 150 * E);
-    ctx.fillStyle = '#8b3a2b'; ctx.beginPath(); ctx.moveTo(cx - 125 * E, base - 150 * E); ctx.lineTo(cx - 35 * E, base - 230 * E); ctx.lineTo(cx + 55 * E, base - 150 * E); ctx.fill();
-    ctx.fillStyle = '#5b3a1e'; ctx.fillRect(cx - 20 * E, base - 80 * E, 40 * E, 80 * E);
-    ctx.fillStyle = '#ffe48a'; ctx.fillRect(cx - 90 * E, base - 120 * E, 40 * E, 34 * E);
+    desenharEscola(cx, base, E);
     if (!jogo || !jogo.zumbis) return;
     jogo.zumbis.forEach(function(z){
-      var x = z.x, y = z.y, s = E, b = Math.sin(z.passo) * 4 * s, a = z.curado ? Math.max(0, 1 - z.tempoCura) : 1;
+      var x = z.x, y = z.y, s = E, a = z.curado ? Math.max(0, 1 - z.tempoCura) : 1, px = 5 * s, pe = y + 80 * s;
       ctx.globalAlpha = a;
-      ctx.strokeStyle = z.curado ? '#7bd389' : '#5f8f4e'; ctx.lineWidth = 9 * s; ctx.lineCap = 'round';
-      ctx.beginPath(); ctx.moveTo(x, y + 40 * s); ctx.lineTo(x - 10 * s + b, y + 80 * s); ctx.moveTo(x, y + 40 * s); ctx.lineTo(x + 10 * s - b, y + 80 * s); ctx.stroke();
-      ctx.fillStyle = z.curado ? '#7bd389' : '#6fa35c'; ARC.rrect(ctx, x - 18 * s, y - 10 * s, 36 * s, 54 * s, 10 * s); ctx.fill();
-      ctx.beginPath(); ctx.moveTo(x - 14 * s, y + 4 * s); ctx.lineTo(x - 44 * s, y + 2 * s + b); ctx.stroke();
-      ctx.fillStyle = z.curado ? '#a8e6b0' : '#8fbf6a'; ctx.beginPath(); ctx.arc(x, y - 26 * s, 20 * s, 0, 2 * Math.PI); ctx.fill();
-      ctx.fillStyle = '#1b1530'; ctx.beginPath(); ctx.arc(x - 8 * s, y - 29 * s, 3.5 * s, 0, 2 * Math.PI); ctx.arc(x + 4 * s, y - 29 * s, 3.5 * s, 0, 2 * Math.PI); ctx.fill();
-      ctx.strokeStyle = '#1b1530'; ctx.lineWidth = 2.5 * s; ctx.beginPath();
-      if (z.curado) ctx.arc(x - 2 * s, y - 20 * s, 7 * s, 0.2, Math.PI - 0.2); else { ctx.moveTo(x - 9 * s, y - 16 * s); ctx.lineTo(x + 6 * s, y - 18 * s); }
-      ctx.stroke();
+      ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(x, pe, 30 * s, 7 * s, 0, 0, 2 * Math.PI) : ctx.arc(x, pe, 20 * s, 0, 2 * Math.PI); ctx.fill();
+      if (z.curado) desenharSprite('c', x, pe - Math.abs(Math.sin(z.tempoCura * 9)) * 26 * s, px);
+      else desenharSprite(Math.floor(z.passo) % 2 ? 'b' : 'a', x, pe + (Math.floor(z.passo) % 2 ? -px : 0), px);
       var txt = z.curado ? z.it.correta : z.it.errada, tam = ARC.fonte(ctx, txt, 220 * s, Math.round(26 * s)), w = ctx.measureText(txt).width + 22 * s;
       ctx.fillStyle = z.curado ? '#e3f7ee' : '#fff3d6'; ARC.rrect(ctx, x - w / 2, y - 92 * s, w, tam + 16 * s, 8 * s); ctx.fill();
       ctx.strokeStyle = '#7a5a2b'; ctx.lineWidth = 3 * s; ctx.stroke();
       ctx.fillStyle = z.curado ? '#11613a' : '#b02a37'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, x, y - 92 * s + (tam + 16 * s) / 2);
-      if (!z.curado && z === jogo.frente){ ctx.strokeStyle = '#ffd54a'; ctx.lineWidth = 4 * s; ctx.beginPath(); ctx.arc(x, y + 20 * s, 64 * s, 0, 2 * Math.PI); ctx.stroke(); }
+      if (!z.curado && z === jogo.frente){ ctx.strokeStyle = '#ffd54a'; ctx.lineWidth = 4 * s; ctx.beginPath(); ctx.arc(x, y + 20 * s, 72 * s, 0, 2 * Math.PI); ctx.stroke(); }
       ctx.globalAlpha = 1;
     });
     jogo.fx.forEach(function(f){ ctx.globalAlpha = Math.max(0, 1 - f.t / 1.3); ARC.fonte(ctx, f.txt, 400, Math.round(30 * E)); ctx.fillStyle = f.cor; ctx.textAlign = 'center'; ctx.fillText(f.txt, f.x, f.y - f.t * 50); ctx.globalAlpha = 1; });
