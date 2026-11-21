@@ -30,11 +30,45 @@
   .pass.frase{font-weight:normal;font-size:clamp(1rem,1.5vw,1.3rem)}
   .pass.frase b{background:#fff3c4;border-radius:6px;padding:0 4px}
   .pass.dentro{opacity:.35}
-  .depois{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-  .depois .grupo{display:flex;gap:4px;padding:4px;border-radius:10px;background:#f4f6fb}
-  .depois .grupo span{background:#fff;border:1px solid var(--borda);border-radius:8px;padding:2px 8px;font-size:.95rem}
-  .depois .mais{color:var(--suave);font-weight:bold}
   #msg{min-height:1.5em;font-weight:bold;margin-top:8px}
+  /* a fila na rua: caminho em zigue-zague até o ponto, com bonequinhos */
+  #cartaoFila{position:relative}
+  #rua{position:relative;z-index:0;height:150px;margin:0 0 8px;border-radius:14px;background:#f1f4f9;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  #rua svg{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+  #rua .estrada-borda{fill:none;stroke:#cfd7e6;stroke-linecap:round;stroke-linejoin:round}
+  #rua .estrada{fill:none;stroke:#e1e7f1;stroke-linecap:round;stroke-linejoin:round}
+  #rua .estrada-meio{fill:none;stroke:#fff;stroke-width:2.5;stroke-dasharray:9 11;stroke-linecap:round}
+  #rua .ponto-placa{font-size:22px}
+  #povo{position:absolute;left:0;top:0;width:100%;height:100%}
+  .pessoa{position:absolute;left:0;top:0;width:24px;height:40px;margin:-40px 0 0 -12px;-webkit-transform-origin:12px 40px;transform-origin:12px 40px}
+  .pessoa .boneco{position:absolute;left:0;top:0;width:24px;height:40px;-webkit-animation:respirar 2.4s ease-in-out infinite;animation:respirar 2.4s ease-in-out infinite}
+  .pessoa .cab{position:absolute;left:5px;top:0;width:14px;height:14px;border-radius:50%;background:#f2c094;background:var(--pele,#f2c094);box-shadow:inset 0 4px 0 #2b2118;box-shadow:inset 0 4px 0 var(--cabelo,#2b2118)}
+  .pessoa .longo .cab{box-shadow:inset 0 4px 0 var(--cabelo,#2b2118),-2px 4px 0 -1px var(--cabelo,#2b2118),2px 4px 0 -1px var(--cabelo,#2b2118)}
+  .pessoa .corpo{position:absolute;left:2px;top:14px;width:20px;height:23px;border-radius:9px 9px 6px 6px;background:#e5e7eb;background:var(--roupa,#e5e7eb);border:1.5px solid rgba(15,23,42,.18);box-sizing:border-box;-webkit-transition:background .3s;transition:background .3s}
+  .pessoa .sombra{position:absolute;left:3px;top:36px;width:18px;height:6px;border-radius:50%;background:rgba(15,23,42,.14)}
+  .pessoa .placa{position:absolute;bottom:100%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);margin-bottom:2px;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:0 5px;font-weight:bold;font-size:13px;line-height:17px;white-space:nowrap;color:#1f2937;box-shadow:0 2px 4px rgba(0,0,0,.08)}
+  .pessoa.sem-placa .placa{display:none}
+  .pessoa.frente .placa{border-color:#f5b400;background:#fff7d1}
+  .pessoa.frente .sombra{background:rgba(250,204,21,.65);left:-3px;width:30px;height:9px;top:34px}
+  .pessoa.andando .boneco{-webkit-animation:passo .34s ease-in-out infinite;animation:passo .34s ease-in-out infinite}
+  .pessoa.nao .cab{-webkit-animation:nao .45s ease-in-out 2;animation:nao .45s ease-in-out 2}
+  .pessoa.voando{position:fixed;z-index:60;pointer-events:none}
+  @-webkit-keyframes respirar{0%,100%{-webkit-transform:translateY(0)}50%{-webkit-transform:translateY(-2px)}}
+  @keyframes respirar{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+  @-webkit-keyframes passo{0%,100%{-webkit-transform:translateY(0) rotate(-5deg)}50%{-webkit-transform:translateY(-4px) rotate(5deg)}}
+  @keyframes passo{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-4px) rotate(5deg)}}
+  @-webkit-keyframes nao{0%,100%{-webkit-transform:translateX(0)}25%{-webkit-transform:translateX(-3px)}75%{-webkit-transform:translateX(3px)}}
+  @keyframes nao{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+  .rua-mais{position:absolute;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#64748b;color:#fff;border-radius:999px;padding:1px 8px;font-weight:bold;font-size:.8rem;white-space:nowrap;pointer-events:none}
+  .rua-dica{position:absolute;right:8px;bottom:4px;font-size:.75rem;color:#64748b;font-weight:bold;pointer-events:none;background:rgba(241,244,249,.92);border-radius:8px;padding:1px 6px;-webkit-transition:opacity .8s;transition:opacity .8s}
+  .rua-dica.some{opacity:0}
+  .balao-pessoa{position:absolute;z-index:30;-webkit-transform:translate(-50%,-100%);transform:translate(-50%,-100%);background:#fff;border:2px solid #94a3b8;border-radius:12px;padding:6px 10px;font-weight:bold;font-size:1.05rem;max-width:280px;width:max-content;box-shadow:0 6px 16px rgba(0,0,0,.16);pointer-events:none;text-align:center}
+  .balao-pessoa::after{content:'';position:absolute;left:50%;bottom:-9px;margin-left:-8px;border:8px solid transparent;border-top-color:#94a3b8;border-bottom:0}
+  .balao-pessoa b{background:#fff3c4;border-radius:5px;padding:0 3px}
+  .ponto-topo{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 6px}
+  .ponto-topo .rotulo{margin:0}
+  .botoes-ponto{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .botoes-ponto button{padding:5px 10px;font-size:.9rem}
   #explica{color:var(--suave);font-size:.95rem;min-height:1.2em}
   /* ponto de ônibus */
   #vagas{display:flex;gap:8px;flex-wrap:wrap}
@@ -66,17 +100,14 @@
     header.mt{padding:4px 10px;flex-wrap:nowrap} header.mt h1{font-size:.95rem;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} header.mt button{padding:5px 10px} header.mt .mt-chip{padding:2px 9px;white-space:nowrap} #infoTopo{flex-wrap:nowrap}
     #jogo{padding:4px;gap:6px;grid-template-columns:minmax(260px,1fr) minmax(0,1fr)}
     #cartaoFila,#cartaoPonto{padding:8px 10px} #cartaoGaragem{padding:6px;position:-webkit-sticky;position:sticky;top:46px}
-    #cartaoGaragem .rotulo,.rot-depois,#depois{display:none}
-    #cartaoPonto{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:6px}
-    #cartaoPonto .rotulo{grid-column:1;grid-row:1;margin:0} #vagas{grid-column:1 / -1;grid-row:2;margin-top:4px}
-    #cartaoPonto .mt-linha{grid-column:2;grid-row:1;flex-wrap:nowrap;margin:0 !important} #cartaoPonto .txt{display:none}
+    #cartaoGaragem .rotulo,.rot-agora,.rua-dica{display:none}
+    #rua{margin-bottom:4px} .ponto-topo{margin-bottom:4px} .botoes-ponto{flex-wrap:nowrap} #cartaoPonto .txt{display:none} #explica:empty{display:none}
     .rotulo{font-size:.8rem;margin:0 0 4px}
     .pass{font-size:1rem;padding:4px 8px;gap:6px;border-radius:10px} .pass.frase{font-size:.9rem} .pass .boneco{display:none}
     .agora{gap:4px} .agora.palavras .pass{flex:1 1 70px;justify-content:center}
     #msg{font-size:.88rem;margin-top:4px} #explica{font-size:.8rem}
-    .depois .grupo span{font-size:.8rem;padding:1px 6px}
-    .vaga{min-height:54px;padding:2px} .no-ponto{gap:3px;padding:3px;font-size:.78rem} .no-ponto .lugares i{width:11px;height:11px;border-width:2px}
-    #cartaoPonto button{padding:4px 9px;font-size:.9rem}
+    .vaga{min-height:48px;padding:2px} .no-ponto{gap:3px;padding:3px;font-size:.78rem} .no-ponto .lugares i{width:11px;height:11px;border-width:2px}
+    .botoes-ponto button{padding:4px 9px;font-size:.9rem}
   }
 </style>
 <script src="visual.js"></script>
@@ -114,17 +145,16 @@
 </div>
 <div id="jogo" hidden>
   <div class="mt-card" id="cartaoFila">
-    <div class="rotulo">🚏 Agora no ponto (estes passageiros são da mesma classe)</div>
+    <div id="rua" role="img" aria-label="Fila de passageiros até o ponto"><svg id="ruaSvg" aria-hidden="true"></svg><div id="povo"></div><span class="rua-mais" id="ruaMais" hidden></span><span class="rua-dica" id="ruaDica">👆 toque num passageiro para ouvir</span></div>
+    <div class="rotulo rot-agora">🚏 Agora no ponto (estes passageiros são da mesma classe)</div>
     <div class="agora" id="agora"></div>
     <div id="msg" aria-live="polite"></div>
     <div id="explica"></div>
-    <div class="rotulo rot-depois" style="margin-top:10px">Depois na fila</div>
-    <div class="depois" id="depois"></div>
+    <div class="balao-pessoa" id="balao" hidden></div>
   </div>
   <div class="mt-card" id="cartaoPonto">
-    <div class="rotulo">🅿️ Vagas do ponto</div>
+    <div class="ponto-topo"><div class="rotulo">🅿️ Vagas do ponto</div><span class="botoes-ponto"><button id="btRecomecar" title="Recomeçar este nível">🔁<span class="txt"> Recomeçar</span></button><button class="perigo" id="btSair" title="Mudar as escolhas">⚙️<span class="txt"> Mudar as escolhas</span></button></span></div>
     <div id="vagas"></div>
-    <p class="mt-linha" style="justify-content:center;margin-top:8px"><button id="btRecomecar" title="Recomeçar este nível">🔁<span class="txt"> Recomeçar este nível</span></button><button class="perigo" id="btSair" title="Mudar as escolhas">⚙️<span class="txt"> Mudar as escolhas</span></button></p>
   </div>
   <div class="mt-card" id="cartaoGaragem">
     <div class="rotulo">🚌 Garagem: toque no ônibus (a seta mostra para onde ele sai)</div>
@@ -293,8 +323,10 @@
     $('fim').hidden = true; $('cartaoFila').hidden = $('cartaoPonto').hidden = $('cartaoGaragem').hidden = false;
     $('garagem').removeAttribute('data-cel');
     try { window.scrollTo(0, 0); } catch (e) {}
-    pintarVagas(); pintarFila(); pintarTopo();
-    msg('Qual é a classe dos passageiros da frente? Tire da garagem um ônibus dessa classe.');
+    limparRua(); montarRua();
+    var dica = $('ruaDica'); dica.classList.remove('some'); clearTimeout(dica._t); dica._t = setTimeout(function(){ dica.classList.add('some'); }, 6000);
+    pintarVagas(); pintarFila(true); pintarTopo();
+    msg(compacto() ? 'Qual é a classe dos passageiros da frente?' : 'Qual é a classe dos passageiros da frente? Tire da garagem um ônibus dessa classe.');
     $('explica').textContent = '';
     pintarGaragem();
     if (temGsap) gsap.from('#garagem .bus', {scale: 0.3, opacity: 0, duration: 0.4, stagger: 0.04, ease: 'back.out(2)'});
@@ -320,18 +352,179 @@
       while (el.scrollWidth > el.clientWidth + 1 && fs > 11){ fs -= 1; el.style.fontSize = fs + 'px'; }
     }
   }
-  function pintarFila(){
+  function pintarFila(entrada){
     var b = jogo.blocos[jogo.frente];
     $('agora').innerHTML = b ? b.itens.map(passHtml).join('') : '<div class="pass">🎉 A fila acabou!</div>';
     $('agora').className = 'agora' + (b && !b.itens[0].frase ? ' palavras' : '');
     caberPalavras();
-    var h = '', k;
-    for (k = jogo.frente + 1; k < Math.min(jogo.blocos.length, jogo.frente + 3); k++) h += '<span class="grupo">' + jogo.blocos[k].itens.map(function(it){ return '<span>' + esc(it.palavra) + '</span>'; }).join('') + '</span>';
-    var resto = jogo.blocos.length - Math.min(jogo.blocos.length, jogo.frente + 3);
-    if (resto > 0) h += '<span class="mais">+ ' + resto * 3 + ' passageiros</span>';
-    $('depois').innerHTML = h || '<span class="mais">ninguém</span>';
+    pintarRua(true, entrada);
     caberGaragem();
   }
+
+  // ---------- a fila na rua: bonequinhos que andam até o ponto ----------
+  var PELES = ['#f2c094', '#e0a872', '#c68642', '#8d5524', '#f6d5b8'], CABELOS = ['#2b2118', '#4a3121', '#7a4b2a', '#d9b26f', '#141414'];
+  var ROUPAS = ['#e5e7eb', '#d6d3d1', '#f8fafc', '#cbd5e1', '#e7e5e4', '#f1f5f9'];
+  var calmo = !!window.PAINEL_CALMO || !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var rua = null, povo = {}, medidor = null;   // rua: o caminho; povo: passageiro -> {el, s (posição no caminho), tw}
+  function fixo(n){ var x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); }
+  function compacto(){ return !!(window.matchMedia && matchMedia('(orientation:landscape) and (max-height:520px)').matches); }
+  function limparRua(){ Object.keys(povo).forEach(function(id){ if (povo[id].tw) povo[id].tw.kill(); }); povo = {}; $('povo').innerHTML = ''; $('balao').hidden = true; }
+  function larguraPlaca(t){   // largura da placa com a palavra (para ninguém tapar a placa do vizinho)
+    if (!medidor) medidor = document.createElement('canvas').getContext('2d');
+    medidor.font = 'bold 13px "Trebuchet MS", "Segoe UI", sans-serif';
+    return (medidor.measureText(String(t)).width + 16) * rua.e;
+  }
+  function montarRua(){
+    var box = $('rua'); if (!box || !jogo) return;
+    var c = compacto(), e = c ? 0.7 : 1, W = box.clientWidth || 300;
+    var topo = Math.round(64 * e), vao = Math.round(66 * e), pad = Math.round(14 * e), r = vao / 2, restam = (jogo.blocos.length - jogo.frente) * 3;
+    var precisa = (Math.min(restam, 9) * 64 + Math.max(0, restam - 9) * 27 + Math.ceil(restam / 3) * 12) * e;
+    var linhas = c ? 1 : Math.max(1, Math.min(3, Math.ceil(precisa / Math.max(80, W - 2 * pad - 2 * r - 30))));
+    var H = topo + (linhas - 1) * vao + Math.round(12 * e);
+    box.style.height = H + 'px';
+    var xMin = (linhas > 1 ? pad + r : pad) + 26 * e, xMax = linhas > 1 ? W - pad - r : W - pad, segs = [], L = 0, i;
+    for (i = 0; i < linhas; i++){
+      var y = topo + i * vao, dir = (linhas - 1 - i) % 2 === 0 ? -1 : 1, xa = dir < 0 ? xMax : xMin, xb = dir < 0 ? xMin : xMax;
+      segs.push({t: 'l', x0: xa, y0: y, x1: xb, y1: y, s0: L, len: Math.abs(xb - xa)}); L += Math.abs(xb - xa);
+      if (i < linhas - 1){ segs.push({t: 'a', cx: xb, cy: y + r, r: r, lado: xb === xMax ? 1 : -1, s0: L, len: Math.PI * r}); L += Math.PI * r; }
+    }
+    rua = {segs: segs, L: L, e: e, W: W, H: H, linhas: linhas, placas: c ? 3 : 9, larg: Math.round(27 * e), vaoGrupo: Math.round(12 * e)};
+    desenharEstrada();
+  }
+  function pontoNa(s){
+    var g = rua.segs, a = g[0], i, q, t, ang;
+    if (s <= 0) return {x: a.x0 + (a.x1 > a.x0 ? 1 : -1) * s, y: a.y0};
+    for (i = 0; i < g.length; i++){
+      q = g[i];
+      if (s <= q.s0 + q.len || i === g.length - 1){
+        t = Math.min(1, Math.max(0, (s - q.s0) / q.len));
+        if (q.t === 'l') return {x: q.x0 + (q.x1 - q.x0) * t, y: q.y0};
+        ang = -Math.PI / 2 + Math.PI * t;
+        return {x: q.cx + q.lado * q.r * Math.cos(ang), y: q.cy + q.r * Math.sin(ang)};
+      }
+    }
+    return {x: a.x0, y: a.y0};
+  }
+  function desenharEstrada(){
+    var g = rua.segs, a = g[0], dx = a.x1 > a.x0 ? 1 : -1, d = 'M' + (a.x0 - dx * 80).toFixed(1) + ',' + a.y0.toFixed(1) + ' L' + a.x0.toFixed(1) + ',' + a.y0.toFixed(1), i, q;
+    for (i = 0; i < g.length; i++){
+      q = g[i];
+      if (q.t === 'l') d += ' L' + q.x1.toFixed(1) + ',' + q.y1.toFixed(1);
+      else d += ' A' + q.r.toFixed(1) + ',' + q.r.toFixed(1) + ' 0 0 ' + (q.lado > 0 ? 1 : 0) + ' ' + q.cx.toFixed(1) + ',' + (q.cy + q.r).toFixed(1);
+    }
+    var fim = pontoNa(rua.L), lw = Math.round(28 * rua.e);
+    $('ruaSvg').innerHTML = '<path class="estrada-borda" stroke-width="' + (lw + 5) + '" d="' + d + '"></path><path class="estrada" stroke-width="' + lw + '" d="' + d + '"></path><path class="estrada-meio" d="' + d + '"></path>' +
+      '<text class="ponto-placa" x="' + (fim.x - 30 * rua.e).toFixed(1) + '" y="' + (fim.y - 4).toFixed(1) + '" font-size="' + Math.round(24 * rua.e) + '">🚏</text>';
+  }
+  function posicionar(o){
+    var pt = pontoNa(o.s), tr = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)' + (rua.e !== 1 ? ' scale(' + rua.e + ')' : '');
+    o.el.style.webkitTransform = tr; o.el.style.transform = tr;
+    o.el.style.zIndex = Math.round(pt.y);
+    if (o.placa && o.w){
+      var esq = pt.x - o.w / 2, dir = pt.x + o.w / 2, sobra = esq < 3 ? 3 - esq : dir > rua.W - 3 ? rua.W - 3 - dir : 0;
+      if (Math.abs(sobra - (o.sobra || 0)) > 0.5){ o.sobra = sobra; o.placa.style.marginLeft = (sobra / rua.e).toFixed(1) + 'px'; }
+    }
+  }
+  function criarPessoa(id, it){
+    var el = document.createElement('div'), a = fixo(id + 1), b = fixo(id + 7), c = fixo(id + 13), atraso = '-' + (a * 2.4).toFixed(2) + 's';
+    el.className = 'pessoa';
+    el.setAttribute('data-p', id);
+    el.style.setProperty('--pele', PELES[Math.floor(a * PELES.length)]);
+    el.style.setProperty('--cabelo', CABELOS[Math.floor(b * CABELOS.length)]);
+    el.style.setProperty('--roupa', ROUPAS[Math.floor(c * ROUPAS.length)]);
+    el.innerHTML = '<span class="placa">' + esc(it.palavra) + '</span><span class="boneco' + (b > 0.55 ? ' longo' : '') + '" style="-webkit-animation-delay:' + atraso + ';animation-delay:' + atraso + '"><i class="cab"></i><i class="corpo"></i></span><i class="sombra"></i>';
+    $('povo').appendChild(el);
+    return el;
+  }
+  function retPlaca(s, w){   // onde fica a placa de quem está na posição s (já empurrada para dentro da rua)
+    var pt = pontoNa(s), esq = pt.x - w / 2, dir = pt.x + w / 2, sobra = esq < 3 ? 3 - esq : dir > rua.W - 3 ? rua.W - 3 - dir : 0, b = pt.y - 42 * rua.e;
+    return {l: esq + sobra, r: dir + sobra, t: b - 21 * rua.e, b: b};
+  }
+  function cruzam(a, b){ return a.l < b.r + 2 && b.l < a.r + 2 && a.t < b.b + 2 && b.t < a.b + 2; }
+  function filaNaRua(){   // a posição de cada passageiro no caminho, da frente para trás
+    var lista = [], s = rua.L - Math.round(12 * rua.e), ant = -1, n = 0, rets = [], b, k, it, w, tent;
+    var bate = function(q){ return cruzam(q, retPlaca(s, w)); };
+    for (b = jogo.frente; b < jogo.blocos.length; b++){
+      for (k = 0; k < 3; k++){
+        it = jogo.blocos[b].itens[k];
+        w = n < rua.placas ? larguraPlaca(it.palavra) : 0;
+        if (ant >= 0) s -= Math.max(rua.larg, (ant + w) / 2 + 6 * rua.e) + (k === 0 ? rua.vaoGrupo : 0);
+        if (w){ for (tent = 0; tent < 120 && rets.some(bate); tent++) s -= 3; rets.push(retPlaca(s, w)); }   // nenhuma placa tapa outra (nem na curva)
+        ant = w;
+        lista.push({id: b * 3 + k, it: it, s: s, n: n, frente: b === jogo.frente});
+        n++;
+      }
+    }
+    return lista;
+  }
+  function andarAte(o, alvo, animado, atraso, vel, chegou){   // anda pelo caminho com velocidade constante (ninguém passa na frente do outro)
+    if (o.tw){ o.tw.kill(); o.tw = null; }
+    var dist = Math.abs(alvo - o.s);
+    if (!animado || !temGsap || calmo || dist < 1){ o.s = alvo; posicionar(o); o.el.classList.remove('andando'); if (chegou) chegou(); return; }
+    o.el.classList.add('andando');
+    o.tw = gsap.to(o, {s: alvo, duration: Math.max(0.25, dist / (vel || 260)), delay: atraso || 0, ease: 'none', onUpdate: function(){ posicionar(o); }, onComplete: function(){ o.tw = null; o.el.classList.remove('andando'); if (chegou) chegou(); }});
+  }
+  function pintarRua(animado, entrada){
+    if (!rua || !jogo) return;
+    var lista = filaNaRua(), vivos = {}, fora = 0, novos = 0, inicio = Math.round(4 * rua.e), vel = (entrada ? 700 : 260) * rua.e;
+    lista.forEach(function(q){
+      if (q.s < inicio){ fora++; return; }
+      vivos[q.id] = true;
+      var o = povo[q.id], novo = !o;
+      if (novo){ o = povo[q.id] = {el: criarPessoa(q.id, q.it), s: animado ? -30 * rua.e - novos * rua.larg : q.s, tw: null}; o.placa = o.el.querySelector('.placa'); }
+      o.w = larguraPlaca(q.it.palavra);
+      if (novo){ posicionar(o); novos++; }
+      var temPlaca = q.n < rua.placas, ganhaPlaca = temPlaca && animado && (novo || o.el.classList.contains('sem-placa'));
+      o.el.className = 'pessoa' + (q.frente ? ' frente' : '') + (temPlaca && !ganhaPlaca ? '' : ' sem-placa') + (o.tw ? ' andando' : '');
+      andarAte(o, q.s, animado, novo && !entrada ? 0.2 : 0, vel, ganhaPlaca ? function(){ o.el.classList.remove('sem-placa'); } : null);
+    });
+    Object.keys(povo).forEach(function(id){ if (!vivos[id]){ var o = povo[id]; if (o.tw) o.tw.kill(); if (o.el.parentNode) o.el.parentNode.removeChild(o.el); delete povo[id]; } });
+    var m = $('ruaMais'), ini = pontoNa(16 * rua.e);
+    m.hidden = !fora; m.textContent = '+' + fora + ' 🚶';
+    m.style.left = Math.max(30, Math.min(rua.W - 30, ini.x)) + 'px'; m.style.top = Math.max(3, ini.y - 62 * rua.e) + 'px';
+  }
+  function embarcar(id, alvo, cor){   // o passageiro da frente vai andando até o ônibus e ganha a cor da classe
+    var o = povo[id]; if (!o) return;
+    delete povo[id];
+    if (o.tw){ o.tw.kill(); o.tw = null; }
+    var el = o.el; if (!el.parentNode) return;
+    if (!alvo || !temGsap || calmo){ el.parentNode.removeChild(el); return; }
+    var rr = $('rua').getBoundingClientRect(), pt = pontoNa(o.s), x0 = rr.left + pt.x, y0 = rr.top + pt.y, r1 = alvo.getBoundingClientRect();
+    el.parentNode.removeChild(el);
+    el.className = 'pessoa voando frente';
+    el.style.left = (x0 - 12) + 'px'; el.style.top = (y0 - 40) + 'px'; el.style.margin = '0'; el.style.webkitTransform = el.style.transform = 'none';
+    el.style.setProperty('--roupa', cor);
+    document.body.appendChild(el);
+    gsap.fromTo(el, {x: 0, y: 0, scale: rua.e}, {x: r1.left + r1.width / 2 - x0, y: r1.top + r1.height * 0.7 - y0, scale: rua.e * 0.55, duration: 0.5, ease: 'power2.in', onComplete: function(){ gsap.to(el, {opacity: 0, duration: 0.15, onComplete: function(){ if (el.parentNode) el.parentNode.removeChild(el); }}); }});
+  }
+  function sacudirFrente(){   // ônibus errado: os passageiros da frente balançam a cabeça
+    var ps = $('povo').querySelectorAll('.pessoa.frente'), i;
+    for (i = 0; i < ps.length; i++){ ps[i].classList.remove('nao'); void ps[i].offsetWidth; ps[i].classList.add('nao'); }
+    setTimeout(function(){ for (var j = 0; j < ps.length; j++) ps[j].classList.remove('nao'); }, 1000);
+  }
+  function textoSimples(h){ var d = document.createElement('div'); d.innerHTML = h; return d.textContent || d.innerText || ''; }
+  function mostrarBalao(id, el){   // tocou num passageiro: mostra a palavra (ou a frase) e lê em voz alta
+    var b = jogo && jogo.blocos[Math.floor(id / 3)], it = b && b.itens[id % 3]; if (!it) return;
+    var bal = $('balao'), cart = $('cartaoFila').getBoundingClientRect(), pl = el.querySelector('.placa'), r = (pl && pl.offsetWidth ? pl : el).getBoundingClientRect();
+    bal.innerHTML = it.frase || esc(it.palavra);
+    bal.style.left = '0px'; bal.hidden = false;
+    var x = r.left + r.width / 2 - cart.left, larg = bal.offsetWidth;
+    x = Math.max(larg / 2 + 4, Math.min(cart.width - larg / 2 - 4, x));
+    bal.style.left = x + 'px'; bal.style.top = (r.top - cart.top - 4) + 'px';
+    clearTimeout(bal._t); bal._t = setTimeout(function(){ bal.hidden = true; }, 2600);
+    if (window.Sala && Sala.falar) Sala.falar(it.frase ? textoSimples(it.frase) : it.palavra);
+    if (temGsap && !calmo) gsap.fromTo(el.querySelector('.boneco'), {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out'});
+  }
+  $('rua').onclick = function(ev){
+    var el = ev.target; while (el && el !== this && !(el.getAttribute && el.getAttribute('data-p'))) el = el.parentNode;
+    if (el && el !== this) mostrarBalao(+el.getAttribute('data-p'), el);
+  };
+  $('agora').onclick = function(ev){   // tocar no cartão também lê a palavra
+    var el = ev.target; while (el && el !== this && !(el.classList && el.classList.contains('pass'))) el = el.parentNode;
+    if (!el || el === this || !jogo) return;
+    var b = jogo.blocos[jogo.frente], k = [].indexOf.call(this.querySelectorAll('.pass'), el), it = b && b.itens[k];
+    if (it && window.Sala && Sala.falar) Sala.falar(it.frase ? textoSimples(it.frase) : it.palavra);
+  };
   function pintarVagas(){
     $('vagas').innerHTML = jogo.vagas.map(function(id, i){
       if (id === null) return '<div class="vaga" data-v="' + i + '"></div>';
@@ -392,7 +585,7 @@
     var chegar = function(){ if (!jogo || jogo.acabou) return; if (el && el.parentNode) el.parentNode.removeChild(el); pintarVagas();
       var np = $('vagas').querySelector('.no-ponto[data-id="' + id + '"]');
       if (temGsap && np) gsap.from(np, {x: 60, opacity: 0, duration: 0.35, ease: 'power2.out'});
-      if (frente && o.classe !== frente.classe) msg('🅿️ O ônibus do ' + nomeClasse(o.classe) + ' ficou esperando: os passageiros da frente não são da classe ' + nomeClasse(o.classe) + '.');
+      if (frente && o.classe !== frente.classe){ msg('🅿️ O ônibus do ' + nomeClasse(o.classe) + ' ficou esperando: os passageiros da frente não são da classe ' + nomeClasse(o.classe) + '.'); sacudirFrente(); }
       processar(); };
     if (temGsap && el){
       var cel = +$('garagem').getAttribute('data-cel'), dist = (Math.max(jogo.L, jogo.C) + 2) * cel, dx = {L: -dist, R: dist, U: 0, D: 0}[o.dir], dy = {U: -dist, D: dist, L: 0, R: 0}[o.dir];
@@ -417,6 +610,7 @@
         o.lugares = k + 1;
         var card = cards[k], seat = $('vagas').querySelector('.no-ponto[data-id="' + o.id + '"] .lugares i:nth-child(' + (k + 1) + ')');
         if (card) card.classList.add('dentro');
+        embarcar(jogo.frente * 3 + k, $('vagas').querySelector('.no-ponto[data-id="' + o.id + '"]'), CLASSES[o.classe].cor);
         if (seat){ seat.classList.add('ocupado'); if (temGsap) gsap.fromTo(seat, {scale: 1.8}, {scale: 1, duration: 0.3, ease: 'back.out(3)'}); }
         tom(600 + k * 120, 0.08);
         k++; return setTimeout(umPorUm, passo);
@@ -492,10 +686,10 @@
   $('btComecar').onclick = function(){ if (!itens.length) return aviso('Ainda não há palavras ou frases carregadas.'); comecar(true); };
   $('btRecomecar').onclick = function(){ if (confirm('Recomeçar este nível do início?')) comecar(false); };
   $('btSair').onclick = function(){ if (confirm('Sair deste jogo e mudar as escolhas?')) sair(); };
-  window.addEventListener('resize', function(){ if (jogo && !jogo.acabou){ clearTimeout(lim.t); lim.t = setTimeout(function(){ caberPalavras(); pintarGaragem(); }, 150); } });
+  window.addEventListener('resize', function(){ if (jogo && !jogo.acabou){ clearTimeout(lim.t); lim.t = setTimeout(function(){ caberPalavras(); montarRua(); pintarRua(false); pintarGaragem(); }, 150); } });
   if (window.Sala) Sala.botaoSom($('btSom'));
   pintarBancos();
-  window.ONIBUS = {jogo: function(){ return jogo; }, tocar: tocar, bloqueador: function(id){ return bloqueador(jogo.onibus[id]); }, itens: function(){ return itens; }};   // usado nos testes
+  window.ONIBUS = {jogo: function(){ return jogo; }, tocar: tocar, rua: function(){ return rua; }, bloqueador: function(id){ return bloqueador(jogo.onibus[id]); }, itens: function(){ return itens; }};   // usado nos testes
 })();
 </script>
 </body>
