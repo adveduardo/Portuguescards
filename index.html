@@ -1008,6 +1008,7 @@
             <option value="infantil">🧸 Visual: infantil</option>
             <option value="calmo">🌙 Visual: calmo (menos estímulos, para TEA)</option>
         </select>
+        <button class="hide-btn" id="btAtualizar" onclick="atualizarPainel()" title="Buscar a versão mais nova do painel e da atividade aberta (bom no app do iPad, sem precisar fechar)">🔄 Atualizar</button>
         <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
     </div>
 
@@ -1042,6 +1043,27 @@
                 iframe.src = selector.value;
             }
         }
+
+        // 🔄 Atualizar: recarrega o painel buscando a versão nova (no app do iPad não há botão de recarregar)
+        // e reabre a mesma atividade que estava aberta.
+        function atualizarPainel() {
+            const sel = document.getElementById('tool-selector');
+            try { sessionStorage.setItem('painel_reabrir', sel.value || ''); } catch (e) {}
+            const b = document.getElementById('btAtualizar'); if (b) b.textContent = '⏳ Atualizando…';
+            const ir = function () { location.replace(location.pathname + '?v=' + Date.now() + location.hash); };
+            if (window.caches && caches.keys) caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); }).then(ir, ir); else ir();
+        }
+        (function reabrirDepoisDeAtualizar() {
+            let v = null; try { v = sessionStorage.getItem('painel_reabrir'); sessionStorage.removeItem('painel_reabrir'); } catch (e) {}
+            if (v === null) return;
+            const sel = document.getElementById('tool-selector');
+            if (!v || ![].some.call(sel.options, function (o) { return o.value === v; })) return;
+            sel.value = v;
+            document.getElementById('welcome-screen').style.display = 'none';
+            const iframe = document.getElementById('app-frame');
+            iframe.style.display = 'block';
+            iframe.src = v + (v.indexOf('?') >= 0 ? '&' : '?') + 'v=' + Date.now();   // a atividade também vem nova
+        })();
 
         function mudarVisual() {
             const v = document.getElementById('visual-selector').value;
