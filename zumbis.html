@@ -102,7 +102,7 @@
     var eq = jogo.equipes[jogo.vez];
     $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🏫 Escola';
     $('hOnda').textContent = '💀 ' + jogo.curados + '/' + jogo.qtd + ' curados';
-    $('hVidas').textContent = jogo.vidasMax <= 5 ? new Array(Math.max(0, jogo.vidas) + 1).join('❤️') + new Array(jogo.vidasMax - Math.max(0, jogo.vidas) + 1).join('🤍') : '❤️ ' + Math.max(0, jogo.vidas) + '/' + jogo.vidasMax;
+    $('hVidas').textContent = jogo.vidasMax <= 5 ? new Array(Math.max(0, jogo.vidas) + 1).join('❤️') + new Array(jogo.vidasMax - Math.max(0, jogo.vidas) + 1).join('♡') : '❤️ ' + Math.max(0, jogo.vidas) + '/' + jogo.vidasMax;
     $('hPontos').textContent = '⭐ ' + eq.pontos;
   }
   function casaX(){ return 190 * tela.ESC; }
