@@ -128,6 +128,21 @@
   .col-fim .tit{display:block;color:#fff;border-radius:8px;padding:2px 8px;margin-bottom:4px;font-weight:bold}
   .col-fim span{display:inline-block;margin:2px 6px 2px 0;font-weight:bold}
   .passaram{color:#b91c1c}
+  /* cenário do pátio: gramado em linhas, flores e a escola na esquerda */
+  #campo.patio{background:#5fae3e;box-shadow:inset 0 0 0 3px #4a8f2f}
+  #campo.patio .faixa{left:0 !important}
+  #campo.patio .faixa.par{background:none}
+  #campo.patio .grama{position:absolute;right:0;background:#79c652}
+  #campo.patio .grama.esc{background:#6cb948}
+  #campo.patio .linha-f{background:rgba(40,90,25,.35);height:3px}
+  #campo.patio .escola{position:absolute;left:0;top:0;bottom:0;background:#c8674c;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.28) 0 2px,transparent 2px 14px),repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 2px,transparent 2px 26px);border-right:6px solid #8a3b28;box-shadow:4px 0 8px rgba(0,0,0,.25)}
+  #campo.patio .porta{position:absolute;left:22%;width:56%;background:#7a4a2a;border:3px solid #5a3218;border-bottom:none;border-radius:40% 40% 0 0;box-sizing:border-box}
+  #campo.patio .porta::after{content:'';position:absolute;right:16%;top:52%;width:5px;height:5px;border-radius:50%;background:#facc15}
+  #campo.patio .placa-escola{position:absolute;left:4px;right:4px;top:4px;background:#fff7d1;border:2px solid #8a3b28;border-radius:6px;font-weight:bold;font-size:10px;text-align:center;color:#8a3b28;z-index:1}
+  #campo.patio .flor{position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 -6px 0 -1px var(--p),6px 0 0 -1px var(--p),0 6px 0 -1px var(--p),-6px 0 0 -1px var(--p);pointer-events:none}
+  #campo.patio .tufo{position:absolute;width:14px;height:8px;border-radius:50% 50% 0 0;background:#4f9a33;pointer-events:none}
+  #campo.patio.colocando .casa.vazia::after{border-color:rgba(255,255,255,.75)}
+  #campo.patio .mancha{background:#3f5f22}
   .so-tab{display:none} body.tabuada .so-tab{display:inline} body.tabuada .so-pal{display:none !important}
   body.tabuada p.so-tab{display:block}
   @media (orientation:landscape) and (max-height:520px){
@@ -167,12 +182,13 @@
     <p class="mt-linha">
       <label>Ondas: <select id="selOndas"><option value="3">3 (rápido)</option><option value="5" selected>5</option><option value="8">8 (longo)</option></select></label>
       <label>Velocidade: <select id="selVel"><option value="0.75">🐢 Devagar</option><option value="1" selected>🚶 Normal</option><option value="1.3">🏃 Rápido</option></select></label>
+      <label>Cenário: <select id="selCena"><option value="patio" selected>🏫 Pátio da escola (gramado)</option><option value="caderno">📒 Folha do caderno</option></select></label>
       <label>Linhas: <select id="selFaixas"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option></select></label>
       <button class="principal" id="btComecar">▶️ Começar</button>
     </p>
     <p class="mt-dica so-pal" id="infoBanco"></p>
-    <p class="mt-dica so-pal">Como jogar: os zumbis da tinta pegaram as palavras e andam pelas linhas do caderno até a <b>margem vermelha</b>. Cada classe é uma canetinha de uma cor: toque numa canetinha e depois numa casa da linha. Ela só cura os zumbis que carregam palavra <b>da classe dela</b>, e o zumbi curado vira criança de novo. Curar vários seguidos dá <b>🎁 presentes</b> (tinta, gelo, turbo e raio) e os <b>💧 pingos</b> que caem dão tinta: é só tocar neles. Se um zumbi chegar à margem, o caderno fica manchado (são 3 chances). Toque num zumbi para ouvir a palavra.</p>
-    <p class="mt-dica so-tab">Como jogar: os zumbis da tinta carregam números. Cada canetinha é uma tabuada: a canetinha do 7 só cura zumbis com números da tabuada do 7 (14, 21, 28…). Toque numa canetinha e depois numa casa da linha do zumbi. Curar vários seguidos dá <b>🎁 presentes</b> e os <b>💧 pingos</b> que caem dão tinta. Se um zumbi chegar à margem, o caderno fica manchado (são 3 chances).</p>
+    <p class="mt-dica so-pal">Como jogar: os zumbis da tinta pegaram as palavras e andam pelas linhas até a <b>escola</b> (ou até a margem do caderno, no outro cenário). Cada classe é uma canetinha de uma cor: toque numa canetinha e depois numa casa da linha. Ela só cura os zumbis que carregam palavra <b>da classe dela</b>, e o zumbi curado vira criança de novo. Curar vários seguidos dá <b>🎁 presentes</b> (tinta, gelo, turbo e raio) e os <b>💧 pingos</b> que caem dão tinta: é só tocar neles. Se um zumbi chegar à escola, vocês perdem uma das 3 chances. Toque num zumbi para ouvir a palavra.</p>
+    <p class="mt-dica so-tab">Como jogar: os zumbis da tinta carregam números. Cada canetinha é uma tabuada: a canetinha do 7 só cura zumbis com números da tabuada do 7 (14, 21, 28…). Toque numa canetinha e depois numa casa da linha do zumbi. Curar vários seguidos dá <b>🎁 presentes</b> e os <b>💧 pingos</b> que caem dão tinta. Se um zumbi chegar à escola, vocês perdem uma das 3 chances.</p>
   </div>
 </div>
 <div id="jogo" hidden>
@@ -321,7 +337,7 @@
     if (TABUADA) tabsEscolhidas = cls.map(function(k){ return CLASSES[k].n; });
     else pool = embaralhar(itens.filter(function(it){ return cls.indexOf(it.classe) >= 0; }));
     pararLaco();
-    jogo = {classes: cls, pool: pool, pos: 0, max: +$('selMax').value, vidas: 3, tinta: 150, onda: 0, ondas: +$('selOndas').value, vel: +$('selVel').value, canetas: {}, zumbis: [], gotas: [], manchas: [], extras: [],
+    jogo = {classes: cls, cena: $('selCena').value, pool: pool, pos: 0, max: +$('selMax').value, vidas: 3, tinta: 150, onda: 0, ondas: +$('selOndas').value, vel: +$('selVel').value, canetas: {}, zumbis: [], gotas: [], manchas: [], extras: [],
       emOnda: false, faltam: 0, proxGerar: 0, tempoPingo: 0, limpos: [], passaram: [], dicas: 0, combo: 0, melhorCombo: 0, presentes: 0, gelo: 0, turbo: 0, sel: null, recarga: {}, acabou: false, pausado: false, inicio: Date.now()};
     cls.forEach(function(k){ jogo.recarga[k] = 0; });
     $('config').hidden = true; $('fim').hidden = true; $('jogo').hidden = false; $('btDica').hidden = $('btPausa').hidden = false; $('pausa').hidden = true;
@@ -387,9 +403,22 @@
     var fig = Math.round(Math.max(24, Math.min(96, ch * 0.5, (ch * 0.94 - fonte * 1.3 - 16) / 1.25)));   // zumbi + placa cabem na linha
     G = {W: W, H: H, L: L, mg: mg, ch: ch, cw: cw, fig: fig, base: ch * 0.94,
       fonte: fonte, fonteFrase: Math.round(Math.max(10, Math.min(17, ch * 0.118))), caneta: Math.round(Math.max(16, Math.min(46, ch * 0.29)))};
-    var h = '<div id="margem" style="width:' + mg + 'px">';
-    for (f = 0; f < Math.max(2, Math.round(H / 70)); f++) h += '<i class="furo" style="top:' + Math.round(28 + f * 70) + 'px"></i>';
-    h += '</div>';
+    var h = '', patio = jogo.cena === 'patio';
+    campo.classList.toggle('patio', patio);
+    if (patio){
+      for (l = 0; l < L; l++) for (c = 0; c < jogo.C; c++) h += '<i class="grama' + ((l + c) % 2 ? ' esc' : '') + '" style="left:' + Math.round(mg + c * cw) + 'px;top:' + Math.round(l * ch) + 'px;width:' + Math.ceil(cw) + 'px;height:' + Math.ceil(ch) + 'px"></i>';
+      for (l = 0; l < L; l++) for (f = 0; f < 3; f++){   // flores e tufos fixos (sempre no mesmo lugar)
+        var fx2 = mg + ((l * 37 + f * 53) % 97) / 97 * (W - mg - 20) + 6, fy2 = l * ch + ch * (0.08 + ((l * 13 + f * 29) % 10) / 100);
+        h += f === 1 ? '<i class="tufo" style="left:' + Math.round(fx2) + 'px;top:' + Math.round(fy2 + ch * 0.05) + 'px"></i>' : '<i class="flor" style="--p:' + ['#f472b6', '#facc15', '#a78bfa'][(l + f) % 3] + ';left:' + Math.round(fx2) + 'px;top:' + Math.round(fy2) + 'px"></i>';
+      }
+      h += '<div class="escola" id="margem" style="width:' + mg + 'px"><span class="placa-escola">ESCOLA</span>';
+      for (l = 0; l < L; l++){ var ph = Math.min(ch * 0.55, 70); h += '<i class="porta" style="top:' + Math.round(l * ch + ch - ph) + 'px;height:' + Math.round(ph) + 'px"></i>'; }
+      h += '</div>';
+    } else {
+      h += '<div id="margem" style="width:' + mg + 'px">';
+      for (f = 0; f < Math.max(2, Math.round(H / 70)); f++) h += '<i class="furo" style="top:' + Math.round(28 + f * 70) + 'px"></i>';
+      h += '</div>';
+    }
     for (l = 0; l < L; l++) h += '<i class="faixa' + (l % 2 ? ' par' : '') + '" style="top:' + Math.round(l * ch) + 'px;height:' + Math.ceil(ch) + 'px;left:' + (mg + 3) + 'px"></i>';
     for (l = 1; l < L; l++) h += '<i class="linha-f" style="top:' + Math.round(l * ch - 1) + 'px;left:' + (mg + 3) + 'px"></i>';
     for (l = 0; l < L; l++) for (c = 0; c < jogo.C; c++) h += '<div class="casa vazia" data-l="' + l + '" data-c="' + c + '" style="left:' + Math.round(mg + c * cw) + 'px;top:' + Math.round(l * ch) + 'px;width:' + Math.ceil(cw) + 'px;height:' + Math.ceil(ch) + 'px"></div>';
@@ -703,6 +732,7 @@
   $('btSair').onclick = function(){ pausar(true); if (confirm('Sair deste jogo e mudar as escolhas?')) sair(); else pausar(false); };
 
   // ---------- fim ----------
+  function lugar(){ return jogo && jogo.cena === 'patio' ? 'a escola' : 'o caderno'; }
   function cadernoHtml(){
     var h = '<div class="caderno-fim">';
     jogo.classes.forEach(function(k){
@@ -722,13 +752,13 @@
   }
   function passaramHtml(){
     if (!jogo.passaram.length) return '';
-    return '<p class="passaram">Passaram pela margem: ' + jogo.passaram.map(function(it){ return '<b>' + esc(it.palavra) + '</b> (' + (TABUADA ? esc(it.explica) : nomeClasse(it.classe).toLowerCase()) + ')'; }).join(', ') + '</p>';
+    return '<p class="passaram">Chegaram até ' + lugar() + ': ' + jogo.passaram.map(function(it){ return '<b>' + esc(it.palavra) + '</b> (' + (TABUADA ? esc(it.explica) : nomeClasse(it.classe).toLowerCase()) + ')'; }).join(', ') + '</p>';
   }
   function vitoria(){
     if (!jogo) return;
     jogo.acabou = true;
     var est = jogo.vidas === 3 && jogo.dicas === 0 ? 3 : jogo.vidas >= 2 ? 2 : 1;
-    mostrarFim('<div class="grande">🎉 O caderno ficou livre dos zumbis!</div><div class="estrelas">' + new Array(est + 1).join('⭐') + new Array(4 - est).join('☆') + '</div>' +
+    mostrarFim('<div class="grande">🎉 ' + (jogo.cena === 'patio' ? 'A escola ficou' : 'O caderno ficou') + ' livre dos zumbis!</div><div class="estrelas">' + new Array(est + 1).join('⭐') + new Array(4 - est).join('☆') + '</div>' +
       '<p>' + jogo.limpos.length + ' zumbis curados · melhor sequência 🔥 ' + jogo.melhorCombo + ' · 🎁 ' + jogo.presentes + ' presentes · ' + jogo.vidas + (jogo.vidas === 1 ? ' chance sobrando' : ' chances sobrando') + ' · ' + jogo.dicas + (jogo.dicas === 1 ? ' dica' : ' dicas') + ' · ⏱️ ' + tempoTxt() + '</p>' +
       '<h3>📒 O caderno da turma</h3>' + cadernoHtml() + passaramHtml() +
       '<p class="mt-linha" style="justify-content:center"><button class="principal" id="fimDeNovo">🔁 Jogar de novo</button><button id="fimConfig">⚙️ Mudar as escolhas</button></p>');
@@ -738,7 +768,7 @@
   function derrota(){
     if (!jogo) return;
     jogo.acabou = true;
-    mostrarFim('<div class="grande">😬 Os zumbis mancharam o caderno</div>' +
+    mostrarFim('<div class="grande">😬 Os zumbis ' + (jogo.cena === 'patio' ? 'entraram na escola' : 'mancharam o caderno') + '</div>' +
       '<p>Vocês chegaram à onda ' + jogo.onda + ' de ' + jogo.ondas + ' e curaram ' + jogo.limpos.length + (jogo.limpos.length === 1 ? ' zumbi' : ' zumbis') + '.</p>' + passaramHtml() +
       '<h3>📒 O caderno da turma</h3>' + cadernoHtml() +
       '<p class="mt-linha" style="justify-content:center"><button class="principal" id="fimDeNovo">🔁 Tentar de novo</button><button id="fimConfig">⚙️ Mudar as escolhas</button></p>');
