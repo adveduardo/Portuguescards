@@ -25,11 +25,12 @@
 <div id="aviso"></div>
 <div class="tela ativa" id="tConfig"><div class="cartao">
   <h1>💀 Zumbis da Ortografia</h1>
-  <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>! Se um zumbi chegar à escola, vocês perdem um coração.</p>
+  <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>. No modo <b>🏷️ Classes de palavras</b>, o zumbi traz uma palavra e vocês escolhem a classe dela. Se um zumbi chegar à escola, vocês perdem um coração; sem corações, a escola é destruída!</p>
   <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
   <p class="dica" id="infoArq">Carregando…</p>
   <label>Zumbis por onda: <select id="selQtd"><option>6</option><option selected>8</option><option>12</option></select></label>
   <label>Velocidade: <select id="selVel"><option value="0.75">devagar</option><option value="1" selected>normal</option><option value="1.35">rápida</option></select></label>
+  <label>Vidas: <select id="selVidas"><option value="1">1 ❤️</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
   <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
   <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
   <p class="dica">Clique na resposta ou use as teclas 1, 2, 3 e 4.</p>
@@ -41,8 +42,33 @@
   'use strict';
   var $ = ARC.$, esc = ARC.esc, itens = [], jogo = null, laco = ARC.laco(passo), tela = ARC.canvas($('cv'), function(){ if (!laco.rodando) desenhar(); }), ctx = tela.ctx;
 
+  var NOME_CLASSE = {substantivo: 'Substantivo', adjetivo: 'Adjetivo', verbo: 'Verbo', adverbio: 'Advérbio', pronome: 'Pronome', artigo: 'Artigo', numeral: 'Numeral', preposicao: 'Preposição', conjuncao: 'Conjunção', interjeicao: 'Interjeição'};
+  function chaveClasse(t){ t = String(t || '').toLowerCase(); var de = 'áàâãéêíóôõúç', para = 'aaaaeeiooouc', s2 = '', i, k; for (i = 0; i < t.length; i++){ k = de.indexOf(t.charAt(i)); s2 += k >= 0 ? para.charAt(k) : t.charAt(i); } s2 = s2.replace(/[^a-z]/g, ''); return NOME_CLASSE[s2] ? s2 : ''; }
+  function lerClasses(d){   // palavras ({palavra, classe}) ou frases ({destaque: "…[palavra]…", correta}) viram zumbis de classe
+    var lista = d.palavras || d.rodadas || [], out = [], usadas = {};
+    lista.forEach(function(it){
+      var k, w, fr = '';
+      if (it.destaque){ var m = String(it.destaque).match(/\[([^\]]+)\]/); if (!m) return; w = m[1]; k = chaveClasse(it.correta || it.classe); fr = String(it.destaque).replace(/\[|\]/g, ''); }
+      else { w = it.palavra; k = chaveClasse(it.classe); }
+      if (!w || !k) return; usadas[k] = 1;
+      out.push({frase: fr, errada: String(w), correta: NOME_CLASSE[k], classe: true, ops: []});
+    });
+    var nomes = Object.keys(usadas).map(function(k){ return NOME_CLASSE[k]; });
+    out.forEach(function(it){ it.ops = [it.correta].concat(ARC.embaralhar(nomes.filter(function(n){ return n !== it.correta; })).slice(0, 3)); });
+    return nomes.length >= 2 ? out : [];
+  }
   ARC.seletor($('selArquivo'), 'detetive', 'detetive-padrao.json', function(arq){
+    var sel = $('selArquivo');
+    if (!sel.querySelector('optgroup.classes')){   // o modo das classes de palavras entra na mesma lista
+      var og = document.createElement('optgroup'); og.className = 'classes'; og.label = '🏷️ Classes de palavras (escolham a classe)';
+      og.innerHTML = '<option value="classes:morfo-classes.json">As 10 classes (390 palavras)</option><option value="classes:morfo-classes-basico.json">Substantivo, adjetivo e verbo (108 palavras)</option><option value="classes:morfo-classes-frase.json">Palavra destacada na frase (802 frases)</option><option value="classes:morfo-classes-frase-sav.json">Frases: substantivo, adjetivo ou verbo (148)</option>';
+      sel.insertBefore(og, sel.firstChild); sel.value = arq;
+    }
     $('infoArq').textContent = 'Carregando…'; itens = [];
+    if (arq.indexOf('classes:') === 0){
+      ARC.json('dados/' + arq.slice(8), function(d){ itens = lerClasses(d); $('infoArq').textContent = itens.length ? itens.length + ' palavras para classificar' : 'Não achei palavras com classe neste arquivo.'; }, function(){ $('infoArq').textContent = 'Não consegui abrir o arquivo.'; });
+      return;
+    }
     ARC.json('dados/' + arq, function(d){
       (d.frases || []).forEach(function(f){
         if (!f || !f.errada || !f.correta) return;
@@ -57,26 +83,26 @@
 
   function comecar(){
     if (itens.length < 3) return ARC.aviso('Escolha um arquivo de palavras.');
-    jogo = {monte: ARC.embaralhar(itens), usadas: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, qtd: +$('selQtd').value, velBase: +$('selVel').value, onda: 1};
+    jogo = {monte: ARC.embaralhar(itens), usadas: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, qtd: +$('selQtd').value, velBase: +$('selVel').value, onda: 1, vidasMax: +$('selVidas').value || 3};
     abrirVez();
   }
   function abrirVez(){
     var eq = jogo.equipes[jogo.vez];
     $('cVez').innerHTML = '<h2>🌙 Onda ' + jogo.onda + (jogo.equipes.length > 1 ? ': vez dos ' + eq.emoji + ' ' + esc(eq.nome) : '') + '</h2>' +
-      '<p>Vêm aí ' + jogo.qtd + ' zumbis. Protejam a escola: vocês têm 3 corações!</p>' +
+      '<p>Vêm aí ' + jogo.qtd + ' zumbis. Protejam a escola: vocês têm ' + jogo.vidasMax + (jogo.vidasMax === 1 ? ' coração' : ' corações') + '!</p>' +
       (jogo.equipes.length > 1 ? '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' : '') +
       '<button type="button" class="principal" id="btIr">💀 Que venham!</button>';
     ARC.tela('tVez'); $('btIr').onclick = iniciarOnda;
   }
   function iniciarOnda(){
-    jogo.zumbis = []; jogo.fx = []; jogo.vidas = 3; jogo.criados = 0; jogo.curados = 0; jogo.escaparam = 0; jogo.gerar = 0.3; jogo.tremer = 0; jogo.acabou = false; jogo.frente = undefined;
+    jogo.zumbis = []; jogo.fx = []; jogo.vidas = jogo.vidasMax; jogo.destruida = false; jogo.criados = 0; jogo.curados = 0; jogo.escaparam = 0; jogo.gerar = 0.3; jogo.tremer = 0; jogo.acabou = false; jogo.frente = undefined;
     ARC.tela(null); $('hud').style.display = ''; $('painel').style.display = 'block'; atualizarHud(); laco.pausado = false; laco.iniciar();
   }
   function atualizarHud(){
     var eq = jogo.equipes[jogo.vez];
     $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🏫 Escola';
     $('hOnda').textContent = '💀 ' + jogo.curados + '/' + jogo.qtd + ' curados';
-    $('hVidas').textContent = '❤️❤️❤️'.slice(0, jogo.vidas * 2) + '♡♡♡'.slice(0, 3 - jogo.vidas);
+    $('hVidas').textContent = jogo.vidasMax <= 5 ? new Array(Math.max(0, jogo.vidas) + 1).join('❤️') + new Array(jogo.vidasMax - Math.max(0, jogo.vidas) + 1).join('🤍') : '❤️ ' + Math.max(0, jogo.vidas) + '/' + jogo.vidasMax;
     $('hPontos').textContent = '⭐ ' + eq.pontos;
   }
   function casaX(){ return 190 * tela.ESC; }
@@ -93,7 +119,7 @@
     jogo.frente = f;
     if (!f){ $('frase').innerHTML = jogo.criados < jogo.qtd ? 'Lá vem mais um…' : ''; $('ops').innerHTML = ''; return; }
     var fr = esc(f.it.frase).replace(esc(f.it.errada), '<mark>' + esc(f.it.errada) + '</mark>');
-    $('frase').innerHTML = (f.it.frase ? fr : '<mark>' + esc(f.it.errada) + '</mark>') + ' &nbsp;→ como se escreve?';
+    $('frase').innerHTML = (f.it.frase ? fr : '<mark>' + esc(f.it.errada) + '</mark>') + ' &nbsp;→ ' + (f.it.classe ? 'qual é a classe?' : 'como se escreve?');
     $('ops').innerHTML = f.ops.map(function(o, i){ return '<button type="button" data-i="' + i + '">' + (i + 1) + ') ' + esc(o) + '</button>'; }).join('');
     var bs = $('ops').querySelectorAll('button');
     for (var k = 0; k < bs.length; k++) bs[k].onclick = function(){ responder(+this.getAttribute('data-i')); };
@@ -123,8 +149,9 @@
         z.x -= z.v * dt; z.passo += dt * 4;
         if (z.x < casaX() + 40 * tela.ESC){
           jogo.zumbis.splice(i, 1); jogo.vidas--; jogo.tremer = 0.6; jogo.escaparam++; ARC.tom(140, 0.5, 0, 'sawtooth');
-          ARC.aviso('🏫 Um zumbi entrou na escola! A escrita certa era: <b>' + esc(z.it.correta) + '</b>', 2600);
+          ARC.aviso('🏫 Um zumbi entrou na escola! ' + (z.it.classe ? '“' + esc(z.it.errada) + '” é <b>' + esc(z.it.correta) + '</b>' : 'A escrita certa era: <b>' + esc(z.it.correta) + '</b>'), 2600);
           jogo.frente = undefined; atualizarHud();
+          if (jogo.vidas <= 0){ jogo.destruida = true; jogo.tremer = 1.4; ARC.tom(90, 0.9, 0.1, 'sawtooth'); ARC.tom(70, 1.1, 0.4, 'sawtooth'); }
           if (jogo.vidas <= 0 || jogo.curados + jogo.escaparam >= jogo.qtd){ fimDaOnda(); break; }
         }
       }
@@ -136,16 +163,18 @@
   }
   function fimDaOnda(){
     jogo.acabou = true;
+    var espera = jogo.vidas > 0 ? 800 : 3200;   // perderam: dá tempo de ver a escola destruída
+    if (jogo.vidas <= 0){ $('painel').style.display = 'none'; ARC.aviso('💥 Os zumbis destruíram a escola!', 3000); }
     setTimeout(function(){
       laco.parar(); $('hud').style.display = 'none'; $('painel').style.display = 'none';
       var ultima = jogo.vez === jogo.equipes.length - 1;
-      $('cVez').innerHTML = '<h2>' + (jogo.vidas > 0 ? '🌅 A escola está salva!' : '💀 Os zumbis venceram desta vez!') + '</h2>' +
+      $('cVez').innerHTML = '<h2>' + (jogo.vidas > 0 ? '🌅 A escola está salva!' : '💥 Os zumbis destruíram a escola!') + '</h2>' +
         '<div class="placar">' + ARC.placarHTML(jogo.equipes, jogo.vez) + '</div>' +
         '<button type="button" class="principal" id="btSegue">' + (ultima ? '🏆 Resultado' : '➡️ Próxima equipe') + '</button>' + (ultima ? ' <button type="button" id="btMais">🔁 Mais uma onda</button>' : '');
       ARC.tela('tVez'); if (jogo.vidas > 0) ARC.festa();
       $('btSegue').onclick = function(){ if (ultima) fim(); else { jogo.vez++; abrirVez(); } };
       if ($('btMais')) $('btMais').onclick = function(){ jogo.vez = 0; jogo.onda++; jogo.velBase *= 1.15; abrirVez(); };
-    }, 800);
+    }, espera);
   }
   function fim(){
     var r = ARC.ranking(jogo.equipes);
@@ -210,7 +239,28 @@
     ctx.drawImage(c, Math.round(x - 8 * px), Math.round(pe - c.height * px), Math.round(16 * px), Math.round(c.height * px));
   }
   // ---------- o prédio da escola ----------
+  function desenharEscolaDestruida(cx, base, E){
+    var x0 = 6 * E, x1 = cx + 40 * E, w = x1 - x0, t = Date.now() / 1000, i;
+    ctx.fillStyle = '#8e3f2d';   // o que sobrou das paredes, com o alto quebrado
+    ctx.beginPath(); ctx.moveTo(x0, base);
+    var pts = [[0, 130], [0.12, 150], [0.2, 95], [0.33, 120], [0.42, 60], [0.55, 105], [0.63, 80], [0.74, 140], [0.86, 70], [0.94, 110], [1, 55]];
+    pts.forEach(function(q){ ctx.lineTo(x0 + q[0] * w, base - q[1] * E); }); ctx.lineTo(x1, base); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = Math.max(1, E);
+    for (i = 0; i < 6; i++){ ctx.beginPath(); ctx.moveTo(x0 + (0.1 + i * 0.15) * w, base - 50 * E); ctx.lineTo(x0 + (0.14 + i * 0.15) * w, base - 30 * E); ctx.lineTo(x0 + (0.11 + i * 0.15) * w, base - 10 * E); ctx.stroke(); }   // rachaduras
+    for (i = 0; i < 3; i++){ var jx = x0 + 18 * E + i * 40 * E; ctx.fillStyle = '#1b1530'; ctx.fillRect(jx, base - 60 * E, 24 * E, 26 * E); ctx.strokeStyle = '#5b3a1e'; ctx.lineWidth = 4 * E; ctx.beginPath(); ctx.moveTo(jx - 3 * E, base - 58 * E); ctx.lineTo(jx + 27 * E, base - 37 * E); ctx.stroke(); }   // janelas quebradas e tábuas
+    ctx.save(); ctx.translate(x1 - 30 * E, base); ctx.rotate(-0.5); ctx.fillStyle = '#5b3a1e'; ctx.fillRect(-19 * E, -76 * E, 38 * E, 76 * E); ctx.restore();   // porta caída
+    ctx.save(); ctx.translate(x0 + w * 0.45, base - 40 * E); ctx.rotate(0.35); ctx.fillStyle = '#fff3c4'; ARC.rrect(ctx, -46 * E, -12 * E, 92 * E, 24 * E, 4 * E); ctx.fill();   // placa torta
+    ctx.fillStyle = '#7d2f22'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold ' + Math.round(15 * E) + 'px "Trebuchet MS", sans-serif'; ctx.fillText('ESCOLA', 0, 0); ctx.restore();
+    ctx.fillStyle = '#7d2f22'; ctx.beginPath(); ctx.moveTo(x1 + 10 * E, base); ctx.lineTo(x1 + 70 * E, base - 30 * E); ctx.lineTo(x1 + 95 * E, base); ctx.fill();   // pedaço do telhado no chão
+    ctx.fillStyle = '#7b7f86';   // entulho
+    for (i = 0; i < 9; i++){ var ex = x0 + (i / 8) * (w + 60 * E), er = (10 + (i * 7) % 14) * E; ctx.beginPath(); ctx.moveTo(ex - er, base); ctx.lineTo(ex - er * 0.3, base - er * 1.1); ctx.lineTo(ex + er, base); ctx.fill(); }
+    ctx.strokeStyle = '#bbb'; ctx.lineWidth = 3 * E; ctx.beginPath(); ctx.moveTo(x0 + w * 0.7, base - 80 * E); ctx.lineTo(x0 + w * 0.8, base - 150 * E); ctx.lineTo(x0 + w * 0.98, base - 165 * E); ctx.stroke();   // mastro torto
+    ctx.fillStyle = '#2f80ed'; ctx.beginPath(); ctx.moveTo(x0 + w * 0.98, base - 165 * E); ctx.lineTo(x0 + w * 0.98 + 10 * E, base - 135 * E); ctx.lineTo(x0 + w * 0.98 - 14 * E, base - 140 * E); ctx.fill();
+    for (i = 0; i < 7; i++){ var fase = (t * 0.35 + i / 7) % 1, fx = x0 + w * (0.2 + 0.6 * ((i * 37) % 10) / 10) + Math.sin(t + i) * 10 * E, fy = base - 120 * E - fase * 200 * E;   // fumaça
+      ctx.fillStyle = 'rgba(90,90,100,' + (0.55 * (1 - fase)).toFixed(2) + ')'; ctx.beginPath(); ctx.arc(fx, fy, (16 + fase * 34) * E, 0, 2 * Math.PI); ctx.fill(); }
+  }
   function desenharEscola(cx, base, E){
+    if (jogo && jogo.destruida) return desenharEscolaDestruida(cx, base, E);
     var x0 = 6 * E, x1 = cx + 40 * E, w = x1 - x0, h = 230 * E, topo = base - h, i, j, mx = x0 + w / 2;
     ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(x0 + 8 * E, topo + 10 * E, w, h);   // sombra
     ctx.fillStyle = '#b5523a'; ctx.fillRect(x0, topo, w, h);   // tijolos
@@ -253,7 +303,7 @@
       ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(x, pe, 30 * s, 7 * s, 0, 0, 2 * Math.PI) : ctx.arc(x, pe, 20 * s, 0, 2 * Math.PI); ctx.fill();
       if (z.curado) desenharSprite(z.crianca || 'c', x, pe - Math.abs(Math.sin(z.tempoCura * 9)) * 26 * s, px);
       else desenharSprite(Math.floor(z.passo) % 2 ? 'b' : 'a', x, pe + (Math.floor(z.passo) % 2 ? -px : 0), px);
-      var txt = z.curado ? z.it.correta : z.it.errada, tam = ARC.fonte(ctx, txt, 220 * s, Math.round(26 * s)), w = ctx.measureText(txt).width + 22 * s;
+      var txt = z.curado ? (z.it.classe ? z.it.errada + ' · ' + z.it.correta : z.it.correta) : z.it.errada, tam = ARC.fonte(ctx, txt, 220 * s, Math.round(26 * s)), w = ctx.measureText(txt).width + 22 * s;
       ctx.fillStyle = z.curado ? '#e3f7ee' : '#fff3d6'; ARC.rrect(ctx, x - w / 2, y - 92 * s, w, tam + 16 * s, 8 * s); ctx.fill();
       ctx.strokeStyle = '#7a5a2b'; ctx.lineWidth = 3 * s; ctx.stroke();
       ctx.fillStyle = z.curado ? '#11613a' : '#b02a37'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, x, y - 92 * s + (tam + 16 * s) / 2);
