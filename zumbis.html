@@ -18,7 +18,7 @@
 <body>
 <canvas id="cv" class="palcoJogo"></canvas>
 <div id="hud" style="display:none">
-  <span class="chip" id="hVez"></span><span class="chip" id="hOnda"></span><span class="chip" id="hVidas"></span><span class="chip" id="hPontos"></span>
+  <span class="chip" id="hVez"></span><span class="chip" id="hOnda"></span><span class="chip" id="hVidas"></span><span class="chip" id="hPontos"></span><span class="chip" id="hPlacar"></span>
   <button type="button" id="btPausa">⏸️</button><button type="button" id="btSom">🔊</button>
 </div>
 <div id="painel"><div id="frase"></div><div id="ops"></div></div>
@@ -28,10 +28,16 @@
   <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>. No modo <b>🏷️ Classes de palavras</b>, o zumbi traz uma palavra e vocês escolhem a classe dela. Se um zumbi chegar à escola, vocês perdem um coração; sem corações, a escola é destruída!</p>
   <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
   <p class="dica" id="infoArq">Carregando…</p>
+  <div id="jsonCaixa" style="display:none;max-width:620px;margin:6px auto;text-align:left">
+    <p class="dica">Cole aqui as suas palavras. <b>Ortografia:</b> "frases" com a frase, a palavra errada, a certa e outras opções. <b>Classes:</b> "palavras" com a palavra e a classe (ou "rodadas" com a palavra entre colchetes na frase).</p>
+    <textarea id="jsonTexto" spellcheck="false" style="width:100%;min-height:130px;font:inherit;font-size:15px;border-radius:10px;padding:8px" placeholder='{"frases": [{"frase": "Abriram uma excessão.", "errada": "excessão", "correta": "exceção", "opcoes": ["exceção", "esceção"]}]}'></textarea>
+    <p><button type="button" id="btModeloOrto">📋 Copiar modelo de ortografia</button> <button type="button" id="btModeloClasses">📋 Copiar modelo de classes</button></p>
+  </div>
   <label>Zumbis por onda: <select id="selQtd"><option>6</option><option selected>8</option><option>12</option></select></label>
   <label>Velocidade: <select id="selVel"><option value="0.75">devagar</option><option value="1" selected>normal</option><option value="1.35">rápida</option></select></label>
   <label>Vidas: <select id="selVidas"><option value="1">1 ❤️</option><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
   <label>Equipes: <select id="selEquipes"><option value="1">1 (turma toda)</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></label>
+  <div id="placarAnterior" style="display:none"></div>
   <p><button type="button" class="principal" id="btComecar">▶️ Começar</button></p>
   <p class="dica">Clique na resposta ou use as teclas 1, 2, 3 e 4.</p>
 </div></div>
@@ -57,14 +63,50 @@
     out.forEach(function(it){ it.ops = [it.correta].concat(ARC.embaralhar(nomes.filter(function(n){ return n !== it.correta; })).slice(0, 3)); });
     return nomes.length >= 2 ? out : [];
   }
+  function lerOrtografia(d){
+    var out = [];
+    (d.frases || []).forEach(function(f){
+      if (!f || !f.errada || !f.correta) return;
+      var ops = [String(f.correta)];
+      (f.opcoes || []).forEach(function(o){ o = String(o); if (ops.indexOf(o) < 0 && o !== f.errada) ops.push(o); });
+      if (ops.length < 2) ops.push(String(f.errada));
+      out.push({frase: String(f.frase || ''), errada: String(f.errada), correta: String(f.correta), ops: ops.slice(0, 4)});
+    });
+    return out;
+  }
+  function usarJson(){
+    var t = $('jsonTexto').value.trim(), d = null;
+    try { localStorage.setItem('zumbis_json', t); } catch (e) {}
+    if (!t){ itens = []; $('infoArq').textContent = 'Cole o JSON abaixo (ou copie um dos modelos para começar).'; return; }
+    try { d = JSON.parse(t); } catch (e) { itens = []; $('infoArq').textContent = '⚠️ O JSON tem um erro de digitação (confira vírgulas, aspas e colchetes).'; return; }
+    itens = d && d.frases ? lerOrtografia(d) : lerClasses(d || {});
+    $('infoArq').textContent = itens.length ? '✅ ' + itens.length + (itens[0].classe ? ' palavras para classificar' : ' palavras para corrigir') + (itens.length < 3 ? ' (coloque pelo menos 3)' : '') : '⚠️ Não achei palavras nesse JSON. Use um dos modelos.';
+  }
+  var MODELO_ORTO = {titulo: 'Minhas palavras', frases: [
+    {frase: 'Abriram uma excessão para ele.', errada: 'excessão', correta: 'exceção', opcoes: ['exceção', 'esceção', 'eceção']},
+    {frase: 'Fizemos uma pesquiza na biblioteca.', errada: 'pesquiza', correta: 'pesquisa', opcoes: ['pesquisa', 'pesqisa']},
+    {frase: 'Faltei por que estava doente.', errada: 'por que', correta: 'porque', opcoes: ['porque', 'por quê', 'porquê']}]};
+  var MODELO_CLASSES = {titulo: 'Minhas classes', palavras: [
+    {palavra: 'cachorro', classe: 'substantivo'}, {palavra: 'bonito', classe: 'adjetivo'}, {palavra: 'correr', classe: 'verbo'}, {palavra: 'ontem', classe: 'advérbio'}]};
+  function copiar(obj, msg){
+    var t = JSON.stringify(obj, null, 2), feito = function(){ ARC.aviso(msg); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(feito, function(){ prompt('Copie o modelo:', t); }); else prompt('Copie o modelo:', t);
+    if (!$('jsonTexto').value.trim()){ $('jsonTexto').value = t; usarJson(); }
+  }
+  $('btModeloOrto').onclick = function(){ copiar(MODELO_ORTO, '📋 Modelo de ortografia copiado (e colado na caixa).'); };
+  $('btModeloClasses').onclick = function(){ copiar(MODELO_CLASSES, '📋 Modelo de classes copiado (e colado na caixa).'); };
+  $('jsonTexto').oninput = usarJson;
+  try { $('jsonTexto').value = localStorage.getItem('zumbis_json') || ''; } catch (e) {}
   ARC.seletor($('selArquivo'), 'detetive', 'detetive-padrao.json', function(arq){
     var sel = $('selArquivo');
     if (!sel.querySelector('optgroup.classes')){   // o modo das classes de palavras entra na mesma lista
       var og = document.createElement('optgroup'); og.className = 'classes'; og.label = '🏷️ Classes de palavras (escolham a classe)';
-      og.innerHTML = '<option value="classes:morfo-classes.json">As 10 classes (390 palavras)</option><option value="classes:morfo-classes-basico.json">Substantivo, adjetivo e verbo (108 palavras)</option><option value="classes:morfo-classes-frase.json">Palavra destacada na frase (802 frases)</option><option value="classes:morfo-classes-frase-sav.json">Frases: substantivo, adjetivo ou verbo (148)</option>';
+      og.innerHTML = '<option value="meu-json">📋 O meu JSON (colar palavras novas)</option><option value="classes:morfo-classes.json">As 10 classes (390 palavras)</option><option value="classes:morfo-classes-basico.json">Substantivo, adjetivo e verbo (108 palavras)</option><option value="classes:morfo-classes-frase.json">Palavra destacada na frase (802 frases)</option><option value="classes:morfo-classes-frase-sav.json">Frases: substantivo, adjetivo ou verbo (148)</option>';
       sel.insertBefore(og, sel.firstChild); sel.value = arq;
     }
     $('infoArq').textContent = 'Carregando…'; itens = [];
+    $('jsonCaixa').style.display = arq === 'meu-json' ? 'block' : 'none';
+    if (arq === 'meu-json'){ usarJson(); return; }
     if (arq.indexOf('classes:') === 0){
       ARC.json('dados/' + arq.slice(8), function(d){ itens = lerClasses(d); $('infoArq').textContent = itens.length ? itens.length + ' palavras para classificar' : 'Não achei palavras com classe neste arquivo.'; }, function(){ $('infoArq').textContent = 'Não consegui abrir o arquivo.'; });
       return;
@@ -83,7 +125,9 @@
 
   function comecar(){
     if (itens.length < 3) return ARC.aviso('Escolha um arquivo de palavras.');
-    jogo = {monte: ARC.embaralhar(itens), usadas: 0, equipes: ARC.criarEquipes(+$('selEquipes').value), vez: 0, qtd: +$('selQtd').value, velBase: +$('selVel').value, onda: 1, vidasMax: +$('selVidas').value || 3};
+    var eqs = ARC.criarEquipes(+$('selEquipes').value), ant = placarSalvo();
+    if ($('ckSomar') && $('ckSomar').checked && ant && ant.length === eqs.length) eqs.forEach(function(e, i){ e.pontos = +ant[i].pontos || 0; });
+    jogo = {monte: ARC.embaralhar(itens), usadas: 0, equipes: eqs, vez: 0, qtd: +$('selQtd').value, velBase: +$('selVel').value, onda: 1, vidasMax: +$('selVidas').value || 3};
     abrirVez();
   }
   function abrirVez(){
@@ -98,12 +142,25 @@
     jogo.zumbis = []; jogo.fx = []; jogo.vidas = jogo.vidasMax; jogo.destruida = false; jogo.criados = 0; jogo.curados = 0; jogo.escaparam = 0; jogo.gerar = 0.3; jogo.tremer = 0; jogo.acabou = false; jogo.frente = undefined;
     ARC.tela(null); $('hud').style.display = ''; $('painel').style.display = 'block'; atualizarHud(); laco.pausado = false; laco.iniciar();
   }
+  function placarSalvo(){ try { return JSON.parse(localStorage.getItem('zumbis_placar') || 'null'); } catch (e) { return null; } }
+  function salvarPlacar(){ try { localStorage.setItem('zumbis_placar', JSON.stringify(jogo.equipes.map(function(e){ return {nome: e.nome, emoji: e.emoji, cor: e.cor, pontos: e.pontos}; }))); } catch (e) {} }
+  function pintarPlacarInicial(){   // na tela inicial: o placar do último jogo e a opção de continuar somando
+    var ant = placarSalvo(), box = $('placarAnterior');
+    if (!ant || !ant.length){ box.style.display = 'none'; return; }
+    box.style.display = 'block';
+    box.innerHTML = '<p><b>🏆 Placar das equipes (último jogo)</b></p><div class="placar">' + ARC.placarHTML(ant) + '</div>' +
+      '<p><label><input type="checkbox" id="ckSomar" checked> Continuar somando estes pontos (com o mesmo número de equipes)</label> <button type="button" id="btZerar">🗑️ Zerar placar</button></p>';
+    $('btZerar').onclick = function(){ try { localStorage.removeItem('zumbis_placar'); } catch (e) {} pintarPlacarInicial(); };
+  }
   function atualizarHud(){
     var eq = jogo.equipes[jogo.vez];
     $('hVez').textContent = jogo.equipes.length > 1 ? eq.emoji + ' ' + eq.nome : '🏫 Escola';
     $('hOnda').textContent = '💀 ' + jogo.curados + '/' + jogo.qtd + ' curados';
     $('hVidas').textContent = jogo.vidasMax <= 5 ? new Array(Math.max(0, jogo.vidas) + 1).join('❤️') + new Array(jogo.vidasMax - Math.max(0, jogo.vidas) + 1).join('♡') : '❤️ ' + Math.max(0, jogo.vidas) + '/' + jogo.vidasMax;
     $('hPontos').textContent = '⭐ ' + eq.pontos;
+    $('hPlacar').style.display = jogo.equipes.length > 1 ? '' : 'none';
+    $('hPlacar').textContent = jogo.equipes.map(function(e){ return e.emoji + ' ' + e.pontos; }).join('  ');
+    salvarPlacar();
   }
   function casaX(){ return 190 * tela.ESC; }
   function novoZumbi(){
@@ -180,7 +237,7 @@
     var r = ARC.ranking(jogo.equipes);
     $('cFim').innerHTML = '<h1>🏆 ' + (jogo.equipes.length > 1 ? r[0].e.emoji + ' ' + esc(r[0].e.nome) + ' venceu!' : jogo.equipes[0].pontos + ' pontos!') + '</h1>' +
       '<div class="placar">' + ARC.placarHTML(r.map(function(x){ return x.e; })) + '</div><button type="button" class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
-    ARC.tela('tFim'); ARC.festa(); $('btDeNovo').onclick = function(){ ARC.tela('tConfig'); };
+    ARC.tela('tFim'); ARC.festa(); salvarPlacar(); $('btDeNovo').onclick = function(){ pintarPlacarInicial(); ARC.tela('tConfig'); };
   }
   // ---------- sprites em pixel art (desenhados uma vez em telinhas e ampliados sem borrar) ----------
   var PAL = {k: '#16130f', g: '#86a95f', G: '#5f7d3f', w: '#ece6c8', r: '#c0392b', h: '#3a2a1e', s: '#6b7c8f', S: '#4b5866', p: '#8a6a4a', m: '#3b1f1a', n: '#3e3a5c', N: '#2a2742', b: '#2b2b2b', f: '#f2c48d', F: '#d9a066', c: '#3fae6a', C: '#2c7d4c', y: '#ffd54a'};
@@ -319,6 +376,7 @@
   });
   $('btPausa').onclick = function(){ laco.pausado = !laco.pausado; this.textContent = laco.pausado ? '▶️' : '⏸️'; if (laco.pausado) ARC.aviso('⏸️ Pausado', 100000); else $('aviso').style.display = 'none'; };
   $('btComecar').onclick = comecar;
+  pintarPlacarInicial();
   if (window.Sala) Sala.botaoSom($('btSom'));
   desenhar();
   window.ZUMBIS = {jogo: function(){ return jogo; }, responder: responder, novo: novoZumbi};   // usado nos testes
