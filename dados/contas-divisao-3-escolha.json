@@ -1,0 +1,487 @@
+{
+ "titulo": "Divisão com 3 algarismos (por 1 algarismo)",
+ "emoji": "➗",
+ "instrucao": "Calcule e escolha o resultado.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule:",
+   "destaque": "612 ÷ 9 = ___",
+   "opcoes": [
+    "168",
+    "68",
+    "78",
+    "58"
+   ],
+   "correta": "68",
+   "explica": "612 ÷ 9 = 68."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "936 ÷ 4 = ___",
+   "opcoes": [
+    "244",
+    "234",
+    "334",
+    "1.234"
+   ],
+   "correta": "234",
+   "explica": "936 ÷ 4 = 234."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "198 ÷ 3 = ___",
+   "opcoes": [
+    "56",
+    "66",
+    "76",
+    "166"
+   ],
+   "correta": "66",
+   "explica": "198 ÷ 3 = 66."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "454 ÷ 2 = ___",
+   "opcoes": [
+    "327",
+    "227",
+    "127",
+    "237"
+   ],
+   "correta": "227",
+   "explica": "454 ÷ 2 = 227."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "850 ÷ 5 = ___",
+   "opcoes": [
+    "170",
+    "70",
+    "1.170",
+    "270"
+   ],
+   "correta": "170",
+   "explica": "850 ÷ 5 = 170."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "708 ÷ 2 = ___",
+   "opcoes": [
+    "454",
+    "254",
+    "364",
+    "354"
+   ],
+   "correta": "354",
+   "explica": "708 ÷ 2 = 354."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "125 ÷ 5 = ___",
+   "opcoes": [
+    "25",
+    "35",
+    "15",
+    "1.025"
+   ],
+   "correta": "25",
+   "explica": "125 ÷ 5 = 25."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "444 ÷ 3 = ___",
+   "opcoes": [
+    "248",
+    "158",
+    "148",
+    "1.148"
+   ],
+   "correta": "148",
+   "explica": "444 ÷ 3 = 148."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "412 ÷ 2 = ___",
+   "opcoes": [
+    "196",
+    "206",
+    "306",
+    "216"
+   ],
+   "correta": "206",
+   "explica": "412 ÷ 2 = 206."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "578 ÷ 2 = ___",
+   "opcoes": [
+    "289",
+    "389",
+    "189",
+    "299"
+   ],
+   "correta": "289",
+   "explica": "578 ÷ 2 = 289."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "375 ÷ 5 = ___",
+   "opcoes": [
+    "175",
+    "85",
+    "75",
+    "1.075"
+   ],
+   "correta": "75",
+   "explica": "375 ÷ 5 = 75."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "952 ÷ 8 = ___",
+   "opcoes": [
+    "129",
+    "119",
+    "109",
+    "219"
+   ],
+   "correta": "119",
+   "explica": "952 ÷ 8 = 119."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "996 ÷ 2 = ___",
+   "opcoes": [
+    "508",
+    "398",
+    "488",
+    "498"
+   ],
+   "correta": "498",
+   "explica": "996 ÷ 2 = 498."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "432 ÷ 3 = ___",
+   "opcoes": [
+    "44",
+    "1.144",
+    "244",
+    "144"
+   ],
+   "correta": "144",
+   "explica": "432 ÷ 3 = 144."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "480 ÷ 4 = ___",
+   "opcoes": [
+    "120",
+    "110",
+    "20",
+    "220"
+   ],
+   "correta": "120",
+   "explica": "480 ÷ 4 = 120."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "940 ÷ 5 = ___",
+   "opcoes": [
+    "178",
+    "288",
+    "198",
+    "188"
+   ],
+   "correta": "188",
+   "explica": "940 ÷ 5 = 188."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "952 ÷ 7 = ___",
+   "opcoes": [
+    "126",
+    "146",
+    "136",
+    "1.136"
+   ],
+   "correta": "136",
+   "explica": "952 ÷ 7 = 136."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "351 ÷ 9 = ___",
+   "opcoes": [
+    "29",
+    "139",
+    "39",
+    "49"
+   ],
+   "correta": "39",
+   "explica": "351 ÷ 9 = 39."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "950 ÷ 5 = ___",
+   "opcoes": [
+    "190",
+    "180",
+    "200",
+    "90"
+   ],
+   "correta": "190",
+   "explica": "950 ÷ 5 = 190."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "488 ÷ 8 = ___",
+   "opcoes": [
+    "1.061",
+    "71",
+    "61",
+    "51"
+   ],
+   "correta": "61",
+   "explica": "488 ÷ 8 = 61."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "825 ÷ 3 = ___",
+   "opcoes": [
+    "275",
+    "375",
+    "285",
+    "265"
+   ],
+   "correta": "275",
+   "explica": "825 ÷ 3 = 275."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "585 ÷ 9 = ___",
+   "opcoes": [
+    "1.065",
+    "65",
+    "55",
+    "165"
+   ],
+   "correta": "65",
+   "explica": "585 ÷ 9 = 65."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "945 ÷ 9 = ___",
+   "opcoes": [
+    "105",
+    "115",
+    "205",
+    "95"
+   ],
+   "correta": "105",
+   "explica": "945 ÷ 9 = 105."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "140 ÷ 7 = ___",
+   "opcoes": [
+    "30",
+    "1.020",
+    "120",
+    "20"
+   ],
+   "correta": "20",
+   "explica": "140 ÷ 7 = 20."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "936 ÷ 6 = ___",
+   "opcoes": [
+    "166",
+    "156",
+    "1.156",
+    "56"
+   ],
+   "correta": "156",
+   "explica": "936 ÷ 6 = 156."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "432 ÷ 8 = ___",
+   "opcoes": [
+    "154",
+    "1.054",
+    "64",
+    "54"
+   ],
+   "correta": "54",
+   "explica": "432 ÷ 8 = 54."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "188 ÷ 4 = ___",
+   "opcoes": [
+    "1.047",
+    "147",
+    "47",
+    "37"
+   ],
+   "correta": "47",
+   "explica": "188 ÷ 4 = 47."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "980 ÷ 4 = ___",
+   "opcoes": [
+    "255",
+    "1.245",
+    "245",
+    "345"
+   ],
+   "correta": "245",
+   "explica": "980 ÷ 4 = 245."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "424 ÷ 8 = ___",
+   "opcoes": [
+    "53",
+    "153",
+    "63",
+    "43"
+   ],
+   "correta": "53",
+   "explica": "424 ÷ 8 = 53."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "982 ÷ 2 = ___",
+   "opcoes": [
+    "591",
+    "1.491",
+    "491",
+    "391"
+   ],
+   "correta": "491",
+   "explica": "982 ÷ 2 = 491."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "528 ÷ 2 = ___",
+   "opcoes": [
+    "364",
+    "164",
+    "264",
+    "274"
+   ],
+   "correta": "264",
+   "explica": "528 ÷ 2 = 264."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "632 ÷ 4 = ___",
+   "opcoes": [
+    "58",
+    "158",
+    "168",
+    "258"
+   ],
+   "correta": "158",
+   "explica": "632 ÷ 4 = 158."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "658 ÷ 7 = ___",
+   "opcoes": [
+    "104",
+    "194",
+    "94",
+    "84"
+   ],
+   "correta": "94",
+   "explica": "658 ÷ 7 = 94."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "730 ÷ 5 = ___",
+   "opcoes": [
+    "156",
+    "1.146",
+    "146",
+    "136"
+   ],
+   "correta": "146",
+   "explica": "730 ÷ 5 = 146."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "231 ÷ 7 = ___",
+   "opcoes": [
+    "33",
+    "133",
+    "43",
+    "1.033"
+   ],
+   "correta": "33",
+   "explica": "231 ÷ 7 = 33."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "972 ÷ 6 = ___",
+   "opcoes": [
+    "152",
+    "162",
+    "62",
+    "172"
+   ],
+   "correta": "162",
+   "explica": "972 ÷ 6 = 162."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "350 ÷ 7 = ___",
+   "opcoes": [
+    "50",
+    "1.050",
+    "40",
+    "150"
+   ],
+   "correta": "50",
+   "explica": "350 ÷ 7 = 50."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "363 ÷ 3 = ___",
+   "opcoes": [
+    "221",
+    "131",
+    "1.121",
+    "121"
+   ],
+   "correta": "121",
+   "explica": "363 ÷ 3 = 121."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "736 ÷ 8 = ___",
+   "opcoes": [
+    "92",
+    "1.092",
+    "102",
+    "82"
+   ],
+   "correta": "92",
+   "explica": "736 ÷ 8 = 92."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "624 ÷ 4 = ___",
+   "opcoes": [
+    "256",
+    "146",
+    "156",
+    "1.156"
+   ],
+   "correta": "156",
+   "explica": "624 ÷ 4 = 156."
+  }
+ ]
+}

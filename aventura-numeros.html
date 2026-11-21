@@ -53,6 +53,7 @@
     <label><input type="checkbox" value="x" checked> ✖️ Multiplicação</label><label><input type="checkbox" value="/"> ➗ Divisão</label></div>
   <p class="tabs" id="tabs"></p>
   <label>Nível: <select id="selNivel"><option value="1">🌱 Fácil (números pequenos)</option><option value="2" selected>🌿 Médio</option><option value="3">🌳 Difícil (inclui o número que falta)</option></select></label>
+  <label>Algarismos: <select id="selAlg"><option value="0" selected>do nível</option><option value="2">2 algarismos</option><option value="3">3 algarismos</option><option value="4">4 algarismos</option></select></label>
   <label>Ritmo: <select id="selRitmo"><option value="14">🐢 Calmo</option><option value="9" selected>🐇 Normal</option><option value="6">⚡ Rápido</option><option value="0">😌 Sem pressa (o monstro só anda quando erra)</option></select></label>
   <h2>🗺️ Escolha o mundo</h2>
   <div class="mapa" id="mapa"></div>
@@ -99,7 +100,16 @@
   // ---------- contas ----------
   function ri(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }
   function gerarConta(){
-    var ops = jogo.ops, op = ARC.sortear(ops), n = jogo.nivel, tabs = jogo.tabs, a, b, r, falta = n === 3 && Math.random() < 0.3;
+    var ops = jogo.ops, op = ARC.sortear(ops), n = jogo.nivel, tabs = jogo.tabs, a, b, r, falta = n === 3 && Math.random() < 0.3, d = jogo.alg || 0;
+    if (d >= 2){   // contas com 2, 3 ou 4 algarismos (escolha do professor)
+      var lo = Math.pow(10, d - 1), hi = Math.pow(10, d) - 1;
+      if (op === '+'){ a = ri(lo, hi); b = ri(lo, hi); r = a + b; }
+      else if (op === '-'){ a = ri(lo, hi); b = ri(lo, hi); if (b > a){ var t0 = a; a = b; b = t0; } if (a - b < lo / 2) a = Math.min(hi, b + Math.ceil(lo / 2) + ri(0, lo)); r = a - b; }
+      else if (op === 'x'){ a = ri(lo, hi); b = +ARC.sortear(tabs); r = a * b; }
+      else { b = +ARC.sortear(tabs); r = ri(Math.ceil(lo / b), Math.floor(hi / b)); a = b * r; }
+      falta = false;
+    } else
+
     if (op === '+'){ if (n === 1){ a = ri(1, 10); b = ri(1, 10); } else if (n === 2){ a = ri(10, 50); b = ri(2, 30); } else { a = ri(20, 99); b = ri(12, 99); } r = a + b; }
     else if (op === '-'){ if (n === 1){ a = ri(2, 20); b = ri(1, a); } else if (n === 2){ a = ri(20, 99); b = ri(2, a - 1); } else { a = ri(60, 250); b = ri(15, a - 5); } r = a - b; }
     else if (op === 'x'){ a = +ARC.sortear(tabs); b = ri(1, n === 3 ? 12 : 10); if (Math.random() < 0.5){ var tt = a; a = b; b = tt; } r = a * b; }
@@ -133,7 +143,7 @@
     var ops = marcados('.ops'), tabs = marcados('#tabs');
     if (!ops.length){ ARC.aviso('Escolha pelo menos um tipo de conta.'); return; }
     if ((ops.indexOf('x') >= 0 || ops.indexOf('/') >= 0) && !tabs.length){ ARC.aviso('Escolha pelo menos uma tabuada.'); return; }
-    jogo = {mundo: m, ops: ops, tabs: tabs, nivel: +$('selNivel').value, ritmo: +$('selRitmo').value, vidas: 3, moedas: 0, seq: 0, melhorSeq: 0, acertos: 0, erros: 0,
+    jogo = {mundo: m, ops: ops, tabs: tabs, nivel: +$('selNivel').value, alg: +$('selAlg').value, ritmo: +$('selRitmo').value, vidas: 3, moedas: 0, seq: 0, melhorSeq: 0, acertos: 0, erros: 0,
       tempos: [], errados: {}, revisar: [], desde: 0, derrotados: 0, fase: 'luta', inimigo: null, cam: 0, alvoCam: 0, heroi: {lanca: 0, dano: 0, corre: 0}, estrelas: [], parts: [], textos: [],
       gaiola: null, amigos: prog.feitos.slice().sort().map(function(i){ return MUNDOS[i].amigo; }), q: null, bloqueado: true, ultimoTexto: ''};
     ARC.tela(''); $('hud').style.display = ''; $('pergunta').style.display = 'block'; $('respostas').style.display = 'block';

@@ -57,7 +57,7 @@
     <p class="tabs" id="tabs"></p>
     <p class="mt-linha">
       <label>Jeito de jogar: <select id="selModo"><option value="digitar" selected>⌨️ Cada grupo digita a resposta (a mesma conta para os dois)</option><option value="tela">⌨️ Cada grupo com a sua conta (dois teclados na tela)</option><option value="prof">🗣️ A turma fala e só o professor marca quem acertou</option></select></label>
-      <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option></select></label>
+      <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option><option value="d3">3 algarismos × 1 (ex.: 254 × 6)</option><option value="d32">3 algarismos × 2 (ex.: 254 × 36)</option><option value="d4">4 algarismos × 1 (ex.: 1.254 × 7)</option></select></label>
       <label>Tempo: <select id="selTempo"><option value="60">1 min</option><option value="90" selected>1 min 30 s</option><option value="120">2 min</option><option value="0">sem tempo</option></select></label>
       <button class="principal" id="btComecar">▶️ Começar</button>
     </p>
@@ -100,6 +100,9 @@
   function contaNumeros(ts, num){   // tabuada normal ou com mais dígitos (escolha do professor)
     var r = function(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }, a, b;
     if (num === 'dd'){ a = r(11, 99); b = r(11, 99); }
+    else if (num === 'd3'){ a = r(100, 999); b = r(2, 9); }
+    else if (num === 'd32'){ a = r(100, 999); b = r(11, 99); }
+    else if (num === 'd4'){ a = r(1000, 9999); b = r(2, 9); }
     else { a = ts[Math.floor(Math.random() * ts.length)]; b = num === 'd2' ? r(10, 99) : r(1, +num || 10); }
     return Math.random() < 0.5 ? {a: a, b: b} : {a: b, b: a};
   }
@@ -112,7 +115,7 @@
   function painelLado(l){
     var nome = l === 'v' ? 'Vermelho' : 'Azul', k = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '⌫', '0', 'OK'];
     var s = '<div class="nome-lado">' + (l === 'v' ? '🔴 ' : '🔵 ') + nome + '</div><div class="q" data-q></div>' +
-      '<input class="campo" data-campo type="text" inputmode="numeric" maxlength="4" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta do ' + nome + '"' + (soToque ? ' readonly' : '') + '><div class="tec">';
+      '<input class="campo" data-campo type="text" inputmode="numeric" maxlength="6" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta do ' + nome + '"' + (soToque ? ' readonly' : '') + '><div class="tec">';
     k.forEach(function(x){ s += '<button type="button" data-k="' + x + '"' + (x === 'OK' ? ' class="ok"' : '') + '>' + x + '</button>'; });
     return s + '</div><div class="estado" data-estado aria-live="polite"></div>';
   }
@@ -135,7 +138,7 @@
         bs = el.querySelectorAll('[data-k]');
         for (i = 0; i < bs.length; i++) bs[i].onclick = function(){ teclaLado(l, this.getAttribute('data-k')); this.blur(); };
         c = el.querySelector('[data-campo]');
-        c.oninput = function(){ var v = c.value.replace(/\D/g, '').slice(0, 4); if (c.value !== v) c.value = v; if (travado(l)){ c.value = jogo.lados[l].dig; return; } jogo.lados[l].dig = v; c.className = 'campo'; };
+        c.oninput = function(){ var v = c.value.replace(/\D/g, '').slice(0, 6); if (c.value !== v) c.value = v; if (travado(l)){ c.value = jogo.lados[l].dig; return; } jogo.lados[l].dig = v; c.className = 'campo'; };
         c.onkeydown = function(e){ if (e.keyCode === 13){ e.preventDefault(); conferir(l); } };
       });
       if (jogo.modo === 'digitar') novaCentral(); else { novaLado('v'); novaLado('a'); }
@@ -164,7 +167,7 @@
     var L = jogo.lados[l], c = campo(l);
     if (k === 'OK') return conferir(l);
     if (k === '⌫') L.dig = L.dig.slice(0, -1);
-    else if (L.dig.length < 4) L.dig += k;
+    else if (L.dig.length < 6) L.dig += k;
     if (c){ c.value = L.dig; c.className = 'campo'; }
   }
   function conferir(l){

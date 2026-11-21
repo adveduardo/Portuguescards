@@ -1,0 +1,487 @@
+{
+ "titulo": "Multiplicação com 3 algarismos (por 1 algarismo)",
+ "emoji": "✖️",
+ "instrucao": "Calcule e escolha o resultado.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule:",
+   "destaque": "346 × 3 = ___",
+   "opcoes": [
+    "2.038",
+    "1.048",
+    "38",
+    "1.038"
+   ],
+   "correta": "1.038",
+   "explica": "346 × 3 = 1.038."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "907 × 8 = ___",
+   "opcoes": [
+    "7.256",
+    "6.256",
+    "8.256",
+    "7.356"
+   ],
+   "correta": "7.256",
+   "explica": "907 × 8 = 7.256."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "868 × 3 = ___",
+   "opcoes": [
+    "2.594",
+    "2.504",
+    "1.604",
+    "2.604"
+   ],
+   "correta": "2.604",
+   "explica": "868 × 3 = 2.604."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "868 × 9 = ___",
+   "opcoes": [
+    "7.712",
+    "7.822",
+    "7.812",
+    "6.812"
+   ],
+   "correta": "7.812",
+   "explica": "868 × 9 = 7.812."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "431 × 3 = ___",
+   "opcoes": [
+    "1.293",
+    "1.303",
+    "1.283",
+    "1.393"
+   ],
+   "correta": "1.293",
+   "explica": "431 × 3 = 1.293."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "223 × 7 = ___",
+   "opcoes": [
+    "1.551",
+    "561",
+    "1.561",
+    "1.461"
+   ],
+   "correta": "1.561",
+   "explica": "223 × 7 = 1.561."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "153 × 8 = ___",
+   "opcoes": [
+    "1.224",
+    "1.234",
+    "1.214",
+    "2.224"
+   ],
+   "correta": "1.224",
+   "explica": "153 × 8 = 1.224."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "131 × 4 = ___",
+   "opcoes": [
+    "524",
+    "624",
+    "1.524",
+    "514"
+   ],
+   "correta": "524",
+   "explica": "131 × 4 = 524."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "187 × 5 = ___",
+   "opcoes": [
+    "925",
+    "835",
+    "945",
+    "935"
+   ],
+   "correta": "935",
+   "explica": "187 × 5 = 935."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "316 × 3 = ___",
+   "opcoes": [
+    "1.048",
+    "948",
+    "958",
+    "938"
+   ],
+   "correta": "948",
+   "explica": "316 × 3 = 948."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "165 × 3 = ___",
+   "opcoes": [
+    "485",
+    "595",
+    "495",
+    "1.495"
+   ],
+   "correta": "495",
+   "explica": "165 × 3 = 495."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "367 × 7 = ___",
+   "opcoes": [
+    "2.569",
+    "1.569",
+    "2.559",
+    "2.669"
+   ],
+   "correta": "2.569",
+   "explica": "367 × 7 = 2.569."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "364 × 6 = ___",
+   "opcoes": [
+    "2.174",
+    "1.184",
+    "3.184",
+    "2.184"
+   ],
+   "correta": "2.184",
+   "explica": "364 × 6 = 2.184."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "871 × 7 = ___",
+   "opcoes": [
+    "6.197",
+    "6.097",
+    "5.097",
+    "6.107"
+   ],
+   "correta": "6.097",
+   "explica": "871 × 7 = 6.097."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "843 × 9 = ___",
+   "opcoes": [
+    "7.587",
+    "7.597",
+    "7.577",
+    "7.487"
+   ],
+   "correta": "7.587",
+   "explica": "843 × 9 = 7.587."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "201 × 3 = ___",
+   "opcoes": [
+    "603",
+    "1.603",
+    "703",
+    "593"
+   ],
+   "correta": "603",
+   "explica": "201 × 3 = 603."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "545 × 6 = ___",
+   "opcoes": [
+    "2.270",
+    "4.270",
+    "3.270",
+    "3.170"
+   ],
+   "correta": "3.270",
+   "explica": "545 × 6 = 3.270."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "556 × 5 = ___",
+   "opcoes": [
+    "2.680",
+    "2.770",
+    "2.880",
+    "2.780"
+   ],
+   "correta": "2.780",
+   "explica": "556 × 5 = 2.780."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "326 × 2 = ___",
+   "opcoes": [
+    "552",
+    "642",
+    "652",
+    "1.652"
+   ],
+   "correta": "652",
+   "explica": "326 × 2 = 652."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "922 × 8 = ___",
+   "opcoes": [
+    "7.366",
+    "8.376",
+    "6.376",
+    "7.376"
+   ],
+   "correta": "7.376",
+   "explica": "922 × 8 = 7.376."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "726 × 6 = ___",
+   "opcoes": [
+    "5.356",
+    "4.346",
+    "4.356",
+    "4.256"
+   ],
+   "correta": "4.356",
+   "explica": "726 × 6 = 4.356."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "308 × 4 = ___",
+   "opcoes": [
+    "1.222",
+    "1.232",
+    "1.132",
+    "2.232"
+   ],
+   "correta": "1.232",
+   "explica": "308 × 4 = 1.232."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "707 × 6 = ___",
+   "opcoes": [
+    "4.232",
+    "4.252",
+    "3.242",
+    "4.242"
+   ],
+   "correta": "4.242",
+   "explica": "707 × 6 = 4.242."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "489 × 7 = ___",
+   "opcoes": [
+    "3.423",
+    "3.433",
+    "3.523",
+    "3.323"
+   ],
+   "correta": "3.423",
+   "explica": "489 × 7 = 3.423."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "746 × 5 = ___",
+   "opcoes": [
+    "3.730",
+    "3.830",
+    "4.730",
+    "2.730"
+   ],
+   "correta": "3.730",
+   "explica": "746 × 5 = 3.730."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "596 × 2 = ___",
+   "opcoes": [
+    "1.092",
+    "1.192",
+    "1.202",
+    "1.292"
+   ],
+   "correta": "1.192",
+   "explica": "596 × 2 = 1.192."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "439 × 2 = ___",
+   "opcoes": [
+    "868",
+    "878",
+    "778",
+    "1.878"
+   ],
+   "correta": "878",
+   "explica": "439 × 2 = 878."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "108 × 8 = ___",
+   "opcoes": [
+    "864",
+    "854",
+    "874",
+    "1.864"
+   ],
+   "correta": "864",
+   "explica": "108 × 8 = 864."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "257 × 2 = ___",
+   "opcoes": [
+    "1.514",
+    "524",
+    "514",
+    "504"
+   ],
+   "correta": "514",
+   "explica": "257 × 2 = 514."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "196 × 5 = ___",
+   "opcoes": [
+    "990",
+    "980",
+    "1.980",
+    "880"
+   ],
+   "correta": "980",
+   "explica": "196 × 5 = 980."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "679 × 3 = ___",
+   "opcoes": [
+    "2.037",
+    "1.037",
+    "2.027",
+    "1.937"
+   ],
+   "correta": "2.037",
+   "explica": "679 × 3 = 2.037."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "417 × 3 = ___",
+   "opcoes": [
+    "1.261",
+    "1.241",
+    "1.251",
+    "1.351"
+   ],
+   "correta": "1.251",
+   "explica": "417 × 3 = 1.251."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "234 × 5 = ___",
+   "opcoes": [
+    "1.180",
+    "1.170",
+    "1.160",
+    "1.070"
+   ],
+   "correta": "1.170",
+   "explica": "234 × 5 = 1.170."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "259 × 7 = ___",
+   "opcoes": [
+    "1.813",
+    "1.823",
+    "1.803",
+    "1.913"
+   ],
+   "correta": "1.813",
+   "explica": "259 × 7 = 1.813."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "966 × 2 = ___",
+   "opcoes": [
+    "1.832",
+    "2.032",
+    "932",
+    "1.932"
+   ],
+   "correta": "1.932",
+   "explica": "966 × 2 = 1.932."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "172 × 9 = ___",
+   "opcoes": [
+    "1.648",
+    "548",
+    "1.548",
+    "1.538"
+   ],
+   "correta": "1.548",
+   "explica": "172 × 9 = 1.548."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "631 × 5 = ___",
+   "opcoes": [
+    "3.155",
+    "2.155",
+    "3.145",
+    "3.165"
+   ],
+   "correta": "3.155",
+   "explica": "631 × 5 = 3.155."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "771 × 4 = ___",
+   "opcoes": [
+    "4.084",
+    "3.084",
+    "2.084",
+    "3.074"
+   ],
+   "correta": "3.084",
+   "explica": "771 × 4 = 3.084."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "493 × 5 = ___",
+   "opcoes": [
+    "2.465",
+    "2.475",
+    "1.465",
+    "3.465"
+   ],
+   "correta": "2.465",
+   "explica": "493 × 5 = 2.465."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "298 × 8 = ___",
+   "opcoes": [
+    "2.484",
+    "2.394",
+    "2.384",
+    "2.374"
+   ],
+   "correta": "2.384",
+   "explica": "298 × 8 = 2.384."
+  }
+ ]
+}

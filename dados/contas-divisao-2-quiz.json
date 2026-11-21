@@ -1,0 +1,486 @@
+{
+ "titulo": "➗ Divisão com 2 algarismos (por 1 algarismo)",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "Quanto é? 90 ÷ 5 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "8",
+    "1.018",
+    "18",
+    "118"
+   ],
+   "correta": "18",
+   "explica": "90 ÷ 5 = 18."
+  },
+  {
+   "pergunta": "Quanto é? 24 ÷ 8 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "13",
+    "1.003",
+    "3",
+    "103"
+   ],
+   "correta": "3",
+   "explica": "24 ÷ 8 = 3."
+  },
+  {
+   "pergunta": "Quanto é? 14 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "102",
+    "1.002",
+    "2"
+   ],
+   "correta": "2",
+   "explica": "14 ÷ 7 = 2."
+  },
+  {
+   "pergunta": "Quanto é? 36 ÷ 9 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "14",
+    "104",
+    "1.004",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "36 ÷ 9 = 4."
+  },
+  {
+   "pergunta": "Quanto é? 39 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.013",
+    "23",
+    "13",
+    "113"
+   ],
+   "correta": "13",
+   "explica": "39 ÷ 3 = 13."
+  },
+  {
+   "pergunta": "Quanto é? 56 ÷ 8 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "107",
+    "7",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "56 ÷ 8 = 7."
+  },
+  {
+   "pergunta": "Quanto é? 12 ÷ 6 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "102",
+    "2",
+    "1.002",
+    "12"
+   ],
+   "correta": "2",
+   "explica": "12 ÷ 6 = 2."
+  },
+  {
+   "pergunta": "Quanto é? 99 ÷ 9 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.011",
+    "1",
+    "11",
+    "111"
+   ],
+   "correta": "11",
+   "explica": "99 ÷ 9 = 11."
+  },
+  {
+   "pergunta": "Quanto é? 24 ÷ 4 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "6",
+    "1.006",
+    "16",
+    "106"
+   ],
+   "correta": "6",
+   "explica": "24 ÷ 4 = 6."
+  },
+  {
+   "pergunta": "Quanto é? 90 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.030",
+    "40",
+    "30",
+    "20"
+   ],
+   "correta": "30",
+   "explica": "90 ÷ 3 = 30."
+  },
+  {
+   "pergunta": "Quanto é? 56 ÷ 4 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "14",
+    "1.014",
+    "24",
+    "114"
+   ],
+   "correta": "14",
+   "explica": "56 ÷ 4 = 14."
+  },
+  {
+   "pergunta": "Quanto é? 72 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "124",
+    "14",
+    "24",
+    "34"
+   ],
+   "correta": "24",
+   "explica": "72 ÷ 3 = 24."
+  },
+  {
+   "pergunta": "Quanto é? 95 ÷ 5 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.019",
+    "29",
+    "19",
+    "9"
+   ],
+   "correta": "19",
+   "explica": "95 ÷ 5 = 19."
+  },
+  {
+   "pergunta": "Quanto é? 14 ÷ 2 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "17",
+    "1.007",
+    "107",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "14 ÷ 2 = 7."
+  },
+  {
+   "pergunta": "Quanto é? 27 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.009",
+    "19",
+    "109",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "27 ÷ 3 = 9."
+  },
+  {
+   "pergunta": "Quanto é? 70 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "110",
+    "10",
+    "20",
+    "1.010"
+   ],
+   "correta": "10",
+   "explica": "70 ÷ 7 = 10."
+  },
+  {
+   "pergunta": "Quanto é? 55 ÷ 5 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "111",
+    "21",
+    "11",
+    "1.011"
+   ],
+   "correta": "11",
+   "explica": "55 ÷ 5 = 11."
+  },
+  {
+   "pergunta": "Quanto é? 21 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "103",
+    "13",
+    "3",
+    "1.003"
+   ],
+   "correta": "3",
+   "explica": "21 ÷ 7 = 3."
+  },
+  {
+   "pergunta": "Quanto é? 74 ÷ 2 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.037",
+    "27",
+    "137",
+    "37"
+   ],
+   "correta": "37",
+   "explica": "74 ÷ 2 = 37."
+  },
+  {
+   "pergunta": "Quanto é? 56 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "8",
+    "1.008",
+    "108",
+    "18"
+   ],
+   "correta": "8",
+   "explica": "56 ÷ 7 = 8."
+  },
+  {
+   "pergunta": "Quanto é? 88 ÷ 4 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "1.022",
+    "22",
+    "122"
+   ],
+   "correta": "22",
+   "explica": "88 ÷ 4 = 22."
+  },
+  {
+   "pergunta": "Quanto é? 84 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "1.012",
+    "2",
+    "22"
+   ],
+   "correta": "12",
+   "explica": "84 ÷ 7 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 18 ÷ 9 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "2",
+    "102",
+    "1.002"
+   ],
+   "correta": "2",
+   "explica": "18 ÷ 9 = 2."
+  },
+  {
+   "pergunta": "Quanto é? 66 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "22",
+    "32",
+    "122"
+   ],
+   "correta": "22",
+   "explica": "66 ÷ 3 = 22."
+  },
+  {
+   "pergunta": "Quanto é? 54 ÷ 9 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.006",
+    "106",
+    "6",
+    "16"
+   ],
+   "correta": "6",
+   "explica": "54 ÷ 9 = 6."
+  },
+  {
+   "pergunta": "Quanto é? 96 ÷ 8 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "112",
+    "22",
+    "2",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "96 ÷ 8 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 60 ÷ 5 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.012",
+    "112",
+    "12",
+    "2"
+   ],
+   "correta": "12",
+   "explica": "60 ÷ 5 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 49 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "7",
+    "107",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "49 ÷ 7 = 7."
+  },
+  {
+   "pergunta": "Quanto é? 84 ÷ 6 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "114",
+    "14",
+    "1.014",
+    "24"
+   ],
+   "correta": "14",
+   "explica": "84 ÷ 6 = 14."
+  },
+  {
+   "pergunta": "Quanto é? 48 ÷ 8 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "6",
+    "16",
+    "106",
+    "1.006"
+   ],
+   "correta": "6",
+   "explica": "48 ÷ 8 = 6."
+  },
+  {
+   "pergunta": "Quanto é? 32 ÷ 2 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "116",
+    "16",
+    "1.016",
+    "6"
+   ],
+   "correta": "16",
+   "explica": "32 ÷ 2 = 16."
+  },
+  {
+   "pergunta": "Quanto é? 88 ÷ 8 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1",
+    "111",
+    "11",
+    "1.011"
+   ],
+   "correta": "11",
+   "explica": "88 ÷ 8 = 11."
+  },
+  {
+   "pergunta": "Quanto é? 48 ÷ 4 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "12",
+    "112",
+    "1.012",
+    "22"
+   ],
+   "correta": "12",
+   "explica": "48 ÷ 4 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 63 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "109",
+    "1.009",
+    "19",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "63 ÷ 7 = 9."
+  },
+  {
+   "pergunta": "Quanto é? 35 ÷ 5 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.007",
+    "107",
+    "7",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "35 ÷ 5 = 7."
+  },
+  {
+   "pergunta": "Quanto é? 36 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.012",
+    "2",
+    "22",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "36 ÷ 3 = 12."
+  },
+  {
+   "pergunta": "Quanto é? 63 ÷ 9 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "7",
+    "107",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "63 ÷ 9 = 7."
+  },
+  {
+   "pergunta": "Quanto é? 35 ÷ 7 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.005",
+    "15",
+    "5",
+    "105"
+   ],
+   "correta": "5",
+   "explica": "35 ÷ 7 = 5."
+  },
+  {
+   "pergunta": "Quanto é? 33 ÷ 3 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "1.011",
+    "21",
+    "1",
+    "11"
+   ],
+   "correta": "11",
+   "explica": "33 ÷ 3 = 11."
+  },
+  {
+   "pergunta": "Quanto é? 78 ÷ 2 = ?",
+   "imagem": "➗",
+   "opcoes": [
+    "139",
+    "39",
+    "49",
+    "29"
+   ],
+   "correta": "39",
+   "explica": "78 ÷ 2 = 39."
+  }
+ ]
+}

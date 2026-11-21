@@ -1,0 +1,487 @@
+{
+ "titulo": "Divisão com 4 algarismos (por 1 algarismo)",
+ "emoji": "➗",
+ "instrucao": "Calcule e escolha o resultado.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.415 ÷ 7 = ___",
+   "opcoes": [
+    "445",
+    "355",
+    "345",
+    "1.345"
+   ],
+   "correta": "345",
+   "explica": "2.415 ÷ 7 = 345."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "9.882 ÷ 2 = ___",
+   "opcoes": [
+    "4.931",
+    "3.941",
+    "5.041",
+    "4.941"
+   ],
+   "correta": "4.941",
+   "explica": "9.882 ÷ 2 = 4.941."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5.424 ÷ 8 = ___",
+   "opcoes": [
+    "678",
+    "668",
+    "578",
+    "688"
+   ],
+   "correta": "678",
+   "explica": "5.424 ÷ 8 = 678."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.804 ÷ 7 = ___",
+   "opcoes": [
+    "982",
+    "972",
+    "1.972",
+    "962"
+   ],
+   "correta": "972",
+   "explica": "6.804 ÷ 7 = 972."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "9.350 ÷ 5 = ___",
+   "opcoes": [
+    "1.880",
+    "1.870",
+    "1.860",
+    "2.870"
+   ],
+   "correta": "1.870",
+   "explica": "9.350 ÷ 5 = 1.870."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.265 ÷ 5 = ___",
+   "opcoes": [
+    "1.253",
+    "1.353",
+    "1.263",
+    "1.243"
+   ],
+   "correta": "1.253",
+   "explica": "6.265 ÷ 5 = 1.253."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5.600 ÷ 8 = ___",
+   "opcoes": [
+    "600",
+    "1.700",
+    "800",
+    "700"
+   ],
+   "correta": "700",
+   "explica": "5.600 ÷ 8 = 700."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1.804 ÷ 2 = ___",
+   "opcoes": [
+    "912",
+    "802",
+    "902",
+    "1.902"
+   ],
+   "correta": "902",
+   "explica": "1.804 ÷ 2 = 902."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "4.968 ÷ 8 = ___",
+   "opcoes": [
+    "631",
+    "621",
+    "721",
+    "521"
+   ],
+   "correta": "621",
+   "explica": "4.968 ÷ 8 = 621."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5.025 ÷ 3 = ___",
+   "opcoes": [
+    "1.675",
+    "1.575",
+    "1.775",
+    "675"
+   ],
+   "correta": "1.675",
+   "explica": "5.025 ÷ 3 = 1.675."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.667 ÷ 7 = ___",
+   "opcoes": [
+    "1.381",
+    "381",
+    "481",
+    "391"
+   ],
+   "correta": "381",
+   "explica": "2.667 ÷ 7 = 381."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "9.158 ÷ 2 = ___",
+   "opcoes": [
+    "4.679",
+    "3.579",
+    "4.569",
+    "4.579"
+   ],
+   "correta": "4.579",
+   "explica": "9.158 ÷ 2 = 4.579."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.876 ÷ 6 = ___",
+   "opcoes": [
+    "1.136",
+    "146",
+    "1.146",
+    "1.246"
+   ],
+   "correta": "1.146",
+   "explica": "6.876 ÷ 6 = 1.146."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "3.096 ÷ 8 = ___",
+   "opcoes": [
+    "377",
+    "397",
+    "1.387",
+    "387"
+   ],
+   "correta": "387",
+   "explica": "3.096 ÷ 8 = 387."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "9.585 ÷ 9 = ___",
+   "opcoes": [
+    "2.065",
+    "65",
+    "1.165",
+    "1.065"
+   ],
+   "correta": "1.065",
+   "explica": "9.585 ÷ 9 = 1.065."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "7.114 ÷ 2 = ___",
+   "opcoes": [
+    "3.547",
+    "3.567",
+    "3.457",
+    "3.557"
+   ],
+   "correta": "3.557",
+   "explica": "7.114 ÷ 2 = 3.557."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5.936 ÷ 7 = ___",
+   "opcoes": [
+    "838",
+    "948",
+    "848",
+    "1.848"
+   ],
+   "correta": "848",
+   "explica": "5.936 ÷ 7 = 848."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "8.841 ÷ 7 = ___",
+   "opcoes": [
+    "1.273",
+    "1.163",
+    "1.263",
+    "1.253"
+   ],
+   "correta": "1.263",
+   "explica": "8.841 ÷ 7 = 1.263."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "5.280 ÷ 8 = ___",
+   "opcoes": [
+    "650",
+    "660",
+    "760",
+    "1.660"
+   ],
+   "correta": "660",
+   "explica": "5.280 ÷ 8 = 660."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1.848 ÷ 8 = ___",
+   "opcoes": [
+    "331",
+    "131",
+    "231",
+    "221"
+   ],
+   "correta": "231",
+   "explica": "1.848 ÷ 8 = 231."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "4.165 ÷ 7 = ___",
+   "opcoes": [
+    "605",
+    "595",
+    "1.595",
+    "585"
+   ],
+   "correta": "595",
+   "explica": "4.165 ÷ 7 = 595."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "7.590 ÷ 5 = ___",
+   "opcoes": [
+    "1.618",
+    "1.418",
+    "1.508",
+    "1.518"
+   ],
+   "correta": "1.518",
+   "explica": "7.590 ÷ 5 = 1.518."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.543 ÷ 3 = ___",
+   "opcoes": [
+    "2.191",
+    "2.181",
+    "2.081",
+    "2.171"
+   ],
+   "correta": "2.181",
+   "explica": "6.543 ÷ 3 = 2.181."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1.950 ÷ 6 = ___",
+   "opcoes": [
+    "425",
+    "315",
+    "335",
+    "325"
+   ],
+   "correta": "325",
+   "explica": "1.950 ÷ 6 = 325."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "7.638 ÷ 3 = ___",
+   "opcoes": [
+    "2.556",
+    "1.546",
+    "2.536",
+    "2.546"
+   ],
+   "correta": "2.546",
+   "explica": "7.638 ÷ 3 = 2.546."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "1.848 ÷ 3 = ___",
+   "opcoes": [
+    "716",
+    "516",
+    "616",
+    "1.616"
+   ],
+   "correta": "616",
+   "explica": "1.848 ÷ 3 = 616."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.545 ÷ 5 = ___",
+   "opcoes": [
+    "409",
+    "509",
+    "609",
+    "519"
+   ],
+   "correta": "509",
+   "explica": "2.545 ÷ 5 = 509."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.358 ÷ 9 = ___",
+   "opcoes": [
+    "272",
+    "162",
+    "252",
+    "262"
+   ],
+   "correta": "262",
+   "explica": "2.358 ÷ 9 = 262."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "8.418 ÷ 6 = ___",
+   "opcoes": [
+    "403",
+    "2.403",
+    "1.403",
+    "1.303"
+   ],
+   "correta": "1.403",
+   "explica": "8.418 ÷ 6 = 1.403."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.155 ÷ 5 = ___",
+   "opcoes": [
+    "1.221",
+    "1.231",
+    "1.241",
+    "1.131"
+   ],
+   "correta": "1.231",
+   "explica": "6.155 ÷ 5 = 1.231."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.963 ÷ 3 = ___",
+   "opcoes": [
+    "2.321",
+    "1.321",
+    "2.221",
+    "2.331"
+   ],
+   "correta": "2.321",
+   "explica": "6.963 ÷ 3 = 2.321."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.328 ÷ 3 = ___",
+   "opcoes": [
+    "786",
+    "776",
+    "766",
+    "876"
+   ],
+   "correta": "776",
+   "explica": "2.328 ÷ 3 = 776."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.061 ÷ 9 = ___",
+   "opcoes": [
+    "229",
+    "329",
+    "219",
+    "239"
+   ],
+   "correta": "229",
+   "explica": "2.061 ÷ 9 = 229."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "7.176 ÷ 6 = ___",
+   "opcoes": [
+    "1.186",
+    "1.296",
+    "2.196",
+    "1.196"
+   ],
+   "correta": "1.196",
+   "explica": "7.176 ÷ 6 = 1.196."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "8.432 ÷ 4 = ___",
+   "opcoes": [
+    "2.098",
+    "3.108",
+    "1.108",
+    "2.108"
+   ],
+   "correta": "2.108",
+   "explica": "8.432 ÷ 4 = 2.108."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "7.936 ÷ 8 = ___",
+   "opcoes": [
+    "892",
+    "1.002",
+    "992",
+    "1.992"
+   ],
+   "correta": "992",
+   "explica": "7.936 ÷ 8 = 992."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "6.235 ÷ 5 = ___",
+   "opcoes": [
+    "247",
+    "1.347",
+    "1.247",
+    "1.237"
+   ],
+   "correta": "1.247",
+   "explica": "6.235 ÷ 5 = 1.247."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "2.450 ÷ 7 = ___",
+   "opcoes": [
+    "250",
+    "360",
+    "350",
+    "1.350"
+   ],
+   "correta": "350",
+   "explica": "2.450 ÷ 7 = 350."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "9.770 ÷ 5 = ___",
+   "opcoes": [
+    "1.854",
+    "2.954",
+    "1.954",
+    "1.944"
+   ],
+   "correta": "1.954",
+   "explica": "9.770 ÷ 5 = 1.954."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "4.780 ÷ 5 = ___",
+   "opcoes": [
+    "956",
+    "966",
+    "1.956",
+    "856"
+   ],
+   "correta": "956",
+   "explica": "4.780 ÷ 5 = 956."
+  }
+ ]
+}

@@ -1,0 +1,487 @@
+{
+ "titulo": "Divisão com 2 algarismos (por 1 algarismo)",
+ "emoji": "➗",
+ "instrucao": "Calcule e escolha o resultado.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule:",
+   "destaque": "90 ÷ 5 = ___",
+   "opcoes": [
+    "8",
+    "1.018",
+    "18",
+    "118"
+   ],
+   "correta": "18",
+   "explica": "90 ÷ 5 = 18."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "24 ÷ 8 = ___",
+   "opcoes": [
+    "13",
+    "1.003",
+    "3",
+    "103"
+   ],
+   "correta": "3",
+   "explica": "24 ÷ 8 = 3."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "14 ÷ 7 = ___",
+   "opcoes": [
+    "12",
+    "102",
+    "1.002",
+    "2"
+   ],
+   "correta": "2",
+   "explica": "14 ÷ 7 = 2."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "36 ÷ 9 = ___",
+   "opcoes": [
+    "14",
+    "104",
+    "1.004",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "36 ÷ 9 = 4."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "39 ÷ 3 = ___",
+   "opcoes": [
+    "1.013",
+    "23",
+    "13",
+    "113"
+   ],
+   "correta": "13",
+   "explica": "39 ÷ 3 = 13."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "56 ÷ 8 = ___",
+   "opcoes": [
+    "107",
+    "7",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "56 ÷ 8 = 7."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "12 ÷ 6 = ___",
+   "opcoes": [
+    "102",
+    "2",
+    "1.002",
+    "12"
+   ],
+   "correta": "2",
+   "explica": "12 ÷ 6 = 2."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "99 ÷ 9 = ___",
+   "opcoes": [
+    "1.011",
+    "1",
+    "11",
+    "111"
+   ],
+   "correta": "11",
+   "explica": "99 ÷ 9 = 11."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "24 ÷ 4 = ___",
+   "opcoes": [
+    "6",
+    "1.006",
+    "16",
+    "106"
+   ],
+   "correta": "6",
+   "explica": "24 ÷ 4 = 6."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "90 ÷ 3 = ___",
+   "opcoes": [
+    "1.030",
+    "40",
+    "30",
+    "20"
+   ],
+   "correta": "30",
+   "explica": "90 ÷ 3 = 30."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "56 ÷ 4 = ___",
+   "opcoes": [
+    "14",
+    "1.014",
+    "24",
+    "114"
+   ],
+   "correta": "14",
+   "explica": "56 ÷ 4 = 14."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "72 ÷ 3 = ___",
+   "opcoes": [
+    "124",
+    "14",
+    "24",
+    "34"
+   ],
+   "correta": "24",
+   "explica": "72 ÷ 3 = 24."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "95 ÷ 5 = ___",
+   "opcoes": [
+    "1.019",
+    "29",
+    "19",
+    "9"
+   ],
+   "correta": "19",
+   "explica": "95 ÷ 5 = 19."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "14 ÷ 2 = ___",
+   "opcoes": [
+    "17",
+    "1.007",
+    "107",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "14 ÷ 2 = 7."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "27 ÷ 3 = ___",
+   "opcoes": [
+    "1.009",
+    "19",
+    "109",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "27 ÷ 3 = 9."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "70 ÷ 7 = ___",
+   "opcoes": [
+    "110",
+    "10",
+    "20",
+    "1.010"
+   ],
+   "correta": "10",
+   "explica": "70 ÷ 7 = 10."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "55 ÷ 5 = ___",
+   "opcoes": [
+    "111",
+    "21",
+    "11",
+    "1.011"
+   ],
+   "correta": "11",
+   "explica": "55 ÷ 5 = 11."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "21 ÷ 7 = ___",
+   "opcoes": [
+    "103",
+    "13",
+    "3",
+    "1.003"
+   ],
+   "correta": "3",
+   "explica": "21 ÷ 7 = 3."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "74 ÷ 2 = ___",
+   "opcoes": [
+    "1.037",
+    "27",
+    "137",
+    "37"
+   ],
+   "correta": "37",
+   "explica": "74 ÷ 2 = 37."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "56 ÷ 7 = ___",
+   "opcoes": [
+    "8",
+    "1.008",
+    "108",
+    "18"
+   ],
+   "correta": "8",
+   "explica": "56 ÷ 7 = 8."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "88 ÷ 4 = ___",
+   "opcoes": [
+    "12",
+    "1.022",
+    "22",
+    "122"
+   ],
+   "correta": "22",
+   "explica": "88 ÷ 4 = 22."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "84 ÷ 7 = ___",
+   "opcoes": [
+    "12",
+    "1.012",
+    "2",
+    "22"
+   ],
+   "correta": "12",
+   "explica": "84 ÷ 7 = 12."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "18 ÷ 9 = ___",
+   "opcoes": [
+    "12",
+    "2",
+    "102",
+    "1.002"
+   ],
+   "correta": "2",
+   "explica": "18 ÷ 9 = 2."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "66 ÷ 3 = ___",
+   "opcoes": [
+    "12",
+    "22",
+    "32",
+    "122"
+   ],
+   "correta": "22",
+   "explica": "66 ÷ 3 = 22."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "54 ÷ 9 = ___",
+   "opcoes": [
+    "1.006",
+    "106",
+    "6",
+    "16"
+   ],
+   "correta": "6",
+   "explica": "54 ÷ 9 = 6."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "96 ÷ 8 = ___",
+   "opcoes": [
+    "112",
+    "22",
+    "2",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "96 ÷ 8 = 12."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "60 ÷ 5 = ___",
+   "opcoes": [
+    "1.012",
+    "112",
+    "12",
+    "2"
+   ],
+   "correta": "12",
+   "explica": "60 ÷ 5 = 12."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "49 ÷ 7 = ___",
+   "opcoes": [
+    "7",
+    "107",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "49 ÷ 7 = 7."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "84 ÷ 6 = ___",
+   "opcoes": [
+    "114",
+    "14",
+    "1.014",
+    "24"
+   ],
+   "correta": "14",
+   "explica": "84 ÷ 6 = 14."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "48 ÷ 8 = ___",
+   "opcoes": [
+    "6",
+    "16",
+    "106",
+    "1.006"
+   ],
+   "correta": "6",
+   "explica": "48 ÷ 8 = 6."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "32 ÷ 2 = ___",
+   "opcoes": [
+    "116",
+    "16",
+    "1.016",
+    "6"
+   ],
+   "correta": "16",
+   "explica": "32 ÷ 2 = 16."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "88 ÷ 8 = ___",
+   "opcoes": [
+    "1",
+    "111",
+    "11",
+    "1.011"
+   ],
+   "correta": "11",
+   "explica": "88 ÷ 8 = 11."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "48 ÷ 4 = ___",
+   "opcoes": [
+    "12",
+    "112",
+    "1.012",
+    "22"
+   ],
+   "correta": "12",
+   "explica": "48 ÷ 4 = 12."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "63 ÷ 7 = ___",
+   "opcoes": [
+    "109",
+    "1.009",
+    "19",
+    "9"
+   ],
+   "correta": "9",
+   "explica": "63 ÷ 7 = 9."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "35 ÷ 5 = ___",
+   "opcoes": [
+    "1.007",
+    "107",
+    "7",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "35 ÷ 5 = 7."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "36 ÷ 3 = ___",
+   "opcoes": [
+    "1.012",
+    "2",
+    "22",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "36 ÷ 3 = 12."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "63 ÷ 9 = ___",
+   "opcoes": [
+    "7",
+    "107",
+    "1.007",
+    "17"
+   ],
+   "correta": "7",
+   "explica": "63 ÷ 9 = 7."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "35 ÷ 7 = ___",
+   "opcoes": [
+    "1.005",
+    "15",
+    "5",
+    "105"
+   ],
+   "correta": "5",
+   "explica": "35 ÷ 7 = 5."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "33 ÷ 3 = ___",
+   "opcoes": [
+    "1.011",
+    "21",
+    "1",
+    "11"
+   ],
+   "correta": "11",
+   "explica": "33 ÷ 3 = 11."
+  },
+  {
+   "enunciado": "Calcule:",
+   "destaque": "78 ÷ 2 = ___",
+   "opcoes": [
+    "139",
+    "39",
+    "49",
+    "29"
+   ],
+   "correta": "39",
+   "explica": "78 ÷ 2 = 39."
+  }
+ ]
+}

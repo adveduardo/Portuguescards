@@ -11,7 +11,7 @@
   #jogo.ativo{display:block}
   #barra{height:12px;border-radius:6px;background:rgba(255,255,255,.2);max-width:560px;margin:4px auto 10px;overflow:hidden}
   #barra i{display:block;height:100%;width:100%;background:#7CFFB2;-webkit-transition:width .25s linear;transition:width .25s linear}
-  #conta{font-size:80px;font-weight:bold;line-height:1.1;margin:6px 0}
+  #conta{font-size:clamp(40px,9vw,80px);font-weight:bold;line-height:1.1;margin:6px 0}
   #resp{display:inline-block;min-width:170px;font-size:64px;font-weight:bold;background:#fff;color:#1f2a44;border-radius:18px;padding:2px 18px;margin:4px 0 8px;min-height:84px}
   #resp.ok{background:#7CFFB2} #resp.erro{background:#ff8a80}
   #fb{min-height:30px;font-size:22px;font-weight:bold}
@@ -46,7 +46,7 @@
   <p>Treino individual da tabuada. O jogo <b>lembra das contas que você erra</b> e faz elas voltarem mais vezes até você dominar (repetição espaçada).</p>
   <p class="tabs" id="tabs"></p>
   <p><button type="button" id="btTodas">Marcar todas</button> <button type="button" id="btNenhuma">Desmarcar</button></p>
-  <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option></select></label><br>
+  <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option><option value="d3">3 algarismos × 1 (ex.: 254 × 6)</option><option value="d32">3 algarismos × 2 (ex.: 254 × 36)</option><option value="d4">4 algarismos × 1 (ex.: 1.254 × 7)</option></select></label><br>
   <label>Jeito de jogar: <select id="selModo">
     <option value="treino">🐢 Treino (sem pressa, com dicas)</option>
     <option value="desafio" selected>⚡ Desafio de 60 segundos</option>
@@ -77,6 +77,9 @@
   function contaNumeros(ts, num){   // tabuada normal ou com mais dígitos (escolha do professor)
     var r = function(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }, a, b;
     if (num === 'dd'){ a = r(11, 99); b = r(11, 99); }
+    else if (num === 'd3'){ a = r(100, 999); b = r(2, 9); }
+    else if (num === 'd32'){ a = r(100, 999); b = r(11, 99); }
+    else if (num === 'd4'){ a = r(1000, 9999); b = r(2, 9); }
     else { a = ts[Math.floor(Math.random() * ts.length)]; b = num === 'd2' ? r(10, 99) : r(1, +num || 10); }
     return Math.random() < 0.5 ? {a: a, b: b} : {a: b, b: a};
   }
@@ -123,7 +126,7 @@
     if (!jogo || jogo.bloqueado) return;
     if (k === 'OK') return conferir();
     if (k === '⌫'){ jogo.digitado = jogo.digitado.slice(0, -1); $('resp').textContent = jogo.digitado; return; }
-    if (jogo.digitado.length < (jogo.num === 'dd' ? 4 : 3)){ jogo.digitado += k; $('resp').textContent = jogo.digitado; ARC.tom(500 + jogo.digitado.length * 60, 0.03); }
+    if (jogo.digitado.length < (jogo.num === 'd32' || jogo.num === 'd4' ? 6 : jogo.num === 'dd' || jogo.num === 'd3' ? 5 : 3)){ jogo.digitado += k; $('resp').textContent = jogo.digitado; ARC.tom(500 + jogo.digitado.length * 60, 0.03); }
   }
   function conferir(){
     if (!jogo.digitado) return;

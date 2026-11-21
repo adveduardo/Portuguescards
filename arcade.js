@@ -113,7 +113,8 @@
         : ['banco', 'quiz'].concat(Object.keys(ind).filter(function(k){ return k.indexOf('escolha-') === 0; }));
       var pedido = ARC.param('arquivo'), h = '', achou = false;
       chaves.forEach(function(k){
-        var l = ind[k] || []; if (!l.length) return;
+        var l = (ind[k] || []).filter(function(e){ return !(k.indexOf('escolha-') === 0 && /^contas-.*-escolha\.json$/.test(e.arquivo)); });   // as contas já aparecem no formato de quiz
+        if (!l.length) return;
         h += '<optgroup label="' + ARC.esc(NOMES[k] || k) + '">' + l.map(function(e){ if (e.arquivo === pedido) achou = true;
           return '<option value="' + ARC.esc(e.arquivo) + '">' + ARC.esc(e.titulo || e.arquivo) + (e.qtd ? ' (' + e.qtd + ')' : '') + '</option>'; }).join('') + '</optgroup>';
       });

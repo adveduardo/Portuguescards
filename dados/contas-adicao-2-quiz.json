@@ -1,0 +1,486 @@
+{
+ "titulo": "➕ Adição com 2 algarismos",
+ "tempoPadrao": 30,
+ "perguntas": [
+  {
+   "pergunta": "Quanto é? 25 + 50 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "75",
+    "65",
+    "1.075",
+    "175"
+   ],
+   "correta": "75",
+   "explica": "25 + 50 = 75."
+  },
+  {
+   "pergunta": "Quanto é? 74 + 75 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "139",
+    "49",
+    "159",
+    "149"
+   ],
+   "correta": "149",
+   "explica": "74 + 75 = 149."
+  },
+  {
+   "pergunta": "Quanto é? 92 + 23 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "105",
+    "115",
+    "15",
+    "1.115"
+   ],
+   "correta": "115",
+   "explica": "92 + 23 = 115."
+  },
+  {
+   "pergunta": "Quanto é? 38 + 86 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "124",
+    "24",
+    "224",
+    "134"
+   ],
+   "correta": "124",
+   "explica": "38 + 86 = 124."
+  },
+  {
+   "pergunta": "Quanto é? 89 + 81 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.170",
+    "70",
+    "180",
+    "170"
+   ],
+   "correta": "170",
+   "explica": "89 + 81 = 170."
+  },
+  {
+   "pergunta": "Quanto é? 63 + 83 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "246",
+    "136",
+    "146",
+    "46"
+   ],
+   "correta": "146",
+   "explica": "63 + 83 = 146."
+  },
+  {
+   "pergunta": "Quanto é? 80 + 72 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "252",
+    "142",
+    "1.152",
+    "152"
+   ],
+   "correta": "152",
+   "explica": "80 + 72 = 152."
+  },
+  {
+   "pergunta": "Quanto é? 85 + 66 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "161",
+    "51",
+    "1.151",
+    "151"
+   ],
+   "correta": "151",
+   "explica": "85 + 66 = 151."
+  },
+  {
+   "pergunta": "Quanto é? 40 + 10 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "60",
+    "50",
+    "1.050",
+    "150"
+   ],
+   "correta": "50",
+   "explica": "40 + 10 = 50."
+  },
+  {
+   "pergunta": "Quanto é? 88 + 20 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "98",
+    "108",
+    "1.108",
+    "8"
+   ],
+   "correta": "108",
+   "explica": "88 + 20 = 108."
+  },
+  {
+   "pergunta": "Quanto é? 24 + 46 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "170",
+    "70",
+    "80",
+    "1.070"
+   ],
+   "correta": "70",
+   "explica": "24 + 46 = 70."
+  },
+  {
+   "pergunta": "Quanto é? 22 + 67 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "89",
+    "189",
+    "79",
+    "99"
+   ],
+   "correta": "89",
+   "explica": "22 + 67 = 89."
+  },
+  {
+   "pergunta": "Quanto é? 11 + 97 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "108",
+    "208",
+    "98",
+    "118"
+   ],
+   "correta": "108",
+   "explica": "11 + 97 = 108."
+  },
+  {
+   "pergunta": "Quanto é? 72 + 96 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "158",
+    "178",
+    "168",
+    "1.168"
+   ],
+   "correta": "168",
+   "explica": "72 + 96 = 168."
+  },
+  {
+   "pergunta": "Quanto é? 50 + 36 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "96",
+    "86",
+    "1.086",
+    "76"
+   ],
+   "correta": "86",
+   "explica": "50 + 36 = 86."
+  },
+  {
+   "pergunta": "Quanto é? 60 + 42 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "202",
+    "1.102",
+    "2",
+    "102"
+   ],
+   "correta": "102",
+   "explica": "60 + 42 = 102."
+  },
+  {
+   "pergunta": "Quanto é? 54 + 55 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "209",
+    "109",
+    "119",
+    "1.109"
+   ],
+   "correta": "109",
+   "explica": "54 + 55 = 109."
+  },
+  {
+   "pergunta": "Quanto é? 58 + 75 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.133",
+    "123",
+    "33",
+    "133"
+   ],
+   "correta": "133",
+   "explica": "58 + 75 = 133."
+  },
+  {
+   "pergunta": "Quanto é? 91 + 19 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "10",
+    "210",
+    "120",
+    "110"
+   ],
+   "correta": "110",
+   "explica": "91 + 19 = 110."
+  },
+  {
+   "pergunta": "Quanto é? 53 + 21 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "74",
+    "64",
+    "174",
+    "1.074"
+   ],
+   "correta": "74",
+   "explica": "53 + 21 = 74."
+  },
+  {
+   "pergunta": "Quanto é? 81 + 78 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.159",
+    "159",
+    "259",
+    "59"
+   ],
+   "correta": "159",
+   "explica": "81 + 78 = 159."
+  },
+  {
+   "pergunta": "Quanto é? 47 + 46 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.093",
+    "193",
+    "83",
+    "93"
+   ],
+   "correta": "93",
+   "explica": "47 + 46 = 93."
+  },
+  {
+   "pergunta": "Quanto é? 68 + 28 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "196",
+    "96",
+    "86",
+    "1.096"
+   ],
+   "correta": "96",
+   "explica": "68 + 28 = 96."
+  },
+  {
+   "pergunta": "Quanto é? 92 + 83 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "165",
+    "185",
+    "175",
+    "275"
+   ],
+   "correta": "175",
+   "explica": "92 + 83 = 175."
+  },
+  {
+   "pergunta": "Quanto é? 49 + 13 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.062",
+    "62",
+    "52",
+    "162"
+   ],
+   "correta": "62",
+   "explica": "49 + 13 = 62."
+  },
+  {
+   "pergunta": "Quanto é? 57 + 56 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "13",
+    "113",
+    "213",
+    "103"
+   ],
+   "correta": "113",
+   "explica": "57 + 56 = 113."
+  },
+  {
+   "pergunta": "Quanto é? 69 + 64 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "133",
+    "233",
+    "33",
+    "123"
+   ],
+   "correta": "133",
+   "explica": "69 + 64 = 133."
+  },
+  {
+   "pergunta": "Quanto é? 21 + 61 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "182",
+    "72",
+    "82",
+    "92"
+   ],
+   "correta": "82",
+   "explica": "21 + 61 = 82."
+  },
+  {
+   "pergunta": "Quanto é? 84 + 80 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "154",
+    "174",
+    "164",
+    "1.164"
+   ],
+   "correta": "164",
+   "explica": "84 + 80 = 164."
+  },
+  {
+   "pergunta": "Quanto é? 73 + 24 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.097",
+    "97",
+    "87",
+    "107"
+   ],
+   "correta": "97",
+   "explica": "73 + 24 = 97."
+  },
+  {
+   "pergunta": "Quanto é? 64 + 74 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "148",
+    "238",
+    "138",
+    "128"
+   ],
+   "correta": "138",
+   "explica": "64 + 74 = 138."
+  },
+  {
+   "pergunta": "Quanto é? 86 + 72 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.158",
+    "158",
+    "58",
+    "258"
+   ],
+   "correta": "158",
+   "explica": "86 + 72 = 158."
+  },
+  {
+   "pergunta": "Quanto é? 60 + 77 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "147",
+    "237",
+    "137",
+    "127"
+   ],
+   "correta": "137",
+   "explica": "60 + 77 = 137."
+  },
+  {
+   "pergunta": "Quanto é? 43 + 63 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "206",
+    "96",
+    "106",
+    "116"
+   ],
+   "correta": "106",
+   "explica": "43 + 63 = 106."
+  },
+  {
+   "pergunta": "Quanto é? 82 + 71 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "153",
+    "253",
+    "53",
+    "1.153"
+   ],
+   "correta": "153",
+   "explica": "82 + 71 = 153."
+  },
+  {
+   "pergunta": "Quanto é? 75 + 76 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "151",
+    "1.151",
+    "141",
+    "51"
+   ],
+   "correta": "151",
+   "explica": "75 + 76 = 151."
+  },
+  {
+   "pergunta": "Quanto é? 13 + 83 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "1.096",
+    "96",
+    "196",
+    "86"
+   ],
+   "correta": "96",
+   "explica": "13 + 83 = 96."
+  },
+  {
+   "pergunta": "Quanto é? 38 + 26 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "64",
+    "1.064",
+    "54",
+    "164"
+   ],
+   "correta": "64",
+   "explica": "38 + 26 = 64."
+  },
+  {
+   "pergunta": "Quanto é? 16 + 76 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "82",
+    "92",
+    "102",
+    "192"
+   ],
+   "correta": "92",
+   "explica": "16 + 76 = 92."
+  },
+  {
+   "pergunta": "Quanto é? 95 + 23 = ?",
+   "imagem": "➕",
+   "opcoes": [
+    "128",
+    "118",
+    "1.118",
+    "18"
+   ],
+   "correta": "118",
+   "explica": "95 + 23 = 118."
+  }
+ ]
+}

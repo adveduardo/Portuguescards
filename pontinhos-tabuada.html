@@ -85,7 +85,7 @@
     </p>
     <p class="mt-linha">
       <label>Quem confere: <select id="selModo"><option value="digitar" selected>⌨️ O grupo digita a resposta</option><option value="prof">🗣️ O grupo fala e o professor confere</option></select></label>
-      <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option></select></label>
+      <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option><option value="d3">3 algarismos × 1 (ex.: 254 × 6)</option><option value="d32">3 algarismos × 2 (ex.: 254 × 36)</option><option value="d4">4 algarismos × 1 (ex.: 1.254 × 7)</option></select></label>
       <label>Tempo para responder: <select id="selTempo"><option value="0" selected>sem limite</option><option value="15">15 s</option><option value="30">30 s</option></select></label>
       <label><input type="checkbox" id="chkEstrelas" checked> ⭐ Quadradinhos dourados (valem 2 pontos)</label>
     </p>
@@ -98,7 +98,7 @@
     <div id="vez"></div>
     <div id="conta"></div>
     <div id="modoDigitar">
-      <input id="campo" type="text" inputmode="numeric" maxlength="4" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta">
+      <input id="campo" type="text" inputmode="numeric" maxlength="6" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta">
       <div class="tec" id="tec"></div>
     </div>
     <div id="prof" hidden><button class="principal" id="btAcertou">✔️ Acertou</button><button class="perigo" id="btErrou">✖️ Errou</button></div>
@@ -133,6 +133,9 @@
   function contaNumeros(ts, num){   // tabuada normal ou com mais dígitos (escolha do professor)
     var r = function(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }, a, b;
     if (num === 'dd'){ a = r(11, 99); b = r(11, 99); }
+    else if (num === 'd3'){ a = r(100, 999); b = r(2, 9); }
+    else if (num === 'd32'){ a = r(100, 999); b = r(11, 99); }
+    else if (num === 'd4'){ a = r(1000, 9999); b = r(2, 9); }
     else { a = ts[Math.floor(Math.random() * ts.length)]; b = num === 'd2' ? r(10, 99) : r(1, +num || 10); }
     return Math.random() < 0.5 ? {a: a, b: b} : {a: b, b: a};
   }
@@ -221,7 +224,7 @@
     rect.style.fill = t.cor; rect.style.fillOpacity = '0.3';
     num.setAttribute('class', 'num'); num.setAttribute('x', c * P + P / 2); num.setAttribute('y', r * P + P / 2 + 6); num.setAttribute('fill', escurecer(t.cor));
     num.textContent = jogo.q.a * jogo.q.b;   // o resultado da conta que valeu o tracinho fica dentro do quadradinho
-    var tam = String(num.textContent).length; if (tam >= 3) num.style.fontSize = (tam >= 4 ? 26 : 33) + 'px';
+    var tam = String(num.textContent).length; if (tam >= 3) num.style.fontSize = (tam >= 6 ? 17 : tam >= 5 ? 21 : tam >= 4 ? 26 : 33) + 'px';
     dono.setAttribute('class', 'dono'); dono.setAttribute('x', c * P + P - 22); dono.setAttribute('y', r * P + 24); dono.textContent = t.emoji;
     g.appendChild(num); g.appendChild(dono); g.setAttribute('class', 'caixa dona');
     if (est){ est.setAttribute('x', c * P + 24); est.setAttribute('y', r * P + 25); }
@@ -289,14 +292,14 @@
       if (!jogo.dig){ msg('✏️ Digite o resultado primeiro.'); return; }
       return responder(+jogo.dig === jogo.q.a * jogo.q.b);
     }
-    if (k === '⌫') jogo.dig = jogo.dig.slice(0, -1); else if (jogo.dig.length < 4) jogo.dig += k;
+    if (k === '⌫') jogo.dig = jogo.dig.slice(0, -1); else if (jogo.dig.length < 6) jogo.dig += k;
     $('campo').value = jogo.dig;
   }
   (function(){
     var bs = $('tec').querySelectorAll('[data-k]');
     for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ tecla(this.getAttribute('data-k')); this.blur(); };
   })();
-  $('campo').oninput = function(){ var v = this.value.replace(/\D/g, '').slice(0, 4); if (this.value !== v) this.value = v; if (jogo) jogo.dig = v; };
+  $('campo').oninput = function(){ var v = this.value.replace(/\D/g, '').slice(0, 6); if (this.value !== v) this.value = v; if (jogo) jogo.dig = v; };
   $('campo').onkeydown = function(e){ if (e.keyCode === 13){ e.preventDefault(); tecla('OK'); } };
   $('btAcertou').onclick = function(){ responder(true); };
   $('btErrou').onclick = function(){ responder(false); };
