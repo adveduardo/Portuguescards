@@ -1,0 +1,292 @@
+{
+  "titulo": "Trilha da História (6º ao 9º)",
+  "casas": 30,
+  "especiais": true,
+  "tipos": {
+    "a6": {
+      "nome": "6º ano",
+      "emoji": "🏺",
+      "cor": "#e67e22"
+    },
+    "a7": {
+      "nome": "7º ano",
+      "emoji": "⛵",
+      "cor": "#2f80ed"
+    },
+    "a8": {
+      "nome": "8º ano",
+      "emoji": "⚙️",
+      "cor": "#8e44ad"
+    },
+    "a9": {
+      "nome": "9º ano",
+      "emoji": "🏛️",
+      "cor": "#27ae60"
+    },
+    "fale": {
+      "nome": "Explique com suas palavras",
+      "emoji": "🗣️",
+      "cor": "#c0392b"
+    }
+  },
+  "desafios": {
+    "a6": [
+      {
+        "texto": "Qual escrita foi criada pelos sumérios?",
+        "resposta": "Cuneiforme"
+      },
+      {
+        "texto": "A Mesopotâmia ficava entre quais rios?",
+        "resposta": "Tigre e Eufrates"
+      },
+      {
+        "texto": "A entrevista com uma avó contando sua infância é uma fonte:",
+        "resposta": "Oral"
+      },
+      {
+        "texto": "Qual povo deixou como herança o latim e o Direito?",
+        "resposta": "Os romanos"
+      },
+      {
+        "texto": "Luzia, um dos fósseis humanos mais antigos da América, foi encontrada em:",
+        "resposta": "Minas Gerais (Lagoa Santa)"
+      },
+      {
+        "texto": "Na Idade Média europeia, a instituição mais poderosa era:",
+        "resposta": "A Igreja Católica"
+      },
+      {
+        "texto": "O que é a pré-história?",
+        "resposta": "O período antes da invenção da escrita"
+      },
+      {
+        "texto": "Quem podia votar na democracia ateniense?",
+        "resposta": "Homens adultos, livres e filhos de atenienses"
+      },
+      {
+        "texto": "Em Roma, os patrícios eram:",
+        "resposta": "Os grandes proprietários de terras"
+      },
+      {
+        "texto": "O Código de Hamurábi ficou conhecido pela regra:",
+        "resposta": "‘Olho por olho, dente por dente’"
+      },
+      {
+        "texto": "O ano 2026 pertence a qual século?",
+        "resposta": "Século XXI"
+      },
+      {
+        "texto": "Como se chamava o governante do Egito antigo, visto como um deus?",
+        "resposta": "Faraó"
+      }
+    ],
+    "a7": [
+      {
+        "texto": "A prensa de tipos móveis, que facilitou a impressão de livros, foi criada por:",
+        "resposta": "Gutenberg"
+      },
+      {
+        "texto": "Em 1492, Cristóvão Colombo chegou:",
+        "resposta": "À América"
+      },
+      {
+        "texto": "O Renascimento começou na região da atual:",
+        "resposta": "Itália"
+      },
+      {
+        "texto": "O Império Inca ficava:",
+        "resposta": "Na Cordilheira dos Andes"
+      },
+      {
+        "texto": "O principal produto do Brasil colonial nos séculos XVI e XVII foi:",
+        "resposta": "O açúcar"
+      },
+      {
+        "texto": "O Quilombo dos Palmares, liderado por Zumbi, ficava em:",
+        "resposta": "Alagoas (Serra da Barriga)"
+      },
+      {
+        "texto": "O Tratado de Tordesilhas (1494) dividiu as terras entre:",
+        "resposta": "Portugal e Espanha"
+      },
+      {
+        "texto": "O mercantilismo defendia que um país enriquecia:",
+        "resposta": "Acumulando metais e vendendo mais do que comprava"
+      },
+      {
+        "texto": "O escambo era:",
+        "resposta": "A troca de mercadorias e trabalho sem uso de dinheiro"
+      },
+      {
+        "texto": "Uma das principais causas da morte de indígenas na conquista foi:",
+        "resposta": "Doenças trazidas pelos europeus, como a varíola"
+      },
+      {
+        "texto": "O Renascimento valorizava:",
+        "resposta": "O ser humano, a razão e a cultura greco-romana"
+      },
+      {
+        "texto": "O Reino do Congo ficava na região:",
+        "resposta": "Centro-ocidental da África"
+      }
+    ],
+    "a8": [
+      {
+        "texto": "O Iluminismo defendia:",
+        "resposta": "A razão, a liberdade e críticas ao absolutismo"
+      },
+      {
+        "texto": "A Declaração dos Direitos do Homem e do Cidadão (1789) afirmava que:",
+        "resposta": "Os homens nascem livres e iguais em direitos"
+      },
+      {
+        "texto": "A Independência do Brasil foi proclamada em 7 de setembro de:",
+        "resposta": "1822"
+      },
+      {
+        "texto": "A primeira independência da América Latina, liderada por ex-escravizados, foi a do:",
+        "resposta": "Haiti (1804)"
+      },
+      {
+        "texto": "O período em que o Brasil foi governado por regentes (1831–1840) é chamado:",
+        "resposta": "Período Regencial"
+      },
+      {
+        "texto": "Montesquieu propôs a divisão do poder em:",
+        "resposta": "Executivo, Legislativo e Judiciário"
+      },
+      {
+        "texto": "Qual máquina foi símbolo da Revolução Industrial?",
+        "resposta": "A máquina a vapor"
+      },
+      {
+        "texto": "Qual destes foi um abolicionista negro brasileiro?",
+        "resposta": "Luís Gama"
+      },
+      {
+        "texto": "A Constituição de 1824 criou um quarto poder, exclusivo do imperador:",
+        "resposta": "O Poder Moderador"
+      },
+      {
+        "texto": "A família real portuguesa veio para o Brasil em 1808 fugindo de:",
+        "resposta": "Napoleão"
+      },
+      {
+        "texto": "Os trabalhadores que quebravam máquinas nas fábricas inglesas eram os:",
+        "resposta": "Ludistas"
+      },
+      {
+        "texto": "A Lei do Ventre Livre (1871) declarava livres:",
+        "resposta": "Os filhos de escravizadas nascidos a partir dela"
+      }
+    ],
+    "a9": [
+      {
+        "texto": "O Muro de Berlim caiu em:",
+        "resposta": "1989"
+      },
+      {
+        "texto": "O apartheid foi um regime de segregação racial na:",
+        "resposta": "África do Sul"
+      },
+      {
+        "texto": "A Guerra de Canudos (1896–1897), na Bahia, foi liderada por:",
+        "resposta": "Antônio Conselheiro"
+      },
+      {
+        "texto": "Getúlio Vargas chegou ao poder com a:",
+        "resposta": "Revolução de 1930"
+      },
+      {
+        "texto": "O AI-5 (1968) foi:",
+        "resposta": "O ato que fechou o Congresso e ampliou a censura e a repressão"
+      },
+      {
+        "texto": "A Primeira Guerra Mundial ocorreu entre:",
+        "resposta": "1914 e 1918"
+      },
+      {
+        "texto": "A Semana de Arte Moderna aconteceu em 1922 em:",
+        "resposta": "São Paulo"
+      },
+      {
+        "texto": "A Lei da Anistia, de 1979, permitiu:",
+        "resposta": "A volta dos exilados políticos"
+      },
+      {
+        "texto": "O golpe civil-militar que derrubou o presidente João Goulart aconteceu em:",
+        "resposta": "1964"
+      },
+      {
+        "texto": "A Segunda Guerra Mundial começou em 1939 com a invasão da:",
+        "resposta": "Polônia pela Alemanha"
+      },
+      {
+        "texto": "A ONU foi criada em 1945 para:",
+        "resposta": "Manter a paz e a cooperação entre os países"
+      },
+      {
+        "texto": "O movimento Diretas Já (1983–1984) pedia:",
+        "resposta": "Eleições diretas para presidente"
+      }
+    ],
+    "fale": [
+      {
+        "texto": "Diga uma fonte histórica que existe na sua casa.",
+        "resposta": "Ex.: fotos, documentos, objetos antigos, receitas da família."
+      },
+      {
+        "texto": "Em que século estamos?",
+        "resposta": "Século XXI."
+      },
+      {
+        "texto": "Diga uma diferença entre o Paleolítico e o Neolítico.",
+        "resposta": "Paleolítico: nômades, caça e coleta. Neolítico: agricultura e sedentarismo."
+      },
+      {
+        "texto": "Por que o rio Nilo era tão importante para o Egito?",
+        "resposta": "As cheias deixavam a terra fértil para plantar."
+      },
+      {
+        "texto": "Quem não podia votar na democracia de Atenas?",
+        "resposta": "Mulheres, escravizados e estrangeiros."
+      },
+      {
+        "texto": "Cite uma herança de Roma que usamos hoje.",
+        "resposta": "Ex.: o latim (base do português), o Direito, o calendário, a arquitetura."
+      },
+      {
+        "texto": "O que um servo devia ao senhor feudal?",
+        "resposta": "Trabalho e parte da produção (corveia, talha, banalidades)."
+      },
+      {
+        "texto": "Diga o nome de um povo indígena brasileiro.",
+        "resposta": "Ex.: Guarani, Tupinambá, Yanomami, Kayapó, Pataxó, Terena."
+      },
+      {
+        "texto": "O que foi o Renascimento?",
+        "resposta": "Movimento cultural que valorizava o ser humano, a razão e a arte greco-romana."
+      },
+      {
+        "texto": "Por que Portugal saiu na frente nas Grandes Navegações?",
+        "resposta": "Posição no Atlântico, experiência no mar, apoio da Coroa e comerciantes."
+      },
+      {
+        "texto": "Diga uma forma de resistência dos africanos escravizados.",
+        "resposta": "Ex.: quilombos, fugas, revoltas, manter a religião e a cultura."
+      },
+      {
+        "texto": "Quem foi Zumbi dos Palmares?",
+        "resposta": "Líder do Quilombo dos Palmares; lembrado no 20 de novembro."
+      },
+      {
+        "texto": "Qual era o principal produto do Brasil colonial?",
+        "resposta": "Açúcar (depois o ouro, no século XVIII)."
+      },
+      {
+        "texto": "O que defendia o Iluminismo?",
+        "resposta": "Razão, liberdade, direitos e críticas ao poder absoluto dos reis."
+      }
+    ]
+  }
+}

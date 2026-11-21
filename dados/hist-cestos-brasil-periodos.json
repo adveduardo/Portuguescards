@@ -1,0 +1,113 @@
+{
+  "titulo": "História do Brasil: Colônia, Império ou República?",
+  "cestos": [
+    {
+      "id": "colonia",
+      "nome": "Colônia (1500–1822)",
+      "emoji": "⛵",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "imperio",
+      "nome": "Império (1822–1889)",
+      "emoji": "👑",
+      "cor": "#8e44ad"
+    },
+    {
+      "id": "republica",
+      "nome": "República (1889–hoje)",
+      "emoji": "🏛️",
+      "cor": "#27ae60"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "Capitanias hereditárias",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Pau-brasil",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Engenhos de açúcar",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Quilombo dos Palmares",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Bandeirantes",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Inconfidência Mineira",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Governo-geral",
+      "cesto": "colonia"
+    },
+    {
+      "palavra": "Poder Moderador",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Dom Pedro II",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Cabanagem",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Revolução Farroupilha",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Guerra do Paraguai",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Lei do Ventre Livre",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Lei Áurea",
+      "cesto": "imperio"
+    },
+    {
+      "palavra": "Coronelismo",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Guerra de Canudos",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Revolta da Vacina",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Era Vargas",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Construção de Brasília",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "AI-5",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Diretas Já",
+      "cesto": "republica"
+    },
+    {
+      "palavra": "Constituição de 1988",
+      "cesto": "republica"
+    }
+  ]
+}

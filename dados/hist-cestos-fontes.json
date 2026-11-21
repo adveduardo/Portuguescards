@@ -1,0 +1,123 @@
+{
+  "titulo": "História: que tipo de fonte histórica?",
+  "cestos": [
+    {
+      "id": "escrita",
+      "nome": "Escrita",
+      "emoji": "📜",
+      "cor": "#2f80ed"
+    },
+    {
+      "id": "oral",
+      "nome": "Oral",
+      "emoji": "🗣️",
+      "cor": "#27ae60"
+    },
+    {
+      "id": "material",
+      "nome": "Material",
+      "emoji": "🏺",
+      "cor": "#e67e22"
+    },
+    {
+      "id": "visual",
+      "nome": "Visual",
+      "emoji": "🖼️",
+      "cor": "#8e44ad"
+    }
+  ],
+  "palavras": [
+    {
+      "palavra": "Carta antiga",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Certidão de nascimento",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Jornal de 1930",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Diário pessoal",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Lei impressa",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Livro de receitas da bisavó",
+      "cesto": "escrita"
+    },
+    {
+      "palavra": "Entrevista com um idoso",
+      "cesto": "oral"
+    },
+    {
+      "palavra": "Lenda contada pelos avós",
+      "cesto": "oral"
+    },
+    {
+      "palavra": "Canção de roda tradicional",
+      "cesto": "oral"
+    },
+    {
+      "palavra": "Relato de um ex-combatente",
+      "cesto": "oral"
+    },
+    {
+      "palavra": "Depoimento gravado",
+      "cesto": "oral"
+    },
+    {
+      "palavra": "Ponta de flecha",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Vaso de cerâmica",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Moeda antiga",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Ferramenta de pedra",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Ruínas de um prédio",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Roupa de época",
+      "cesto": "material"
+    },
+    {
+      "palavra": "Fotografia antiga",
+      "cesto": "visual"
+    },
+    {
+      "palavra": "Pintura rupestre",
+      "cesto": "visual"
+    },
+    {
+      "palavra": "Quadro de um pintor",
+      "cesto": "visual"
+    },
+    {
+      "palavra": "Cartaz de propaganda",
+      "cesto": "visual"
+    },
+    {
+      "palavra": "Filme antigo",
+      "cesto": "visual"
+    },
+    {
+      "palavra": "Mapa antigo",
+      "cesto": "visual"
+    }
+  ]
+}

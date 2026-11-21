@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linha do Tempo</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#0f1d3a;background:linear-gradient(160deg,#0f1d3a,#1d3b6e);color:#fff;min-height:100vh}
+  .tela{display:none;max-width:1100px;margin:0 auto;padding:16px}
+  .tela.ativa{display:block}
+  h1{text-align:center;font-size:clamp(1.6rem,4vw,2.6rem);margin:8px 0 4px}
+  .sub{text-align:center;color:#c8d6f0;margin:0 0 16px}
+  .caixa{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:16px;margin:0 auto 14px;max-width:760px}
+  label{display:block;font-weight:bold;margin:10px 0 6px}
+  select,textarea{width:100%;font-size:17px;padding:9px 10px;border-radius:10px;border:2px solid #9fb4dc;background:#fff;color:#0f172a}
+  textarea{min-height:120px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+  .linha{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px}
+  .linha > *{-webkit-box-flex:1;-webkit-flex:1 1 160px;flex:1 1 160px}
+  .op{display:block;background:#fff;color:#0f172a;border:3px solid transparent;border-radius:14px;padding:10px;font-size:16px;font-weight:bold;cursor:pointer;text-align:center}
+  .op.sel{border-color:#ffd54a;background:#fff8d6}
+  .bt{display:inline-block;border:none;border-radius:14px;padding:12px 20px;font-size:18px;font-weight:bold;cursor:pointer;background:#ffd54a;color:#1a1a1a;margin:4px}
+  .bt.sec{background:#e2e8f0}
+  .centro{text-align:center}
+  .info{color:#c8d6f0;font-size:14px;margin-top:6px}
+  /* jogo */
+  #placar{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-box-align:center;-webkit-align-items:center;align-items:center;gap:8px;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-bottom:10px}
+  .eq{background:rgba(255,255,255,.12);border-radius:12px;padding:6px 14px;font-weight:bold;font-size:18px;border:3px solid transparent}
+  .eq.vez{border-color:#ffd54a;background:rgba(255,213,74,.2)}
+  #pedido{text-align:center;font-size:clamp(1.1rem,2.6vw,1.6rem);font-weight:bold;margin:6px 0 12px}
+  #trilho{position:relative;display:-webkit-box;display:-webkit-flex;display:flex;gap:8px;padding:26px 6px 10px;margin-bottom:16px;overflow-x:auto}
+  #trilho:before{content:"";position:absolute;left:0;right:0;top:12px;height:6px;border-radius:3px;background:#ffd54a}
+  .vaga{position:relative;-webkit-box-flex:1;-webkit-flex:1 1 0;flex:1 1 0;min-width:120px;min-height:120px;border:3px dashed rgba(255,255,255,.35);border-radius:14px;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;color:rgba(255,255,255,.5);font-size:28px;font-weight:bold}
+  .vaga:before{content:"";position:absolute;top:-20px;left:50%;margin-left:-8px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #ffd54a}
+  .vaga.cheia{border:none}
+  .cartao{background:#fff;color:#0f172a;border-radius:14px;padding:10px 8px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.3);cursor:pointer;width:100%;border:3px solid transparent;-webkit-user-select:none;user-select:none}
+  .cartao .em{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1}
+  .cartao .tx{font-weight:bold;font-size:clamp(.95rem,2vw,1.15rem);line-height:1.25;margin-top:4px}
+  .cartao .qd{display:none;margin-top:6px;font-weight:bold;color:#fff;background:#1d4ed8;border-radius:8px;padding:2px 6px;font-size:15px}
+  .cartao.certo{border-color:#22c55e;cursor:default}
+  .cartao.certo .qd,.cartao.mostra .qd{display:inline-block}
+  .cartao.erro{border-color:#ef4444;-webkit-animation:treme .4s;animation:treme .4s}
+  @-webkit-keyframes treme{25%{-webkit-transform:translateX(-8px)}75%{-webkit-transform:translateX(8px)}}
+  @keyframes treme{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  #mesa{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:12px;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center}
+  #mesa .cartao{width:clamp(150px,22vw,220px)}
+  #duelo{display:-webkit-box;display:-webkit-flex;display:flex;gap:16px;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-flex-wrap:wrap;flex-wrap:wrap}
+  #duelo .cartao{width:clamp(220px,40vw,380px);padding:18px 12px}
+  #duelo .cartao .em{font-size:clamp(3rem,8vw,4.5rem)}
+  #duelo .cartao .tx{font-size:clamp(1.1rem,2.6vw,1.5rem)}
+  #msg{text-align:center;font-size:20px;font-weight:bold;min-height:30px;margin:12px 0}
+  #acoes{text-align:center}
+  .grande{font-size:clamp(2rem,6vw,3.4rem);text-align:center;margin:10px 0}
+</style>
+</head>
+<body>
+
+<div class="tela ativa" id="tConfig">
+  <h1>🕰️ Linha do Tempo</h1>
+  <p class="sub">Coloquem os acontecimentos em ordem, do mais antigo ao mais recente.</p>
+  <div class="caixa">
+    <label for="selLista">Conteúdo</label>
+    <select id="selLista"><option value="">Carregando…</option></select>
+    <div class="info" id="infoLista"></div>
+    <label>Modo</label>
+    <div class="linha" id="opModo">
+      <button type="button" class="op sel" data-v="monte">🔢 Monte a linha<br><small>toque do mais antigo ao mais recente</small></button>
+      <button type="button" class="op" data-v="duelo">⚖️ Qual veio primeiro?<br><small>dois acontecimentos por vez</small></button>
+    </div>
+    <div class="linha">
+      <div><label for="selQtd">Cartões por rodada</label><select id="selQtd"><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></div>
+      <div><label for="selRodadas">Rodadas</label><select id="selRodadas"><option value="5">5</option><option value="8" selected>8</option><option value="12">12</option></select></div>
+      <div><label for="selEquipes">Quem joga</label><select id="selEquipes"><option value="1">A turma toda</option><option value="2" selected>2 equipes</option><option value="3">3 equipes</option><option value="4">4 equipes</option></select></div>
+    </div>
+    <div class="centro" style="margin-top:14px"><button type="button" class="bt" id="btComecar">▶️ Começar</button></div>
+  </div>
+  <div class="caixa">
+    <label for="txtJson">📋 O meu JSON (opcional)</label>
+    <textarea id="txtJson" placeholder='{"titulo": "Minha linha do tempo", "eventos": [{"ano": 1500, "quando": "1500", "emoji": "⛵", "texto": "Chegada dos portugueses"}]}'></textarea>
+    <div class="centro">
+      <button type="button" class="bt sec" id="btColar">📋 Colar o meu JSON</button>
+      <button type="button" class="bt sec" id="btModelo">📄 Copiar o modelo</button>
+    </div>
+    <div class="info">“ano” é o número usado para ordenar (antes de Cristo com sinal de menos: -3500). “quando” é o que aparece no cartão.</div>
+  </div>
+</div>
+
+<div class="tela" id="tJogo">
+  <div id="placar"></div>
+  <div id="pedido"></div>
+  <div id="trilho"></div>
+  <div id="mesa"></div>
+  <div id="duelo"></div>
+  <div id="msg"></div>
+  <div id="acoes">
+    <button type="button" class="bt sec" id="btRevelar">👀 Revelar a ordem</button>
+    <button type="button" class="bt" id="btProxima" style="display:none">➡️ Próxima rodada</button>
+    <button type="button" class="bt sec" id="btSair">🏁 Encerrar</button>
+  </div>
+</div>
+
+<div class="tela" id="tFim">
+  <h1>🏆 Fim do jogo!</h1>
+  <div class="grande" id="resultado"></div>
+  <div class="caixa" id="ranking"></div>
+  <div class="centro"><button type="button" class="bt" id="btDeNovo">🔁 Jogar de novo</button></div>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function param(n){ var m = new RegExp('[?&]' + n + '=([^&#]*)').exec(location.search); return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : ''; }
+  function embaralhar(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pegar(url, cb){
+    var x = new XMLHttpRequest();
+    x.open('GET', url, true);
+    x.onreadystatechange = function(){ if (x.readyState !== 4) return; if (x.status >= 200 && x.status < 300 || x.status === 0 && x.responseText){ try { cb(null, JSON.parse(x.responseText)); } catch (e) { cb(e); } } else cb(new Error('http ' + x.status)); };
+    x.send();
+  }
+  function tela(id){ var t = document.querySelectorAll('.tela'); for (var i = 0; i < t.length; i++) t[i].className = 'tela' + (t[i].id === id ? ' ativa' : ''); window.scrollTo(0, 0); }
+  function quando(e){ return e.quando || (e.ano < 0 ? (-e.ano) + ' a.C.' : String(e.ano)); }
+  var MODELO = {titulo: 'Minha linha do tempo', eventos: [
+    {ano: -3500, quando: 'c. 3500 a.C.', emoji: '📜', texto: 'Invenção da escrita'},
+    {ano: 1500, quando: '1500', emoji: '⛵', texto: 'Chegada dos portugueses'},
+    {ano: 1822, quando: '1822', emoji: '🇧🇷', texto: 'Independência do Brasil'},
+    {ano: 1888, quando: '1888', emoji: '🕊️', texto: 'Lei Áurea'},
+    {ano: 1988, quando: '1988', emoji: '📜', texto: 'Constituição Cidadã'}]};
+
+  // ---------- conteúdo ----------
+  var lista = null, colado = null;
+  function validar(d){
+    if (!d || !(d.eventos instanceof Array)) return null;
+    var ev = [];
+    for (var i = 0; i < d.eventos.length; i++){ var e = d.eventos[i]; if (e && typeof e.ano === 'number' && e.texto) ev.push({ano: e.ano, quando: e.quando, emoji: e.emoji || '📌', texto: String(e.texto)}); }
+    return ev.length >= 2 ? {titulo: d.titulo || 'Linha do tempo', eventos: ev} : null;
+  }
+  function mostrarInfo(){ $('infoLista').textContent = lista ? lista.titulo + ' • ' + lista.eventos.length + ' acontecimentos' : 'Não consegui abrir este conteúdo.'; }
+  function carregar(arq){
+    if (arq === '__colado'){ lista = colado; mostrarInfo(); return; }
+    pegar('dados/' + arq, function(err, d){ lista = err ? null : validar(d); mostrarInfo(); });
+  }
+  $('selLista').onchange = function(){ carregar(this.value); };
+  pegar('dados/indice.json', function(err, ind){
+    var itens = !err && ind && ind['linha-tempo'] ? ind['linha-tempo'] : [], pedido = param('arquivo'), sel = $('selLista'), h = '';
+    for (var i = 0; i < itens.length; i++) h += '<option value="' + esc(itens[i].arquivo) + '">' + esc(itens[i].titulo) + '</option>';
+    if (pedido && !/\//.test(pedido) && h.indexOf('value="' + esc(pedido) + '"') < 0) h = '<option value="' + esc(pedido) + '">' + esc(pedido) + '</option>' + h;
+    sel.innerHTML = h || '<option value="">(nenhum conteúdo)</option>';
+    if (pedido && !/\//.test(pedido)) sel.value = pedido;
+    if (sel.value) carregar(sel.value);
+  });
+  $('btColar').onclick = function(){
+    var t = $('txtJson').value, d = null;
+    try { d = validar(JSON.parse(t)); } catch (e) {}
+    if (!d){ alert('Esse JSON não está no formato da linha do tempo. Use “Copiar o modelo” para ver o formato (pelo menos 2 eventos com "ano" e "texto").'); return; }
+    colado = d;
+    var sel = $('selLista'), op = sel.querySelector('option[value="__colado"]');
+    if (!op){ op = document.createElement('option'); op.value = '__colado'; sel.insertBefore(op, sel.firstChild); }
+    op.textContent = '📋 ' + d.titulo + ' (colado)';
+    sel.value = '__colado'; carregar('__colado');
+  };
+  $('btModelo').onclick = function(){
+    var t = JSON.stringify(MODELO, null, 2);
+    $('txtJson').value = t;
+    try { $('txtJson').select(); document.execCommand('copy'); } catch (e) {}
+  };
+  var botoesModo = $('opModo').querySelectorAll('.op'), modo = 'monte';
+  for (var b = 0; b < botoesModo.length; b++) botoesModo[b].onclick = function(){
+    modo = this.getAttribute('data-v');
+    for (var k = 0; k < botoesModo.length; k++) botoesModo[k].className = 'op' + (botoesModo[k] === this ? ' sel' : '');
+  };
+
+  // ---------- jogo ----------
+  var J = null;
+  function comecar(){
+    if (!lista){ alert('Escolha um conteúdo que abra (ou cole o seu JSON).'); return; }
+    var n = Math.min(+$('selQtd').value, lista.eventos.length), eq = +$('selEquipes').value, nomes = ['🔴 Equipe 1', '🔵 Equipe 2', '💚 Equipe 3', '💛 Equipe 4'];
+    if (eq === 1) nomes = ['🙌 Turma'];
+    J = {modo: modo, n: modo === 'duelo' ? 2 : n, rodadas: +$('selRodadas').value, rodada: 0, eq: [], vez: 0, monte: embaralhar(lista.eventos), pos: 0};
+    for (var i = 0; i < eq; i++) J.eq.push({nome: nomes[i], pontos: 0});
+    tela('tJogo'); novaRodada();
+  }
+  function tirar(k){
+    var r = [], usados = {};
+    for (var tent = 0; r.length < k && tent < 500; tent++){
+      if (J.pos >= J.monte.length){ J.monte = embaralhar(lista.eventos); J.pos = 0; }
+      var e = J.monte[J.pos++];
+      var chave = e.ano + '|' + e.texto, mesmoAno = false;
+      for (var i = 0; i < r.length; i++) if (r[i].ano === e.ano) mesmoAno = true;   // anos iguais deixariam a ordem ambígua
+      if (!usados[chave] && !mesmoAno){ usados[chave] = 1; r.push(e); }
+    }
+    return r;
+  }
+  function desenharPlacar(){
+    var h = '<div class="eq" style="background:none;border:none">Rodada ' + (J.rodada) + ' de ' + J.rodadas + '</div>';
+    for (var i = 0; i < J.eq.length; i++) h += '<div class="eq' + (i === J.vez && J.eq.length > 1 ? ' vez' : '') + '">' + esc(J.eq[i].nome) + ': ' + J.eq[i].pontos + '</div>';
+    $('placar').innerHTML = h;
+  }
+  function cartaoHtml(e, i){ return '<div class="cartao" data-i="' + i + '"><div class="em">' + esc(e.emoji) + '</div><div class="tx">' + esc(e.texto) + '</div><div class="qd">' + esc(quando(e)) + '</div></div>'; }
+  function novaRodada(){
+    J.rodada++;
+    if (J.rodada > J.rodadas) return fim();
+    if (J.rodada > 1 && J.eq.length > 1) J.vez = (J.vez + 1) % J.eq.length;
+    J.cartas = tirar(J.n);
+    J.ordem = J.cartas.slice().sort(function(a, b){ return a.ano - b.ano; });
+    J.passo = 0; J.erros = 0; J.acabou = false;
+    $('msg').textContent = ''; $('btProxima').style.display = 'none'; $('btRevelar').style.display = '';
+    var quem = J.eq.length > 1 ? 'Vez da ' + J.eq[J.vez].nome + ': ' : '';
+    var i, h = '';
+    if (J.modo === 'duelo'){
+      $('pedido').textContent = quem + 'qual aconteceu primeiro?';
+      $('trilho').style.display = 'none'; $('mesa').innerHTML = '';
+      for (i = 0; i < J.cartas.length; i++) h += cartaoHtml(J.cartas[i], i);
+      $('duelo').innerHTML = h;
+    } else {
+      $('pedido').textContent = quem + 'toquem do mais antigo ao mais recente.';
+      $('duelo').innerHTML = ''; $('trilho').style.display = '';
+      var t = '';
+      for (i = 0; i < J.cartas.length; i++) t += '<div class="vaga" id="vaga' + i + '">' + (i + 1) + '</div>';
+      $('trilho').innerHTML = t;
+      for (i = 0; i < J.cartas.length; i++) h += cartaoHtml(J.cartas[i], i);
+      $('mesa').innerHTML = h;
+    }
+    desenharPlacar();
+  }
+  function tocar(el){
+    if (!J || J.acabou || !el || /certo/.test(el.className)) return;
+    var e = J.cartas[+el.getAttribute('data-i')];
+    if (J.modo === 'duelo'){
+      J.acabou = true;
+      var ok = e === J.ordem[0], cs = $('duelo').querySelectorAll('.cartao');
+      for (var i = 0; i < cs.length; i++){ var c = J.cartas[+cs[i].getAttribute('data-i')]; cs[i].className = 'cartao mostra' + (c === J.ordem[0] ? ' certo' : (cs[i] === el ? ' erro' : '')); }
+      if (ok) J.eq[J.vez].pontos++;
+      $('msg').innerHTML = ok ? '✅ Isso! ' + esc(J.ordem[0].texto) + ' (' + esc(quando(J.ordem[0])) + ') veio antes.' : '❌ Não: ' + esc(J.ordem[0].texto) + ' (' + esc(quando(J.ordem[0])) + ') veio antes.';
+      terminarRodada();
+      return;
+    }
+    if (e === J.ordem[J.passo]){
+      var vaga = $('vaga' + J.passo);
+      el.className = 'cartao certo';
+      vaga.innerHTML = ''; vaga.className = 'vaga cheia'; vaga.appendChild(el);
+      J.passo++;
+      if (J.passo >= J.ordem.length){
+        J.acabou = true;
+        var pts = Math.max(0, J.ordem.length - J.erros);
+        J.eq[J.vez].pontos += pts;
+        $('msg').textContent = (J.erros ? '👍 Linha completa com ' + J.erros + ' erro(s): ' : '🌟 Linha perfeita! ') + '+' + pts + ' ponto(s).';
+        terminarRodada();
+      } else $('msg').textContent = '✅ Certo! Agora o próximo.';
+    } else {
+      J.erros++;
+      el.className = 'cartao erro';
+      setTimeout(function(){ if (/erro/.test(el.className)) el.className = 'cartao'; }, 450);
+      $('msg').textContent = '❌ Ainda não. Procurem um acontecimento mais antigo.';
+    }
+  }
+  function terminarRodada(){ $('btRevelar').style.display = 'none'; $('btProxima').style.display = ''; desenharPlacar(); }
+  function revelar(){
+    if (!J || J.acabou) return;
+    J.acabou = true;
+    if (J.modo !== 'duelo'){
+      for (var i = J.passo; i < J.ordem.length; i++){
+        var el = null, cs = $('mesa').querySelectorAll('.cartao');
+        for (var k = 0; k < cs.length; k++) if (J.cartas[+cs[k].getAttribute('data-i')] === J.ordem[i]) el = cs[k];
+        if (el){ el.className = 'cartao certo'; var v = $('vaga' + i); v.innerHTML = ''; v.className = 'vaga cheia'; v.appendChild(el); }
+      }
+    } else {
+      var ds = $('duelo').querySelectorAll('.cartao');
+      for (var j = 0; j < ds.length; j++) ds[j].className = 'cartao mostra' + (J.cartas[+ds[j].getAttribute('data-i')] === J.ordem[0] ? ' certo' : '');
+    }
+    $('msg').textContent = '👀 Esta é a ordem certa (sem pontos nesta rodada).';
+    terminarRodada();
+  }
+  function fim(){
+    var r = J.eq.slice().sort(function(a, b){ return b.pontos - a.pontos; }), h = '';
+    for (var i = 0; i < r.length; i++) h += '<div class="eq" style="margin:6px 0">' + (i + 1) + 'º ' + esc(r[i].nome) + ': ' + r[i].pontos + ' ponto(s)</div>';
+    $('resultado').textContent = J.eq.length > 1 ? (r.length > 1 && r[0].pontos === r[1].pontos ? '⚖️ Empate!' : '🏆 ' + r[0].nome) : '🙌 ' + r[0].pontos + ' ponto(s)';
+    $('ranking').innerHTML = h;
+    tela('tFim');
+  }
+  function alvo(ev){ var t = ev.target; while (t && t !== document && !(t.className && /cartao/.test(t.className))) t = t.parentNode; return t && t !== document ? t : null; }
+  $('mesa').onclick = function(ev){ tocar(alvo(ev)); };
+  $('duelo').onclick = function(ev){ tocar(alvo(ev)); };
+  $('btComecar').onclick = comecar;
+  $('btRevelar').onclick = revelar;
+  $('btProxima').onclick = novaRodada;
+  $('btSair').onclick = function(){ if (J) fim(); };
+  $('btDeNovo').onclick = function(){ tela('tConfig'); };
+  window.LINHA = {jogo: function(){ return J; }, lista: function(){ return lista; }, tocar: tocar};
+})();
+</script>
+</body>
+</html>

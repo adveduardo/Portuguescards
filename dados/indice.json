@@ -234,6 +234,26 @@
       "arquivo": "contas-divisao-4-quiz.json",
       "titulo": "🧮 Divisão com 4 algarismos (por 1 algarismo)",
       "qtd": 40
+    },
+    {
+      "arquivo": "quiz-hist-6.json",
+      "titulo": "📜 História do 6º ano",
+      "qtd": 38
+    },
+    {
+      "arquivo": "quiz-hist-7.json",
+      "titulo": "📜 História do 7º ano",
+      "qtd": 36
+    },
+    {
+      "arquivo": "quiz-hist-8.json",
+      "titulo": "📜 História do 8º ano",
+      "qtd": 35
+    },
+    {
+      "arquivo": "quiz-hist-9.json",
+      "titulo": "📜 História do 9º ano",
+      "qtd": 36
     }
   ],
   "stop": [
@@ -438,6 +458,10 @@
       "arquivo": "contas-divisao-4-batata.json",
       "titulo": "🧮 Divisão com 4 algarismos (por 1 algarismo)",
       "qtd": 40
+    },
+    {
+      "arquivo": "batata-historia.json",
+      "titulo": "📜 Batata quente da História (6º ao 9º)"
     }
   ],
   "trilha": [
@@ -540,6 +564,10 @@
     {
       "arquivo": "trilha-es.json",
       "titulo": "🇪🇸 Juego de mesa en español"
+    },
+    {
+      "arquivo": "trilha-historia.json",
+      "titulo": "📜 Trilha da História (6º ao 9º)"
     }
   ],
   "escape": [
@@ -1083,6 +1111,22 @@
     {
       "arquivo": "es-cestos-acentuacion.json",
       "titulo": "🇪🇸 ¿Aguda, llana o esdrújula?"
+    },
+    {
+      "arquivo": "hist-cestos-fontes.json",
+      "titulo": "📜 História: que tipo de fonte histórica?"
+    },
+    {
+      "arquivo": "hist-cestos-grecia-roma.json",
+      "titulo": "📜 História: Grécia ou Roma?"
+    },
+    {
+      "arquivo": "hist-cestos-brasil-periodos.json",
+      "titulo": "📜 História do Brasil: Colônia, Império ou República?"
+    },
+    {
+      "arquivo": "hist-cestos-guerras.json",
+      "titulo": "📜 História: Primeira ou Segunda Guerra Mundial?"
     }
   ],
   "morfo-frases": [
@@ -2169,6 +2213,22 @@
     {
       "arquivo": "memoria-es-falsos.json",
       "titulo": "🇪🇸 Memoria: falsos amigos"
+    },
+    {
+      "arquivo": "memoria-hist-6.json",
+      "titulo": "📜 História do 6º ano: termo e significado"
+    },
+    {
+      "arquivo": "memoria-hist-7.json",
+      "titulo": "📜 História do 7º ano: termo e significado"
+    },
+    {
+      "arquivo": "memoria-hist-8.json",
+      "titulo": "📜 História do 8º ano: termo e significado"
+    },
+    {
+      "arquivo": "memoria-hist-9.json",
+      "titulo": "📜 História do 9º ano: termo e significado"
     }
   ],
   "bingo": [
@@ -2945,6 +3005,12 @@
       "titulo": "⭐ Banco completo: Quiz geral de Língua Portuguesa (552 questões)",
       "grupo": "🏆 Quizzes prontos",
       "qtd": 552
+    },
+    {
+      "arquivo": "banco-historia.json",
+      "titulo": "⭐ Banco completo: História do 6º ao 9º ano (145 questões)",
+      "grupo": "📜 História",
+      "qtd": 145
     }
   ],
   "leitura": [
@@ -3389,6 +3455,55 @@
       "arquivo": "es-dias-meses.json",
       "titulo": "🇪🇸 Los días, los meses y las estaciones",
       "qtd": 12
+    }
+  ],
+  "escolha-hist": [
+    {
+      "arquivo": "hist-6.json",
+      "titulo": "📜 História 6º ano: Origens, Antiguidade e Idade Média",
+      "qtd": 38
+    },
+    {
+      "arquivo": "hist-7.json",
+      "titulo": "📜 História 7º ano: Mundo moderno, América, África e Brasil colônia",
+      "qtd": 36
+    },
+    {
+      "arquivo": "hist-8.json",
+      "titulo": "📜 História 8º ano: Revoluções, independências e Brasil Império",
+      "qtd": 35
+    },
+    {
+      "arquivo": "hist-9.json",
+      "titulo": "📜 História 9º ano: República, guerras mundiais, ditadura e mundo atual",
+      "qtd": 36
+    }
+  ],
+  "linha-tempo": [
+    {
+      "arquivo": "linha-tempo-6.json",
+      "titulo": "📜 6º ano: Origens, Antiguidade e Idade Média",
+      "qtd": 18
+    },
+    {
+      "arquivo": "linha-tempo-7.json",
+      "titulo": "📜 7º ano: Mundo moderno, América, África e Brasil colônia",
+      "qtd": 18
+    },
+    {
+      "arquivo": "linha-tempo-8.json",
+      "titulo": "📜 8º ano: Revoluções, independências e Brasil Império",
+      "qtd": 18
+    },
+    {
+      "arquivo": "linha-tempo-9.json",
+      "titulo": "📜 9º ano: República, guerras mundiais, ditadura e mundo atual",
+      "qtd": 20
+    },
+    {
+      "arquivo": "linha-tempo-geral.json",
+      "titulo": "📜 Do 6º ao 9º ano (tudo misturado)",
+      "qtd": 74
     }
   ]
 }
