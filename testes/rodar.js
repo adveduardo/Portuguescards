@@ -6,7 +6,7 @@
      2) Menu: nenhuma atividade repetida, toda opção abre uma página (e um arquivo de conteúdo) que existe.
      3) iPads antigos (iOS 9): JavaScript ES5 e emoji até o Unicode 8 nas páginas que rodam nos iPads.
      4) Fumaça: abre todas as páginas num navegador de verdade e procura erros de JavaScript.
-     5) Link curto: as salas com iPads têm o botão ✂️ e ele mostra is.gd/sala + código; a página link-curto.html
+     5) Link curto: as salas com iPads têm o botão ✂️ e ele mostra is.gd/0 + código; a página link-curto.html
         transforma um link do Google Drive em link curto + QR Code (o is.gd é simulado). */
 'use strict';
 const fs = require('fs'), path = require('path'), http = require('http');
@@ -108,7 +108,7 @@ servidor.listen(0, async () => {
     await pl.waitForFunction(() => !document.querySelector('.avCurto').hidden, null, {timeout: 10000});
     link = await pl.evaluate(() => ({curto: document.querySelector('.avCurto').textContent, codigo: document.getElementById('codigoSala').textContent.trim()}));
   } catch (e) { errosLink.push(e.message.split('\n')[0]); }
-  ok(link.curto === 'is.gd/sala' + link.codigo && !errosLink.length, 'Link curto: o botão ✂️ mostra is.gd/sala + o código da sala', [JSON.stringify(link)].concat(errosLink));
+  ok(link.curto === 'is.gd/0' + link.codigo && !errosLink.length, 'Link curto: o botão ✂️ mostra is.gd/0 + o código da sala (só números)', [JSON.stringify(link)].concat(errosLink));
   await pl.close();
   const pd = await ctx.newPage(), errosDrive = [];
   pd.on('pageerror', e => errosDrive.push(e.message));

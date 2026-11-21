@@ -417,7 +417,7 @@ AV.iniciarConexao = el => {
 
 // ---------- link curto para os alunos copiarem do quadro ----------
 // Toda tela que mostra o endereço (#urlJogar) ganha o botão "✂️ Link curto". O is.gd (gratuito, sem conta)
-// devolve algo como is.gd/sala4821, que abre o jogar.html já com o código da sala preenchido.
+// devolve algo como is.gd/04821 (o is.gd pede no mínimo 5 caracteres, por isso o 0 na frente do código), que abre o jogar.html já com o código da sala preenchido.
 // "✏️ Meu link" guarda um link curto do próprio professor (bit.ly, TinyURL…) no lugar do is.gd.
 // A escolha fica neste computador: nas próximas salas o link curto já aparece sozinho.
 const LINK = {modo: 'painel_link_modo', meu: 'painel_link_meu', guardados: 'painel_links_curtos'};
@@ -451,12 +451,13 @@ const pedirLink = url => pedirJsonp(url).catch(e => {
   if (e.message !== 'sem-jsonp' || !window.fetch) throw e;
   return fetch(url, {cache: 'no-store'}).then(r => r.json());
 });
-// AV.encurtar(endereço, apelidos?, {semGuardado}) → Promise com o link curto. Tenta os apelidos (ex.: sala4821) na ordem;
+// AV.encurtar(endereço, apelidos?, {semGuardado}) → Promise com o link curto. Tenta os apelidos (ex.: 04821) na ordem;
 // apelido que já existe só serve se já aponta para o mesmo endereço. Sem apelido livre, o is.gd escolhe um.
 // O link criado fica guardado neste computador; semGuardado: true pede de novo (ex.: para tentar um nome novo).
 AV.encurtar = (longo, apelidos, op) => {
   let guardados = {};
   try { guardados = JSON.parse(lsLer(LINK.guardados)) || {}; } catch (e) {}
+  if (/is\.gd\/(sala|jogo|turma)\d{4}$/.test(guardados[longo] || '')) delete guardados[longo];   // link antigo com "sala": gera de novo só com números
   if (guardados[longo] && !(op && op.semGuardado)) return Promise.resolve(guardados[longo]);
   const API = 'https://is.gd/';
   const criar = apelido => pedirLink(API + 'create.php?format=json&url=' + encodeURIComponent(longo) + (apelido ? '&shorturl=' + encodeURIComponent(apelido) : ''));
@@ -522,7 +523,7 @@ AV.linkCurto = () => {
     if (meu){ lsGravar(LINK.modo, 'curto'); return mostrar(meu); }
     const c = codigo(), minha = vez;
     bGerar.disabled = true; bGerar.textContent = '⏳ Encurtando…';
-    AV.encurtar(AV.urlJogar() + (c ? '?sala=' + c : ''), c ? ['sala' + c, 'jogo' + c, 'turma' + c] : []).then(link => {
+    AV.encurtar(AV.urlJogar() + (c ? '?sala=' + c : ''), c ? ['0' + c, '00' + c, '000' + c, 'sala' + c, 'jogo' + c, 'turma' + c] : []).then(link => {
       if (minha !== vez) return;
       lsGravar(LINK.modo, 'curto'); mostrar(link);
     }, e => {
