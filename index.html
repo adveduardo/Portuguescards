@@ -1080,8 +1080,11 @@
             document.getElementById('link-curto-txt').textContent = '⏳ encurtando…';
             document.getElementById('caixa-link').style.display = 'flex';
             let guardados = {}; try { guardados = JSON.parse(localStorage.getItem('qr_curtos') || '{}') || {}; } catch (e) {}
-            if (guardados[linkLongoAtual]) { mostrarCurto(guardados[linkLongoAtual]); return; }
-            const servicos = ['https://is.gd/create.php', 'https://v.gd/create.php']; let i = 0;
+            if (/\/\d{5,}$/.test(guardados[linkLongoAtual] || '')) { mostrarCurto(guardados[linkLongoAtual]); return; }
+            // só números, no formato da sala: 0 + 4 números (is.gd/04821); se ocupado, sorteia outro; depois 6 números
+            const sorteio = n => String(Math.floor(Math.random() * Math.pow(10, n)) + Math.pow(10, n)).slice(1);
+            const nomes = ['0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '1' + sorteio(5), '2' + sorteio(5), '3' + sorteio(5)];
+            const servicos = ['https://is.gd/create.php', 'https://v.gd/create.php']; let i = 0, n = 0;
             const tenta = function () {
                 if (i >= servicos.length) { document.getElementById('link-curto-txt').textContent = '⚠️ sem internet agora'; return; }
                 const nome = 'painelCurto' + Date.now() + i, sc = document.createElement('script'); let feito = false;
@@ -1090,10 +1093,12 @@
                 window[nome] = function (r) {
                     if (feito) return; clearTimeout(relogio); fim();
                     if (r && r.shorturl) { try { guardados[linkLongoAtual] = r.shorturl; localStorage.setItem('qr_curtos', JSON.stringify(guardados)); } catch (e) {} mostrarCurto(r.shorturl); }
+                    else if (r && +r.errorcode === 2 && n < nomes.length) { n++; i--; tenta(); }   // número já usado: sorteia outro
+                    else if (r && +r.errorcode === 3) document.getElementById('link-curto-txt').textContent = '⏳ o is.gd pediu uma pausa; tente daqui a pouco';
                     else tenta();
                 };
                 sc.onerror = function () { if (!feito) { clearTimeout(relogio); fim(); tenta(); } };
-                sc.src = servicos[i++] + '?format=json&callback=' + nome + '&url=' + encodeURIComponent(linkLongoAtual);
+                sc.src = servicos[i++] + '?format=json&callback=' + nome + '&url=' + encodeURIComponent(linkLongoAtual) + (nomes[n] ? '&shorturl=' + nomes[n] : '');
                 document.body.appendChild(sc);
             };
             tenta();

@@ -209,7 +209,7 @@
   function apelidoLimpo(){ return semAcento(aparar($('apelido').value)).replace(/\s+/g, '').replace(/[^a-z0-9_]/g, '').slice(0, 30); }
   function desenharApelido(){
     var a = apelidoLimpo(), bruto = aparar($('apelido').value), d = $('dicaApelido');
-    if (!bruto) d.innerHTML = 'Um nome fácil de digitar (só letras sem acento, números e _). Em branco, o is.gd escolhe um nome.';
+    if (!bruto) d.innerHTML = 'Um nome fácil de digitar (só letras sem acento, números e _). Em branco, vira um número fácil de digitar (ex.: is.gd/04821).';
     else if (a.length < 5) d.innerHTML = '✏️ Faltam ' + (5 - a.length) + (5 - a.length === 1 ? ' letra' : ' letras') + ': o nome precisa ter pelo menos 5.';
     else d.innerHTML = 'Vai ficar assim: <b>is.gd/' + esc(a) + '</b>' + (a !== bruto ? ' (sem acentos, espaços e maiúsculas)' : '');
   }

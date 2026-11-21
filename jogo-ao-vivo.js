@@ -454,10 +454,16 @@ const pedirLink = url => pedirJsonp(url).catch(e => {
 // AV.encurtar(endereço, apelidos?, {semGuardado}) → Promise com o link curto. Tenta os apelidos (ex.: 04821) na ordem;
 // apelido que já existe só serve se já aponta para o mesmo endereço. Sem apelido livre, o is.gd escolhe um.
 // O link criado fica guardado neste computador; semGuardado: true pede de novo (ex.: para tentar um nome novo).
+// nomes só com números, no formato da sala (0 + 4 números, ex.: is.gd/04821); se estiverem ocupados, 6 números
+const sorteio = n => String(Math.floor(Math.random() * Math.pow(10, n)) + Math.pow(10, n)).slice(1);
+AV.apelidosNumericos = () => ['0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '1' + sorteio(5), '2' + sorteio(5), '3' + sorteio(5)];
+const ehNumerico = u => /\/\d{5,}$/.test(String(u || ''));
 AV.encurtar = (longo, apelidos, op) => {
+  const proprios = !!(apelidos && apelidos.length && !apelidos.every(a => /^\d+$/.test(a)));   // nome escolhido pelo professor
+  if (!apelidos || !apelidos.length) apelidos = AV.apelidosNumericos();
   let guardados = {};
   try { guardados = JSON.parse(lsLer(LINK.guardados)) || {}; } catch (e) {}
-  if (/is\.gd\/(sala|jogo|turma)\d{4}$/.test(guardados[longo] || '')) delete guardados[longo];   // link antigo com "sala": gera de novo só com números
+  if (guardados[longo] && !proprios && !ehNumerico(guardados[longo])) delete guardados[longo];   // link antigo com letras: gera de novo só com números
   if (guardados[longo] && !(op && op.semGuardado)) return Promise.resolve(guardados[longo]);
   const API = 'https://is.gd/';
   const criar = apelido => pedirLink(API + 'create.php?format=json&url=' + encodeURIComponent(longo) + (apelido ? '&shorturl=' + encodeURIComponent(apelido) : ''));
@@ -523,7 +529,7 @@ AV.linkCurto = () => {
     if (meu){ lsGravar(LINK.modo, 'curto'); return mostrar(meu); }
     const c = codigo(), minha = vez;
     bGerar.disabled = true; bGerar.textContent = '⏳ Encurtando…';
-    AV.encurtar(AV.urlJogar() + (c ? '?sala=' + c : ''), c ? ['0' + c, '00' + c, '000' + c, 'sala' + c, 'jogo' + c, 'turma' + c] : []).then(link => {
+    AV.encurtar(AV.urlJogar() + (c ? '?sala=' + c : ''), c ? ['0' + c, '00' + c, '000' + c].concat(AV.apelidosNumericos()) : []).then(link => {
       if (minha !== vez) return;
       lsGravar(LINK.modo, 'curto'); mostrar(link);
     }, e => {

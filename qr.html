@@ -150,14 +150,18 @@
   // ---------- link curto (serviço gratuito is.gd; se falhar, v.gd) ----------
   var CHAVE_CURTOS = 'qr_curtos', criando = false, erroCurto = '', pedidos = 0, ultimoCurto = null;
   function curtos(){ return lerLS(CHAVE_CURTOS) || {}; }
-  function curtoDe(u){ return u ? curtos()[u] || '' : ''; }
+  function curtoDe(u){ var c = u ? curtos()[u] || '' : ''; return /\/\d{5,}$/.test(c) ? c : ''; }   // só os links com números (como o da sala)
   function guardarCurto(longo, c){
     var m = curtos(), ks = Object.keys(m);
     if (ks.length >= 200) delete m[ks[0]];   // guarda só os últimos
     m[longo] = c; gravarLS(CHAVE_CURTOS, m);
   }
   function encurtar(longo, pronto){
-    var servicos = ['https://is.gd/create.php', 'https://v.gd/create.php'], i = 0, motivo = '';
+    var servicos = ['https://is.gd/create.php', 'https://v.gd/create.php'], i = 0, motivo = '', n = 0;
+    // só números, no formato da sala: 0 + código da sala (ou 0 + 4 números sorteados); se ocupado, outro número
+    var sala = (String(longo).match(/[?&]sala=(\d{4})(?:&|$)/) || [])[1], nomes = sala ? ['0' + sala, '00' + sala, '000' + sala] : [];
+    function sorteio(k){ return String(Math.floor(Math.random() * Math.pow(10, k)) + Math.pow(10, k)).slice(1); }
+    nomes = nomes.concat(['0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '0' + sorteio(4), '1' + sorteio(5), '2' + sorteio(5), '3' + sorteio(5)]);
     function tenta(){
       if (i >= servicos.length){ pronto(motivo || 'rede'); return; }
       var base = servicos[i++], nome = 'qrCurto' + (++pedidos) + '_' + new Date().getTime(), s = document.createElement('script'), feito = false;
@@ -166,11 +170,12 @@
       window[nome] = function(r){
         if (feito) return; fim();
         if (r && r.shorturl) pronto('', r.shorturl);
-        else if (r && r.errorcode === 1) pronto('link');
+        else if (r && +r.errorcode === 2 && n < nomes.length){ n++; i--; tenta(); }   // número já usado: sorteia outro
+        else if (r && +r.errorcode === 1) pronto('link');
         else { motivo = 'servico'; tenta(); }
       };
       s.onerror = function(){ if (feito) return; fim(); tenta(); };
-      s.src = base + '?format=json&callback=' + nome + '&url=' + encodeURIComponent(longo);
+      s.src = base + '?format=json&callback=' + nome + '&url=' + encodeURIComponent(longo) + (nomes[n] ? '&shorturl=' + nomes[n] : '');
       document.body.appendChild(s);
     }
     tenta();
