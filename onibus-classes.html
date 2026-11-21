@@ -14,15 +14,20 @@
   #jsonCaixa textarea{width:100%;min-height:120px;font:inherit;font-size:.95rem;border:2px solid var(--borda);border-radius:10px;padding:8px}
   /* jogo: a fila e o ponto de um lado, a garagem do outro */
   #jogo{display:grid;gap:10px;grid-template-columns:minmax(300px,.85fr) minmax(0,1.3fr);grid-template-areas:"fila garagem" "ponto garagem";grid-template-rows:auto 1fr;align-items:start;max-width:1500px;margin:0 auto;padding:8px}
-  #cartaoFila{grid-area:fila;margin:0} #cartaoPonto{grid-area:ponto;margin:0} #cartaoGaragem{grid-area:garagem;margin:0;padding:10px}
+  #cartaoFila{grid-area:fila;margin:0} #cartaoPonto{grid-area:ponto;margin:0} #cartaoGaragem{grid-area:garagem;margin:0;padding:10px} #fim{grid-column:1 / -1}
+  /* tablet deitado (espelhado no projetor) e computador: a rua ocupa a coluna da esquerda inteira */
+  @media (orientation:landscape) and (min-height:521px) and (min-width:601px){
+    #jogo{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;align-items:stretch;box-sizing:border-box}
+    #cartaoFila{display:flex;flex-direction:column;min-height:0}
+    #rua{-webkit-box-flex:1;flex:1 1 auto;min-height:140px}
+    #msg{min-height:2.6em} #explica{min-height:2.4em}
+  }
   @media (orientation:portrait),(max-width:600px){#jogo{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"fila" "ponto" "garagem"} #msg{min-height:2.6em} #explica{min-height:2.4em}}
   .rotulo{font-weight:bold;color:var(--suave);font-size:.95rem;margin:2px 0 6px}
-  .agora{display:flex;flex-direction:column;gap:8px}
-  .agora.palavras{flex-direction:row;flex-wrap:wrap}
-  .agora.palavras .pass{flex:1 1 130px;min-width:0;flex-direction:column;justify-content:center;text-align:center;gap:4px;padding:6px 8px}
-  .agora.palavras .pass .boneco{width:30px;height:34px}
+  .agora{display:flex;flex-direction:column;gap:5px;margin-bottom:2px}
   .pass .pal{min-width:0}
-  .agora.palavras .pass .pal{display:block;max-width:100%;white-space:nowrap;overflow:hidden}
+  .agora.frases .pass{padding:5px 10px;border-radius:10px;font-size:clamp(.95rem,1.35vw,1.2rem)}
+  .agora.frases .pass .boneco{display:none}
   .pass{display:flex;align-items:center;gap:10px;background:#f4f6fb;border:2px solid var(--borda);border-radius:14px;padding:8px 12px;font-size:clamp(1.1rem,1.8vw,1.6rem);font-weight:bold;text-align:left}
   .pass .boneco{flex:none;width:30px;height:40px;position:relative}
   .pass .boneco::before{content:'';position:absolute;left:8px;top:0;width:14px;height:14px;border-radius:50%;background:#f2c094}
@@ -48,7 +53,7 @@
   .pessoa .sombra{position:absolute;left:3px;top:36px;width:18px;height:6px;border-radius:50%;background:rgba(15,23,42,.14)}
   .pessoa .placa{position:absolute;bottom:100%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);margin-bottom:2px;background:#fff;border:2px solid #cbd5e1;border-radius:8px;padding:0 5px;font-weight:bold;font-size:13px;line-height:17px;white-space:nowrap;color:#1f2937;box-shadow:0 2px 4px rgba(0,0,0,.08)}
   .pessoa.sem-placa .placa{display:none}
-  .pessoa.frente .placa{border-color:#f5b400;background:#fff7d1}
+  .pessoa.frente .placa{border-color:#f5b400;background:#fff7d1;font-size:16px;line-height:20px;padding:0 6px}
   .pessoa.frente .sombra{background:rgba(250,204,21,.65);left:-3px;width:30px;height:9px;top:34px}
   .pessoa.andando .boneco{-webkit-animation:passo .34s ease-in-out infinite;animation:passo .34s ease-in-out infinite}
   .pessoa.nao .cab{-webkit-animation:nao .45s ease-in-out 2;animation:nao .45s ease-in-out 2}
@@ -68,7 +73,9 @@
   .ponto-topo{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 6px}
   .ponto-topo .rotulo{margin:0}
   .botoes-ponto{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-  .botoes-ponto button{padding:5px 10px;font-size:.9rem}
+  .botoes-ponto button{padding:5px 10px;font-size:.9rem;white-space:nowrap}
+  .ponto-topo .rotulo{white-space:nowrap}
+  #cartaoPonto.apertado .txt{display:none}
   #explica{color:var(--suave);font-size:.95rem;min-height:1.2em}
   /* ponto de ônibus */
   #vagas{display:flex;gap:8px;flex-wrap:wrap}
@@ -100,11 +107,11 @@
     header.mt{padding:4px 10px;flex-wrap:nowrap} header.mt h1{font-size:.95rem;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} header.mt button{padding:5px 10px} header.mt .mt-chip{padding:2px 9px;white-space:nowrap} #infoTopo{flex-wrap:nowrap}
     #jogo{padding:4px;gap:6px;grid-template-columns:minmax(260px,1fr) minmax(0,1fr)}
     #cartaoFila,#cartaoPonto{padding:8px 10px} #cartaoGaragem{padding:6px;position:-webkit-sticky;position:sticky;top:46px}
-    #cartaoGaragem .rotulo,.rot-agora,.rua-dica{display:none}
+    #cartaoGaragem .rotulo,.rua-dica{display:none}
     #rua{margin-bottom:4px} .ponto-topo{margin-bottom:4px} .botoes-ponto{flex-wrap:nowrap} #cartaoPonto .txt{display:none} #explica:empty{display:none}
     .rotulo{font-size:.8rem;margin:0 0 4px}
     .pass{font-size:1rem;padding:4px 8px;gap:6px;border-radius:10px} .pass.frase{font-size:.9rem} .pass .boneco{display:none}
-    .agora{gap:4px} .agora.palavras .pass{flex:1 1 70px;justify-content:center}
+    .agora{gap:3px} .agora.frases .pass{font-size:.85rem;padding:2px 8px}
     #msg{font-size:.88rem;margin-top:4px} #explica{font-size:.8rem}
     .vaga{min-height:48px;padding:2px} .no-ponto{gap:3px;padding:3px;font-size:.78rem} .no-ponto .lugares i{width:11px;height:11px;border-width:2px}
     .botoes-ponto button{padding:4px 9px;font-size:.9rem}
@@ -146,8 +153,7 @@
 <div id="jogo" hidden>
   <div class="mt-card" id="cartaoFila">
     <div id="rua" role="img" aria-label="Fila de passageiros até o ponto"><svg id="ruaSvg" aria-hidden="true"></svg><div id="povo"></div><span class="rua-mais" id="ruaMais" hidden></span><span class="rua-dica" id="ruaDica">👆 toque num passageiro para ouvir</span></div>
-    <div class="rotulo rot-agora">🚏 Agora no ponto (estes passageiros são da mesma classe)</div>
-    <div class="agora" id="agora"></div>
+    <div class="agora" id="agora" hidden></div>
     <div id="msg" aria-live="polite"></div>
     <div id="explica"></div>
     <div class="balao-pessoa" id="balao" hidden></div>
@@ -323,16 +329,17 @@
     $('fim').hidden = true; $('cartaoFila').hidden = $('cartaoPonto').hidden = $('cartaoGaragem').hidden = false;
     $('garagem').removeAttribute('data-cel');
     try { window.scrollTo(0, 0); } catch (e) {}
-    limparRua(); montarRua();
+    limparRua(); ajustarAltura();
     var dica = $('ruaDica'); dica.classList.remove('some'); clearTimeout(dica._t); dica._t = setTimeout(function(){ dica.classList.add('some'); }, 6000);
-    pintarVagas(); pintarFila(true); pintarTopo();
+    pintarVagas(); pintarAgora(); pintarTopo(); ajustarPonto();
     msg(compacto() ? 'Qual é a classe dos passageiros da frente?' : 'Qual é a classe dos passageiros da frente? Tire da garagem um ônibus dessa classe.');
     $('explica').textContent = '';
+    montarRua(); pintarRua(true, true);
     pintarGaragem();
     if (temGsap) gsap.from('#garagem .bus', {scale: 0.3, opacity: 0, duration: 0.4, stagger: 0.04, ease: 'back.out(2)'});
     tom(392, 0.15);
   }
-  function msg(t){ $('msg').innerHTML = t; caberGaragem(); }
+  function msg(t){ $('msg').innerHTML = t; conferirRua(); caberGaragem(); }
   function caberGaragem(){   // a fila ou a mensagem cresceu e empurrou a garagem para fora da tela: a garagem diminui
     if (!jogo || jogo.acabou) return;
     var atual = +$('garagem').getAttribute('data-cel');
@@ -344,21 +351,36 @@
     $('infoTopo').innerHTML = '<span class="mt-chip">🚶 faltam ' + resta + '</span><span class="mt-chip">🚌 ' + jogo.movimentos + ' ' + (jogo.movimentos === 1 ? 'viagem' : 'viagens') + '</span>' + (jogo.dicas ? '<span class="mt-chip">💡 ' + jogo.dicas + '</span>' : '');
   }
   function passHtml(it){ return '<div class="pass' + (it.frase ? ' frase' : '') + '"><span class="boneco"></span><span class="pal">' + (it.frase || esc(it.palavra)) + '</span></div>'; }
-  function caberPalavras(){   // palavra comprida: a letra diminui em vez de a palavra quebrar no meio
-    var ps = $('agora').querySelectorAll('.agora.palavras .pal'), i, el, fs;
-    for (i = 0; i < ps.length; i++){
-      el = ps[i]; el.style.fontSize = '';
-      fs = parseFloat(window.getComputedStyle(el).fontSize) || 20;
-      while (el.scrollWidth > el.clientWidth + 1 && fs > 11){ fs -= 1; el.style.fontSize = fs + 'px'; }
-    }
+  function pintarAgora(){   // modo frases: as 3 frases da frente (a palavra destacada já está na placa da rua)
+    var b = jogo.blocos[jogo.frente], frases = !!(b && b.itens[0].frase);
+    $('agora').innerHTML = frases ? b.itens.map(passHtml).join('') : '';
+    $('agora').className = 'agora' + (frases ? ' frases' : '');
+    $('agora').hidden = !frases;
   }
-  function pintarFila(entrada){
-    var b = jogo.blocos[jogo.frente];
-    $('agora').innerHTML = b ? b.itens.map(passHtml).join('') : '<div class="pass">🎉 A fila acabou!</div>';
-    $('agora').className = 'agora' + (b && !b.itens[0].frase ? ' palavras' : '');
-    caberPalavras();
-    pintarRua(true, entrada);
+  function pintarFila(){
+    pintarAgora();
+    conferirRua();
+    pintarRua(true);
     caberGaragem();
+  }
+  function modoTela(){   // igual às regras de tela do CSS
+    var w = window.innerWidth || 1000, h = window.innerHeight || 700;
+    if (w > h && h <= 520) return 'compacta';
+    if (w <= h || w <= 600) return 'empilhada';
+    return 'larga';
+  }
+  function ajustarAltura(){   // tablet deitado / projetor: o jogo ocupa exatamente a altura da tela
+    var j = $('jogo'), cab = document.querySelector('header.mt');
+    j.style.height = modoTela() === 'larga' ? Math.max(420, (window.innerHeight || 700) - (cab ? cab.offsetHeight : 60)) + 'px' : '';
+  }
+  function ajustarPonto(){   // se os botões não cabem ao lado de "Vagas do ponto", ficam só com o ícone
+    var c = $('cartaoPonto'), t = c.querySelector('.ponto-topo');
+    c.classList.remove('apertado');
+    if (t.offsetHeight > 46) c.classList.add('apertado');
+  }
+  function conferirRua(){   // o espaço da rua mudou (mensagem maior, frases maiores): refaz o caminho
+    if (!rua || !jogo || jogo.acabou || modoTela() !== 'larga') return;
+    if (Math.abs($('rua').clientHeight - rua.H) > 6){ montarRua(); pintarRua(false); }
   }
 
   // ---------- a fila na rua: bonequinhos que andam até o ponto ----------
@@ -368,27 +390,58 @@
   var rua = null, povo = {}, medidor = null;   // rua: o caminho; povo: passageiro -> {el, s (posição no caminho), tw}
   function fixo(n){ var x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); }
   function compacto(){ return !!(window.matchMedia && matchMedia('(orientation:landscape) and (max-height:520px)').matches); }
-  function limparRua(){ Object.keys(povo).forEach(function(id){ if (povo[id].tw) povo[id].tw.kill(); }); povo = {}; $('povo').innerHTML = ''; $('balao').hidden = true; }
-  function larguraPlaca(t){   // largura da placa com a palavra (para ninguém tapar a placa do vizinho)
+  function limparRua(){ Object.keys(povo).forEach(function(id){ if (povo[id].tw) povo[id].tw.kill(); }); povo = {}; rua = null; $('povo').innerHTML = ''; $('balao').hidden = true; }
+  function larguraBase(t, frente){   // largura da placa com a palavra, na escala 1 (a da frente tem letra maior)
     if (!medidor) medidor = document.createElement('canvas').getContext('2d');
-    medidor.font = 'bold 13px "Trebuchet MS", "Segoe UI", sans-serif';
-    return (medidor.measureText(String(t)).width + 16) * rua.e;
+    medidor.font = 'bold ' + (frente ? 16 : 13) + 'px "Trebuchet MS", "Segoe UI", sans-serif';
+    return medidor.measureText(String(t)).width + (frente ? 18 : 16);
+  }
+  function larguraPlaca(t, frente){ return larguraBase(t, frente) * rua.e; }
+  function comprimentoBase(placas){   // quanto de rua a fila inteira ocupa, na escala 1
+    var tot = 0, ant = -1, n = 0, b, k, w;
+    for (b = jogo.frente; b < jogo.blocos.length; b++) for (k = 0; k < 3; k++){
+      w = n < placas ? larguraBase(jogo.blocos[b].itens[k].palavra, b === jogo.frente) : 0;
+      if (ant >= 0) tot += Math.max(27, (ant + w) / 2 + 11) + (k === 0 ? 12 : 0);
+      ant = w; n++;
+    }
+    return tot * 1.12 + 50;
+  }
+  function compRua(W, e, linhas){   // comprimento da rua em zigue-zague com essas medidas
+    var vao = 66 * e, r = vao / 2, pad = 14 * e, lin = linhas > 1 ? W - 2 * pad - 2 * r - 26 * e : W - 2 * pad - 26 * e;
+    return linhas * lin + (linhas - 1) * Math.PI * r;
   }
   function montarRua(){
     var box = $('rua'); if (!box || !jogo) return;
-    var c = compacto(), e = c ? 0.7 : 1, W = box.clientWidth || 300;
-    var topo = Math.round(64 * e), vao = Math.round(66 * e), pad = Math.round(14 * e), r = vao / 2, restam = (jogo.blocos.length - jogo.frente) * 3;
-    var precisa = (Math.min(restam, 9) * 64 + Math.max(0, restam - 9) * 27 + Math.ceil(restam / 3) * 12) * e;
-    var linhas = c ? 1 : Math.max(1, Math.min(3, Math.ceil(precisa / Math.max(80, W - 2 * pad - 2 * r - 30))));
-    var H = topo + (linhas - 1) * vao + Math.round(12 * e);
-    box.style.height = H + 'px';
+    var modo = modoTela(), W = box.clientWidth || 300, placas = modo === 'compacta' ? 3 : 9, base = comprimentoBase(placas), e, linhas, H, vao, cima = 0, k;
+    if (modo === 'larga'){
+      // a rua tem o tamanho que sobrou na coluna: os bonecos ficam do maior tamanho em que a fila inteira cabe
+      box.style.height = '';
+      H = box.clientHeight || 300;
+      for (k = 18; k >= 8; k--){
+        e = k / 10;
+        var maxL = Math.max(1, Math.min(6, Math.floor((H - 64 * e - 12 * e) / (66 * e)) + 1));
+        for (linhas = 1; linhas <= maxL && compRua(W, e, linhas) < base * e; linhas++);
+        if (linhas <= maxL) break;
+        linhas = maxL;
+      }
+      vao = linhas > 1 ? Math.min(66 * e * 1.35, (H - 64 * e - 12 * e) / (linhas - 1)) : 0;
+      cima = Math.max(0, (H - 64 * e - (linhas - 1) * vao - 12 * e) / 2);
+    } else {
+      e = modo === 'compacta' ? 0.7 : W >= 640 ? 1.25 : 1;
+      vao = 66 * e;
+      linhas = 1;
+      while (modo !== 'compacta' && linhas < 3 && compRua(W, e, linhas) < base * e) linhas++;
+      H = Math.round(64 * e + (linhas - 1) * vao + 12 * e);
+      box.style.height = H + 'px';
+    }
+    var topo = cima + 64 * e, pad = 14 * e, r = vao / 2;
     var xMin = (linhas > 1 ? pad + r : pad) + 26 * e, xMax = linhas > 1 ? W - pad - r : W - pad, segs = [], L = 0, i;
     for (i = 0; i < linhas; i++){
       var y = topo + i * vao, dir = (linhas - 1 - i) % 2 === 0 ? -1 : 1, xa = dir < 0 ? xMax : xMin, xb = dir < 0 ? xMin : xMax;
       segs.push({t: 'l', x0: xa, y0: y, x1: xb, y1: y, s0: L, len: Math.abs(xb - xa)}); L += Math.abs(xb - xa);
       if (i < linhas - 1){ segs.push({t: 'a', cx: xb, cy: y + r, r: r, lado: xb === xMax ? 1 : -1, s0: L, len: Math.PI * r}); L += Math.PI * r; }
     }
-    rua = {segs: segs, L: L, e: e, W: W, H: H, linhas: linhas, placas: c ? 3 : 9, larg: Math.round(27 * e), vaoGrupo: Math.round(12 * e)};
+    rua = {segs: segs, L: L, e: e, W: W, H: H, linhas: linhas, placas: placas, larg: Math.round(27 * e), vaoGrupo: Math.round(12 * e)};
     desenharEstrada();
   }
   function pontoNa(s){
@@ -436,20 +489,21 @@
     $('povo').appendChild(el);
     return el;
   }
-  function retPlaca(s, w){   // onde fica a placa de quem está na posição s (já empurrada para dentro da rua)
+  function retPlaca(s, w, frente){   // onde fica a placa de quem está na posição s (já empurrada para dentro da rua)
     var pt = pontoNa(s), esq = pt.x - w / 2, dir = pt.x + w / 2, sobra = esq < 3 ? 3 - esq : dir > rua.W - 3 ? rua.W - 3 - dir : 0, b = pt.y - 42 * rua.e;
-    return {l: esq + sobra, r: dir + sobra, t: b - 21 * rua.e, b: b};
+    return {l: esq + sobra, r: dir + sobra, t: b - (frente ? 24 : 21) * rua.e, b: b};
   }
-  function cruzam(a, b){ return a.l < b.r + 2 && b.l < a.r + 2 && a.t < b.b + 2 && b.t < a.b + 2; }
+  function cruzam(a, b){ return a.l < b.r + 5 && b.l < a.r + 5 && a.t < b.b + 3 && b.t < a.b + 3; }
   function filaNaRua(){   // a posição de cada passageiro no caminho, da frente para trás
     var lista = [], s = rua.L - Math.round(12 * rua.e), ant = -1, n = 0, rets = [], b, k, it, w, tent;
-    var bate = function(q){ return cruzam(q, retPlaca(s, w)); };
+    var fr = false, bate = function(q){ return cruzam(q, retPlaca(s, w, fr)); };
     for (b = jogo.frente; b < jogo.blocos.length; b++){
       for (k = 0; k < 3; k++){
         it = jogo.blocos[b].itens[k];
-        w = n < rua.placas ? larguraPlaca(it.palavra) : 0;
-        if (ant >= 0) s -= Math.max(rua.larg, (ant + w) / 2 + 6 * rua.e) + (k === 0 ? rua.vaoGrupo : 0);
-        if (w){ for (tent = 0; tent < 120 && rets.some(bate); tent++) s -= 3; rets.push(retPlaca(s, w)); }   // nenhuma placa tapa outra (nem na curva)
+        fr = b === jogo.frente;
+        w = n < rua.placas ? larguraPlaca(it.palavra, fr) : 0;
+        if (ant >= 0) s -= Math.max(rua.larg, (ant + w) / 2 + 11 * rua.e) + (k === 0 ? rua.vaoGrupo : 0);
+        if (w){ for (tent = 0; tent < 160 && rets.some(bate); tent++) s -= 3; rets.push(retPlaca(s, w, fr)); }   // nenhuma placa tapa outra (nem na curva)
         ant = w;
         lista.push({id: b * 3 + k, it: it, s: s, n: n, frente: b === jogo.frente});
         n++;
@@ -472,7 +526,7 @@
       vivos[q.id] = true;
       var o = povo[q.id], novo = !o;
       if (novo){ o = povo[q.id] = {el: criarPessoa(q.id, q.it), s: animado ? -30 * rua.e - novos * rua.larg : q.s, tw: null}; o.placa = o.el.querySelector('.placa'); }
-      o.w = larguraPlaca(q.it.palavra);
+      o.w = larguraPlaca(q.it.palavra, q.frente);
       if (novo){ posicionar(o); novos++; }
       var temPlaca = q.n < rua.placas, ganhaPlaca = temPlaca && animado && (novo || o.el.classList.contains('sem-placa'));
       o.el.className = 'pessoa' + (q.frente ? ' frente' : '') + (temPlaca && !ganhaPlaca ? '' : ' sem-placa') + (o.tw ? ' andando' : '');
@@ -507,7 +561,7 @@
     var b = jogo && jogo.blocos[Math.floor(id / 3)], it = b && b.itens[id % 3]; if (!it) return;
     var bal = $('balao'), cart = $('cartaoFila').getBoundingClientRect(), pl = el.querySelector('.placa'), r = (pl && pl.offsetWidth ? pl : el).getBoundingClientRect();
     bal.innerHTML = it.frase || esc(it.palavra);
-    bal.style.left = '0px'; bal.hidden = false;
+    bal.style.fontSize = Math.max(16, Math.round(17 * rua.e)) + 'px'; bal.style.left = '0px'; bal.hidden = false;
     var x = r.left + r.width / 2 - cart.left, larg = bal.offsetWidth;
     x = Math.max(larg / 2 + 4, Math.min(cart.width - larg / 2 - 4, x));
     bal.style.left = x + 'px'; bal.style.top = (r.top - cart.top - 4) + 'px';
@@ -636,7 +690,7 @@
   }
   function tempoTxt(){ var s = Math.round((Date.now() - jogo.inicio) / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
   function mostrarFim(html){
-    $('cartaoFila').hidden = $('cartaoPonto').hidden = $('cartaoGaragem').hidden = true; $('btDica').hidden = true;
+    $('cartaoFila').hidden = $('cartaoPonto').hidden = $('cartaoGaragem').hidden = true; $('btDica').hidden = true; $('jogo').style.height = '';
     $('fim').hidden = false; $('fim').innerHTML = html;
     $('fimNovo').onclick = function(){ comecar(true); };
     $('fimMesmo').onclick = function(){ comecar(false); };
@@ -686,7 +740,7 @@
   $('btComecar').onclick = function(){ if (!itens.length) return aviso('Ainda não há palavras ou frases carregadas.'); comecar(true); };
   $('btRecomecar').onclick = function(){ if (confirm('Recomeçar este nível do início?')) comecar(false); };
   $('btSair').onclick = function(){ if (confirm('Sair deste jogo e mudar as escolhas?')) sair(); };
-  window.addEventListener('resize', function(){ if (jogo && !jogo.acabou){ clearTimeout(lim.t); lim.t = setTimeout(function(){ caberPalavras(); montarRua(); pintarRua(false); pintarGaragem(); }, 150); } });
+  window.addEventListener('resize', function(){ if (jogo && !jogo.acabou){ clearTimeout(lim.t); lim.t = setTimeout(function(){ ajustarAltura(); ajustarPonto(); montarRua(); pintarRua(false); pintarGaragem(); }, 150); } });
   if (window.Sala) Sala.botaoSom($('btSom'));
   pintarBancos();
   window.ONIBUS = {jogo: function(){ return jogo; }, tocar: tocar, rua: function(){ return rua; }, bloqueador: function(id){ return bloqueador(jogo.onibus[id]); }, itens: function(){ return itens; }};   // usado nos testes
