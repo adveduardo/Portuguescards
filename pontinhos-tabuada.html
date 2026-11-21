@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pontinhos da Tabuada</title>
+<link rel="stylesheet" href="mat.css">
+<style>
+  [hidden]{display:none !important}
+  .tabs label{margin:2px 4px;font-weight:bold}
+  #placar{display:flex;gap:6px;flex-wrap:wrap}
+  .chip-time{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 12px;font-weight:bold;background:#eef1f6;border:3px solid transparent;white-space:nowrap}
+  .chip-time.vez{border-color:var(--c);background:#fff}
+  .chip-time b{font-size:1.25rem;color:var(--c)}
+  /* no jogo: tabuleiro grande de um lado e a conta do outro */
+  #area.jogando{display:grid;gap:10px;max-width:1500px;grid-template-columns:minmax(0,1.3fr) minmax(300px,.8fr);grid-template-areas:"tab painel";align-items:start}
+  #area.jogando #config{display:none}
+  #cartaoTab{grid-area:tab;margin:0;padding:10px}
+  #painel{grid-area:painel;margin:0;text-align:center;border-top:10px solid var(--cor-vez,#2f80ed)}
+  #tab{display:block;width:100%;height:auto;max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);margin:0 auto;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  #vez{font-size:1.5rem;font-weight:bold;color:var(--cor-vez,#2f80ed)}
+  #conta{font-size:clamp(2.4rem,5.4vw,4.8rem);font-weight:bold;line-height:1.1;margin:6px 0}
+  #campo{display:block;width:min(240px,80%);margin:6px auto;text-align:center;font-size:2.4rem;font-weight:bold;padding:4px 10px;border-radius:14px;border:4px solid var(--borda);background:#fff;color:var(--texto)}
+  #campo:focus{outline:none;border-color:var(--cor-vez,#2f80ed)}
+  #campo::placeholder{color:#c3cad8}
+  #campo.certo{border-color:#22c55e;background:#d1fae5}
+  #campo.errado{border-color:#f87171;background:#fee2e2;color:#b91c1c}
+  .tec{max-width:330px;margin:0 auto}
+  .tec button{width:30%;height:clamp(40px,6.5vh,54px);font-size:1.5rem;margin:1%;background:#eef1f6}
+  .tec button.ok{background:#22c55e;color:#fff}
+  #prof button{font-size:1.25rem;padding:14px 20px;margin:4px}
+  #msg{min-height:1.6em;font-weight:bold;font-size:1.15rem;margin:8px 0 4px}
+  #fim{display:flex;flex-direction:column;gap:8px;align-items:center}
+  #fim .ranking{display:grid;gap:6px;width:100%;max-width:380px}
+  #fim .lin{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:#f4f6fb;font-weight:bold;border-left:8px solid var(--c)}
+  #fim .lin b{font-size:1.3rem;color:var(--c)}
+  #fim .lin .nome{white-space:nowrap}
+  #fim .lin .pts{text-align:right}
+  #fim .lin small{display:block;font-weight:normal;color:var(--suave);font-size:.85rem}
+  #botoesJogo{justify-content:center;margin-top:8px}
+  @media (max-width:900px),(orientation:portrait){
+    #area.jogando{grid-template-columns:1fr;grid-template-areas:"painel" "tab"}
+    #tab{max-height:none}
+  }
+  /* no tablet em pé, a conta fica ao lado do teclado para sobrar espaço para o tabuleiro */
+  @media (orientation:portrait) and (min-width:600px){
+    #painel{display:grid;grid-template-columns:1fr 1fr;align-items:center;column-gap:12px}
+    #painel #vez,#painel #conta,#painel #msg,#painel #botoesJogo,#painel #fim{grid-column:1}
+    #painel #modoDigitar,#painel #prof{grid-column:2;grid-row:1 / span 4}
+  }
+  /* tabuleiro */
+  #tab .ponto{fill:#1f2a44}
+  #tab .linha .ver{stroke:#d5dbe7;stroke-width:9;stroke-linecap:round;stroke-dasharray:2 15}
+  #tab .linha.feita .ver{stroke-width:13;stroke-dasharray:none}
+  #tab .linha .alvo{stroke:transparent;stroke-width:44;stroke-linecap:round}
+  #tab.escolher .linha:not(.feita) .alvo{cursor:pointer}
+  #tab.escolher .linha:not(.feita) .ver{stroke:var(--cor-vez,#2f80ed);stroke-opacity:.45;animation:piscar 1.1s ease-in-out infinite}
+  @media (hover:hover){#tab.escolher .linha:not(.feita):hover .ver{stroke-opacity:1;stroke-dasharray:none;stroke-width:13;animation:none}}
+  @keyframes piscar{50%{stroke-opacity:.12}}
+  #tab .caixa rect{fill:transparent}
+  #tab .caixa text{text-anchor:middle;dominant-baseline:central;font-weight:bold;pointer-events:none}
+  #tab .caixa .estrela{font-size:36px;opacity:.3}
+  #tab .caixa.dona .estrela{opacity:1;font-size:22px}
+  #tab .caixa .num{font-size:40px}
+  #tab .caixa .dono{font-size:20px}
+</style>
+<script src="visual.js"></script>
+<script src="sala.js"></script>
+<script src="libs/gsap.min.js"></script>
+</head>
+<body>
+<header class="mt">
+  <h1>🔵 Pontinhos da Tabuada</h1>
+  <span id="placar"></span>
+  <span id="tempo" class="mt-chip" hidden></span>
+  <button id="btSom">🔊</button>
+</header>
+<div class="mt-wrap" id="area">
+  <div class="mt-card" id="config">
+    <h2>Preparar o jogo</h2>
+    <p class="tabs" id="tabs"></p>
+    <p class="mt-linha">
+      <label>Tamanho: <select id="selTam"><option value="3">3 × 3 quadradinhos (rápido)</option><option value="4" selected>4 × 4 quadradinhos</option><option value="5">5 × 5 quadradinhos</option><option value="6">6 × 6 quadradinhos (longo)</option></select></label>
+      <label>Grupos: <select id="selTimes"><option value="2" selected>2 grupos</option><option value="3">3 grupos</option><option value="4">4 grupos</option></select></label>
+    </p>
+    <p class="mt-linha">
+      <label>Quem confere: <select id="selModo"><option value="digitar" selected>⌨️ O grupo digita a resposta</option><option value="prof">🗣️ O grupo fala e o professor confere</option></select></label>
+      <label>Tempo para responder: <select id="selTempo"><option value="0" selected>sem limite</option><option value="15">15 s</option><option value="30">30 s</option></select></label>
+      <label><input type="checkbox" id="chkEstrelas" checked> ⭐ Quadradinhos dourados (valem 2 pontos)</label>
+    </p>
+    <p class="mt-linha"><button class="principal" id="btComecar">▶️ Começar</button></p>
+    <p class="mt-dica">Como jogar: na sua vez, o grupo resolve uma conta da tabuada. Acertou? Escolhe <b>um tracinho</b> para ligar dois pontinhos vizinhos. Quem fecha o quarto lado de um quadradinho fica com ele (o resultado da conta aparece dentro) e <b>joga de novo</b>. Errou? A vez passa para o próximo grupo. No fim, ganha quem tiver mais pontos.</p>
+    <p class="mt-dica">Os tracinhos só ficam liberados depois da resposta certa, e no jeito de digitar não adianta chutar: errou, perdeu a vez.</p>
+  </div>
+  <div class="mt-card" id="cartaoTab" hidden><svg id="tab" viewBox="0 0 100 100" role="img" aria-label="Tabuleiro de pontinhos"></svg></div>
+  <div class="mt-card" id="painel" hidden>
+    <div id="vez"></div>
+    <div id="conta"></div>
+    <div id="modoDigitar">
+      <input id="campo" type="text" inputmode="numeric" maxlength="3" autocomplete="off" spellcheck="false" placeholder="?" aria-label="Resposta">
+      <div class="tec" id="tec"></div>
+    </div>
+    <div id="prof" hidden><button class="principal" id="btAcertou">✔️ Acertou</button><button class="perigo" id="btErrou">✖️ Errou</button></div>
+    <div id="msg" aria-live="polite"></div>
+    <div id="fim" hidden></div>
+    <p class="mt-linha" id="botoesJogo"><button id="btPular">⏭️ Trocar a conta</button><button class="perigo" id="btFim">🏁 Terminar</button></p>
+  </div>
+</div>
+<div class="mt-aviso" id="aviso"></div>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); }, NS = 'http://www.w3.org/2000/svg', P = 100, temGsap = !!window.gsap;
+  var GRUPOS = [{nome: 'Grupo 1', cor: '#e74c3c', emoji: '🔴'}, {nome: 'Grupo 2', cor: '#2f80ed', emoji: '🔵'}, {nome: 'Grupo 3', cor: '#27ae60', emoji: '💚'}, {nome: 'Grupo 4', cor: '#e08e0b', emoji: '💛'}];
+  // no tablet ou na lousa de toque o campo não abre o teclado do aparelho: usa-se o teclado da tela
+  var soToque = !!(window.matchMedia && matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches);
+  var jogo = null, relogio = null, espera = null;
+
+  var h = 'Tabuadas: '; for (var t = 2; t <= 10; t++) h += '<label><input type="checkbox" value="' + t + '"' + (t <= 9 ? ' checked' : '') + '> ' + t + '</label>';
+  $('tabs').innerHTML = h;
+  var teclas = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '⌫', '0', 'OK'], ht = '';
+  teclas.forEach(function(k){ ht += '<button type="button" data-k="' + k + '"' + (k === 'OK' ? ' class="ok"' : '') + '>' + k + '</button>'; });
+  $('tec').innerHTML = ht;
+  if (soToque) $('campo').setAttribute('readonly', '');
+
+  function aviso(txt){ var a = $('aviso'); a.textContent = txt; a.style.display = 'block'; clearTimeout(a._t); a._t = setTimeout(function(){ a.style.display = 'none'; }, 2400); }
+  function msg(txt){ $('msg').textContent = txt; }
+  function tom(f, d, atraso, tipo){ if (window.Sala) Sala.tom(f, d, atraso || 0, tipo); }
+  function tabs(){ var l = [], cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) if (cs[i].checked) l.push(+cs[i].value); return l; }
+  function embaralhar(a){ for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  function escurecer(hex){ var n = parseInt(hex.slice(1), 16), f = function(v){ v = Math.round(v * 0.62).toString(16); return v.length < 2 ? '0' + v : v; }; return '#' + f(n >> 16) + f((n >> 8) & 255) + f(n & 255); }
+  function novaConta(){
+    var ts = jogo.tabs, a, b, x, n = 0;
+    do {
+      a = ts[Math.floor(Math.random() * ts.length)]; b = 1 + Math.floor(Math.random() * 10);
+      if (Math.random() < 0.5){ x = a; a = b; b = x; }
+    } while (jogo.q && jogo.q.a === a && jogo.q.b === b && ++n < 10);
+    return {a: a, b: b};
+  }
+
+  // ---------- começar ----------
+  function comecar(){
+    var ts = tabs(); if (!ts.length) return aviso('Marque pelo menos uma tabuada.');
+    var N = +$('selTam').value, nt = +$('selTimes').value, i;
+    jogo = {N: N, tabs: ts, modo: $('selModo').value, tempo: +$('selTempo').value, vez: 0, fase: 'pergunta', q: null, dig: '', acabou: false,
+      linhas: {}, donos: [], estrelas: [], times: GRUPOS.slice(0, nt).map(function(g){ return {nome: g.nome, cor: g.cor, emoji: g.emoji, pts: 0, caixas: 0, acertos: 0, erros: 0}; })};
+    for (i = 0; i < N * N; i++){ jogo.donos.push(-1); jogo.estrelas.push(false); }
+    if ($('chkEstrelas').checked){
+      var ordem = []; for (i = 0; i < N * N; i++) ordem.push(i);
+      embaralhar(ordem).slice(0, Math.max(1, Math.round(N * N * 0.15))).forEach(function(k){ jogo.estrelas[k] = true; });
+    }
+    desenharTabuleiro();
+    $('area').className = 'mt-wrap jogando';
+    $('cartaoTab').hidden = $('painel').hidden = false;
+    $('modoDigitar').hidden = jogo.modo !== 'digitar'; $('prof').hidden = jogo.modo !== 'prof';
+    $('fim').hidden = true; $('botoesJogo').hidden = false; $('conta').hidden = false;
+    if (temGsap) gsap.from('#tab .ponto', {scale: 0, transformOrigin: '50% 50%', duration: 0.35, stagger: 0.012, ease: 'back.out(2)'});
+    novaPergunta();
+    tom(392, 0.15);
+  }
+
+  // ---------- tabuleiro (SVG) ----------
+  function linhaSvg(k, x1, y1, x2, y2){
+    var pos = 'x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"';
+    return '<g class="linha" data-k="' + k + '"><line class="ver" ' + pos + '></line><line class="alvo" ' + pos + '></line></g>';
+  }
+  function desenharTabuleiro(){
+    var N = jogo.N, s = '', r, c, i;
+    $('tab').setAttribute('viewBox', '-34 -34 ' + (N * P + 68) + ' ' + (N * P + 68));
+    for (r = 0; r < N; r++) for (c = 0; c < N; c++){
+      i = r * N + c;
+      s += '<g class="caixa" data-i="' + i + '"><rect x="' + (c * P + 7) + '" y="' + (r * P + 7) + '" width="' + (P - 14) + '" height="' + (P - 14) + '" rx="12"></rect>' +
+        (jogo.estrelas[i] ? '<text class="estrela" x="' + (c * P + P / 2) + '" y="' + (r * P + P / 2) + '">⭐</text>' : '') + '</g>';
+    }
+    for (r = 0; r <= N; r++) for (c = 0; c < N; c++) s += linhaSvg('h-' + r + '-' + c, c * P, r * P, (c + 1) * P, r * P);
+    for (r = 0; r < N; r++) for (c = 0; c <= N; c++) s += linhaSvg('v-' + r + '-' + c, c * P, r * P, c * P, (r + 1) * P);
+    for (r = 0; r <= N; r++) for (c = 0; c <= N; c++) s += '<circle class="ponto" cx="' + (c * P) + '" cy="' + (r * P) + '" r="11"></circle>';
+    $('tab').innerHTML = s;
+    $('tab').setAttribute('class', '');
+  }
+  function lados(r, c){ return ['h-' + r + '-' + c, 'h-' + (r + 1) + '-' + c, 'v-' + r + '-' + c, 'v-' + r + '-' + (c + 1)]; }
+  function fechada(r, c){ var ls = lados(r, c); for (var i = 0; i < 4; i++) if (jogo.linhas[ls[i]] === undefined) return false; return true; }
+  function caixasQueFecham(k){
+    var p = k.split('-'), r = +p[1], c = +p[2], N = jogo.N, cand = [], novas = [];
+    if (p[0] === 'h'){ if (r > 0) cand.push([r - 1, c]); if (r < N) cand.push([r, c]); }
+    else { if (c > 0) cand.push([r, c - 1]); if (c < N) cand.push([r, c]); }
+    cand.forEach(function(x){ var i = x[0] * N + x[1]; if (jogo.donos[i] < 0 && fechada(x[0], x[1])) novas.push(i); });
+    return novas;
+  }
+  function desenharLinha(k){
+    if (!jogo || jogo.acabou || jogo.fase !== 'linha' || jogo.linhas[k] !== undefined) return;
+    var t = jogo.times[jogo.vez], g = $('tab').querySelector('[data-k="' + k + '"]'), ver;
+    if (!g) return;
+    jogo.fase = 'desenhando';
+    jogo.linhas[k] = jogo.vez;
+    ver = g.querySelector('.ver');
+    g.setAttribute('class', 'linha feita'); ver.style.stroke = t.cor;
+    $('tab').setAttribute('class', '');
+    if (temGsap) gsap.fromTo(ver, {strokeDasharray: P, strokeDashoffset: P}, {strokeDashoffset: 0, duration: 0.35, ease: 'power2.out', onComplete: function(){ ver.style.strokeDasharray = 'none'; }});
+    tom(520, 0.08);
+    var novas = caixasQueFecham(k);
+    novas.forEach(ganharCaixa);
+    pintarPlacar();
+    if (jogo.donos.indexOf(-1) < 0) return setTimeout(terminar, temGsap ? 1100 : 0);
+    if (novas.length){
+      msg('🎉 Fechou ' + (novas.length > 1 ? novas.length + ' quadradinhos' : 'um quadradinho') + '! ' + t.nome + ' joga de novo.');
+      depois(novaPergunta, 1300);
+    } else {
+      jogo.vez = (jogo.vez + 1) % jogo.times.length;
+      depois(novaPergunta, 600);
+    }
+  }
+  function ganharCaixa(i){
+    var t = jogo.times[jogo.vez], N = jogo.N, r = Math.floor(i / N), c = i % N, g = $('tab').querySelector('.caixa[data-i="' + i + '"]'), rect = g.querySelector('rect'), est = g.querySelector('.estrela');
+    var vale = jogo.estrelas[i] ? 2 : 1, num = document.createElementNS(NS, 'text'), dono = document.createElementNS(NS, 'text');
+    jogo.donos[i] = jogo.vez; t.pts += vale; t.caixas++;
+    rect.style.fill = t.cor; rect.style.fillOpacity = '0.3';
+    num.setAttribute('class', 'num'); num.setAttribute('x', c * P + P / 2); num.setAttribute('y', r * P + P / 2 + 6); num.setAttribute('fill', escurecer(t.cor));
+    num.textContent = jogo.q.a * jogo.q.b;   // o resultado da conta que valeu o tracinho fica dentro do quadradinho
+    dono.setAttribute('class', 'dono'); dono.setAttribute('x', c * P + P - 22); dono.setAttribute('y', r * P + 24); dono.textContent = t.emoji;
+    g.appendChild(num); g.appendChild(dono); g.setAttribute('class', 'caixa dona');
+    if (est){ est.setAttribute('x', c * P + 24); est.setAttribute('y', r * P + 25); }
+    if (temGsap){
+      gsap.fromTo(rect, {scale: 0.2, transformOrigin: '50% 50%'}, {scale: 1, duration: 0.5, ease: 'back.out(2)'});
+      gsap.fromTo([num, dono], {scale: 0, transformOrigin: '50% 50%'}, {scale: 1, duration: 0.5, delay: 0.12, ease: 'back.out(3)'});
+    }
+    tom(660, 0.12, 0.05); tom(880, 0.16, 0.16);
+    if (vale > 1){ tom(1046, 0.18, 0.3); aviso('⭐ Quadradinho dourado: +2 pontos para o ' + t.nome + '!'); }
+  }
+  $('tab').onclick = function(e){
+    if (!jogo || jogo.fase !== 'linha') return;
+    var g = e.target;
+    while (g && g !== this && !(g.getAttribute && g.getAttribute('data-k'))) g = g.parentNode;
+    if (g && g !== this) desenharLinha(g.getAttribute('data-k'));
+  };
+
+  // ---------- a conta da vez ----------
+  function depois(fn, ms){ clearTimeout(espera); espera = setTimeout(function(){ if (jogo && !jogo.acabou) fn(); }, temGsap ? ms : 0); }
+  function habilitar(sim){
+    var bs = document.querySelectorAll('#tec button, #prof button'), i;
+    for (i = 0; i < bs.length; i++) bs[i].disabled = !sim;
+    $('campo').disabled = !sim; $('btPular').disabled = !sim;
+  }
+  function novaPergunta(){
+    if (!jogo || jogo.acabou) return;
+    var t = jogo.times[jogo.vez];
+    jogo.fase = 'pergunta'; jogo.q = novaConta(); jogo.dig = '';
+    document.documentElement.style.setProperty('--cor-vez', t.cor);
+    $('vez').innerHTML = t.emoji + ' Vez do <b>' + t.nome + '</b>';
+    $('conta').textContent = jogo.q.a + ' × ' + jogo.q.b + ' = ?';
+    $('campo').value = ''; $('campo').className = '';
+    habilitar(true);
+    msg(jogo.modo === 'digitar' ? 'Digite o resultado e aperte OK.' : 'O grupo fala o resultado. Professor: confira.');
+    if (temGsap) gsap.fromTo('#conta', {scale: 0.5, opacity: 0}, {scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2.2)'});
+    pintarPlacar();
+    iniciarTempo();
+    if (jogo.modo === 'digitar' && !soToque) try { $('campo').focus(); } catch (e) {}
+  }
+  function responder(certo, motivo){
+    if (!jogo || jogo.acabou || jogo.fase !== 'pergunta') return;
+    pararTempo();
+    var t = jogo.times[jogo.vez], res = jogo.q.a * jogo.q.b;
+    $('conta').textContent = jogo.q.a + ' × ' + jogo.q.b + ' = ' + res;
+    habilitar(false);
+    if (certo){
+      t.acertos++; jogo.fase = 'linha';
+      $('campo').className = 'certo';
+      msg('✔️ Isso! Agora escolha um tracinho no tabuleiro.');
+      $('tab').setAttribute('class', 'escolher');
+      tom(660, 0.1); tom(880, 0.14, 0.1);
+    } else {
+      t.erros++; jogo.fase = 'erro';
+      $('campo').className = 'errado';
+      msg((motivo === 'tempo' ? '⏰ O tempo acabou.' : '❌ Não foi dessa vez.') + ' A vez passa.');
+      tom(200, 0.18, 0, 'sawtooth');
+      if (temGsap) gsap.fromTo('#painel', {x: -10}, {x: 0, duration: 0.45, ease: 'elastic.out(1, 0.3)'});
+      jogo.vez = (jogo.vez + 1) % jogo.times.length;
+      depois(novaPergunta, 2200);
+    }
+  }
+  function tecla(k){
+    if (!jogo || jogo.fase !== 'pergunta' || jogo.modo !== 'digitar') return;
+    if (k === 'OK'){
+      if (!jogo.dig){ msg('✏️ Digite o resultado primeiro.'); return; }
+      return responder(+jogo.dig === jogo.q.a * jogo.q.b);
+    }
+    if (k === '⌫') jogo.dig = jogo.dig.slice(0, -1); else if (jogo.dig.length < 3) jogo.dig += k;
+    $('campo').value = jogo.dig;
+  }
+  (function(){
+    var bs = $('tec').querySelectorAll('[data-k]');
+    for (var i = 0; i < bs.length; i++) bs[i].onclick = function(){ tecla(this.getAttribute('data-k')); this.blur(); };
+  })();
+  $('campo').oninput = function(){ var v = this.value.replace(/\D/g, '').slice(0, 3); if (this.value !== v) this.value = v; if (jogo) jogo.dig = v; };
+  $('campo').onkeydown = function(e){ if (e.keyCode === 13){ e.preventDefault(); tecla('OK'); } };
+  $('btAcertou').onclick = function(){ responder(true); };
+  $('btErrou').onclick = function(){ responder(false); };
+
+  // ---------- tempo para responder ----------
+  function pararTempo(){ clearInterval(relogio); relogio = null; $('tempo').hidden = true; }
+  function iniciarTempo(){
+    pararTempo();
+    if (!jogo.tempo) return;
+    var fim = Date.now() + jogo.tempo * 1000;
+    var pinta = function(){
+      var resta = Math.max(0, Math.ceil((fim - Date.now()) / 1000));
+      $('tempo').hidden = false; $('tempo').textContent = '⏱️ ' + resta + ' s';
+      if (resta <= 0) responder(false, 'tempo');
+    };
+    pinta(); relogio = setInterval(pinta, 250);
+  }
+
+  // ---------- placar e fim ----------
+  function pintarPlacar(){
+    if (!jogo) return;
+    $('placar').innerHTML = jogo.times.map(function(t, i){ return '<span class="chip-time' + (i === jogo.vez && !jogo.acabou ? ' vez' : '') + '" style="--c:' + t.cor + '">' + t.emoji + ' ' + t.nome + ' <b>' + t.pts + '</b></span>'; }).join('');
+  }
+  function terminar(){
+    if (!jogo || jogo.acabou) return;
+    jogo.acabou = true; pararTempo(); clearTimeout(espera);
+    $('tab').setAttribute('class', '');
+    var ordem = jogo.times.slice().sort(function(a, b){ return b.pts - a.pts || b.caixas - a.caixas; }), max = ordem[0].pts;
+    var vencedores = ordem.filter(function(t){ return t.pts === max; });
+    document.documentElement.style.setProperty('--cor-vez', vencedores.length === 1 ? vencedores[0].cor : '#8e44ad');
+    $('vez').innerHTML = vencedores.length === 1 ? '🏆 ' + vencedores[0].emoji + ' <b>' + vencedores[0].nome + '</b> venceu!' : '🤝 Empate!';
+    $('conta').hidden = true; $('modoDigitar').hidden = true; $('prof').hidden = true; $('botoesJogo').hidden = true;
+    msg('');
+    $('fim').hidden = false;
+    $('fim').innerHTML = '<div class="ranking">' + ordem.map(function(t){ return '<div class="lin" style="--c:' + t.cor + '"><span class="nome">' + t.emoji + ' ' + t.nome + '</span><span class="pts"><b>' + t.pts + '</b> ' + (t.pts === 1 ? 'ponto' : 'pontos') + '<small>' + t.acertos + (t.acertos === 1 ? ' conta certa' : ' contas certas') + '</small></span></div>'; }).join('') +
+      '</div><button class="principal" id="btDeNovo">🔁 Jogar de novo</button>';
+    $('btDeNovo').onclick = function(){ $('area').className = 'mt-wrap'; $('cartaoTab').hidden = $('painel').hidden = true; $('placar').innerHTML = ''; jogo = null; };
+    pintarPlacar();
+    if (window.Sala){ Sala.festa(); Sala.confete(); }
+  }
+  $('btComecar').onclick = comecar;
+  $('btPular').onclick = function(){ if (jogo && jogo.fase === 'pergunta') novaPergunta(); };
+  $('btFim').onclick = function(){ if (jogo && !jogo.acabou && confirm('Terminar o jogo agora?')) terminar(); };
+  if (window.Sala) Sala.botaoSom($('btSom'));
+  window.PONTINHOS = {jogo: function(){ return jogo; }, responder: responder, desenharLinha: desenharLinha, tecla: tecla};   // usado nos testes
+})();
+</script>
+</body>
+</html>
