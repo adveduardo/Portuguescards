@@ -361,7 +361,7 @@ function comecarAOuvir(){
         if (sala !== salaAtual || eq !== eqAtual) return;
         Rede.ler('salas/' + sala + '/jogo', function(err, j){
           if (err || sala !== salaAtual || eq !== eqAtual) return;
-          if (!j) return sair('A sala foi encerrada pelo professor.');
+          if (!j) return sair('A sala foi encerrada pelo professor. Digite o código da sala nova (está no telão).');
           Rede.ler('salas/' + sala + '/grupos/' + eq.id, function(err2, g2){
             if (err2 || g2 || sala !== salaAtual || eq !== eqAtual) return;
             alert('O professor tirou a sua equipe. Escolham de novo.'); eq = null; escolherEquipe();
@@ -372,12 +372,19 @@ function comecarAOuvir(){
   });
   ouvEstado = Rede.ouvir('salas/' + sala + '/estado', function(s){ estado = s || {fase: 'espera'}; renderizar(); });
 }
+function largarSalaAntiga(s){
+  gravarLS('jogar_sessao', null);
+  Rede.ler('salas/' + s.sala + '/grupos/' + s.eq, function(err, g){
+    if (!err && g && g.dispositivo === dispositivo) Rede.apagar('salas/' + s.sala + '/grupos/' + s.eq);
+  });
+}
 function sair(msg){
   fecharOuvintes();
   if (sala && eq && msg === undefined) Rede.apagar('salas/' + sala + '/grupos/' + eq.id);
   gravarLS('jogar_sessao', null);
   sala = null; eq = null; estado = null;
   mostrar('tEntrar');
+  if (msg) $('codigo').value = '';   // sala encerrada: o código antigo não serve mais
   $('erro').innerHTML = msg ? esc(msg) : '';
 }
 function telaEspera(msg, sub, extraHtml){
@@ -1171,18 +1178,23 @@ Rede.iniciar(function(modo){
     $('aviso').style.display = 'block';
     $('aviso').innerHTML = '⚠️ <b>Modo teste:</b> o banco de dados ainda não foi configurado. Assim, o jogo só funciona entre abas deste mesmo aparelho.';
   }
-  var m = location.search.match(/[?&]sala=(\d{4})/);
-  if (m) $('codigo').value = m[1];
-  // reconecta automaticamente se a página foi recarregada
+  var m = location.search.match(/[?&]sala=(\d{4})/), salaDoLink = m ? m[1] : '';
+  if (salaDoLink) $('codigo').value = salaDoLink;
   var s = null; try{ s = JSON.parse(lerLS('jogar_sessao')); }catch(e){}
+  // o link é de outra sala (o professor abriu outra atividade): larga a sala antiga e vai para a nova
+  if (s && s.sala && s.eq && salaDoLink && salaDoLink !== s.sala){ largarSalaAntiga(s); s = null; }
   if (s && s.sala && s.eq){
+    // reconecta automaticamente se a página foi recarregada (na mesma sala)
     Rede.ler('salas/' + s.sala + '/grupos/' + s.eq, function(err, g){
       if (!err && g && g.dispositivo === dispositivo){
         sala = s.sala; jogo = s.jogo; eq = equipePorId(s.eq);
         if (eq) comecarAOuvir();
-      } else if (!err) gravarLS('jogar_sessao', null);
+      } else {
+        if (!err) gravarLS('jogar_sessao', null);
+        if (salaDoLink) entrar();
+      }
     });
-  }
+  } else if (salaDoLink) entrar();   // link com o código: já vai para a escolha da equipe
 });
 })();
 </script>

@@ -556,5 +556,42 @@ AV.linkCurto = () => {
 };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', AV.linkCurto); else AV.linkCurto();
 
+// ---------- a sala termina quando o professor sai da atividade ----------
+// Ao trocar de atividade no painel (ou fechar ou recarregar a página), a sala deste telão é apagada: os celulares
+// mostram "A sala foi encerrada pelo professor" e voltam para a tela do código. Duas garantias:
+// 1) ao sair, a página apaga a sala (pedido que continua mesmo com a página fechando);
+// 2) a próxima atividade ao vivo aberta neste aparelho apaga a sala anterior, se a página dela já fechou.
+const SALA_VIVA = 'painel_sala_viva';
+const codigoDaTela = () => { const c = document.getElementById('codigoSala'), t = c ? c.textContent.trim() : ''; return /^\d{4}$/.test(t) ? t : ''; };
+const apagarSala = (cod, saindo) => {
+  if (!cod || !window.Rede) return;
+  if (saindo && Rede.modo === 'firebase' && Rede.base && window.fetch){
+    try { fetch(Rede.base + '/salas/' + cod + '.json', {method: 'DELETE', keepalive: true}).catch(() => {}); return; } catch (e) {}
+  }
+  try { Rede.apagar('salas/' + cod); } catch (e) {}
+};
+AV.acompanharSala = () => {
+  const el = document.getElementById('codigoSala');
+  if (!el || el.dataset.acompanhada || !window.Rede) return;
+  el.dataset.acompanhada = '1';
+  let minha = '';
+  const marcar = fechada => { if (minha) lsGravar(SALA_VIVA, JSON.stringify({codigo: minha, t: Date.now(), fechada: !!fechada})); };
+  const ver = () => {
+    const cod = codigoDaTela();
+    if (!cod || cod === minha) return;
+    let antes = null;
+    try { antes = JSON.parse(lsLer(SALA_VIVA)); } catch (e) {}
+    if (minha) apagarSala(minha);   // esta mesma página abriu uma sala nova
+    else if (antes && antes.codigo && antes.codigo !== cod && (antes.fechada || Date.now() - antes.t > 20000)) apagarSala(antes.codigo);
+    minha = cod; marcar(false);
+  };
+  new MutationObserver(ver).observe(el, {childList: true, characterData: true, subtree: true});
+  ver();
+  setInterval(() => marcar(false), 5000);   // "esta sala está aberta" (outra aba com jogo ao vivo não apaga esta)
+  window.addEventListener('pagehide', () => { if (!minha) return; marcar(true); apagarSala(minha, true); });
+  window.addEventListener('pageshow', e => { if (e.persisted && minha) location.reload(); });   // voltou pelo "voltar" do navegador: a sala antiga já foi apagada
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', AV.acompanharSala); else AV.acompanharSala();
+
 window.AoVivo = AV;
 })();
