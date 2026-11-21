@@ -312,7 +312,7 @@
   }
   function pintarTabs(){
     var h = '<b>Canetinhas (de 2 a 5 tabuadas):</b> ';
-    for (var n = 2; n <= 12; n++) h += '<label><input type="checkbox" value="t' + n + '"' + (tabsEscolhidas.indexOf(n) >= 0 ? ' checked' : '') + '><span class="cor" style="background:' + CLASSES['t' + n].cor + '"></span>do ' + n + '</label>';
+    for (var n = 2; n <= 10; n++) h += '<label><input type="checkbox" value="t' + n + '"' + (tabsEscolhidas.indexOf(n) >= 0 ? ' checked' : '') + '><span class="cor" style="background:' + CLASSES['t' + n].cor + '"></span>do ' + n + '</label>';
     $('tabsOp').innerHTML = h;
   }
   $('classesOp').onchange = function(){ escolhidas = marcadas('classesOp'); };
