@@ -46,6 +46,7 @@
   <p>Treino individual da tabuada. O jogo <b>lembra das contas que você erra</b> e faz elas voltarem mais vezes até você dominar (repetição espaçada).</p>
   <p class="tabs" id="tabs"></p>
   <p><button type="button" id="btTodas">Marcar todas</button> <button type="button" id="btNenhuma">Desmarcar</button></p>
+  <label>Números: <select id="selNum"><option value="10" selected>tabuada (até × 10)</option><option value="12">até × 12</option><option value="20">até × 20</option><option value="d2">2 dígitos × 1 dígito (ex.: 34 × 7)</option><option value="dd">2 dígitos × 2 dígitos (ex.: 23 × 45)</option></select></label><br>
   <label>Jeito de jogar: <select id="selModo">
     <option value="treino">🐢 Treino (sem pressa, com dicas)</option>
     <option value="desafio" selected>⚡ Desafio de 60 segundos</option>
@@ -69,13 +70,20 @@
   function marcadas(){ var l = [], cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) if (cs[i].checked) l.push(+cs[i].value); return l; }
   $('btTodas').onclick = function(){ var cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) cs[i].checked = true; };
   $('btNenhuma').onclick = function(){ var cs = $('tabs').querySelectorAll('input'); for (var i = 0; i < cs.length; i++) cs[i].checked = false; };
-  function chaveRecorde(){ return 'tabuada_recorde_' + marcadas().join('-'); }
+  function chaveRecorde(){ var n = $('selNum') ? $('selNum').value : '10'; return 'tabuada_recorde_' + marcadas().join('-') + (n !== '10' ? '_' + n : ''); }
   function mostrarRecorde(){ var r = 0; try { r = +localStorage.getItem(chaveRecorde()) || 0; } catch (e) {} $('recorde').textContent = r ? '🏆 Seu recorde no desafio com essas tabuadas: ' + r + ' acertos em 60 s.' : ''; }
   $('tabs').onchange = mostrarRecorde; mostrarRecorde();
 
+  function contaNumeros(ts, num){   // tabuada normal ou com mais dígitos (escolha do professor)
+    var r = function(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }, a, b;
+    if (num === 'dd'){ a = r(11, 99); b = r(11, 99); }
+    else { a = ts[Math.floor(Math.random() * ts.length)]; b = num === 'd2' ? r(10, 99) : r(1, +num || 10); }
+    return Math.random() < 0.5 ? {a: a, b: b} : {a: b, b: a};
+  }
   // ---------- sorteio com peso: contas que você erra aparecem mais ----------
   function fatos(tabs){ var l = []; tabs.forEach(function(a){ for (var b = 1; b <= 10; b++) l.push({a: a, b: b}); }); return l; }
   function sortear(){
+    if (jogo.num !== '10'){ var c = contaNumeros(jogo.tabs, jogo.num), n = 0; while (jogo.ultimo && c.a === jogo.ultimo.a && c.b === jogo.ultimo.b && ++n < 10) c = contaNumeros(jogo.tabs, jogo.num); c.base = {a: c.a, b: c.b}; return c; }
     var l = jogo.fatos, tot = 0, pesos = [], i;
     for (i = 0; i < l.length; i++){
       var cx = caixa(l[i].a, l[i].b), p = jogo.modo === 'revisao' ? (cx <= 1 ? 6 : 0.3) : 5 - cx;
@@ -89,7 +97,7 @@
   }
   function comecar(){
     var tabs = marcadas(); if (!tabs.length) return ARC.aviso('Marque pelo menos uma tabuada.');
-    jogo = {modo: $('selModo').value, tabs: tabs, fatos: fatos(tabs), acertos: 0, erros: 0, errados: {}, resta: 60, digitado: '', bloqueado: false, ultimo: null};
+    jogo = {modo: $('selModo').value, num: $('selNum').value, tabs: tabs, fatos: fatos(tabs), acertos: 0, erros: 0, errados: {}, resta: 60, digitado: '', bloqueado: false, ultimo: null};
     ARC.tela(null); $('jogo').className = 'ativo'; $('hud').style.display = '';
     $('hModo').textContent = {treino: '🐢 Treino', desafio: '⚡ Desafio', revisao: '🔁 Revisão'}[jogo.modo];
     $('barra').style.display = jogo.modo === 'desafio' ? '' : 'none'; $('hTempo').style.display = jogo.modo === 'desafio' ? '' : 'none';
@@ -115,18 +123,18 @@
     if (!jogo || jogo.bloqueado) return;
     if (k === 'OK') return conferir();
     if (k === '⌫'){ jogo.digitado = jogo.digitado.slice(0, -1); $('resp').textContent = jogo.digitado; return; }
-    if (jogo.digitado.length < 3){ jogo.digitado += k; $('resp').textContent = jogo.digitado; ARC.tom(500 + jogo.digitado.length * 60, 0.03); }
+    if (jogo.digitado.length < (jogo.num === 'dd' ? 4 : 3)){ jogo.digitado += k; $('resp').textContent = jogo.digitado; ARC.tom(500 + jogo.digitado.length * 60, 0.03); }
   }
   function conferir(){
     if (!jogo.digitado) return;
     var q = jogo.q, certo = q.a * q.b, v = parseInt(jogo.digitado, 10), chave = q.base.a + 'x' + q.base.b;
     jogo.bloqueado = true;
     if (v === certo){
-      jogo.acertos++; caixas[chave] = Math.min(4, (caixas[chave] || 0) + 1); salvar();
+      jogo.acertos++; if (jogo.num === '10'){ caixas[chave] = Math.min(4, (caixas[chave] || 0) + 1); salvar(); }
       $('resp').className = 'ok'; $('fb').textContent = jogo.modo === 'desafio' ? '✔' : '✔ Isso!'; ARC.plim();
       setTimeout(proxima, jogo.modo === 'desafio' ? 280 : 650);
     } else {
-      jogo.erros++; caixas[chave] = 0; salvar(); jogo.errados[q.a + ' × ' + q.b] = certo;
+      jogo.erros++; if (jogo.num === '10'){ caixas[chave] = 0; salvar(); } jogo.errados[q.a + ' × ' + q.b] = certo;
       $('resp').className = 'erro'; ARC.erro();
       $('fb').textContent = '✗ ' + q.a + ' × ' + q.b + ' = ' + certo + (jogo.modo === 'desafio' ? '' : '. ' + dica(q.a, q.b));
       setTimeout(proxima, jogo.modo === 'desafio' ? 1300 : 2600);
