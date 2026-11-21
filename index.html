@@ -109,11 +109,8 @@
         <button id="menu-btn" type="button" onclick="abrirMenu()" title="Escolher a atividade">🏠 Tela Inicial ▾</button>
         <select id="tool-selector" onchange="changeTool()">
             <option value="">🏠 Tela Inicial</option>
-            <option value="quiz.html">🃏 PortuguêsCards (Jogo de Português)</option>
+            <option value="portuguescards-2.html">🃏 PortuguêsCards 2.0 (Jogo de Português)</option>
             <option value="link-curto.html">🔗 Link curto e QR Code: cole um link do Google Drive (PDF, Docs…) para a turma abrir</option>
-            <optgroup label="🗂️ Projetos temp">
-                <option value="portuguescards-2.html">🧪 PortuguêsCards 2.0 (protótipo do visual novo, em teste)</option>
-            </optgroup>
             <optgroup label="🧰 Ferramentas da sala">
                 <option value="ruido.html">🔊 Medidor de Ruído</option>
                 <option value="semaforo.html">🚦 Semáforo da Turma</option>
@@ -1008,14 +1005,30 @@
                 <option value="pareamento.html?modo=quantidade">🔢 Pareamento: número e quantidade</option>
                 <option value="ipad.html">📱 Página de entrada para usar direto no iPad</option>
             </optgroup>
+            <optgroup label="🗄️ Arquivo Morto">
+                <option value="quiz.html">🃏 PortuguêsCards antigo (versão anterior)</option>
+            </optgroup>
         </select>
         <select id="visual-selector" onchange="mudarVisual()" title="Aparência das atividades">
             <option value="adulto">🎨 Visual: jovem e adulto</option>
             <option value="infantil">🧸 Visual: infantil</option>
             <option value="calmo">🌙 Visual: calmo (menos estímulos, para TEA)</option>
         </select>
+        <button class="hide-btn" id="btLinkCurto" onclick="linkCurtoAtividade()" title="Gerar um link curto da atividade aberta para a turma digitar no iPad ou no Chrome">✂️ Link curto</button>
         <button class="hide-btn" id="btAtualizar" onclick="atualizarPainel()" title="Buscar a versão mais nova do painel e da atividade aberta (bom no app do iPad, sem precisar fechar)">🔄 Atualizar</button>
         <button class="hide-btn" onclick="toggleTopBar()" title="Esconder esta barra superior">⬆️ Ocultar</button>
+    </div>
+
+    <div id="caixa-link" role="dialog" aria-label="Link curto da atividade" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.6);align-items:center;justify-content:center;padding:16px">
+      <div style="background:#fff;border-radius:18px;padding:20px 24px;max-width:640px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3);font-family:inherit">
+        <div id="link-titulo" style="font-weight:bold;color:#475569;margin-bottom:6px"></div>
+        <div style="color:#64748b">Digitem no iPad ou no Chrome:</div>
+        <div id="link-curto-txt" style="font-size:clamp(2rem,7vw,3.6rem);font-weight:bold;color:#1d4ed8;margin:8px 0;word-break:break-all;user-select:all">…</div>
+        <div id="link-longo" style="font-size:12px;color:#94a3b8;word-break:break-all;margin-bottom:12px"></div>
+        <button type="button" class="hide-btn" style="display:inline-flex" onclick="copiarLinkCurto()">📋 Copiar</button>
+        <button type="button" class="hide-btn" style="display:inline-flex" onclick="abrirQrDoLink()">📱 QR Code</button>
+        <button type="button" class="hide-btn" style="display:inline-flex" onclick="document.getElementById('caixa-link').style.display='none'">✖ Fechar</button>
+      </div>
     </div>
 
     <div id="menu-painel" role="dialog" aria-label="Atividades">
@@ -1048,6 +1061,50 @@
                 iframe.style.display = "block";
                 iframe.src = selector.value;
             }
+        }
+
+        // ✂️ Link curto da atividade aberta (is.gd; se falhar, v.gd) para a turma digitar no iPad ou no Chrome
+        const SITE_PUBLICO = 'https://adveduardo.github.io/Portuguescards/';
+        let linkLongoAtual = '';
+        function linkCurtoAtividade() {
+            const sel = document.getElementById('tool-selector'), v = sel.value;
+            const local = location.protocol === 'file:' || /^(localhost|127(\.\d+){3}|0\.0\.0\.0)$/.test(location.hostname);
+            const base = local ? SITE_PUBLICO : location.href.replace(/[?#].*$/, '').replace(/[^\/]*$/, '');
+            linkLongoAtual = base + (v || '');
+            const op = sel.options[sel.selectedIndex];
+            document.getElementById('link-titulo').textContent = v ? op.textContent : '🏠 Painel de Aula';
+            document.getElementById('link-longo').textContent = linkLongoAtual;
+            document.getElementById('link-curto-txt').textContent = '⏳ encurtando…';
+            document.getElementById('caixa-link').style.display = 'flex';
+            let guardados = {}; try { guardados = JSON.parse(localStorage.getItem('qr_curtos') || '{}') || {}; } catch (e) {}
+            if (guardados[linkLongoAtual]) { mostrarCurto(guardados[linkLongoAtual]); return; }
+            const servicos = ['https://is.gd/create.php', 'https://v.gd/create.php']; let i = 0;
+            const tenta = function () {
+                if (i >= servicos.length) { document.getElementById('link-curto-txt').textContent = '⚠️ sem internet agora'; return; }
+                const nome = 'painelCurto' + Date.now() + i, sc = document.createElement('script'); let feito = false;
+                const fim = function () { feito = true; window[nome] = function () {}; if (sc.parentNode) sc.parentNode.removeChild(sc); };
+                const relogio = setTimeout(function () { if (!feito) { fim(); tenta(); } }, 8000);
+                window[nome] = function (r) {
+                    if (feito) return; clearTimeout(relogio); fim();
+                    if (r && r.shorturl) { try { guardados[linkLongoAtual] = r.shorturl; localStorage.setItem('qr_curtos', JSON.stringify(guardados)); } catch (e) {} mostrarCurto(r.shorturl); }
+                    else tenta();
+                };
+                sc.onerror = function () { if (!feito) { clearTimeout(relogio); fim(); tenta(); } };
+                sc.src = servicos[i++] + '?format=json&callback=' + nome + '&url=' + encodeURIComponent(linkLongoAtual);
+                document.body.appendChild(sc);
+            };
+            tenta();
+        }
+        function mostrarCurto(u) { document.getElementById('link-curto-txt').textContent = u.replace(/^https?:\/\//, ''); document.getElementById('link-curto-txt').setAttribute('data-url', u); }
+        function copiarLinkCurto() {
+            const t = document.getElementById('link-curto-txt').getAttribute('data-url') || linkLongoAtual;
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).catch(function () { prompt('Copie o link:', t); }); else prompt('Copie o link:', t);
+        }
+        function abrirQrDoLink() {
+            document.getElementById('caixa-link').style.display = 'none';
+            const sel = document.getElementById('tool-selector'), v = sel.value;
+            sel.value = 'qr.html'; changeTool();
+            document.getElementById('app-frame').src = 'qr.html' + (v ? '?atividade=' + encodeURIComponent(v) : '');
         }
 
         // 🔄 Atualizar: recarrega o painel buscando a versão nova (no app do iPad não há botão de recarregar)
