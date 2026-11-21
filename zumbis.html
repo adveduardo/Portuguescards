@@ -173,7 +173,7 @@
   function novoZumbi(){
     if (jogo.usadas >= jogo.monte.length){ jogo.monte = ARC.embaralhar(jogo.monte); jogo.usadas = 0; }
     var it = jogo.monte[jogo.usadas++], E = tela.ESC, acel = 1 + jogo.criados * 0.06;
-    jogo.zumbis.push({it: it, x: tela.W + 40 * E, y: tela.H - 170 * E - (jogo.criados % 3) * 18 * E, v: (26 + Math.random() * 10) * E * jogo.velBase * acel, passo: Math.random() * 6, ops: ARC.embaralhar(it.ops), crianca: sortearCrianca()});
+    jogo.zumbis.push({it: it, x: tela.W + 40 * E, y: tela.H - 192 * E + (jogo.criados % 3) * 7 * E, v: (26 + Math.random() * 10) * E * jogo.velBase * acel, passo: Math.random() * 6, ops: ARC.embaralhar(it.ops), crianca: sortearCrianca()});
     jogo.criados++;
   }
   function frente(){ var f = null; jogo.zumbis.forEach(function(z){ if (!z.curado && (!f || z.x < f.x)) f = z; }); return f; }
@@ -206,11 +206,16 @@
   function passo(dt){
     if (dt && jogo && !jogo.acabou){
       jogo.gerar -= dt;
-      if (jogo.gerar <= 0 && jogo.criados < jogo.qtd){ novoZumbi(); jogo.gerar = ARC.aleat(3.2, 4.6) / jogo.velBase; }
+      if (jogo.gerar <= 0 && jogo.criados < jogo.qtd){
+        var perto = jogo.zumbis.some(function(z2){ return !z2.curado && z2.x > tela.W - 170 * tela.ESC; });   // espera o anterior andar, para as placas não se taparem
+        if (perto) jogo.gerar = 0.4; else { novoZumbi(); jogo.gerar = ARC.aleat(3.2, 4.6) / jogo.velBase; }
+      }
       for (var i = jogo.zumbis.length - 1; i >= 0; i--){
         var z = jogo.zumbis[i];
         if (z.curado){ z.tempoCura += dt; if (z.tempoCura > 1.2) jogo.zumbis.splice(i, 1); continue; }
         z.x -= z.v * dt; z.passo += dt * 4;
+        var lim2 = -1e9; jogo.zumbis.forEach(function(o){ if (o !== z && !o.curado && o.x < z.x + 1 && o.x > lim2) lim2 = o.x; });   // o zumbi logo à frente
+        if (lim2 > -1e9 && z.x < lim2 + 120 * tela.ESC) z.x = lim2 + 120 * tela.ESC;   // não passa por cima dele: fica na fila
         if (z.x < casaX() + 40 * tela.ESC){
           jogo.zumbis.splice(i, 1); jogo.vidas--; jogo.tremer = 0.6; jogo.escaparam++; ARC.tom(140, 0.5, 0, 'sawtooth');
           ARC.aviso('🏫 Um zumbi entrou na escola! ' + (z.it.classe ? '“' + esc(z.it.errada) + '” é <b>' + esc(z.it.correta) + '</b>' : 'A escrita certa era: <b>' + esc(z.it.correta) + '</b>'), 2600);
@@ -361,7 +366,7 @@
     var tx = jogo && jogo.tremer > 0 ? Math.sin(Date.now() / 25) * 6 : 0, cx = casaX() + tx, base = H - 120 * E;
     desenharEscola(cx, base, E);
     if (!jogo || !jogo.zumbis) return;
-    jogo.zumbis.forEach(function(z){
+    jogo.zumbis.slice().sort(function(a2, b2){ return a2.y - b2.y; }).forEach(function(z){   // os de trás primeiro
       var x = z.x, y = z.y, s = E, a = z.curado ? Math.max(0, 1 - z.tempoCura) : 1, px = 5 * s, pe = y + 80 * s;
       ctx.globalAlpha = a;
       ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse ? ctx.ellipse(x, pe, 30 * s, 7 * s, 0, 0, 2 * Math.PI) : ctx.arc(x, pe, 20 * s, 0, 2 * Math.PI); ctx.fill();
