@@ -244,6 +244,8 @@
   .carta.velha .num{font-size:calc(var(--w,160px) * .4)}
   .carta.velha.feita .masc{font-size:calc(var(--w,160px) * .52)}
   .carta.linha{animation:brilho .9s ease-in-out infinite alternate}
+  .carta.da-vez{outline:4px solid #facc15;outline-offset:3px;animation:brilho .8s ease-in-out infinite alternate}
+  .carta.da-vez .pts::before{content:'👆 '}
   @keyframes brilho{from{box-shadow:0 0 0 0 rgba(250,204,21,0)}to{box-shadow:0 0 0 10px rgba(250,204,21,.6)}}
   .cab-tema{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:700;color:#fff;background:var(--cor);border-radius:14px;padding:4px 8px;line-height:1.1;
     height:var(--cab,46px);overflow:hidden;font-size:clamp(12px,calc(var(--w,160px) * .095),19px)}
@@ -308,6 +310,16 @@
   .roleta-res{min-height:2.6em;display:flex;align-items:center;gap:10px;background:var(--sup2);border:2px dashed var(--borda);border-radius:16px;padding:8px 12px;font-weight:600;font-size:clamp(15px,1.3vw,19px)}
   .roleta-temas{display:grid;gap:7px;max-height:36vh;overflow:auto}
   .rt{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+  .roleta-escolha{background:var(--sup);border:3px solid var(--cor);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;flex:none}
+  .escolha-tit{font-weight:700;font-size:clamp(15px,1.3vw,19px)}
+  .escolha-cartas{display:flex;flex-wrap:wrap;gap:10px;max-height:32vh;overflow:auto;padding:4px 2px 8px}
+  .carta-esc{width:clamp(48px,4.6vw,64px);height:clamp(62px,6vw,84px);border:3px solid #fff;border-radius:12px;padding:0;color:#fff;font-family:var(--titulo);font-weight:700;line-height:1;
+    background:var(--cor);background:linear-gradient(150deg,var(--cor),var(--cor-esc,#312e81));box-shadow:0 5px 0 var(--cor-esc,#312e81),0 8px 14px rgba(0,0,0,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform .15s}
+  .carta-esc span{font-size:clamp(18px,1.8vw,26px)}
+  .carta-esc small{font-size:11px;font-weight:600;opacity:.92}
+  @media(hover:hover){.carta-esc:hover{transform:translateY(-5px) rotate(-2deg)}}
+  .carta-esc:active{transform:translateY(3px)}
+  .monte.pronta{border-color:var(--cor);outline:4px solid #facc15;outline-offset:2px;animation:brilho .8s ease-in-out infinite alternate}
   .rt .cor{width:14px;height:14px;border-radius:4px;flex:none}
   .rt .nome-rt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
   .rt .barra-rt{flex:1;height:8px;border-radius:999px;background:var(--borda);overflow:hidden;min-width:40px}
@@ -736,7 +748,7 @@ const MODOS = {
   velha: {nome: 'Jogo da Velha', ic: '⭕', desc: 'Dois grupos e 9 casas. Acertou a pergunta, a casa fica com o grupo. Quem fizer <b>uma linha</b> ganha +10 e vence.'},
   memoria: {nome: 'Jogo da Memória', ic: '🧠', desc: 'Vire duas cartas: pergunta e resposta formam um par. Achou, ganha 10 e <b>joga de novo</b>.'},
   temas: {nome: 'Tabuleiro de Temas', ic: '🏛️', desc: 'Uma coluna por tema e cartas de <b>10, 20, 30… pontos</b>: quanto mais difícil, mais vale. Use "tema" e "pts" no JSON.'},
-  sequencia: {nome: 'Sequência', ic: '➡️', desc: 'As perguntas aparecem <b>uma depois da outra</b>, na ordem, e a vez passa de grupo em grupo.'},
+  sequencia: {nome: 'Sequência', ic: '➡️', desc: 'As cartas vão <b>uma depois da outra</b>, na ordem: a próxima brilha e a turma toca nela para abrir. A vez passa de grupo em grupo.'},
   redacao: {nome: 'Temas de Redação', ic: '✍️', desc: 'Cada carta é um tema. Abra, leia a orientação e <b>anote o aluno</b> que vai escrever. No fim, sai a lista.'}
 };
 const ORDEM_MODOS = ['padrao', 'corrida', 'palavra', 'roleta', 'velha', 'memoria', 'temas', 'sequencia', 'redacao'];
@@ -1161,7 +1173,6 @@ async function comecar(){
     mostrarTela('telaJogo');
     desenharPlacar(); atualizarProgresso(); ajustarBarra(); desenharCena(); desenharTabuleiro();
     entradaDoJogo();
-    if (jogo.modo === 'sequencia') setTimeout(() => { if (jogo && jogo.modo === 'sequencia' && !atual) abrirCarta(0); }, animar() ? 1300 : 200);
   } catch (e) {
     alert((e && e.message && e.message !== 'vazio' ? e.message : 'Não consegui carregar as questões agora.') + ' Tente de novo ou use o "Exemplo rápido".');
   } finally {
@@ -1260,13 +1271,17 @@ function cartaHtml(c, i){
   }
   const bloqueada = m === 'sequencia' && i !== jogo.seq;
   if (m === 'temas') return `<button type="button" class="carta" data-i="${i}" style="${vars}" aria-label="${esc(c.assunto.nome)}, ${c.pts} pontos"><span class="valor">${c.pts}<small>pts</small></span></button>`;
-  return `<button type="button" class="carta" data-i="${i}" style="${vars}" ${bloqueada ? 'disabled' : ''} aria-label="Carta ${i + 1}, ${esc(c.assunto.nome)}, ${c.pts} pontos">
+  return `<button type="button" class="carta${m === 'sequencia' && i === jogo.seq ? ' da-vez' : ''}" data-i="${i}" style="${vars}" ${bloqueada ? 'disabled' : ''} aria-label="Carta ${i + 1}, ${esc(c.assunto.nome)}, ${c.pts} pontos">
     <span class="assunto">${c.assunto.ic} <span>${esc(c.assunto.nome)}</span></span><span class="num">${i + 1}</span><span class="pts">${c.pts} pts</span></button>`;
 }
 function desenharTabuleiro(){
   const tab = $('#tabuleiro'), m = jogo.modo;
   tab.classList.remove('rola', 'rola-x');
-  if (m === 'corrida'){ desenharMontes(); tab.onclick = e => { const b = e.target.closest('.monte'); if (b && !b.disabled) tirarCarta(+b.dataset.p); }; return; }
+  if (m === 'corrida'){ desenharMontes(); tab.onclick = e => {
+    const b = e.target.closest('.monte, .dado-area'); if (!b || b.disabled) return;
+    if (b.classList.contains('dado-area')){ if (jogo.porDado && jogo.pronta == null) tirarCarta(0); return; }
+    tirarCarta(+b.dataset.p);
+  }; return; }
   if (m === 'roleta'){ tab.innerHTML = ''; tab.onclick = null; return; }
   let h = '';
   if (m === 'temas'){
@@ -1440,7 +1455,7 @@ function marcarVezCorrida(){
   $$('#cena .faixa').forEach(f => f.classList.toggle('vez', +f.getAttribute('data-t') === jogo.vez && !jogo.encerrado));
   const v = $('#montesVez'); if (!v) return;
   const t = jogo.equipes[jogo.vez];
-  v.innerHTML = jogo.encerrado ? '🏁 Fim da corrida' : jogo.animando ? `${t.m} <b>${esc(t.nome)}</b> está andando…` : `${t.m} Vez de <b>${esc(t.nome)}</b>: ${jogo.porDado ? 'tirem uma carta' : 'escolham um monte'}`;
+  v.innerHTML = jogo.encerrado ? '🏁 Fim da corrida' : jogo.animando ? `${t.m} <b>${esc(t.nome)}</b> está andando…` : `${t.m} Vez de <b>${esc(t.nome)}</b>: ${jogo.porDado ? (jogo.pronta != null ? 'toquem na carta' : 'joguem o dado') : 'escolham um monte'}`;
 }
 function atualizarChip(ti){
   const el = $(`#placar .time[data-t="${ti}"]`); if (!el) return;
@@ -1522,10 +1537,11 @@ function desenharMontes(){
     : [1, 2, 3].filter(p => jogo.cartas.some(c => c.passos === p)).map(p => ({p, n: todos.filter(i => livre(i) && jogo.cartas[i].passos === p).length}));
   let h = '<div class="montes-vez" id="montesVez"></div>' + grupos.map(g => {
     const info = PASSO_INFO[g.p] || {nome: 'Monte', cor: '#6366f1'}, vars = varsCor(info.cor), nc = `${g.n} ${g.n === 1 ? 'carta' : 'cartas'}`;
-    const titulo = g.p ? info.nome : 'Tirar uma carta', anda = g.p ? `anda ${g.p} ${g.p === 1 ? 'casa' : 'casas'}` : '';
+    const pronta = !g.p && jogo.porDado && jogo.pronta != null ? jogo.cartas[jogo.pronta].passos : 0;
+    const titulo = g.p ? info.nome : pronta ? '👆 Toque na carta' : 'Jogar o dado', anda = g.p ? `anda ${g.p} ${g.p === 1 ? 'casa' : 'casas'}` : pronta ? `vale ${pronta} ${pronta === 1 ? 'casa' : 'casas'}` : '';
     const pilha = (g.n >= 3 ? '<span class="carta-m c3"></span>' : '') + (g.n >= 2 ? '<span class="carta-m c2"></span>' : '') +
-      (g.n ? `<span class="carta-m topo" style="${vars}">${g.p ? `<span class="mi">🏃</span><b>+${g.p}</b>` : '<span class="mi">🃏</span><b>?</b>'}</span>` : '');
-    return `<button type="button" class="monte" data-p="${g.p}" style="${vars}" ${g.n && !jogo.animando ? '' : 'disabled'} aria-label="${titulo}${anda ? ', ' + anda : ''}: ${nc}">
+      (g.n ? `<span class="carta-m topo" style="${vars}">${g.p || pronta ? `<span class="mi">🏃</span><b>+${g.p || pronta}</b>` : '<span class="mi">🃏</span><b>?</b>'}</span>` : '');
+    return `<button type="button" class="monte${pronta ? ' pronta' : ''}" data-p="${g.p}" style="${vars}" ${g.n && !jogo.animando ? '' : 'disabled'} aria-label="${titulo}${anda ? ', ' + anda : ''}: ${nc}">
       <span class="pilha">${pilha}</span><span class="monte-txt"><b>${titulo}</b><small>${anda ? anda + ' · ' : ''}${nc}</small></span></button>`;
   }).join('');
   if (jogo.porDado){
@@ -1539,7 +1555,14 @@ function desenharMontes(){
 let forcarDado = null;
 async function tirarCarta(p){
   if (atual || !jogo || jogo.encerrado || jogo.animando || jogo.modo !== 'corrida') return;
-  const j = jogo, livres = j.cartas.map((c, i) => i).filter(i => !j.cartas[i].feita && (j.porDado || j.cartas[i].passos === p));
+  const j = jogo;
+  if (j.porDado && j.pronta != null){   // o dado já rolou: agora a carta abre no toque
+    const k = j.pronta; j.pronta = null;
+    abrirCarta(k, $('#tabuleiro .monte .carta-m.topo'));
+    if (!atual){ j.pronta = k; }
+    return;
+  }
+  const livres = j.cartas.map((c, i) => i).filter(i => !j.cartas[i].feita && (j.porDado || j.cartas[i].passos === p));
   if (!livres.length) return;
   const i = livres[Math.floor(Math.random() * livres.length)], c = j.cartas[i];
   if (j.porDado){
@@ -1549,6 +1572,10 @@ async function tirarCarta(p){
     j.animando = false;
     if (jogo !== j || j.encerrado) return;
     c.passos = v; c.pts = v * 10;
+    j.pronta = i;   // a carta não abre sozinha: o monte brilha e a turma toca nele
+    desenharMontes();
+    if (animar()) gsap.fromTo('#tabuleiro .monte .carta-m.topo', {y: 0}, {y: -14, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out', clearProps: 'transform'});
+    return;
   }
   abrirCarta(i, $(`#tabuleiro .monte[data-p="${p}"] .carta-m.topo`));
 }
@@ -1790,9 +1817,10 @@ function desenharRoleta(){
   cena.innerHTML = `<div class="roda-caixa" id="rodaCaixa"><svg id="roda" viewBox="-112 -112 224 224" role="img" aria-label="Roleta dos temas"><circle class="aro" r="109"></circle><g class="giro"></g><circle class="miolo" r="17"></circle></svg>
       <div class="ponteiro" aria-hidden="true"></div><button type="button" class="btn-girar" id="btnGirarCentro" aria-label="Girar a roleta">GIRAR</button></div>
     <div class="roleta-lado"><div class="roleta-vez" id="roletaVez"></div><button type="button" class="btn-pri" id="btnGirar">🎡 Girar a roleta</button>
-      <div class="roleta-res" id="roletaRes" aria-live="polite">${jogo.ultimoRes || 'Gire a roleta para sortear o tema da pergunta.'}</div><div class="roleta-temas" id="roletaTemas"></div></div>`;
+      <div class="roleta-res" id="roletaRes" aria-live="polite">${jogo.ultimoRes || 'Gire a roleta para sortear o tema da pergunta.'}</div><div class="roleta-escolha" id="roletaEscolha" hidden></div><div class="roleta-temas" id="roletaTemas"></div></div>`;
   $('#btnGirar').onclick = $('#btnGirarCentro').onclick = () => girar();
-  desenharRoda(); desenharTemasRoleta(); pintarVezRoleta(); ajustarRoleta();
+  $('#roletaEscolha').onclick = escolherCartaRoleta;
+  desenharRoda(); desenharTemasRoleta(); desenharEscolhaRoleta(false); pintarVezRoleta(); ajustarRoleta();
 }
 function desenharRoda(){
   const g = d3.select('#roda .giro'); if (g.empty()) return;
@@ -1812,12 +1840,28 @@ function desenharTemasRoleta(){
   box.innerHTML = jogo.grupos.map(g => { const n = g.idxs.length, f = g.idxs.filter(i => jogo.cartas[i].feita).length;
     return `<div class="rt${f >= n ? ' vazio' : ''}"><span class="cor" style="background:${g.cor}"></span><span class="nome-rt">${g.ic} ${esc(g.nome)}</span><span class="barra-rt"><i style="width:${100 * f / n}%;background:${g.cor}"></i></span><small>${f}/${n}</small></div>`; }).join('');
 }
+function desenharEscolhaRoleta(animado){   // a roleta sorteou o tema: as cartas dele aparecem viradas e a turma escolhe uma
+  const box = $('#roletaEscolha'); if (!box) return;
+  const e = jogo && jogo.escolhendo;
+  box.hidden = !e;
+  if (!e){ box.innerHTML = ''; return; }
+  box.setAttribute('style', varsCor(e.cor));
+  box.innerHTML = `<div class="escolha-tit">👆 ${esc(jogo.equipes[jogo.vez].nome)}, escolham uma carta de <b>${e.ic} ${esc(e.nome)}</b></div><div class="escolha-cartas">` +
+    e.idxs.map((i, n) => `<button type="button" class="carta-esc" data-i="${i}" aria-label="Carta ${n + 1} de ${esc(e.nome)}, ${jogo.cartas[i].pts} pontos"><span>${n + 1}</span><small>${jogo.cartas[i].pts} pts</small></button>`).join('') + '</div>';
+  if (animado !== false && animar()) gsap.from('#roletaEscolha .carta-esc', {y: 26, rotation: () => Math.random() * 16 - 8, opacity: 0, stagger: .04, duration: .35, ease: 'back.out(2)', clearProps: 'transform,opacity'});
+  try { box.scrollIntoView({block: 'nearest'}); } catch (err) {}
+}
+function escolherCartaRoleta(ev){
+  const b = ev.target.closest('.carta-esc'); if (!b || !jogo || !jogo.escolhendo || atual) return;
+  abrirCarta(+b.dataset.i, b);
+  if (atual) jogo.escolhendo = null;
+}
 function pintarVezRoleta(){
   const box = $('#roletaVez'); if (!box || !jogo) return;
   const t = jogo.equipes[jogo.vez];
   box.style.setProperty('--cor-time', t.cor);
   box.innerHTML = jogo.encerrado ? '🏁 Fim de jogo' : `<span class="m">${t.m}</span><span>Vez de <b>${esc(t.nome)}</b></span>${jogo.dobro === jogo.vez ? '<span class="dobro-ativo">⭐ vale o dobro</span>' : ''}`;
-  $('#btnGirar').disabled = $('#btnGirarCentro').disabled = jogo.encerrado || !!jogo.girando || !!atual;
+  $('#btnGirar').disabled = $('#btnGirarCentro').disabled = jogo.encerrado || !!jogo.girando || !!atual || !!jogo.escolhendo;
 }
 function ajustarRoleta(){
   const cena = $('#cena'), caixa = $('#rodaCaixa'), lado = $('.roleta-lado'); if (!caixa) return;
@@ -1832,7 +1876,7 @@ function fatiaNoPonteiro(rot){
   return jogo.arcos.findIndex(x => a >= x.a0 && a < x.a1);
 }
 function girar(forcar){
-  if (!jogo || jogo.modo !== 'roleta' || jogo.encerrado || jogo.girando || atual) return;
+  if (!jogo || jogo.modo !== 'roleta' || jogo.encerrado || jogo.girando || atual || jogo.escolhendo) return;
   const fat = jogo.fatias, arcos = jogo.arcos; if (!fat.length || !arcos) return;
   let k = -1;
   if (forcar !== undefined && forcar !== null) k = typeof forcar === 'number' ? forcar : fat.findIndex(f => f.tipo === forcar || (f.g && f.g.nome === forcar));
@@ -1861,11 +1905,11 @@ function resultadoRoleta(k){
   const f = jogo.fatias[k], ti = jogo.vez, t = jogo.equipes[ti], res = $('#roletaRes'), el = $(`#roda .fatia[data-k="${k}"]`);
   if (el){ el.classList.add('vencedora'); if (animar()) gsap.fromTo(el, {scale: 1}, {scale: 1.07, svgOrigin: '0 0', duration: .22, yoyo: true, repeat: 3}); }
   if (f.tipo === 'tema'){
-    const livres = f.g.idxs.filter(i => !jogo.cartas[i].feita), i = livres[Math.floor(Math.random() * livres.length)];
     jogo.ultimoRes = `<span class="cor-res" style="background:${f.cor}"></span><span>Tema sorteado: <b>${f.ic} ${esc(f.nome)}</b></span>`;
     if (res) res.innerHTML = jogo.ultimoRes;
-    som('acerto'); anunciar(`A roleta parou em ${f.nome}.`);
-    setTimeout(() => { if (jogo && !jogo.encerrado && !atual) abrirCarta(i, null); }, animar() ? 900 : 0);
+    som('acerto'); anunciar(`A roleta parou em ${f.nome}. Escolham uma carta.`);
+    jogo.escolhendo = {idxs: f.g.idxs.filter(i => !jogo.cartas[i].feita), cor: f.cor, nome: f.nome, ic: f.ic};
+    desenharEscolhaRoleta(); pintarVezRoleta();
     return;
   }
   atual = {i: -1, c: null, timeOriginal: ti, timeAtual: ti, rebote: false, tentou: true, respondida: true, timer: null, acertou: null, especial: true, bonus: f.tipo};
@@ -1885,6 +1929,7 @@ function resultadoRoleta(k){
   }, animar() ? 700 : 0);
 }
 function seguirRoleta(a){
+  jogo.escolhendo = null; desenharEscolhaRoleta();
   if (a.c && jogo.dobro === a.timeOriginal) jogo.dobro = null;
   if (jogo.dobro !== null && jogo.dobro !== undefined && jogo.dobro !== jogo.vez) jogo.dobro = null;
   atualizarProgresso();
@@ -2239,9 +2284,10 @@ function proxima(){
       }
     }
     if (jogo.cartas.every(c => c.feita)){ jogo.encerrado = true; atualizarVez(); setTimeout(mostrarFim, animar() ? 1100 : 0); return; }
-    if (m === 'sequencia'){
-      $$('#tabuleiro .carta').forEach(el => { if (!el.classList.contains('feita')) el.disabled = +el.dataset.i !== jogo.seq; });
-      setTimeout(() => { if (jogo && !atual && !jogo.encerrado) abrirCarta(jogo.seq); }, animar() ? 900 : 50);
+    if (m === 'sequencia'){   // a próxima carta brilha; ela só abre quando a turma tocar
+      $$('#tabuleiro .carta').forEach(el => { if (!el.classList.contains('feita')){ const k = +el.dataset.i; el.disabled = k !== jogo.seq; el.classList.toggle('da-vez', k === jogo.seq); } });
+      const prox = $(`#tabuleiro .carta[data-i="${jogo.seq}"]`);
+      if (prox && prox.closest('.tabuleiro.rola')){ try { prox.scrollIntoView({block: 'nearest', inline: 'nearest'}); } catch (e) {} }
     }
   });
 }
@@ -2360,7 +2406,7 @@ aplicarCalmo(); aplicarTema(); pintarSom();
 desenharFonte(); desenharBancos(); desenharQtd(); desenharModos(); desenharEquipes(); desenharRegras(); desenharResumo();
 carregarBancos();
 window.PC2 = {cfg, jogo: () => jogo, atual: () => atual, abrirCarta, responder, fazerRebote, revelar, proxima, mostrarFim, clicarMemoria, bancos: () => BANCOS,
-  tirarCarta, girar, arriscar: abrirArriscar, conferirPalavra, dado: v => { forcarDado = v; }, grafico: () => grafico,
+  tirarCarta, girar, escolher: n => { const b = $$('#roletaEscolha .carta-esc')[n || 0]; if (b) b.click(); }, arriscar: abrirArriscar, conferirPalavra, dado: v => { forcarDado = v; }, grafico: () => grafico,
   redesenhar: () => { desenharPlacar(); desenharCena(); desenharTabuleiro(); },
   lerJson, surpresa: v => { forcarSurpresa = v; }, definirJson: t => { jsonTexto = t; gravar('pc2_json', t); $('#jsonTexto').value = t; desenharStatusJson(); desenharResumo(); }};   // usado nos testes
 })();
