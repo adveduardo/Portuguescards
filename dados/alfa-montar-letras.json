@@ -1,0 +1,925 @@
+{
+ "titulo": "Monte a palavra letra por letra",
+ "pecasExtras": [
+  "A",
+  "E",
+  "I",
+  "O",
+  "U",
+  "B",
+  "C",
+  "D",
+  "L",
+  "M",
+  "P",
+  "R",
+  "S",
+  "T"
+ ],
+ "palavras": [
+  {
+   "palavra": "BOLA",
+   "partes": [
+    "B",
+    "O",
+    "L",
+    "A"
+   ],
+   "dica": "Um brinquedo.",
+   "imagem": "⚽",
+   "explica": "B + O + L + A = BOLA (4 letras)"
+  },
+  {
+   "palavra": "BOLO",
+   "partes": [
+    "B",
+    "O",
+    "L",
+    "O"
+   ],
+   "dica": "Um doce de festa.",
+   "imagem": "🎂",
+   "explica": "B + O + L + O = BOLO (4 letras)"
+  },
+  {
+   "palavra": "GATO",
+   "partes": [
+    "G",
+    "A",
+    "T",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐱",
+   "explica": "G + A + T + O = GATO (4 letras)"
+  },
+  {
+   "palavra": "PATO",
+   "partes": [
+    "P",
+    "A",
+    "T",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🦆",
+   "explica": "P + A + T + O = PATO (4 letras)"
+  },
+  {
+   "palavra": "SAPO",
+   "partes": [
+    "S",
+    "A",
+    "P",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐸",
+   "explica": "S + A + P + O = SAPO (4 letras)"
+  },
+  {
+   "palavra": "CASA",
+   "partes": [
+    "C",
+    "A",
+    "S",
+    "A"
+   ],
+   "dica": "Onde moramos.",
+   "imagem": "🏠",
+   "explica": "C + A + S + A = CASA (4 letras)"
+  },
+  {
+   "palavra": "VACA",
+   "partes": [
+    "V",
+    "A",
+    "C",
+    "A"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐄",
+   "explica": "V + A + C + A = VACA (4 letras)"
+  },
+  {
+   "palavra": "FACA",
+   "partes": [
+    "F",
+    "A",
+    "C",
+    "A"
+   ],
+   "dica": "Serve para cortar.",
+   "imagem": "🔪",
+   "explica": "F + A + C + A = FACA (4 letras)"
+  },
+  {
+   "palavra": "MALA",
+   "partes": [
+    "M",
+    "A",
+    "L",
+    "A"
+   ],
+   "dica": "Leva roupas na viagem.",
+   "imagem": "🧳",
+   "explica": "M + A + L + A = MALA (4 letras)"
+  },
+  {
+   "palavra": "LUA",
+   "partes": [
+    "L",
+    "U",
+    "A"
+   ],
+   "dica": "Aparece à noite.",
+   "imagem": "🌙",
+   "explica": "L + U + A = LUA (3 letras)"
+  },
+  {
+   "palavra": "DADO",
+   "partes": [
+    "D",
+    "A",
+    "D",
+    "O"
+   ],
+   "dica": "Usamos em jogos.",
+   "imagem": "🎲",
+   "explica": "D + A + D + O = DADO (4 letras)"
+  },
+  {
+   "palavra": "UVA",
+   "partes": [
+    "U",
+    "V",
+    "A"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍇",
+   "explica": "U + V + A = UVA (3 letras)"
+  },
+  {
+   "palavra": "RATO",
+   "partes": [
+    "R",
+    "A",
+    "T",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐭",
+   "explica": "R + A + T + O = RATO (4 letras)"
+  },
+  {
+   "palavra": "URSO",
+   "partes": [
+    "U",
+    "R",
+    "S",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐻",
+   "explica": "U + R + S + O = URSO (4 letras)"
+  },
+  {
+   "palavra": "PEIXE",
+   "partes": [
+    "P",
+    "E",
+    "I",
+    "X",
+    "E"
+   ],
+   "dica": "Vive na água.",
+   "imagem": "🐟",
+   "explica": "P + E + I + X + E = PEIXE (5 letras)"
+  },
+  {
+   "palavra": "PIPA",
+   "partes": [
+    "P",
+    "I",
+    "P",
+    "A"
+   ],
+   "dica": "Voa com o vento.",
+   "imagem": "🪁",
+   "explica": "P + I + P + A = PIPA (4 letras)"
+  },
+  {
+   "palavra": "SUCO",
+   "partes": [
+    "S",
+    "U",
+    "C",
+    "O"
+   ],
+   "dica": "Uma bebida.",
+   "imagem": "🧃",
+   "explica": "S + U + C + O = SUCO (4 letras)"
+  },
+  {
+   "palavra": "MEL",
+   "partes": [
+    "M",
+    "E",
+    "L"
+   ],
+   "dica": "As abelhas fazem.",
+   "imagem": "🍯",
+   "explica": "M + E + L = MEL (3 letras)"
+  },
+  {
+   "palavra": "OVO",
+   "partes": [
+    "O",
+    "V",
+    "O"
+   ],
+   "dica": "A galinha bota.",
+   "imagem": "🥚",
+   "explica": "O + V + O = OVO (3 letras)"
+  },
+  {
+   "palavra": "MÃO",
+   "partes": [
+    "M",
+    "Ã",
+    "O"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "✋",
+   "explica": "M + Ã + O = MÃO (3 letras)"
+  },
+  {
+   "palavra": "DENTE",
+   "partes": [
+    "D",
+    "E",
+    "N",
+    "T",
+    "E"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "🦷",
+   "explica": "D + E + N + T + E = DENTE (5 letras)"
+  },
+  {
+   "palavra": "NARIZ",
+   "partes": [
+    "N",
+    "A",
+    "R",
+    "I",
+    "Z"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "👃",
+   "explica": "N + A + R + I + Z = NARIZ (5 letras)"
+  },
+  {
+   "palavra": "BOCA",
+   "partes": [
+    "B",
+    "O",
+    "C",
+    "A"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "👄",
+   "explica": "B + O + C + A = BOCA (4 letras)"
+  },
+  {
+   "palavra": "CAMA",
+   "partes": [
+    "C",
+    "A",
+    "M",
+    "A"
+   ],
+   "dica": "Lugar de dormir.",
+   "imagem": "🛏️",
+   "explica": "C + A + M + A = CAMA (4 letras)"
+  },
+  {
+   "palavra": "SOFÁ",
+   "partes": [
+    "S",
+    "O",
+    "F",
+    "Á"
+   ],
+   "dica": "Lugar de sentar na sala.",
+   "imagem": "🛋️",
+   "explica": "S + O + F + Á = SOFÁ (4 letras)"
+  },
+  {
+   "palavra": "VELA",
+   "partes": [
+    "V",
+    "E",
+    "L",
+    "A"
+   ],
+   "dica": "Tem fogo e ilumina.",
+   "imagem": "🕯️",
+   "explica": "V + E + L + A = VELA (4 letras)"
+  },
+  {
+   "palavra": "PERA",
+   "partes": [
+    "P",
+    "E",
+    "R",
+    "A"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍐",
+   "explica": "P + E + R + A = PERA (4 letras)"
+  },
+  {
+   "palavra": "COCO",
+   "partes": [
+    "C",
+    "O",
+    "C",
+    "O"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🥥",
+   "explica": "C + O + C + O = COCO (4 letras)"
+  },
+  {
+   "palavra": "MILHO",
+   "partes": [
+    "M",
+    "I",
+    "L",
+    "H",
+    "O"
+   ],
+   "dica": "Vira pipoca.",
+   "imagem": "🌽",
+   "explica": "M + I + L + H + O = MILHO (5 letras)"
+  },
+  {
+   "palavra": "PÃO",
+   "partes": [
+    "P",
+    "Ã",
+    "O"
+   ],
+   "dica": "Comemos no café da manhã.",
+   "imagem": "🍞",
+   "explica": "P + Ã + O = PÃO (3 letras)"
+  },
+  {
+   "palavra": "SOL",
+   "partes": [
+    "S",
+    "O",
+    "L"
+   ],
+   "dica": "Brilha de dia.",
+   "imagem": "☀️",
+   "explica": "S + O + L = SOL (3 letras)"
+  },
+  {
+   "palavra": "FOGO",
+   "partes": [
+    "F",
+    "O",
+    "G",
+    "O"
+   ],
+   "dica": "É muito quente.",
+   "imagem": "🔥",
+   "explica": "F + O + G + O = FOGO (4 letras)"
+  },
+  {
+   "palavra": "CHUVA",
+   "partes": [
+    "C",
+    "H",
+    "U",
+    "V",
+    "A"
+   ],
+   "dica": "Cai do céu.",
+   "imagem": "🌧️",
+   "explica": "C + H + U + V + A = CHUVA (5 letras)"
+  },
+  {
+   "palavra": "NUVEM",
+   "partes": [
+    "N",
+    "U",
+    "V",
+    "E",
+    "M"
+   ],
+   "dica": "Fica no céu.",
+   "imagem": "☁️",
+   "explica": "N + U + V + E + M = NUVEM (5 letras)"
+  },
+  {
+   "palavra": "FLOR",
+   "partes": [
+    "F",
+    "L",
+    "O",
+    "R"
+   ],
+   "dica": "Nasce no jardim.",
+   "imagem": "🌸",
+   "explica": "F + L + O + R = FLOR (4 letras)"
+  },
+  {
+   "palavra": "FOCA",
+   "partes": [
+    "F",
+    "O",
+    "C",
+    "A"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🦭",
+   "explica": "F + O + C + A = FOCA (4 letras)"
+  },
+  {
+   "palavra": "ZEBRA",
+   "partes": [
+    "Z",
+    "E",
+    "B",
+    "R",
+    "A"
+   ],
+   "dica": "Um animal listrado.",
+   "imagem": "🦓",
+   "explica": "Z + E + B + R + A = ZEBRA (5 letras)"
+  },
+  {
+   "palavra": "COBRA",
+   "partes": [
+    "C",
+    "O",
+    "B",
+    "R",
+    "A"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐍",
+   "explica": "C + O + B + R + A = COBRA (5 letras)"
+  },
+  {
+   "palavra": "LOBO",
+   "partes": [
+    "L",
+    "O",
+    "B",
+    "O"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐺",
+   "explica": "L + O + B + O = LOBO (4 letras)"
+  },
+  {
+   "palavra": "TREM",
+   "partes": [
+    "T",
+    "R",
+    "E",
+    "M"
+   ],
+   "dica": "Anda nos trilhos.",
+   "imagem": "🚂",
+   "explica": "T + R + E + M = TREM (4 letras)"
+  },
+  {
+   "palavra": "CARRO",
+   "partes": [
+    "C",
+    "A",
+    "R",
+    "R",
+    "O"
+   ],
+   "dica": "Um meio de transporte.",
+   "imagem": "🚗",
+   "explica": "C + A + R + R + O = CARRO (5 letras)"
+  },
+  {
+   "palavra": "BARCO",
+   "partes": [
+    "B",
+    "A",
+    "R",
+    "C",
+    "O"
+   ],
+   "dica": "Anda na água.",
+   "imagem": "⛵",
+   "explica": "B + A + R + C + O = BARCO (5 letras)"
+  },
+  {
+   "palavra": "MOTO",
+   "partes": [
+    "M",
+    "O",
+    "T",
+    "O"
+   ],
+   "dica": "Um meio de transporte.",
+   "imagem": "🏍️",
+   "explica": "M + O + T + O = MOTO (4 letras)"
+  },
+  {
+   "palavra": "TÁXI",
+   "partes": [
+    "T",
+    "Á",
+    "X",
+    "I"
+   ],
+   "dica": "Um carro amarelo.",
+   "imagem": "🚕",
+   "explica": "T + Á + X + I = TÁXI (4 letras)"
+  },
+  {
+   "palavra": "LÁPIS",
+   "partes": [
+    "L",
+    "Á",
+    "P",
+    "I",
+    "S"
+   ],
+   "dica": "Serve para escrever.",
+   "imagem": "✏️",
+   "explica": "L + Á + P + I + S = LÁPIS (5 letras)"
+  },
+  {
+   "palavra": "LIVRO",
+   "partes": [
+    "L",
+    "I",
+    "V",
+    "R",
+    "O"
+   ],
+   "dica": "Tem histórias.",
+   "imagem": "📕",
+   "explica": "L + I + V + R + O = LIVRO (5 letras)"
+  },
+  {
+   "palavra": "FADA",
+   "partes": [
+    "F",
+    "A",
+    "D",
+    "A"
+   ],
+   "dica": "Tem varinha mágica.",
+   "imagem": "🧚",
+   "explica": "F + A + D + A = FADA (4 letras)"
+  },
+  {
+   "palavra": "ROSA",
+   "partes": [
+    "R",
+    "O",
+    "S",
+    "A"
+   ],
+   "dica": "Uma flor.",
+   "imagem": "🌹",
+   "explica": "R + O + S + A = ROSA (4 letras)"
+  },
+  {
+   "palavra": "SINO",
+   "partes": [
+    "S",
+    "I",
+    "N",
+    "O"
+   ],
+   "dica": "Faz blém-blém.",
+   "imagem": "🔔",
+   "explica": "S + I + N + O = SINO (4 letras)"
+  },
+  {
+   "palavra": "NINHO",
+   "partes": [
+    "N",
+    "I",
+    "N",
+    "H",
+    "O"
+   ],
+   "dica": "Casa do passarinho.",
+   "imagem": "🪺",
+   "explica": "N + I + N + H + O = NINHO (5 letras)"
+  },
+  {
+   "palavra": "GALO",
+   "partes": [
+    "G",
+    "A",
+    "L",
+    "O"
+   ],
+   "dica": "Canta de manhã.",
+   "imagem": "🐓",
+   "explica": "G + A + L + O = GALO (4 letras)"
+  },
+  {
+   "palavra": "PIÃO",
+   "partes": [
+    "P",
+    "I",
+    "Ã",
+    "O"
+   ],
+   "dica": "Um brinquedo que gira.",
+   "imagem": "🪀",
+   "explica": "P + I + Ã + O = PIÃO (4 letras)"
+  },
+  {
+   "palavra": "POTE",
+   "partes": [
+    "P",
+    "O",
+    "T",
+    "E"
+   ],
+   "dica": "Guarda coisas.",
+   "imagem": "🫙",
+   "explica": "P + O + T + E = POTE (4 letras)"
+  },
+  {
+   "palavra": "TELA",
+   "partes": [
+    "T",
+    "E",
+    "L",
+    "A"
+   ],
+   "dica": "Parte do computador.",
+   "imagem": "🖥️",
+   "explica": "T + E + L + A = TELA (4 letras)"
+  },
+  {
+   "palavra": "DEDO",
+   "partes": [
+    "D",
+    "E",
+    "D",
+    "O"
+   ],
+   "dica": "Parte da mão.",
+   "imagem": "👆",
+   "explica": "D + E + D + O = DEDO (4 letras)"
+  },
+  {
+   "palavra": "LEITE",
+   "partes": [
+    "L",
+    "E",
+    "I",
+    "T",
+    "E"
+   ],
+   "dica": "Uma bebida branca.",
+   "imagem": "🥛",
+   "explica": "L + E + I + T + E = LEITE (5 letras)"
+  },
+  {
+   "palavra": "SAL",
+   "partes": [
+    "S",
+    "A",
+    "L"
+   ],
+   "dica": "Tempero.",
+   "imagem": "🧂",
+   "explica": "S + A + L = SAL (3 letras)"
+  },
+  {
+   "palavra": "CHÁ",
+   "partes": [
+    "C",
+    "H",
+    "Á"
+   ],
+   "dica": "Uma bebida quente.",
+   "imagem": "🍵",
+   "explica": "C + H + Á = CHÁ (3 letras)"
+  },
+  {
+   "palavra": "MANGA",
+   "partes": [
+    "M",
+    "A",
+    "N",
+    "G",
+    "A"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🥭",
+   "explica": "M + A + N + G + A = MANGA (5 letras)"
+  },
+  {
+   "palavra": "ARROZ",
+   "partes": [
+    "A",
+    "R",
+    "R",
+    "O",
+    "Z"
+   ],
+   "dica": "Comemos com feijão.",
+   "imagem": "🍚",
+   "explica": "A + R + R + O + Z = ARROZ (5 letras)"
+  },
+  {
+   "palavra": "PIZZA",
+   "partes": [
+    "P",
+    "I",
+    "Z",
+    "Z",
+    "A"
+   ],
+   "dica": "Uma comida.",
+   "imagem": "🍕",
+   "explica": "P + I + Z + Z + A = PIZZA (5 letras)"
+  },
+  {
+   "palavra": "SOPA",
+   "partes": [
+    "S",
+    "O",
+    "P",
+    "A"
+   ],
+   "dica": "Comida quente.",
+   "imagem": "🍲",
+   "explica": "S + O + P + A = SOPA (4 letras)"
+  },
+  {
+   "palavra": "BONÉ",
+   "partes": [
+    "B",
+    "O",
+    "N",
+    "É"
+   ],
+   "dica": "Usamos na cabeça.",
+   "imagem": "🧢",
+   "explica": "B + O + N + É = BONÉ (4 letras)"
+  },
+  {
+   "palavra": "MEIA",
+   "partes": [
+    "M",
+    "E",
+    "I",
+    "A"
+   ],
+   "dica": "Usamos no pé.",
+   "imagem": "🧦",
+   "explica": "M + E + I + A = MEIA (4 letras)"
+  },
+  {
+   "palavra": "LUVA",
+   "partes": [
+    "L",
+    "U",
+    "V",
+    "A"
+   ],
+   "dica": "Usamos na mão.",
+   "imagem": "🧤",
+   "explica": "L + U + V + A = LUVA (4 letras)"
+  },
+  {
+   "palavra": "BOTA",
+   "partes": [
+    "B",
+    "O",
+    "T",
+    "A"
+   ],
+   "dica": "Um calçado.",
+   "imagem": "👢",
+   "explica": "B + O + T + A = BOTA (4 letras)"
+  },
+  {
+   "palavra": "BALÃO",
+   "partes": [
+    "B",
+    "A",
+    "L",
+    "Ã",
+    "O"
+   ],
+   "dica": "Enchemos de ar.",
+   "imagem": "🎈",
+   "explica": "B + A + L + Ã + O = BALÃO (5 letras)"
+  },
+  {
+   "palavra": "AVIÃO",
+   "partes": [
+    "A",
+    "V",
+    "I",
+    "Ã",
+    "O"
+   ],
+   "dica": "Voa no céu.",
+   "imagem": "✈️",
+   "explica": "A + V + I + Ã + O = AVIÃO (5 letras)"
+  },
+  {
+   "palavra": "LIMÃO",
+   "partes": [
+    "L",
+    "I",
+    "M",
+    "Ã",
+    "O"
+   ],
+   "dica": "Uma fruta azeda.",
+   "imagem": "🍋",
+   "explica": "L + I + M + Ã + O = LIMÃO (5 letras)"
+  },
+  {
+   "palavra": "RÉGUA",
+   "partes": [
+    "R",
+    "É",
+    "G",
+    "U",
+    "A"
+   ],
+   "dica": "Serve para medir.",
+   "imagem": "📏",
+   "explica": "R + É + G + U + A = RÉGUA (5 letras)"
+  },
+  {
+   "palavra": "PRAIA",
+   "partes": [
+    "P",
+    "R",
+    "A",
+    "I",
+    "A"
+   ],
+   "dica": "Tem areia e mar.",
+   "imagem": "🏖️",
+   "explica": "P + R + A + I + A = PRAIA (5 letras)"
+  },
+  {
+   "palavra": "FOLHA",
+   "partes": [
+    "F",
+    "O",
+    "L",
+    "H",
+    "A"
+   ],
+   "dica": "Nasce na árvore.",
+   "imagem": "🍃",
+   "explica": "F + O + L + H + A = FOLHA (5 letras)"
+  },
+  {
+   "palavra": "CACTO",
+   "partes": [
+    "C",
+    "A",
+    "C",
+    "T",
+    "O"
+   ],
+   "dica": "Tem espinhos.",
+   "imagem": "🌵",
+   "explica": "C + A + C + T + O = CACTO (5 letras)"
+  },
+  {
+   "palavra": "PIANO",
+   "partes": [
+    "P",
+    "I",
+    "A",
+    "N",
+    "O"
+   ],
+   "dica": "Um instrumento.",
+   "imagem": "🎹",
+   "explica": "P + I + A + N + O = PIANO (5 letras)"
+  }
+ ]
+}

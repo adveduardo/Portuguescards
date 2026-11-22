@@ -1,0 +1,1866 @@
+{
+ "titulo": "Monte a palavra com sílabas (todas)",
+ "pecasExtras": [
+  "BA",
+  "CA",
+  "DA",
+  "FA",
+  "GA",
+  "LA",
+  "MA",
+  "NA",
+  "PA",
+  "RA",
+  "SA",
+  "TA",
+  "VA",
+  "BO",
+  "LO",
+  "TO",
+  "LE",
+  "PE",
+  "NI",
+  "LI"
+ ],
+ "palavras": [
+  {
+   "palavra": "BOLA",
+   "partes": [
+    "BO",
+    "LA"
+   ],
+   "dica": "Um brinquedo.",
+   "imagem": "⚽",
+   "explica": "BO + LA = BOLA (2 sílabas)"
+  },
+  {
+   "palavra": "BOLO",
+   "partes": [
+    "BO",
+    "LO"
+   ],
+   "dica": "Um doce de festa.",
+   "imagem": "🎂",
+   "explica": "BO + LO = BOLO (2 sílabas)"
+  },
+  {
+   "palavra": "GATO",
+   "partes": [
+    "GA",
+    "TO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐱",
+   "explica": "GA + TO = GATO (2 sílabas)"
+  },
+  {
+   "palavra": "PATO",
+   "partes": [
+    "PA",
+    "TO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🦆",
+   "explica": "PA + TO = PATO (2 sílabas)"
+  },
+  {
+   "palavra": "SAPO",
+   "partes": [
+    "SA",
+    "PO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐸",
+   "explica": "SA + PO = SAPO (2 sílabas)"
+  },
+  {
+   "palavra": "CASA",
+   "partes": [
+    "CA",
+    "SA"
+   ],
+   "dica": "Onde moramos.",
+   "imagem": "🏠",
+   "explica": "CA + SA = CASA (2 sílabas)"
+  },
+  {
+   "palavra": "VACA",
+   "partes": [
+    "VA",
+    "CA"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐄",
+   "explica": "VA + CA = VACA (2 sílabas)"
+  },
+  {
+   "palavra": "FACA",
+   "partes": [
+    "FA",
+    "CA"
+   ],
+   "dica": "Serve para cortar.",
+   "imagem": "🔪",
+   "explica": "FA + CA = FACA (2 sílabas)"
+  },
+  {
+   "palavra": "MALA",
+   "partes": [
+    "MA",
+    "LA"
+   ],
+   "dica": "Leva roupas na viagem.",
+   "imagem": "🧳",
+   "explica": "MA + LA = MALA (2 sílabas)"
+  },
+  {
+   "palavra": "LUA",
+   "partes": [
+    "LU",
+    "A"
+   ],
+   "dica": "Aparece à noite.",
+   "imagem": "🌙",
+   "explica": "LU + A = LUA (2 sílabas)"
+  },
+  {
+   "palavra": "DADO",
+   "partes": [
+    "DA",
+    "DO"
+   ],
+   "dica": "Usamos em jogos.",
+   "imagem": "🎲",
+   "explica": "DA + DO = DADO (2 sílabas)"
+  },
+  {
+   "palavra": "UVA",
+   "partes": [
+    "U",
+    "VA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍇",
+   "explica": "U + VA = UVA (2 sílabas)"
+  },
+  {
+   "palavra": "RATO",
+   "partes": [
+    "RA",
+    "TO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐭",
+   "explica": "RA + TO = RATO (2 sílabas)"
+  },
+  {
+   "palavra": "URSO",
+   "partes": [
+    "UR",
+    "SO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐻",
+   "explica": "UR + SO = URSO (2 sílabas)"
+  },
+  {
+   "palavra": "PEIXE",
+   "partes": [
+    "PEI",
+    "XE"
+   ],
+   "dica": "Vive na água.",
+   "imagem": "🐟",
+   "explica": "PEI + XE = PEIXE (2 sílabas)"
+  },
+  {
+   "palavra": "PIPA",
+   "partes": [
+    "PI",
+    "PA"
+   ],
+   "dica": "Voa com o vento.",
+   "imagem": "🪁",
+   "explica": "PI + PA = PIPA (2 sílabas)"
+  },
+  {
+   "palavra": "SUCO",
+   "partes": [
+    "SU",
+    "CO"
+   ],
+   "dica": "Uma bebida.",
+   "imagem": "🧃",
+   "explica": "SU + CO = SUCO (2 sílabas)"
+  },
+  {
+   "palavra": "OVO",
+   "partes": [
+    "O",
+    "VO"
+   ],
+   "dica": "A galinha bota.",
+   "imagem": "🥚",
+   "explica": "O + VO = OVO (2 sílabas)"
+  },
+  {
+   "palavra": "DENTE",
+   "partes": [
+    "DEN",
+    "TE"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "🦷",
+   "explica": "DEN + TE = DENTE (2 sílabas)"
+  },
+  {
+   "palavra": "NARIZ",
+   "partes": [
+    "NA",
+    "RIZ"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "👃",
+   "explica": "NA + RIZ = NARIZ (2 sílabas)"
+  },
+  {
+   "palavra": "BOCA",
+   "partes": [
+    "BO",
+    "CA"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "👄",
+   "explica": "BO + CA = BOCA (2 sílabas)"
+  },
+  {
+   "palavra": "CAMA",
+   "partes": [
+    "CA",
+    "MA"
+   ],
+   "dica": "Lugar de dormir.",
+   "imagem": "🛏️",
+   "explica": "CA + MA = CAMA (2 sílabas)"
+  },
+  {
+   "palavra": "SOFÁ",
+   "partes": [
+    "SO",
+    "FÁ"
+   ],
+   "dica": "Lugar de sentar na sala.",
+   "imagem": "🛋️",
+   "explica": "SO + FÁ = SOFÁ (2 sílabas)"
+  },
+  {
+   "palavra": "VELA",
+   "partes": [
+    "VE",
+    "LA"
+   ],
+   "dica": "Tem fogo e ilumina.",
+   "imagem": "🕯️",
+   "explica": "VE + LA = VELA (2 sílabas)"
+  },
+  {
+   "palavra": "PERA",
+   "partes": [
+    "PE",
+    "RA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍐",
+   "explica": "PE + RA = PERA (2 sílabas)"
+  },
+  {
+   "palavra": "COCO",
+   "partes": [
+    "CO",
+    "CO"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🥥",
+   "explica": "CO + CO = COCO (2 sílabas)"
+  },
+  {
+   "palavra": "MILHO",
+   "partes": [
+    "MI",
+    "LHO"
+   ],
+   "dica": "Vira pipoca.",
+   "imagem": "🌽",
+   "explica": "MI + LHO = MILHO (2 sílabas)"
+  },
+  {
+   "palavra": "FOGO",
+   "partes": [
+    "FO",
+    "GO"
+   ],
+   "dica": "É muito quente.",
+   "imagem": "🔥",
+   "explica": "FO + GO = FOGO (2 sílabas)"
+  },
+  {
+   "palavra": "CHUVA",
+   "partes": [
+    "CHU",
+    "VA"
+   ],
+   "dica": "Cai do céu.",
+   "imagem": "🌧️",
+   "explica": "CHU + VA = CHUVA (2 sílabas)"
+  },
+  {
+   "palavra": "NUVEM",
+   "partes": [
+    "NU",
+    "VEM"
+   ],
+   "dica": "Fica no céu.",
+   "imagem": "☁️",
+   "explica": "NU + VEM = NUVEM (2 sílabas)"
+  },
+  {
+   "palavra": "FOCA",
+   "partes": [
+    "FO",
+    "CA"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🦭",
+   "explica": "FO + CA = FOCA (2 sílabas)"
+  },
+  {
+   "palavra": "ZEBRA",
+   "partes": [
+    "ZE",
+    "BRA"
+   ],
+   "dica": "Um animal listrado.",
+   "imagem": "🦓",
+   "explica": "ZE + BRA = ZEBRA (2 sílabas)"
+  },
+  {
+   "palavra": "COBRA",
+   "partes": [
+    "CO",
+    "BRA"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐍",
+   "explica": "CO + BRA = COBRA (2 sílabas)"
+  },
+  {
+   "palavra": "LOBO",
+   "partes": [
+    "LO",
+    "BO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐺",
+   "explica": "LO + BO = LOBO (2 sílabas)"
+  },
+  {
+   "palavra": "CARRO",
+   "partes": [
+    "CAR",
+    "RO"
+   ],
+   "dica": "Um meio de transporte.",
+   "imagem": "🚗",
+   "explica": "CAR + RO = CARRO (2 sílabas)"
+  },
+  {
+   "palavra": "BARCO",
+   "partes": [
+    "BAR",
+    "CO"
+   ],
+   "dica": "Anda na água.",
+   "imagem": "⛵",
+   "explica": "BAR + CO = BARCO (2 sílabas)"
+  },
+  {
+   "palavra": "MOTO",
+   "partes": [
+    "MO",
+    "TO"
+   ],
+   "dica": "Um meio de transporte.",
+   "imagem": "🏍️",
+   "explica": "MO + TO = MOTO (2 sílabas)"
+  },
+  {
+   "palavra": "TÁXI",
+   "partes": [
+    "TÁ",
+    "XI"
+   ],
+   "dica": "Um carro amarelo.",
+   "imagem": "🚕",
+   "explica": "TÁ + XI = TÁXI (2 sílabas)"
+  },
+  {
+   "palavra": "LÁPIS",
+   "partes": [
+    "LÁ",
+    "PIS"
+   ],
+   "dica": "Serve para escrever.",
+   "imagem": "✏️",
+   "explica": "LÁ + PIS = LÁPIS (2 sílabas)"
+  },
+  {
+   "palavra": "LIVRO",
+   "partes": [
+    "LI",
+    "VRO"
+   ],
+   "dica": "Tem histórias.",
+   "imagem": "📕",
+   "explica": "LI + VRO = LIVRO (2 sílabas)"
+  },
+  {
+   "palavra": "FADA",
+   "partes": [
+    "FA",
+    "DA"
+   ],
+   "dica": "Tem varinha mágica.",
+   "imagem": "🧚",
+   "explica": "FA + DA = FADA (2 sílabas)"
+  },
+  {
+   "palavra": "ROSA",
+   "partes": [
+    "RO",
+    "SA"
+   ],
+   "dica": "Uma flor.",
+   "imagem": "🌹",
+   "explica": "RO + SA = ROSA (2 sílabas)"
+  },
+  {
+   "palavra": "SINO",
+   "partes": [
+    "SI",
+    "NO"
+   ],
+   "dica": "Faz blém-blém.",
+   "imagem": "🔔",
+   "explica": "SI + NO = SINO (2 sílabas)"
+  },
+  {
+   "palavra": "NINHO",
+   "partes": [
+    "NI",
+    "NHO"
+   ],
+   "dica": "Casa do passarinho.",
+   "imagem": "🪺",
+   "explica": "NI + NHO = NINHO (2 sílabas)"
+  },
+  {
+   "palavra": "GALO",
+   "partes": [
+    "GA",
+    "LO"
+   ],
+   "dica": "Canta de manhã.",
+   "imagem": "🐓",
+   "explica": "GA + LO = GALO (2 sílabas)"
+  },
+  {
+   "palavra": "PIÃO",
+   "partes": [
+    "PI",
+    "ÃO"
+   ],
+   "dica": "Um brinquedo que gira.",
+   "imagem": "🪀",
+   "explica": "PI + ÃO = PIÃO (2 sílabas)"
+  },
+  {
+   "palavra": "POTE",
+   "partes": [
+    "PO",
+    "TE"
+   ],
+   "dica": "Guarda coisas.",
+   "imagem": "🫙",
+   "explica": "PO + TE = POTE (2 sílabas)"
+  },
+  {
+   "palavra": "TELA",
+   "partes": [
+    "TE",
+    "LA"
+   ],
+   "dica": "Parte do computador.",
+   "imagem": "🖥️",
+   "explica": "TE + LA = TELA (2 sílabas)"
+  },
+  {
+   "palavra": "DEDO",
+   "partes": [
+    "DE",
+    "DO"
+   ],
+   "dica": "Parte da mão.",
+   "imagem": "👆",
+   "explica": "DE + DO = DEDO (2 sílabas)"
+  },
+  {
+   "palavra": "LEITE",
+   "partes": [
+    "LEI",
+    "TE"
+   ],
+   "dica": "Uma bebida branca.",
+   "imagem": "🥛",
+   "explica": "LEI + TE = LEITE (2 sílabas)"
+  },
+  {
+   "palavra": "MANGA",
+   "partes": [
+    "MAN",
+    "GA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🥭",
+   "explica": "MAN + GA = MANGA (2 sílabas)"
+  },
+  {
+   "palavra": "FEIJÃO",
+   "partes": [
+    "FEI",
+    "JÃO"
+   ],
+   "dica": "Comemos com arroz.",
+   "imagem": "🫘",
+   "explica": "FEI + JÃO = FEIJÃO (2 sílabas)"
+  },
+  {
+   "palavra": "ARROZ",
+   "partes": [
+    "AR",
+    "ROZ"
+   ],
+   "dica": "Comemos com feijão.",
+   "imagem": "🍚",
+   "explica": "AR + ROZ = ARROZ (2 sílabas)"
+  },
+  {
+   "palavra": "PIZZA",
+   "partes": [
+    "PIZ",
+    "ZA"
+   ],
+   "dica": "Uma comida.",
+   "imagem": "🍕",
+   "explica": "PIZ + ZA = PIZZA (2 sílabas)"
+  },
+  {
+   "palavra": "SOPA",
+   "partes": [
+    "SO",
+    "PA"
+   ],
+   "dica": "Comida quente.",
+   "imagem": "🍲",
+   "explica": "SO + PA = SOPA (2 sílabas)"
+  },
+  {
+   "palavra": "BONÉ",
+   "partes": [
+    "BO",
+    "NÉ"
+   ],
+   "dica": "Usamos na cabeça.",
+   "imagem": "🧢",
+   "explica": "BO + NÉ = BONÉ (2 sílabas)"
+  },
+  {
+   "palavra": "MEIA",
+   "partes": [
+    "MEI",
+    "A"
+   ],
+   "dica": "Usamos no pé.",
+   "imagem": "🧦",
+   "explica": "MEI + A = MEIA (2 sílabas)"
+  },
+  {
+   "palavra": "LUVA",
+   "partes": [
+    "LU",
+    "VA"
+   ],
+   "dica": "Usamos na mão.",
+   "imagem": "🧤",
+   "explica": "LU + VA = LUVA (2 sílabas)"
+  },
+  {
+   "palavra": "BOTA",
+   "partes": [
+    "BO",
+    "TA"
+   ],
+   "dica": "Um calçado.",
+   "imagem": "👢",
+   "explica": "BO + TA = BOTA (2 sílabas)"
+  },
+  {
+   "palavra": "SAPATO",
+   "partes": [
+    "SA",
+    "PA",
+    "TO"
+   ],
+   "dica": "Um calçado.",
+   "imagem": "👞",
+   "explica": "SA + PA + TO = SAPATO (3 sílabas)"
+  },
+  {
+   "palavra": "MACACO",
+   "partes": [
+    "MA",
+    "CA",
+    "CO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐵",
+   "explica": "MA + CA + CO = MACACO (3 sílabas)"
+  },
+  {
+   "palavra": "CAVALO",
+   "partes": [
+    "CA",
+    "VA",
+    "LO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐴",
+   "explica": "CA + VA + LO = CAVALO (3 sílabas)"
+  },
+  {
+   "palavra": "GALINHA",
+   "partes": [
+    "GA",
+    "LI",
+    "NHA"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐔",
+   "explica": "GA + LI + NHA = GALINHA (3 sílabas)"
+  },
+  {
+   "palavra": "JANELA",
+   "partes": [
+    "JA",
+    "NE",
+    "LA"
+   ],
+   "dica": "Parte da casa.",
+   "imagem": "🪟",
+   "explica": "JA + NE + LA = JANELA (3 sílabas)"
+  },
+  {
+   "palavra": "BONECA",
+   "partes": [
+    "BO",
+    "NE",
+    "CA"
+   ],
+   "dica": "Um brinquedo.",
+   "imagem": "🪆",
+   "explica": "BO + NE + CA = BONECA (3 sílabas)"
+  },
+  {
+   "palavra": "TOMATE",
+   "partes": [
+    "TO",
+    "MA",
+    "TE"
+   ],
+   "dica": "Um fruto vermelho.",
+   "imagem": "🍅",
+   "explica": "TO + MA + TE = TOMATE (3 sílabas)"
+  },
+  {
+   "palavra": "BANANA",
+   "partes": [
+    "BA",
+    "NA",
+    "NA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍌",
+   "explica": "BA + NA + NA = BANANA (3 sílabas)"
+  },
+  {
+   "palavra": "CEBOLA",
+   "partes": [
+    "CE",
+    "BO",
+    "LA"
+   ],
+   "dica": "Um tempero.",
+   "imagem": "🧅",
+   "explica": "CE + BO + LA = CEBOLA (3 sílabas)"
+  },
+  {
+   "palavra": "PIPOCA",
+   "partes": [
+    "PI",
+    "PO",
+    "CA"
+   ],
+   "dica": "Comemos no cinema.",
+   "imagem": "🍿",
+   "explica": "PI + PO + CA = PIPOCA (3 sílabas)"
+  },
+  {
+   "palavra": "COELHO",
+   "partes": [
+    "CO",
+    "E",
+    "LHO"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐰",
+   "explica": "CO + E + LHO = COELHO (3 sílabas)"
+  },
+  {
+   "palavra": "CANETA",
+   "partes": [
+    "CA",
+    "NE",
+    "TA"
+   ],
+   "dica": "Serve para escrever.",
+   "imagem": "🖊️",
+   "explica": "CA + NE + TA = CANETA (3 sílabas)"
+  },
+  {
+   "palavra": "PANELA",
+   "partes": [
+    "PA",
+    "NE",
+    "LA"
+   ],
+   "dica": "Usamos para cozinhar.",
+   "imagem": "🍳",
+   "explica": "PA + NE + LA = PANELA (3 sílabas)"
+  },
+  {
+   "palavra": "GIRAFA",
+   "partes": [
+    "GI",
+    "RA",
+    "FA"
+   ],
+   "dica": "Tem pescoço comprido.",
+   "imagem": "🦒",
+   "explica": "GI + RA + FA = GIRAFA (3 sílabas)"
+  },
+  {
+   "palavra": "BALEIA",
+   "partes": [
+    "BA",
+    "LEI",
+    "A"
+   ],
+   "dica": "Vive no mar.",
+   "imagem": "🐋",
+   "explica": "BA + LEI + A = BALEIA (3 sílabas)"
+  },
+  {
+   "palavra": "PALHAÇO",
+   "partes": [
+    "PA",
+    "LHA",
+    "ÇO"
+   ],
+   "dica": "Trabalha no circo.",
+   "imagem": "🤡",
+   "explica": "PA + LHA + ÇO = PALHAÇO (3 sílabas)"
+  },
+  {
+   "palavra": "BALÃO",
+   "partes": [
+    "BA",
+    "LÃO"
+   ],
+   "dica": "Enchemos de ar.",
+   "imagem": "🎈",
+   "explica": "BA + LÃO = BALÃO (2 sílabas)"
+  },
+  {
+   "palavra": "CAMISA",
+   "partes": [
+    "CA",
+    "MI",
+    "SA"
+   ],
+   "dica": "Uma roupa.",
+   "imagem": "👕",
+   "explica": "CA + MI + SA = CAMISA (3 sílabas)"
+  },
+  {
+   "palavra": "TESOURA",
+   "partes": [
+    "TE",
+    "SOU",
+    "RA"
+   ],
+   "dica": "Serve para cortar.",
+   "imagem": "✂️",
+   "explica": "TE + SOU + RA = TESOURA (3 sílabas)"
+  },
+  {
+   "palavra": "FOGUETE",
+   "partes": [
+    "FO",
+    "GUE",
+    "TE"
+   ],
+   "dica": "Vai para o espaço.",
+   "imagem": "🚀",
+   "explica": "FO + GUE + TE = FOGUETE (3 sílabas)"
+  },
+  {
+   "palavra": "AVIÃO",
+   "partes": [
+    "A",
+    "VI",
+    "ÃO"
+   ],
+   "dica": "Voa no céu.",
+   "imagem": "✈️",
+   "explica": "A + VI + ÃO = AVIÃO (3 sílabas)"
+  },
+  {
+   "palavra": "ÔNIBUS",
+   "partes": [
+    "Ô",
+    "NI",
+    "BUS"
+   ],
+   "dica": "Leva muitas pessoas.",
+   "imagem": "🚌",
+   "explica": "Ô + NI + BUS = ÔNIBUS (3 sílabas)"
+  },
+  {
+   "palavra": "CADEIRA",
+   "partes": [
+    "CA",
+    "DEI",
+    "RA"
+   ],
+   "dica": "Serve para sentar.",
+   "imagem": "🪑",
+   "explica": "CA + DEI + RA = CADEIRA (3 sílabas)"
+  },
+  {
+   "palavra": "ESCOVA",
+   "partes": [
+    "ES",
+    "CO",
+    "VA"
+   ],
+   "dica": "Limpa os dentes.",
+   "imagem": "🪥",
+   "explica": "ES + CO + VA = ESCOVA (3 sílabas)"
+  },
+  {
+   "palavra": "CENOURA",
+   "partes": [
+    "CE",
+    "NOU",
+    "RA"
+   ],
+   "dica": "O coelho gosta.",
+   "imagem": "🥕",
+   "explica": "CE + NOU + RA = CENOURA (3 sílabas)"
+  },
+  {
+   "palavra": "BATATA",
+   "partes": [
+    "BA",
+    "TA",
+    "TA"
+   ],
+   "dica": "Vira batata frita.",
+   "imagem": "🥔",
+   "explica": "BA + TA + TA = BATATA (3 sílabas)"
+  },
+  {
+   "palavra": "MORANGO",
+   "partes": [
+    "MO",
+    "RAN",
+    "GO"
+   ],
+   "dica": "Uma fruta vermelha.",
+   "imagem": "🍓",
+   "explica": "MO + RAN + GO = MORANGO (3 sílabas)"
+  },
+  {
+   "palavra": "LARANJA",
+   "partes": [
+    "LA",
+    "RAN",
+    "JA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍊",
+   "explica": "LA + RAN + JA = LARANJA (3 sílabas)"
+  },
+  {
+   "palavra": "CEREJA",
+   "partes": [
+    "CE",
+    "RE",
+    "JA"
+   ],
+   "dica": "Uma fruta.",
+   "imagem": "🍒",
+   "explica": "CE + RE + JA = CEREJA (3 sílabas)"
+  },
+  {
+   "palavra": "LIMÃO",
+   "partes": [
+    "LI",
+    "MÃO"
+   ],
+   "dica": "Uma fruta azeda.",
+   "imagem": "🍋",
+   "explica": "LI + MÃO = LIMÃO (2 sílabas)"
+  },
+  {
+   "palavra": "PEPINO",
+   "partes": [
+    "PE",
+    "PI",
+    "NO"
+   ],
+   "dica": "Um legume.",
+   "imagem": "🥒",
+   "explica": "PE + PI + NO = PEPINO (3 sílabas)"
+  },
+  {
+   "palavra": "ABELHA",
+   "partes": [
+    "A",
+    "BE",
+    "LHA"
+   ],
+   "dica": "Faz mel.",
+   "imagem": "🐝",
+   "explica": "A + BE + LHA = ABELHA (3 sílabas)"
+  },
+  {
+   "palavra": "FORMIGA",
+   "partes": [
+    "FOR",
+    "MI",
+    "GA"
+   ],
+   "dica": "Um inseto.",
+   "imagem": "🐜",
+   "explica": "FOR + MI + GA = FORMIGA (3 sílabas)"
+  },
+  {
+   "palavra": "CARACOL",
+   "partes": [
+    "CA",
+    "RA",
+    "COL"
+   ],
+   "dica": "Anda devagar.",
+   "imagem": "🐌",
+   "explica": "CA + RA + COL = CARACOL (3 sílabas)"
+  },
+  {
+   "palavra": "CORUJA",
+   "partes": [
+    "CO",
+    "RU",
+    "JA"
+   ],
+   "dica": "Uma ave da noite.",
+   "imagem": "🦉",
+   "explica": "CO + RU + JA = CORUJA (3 sílabas)"
+  },
+  {
+   "palavra": "PINGUIM",
+   "partes": [
+    "PIN",
+    "GUIM"
+   ],
+   "dica": "Uma ave do gelo.",
+   "imagem": "🐧",
+   "explica": "PIN + GUIM = PINGUIM (2 sílabas)"
+  },
+  {
+   "palavra": "TUBARÃO",
+   "partes": [
+    "TU",
+    "BA",
+    "RÃO"
+   ],
+   "dica": "Vive no mar.",
+   "imagem": "🦈",
+   "explica": "TU + BA + RÃO = TUBARÃO (3 sílabas)"
+  },
+  {
+   "palavra": "CAMARÃO",
+   "partes": [
+    "CA",
+    "MA",
+    "RÃO"
+   ],
+   "dica": "Vive no mar.",
+   "imagem": "🦐",
+   "explica": "CA + MA + RÃO = CAMARÃO (3 sílabas)"
+  },
+  {
+   "palavra": "PAPAGAIO",
+   "partes": [
+    "PA",
+    "PA",
+    "GAI",
+    "O"
+   ],
+   "dica": "Uma ave que fala.",
+   "imagem": "🦜",
+   "explica": "PA + PA + GAI + O = PAPAGAIO (4 sílabas)"
+  },
+  {
+   "palavra": "CAVEIRA",
+   "partes": [
+    "CA",
+    "VEI",
+    "RA"
+   ],
+   "dica": "Um esqueleto.",
+   "imagem": "💀",
+   "explica": "CA + VEI + RA = CAVEIRA (3 sílabas)"
+  },
+  {
+   "palavra": "CORAÇÃO",
+   "partes": [
+    "CO",
+    "RA",
+    "ÇÃO"
+   ],
+   "dica": "Bate no peito.",
+   "imagem": "❤️",
+   "explica": "CO + RA + ÇÃO = CORAÇÃO (3 sílabas)"
+  },
+  {
+   "palavra": "CABEÇA",
+   "partes": [
+    "CA",
+    "BE",
+    "ÇA"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "🙂",
+   "explica": "CA + BE + ÇA = CABEÇA (3 sílabas)"
+  },
+  {
+   "palavra": "ORELHA",
+   "partes": [
+    "O",
+    "RE",
+    "LHA"
+   ],
+   "dica": "Parte do corpo.",
+   "imagem": "👂",
+   "explica": "O + RE + LHA = ORELHA (3 sílabas)"
+  },
+  {
+   "palavra": "CABELO",
+   "partes": [
+    "CA",
+    "BE",
+    "LO"
+   ],
+   "dica": "Cresce na cabeça.",
+   "imagem": "💇",
+   "explica": "CA + BE + LO = CABELO (3 sílabas)"
+  },
+  {
+   "palavra": "JACARÉ",
+   "partes": [
+    "JA",
+    "CA",
+    "RÉ"
+   ],
+   "dica": "Um animal.",
+   "imagem": "🐊",
+   "explica": "JA + CA + RÉ = JACARÉ (3 sílabas)"
+  },
+  {
+   "palavra": "TARTARUGA",
+   "partes": [
+    "TAR",
+    "TA",
+    "RU",
+    "GA"
+   ],
+   "dica": "Anda devagar.",
+   "imagem": "🐢",
+   "explica": "TAR + TA + RU + GA = TARTARUGA (4 sílabas)"
+  },
+  {
+   "palavra": "MOCHILA",
+   "partes": [
+    "MO",
+    "CHI",
+    "LA"
+   ],
+   "dica": "Leva o material.",
+   "imagem": "🎒",
+   "explica": "MO + CHI + LA = MOCHILA (3 sílabas)"
+  },
+  {
+   "palavra": "CADERNO",
+   "partes": [
+    "CA",
+    "DER",
+    "NO"
+   ],
+   "dica": "Escrevemos nele.",
+   "imagem": "📓",
+   "explica": "CA + DER + NO = CADERNO (3 sílabas)"
+  },
+  {
+   "palavra": "RÉGUA",
+   "partes": [
+    "RÉ",
+    "GUA"
+   ],
+   "dica": "Serve para medir.",
+   "imagem": "📏",
+   "explica": "RÉ + GUA = RÉGUA (2 sílabas)"
+  },
+  {
+   "palavra": "PINCEL",
+   "partes": [
+    "PIN",
+    "CEL"
+   ],
+   "dica": "Serve para pintar.",
+   "imagem": "🖌️",
+   "explica": "PIN + CEL = PINCEL (2 sílabas)"
+  },
+  {
+   "palavra": "GELADEIRA",
+   "partes": [
+    "GE",
+    "LA",
+    "DEI",
+    "RA"
+   ],
+   "dica": "Guarda comida gelada.",
+   "imagem": "🧊",
+   "explica": "GE + LA + DEI + RA = GELADEIRA (4 sílabas)"
+  },
+  {
+   "palavra": "VASSOURA",
+   "partes": [
+    "VAS",
+    "SOU",
+    "RA"
+   ],
+   "dica": "Serve para varrer.",
+   "imagem": "🧹",
+   "explica": "VAS + SOU + RA = VASSOURA (3 sílabas)"
+  },
+  {
+   "palavra": "SABONETE",
+   "partes": [
+    "SA",
+    "BO",
+    "NE",
+    "TE"
+   ],
+   "dica": "Serve para lavar.",
+   "imagem": "🧼",
+   "explica": "SA + BO + NE + TE = SABONETE (4 sílabas)"
+  },
+  {
+   "palavra": "TOALHA",
+   "partes": [
+    "TO",
+    "A",
+    "LHA"
+   ],
+   "dica": "Serve para secar.",
+   "imagem": "🧻",
+   "explica": "TO + A + LHA = TOALHA (3 sílabas)"
+  },
+  {
+   "palavra": "ESPELHO",
+   "partes": [
+    "ES",
+    "PE",
+    "LHO"
+   ],
+   "dica": "Mostra a nossa imagem.",
+   "imagem": "🪞",
+   "explica": "ES + PE + LHO = ESPELHO (3 sílabas)"
+  },
+  {
+   "palavra": "RELÓGIO",
+   "partes": [
+    "RE",
+    "LÓ",
+    "GIO"
+   ],
+   "dica": "Mostra as horas.",
+   "imagem": "⏰",
+   "explica": "RE + LÓ + GIO = RELÓGIO (3 sílabas)"
+  },
+  {
+   "palavra": "TELEFONE",
+   "partes": [
+    "TE",
+    "LE",
+    "FO",
+    "NE"
+   ],
+   "dica": "Serve para ligar.",
+   "imagem": "☎️",
+   "explica": "TE + LE + FO + NE = TELEFONE (4 sílabas)"
+  },
+  {
+   "palavra": "CASACO",
+   "partes": [
+    "CA",
+    "SA",
+    "CO"
+   ],
+   "dica": "Roupa de frio.",
+   "imagem": "🧥",
+   "explica": "CA + SA + CO = CASACO (3 sílabas)"
+  },
+  {
+   "palavra": "VESTIDO",
+   "partes": [
+    "VES",
+    "TI",
+    "DO"
+   ],
+   "dica": "Uma roupa.",
+   "imagem": "👗",
+   "explica": "VES + TI + DO = VESTIDO (3 sílabas)"
+  },
+  {
+   "palavra": "SANDÁLIA",
+   "partes": [
+    "SAN",
+    "DÁ",
+    "LIA"
+   ],
+   "dica": "Um calçado.",
+   "imagem": "👡",
+   "explica": "SAN + DÁ + LIA = SANDÁLIA (3 sílabas)"
+  },
+  {
+   "palavra": "CHINELO",
+   "partes": [
+    "CHI",
+    "NE",
+    "LO"
+   ],
+   "dica": "Um calçado.",
+   "imagem": "🩴",
+   "explica": "CHI + NE + LO = CHINELO (3 sílabas)"
+  },
+  {
+   "palavra": "SORVETE",
+   "partes": [
+    "SOR",
+    "VE",
+    "TE"
+   ],
+   "dica": "Um doce gelado.",
+   "imagem": "🍦",
+   "explica": "SOR + VE + TE = SORVETE (3 sílabas)"
+  },
+  {
+   "palavra": "BISCOITO",
+   "partes": [
+    "BIS",
+    "COI",
+    "TO"
+   ],
+   "dica": "Um lanche.",
+   "imagem": "🍪",
+   "explica": "BIS + COI + TO = BISCOITO (3 sílabas)"
+  },
+  {
+   "palavra": "PIRULITO",
+   "partes": [
+    "PI",
+    "RU",
+    "LI",
+    "TO"
+   ],
+   "dica": "Um doce.",
+   "imagem": "🍭",
+   "explica": "PI + RU + LI + TO = PIRULITO (4 sílabas)"
+  },
+  {
+   "palavra": "CHOCOLATE",
+   "partes": [
+    "CHO",
+    "CO",
+    "LA",
+    "TE"
+   ],
+   "dica": "Um doce.",
+   "imagem": "🍫",
+   "explica": "CHO + CO + LA + TE = CHOCOLATE (4 sílabas)"
+  },
+  {
+   "palavra": "ESTRELA",
+   "partes": [
+    "ES",
+    "TRE",
+    "LA"
+   ],
+   "dica": "Brilha no céu.",
+   "imagem": "⭐",
+   "explica": "ES + TRE + LA = ESTRELA (3 sílabas)"
+  },
+  {
+   "palavra": "PLANETA",
+   "partes": [
+    "PLA",
+    "NE",
+    "TA"
+   ],
+   "dica": "Gira em volta do Sol.",
+   "imagem": "🪐",
+   "explica": "PLA + NE + TA = PLANETA (3 sílabas)"
+  },
+  {
+   "palavra": "MONTANHA",
+   "partes": [
+    "MON",
+    "TA",
+    "NHA"
+   ],
+   "dica": "É muito alta.",
+   "imagem": "⛰️",
+   "explica": "MON + TA + NHA = MONTANHA (3 sílabas)"
+  },
+  {
+   "palavra": "VULCÃO",
+   "partes": [
+    "VUL",
+    "CÃO"
+   ],
+   "dica": "Solta lava.",
+   "imagem": "🌋",
+   "explica": "VUL + CÃO = VULCÃO (2 sílabas)"
+  },
+  {
+   "palavra": "PRAIA",
+   "partes": [
+    "PRAI",
+    "A"
+   ],
+   "dica": "Tem areia e mar.",
+   "imagem": "🏖️",
+   "explica": "PRAI + A = PRAIA (2 sílabas)"
+  },
+  {
+   "palavra": "ÁRVORE",
+   "partes": [
+    "ÁR",
+    "VO",
+    "RE"
+   ],
+   "dica": "Tem tronco e folhas.",
+   "imagem": "🌳",
+   "explica": "ÁR + VO + RE = ÁRVORE (3 sílabas)"
+  },
+  {
+   "palavra": "FOLHA",
+   "partes": [
+    "FO",
+    "LHA"
+   ],
+   "dica": "Nasce na árvore.",
+   "imagem": "🍃",
+   "explica": "FO + LHA = FOLHA (2 sílabas)"
+  },
+  {
+   "palavra": "CACTO",
+   "partes": [
+    "CAC",
+    "TO"
+   ],
+   "dica": "Tem espinhos.",
+   "imagem": "🌵",
+   "explica": "CAC + TO = CACTO (2 sílabas)"
+  },
+  {
+   "palavra": "COMIDA",
+   "partes": [
+    "CO",
+    "MI",
+    "DA"
+   ],
+   "dica": "O que comemos.",
+   "imagem": "🍽️",
+   "explica": "CO + MI + DA = COMIDA (3 sílabas)"
+  },
+  {
+   "palavra": "BICICLETA",
+   "partes": [
+    "BI",
+    "CI",
+    "CLE",
+    "TA"
+   ],
+   "dica": "Tem duas rodas.",
+   "imagem": "🚲",
+   "explica": "BI + CI + CLE + TA = BICICLETA (4 sílabas)"
+  },
+  {
+   "palavra": "BORBOLETA",
+   "partes": [
+    "BOR",
+    "BO",
+    "LE",
+    "TA"
+   ],
+   "dica": "Um inseto colorido.",
+   "imagem": "🦋",
+   "explica": "BOR + BO + LE + TA = BORBOLETA (4 sílabas)"
+  },
+  {
+   "palavra": "MINHOCA",
+   "partes": [
+    "MI",
+    "NHO",
+    "CA"
+   ],
+   "dica": "Vive na terra.",
+   "imagem": "🪱",
+   "explica": "MI + NHO + CA = MINHOCA (3 sílabas)"
+  },
+  {
+   "palavra": "ELEFANTE",
+   "partes": [
+    "E",
+    "LE",
+    "FAN",
+    "TE"
+   ],
+   "dica": "Tem tromba.",
+   "imagem": "🐘",
+   "explica": "E + LE + FAN + TE = ELEFANTE (4 sílabas)"
+  },
+  {
+   "palavra": "JOANINHA",
+   "partes": [
+    "JO",
+    "A",
+    "NI",
+    "NHA"
+   ],
+   "dica": "Um inseto vermelho.",
+   "imagem": "🐞",
+   "explica": "JO + A + NI + NHA = JOANINHA (4 sílabas)"
+  },
+  {
+   "palavra": "HIPOPÓTAMO",
+   "partes": [
+    "HI",
+    "PO",
+    "PÓ",
+    "TA",
+    "MO"
+   ],
+   "dica": "Um animal grande.",
+   "imagem": "🦛",
+   "explica": "HI + PO + PÓ + TA + MO = HIPOPÓTAMO (5 sílabas)"
+  },
+  {
+   "palavra": "RINOCERONTE",
+   "partes": [
+    "RI",
+    "NO",
+    "CE",
+    "RON",
+    "TE"
+   ],
+   "dica": "Tem chifre no nariz.",
+   "imagem": "🦏",
+   "explica": "RI + NO + CE + RON + TE = RINOCERONTE (5 sílabas)"
+  },
+  {
+   "palavra": "DINOSSAURO",
+   "partes": [
+    "DI",
+    "NOS",
+    "SAU",
+    "RO"
+   ],
+   "dica": "Viveu há muito tempo.",
+   "imagem": "🦕",
+   "explica": "DI + NOS + SAU + RO = DINOSSAURO (4 sílabas)"
+  },
+  {
+   "palavra": "UNICÓRNIO",
+   "partes": [
+    "U",
+    "NI",
+    "CÓR",
+    "NIO"
+   ],
+   "dica": "Um cavalo com chifre.",
+   "imagem": "🦄",
+   "explica": "U + NI + CÓR + NIO = UNICÓRNIO (4 sílabas)"
+  },
+  {
+   "palavra": "CARANGUEJO",
+   "partes": [
+    "CA",
+    "RAN",
+    "GUE",
+    "JO"
+   ],
+   "dica": "Anda de lado.",
+   "imagem": "🦀",
+   "explica": "CA + RAN + GUE + JO = CARANGUEJO (4 sílabas)"
+  },
+  {
+   "palavra": "GOLFINHO",
+   "partes": [
+    "GOL",
+    "FI",
+    "NHO"
+   ],
+   "dica": "Vive no mar.",
+   "imagem": "🐬",
+   "explica": "GOL + FI + NHO = GOLFINHO (3 sílabas)"
+  },
+  {
+   "palavra": "CAMINHÃO",
+   "partes": [
+    "CA",
+    "MI",
+    "NHÃO"
+   ],
+   "dica": "Leva cargas.",
+   "imagem": "🚚",
+   "explica": "CA + MI + NHÃO = CAMINHÃO (3 sílabas)"
+  },
+  {
+   "palavra": "HELICÓPTERO",
+   "partes": [
+    "HE",
+    "LI",
+    "CÓP",
+    "TE",
+    "RO"
+   ],
+   "dica": "Voa e tem hélice.",
+   "imagem": "🚁",
+   "explica": "HE + LI + CÓP + TE + RO = HELICÓPTERO (5 sílabas)"
+  },
+  {
+   "palavra": "AMBULÂNCIA",
+   "partes": [
+    "AM",
+    "BU",
+    "LÂN",
+    "CIA"
+   ],
+   "dica": "Leva doentes ao hospital.",
+   "imagem": "🚑",
+   "explica": "AM + BU + LÂN + CIA = AMBULÂNCIA (4 sílabas)"
+  },
+  {
+   "palavra": "TELEVISÃO",
+   "partes": [
+    "TE",
+    "LE",
+    "VI",
+    "SÃO"
+   ],
+   "dica": "Assistimos desenhos nela.",
+   "imagem": "📺",
+   "explica": "TE + LE + VI + SÃO = TELEVISÃO (4 sílabas)"
+  },
+  {
+   "palavra": "COMPUTADOR",
+   "partes": [
+    "COM",
+    "PU",
+    "TA",
+    "DOR"
+   ],
+   "dica": "Usamos para estudar.",
+   "imagem": "💻",
+   "explica": "COM + PU + TA + DOR = COMPUTADOR (4 sílabas)"
+  },
+  {
+   "palavra": "MICROFONE",
+   "partes": [
+    "MI",
+    "CRO",
+    "FO",
+    "NE"
+   ],
+   "dica": "Serve para cantar.",
+   "imagem": "🎤",
+   "explica": "MI + CRO + FO + NE = MICROFONE (4 sílabas)"
+  },
+  {
+   "palavra": "CALENDÁRIO",
+   "partes": [
+    "CA",
+    "LEN",
+    "DÁ",
+    "RIO"
+   ],
+   "dica": "Mostra os dias.",
+   "imagem": "📅",
+   "explica": "CA + LEN + DÁ + RIO = CALENDÁRIO (4 sílabas)"
+  },
+  {
+   "palavra": "GUARDACHUVA",
+   "partes": [
+    "GUAR",
+    "DA",
+    "CHU",
+    "VA"
+   ],
+   "dica": "Protege da chuva.",
+   "imagem": "☂️",
+   "explica": "GUAR + DA + CHU + VA = GUARDACHUVA (4 sílabas)"
+  },
+  {
+   "palavra": "ABACAXI",
+   "partes": [
+    "A",
+    "BA",
+    "CA",
+    "XI"
+   ],
+   "dica": "Uma fruta com coroa.",
+   "imagem": "🍍",
+   "explica": "A + BA + CA + XI = ABACAXI (4 sílabas)"
+  },
+  {
+   "palavra": "MELANCIA",
+   "partes": [
+    "ME",
+    "LAN",
+    "CI",
+    "A"
+   ],
+   "dica": "Uma fruta grande.",
+   "imagem": "🍉",
+   "explica": "ME + LAN + CI + A = MELANCIA (4 sílabas)"
+  },
+  {
+   "palavra": "ABACATE",
+   "partes": [
+    "A",
+    "BA",
+    "CA",
+    "TE"
+   ],
+   "dica": "Uma fruta verde.",
+   "imagem": "🥑",
+   "explica": "A + BA + CA + TE = ABACATE (4 sílabas)"
+  },
+  {
+   "palavra": "SANDUÍCHE",
+   "partes": [
+    "SAN",
+    "DU",
+    "Í",
+    "CHE"
+   ],
+   "dica": "Um lanche.",
+   "imagem": "🥪",
+   "explica": "SAN + DU + Í + CHE = SANDUÍCHE (4 sílabas)"
+  },
+  {
+   "palavra": "MACARRÃO",
+   "partes": [
+    "MA",
+    "CAR",
+    "RÃO"
+   ],
+   "dica": "Uma comida.",
+   "imagem": "🍝",
+   "explica": "MA + CAR + RÃO = MACARRÃO (3 sílabas)"
+  },
+  {
+   "palavra": "HAMBÚRGUER",
+   "partes": [
+    "HAM",
+    "BÚR",
+    "GUER"
+   ],
+   "dica": "Um lanche.",
+   "imagem": "🍔",
+   "explica": "HAM + BÚR + GUER = HAMBÚRGUER (3 sílabas)"
+  },
+  {
+   "palavra": "PRINCESA",
+   "partes": [
+    "PRIN",
+    "CE",
+    "SA"
+   ],
+   "dica": "Filha do rei.",
+   "imagem": "👸",
+   "explica": "PRIN + CE + SA = PRINCESA (3 sílabas)"
+  },
+  {
+   "palavra": "ASTRONAUTA",
+   "partes": [
+    "AS",
+    "TRO",
+    "NAU",
+    "TA"
+   ],
+   "dica": "Vai para o espaço.",
+   "imagem": "🧑‍🚀",
+   "explica": "AS + TRO + NAU + TA = ASTRONAUTA (4 sílabas)"
+  },
+  {
+   "palavra": "BOMBEIRO",
+   "partes": [
+    "BOM",
+    "BEI",
+    "RO"
+   ],
+   "dica": "Apaga o fogo.",
+   "imagem": "🚒",
+   "explica": "BOM + BEI + RO = BOMBEIRO (3 sílabas)"
+  },
+  {
+   "palavra": "PROFESSORA",
+   "partes": [
+    "PRO",
+    "FES",
+    "SO",
+    "RA"
+   ],
+   "dica": "Ensina na escola.",
+   "imagem": "🧑‍🏫",
+   "explica": "PRO + FES + SO + RA = PROFESSORA (4 sílabas)"
+  },
+  {
+   "palavra": "FAMÍLIA",
+   "partes": [
+    "FA",
+    "MÍ",
+    "LIA"
+   ],
+   "dica": "Pai, mãe e filhos.",
+   "imagem": "👪",
+   "explica": "FA + MÍ + LIA = FAMÍLIA (3 sílabas)"
+  },
+  {
+   "palavra": "BONECODENEVE",
+   "partes": [
+    "BO",
+    "NE",
+    "CO",
+    "DE",
+    "NE",
+    "VE"
+   ],
+   "dica": "Feito de neve.",
+   "imagem": "⛄",
+   "explica": "BO + NE + CO + DE + NE + VE = BONECODENEVE (6 sílabas)"
+  },
+  {
+   "palavra": "ARCOÍRIS",
+   "partes": [
+    "AR",
+    "CO",
+    "Í",
+    "RIS"
+   ],
+   "dica": "Tem sete cores.",
+   "imagem": "🌈",
+   "explica": "AR + CO + Í + RIS = ARCOÍRIS (4 sílabas)"
+  },
+  {
+   "palavra": "GIRASSOL",
+   "partes": [
+    "GI",
+    "RAS",
+    "SOL"
+   ],
+   "dica": "Uma flor amarela.",
+   "imagem": "🌻",
+   "explica": "GI + RAS + SOL = GIRASSOL (3 sílabas)"
+  },
+  {
+   "palavra": "QUEBRACABEÇA",
+   "partes": [
+    "QUE",
+    "BRA",
+    "CA",
+    "BE",
+    "ÇA"
+   ],
+   "dica": "Um jogo de peças.",
+   "imagem": "🧩",
+   "explica": "QUE + BRA + CA + BE + ÇA = QUEBRACABEÇA (5 sílabas)"
+  },
+  {
+   "palavra": "VIOLÃO",
+   "partes": [
+    "VI",
+    "O",
+    "LÃO"
+   ],
+   "dica": "Um instrumento.",
+   "imagem": "🎸",
+   "explica": "VI + O + LÃO = VIOLÃO (3 sílabas)"
+  },
+  {
+   "palavra": "PIANO",
+   "partes": [
+    "PI",
+    "A",
+    "NO"
+   ],
+   "dica": "Um instrumento.",
+   "imagem": "🎹",
+   "explica": "PI + A + NO = PIANO (3 sílabas)"
+  },
+  {
+   "palavra": "TAMBOR",
+   "partes": [
+    "TAM",
+    "BOR"
+   ],
+   "dica": "Um instrumento.",
+   "imagem": "🥁",
+   "explica": "TAM + BOR = TAMBOR (2 sílabas)"
+  }
+ ]
+}
