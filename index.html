@@ -94,6 +94,20 @@
         }
         .welcome-card h1 { color: #60a5fa; margin-bottom: 15px; }
         .welcome-card p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
+        #welcome-screen { overflow-y: auto; }
+        .criador { margin-top: 18px; max-width: 600px; width: 100%; text-align: left; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; color: #e2e8f0; }
+        .criador summary { cursor: pointer; padding: 14px 18px; list-style: none; display: flex; align-items: center; gap: 12px; }
+        .criador summary::-webkit-details-marker { display: none; }
+        .criador .foto { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+            background: linear-gradient(135deg, #2563eb, #60a5fa); font-weight: bold; font-size: 18px; color: #fff; }
+        .criador .nome { font-weight: bold; color: #f8fafc; font-size: 1.05rem; }
+        .criador .cargo { font-size: .9rem; color: #94a3b8; }
+        .criador .seta { margin-left: auto; color: #60a5fa; font-size: .9rem; white-space: nowrap; }
+        .criador[open] .seta { visibility: hidden; }
+        .criador .bio { padding: 0 18px 16px; font-size: .98rem; line-height: 1.55; color: #cbd5e1; }
+        .criador .bio p { margin: 0 0 10px; font-size: inherit; color: inherit; }
+        @media (max-width: 560px) { .criador summary { flex-wrap: wrap; } .criador .seta { margin-left: 58px; } .criador[open] .seta { display: none; } }
 
         /* Iframe */
         iframe {
@@ -1139,6 +1153,18 @@
             <h1>Olá, Professor! 👋</h1>
             <p>Seu painel interativo está pronto. Selecione a atividade que deseja usar no menu acima para começar a aula.</p>
         </div>
+        <details class="criador" id="sobre-criador">
+            <summary>
+                <span class="foto" aria-hidden="true">EG</span>
+                <span><span class="nome">Criado pelo Prof. Eduardo da Silva Goulart</span><br><span class="cargo">Licenciado em Língua Portuguesa e História • Mestre em Direito</span></span>
+                <span class="seta">Sobre o criador ▾</span>
+            </summary>
+            <div class="bio">
+                <p>Mestre em Direito pela Universidad de la Empresa (UDE), Montevidéu/Uruguai, e doutorando em Direito Internacional pela Universidad Autónoma de Asunción (UAA). É Bacharel em Direito pela Universidade Católica de Pelotas (UCPel, 2014) e graduado em Língua Portuguesa e História pela ETEP, além de pós-graduado em Literatura Brasileira e nas áreas de Direito Previdenciário, Constitucional, Civil e Processual Civil e do Trabalho.</p>
+                <p>Advogado inscrito na Ordem dos Advogados do Brasil, Seccional do Rio Grande do Sul (OAB/RS), sob o nº 95.410, exerce a advocacia na Silva Goulart Advocacia em Rede, com atuação predominante nas áreas de Direito Previdenciário e Direito do Trabalho, atendendo demandas nas cidades de Pelotas, Rio Grande, Canguçu e região, no Estado do Rio Grande do Sul.</p>
+                <p>Possui produção científica e participação em congressos internacionais na área jurídica, com artigos publicados em periódicos científicos de circulação e visibilidade nacional e internacional, incluindo revistas classificadas no estrato Qualis A2.</p>
+            </div>
+        </details>
     </div>
 
     <iframe id="app-frame" src="" allow="microphone; autoplay; fullscreen" allowfullscreen></iframe>
