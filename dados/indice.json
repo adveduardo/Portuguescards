@@ -254,6 +254,26 @@
       "arquivo": "quiz-hist-9.json",
       "titulo": "📜 História do 9º ano",
       "qtd": 36
+    },
+    {
+      "arquivo": "quiz-mat-potenciacao.json",
+      "titulo": "🔢 Potenciação",
+      "qtd": 45
+    },
+    {
+      "arquivo": "quiz-mat-raiz-quadrada.json",
+      "titulo": "🔢 Raiz quadrada",
+      "qtd": 43
+    },
+    {
+      "arquivo": "quiz-mat-media-aritmetica.json",
+      "titulo": "🔢 Média aritmética",
+      "qtd": 32
+    },
+    {
+      "arquivo": "quiz-mat-pot-raiz-media.json",
+      "titulo": "🔢 Potenciação, raiz quadrada e média (misturado)",
+      "qtd": 45
     }
   ],
   "stop": [
@@ -462,6 +482,10 @@
     {
       "arquivo": "batata-historia.json",
       "titulo": "📜 Batata quente da História (6º ao 9º)"
+    },
+    {
+      "arquivo": "batata-pot-raiz-media.json",
+      "titulo": "🔢 Potência, raiz e média"
     }
   ],
   "trilha": [
@@ -568,6 +592,10 @@
     {
       "arquivo": "trilha-historia.json",
       "titulo": "📜 Trilha da História (6º ao 9º)"
+    },
+    {
+      "arquivo": "trilha-pot-raiz-media.json",
+      "titulo": "🔢 Trilha da potência, raiz e média"
     }
   ],
   "escape": [
@@ -1127,6 +1155,14 @@
     {
       "arquivo": "hist-cestos-guerras.json",
       "titulo": "📜 História: Primeira ou Segunda Guerra Mundial?"
+    },
+    {
+      "arquivo": "mat-cestos-quadrado-perfeito.json",
+      "titulo": "🔢 Quadrado perfeito ou não?"
+    },
+    {
+      "arquivo": "mat-cestos-sinal-potencia.json",
+      "titulo": "🔢 Potência: positivo ou negativo?"
     }
   ],
   "morfo-frases": [
@@ -3308,6 +3344,21 @@
       "arquivo": "contas-divisao-4-escolha.json",
       "titulo": "🧮 Divisão com 4 algarismos (por 1 algarismo)",
       "qtd": 40
+    },
+    {
+      "arquivo": "mat-potenciacao.json",
+      "titulo": "🔢 Potenciação",
+      "qtd": 45
+    },
+    {
+      "arquivo": "mat-raiz-quadrada.json",
+      "titulo": "🔢 Raiz quadrada",
+      "qtd": 43
+    },
+    {
+      "arquivo": "mat-media-aritmetica.json",
+      "titulo": "🔢 Média aritmética",
+      "qtd": 32
     }
   ],
   "escolha-es": [

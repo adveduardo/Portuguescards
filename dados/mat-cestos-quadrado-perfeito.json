@@ -1,0 +1,195 @@
+{
+ "titulo": "Matemática: quadrado perfeito ou não?",
+ "cestos": [
+  {
+   "id": "sim",
+   "nome": "Quadrado perfeito (raiz exata)",
+   "emoji": "✅",
+   "cor": "#27ae60"
+  },
+  {
+   "id": "nao",
+   "nome": "Não é quadrado perfeito",
+   "emoji": "❌",
+   "cor": "#c0392b"
+  }
+ ],
+ "palavras": [
+  {
+   "palavra": "1",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "4",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "9",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "16",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "25",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "36",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "49",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "64",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "81",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "100",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "121",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "144",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "169",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "196",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "225",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "256",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "289",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "324",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "361",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "400",
+   "cesto": "sim"
+  },
+  {
+   "palavra": "2",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "3",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "5",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "8",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "10",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "12",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "15",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "18",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "20",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "24",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "27",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "30",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "32",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "40",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "45",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "50",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "60",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "72",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "80",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "90",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "99",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "120",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "150",
+   "cesto": "nao"
+  },
+  {
+   "palavra": "200",
+   "cesto": "nao"
+  }
+ ]
+}

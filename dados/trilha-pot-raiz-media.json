@@ -1,0 +1,197 @@
+{
+ "titulo": "Trilha da potência, raiz e média",
+ "casas": 30,
+ "especiais": true,
+ "tipos": {
+  "pot": {
+   "nome": "Potenciação",
+   "emoji": "🔺",
+   "cor": "#2f80ed"
+  },
+  "raiz": {
+   "nome": "Raiz quadrada",
+   "emoji": "✔️",
+   "cor": "#27ae60"
+  },
+  "media": {
+   "nome": "Média",
+   "emoji": "📊",
+   "cor": "#8e44ad"
+  },
+  "mente": {
+   "nome": "Cálculo mental",
+   "emoji": "🧠",
+   "cor": "#e67e22"
+  }
+ },
+ "desafios": {
+  "pot": [
+   {
+    "texto": "Potência de decimal: (0,1)² = ?",
+    "resposta": "0,01"
+   },
+   {
+    "texto": "Calcule a potência: 10³ = ?",
+    "resposta": "1.000"
+   },
+   {
+    "texto": "Calcule a potência: 6² = ?",
+    "resposta": "36"
+   },
+   {
+    "texto": "Calcule a potência: 2⁴ = ?",
+    "resposta": "16"
+   },
+   {
+    "texto": "Calcule a potência: 5³ = ?",
+    "resposta": "125"
+   },
+   {
+    "texto": "Potência de fração: (2/3)² = ?",
+    "resposta": "4/9"
+   },
+   {
+    "texto": "Calcule a potência: 2³ = ?",
+    "resposta": "8"
+   },
+   {
+    "texto": "Todo número elevado a 1 é ele mesmo: 37¹ = ?",
+    "resposta": "37"
+   },
+   {
+    "texto": "Calcule a potência: 3³ = ?",
+    "resposta": "27"
+   },
+   {
+    "texto": "Propriedade: divisão de potências de mesma base (subtrai os expoentes): 5⁸ : 5³ = ?",
+    "resposta": "5⁵"
+   }
+  ],
+  "raiz": [
+   {
+    "texto": "Raiz de fração: √(4/25) = ?",
+    "resposta": "2/5"
+   },
+   {
+    "texto": "Calcule a raiz quadrada: √225 = ?",
+    "resposta": "15"
+   },
+   {
+    "texto": "Problema: Uma horta quadrada tem 144 m². Quanto mede cada lado?",
+    "resposta": "12 m"
+   },
+   {
+    "texto": "Calcule a raiz quadrada: √121 = ?",
+    "resposta": "11"
+   },
+   {
+    "texto": "Expressão: 3 × √49 = ?",
+    "resposta": "21"
+   },
+   {
+    "texto": "Calcule a raiz quadrada: √1 = ?",
+    "resposta": "1"
+   },
+   {
+    "texto": "Calcule a raiz quadrada: √100 = ?",
+    "resposta": "10"
+   },
+   {
+    "texto": "Calcule a raiz quadrada: √64 = ?",
+    "resposta": "8"
+   },
+   {
+    "texto": "Raiz de fração: √(1/49) = ?",
+    "resposta": "1/7"
+   },
+   {
+    "texto": "Estimativa: entre quais números inteiros está a raiz? √30 está entre:",
+    "resposta": "5 e 6"
+   }
+  ],
+  "media": [
+   {
+    "texto": "Qual é a média de 7, 8 e 9?",
+    "resposta": "8"
+   },
+   {
+    "texto": "A média de 5 números é 8. Qual é a soma deles?",
+    "resposta": "40"
+   },
+   {
+    "texto": "Um aluno tirou 4, 6 e 7. Que nota precisa no 4º bimestre para ter média 6?",
+    "resposta": "7"
+   },
+   {
+    "texto": "Um aluno tirou 6, 7 e 8. Que nota precisa no 4º bimestre para ter média 7?",
+    "resposta": "7"
+   },
+   {
+    "texto": "Qual é a média de 3, 5 e 7?",
+    "resposta": "5"
+   },
+   {
+    "texto": "Bia tirou as notas 10, 8, 9 e 9 nos quatro bimestres. Qual é a média?",
+    "resposta": "9"
+   },
+   {
+    "texto": "Qual é a média de 20, 30 e 40?",
+    "resposta": "30"
+   },
+   {
+    "texto": "As temperaturas da semana foram 30, 28, 32 °C. Qual é a temperatura média?",
+    "resposta": "30 °C"
+   },
+   {
+    "texto": "Qual é a média de 6, 6 e 9?",
+    "resposta": "7"
+   },
+   {
+    "texto": "Uma loja vendeu R$ 150, R$ 200 e R$ 250 em três dias. Qual foi a média por dia? (em reais)",
+    "resposta": "200"
+   }
+  ],
+  "mente": [
+   {
+    "texto": "Quanto é 2⁵?",
+    "resposta": "32"
+   },
+   {
+    "texto": "Quanto é 10⁴?",
+    "resposta": "10.000"
+   },
+   {
+    "texto": "Quanto é 3³?",
+    "resposta": "27"
+   },
+   {
+    "texto": "Quanto é (−2)²? E −2²?",
+    "resposta": "4 e −4"
+   },
+   {
+    "texto": "Quanto é 7⁰?",
+    "resposta": "1"
+   },
+   {
+    "texto": "Quanto é √81?",
+    "resposta": "9"
+   },
+   {
+    "texto": "Quanto é √144?",
+    "resposta": "12"
+   },
+   {
+    "texto": "√30 está entre quais inteiros?",
+    "resposta": "5 e 6"
+   },
+   {
+    "texto": "Um quadrado tem área 100 m². Quanto mede o lado?",
+    "resposta": "10 m"
+   },
+   {
+    "texto": "Qual é a média de 4, 8 e 12?",
+    "resposta": "8"
+   }
+  ]
+ }
+}

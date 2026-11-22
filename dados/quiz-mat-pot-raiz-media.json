@@ -1,0 +1,501 @@
+{
+ "titulo": "Quiz: potenciação, raiz quadrada e média",
+ "tempoPadrao": 40,
+ "perguntas": [
+  {
+   "pergunta": "Raiz de decimal: √0,25 = ?",
+   "opcoes": [
+    "0,5",
+    "5",
+    "0,05",
+    "0,125"
+   ],
+   "correta": "0,5",
+   "explica": "0,5 × 0,5 = 0,25, então √0,25 = 0,5."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 4 e 6?",
+   "opcoes": [
+    "5",
+    "7",
+    "6",
+    "10"
+   ],
+   "correta": "5",
+   "explica": "Soma: 4 + 6 = 10. Divide pela quantidade (2): 10 ÷ 2 = 5."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √0 = ?",
+   "opcoes": [
+    "1",
+    "2",
+    "3",
+    "0"
+   ],
+   "correta": "0",
+   "explica": "√0 = 0, porque 0² = 0 × 0 = 0. Cuidado: raiz não é a metade!"
+  },
+  {
+   "pergunta": "Problema: Uma sala quadrada tem 49 m² de piso. Qual é o perímetro?",
+   "opcoes": [
+    "49 m",
+    "7 m",
+    "28 m",
+    "14 m"
+   ],
+   "correta": "28 m",
+   "explica": "Lado = √49 = 7 m; perímetro = 4 × 7 = 28 m."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média das idades: 30, 40, 50 anos?",
+   "opcoes": [
+    "50 anos",
+    "41 anos",
+    "40 anos",
+    "120 anos"
+   ],
+   "correta": "40 anos",
+   "explica": "Soma: 30 + 40 + 50 = 120. Divide pela quantidade (3): 120 ÷ 3 = 40 anos."
+  },
+  {
+   "pergunta": "Potência de número negativo (atenção ao sinal): (-2)³ = ?",
+   "opcoes": [
+    "-8",
+    "8",
+    "6",
+    "-6"
+   ],
+   "correta": "-8",
+   "explica": "(-2)³ = -8. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "pergunta": "Todo número (diferente de zero) elevado a zero é: 5⁰ = ?",
+   "opcoes": [
+    "5",
+    "10",
+    "0",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 5⁰ = 1."
+  },
+  {
+   "pergunta": "Potência de número negativo (atenção ao sinal): (-10)³ = ?",
+   "opcoes": [
+    "1000",
+    "30",
+    "-30",
+    "-1000"
+   ],
+   "correta": "-1000",
+   "explica": "(-10)³ = -1000. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "pergunta": "Potência de decimal: (0,5)² = ?",
+   "opcoes": [
+    "2,5",
+    "1",
+    "0,10",
+    "0,25"
+   ],
+   "correta": "0,25",
+   "explica": "0,5 × 0,5 = 0,25."
+  },
+  {
+   "pergunta": "Calcule a potência: 8² = ?",
+   "opcoes": [
+    "64",
+    "72",
+    "10",
+    "16"
+   ],
+   "correta": "64",
+   "explica": "8² = 8 × 8 = 64. Cuidado: não é 8 × 2 = 16."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛27 = ?",
+   "opcoes": [
+    "13,5",
+    "9",
+    "3",
+    "6"
+   ],
+   "correta": "3",
+   "explica": "3³ = 27, então ∛27 = 3."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √10 está entre:",
+   "opcoes": [
+    "2 e 3",
+    "4 e 5",
+    "3 e 4 1",
+    "3 e 4"
+   ],
+   "correta": "3 e 4",
+   "explica": "3² = 9 e 4² = 16; como 9 < 10 < 16, √10 está entre 3 e 4."
+  },
+  {
+   "pergunta": "Calcule a potência: 10³ = ?",
+   "opcoes": [
+    "1.000",
+    "13",
+    "30",
+    "1010"
+   ],
+   "correta": "1.000",
+   "explica": "10³ = 10 × 10 × 10 = 1000. Cuidado: não é 10 × 3 = 30."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √196 = ?",
+   "opcoes": [
+    "15",
+    "98",
+    "13",
+    "14"
+   ],
+   "correta": "14",
+   "explica": "√196 = 14, porque 14² = 14 × 14 = 196. Cuidado: raiz não é a metade!"
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 5, 10 e 15?",
+   "opcoes": [
+    "30",
+    "10",
+    "15",
+    "11"
+   ],
+   "correta": "10",
+   "explica": "Soma: 5 + 10 + 15 = 30. Divide pela quantidade (3): 30 ÷ 3 = 10."
+  },
+  {
+   "pergunta": "Leitura: Como se lê 7² ?",
+   "opcoes": [
+    "sete ao cubo",
+    "sete ao quadrado",
+    "dois elevado a sete",
+    "sete vezes dois"
+   ],
+   "correta": "sete ao quadrado",
+   "explica": "Expoente 2: “ao quadrado”; expoente 3: “ao cubo”."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛8 = ?",
+   "opcoes": [
+    "2",
+    "4",
+    "24",
+    "3"
+   ],
+   "correta": "2",
+   "explica": "2³ = 8, então ∛8 = 2."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √50 está entre:",
+   "opcoes": [
+    "24 e 25",
+    "6 e 7",
+    "8 e 9",
+    "7 e 8"
+   ],
+   "correta": "7 e 8",
+   "explica": "7² = 49 e 8² = 64; como 49 < 50 < 64, √50 está entre 7 e 8."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 20, 30 e 40?",
+   "opcoes": [
+    "90",
+    "40",
+    "30",
+    "31"
+   ],
+   "correta": "30",
+   "explica": "Soma: 20 + 30 + 40 = 90. Divide pela quantidade (3): 90 ÷ 3 = 30."
+  },
+  {
+   "pergunta": "Média: quanto falta? Um aluno tirou 6, 7 e 8. Que nota precisa no 4º bimestre para ter média 7?",
+   "opcoes": [
+    "7",
+    "9",
+    "10",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Para média 7 em 4 notas, a soma deve ser 7 × 4 = 28. Já tem 21; faltam 28 − 21 = 7."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 2, 4, 6 e 8?",
+   "opcoes": [
+    "8",
+    "5",
+    "20",
+    "6"
+   ],
+   "correta": "5",
+   "explica": "Soma: 2 + 4 + 6 + 8 = 20. Divide pela quantidade (4): 20 ÷ 4 = 5."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √144 = ?",
+   "opcoes": [
+    "12",
+    "72",
+    "11",
+    "13"
+   ],
+   "correta": "12",
+   "explica": "√144 = 12, porque 12² = 12 × 12 = 144. Cuidado: raiz não é a metade!"
+  },
+  {
+   "pergunta": "Expressão: √81 − √25 = ?",
+   "opcoes": [
+    "56",
+    "2",
+    "√56",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "√81 = 9 e √25 = 5; 9 − 5 = 4."
+  },
+  {
+   "pergunta": "Média: quanto falta? Um aluno tirou 4, 6 e 7. Que nota precisa no 4º bimestre para ter média 6?",
+   "opcoes": [
+    "6",
+    "5",
+    "8",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "Para média 6 em 4 notas, a soma deve ser 6 × 4 = 24. Já tem 17; faltam 24 − 17 = 7."
+  },
+  {
+   "pergunta": "Problema: Uma bactéria se divide em 2 a cada hora. Depois de 5 horas, quantas são (começando com 1)?",
+   "opcoes": [
+    "25",
+    "10",
+    "16",
+    "32"
+   ],
+   "correta": "32",
+   "explica": "2⁵ = 2 × 2 × 2 × 2 × 2 = 32."
+  },
+  {
+   "pergunta": "Média: quanto falta? Um aluno tirou 8, 8 e 9. Que nota precisa no 4º bimestre para ter média 8?",
+   "opcoes": [
+    "10",
+    "9",
+    "7",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Para média 8 em 4 notas, a soma deve ser 8 × 4 = 32. Já tem 25; faltam 32 − 25 = 7."
+  },
+  {
+   "pergunta": "Calcule a potência: 12² = ?",
+   "opcoes": [
+    "14",
+    "144",
+    "156",
+    "24"
+   ],
+   "correta": "144",
+   "explica": "12² = 12 × 12 = 144. Cuidado: não é 12 × 2 = 24."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √90 está entre:",
+   "opcoes": [
+    "10 e 11",
+    "8 e 9",
+    "44 e 45",
+    "9 e 10"
+   ],
+   "correta": "9 e 10",
+   "explica": "9² = 81 e 10² = 100; como 81 < 90 < 100, √90 está entre 9 e 10."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 3, 5 e 7?",
+   "opcoes": [
+    "7",
+    "6",
+    "5",
+    "15"
+   ],
+   "correta": "5",
+   "explica": "Soma: 3 + 5 + 7 = 15. Divide pela quantidade (3): 15 ÷ 3 = 5."
+  },
+  {
+   "pergunta": "Todo número (diferente de zero) elevado a zero é: 100⁰ = ?",
+   "opcoes": [
+    "0",
+    "100",
+    "1",
+    "10"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 100⁰ = 1."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √121 = ?",
+   "opcoes": [
+    "10",
+    "60",
+    "12",
+    "11"
+   ],
+   "correta": "11",
+   "explica": "√121 = 11, porque 11² = 11 × 11 = 121. Cuidado: raiz não é a metade!"
+  },
+  {
+   "pergunta": "Todo número (diferente de zero) elevado a zero é: 13⁰ = ?",
+   "opcoes": [
+    "0",
+    "13",
+    "10",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 13⁰ = 1."
+  },
+  {
+   "pergunta": "Todo número elevado a 1 é ele mesmo: 37¹ = ?",
+   "opcoes": [
+    "1",
+    "0",
+    "37",
+    "74"
+   ],
+   "correta": "37",
+   "explica": "37¹ = 37."
+  },
+  {
+   "pergunta": "Potências de 10: 10⁶ = ?",
+   "opcoes": [
+    "10.000.000",
+    "60",
+    "1.000.000",
+    "100.000"
+   ],
+   "correta": "1.000.000",
+   "explica": "10⁶: o 1 seguido de 6 zeros = 1.000.000."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 10 e 20?",
+   "opcoes": [
+    "20",
+    "16",
+    "30",
+    "15"
+   ],
+   "correta": "15",
+   "explica": "Soma: 10 + 20 = 30. Divide pela quantidade (2): 30 ÷ 2 = 15."
+  },
+  {
+   "pergunta": "Calcule a potência: 2⁶ = ?",
+   "opcoes": [
+    "12",
+    "64",
+    "8",
+    "66"
+   ],
+   "correta": "64",
+   "explica": "2⁶ = 2 × 2 × 2 × 2 × 2 × 2 = 64. Cuidado: não é 2 × 6 = 12."
+  },
+  {
+   "pergunta": "Média aritmética: Uma loja vendeu R$ 150, R$ 200 e R$ 250 em três dias. Qual foi a média por dia? (em reais)",
+   "opcoes": [
+    "600",
+    "200",
+    "250",
+    "201"
+   ],
+   "correta": "200",
+   "explica": "Soma: 150 + 200 + 250 = 600. Divide pela quantidade (3): 600 ÷ 3 = 200."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 12 e 18?",
+   "opcoes": [
+    "15",
+    "16",
+    "18",
+    "30"
+   ],
+   "correta": "15",
+   "explica": "Soma: 12 + 18 = 30. Divide pela quantidade (2): 30 ÷ 2 = 15."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √30 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "5 e 6",
+    "6 e 7",
+    "4 e 5"
+   ],
+   "correta": "5 e 6",
+   "explica": "5² = 25 e 6² = 36; como 25 < 30 < 36, √30 está entre 5 e 6."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √4 = ?",
+   "opcoes": [
+    "2",
+    "3",
+    "4",
+    "1"
+   ],
+   "correta": "2",
+   "explica": "√4 = 2, porque 2² = 2 × 2 = 4. Cuidado: raiz não é a metade!"
+  },
+  {
+   "pergunta": "Potência de fração: (2/3)² = ?",
+   "opcoes": [
+    "4/9",
+    "4/3",
+    "2/9",
+    "1/3"
+   ],
+   "correta": "4/9",
+   "explica": "Eleva o numerador e o denominador: 2²/3² = 4/9."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 6, 6 e 9?",
+   "opcoes": [
+    "21",
+    "7,5",
+    "9",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "Soma: 6 + 6 + 9 = 21. Divide pela quantidade (3): 21 ÷ 3 = 7."
+  },
+  {
+   "pergunta": "Raiz de fração: √(4/25) = ?",
+   "opcoes": [
+    "2/5",
+    "4/5",
+    "2/12",
+    "2/25"
+   ],
+   "correta": "2/5",
+   "explica": "Tira a raiz do numerador e do denominador: √4/√25 = 2/5."
+  },
+  {
+   "pergunta": "Média aritmética: Leo tirou as notas 5, 6, 7 e 6 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "6",
+    "8",
+    "7",
+    "24"
+   ],
+   "correta": "6",
+   "explica": "Soma: 5 + 6 + 7 + 6 = 24. Divide pela quantidade (4): 24 ÷ 4 = 6."
+  },
+  {
+   "pergunta": "Média aritmética: Qual é a média de 7, 8 e 9?",
+   "opcoes": [
+    "24",
+    "8",
+    "10",
+    "9"
+   ],
+   "correta": "8",
+   "explica": "Soma: 7 + 8 + 9 = 24. Divide pela quantidade (3): 24 ÷ 3 = 8."
+  }
+ ]
+}

@@ -1,0 +1,547 @@
+{
+ "titulo": "Potenciação (exercícios)",
+ "emoji": "🔺",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "2³ = ?",
+   "opcoes": [
+    "10",
+    "8",
+    "5",
+    "6"
+   ],
+   "correta": "8",
+   "explica": "2³ = 2 × 2 × 2 = 8. Cuidado: não é 2 × 3 = 6."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "2⁴ = ?",
+   "opcoes": [
+    "8",
+    "16",
+    "18",
+    "6"
+   ],
+   "correta": "16",
+   "explica": "2⁴ = 2 × 2 × 2 × 2 = 16. Cuidado: não é 2 × 4 = 8."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "2⁵ = ?",
+   "opcoes": [
+    "10",
+    "7",
+    "34",
+    "32"
+   ],
+   "correta": "32",
+   "explica": "2⁵ = 2 × 2 × 2 × 2 × 2 = 32. Cuidado: não é 2 × 5 = 10."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "3² = ?",
+   "opcoes": [
+    "9",
+    "12",
+    "6",
+    "5"
+   ],
+   "correta": "9",
+   "explica": "3² = 3 × 3 = 9. Cuidado: não é 3 × 2 = 6."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "3³ = ?",
+   "opcoes": [
+    "30",
+    "27",
+    "6",
+    "9"
+   ],
+   "correta": "27",
+   "explica": "3³ = 3 × 3 × 3 = 27. Cuidado: não é 3 × 3 = 9."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "4² = ?",
+   "opcoes": [
+    "20",
+    "6",
+    "8",
+    "16"
+   ],
+   "correta": "16",
+   "explica": "4² = 4 × 4 = 16. Cuidado: não é 4 × 2 = 8."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "5² = ?",
+   "opcoes": [
+    "25",
+    "7",
+    "10",
+    "30"
+   ],
+   "correta": "25",
+   "explica": "5² = 5 × 5 = 25. Cuidado: não é 5 × 2 = 10."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "5³ = ?",
+   "opcoes": [
+    "15",
+    "125",
+    "8",
+    "130"
+   ],
+   "correta": "125",
+   "explica": "5³ = 5 × 5 × 5 = 125. Cuidado: não é 5 × 3 = 15."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "10² = ?",
+   "opcoes": [
+    "12",
+    "20",
+    "110",
+    "100"
+   ],
+   "correta": "100",
+   "explica": "10² = 10 × 10 = 100. Cuidado: não é 10 × 2 = 20."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "10³ = ?",
+   "opcoes": [
+    "1.000",
+    "13",
+    "30",
+    "1010"
+   ],
+   "correta": "1.000",
+   "explica": "10³ = 10 × 10 × 10 = 1000. Cuidado: não é 10 × 3 = 30."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "6² = ?",
+   "opcoes": [
+    "36",
+    "12",
+    "8",
+    "42"
+   ],
+   "correta": "36",
+   "explica": "6² = 6 × 6 = 36. Cuidado: não é 6 × 2 = 12."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "7² = ?",
+   "opcoes": [
+    "49",
+    "9",
+    "14",
+    "56"
+   ],
+   "correta": "49",
+   "explica": "7² = 7 × 7 = 49. Cuidado: não é 7 × 2 = 14."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "2⁶ = ?",
+   "opcoes": [
+    "12",
+    "64",
+    "8",
+    "66"
+   ],
+   "correta": "64",
+   "explica": "2⁶ = 2 × 2 × 2 × 2 × 2 × 2 = 64. Cuidado: não é 2 × 6 = 12."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "3⁴ = ?",
+   "opcoes": [
+    "81",
+    "84",
+    "7",
+    "12"
+   ],
+   "correta": "81",
+   "explica": "3⁴ = 3 × 3 × 3 × 3 = 81. Cuidado: não é 3 × 4 = 12."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "8² = ?",
+   "opcoes": [
+    "64",
+    "72",
+    "10",
+    "16"
+   ],
+   "correta": "64",
+   "explica": "8² = 8 × 8 = 64. Cuidado: não é 8 × 2 = 16."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "9² = ?",
+   "opcoes": [
+    "18",
+    "11",
+    "90",
+    "81"
+   ],
+   "correta": "81",
+   "explica": "9² = 9 × 9 = 81. Cuidado: não é 9 × 2 = 18."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "11² = ?",
+   "opcoes": [
+    "22",
+    "13",
+    "132",
+    "121"
+   ],
+   "correta": "121",
+   "explica": "11² = 11 × 11 = 121. Cuidado: não é 11 × 2 = 22."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "12² = ?",
+   "opcoes": [
+    "14",
+    "144",
+    "156",
+    "24"
+   ],
+   "correta": "144",
+   "explica": "12² = 12 × 12 = 144. Cuidado: não é 12 × 2 = 24."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "1⁹ = ?",
+   "opcoes": [
+    "1",
+    "2",
+    "9",
+    "10"
+   ],
+   "correta": "1",
+   "explica": "1⁹ = 1 × 1 × 1 × 1 × 1 × 1 × 1 × 1 × 1 = 1. Cuidado: não é 1 × 9 = 9."
+  },
+  {
+   "enunciado": "Calcule a potência:",
+   "destaque": "4³ = ?",
+   "opcoes": [
+    "68",
+    "12",
+    "7",
+    "64"
+   ],
+   "correta": "64",
+   "explica": "4³ = 4 × 4 × 4 = 64. Cuidado: não é 4 × 3 = 12."
+  },
+  {
+   "enunciado": "Todo número (diferente de zero) elevado a zero é:",
+   "destaque": "5⁰ = ?",
+   "opcoes": [
+    "5",
+    "10",
+    "0",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 5⁰ = 1."
+  },
+  {
+   "enunciado": "Todo número (diferente de zero) elevado a zero é:",
+   "destaque": "13⁰ = ?",
+   "opcoes": [
+    "0",
+    "13",
+    "10",
+    "1"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 13⁰ = 1."
+  },
+  {
+   "enunciado": "Todo número (diferente de zero) elevado a zero é:",
+   "destaque": "100⁰ = ?",
+   "opcoes": [
+    "0",
+    "100",
+    "1",
+    "10"
+   ],
+   "correta": "1",
+   "explica": "Qualquer número diferente de zero elevado a 0 vale 1: 100⁰ = 1."
+  },
+  {
+   "enunciado": "Todo número elevado a 1 é ele mesmo:",
+   "destaque": "37¹ = ?",
+   "opcoes": [
+    "1",
+    "0",
+    "37",
+    "74"
+   ],
+   "correta": "37",
+   "explica": "37¹ = 37."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-2)² = ?",
+   "opcoes": [
+    "6",
+    "-4",
+    "5",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "(-2)² = 4. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-2)³ = ?",
+   "opcoes": [
+    "-8",
+    "8",
+    "6",
+    "-6"
+   ],
+   "correta": "-8",
+   "explica": "(-2)³ = -8. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-3)² = ?",
+   "opcoes": [
+    "-6",
+    "6",
+    "9",
+    "-9"
+   ],
+   "correta": "9",
+   "explica": "(-3)² = 9. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-1)⁷ = ?",
+   "opcoes": [
+    "-7",
+    "1",
+    "7",
+    "-1"
+   ],
+   "correta": "-1",
+   "explica": "(-1)⁷ = -1. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-5)² = ?",
+   "opcoes": [
+    "-25",
+    "10",
+    "25",
+    "-10"
+   ],
+   "correta": "25",
+   "explica": "(-5)² = 25. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Potência de número negativo (atenção ao sinal):",
+   "destaque": "(-10)³ = ?",
+   "opcoes": [
+    "1000",
+    "30",
+    "-30",
+    "-1000"
+   ],
+   "correta": "-1000",
+   "explica": "(-10)³ = -1000. Expoente par dá resultado positivo; expoente ímpar mantém o sinal negativo."
+  },
+  {
+   "enunciado": "Atenção aos parênteses:",
+   "destaque": "−3² = ?",
+   "opcoes": [
+    "-6",
+    "9",
+    "6",
+    "-9"
+   ],
+   "correta": "-9",
+   "explica": "Sem parênteses, só o 3 é elevado ao quadrado: −(3²) = −9. Já (−3)² = 9."
+  },
+  {
+   "enunciado": "Potência de fração:",
+   "destaque": "(1/2)² = ?",
+   "opcoes": [
+    "1/2",
+    "1/4",
+    "1/4 1",
+    "1/4 2"
+   ],
+   "correta": "1/4",
+   "explica": "Eleva o numerador e o denominador: 1²/2² = 1/4."
+  },
+  {
+   "enunciado": "Potência de fração:",
+   "destaque": "(2/3)² = ?",
+   "opcoes": [
+    "4/9",
+    "4/3",
+    "2/9",
+    "1/3"
+   ],
+   "correta": "4/9",
+   "explica": "Eleva o numerador e o denominador: 2²/3² = 4/9."
+  },
+  {
+   "enunciado": "Potência de fração:",
+   "destaque": "(1/3)³ = ?",
+   "opcoes": [
+    "1/27 2",
+    "1/27 1",
+    "1/3",
+    "1/27"
+   ],
+   "correta": "1/27",
+   "explica": "Eleva o numerador e o denominador: 1³/3³ = 1/27."
+  },
+  {
+   "enunciado": "Potência de decimal:",
+   "destaque": "(0,1)² = ?",
+   "opcoes": [
+    "1",
+    "0,1",
+    "0,2",
+    "0,01"
+   ],
+   "correta": "0,01",
+   "explica": "0,1 × 0,1 = 0,01 (duas casas decimais)."
+  },
+  {
+   "enunciado": "Potência de decimal:",
+   "destaque": "(0,5)² = ?",
+   "opcoes": [
+    "2,5",
+    "1",
+    "0,10",
+    "0,25"
+   ],
+   "correta": "0,25",
+   "explica": "0,5 × 0,5 = 0,25."
+  },
+  {
+   "enunciado": "Propriedade: multiplicação de potências de mesma base (soma os expoentes):",
+   "destaque": "2³ × 2⁴ = ?",
+   "opcoes": [
+    "2¹²",
+    "2⁷",
+    "4¹²",
+    "4⁷"
+   ],
+   "correta": "2⁷",
+   "explica": "Mesma base na multiplicação: conserva a base e soma os expoentes (3 + 4 = 7)."
+  },
+  {
+   "enunciado": "Propriedade: divisão de potências de mesma base (subtrai os expoentes):",
+   "destaque": "5⁸ : 5³ = ?",
+   "opcoes": [
+    "5²⁴",
+    "5¹¹",
+    "5⁵",
+    "1⁵"
+   ],
+   "correta": "5⁵",
+   "explica": "Mesma base na divisão: conserva a base e subtrai os expoentes (8 − 3 = 5)."
+  },
+  {
+   "enunciado": "Propriedade: potência de potência (multiplica os expoentes):",
+   "destaque": "(3²)⁴ = ?",
+   "opcoes": [
+    "3¹⁶",
+    "9⁴",
+    "3⁸",
+    "3⁶"
+   ],
+   "correta": "3⁸",
+   "explica": "Potência de potência: multiplica os expoentes (2 × 4 = 8)."
+  },
+  {
+   "enunciado": "Leitura:",
+   "destaque": "Como se lê 7² ?",
+   "opcoes": [
+    "sete ao cubo",
+    "sete ao quadrado",
+    "dois elevado a sete",
+    "sete vezes dois"
+   ],
+   "correta": "sete ao quadrado",
+   "explica": "Expoente 2: “ao quadrado”; expoente 3: “ao cubo”."
+  },
+  {
+   "enunciado": "Leitura:",
+   "destaque": "Como se lê 4³ ?",
+   "opcoes": [
+    "quatro ao cubo",
+    "três elevado a quatro",
+    "quatro ao quadrado",
+    "quatro vezes três"
+   ],
+   "correta": "quatro ao cubo",
+   "explica": "4³ = 4 × 4 × 4 = 64: “quatro ao cubo”."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Um quadrado tem lado de 9 cm. Qual é a área? (lado²)",
+   "opcoes": [
+    "18 cm²",
+    "36 cm²",
+    "81 cm²",
+    "27 cm²"
+   ],
+   "correta": "81 cm²",
+   "explica": "Área do quadrado = lado² = 9² = 81 cm²."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Um cubo tem aresta de 3 cm. Qual é o volume? (aresta³)",
+   "opcoes": [
+    "81 cm³",
+    "27 cm³",
+    "9 cm³",
+    "18 cm³"
+   ],
+   "correta": "27 cm³",
+   "explica": "Volume do cubo = aresta³ = 3³ = 27 cm³."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Uma bactéria se divide em 2 a cada hora. Depois de 5 horas, quantas são (começando com 1)?",
+   "opcoes": [
+    "25",
+    "10",
+    "16",
+    "32"
+   ],
+   "correta": "32",
+   "explica": "2⁵ = 2 × 2 × 2 × 2 × 2 = 32."
+  },
+  {
+   "enunciado": "Potências de 10:",
+   "destaque": "10⁶ = ?",
+   "opcoes": [
+    "10.000.000",
+    "60",
+    "1.000.000",
+    "100.000"
+   ],
+   "correta": "1.000.000",
+   "explica": "10⁶: o 1 seguido de 6 zeros = 1.000.000."
+  }
+ ]
+}

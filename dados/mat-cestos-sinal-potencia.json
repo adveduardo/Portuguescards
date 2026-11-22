@@ -1,0 +1,99 @@
+{
+ "titulo": "Matemática: o resultado da potência é positivo ou negativo?",
+ "cestos": [
+  {
+   "id": "pos",
+   "nome": "Positivo (+)",
+   "emoji": "➕",
+   "cor": "#2f80ed"
+  },
+  {
+   "id": "neg",
+   "nome": "Negativo (−)",
+   "emoji": "➖",
+   "cor": "#e67e22"
+  }
+ ],
+ "palavras": [
+  {
+   "palavra": "(-2)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-2)³",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-3)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-3)³",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-1)⁴",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-1)⁵",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-5)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-4)³",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-10)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-10)⁵",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-6)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-7)¹",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-2)⁴",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-2)⁵",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "(-9)²",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-8)³",
+   "cesto": "neg"
+  },
+  {
+   "palavra": "3³",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "2⁵",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-1)¹⁰⁰",
+   "cesto": "pos"
+  },
+  {
+   "palavra": "(-1)⁹⁹",
+   "cesto": "neg"
+  }
+ ]
+}

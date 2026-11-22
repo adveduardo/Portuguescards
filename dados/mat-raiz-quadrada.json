@@ -1,0 +1,523 @@
+{
+ "titulo": "Raiz quadrada (exercícios)",
+ "emoji": "√",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√4 = ?",
+   "opcoes": [
+    "2",
+    "3",
+    "4",
+    "1"
+   ],
+   "correta": "2",
+   "explica": "√4 = 2, porque 2² = 2 × 2 = 4. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√9 = ?",
+   "opcoes": [
+    "6",
+    "3",
+    "4",
+    "2"
+   ],
+   "correta": "3",
+   "explica": "√9 = 3, porque 3² = 3 × 3 = 9. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√16 = ?",
+   "opcoes": [
+    "3",
+    "8",
+    "5",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "√16 = 4, porque 4² = 4 × 4 = 16. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√25 = ?",
+   "opcoes": [
+    "4",
+    "12",
+    "5",
+    "6"
+   ],
+   "correta": "5",
+   "explica": "√25 = 5, porque 5² = 5 × 5 = 25. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√36 = ?",
+   "opcoes": [
+    "5",
+    "6",
+    "7",
+    "18"
+   ],
+   "correta": "6",
+   "explica": "√36 = 6, porque 6² = 6 × 6 = 36. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√49 = ?",
+   "opcoes": [
+    "7",
+    "6",
+    "8",
+    "24"
+   ],
+   "correta": "7",
+   "explica": "√49 = 7, porque 7² = 7 × 7 = 49. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√64 = ?",
+   "opcoes": [
+    "7",
+    "9",
+    "8",
+    "32"
+   ],
+   "correta": "8",
+   "explica": "√64 = 8, porque 8² = 8 × 8 = 64. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√81 = ?",
+   "opcoes": [
+    "40",
+    "10",
+    "9",
+    "8"
+   ],
+   "correta": "9",
+   "explica": "√81 = 9, porque 9² = 9 × 9 = 81. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√100 = ?",
+   "opcoes": [
+    "9",
+    "50",
+    "11",
+    "10"
+   ],
+   "correta": "10",
+   "explica": "√100 = 10, porque 10² = 10 × 10 = 100. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√121 = ?",
+   "opcoes": [
+    "10",
+    "60",
+    "12",
+    "11"
+   ],
+   "correta": "11",
+   "explica": "√121 = 11, porque 11² = 11 × 11 = 121. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√144 = ?",
+   "opcoes": [
+    "12",
+    "72",
+    "11",
+    "13"
+   ],
+   "correta": "12",
+   "explica": "√144 = 12, porque 12² = 12 × 12 = 144. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√169 = ?",
+   "opcoes": [
+    "84",
+    "14",
+    "12",
+    "13"
+   ],
+   "correta": "13",
+   "explica": "√169 = 13, porque 13² = 13 × 13 = 169. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√196 = ?",
+   "opcoes": [
+    "15",
+    "98",
+    "13",
+    "14"
+   ],
+   "correta": "14",
+   "explica": "√196 = 14, porque 14² = 14 × 14 = 196. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√225 = ?",
+   "opcoes": [
+    "15",
+    "16",
+    "14",
+    "112"
+   ],
+   "correta": "15",
+   "explica": "√225 = 15, porque 15² = 15 × 15 = 225. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√400 = ?",
+   "opcoes": [
+    "21",
+    "19",
+    "20",
+    "200"
+   ],
+   "correta": "20",
+   "explica": "√400 = 20, porque 20² = 20 × 20 = 400. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√1 = ?",
+   "opcoes": [
+    "2",
+    "1",
+    "3",
+    "0"
+   ],
+   "correta": "1",
+   "explica": "√1 = 1, porque 1² = 1 × 1 = 1. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√0 = ?",
+   "opcoes": [
+    "1",
+    "2",
+    "3",
+    "0"
+   ],
+   "correta": "0",
+   "explica": "√0 = 0, porque 0² = 0 × 0 = 0. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Calcule a raiz quadrada:",
+   "destaque": "√900 = ?",
+   "opcoes": [
+    "31",
+    "450",
+    "29",
+    "30"
+   ],
+   "correta": "30",
+   "explica": "√900 = 30, porque 30² = 30 × 30 = 900. Cuidado: raiz não é a metade!"
+  },
+  {
+   "enunciado": "Raiz de fração:",
+   "destaque": "√(9/16) = ?",
+   "opcoes": [
+    "3/4",
+    "4/8",
+    "9/4",
+    "3/16"
+   ],
+   "correta": "3/4",
+   "explica": "Tira a raiz do numerador e do denominador: √9/√16 = 3/4."
+  },
+  {
+   "enunciado": "Raiz de fração:",
+   "destaque": "√(4/25) = ?",
+   "opcoes": [
+    "2/5",
+    "4/5",
+    "2/12",
+    "2/25"
+   ],
+   "correta": "2/5",
+   "explica": "Tira a raiz do numerador e do denominador: √4/√25 = 2/5."
+  },
+  {
+   "enunciado": "Raiz de fração:",
+   "destaque": "√(1/49) = ?",
+   "opcoes": [
+    "1/24",
+    "1/7 1",
+    "1/49",
+    "1/7"
+   ],
+   "correta": "1/7",
+   "explica": "Tira a raiz do numerador e do denominador: √1/√49 = 1/7."
+  },
+  {
+   "enunciado": "Raiz de fração:",
+   "destaque": "√(36/100) = ?",
+   "opcoes": [
+    "36/10",
+    "6/100",
+    "18/50",
+    "6/10"
+   ],
+   "correta": "6/10",
+   "explica": "Tira a raiz do numerador e do denominador: √36/√100 = 6/10."
+  },
+  {
+   "enunciado": "Raiz de decimal:",
+   "destaque": "√0,25 = ?",
+   "opcoes": [
+    "0,5",
+    "5",
+    "0,05",
+    "0,125"
+   ],
+   "correta": "0,5",
+   "explica": "0,5 × 0,5 = 0,25, então √0,25 = 0,5."
+  },
+  {
+   "enunciado": "Raiz de decimal:",
+   "destaque": "√0,09 = ?",
+   "opcoes": [
+    "0,03",
+    "0,045",
+    "0,3",
+    "3"
+   ],
+   "correta": "0,3",
+   "explica": "0,3 × 0,3 = 0,09, então √0,09 = 0,3."
+  },
+  {
+   "enunciado": "Raiz de decimal:",
+   "destaque": "√0,49 = ?",
+   "opcoes": [
+    "0,07",
+    "0,245",
+    "7",
+    "0,7"
+   ],
+   "correta": "0,7",
+   "explica": "0,7 × 0,7 = 0,49, então √0,49 = 0,7."
+  },
+  {
+   "enunciado": "Raiz de decimal:",
+   "destaque": "√1,44 = ?",
+   "opcoes": [
+    "0,72",
+    "0,12",
+    "12",
+    "1,2"
+   ],
+   "correta": "1,2",
+   "explica": "1,2 × 1,2 = 1,44, então √1,44 = 1,2."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√50 está entre:",
+   "opcoes": [
+    "24 e 25",
+    "6 e 7",
+    "8 e 9",
+    "7 e 8"
+   ],
+   "correta": "7 e 8",
+   "explica": "7² = 49 e 8² = 64; como 49 < 50 < 64, √50 está entre 7 e 8."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√20 está entre:",
+   "opcoes": [
+    "5 e 6",
+    "4 e 5",
+    "3 e 4",
+    "9 e 10"
+   ],
+   "correta": "4 e 5",
+   "explica": "4² = 16 e 5² = 25; como 16 < 20 < 25, √20 está entre 4 e 5."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√70 está entre:",
+   "opcoes": [
+    "8 e 9",
+    "34 e 35",
+    "7 e 8",
+    "9 e 10"
+   ],
+   "correta": "8 e 9",
+   "explica": "8² = 64 e 9² = 81; como 64 < 70 < 81, √70 está entre 8 e 9."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√10 está entre:",
+   "opcoes": [
+    "2 e 3",
+    "4 e 5",
+    "3 e 4 1",
+    "3 e 4"
+   ],
+   "correta": "3 e 4",
+   "explica": "3² = 9 e 4² = 16; como 9 < 10 < 16, √10 está entre 3 e 4."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√90 está entre:",
+   "opcoes": [
+    "10 e 11",
+    "8 e 9",
+    "44 e 45",
+    "9 e 10"
+   ],
+   "correta": "9 e 10",
+   "explica": "9² = 81 e 10² = 100; como 81 < 90 < 100, √90 está entre 9 e 10."
+  },
+  {
+   "enunciado": "Estimativa: entre quais números inteiros está a raiz?",
+   "destaque": "√30 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "5 e 6",
+    "6 e 7",
+    "4 e 5"
+   ],
+   "correta": "5 e 6",
+   "explica": "5² = 25 e 6² = 36; como 25 < 30 < 36, √30 está entre 5 e 6."
+  },
+  {
+   "enunciado": "Números negativos:",
+   "destaque": "√(−16) nos números reais:",
+   "opcoes": [
+    "4",
+    "−4",
+    "não existe",
+    "8"
+   ],
+   "correta": "não existe",
+   "explica": "Nenhum número real ao quadrado dá negativo (4² = 16 e (−4)² = 16). Então √(−16) não existe nos reais."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Um quadrado tem área de 64 m². Quanto mede o lado?",
+   "opcoes": [
+    "8 m",
+    "32 m",
+    "4 m",
+    "16 m"
+   ],
+   "correta": "8 m",
+   "explica": "Lado = √área = √64 = 8 m."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Uma horta quadrada tem 144 m². Quanto mede cada lado?",
+   "opcoes": [
+    "72 m",
+    "12 m",
+    "36 m",
+    "14 m"
+   ],
+   "correta": "12 m",
+   "explica": "√144 = 12, porque 12 × 12 = 144."
+  },
+  {
+   "enunciado": "Problema:",
+   "destaque": "Uma sala quadrada tem 49 m² de piso. Qual é o perímetro?",
+   "opcoes": [
+    "49 m",
+    "7 m",
+    "28 m",
+    "14 m"
+   ],
+   "correta": "28 m",
+   "explica": "Lado = √49 = 7 m; perímetro = 4 × 7 = 28 m."
+  },
+  {
+   "enunciado": "Expressão:",
+   "destaque": "√36 + √64 = ?",
+   "opcoes": [
+    "√100",
+    "14",
+    "100",
+    "10"
+   ],
+   "correta": "14",
+   "explica": "√36 = 6 e √64 = 8; 6 + 8 = 14. Atenção: √36 + √64 não é √100."
+  },
+  {
+   "enunciado": "Expressão:",
+   "destaque": "√81 − √25 = ?",
+   "opcoes": [
+    "56",
+    "2",
+    "√56",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "√81 = 9 e √25 = 5; 9 − 5 = 4."
+  },
+  {
+   "enunciado": "Expressão:",
+   "destaque": "3 × √49 = ?",
+   "opcoes": [
+    "7",
+    "21",
+    "10",
+    "147"
+   ],
+   "correta": "21",
+   "explica": "√49 = 7; 3 × 7 = 21."
+  },
+  {
+   "enunciado": "Relação com a potência:",
+   "destaque": "Se 15² = 225, então √225 = ?",
+   "opcoes": [
+    "15",
+    "25",
+    "30",
+    "112,5"
+   ],
+   "correta": "15",
+   "explica": "Raiz quadrada é a operação inversa de elevar ao quadrado."
+  },
+  {
+   "enunciado": "Raiz cúbica:",
+   "destaque": "∛27 = ?",
+   "opcoes": [
+    "13,5",
+    "9",
+    "3",
+    "6"
+   ],
+   "correta": "3",
+   "explica": "3³ = 27, então ∛27 = 3."
+  },
+  {
+   "enunciado": "Raiz cúbica:",
+   "destaque": "∛8 = ?",
+   "opcoes": [
+    "2",
+    "4",
+    "24",
+    "3"
+   ],
+   "correta": "2",
+   "explica": "2³ = 8, então ∛8 = 2."
+  },
+  {
+   "enunciado": "Quadrado perfeito:",
+   "destaque": "Qual destes é um quadrado perfeito?",
+   "opcoes": [
+    "81",
+    "50",
+    "72",
+    "90"
+   ],
+   "correta": "81",
+   "explica": "81 = 9². Os outros não têm raiz quadrada exata."
+  }
+ ]
+}

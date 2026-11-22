@@ -1,0 +1,391 @@
+{
+ "titulo": "Média aritmética (exercícios)",
+ "emoji": "📊",
+ "instrucao": "Escolha a resposta certa.",
+ "rodadas": [
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 4 e 6?",
+   "opcoes": [
+    "5",
+    "7",
+    "6",
+    "10"
+   ],
+   "correta": "5",
+   "explica": "Soma: 4 + 6 = 10. Divide pela quantidade (2): 10 ÷ 2 = 5."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 10 e 20?",
+   "opcoes": [
+    "20",
+    "16",
+    "30",
+    "15"
+   ],
+   "correta": "15",
+   "explica": "Soma: 10 + 20 = 30. Divide pela quantidade (2): 30 ÷ 2 = 15."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 3, 5 e 7?",
+   "opcoes": [
+    "7",
+    "6",
+    "5",
+    "15"
+   ],
+   "correta": "5",
+   "explica": "Soma: 3 + 5 + 7 = 15. Divide pela quantidade (3): 15 ÷ 3 = 5."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 2, 4, 6 e 8?",
+   "opcoes": [
+    "8",
+    "5",
+    "20",
+    "6"
+   ],
+   "correta": "5",
+   "explica": "Soma: 2 + 4 + 6 + 8 = 20. Divide pela quantidade (4): 20 ÷ 4 = 5."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 5, 10 e 15?",
+   "opcoes": [
+    "30",
+    "10",
+    "15",
+    "11"
+   ],
+   "correta": "10",
+   "explica": "Soma: 5 + 10 + 15 = 30. Divide pela quantidade (3): 30 ÷ 3 = 10."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 12 e 18?",
+   "opcoes": [
+    "15",
+    "16",
+    "18",
+    "30"
+   ],
+   "correta": "15",
+   "explica": "Soma: 12 + 18 = 30. Divide pela quantidade (2): 30 ÷ 2 = 15."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 7, 8 e 9?",
+   "opcoes": [
+    "24",
+    "8",
+    "10",
+    "9"
+   ],
+   "correta": "8",
+   "explica": "Soma: 7 + 8 + 9 = 24. Divide pela quantidade (3): 24 ÷ 3 = 8."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 1, 2, 3, 4 e 5?",
+   "opcoes": [
+    "5",
+    "15",
+    "4",
+    "3"
+   ],
+   "correta": "3",
+   "explica": "Soma: 1 + 2 + 3 + 4 + 5 = 15. Divide pela quantidade (5): 15 ÷ 5 = 3."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 20, 30 e 40?",
+   "opcoes": [
+    "90",
+    "40",
+    "30",
+    "31"
+   ],
+   "correta": "30",
+   "explica": "Soma: 20 + 30 + 40 = 90. Divide pela quantidade (3): 90 ÷ 3 = 30."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de 6, 6 e 9?",
+   "opcoes": [
+    "21",
+    "7,5",
+    "9",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "Soma: 6 + 6 + 9 = 21. Divide pela quantidade (3): 21 ÷ 3 = 7."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Ana tirou as notas 7, 8, 9 e 8 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "8",
+    "9",
+    "10",
+    "32"
+   ],
+   "correta": "8",
+   "explica": "Soma: 7 + 8 + 9 + 8 = 32. Divide pela quantidade (4): 32 ÷ 4 = 8."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Leo tirou as notas 5, 6, 7 e 6 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "6",
+    "8",
+    "7",
+    "24"
+   ],
+   "correta": "6",
+   "explica": "Soma: 5 + 6 + 7 + 6 = 24. Divide pela quantidade (4): 24 ÷ 4 = 6."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Bia tirou as notas 10, 8, 9 e 9 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "10",
+    "36",
+    "9",
+    "11"
+   ],
+   "correta": "9",
+   "explica": "Soma: 10 + 8 + 9 + 9 = 36. Divide pela quantidade (4): 36 ÷ 4 = 9."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Davi tirou as notas 6, 7, 5 e 6 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "24",
+    "6",
+    "7",
+    "8"
+   ],
+   "correta": "6",
+   "explica": "Soma: 6 + 7 + 5 + 6 = 24. Divide pela quantidade (4): 24 ÷ 4 = 6."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Lia tirou as notas 8,5, 7,5, 9 e 7 nos quatro bimestres. Qual é a média?",
+   "opcoes": [
+    "8",
+    "9",
+    "10",
+    "32"
+   ],
+   "correta": "8",
+   "explica": "Soma: 8,5 + 7,5 + 9 + 7 = 32. Divide pela quantidade (4): 32 ÷ 4 = 8."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média das idades: 10, 12, 14 anos?",
+   "opcoes": [
+    "12 anos",
+    "36 anos",
+    "13 anos",
+    "14 anos"
+   ],
+   "correta": "12 anos",
+   "explica": "Soma: 10 + 12 + 14 = 36. Divide pela quantidade (3): 36 ÷ 3 = 12 anos."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média das idades: 11, 13, 12, 12 anos?",
+   "opcoes": [
+    "13 anos",
+    "12 anos 1",
+    "12 anos",
+    "48 anos"
+   ],
+   "correta": "12 anos",
+   "explica": "Soma: 11 + 13 + 12 + 12 = 48. Divide pela quantidade (4): 48 ÷ 4 = 12 anos."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média das idades: 30, 40, 50 anos?",
+   "opcoes": [
+    "50 anos",
+    "41 anos",
+    "40 anos",
+    "120 anos"
+   ],
+   "correta": "40 anos",
+   "explica": "Soma: 30 + 40 + 50 = 120. Divide pela quantidade (3): 120 ÷ 3 = 40 anos."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "As temperaturas da semana foram 20, 24, 22, 26 °C. Qual é a temperatura média?",
+   "opcoes": [
+    "92 °C",
+    "26 °C",
+    "23 °C",
+    "24 °C"
+   ],
+   "correta": "23 °C",
+   "explica": "Soma: 20 + 24 + 22 + 26 = 92. Divide pela quantidade (4): 92 ÷ 4 = 23 °C."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "As temperaturas da semana foram 30, 28, 32 °C. Qual é a temperatura média?",
+   "opcoes": [
+    "31 °C",
+    "30 °C",
+    "32 °C",
+    "90 °C"
+   ],
+   "correta": "30 °C",
+   "explica": "Soma: 30 + 28 + 32 = 90. Divide pela quantidade (3): 90 ÷ 3 = 30 °C."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Uma loja vendeu R$ 150, R$ 200 e R$ 250 em três dias. Qual foi a média por dia? (em reais)",
+   "opcoes": [
+    "600",
+    "200",
+    "250",
+    "201"
+   ],
+   "correta": "200",
+   "explica": "Soma: 150 + 200 + 250 = 600. Divide pela quantidade (3): 600 ÷ 3 = 200."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Em 5 jogos, o time fez 2, 3, 4, 5 e 6 gols. Qual é a média de gols por jogo?",
+   "opcoes": [
+    "5",
+    "6",
+    "20",
+    "4"
+   ],
+   "correta": "4",
+   "explica": "Soma: 2 + 3 + 4 + 5 + 6 = 20. Divide pela quantidade (5): 20 ÷ 5 = 4."
+  },
+  {
+   "enunciado": "Média aritmética:",
+   "destaque": "Qual é a média de −2, 0 e 5?",
+   "opcoes": [
+    "1",
+    "1,5",
+    "3",
+    "5"
+   ],
+   "correta": "1",
+   "explica": "Soma: -2 + 0 + 5 = 3. Divide pela quantidade (3): 3 ÷ 3 = 1."
+  },
+  {
+   "enunciado": "Média: quanto falta?",
+   "destaque": "Um aluno tirou 6, 7 e 8. Que nota precisa no 4º bimestre para ter média 7?",
+   "opcoes": [
+    "7",
+    "9",
+    "10",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Para média 7 em 4 notas, a soma deve ser 7 × 4 = 28. Já tem 21; faltam 28 − 21 = 7."
+  },
+  {
+   "enunciado": "Média: quanto falta?",
+   "destaque": "Um aluno tirou 5, 6 e 7. Que nota precisa no 4º bimestre para ter média 6?",
+   "opcoes": [
+    "8",
+    "6",
+    "7",
+    "9"
+   ],
+   "correta": "6",
+   "explica": "Para média 6 em 4 notas, a soma deve ser 6 × 4 = 24. Já tem 18; faltam 24 − 18 = 6."
+  },
+  {
+   "enunciado": "Média: quanto falta?",
+   "destaque": "Um aluno tirou 8, 8 e 9. Que nota precisa no 4º bimestre para ter média 8?",
+   "opcoes": [
+    "10",
+    "9",
+    "7",
+    "8"
+   ],
+   "correta": "7",
+   "explica": "Para média 8 em 4 notas, a soma deve ser 8 × 4 = 32. Já tem 25; faltam 32 − 25 = 7."
+  },
+  {
+   "enunciado": "Média: quanto falta?",
+   "destaque": "Um aluno tirou 4, 6 e 7. Que nota precisa no 4º bimestre para ter média 6?",
+   "opcoes": [
+    "6",
+    "5",
+    "8",
+    "7"
+   ],
+   "correta": "7",
+   "explica": "Para média 6 em 4 notas, a soma deve ser 6 × 4 = 24. Já tem 17; faltam 24 − 17 = 7."
+  },
+  {
+   "enunciado": "Média e soma:",
+   "destaque": "A média de 5 números é 8. Qual é a soma deles?",
+   "opcoes": [
+    "8",
+    "40",
+    "13",
+    "1,6"
+   ],
+   "correta": "40",
+   "explica": "Soma = média × quantidade = 8 × 5 = 40."
+  },
+  {
+   "enunciado": "Média e soma:",
+   "destaque": "A média de 4 números é 15. Qual é a soma deles?",
+   "opcoes": [
+    "60",
+    "19",
+    "3,75",
+    "11"
+   ],
+   "correta": "60",
+   "explica": "Soma = 15 × 4 = 60."
+  },
+  {
+   "enunciado": "Conceito:",
+   "destaque": "Para calcular a média aritmética, nós:",
+   "opcoes": [
+    "pegamos o maior valor",
+    "somamos todos os valores e dividimos pela quantidade",
+    "multiplicamos os valores",
+    "subtraímos o menor do maior"
+   ],
+   "correta": "somamos todos os valores e dividimos pela quantidade",
+   "explica": "Média = soma dos valores ÷ quantidade de valores."
+  },
+  {
+   "enunciado": "Conceito:",
+   "destaque": "Se somarmos 2 a todos os valores de uma lista, a média:",
+   "opcoes": [
+    "dobra",
+    "aumenta 2",
+    "aumenta 4",
+    "não muda"
+   ],
+   "correta": "aumenta 2",
+   "explica": "Cada valor cresce 2, então a soma cresce 2 × quantidade e a média cresce 2."
+  },
+  {
+   "enunciado": "Conceito:",
+   "destaque": "A média de 10, 10, 10 e 10 é:",
+   "opcoes": [
+    "0",
+    "40",
+    "10",
+    "4"
+   ],
+   "correta": "10",
+   "explica": "Se todos os valores são iguais, a média é esse valor."
+  }
+ ]
+}
