@@ -28,12 +28,15 @@
   .etapa.feita{opacity:.55}
   #relogio{font-weight:bold;font-size:18px;color:#1f3a68}
   /* quadro */
-  #quadro{background:#1f4d3a;background:linear-gradient(180deg,#24563f,#1b4433);color:#f4f7ef;border:10px solid #8a5a2b;border-radius:14px;padding:18px 22px;font-family:"Comic Sans MS","Chalkboard SE","Segoe Print",cursive,sans-serif;font-size:clamp(1rem,2vw,1.3rem);line-height:1.5}
+  #quadro{background:#1f4d3a;background:linear-gradient(180deg,#24563f,#1b4433);color:#f4f7ef;border:10px solid #8a5a2b;border-radius:14px;padding:18px 22px;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:clamp(1rem,1.9vw,1.25rem);line-height:1.45}
   #quadro .tit{font-size:1.35em;font-weight:bold;color:#ffe680;margin:10px 0 4px}
   #quadro .tit:first-child{margin-top:0}
   #quadro .li{margin:2px 0 2px 1.1em;text-indent:-1.1em}
-  #quadro:fullscreen{font-size:2.1vw;border-width:0;border-radius:0;padding:3vw 4vw;overflow:auto}
-  #quadro:-webkit-full-screen{font-size:2.1vw;border-width:0;border-radius:0;padding:3vw 4vw;overflow:auto}
+  #quadro .sec{-webkit-column-break-inside:avoid;break-inside:avoid}
+  /* tela cheia: a letra cresce até ocupar o quadro todo (ajustada pelo script); em tela larga, duas colunas */
+  #quadro:fullscreen{width:100vw;height:100vh;border-width:0;border-radius:0;padding:2.5vh 3vw;overflow:hidden;-webkit-column-gap:4vw;column-gap:4vw;-webkit-column-fill:auto;column-fill:auto}
+  #quadro:-webkit-full-screen{width:100vw;height:100vh;border-width:0;border-radius:0;padding:2.5vh 3vw;overflow:hidden;-webkit-column-gap:4vw;column-gap:4vw;-webkit-column-fill:auto;column-fill:auto}
+  #quadro.duas{-webkit-column-count:2;column-count:2;-webkit-column-rule:2px dashed rgba(255,255,255,.25);column-rule:2px dashed rgba(255,255,255,.25)}
   /* questões */
   .q{border-bottom:1px solid #e3e9f4;padding:8px 0}
   .q .enun{font-weight:bold}
@@ -85,8 +88,12 @@
     });
     h += '</div><div class="barra" style="margin:10px 0 0"><button class="bt" id="btAula">▶️ Começar a aula (marca a etapa)</button></div></div>';
     h += '<div class="cartao"><h2>🧑‍🏫 No quadro <button class="bt claro" id="btTela" style="float:right;padding:6px 12px;font-size:14px">🖥️ Tela cheia</button></h2><div id="quadro">';
-    e.quadro.forEach(function(l){ h += l.indexOf('# ') === 0 ? '<div class="tit">' + esc(l.slice(2)) + '</div>' : '<div class="li">' + esc(l.replace(/^- /, '• ')) + '</div>'; });
-    h += '</div></div>';
+    var aberta = false;
+    e.quadro.forEach(function(l){
+      if (l.indexOf('# ') === 0){ h += (aberta ? '</div>' : '') + '<div class="sec"><div class="tit">' + esc(l.slice(2)) + '</div>'; aberta = true; }
+      else h += '<div class="li">' + esc(l.replace(/^- /, '• ')) + '</div>';
+    });
+    h += (aberta ? '</div>' : '') + '</div></div>';
     h += '<div class="cartao" id="corr"><h2>✅ Correção da folha <button class="bt claro" id="btGab" style="float:right;padding:6px 12px;font-size:14px">👁️ Mostrar todo o gabarito</button></h2><p class="sub" style="margin:0 0 6px">Toque em uma questão para ver só a resposta dela.</p>';
     e.questoes.forEach(function(q, i){
       h += '<div class="q"><div class="enun">' + (i + 1) + '. ' + esc(q.enunciado) + '</div>' + (q.opcoes ? '<div class="ops">' + q.opcoes.map(function(o, k){ return 'abcd'.charAt(k) + ') ' + esc(o); }).join('   •   ') + '</div>' : '') + '<div class="resp">' + esc(q.resposta) + '</div></div>';
@@ -103,6 +110,19 @@
     $('btAula').onclick = alternarAula;
     pararAula();
   }
+  // tela cheia: maior letra que cabe no quadro inteiro (duas colunas se a tela for larga e isso deixar a letra maior)
+  function cabe(q){ return q.scrollHeight <= q.clientHeight + 1 && q.scrollWidth <= q.clientWidth + 1; }
+  function maiorLetra(q){ var lo = 10, hi = 160; while (hi - lo > 1){ var m = (lo + hi) >> 1; q.style.fontSize = m + 'px'; if (cabe(q)) lo = m; else hi = m; } q.style.fontSize = lo + 'px'; return lo; }
+  function ajustarQuadro(){
+    var q = $('quadro'); if (!q) return;
+    var cheia = document.fullscreenElement === q || document.webkitFullscreenElement === q;
+    if (!cheia){ q.className = ''; q.style.fontSize = ''; return; }
+    q.className = ''; var uma = maiorLetra(q);
+    if (window.innerWidth > window.innerHeight * 1.2){ q.className = 'duas'; var duas = maiorLetra(q); if (duas <= uma){ q.className = ''; maiorLetra(q); } }
+  }
+  document.addEventListener('fullscreenchange', function(){ setTimeout(ajustarQuadro, 60); });
+  document.addEventListener('webkitfullscreenchange', function(){ setTimeout(ajustarQuadro, 60); });
+  window.addEventListener('resize', function(){ setTimeout(ajustarQuadro, 60); });
   function ir(n){ if (n < 1 || n > 30) return; try { history.replaceState(null, '', '?n=' + n); } catch (e) {} encontro(n); window.scrollTo(0, 0); }
 
   // cronômetro das duas aulas: destaca a etapa do momento
@@ -123,7 +143,7 @@
     if (n >= 1 && n <= 30) encontro(n); else visaoGeral();
   };
   x.send();
-  window.ENCONTROS = {dados: function(){ return D; }, atual: function(){ return atual; }};
+  window.ENCONTROS = {dados: function(){ return D; }, atual: function(){ return atual; }, ajustar: ajustarQuadro, maiorLetra: maiorLetra};
 })();
 </script>
 </body>
