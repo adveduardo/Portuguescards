@@ -108,6 +108,10 @@
             cursor: pointer; display: grid; place-items: center; padding: 0; }
         #canetaBarra.fechada #cnAbrir { opacity: .55; background: #1e293b; }
         #canetaBarra.fechada #cnAbrir:hover { opacity: 1; }
+        #btLaserRapido { position: fixed; right: 14px; bottom: 14px; z-index: 950; width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(255,255,255,.3);
+            background: rgba(30,41,59,.6); color: #fff; font-size: 22px; cursor: pointer; display: grid; place-items: center; padding: 0; box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+        #btLaserRapido:hover { background: rgba(30,41,59,.9); }
+        #btLaserRapido.ativa { background: #7f1d1d; border-color: #ff4d4d; box-shadow: 0 0 0 4px rgba(255,60,60,.45), 0 0 18px rgba(255,0,0,.8); }
         #canetaBarra .cnFer.ativa { border-color: #ffd54a; box-shadow: 0 0 0 3px #ffd54a; }
         #canetaBarra .pingo { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; display: block; }
         @media (max-height: 560px) { #canetaBarra button { width: 36px; height: 36px; font-size: 16px; } #canetaBarra .pingo { width: 18px; height: 18px; } }
@@ -1190,6 +1194,7 @@
     <!-- ✏️ Caneta e laser por cima de qualquer atividade (para escrever na tela espelhada do iPad) -->
     <canvas id="tinta" aria-hidden="true"></canvas>
     <canvas id="laser" aria-hidden="true"></canvas>
+    <button type="button" id="btLaserRapido" title="Laser para demonstrar (toque de novo para desligar)" aria-label="Laser">🔴</button>
     <div id="canetaBarra" class="fechada">
         <button type="button" id="cnAbrir" title="Caneta e laser para escrever na tela" aria-label="Caneta">✏️</button>
         <div id="cnFerramentas">
@@ -1248,6 +1253,7 @@
                 ferramenta = f; if (c) cor = c;
                 document.body.classList.toggle('escrevendo', !!f);
                 barra.querySelectorAll('.cnFer').forEach(b => b.classList.toggle('ativa', !!f && b.dataset.f === f && (f === 'laser' || b.dataset.cor === cor)));
+                document.getElementById('btLaserRapido').classList.toggle('ativa', f === 'laser');
             }
             function apagar() { ct.clearRect(0, 0, tinta.width, tinta.height); rastro = []; cl.clearRect(0, 0, laser.width, laser.height); }
             function traco(a, b) {
@@ -1291,6 +1297,8 @@
             };
             barra.querySelectorAll('.cnFer').forEach(b => b.onclick = () => { ajustar(); escolher(b.dataset.f, b.dataset.cor); });
             document.getElementById('cnApagar').onclick = apagar;
+            // botão rápido do laser (canto inferior direito): liga e desliga sem abrir a barra da caneta
+            document.getElementById('btLaserRapido').onclick = () => { if (ferramenta === 'laser') escolher(null); else { ajustar(); escolher('laser'); } };
             document.getElementById('cnMao').onclick = () => escolher(null);
             document.getElementById('cnFechar').onclick = () => { apagar(); escolher(null); barra.classList.add('fechada'); };
             window.addEventListener('resize', () => setTimeout(ajustar, 50));
