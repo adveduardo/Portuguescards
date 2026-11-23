@@ -20,7 +20,17 @@
     {id: 'porquinhos', nome: 'Porquinhos', emoji: '🐷', art: 'dos'}, {id: 'galinhas', nome: 'Galinhas', emoji: '🐔', art: 'das'},
     {id: 'passarinhos', nome: 'Passarinhos', emoji: '🐦', art: 'dos'}, {id: 'cobras', nome: 'Cobras', emoji: '🐍', art: 'das'},
     {id: 'caracois', nome: 'Caracóis', emoji: '🐌', art: 'dos'}, {id: 'escorpioes', nome: 'Escorpiões', emoji: '🦂', art: 'dos'},
-    {id: 'vacas', nome: 'Vacas', emoji: '🐮', art: 'das'}, {id: 'camelos', nome: 'Camelos', emoji: '🐫', art: 'dos'}
+    {id: 'vacas', nome: 'Vacas', emoji: '🐮', art: 'das'}, {id: 'camelos', nome: 'Camelos', emoji: '🐫', art: 'dos'},
+    {id: 'ratinhos', nome: 'Ratinhos', emoji: '🐭', art: 'dos'}, {id: 'javalis', nome: 'Javalis', emoji: '🐗', art: 'dos'},
+    {id: 'ovelhas', nome: 'Ovelhas', emoji: '🐑', art: 'das'}, {id: 'cabras', nome: 'Cabras', emoji: '🐐', art: 'das'},
+    {id: 'galos', nome: 'Galos', emoji: '🐓', art: 'dos'}, {id: 'pintinhos', nome: 'Pintinhos', emoji: '🐤', art: 'dos'},
+    {id: 'perus', nome: 'Perus', emoji: '🦃', art: 'dos'}, {id: 'peixes', nome: 'Peixes', emoji: '🐟', art: 'dos'},
+    {id: 'peixinhos', nome: 'Peixinhos', emoji: '🐠', art: 'dos'}, {id: 'baiacus', nome: 'Baiacus', emoji: '🐡', art: 'dos'},
+    {id: 'formigas', nome: 'Formigas', emoji: '🐜', art: 'das'}, {id: 'lagartas', nome: 'Lagartas', emoji: '🐛', art: 'das'},
+    {id: 'dragoes', nome: 'Dragões', emoji: '🐲', art: 'dos'}, {id: 'bois', nome: 'Bois', emoji: '🐂', art: 'dos'},
+    {id: 'bufalos', nome: 'Búfalos', emoji: '🐃', art: 'dos'}, {id: 'oncas', nome: 'Onças', emoji: '🐆', art: 'das'},
+    {id: 'esquilos', nome: 'Esquilos', emoji: '🐿️', art: 'dos'}, {id: 'pombas', nome: 'Pombas', emoji: '🕊️', art: 'das'},
+    {id: 'aranhas', nome: 'Aranhas', emoji: '🕷️', art: 'das'}, {id: 'carneiros', nome: 'Carneiros', emoji: '🐏', art: 'dos'}
   ];
   var CORES = ['#e74c3c', '#2f80ed', '#27ae60', '#e6a800'];
   var PADRAO = ['leoes', 'golfinhos', 'pandas', 'abelhas'];
@@ -65,7 +75,8 @@
     '.anmGrade{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;margin:8px 0}' +
     '.anmGrade button{width:76px;margin:3px;padding:6px 2px;border:2px solid #e3e9f4;background:#fff;border-radius:12px;cursor:pointer;font-family:inherit;font-size:12px;color:#14213d}' +
     '.anmGrade button span{display:block;font-size:30px;line-height:1.2}.anmGrade button.usado{background:#eef2f8;opacity:.6}' +
-    '.anmDica{color:#4a5a78;font-size:14px;margin:4px 0}';
+    '.anmDica{color:#4a5a78;font-size:14px;margin:4px 0}' +
+    '.anmFim{position:-webkit-sticky;position:sticky;bottom:-16px;background:#fff;padding:8px 0 4px;margin-top:6px;border-top:1px solid #e3e9f4}';
   function estilo(){ if (document.getElementById('anmCss')) return; var s = document.createElement('style'); s.id = 'anmCss'; s.textContent = css; document.head.appendChild(s); }
   function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
   function resumo(){
@@ -96,7 +107,7 @@
         h += '</div>';
       } else if (c.modo === 'aleatorio') h += '<p class="anmDica">Cada vez que esta tela abrir, as equipes ganham animais sorteados.</p><div class="anmAcoes"><button type="button" data-x="sortear">🎲 Sortear de novo</button></div>';
       else h += '<p class="anmDica">Leões, Golfinhos, Pandas e Abelhas.</p>';
-      h += '<div class="anmAcoes" style="margin-top:10px"><button type="button" data-x="ok" style="background:#ffd54a;border-color:#e0b400">✔️ Pronto</button></div></div>';
+      h += '<div class="anmAcoes anmFim"><button type="button" data-x="ok" style="background:#ffd54a;border-color:#e0b400">✔️ Pronto</button></div></div>';
       fundo.innerHTML = h;
     }
     fundo.onclick = function(ev){
