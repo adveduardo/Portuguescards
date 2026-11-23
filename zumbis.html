@@ -25,8 +25,9 @@
 <div id="aviso"></div>
 <div class="tela ativa" id="tConfig"><div class="cartao">
   <h1>💀 Zumbis da Ortografia</h1>
-  <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>. No modo <b>🏷️ Classes de palavras</b>, o zumbi traz uma palavra e vocês escolhem a classe dela. Se um zumbi chegar à escola, vocês perdem um coração; sem corações, a escola é destruída!</p>
-  <label>Palavras: <select id="selArquivo" style="max-width:560px"></select></label>
+  <p>Zumbis vêm andando até a escola com <b>palavras escritas errado</b>. Para curar o zumbi da frente, escolha a <b>escrita certa</b>. No modo <b>🏷️ Classes de palavras</b>, o zumbi traz uma palavra e vocês escolhem a classe dela; no modo <b>📝 Frases</b>, ele traz uma frase com uma palavra destacada. Se um zumbi chegar à escola, vocês perdem um coração; sem corações, a escola é destruída!</p>
+  <label>Os zumbis carregam: <select id="selTipo"><option value="ortografia">🔤 Ortografia (escolham a escrita certa)</option><option value="classes">🏷️ Classes de palavras (escolham a classe)</option><option value="frases">📝 Frases (a classe da palavra destacada na frase)</option></select></label>
+  <label><span id="rotArquivo">Palavras:</span> <select id="selArquivo" style="max-width:560px"></select></label>
   <p class="dica" id="infoArq">Carregando…</p>
   <p><button type="button" id="btMeuJson">📋 Colar o meu JSON (palavras novas)</button></p>
   <div id="jsonCaixa" style="display:none;max-width:620px;margin:6px auto;text-align:left">
@@ -104,18 +105,39 @@
     setTimeout(function(){ try { $('jsonTexto').focus(); $('jsonCaixa').scrollIntoView({block: 'center'}); } catch (e) {} }, 50);
   };
   try { $('jsonTexto').value = localStorage.getItem('zumbis_json') || ''; } catch (e) {}
+  // três tipos de conteúdo: ortografia (lista do índice), classes de palavras e frases com a palavra destacada
+  var CLASSES_OPS = '<option value="classes:morfo-classes.json">As 10 classes (390 palavras)</option><option value="classes:morfo-classes-basico.json">Substantivo, adjetivo e verbo (108 palavras)</option><option value="classes:morfo-classes-invariaveis.json">Advérbio, preposição, conjunção e interjeição (47 palavras)</option><option value="classes:morfo-classes-mudam.json">A mesma palavra, classes diferentes (26)</option><option value="classes:morfo-classes-eja.json">Palavras do dia a dia, EJA (46)</option>';
+  var FRASES_OPS = '<option value="classes:morfo-classes-frase.json">Palavra destacada na frase: as 10 classes (802 frases)</option><option value="classes:morfo-classes-frase-sav.json">Frases: substantivo, adjetivo ou verbo (148)</option><option value="classes:morfo-classes-frase-invariaveis.json">Frases: advérbio, preposição, conjunção ou interjeição (147)</option>';
+  var MEU = '<option value="meu-json">📋 O meu JSON (colar palavras novas)</option>', ORTO = '';
+  var modoPedido = ARC.param('modo');
+  if (modoPedido === 'classes' || modoPedido === 'frases') $('selTipo').value = modoPedido;
+  function tipoDe(arq){ return arq.indexOf('classes:morfo-classes-frase') === 0 ? 'frases' : arq.indexOf('classes:') === 0 ? 'classes' : 'ortografia'; }
+  function aplicarTipo(t, arq){
+    var sel = $('selArquivo');
+    sel.innerHTML = t === 'classes' ? CLASSES_OPS + MEU : t === 'frases' ? FRASES_OPS + MEU : ORTO + MEU;
+    $('rotArquivo').textContent = t === 'classes' ? 'Classes:' : t === 'frases' ? 'Frases:' : 'Palavras:';
+    if (arq && sel.querySelector('option[value="' + arq + '"]')) sel.value = arq; else sel.selectedIndex = 0;
+    carregarArquivo(sel.value);
+  }
+  $('selTipo').onchange = function(){ aplicarTipo(this.value); };
   ARC.seletor($('selArquivo'), 'detetive', 'detetive-padrao.json', function(arq){
     var sel = $('selArquivo');
-    if (!sel.querySelector('optgroup.classes')){   // o modo das classes de palavras entra na mesma lista
-      var og = document.createElement('optgroup'); og.className = 'classes'; og.label = '🏷️ Classes de palavras (escolham a classe)';
-      og.innerHTML = '<option value="meu-json">📋 O meu JSON (colar palavras novas)</option><option value="classes:morfo-classes.json">As 10 classes (390 palavras)</option><option value="classes:morfo-classes-basico.json">Substantivo, adjetivo e verbo (108 palavras)</option><option value="classes:morfo-classes-frase.json">Palavra destacada na frase (802 frases)</option><option value="classes:morfo-classes-frase-sav.json">Frases: substantivo, adjetivo ou verbo (148)</option>';
-      sel.insertBefore(og, sel.firstChild); sel.value = arq;
+    if (!ORTO){   // primeira vez: guarda a lista de ortografia e liga a troca de arquivo
+      ORTO = sel.innerHTML;
+      sel.onchange = function(){ carregarArquivo(sel.value); };
+      var pedido = ARC.param('arquivo'), t = $('selTipo').value;
+      if (pedido && /^morfo-classes/.test(pedido)){ arq = 'classes:' + pedido; t = tipoDe(arq); $('selTipo').value = t; }
+      aplicarTipo(t, t === 'ortografia' ? arq : arq.indexOf('classes:') === 0 ? arq : '');
+      return;
     }
+    carregarArquivo(arq);
+  });
+  function carregarArquivo(arq){
     $('infoArq').textContent = 'Carregando…'; itens = [];
     $('jsonCaixa').style.display = arq === 'meu-json' ? 'block' : 'none';
     if (arq === 'meu-json'){ usarJson(); return; }
     if (arq.indexOf('classes:') === 0){
-      ARC.json('dados/' + arq.slice(8), function(d){ itens = lerClasses(d); $('infoArq').textContent = itens.length ? itens.length + ' palavras para classificar' : 'Não achei palavras com classe neste arquivo.'; }, function(){ $('infoArq').textContent = 'Não consegui abrir o arquivo.'; });
+      ARC.json('dados/' + arq.slice(8), function(d){ itens = lerClasses(d); $('infoArq').textContent = itens.length ? itens.length + (tipoDe(arq) === 'frases' ? ' frases' : ' palavras') + ' para classificar' : 'Não achei palavras com classe neste arquivo.'; }, function(){ $('infoArq').textContent = 'Não consegui abrir o arquivo.'; });
       return;
     }
     ARC.json('dados/' + arq, function(d){
@@ -128,7 +150,7 @@
       });
       $('infoArq').textContent = itens.length ? (d.titulo || arq) + ' • ' + itens.length + ' palavras' : 'Este arquivo não tem palavras para corrigir.';
     }, function(){ $('infoArq').textContent = 'Não consegui abrir dados/' + arq; });
-  });
+  }
 
   function comecar(){
     if (itens.length < 3) return ARC.aviso('Escolha um arquivo de palavras.');
