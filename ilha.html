@@ -133,6 +133,7 @@
 <div id="janela" class="janela" hidden><div class="caixaJ" id="caixaJ"></div></div>
 
 <script src="jogo-ao-vivo.js"></script>
+<script src="animais.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo;
@@ -210,7 +211,7 @@ function comecar(){
   const ne = +$('selEquipes').value;
   jogo = {titulo: banco.titulo, rodadas: +$('selRodadas').value, rodada: 1, vez: 0, erroAnda: +$('selErro').value, mini: +$('selMini').value,
     tempo: +$('selTempo').value, cerebro: $('chkCerebro').checked, casas: ['inicio'].concat(embaralhar(DISTRIB)), bau: 0,
-    equipes: EQUIPES.slice(0, ne).map(e => Object.assign({}, e, {pos: 0, joias: 0, trofeus: 0, acertos: 0, respostas: 0, pulaVez: false})),
+    equipes: (window.Animais ? Animais.equipes(ne) : EQUIPES.slice(0, ne)).map(e => Object.assign({}, e, {pos: 0, joias: 0, trofeus: 0, acertos: 0, respostas: 0, pulaVez: false})),
     perguntas: embaralhar(banco.perguntas), ip: 0, ultimoMini: '', log: '🎉 A festa começou! Boa sorte a todos.', terminado: false};
   jogo.bau = sortearBau(-1);
   iniciarTela();

@@ -84,6 +84,7 @@
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
+<script src="animais.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo;
@@ -142,7 +143,7 @@ function comecar(){
   fila = embaralhar(dados.frases); if (q) fila = fila.slice(0, q);
   total = fila.length; n = 0; vez = 0; acertosTurma = 0;
   const ne = +$('selEquipes').value;
-  equipes = ne ? EQUIPES.slice(0, ne).map(e => Object.assign({pontos: 0}, e)) : [];
+  equipes = ne ? (window.Animais ? Animais.equipes(ne) : EQUIPES.slice(0, ne)).map(e => Object.assign({pontos: 0}, e)) : [];
   AV.mostrarTela('tJogo');
   listaRod = fila.slice();
   navR = AV.rodadas({lugar: $('navLugar'), total: listaRod.length, aoAvancar: () => { if (equipes.length) vez = (vez + 1) % equipes.length; }, btnProxima: $('btnProxima'), btnPuladas: $('btnPuladas'),

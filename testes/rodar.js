@@ -42,7 +42,7 @@ ok(!quebradosMenu.length, 'Menu: toda opção abre uma página e um conteúdo qu
 // ---------- 3) iPads antigos ----------
 let acorn = null; try { acorn = require('acorn'); } catch (e) {}
 const paginas = fs.readdirSync(RAIZ).filter(f => f.endsWith('.html'));
-const doIpad = ['jogar.html', 'rede.js', 'sala.js', 'arcade.js'].concat(paginas.filter(f => { const s = ler(f); return s.indexOf('src="arcade.js"') >= 0 && s.indexOf('jogo-ao-vivo.js') < 0; }));
+const doIpad = ['jogar.html', 'rede.js', 'sala.js', 'arcade.js', 'animais.js'].concat(paginas.filter(f => { const s = ler(f); return s.indexOf('src="arcade.js"') >= 0 && s.indexOf('jogo-ao-vivo.js') < 0; }));
 const blocos = f => f.endsWith('.html') ? [...ler(f).matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]) : [ler(f)];
 if (acorn){
   const naoES5 = [];

@@ -75,6 +75,7 @@
 </section>
 
 <script src="jogo-ao-vivo.js"></script>
+<script src="animais.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo;
@@ -109,7 +110,7 @@ function comecar(){
   total = lista.length; idx = 0; vez = 0; acertosTurma = 0;
   est = lista.map(() => ({etapa: 'achar', tentativas: 0, ops: null, escolha: null, certo: false, pulada: false}));
   const ne = +$('selEquipes').value;
-  equipes = ne ? EQUIPES.slice(0, ne).map(e => Object.assign({pontos: 0}, e)) : [];
+  equipes = ne ? (window.Animais ? Animais.equipes(ne) : EQUIPES.slice(0, ne)).map(e => Object.assign({pontos: 0}, e)) : [];
   if (!nav) nav = AV.barraNavegacao({lugar: $('navLugar'), total: () => total, atual: () => idx, irPara,
     respondida: () => !!est[idx] && est[idx].etapa === 'feito',
     estado: i => est[i].etapa === 'feito' ? (est[i].certo ? 'ok' : 'erro') : est[i].pulada ? 'pulou' : ''});

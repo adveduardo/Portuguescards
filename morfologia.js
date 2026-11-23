@@ -47,10 +47,11 @@ function montarEscolhaClasses(el, disponiveis, aoMudar){
 }
 const classesMarcadas = el => [...el.querySelectorAll('input[data-c]:checked')].map(i => i.dataset.c);
 
-// Placar: turma toda (0) ou 2 a 4 equipes que se revezam
+// Placar: turma toda (0) ou 2 a 4 equipes que se revezam (os animais vêm de animais.js, se o professor escolheu)
+if (!window.Animais && !document.getElementById('anmScript')){ var sAnm = document.createElement('script'); sAnm.id = 'anmScript'; sAnm.src = 'animais.js'; (document.head || document.documentElement).appendChild(sAnm); }   // animais das equipes
 const EQUIPES = [{nome:'Leões',emoji:'🦁',cor:'#e74c3c'},{nome:'Golfinhos',emoji:'🐬',cor:'#2f80ed'},{nome:'Papagaios',emoji:'🦜',cor:'#27ae60'},{nome:'Abelhas',emoji:'🐝',cor:'#e6a800'}];
 function criarPlacar(el, n){
-  const p = {equipes: n ? EQUIPES.slice(0, n).map(e => Object.assign({pontos: 0}, e)) : [], vez: 0, turma: 0};
+  const p = {equipes: n ? (window.Animais ? window.Animais.equipes(n) : EQUIPES.slice(0, n)).map(e => Object.assign({pontos: 0}, e)) : [], vez: 0, turma: 0};
   p.desenhar = () => {
     el.innerHTML = p.equipes.length
       ? p.equipes.map((e, i) => `<span class="chipEq ${i === p.vez ? 'davez' : ''}" style="background:${e.cor}">${e.emoji} ${AoVivo.esc(e.nome)}<b>${e.pontos}</b></span>`).join('')

@@ -40,6 +40,7 @@
 </style>
 <script src="visual.js"></script>
 <script src="sala.js"></script>
+<script src="animais.js"></script>
 </head>
 <body>
 <canvas id="lagoa"></canvas>
@@ -165,7 +166,7 @@
     var ne = +$('selEquipes').value, nf = +$('selFases').value, alvos = Sala.embaralhar(dados.alvos), fases = [];
     for (var i = 0; i < nf; i++) fases.push({alvo: alvos[i % alvos.length], equipe: ne ? i % ne : -1});
     jogo = {fases: fases, f: 0, meta: +$('selMeta').value, vel: +$('selVel').value, tempo: +$('selTempo').value,
-      equipes: ne ? EQUIPES.slice(0, ne).map(function(e){ return {nome: e.nome, emoji: e.emoji, cor: e.cor, pontos: 0}; }) : [{nome: 'Turma', emoji: '🐥', cor: '#0f6aa8', pontos: 0}]};
+      equipes: ne ? (window.Animais ? Animais.equipes(ne) : EQUIPES.slice(0, ne)).map(function(e){ return {nome: e.nome, emoji: e.emoji, cor: e.cor, art: e.art, pontos: 0}; }) : [{nome: 'Turma', emoji: '🐥', cor: '#0f6aa8', pontos: 0}]};
     introFase();
   }
   function faseAtual(){ return jogo.fases[jogo.f]; }
@@ -175,7 +176,7 @@
     var f = faseAtual(), c = dados.cats[f.alvo], eq = equipeAtual();
     rodando = false;
     $('cFase').innerHTML = '<h2>Fase ' + (jogo.f + 1) + ' de ' + jogo.fases.length + '</h2>' +
-      (jogo.equipes.length > 1 ? '<p style="font-size:24px;font-weight:bold;margin:4px 0">Vez ' + (eq.nome === 'Abelhas' ? 'das ' : 'dos ') + eq.emoji + ' ' + esc(eq.nome) + '</p>' : '') +
+      (jogo.equipes.length > 1 ? '<p style="font-size:24px;font-weight:bold;margin:4px 0">Vez ' + (eq.art ? eq.art + ' ' : eq.nome === 'Abelhas' ? 'das ' : 'dos ') + eq.emoji + ' ' + esc(eq.nome) + '</p>' : '') +
       '<div class="alvoGrande" style="background:' + c.cor + '">' + esc(textoAlvo(f.alvo)) + '</div>' +
       (c.def ? '<p class="dica" style="font-size:18px">Lembrete: ' + esc(c.plural.toLowerCase()) + ' ' + esc(c.def) + '.</p>' : '') +
       '<p class="dica">Junte ' + jogo.meta + ' patinhos. Cuidado: palavra errada espanta um patinho e tira um ❤️.</p>' +

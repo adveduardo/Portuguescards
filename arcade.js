@@ -36,7 +36,8 @@
 
   // ---------- equipes ----------
   ARC.EQUIPES = [{nome: 'Leões', emoji: '🦁', cor: '#e74c3c'}, {nome: 'Golfinhos', emoji: '🐬', cor: '#2f80ed'}, {nome: 'Pandas', emoji: '🐼', cor: '#27ae60'}, {nome: 'Abelhas', emoji: '🐝', cor: '#e6a800'}];
-  ARC.criarEquipes = function(n){ var l = []; for (var i = 0; i < n; i++) l.push({nome: ARC.EQUIPES[i].nome, emoji: ARC.EQUIPES[i].emoji, cor: ARC.EQUIPES[i].cor, pontos: 0}); return l; };
+  if (!window.Animais && !document.getElementById('anmScript')){ var sAnm = document.createElement('script'); sAnm.id = 'anmScript'; sAnm.src = 'animais.js'; (document.head || document.documentElement).appendChild(sAnm); }   // animais das equipes
+  ARC.criarEquipes = function(n){ var base = window.Animais ? window.Animais.equipes(n) : ARC.EQUIPES, l = []; for (var i = 0; i < n; i++) l.push({nome: base[i].nome, emoji: base[i].emoji, cor: base[i].cor, pontos: 0}); return l; };
   ARC.placarHTML = function(eqs, destaque){
     return eqs.map(function(e, i){ return '<div style="background:' + e.cor + (destaque === i ? ';outline:4px solid #ffd54a' : '') + '">' + e.emoji + ' ' + ARC.esc(e.nome) + '<small>' + e.pontos + '</small></div>'; }).join('');
   };

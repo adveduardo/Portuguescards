@@ -85,6 +85,7 @@
   </div>
 </div>
 
+<script src="animais.js"></script>
 <div class="tela" id="tJogo">
   <div id="placar"></div>
   <div id="pedido"></div>
@@ -174,7 +175,7 @@
   var J = null;
   function comecar(){
     if (!lista){ alert('Escolha um conteúdo que abra (ou cole o seu JSON).'); return; }
-    var n = Math.min(+$('selQtd').value, lista.eventos.length), eq = +$('selEquipes').value, nomes = ['🔴 Equipe 1', '🔵 Equipe 2', '💚 Equipe 3', '💛 Equipe 4'];
+    var n = Math.min(+$('selQtd').value, lista.eventos.length), eq = +$('selEquipes').value, nomes = window.Animais ? Animais.equipes(4).map(function(a){ return a.emoji + ' ' + a.nome; }) : ['🔴 Equipe 1', '🔵 Equipe 2', '💚 Equipe 3', '💛 Equipe 4'];
     if (eq === 1) nomes = ['🙌 Turma'];
     J = {modo: modo, n: modo === 'duelo' ? 2 : n, rodadas: +$('selRodadas').value, rodada: 0, eq: [], vez: 0, monte: embaralhar(lista.eventos), pos: 0};
     for (var i = 0; i < eq; i++) J.eq.push({nome: nomes[i], pontos: 0});

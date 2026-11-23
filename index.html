@@ -95,6 +95,22 @@
         .welcome-card h1 { color: #60a5fa; margin-bottom: 15px; }
         .welcome-card p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
         #welcome-screen { overflow-y: auto; }
+        /* caneta e laser */
+        #tinta, #laser { position: fixed; left: 0; top: 0; z-index: 900; pointer-events: none; touch-action: none; }
+        #laser { z-index: 901; }
+        body.escrevendo #tinta { pointer-events: auto; cursor: crosshair; }
+        #canetaBarra { position: fixed; left: 8px; top: 50%; transform: translateY(-50%); z-index: 950; display: flex; flex-direction: column; align-items: center; gap: 6px;
+            background: rgba(15,23,42,.82); border-radius: 18px; padding: 6px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+        #canetaBarra.fechada { background: transparent; box-shadow: none; padding: 0; }
+        #canetaBarra.fechada #cnFerramentas { display: none; }
+        #cnFerramentas { display: flex; flex-direction: column; gap: 6px; }
+        #canetaBarra button { width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,.25); background: #1e293b; color: #fff; font-size: 20px;
+            cursor: pointer; display: grid; place-items: center; padding: 0; }
+        #canetaBarra.fechada #cnAbrir { opacity: .55; background: #1e293b; }
+        #canetaBarra.fechada #cnAbrir:hover { opacity: 1; }
+        #canetaBarra .cnFer.ativa { border-color: #ffd54a; box-shadow: 0 0 0 3px #ffd54a; }
+        #canetaBarra .pingo { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; display: block; }
+        @media (max-height: 560px) { #canetaBarra button { width: 36px; height: 36px; font-size: 16px; } #canetaBarra .pingo { width: 18px; height: 18px; } }
         .criador { margin-top: 18px; max-width: 600px; width: 100%; text-align: left; background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; color: #e2e8f0; }
         .criador summary { cursor: pointer; padding: 14px 18px; list-style: none; display: flex; align-items: center; gap: 12px; }
@@ -1169,6 +1185,25 @@
 
     <iframe id="app-frame" src="" allow="microphone; autoplay; fullscreen" allowfullscreen></iframe>
 
+    <!-- ✏️ Caneta e laser por cima de qualquer atividade (para escrever na tela espelhada do iPad) -->
+    <canvas id="tinta" aria-hidden="true"></canvas>
+    <canvas id="laser" aria-hidden="true"></canvas>
+    <div id="canetaBarra" class="fechada">
+        <button type="button" id="cnAbrir" title="Caneta e laser para escrever na tela" aria-label="Caneta">✏️</button>
+        <div id="cnFerramentas">
+            <button type="button" class="cnFer" data-f="caneta" data-cor="#e11d48" title="Caneta vermelha"><span class="pingo" style="background:#e11d48"></span></button>
+            <button type="button" class="cnFer" data-f="caneta" data-cor="#2563eb" title="Caneta azul"><span class="pingo" style="background:#2563eb"></span></button>
+            <button type="button" class="cnFer" data-f="caneta" data-cor="#16a34a" title="Caneta verde"><span class="pingo" style="background:#16a34a"></span></button>
+            <button type="button" class="cnFer" data-f="caneta" data-cor="#111827" title="Caneta preta"><span class="pingo" style="background:#111827"></span></button>
+            <button type="button" class="cnFer" data-f="caneta" data-cor="#ffffff" title="Caneta branca"><span class="pingo" style="background:#fff;border-color:#94a3b8"></span></button>
+            <button type="button" class="cnFer" data-f="marca" data-cor="#facc15" title="Marca-texto amarelo">🖍️</button>
+            <button type="button" class="cnFer" data-f="laser" title="Laser: só deixa um rastro que some">🔴</button>
+            <button type="button" id="cnApagar" title="Apagar tudo">🧽</button>
+            <button type="button" id="cnMao" title="Parar de escrever e mexer na atividade (o desenho fica)">👆</button>
+            <button type="button" id="cnFechar" title="Fechar a caneta e apagar">✖</button>
+        </div>
+    </div>
+
     <script>
         function changeTool() {
             const selector = document.getElementById('tool-selector');
@@ -1184,7 +1219,83 @@
                 iframe.style.display = "block";
                 iframe.src = selector.value;
             }
+            if (window.canetaApagar) { canetaApagar(); setTimeout(canetaAjustar, 60); }   // atividade nova começa sem rabiscos
         }
+
+        // ✏️ Caneta e laser: uma camada transparente por cima da atividade. Apagar tudo num toque.
+        (function () {
+            const tinta = document.getElementById('tinta'), laser = document.getElementById('laser'), barra = document.getElementById('canetaBarra');
+            const ct = tinta.getContext('2d'), cl = laser.getContext('2d');
+            let ferramenta = null, cor = '#e11d48', desenhando = false, ultimo = null, rastro = [], animando = false, dpr = 1;
+            function area() {
+                const f = document.getElementById('app-frame'), w = document.getElementById('welcome-screen');
+                const el = f.style.display === 'block' ? f : w;
+                const r = el.getBoundingClientRect();
+                return r.width && r.height ? r : {left: 0, top: 0, width: innerWidth, height: innerHeight};
+            }
+            function ajustar() {
+                const r = area(); dpr = window.devicePixelRatio || 1;
+                const copia = document.createElement('canvas'); copia.width = tinta.width; copia.height = tinta.height;
+                if (tinta.width) copia.getContext('2d').drawImage(tinta, 0, 0);
+                [tinta, laser].forEach(c => { c.style.left = r.left + 'px'; c.style.top = r.top + 'px'; c.style.width = r.width + 'px'; c.style.height = r.height + 'px';
+                    c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); });
+                if (copia.width) ct.drawImage(copia, 0, 0);
+            }
+            function ponto(ev) { const r = tinta.getBoundingClientRect(); return {x: (ev.clientX - r.left) * dpr, y: (ev.clientY - r.top) * dpr, t: performance.now()}; }
+            function escolher(f, c) {
+                ferramenta = f; if (c) cor = c;
+                document.body.classList.toggle('escrevendo', !!f);
+                barra.querySelectorAll('.cnFer').forEach(b => b.classList.toggle('ativa', !!f && b.dataset.f === f && (f === 'laser' || b.dataset.cor === cor)));
+            }
+            function apagar() { ct.clearRect(0, 0, tinta.width, tinta.height); rastro = []; cl.clearRect(0, 0, laser.width, laser.height); }
+            function traco(a, b) {
+                ct.save(); ct.lineCap = 'round'; ct.lineJoin = 'round';
+                if (ferramenta === 'marca') { ct.globalAlpha = .35; ct.globalCompositeOperation = 'multiply'; ct.lineWidth = 26 * dpr; } else ct.lineWidth = 5 * dpr;
+                ct.strokeStyle = cor; ct.beginPath(); ct.moveTo(a.x, a.y); ct.lineTo(b.x, b.y); ct.stroke(); ct.restore();
+            }
+            function animarLaser() {
+                const agora = performance.now(), VIDA = 900;
+                rastro = rastro.filter(p => agora - p.t < VIDA);
+                cl.clearRect(0, 0, laser.width, laser.height);
+                cl.lineCap = 'round'; cl.lineJoin = 'round';
+                for (let i = 1; i < rastro.length; i++) {
+                    const a = rastro[i - 1], b = rastro[i]; if (b.novo) continue;
+                    const vida = 1 - (agora - b.t) / VIDA;
+                    cl.strokeStyle = 'rgba(255,40,40,' + (vida * .9).toFixed(3) + ')'; cl.lineWidth = (4 + 6 * vida) * dpr;
+                    cl.shadowColor = 'rgba(255,0,0,.9)'; cl.shadowBlur = 14 * dpr;
+                    cl.beginPath(); cl.moveTo(a.x, a.y); cl.lineTo(b.x, b.y); cl.stroke();
+                }
+                const fim = rastro[rastro.length - 1];
+                if (fim && desenhando) { cl.fillStyle = '#ff2a2a'; cl.shadowBlur = 20 * dpr; cl.beginPath(); cl.arc(fim.x, fim.y, 7 * dpr, 0, 7); cl.fill(); }
+                if (rastro.length || desenhando) requestAnimationFrame(animarLaser); else { animando = false; cl.clearRect(0, 0, laser.width, laser.height); }
+            }
+            tinta.addEventListener('pointerdown', ev => {
+                if (!ferramenta) return; ev.preventDefault(); desenhando = true; ultimo = ponto(ev);
+                try { tinta.setPointerCapture(ev.pointerId); } catch (e) {}
+                if (ferramenta === 'laser') { const p = ultimo; p.novo = true; rastro.push(p); if (!animando) { animando = true; requestAnimationFrame(animarLaser); } }
+                else traco(ultimo, {x: ultimo.x + .1, y: ultimo.y + .1});
+            });
+            tinta.addEventListener('pointermove', ev => {
+                if (!desenhando) return; ev.preventDefault();
+                const p = ponto(ev);
+                if (ferramenta === 'laser') rastro.push(p); else traco(ultimo, p);
+                ultimo = p;
+            });
+            const soltar = () => { desenhando = false; ultimo = null; };
+            tinta.addEventListener('pointerup', soltar); tinta.addEventListener('pointercancel', soltar); tinta.addEventListener('pointerleave', soltar);
+            document.getElementById('cnAbrir').onclick = () => {
+                const fechada = barra.classList.toggle('fechada');
+                if (!fechada) { ajustar(); if (!ferramenta) escolher('caneta', cor); } else escolher(null);
+            };
+            barra.querySelectorAll('.cnFer').forEach(b => b.onclick = () => { ajustar(); escolher(b.dataset.f, b.dataset.cor); });
+            document.getElementById('cnApagar').onclick = apagar;
+            document.getElementById('cnMao').onclick = () => escolher(null);
+            document.getElementById('cnFechar').onclick = () => { apagar(); escolher(null); barra.classList.add('fechada'); };
+            window.addEventListener('resize', () => setTimeout(ajustar, 50));
+            window.canetaAjustar = ajustar; window.canetaApagar = apagar;
+            window.CANETA = {escolher, apagar, ajustar, estado: () => ({ferramenta, cor, desenhando, rastro: rastro.length})};
+            setTimeout(ajustar, 0);
+        })();
 
         // ✂️ Link curto da atividade aberta (is.gd; se falhar, v.gd) para a turma digitar no iPad ou no Chrome
         const SITE_PUBLICO = 'https://adveduardo.github.io/Portuguescards/';
@@ -1375,6 +1486,7 @@
                 topBar.style.display = 'none';
                 showBtn.style.display = 'block';
             }
+            if (window.canetaAjustar) setTimeout(canetaAjustar, 60);
         }
     </script>
 </body>
