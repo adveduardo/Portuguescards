@@ -21,7 +21,7 @@ function olhos(x1, x2, y){
     <g class="olho-normal"><ellipse rx="7.5" ry="9.5" fill="${ESCURO}"/><circle cx="2.6" cy="-3.6" r="2.8" fill="#fff"/><circle cx="-2.4" cy="2.8" r="1.3" fill="#fff" opacity=".8"/></g>
     <path class="olho-feliz" d="M-8 3 Q0 -8 8 3" stroke="${ESCURO}" stroke-width="3.4" fill="none" stroke-linecap="round"/>
     <g class="olho-susto"><circle r="11" fill="#fff" stroke="${ESCURO}" stroke-width="2.4"/><circle r="4" fill="${ESCURO}"/></g></g>`;
-  return um(x1) + um(x2);
+  return '<g class="olhar">' + um(x1) + um(x2) + '</g>';
 }
 function sprite(tipo){
   const p = P[tipo] || P.cachorro, c1 = p.c1, c2 = p.c2, esc = p.esc;
@@ -47,8 +47,8 @@ function sprite(tipo){
   corpo += `<ellipse cx="100" cy="176" rx="33" ry="27" fill="${c2}"/>`;
   const pe = p.bico ? '#ffa62b' : (p.bracosEsc ? esc : c1);
   corpo += `<ellipse cx="72" cy="206" rx="17" ry="9" fill="${pe}" stroke="${esc}" stroke-width="2.5"/><ellipse cx="128" cy="206" rx="17" ry="9" fill="${pe}" stroke="${esc}" stroke-width="2.5"/>`;
-  if (p.asas) corpo += `<g class="bracos"><ellipse cx="46" cy="166" rx="12" ry="28" fill="${c1}" transform="rotate(20 46 166)"/><ellipse cx="154" cy="166" rx="12" ry="28" fill="${c1}" transform="rotate(-20 154 166)"/></g>`;
-  else corpo += `<g class="bracos"><ellipse cx="58" cy="172" rx="12" ry="17" fill="${p.bracosEsc ? esc : c1}" stroke="${esc}" stroke-width="2.5" transform="rotate(25 58 172)"/><ellipse cx="142" cy="172" rx="12" ry="17" fill="${p.bracosEsc ? esc : c1}" stroke="${esc}" stroke-width="2.5" transform="rotate(-25 142 172)"/></g>`;
+  if (p.asas) corpo += `<g class="bracos"><g class="braco-e"><ellipse cx="46" cy="166" rx="12" ry="28" fill="${c1}" transform="rotate(20 46 166)"/></g><g class="braco-d"><ellipse cx="154" cy="166" rx="12" ry="28" fill="${c1}" transform="rotate(-20 154 166)"/></g></g>`;
+  else corpo += `<g class="bracos"><g class="braco-e"><ellipse cx="58" cy="172" rx="12" ry="17" fill="${p.bracosEsc ? esc : c1}" stroke="${esc}" stroke-width="2.5" transform="rotate(25 58 172)"/></g><g class="braco-d"><ellipse cx="142" cy="172" rx="12" ry="17" fill="${p.bracosEsc ? esc : c1}" stroke="${esc}" stroke-width="2.5" transform="rotate(-25 142 172)"/></g></g>`;
   // ---- cabeça ----
   rosto += `<circle cx="100" cy="98" r="60" fill="${c1}" stroke="${esc}" stroke-width="3"/>`;
   rosto += `<ellipse cx="82" cy="68" rx="20" ry="11" fill="#fff" opacity=".22" transform="rotate(-20 82 68)"/>`;   // brilho
@@ -233,6 +233,12 @@ const css = `
   #tormenta.semChuva .chuva,#tormenta.semChuva .nuvemPreta{display:none}
   /* sprite */
   .sprite{width:var(--tam,min(30vh,260px));height:auto;display:block;overflow:visible;filter:drop-shadow(0 10px 8px rgba(0,0,0,.15))}
+  .sprite .olhar{transform:translate(var(--ox,0px),var(--oy,0px));transition:transform .25s ease-out}
+  .sprite .braco-d{transform-origin:142px 160px;transform-box:view-box}
+  .sprite .bochecha{transform-box:fill-box;transform-origin:center;transition:transform .2s}
+  .sprite.est-come .bochecha{transform:scale(1.5);opacity:.75}
+  .sprite.acena .braco-d{animation:acena .35s ease-in-out 5}
+  @keyframes acena{50%{transform:rotate(-70deg) translate(4px,-6px)}}
   .sprite .olho-normal,.sprite .olho-feliz,.sprite .olho-susto,.sprite .boca-come,.sprite .coracoes,.sprite .suor,.sprite .orelhas,.sprite .cabeca,.sprite .corpoTodo{transform-box:fill-box}
   .sprite .olho-feliz,.sprite .olho-susto,.sprite .boca-come,.sprite .boca-susto,.sprite .suor,.sprite .coracoes{display:none}
   .sprite .olho-normal{transform-origin:center;animation:piscar 4.5s infinite}

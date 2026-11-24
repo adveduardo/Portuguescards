@@ -30,10 +30,12 @@
   .bt.verde{background:#16a34a}.bt.vermelho{background:#dc2626}
   .centro{text-align:center}
   /* cena */
-  #topo{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
+  #tCena.ativa{display:flex;flex-direction:column;height:100vh;padding:8px 12px 10px;max-width:none}
+  #topo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:2px;flex:none}
+  #topo .chip{padding:4px 12px;font-size:clamp(.85rem,1.5vw,1.05rem)}
   .chip{background:rgba(255,255,255,.92);border-radius:999px;padding:6px 14px;font-weight:bold;font-size:clamp(.95rem,1.8vw,1.15rem);box-shadow:0 2px 6px rgba(0,0,0,.08)}
-  #cena{position:relative;height:min(58vh,520px);display:flex;align-items:flex-end;justify-content:center;gap:4vw}
-  #balao{position:absolute;top:2%;left:50%;transform:translateX(-50%);background:#fff;border-radius:22px;padding:10px 20px;font-weight:bold;font-size:clamp(1.1rem,2.6vw,1.8rem);box-shadow:0 6px 16px rgba(0,0,0,.12);white-space:nowrap;transition:opacity .3s}
+  #cena{position:relative;flex:1;min-height:0;display:flex;align-items:flex-end;justify-content:center;gap:3vw}
+  #balao{z-index:3;position:absolute;top:1%;left:50%;transform:translateX(-50%);background:#fff;border-radius:22px;padding:10px 20px;font-weight:bold;font-size:clamp(1.1rem,2.6vw,1.8rem);box-shadow:0 6px 16px rgba(0,0,0,.12);white-space:nowrap;transition:opacity .3s}
   #balao:after{content:"";position:absolute;bottom:-14px;left:50%;margin-left:-12px;border:12px solid transparent;border-top-color:#fff;border-bottom:0}
   #bichoBox{position:relative;cursor:pointer;-webkit-user-select:none;user-select:none;transition:font-size .6s}
   #bicho{font-size:var(--tam,min(30vh,260px));line-height:1;display:block;filter:drop-shadow(0 12px 10px rgba(0,0,0,.18))}
@@ -46,10 +48,17 @@
   .assustado{animation:treme .12s linear infinite}
   @keyframes treme{25%{transform:translateX(-7px) rotate(-3deg)}75%{transform:translateX(7px) rotate(3deg)}}
   .risada{animation:pula .5s ease-in-out 2}
+  .acao-pula{animation:pulao .55s cubic-bezier(.3,1.6,.6,1) 2}
+  @keyframes pulao{0%,100%{transform:translateY(0) scale(1)}15%{transform:translateY(0) scale(1.12,.86)}50%{transform:translateY(-22%) scale(.94,1.08)}85%{transform:translateY(0) scale(1.1,.9)}}
+  .acao-gira{animation:giro .9s ease-in-out}
+  @keyframes giro{50%{transform:rotate(180deg) scale(1.08)}100%{transform:rotate(360deg)}}
+  .acao-danca{animation:danca .45s ease-in-out 6}
+  @keyframes danca{25%{transform:rotate(-9deg) translateX(-4%)}75%{transform:rotate(9deg) translateX(4%)}}
+  .voandoBoca{position:fixed;z-index:4;pointer-events:none;transition:left .7s cubic-bezier(.4,.1,.6,1),top .7s cubic-bezier(.3,-.6,.6,1),transform .7s,opacity .7s}
   @keyframes pula{50%{transform:translateY(-40px) rotate(8deg)}}
-  #pratoBox{position:relative;text-align:center;margin-bottom:2vh}
-  #comida{font-size:min(14vh,120px);line-height:1;display:block;transition:transform .2s,opacity .2s;cursor:pointer}
-  #prato{font-size:min(12vh,100px);line-height:.6;display:block}
+  #pratoBox{position:relative;text-align:center;margin-bottom:1vh}
+  #comida{font-size:calc(var(--tam,260px) * .42);line-height:1;display:block;transition:transform .2s,opacity .2s;cursor:pointer}
+  #prato{font-size:calc(var(--tam,260px) * .36);line-height:.6;display:block}
   #comida.tremendo{animation:treme .1s linear infinite}
   #comida.caindo{animation:cai .9s ease-in forwards}
   @keyframes cai{to{transform:translateY(40vh) rotate(160deg);opacity:0}}
@@ -58,16 +67,19 @@
   @keyframes voa{to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
   #mordidas{font-weight:bold;color:#14532d;font-size:clamp(.9rem,1.8vw,1.1rem)}
   /* medidores */
-  .medidores{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:980px;margin:22px auto 0}
-  .medidor{background:rgba(255,255,255,.93);border-radius:18px;padding:10px 14px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .medidores{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:1100px;width:100%;margin:6px auto 0;flex:none}
+  .medidor{background:rgba(255,255,255,.93);border-radius:16px;padding:6px 12px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .medidor b{margin-bottom:3px;font-size:.95rem}
+  .medidor .trilho{height:22px}
   .medidor b{display:block;margin-bottom:6px}
   .trilho{position:relative;height:30px;background:#e5e7eb;border-radius:999px;overflow:hidden}
   .enche{height:100%;width:0;border-radius:999px;transition:width .25s}
   #barriga .enche{background:linear-gradient(90deg,#fbbf24,#f97316)}
   #ruido .enche{background:linear-gradient(90deg,#22c55e,#eab308 60%,#ef4444)}
   #limite{position:absolute;top:-4px;bottom:-4px;width:4px;background:#1f2937;border-radius:2px}
-  .controles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
-  #avisoMic{max-width:860px;margin:8px auto;background:#fff7d6;border:2px solid #f2d675;border-radius:14px;padding:10px 14px;text-align:center;display:none}
+  .controles{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:6px;flex:none}
+  .controles .bt,.controles select{padding:7px 12px;font-size:15px}
+  #avisoMic{position:fixed !important;z-index:5 !important;left:50%;bottom:110px;transform:translateX(-50%);max-width:640px;font-size:14px;cursor:pointer;margin:0;background:#fff7d6;border:2px solid #f2d675;border-radius:14px;padding:10px 14px;text-align:center;display:none}
   #festa{position:fixed;inset:0;z-index:20;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;padding:16px}
   #festa.on{display:flex}
   #festa .cx{background:#fff;border-radius:24px;padding:24px 30px;text-align:center;max-width:560px;font-size:1.2rem}
@@ -265,8 +277,8 @@ function subirNivel(){
   J.nivel++; J.comidasNivel = 0;
   const enf = ENFEITES[Math.min(J.nivel - 1, ENFEITES.length - 1)];
   $('festaCx').innerHTML = `<div class="grande">${J.bicho.e}${enf}</div><h2>🎉 ${esc(J.nome)} encheu a barriga!</h2><p>A turma fez silêncio e ${esc(J.nome)} subiu para o <b>nível ${J.nivel}</b>${enf ? ` e ganhou um enfeite ${enf}` : ''}!</p><p>🏆 Combinem um prêmio com o professor!</p><button type="button" class="bt ouro" id="btContinuarFesta">▶️ Continuar</button>`;
-  $('festa').classList.add('on'); confete(); [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => tom(f, .2, .06), i * 120));
-  pausado = true;
+  $('festa').classList.add('on'); confete(); confete(); [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => tom(f, .2, .06), i * 120));
+  pausado = true; $('bichoBox').classList.add('acao-danca'); setTimeout(() => $('bichoBox').classList.remove('acao-danca'), 2800);
   $('btContinuarFesta').onclick = () => { $('festa').classList.remove('on'); pausado = false; novaComida(); atualizar(); };
 }
 function confete(){ const it = ['🎉', '⭐', '🎊', J.comidaAtual, '💛']; for (let i = 0; i < 40; i++){ const c = document.createElement('span'); c.className = 'conf'; c.textContent = it[i % it.length]; c.style.left = Math.random() * 100 + 'vw'; c.style.animationDelay = Math.random() * .8 + 's'; document.body.appendChild(c); setTimeout(() => c.remove(), 3600); } }
@@ -280,7 +292,43 @@ function susto(forte){
     setTimeout(() => { if (J) novaComida(); }, 950);
   }
 }
-$('bichoBox').onclick = () => { felizAte = Date.now() + 1800; const b = $('bicho'); b.classList.remove('risada'); void b.offsetWidth; b.classList.add('risada'); setTimeout(() => b.classList.remove('risada'), 1100); falar(FALAS_RISO[Math.floor(Math.random() * FALAS_RISO.length)]); tom(990, .08); };
+// tamanho: o maior possível no espaço livre da cena
+function ajustarTamanho(){
+  if (!J) return;
+  const c = $('cena').getBoundingClientRect();
+  const emPe = innerHeight > innerWidth * 1.1;   // tablet em pé: o bichinho pode ocupar mais da largura
+  const base = Math.max(140, Math.min(c.height * .9, innerWidth * (emPe ? .62 : .46)));
+  const fator = Math.min(1, .82 + Math.min(J.nivel, 6) * .03);
+  document.documentElement.style.setProperty('--tam', Math.round(base * fator) + 'px');
+}
+window.addEventListener('resize', ajustarTamanho);
+// olhinhos que acompanham o dedo ou o mouse
+document.addEventListener('pointermove', ev => {
+  const b = $('bicho').getBoundingClientRect(); if (!b.width) return;
+  const dx = ev.clientX - (b.left + b.width / 2), dy = ev.clientY - (b.top + b.height * .4), d = Math.hypot(dx, dy) || 1;
+  $('bicho').style.setProperty('--ox', (dx / d * 4.5).toFixed(1) + 'px'); $('bicho').style.setProperty('--oy', (dy / d * 3.5).toFixed(1) + 'px');
+});
+// brincadeiras de quem está feliz e quietinho
+let proximaBrincadeira = Date.now() + 7000;
+function brincar(){
+  const acoes = ['pula', 'gira', 'acena', 'danca', 'olha'], a = acoes[Math.floor(Math.random() * acoes.length)], box = $('bichoBox'), spr = $('bicho').querySelector('.sprite');
+  if (a === 'olha'){ const lados = [-6, 6, 0]; lados.forEach((x, i) => setTimeout(() => { $('bicho').style.setProperty('--ox', x + 'px'); }, i * 700)); falar(['Cadê o barulho? 👀', 'Tudo quietinho… 😊'][Math.floor(Math.random() * 2)]); return; }
+  if (a === 'acena'){ if (spr){ spr.classList.add('acena'); setTimeout(() => spr.classList.remove('acena'), 1900); } else box.classList.add('acao-danca'); falar('Oi, turma! 👋'); setTimeout(() => box.classList.remove('acao-danca'), 1900); return; }
+  box.classList.remove('acao-pula', 'acao-gira', 'acao-danca'); void box.offsetWidth; box.classList.add('acao-' + a);
+  if (a === 'danca') falar('Que silêncio gostoso! 💃');
+  setTimeout(() => box.classList.remove('acao-' + a), 2800);
+}
+// pedacinho de comida voando do prato até a boca
+function pedacinho(){
+  const o = $('comida').getBoundingClientRect(), d = $('bicho').getBoundingClientRect(); if (!o.width || !d.width) return;
+  const m = document.createElement('span'); m.className = 'voandoBoca'; m.textContent = J.comidaAtual;
+  m.style.left = (o.left + o.width / 2) + 'px'; m.style.top = (o.top + o.height / 3) + 'px'; m.style.fontSize = Math.max(22, o.width * .3) + 'px';
+  document.body.appendChild(m);
+  requestAnimationFrame(() => requestAnimationFrame(() => { m.style.left = (d.left + d.width / 2) + 'px'; m.style.top = (d.top + d.height * .52) + 'px'; m.style.transform = 'scale(.3) rotate(240deg)'; m.style.opacity = '.2'; }));
+  setTimeout(() => m.remove(), 800);
+}
+$('avisoMic').onclick = () => { $('avisoMic').style.display = 'none'; };
+$('bichoBox').onclick = () => { felizAte = Date.now() + 1800; ARTE.estado($('bicho'), 'feliz'); const b = $('bicho'); b.classList.remove('risada'); void b.offsetWidth; b.classList.add('risada'); setTimeout(() => b.classList.remove('risada'), 1100); falar(FALAS_RISO[Math.floor(Math.random() * FALAS_RISO.length)]); tom(990, .08); };
 $('btPetisco').onclick = () => { if (J && !pausado) comeuUma('petisco'); };
 $('comida').onclick = () => { if (!J || pausado) return; J.progresso = Math.min(J.segPorComida, J.progresso + J.segPorComida * .15); migalhas(3); tom(700, .05); };
 $('btPausa').onclick = () => { pausado = !pausado; $('btPausa').textContent = pausado ? '▶️ Continuar' : '⏸️ Pausar'; falar(pausado ? 'Hora da soneca… 😴' : 'Voltei! 😃'); };
@@ -293,7 +341,7 @@ function atualizar(){
   $('chipSilencio').textContent = `🤫 ${Math.floor(J.silencioSeg / 60)} min ${String(Math.floor(J.silencioSeg % 60)).padStart(2, '0')} s de silêncio`;
   $('chipSustos').textContent = `🙀 ${J.sustos} susto${J.sustos === 1 ? '' : 's'}`;
   $('enfeite').textContent = enf;
-  document.documentElement.style.setProperty('--tam', `min(${26 + Math.min(J.nivel, 6) * 2}vh, ${220 + Math.min(J.nivel, 6) * 15}px)`);
+  ajustarTamanho();
   const pct = ((J.comidasNivel + J.progresso / J.segPorComida) / J.meta) * 100;
   $('barriga').querySelector('.enche').style.width = Math.min(100, pct) + '%';
   $('barriga').querySelector('b').textContent = `🍽️ Barriga de ${J.nome}: ${J.comidasNivel} de ${J.meta} comidas`;
@@ -325,7 +373,8 @@ setInterval(() => {
     ARTE.estado(b, Date.now() < felizAte ? 'feliz' : b.className === 'comendo' ? 'come' : 'normal');
     if (comida.classList.contains('tremendo')) comida.className = '';
     J.silencioSeg += dt; J.progresso += dt;
-    if (Math.floor(J.progresso * 2) !== Math.floor((J.progresso - dt) * 2)) tom(320 + Math.random() * 60, .04, .02);   // nham
+    if (Math.floor(J.progresso * 2) !== Math.floor((J.progresso - dt) * 2)){ tom(320 + Math.random() * 60, .04, .02); pedacinho(); }   // nham
+    if (Date.now() > proximaBrincadeira && nivelSom < limite * .6){ brincar(); proximaBrincadeira = Date.now() + 6500 + Math.random() * 6000; }
     if (J.progresso >= J.segPorComida && !comida.classList.contains('caindo')) comeuUma('silencio');
   }
   if (Date.now() > ultimaFala) $('balao').style.opacity = alto ? 1 : .0;
