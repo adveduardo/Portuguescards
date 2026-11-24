@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banco de Repertório</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#f4f1ea;color:#1f2937}
+  .pag{max-width:1180px;margin:0 auto;padding:14px 16px 40px}
+  h1{font-size:clamp(1.5rem,3.6vw,2.3rem);margin:4px 0;color:#1f3a68;text-align:center}
+  .sub{text-align:center;color:#6b7280;margin:0 0 12px}
+  .abas{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+  .aba{border:2px solid #cbd5e1;background:#fff;border-radius:999px;padding:10px 18px;font:inherit;font-weight:bold;font-size:16px;cursor:pointer;color:#1f3a68}
+  .aba.on{background:#1f3a68;color:#fff;border-color:#1f3a68}
+  .filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;background:#fffdf8;border:1px solid #e7e1d6;border-radius:16px;padding:10px;margin-bottom:12px}
+  .filtros select,.filtros input{font:inherit;font-size:15px;border:2px solid #d6cfc2;border-radius:10px;padding:7px 10px;background:#fff}
+  .filtros input{min-width:220px;flex:1}
+  .bt{border:none;border-radius:12px;padding:9px 14px;font:inherit;font-weight:bold;font-size:15px;cursor:pointer;background:#1f3a68;color:#fff}
+  .bt.ouro{background:#ffd54a;color:#1a1a1a}.bt.claro{background:#fff;color:#1f3a68;border:2px solid #cbd5e1}
+  .info{text-align:center;color:#6b7280;font-size:14px;margin:0 0 10px}
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .card{background:#fffdf8;border:1px solid #e7e1d6;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .card .tipo{font-size:13px;font-weight:bold;color:#6b7280}
+  .card h3{margin:0;font-size:1.12rem;color:#1f3a68}
+  .card .autor{font-size:14px;color:#374151}
+  .card .ideia{font-size:15px;line-height:1.4}
+  .card .trecho{font-family:Georgia,serif;font-style:italic;background:#f6f0e2;border-left:4px solid #b7791f;border-radius:6px;padding:8px 10px;font-size:15px;white-space:pre-line}
+  .card .trecho small{display:block;font-style:normal;font-family:"Segoe UI",sans-serif;color:#6b7280;margin-top:4px;font-size:12px}
+  .card .uso{background:#eef6ee;border:1px dashed #86c286;border-radius:10px;padding:8px 10px;font-size:14px;line-height:1.4}
+  .card .uso b{display:block;color:#166534;font-size:12px;margin-bottom:2px}
+  .tags{display:flex;flex-wrap:wrap;gap:4px}
+  .tags span{background:#e8eef9;color:#1f3a68;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:bold}
+  .card .acoes{display:flex;gap:6px;margin-top:auto;flex-wrap:wrap}
+  .card .acoes button{border:1px solid #cbd5e1;background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:13px;font-weight:bold;cursor:pointer;color:#1f3a68}
+  #telao{display:none;position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.92);align-items:center;justify-content:center;padding:4vh 5vw}
+  #telao.on{display:flex}
+  #telao .cx{background:#fffdf8;border-radius:22px;max-width:1000px;width:100%;max-height:92vh;overflow:auto;padding:4vh 4vw;font-size:clamp(1.05rem,2.2vw,1.6rem);line-height:1.5}
+  #telao h3{font-size:1.5em;margin:0 0 6px;color:#1f3a68}
+  #telao .fechar{float:right}
+  .vazio{text-align:center;color:#6b7280;padding:30px}
+</style>
+</head>
+<body>
+<div class="pag">
+  <h1>📚 Banco de Repertório</h1>
+  <p class="sub">Ideias, citações e obras para enriquecer a redação, cada uma com uma frase pronta para usar no texto.</p>
+  <div class="abas">
+    <button type="button" class="aba on" data-a="repertorio">🧠 Repertório para o ENEM</button>
+    <button type="button" class="aba" data-a="literatura">📖 Literatura clássica brasileira</button>
+  </div>
+  <div class="filtros">
+    <select id="selFiltro1" aria-label="Filtro"></select>
+    <select id="selFiltro2" aria-label="Filtro"></select>
+    <input type="search" id="busca" placeholder="🔎 Buscar (ex.: fome, Machado, racismo, internet…)">
+    <button type="button" class="bt ouro" id="btSortear">🎲 Sortear um</button>
+  </div>
+  <p class="info" id="info"></p>
+  <div class="grade" id="grade"></div>
+</div>
+<div id="telao" role="dialog" aria-label="Repertório em tela grande"><div class="cx" id="telaoCx"></div></div>
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const sem = t => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+let D = null, aba = new URLSearchParams(location.search).get('aba') === 'literatura' ? 'literatura' : 'repertorio', lista = [];
+
+function montarFiltros(){
+  if (aba === 'repertorio'){
+    const tipos = [...new Set(D.repertorio.map(x => x.tipo))];
+    $('selFiltro1').innerHTML = '<option value="">Todos os temas (eixos)</option>' + D.eixos.map(e => `<option>${esc(e)}</option>`).join('');
+    $('selFiltro2').innerHTML = '<option value="">Todos os tipos</option>' + tipos.map(t => `<option>${esc(t)}</option>`).join('');
+  } else {
+    const temas = [...new Set(D.literatura.flatMap(x => x.temas))].sort((a, b) => a.localeCompare(b, 'pt'));
+    const escolas = [...new Set(D.literatura.map(x => x.escola.split(' (')[0]))];
+    $('selFiltro1').innerHTML = '<option value="">Todos os temas de redação</option>' + temas.map(e => `<option>${esc(e)}</option>`).join('');
+    $('selFiltro2').innerHTML = '<option value="">Todas as escolas literárias</option>' + escolas.map(t => `<option>${esc(t)}</option>`).join('');
+  }
+}
+function filtrar(){
+  const f1 = $('selFiltro1').value, f2 = $('selFiltro2').value, b = sem($('busca').value.trim());
+  if (aba === 'repertorio') lista = D.repertorio.filter(x => (!f1 || x.eixos.includes(f1)) && (!f2 || x.tipo === f2) && (!b || sem([x.titulo, x.autor, x.ideia, x.uso, x.eixos.join(' ')].join(' ')).includes(b)));
+  else lista = D.literatura.filter(x => (!f1 || x.temas.includes(f1)) && (!f2 || x.escola.split(' (')[0] === f2) && (!b || sem([x.obra, x.autor, x.resumo, x.temas.join(' '), x.trecho].join(' ')).includes(b)));
+  desenhar();
+}
+function cartaoRep(x, i){
+  return `<div class="card"><span class="tipo">${esc(x.tipo)}</span><h3>${esc(x.titulo)}</h3><span class="autor">${esc(x.autor)} • ${esc(x.ano)}</span>
+    <div class="ideia">${esc(x.ideia)}</div><div class="uso"><b>✍️ Frase pronta para a redação</b>${esc(x.uso)}</div>
+    <div class="tags">${x.eixos.map(e => `<span>${esc(e)}</span>`).join('')}</div>
+    <div class="acoes"><button type="button" data-copiar="${i}">📋 Copiar a frase</button><button type="button" data-telao="${i}">🖥️ Mostrar grande</button></div></div>`;
+}
+function cartaoLit(x, i){
+  const nota = x.dominio_publico ? 'obra em domínio público' : 'citação curta com crédito (Lei 9.610/98, art. 46, III)';
+  return `<div class="card"><span class="tipo">📖 ${esc(x.escola)}</span><h3>${esc(x.obra)}</h3><span class="autor">${esc(x.autor)} • ${esc(x.ano)}</span>
+    <div class="ideia">${esc(x.resumo)}</div>${x.trecho ? `<div class="trecho">“${esc(x.trecho)}”<small>${esc(x.autor)}, ${esc(x.obra)} (${nota})</small></div>` : ''}
+    <div class="uso"><b>✍️ Frase pronta para a redação</b>${esc(x.uso)}</div>
+    <div class="tags">${x.temas.map(e => `<span>${esc(e)}</span>`).join('')}</div>
+    <div class="acoes"><button type="button" data-copiar="${i}">📋 Copiar a frase</button><button type="button" data-telao="${i}">🖥️ Mostrar grande</button></div></div>`;
+}
+function desenhar(){
+  $('info').textContent = `${lista.length} ${aba === 'repertorio' ? 'repertório(s)' : 'obra(s)'} • troque [problema] pelo problema do seu tema.`;
+  $('grade').innerHTML = lista.length ? lista.map((x, i) => aba === 'repertorio' ? cartaoRep(x, i) : cartaoLit(x, i)).join('') : '<div class="vazio">Nada encontrado com esses filtros.</div>';
+}
+function telao(i){
+  const x = lista[i]; if (!x) return;
+  const rep = aba === 'repertorio';
+  $('telaoCx').innerHTML = `<button type="button" class="bt claro fechar" id="btFechar">✖ Fechar</button>` +
+    (rep ? `<div class="tipo">${esc(x.tipo)}</div><h3>${esc(x.titulo)}</h3><p><b>${esc(x.autor)}</b> • ${esc(x.ano)}</p><p>${esc(x.ideia)}</p>`
+         : `<div class="tipo">📖 ${esc(x.escola)}</div><h3>${esc(x.obra)}</h3><p><b>${esc(x.autor)}</b> • ${esc(x.ano)}</p><p>${esc(x.resumo)}</p>${x.trecho ? `<p style="font-family:Georgia,serif;font-style:italic;white-space:pre-line">“${esc(x.trecho)}”</p>` : ''}`) +
+    `<p style="background:#eef6ee;border-radius:12px;padding:10px 14px"><b>✍️ Na redação:</b> ${esc(x.uso)}</p>`;
+  $('telao').classList.add('on'); $('btFechar').onclick = () => $('telao').classList.remove('on');
+}
+$('telao').onclick = ev => { if (ev.target === $('telao')) $('telao').classList.remove('on'); };
+$('grade').onclick = ev => {
+  const c = ev.target.closest('[data-copiar]'), t = ev.target.closest('[data-telao]');
+  if (c){ const x = lista[+c.dataset.copiar]; const txt = x.uso;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => { c.textContent = '✅ Copiada!'; setTimeout(() => c.textContent = '📋 Copiar a frase', 1500); }, () => prompt('Copie a frase:', txt)); }
+  if (t) telao(+t.dataset.telao);
+};
+$('btSortear').onclick = () => { if (lista.length) telao(Math.floor(Math.random() * lista.length)); };
+document.querySelectorAll('.aba').forEach(b => b.onclick = () => {
+  aba = b.dataset.a; document.querySelectorAll('.aba').forEach(x => x.classList.toggle('on', x === b));
+  $('busca').value = ''; montarFiltros(); filtrar();
+});
+['selFiltro1', 'selFiltro2'].forEach(id => $(id).onchange = filtrar);
+$('busca').oninput = filtrar;
+fetch('dados/repertorio-redacao.json').then(r => r.json()).then(d => {
+  D = d; document.querySelectorAll('.aba').forEach(x => x.classList.toggle('on', x.dataset.a === aba)); montarFiltros(); filtrar();
+}).catch(() => { $('info').textContent = 'Não consegui abrir o banco de repertório.'; });
+window.REPERTORIO = {dados: () => D, lista: () => lista};
+})();
+</script>
+</body>
+</html>

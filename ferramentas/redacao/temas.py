@@ -264,6 +264,35 @@ NARR += [
 SURPRESAS = ['um guarda-chuva amarelo', 'uma chave enferrujada', 'um bolo de chocolate', 'um apagão', 'uma galinha fujona', 'um bilhete anônimo', 'uma música antiga', 'um pneu furado', 'um celular sem bateria',
   'um arco-íris', 'uma foto rasgada', 'um espirro na hora errada', 'uma bicicleta vermelha', 'uma tempestade', 'um diário secreto', 'um par de óculos perdido', 'uma pipa presa na árvore', 'um mapa',
   'um sorvete derretendo', 'um professor fantasiado', 'uma caixa de papelão', 'um papagaio que fala', 'uma lanterna', 'um relógio parado', 'um cheiro de pipoca', 'um pé de meia furado', 'um convite para uma festa', 'uma ponte quebrada']
-d = {'nivel': 'fund', 'titulo': 'Redação a várias mãos', 'dissertacao': D, 'narrativa': NARR, 'surpresas': SURPRESAS}
+# repertório extra para os temas do ENEM (literatura brasileira e mais referências)
+EXTRA = {
+ 'Os desafios do uso consciente das redes sociais pelos jovens': ['Machado de Assis, “Dom Casmurro”: só a versão de Bentinho (como nas fake news)', 'George Orwell, “1984”: vigilância e manipulação', 'Documentário “O Dilema das Redes” (2020)'],
+ 'A valorização da leitura na formação dos estudantes': ['Ray Bradbury, “Fahrenheit 451”: livros queimados', 'Filme “Central do Brasil”: Dora escreve cartas para analfabetos', 'Kant: coragem de pensar por si mesmo'],
+ 'O combate ao desperdício de alimentos no Brasil': ['Manuel Bandeira, “O Bicho”: “O bicho, meu Deus, era um homem.”', 'Curta “Ilha das Flores” (1989)', 'Carolina Maria de Jesus, “Quarto de Despejo”'],
+ 'A inclusão das pessoas com deficiência na escola': ['Filme “Extraordinário” (2017)', 'Pierre Bourdieu: violência simbólica na escola'],
+ 'A violência contra a mulher no Brasil': ['Graciliano Ramos, “São Bernardo”: Madalena tratada como propriedade', 'Machado de Assis, “Dom Casmurro”: Capitu silenciada', 'Conceição Evaristo, “Olhos d’Água”'],
+ 'O trabalho infantil ainda presente no Brasil': ['Jorge Amado, “Capitães da Areia”', 'Kant: tratar a pessoa como fim, nunca como meio'],
+ 'A importância da vacinação para a saúde coletiva': ['Monteiro Lobato: o Jeca Tatu e o abandono da saúde no campo', 'OMS: saúde como completo bem-estar físico, mental e social'],
+ 'Os desafios da mobilidade urbana nas cidades brasileiras': ['Milton Santos: a cidade desigual e a globalização perversa', 'Charles Chaplin, “Tempos Modernos”: a pressa e a desumanização'],
+ 'O lixo e a reciclagem nas cidades': ['Animação “Wall-E” (2008)', 'Ailton Krenak, “Ideias para adiar o fim do mundo”'],
+ 'A saúde mental dos jovens': ['Machado de Assis, “O Alienista”', 'Lima Barreto, “Diário do Hospício”', 'Filme “Coringa” (2019)'],
+ 'O racismo estrutural na sociedade brasileira': ['Castro Alves, “O Navio Negreiro”', 'Machado de Assis, “Pai contra Mãe”', 'Lima Barreto, “Recordações do Escrivão Isaías Caminha”'],
+ 'O respeito às pessoas idosas': ['Cora Coralina publicou seu primeiro livro aos 75 anos (1965)', 'Kant: a dignidade humana não depende da utilidade'],
+ 'O bullying nas escolas': ['Raul Pompeia, “O Ateneu”: a escola opressora', 'Filme “Extraordinário” (2017)'],
+ 'A gravidez na adolescência': ['Simone de Beauvoir, “O Segundo Sexo”', 'Rachel de Queiroz, “O Quinze”: Conceição, mulher que escolhe estudar e trabalhar'],
+ 'A preservação da Amazônia': ['Carta de Pero Vaz de Caminha (1500): a terra vista como riqueza a explorar', 'Ailton Krenak, “Ideias para adiar o fim do mundo”', 'Gonçalves Dias, “Canção do Exílio”'],
+ 'O acesso à cultura nas periferias': ['Carolina Maria de Jesus, “Quarto de Despejo”', 'Oswald de Andrade, “Manifesto Antropófago”', 'Filme “Bacurau” (2019)'],
+ 'Os golpes digitais e a segurança na internet': ['Michel Foucault, “Vigiar e Punir”: a vigilância', 'Série “Black Mirror”'],
+ 'O esporte como ferramenta de transformação social': ['Aristóteles: o ser humano é um animal social e político', 'Filme “Estrelas Além do Tempo”: talento que vence o preconceito'],
+ 'A importância do voto consciente': ['Filme “Ainda Estou Aqui” (2024): a memória da ditadura', 'Cecília Meireles, “Romanceiro da Inconfidência”: a liberdade', 'Sérgio Buarque de Holanda: o “homem cordial”'],
+ 'A falta de água e o uso consciente': ['Graciliano Ramos, “Vidas Secas”', 'Rachel de Queiroz, “O Quinze”', 'João Cabral de Melo Neto, “Morte e Vida Severina”'],
+}
+for x in D:
+    for item in EXTRA.get(x['tema'], []):
+        if item not in x['repertorio']: x['repertorio'].append(item)
+faltam = [t for t in EXTRA if t not in {x['tema'] for x in D}]
+assert not faltam, faltam
+
+d = {'titulo': 'Redação a várias mãos', 'dissertacao': D, 'narrativa': NARR, 'surpresas': SURPRESAS}
 json.dump(d, open(os.path.join(RAIZ, 'dados', 'redacao-maos.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print({n: sum(1 for x in D if x['nivel'] == n) for n in ('fund', 'enem', 'eja')}, {n: sum(1 for x in NARR if x['nivel'] == n) for n in ('fund', 'enem', 'eja')}, 'temas de dissertação;', len(NARR), 'histórias;', len(SURPRESAS), 'surpresas')
