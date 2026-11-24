@@ -7,7 +7,12 @@
 <style>
   *{box-sizing:border-box}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#bfe8ff;background:linear-gradient(180deg,#bfe8ff 0%,#e8f8ff 55%,#bfe9a8 55%,#9ed883 100%);color:#1f2937;min-height:100vh;overflow-x:hidden}
-  .tela{display:none;max-width:1180px;margin:0 auto;padding:14px 16px 30px}
+  .tela{display:none;max-width:1180px;margin:0 auto;padding:14px 16px 30px;position:relative;z-index:1}
+  .cenarios{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+  .cen{border:3px solid transparent;background:#fff;border-radius:16px;padding:8px;cursor:pointer;font:inherit;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .cen span{display:block;font-size:38px;line-height:1.2}
+  .cen.sel{border-color:#1f3a68;background:#eef5ff}
+  #topo,#cena,.medidores,.controles,#avisoMic{position:relative;z-index:1}
   .tela.ativa{display:block}
   h1{text-align:center;color:#1f3a68;font-size:clamp(1.6rem,4vw,2.6rem);margin:6px 0}
   .sub{text-align:center;color:#334155;margin:0 0 12px}
@@ -73,6 +78,8 @@
 </style>
 </head>
 <body>
+<div id="fundo"></div>
+<div id="tormenta"><div class="escuro"></div><div class="chuva"></div><div class="nuvemPreta">⛈️</div></div>
 
 <!-- escolher o bichinho -->
 <div class="tela ativa" id="tConfig">
@@ -89,6 +96,15 @@
       <label>🍽️ Comidas para encher a barriga: <select id="selMeta"><option value="3">3 (rápido)</option><option value="5" selected>5</option><option value="8">8</option><option value="12">12 (aula inteira)</option></select></label>
       <label>⏱️ Silêncio para comer cada comida: <select id="selMordidas"><option value="10">10 s</option><option value="20" selected>20 s</option><option value="40">40 s</option><option value="60">1 min</option></select></label>
       <label><input type="checkbox" id="chkSom"> 🔈 Sons do bichinho (baixinhos)</label>
+    </div>
+  </div>
+  <div class="caixa">
+    <h2>4. Cenário e jeito do bichinho</h2>
+    <div class="cenarios" id="cenarios"></div>
+    <div class="linha" style="margin-top:10px">
+      <b>Bichinho:</b>
+      <label><input type="radio" name="estilo" value="desenhado" checked> 🎨 Desenhado (pisca, mastiga, se assusta)</label>
+      <label><input type="radio" name="estilo" value="emoji"> 😀 Emoji (o de antes)</label>
     </div>
   </div>
   <div class="centro"><button type="button" class="bt ouro" id="btComecar" style="font-size:20px;padding:14px 28px">▶️ Começar</button></div>
@@ -120,11 +136,13 @@
     <button type="button" class="bt claro" id="btPausa">⏸️ Pausar</button>
     <button type="button" class="bt claro" id="btManualQuieto" hidden>🤫 Turma em silêncio</button>
     <button type="button" class="bt claro" id="btManualBarulho" hidden>📢 Turma barulhenta</button>
+    <select id="selCenarioJogo" aria-label="Cenário" style="font-weight:bold"></select>
     <button type="button" class="bt claro" id="btTrocar">🔄 Trocar de bichinho</button>
   </div>
 </div>
 
 <div id="festa"><div class="cx" id="festaCx"></div></div>
+<script src="bichinho-arte.js"></script>
 
 <script>
 (function(){
@@ -148,20 +166,36 @@ const ENFEITES = ['', '🎀', '🧢', '🎩', '👑'];
 const FALAS_QUIETO = ['Hmm, que delícia! 😋', 'Nham nham… 🤤', 'Que silêncio gostoso! 😌', 'Obrigado, turma! 💛', 'Continuem assim! ⭐'];
 const FALAS_BARULHO = ['Ai, que susto! 🙀', 'Shhh! Não consigo comer… 🤫', 'Muito barulho! 😣', 'Minha comida! 😱'];
 const FALAS_RISO = ['Hihihi! 😆', 'Faz cócegas! 🤭', 'Oba, carinho! 🥰'];
+let cenarioId = 'quintal', cenarioAtual = null, felizAte = 0;
 let escolhido = BICHOS[0], J = null, pausado = false, nivelSom = 0, ultimoSusto = 0, ultimaFala = 0;
 
 // ---------- configuração ----------
 $('bichos').innerHTML = BICHOS.map((b, i) => `<button type="button" class="bicho${i ? '' : ' sel'}" data-i="${i}"><span>${b.e}</span><small>${esc(b.nome)} • come ${b.comidas.join('')}</small></button>`).join('');
 $('bichos').onclick = ev => { const b = ev.target.closest('.bicho'); if (!b) return; escolhido = BICHOS[+b.dataset.i]; document.querySelectorAll('.bicho').forEach(x => x.classList.toggle('sel', x === b)); };
+function aplicarCenario(id){
+  cenarioId = id; cenarioAtual = ARTE.cenario(id, $('fundo'));
+  $('tormenta').classList.toggle('semChuva', !cenarioAtual.chuva);
+  document.querySelectorAll('.cen').forEach(b => b.classList.toggle('sel', b.dataset.id === id));
+  $('selCenarioJogo').value = id;
+  try { const s = JSON.parse(localStorage.getItem('bichinho_silencio') || '{}'); s.cenario = id; localStorage.setItem('bichinho_silencio', JSON.stringify(s)); } catch (e) {}
+}
+$('cenarios').innerHTML = ARTE.CENARIOS.map(c => `<button type="button" class="cen" data-id="${c.id}"><span>${c.emoji}</span>${esc(c.nome)}</button>`).join('');
+$('selCenarioJogo').innerHTML = ARTE.CENARIOS.map(c => `<option value="${c.id}">${c.emoji} ${esc(c.nome)}</option>`).join('');
+$('cenarios').onclick = ev => { const b = ev.target.closest('.cen'); if (b) aplicarCenario(b.dataset.id); };
+$('selCenarioJogo').onchange = () => aplicarCenario($('selCenarioJogo').value);
+const estiloEscolhido = () => (document.querySelector('input[name=estilo]:checked') || {}).value || 'desenhado';
+function desenharBicho(){
+  if (estiloEscolhido() === 'emoji') $('bicho').textContent = J.bicho.e; else $('bicho').innerHTML = ARTE.sprite(J.bicho.id);
+}
 $('btNomeSorte').onclick = () => { $('inNome').value = NOMES[Math.floor(Math.random() * NOMES.length)]; };
-try { const s = JSON.parse(localStorage.getItem('bichinho_silencio') || 'null'); if (s){ const k = BICHOS.findIndex(b => b.id === s.bicho); if (k >= 0) document.querySelector(`.bicho[data-i="${k}"]`).click(); $('inNome').value = s.nome || ''; if (s.limite) $('rgLimite').value = s.limite; } } catch (e) {}
+try { const s = JSON.parse(localStorage.getItem('bichinho_silencio') || 'null'); if (s && s.estilo){ const r = document.querySelector(`input[name=estilo][value=${s.estilo}]`); if (r) r.checked = true; } aplicarCenario(s && s.cenario || 'quintal'); if (s){ const k = BICHOS.findIndex(b => b.id === s.bicho); if (k >= 0) document.querySelector(`.bicho[data-i="${k}"]`).click(); $('inNome').value = s.nome || ''; if (s.limite) $('rgLimite').value = s.limite; } } catch (e) {}
 
 $('btComecar').onclick = () => {
   const nome = $('inNome').value.trim() || NOMES[Math.floor(Math.random() * NOMES.length)];
   J = {bicho: escolhido, nome, meta: +$('selMeta').value, segPorComida: +$('selMordidas').value, nivel: 1, comidasNivel: 0, comidasTotal: 0, progresso: 0, sustos: 0, silencioSeg: 0, comidaAtual: escolhido.comidas[0]};
-  try { localStorage.setItem('bichinho_silencio', JSON.stringify({bicho: escolhido.id, nome, limite: +$('rgLimite').value})); } catch (e) {}
+  try { localStorage.setItem('bichinho_silencio', JSON.stringify({bicho: escolhido.id, nome, limite: +$('rgLimite').value, cenario: cenarioId, estilo: estiloEscolhido()})); } catch (e) {}
   document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === 'tCena'));
-  $('bicho').textContent = escolhido.e;
+  desenharBicho();
   novaComida(); atualizar(); falar(`Oi, turma! Eu sou ${nome}! 👋`, 3500);
   ligarMicrofone();
 };
@@ -221,6 +255,7 @@ function migalhas(qtd = 6){
 }
 function tom(f, d = .08, v = .05){ if (!$('chkSom').checked) return; try { const c = tom.c || (tom.c = new (window.AudioContext || window.webkitAudioContext)()); const o = c.createOscillator(), g = c.createGain(); o.type = 'triangle'; o.frequency.value = f; o.connect(g); g.connect(c.destination); g.gain.setValueAtTime(v, c.currentTime); g.gain.exponentialRampToValueAtTime(.0001, c.currentTime + d); o.start(); o.stop(c.currentTime + d); } catch (e) {} }
 function comeuUma(origem){
+  felizAte = Date.now() + 1500;
   J.comidasNivel++; J.comidasTotal++; migalhas(10); tom(660, .1); tom(880, .12);
   falar(origem === 'petisco' ? 'Um petisco! Obrigado! 🥰' : FALAS_QUIETO[Math.floor(Math.random() * FALAS_QUIETO.length)]);
   if (J.comidasNivel >= J.meta){ subirNivel(); return; }
@@ -245,7 +280,7 @@ function susto(forte){
     setTimeout(() => { if (J) novaComida(); }, 950);
   }
 }
-$('bichoBox').onclick = () => { const b = $('bicho'); b.classList.remove('risada'); void b.offsetWidth; b.classList.add('risada'); setTimeout(() => b.classList.remove('risada'), 1100); falar(FALAS_RISO[Math.floor(Math.random() * FALAS_RISO.length)]); tom(990, .08); };
+$('bichoBox').onclick = () => { felizAte = Date.now() + 1800; const b = $('bicho'); b.classList.remove('risada'); void b.offsetWidth; b.classList.add('risada'); setTimeout(() => b.classList.remove('risada'), 1100); falar(FALAS_RISO[Math.floor(Math.random() * FALAS_RISO.length)]); tom(990, .08); };
 $('btPetisco').onclick = () => { if (J && !pausado) comeuUma('petisco'); };
 $('comida').onclick = () => { if (!J || pausado) return; J.progresso = Math.min(J.segPorComida, J.progresso + J.segPorComida * .15); migalhas(3); tom(700, .05); };
 $('btPausa').onclick = () => { pausado = !pausado; $('btPausa').textContent = pausado ? '▶️ Continuar' : '⏸️ Pausar'; falar(pausado ? 'Hora da soneca… 😴' : 'Voltei! 😃'); };
@@ -275,16 +310,19 @@ setInterval(() => {
   const bruto = manual ? manualAlvo + (Math.random() * 6 - 3) : lerNivel();
   nivelSom = nivelSom * .7 + bruto * .3;
   $('ruido').querySelector('.enche').style.width = nivelSom + '%';
-  if (pausado){ $('bicho').className = ''; $('maos').style.display = 'none'; return; }
+  if (pausado){ $('bicho').className = ''; $('maos').style.display = 'none'; ARTE.estado($('bicho'), Date.now() < felizAte || $('festa').classList.contains('on') ? 'feliz' : 'normal'); $('tormenta').style.opacity = 0; $('fundo').classList.remove('treme'); return; }
   const limite = +$('rgLimite').value, alto = nivelSom > limite, muitoAlto = nivelSom > Math.min(98, limite * 1.5 + 8);
   const b = $('bicho'), comida = $('comida');
+  $('tormenta').style.opacity = Math.max(0, Math.min(1, (nivelSom - limite * .75) / (limite * .5 + 5)));
+  $('fundo').classList.toggle('treme', muitoAlto);
   if (alto){
-    b.className = 'assustado'; $('maos').style.display = 'block';
+    b.className = 'assustado'; $('maos').style.display = 'block'; ARTE.estado(b, 'susto');
     if (!comida.classList.contains('caindo')) comida.className = 'tremendo';
     J.progresso = Math.max(0, J.progresso - dt * 2);   // o barulho “tira” um pouco do que ele já comeu
     susto(muitoAlto);
   } else {
     b.className = J.progresso > 0 || nivelSom < limite * .8 ? 'comendo' : 'respira'; $('maos').style.display = 'none';
+    ARTE.estado(b, Date.now() < felizAte ? 'feliz' : b.className === 'comendo' ? 'come' : 'normal');
     if (comida.classList.contains('tremendo')) comida.className = '';
     J.silencioSeg += dt; J.progresso += dt;
     if (Math.floor(J.progresso * 2) !== Math.floor((J.progresso - dt) * 2)) tom(320 + Math.random() * 60, .04, .02);   // nham
