@@ -291,5 +291,264 @@
       "explica": "Consequência: indica o efeito, o resultado.",
       "imagem": "📉"
     }
-  ]
+  ],
+  "aula": {
+    "titulo": "Aula: os conectivos",
+    "aba": "Aula: os conectivos (explicação)",
+    "intro": "Conectivos são as palavras e expressões que [ligam] as ideias do texto: ligam palavras, orações e parágrafos e mostram a relação entre elas (soma, oposição, causa, conclusão…). Um bom texto usa conectivos variados, e o conectivo certo deixa claro o que você quer dizer. Na redação do ENEM, eles contam na Competência 4 (coesão).",
+    "blocos": [
+      {
+        "titulo": "Adição",
+        "emoji": "➕",
+        "cor": "#27ae60",
+        "explica": "Soma uma ideia ou um argumento a outro.",
+        "palavras": [
+          "e",
+          "além disso",
+          "ademais",
+          "também",
+          "não só… mas também",
+          "outrossim",
+          "somado a isso"
+        ],
+        "exemplos": [
+          "A leitura amplia o vocabulário. [Além disso], estimula a imaginação.",
+          "O desmatamento destrói a fauna [e] agrava as mudanças climáticas."
+        ]
+      },
+      {
+        "titulo": "Oposição (adversidade)",
+        "emoji": "↔️",
+        "cor": "#e74c3c",
+        "explica": "Mostra uma ideia contrária à anterior.",
+        "palavras": [
+          "mas",
+          "porém",
+          "contudo",
+          "todavia",
+          "entretanto",
+          "no entanto"
+        ],
+        "exemplos": [
+          "O Brasil tem leis avançadas; [no entanto], elas nem sempre são cumpridas.",
+          "Estudei muito, [mas] fiquei nervoso na prova."
+        ]
+      },
+      {
+        "titulo": "Concessão",
+        "emoji": "🛡️",
+        "cor": "#8e44ad",
+        "explica": "Admite uma ideia contrária, mas ela não impede o que se afirma. Depois de “embora”, o verbo vai para o subjuntivo.",
+        "palavras": [
+          "embora",
+          "ainda que",
+          "mesmo que",
+          "apesar de",
+          "conquanto",
+          "por mais que"
+        ],
+        "exemplos": [
+          "[Embora] existam leis, a violência contra a mulher persiste.",
+          "[Apesar de] cansado, ele foi à aula."
+        ]
+      },
+      {
+        "titulo": "Causa",
+        "emoji": "🔍",
+        "cor": "#2f80ed",
+        "explica": "Explica o motivo, o porquê de algo.",
+        "palavras": [
+          "porque",
+          "pois",
+          "já que",
+          "visto que",
+          "uma vez que",
+          "devido a",
+          "em virtude de"
+        ],
+        "exemplos": [
+          "Muitos jovens abandonam a escola [porque] precisam trabalhar.",
+          "[Visto que] a água é limitada, é preciso economizá-la."
+        ]
+      },
+      {
+        "titulo": "Consequência",
+        "emoji": "➡️",
+        "cor": "#f39c12",
+        "explica": "Mostra o resultado, o efeito de algo.",
+        "palavras": [
+          "por isso",
+          "de modo que",
+          "tanto que",
+          "consequentemente",
+          "por conseguinte",
+          "de forma que"
+        ],
+        "exemplos": [
+          "O lixo é jogado nas ruas; [por isso], os bueiros entopem.",
+          "Choveu tanto [que] a rua alagou."
+        ]
+      },
+      {
+        "titulo": "Conclusão",
+        "emoji": "🏁",
+        "cor": "#16a085",
+        "explica": "Fecha uma ideia ou o texto, tirando uma conclusão.",
+        "palavras": [
+          "portanto",
+          "logo",
+          "assim",
+          "dessa forma",
+          "em suma",
+          "enfim"
+        ],
+        "exemplos": [
+          "[Portanto], cabe ao governo ampliar as bibliotecas públicas.",
+          "Ele estudou e treinou; [logo], estava preparado."
+        ]
+      },
+      {
+        "titulo": "Exemplificação",
+        "emoji": "💡",
+        "cor": "#c2185b",
+        "explica": "Apresenta um exemplo para comprovar a ideia.",
+        "palavras": [
+          "por exemplo",
+          "como",
+          "a exemplo de",
+          "é o caso de",
+          "tal como"
+        ],
+        "exemplos": [
+          "Doenças transmitidas por mosquitos, [como] a dengue, aumentam no verão.",
+          "[É o caso de] muitas cidades sem coleta seletiva."
+        ]
+      },
+      {
+        "titulo": "Finalidade",
+        "emoji": "🎯",
+        "cor": "#d35400",
+        "explica": "Indica o objetivo, o “para quê”. Muito usada na proposta de intervenção.",
+        "palavras": [
+          "para",
+          "a fim de",
+          "para que",
+          "com o objetivo de",
+          "com o intuito de"
+        ],
+        "exemplos": [
+          "A escola deve promover rodas de conversa, [a fim de] combater o bullying.",
+          "Estudamos [para que] o futuro seja melhor."
+        ]
+      },
+      {
+        "titulo": "Condição",
+        "emoji": "❓",
+        "cor": "#7f8c8d",
+        "explica": "Apresenta uma hipótese, uma condição para algo acontecer.",
+        "palavras": [
+          "se",
+          "caso",
+          "desde que",
+          "contanto que",
+          "a menos que"
+        ],
+        "exemplos": [
+          "[Caso] não haja investimento, o problema vai piorar.",
+          "[Se] todos economizarem, não faltará água."
+        ]
+      },
+      {
+        "titulo": "Tempo",
+        "emoji": "⏰",
+        "cor": "#2c3e50",
+        "explica": "Situa os fatos no tempo.",
+        "palavras": [
+          "quando",
+          "enquanto",
+          "assim que",
+          "logo que",
+          "depois que",
+          "atualmente",
+          "hoje em dia"
+        ],
+        "exemplos": [
+          "[Enquanto] uns desperdiçam comida, outros passam fome.",
+          "[Atualmente], muitos brasileiros trabalham na informalidade."
+        ]
+      },
+      {
+        "titulo": "Comparação",
+        "emoji": "⚖️",
+        "cor": "#1abc9c",
+        "explica": "Compara duas ideias, mostrando semelhança ou diferença.",
+        "palavras": [
+          "como",
+          "assim como",
+          "tal qual",
+          "do mesmo modo que",
+          "mais… do que"
+        ],
+        "exemplos": [
+          "[Assim como] a saúde, a educação é um direito de todos.",
+          "Ler é [mais] importante [do que] decorar."
+        ]
+      },
+      {
+        "titulo": "Explicação (esclarecimento)",
+        "emoji": "🗣️",
+        "cor": "#9b59b6",
+        "explica": "Explica melhor ou repete a ideia com outras palavras.",
+        "palavras": [
+          "isto é",
+          "ou seja",
+          "em outras palavras",
+          "a saber"
+        ],
+        "exemplos": [
+          "A evasão escolar, [ou seja], o abandono dos estudos, preocupa o país."
+        ]
+      },
+      {
+        "titulo": "Ordem (sequência)",
+        "emoji": "🔢",
+        "cor": "#34495e",
+        "explica": "Organiza as ideias em sequência.",
+        "palavras": [
+          "em primeiro lugar",
+          "primeiramente",
+          "em seguida",
+          "por último",
+          "por fim"
+        ],
+        "exemplos": [
+          "[Em primeiro lugar], é preciso investir em transporte. [Em seguida], é necessário ouvir a população."
+        ]
+      },
+      {
+        "titulo": "Onde usar na redação",
+        "emoji": "📝",
+        "cor": "#1f3a68",
+        "explica": "Sugestões de conectivos para cada parte do texto dissertativo:",
+        "palavras": [
+          "Introdução: Atualmente, Segundo…, Nesse contexto",
+          "Desenvolvimento 1: Em primeiro lugar, Primeiramente",
+          "Desenvolvimento 2: Além disso, Ademais, Somado a isso",
+          "Conclusão: Portanto, Dessa forma, a fim de"
+        ],
+        "exemplos": [
+          "[Nesse contexto], o problema se agrava…",
+          "[Ademais], outro fator contribui para…",
+          "[Dessa forma], cabe à escola…, [a fim de]…"
+        ]
+      }
+    ],
+    "dicas": [
+      "Evite começar frases com [mas] em texto formal: prefira [porém], [contudo] ou [no entanto].",
+      "[Onde] é só para lugar: “a cidade onde moro”. Para tempo ou situação, use [em que].",
+      "Depois de [embora], o verbo vai para o subjuntivo: “Embora [seja] difícil…”.",
+      "Não repita o mesmo conectivo no texto: varie (além disso → ademais → somado a isso).",
+      "O conectivo precisa combinar com a ideia: [portanto] é conclusão, não oposição!"
+    ]
+  }
 }

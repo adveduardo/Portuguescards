@@ -76,6 +76,7 @@
 
 <script src="jogo-ao-vivo.js"></script>
 <script src="morfologia.js"></script>
+<script src="aula.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const AV = window.AoVivo, M = window.Morfo;
@@ -130,6 +131,7 @@ function carregar(d, origem){
   const x = normalizar(d);
   if (!x) return AV.avisar('JSON inválido para esta atividade. Baixe o modelo para ver o formato.');
   dados = x;
+  if (window.Aula) Aula.preparar(d.aula, {abrir: M.param('aula') === '1'});   // abinha da aula, se o JSON tiver "aula"
   $('tituloConfig').textContent = `${x.emoji} ${x.titulo}`; document.title = x.titulo;
   $('blocoClasses').hidden = x.tipo !== 'classes';
   if (x.tipo === 'classes'){
