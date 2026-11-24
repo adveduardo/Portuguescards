@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bichinho do Silêncio</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#bfe8ff;background:linear-gradient(180deg,#bfe8ff 0%,#e8f8ff 55%,#bfe9a8 55%,#9ed883 100%);color:#1f2937;min-height:100vh;overflow-x:hidden}
+  .tela{display:none;max-width:1180px;margin:0 auto;padding:14px 16px 30px}
+  .tela.ativa{display:block}
+  h1{text-align:center;color:#1f3a68;font-size:clamp(1.6rem,4vw,2.6rem);margin:6px 0}
+  .sub{text-align:center;color:#334155;margin:0 0 12px}
+  .caixa{background:rgba(255,255,255,.92);border-radius:20px;padding:16px;margin:0 auto 12px;max-width:860px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+  .caixa h2{margin:0 0 10px;font-size:1.15rem;color:#1f3a68}
+  .bichos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .bicho{border:3px solid transparent;background:#fff;border-radius:16px;padding:8px;cursor:pointer;font:inherit;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .bicho span{display:block;font-size:46px;line-height:1.15}
+  .bicho small{color:#475569}
+  .bicho.sel{border-color:#1f3a68;background:#eef5ff}
+  .linha{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  input[type=text],select{font:inherit;font-size:17px;border:2px solid #cbd5e1;border-radius:10px;padding:8px 10px;background:#fff}
+  .bt{border:none;border-radius:14px;padding:12px 20px;font:inherit;font-weight:bold;font-size:17px;cursor:pointer;background:#1f3a68;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+  .bt.ouro{background:#ffd54a;color:#1a1a1a}.bt.claro{background:#fff;color:#1f3a68;border:2px solid #cbd5e1;box-shadow:none}
+  .bt.verde{background:#16a34a}.bt.vermelho{background:#dc2626}
+  .centro{text-align:center}
+  /* cena */
+  #topo{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
+  .chip{background:rgba(255,255,255,.92);border-radius:999px;padding:6px 14px;font-weight:bold;font-size:clamp(.95rem,1.8vw,1.15rem);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  #cena{position:relative;height:min(58vh,520px);display:flex;align-items:flex-end;justify-content:center;gap:4vw}
+  #balao{position:absolute;top:2%;left:50%;transform:translateX(-50%);background:#fff;border-radius:22px;padding:10px 20px;font-weight:bold;font-size:clamp(1.1rem,2.6vw,1.8rem);box-shadow:0 6px 16px rgba(0,0,0,.12);white-space:nowrap;transition:opacity .3s}
+  #balao:after{content:"";position:absolute;bottom:-14px;left:50%;margin-left:-12px;border:12px solid transparent;border-top-color:#fff;border-bottom:0}
+  #bichoBox{position:relative;cursor:pointer;-webkit-user-select:none;user-select:none;transition:font-size .6s}
+  #bicho{font-size:var(--tam,min(30vh,260px));line-height:1;display:block;filter:drop-shadow(0 12px 10px rgba(0,0,0,.18))}
+  #enfeite{position:absolute;top:-6%;left:50%;transform:translateX(-50%);font-size:calc(var(--tam,min(30vh,260px)) * .38)}
+  #maos{position:absolute;top:-4%;right:-18%;font-size:calc(var(--tam,min(30vh,260px)) * .32);display:none;animation:treme .2s linear infinite}
+  .respira{animation:respira 2.4s ease-in-out infinite}
+  @keyframes respira{50%{transform:translateY(-6px) scale(1.02)}}
+  .comendo{animation:come .35s ease-in-out infinite}
+  @keyframes come{50%{transform:scale(1.06,.94)}}
+  .assustado{animation:treme .12s linear infinite}
+  @keyframes treme{25%{transform:translateX(-7px) rotate(-3deg)}75%{transform:translateX(7px) rotate(3deg)}}
+  .risada{animation:pula .5s ease-in-out 2}
+  @keyframes pula{50%{transform:translateY(-40px) rotate(8deg)}}
+  #pratoBox{position:relative;text-align:center;margin-bottom:2vh}
+  #comida{font-size:min(14vh,120px);line-height:1;display:block;transition:transform .2s,opacity .2s;cursor:pointer}
+  #prato{font-size:min(12vh,100px);line-height:.6;display:block}
+  #comida.tremendo{animation:treme .1s linear infinite}
+  #comida.caindo{animation:cai .9s ease-in forwards}
+  @keyframes cai{to{transform:translateY(40vh) rotate(160deg);opacity:0}}
+  #migalhas{position:absolute;inset:0;pointer-events:none}
+  .migalha{position:absolute;font-size:24px;animation:voa .9s ease-out forwards}
+  @keyframes voa{to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
+  #mordidas{font-weight:bold;color:#14532d;font-size:clamp(.9rem,1.8vw,1.1rem)}
+  /* medidores */
+  .medidores{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:980px;margin:22px auto 0}
+  .medidor{background:rgba(255,255,255,.93);border-radius:18px;padding:10px 14px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .medidor b{display:block;margin-bottom:6px}
+  .trilho{position:relative;height:30px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+  .enche{height:100%;width:0;border-radius:999px;transition:width .25s}
+  #barriga .enche{background:linear-gradient(90deg,#fbbf24,#f97316)}
+  #ruido .enche{background:linear-gradient(90deg,#22c55e,#eab308 60%,#ef4444)}
+  #limite{position:absolute;top:-4px;bottom:-4px;width:4px;background:#1f2937;border-radius:2px}
+  .controles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+  #avisoMic{max-width:860px;margin:8px auto;background:#fff7d6;border:2px solid #f2d675;border-radius:14px;padding:10px 14px;text-align:center;display:none}
+  #festa{position:fixed;inset:0;z-index:20;background:rgba(15,23,42,.6);display:none;align-items:center;justify-content:center;padding:16px}
+  #festa.on{display:flex}
+  #festa .cx{background:#fff;border-radius:24px;padding:24px 30px;text-align:center;max-width:560px;font-size:1.2rem}
+  #festa .grande{font-size:90px;line-height:1.1}
+  .conf{position:fixed;top:-30px;font-size:26px;z-index:21;animation:chuva 2.6s linear forwards}
+  @keyframes chuva{to{transform:translateY(110vh) rotate(540deg)}}
+  @media (max-width:700px){.medidores{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- escolher o bichinho -->
+<div class="tela ativa" id="tConfig">
+  <h1>🐾 Bichinho do Silêncio</h1>
+  <p class="sub">Em silêncio, o bichinho come e fica feliz. Com barulho, ele se assusta e a comida treme… ou cai do prato!</p>
+  <div class="caixa"><h2>1. Escolham o bichinho da turma</h2><div class="bichos" id="bichos"></div></div>
+  <div class="caixa">
+    <h2>2. Como ele se chama?</h2>
+    <div class="linha"><input type="text" id="inNome" maxlength="20" placeholder="Ex.: Pipoca" style="flex:1;min-width:200px"><button type="button" class="bt claro" id="btNomeSorte">🎲 Sortear um nome</button></div>
+  </div>
+  <div class="caixa">
+    <h2>3. Meta e dificuldade</h2>
+    <div class="linha">
+      <label>🍽️ Comidas para encher a barriga: <select id="selMeta"><option value="3">3 (rápido)</option><option value="5" selected>5</option><option value="8">8</option><option value="12">12 (aula inteira)</option></select></label>
+      <label>⏱️ Silêncio para comer cada comida: <select id="selMordidas"><option value="10">10 s</option><option value="20" selected>20 s</option><option value="40">40 s</option><option value="60">1 min</option></select></label>
+      <label><input type="checkbox" id="chkSom"> 🔈 Sons do bichinho (baixinhos)</label>
+    </div>
+  </div>
+  <div class="centro"><button type="button" class="bt ouro" id="btComecar" style="font-size:20px;padding:14px 28px">▶️ Começar</button></div>
+</div>
+
+<!-- cena -->
+<div class="tela" id="tCena">
+  <div id="topo">
+    <span class="chip" id="chipNome"></span>
+    <span class="chip" id="chipNivel"></span>
+    <span class="chip" id="chipComidas"></span>
+    <span class="chip" id="chipSilencio"></span>
+    <span class="chip" id="chipSustos"></span>
+  </div>
+  <div id="avisoMic"></div>
+  <div id="cena">
+    <div id="balao">Oi, turma! 👋</div>
+    <div id="bichoBox" title="Toque no bichinho!"><span id="enfeite"></span><span id="bicho" class="respira"></span><span id="maos">💢</span></div>
+    <div id="pratoBox"><span id="comida" title="Toque para dar um petisco"></span><span id="prato">🍽️</span><div id="mordidas"></div><div id="migalhas"></div></div>
+  </div>
+  <div class="medidores">
+    <div class="medidor" id="barriga"><b>🍽️ Barriga</b><div class="trilho"><div class="enche"></div></div></div>
+    <div class="medidor" id="ruido"><b>🔊 Barulho da turma <small id="dicaLimite" style="font-weight:normal;color:#64748b">(a linha preta é o limite)</small></b><div class="trilho"><div class="enche"></div><div id="limite"></div></div>
+      <div class="linha" style="margin-top:6px;font-size:14px"><label style="flex:1">Limite: <input type="range" id="rgLimite" min="5" max="90" value="35" style="width:100%"></label></div></div>
+  </div>
+  <div class="controles">
+    <button type="button" class="bt claro" id="btCalibrar">🎚️ Calibrar silêncio (3 s)</button>
+    <button type="button" class="bt verde" id="btPetisco">🍎 Dar um petisco</button>
+    <button type="button" class="bt claro" id="btPausa">⏸️ Pausar</button>
+    <button type="button" class="bt claro" id="btManualQuieto" hidden>🤫 Turma em silêncio</button>
+    <button type="button" class="bt claro" id="btManualBarulho" hidden>📢 Turma barulhenta</button>
+    <button type="button" class="bt claro" id="btTrocar">🔄 Trocar de bichinho</button>
+  </div>
+</div>
+
+<div id="festa"><div class="cx" id="festaCx"></div></div>
+
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const BICHOS = [
+  {id: 'cachorro', e: '🐶', nome: 'Cachorrinho', comidas: ['🦴', '🍖', '🥩'], art: 'o'},
+  {id: 'gato', e: '🐱', nome: 'Gatinho', comidas: ['🐟', '🥛', '🍣'], art: 'o'},
+  {id: 'coelho', e: '🐰', nome: 'Coelhinho', comidas: ['🥕', '🥬', '🍎'], art: 'o'},
+  {id: 'macaco', e: '🐵', nome: 'Macaquinho', comidas: ['🍌', '🥭', '🍍'], art: 'o'},
+  {id: 'urso', e: '🐻', nome: 'Ursinho', comidas: ['🍯', '🐟', '🫐'], art: 'o'},
+  {id: 'panda', e: '🐼', nome: 'Pandinha', comidas: ['🎋', '🍎', '🥬'], art: 'a'},
+  {id: 'hamster', e: '🐹', nome: 'Hamster', comidas: ['🌻', '🥜', '🌽'], art: 'o'},
+  {id: 'pinguim', e: '🐧', nome: 'Pinguim', comidas: ['🐟', '🦐', '🦑'], art: 'o'},
+  {id: 'sapo', e: '🐸', nome: 'Sapinho', comidas: ['🪰', '🦗', '🐛'], art: 'o'},
+  {id: 'unicornio', e: '🦄', nome: 'Unicórnio', comidas: ['🍓', '🧁', '🍭'], art: 'o'}
+];
+const NOMES = ['Pipoca', 'Bolinha', 'Pingo', 'Paçoca', 'Biscoito', 'Fubá', 'Jujuba', 'Tico', 'Mel', 'Farofa', 'Quindim', 'Brigadeiro', 'Cocada', 'Pudim'];
+const ENFEITES = ['', '🎀', '🧢', '🎩', '👑'];
+const FALAS_QUIETO = ['Hmm, que delícia! 😋', 'Nham nham… 🤤', 'Que silêncio gostoso! 😌', 'Obrigado, turma! 💛', 'Continuem assim! ⭐'];
+const FALAS_BARULHO = ['Ai, que susto! 🙀', 'Shhh! Não consigo comer… 🤫', 'Muito barulho! 😣', 'Minha comida! 😱'];
+const FALAS_RISO = ['Hihihi! 😆', 'Faz cócegas! 🤭', 'Oba, carinho! 🥰'];
+let escolhido = BICHOS[0], J = null, pausado = false, nivelSom = 0, ultimoSusto = 0, ultimaFala = 0;
+
+// ---------- configuração ----------
+$('bichos').innerHTML = BICHOS.map((b, i) => `<button type="button" class="bicho${i ? '' : ' sel'}" data-i="${i}"><span>${b.e}</span><small>${esc(b.nome)} • come ${b.comidas.join('')}</small></button>`).join('');
+$('bichos').onclick = ev => { const b = ev.target.closest('.bicho'); if (!b) return; escolhido = BICHOS[+b.dataset.i]; document.querySelectorAll('.bicho').forEach(x => x.classList.toggle('sel', x === b)); };
+$('btNomeSorte').onclick = () => { $('inNome').value = NOMES[Math.floor(Math.random() * NOMES.length)]; };
+try { const s = JSON.parse(localStorage.getItem('bichinho_silencio') || 'null'); if (s){ const k = BICHOS.findIndex(b => b.id === s.bicho); if (k >= 0) document.querySelector(`.bicho[data-i="${k}"]`).click(); $('inNome').value = s.nome || ''; if (s.limite) $('rgLimite').value = s.limite; } } catch (e) {}
+
+$('btComecar').onclick = () => {
+  const nome = $('inNome').value.trim() || NOMES[Math.floor(Math.random() * NOMES.length)];
+  J = {bicho: escolhido, nome, meta: +$('selMeta').value, segPorComida: +$('selMordidas').value, nivel: 1, comidasNivel: 0, comidasTotal: 0, progresso: 0, sustos: 0, silencioSeg: 0, comidaAtual: escolhido.comidas[0]};
+  try { localStorage.setItem('bichinho_silencio', JSON.stringify({bicho: escolhido.id, nome, limite: +$('rgLimite').value})); } catch (e) {}
+  document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === 'tCena'));
+  $('bicho').textContent = escolhido.e;
+  novaComida(); atualizar(); falar(`Oi, turma! Eu sou ${nome}! 👋`, 3500);
+  ligarMicrofone();
+};
+$('btTrocar').onclick = () => { pausado = true; document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === 'tConfig')); };
+
+// ---------- microfone ----------
+let analisador = null, dados = null, manual = false;
+async function ligarMicrofone(){
+  pausado = false;
+  if (analisador) return;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, autoGainControl: false}});
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaStreamSource(stream);
+    analisador = ctx.createAnalyser(); analisador.fftSize = 1024; src.connect(analisador);
+    dados = new Float32Array(analisador.fftSize);
+    $('avisoMic').style.display = 'none';
+  } catch (e) {
+    manual = true;
+    $('avisoMic').style.display = 'block';
+    $('avisoMic').innerHTML = '🎤 Não consegui usar o microfone (permissão negada ou aparelho sem microfone). Use os botões <b>🤫 Turma em silêncio</b> e <b>📢 Turma barulhenta</b> para controlar o bichinho.';
+    $('btManualQuieto').hidden = $('btManualBarulho').hidden = false; $('btCalibrar').hidden = true;
+  }
+}
+function lerNivel(){   // 0 a 100
+  if (!analisador) return nivelSom;
+  analisador.getFloatTimeDomainData(dados);
+  let s = 0; for (let i = 0; i < dados.length; i++) s += dados[i] * dados[i];
+  const rms = Math.sqrt(s / dados.length), db = 20 * Math.log10(rms + 1e-8);   // ~ -100 (silêncio total) a 0 (máximo)
+  return Math.max(0, Math.min(100, (db + 70) * 1.6));
+}
+let manualAlvo = 5;
+$('btManualQuieto').onclick = () => { manualAlvo = 5; };
+$('btManualBarulho').onclick = () => { manualAlvo = 95; };
+$('btCalibrar').onclick = () => {
+  if (!analisador) return;
+  const amostras = []; const fim = Date.now() + 3000; $('btCalibrar').disabled = true; falar('Fiquem quietinhos… estou ouvindo! 👂', 3000);
+  const t = setInterval(() => { amostras.push(lerNivel()); if (Date.now() > fim){ clearInterval(t); amostras.sort((a, b) => a - b);
+    const base = amostras[Math.floor(amostras.length * .8)] || 10; $('rgLimite').value = Math.min(90, Math.round(base + 14)); $('btCalibrar').disabled = false;
+    salvarLimite(); falar('Pronto! Agora eu sei o que é silêncio 😊', 3000); } }, 100);
+};
+function salvarLimite(){ try { const s = JSON.parse(localStorage.getItem('bichinho_silencio') || '{}'); s.limite = +$('rgLimite').value; localStorage.setItem('bichinho_silencio', JSON.stringify(s)); } catch (e) {} }
+$('rgLimite').oninput = () => { posicionarLimite(); salvarLimite(); };
+function posicionarLimite(){ $('limite').style.left = $('rgLimite').value + '%'; }
+
+// ---------- jogo ----------
+function novaComida(){
+  const c = J.bicho.comidas; J.comidaAtual = c[Math.floor(Math.random() * c.length)]; J.progresso = 0;
+  const el = $('comida'); el.className = ''; el.textContent = J.comidaAtual; el.style.transform = 'scale(1)'; el.style.opacity = 1;
+}
+function falar(t, ms = 2200){ $('balao').textContent = t; $('balao').style.opacity = 1; ultimaFala = Date.now() + ms; }
+function migalhas(qtd = 6){
+  const box = $('migalhas');
+  for (let i = 0; i < qtd; i++){ const m = document.createElement('span'); m.className = 'migalha'; m.textContent = J.comidaAtual;
+    m.style.left = '45%'; m.style.top = '20%'; m.style.setProperty('--dx', (Math.random() * 160 - 80) + 'px'); m.style.setProperty('--dy', (Math.random() * -120 - 20) + 'px'); m.style.fontSize = (14 + Math.random() * 14) + 'px';
+    box.appendChild(m); setTimeout(() => m.remove(), 950); }
+}
+function tom(f, d = .08, v = .05){ if (!$('chkSom').checked) return; try { const c = tom.c || (tom.c = new (window.AudioContext || window.webkitAudioContext)()); const o = c.createOscillator(), g = c.createGain(); o.type = 'triangle'; o.frequency.value = f; o.connect(g); g.connect(c.destination); g.gain.setValueAtTime(v, c.currentTime); g.gain.exponentialRampToValueAtTime(.0001, c.currentTime + d); o.start(); o.stop(c.currentTime + d); } catch (e) {} }
+function comeuUma(origem){
+  J.comidasNivel++; J.comidasTotal++; migalhas(10); tom(660, .1); tom(880, .12);
+  falar(origem === 'petisco' ? 'Um petisco! Obrigado! 🥰' : FALAS_QUIETO[Math.floor(Math.random() * FALAS_QUIETO.length)]);
+  if (J.comidasNivel >= J.meta){ subirNivel(); return; }
+  novaComida();
+}
+function subirNivel(){
+  J.nivel++; J.comidasNivel = 0;
+  const enf = ENFEITES[Math.min(J.nivel - 1, ENFEITES.length - 1)];
+  $('festaCx').innerHTML = `<div class="grande">${J.bicho.e}${enf}</div><h2>🎉 ${esc(J.nome)} encheu a barriga!</h2><p>A turma fez silêncio e ${esc(J.nome)} subiu para o <b>nível ${J.nivel}</b>${enf ? ` e ganhou um enfeite ${enf}` : ''}!</p><p>🏆 Combinem um prêmio com o professor!</p><button type="button" class="bt ouro" id="btContinuarFesta">▶️ Continuar</button>`;
+  $('festa').classList.add('on'); confete(); [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => tom(f, .2, .06), i * 120));
+  pausado = true;
+  $('btContinuarFesta').onclick = () => { $('festa').classList.remove('on'); pausado = false; novaComida(); atualizar(); };
+}
+function confete(){ const it = ['🎉', '⭐', '🎊', J.comidaAtual, '💛']; for (let i = 0; i < 40; i++){ const c = document.createElement('span'); c.className = 'conf'; c.textContent = it[i % it.length]; c.style.left = Math.random() * 100 + 'vw'; c.style.animationDelay = Math.random() * .8 + 's'; document.body.appendChild(c); setTimeout(() => c.remove(), 3600); } }
+function susto(forte){
+  const agora = Date.now();
+  if (agora - ultimoSusto < 2500) return;
+  ultimoSusto = agora; J.sustos++;
+  falar(FALAS_BARULHO[Math.floor(Math.random() * FALAS_BARULHO.length)], 2000); tom(220, .15);
+  if (forte && J.progresso > 0){   // barulho muito alto: a comida cai do prato
+    const el = $('comida'); el.className = 'caindo';
+    setTimeout(() => { if (J) novaComida(); }, 950);
+  }
+}
+$('bichoBox').onclick = () => { const b = $('bicho'); b.classList.remove('risada'); void b.offsetWidth; b.classList.add('risada'); setTimeout(() => b.classList.remove('risada'), 1100); falar(FALAS_RISO[Math.floor(Math.random() * FALAS_RISO.length)]); tom(990, .08); };
+$('btPetisco').onclick = () => { if (J && !pausado) comeuUma('petisco'); };
+$('comida').onclick = () => { if (!J || pausado) return; J.progresso = Math.min(J.segPorComida, J.progresso + J.segPorComida * .15); migalhas(3); tom(700, .05); };
+$('btPausa').onclick = () => { pausado = !pausado; $('btPausa').textContent = pausado ? '▶️ Continuar' : '⏸️ Pausar'; falar(pausado ? 'Hora da soneca… 😴' : 'Voltei! 😃'); };
+
+function atualizar(){
+  const b = J.bicho, enf = ENFEITES[Math.min(J.nivel - 1, ENFEITES.length - 1)];
+  $('chipNome').textContent = `${b.e} ${J.nome}`;
+  $('chipNivel').textContent = `⭐ Nível ${J.nivel}`;
+  $('chipComidas').textContent = `🍽️ ${J.comidasTotal} comida${J.comidasTotal === 1 ? '' : 's'}`;
+  $('chipSilencio').textContent = `🤫 ${Math.floor(J.silencioSeg / 60)} min ${String(Math.floor(J.silencioSeg % 60)).padStart(2, '0')} s de silêncio`;
+  $('chipSustos').textContent = `🙀 ${J.sustos} susto${J.sustos === 1 ? '' : 's'}`;
+  $('enfeite').textContent = enf;
+  document.documentElement.style.setProperty('--tam', `min(${26 + Math.min(J.nivel, 6) * 2}vh, ${220 + Math.min(J.nivel, 6) * 15}px)`);
+  const pct = ((J.comidasNivel + J.progresso / J.segPorComida) / J.meta) * 100;
+  $('barriga').querySelector('.enche').style.width = Math.min(100, pct) + '%';
+  $('barriga').querySelector('b').textContent = `🍽️ Barriga de ${J.nome}: ${J.comidasNivel} de ${J.meta} comidas`;
+  $('mordidas').textContent = J.progresso > 0 ? `mordidas: ${Math.round(J.progresso / J.segPorComida * 100)}%` : '';
+  const el = $('comida'); if (!el.classList.contains('caindo')) el.style.transform = `scale(${1 - .55 * (J.progresso / J.segPorComida)})`;
+}
+
+// laço principal: 10 vezes por segundo
+let ultimo = performance.now();
+posicionarLimite();
+setInterval(() => {
+  const agora = performance.now(), dt = Math.min(.5, (agora - ultimo) / 1000); ultimo = agora;
+  if (!J) return;
+  const bruto = manual ? manualAlvo + (Math.random() * 6 - 3) : lerNivel();
+  nivelSom = nivelSom * .7 + bruto * .3;
+  $('ruido').querySelector('.enche').style.width = nivelSom + '%';
+  if (pausado){ $('bicho').className = ''; $('maos').style.display = 'none'; return; }
+  const limite = +$('rgLimite').value, alto = nivelSom > limite, muitoAlto = nivelSom > Math.min(98, limite * 1.5 + 8);
+  const b = $('bicho'), comida = $('comida');
+  if (alto){
+    b.className = 'assustado'; $('maos').style.display = 'block';
+    if (!comida.classList.contains('caindo')) comida.className = 'tremendo';
+    J.progresso = Math.max(0, J.progresso - dt * 2);   // o barulho “tira” um pouco do que ele já comeu
+    susto(muitoAlto);
+  } else {
+    b.className = J.progresso > 0 || nivelSom < limite * .8 ? 'comendo' : 'respira'; $('maos').style.display = 'none';
+    if (comida.classList.contains('tremendo')) comida.className = '';
+    J.silencioSeg += dt; J.progresso += dt;
+    if (Math.floor(J.progresso * 2) !== Math.floor((J.progresso - dt) * 2)) tom(320 + Math.random() * 60, .04, .02);   // nham
+    if (J.progresso >= J.segPorComida && !comida.classList.contains('caindo')) comeuUma('silencio');
+  }
+  if (Date.now() > ultimaFala) $('balao').style.opacity = alto ? 1 : .0;
+  if (Date.now() > ultimaFala && alto) $('balao').textContent = 'Shhh! 🤫';
+  atualizar();
+}, 100);
+window.BICHO = {estado: () => J, setManual: v => { manual = true; manualAlvo = v; }, nivel: () => nivelSom};
+})();
+</script>
+</body>
+</html>
