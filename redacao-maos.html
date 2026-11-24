@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redação a Várias Mãos</title>
+<style>
+  *{box-sizing:border-box}
+  :root{--fundo:#f3f0ea;--papel:#fffdf8;--tinta:#1f2937;--suave:#6b7280;--linha:#e7e1d6;--azul:#1f3a68;--ouro:#ffd54a}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--fundo);color:var(--tinta)}
+  .pag{max-width:1180px;margin:0 auto;padding:14px 16px 40px}
+  h1{font-size:clamp(1.5rem,3.6vw,2.4rem);margin:4px 0;color:var(--azul);text-align:center}
+  .sub{text-align:center;color:var(--suave);margin:0 0 14px}
+  .tela{display:none}.tela.ativa{display:block}
+  .caixa{background:var(--papel);border:1px solid var(--linha);border-radius:18px;padding:16px;margin:0 auto 14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .caixa h2{margin:0 0 10px;font-size:1.15rem;color:var(--azul)}
+  label.campo{display:block;font-weight:bold;margin:10px 0 6px}
+  select,input[type=text],textarea{font:inherit;font-size:16px;border:2px solid #d6cfc2;border-radius:10px;padding:8px 10px;background:#fff;color:var(--tinta);width:100%}
+  .opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+  .op{border:3px solid transparent;background:#fff;border-radius:14px;padding:12px;text-align:left;cursor:pointer;font:inherit;color:var(--tinta);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .op b{display:block;font-size:1.05rem}.op small{color:var(--suave)}
+  .op.sel{border-color:var(--azul);background:#eef3fb}
+  .bt{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:12px;padding:10px 16px;font:inherit;font-weight:bold;font-size:16px;cursor:pointer;background:var(--azul);color:#fff;margin:3px}
+  .bt.claro{background:#fff;color:var(--azul);border:2px solid #cbd5e1}
+  .bt.ouro{background:var(--ouro);color:#1a1a1a}
+  .bt.verde{background:#15803d}
+  .bt:disabled{opacity:.45;cursor:default}
+  .centro{text-align:center}
+  .linhaFlex{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .grupoChip{display:inline-flex;align-items:center;gap:6px;color:#fff;border-radius:999px;padding:4px 12px;font-weight:bold}
+  .ordem{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;margin-top:6px}
+  .ordem .item{border:2px dashed #d6cfc2;border-radius:12px;padding:8px 10px;background:#fff}
+  .ordem .item small{display:block;color:var(--suave)}
+  /* mesa */
+  #cabTema{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;justify-content:space-between}
+  #cabTema h2{font-size:1.3rem;margin:0}
+  #relogio{font-size:2rem;font-weight:bold;font-variant-numeric:tabular-nums;color:var(--azul);background:#fff;border:2px solid #cbd5e1;border-radius:14px;padding:4px 14px}
+  #relogio.acabando{color:#b91c1c;border-color:#fca5a5;animation:pisca 1s infinite}
+  @keyframes pisca{50%{opacity:.5}}
+  details.apoio{margin-top:8px}
+  details.apoio summary{cursor:pointer;font-weight:bold;color:var(--azul)}
+  details.apoio ul{margin:6px 0 0 18px;padding:0}
+  .combinado{background:#fff8dc;border:2px solid #f2d675;border-radius:14px;padding:10px 12px;margin:10px 0}
+  .combinado label{font-weight:bold}
+  .grade4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .par{background:var(--papel);border:1px solid var(--linha);border-top:8px solid var(--cor,#999);border-radius:16px;padding:12px;position:relative;display:flex;flex-direction:column}
+  .par .topo{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+  .par .papel{font-weight:bold;font-size:1.1rem}
+  .par .estado{font-size:13px;font-weight:bold;border-radius:999px;padding:2px 10px;background:#eef2f7;color:#475569}
+  .par.pronto .estado{background:#dcfce7;color:#166534}
+  .par .faz{margin:6px 0 4px 18px;padding:0;font-size:14px;line-height:1.35}
+  .par .chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}
+  .par .chips button{border:1px solid #d6cfc2;background:#fff;border-radius:999px;padding:3px 9px;font:inherit;font-size:13px;cursor:pointer;color:var(--tinta)}
+  .par .chips button:hover{background:#fef3c7}
+  .par .rep button{background:#eef3fb}
+  .par .anterior{background:#f6f3ed;border-left:4px solid #cbd5e1;border-radius:8px;padding:6px 10px;font-size:14px;color:#374151;margin:6px 0;max-height:120px;overflow:auto}
+  .par .surpresa{background:#fdf2f8;border:2px dashed #f9a8d4;border-radius:10px;padding:5px 10px;font-weight:bold;color:#9d174d;margin:4px 0}
+  .par textarea{min-height:170px;flex:1;line-height:1.5;font-size:17px;resize:vertical;background:repeating-linear-gradient(#fff 0 25px,#eef2f7 25px 26px);background-attachment:local}
+  .par .rodape{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+  .par .conta{font-size:13px;color:var(--suave)}
+  .par.bloqueado textarea,.par.bloqueado .chips{opacity:.35;pointer-events:none}
+  .par .espera{display:none;position:absolute;inset:auto 12px 60px 12px;text-align:center;font-weight:bold;color:#475569;background:rgba(255,255,255,.92);border-radius:12px;padding:12px}
+  .par.bloqueado .espera{display:block}
+  .comeco{font-size:13px;color:#6b7280;font-style:italic;margin:2px 0}
+  /* redação montada */
+  #folha{background:#fff;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.12);padding:32px 40px;max-width:860px;margin:0 auto;font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.75;color:#111}
+  #folha h2{font-family:inherit;text-align:center;font-size:1.4em;margin:0 0 16px;color:#111}
+  #folha p{text-indent:2.2em;margin:0 0 12px;border-left:6px solid var(--cor,#ccc);padding-left:12px;position:relative}
+  #folha p .marca{position:absolute;left:-110px;top:2px;width:96px;text-align:right;font:bold 12px "Segoe UI",sans-serif;text-indent:0;color:var(--cor)}
+  #folha:fullscreen{max-width:none;border-radius:0;padding:4vh 7vw;font-size:2.3vw;overflow:auto}
+  #folha:-webkit-full-screen{max-width:none;border-radius:0;padding:4vh 7vw;font-size:2.3vw;overflow:auto}
+  .revisao label{display:block;margin:6px 0;font-size:16px}
+  .aval{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+  .aval .cx{border:2px solid var(--cor);border-radius:14px;padding:10px;background:#fff}
+  .aval .crit{display:flex;justify-content:space-between;align-items:center;margin:4px 0;font-size:14px;gap:6px}
+  .aval .crit span:last-child{white-space:nowrap;flex:none}
+  .aval .crit button{border:none;background:none;font-size:22px;cursor:pointer;filter:grayscale(1);opacity:.45;padding:0 2px}
+  .aval .crit button.on{filter:none;opacity:1}
+  #placar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+  #placar .eq{color:#fff;border-radius:16px;padding:8px 16px;font-weight:bold;font-size:1.2rem}
+  #fichas{display:none}
+  @media (max-width:820px){.grade4{grid-template-columns:1fr} #folha{padding:20px 18px} #folha p .marca{position:static;display:block;text-align:left;width:auto;margin-bottom:2px}}
+  @media print{
+    body{background:#fff}
+    body.imprimindo-fichas .pag{display:none}
+    body.imprimindo-fichas #fichas{display:block}
+    body.imprimindo-redacao .pag > *:not(#tFinal){display:none}
+    body.imprimindo-redacao #tFinal > *:not(#folha){display:none}
+    body.imprimindo-redacao #folha{box-shadow:none;padding:0}
+    body.imprimindo-redacao #folha p .marca{display:none}
+    .ficha{page-break-after:always;font-family:Arial,sans-serif;color:#000;padding:10px}
+    .ficha h3{margin:0 0 6px}.ficha .lin{border-bottom:1px solid #999;height:30px}
+  }
+</style>
+</head>
+<body>
+<div class="pag">
+
+<!-- 1) preparar -->
+<div class="tela ativa" id="tConfig">
+  <h1>✍️ Redação a Várias Mãos</h1>
+  <p class="sub">Quatro grupos, um texto só: cada grupo escreve um parágrafo e, no fim, a turma lê a redação montada.</p>
+
+  <div class="caixa">
+    <h2>1. Que texto vamos escrever?</h2>
+    <div class="opcoes" id="opGenero">
+      <button type="button" class="op sel" data-v="dissertacao"><b>📝 Dissertação argumentativa</b><small>Introdução, dois desenvolvimentos e conclusão com proposta de intervenção (modelo ENEM).</small></button>
+      <button type="button" class="op" data-v="narrativa"><b>📖 História a várias mãos</b><small>Situação inicial, conflito, clímax e desfecho, com um elemento surpresa sorteado para cada grupo.</small></button>
+    </div>
+  </div>
+
+  <div class="caixa">
+    <h2>2. Tema</h2>
+    <div class="linhaFlex"><select id="selTema" style="flex:1;min-width:240px"></select><button type="button" class="bt ouro" id="btSortearTema">🎲 Sortear tema</button></div>
+    <label class="campo" for="inTemaLivre">✏️ Ou escreva um tema seu</label>
+    <input type="text" id="inTemaLivre" maxlength="160" placeholder="Ex.: O uso do celular na sala de aula">
+    <p class="sub" id="infoTema" style="text-align:left;margin:8px 0 0"></p>
+  </div>
+
+  <div class="caixa">
+    <h2>3. Como os grupos vão escrever?</h2>
+    <div class="opcoes" id="opModo">
+      <button type="button" class="op sel" data-v="corrente"><b>🔗 Corrente</b><small>Um parágrafo de cada vez: o grupo lê o parágrafo anterior antes de escrever o seu. O texto fica mais coeso.</small></button>
+      <button type="button" class="op" data-v="cegas"><b>🙈 Às cegas</b><small>Todos ao mesmo tempo, só com a tese (ou o combinado da história). No fim, a turma descobre se o texto “conversa”.</small></button>
+    </div>
+    <div class="linhaFlex" style="margin-top:10px">
+      <label>⏱️ Tempo por parágrafo: <select id="selTempo" style="width:auto"><option value="8">8 min</option><option value="12">12 min</option><option value="15" selected>15 min</option><option value="20">20 min</option><option value="0">sem tempo</option></select></label>
+    </div>
+  </div>
+
+  <div class="caixa">
+    <h2>4. Os grupos <button type="button" class="bt claro" id="btAnimais" style="padding:6px 12px;font-size:14px">🐾 Animais</button> <button type="button" class="bt claro" id="btSortearOrdem" style="padding:6px 12px;font-size:14px">🎲 Sortear quem escreve cada parágrafo</button></h2>
+    <div class="ordem" id="ordem"></div>
+  </div>
+
+  <div class="centro">
+    <button type="button" class="bt ouro" id="btComecar" style="font-size:20px;padding:14px 26px">▶️ Começar a escrita</button>
+    <button type="button" class="bt claro" id="btFichas">🖨️ Imprimir as fichas dos grupos</button>
+    <button type="button" class="bt claro" id="btContinuar" style="display:none">↩️ Continuar a última redação</button>
+  </div>
+</div>
+
+<!-- 2) mesa de escrita -->
+<div class="tela" id="tMesa">
+  <div class="caixa">
+    <div id="cabTema">
+      <div style="flex:1;min-width:240px"><span class="grupoChip" id="chipGenero" style="background:var(--azul)"></span><h2 id="tituloTema" style="margin-top:6px"></h2><div id="propostaTema" style="color:#4b5563;margin-top:4px"></div></div>
+      <div class="centro"><div id="relogio">--:--</div><button type="button" class="bt claro" id="btRelogio" style="padding:4px 10px;font-size:14px">▶️ Iniciar</button><button type="button" class="bt claro" id="btMais" style="padding:4px 10px;font-size:14px">+1 min</button></div>
+    </div>
+    <details class="apoio" id="apoio"><summary>💡 Pontos de partida e repertório</summary><div id="apoioTxt"></div></details>
+    <div class="combinado" id="combinado"><label for="inTese" id="rotTese"></label><input type="text" id="inTese" maxlength="300"></div>
+  </div>
+  <div class="grade4" id="grade"></div>
+  <div class="centro" style="margin-top:14px">
+    <button type="button" class="bt ouro" id="btMontar" style="font-size:19px">📜 Montar a redação</button>
+    <button type="button" class="bt claro" id="btVoltarCfg">⚙️ Voltar às configurações</button>
+  </div>
+</div>
+
+<!-- 3) redação montada -->
+<div class="tela" id="tFinal">
+  <div class="centro" style="margin-bottom:10px">
+    <input type="text" id="inTitulo" maxlength="120" placeholder="Título da redação (a turma escolhe!)" style="max-width:640px;text-align:center;font-weight:bold">
+  </div>
+  <div id="folha"></div>
+  <div class="centro" style="margin:12px 0">
+    <button type="button" class="bt" id="btTelaCheia">🖥️ Ler em tela cheia</button>
+    <button type="button" class="bt claro" id="btFalar">🔊 Ler em voz alta</button>
+    <button type="button" class="bt claro" id="btCopiar">📋 Copiar o texto</button>
+    <button type="button" class="bt claro" id="btImprimir">🖨️ Imprimir</button>
+    <button type="button" class="bt claro" id="btEditar">✏️ Voltar e editar</button>
+  </div>
+  <div class="caixa revisao"><h2>🔍 Revisão coletiva</h2><div id="revisao"></div></div>
+  <div class="caixa"><h2>⭐ Estrelas para cada grupo</h2><div class="aval" id="aval"></div>
+    <div class="centro" style="margin-top:10px"><button type="button" class="bt ouro" id="btPlacar">🏆 Mostrar o placar</button></div><div id="placar"></div></div>
+  <div class="centro"><button type="button" class="bt verde" id="btNova">🔄 Nova redação</button></div>
+</div>
+</div>
+
+<div id="fichas"></div>
+<script src="animais.js"></script>
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const embaralhar = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const CHAVE = 'redacao_maos';
+const PAPEIS = {
+  dissertacao: [
+    {nome: 'Introdução', emoji: '🚪', faz: ['Apresente o tema com um fato, uma data, uma lei ou uma citação (contextualize).', 'Escreva a tese: a opinião do texto sobre o problema.', 'Anuncie os dois argumentos que virão.'],
+      conectivos: ['Atualmente,', 'No Brasil,', 'Segundo', 'De acordo com', 'Nesse contexto,', 'Diante disso,', 'Entretanto,'], comeco: 'Segundo [repertório], ... Entretanto, no Brasil atual, ...',
+      criterios: ['Contextualizou o tema', 'Deixou clara a tese', 'Anunciou os argumentos']},
+    {nome: 'Desenvolvimento 1', emoji: '🧱', faz: ['Comece com um conectivo e apresente o 1º argumento.', 'Explique: por que isso acontece? Quais são as consequências?', 'Use um repertório (lei, autor, fato histórico, filme, livro).'],
+      conectivos: ['Em primeiro lugar,', 'Primeiramente,', 'Isso ocorre porque', 'Nesse sentido,', 'Como afirma', 'Por conseguinte,'], comeco: 'Em primeiro lugar, é preciso destacar que ...',
+      criterios: ['Argumento claro', 'Explicou causas ou consequências', 'Usou repertório']},
+    {nome: 'Desenvolvimento 2', emoji: '🧱', faz: ['Comece com um conectivo de adição e apresente o 2º argumento.', 'Explique e dê um exemplo.', 'Ligue o argumento à tese da introdução.'],
+      conectivos: ['Além disso,', 'Ademais,', 'Somado a isso,', 'Outrossim,', 'Desse modo,', 'Por exemplo,'], comeco: 'Além disso, outro fator relevante é ...',
+      criterios: ['Argumento novo (não repetiu o 1º)', 'Explicou com exemplo', 'Conversou com a tese']},
+    {nome: 'Conclusão', emoji: '🏁', faz: ['Retome a tese com outras palavras.', 'Proposta de intervenção: QUEM (agente) + O QUÊ (ação) + COMO (meio) + PARA QUÊ (finalidade) + um detalhe.', 'Feche com uma frase que converse com a introdução.'],
+      conectivos: ['Portanto,', 'Dessa forma,', 'Em suma,', 'Logo,', 'por meio de', 'a fim de', 'com o objetivo de'], comeco: 'Portanto, cabe ao [agente] [ação], por meio de [meio], a fim de [finalidade].',
+      criterios: ['Retomou a tese', 'Proposta completa (agente, ação, meio, finalidade)', 'Fechamento coerente']}
+  ],
+  narrativa: [
+    {nome: 'Situação inicial', emoji: '🌅', faz: ['Apresente os personagens, o lugar e o tempo.', 'Mostre como era tudo antes do problema.', 'Encaixe o seu elemento surpresa.'],
+      conectivos: ['Era uma vez', 'Certa manhã,', 'Naquele tempo,', 'Numa cidade chamada', 'Todos os dias,'], comeco: 'Certa manhã, em ...',
+      criterios: ['Apresentou personagens e lugar', 'Despertou curiosidade', 'Usou o elemento surpresa']},
+    {nome: 'Conflito', emoji: '⚡', faz: ['Continue a história do grupo anterior.', 'Crie o problema que muda tudo.', 'Encaixe o seu elemento surpresa.'],
+      conectivos: ['De repente,', 'Mas, naquele dia,', 'Foi então que', 'Sem aviso,', 'Para a surpresa de todos,'], comeco: 'De repente, ...',
+      criterios: ['Continuou a história', 'Criou um problema forte', 'Usou o elemento surpresa']},
+    {nome: 'Clímax', emoji: '🌋', faz: ['Mostre as tentativas de resolver o problema.', 'Chegue ao momento mais tenso da história.', 'Encaixe o seu elemento surpresa.'],
+      conectivos: ['Desesperados,', 'Enquanto isso,', 'No momento mais tenso,', 'Quando tudo parecia perdido,', 'Com o coração disparado,'], comeco: 'Quando tudo parecia perdido, ...',
+      criterios: ['Aumentou a tensão', 'Personagens agiram', 'Usou o elemento surpresa']},
+    {nome: 'Desfecho', emoji: '🌈', faz: ['Resolva o problema (ou crie um final surpreendente).', 'Mostre como os personagens ficaram depois.', 'Encaixe o seu elemento surpresa.'],
+      conectivos: ['Finalmente,', 'Por fim,', 'Desde aquele dia,', 'E assim,', 'No fim das contas,'], comeco: 'Finalmente, ...',
+      criterios: ['Resolveu o conflito', 'Final coerente com o começo', 'Usou o elemento surpresa']}
+  ]
+};
+const REVISAO = {
+  dissertacao: ['A introdução apresenta o tema e uma tese clara?', 'Cada desenvolvimento traz um argumento diferente que defende a tese?', 'Há conectivos ligando um parágrafo ao outro?', 'A conclusão retoma a tese e tem proposta completa (agente, ação, meio, finalidade)?', 'Há palavras repetidas demais? Troquem por sinônimos.', 'Pontuação e acentuação foram revisadas?'],
+  narrativa: ['A história tem começo, meio e fim?', 'Os personagens e o lugar continuam os mesmos do início ao fim?', 'O conflito é resolvido no desfecho?', 'Os quatro elementos surpresa apareceram?', 'Os tempos verbais estão combinando (passado)?', 'Há diálogos com travessão? Ficaram bem pontuados?']
+};
+const LINHAS_IDEAIS = {dissertacao: [5, 8], narrativa: [4, 9]};
+
+let BANCO = null;
+let J = null;   // estado da redação
+let genero = 'dissertacao', modo = 'corrente';
+
+function grupos(){ return window.Animais ? Animais.equipes(4) : [{nome: 'Grupo 1', emoji: '🔴', cor: '#e74c3c'}, {nome: 'Grupo 2', emoji: '🔵', cor: '#2f80ed'}, {nome: 'Grupo 3', emoji: '🟢', cor: '#27ae60'}, {nome: 'Grupo 4', emoji: '🟡', cor: '#e6a800'}]; }
+let ordem = [0, 1, 2, 3];   // ordem[parágrafo] = grupo
+function lerSalvo(){ try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } }
+function salvar(){ if (J) try { localStorage.setItem(CHAVE, JSON.stringify(J)); } catch (e) {} }
+
+// ---------- configuração ----------
+function escolherOp(box, v){ box.querySelectorAll('.op').forEach(b => b.classList.toggle('sel', b.dataset.v === v)); }
+$('opGenero').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; genero = b.dataset.v; escolherOp($('opGenero'), genero); preencherTemas(); desenharOrdem(); };
+$('opModo').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; modo = b.dataset.v; escolherOp($('opModo'), modo); };
+function preencherTemas(){
+  if (!BANCO) return;
+  const l = genero === 'dissertacao' ? BANCO.dissertacao : BANCO.narrativa;
+  $('selTema').innerHTML = l.map((t, i) => `<option value="${i}">${esc(genero === 'dissertacao' ? t.eixo + ': ' + t.tema : t.titulo)}</option>`).join('');
+  $('inTemaLivre').placeholder = genero === 'dissertacao' ? 'Ex.: O uso do celular na sala de aula' : 'Ex.: O dia em que a escola virou um castelo';
+  mostrarInfoTema();
+}
+function mostrarInfoTema(){
+  if (!BANCO) return;
+  const livre = $('inTemaLivre').value.trim();
+  if (livre){ $('infoTema').textContent = '✏️ Tema livre: ' + livre; return; }
+  const t = (genero === 'dissertacao' ? BANCO.dissertacao : BANCO.narrativa)[+$('selTema').value];
+  $('infoTema').innerHTML = t ? (genero === 'dissertacao' ? '📌 ' + esc(t.proposta) : '📌 ' + esc(t.inicio) + ' <i>Personagens: ' + esc(t.personagens) + '. Lugar: ' + esc(t.lugar) + '.</i>') : '';
+}
+$('selTema').onchange = mostrarInfoTema; $('inTemaLivre').oninput = mostrarInfoTema;
+$('btSortearTema').onclick = () => {   // roleta rápida pelos temas
+  $('inTemaLivre').value = '';
+  const sel = $('selTema'), n = sel.options.length, alvo = Math.floor(Math.random() * n); let passo = 0; const total = 14 + alvo % n;
+  const giro = () => { sel.selectedIndex = (sel.selectedIndex + 1) % n; passo++; if (passo < total) setTimeout(giro, 40 + passo * 9); else mostrarInfoTema(); };
+  giro();
+};
+function desenharOrdem(){
+  const g = grupos(), P = PAPEIS[genero];
+  $('ordem').innerHTML = P.map((p, k) => { const e = g[ordem[k]]; return `<div class="item"><small>${k + 1}º parágrafo: ${p.emoji} ${esc(p.nome)}</small><span class="grupoChip" style="background:${e.cor}">${e.emoji} ${esc(e.nome)}</span></div>`; }).join('');
+}
+$('btSortearOrdem').onclick = () => { ordem = embaralhar([0, 1, 2, 3]); desenharOrdem(); };
+$('btAnimais').onclick = () => { if (window.Animais) Animais.abrir(); };
+if (window.Animais) Animais.aoMudar = () => { desenharOrdem(); if (J){ J.grupos = grupos(); salvar(); } };
+
+function temaAtual(){
+  const livre = $('inTemaLivre').value.trim();
+  if (genero === 'dissertacao'){
+    if (livre) return {tema: livre, proposta: 'Redija um texto dissertativo-argumentativo sobre o tema: ' + livre + '.', motivadores: [], repertorio: [], argumentos: [], agentes: ['escola', 'famílias', 'governo', 'mídia', 'sociedade']};
+    return BANCO.dissertacao[+$('selTema').value];
+  }
+  if (livre) return {titulo: livre, inicio: '', personagens: 'a turma decide', lugar: 'a turma decide'};
+  return BANCO.narrativa[+$('selTema').value];
+}
+function comecar(){
+  if (!BANCO) return;
+  const t = temaAtual(), tempo = +$('selTempo').value;
+  J = {genero, modo, tempo, tema: t, grupos: grupos(), ordem: ordem.slice(), textos: ['', '', '', ''], prontos: [false, false, false, false], tese: '', titulo: '', estrelas: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    surpresas: genero === 'narrativa' ? embaralhar(BANCO.surpresas).slice(0, 4) : null, criado: Date.now()};
+  salvar(); abrirMesa(); reiniciarRelogio();
+}
+$('btComecar').onclick = comecar;
+$('btContinuar').onclick = () => { J = lerSalvo(); if (J){ genero = J.genero; modo = J.modo; abrirMesa(); reiniciarRelogio(); } };
+
+// ---------- mesa de escrita ----------
+function tela(id){ document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === id)); window.scrollTo(0, 0); }
+function vez(){ return J.modo === 'corrente' ? J.prontos.indexOf(false) : -1; }   // parágrafo da vez (corrente)
+function abrirMesa(){
+  tela('tMesa');
+  const t = J.tema, diss = J.genero === 'dissertacao';
+  $('chipGenero').textContent = (diss ? '📝 Dissertação argumentativa' : '📖 História a várias mãos') + ' • ' + (J.modo === 'corrente' ? '🔗 Corrente' : '🙈 Às cegas');
+  $('tituloTema').textContent = diss ? t.tema : t.titulo;
+  $('propostaTema').textContent = diss ? t.proposta : (t.inicio ? t.inicio + ' ' : '') + 'Personagens: ' + t.personagens + '. Lugar: ' + t.lugar + '.';
+  let apoio = '';
+  if (diss){
+    if (t.motivadores.length) apoio += '<b>Pontos de partida</b><ul>' + t.motivadores.map(m => '<li>' + esc(m) + '</li>').join('') + '</ul>';
+    if (t.repertorio.length) apoio += '<b>Repertório</b><ul>' + t.repertorio.map(m => '<li>' + esc(m) + '</li>').join('') + '</ul>';
+    if (t.argumentos.length) apoio += '<b>Ideias de argumento</b><ul>' + t.argumentos.map(m => '<li>' + esc(m) + '</li>').join('') + '</ul>';
+    apoio += '<b>Possíveis agentes da proposta</b><ul><li>' + esc(t.agentes.join(', ')) + '</li></ul>';
+  } else apoio = '<b>Elementos surpresa sorteados</b><ul>' + J.surpresas.map((s, k) => '<li>' + (k + 1) + 'º parágrafo: ' + esc(s) + '</li>').join('') + '</ul>';
+  $('apoioTxt').innerHTML = apoio;
+  $('rotTese').textContent = diss ? '🎯 Tese combinada pela turma (o que o texto vai defender):' : '🧭 Combinado da história (nome dos personagens, lugar, tempo):';
+  $('inTese').placeholder = diss ? 'Ex.: o uso excessivo das redes prejudica os jovens por causa dos algoritmos e da falta de educação midiática' : 'Ex.: Lia e o gato Pipoca, numa vila de pescadores, num verão quente';
+  $('inTese').value = J.tese || '';
+  desenharGrade();
+}
+$('inTese').oninput = () => { J.tese = $('inTese').value; salvar(); };
+function desenharGrade(){
+  const P = PAPEIS[J.genero], g = J.grupos, v = vez();
+  $('grade').innerHTML = P.map((p, k) => {
+    const e = g[J.ordem[k]], bloq = J.modo === 'corrente' && !J.prontos[k] && k !== v;
+    const ant = J.modo === 'corrente' && k > 0 && J.textos[k - 1] ? `<div class="anterior"><b>Parágrafo anterior:</b> ${esc(J.textos[k - 1])}</div>` : '';
+    const sup = J.surpresas ? `<div class="surpresa">🎁 Elemento surpresa: ${esc(J.surpresas[k])}</div>` : '';
+    const rep = J.genero === 'dissertacao' && J.tema.repertorio.length && k < 3 ? `<div class="chips rep">${J.tema.repertorio.map(r => `<button type="button" data-ins="${esc(r)}">📚 ${esc(r.length > 40 ? r.slice(0, 38) + '…' : r)}</button>`).join('')}</div>` : '';
+    const agentes = J.genero === 'dissertacao' && k === 3 ? `<div class="chips rep">${J.tema.agentes.map(a => `<button type="button" data-ins="${esc(a)}">👤 ${esc(a)}</button>`).join('')}</div>` : '';
+    return `<div class="par${J.prontos[k] ? ' pronto' : ''}${bloq ? ' bloqueado' : ''}" style="--cor:${e.cor}" data-k="${k}">
+      <div class="topo"><span class="papel">${k + 1}. ${p.emoji} ${esc(p.nome)}</span><span class="grupoChip" style="background:${e.cor}">${e.emoji} ${esc(e.nome)}</span><span class="estado">${J.prontos[k] ? '✅ Pronto' : bloq ? '⏳ Aguardando' : '✍️ Escrevendo'}</span></div>
+      <ul class="faz">${p.faz.map(f => '<li>' + esc(f) + '</li>').join('')}</ul>
+      <div class="comeco">Um jeito de começar: “${esc(p.comeco)}”</div>
+      ${sup}${ant}
+      <div class="chips">${p.conectivos.map(c => `<button type="button" data-ins="${esc(c)}">${esc(c)}</button>`).join('')}</div>${rep}${agentes}
+      <textarea data-k="${k}" placeholder="${e.emoji} ${esc(e.nome)}: escrevam aqui (ou digitem o que escreveram no papel)…">${esc(J.textos[k])}</textarea>
+      <div class="espera">⏳ Esperando o parágrafo anterior ficar pronto.</div>
+      <div class="rodape"><span class="conta" id="conta${k}"></span><button type="button" class="bt ${J.prontos[k] ? 'claro' : 'verde'}" data-pronto="${k}" style="padding:6px 12px;font-size:14px">${J.prontos[k] ? '✏️ Reabrir' : '✅ Parágrafo pronto'}</button></div>
+    </div>`;
+  }).join('');
+  for (let k = 0; k < 4; k++) contar(k);
+}
+function contar(k){
+  const t = J.textos[k].trim(), pal = t ? t.split(/\s+/).length : 0, lin = Math.ceil(t.length / 75), [a, b] = LINHAS_IDEAIS[J.genero];
+  const el = $('conta' + k); if (!el) return;
+  el.textContent = `${pal} palavras • cerca de ${lin} linha${lin === 1 ? '' : 's'}` + (lin && lin < a ? ' (pode crescer)' : lin > b ? ' (está longo)' : lin ? ' 👍' : '');
+}
+$('grade').addEventListener('input', ev => { const ta = ev.target.closest('textarea'); if (!ta) return; const k = +ta.dataset.k; J.textos[k] = ta.value; contar(k); salvar(); });
+$('grade').addEventListener('click', ev => {
+  const ins = ev.target.closest('[data-ins]'), pr = ev.target.closest('[data-pronto]');
+  if (ins){
+    const ta = ins.closest('.par').querySelector('textarea'), txt = ins.dataset.ins, ini = ta.selectionStart || ta.value.length, fim = ta.selectionEnd || ta.value.length;
+    const antes = ta.value.slice(0, ini), espaco = antes && !/\s$/.test(antes) ? ' ' : '';
+    ta.value = antes + espaco + txt + ' ' + ta.value.slice(fim); ta.focus(); const pos = (antes + espaco + txt + ' ').length; ta.setSelectionRange(pos, pos);
+    ta.dispatchEvent(new Event('input', {bubbles: true}));
+  } else if (pr){
+    const k = +pr.dataset.pronto;
+    if (!J.prontos[k] && !J.textos[k].trim()) return alert('Escreva o parágrafo antes de marcar como pronto.');
+    J.prontos[k] = !J.prontos[k]; salvar(); desenharGrade();
+    if (J.prontos[k] && J.modo === 'corrente') reiniciarRelogio(true);
+    if (J.prontos.every(Boolean)) setTimeout(() => { if (confirm('🎉 Os quatro parágrafos estão prontos! Montar a redação agora?')) montar(); }, 150);
+  }
+});
+$('btVoltarCfg').onclick = () => { pararRelogio(); tela('tConfig'); verContinuar(); };
+
+// ---------- relógio ----------
+let restante = 0, tique = null;
+function mostrarRelogio(){
+  const r = $('relogio');
+  if (!J || !J.tempo){ r.textContent = '∞'; r.classList.remove('acabando'); $('btRelogio').style.display = $('btMais').style.display = 'none'; return; }
+  $('btRelogio').style.display = $('btMais').style.display = '';
+  const m = Math.floor(Math.max(restante, 0) / 60), s = Math.max(restante, 0) % 60;
+  r.textContent = m + ':' + String(s).padStart(2, '0'); r.classList.toggle('acabando', restante <= 60 && restante > 0);
+}
+function pararRelogio(){ clearInterval(tique); tique = null; $('btRelogio').textContent = '▶️ Iniciar'; }
+function reiniciarRelogio(iniciar){ pararRelogio(); restante = (J && J.tempo ? J.tempo : 0) * 60; mostrarRelogio(); if (iniciar && J.tempo) alternarRelogio(); }
+function alternarRelogio(){
+  if (tique){ pararRelogio(); return; }
+  if (restante <= 0) restante = J.tempo * 60;
+  $('btRelogio').textContent = '⏸️ Pausar';
+  tique = setInterval(() => { restante--; mostrarRelogio(); if (restante <= 0){ pararRelogio(); apito(); $('relogio').textContent = '⏰ 0:00'; } }, 1000);
+}
+$('btRelogio').onclick = alternarRelogio;
+$('btMais').onclick = () => { restante += 60; mostrarRelogio(); };
+function apito(){ try { const c = new (window.AudioContext || window.webkitAudioContext)(); [0, .35, .7].forEach(t => { const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 880; o.connect(g); g.connect(c.destination); g.gain.setValueAtTime(.25, c.currentTime + t); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + t + .3); o.start(c.currentTime + t); o.stop(c.currentTime + t + .3); }); } catch (e) {} }
+
+// ---------- redação montada ----------
+function montar(){
+  pararRelogio(); tela('tFinal');
+  const P = PAPEIS[J.genero];
+  $('inTitulo').value = J.titulo || '';
+  desenharFolha();
+  $('revisao').innerHTML = REVISAO[J.genero].map((r, i) => `<label><input type="checkbox" data-r="${i}"> ${esc(r)}</label>`).join('');
+  $('aval').innerHTML = P.map((p, k) => { const e = J.grupos[J.ordem[k]];
+    return `<div class="cx" style="--cor:${e.cor}"><span class="grupoChip" style="background:${e.cor}">${e.emoji} ${esc(e.nome)}</span> <b>${esc(p.nome)}</b>` +
+      p.criterios.map((c, i) => `<div class="crit"><span>${esc(c)}</span><span>${[1, 2, 3].map(n => `<button type="button" data-k="${k}" data-c="${i}" data-n="${n}" class="${J.estrelas[k][i] >= n ? 'on' : ''}">⭐</button>`).join('')}</span></div>`).join('') + '</div>'; }).join('');
+  $('placar').innerHTML = '';
+}
+function desenharFolha(){
+  const P = PAPEIS[J.genero];
+  $('folha').innerHTML = (J.titulo ? `<h2>${esc(J.titulo)}</h2>` : '') + P.map((p, k) => { const e = J.grupos[J.ordem[k]];
+    return `<p style="--cor:${e.cor}"><span class="marca">${e.emoji} ${esc(e.nome)}</span>${esc(J.textos[k].trim() || '(parágrafo em branco)')}</p>`; }).join('');
+}
+$('btMontar').onclick = montar;
+$('inTitulo').oninput = () => { J.titulo = $('inTitulo').value; salvar(); desenharFolha(); };
+$('aval').onclick = ev => { const b = ev.target.closest('button[data-n]'); if (!b) return; const k = +b.dataset.k, c = +b.dataset.c, n = +b.dataset.n;
+  J.estrelas[k][c] = J.estrelas[k][c] === n ? n - 1 : n; salvar();
+  b.parentNode.querySelectorAll('button').forEach(x => x.classList.toggle('on', +x.dataset.n <= J.estrelas[k][c])); };
+$('btPlacar').onclick = () => {
+  const r = J.ordem.map((g, k) => ({e: J.grupos[g], pts: J.estrelas[k].reduce((a, b) => a + b, 0)})).sort((a, b) => b.pts - a.pts);
+  $('placar').innerHTML = r.map((x, i) => `<div class="eq" style="background:${x.e.cor}">${i === 0 ? '🏆 ' : ''}${x.e.emoji} ${esc(x.e.nome)}: ${x.pts} ⭐</div>`).join('');
+};
+$('btTelaCheia').onclick = () => { const f = $('folha'), fn = f.requestFullscreen || f.webkitRequestFullscreen; if (fn) fn.call(f); };
+$('btFalar').onclick = () => {
+  if (!window.speechSynthesis) return alert('Este navegador não lê em voz alta.');
+  if (speechSynthesis.speaking){ speechSynthesis.cancel(); return; }
+  const u = new SpeechSynthesisUtterance([J.titulo].concat(J.textos).filter(Boolean).join('. \n')); u.lang = 'pt-BR'; u.rate = .95; speechSynthesis.speak(u);
+};
+function textoPuro(){ return (J.titulo ? J.titulo + '\n\n' : '') + J.textos.map(t => t.trim()).filter(Boolean).join('\n\n'); }
+$('btCopiar').onclick = () => { const t = textoPuro(); if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => alert('📋 Texto copiado.'), () => prompt('Copie o texto:', t)); else prompt('Copie o texto:', t); };
+$('btImprimir').onclick = () => { document.body.classList.add('imprimindo-redacao'); window.print(); setTimeout(() => document.body.classList.remove('imprimindo-redacao'), 500); };
+$('btEditar').onclick = () => { abrirMesa(); mostrarRelogio(); };
+$('btNova').onclick = () => { if (!confirm('Começar uma nova redação? A atual fica guardada até você começar outra.')) return; tela('tConfig'); verContinuar(); };
+
+// ---------- fichas impressas dos grupos ----------
+$('btFichas').onclick = () => {
+  if (!BANCO) return;
+  const t = temaAtual(), P = PAPEIS[genero], g = grupos(), diss = genero === 'dissertacao', surp = diss ? null : embaralhar(BANCO.surpresas).slice(0, 4);
+  $('fichas').innerHTML = P.map((p, k) => { const e = g[ordem[k]];
+    return `<div class="ficha"><h3>${e.emoji} ${esc(e.nome)}: ${k + 1}º parágrafo, ${esc(p.nome)}</h3>
+      <p><b>${diss ? 'Tema' : 'História'}:</b> ${esc(diss ? t.tema : t.titulo)}</p>${diss ? '' : `<p><b>Personagens:</b> ${esc(t.personagens)}. <b>Lugar:</b> ${esc(t.lugar)}. <b>Elemento surpresa:</b> ${esc(surp[k])}</p>`}
+      <p><b>Tese ou combinado da turma:</b> ____________________________________________________________</p>
+      <ul>${p.faz.map(f => '<li>' + esc(f) + '</li>').join('')}</ul>
+      <p><b>Conectivos:</b> ${esc(p.conectivos.join('  •  '))}</p>${diss && t.repertorio.length && k < 3 ? `<p><b>Repertório:</b> ${esc(t.repertorio.join('; '))}</p>` : ''}
+      <p><i>Um jeito de começar: “${esc(p.comeco)}”</i></p>${'<div class="lin"></div>'.repeat(12)}</div>`; }).join('');
+  document.body.classList.add('imprimindo-fichas'); window.print(); setTimeout(() => document.body.classList.remove('imprimindo-fichas'), 500);
+};
+
+function verContinuar(){ const s = lerSalvo(); $('btContinuar').style.display = s && s.textos && s.textos.some(x => x.trim()) ? '' : 'none'; }
+fetch('dados/redacao-maos.json').then(r => r.json()).then(d => { BANCO = d; preencherTemas(); desenharOrdem(); verContinuar(); }).catch(() => { $('infoTema').textContent = 'Não consegui abrir os temas.'; });
+desenharOrdem();
+window.REDACAO = {estado: () => J, comecar, montar};
+})();
+</script>
+</body>
+</html>
