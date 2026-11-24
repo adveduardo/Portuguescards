@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monte o Parágrafo ao Vivo</title>
+<link rel="stylesheet" href="jogo-ao-vivo.css">
+<style>
+  .topoRod{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  #relogioRod{font-size:clamp(2.4rem,7vw,4.4rem);font-weight:bold;text-align:center;font-variant-numeric:tabular-nums}
+  #relogioRod.acabando{color:var(--vermelho);animation:pulsar 1s infinite}
+  @keyframes pulsar{50%{transform:scale(1.06)}}
+  #pecasTelao{max-width:1100px;margin:8px auto;display:flex;flex-direction:column;gap:8px}
+  #pecasTelao div{background:#fffdf6;border-radius:16px;padding:10px 16px;font-size:clamp(1.05rem,2.2vw,1.45rem);box-shadow:0 4px 0 #0001;text-align:left}
+  #statusEquipes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:12px 0}
+  .stEq{color:#fff;border-radius:18px;padding:10px 16px;font-weight:bold;font-size:1.2rem;box-shadow:0 4px 0 #0002;min-width:170px;text-align:center}
+  .stEq small{display:block;font-size:.95rem;opacity:.95;font-weight:normal}
+  .stEq.enviou{outline:4px solid #fff;box-shadow:0 0 0 8px var(--verde)}
+  #certoBox{background:#fffdf6;border-radius:24px;padding:16px 26px;box-shadow:0 6px 0 #0001;margin:10px auto;max-width:1100px;text-align:left}
+  #certoBox h2{text-align:center;margin:0 0 8px}
+  #certoBox ol{margin:0;padding-left:1.6em;font-size:clamp(1.1rem,2.3vw,1.5rem);line-height:1.5}
+  #certoBox .explica{margin-top:10px;color:#555;font-size:1.05rem}
+  #resEquipes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}
+  .resEq{color:#fff;border-radius:16px;padding:8px 14px;font-weight:bold;font-size:1.1rem}
+  .resEq .pos{display:inline-block;margin-left:6px;letter-spacing:2px}
+  #textoCompleto{background:#fff;border-radius:18px;padding:18px 26px;max-width:1000px;margin:12px auto;font-family:Georgia,serif;font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.7;text-align:left}
+  #textoCompleto p{text-indent:2em;margin:0 0 10px}
+</style>
+<script src="visual.js"></script>
+</head>
+<body>
+<div id="conexaoAviso">⚠️ reconectando ao banco…</div>
+
+<!-- ============ CONFIGURAÇÃO ============ -->
+<section id="tConfig" class="tela ativa">
+  <h1>🧱 Monte o Parágrafo ao Vivo</h1>
+  <div class="cartao">
+    <h2>1. Banco de parágrafos</h2>
+    <label>Arquivo: <select id="selArquivo"></select></label>
+    <div class="linha" style="justify-content:flex-start">
+      <button id="btnAbrirJson">📂 Abrir outro JSON do computador</button>
+      <button id="btnModelo">📄 Baixar o modelo</button>
+    </div>
+    <input type="file" id="arquivoJson" accept=".json,application/json" hidden>
+    <div id="infoJson" class="dica"></div>
+    <label>Tema: <select id="selTema"></select></label>
+    <label id="lblParte">Parte: <select id="selParte"></select></label>
+    <label id="lblQtd">Rodadas: <select id="selQtd"><option value="3">3</option><option value="5" selected>5</option><option value="8">8</option><option value="10">10</option></select></label>
+  </div>
+  <div class="cartao">
+    <h2>2. Tempo</h2>
+    <label>Tempo de cada rodada:
+      <select id="selTempo"><option value="60">1 min</option><option value="90" selected>1 min 30 s</option><option value="120">2 min</option><option value="180">3 min</option><option value="0">sem limite</option></select>
+    </label>
+    <p class="dica">Pontos: 1 por frase no lugar certo, +2 pelo parágrafo perfeito e +1 para a primeira equipe que mandar o parágrafo perfeito.</p>
+    <label><input type="checkbox" id="chkSom" checked> Sons</label>
+  </div>
+  <div id="painelConexao" class="cartao"></div>
+  <p class="dica" style="text-align:center">Cada equipe monta o parágrafo no seu iPad, tablet ou Chromebook.</p>
+  <button id="btnCriar" class="principal">▶️ Criar a sala</button>
+</section>
+
+<!-- ============ SALA ============ -->
+<section id="tSala" class="tela">
+  <div class="cabecalhoSala">
+    <div><div class="dica">Nos tablets e Chromebooks, abram:</div><div id="urlJogar" class="url"></div></div>
+    <div class="codigoBox">Código da sala<b id="codigoSala">----</b></div>
+  </div>
+  <h2 id="tituloSala"></h2>
+  <div id="gruposSala" class="grupos"></div>
+  <p class="dica" id="dicaGrupos" style="text-align:center">Esperando os grupos entrarem…</p>
+  <div class="linha">
+    <button id="btnComecar" class="principal">🧱 Começar</button>
+    <button id="btnEncerrar">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<!-- ============ RODADA ============ -->
+<section id="tRodada" class="tela">
+  <div class="topoRod">
+    <h2 id="tituloRod" style="margin:4px 0;text-align:left"></h2>
+    <div class="dica" id="infoRod"></div>
+  </div>
+  <div id="relogioRod"></div>
+  <p class="dica" style="text-align:center">As frases estão embaralhadas nos aparelhos. Cada equipe monta o parágrafo na ordem certa.</p>
+  <div id="pecasTelao"></div>
+  <div id="statusEquipes"></div>
+  <div class="linha">
+    <button id="btnMaisTempo">➕ 30 s</button>
+    <button id="btnCorrigir" class="principal">✅ Corrigir agora</button>
+    <button id="btnEncerrar2">✖️ Encerrar</button>
+  </div>
+</section>
+
+<!-- ============ CORREÇÃO ============ -->
+<section id="tCorrecao" class="tela">
+  <div id="certoBox"></div>
+  <div id="resEquipes"></div>
+  <div id="ranking"></div>
+  <div id="textoCompleto" hidden></div>
+  <div class="linha">
+    <button id="btnProxima" class="principal">➡️ Próxima rodada</button>
+    <button id="btnFim">🏁 Terminar e ver o placar</button>
+  </div>
+</section>
+
+<!-- ============ FIM ============ -->
+<section id="tFim" class="tela">
+  <h1>🏆 Placar final</h1>
+  <div id="rankingFim"></div>
+  <div class="linha">
+    <button id="btnNova" class="principal">🔁 Jogar de novo</button>
+    <button id="btnEncerrar3">✖️ Encerrar sala</button>
+  </div>
+</section>
+
+<script src="rede.js"></script>
+<script src="jogo-ao-vivo.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const AV = window.AoVivo;
+const embaralhar = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let dados = null, sala = null, arvore = {}, ouvinte = null, fase = 'config';
+let lista = [], idx = 0, rodadaGlobal = 0, totais = {}, tempo = 0, fim = 0, timer = null, corrigindo = false, temaInteiro = false, atual = null;
+
+// ---------- banco ----------
+function carregar(d, origem){
+  const seqs = (d && Array.isArray(d.sequencias) ? d.sequencias : []).filter(s => s && Array.isArray(s.itens) && s.itens.length >= 2)
+    .map(s => ({titulo: String(s.titulo || ''), tema: String(s.tema || ''), parte: String(s.parte || ''), itens: s.itens.map(String), explica: String(s.explica || '')}));
+  if (!seqs.length) return AV.avisar('Este JSON não tem "sequencias" com "itens".');
+  dados = {titulo: d.titulo || 'Monte o parágrafo', seqs};
+  const temas = [...new Set(seqs.map(s => s.tema).filter(Boolean))], partes = [...new Set(seqs.map(s => s.parte).filter(Boolean))];
+  $('selTema').innerHTML = '<option value="">🎲 Vários temas sorteados</option>' + temas.map(t => `<option value="${AV.esc(t)}">${AV.esc(t)} (texto completo)</option>`).join('');
+  $('selParte').innerHTML = '<option value="">Todas as partes</option>' + partes.map(p => `<option value="${AV.esc(p)}">${AV.esc(p)}</option>`).join('');
+  $('lblParte').hidden = !partes.length;
+  atualizarFiltros();
+  $('infoJson').textContent = `${dados.titulo} • ${seqs.length} sequências • ${temas.length} temas` + (origem ? ` • ${origem}` : '');
+}
+function atualizarFiltros(){ const t = $('selTema').value; $('lblQtd').hidden = !!t; $('lblParte').hidden = !!t || !$('selParte').options.length || $('selParte').options.length < 2; }
+$('selTema').onchange = atualizarFiltros;
+AV.prepararSeletorJson({tipo: 'morfo-ordene', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
+$('btnModelo').onclick = () => AV.baixarArquivo('dados/red-paragrafo-fund.json', 'modelo-monte-o-paragrafo.json');
+
+// ---------- sala ----------
+$('btnCriar').onclick = () => {
+  if (!dados) return AV.avisar('Escolha um banco de parágrafos.');
+  AV.som = $('chkSom').checked;
+  if (sala){ irPara('sala'); return; }
+  $('btnCriar').disabled = true;
+  Rede.novaSala({jogo: 'ordene', estado: {fase: 'espera', titulo: dados.titulo}}, (err, codigo) => {
+    $('btnCriar').disabled = false;
+    if (err) return AV.avisar('Não foi possível criar a sala: ' + err.message);
+    sala = codigo;
+    $('codigoSala').textContent = codigo; $('urlJogar').textContent = AV.urlJogar();
+    ouvinte = Rede.ouvir('salas/' + sala, v => { arvore = v || {}; aoMudar(); });
+    irPara('sala');
+  });
+};
+function grupos(){ return arvore.grupos || {}; }
+function info(id){ return grupos()[id] || Rede.EQUIPES.find(e => e.id === id) || {nome: id, emoji: '✏️', cor: '#7f8c8d'}; }
+function irPara(f){
+  fase = f; AV.mostrarTela({config: 'tConfig', sala: 'tSala', rodada: 'tRodada', correcao: 'tCorrecao', fim: 'tFim'}[f]);
+  if (f === 'sala'){ $('tituloSala').textContent = '🧱 ' + dados.titulo; Rede.gravar(`salas/${sala}/estado`, {fase: 'espera', titulo: dados.titulo}); }
+  aoMudar();
+}
+function respostas(){ return ((arvore.ordene || {})['r' + rodadaGlobal]) || {}; }
+function aoMudar(){
+  const g = grupos(), ids = AV.ordemGrupos(g);
+  if (fase === 'sala'){
+    AV.desenharGrupos($('gruposSala'), g, id => Rede.apagar(`salas/${sala}/grupos/${id}`));
+    $('dicaGrupos').textContent = ids.length ? `${ids.length} equipe${ids.length > 1 ? 's' : ''} pronta${ids.length > 1 ? 's' : ''}!` : 'Esperando os grupos entrarem…';
+  }
+  if (fase === 'rodada'){
+    const r = respostas();
+    $('statusEquipes').innerHTML = ids.map(id => { const e = g[id], ok = !!r[id];
+      return `<div class="stEq${ok ? ' enviou' : ''}" style="background:${e.cor}">${e.emoji} ${AV.esc(e.nome)}<small>${ok ? '✅ enviou' : '🧱 montando…'}</small></div>`; }).join('') || '<p class="dica">Nenhuma equipe na sala.</p>';
+    if (ids.length && ids.every(id => r[id]) && !corrigindo) setTimeout(() => { if (fase === 'rodada' && !corrigindo) corrigir(); }, 900);
+  }
+}
+
+// ---------- rodadas ----------
+$('btnComecar').onclick = () => {
+  if (!AV.ordemGrupos(grupos()).length) return AV.avisar('Nenhuma equipe entrou ainda. Peça para os grupos entrarem com o código da sala.');
+  const tema = $('selTema').value, parte = $('selParte').value;
+  temaInteiro = !!tema;
+  lista = tema ? dados.seqs.filter(s => s.tema === tema) : embaralhar(dados.seqs.filter(s => !parte || s.parte === parte)).slice(0, +$('selQtd').value);
+  if (!lista.length) return AV.avisar('Não há sequências com essas opções.');
+  tempo = +$('selTempo').value; idx = 0; totais = {};
+  AV.ordemGrupos(grupos()).forEach(id => totais[id] = 0);
+  novaRodada();
+};
+function novaRodada(){
+  atual = lista[idx]; rodadaGlobal++; corrigindo = false;
+  const itens = atual.itens.map((t, i) => ({id: 'i' + i, t}));
+  let mist = embaralhar(itens); if (mist.every((x, i) => x.id === 'i' + i)) mist = mist.slice(1).concat(mist[0]);   // nunca já na ordem certa
+  atual.mist = mist;
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'montando', rodada: rodadaGlobal, titulo: dados.titulo, tema: atual.tema, parte: atual.parte, itens: mist, num: idx + 1, total: lista.length, tempo, inicio: Rede.TS});
+  $('tituloRod').textContent = (atual.parte ? atual.parte + ' — ' : '') + (atual.tema || atual.titulo);
+  $('infoRod').textContent = `Rodada ${idx + 1} de ${lista.length}`;
+  $('pecasTelao').innerHTML = mist.map(x => `<div>${AV.esc(x.t)}</div>`).join('');
+  fim = tempo ? Date.now() + tempo * 1000 : 0;
+  clearInterval(timer); timer = tempo ? setInterval(relogio, 250) : null; relogio();
+  irPara('rodada');
+}
+function relogio(){
+  const el = $('relogioRod');
+  if (!fim){ el.textContent = '∞'; el.classList.remove('acabando'); return; }
+  const falta = Math.max(0, Math.ceil((fim - Date.now()) / 1000));
+  el.textContent = AV.mmss(falta); el.classList.toggle('acabando', falta <= 10 && falta > 0);
+  if (falta <= 10 && falta > 0 && AV.som) AV.tique();
+  if (falta === 0){ clearInterval(timer); timer = null; setTimeout(() => { if (fase === 'rodada' && !corrigindo) corrigir(); }, 2500); }   // folga para os envios automáticos chegarem
+}
+$('btnMaisTempo').onclick = () => {
+  if (!tempo) return;
+  fim = Math.max(fim, Date.now()) + 30000; tempo += 30;
+  Rede.atualizar(`salas/${sala}/estado`, {tempo});
+  if (!timer) timer = setInterval(relogio, 250); relogio();
+};
+$('btnCorrigir').onclick = () => corrigir();
+function corrigir(){
+  if (corrigindo) return; corrigindo = true;
+  clearInterval(timer); timer = null;
+  const r = rodadaGlobal;
+  Rede.atualizar(`salas/${sala}/estado`, {fase: 'recolhendo'});
+  Rede.lerInsistindo(`salas/${sala}/ordene/r${r}`, (err, v) => {
+    if (r !== rodadaGlobal) return;
+    const resp = v || {}, total = atual.itens.length, resultado = {}, daRodada = {};
+    let primeiro = null, tPrimeiro = Infinity;
+    Object.keys(resp).forEach(id => {
+      const ordem = Array.isArray(resp[id].ordem) ? resp[id].ordem : Rede.lista(resp[id].ordem);
+      let posicoes = '', acertos = 0;
+      for (let i = 0; i < total; i++){ const ok = ordem[i] === 'i' + i; posicoes += ok ? '1' : '0'; if (ok) acertos++; }
+      const pontos = acertos + (acertos === total ? 2 : 0);
+      resultado[id] = {acertos, total, pontos, posicoes};
+      if (acertos === total && typeof resp[id].t === 'number' && resp[id].t < tPrimeiro){ tPrimeiro = resp[id].t; primeiro = id; }
+    });
+    if (primeiro){ resultado[primeiro].pontos += 1; resultado[primeiro].primeiro = true; }
+    Object.keys(resultado).forEach(id => { totais[id] = (totais[id] || 0) + resultado[id].pontos; daRodada[id] = resultado[id].pontos; });
+    Rede.gravar(`salas/${sala}/estado`, {fase: 'correcao', rodada: r, titulo: dados.titulo, tema: atual.tema, parte: atual.parte, correta: atual.itens, resultado});
+    mostrarCorrecao(resultado, daRodada);
+  });
+}
+function mostrarCorrecao(resultado, daRodada){
+  irPara('correcao');
+  if (AV.som) AV.fanfarra();
+  $('certoBox').innerHTML = `<h2>✅ ${AV.esc((atual.parte ? atual.parte + ' — ' : '') + (atual.tema || atual.titulo))}</h2><ol>${atual.itens.map(t => `<li>${AV.esc(t)}</li>`).join('')}</ol>` + (atual.explica ? `<div class="explica">💡 ${AV.esc(atual.explica)}</div>` : '');
+  const ids = AV.ordemGrupos(grupos());
+  $('resEquipes').innerHTML = ids.map(id => { const e = info(id), x = resultado[id];
+    return `<div class="resEq" style="background:${e.cor}">${e.emoji} ${AV.esc(e.nome)}: ${x ? (x.acertos === x.total ? '🌟 perfeito' : x.acertos + '/' + x.total) + ' • +' + x.pontos + (x.primeiro ? ' ⚡ 1º' : '') + `<span class="pos">${x.posicoes.split('').map(c => c === '1' ? '🟩' : '🟥').join('')}</span>` : 'não enviou'}</div>`; }).join('');
+  const g = {}; ids.forEach(id => g[id] = info(id));
+  AV.desenharRanking($('ranking'), g, totais, daRodada, false);
+  const ultima = idx >= lista.length - 1;
+  $('btnProxima').hidden = ultima;
+  $('textoCompleto').hidden = !(temaInteiro && ultima);
+  if (temaInteiro && ultima) $('textoCompleto').innerHTML = `<h3 style="text-align:center;font-family:inherit">📄 Texto completo: ${AV.esc(lista[0].tema)}</h3>` + lista.map(s => `<p>${AV.esc(s.itens.join(' '))}</p>`).join('');
+}
+$('btnProxima').onclick = () => { idx++; if (idx < lista.length) novaRodada(); };
+$('btnFim').onclick = () => {
+  irPara('fim');
+  const ids = AV.ordemGrupos(grupos()), g = {}; ids.forEach(id => g[id] = info(id));
+  AV.desenharRanking($('rankingFim'), g, totais, null, true);
+  Rede.gravar(`salas/${sala}/estado`, {fase: 'fim', titulo: dados.titulo});
+  if (AV.som) AV.fanfarra(); AV.confete();
+};
+$('btnNova').onclick = () => irPara('sala');
+function encerrar(){
+  if (!confirm('Encerrar a sala? Os aparelhos voltam para a tela do código.')) return;
+  clearInterval(timer);
+  if (ouvinte) ouvinte.fechar();
+  if (sala) Rede.apagar('salas/' + sala);
+  sala = null; arvore = {}; irPara('config');
+}
+['btnEncerrar', 'btnEncerrar2', 'btnEncerrar3'].forEach(id => $(id).onclick = encerrar);
+AV.iniciarConexao($('painelConexao'));
+window.PARAGRAFO = {estado: () => ({fase, sala, idx, rodadaGlobal, totais, lista: lista.length})};
+</script>
+</body>
+</html>

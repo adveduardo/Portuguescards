@@ -105,6 +105,16 @@
   @-webkit-keyframes tremer{25%{-webkit-transform:translateX(-10px)}75%{-webkit-transform:translateX(10px)}}
   @keyframes tremer{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
 
+  /* MONTE O PARÁGRAFO (ordene) */
+  #ordTitulo{font-size:22px;font-weight:bold;margin:2px 0}
+  #ordParte{font-size:16px;opacity:.8;margin-bottom:6px}
+  .ordSlot{display:block;background:#fff;border:3px dashed #c9d2e3;border-radius:14px;min-height:54px;margin:8px auto;max-width:760px;padding:12px 12px 12px 46px;text-align:left;font-size:19px;line-height:1.3;position:relative}
+  .ordSlot .n{position:absolute;left:12px;top:12px;font-weight:bold;color:#8a94a8}
+  .ordSlot.cheio{border-style:solid;border-color:#2f80ed;background:#eef5ff}
+  .ordPeca{display:block;width:100%;max-width:760px;margin:8px auto;text-align:left;font-size:19px;line-height:1.3;background:#2f80ed;color:#fff}
+  .ordFim{background:#fff;border-radius:14px;margin:6px auto;max-width:760px;padding:10px 12px;text-align:left;font-size:17px;line-height:1.35}
+  .ordFim.ok{border-left:8px solid #27ae60}.ordFim.no{border-left:8px solid #e74c3c}
+
   /* MÍMICA E DESENHO */
   .aviso-secreto{background:#fff3cd;color:#7a5b00;border-radius:12px;padding:6px 12px;font-size:16px;font-weight:bold;display:inline-block;margin-bottom:4px}
   #mimPalavra{font-size:60px;font-weight:bold;margin:16px 0 4px;word-wrap:break-word;line-height:1.1}
@@ -266,6 +276,15 @@
   <button class="verde" id="escrEnviar">Enviar ✅</button>
 </section>
 
+<section class="tela" id="tOrdene">
+  <div class="topo" id="topoOrdene"><span class="nome"></span><span class="info" id="ordTempo"></span></div>
+  <div id="ordTitulo"></div>
+  <div id="ordParte"></div>
+  <div id="ordSlots"></div>
+  <div id="ordPecas"></div>
+  <p><button class="pequeno" id="ordLimpar">↩️ Recomeçar</button> <button class="verde" id="ordEnviar">Enviar ✅</button></p>
+</section>
+
 <script src="rede.js"></script>
 <script>
 (function(){
@@ -347,10 +366,11 @@ function fecharOuvintes(){
   pararMimica();
   pararRelogioEscape();
   pararRelogioEscrita();
+  pararRelogioOrdene();
 }
 function comecarAOuvir(){
   fecharOuvintes();
-  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null; bg.rodada = null;
+  estado = null; stopRodada = null; quizN = null; fuga.rodada = null; mim.vez = null; cam.rodada = null; escr.rodada = null; bg.rodada = null; ord.rodada = null;
   Rede.medirRelogio('salas/' + sala + '/relogio/' + dispositivo, function(){ recalcularRelogios(); });
   telaEspera('Aguardando o professor começar…', 'Olhem para o telão 👀');
   ouvMeuGrupo = Rede.ouvir('salas/' + sala + '/grupos/' + eq.id, function(g){
@@ -406,7 +426,89 @@ function renderizar(){
   else if (jogo === 'caminho') renderCaminho();
   else if (jogo === 'escrita') renderEscrita();
   else if (jogo === 'bingo') renderBingo();
+  else if (jogo === 'ordene') renderOrdene();
   else renderQuiz();
+}
+
+// ================= MONTE O PARÁGRAFO (ordene) =================
+// O professor manda as frases embaralhadas; a equipe toca na ordem certa e envia.
+var ord = {rodada: null, itens: [], sel: [], enviado: false, timer: null, fim: 0, inicioLocal: 0};
+function caminhoOrdene(){ return 'salas/' + sala + '/ordene/r' + ord.rodada + '/' + eq.id; }
+function pararRelogioOrdene(){ if (ord.timer){ clearInterval(ord.timer); ord.timer = null; } }
+function textoItem(id){ for (var i = 0; i < ord.itens.length; i++) if (ord.itens[i].id === id) return ord.itens[i].t; return ''; }
+function renderOrdene(){
+  var f = estado.fase;
+  if (f === 'montando'){
+    if (ord.rodada !== estado.rodada) iniciarOrdene();
+    return;
+  }
+  pararRelogioOrdene();
+  if (f === 'correcao'){ mostrarCorrecaoOrdene(); return; }
+  if (f === 'fim'){ telaEspera('🏁 Fim de jogo!', 'Olhem o telão para ver o placar final 👀'); return; }
+  telaEspera(estado.titulo ? '📝 ' + esc(estado.titulo) : 'Aguardando o professor começar…', 'Olhem para o telão 👀');
+}
+function iniciarOrdene(){
+  var r = estado.rodada;
+  ord.rodada = r; ord.itens = Rede.lista(estado.itens); ord.sel = []; ord.enviado = false;
+  pararRelogioOrdene();
+  ord.inicioLocal = Date.now();
+  ord.fim = estado.tempo ? inicioNoAparelho(ord.inicioLocal) + estado.tempo * 1000 : 0;
+  telaEspera('📝 Preparando as frases…', '');
+  Rede.ler(caminhoOrdene(), function(err, v){
+    if (ord.rodada !== r) return;
+    if (v && v.ordem){ ord.enviado = true; telaEspera('✅ Enviado!', 'Aguardem a correção no telão 👀'); return; }
+    if (ord.fim) ord.timer = setInterval(relogioOrdene, 500);
+    vibrar(); desenharOrdene();
+  });
+}
+function relogioOrdene(){
+  var falta = Math.ceil((ord.fim - Date.now()) / 1000);
+  if (falta <= 0){ pararRelogioOrdene(); $('ordTempo').innerHTML = '⏰ 0:00'; enviarOrdene(true); return; }
+  $('ordTempo').innerHTML = '⏱️ ' + Math.floor(falta / 60) + ':' + (falta % 60 < 10 ? '0' : '') + (falta % 60);
+}
+function desenharOrdene(){
+  mostrar('tOrdene');
+  pintarTopo('topoOrdene');
+  $('ordTitulo').innerHTML = esc(estado.tema || estado.titulo || '');
+  $('ordParte').innerHTML = (estado.parte ? esc(estado.parte) + ' • ' : '') + 'Toquem nas frases na ordem certa' + (estado.num ? ' • ' + estado.num + ' de ' + estado.total : '');
+  var h = '', i;
+  for (i = 0; i < ord.itens.length; i++){
+    var id = ord.sel[i];
+    h += '<div class="ordSlot' + (id ? ' cheio' : '') + '"' + (id ? ' data-tira="' + i + '"' : '') + '><span class="n">' + (i + 1) + 'º</span>' + (id ? esc(textoItem(id)) : '') + '</div>';
+  }
+  $('ordSlots').innerHTML = h;
+  h = '';
+  for (i = 0; i < ord.itens.length; i++) if (ord.sel.indexOf(ord.itens[i].id) < 0) h += '<button class="ordPeca" data-id="' + esc(ord.itens[i].id) + '">' + esc(ord.itens[i].t) + '</button>';
+  $('ordPecas').innerHTML = h;
+  $('ordEnviar').disabled = ord.sel.length < ord.itens.length;
+  if (ord.fim) relogioOrdene(); else $('ordTempo').innerHTML = '';
+}
+function alvoCom(el, attr){ while (el && el !== document && !(el.getAttribute && el.getAttribute(attr) !== null)) el = el.parentNode; return el && el !== document ? el : null; }
+$('ordPecas').onclick = function(ev){
+  var b = alvoCom(ev.target, 'data-id'); if (!b || ord.enviado) return;
+  ord.sel.push(b.getAttribute('data-id')); desenharOrdene();
+};
+$('ordSlots').onclick = function(ev){
+  var b = alvoCom(ev.target, 'data-tira'); if (!b || ord.enviado) return;
+  ord.sel.splice(+b.getAttribute('data-tira'), 1); desenharOrdene();
+};
+$('ordLimpar').onclick = function(){ if (ord.enviado) return; ord.sel = []; desenharOrdene(); };
+$('ordEnviar').onclick = function(){ enviarOrdene(false); };
+function enviarOrdene(auto){
+  if (ord.enviado || ord.rodada === null) return;
+  if (!auto && ord.sel.length < ord.itens.length) return;
+  ord.enviado = true; pararRelogioOrdene();
+  var r = ord.rodada;
+  Rede.gravar(caminhoOrdene(), {ordem: ord.sel.slice(), completo: ord.sel.length === ord.itens.length, t: Rede.TS}, function(err){
+    if (err && ord.rodada === r){ ord.enviado = false; alert('Não foi possível enviar. Tentem de novo.'); desenharOrdene(); return; }
+    if (ord.rodada === r) telaEspera(auto ? '⏰ Tempo esgotado!' : '✅ Enviado!', 'Aguardem a correção no telão 👀');
+  });
+}
+function mostrarCorrecaoOrdene(){
+  var res = (estado.resultado || {})[eq.id], certa = Rede.lista(estado.correta), h = '';
+  for (var i = 0; i < certa.length; i++) h += '<div class="ordFim ' + (res && res.posicoes && res.posicoes.charAt(i) === '1' ? 'ok' : 'no') + '"><b>' + (i + 1) + 'º</b> ' + esc(certa[i]) + '</div>';
+  var msg = res ? (res.acertos === res.total ? '🌟 Parágrafo perfeito!' : '👍 ' + res.acertos + ' de ' + res.total + ' no lugar certo') : '😶 Não enviaram a tempo';
+  telaEspera(msg, res ? '+' + res.pontos + ' ponto' + (res.pontos === 1 ? '' : 's') + ' • a ordem certa é:' : 'A ordem certa é:', h);
 }
 
 // ================= STOP =================
