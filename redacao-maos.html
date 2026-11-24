@@ -102,6 +102,15 @@
   <p class="sub">Quatro grupos, um texto só: cada grupo escreve um parágrafo e, no fim, a turma lê a redação montada.</p>
 
   <div class="caixa">
+    <h2>Para quem?</h2>
+    <div class="opcoes" id="opNivel">
+      <button type="button" class="op sel" data-v="fund"><b>🎒 6º ao 9º ano</b><small>Temas divertidos do dia a dia da escola e instruções mais simples.</small></button>
+      <button type="button" class="op" data-v="enem"><b>🎓 ENEM</b><small>Temas sociais com repertório e proposta de intervenção completa.</small></button>
+      <button type="button" class="op" data-v="eja"><b>🧑‍🏫 EJA</b><small>Temas da vida adulta: trabalho, saúde, orçamento, cidadania.</small></button>
+    </div>
+  </div>
+
+  <div class="caixa">
     <h2>1. Que texto vamos escrever?</h2>
     <div class="opcoes" id="opGenero">
       <button type="button" class="op sel" data-v="dissertacao"><b>📝 Dissertação argumentativa</b><small>Introdução, dois desenvolvimentos e conclusão com proposta de intervenção (modelo ENEM).</small></button>
@@ -201,6 +210,20 @@ const PAPEIS = {
       conectivos: ['Portanto,', 'Dessa forma,', 'Em suma,', 'Logo,', 'por meio de', 'a fim de', 'com o objetivo de'], comeco: 'Portanto, cabe ao [agente] [ação], por meio de [meio], a fim de [finalidade].',
       criterios: ['Retomou a tese', 'Proposta completa (agente, ação, meio, finalidade)', 'Fechamento coerente']}
   ],
+  dissertacao_fund: [
+    {nome: 'Introdução', emoji: '🚪', faz: ['Conte qual é o assunto de um jeito curioso: uma pergunta, uma situação ou uma curiosidade.', 'Diga a opinião do grupo (essa é a TESE!).', 'Avise os dois motivos que vão aparecer depois.'],
+      conectivos: ['Você já imaginou', 'Hoje em dia,', 'Muita gente acha que', 'Na nossa opinião,', 'Porém,', 'Por isso,'], comeco: 'Você já imaginou ...? Hoje em dia, ... Na nossa opinião, ...',
+      criterios: ['Começou de um jeito interessante', 'Deu a opinião do grupo', 'Avisou os motivos']},
+    {nome: 'Desenvolvimento 1', emoji: '🧱', faz: ['Escreva o 1º motivo que defende a opinião.', 'Explique com um exemplo da escola, de casa ou de um filme.', 'Use uma palavra de ligação no começo.'],
+      conectivos: ['Em primeiro lugar,', 'Um bom exemplo é', 'Isso acontece porque', 'Por exemplo,', 'Assim,'], comeco: 'Em primeiro lugar, ...',
+      criterios: ['Motivo claro', 'Deu exemplo', 'Usou palavra de ligação']},
+    {nome: 'Desenvolvimento 2', emoji: '🧱', faz: ['Escreva o 2º motivo (diferente do 1º).', 'Explique e dê outro exemplo.', 'Mostre que ele também defende a opinião do grupo.'],
+      conectivos: ['Além disso,', 'Também', 'Outro motivo é que', 'Por outro lado,', 'Dessa forma,'], comeco: 'Além disso, ...',
+      criterios: ['Motivo novo', 'Deu exemplo', 'Combinou com a opinião']},
+    {nome: 'Conclusão', emoji: '🏁', faz: ['Repita a opinião do grupo com outras palavras.', 'Dê uma solução: QUEM pode fazer O QUÊ e COMO.', 'Termine com uma frase marcante.'],
+      conectivos: ['Portanto,', 'Por isso,', 'Enfim,', 'Para resolver,', 'Assim,'], comeco: 'Portanto, ... Para resolver, a escola pode ...',
+      criterios: ['Repetiu a opinião', 'Deu uma solução', 'Terminou bem']}
+  ],
   narrativa: [
     {nome: 'Situação inicial', emoji: '🌅', faz: ['Apresente os personagens, o lugar e o tempo.', 'Mostre como era tudo antes do problema.', 'Encaixe o seu elemento surpresa.'],
       conectivos: ['Era uma vez', 'Certa manhã,', 'Naquele tempo,', 'Numa cidade chamada', 'Todos os dias,'], comeco: 'Certa manhã, em ...',
@@ -224,7 +247,8 @@ const LINHAS_IDEAIS = {dissertacao: [5, 8], narrativa: [4, 9]};
 
 let BANCO = null;
 let J = null;   // estado da redação
-let genero = 'dissertacao', modo = 'corrente';
+let genero = 'dissertacao', modo = 'corrente', nivel = (() => { try { return localStorage.getItem('redacao_maos_nivel') || 'fund'; } catch (e) { return 'fund'; } })();
+const papeis = (g, n) => PAPEIS[g === 'dissertacao' && n === 'fund' ? 'dissertacao_fund' : g];
 
 function grupos(){ return window.Animais ? Animais.equipes(4) : [{nome: 'Grupo 1', emoji: '🔴', cor: '#e74c3c'}, {nome: 'Grupo 2', emoji: '🔵', cor: '#2f80ed'}, {nome: 'Grupo 3', emoji: '🟢', cor: '#27ae60'}, {nome: 'Grupo 4', emoji: '🟡', cor: '#e6a800'}]; }
 let ordem = [0, 1, 2, 3];   // ordem[parágrafo] = grupo
@@ -234,11 +258,14 @@ function salvar(){ if (J) try { localStorage.setItem(CHAVE, JSON.stringify(J)); 
 // ---------- configuração ----------
 function escolherOp(box, v){ box.querySelectorAll('.op').forEach(b => b.classList.toggle('sel', b.dataset.v === v)); }
 $('opGenero').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; genero = b.dataset.v; escolherOp($('opGenero'), genero); preencherTemas(); desenharOrdem(); };
+$('opNivel').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; nivel = b.dataset.v; try { localStorage.setItem('redacao_maos_nivel', nivel); } catch (e) {} escolherOp($('opNivel'), nivel); preencherTemas(); desenharOrdem(); };
 $('opModo').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; modo = b.dataset.v; escolherOp($('opModo'), modo); };
 function preencherTemas(){
   if (!BANCO) return;
   const l = genero === 'dissertacao' ? BANCO.dissertacao : BANCO.narrativa;
-  $('selTema').innerHTML = l.map((t, i) => `<option value="${i}">${esc(genero === 'dissertacao' ? t.eixo + ': ' + t.tema : t.titulo)}</option>`).join('');
+  let idx = l.map((t, i) => i).filter(i => (l[i].nivel || 'enem') === nivel);
+  if (!idx.length) idx = l.map((t, i) => i);
+  $('selTema').innerHTML = idx.map(i => `<option value="${i}">${esc(genero === 'dissertacao' ? l[i].eixo + ': ' + l[i].tema : l[i].titulo)}</option>`).join('');
   $('inTemaLivre').placeholder = genero === 'dissertacao' ? 'Ex.: O uso do celular na sala de aula' : 'Ex.: O dia em que a escola virou um castelo';
   mostrarInfoTema();
 }
@@ -257,7 +284,7 @@ $('btSortearTema').onclick = () => {   // roleta rápida pelos temas
   giro();
 };
 function desenharOrdem(){
-  const g = grupos(), P = PAPEIS[genero];
+  const g = grupos(), P = papeis(genero, nivel);
   $('ordem').innerHTML = P.map((p, k) => { const e = g[ordem[k]]; return `<div class="item"><small>${k + 1}º parágrafo: ${p.emoji} ${esc(p.nome)}</small><span class="grupoChip" style="background:${e.cor}">${e.emoji} ${esc(e.nome)}</span></div>`; }).join('');
 }
 $('btSortearOrdem').onclick = () => { ordem = embaralhar([0, 1, 2, 3]); desenharOrdem(); };
@@ -276,12 +303,12 @@ function temaAtual(){
 function comecar(){
   if (!BANCO) return;
   const t = temaAtual(), tempo = +$('selTempo').value;
-  J = {genero, modo, tempo, tema: t, grupos: grupos(), ordem: ordem.slice(), textos: ['', '', '', ''], prontos: [false, false, false, false], tese: '', titulo: '', estrelas: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+  J = {genero, nivel, modo, tempo, tema: t, grupos: grupos(), ordem: ordem.slice(), textos: ['', '', '', ''], prontos: [false, false, false, false], tese: '', titulo: '', estrelas: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
     surpresas: genero === 'narrativa' ? embaralhar(BANCO.surpresas).slice(0, 4) : null, criado: Date.now()};
   salvar(); abrirMesa(); reiniciarRelogio();
 }
 $('btComecar').onclick = comecar;
-$('btContinuar').onclick = () => { J = lerSalvo(); if (J){ genero = J.genero; modo = J.modo; abrirMesa(); reiniciarRelogio(); } };
+$('btContinuar').onclick = () => { J = lerSalvo(); if (J){ genero = J.genero; modo = J.modo; nivel = J.nivel || 'enem'; abrirMesa(); reiniciarRelogio(); } };
 
 // ---------- mesa de escrita ----------
 function tela(id){ document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === id)); window.scrollTo(0, 0); }
@@ -289,7 +316,7 @@ function vez(){ return J.modo === 'corrente' ? J.prontos.indexOf(false) : -1; } 
 function abrirMesa(){
   tela('tMesa');
   const t = J.tema, diss = J.genero === 'dissertacao';
-  $('chipGenero').textContent = (diss ? '📝 Dissertação argumentativa' : '📖 História a várias mãos') + ' • ' + (J.modo === 'corrente' ? '🔗 Corrente' : '🙈 Às cegas');
+  $('chipGenero').textContent = ({fund: '🎒 6º ao 9º', enem: '🎓 ENEM', eja: '🧑‍🏫 EJA'}[J.nivel || 'enem']) + ' • ' + (diss ? '📝 Dissertação' : '📖 História') + ' • ' + (J.modo === 'corrente' ? '🔗 Corrente' : '🙈 Às cegas');
   $('tituloTema').textContent = diss ? t.tema : t.titulo;
   $('propostaTema').textContent = diss ? t.proposta : (t.inicio ? t.inicio + ' ' : '') + 'Personagens: ' + t.personagens + '. Lugar: ' + t.lugar + '.';
   let apoio = '';
@@ -300,14 +327,15 @@ function abrirMesa(){
     apoio += '<b>Possíveis agentes da proposta</b><ul><li>' + esc(t.agentes.join(', ')) + '</li></ul>';
   } else apoio = '<b>Elementos surpresa sorteados</b><ul>' + J.surpresas.map((s, k) => '<li>' + (k + 1) + 'º parágrafo: ' + esc(s) + '</li>').join('') + '</ul>';
   $('apoioTxt').innerHTML = apoio;
-  $('rotTese').textContent = diss ? '🎯 Tese combinada pela turma (o que o texto vai defender):' : '🧭 Combinado da história (nome dos personagens, lugar, tempo):';
-  $('inTese').placeholder = diss ? 'Ex.: o uso excessivo das redes prejudica os jovens por causa dos algoritmos e da falta de educação midiática' : 'Ex.: Lia e o gato Pipoca, numa vila de pescadores, num verão quente';
+  const fund = (J.nivel || 'enem') === 'fund';
+  $('rotTese').textContent = diss ? (fund ? '🎯 Opinião da turma (a TESE: o que o texto vai defender):' : '🎯 Tese combinada pela turma (o que o texto vai defender):') : '🧭 Combinado da história (nome dos personagens, lugar, tempo):';
+  $('inTese').placeholder = diss ? (fund ? 'Ex.: o celular atrapalha mais do que ajuda, mas pode ser usado quando o professor pedir' : 'Ex.: o uso excessivo das redes prejudica os jovens por causa dos algoritmos e da falta de educação midiática') : 'Ex.: Lia e o gato Pipoca, numa vila de pescadores, num verão quente';
   $('inTese').value = J.tese || '';
   desenharGrade();
 }
 $('inTese').oninput = () => { J.tese = $('inTese').value; salvar(); };
 function desenharGrade(){
-  const P = PAPEIS[J.genero], g = J.grupos, v = vez();
+  const P = papeis(J.genero, J.nivel), g = J.grupos, v = vez();
   $('grade').innerHTML = P.map((p, k) => {
     const e = g[J.ordem[k]], bloq = J.modo === 'corrente' && !J.prontos[k] && k !== v;
     const ant = J.modo === 'corrente' && k > 0 && J.textos[k - 1] ? `<div class="anterior"><b>Parágrafo anterior:</b> ${esc(J.textos[k - 1])}</div>` : '';
@@ -374,7 +402,7 @@ function apito(){ try { const c = new (window.AudioContext || window.webkitAudio
 // ---------- redação montada ----------
 function montar(){
   pararRelogio(); tela('tFinal');
-  const P = PAPEIS[J.genero];
+  const P = papeis(J.genero, J.nivel);
   $('inTitulo').value = J.titulo || '';
   desenharFolha();
   $('revisao').innerHTML = REVISAO[J.genero].map((r, i) => `<label><input type="checkbox" data-r="${i}"> ${esc(r)}</label>`).join('');
@@ -384,7 +412,7 @@ function montar(){
   $('placar').innerHTML = '';
 }
 function desenharFolha(){
-  const P = PAPEIS[J.genero];
+  const P = papeis(J.genero, J.nivel);
   $('folha').innerHTML = (J.titulo ? `<h2>${esc(J.titulo)}</h2>` : '') + P.map((p, k) => { const e = J.grupos[J.ordem[k]];
     return `<p style="--cor:${e.cor}"><span class="marca">${e.emoji} ${esc(e.nome)}</span>${esc(J.textos[k].trim() || '(parágrafo em branco)')}</p>`; }).join('');
 }
@@ -412,7 +440,7 @@ $('btNova').onclick = () => { if (!confirm('Começar uma nova redação? A atual
 // ---------- fichas impressas dos grupos ----------
 $('btFichas').onclick = () => {
   if (!BANCO) return;
-  const t = temaAtual(), P = PAPEIS[genero], g = grupos(), diss = genero === 'dissertacao', surp = diss ? null : embaralhar(BANCO.surpresas).slice(0, 4);
+  const t = temaAtual(), P = papeis(genero, nivel), g = grupos(), diss = genero === 'dissertacao', surp = diss ? null : embaralhar(BANCO.surpresas).slice(0, 4);
   $('fichas').innerHTML = P.map((p, k) => { const e = g[ordem[k]];
     return `<div class="ficha"><h3>${e.emoji} ${esc(e.nome)}: ${k + 1}º parágrafo, ${esc(p.nome)}</h3>
       <p><b>${diss ? 'Tema' : 'História'}:</b> ${esc(diss ? t.tema : t.titulo)}</p>${diss ? '' : `<p><b>Personagens:</b> ${esc(t.personagens)}. <b>Lugar:</b> ${esc(t.lugar)}. <b>Elemento surpresa:</b> ${esc(surp[k])}</p>`}
@@ -424,6 +452,7 @@ $('btFichas').onclick = () => {
 };
 
 function verContinuar(){ const s = lerSalvo(); $('btContinuar').style.display = s && s.textos && s.textos.some(x => x.trim()) ? '' : 'none'; }
+escolherOp($('opNivel'), nivel);
 fetch('dados/redacao-maos.json').then(r => r.json()).then(d => { BANCO = d; preencherTemas(); desenharOrdem(); verContinuar(); }).catch(() => { $('infoTema').textContent = 'Não consegui abrir os temas.'; });
 desenharOrdem();
 window.REDACAO = {estado: () => J, comecar, montar};
