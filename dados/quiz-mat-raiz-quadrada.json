@@ -1,6 +1,7 @@
 {
  "titulo": "Quiz: Raiz quadrada",
  "tempoPadrao": 40,
+ "sortear": 20,
  "perguntas": [
   {
    "pergunta": "Calcule a raiz quadrada: √4 = ?",
@@ -226,7 +227,7 @@
    "pergunta": "Raiz de fração: √(1/49) = ?",
    "opcoes": [
     "1/24",
-    "1/7 1",
+    "1/8",
     "1/49",
     "1/7"
    ],
@@ -326,7 +327,7 @@
    "opcoes": [
     "2 e 3",
     "4 e 5",
-    "3 e 4 1",
+    "3 e 5",
     "3 e 4"
    ],
    "correta": "3 e 4",
@@ -474,6 +475,1755 @@
    ],
    "correta": "81",
    "explica": "81 = 9². Os outros não têm raiz quadrada exata."
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √256 = ?",
+   "opcoes": [
+    "16",
+    "15",
+    "17",
+    "128"
+   ],
+   "correta": "16",
+   "explica": "√256 = 16, porque 16 × 16 = 256. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √289 = ?",
+   "opcoes": [
+    "18",
+    "16",
+    "144",
+    "17"
+   ],
+   "correta": "17",
+   "explica": "√289 = 17, porque 17 × 17 = 289. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √324 = ?",
+   "opcoes": [
+    "19",
+    "17",
+    "18",
+    "162"
+   ],
+   "correta": "18",
+   "explica": "√324 = 18, porque 18 × 18 = 324. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √361 = ?",
+   "opcoes": [
+    "20",
+    "19",
+    "180",
+    "18"
+   ],
+   "correta": "19",
+   "explica": "√361 = 19, porque 19 × 19 = 361. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √441 = ?",
+   "opcoes": [
+    "220",
+    "21",
+    "22",
+    "20"
+   ],
+   "correta": "21",
+   "explica": "√441 = 21, porque 21 × 21 = 441. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √484 = ?",
+   "opcoes": [
+    "22",
+    "21",
+    "23",
+    "242"
+   ],
+   "correta": "22",
+   "explica": "√484 = 22, porque 22 × 22 = 484. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √529 = ?",
+   "opcoes": [
+    "264",
+    "23",
+    "22",
+    "24"
+   ],
+   "correta": "23",
+   "explica": "√529 = 23, porque 23 × 23 = 529. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √576 = ?",
+   "opcoes": [
+    "25",
+    "288",
+    "23",
+    "24"
+   ],
+   "correta": "24",
+   "explica": "√576 = 24, porque 24 × 24 = 576. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √625 = ?",
+   "opcoes": [
+    "312",
+    "26",
+    "25",
+    "24"
+   ],
+   "correta": "25",
+   "explica": "√625 = 25, porque 25 × 25 = 625. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √676 = ?",
+   "opcoes": [
+    "338",
+    "25",
+    "27",
+    "26"
+   ],
+   "correta": "26",
+   "explica": "√676 = 26, porque 26 × 26 = 676. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √729 = ?",
+   "opcoes": [
+    "27",
+    "28",
+    "26",
+    "364"
+   ],
+   "correta": "27",
+   "explica": "√729 = 27, porque 27 × 27 = 729. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √784 = ?",
+   "opcoes": [
+    "28",
+    "27",
+    "29",
+    "392"
+   ],
+   "correta": "28",
+   "explica": "√784 = 28, porque 28 × 28 = 784. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Calcule a raiz quadrada: √841 = ?",
+   "opcoes": [
+    "30",
+    "420",
+    "29",
+    "28"
+   ],
+   "correta": "29",
+   "explica": "√841 = 29, porque 29 × 29 = 841. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √1.600 = ?",
+   "opcoes": [
+    "800",
+    "40",
+    "41",
+    "39"
+   ],
+   "correta": "40",
+   "explica": "√1.600 = 40, porque 40 × 40 = 1.600. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √2.500 = ?",
+   "opcoes": [
+    "50",
+    "51",
+    "49",
+    "1.250"
+   ],
+   "correta": "50",
+   "explica": "√2.500 = 50, porque 50 × 50 = 2.500. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √3.600 = ?",
+   "opcoes": [
+    "60",
+    "1.800",
+    "59",
+    "61"
+   ],
+   "correta": "60",
+   "explica": "√3.600 = 60, porque 60 × 60 = 3.600. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √4.900 = ?",
+   "opcoes": [
+    "71",
+    "69",
+    "70",
+    "2.450"
+   ],
+   "correta": "70",
+   "explica": "√4.900 = 70, porque 70 × 70 = 4.900. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √6.400 = ?",
+   "opcoes": [
+    "81",
+    "79",
+    "80",
+    "3.200"
+   ],
+   "correta": "80",
+   "explica": "√6.400 = 80, porque 80 × 80 = 6.400. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √8.100 = ?",
+   "opcoes": [
+    "4.050",
+    "91",
+    "90",
+    "89"
+   ],
+   "correta": "90",
+   "explica": "√8.100 = 90, porque 90 × 90 = 8.100. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de dezena redonda (milhar): √10.000 = ?",
+   "opcoes": [
+    "99",
+    "100",
+    "101",
+    "5.000"
+   ],
+   "correta": "100",
+   "explica": "√10.000 = 100, porque 100 × 100 = 10.000. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √5.776 = ?",
+   "opcoes": [
+    "75",
+    "2.888",
+    "77",
+    "76"
+   ],
+   "correta": "76",
+   "explica": "√5.776 = 76, porque 76 × 76 = 5.776. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √7.056 = ?",
+   "opcoes": [
+    "84",
+    "83",
+    "3.528",
+    "85"
+   ],
+   "correta": "84",
+   "explica": "√7.056 = 84, porque 84 × 84 = 7.056. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √6.241 = ?",
+   "opcoes": [
+    "3.120",
+    "78",
+    "80",
+    "79"
+   ],
+   "correta": "79",
+   "explica": "√6.241 = 79, porque 79 × 79 = 6.241. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √3.721 = ?",
+   "opcoes": [
+    "61",
+    "1.860",
+    "60",
+    "62"
+   ],
+   "correta": "61",
+   "explica": "√3.721 = 61, porque 61 × 61 = 3.721. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √9.604 = ?",
+   "opcoes": [
+    "98",
+    "4.802",
+    "97",
+    "99"
+   ],
+   "correta": "98",
+   "explica": "√9.604 = 98, porque 98 × 98 = 9.604. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √5.329 = ?",
+   "opcoes": [
+    "2.664",
+    "73",
+    "74",
+    "72"
+   ],
+   "correta": "73",
+   "explica": "√5.329 = 73, porque 73 × 73 = 5.329. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √2.025 = ?",
+   "opcoes": [
+    "46",
+    "45",
+    "44",
+    "1.012"
+   ],
+   "correta": "45",
+   "explica": "√2.025 = 45, porque 45 × 45 = 2.025. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √9.409 = ?",
+   "opcoes": [
+    "96",
+    "4.704",
+    "97",
+    "98"
+   ],
+   "correta": "97",
+   "explica": "√9.409 = 97, porque 97 × 97 = 9.409. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √1.521 = ?",
+   "opcoes": [
+    "39",
+    "760",
+    "38",
+    "40"
+   ],
+   "correta": "39",
+   "explica": "√1.521 = 39, porque 39 × 39 = 1.521. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √1.764 = ?",
+   "opcoes": [
+    "882",
+    "43",
+    "41",
+    "42"
+   ],
+   "correta": "42",
+   "explica": "√1.764 = 42, porque 42 × 42 = 1.764. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √4.225 = ?",
+   "opcoes": [
+    "2.112",
+    "65",
+    "64",
+    "66"
+   ],
+   "correta": "65",
+   "explica": "√4.225 = 65, porque 65 × 65 = 4.225. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √1.024 = ?",
+   "opcoes": [
+    "32",
+    "33",
+    "512",
+    "31"
+   ],
+   "correta": "32",
+   "explica": "√1.024 = 32, porque 32 × 32 = 1.024. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √8.649 = ?",
+   "opcoes": [
+    "4.324",
+    "93",
+    "94",
+    "92"
+   ],
+   "correta": "93",
+   "explica": "√8.649 = 93, porque 93 × 93 = 8.649. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √9.801 = ?",
+   "opcoes": [
+    "4.900",
+    "100",
+    "98",
+    "99"
+   ],
+   "correta": "99",
+   "explica": "√9.801 = 99, porque 99 × 99 = 9.801. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √7.744 = ?",
+   "opcoes": [
+    "87",
+    "88",
+    "3.872",
+    "89"
+   ],
+   "correta": "88",
+   "explica": "√7.744 = 88, porque 88 × 88 = 7.744. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √5.476 = ?",
+   "opcoes": [
+    "73",
+    "2.738",
+    "74",
+    "75"
+   ],
+   "correta": "74",
+   "explica": "√5.476 = 74, porque 74 × 74 = 5.476. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz quadrada (centena e milhar): √4.356 = ?",
+   "opcoes": [
+    "2.178",
+    "67",
+    "66",
+    "65"
+   ],
+   "correta": "66",
+   "explica": "√4.356 = 66, porque 66 × 66 = 4.356. Raiz não é a metade!"
+  },
+  {
+   "pergunta": "Raiz de fração: √(1/4) = ?",
+   "opcoes": [
+    "2/2",
+    "1/2",
+    "1/3",
+    "1/4"
+   ],
+   "correta": "1/2",
+   "explica": "√1 = 1 e √4 = 2; então √(1/4) = 1/2."
+  },
+  {
+   "pergunta": "Raiz de fração: √(1/9) = ?",
+   "opcoes": [
+    "1/3",
+    "2/3",
+    "1/4",
+    "1/9"
+   ],
+   "correta": "1/3",
+   "explica": "√1 = 1 e √9 = 3; então √(1/9) = 1/3."
+  },
+  {
+   "pergunta": "Raiz de fração: √(4/9) = ?",
+   "opcoes": [
+    "4/3",
+    "2/3",
+    "2/9",
+    "2/4"
+   ],
+   "correta": "2/3",
+   "explica": "√4 = 2 e √9 = 3; então √(4/9) = 2/3."
+  },
+  {
+   "pergunta": "Raiz de fração: √(1/16) = ?",
+   "opcoes": [
+    "1/8",
+    "1/4",
+    "2/4",
+    "1/16"
+   ],
+   "correta": "1/4",
+   "explica": "√1 = 1 e √16 = 4; então √(1/16) = 1/4."
+  },
+  {
+   "pergunta": "Raiz de fração: √(9/25) = ?",
+   "opcoes": [
+    "9/5",
+    "3/25",
+    "3/5",
+    "4/12"
+   ],
+   "correta": "3/5",
+   "explica": "√9 = 3 e √25 = 5; então √(9/25) = 3/5."
+  },
+  {
+   "pergunta": "Raiz de fração: √(16/25) = ?",
+   "opcoes": [
+    "8/12",
+    "4/25",
+    "16/5",
+    "4/5"
+   ],
+   "correta": "4/5",
+   "explica": "√16 = 4 e √25 = 5; então √(16/25) = 4/5."
+  },
+  {
+   "pergunta": "Raiz de fração: √(25/36) = ?",
+   "opcoes": [
+    "25/6",
+    "12/18",
+    "5/6",
+    "5/36"
+   ],
+   "correta": "5/6",
+   "explica": "√25 = 5 e √36 = 6; então √(25/36) = 5/6."
+  },
+  {
+   "pergunta": "Raiz de fração: √(1/100) = ?",
+   "opcoes": [
+    "1/100",
+    "2/10",
+    "1/50",
+    "1/10"
+   ],
+   "correta": "1/10",
+   "explica": "√1 = 1 e √100 = 10; então √(1/100) = 1/10."
+  },
+  {
+   "pergunta": "Raiz de fração: √(49/64) = ?",
+   "opcoes": [
+    "49/8",
+    "7/8",
+    "7/64",
+    "24/32"
+   ],
+   "correta": "7/8",
+   "explica": "√49 = 7 e √64 = 8; então √(49/64) = 7/8."
+  },
+  {
+   "pergunta": "Raiz de fração: √(64/81) = ?",
+   "opcoes": [
+    "8/81",
+    "32/40",
+    "8/9",
+    "64/9"
+   ],
+   "correta": "8/9",
+   "explica": "√64 = 8 e √81 = 9; então √(64/81) = 8/9."
+  },
+  {
+   "pergunta": "Raiz de fração: √(4/49) = ?",
+   "opcoes": [
+    "2/7",
+    "2/49",
+    "4/7",
+    "2/24"
+   ],
+   "correta": "2/7",
+   "explica": "√4 = 2 e √49 = 7; então √(4/49) = 2/7."
+  },
+  {
+   "pergunta": "Raiz de fração: √(9/100) = ?",
+   "opcoes": [
+    "9/10",
+    "4/50",
+    "3/100",
+    "3/10"
+   ],
+   "correta": "3/10",
+   "explica": "√9 = 3 e √100 = 10; então √(9/100) = 3/10."
+  },
+  {
+   "pergunta": "Raiz de fração: √(81/100) = ?",
+   "opcoes": [
+    "9/100",
+    "40/50",
+    "81/10",
+    "9/10"
+   ],
+   "correta": "9/10",
+   "explica": "√81 = 9 e √100 = 10; então √(81/100) = 9/10."
+  },
+  {
+   "pergunta": "Raiz de fração: √(25/144) = ?",
+   "opcoes": [
+    "5/12",
+    "5/144",
+    "12/72",
+    "25/12"
+   ],
+   "correta": "5/12",
+   "explica": "√25 = 5 e √144 = 12; então √(25/144) = 5/12."
+  },
+  {
+   "pergunta": "Raiz de fração: √(16/121) = ?",
+   "opcoes": [
+    "8/60",
+    "4/121",
+    "4/11",
+    "16/11"
+   ],
+   "correta": "4/11",
+   "explica": "√16 = 4 e √121 = 11; então √(16/121) = 4/11."
+  },
+  {
+   "pergunta": "Raiz de fração: √(1/81) = ?",
+   "opcoes": [
+    "1/9",
+    "2/9",
+    "1/81",
+    "1/40"
+   ],
+   "correta": "1/9",
+   "explica": "√1 = 1 e √81 = 9; então √(1/81) = 1/9."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,01 = ?",
+   "opcoes": [
+    "0,005",
+    "0,1",
+    "1",
+    "0,01"
+   ],
+   "correta": "0,1",
+   "explica": "0,1 × 0,1 = 0,01, então √0,01 = 0,1 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,04 = ?",
+   "opcoes": [
+    "0,2",
+    "0,02",
+    "2",
+    "0,3"
+   ],
+   "correta": "0,2",
+   "explica": "0,2 × 0,2 = 0,04, então √0,04 = 0,2 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,16 = ?",
+   "opcoes": [
+    "0,4",
+    "0,04",
+    "0,08",
+    "4"
+   ],
+   "correta": "0,4",
+   "explica": "0,4 × 0,4 = 0,16, então √0,16 = 0,4 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,36 = ?",
+   "opcoes": [
+    "0,18",
+    "0,6",
+    "0,06",
+    "6"
+   ],
+   "correta": "0,6",
+   "explica": "0,6 × 0,6 = 0,36, então √0,36 = 0,6 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,64 = ?",
+   "opcoes": [
+    "8",
+    "0,32",
+    "0,08",
+    "0,8"
+   ],
+   "correta": "0,8",
+   "explica": "0,8 × 0,8 = 0,64, então √0,64 = 0,8 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √0,81 = ?",
+   "opcoes": [
+    "0,09",
+    "0,405",
+    "9",
+    "0,9"
+   ],
+   "correta": "0,9",
+   "explica": "0,9 × 0,9 = 0,81, então √0,81 = 0,9 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √1,21 = ?",
+   "opcoes": [
+    "1,1",
+    "0,605",
+    "11",
+    "0,11"
+   ],
+   "correta": "1,1",
+   "explica": "1,1 × 1,1 = 1,21, então √1,21 = 1,1 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √1,69 = ?",
+   "opcoes": [
+    "13",
+    "0,845",
+    "0,13",
+    "1,3"
+   ],
+   "correta": "1,3",
+   "explica": "1,3 × 1,3 = 1,69, então √1,69 = 1,3 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √2,25 = ?",
+   "opcoes": [
+    "0,15",
+    "15",
+    "1,5",
+    "1,125"
+   ],
+   "correta": "1,5",
+   "explica": "1,5 × 1,5 = 2,25, então √2,25 = 1,5 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √2,56 = ?",
+   "opcoes": [
+    "16",
+    "1,6",
+    "0,16",
+    "1,28"
+   ],
+   "correta": "1,6",
+   "explica": "1,6 × 1,6 = 2,56, então √2,56 = 1,6 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Raiz de decimal: √6,25 = ?",
+   "opcoes": [
+    "2,5",
+    "3,125",
+    "25",
+    "0,25"
+   ],
+   "correta": "2,5",
+   "explica": "2,5 × 2,5 = 6,25, então √6,25 = 2,5 (o radicando tem o dobro de casas decimais)."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √154 está entre:",
+   "opcoes": [
+    "11 e 12",
+    "76 e 77",
+    "13 e 14",
+    "12 e 13"
+   ],
+   "correta": "12 e 13",
+   "explica": "12² = 144 e 13² = 169; como 144 < 154 < 169, √154 está entre 12 e 13."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √364 está entre:",
+   "opcoes": [
+    "19 e 20",
+    "181 e 182",
+    "20 e 21",
+    "18 e 19"
+   ],
+   "correta": "19 e 20",
+   "explica": "19² = 361 e 20² = 400; como 361 < 364 < 400, √364 está entre 19 e 20."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √133 está entre:",
+   "opcoes": [
+    "65 e 66",
+    "10 e 11",
+    "12 e 13",
+    "11 e 12"
+   ],
+   "correta": "11 e 12",
+   "explica": "11² = 121 e 12² = 144; como 121 < 133 < 144, √133 está entre 11 e 12."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √103 está entre:",
+   "opcoes": [
+    "10 e 11",
+    "11 e 12",
+    "9 e 10",
+    "50 e 51"
+   ],
+   "correta": "10 e 11",
+   "explica": "10² = 100 e 11² = 121; como 100 < 103 < 121, √103 está entre 10 e 11."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √186 está entre:",
+   "opcoes": [
+    "13 e 14",
+    "12 e 13",
+    "92 e 93",
+    "14 e 15"
+   ],
+   "correta": "13 e 14",
+   "explica": "13² = 169 e 14² = 196; como 169 < 186 < 196, √186 está entre 13 e 14."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √243 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "15 e 16",
+    "16 e 17",
+    "120 e 121"
+   ],
+   "correta": "15 e 16",
+   "explica": "15² = 225 e 16² = 256; como 225 < 243 < 256, √243 está entre 15 e 16."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √282 está entre:",
+   "opcoes": [
+    "140 e 141",
+    "15 e 16",
+    "17 e 18",
+    "16 e 17"
+   ],
+   "correta": "16 e 17",
+   "explica": "16² = 256 e 17² = 289; como 256 < 282 < 289, √282 está entre 16 e 17."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √311 está entre:",
+   "opcoes": [
+    "16 e 17",
+    "18 e 19",
+    "17 e 18",
+    "154 e 155"
+   ],
+   "correta": "17 e 18",
+   "explica": "17² = 289 e 18² = 324; como 289 < 311 < 324, √311 está entre 17 e 18."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √189 está entre:",
+   "opcoes": [
+    "13 e 14",
+    "14 e 15",
+    "12 e 13",
+    "93 e 94"
+   ],
+   "correta": "13 e 14",
+   "explica": "13² = 169 e 14² = 196; como 169 < 189 < 196, √189 está entre 13 e 14."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √185 está entre:",
+   "opcoes": [
+    "12 e 13",
+    "91 e 92",
+    "13 e 14",
+    "14 e 15"
+   ],
+   "correta": "13 e 14",
+   "explica": "13² = 169 e 14² = 196; como 169 < 185 < 196, √185 está entre 13 e 14."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √396 está entre:",
+   "opcoes": [
+    "19 e 20",
+    "20 e 21",
+    "18 e 19",
+    "197 e 198"
+   ],
+   "correta": "19 e 20",
+   "explica": "19² = 361 e 20² = 400; como 361 < 396 < 400, √396 está entre 19 e 20."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √362 está entre:",
+   "opcoes": [
+    "180 e 181",
+    "19 e 20",
+    "18 e 19",
+    "20 e 21"
+   ],
+   "correta": "19 e 20",
+   "explica": "19² = 361 e 20² = 400; como 361 < 362 < 400, √362 está entre 19 e 20."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √275 está entre:",
+   "opcoes": [
+    "16 e 17",
+    "17 e 18",
+    "15 e 16",
+    "136 e 137"
+   ],
+   "correta": "16 e 17",
+   "explica": "16² = 256 e 17² = 289; como 256 < 275 < 289, √275 está entre 16 e 17."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √228 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "113 e 114",
+    "16 e 17",
+    "15 e 16"
+   ],
+   "correta": "15 e 16",
+   "explica": "15² = 225 e 16² = 256; como 225 < 228 < 256, √228 está entre 15 e 16."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √180 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "13 e 14",
+    "12 e 13",
+    "89 e 90"
+   ],
+   "correta": "13 e 14",
+   "explica": "13² = 169 e 14² = 196; como 169 < 180 < 196, √180 está entre 13 e 14."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √107 está entre:",
+   "opcoes": [
+    "10 e 11",
+    "9 e 10",
+    "52 e 53",
+    "11 e 12"
+   ],
+   "correta": "10 e 11",
+   "explica": "10² = 100 e 11² = 121; como 100 < 107 < 121, √107 está entre 10 e 11."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √117 está entre:",
+   "opcoes": [
+    "10 e 11",
+    "9 e 10",
+    "11 e 12",
+    "57 e 58"
+   ],
+   "correta": "10 e 11",
+   "explica": "10² = 100 e 11² = 121; como 100 < 117 < 121, √117 está entre 10 e 11."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √260 está entre:",
+   "opcoes": [
+    "15 e 16",
+    "129 e 130",
+    "16 e 17",
+    "17 e 18"
+   ],
+   "correta": "16 e 17",
+   "explica": "16² = 256 e 17² = 289; como 256 < 260 < 289, √260 está entre 16 e 17."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √130 está entre:",
+   "opcoes": [
+    "12 e 13",
+    "11 e 12",
+    "10 e 11",
+    "64 e 65"
+   ],
+   "correta": "11 e 12",
+   "explica": "11² = 121 e 12² = 144; como 121 < 130 < 144, √130 está entre 11 e 12."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √378 está entre:",
+   "opcoes": [
+    "20 e 21",
+    "188 e 189",
+    "19 e 20",
+    "18 e 19"
+   ],
+   "correta": "19 e 20",
+   "explica": "19² = 361 e 20² = 400; como 361 < 378 < 400, √378 está entre 19 e 20."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √199 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "15 e 16",
+    "13 e 14",
+    "98 e 99"
+   ],
+   "correta": "14 e 15",
+   "explica": "14² = 196 e 15² = 225; como 196 < 199 < 225, √199 está entre 14 e 15."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √200 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "13 e 14",
+    "99 e 100",
+    "15 e 16"
+   ],
+   "correta": "14 e 15",
+   "explica": "14² = 196 e 15² = 225; como 196 < 200 < 225, √200 está entre 14 e 15."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √231 está entre:",
+   "opcoes": [
+    "15 e 16",
+    "16 e 17",
+    "14 e 15",
+    "114 e 115"
+   ],
+   "correta": "15 e 16",
+   "explica": "15² = 225 e 16² = 256; como 225 < 231 < 256, √231 está entre 15 e 16."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √327 está entre:",
+   "opcoes": [
+    "18 e 19",
+    "162 e 163",
+    "17 e 18",
+    "19 e 20"
+   ],
+   "correta": "18 e 19",
+   "explica": "18² = 324 e 19² = 361; como 324 < 327 < 361, √327 está entre 18 e 19."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √216 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "13 e 14",
+    "15 e 16",
+    "107 e 108"
+   ],
+   "correta": "14 e 15",
+   "explica": "14² = 196 e 15² = 225; como 196 < 216 < 225, √216 está entre 14 e 15."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √126 está entre:",
+   "opcoes": [
+    "11 e 12",
+    "10 e 11",
+    "62 e 63",
+    "12 e 13"
+   ],
+   "correta": "11 e 12",
+   "explica": "11² = 121 e 12² = 144; como 121 < 126 < 144, √126 está entre 11 e 12."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √95 está entre:",
+   "opcoes": [
+    "8 e 9",
+    "10 e 11",
+    "46 e 47",
+    "9 e 10"
+   ],
+   "correta": "9 e 10",
+   "explica": "9² = 81 e 10² = 100; como 81 < 95 < 100, √95 está entre 9 e 10."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √248 está entre:",
+   "opcoes": [
+    "14 e 15",
+    "15 e 16",
+    "16 e 17",
+    "123 e 124"
+   ],
+   "correta": "15 e 16",
+   "explica": "15² = 225 e 16² = 256; como 225 < 248 < 256, √248 está entre 15 e 16."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √314 está entre:",
+   "opcoes": [
+    "16 e 17",
+    "156 e 157",
+    "18 e 19",
+    "17 e 18"
+   ],
+   "correta": "17 e 18",
+   "explica": "17² = 289 e 18² = 324; como 289 < 314 < 324, √314 está entre 17 e 18."
+  },
+  {
+   "pergunta": "Estimativa: entre quais números inteiros está a raiz? √79 está entre:",
+   "opcoes": [
+    "8 e 9",
+    "7 e 8",
+    "9 e 10",
+    "38 e 39"
+   ],
+   "correta": "8 e 9",
+   "explica": "8² = 64 e 9² = 81; como 64 < 79 < 81, √79 está entre 8 e 9."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √184 ≈ ?",
+   "opcoes": [
+    "13",
+    "92",
+    "14",
+    "15"
+   ],
+   "correta": "14",
+   "explica": "13² = 169 e 14² = 196. 184 está mais perto de 196, então √184 ≈ 14."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √143 ≈ ?",
+   "opcoes": [
+    "71",
+    "11",
+    "13",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "11² = 121 e 12² = 144. 143 está mais perto de 144, então √143 ≈ 12."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √47 ≈ ?",
+   "opcoes": [
+    "23",
+    "7",
+    "8",
+    "6"
+   ],
+   "correta": "7",
+   "explica": "6² = 36 e 7² = 49. 47 está mais perto de 49, então √47 ≈ 7."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √15 ≈ ?",
+   "opcoes": [
+    "4",
+    "3",
+    "5",
+    "7"
+   ],
+   "correta": "4",
+   "explica": "3² = 9 e 4² = 16. 15 está mais perto de 16, então √15 ≈ 4."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √141 ≈ ?",
+   "opcoes": [
+    "11",
+    "12",
+    "13",
+    "70"
+   ],
+   "correta": "12",
+   "explica": "11² = 121 e 12² = 144. 141 está mais perto de 144, então √141 ≈ 12."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √110 ≈ ?",
+   "opcoes": [
+    "10",
+    "9",
+    "11",
+    "55"
+   ],
+   "correta": "10",
+   "explica": "10² = 100 e 11² = 121. 110 está mais perto de 100, então √110 ≈ 10."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √79 ≈ ?",
+   "opcoes": [
+    "10",
+    "9",
+    "39",
+    "8"
+   ],
+   "correta": "9",
+   "explica": "8² = 64 e 9² = 81. 79 está mais perto de 81, então √79 ≈ 9."
+  },
+  {
+   "pergunta": "Estimativa: a raiz fica mais perto de qual inteiro? √137 ≈ ?",
+   "opcoes": [
+    "11",
+    "13",
+    "12",
+    "68"
+   ],
+   "correta": "12",
+   "explica": "11² = 121 e 12² = 144. 137 está mais perto de 144, então √137 ≈ 12."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛1 = ?",
+   "opcoes": [
+    "2",
+    "1",
+    "3",
+    "0"
+   ],
+   "correta": "1",
+   "explica": "1 × 1 × 1 = 1, então ∛1 = 1."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛64 = ?",
+   "opcoes": [
+    "5",
+    "4",
+    "21",
+    "16"
+   ],
+   "correta": "4",
+   "explica": "4 × 4 × 4 = 64, então ∛64 = 4."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛125 = ?",
+   "opcoes": [
+    "6",
+    "25",
+    "5",
+    "42"
+   ],
+   "correta": "5",
+   "explica": "5 × 5 × 5 = 125, então ∛125 = 5."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛216 = ?",
+   "opcoes": [
+    "36",
+    "7",
+    "6",
+    "72"
+   ],
+   "correta": "6",
+   "explica": "6 × 6 × 6 = 216, então ∛216 = 6."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛343 = ?",
+   "opcoes": [
+    "49",
+    "7",
+    "8",
+    "114"
+   ],
+   "correta": "7",
+   "explica": "7 × 7 × 7 = 343, então ∛343 = 7."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛1.000 = ?",
+   "opcoes": [
+    "100",
+    "333",
+    "10",
+    "11"
+   ],
+   "correta": "10",
+   "explica": "10 × 10 × 10 = 1.000, então ∛1.000 = 10."
+  },
+  {
+   "pergunta": "Raiz cúbica: ∛1.728 = ?",
+   "opcoes": [
+    "12",
+    "13",
+    "144",
+    "576"
+   ],
+   "correta": "12",
+   "explica": "12 × 12 × 12 = 1.728, então ∛1.728 = 12."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √8 = ?",
+   "opcoes": [
+    "2√2",
+    "2√3",
+    "4√2",
+    "2√4"
+   ],
+   "correta": "2√2",
+   "explica": "8 = 4 × 2; √8 = √4 × √2 = 2√2."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √12 = ?",
+   "opcoes": [
+    "2√3",
+    "2√6",
+    "4√3",
+    "3√2"
+   ],
+   "correta": "2√3",
+   "explica": "12 = 4 × 3; √12 = √4 × √3 = 2√3."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √18 = ?",
+   "opcoes": [
+    "3√4",
+    "3√2",
+    "2√3",
+    "9√2"
+   ],
+   "correta": "3√2",
+   "explica": "18 = 9 × 2; √18 = √9 × √2 = 3√2."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √20 = ?",
+   "opcoes": [
+    "2√5",
+    "4√5",
+    "5√2",
+    "2√10"
+   ],
+   "correta": "2√5",
+   "explica": "20 = 4 × 5; √20 = √4 × √5 = 2√5."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √27 = ?",
+   "opcoes": [
+    "3√3",
+    "3√4",
+    "9√3",
+    "3√6"
+   ],
+   "correta": "3√3",
+   "explica": "27 = 9 × 3; √27 = √9 × √3 = 3√3."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √32 = ?",
+   "opcoes": [
+    "4√2",
+    "2√4",
+    "4√4",
+    "16√2"
+   ],
+   "correta": "4√2",
+   "explica": "32 = 16 × 2; √32 = √16 × √2 = 4√2."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √28 = ?",
+   "opcoes": [
+    "7√2",
+    "4√7",
+    "2√14",
+    "2√7"
+   ],
+   "correta": "2√7",
+   "explica": "28 = 4 × 7; √28 = √4 × √7 = 2√7."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √50 = ?",
+   "opcoes": [
+    "5√4",
+    "5√2",
+    "25√2",
+    "2√5"
+   ],
+   "correta": "5√2",
+   "explica": "50 = 25 × 2; √50 = √25 × √2 = 5√2."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √45 = ?",
+   "opcoes": [
+    "9√5",
+    "5√3",
+    "3√5",
+    "3√10"
+   ],
+   "correta": "3√5",
+   "explica": "45 = 9 × 5; √45 = √9 × √5 = 3√5."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √48 = ?",
+   "opcoes": [
+    "3√4",
+    "16√3",
+    "4√6",
+    "4√3"
+   ],
+   "correta": "4√3",
+   "explica": "48 = 16 × 3; √48 = √16 × √3 = 4√3."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √72 = ?",
+   "opcoes": [
+    "6√4",
+    "2√6",
+    "6√2",
+    "36√2"
+   ],
+   "correta": "6√2",
+   "explica": "72 = 36 × 2; √72 = √36 × √2 = 6√2."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √75 = ?",
+   "opcoes": [
+    "5√6",
+    "5√3",
+    "25√3",
+    "3√5"
+   ],
+   "correta": "5√3",
+   "explica": "75 = 25 × 3; √75 = √25 × √3 = 5√3."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √24 = ?",
+   "opcoes": [
+    "2√12",
+    "4√6",
+    "2√6",
+    "6√2"
+   ],
+   "correta": "2√6",
+   "explica": "24 = 4 × 6; √24 = √4 × √6 = 2√6."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √63 = ?",
+   "opcoes": [
+    "3√7",
+    "7√3",
+    "9√7",
+    "3√14"
+   ],
+   "correta": "3√7",
+   "explica": "63 = 9 × 7; √63 = √9 × √7 = 3√7."
+  },
+  {
+   "pergunta": "Simplifique o radical (9º ano): √200 = ?",
+   "opcoes": [
+    "10√2",
+    "2√10",
+    "10√4",
+    "100√2"
+   ],
+   "correta": "10√2",
+   "explica": "200 = 100 × 2; √200 = √100 × √2 = 10√2."
+  },
+  {
+   "pergunta": "Expressão: √4 + √9 = ?",
+   "opcoes": [
+    "5",
+    "7",
+    "6",
+    "3"
+   ],
+   "correta": "5",
+   "explica": "√4 = 2 e √9 = 3; 2 + 3 = 5. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √16 + √9 = ?",
+   "opcoes": [
+    "7",
+    "8",
+    "5",
+    "12"
+   ],
+   "correta": "7",
+   "explica": "√16 = 4 e √9 = 3; 4 + 3 = 7. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √25 + √4 = ?",
+   "opcoes": [
+    "5",
+    "7",
+    "10",
+    "14"
+   ],
+   "correta": "7",
+   "explica": "√25 = 5 e √4 = 2; 5 + 2 = 7. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √100 + √49 = ?",
+   "opcoes": [
+    "70",
+    "12",
+    "17",
+    "74"
+   ],
+   "correta": "17",
+   "explica": "√100 = 10 e √49 = 7; 10 + 7 = 17. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √64 + √36 = ?",
+   "opcoes": [
+    "10",
+    "50",
+    "48",
+    "14"
+   ],
+   "correta": "14",
+   "explica": "√64 = 8 e √36 = 6; 8 + 6 = 14. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √121 + √1 = ?",
+   "opcoes": [
+    "13",
+    "11",
+    "61",
+    "12"
+   ],
+   "correta": "12",
+   "explica": "√121 = 11 e √1 = 1; 11 + 1 = 12. Não se somam os radicandos!"
+  },
+  {
+   "pergunta": "Expressão: √4 × √9 = ?",
+   "opcoes": [
+    "36",
+    "5",
+    "6",
+    "7"
+   ],
+   "correta": "6",
+   "explica": "√4 × √9 = 2 × 3 = 6 (também é √36)."
+  },
+  {
+   "pergunta": "Expressão: √25 × √4 = ?",
+   "opcoes": [
+    "7",
+    "11",
+    "100",
+    "10"
+   ],
+   "correta": "10",
+   "explica": "√25 × √4 = 5 × 2 = 10 (também é √100)."
+  },
+  {
+   "pergunta": "Expressão: √16 × √25 = ?",
+   "opcoes": [
+    "20",
+    "21",
+    "400",
+    "9"
+   ],
+   "correta": "20",
+   "explica": "√16 × √25 = 4 × 5 = 20 (também é √400)."
+  },
+  {
+   "pergunta": "Expressão: √9 × √49 = ?",
+   "opcoes": [
+    "10",
+    "441",
+    "21",
+    "22"
+   ],
+   "correta": "21",
+   "explica": "√9 × √49 = 3 × 7 = 21 (também é √441)."
+  },
+  {
+   "pergunta": "Expressão: √144 ÷ √16 = ?",
+   "opcoes": [
+    "8",
+    "4",
+    "3",
+    "9"
+   ],
+   "correta": "3",
+   "explica": "√144 = 12 e √16 = 4; 12 ÷ 4 = 3."
+  },
+  {
+   "pergunta": "Expressão: √100 ÷ √4 = ?",
+   "opcoes": [
+    "2",
+    "8",
+    "25",
+    "5"
+   ],
+   "correta": "5",
+   "explica": "√100 = 10 e √4 = 2; 10 ÷ 2 = 5."
+  },
+  {
+   "pergunta": "Expressão: √81 ÷ √9 = ?",
+   "opcoes": [
+    "6",
+    "3",
+    "4",
+    "9"
+   ],
+   "correta": "3",
+   "explica": "√81 = 9 e √9 = 3; 9 ÷ 3 = 3."
+  },
+  {
+   "pergunta": "Expressão: √196 ÷ √49 = ?",
+   "opcoes": [
+    "4",
+    "2",
+    "7",
+    "3"
+   ],
+   "correta": "2",
+   "explica": "√196 = 14 e √49 = 7; 14 ÷ 7 = 2."
+  },
+  {
+   "pergunta": "Pegadinha: √(9 + 16) = ?",
+   "opcoes": [
+    "25",
+    "12",
+    "7",
+    "5"
+   ],
+   "correta": "5",
+   "explica": "Primeiro resolve dentro da raiz: 9 + 16 = 25; √25 = 5. É diferente de √9 + √16 = 7."
+  },
+  {
+   "pergunta": "Pegadinha: √(36 + 64) = ?",
+   "opcoes": [
+    "14",
+    "100",
+    "50",
+    "10"
+   ],
+   "correta": "10",
+   "explica": "Primeiro resolve dentro da raiz: 36 + 64 = 100; √100 = 10. É diferente de √36 + √64 = 14."
+  },
+  {
+   "pergunta": "Pegadinha: √(25 + 144) = ?",
+   "opcoes": [
+    "84",
+    "169",
+    "17",
+    "13"
+   ],
+   "correta": "13",
+   "explica": "Primeiro resolve dentro da raiz: 25 + 144 = 169; √169 = 13. É diferente de √25 + √144 = 17."
+  },
+  {
+   "pergunta": "Atenção ao sinal de fora: −√9 = ?",
+   "opcoes": [
+    "−3",
+    "3",
+    "não existe",
+    "−4"
+   ],
+   "correta": "−3",
+   "explica": "Primeiro a raiz: √9 = 3; com o sinal de fora fica −3. (Diferente de √(−9), que não existe nos reais.)"
+  },
+  {
+   "pergunta": "Atenção ao sinal de fora: −√25 = ?",
+   "opcoes": [
+    "5",
+    "−5",
+    "−12",
+    "não existe"
+   ],
+   "correta": "−5",
+   "explica": "Primeiro a raiz: √25 = 5; com o sinal de fora fica −5. (Diferente de √(−25), que não existe nos reais.)"
+  },
+  {
+   "pergunta": "Atenção ao sinal de fora: −√100 = ?",
+   "opcoes": [
+    "−10",
+    "−50",
+    "não existe",
+    "10"
+   ],
+   "correta": "−10",
+   "explica": "Primeiro a raiz: √100 = 10; com o sinal de fora fica −10. (Diferente de √(−100), que não existe nos reais.)"
+  },
+  {
+   "pergunta": "Atenção ao sinal de fora: −√49 = ?",
+   "opcoes": [
+    "−24",
+    "7",
+    "−7",
+    "não existe"
+   ],
+   "correta": "−7",
+   "explica": "Primeiro a raiz: √49 = 7; com o sinal de fora fica −7. (Diferente de √(−49), que não existe nos reais.)"
+  },
+  {
+   "pergunta": "Problema: A área de um tapete quadrado é 81 m². Quanto mede cada lado?",
+   "opcoes": [
+    "20 m",
+    "18 m",
+    "9 m",
+    "40 m"
+   ],
+   "correta": "9 m",
+   "explica": "Lado = √área = √81 = 9 m."
+  },
+  {
+   "pergunta": "Problema: A área de uma quadra quadrada é 100 m². Quanto mede cada lado?",
+   "opcoes": [
+    "25 m",
+    "20 m",
+    "10 m",
+    "50 m"
+   ],
+   "correta": "10 m",
+   "explica": "Lado = √área = √100 = 10 m."
+  },
+  {
+   "pergunta": "Problema: A área de um terreno quadrado é 225 m². Quanto mede cada lado?",
+   "opcoes": [
+    "30 m",
+    "56 m",
+    "15 m",
+    "112 m"
+   ],
+   "correta": "15 m",
+   "explica": "Lado = √área = √225 = 15 m."
+  },
+  {
+   "pergunta": "Problema: A área de um azulejo quadrado (em cm²) é 36 m². Quanto mede cada lado?",
+   "opcoes": [
+    "6 m",
+    "12 m",
+    "9 m",
+    "18 m"
+   ],
+   "correta": "6 m",
+   "explica": "Lado = √área = √36 = 6 m."
+  },
+  {
+   "pergunta": "Problema: A área de uma praça quadrada é 400 m². Quanto mede cada lado?",
+   "opcoes": [
+    "200 m",
+    "100 m",
+    "20 m",
+    "40 m"
+   ],
+   "correta": "20 m",
+   "explica": "Lado = √área = √400 = 20 m."
+  },
+  {
+   "pergunta": "Problema: A área de um jardim quadrado é 169 m². Quanto mede cada lado?",
+   "opcoes": [
+    "84 m",
+    "42 m",
+    "13 m",
+    "26 m"
+   ],
+   "correta": "13 m",
+   "explica": "Lado = √área = √169 = 13 m."
+  },
+  {
+   "pergunta": "Problema: A área de um campo quadrado é 900 m². Quanto mede cada lado?",
+   "opcoes": [
+    "225 m",
+    "450 m",
+    "30 m",
+    "60 m"
+   ],
+   "correta": "30 m",
+   "explica": "Lado = √área = √900 = 30 m."
+  },
+  {
+   "pergunta": "Problema: A área de uma fazendinha quadrada é 2.500 m². Quanto mede cada lado?",
+   "opcoes": [
+    "50 m",
+    "1250 m",
+    "100 m",
+    "625 m"
+   ],
+   "correta": "50 m",
+   "explica": "Lado = √área = √2.500 = 50 m."
+  },
+  {
+   "pergunta": "Problema: Um quadrado tem área 64 cm². Qual é o perímetro?",
+   "opcoes": [
+    "16 cm",
+    "33 cm",
+    "8 cm",
+    "32 cm"
+   ],
+   "correta": "32 cm",
+   "explica": "Lado = √64 = 8 cm; perímetro = 4 × 8 = 32 cm."
+  },
+  {
+   "pergunta": "Problema: Um quadrado tem área 121 cm². Qual é o perímetro?",
+   "opcoes": [
+    "30 cm",
+    "22 cm",
+    "11 cm",
+    "44 cm"
+   ],
+   "correta": "44 cm",
+   "explica": "Lado = √121 = 11 cm; perímetro = 4 × 11 = 44 cm."
+  },
+  {
+   "pergunta": "Problema: Um quadrado tem área 196 cm². Qual é o perímetro?",
+   "opcoes": [
+    "14 cm",
+    "49 cm",
+    "28 cm",
+    "56 cm"
+   ],
+   "correta": "56 cm",
+   "explica": "Lado = √196 = 14 cm; perímetro = 4 × 14 = 56 cm."
+  },
+  {
+   "pergunta": "Problema: Um quadrado tem área 324 cm². Qual é o perímetro?",
+   "opcoes": [
+    "81 cm",
+    "18 cm",
+    "36 cm",
+    "72 cm"
+   ],
+   "correta": "72 cm",
+   "explica": "Lado = √324 = 18 cm; perímetro = 4 × 18 = 72 cm."
+  },
+  {
+   "pergunta": "Problema: Uma caixa cúbica tem volume de 125 cm³. Quanto mede a aresta?",
+   "opcoes": [
+    "15 cm",
+    "41 cm",
+    "25 cm",
+    "5 cm"
+   ],
+   "correta": "5 cm",
+   "explica": "Aresta = ∛125 = 5 cm, porque 5 × 5 × 5 = 125."
+  },
+  {
+   "pergunta": "Problema: A sala tem 64 lajotas quadradas formando um quadrado. Quantas lajotas há em cada fila?",
+   "opcoes": [
+    "8",
+    "16",
+    "6",
+    "32"
+   ],
+   "correta": "8",
+   "explica": "√64 = 8 lajotas por fila."
   }
  ]
 }

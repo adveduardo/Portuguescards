@@ -27,86 +27,86 @@
  "desafios": {
   "pot": [
    {
-    "texto": "Potência de decimal: (0,1)² = ?",
-    "resposta": "0,01"
+    "texto": "Atenção aos parênteses: −3² = ?",
+    "resposta": "-9"
    },
    {
-    "texto": "Calcule a potência: 10³ = ?",
-    "resposta": "1.000"
+    "texto": "Calcule a potência: 1⁹ = ?",
+    "resposta": "1"
+   },
+   {
+    "texto": "Todo número (diferente de zero) elevado a zero é: 5⁰ = ?",
+    "resposta": "1"
    },
    {
     "texto": "Calcule a potência: 6² = ?",
     "resposta": "36"
    },
    {
+    "texto": "Calcule a potência: 5² = ?",
+    "resposta": "25"
+   },
+   {
+    "texto": "Leitura: Como se lê 7² ?",
+    "resposta": "sete ao quadrado"
+   },
+   {
+    "texto": "Potência de decimal: (0,5)² = ?",
+    "resposta": "0,25"
+   },
+   {
     "texto": "Calcule a potência: 2⁴ = ?",
     "resposta": "16"
    },
    {
-    "texto": "Calcule a potência: 5³ = ?",
-    "resposta": "125"
+    "texto": "Calcule a potência: 3⁴ = ?",
+    "resposta": "81"
    },
    {
-    "texto": "Potência de fração: (2/3)² = ?",
-    "resposta": "4/9"
-   },
-   {
-    "texto": "Calcule a potência: 2³ = ?",
-    "resposta": "8"
-   },
-   {
-    "texto": "Todo número elevado a 1 é ele mesmo: 37¹ = ?",
-    "resposta": "37"
-   },
-   {
-    "texto": "Calcule a potência: 3³ = ?",
-    "resposta": "27"
-   },
-   {
-    "texto": "Propriedade: divisão de potências de mesma base (subtrai os expoentes): 5⁸ : 5³ = ?",
-    "resposta": "5⁵"
+    "texto": "Propriedade: multiplicação de potências de mesma base (soma os expoentes): 2³ × 2⁴ = ?",
+    "resposta": "2⁷"
    }
   ],
   "raiz": [
    {
-    "texto": "Raiz de fração: √(4/25) = ?",
-    "resposta": "2/5"
+    "texto": "Expressão: √100 ÷ √4 = ?",
+    "resposta": "5"
    },
    {
-    "texto": "Calcule a raiz quadrada: √225 = ?",
-    "resposta": "15"
+    "texto": "Raiz quadrada (centena e milhar): √8.649 = ?",
+    "resposta": "93"
    },
    {
-    "texto": "Problema: Uma horta quadrada tem 144 m². Quanto mede cada lado?",
-    "resposta": "12 m"
-   },
-   {
-    "texto": "Calcule a raiz quadrada: √121 = ?",
-    "resposta": "11"
-   },
-   {
-    "texto": "Expressão: 3 × √49 = ?",
-    "resposta": "21"
-   },
-   {
-    "texto": "Calcule a raiz quadrada: √1 = ?",
-    "resposta": "1"
-   },
-   {
-    "texto": "Calcule a raiz quadrada: √100 = ?",
+    "texto": "Pegadinha: √(36 + 64) = ?",
     "resposta": "10"
    },
    {
-    "texto": "Calcule a raiz quadrada: √64 = ?",
-    "resposta": "8"
+    "texto": "Problema: A área de um campo quadrado é 900 m². Quanto mede cada lado?",
+    "resposta": "30 m"
    },
    {
-    "texto": "Raiz de fração: √(1/49) = ?",
-    "resposta": "1/7"
+    "texto": "Raiz de decimal: √1,69 = ?",
+    "resposta": "1,3"
    },
    {
-    "texto": "Estimativa: entre quais números inteiros está a raiz? √30 está entre:",
-    "resposta": "5 e 6"
+    "texto": "Raiz de dezena redonda (milhar): √2.500 = ?",
+    "resposta": "50"
+   },
+   {
+    "texto": "Expressão: √144 ÷ √16 = ?",
+    "resposta": "3"
+   },
+   {
+    "texto": "Expressão: √100 + √49 = ?",
+    "resposta": "17"
+   },
+   {
+    "texto": "Raiz de fração: √(1/16) = ?",
+    "resposta": "1/4"
+   },
+   {
+    "texto": "Quadrado perfeito: Qual destes é um quadrado perfeito?",
+    "resposta": "81"
    }
   ],
   "media": [
@@ -115,40 +115,40 @@
     "resposta": "8"
    },
    {
-    "texto": "A média de 5 números é 8. Qual é a soma deles?",
-    "resposta": "40"
-   },
-   {
-    "texto": "Um aluno tirou 4, 6 e 7. Que nota precisa no 4º bimestre para ter média 6?",
-    "resposta": "7"
-   },
-   {
-    "texto": "Um aluno tirou 6, 7 e 8. Que nota precisa no 4º bimestre para ter média 7?",
-    "resposta": "7"
-   },
-   {
-    "texto": "Qual é a média de 3, 5 e 7?",
-    "resposta": "5"
+    "texto": "Qual é a média de 1, 2, 3, 4 e 5?",
+    "resposta": "3"
    },
    {
     "texto": "Bia tirou as notas 10, 8, 9 e 9 nos quatro bimestres. Qual é a média?",
     "resposta": "9"
    },
    {
-    "texto": "Qual é a média de 20, 30 e 40?",
-    "resposta": "30"
+    "texto": "Qual é a média de 5, 10 e 15?",
+    "resposta": "10"
    },
    {
     "texto": "As temperaturas da semana foram 30, 28, 32 °C. Qual é a temperatura média?",
     "resposta": "30 °C"
    },
    {
-    "texto": "Qual é a média de 6, 6 e 9?",
-    "resposta": "7"
+    "texto": "Ana tirou as notas 7, 8, 9 e 8 nos quatro bimestres. Qual é a média?",
+    "resposta": "8"
    },
    {
     "texto": "Uma loja vendeu R$ 150, R$ 200 e R$ 250 em três dias. Qual foi a média por dia? (em reais)",
     "resposta": "200"
+   },
+   {
+    "texto": "Qual é a média das idades: 30, 40, 50 anos?",
+    "resposta": "40 anos"
+   },
+   {
+    "texto": "Para calcular a média aritmética, nós:",
+    "resposta": "somamos todos os valores e dividimos pela quantidade"
+   },
+   {
+    "texto": "A média de 10, 10, 10 e 10 é:",
+    "resposta": "10"
    }
   ],
   "mente": [

@@ -59,6 +59,7 @@
     <label><input type="checkbox" id="chkTexto" checked> Mostrar a pergunta e as alternativas também nos iPads</label>
     <label><input type="checkbox" id="chkEmbaralhar"> Embaralhar a ordem das perguntas</label>
     <label><input type="checkbox" id="chkEmbaralharOp"> Embaralhar as alternativas</label>
+    <label>Quantas perguntas: <select id="selQtdPerg"><option value="0" selected>todas</option><option value="10">10 sorteadas</option><option value="15">15 sorteadas</option><option value="20">20 sorteadas</option><option value="30">30 sorteadas</option></select></label>
     <label>Tempo por pergunta:
       <select id="selTempo">
         <option value="json" selected>o que está no JSON</option>
@@ -149,12 +150,14 @@ function normalizarQuiz(d){
     if (correta < 0 || correta >= opcoes.length){ console.warn('Pergunta sem resposta correta válida:', p); return; }
     lista.push({pergunta: String(p.pergunta), opcoes, correta, imagem: p.imagem || '', tempo: +p.tempo || padrao});
   });
-  return {titulo: d.titulo || 'Quiz', perguntas: lista, ignoradas: d.perguntas.length - lista.length};
+  return {titulo: d.titulo || 'Quiz', perguntas: lista, ignoradas: d.perguntas.length - lista.length, sortear: +d.sortear || 0};
 }
 function carregar(d, origem){
   const q = normalizarQuiz(d);
   if (!q || !q.perguntas.length){ AV.avisar('JSON inválido: confira "perguntas", "opcoes" e "correta".'); return; }
   quiz = q;
+  // banco grande: o JSON pode pedir sorteio ("sortear": 20) e já deixa embaralhado
+  if (q.sortear){ $('selQtdPerg').value = String(q.sortear); if ($('selQtdPerg').value !== String(q.sortear)) $('selQtdPerg').value = '20'; $('chkEmbaralhar').checked = true; $('chkEmbaralharOp').checked = true; }
   $('infoJson').textContent = `${q.titulo} • ${q.perguntas.length} perguntas` + (q.ignoradas ? ` • ${q.ignoradas} ignorada(s) por erro no JSON` : '') + (origem ? ` • ${origem}` : '');
 }
 AV.prepararSeletorJson({tipo: 'quiz', select: $('selArquivo'), botaoAbrir: $('btnAbrirJson'), input: $('arquivoJson'), aoCarregar: carregar});
@@ -167,6 +170,8 @@ $('btnCriar').onclick = () => {
   if (!quiz) return AV.avisar('Carregue um JSON de perguntas.');
   AV.som = $('chkSom').checked;
   perguntas = $('chkEmbaralhar').checked ? embaralhar(quiz.perguntas) : quiz.perguntas.slice();
+  const qtdP = +$('selQtdPerg').value;
+  if (qtdP && qtdP < perguntas.length) perguntas = embaralhar(perguntas).slice(0, qtdP);
   if ($('chkEmbaralharOp').checked){
     perguntas = perguntas.map(p => {
       const ordem = embaralhar(p.opcoes.map((_, i) => i));
