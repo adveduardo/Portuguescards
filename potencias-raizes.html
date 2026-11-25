@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potências e Raízes</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#f1f5ff;color:#1f2937}
+  .pag{max-width:1100px;margin:0 auto;padding:14px 16px 40px}
+  h1{text-align:center;color:#1f3a68;font-size:clamp(1.5rem,3.6vw,2.4rem);margin:4px 0}
+  .sub{text-align:center;color:#4b5563;margin:0 0 12px}
+  .tela{display:none}.tela.ativa{display:block}
+  .caixa{background:#fff;border-radius:18px;padding:14px 16px;margin:0 auto 12px;max-width:980px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .caixa h2{margin:0 0 10px;font-size:1.12rem;color:#1f3a68}
+  .opcoes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+  .op{border:3px solid transparent;background:#f6f8fc;border-radius:14px;padding:10px;text-align:left;cursor:pointer;font:inherit;color:#1f2937}
+  .op b{display:block}.op small{color:#6b7280}
+  .op.sel{border-color:#1f3a68;background:#eaf1ff}
+  .linha{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  select{font:inherit;font-size:16px;border:2px solid #cbd5e1;border-radius:10px;padding:7px 10px;background:#fff}
+  .bt{border:none;border-radius:12px;padding:11px 18px;font:inherit;font-weight:bold;font-size:16px;cursor:pointer;background:#1f3a68;color:#fff;margin:3px}
+  .bt.ouro{background:#ffd54a;color:#1a1a1a}.bt.claro{background:#fff;color:#1f3a68;border:2px solid #cbd5e1}.bt.verde{background:#15803d}
+  .centro{text-align:center}
+  #exemplos{text-align:center;color:#1f3a68;font-size:1.15rem;margin-top:8px}
+  .m{font-family:"Cambria Math","Times New Roman",serif}
+  sup{font-size:.6em}
+  .raiz{white-space:nowrap}.raiz .rad{border-top:.07em solid currentColor;padding:0 .08em}
+  .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.05;margin:0 .1em}
+  .frac span:first-child{border-bottom:.06em solid currentColor;padding:0 .15em}
+  #placar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px}
+  .chip{background:#fff;border-radius:999px;padding:6px 14px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  #cartao{background:#fff;border-radius:22px;padding:22px;max-width:900px;margin:0 auto;box-shadow:0 6px 20px rgba(0,0,0,.08);text-align:center}
+  #enun{color:#6b7280;font-size:1.1rem}
+  #pergunta{font-size:clamp(2.4rem,7vw,4.6rem);margin:8px 0;color:#1f3a68}
+  #visor{font-size:2.2rem;min-height:56px;border:3px solid #cbd5e1;border-radius:14px;padding:6px 14px;display:inline-block;min-width:240px;font-weight:bold;background:#fafcff}
+  #teclado{display:grid;grid-template-columns:repeat(5,60px);gap:6px;justify-content:center;margin:10px auto}
+  #teclado button{height:52px;border:none;border-radius:12px;font:bold 22px inherit;cursor:pointer;background:#eef2f9;color:#1f3a68}
+  #teclado button.esp{background:#1f3a68;color:#fff}
+  #alternativas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:640px;margin:12px auto}
+  #alternativas button{border:3px solid #dbe4f3;background:#fff;border-radius:16px;padding:14px;font:bold clamp(1.3rem,3vw,1.9rem) "Cambria Math","Times New Roman",serif;cursor:pointer;color:#1f2937}
+  #alternativas button.certa{border-color:#16a34a;background:#dcfce7}#alternativas button.errada{border-color:#dc2626;background:#fee2e2}
+  #msg{font-size:1.25rem;font-weight:bold;min-height:30px;margin:10px 0}
+  #explica{color:#374151;font-size:1.1rem;min-height:24px}
+  #folha{display:none}
+  @media print{
+    body{background:#fff}.pag{display:none}#folha{display:block;font-family:Arial,sans-serif;color:#000}
+    #folha .cab{border-bottom:2px solid #000;margin-bottom:10px;padding-bottom:6px}#folha h2{margin:0 0 4px}
+    #folha ol{columns:3;column-gap:24px;font-size:18px;line-height:2.6}#folha li{break-inside:avoid}
+    #folha .gab{break-before:page}#folha .gab ol{font-size:14px;line-height:1.8;columns:2}
+  }
+</style>
+</head>
+<body>
+<div class="pag">
+<div class="tela ativa" id="tConfig">
+  <h1>🎛️ Potências e Raízes</h1>
+  <p class="sub">Monte a bateria do jeito da turma: operação, ano e tamanho dos números. Os exercícios são criados na hora, com explicação.</p>
+  <div class="caixa"><h2>1. Operação</h2><div class="opcoes" id="opOper">
+    <button type="button" class="op sel" data-v="pot"><b>🔺 Potências</b><small>quadrado, cubo e outras</small></button>
+    <button type="button" class="op" data-v="raiz"><b>✔️ Raiz quadrada</b><small>exatas, aproximadas e simplificação</small></button>
+    <button type="button" class="op" data-v="cubica"><b>🧊 Raiz cúbica</b><small>∛ de cubos perfeitos</small></button>
+    <button type="button" class="op" data-v="misto"><b>🎲 Misturado</b><small>potências e raízes</small></button>
+  </div></div>
+  <div class="caixa"><h2>2. Ano</h2><div class="opcoes" id="opAno">
+    <button type="button" class="op sel" data-v="6"><b>6º ano</b><small>números naturais, quadrado e cubo, raízes exatas</small></button>
+    <button type="button" class="op" data-v="7"><b>7º ano</b><small>bases negativas, expoente 0 e 1, potências de 10</small></button>
+    <button type="button" class="op" data-v="8"><b>8º ano</b><small>frações e decimais, raiz aproximada</small></button>
+    <button type="button" class="op" data-v="9"><b>9º ano</b><small>expoente negativo, simplificar radicais</small></button>
+  </div></div>
+  <div class="caixa"><h2>3. Tamanho dos números</h2><div class="opcoes" id="opTam">
+    <button type="button" class="op sel" data-v="d"><b>Dezena</b><small>resultados ou radicandos de 10 a 99</small></button>
+    <button type="button" class="op" data-v="c"><b>Centena</b><small>de 100 a 999</small></button>
+    <button type="button" class="op" data-v="m"><b>Milhar</b><small>de 1.000 a 9.999</small></button>
+  </div>
+  <div id="exemplos"></div></div>
+  <div class="caixa"><h2>4. Como responder</h2>
+    <div class="linha">
+      <select id="selResp"><option value="digitar">✏️ Digitar a resposta (teclado na tela)</option><option value="escolha">🔘 Escolher entre 4 alternativas</option></select>
+      <label>Quantidade: <select id="selQtd"><option>10</option><option selected>15</option><option>20</option><option>30</option></select></label>
+    </div></div>
+  <div class="centro"><button type="button" class="bt ouro" id="btComecar" style="font-size:20px;padding:14px 28px">▶️ Começar a bateria</button><button type="button" class="bt claro" id="btImprimir">🖨️ Imprimir lista com gabarito</button></div>
+</div>
+
+<div class="tela" id="tJogo">
+  <div id="placar"></div>
+  <div id="cartao">
+    <div id="enun"></div>
+    <div id="pergunta" class="m"></div>
+    <div id="areaDigitar">
+      <div id="visor" class="m"></div>
+      <div id="teclado"></div>
+      <button type="button" class="bt verde" id="btConferir">✅ Conferir</button>
+    </div>
+    <div id="alternativas"></div>
+    <div id="msg"></div>
+    <div id="explica"></div>
+    <button type="button" class="bt ouro" id="btProxima" style="display:none">➡️ Próxima</button>
+  </div>
+  <div class="centro" style="margin-top:12px"><button type="button" class="bt claro" id="btSair">⚙️ Trocar as opções</button></div>
+</div>
+
+<div class="tela" id="tFim">
+  <h1>🏆 Bateria concluída!</h1>
+  <div class="caixa centro" id="resumo" style="font-size:1.3rem"></div>
+  <div class="centro"><button type="button" class="bt ouro" id="btDeNovo">🔁 Nova bateria</button><button type="button" class="bt claro" id="btConfig">⚙️ Trocar as opções</button></div>
+</div>
+</div>
+<div id="folha"></div>
+
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pega = l => l[Math.floor(Math.random() * l.length)];
+const fmt = n => (n < 0 ? '−' : '') + Math.abs(n).toLocaleString('pt-BR', {maximumFractionDigits: 6});
+const mdc = (a, b) => b ? mdc(b, a % b) : Math.abs(a);
+const FAIXA = {d: [10, 99], c: [100, 999], m: [1000, 9999]};
+const sup = e => `<sup>${String(e).replace('-', '−')}</sup>`;
+const raizH = (n, ind) => `<span class="raiz">${ind === 3 ? '∛' : '√'}<span class="rad">${n}</span></span>`;
+const fracH = (a, b) => `<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const dec = (n, casas) => (n / Math.pow(10, casas)).toLocaleString('pt-BR', {minimumFractionDigits: casas, maximumFractionDigits: casas});
+
+// Cada gerador devolve {enun, html, resp (texto canônico), aceitas:[...], explica, erradas:[...]}
+function potNatural(tam){
+  const [lo, hi] = FAIXA[tam], op = [];
+  for (let b = 2; b <= 99; b++) for (let e = 2; e <= 9; e++){ const v = Math.pow(b, e); if (v >= lo && v <= hi) op.push([b, e]); }
+  const [b, e] = pega(op), v = Math.pow(b, e);
+  return {enun: 'Calcule a potência:', html: `${b}${sup(e)} = ?`, resp: fmt(v), explica: `${b}${sup(e)} = ${Array(e).fill(b).join(' × ')} = ${fmt(v)}. Cuidado: não é ${b} × ${e} = ${b * e}.`, erradas: [fmt(b * e), fmt(v + b), fmt(Math.pow(b, e - 1)), fmt(v * b)]};
+}
+function raizExata(tam){
+  const [lo, hi] = FAIXA[tam], op = []; for (let r = 2; r * r <= hi; r++) if (r * r >= lo) op.push(r);
+  const r = pega(op), n = r * r;
+  return {enun: 'Calcule a raiz quadrada:', html: `${raizH(fmt(n))} = ?`, resp: fmt(r), explica: `√${fmt(n)} = ${r}, porque ${r} × ${r} = ${fmt(n)}. Raiz não é a metade!`, erradas: [fmt(Math.round(n / 2)), fmt(r + 1), fmt(r - 1), fmt(r * 2)]};
+}
+function raizCubica(tam){
+  const [lo, hi] = FAIXA[tam], op = []; for (let r = 2; r * r * r <= hi; r++) if (r * r * r >= lo) op.push(r);
+  const r = pega(op), n = r * r * r;
+  return {enun: 'Calcule a raiz cúbica:', html: `${raizH(fmt(n), 3)} = ?`, resp: fmt(r), explica: `∛${fmt(n)} = ${r}, porque ${r} × ${r} × ${r} = ${fmt(n)}.`, erradas: [fmt(Math.round(n / 3)), fmt(r + 1), fmt(r - 1), fmt(r * 3)]};
+}
+function pot7(tam){
+  const [lo, hi] = FAIXA[tam], tipo = pega(['neg', 'neg', 'semParenteses', 'zeroUm', 'dez']);
+  if (tipo === 'zeroUm'){ const b = ri(lo, hi), e = pega([0, 1]); return {enun: 'Lembre: expoente 0 e expoente 1.', html: `${fmt(b)}${sup(e)} = ?`, resp: fmt(e ? b : 1), explica: e ? `Todo número elevado a 1 é ele mesmo: ${fmt(b)}.` : 'Todo número diferente de zero elevado a 0 vale 1.', erradas: e ? ['1', '0', fmt(b * 10)] : ['0', fmt(b), '10']}; }
+  if (tipo === 'dez'){ const z = String(lo).length - 1 + ri(0, 1), v = Math.pow(10, z); return {enun: 'Potência de 10: conte os zeros.', html: `10${sup(z)} = ?`, resp: fmt(v), explica: `10${sup(z)} é o 1 seguido de ${z} zeros: ${fmt(v)}.`, erradas: [fmt(10 * z), fmt(v * 10), fmt(v / 10), fmt(v * 100)].filter(x => x !== fmt(v))}; }
+  const op = []; for (let b = 2; b <= 99; b++) for (let e = 2; e <= 7; e++){ const v = Math.pow(b, e); if (v >= lo && v <= hi) op.push([b, e]); }
+  const [b, e] = pega(op), v = Math.pow(-b, e);
+  if (tipo === 'semParenteses') return {enun: 'Atenção: sem parênteses, o sinal fica de fora.', html: `−${b}${sup(e)} = ?`, resp: fmt(-Math.pow(b, e)), explica: `−${b}${sup(e)} = −(${b}${sup(e)}) = ${fmt(-Math.pow(b, e))}. Só com parênteses o negativo entra na potência.`, erradas: [fmt(Math.pow(b, e)), fmt(-b * e), fmt(b * e)]};
+  return {enun: 'Potência com base negativa:', html: `(−${b})${sup(e)} = ?`, resp: fmt(v), explica: `Expoente ${e % 2 ? 'ímpar mantém o sinal negativo' : 'par deixa o resultado positivo'}: (−${b})${sup(e)} = ${fmt(v)}.`, erradas: [fmt(-v), fmt(-b * e), fmt(b * e)]};
+}
+function raiz7(tam){
+  const x = raizExata(tam);
+  if (Math.random() < .4){ const r = +x.resp.replace(/\./g, ''), n = r * r; return {enun: 'Atenção ao sinal de fora da raiz:', html: `−${raizH(fmt(n))} = ?`, resp: fmt(-r), explica: `A raiz de ${fmt(n)} é ${r}; com o sinal de fora, fica ${fmt(-r)}.`, erradas: [fmt(r), fmt(-Math.round(n / 2)), fmt(-(r + 1))]}; }
+  return x;
+}
+function pot8(tam){
+  const [lo, hi] = FAIXA[tam];
+  if (Math.random() < .5){   // fração
+    const op = []; for (let b = 2; b <= 99; b++) for (let e = 2; e <= 3; e++){ const v = Math.pow(b, e); if (v >= lo && v <= hi) op.push([b, e]); }
+    const [b, e] = pega(op); let a = ri(1, b - 1); while (mdc(a, b) !== 1) a = ri(1, b - 1);
+    const A = Math.pow(a, e), B = Math.pow(b, e);
+    return {enun: 'Potência de fração: eleve o numerador e o denominador.', html: `(${fracH(a, b)})${sup(e)} = ?`, resp: `${fmt(A)}/${fmt(B)}`, explica: `(${a}/${b})${sup(e)} = ${a}${sup(e)}/${b}${sup(e)} = ${fmt(A)}/${fmt(B)}.`, erradas: [`${fmt(a * e)}/${fmt(b * e)}`, `${fmt(a)}/${fmt(B)}`, `${fmt(A)}/${fmt(b)}`]};
+  }
+  // decimal: (n/10)² com n² na faixa
+  const op = []; for (let n = 2; n * n <= hi; n++) if (n * n >= lo && n % 10) op.push(n);
+  const n = pega(op), q = n * n;
+  return {enun: 'Potência de decimal: o resultado tem o dobro de casas decimais.', html: `(${dec(n, 1)})${sup(2)} = ?`, resp: dec(q, 2), explica: `${dec(n, 1)} × ${dec(n, 1)} = ${dec(q, 2)} (1 casa + 1 casa = 2 casas).`, erradas: [dec(q, 1), dec(n * 2, 1), dec(q, 3)]};
+}
+function raiz8(tam){
+  const [lo, hi] = FAIXA[tam], t = pega(['frac', 'dec', 'aprox', 'aprox']);
+  if (t === 'aprox'){
+    let n; do { n = ri(lo, hi); } while (Number.isInteger(Math.sqrt(n)));
+    const a = Math.floor(Math.sqrt(n));
+    return {enun: 'Raiz aproximada: entre quais números inteiros está?', html: `${raizH(fmt(n))} está entre`, resp: `${a} e ${a + 1}`, explica: `${a}² = ${fmt(a * a)} e ${a + 1}² = ${fmt((a + 1) * (a + 1))}. Como ${fmt(a * a)} < ${fmt(n)} < ${fmt((a + 1) * (a + 1))}, a raiz está entre ${a} e ${a + 1}.`, erradas: [`${a - 1} e ${a}`, `${a + 1} e ${a + 2}`, `${Math.floor(n / 2) - 1} e ${Math.floor(n / 2)}`], soEscolha: true};
+  }
+  const op = []; for (let r = 2; r * r <= hi; r++) if (r * r >= lo) op.push(r);
+  const r = pega(op);
+  if (t === 'frac'){ let a = ri(1, Math.min(r - 1, 12)); while (mdc(a, r) !== 1) a = ri(1, r - 1);
+    return {enun: 'Raiz de fração: tire a raiz de cima e a de baixo.', html: `${raizH(fracH(a * a, fmt(r * r)))} = ?`, resp: `${a}/${r}`, explica: `√${a * a} = ${a} e √${fmt(r * r)} = ${r}; então a raiz é ${a}/${r}.`, erradas: [`${a * a}/${r}`, `${a}/${fmt(r * r)}`, `${Math.round(a * a / 2)}/${Math.round(r * r / 2)}`]}; }
+  return {enun: 'Raiz de decimal:', html: `${raizH(dec(r * r, 2))} = ?`, resp: dec(r, 1), explica: `${dec(r, 1)} × ${dec(r, 1)} = ${dec(r * r, 2)}.`, erradas: [dec(r, 2), dec(r * r, 1), fmt(r)]};
+}
+function pot9(tam){
+  const [lo, hi] = FAIXA[tam];
+  if (Math.random() < .55){
+    const op = []; for (let b = 2; b <= 99; b++) for (let e = 2; e <= 7; e++){ const v = Math.pow(b, e); if (v >= lo && v <= hi) op.push([b, e]); }
+    const [b, e] = pega(op), v = Math.pow(b, e);
+    return {enun: 'Expoente negativo: inverta a base.', html: `${b}${sup(-e)} = ?`, resp: `1/${fmt(v)}`, explica: `${b}${sup(-e)} = 1/${b}${sup(e)} = 1/${fmt(v)}. O expoente negativo não deixa o número negativo!`, erradas: [fmt(-v), `−1/${fmt(v)}`, `1/${fmt(b * e)}`]};
+  }
+  return potNatural(tam);
+}
+function raiz9(tam){
+  const [lo, hi] = FAIXA[tam], op = [];
+  for (const m of [2, 3, 5, 6, 7, 10]) for (let k = 2; k * k * m <= hi; k++) if (k * k * m >= lo) op.push([k, m]);
+  const [k, m] = pega(op), n = k * k * m;
+  return {enun: 'Simplifique o radical (fatore e tire o quadrado perfeito):', html: `${raizH(fmt(n))} = ?`, resp: `${k}√${m}`, explica: `${fmt(n)} = ${k * k} × ${m}, então √${fmt(n)} = √${k * k} × √${m} = ${k}√${m}.`, erradas: [`${m}√${k}`, `${k * k}√${m}`, `${k}√${m * 2}`]};
+}
+const GERA = {
+  pot: {6: potNatural, 7: pot7, 8: pot8, 9: pot9},
+  raiz: {6: raizExata, 7: raiz7, 8: raiz8, 9: raiz9},
+  cubica: {6: raizCubica, 7: raizCubica, 8: raizCubica, 9: raizCubica}
+};
+function gerarUm(oper, ano, tam){
+  const o = oper === 'misto' ? pega(['pot', 'pot', 'raiz', 'raiz', 'cubica']) : oper;
+  const g = GERA[o][ano](tam);
+  g.erradas = g.erradas.filter((e, i, l) => e !== g.resp && l.indexOf(e) === i);
+  return g;
+}
+
+// ---------- configuração ----------
+const cfg = {oper: 'pot', ano: '6', tam: 'd'};
+try { Object.assign(cfg, JSON.parse(localStorage.getItem('potraiz_cfg') || '{}')); } catch (e) {}
+[['opOper', 'oper'], ['opAno', 'ano'], ['opTam', 'tam']].forEach(([id, k]) => {
+  $(id).querySelectorAll('.op').forEach(b => b.classList.toggle('sel', b.dataset.v === cfg[k]));
+  $(id).onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; cfg[k] = b.dataset.v; $(id).querySelectorAll('.op').forEach(x => x.classList.toggle('sel', x === b)); exemplos(); };
+});
+function exemplos(){ const l = []; for (let i = 0; i < 4; i++){ const g = gerarUm(cfg.oper, cfg.ano, cfg.tam); l.push(`<span class="m">${g.html.replace(' = ?', '').replace(' está entre', '')}</span>`); } $('exemplos').innerHTML = 'Exemplos: ' + l.join(' &nbsp;•&nbsp; '); }
+exemplos();
+
+function montarLista(){
+  const qtd = +$('selQtd').value, l = [], vistos = new Set();
+  for (let t = 0; t < qtd * 8 && l.length < qtd; t++){ const g = gerarUm(cfg.oper, cfg.ano, cfg.tam); if (!vistos.has(g.html)){ vistos.add(g.html); l.push(g); } }
+  return l;
+}
+// ---------- bateria ----------
+let lista = [], idx = 0, acertos = 0, atual = null, visor = '', respondida = false;
+const tela = id => document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === id));
+const norm = t => String(t).replace(/\s/g, '').replace(/[−–]/g, '-').replace(/\.(?=\d{3}(\D|$))/g, '').replace(/[vV]/g, '√').replace(/^\+/, '').toLowerCase();
+$('btComecar').onclick = () => {
+  try { localStorage.setItem('potraiz_cfg', JSON.stringify(cfg)); } catch (e) {}
+  lista = montarLista(); idx = 0; acertos = 0; tela('tJogo'); mostrar();
+};
+const TECLAS = ['7', '8', '9', '√', '⌫', '4', '5', '6', '/', '−', '1', '2', '3', ',', 'e', '0', '00', '000', 'C', ' '];
+$('teclado').innerHTML = TECLAS.map(k => k === ' ' ? '<span></span>' : `<button type="button" class="${/[√⌫\/−,eC]/.test(k) && k.length === 1 ? 'esp' : ''}" data-k="${k}">${k === 'e' ? ' e ' : k}</button>`).join('');
+$('teclado').onclick = ev => { const b = ev.target.closest('[data-k]'); if (!b || respondida) return; const k = b.dataset.k;
+  if (k === '⌫') visor = visor.slice(0, -1); else if (k === 'C') visor = ''; else if (k === 'e') visor += ' e '; else visor += k;
+  $('visor').textContent = visor; };
+document.addEventListener('keydown', ev => {
+  if (!$('tJogo').classList.contains('ativa') || respondida || $('areaDigitar').style.display === 'none') return;
+  if (/^[0-9\/,√e]$/.test(ev.key)) visor += ev.key === 'e' ? ' e ' : ev.key;
+  else if (ev.key === '-') visor += '−'; else if (ev.key === 'Backspace') visor = visor.slice(0, -1); else if (ev.key === 'Enter') return conferir(); else return;
+  $('visor').textContent = visor; ev.preventDefault();
+});
+function placar(){ $('placar').innerHTML = `<span class="chip">${{pot: '🔺 Potências', raiz: '✔️ Raiz quadrada', cubica: '🧊 Raiz cúbica', misto: '🎲 Misturado'}[cfg.oper]} • ${cfg.ano}º ano • ${{d: 'dezena', c: 'centena', m: 'milhar'}[cfg.tam]}</span><span class="chip">📝 ${idx + 1} de ${lista.length}</span><span class="chip">✅ ${acertos}</span>`; }
+function mostrar(){
+  atual = lista[idx]; respondida = false; visor = '';
+  $('enun').textContent = atual.enun; $('pergunta').innerHTML = atual.html; $('visor').textContent = '';
+  $('msg').textContent = ''; $('explica').innerHTML = ''; $('btProxima').style.display = 'none';
+  const escolha = $('selResp').value === 'escolha' || atual.soEscolha;
+  $('areaDigitar').style.display = escolha ? 'none' : '';
+  if (escolha){
+    const ops = [atual.resp]; atual.erradas.forEach(e => { if (ops.length < 4 && !ops.includes(e) && e !== atual.resp) ops.push(e); });
+    let k = 1; while (ops.length < 4){ const extra = atual.resp.replace(/\d+$/, d => String(+d + k++)); if (!ops.includes(extra)) ops.push(extra); }
+    ops.sort(() => Math.random() - .5);
+    $('alternativas').innerHTML = ops.map(o => `<button type="button" data-o="${o}">${o.replace(/\//g, ' / ')}</button>`).join('');
+  } else $('alternativas').innerHTML = '';
+  placar();
+}
+$('alternativas').onclick = ev => { const b = ev.target.closest('[data-o]'); if (!b || respondida) return; corrigir(b.dataset.o, b); };
+function conferir(){ if (respondida || !visor.trim()) return; corrigir(visor); }
+$('btConferir').onclick = conferir;
+function corrigir(dada, botao){
+  respondida = true;
+  const ok = norm(dada) === norm(atual.resp);
+  if (ok) acertos++;
+  if (botao){ $('alternativas').querySelectorAll('button').forEach(b => { if (b.dataset.o === atual.resp) b.classList.add('certa'); }); if (!ok) botao.classList.add('errada'); }
+  $('msg').innerHTML = ok ? '🎉 Acertou!' : `❌ A resposta é <b>${atual.resp}</b>.`;
+  $('msg').style.color = ok ? '#15803d' : '#b91c1c';
+  $('explica').innerHTML = '💡 ' + atual.explica;
+  $('btProxima').style.display = ''; placar();
+}
+$('btProxima').onclick = () => { idx++; if (idx < lista.length) mostrar(); else { tela('tFim'); $('resumo').innerHTML = `✅ ${acertos} de ${lista.length} acertos (${Math.round(100 * acertos / lista.length)}%)`; } };
+$('btSair').onclick = () => tela('tConfig'); $('btConfig').onclick = () => tela('tConfig');
+$('btDeNovo').onclick = () => $('btComecar').onclick();
+// ---------- impressão ----------
+$('btImprimir').onclick = () => {
+  const l = montarLista();
+  $('folha').innerHTML = `<div class="cab"><h2>${{pot: 'Potências', raiz: 'Raiz quadrada', cubica: 'Raiz cúbica', misto: 'Potências e raízes'}[cfg.oper]} • ${cfg.ano}º ano • ${{d: 'dezena', c: 'centena', m: 'milhar'}[cfg.tam]}</h2>Nome: ________________________________ Turma: ______ Data: ___/___/______</div>
+    <ol>${l.map(g => `<li><span class="m">${g.html.replace(' = ?', ' = ______').replace(' está entre', ' está entre ___ e ___')}</span></li>`).join('')}</ol>
+    <div class="gab"><h2>Gabarito</h2><ol>${l.map(g => `<li><b>${g.resp}</b> — ${g.explica}</li>`).join('')}</ol></div>`;
+  window.print();
+};
+window.POTRAIZ = {gerarUm, cfg, estado: () => ({lista, idx, acertos, atual})};
+})();
+</script>
+</body>
+</html>

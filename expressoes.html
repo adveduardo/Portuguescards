@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expressões Numéricas</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:#eef3fb;color:#1f2937}
+  .pag{max-width:1150px;margin:0 auto;padding:14px 16px 40px}
+  h1{text-align:center;color:#1f3a68;font-size:clamp(1.5rem,3.6vw,2.4rem);margin:4px 0}
+  .sub{text-align:center;color:#4b5563;margin:0 0 12px}
+  .tela{display:none}.tela.ativa{display:block}
+  .caixa{background:#fff;border-radius:18px;padding:14px 16px;margin:0 auto 12px;max-width:980px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .caixa h2{margin:0 0 10px;font-size:1.12rem;color:#1f3a68}
+  .opcoes{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}
+  .op{border:3px solid transparent;background:#f6f8fc;border-radius:14px;padding:10px;text-align:left;cursor:pointer;font:inherit;color:#1f2937}
+  .op b{display:block}.op small{color:#6b7280}
+  .op.sel{border-color:#1f3a68;background:#eaf1ff}
+  .linha{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  select,input[type=text]{font:inherit;font-size:16px;border:2px solid #cbd5e1;border-radius:10px;padding:7px 10px;background:#fff}
+  .bt{border:none;border-radius:12px;padding:11px 18px;font:inherit;font-weight:bold;font-size:16px;cursor:pointer;background:#1f3a68;color:#fff;margin:3px}
+  .bt.ouro{background:#ffd54a;color:#1a1a1a}.bt.claro{background:#fff;color:#1f3a68;border:2px solid #cbd5e1}.bt.verde{background:#15803d}
+  .centro{text-align:center}
+  .exemplo{font-size:1.25rem;text-align:center;margin-top:8px;color:#1f3a68}
+  /* expressão */
+  .expr{font-family:"Cambria Math","Times New Roman",serif;font-size:clamp(1.6rem,4.6vw,3.2rem);text-align:center;line-height:1.6;word-spacing:.05em}
+  .expr .tk{display:inline-block;padding:0 .08em;border-radius:10px;transition:background .2s,transform .2s}
+  .expr .op{margin:0 .18em;color:#1f3a68;font-weight:bold}
+  .expr .gr{color:#7c3aed;font-weight:bold}
+  .expr .alvo{background:#fff3b0;box-shadow:0 0 0 3px #f2c94c}
+  .expr .tocavel{cursor:pointer}
+  .expr .tocavel:hover{background:#e0ecff}
+  .expr .erro{background:#fecaca;animation:treme .35s}
+  .expr .novo{background:#bbf7d0;animation:pulo .5s}
+  @keyframes treme{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  @keyframes pulo{50%{transform:scale(1.25)}}
+  sup{font-size:.6em}
+  .raiz{white-space:nowrap}.raiz .rad{border-top:.07em solid currentColor;padding:0 .05em}
+  #placar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px}
+  .chip{background:#fff;border-radius:999px;padding:6px 14px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  #cartao{background:#fff;border-radius:22px;padding:20px 22px;max-width:1100px;margin:0 auto;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+  #resposta{font-size:2rem;width:min(320px,80%);text-align:center;font-weight:bold;border:3px solid #cbd5e1;border-radius:14px;padding:8px}
+  #msg{text-align:center;font-size:1.25rem;font-weight:bold;min-height:32px;margin:10px 0}
+  #passos{max-width:900px;margin:10px auto 0;display:none}
+  #passos .ps{display:flex;gap:10px;align-items:center;border-bottom:1px dashed #d1d9e6;padding:6px 0}
+  #passos .ps .n{min-width:110px;font-size:.9rem;color:#6b7280}
+  #passos .ps .expr{font-size:clamp(1.1rem,2.6vw,1.7rem);text-align:left}
+  #dica{color:#6b7280;text-align:center}
+  /* impressão */
+  #folha{display:none}
+  @media print{
+    body{background:#fff}.pag{display:none}#folha{display:block;font-family:Arial,sans-serif;color:#000}
+    #folha h2{margin:0 0 4px}#folha .cab{border-bottom:2px solid #000;margin-bottom:10px;padding-bottom:6px}
+    #folha ol{columns:2;column-gap:30px;font-size:16px;line-height:2.1}
+    #folha li{break-inside:avoid;margin-bottom:14px}
+    #folha .expr{font-size:18px;text-align:left;line-height:1.5}
+    #folha .gab{break-before:page}
+    #folha .gab .expr{font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="pag">
+<div class="tela ativa" id="tConfig">
+  <h1>🧮 Expressões Numéricas</h1>
+  <p class="sub">Escolha a dificuldade e o modo. As contas são criadas na hora, sempre com resultado inteiro e com passo a passo.</p>
+  <div class="caixa"><h2>1. Dificuldade</h2><div class="opcoes" id="opNivel"></div><div class="exemplo" id="exemploNivel"></div></div>
+  <div class="caixa"><h2>2. Tamanho dos números</h2>
+    <div class="linha"><select id="selTam"><option value="d">Dezena (até 99)</option><option value="c">Centena (até 999)</option><option value="m">Milhar (até 9.999)</option></select>
+    <label>Quantidade: <select id="selQtd"><option>5</option><option selected>10</option><option>15</option><option>20</option><option>30</option></select></label></div></div>
+  <div class="caixa"><h2>3. Modo</h2><div class="opcoes" id="opModo">
+    <button type="button" class="op sel" data-v="bateria"><b>📝 Bateria de exercícios</b><small>Digitem o resultado; depois vejam o passo a passo.</small></button>
+    <button type="button" class="op" data-v="ordem"><b>👆 Detetive da ordem</b><small>Toquem na operação que vem primeiro: a expressão se resolve passo a passo.</small></button>
+    <button type="button" class="op" data-v="imprimir"><b>🖨️ Lista para imprimir</b><small>Exercícios numerados e gabarito com a resolução.</small></button>
+  </div></div>
+  <div class="centro"><button type="button" class="bt ouro" id="btComecar" style="font-size:20px;padding:14px 28px">▶️ Começar</button></div>
+  <div class="caixa" style="margin-top:14px"><h2>📌 Ordem para resolver</h2>
+    <p style="margin:0;line-height:1.5">1️⃣ Primeiro o que está dentro dos <b>parênteses ( )</b>, depois dos <b>colchetes [ ]</b> e por último das <b>chaves { }</b>.<br>
+    2️⃣ Dentro de cada um: <b>potências e raízes</b> → <b>multiplicações e divisões</b> (na ordem em que aparecem) → <b>adições e subtrações</b> (na ordem em que aparecem).</p></div>
+</div>
+
+<div class="tela" id="tJogo">
+  <div id="placar"></div>
+  <div id="cartao">
+    <div id="dica"></div>
+    <div class="expr" id="expr"></div>
+    <div id="areaResp" class="centro" style="margin-top:10px">
+      <input type="text" id="resposta" inputmode="numeric" autocomplete="off" placeholder="resultado">
+      <div><button type="button" class="bt verde" id="btConferir">✅ Conferir</button><button type="button" class="bt claro" id="btPassos">🪜 Ver o passo a passo</button></div>
+    </div>
+    <div id="msg"></div>
+    <div id="passos"></div>
+    <div class="centro"><button type="button" class="bt ouro" id="btProxima" style="display:none">➡️ Próxima</button></div>
+  </div>
+  <div class="centro" style="margin-top:12px"><button type="button" class="bt claro" id="btSair">⚙️ Trocar a dificuldade</button></div>
+</div>
+
+<div class="tela" id="tFim">
+  <h1>🏆 Bateria concluída!</h1>
+  <div class="caixa centro" id="resumo" style="font-size:1.3rem"></div>
+  <div class="centro"><button type="button" class="bt ouro" id="btDeNovo">🔁 Nova bateria</button><button type="button" class="bt claro" id="btConfig">⚙️ Trocar a dificuldade</button></div>
+</div>
+</div>
+<div id="folha"></div>
+
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const ri = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pega = l => l[Math.floor(Math.random() * l.length)];
+const fmt = n => (n < 0 ? '−' : '') + Math.abs(n).toLocaleString('pt-BR');
+
+// ---------- níveis ----------
+const NIVEIS = [
+  {n: 1, nome: 'Nível 1', ano: '6º ano', desc: 'Adição e subtração', ops: ['+', '−'], nops: [2, 3], grupos: 0},
+  {n: 2, nome: 'Nível 2', ano: '6º ano', desc: 'As quatro operações (× e ÷ primeiro)', ops: ['+', '−', '×', '÷'], nops: [2, 3], grupos: 0, exigeMult: true},
+  {n: 3, nome: 'Nível 3', ano: '6º ano', desc: 'Com parênteses ( )', ops: ['+', '−', '×', '÷'], nops: [3, 3], grupos: 1},
+  {n: 4, nome: 'Nível 4', ano: '6º ano', desc: 'Parênteses e colchetes [ ]', ops: ['+', '−', '×', '÷'], nops: [3, 4], grupos: 2},
+  {n: 5, nome: 'Nível 5', ano: '6º e 7º ano', desc: 'Parênteses, colchetes e chaves { }', ops: ['+', '−', '×', '÷'], nops: [4, 5], grupos: 3},
+  {n: 6, nome: 'Nível 6', ano: '6º e 7º ano', desc: 'Com potências e raízes', ops: ['+', '−', '×', '÷'], nops: [2, 3], grupos: 1, potencias: true},
+  {n: 7, nome: 'Nível 7', ano: '7º ano', desc: 'Números inteiros (negativos)', ops: ['+', '−', '×', '÷'], nops: [2, 3], grupos: 1, negativos: true},
+  {n: 8, nome: 'Nível 8', ano: '8º e 9º ano', desc: 'Desafio: tudo junto (chaves, potências, raízes e negativos)', ops: ['+', '−', '×', '÷'], nops: [3, 4], grupos: 2, potencias: true, negativos: true}
+];
+const TAM = {d: {lo: 2, hi: 20, max: 999, pequeno: 9}, c: {lo: 10, hi: 150, max: 9999, pequeno: 12}, m: {lo: 100, hi: 1500, max: 99999, pequeno: 15}};
+
+// ---------- tokens ----------
+// num {t:'num', v} | op {t:'op', v} | abre/fecha {t:'abre'|'fecha', v} | pot {t:'pot', b, e} | raiz {t:'raiz', n}
+function htmlToken(k, i, extra){
+  const cls = 'tk' + (extra || '');
+  if (k.t === 'num') return `<span class="${cls}" data-i="${i}">${k.v < 0 ? '(' + fmt(k.v) + ')' : fmt(k.v)}</span>`;
+  if (k.t === 'op') return `<span class="${cls} op" data-i="${i}">${k.v}</span>`;
+  if (k.t === 'abre' || k.t === 'fecha') return `<span class="${cls} gr" data-i="${i}">${k.v}</span>`;
+  if (k.t === 'pot') return `<span class="${cls}" data-i="${i}">${k.b < 0 ? '(' + fmt(k.b) + ')' : fmt(k.b)}<sup>${k.e}</sup></span>`;
+  if (k.t === 'raiz') return `<span class="${cls} raiz" data-i="${i}">√<span class="rad">${fmt(k.n)}</span></span>`;
+}
+const htmlExpr = (tks, marcas = {}) => tks.map((k, i) => htmlToken(k, i, marcas[i] || '')).join(' ');
+const valor = k => k.t === 'num' ? k.v : k.t === 'pot' ? Math.pow(k.b, k.e) : Math.round(Math.sqrt(k.n));
+
+// próximo passo da resolução: {ini, fim, novo, alvo, desc} (ini..fim é trocado por "novo")
+function proximoPasso(tks){
+  let j = tks.findIndex(k => k.t === 'fecha'), i = -1;
+  if (j >= 0){ for (let x = j - 1; x >= 0; x--) if (tks[x].t === 'abre'){ i = x; break; } }
+  const a = j >= 0 ? i + 1 : 0, b = j >= 0 ? j - 1 : tks.length - 1;
+  const nome = j >= 0 ? {'(': 'parênteses', '[': 'colchetes', '{': 'chaves'}[tks[i].v] : '';
+  if (j >= 0 && a === b && tks[a].t === 'num') return {ini: i, fim: j, novo: tks[a], alvo: -1, auto: true, desc: `Tira os ${nome}`};
+  for (let x = a; x <= b; x++) if (tks[x].t === 'pot' || tks[x].t === 'raiz'){
+    const v = valor(tks[x]);
+    return {ini: x, fim: x, novo: {t: 'num', v}, alvo: x, desc: tks[x].t === 'pot' ? `Potência: ${tks[x].b < 0 ? '(' + fmt(tks[x].b) + ')' : fmt(tks[x].b)}^${tks[x].e} = ${fmt(v)}` : `Raiz: √${fmt(tks[x].n)} = ${fmt(v)}`};
+  }
+  const conta = sinais => { for (let x = a; x <= b; x++) if (tks[x].t === 'op' && sinais.includes(tks[x].v)){
+    const p = tks[x - 1].v, q = tks[x + 1].v, o = tks[x].v;
+    const v = o === '+' ? p + q : o === '−' ? p - q : o === '×' ? p * q : p / q;
+    return {ini: x - 1, fim: x + 1, novo: {t: 'num', v}, alvo: x, desc: `${{'+': 'Adição', '−': 'Subtração', '×': 'Multiplicação', '÷': 'Divisão'}[o]}: ${fmt(p)} ${o} ${q < 0 ? '(' + fmt(q) + ')' : fmt(q)} = ${fmt(v)}`, ok: Number.isInteger(v)};
+  } return null; };
+  return conta(['×', '÷']) || conta(['+', '−']) || null;
+}
+function aplicar(tks, p){ return tks.slice(0, p.ini).concat([p.novo], tks.slice(p.fim + 1)); }
+function resolver(tks){   // lista de passos (ou null se der divisão não exata)
+  const passos = []; let atual = tks, guarda = 0;
+  while (!(atual.length === 1 && atual[0].t === 'num') && guarda++ < 60){
+    const p = proximoPasso(atual); if (!p || p.ok === false) return null;
+    atual = aplicar(atual, p); passos.push({p, depois: atual});
+  }
+  return passos;
+}
+
+// ---------- gerador ----------
+function folha(nv, tam){
+  if (nv.potencias && Math.random() < .4){
+    if (Math.random() < .5){ const b = ri(2, tam === 'd' ? 5 : 10), e = b <= 3 ? ri(2, 4) : b <= 5 ? ri(2, 3) : 2; return {t: 'pot', b: nv.negativos && Math.random() < .4 ? -b : b, e}; }
+    const r = ri(2, tam === 'd' ? 9 : tam === 'c' ? 15 : 30); return {t: 'raiz', n: r * r};
+  }
+  const T = TAM[tam]; let v = ri(T.lo, T.hi);
+  if (nv.negativos && Math.random() < .45) v = -v;
+  return {t: 'num', v};
+}
+function pequeno(nv, tam){ let v = ri(2, TAM[tam].pequeno); if (nv.negativos && Math.random() < .4) v = -v; return {t: 'num', v}; }
+const PREC = {'+': 1, '−': 1, '×': 2, '÷': 2};
+function gerarArvore(nv, tam){
+  let raiz = {folha: folha(nv, tam)};
+  const nops = ri(nv.nops[0], nv.nops[1]), nos = [];
+  for (let k = 0; k < nops; k++){
+    // escolhe uma folha qualquer e transforma em operação
+    const folhas = []; (function vis(n, pai, lado){ if (n.folha) folhas.push({n, pai, lado}); else { vis(n.e, n, 'e'); vis(n.d, n, 'd'); } })(raiz, null, null);
+    const f = pega(folhas), op = pega(nv.ops), no = {op};
+    if (op === '×' || op === '÷'){ no.e = {folha: f.n.folha}; no.d = {folha: pequeno(nv, tam)}; }
+    else if (Math.random() < .5){ no.e = {folha: f.n.folha}; no.d = {folha: folha(nv, tam)}; } else { no.e = {folha: folha(nv, tam)}; no.d = {folha: f.n.folha}; }
+    if (op === '÷' && no.e.folha.t === 'num'){ const q = no.d.folha.v; no.e.folha = {t: 'num', v: q * ri(2, Math.max(2, Math.floor(TAM[tam].hi / Math.abs(q))))}; if (nv.negativos && Math.random() < .4) no.e.folha.v *= -1; }
+    if (f.pai) f.pai[f.lado] = no; else raiz = no;
+    nos.push(no);
+  }
+  // grupos forçados (parênteses que mudam ou destacam a ordem)
+  const internos = []; (function vis(n, prof){ if (!n.folha){ if (prof > 0) internos.push(n); vis(n.e, prof + 1); vis(n.d, prof + 1); } })(raiz, 0);
+  internos.sort(() => Math.random() - .5).slice(0, nv.grupos >= 1 ? Math.min(internos.length, nv.grupos + 1) : 0).forEach(n => n.grupo = true);
+  return raiz;
+}
+function paraTokens(n, paiOp, lado){
+  if (n.folha) return [Object.assign({}, n.folha)];
+  const precisa = paiOp && (PREC[n.op] < PREC[paiOp] || (lado === 'd' && PREC[n.op] === PREC[paiOp] && (paiOp === '−' || paiOp === '÷')));
+  const corpo = paraTokens(n.e, n.op, 'e').concat([{t: 'op', v: n.op}], paraTokens(n.d, n.op, 'd'));
+  return (precisa || n.grupo) ? [{t: 'abre', v: '('}].concat(corpo, [{t: 'fecha', v: ')'}]) : corpo;
+}
+function trocarSimbolos(tks){   // ( ) por dentro, [ ] no meio, { } por fora
+  const pilha = [], prof = []; let max = 0;
+  tks.forEach((k, i) => { if (k.t === 'abre') pilha.push(i); else if (k.t === 'fecha'){ const a = pilha.pop(); prof.push([a, i]); } });
+  // profundidade real: quantos grupos há dentro de cada um
+  const dentro = ([a, f]) => 1 + Math.max(0, ...prof.filter(([a2, f2]) => a2 > a && f2 < f).map(dentro));
+  prof.forEach(par => { const d = dentro(par); max = Math.max(max, d); const s = d === 1 ? ['(', ')'] : d === 2 ? ['[', ']'] : ['{', '}']; tks[par[0]].v = s[0]; tks[par[1]].v = s[1]; });
+  return max;
+}
+function gerar(nv, tam){
+  for (let t = 0; t < 4000; t++){
+    const tks = paraTokens(gerarArvore(nv, tam));
+    const prof = trocarSimbolos(tks);
+    const maxProf = nv.grupos === 0 ? 0 : nv.n === 3 ? 1 : nv.grupos === 1 ? 2 : 3;
+    if (prof > maxProf) continue;
+    if (nv.grupos >= 2 && prof < nv.grupos) continue;
+    if (nv.grupos === 1 && prof < 1) continue;
+    if (nv.exigeMult && !tks.some(k => k.t === 'op' && (k.v === '×' || k.v === '÷'))) continue;
+    if (nv.exigeMult && !tks.some(k => k.t === 'op' && (k.v === '+' || k.v === '−'))) continue;   // misturar as duas prioridades
+    if (nv.potencias && !tks.some(k => k.t === 'pot' || k.t === 'raiz')) continue;
+    if (nv.negativos && !tks.some(k => (k.t === 'num' && k.v < 0) || (k.t === 'pot' && k.b < 0))) continue;
+    if (tks.some((k, i) => k.t === 'num' && Math.abs(k.v) === 1 && tks[i - 1] && tks[i - 1].v === '÷')) continue;
+    const passos = resolver(tks); if (!passos) continue;
+    const T = TAM[tam]; let ruim = false;
+    passos.forEach(({depois}) => depois.forEach(k => { if (k.t === 'num' && (Math.abs(k.v) > T.max || (!nv.negativos && k.v < 0))) ruim = true; }));
+    if (ruim) continue;
+    const r = passos[passos.length - 1].depois[0].v;
+    if (!nv.negativos && r < 0) continue;
+    return {tks, passos, r};
+  }
+  return null;
+}
+
+// ---------- configuração ----------
+let nivel = NIVEIS[2], modo = 'bateria';
+try { const s = JSON.parse(localStorage.getItem('expressoes_cfg') || '{}'); if (s.n) nivel = NIVEIS[s.n - 1] || nivel; if (s.tam) $('selTam').value = s.tam; } catch (e) {}
+{ const pn = +new URLSearchParams(location.search).get('nivel'); if (NIVEIS[pn - 1]) nivel = NIVEIS[pn - 1]; }
+$('opNivel').innerHTML = NIVEIS.map(n => `<button type="button" class="op${n === nivel ? ' sel' : ''}" data-n="${n.n}"><b>${n.nome} • ${n.ano}</b><small>${n.desc}</small></button>`).join('');
+function mostrarExemplo(){ const g = gerar(nivel, $('selTam').value); $('exemploNivel').innerHTML = g ? 'Exemplo: <span class="expr" style="font-size:1.3rem">' + htmlExpr(g.tks) + ' = ' + fmt(g.r) + '</span>' : ''; }
+$('opNivel').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; nivel = NIVEIS[+b.dataset.n - 1]; $('opNivel').querySelectorAll('.op').forEach(x => x.classList.toggle('sel', x === b)); mostrarExemplo(); };
+$('selTam').onchange = mostrarExemplo;
+$('opModo').onclick = ev => { const b = ev.target.closest('.op'); if (!b) return; modo = b.dataset.v; $('opModo').querySelectorAll('.op').forEach(x => x.classList.toggle('sel', x === b)); };
+mostrarExemplo();
+
+// ---------- bateria / detetive ----------
+let lista = [], idx = 0, acertos = 0, atual = null, passoAtual = 0, tksAtual = null, errosNaQuestao = 0, pontos = 0;
+const tela = id => document.querySelectorAll('.tela').forEach(t => t.classList.toggle('ativa', t.id === id));
+function comecar(){
+  const tam = $('selTam').value, qtd = +$('selQtd').value;
+  try { localStorage.setItem('expressoes_cfg', JSON.stringify({n: nivel.n, tam})); } catch (e) {}
+  lista = []; const vistos = new Set();
+  for (let k = 0; k < qtd * 3 && lista.length < qtd; k++){ const g = gerar(nivel, tam); if (g){ const chave = htmlExpr(g.tks); if (!vistos.has(chave)){ vistos.add(chave); lista.push(g); } } }
+  if (modo === 'imprimir') return imprimir(tam);
+  idx = 0; acertos = 0; pontos = 0; tela('tJogo'); mostrar();
+}
+$('btComecar').onclick = comecar;
+function placar(){
+  $('placar').innerHTML = `<span class="chip">${esc(nivel.nome)} • ${esc(nivel.desc)}</span><span class="chip">📝 ${idx + 1} de ${lista.length}</span><span class="chip">${modo === 'ordem' ? '⭐ ' + pontos + ' pontos' : '✅ ' + acertos + ' acerto' + (acertos === 1 ? '' : 's')}</span>`;
+}
+function mostrar(){
+  atual = lista[idx]; tksAtual = atual.tks; passoAtual = 0; errosNaQuestao = 0;
+  $('msg').textContent = ''; $('passos').style.display = 'none'; $('passos').innerHTML = ''; $('btProxima').style.display = 'none';
+  placar();
+  if (modo === 'ordem'){
+    $('areaResp').style.display = 'none';
+    $('dica').textContent = '👆 Toquem na operação que deve ser resolvida primeiro.';
+    desenharDetetive();
+  } else {
+    $('areaResp').style.display = ''; $('resposta').value = ''; $('resposta').disabled = false; $('btConferir').disabled = false;
+    $('dica').textContent = 'Resolvam e digitem o resultado:';
+    $('expr').innerHTML = htmlExpr(tksAtual) + ' = ?';
+    setTimeout(() => $('resposta').focus(), 50);
+  }
+}
+function lerNumero(t){ t = String(t).trim().replace(/\s/g, '').replace(/[−–]/g, '-').replace(/\./g, '').replace(',', '.'); return t === '' || isNaN(+t) ? null : +t; }
+function conferir(){
+  const v = lerNumero($('resposta').value); if (v === null) return;
+  const ok = v === atual.r;
+  if (ok) acertos++;
+  $('msg').innerHTML = ok ? '🎉 Acertou! ' + fmt(atual.r) : `❌ Não foi dessa vez. O resultado é <b>${fmt(atual.r)}</b>.`;
+  $('msg').style.color = ok ? '#15803d' : '#b91c1c';
+  $('resposta').disabled = true; $('btConferir').disabled = true;
+  $('btProxima').style.display = ''; placar(); if (!ok) verPassos();
+}
+$('btConferir').onclick = conferir;
+$('resposta').onkeydown = ev => { if (ev.key === 'Enter') conferir(); };
+function verPassos(){
+  $('passos').style.display = 'block';
+  $('passos').innerHTML = `<div class="ps"><span class="n">Expressão</span><span class="expr">${htmlExpr(atual.tks)}</span></div>` +
+    atual.passos.map((x, k) => `<div class="ps"><span class="n">${k + 1}º passo<br><small>${esc(x.p.desc)}</small></span><span class="expr">= ${htmlExpr(x.depois)}</span></div>`).join('');
+}
+$('btPassos').onclick = verPassos;
+$('btProxima').onclick = () => { idx++; if (idx < lista.length) mostrar(); else fim(); };
+function desenharDetetive(marcas = {}){
+  if (tksAtual.length === 1){
+    $('expr').innerHTML = htmlExpr(atual.tks) + ' = <span class="tk novo">' + fmt(tksAtual[0].v) + '</span>';
+    $('msg').innerHTML = errosNaQuestao ? `✅ Resolvida! (${errosNaQuestao} toque${errosNaQuestao > 1 ? 's' : ''} errado${errosNaQuestao > 1 ? 's' : ''})` : '🌟 Perfeito! Vocês acertaram a ordem toda!';
+    $('msg').style.color = '#15803d'; $('btProxima').style.display = ''; return;
+  }
+  const p = proximoPasso(tksAtual);
+  if (p.auto){ $('expr').innerHTML = htmlExpr(tksAtual, {[p.ini]: ' alvo', [p.fim]: ' alvo'}); $('msg').textContent = '✂️ ' + p.desc; $('msg').style.color = '#7c3aed'; setTimeout(() => { tksAtual = aplicar(tksAtual, p); desenharDetetive({[p.ini]: ' novo'}); }, 900); return; }
+  const m = Object.assign({}, marcas);
+  tksAtual.forEach((k, i) => { if (k.t === 'op' || k.t === 'pot' || k.t === 'raiz') m[i] = (m[i] || '') + ' tocavel'; });
+  $('expr').innerHTML = htmlExpr(tksAtual, m);
+}
+$('expr').onclick = ev => {
+  if (modo !== 'ordem' || tksAtual.length === 1) return;
+  const el = ev.target.closest('.tocavel'); if (!el) return;
+  const i = +el.dataset.i, p = proximoPasso(tksAtual);
+  if (!p || p.auto) return;
+  if (i === p.alvo){
+    if (!errosNaQuestao || passoAtual > 0) pontos += 1;
+    $('msg').innerHTML = '✅ ' + esc(p.desc); $('msg').style.color = '#15803d';
+    tksAtual = aplicar(tksAtual, p); passoAtual++;
+    desenharDetetive({[p.ini]: ' novo'}); placar();
+  } else {
+    errosNaQuestao++;
+    el.classList.add('erro'); setTimeout(() => el.classList.remove('erro'), 400);
+    const k = tksAtual[i];
+    $('msg').innerHTML = '🤔 Ainda não! ' + (proximoPasso(tksAtual).ini >= 0 && tksAtual.some(x => x.t === 'abre') ? 'Comecem pelo que está dentro dos parênteses mais de dentro.' : (k.v === '+' || k.v === '−') ? 'Multiplicação e divisão vêm antes da adição e da subtração.' : 'Potências e raízes vêm antes; e as operações do mesmo tipo vão da esquerda para a direita.');
+    $('msg').style.color = '#b45309';
+  }
+};
+function fim(){
+  tela('tFim');
+  $('resumo').innerHTML = modo === 'ordem' ? `⭐ ${pontos} pontos em ${lista.length} expressões` : `✅ ${acertos} de ${lista.length} acertos (${Math.round(100 * acertos / lista.length)}%)`;
+}
+$('btSair').onclick = () => tela('tConfig');
+$('btConfig').onclick = () => tela('tConfig');
+$('btDeNovo').onclick = comecar;
+
+// ---------- impressão ----------
+function imprimir(tam){
+  const nomeTam = {d: 'dezena', c: 'centena', m: 'milhar'}[tam];
+  $('folha').innerHTML = `<div class="cab"><h2>Expressões numéricas • ${esc(nivel.nome)}: ${esc(nivel.desc)}</h2>Nome: ________________________________ Turma: ______ Data: ___/___/______ <small>(números até a ${nomeTam})</small></div>
+    <ol>${lista.map(g => `<li><span class="expr">${htmlExpr(g.tks)} =</span></li>`).join('')}</ol>
+    <div class="gab"><h2>Gabarito com a resolução</h2><ol>${lista.map(g => `<li><span class="expr">${htmlExpr(g.tks)}</span>${g.passos.map(x => `<br><span class="expr">= ${htmlExpr(x.depois)}</span>`).join('')}</li>`).join('')}</ol></div>`;
+  window.print();
+}
+window.EXPR = {gerar, resolver, NIVEIS, proximoPasso, estado: () => ({lista, idx, acertos, pontos, tksAtual, atual})};
+})();
+</script>
+</body>
+</html>
