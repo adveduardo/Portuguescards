@@ -262,6 +262,7 @@
   .carta.mem .costas{background:var(--cor);background:linear-gradient(155deg,var(--cor),var(--cor-esc,#312e81));color:#fff;box-shadow:0 8px 0 var(--cor-esc,#312e81),0 16px 28px rgba(0,0,0,.18)}
   .carta.mem .costas::before{content:'';position:absolute;left:0;top:0;right:0;bottom:0;background:radial-gradient(circle at 18% 12%,rgba(255,255,255,.32),transparent 36%),repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 10px,transparent 10px 20px)}
   .carta.mem .costas .num{font-size:calc(var(--w,160px) * .3)}
+  .carta.mem .n-mem{position:absolute;top:6%;left:7%;font-family:var(--titulo);font-weight:700;font-size:calc(var(--w,160px) * .1);line-height:1;opacity:.7}
   .carta.mem .costas .q{position:absolute;bottom:9%;font-size:calc(var(--w,160px) * .14);opacity:.85}
   .carta.mem .frente{background:var(--sup);color:var(--texto);transform:rotateY(180deg);border:4px solid var(--cor);font-weight:600;line-height:1.2;box-shadow:0 8px 20px rgba(0,0,0,.12);font-size:max(12px,calc(var(--w,160px) * .12))}
   .carta.mem .frente.m{font-size:max(11px,calc(var(--w,160px) * .095))}
@@ -1252,7 +1253,7 @@ function cartaHtml(c, i){
   if (m === 'memoria'){
     const t = c.achada ? jogo.equipes[c.achada.time] : null, tam = c.texto.length > 34 ? ' p' : c.texto.length > 16 ? ' m' : '';
     return `<button type="button" class="carta mem${c.virada || c.achada ? ' virada' : ''}${c.achada ? ' achada' : ''}" data-i="${i}" style="${vars}${t ? ';--cor-time:' + t.cor : ''}" aria-label="Carta ${i + 1}${c.virada || c.achada ? ': ' + esc(c.texto) : ''}">
-      <span class="interno"><span class="face costas"><span class="num">${i + 1}</span><span class="q">?</span></span><span class="face frente${tam}">${t ? `<span class="selo-time">${t.m}</span>` : ''}<span>${esc(c.texto)}</span></span></span></button>`;
+      <span class="interno"><span class="face costas"><span class="num">${i + 1}</span><span class="q">?</span></span><span class="face frente${tam}"><span class="n-mem">${i + 1}</span>${t ? `<span class="selo-time">${t.m}</span>` : ''}<span>${esc(c.texto)}</span></span></span></button>`;
   }
   const f = c.feita;
   if (m === 'velha'){

@@ -13,7 +13,12 @@
   .carta.virada .dentro{transform:rotateY(180deg)}
   .face{position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;
     box-shadow:0 5px 0 #0002;padding:6px;text-align:center;font-weight:bold;line-height:1.15}
-  .face.verso{background:linear-gradient(135deg,#2f80ed,#8e44ad);color:#fff;font-size:clamp(1.6rem,4vw,2.6rem)}
+  .face.verso{background:linear-gradient(135deg,#2f80ed,#8e44ad);color:#fff;font-size:clamp(2rem,5vw,3.4rem);flex-direction:column;text-shadow:0 3px 0 #0003}
+  .face.verso small{font-size:.38em;opacity:.75;margin-top:2px}
+  .numCarta{position:absolute;top:5px;left:8px;font-size:clamp(.8rem,1.6vw,1.05rem);background:#1f3a68;color:#fff;border-radius:999px;padding:1px 8px;line-height:1.3}
+  .carta.achada .numCarta{background:#0004}
+  #digNum{text-align:center;font-size:1rem;color:var(--texto);margin:2px 0}
+  #digNum b{display:inline-block;min-width:2.2em;background:#ffd54a;color:#1a1a1a;border-radius:8px;padding:0 6px}
   .face.frente{background:#fff;color:var(--texto);transform:rotateY(180deg)}
   .carta.achada .face.frente{color:#fff}
   #explicaMm{text-align:center;font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:1050px;margin:6px auto;min-height:1.4em}
@@ -48,6 +53,7 @@
   <div id="vezMm"></div>
   <div id="grade"></div>
   <div id="explicaMm"></div>
+  <div id="digNum">⌨️ Dica: a turma fala o número e você digita no teclado (ex.: 7 e Enter) para virar a carta. <b id="numDigitado"></b></div>
   <div class="linha"><button id="btnSair">⏹️ Terminar</button></div>
 </section>
 
@@ -90,7 +96,7 @@ function comecar(){
   const colunas = cartas.length <= 12 ? 4 : cartas.length <= 16 ? 4 : cartas.length <= 20 ? 5 : 6;
   $('grade').style.gridTemplateColumns = `repeat(${colunas}, 1fr)`;
   $('grade').style.maxWidth = (colunas * 200) + 'px';
-  $('grade').innerHTML = cartas.map((c, i) => `<button class="carta" data-i="${i}"><div class="dentro"><div class="face verso">❓</div><div class="face frente" style="font-size:${tamanhoFonte(c.texto)}">${AV.esc(c.texto)}</div></div></button>`).join('');
+  $('grade').innerHTML = cartas.map((c, i) => `<button class="carta" data-i="${i}" aria-label="Carta ${i + 1}"><div class="dentro"><div class="face verso">${i + 1}<small>❓</small></div><div class="face frente" style="font-size:${tamanhoFonte(c.texto)}"><span class="numCarta">${i + 1}</span>${AV.esc(c.texto)}</div></div></button>`).join('');
   $('grade').querySelectorAll('.carta').forEach(b => b.onclick = () => virar(+b.dataset.i, b));
   $('explicaMm').textContent = `Encontrem os pares de ${dados.relacao}!`;
   AV.mostrarTela('tJogo'); vez();
@@ -117,6 +123,17 @@ function virar(i, b){
   }
 }
 function fim(){ placar.ranking($('ranking'), totalPares); AV.mostrarTela('tFim'); AV.fanfarra(); AV.confete(); }
+// virar pelo número: digitar o número da carta e Enter (ou esperar um instante)
+let numDig = '', tNum = null;
+function virarNumero(){ const n = +numDig; numDig = ''; $('numDigitado').textContent = ''; clearTimeout(tNum);
+  const b = $('grade').querySelector(`.carta[data-i="${n - 1}"]`); if (b) virar(n - 1, b); }
+document.addEventListener('keydown', ev => {
+  if (!$('tJogo').classList.contains('ativa') || /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (/^[0-9]$/.test(ev.key)){ numDig = (numDig + ev.key).slice(-2); $('numDigitado').textContent = numDig; clearTimeout(tNum);
+    if (+numDig * 10 > cartas.length) tNum = setTimeout(virarNumero, 300); else tNum = setTimeout(virarNumero, 1500); }
+  else if (ev.key === 'Enter' && numDig){ ev.preventDefault(); virarNumero(); }
+  else if (ev.key === 'Backspace'){ numDig = numDig.slice(0, -1); $('numDigitado').textContent = numDig; }
+});
 $('btnComecar').onclick = comecar;
 $('btnSair').onclick = () => { if (confirm('Terminar agora?')) fim(); };
 $('btnDeNovo').onclick = () => AV.mostrarTela('tConfig');
