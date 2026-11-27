@@ -1,0 +1,370 @@
+[
+ {
+  "id": "exemplo-1",
+  "exemplo": true,
+  "titulo": "Apartamento – Vila Mariana (exemplo)",
+  "tipo": "Apartamento",
+  "modalidade": "Judicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "São Paulo",
+  "uf": "SP",
+  "bairro": "Vila Mariana",
+  "lat": -23.5891,
+  "lng": -46.6345,
+  "avaliacao": 520000,
+  "area": 65,
+  "quartos": 2,
+  "vagas": 2,
+  "pracas": [
+   {
+    "data": "2026-12-08",
+    "valor": 520000
+   },
+   {
+    "data": "2026-12-22",
+    "valor": 312000
+   }
+  ],
+  "financiavel": true,
+  "fgts": true,
+  "ocupado": true,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-2",
+  "exemplo": true,
+  "titulo": "Casa – Taquaral (exemplo)",
+  "tipo": "Casa",
+  "modalidade": "Extrajudicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Campinas",
+  "uf": "SP",
+  "bairro": "Taquaral",
+  "lat": -22.8738,
+  "lng": -47.048,
+  "avaliacao": 780000,
+  "area": 48,
+  "quartos": 3,
+  "vagas": 0,
+  "pracas": [
+   {
+    "data": "2026-12-15",
+    "valor": 702000
+   },
+   {
+    "data": "2027-01-01",
+    "valor": 390000
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": false,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-3",
+  "exemplo": true,
+  "titulo": "Apartamento – Tijuca (exemplo)",
+  "tipo": "Apartamento",
+  "modalidade": "Venda direta",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Rio de Janeiro",
+  "uf": "RJ",
+  "bairro": "Tijuca",
+  "lat": -22.9249,
+  "lng": -43.2321,
+  "avaliacao": 450000,
+  "area": 250,
+  "quartos": 1,
+  "vagas": 2,
+  "pracas": [
+   {
+    "data": "2027-01-12",
+    "valor": 261000
+   }
+  ],
+  "financiavel": true,
+  "fgts": false,
+  "ocupado": null,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-4",
+  "exemplo": true,
+  "titulo": "Terreno – Santa Felicidade (exemplo)",
+  "tipo": "Terreno",
+  "modalidade": "Judicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Curitiba",
+  "uf": "PR",
+  "bairro": "Santa Felicidade",
+  "lat": -25.404,
+  "lng": -49.329,
+  "avaliacao": 310000,
+  "area": 48,
+  "quartos": null,
+  "vagas": null,
+  "pracas": [
+   {
+    "data": "2027-01-20",
+    "valor": 310000
+   },
+   {
+    "data": "2027-02-06",
+    "valor": 170500
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": true,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-5",
+  "exemplo": true,
+  "titulo": "Casa – Pampulha (exemplo)",
+  "tipo": "Casa",
+  "modalidade": "Extrajudicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Belo Horizonte",
+  "uf": "MG",
+  "bairro": "Pampulha",
+  "lat": -19.8516,
+  "lng": -43.9705,
+  "avaliacao": 890000,
+  "area": 120,
+  "quartos": 2,
+  "vagas": 0,
+  "pracas": [
+   {
+    "data": "2027-02-03",
+    "valor": 801000
+   },
+   {
+    "data": "2027-02-17",
+    "valor": 445000
+   }
+  ],
+  "financiavel": true,
+  "fgts": true,
+  "ocupado": false,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-6",
+  "exemplo": true,
+  "titulo": "Comercial – Centro Histórico (exemplo)",
+  "tipo": "Comercial",
+  "modalidade": "Venda direta",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Porto Alegre",
+  "uf": "RS",
+  "bairro": "Centro Histórico",
+  "lat": -30.031,
+  "lng": -51.2287,
+  "avaliacao": 640000,
+  "area": 48,
+  "quartos": null,
+  "vagas": 2,
+  "pracas": [
+   {
+    "data": "2026-12-18",
+    "valor": 371200
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": null,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-7",
+  "exemplo": true,
+  "titulo": "Apartamento – Pituba (exemplo)",
+  "tipo": "Apartamento",
+  "modalidade": "Judicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Salvador",
+  "uf": "BA",
+  "bairro": "Pituba",
+  "lat": -13.001,
+  "lng": -38.454,
+  "avaliacao": 380000,
+  "area": 48,
+  "quartos": 3,
+  "vagas": 0,
+  "pracas": [
+   {
+    "data": "2026-12-08",
+    "valor": 380000
+   },
+   {
+    "data": "2026-12-22",
+    "valor": 247000
+   }
+  ],
+  "financiavel": true,
+  "fgts": false,
+  "ocupado": true,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-8",
+  "exemplo": true,
+  "titulo": "Rural – Zona Rural (exemplo)",
+  "tipo": "Rural",
+  "modalidade": "Extrajudicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Goiânia",
+  "uf": "GO",
+  "bairro": "Zona Rural",
+  "lat": -16.56,
+  "lng": -49.15,
+  "avaliacao": 1200000,
+  "area": 400,
+  "quartos": null,
+  "vagas": null,
+  "pracas": [
+   {
+    "data": "2026-12-15",
+    "valor": 1080000
+   },
+   {
+    "data": "2027-01-01",
+    "valor": 660000
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": false,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-9",
+  "exemplo": true,
+  "titulo": "Apartamento – Trindade (exemplo)",
+  "tipo": "Apartamento",
+  "modalidade": "Venda direta",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Florianópolis",
+  "uf": "SC",
+  "bairro": "Trindade",
+  "lat": -27.588,
+  "lng": -48.523,
+  "avaliacao": 560000,
+  "area": 250,
+  "quartos": 3,
+  "vagas": 1,
+  "pracas": [
+   {
+    "data": "2027-01-12",
+    "valor": 324800
+   }
+  ],
+  "financiavel": true,
+  "fgts": true,
+  "ocupado": null,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-10",
+  "exemplo": true,
+  "titulo": "Casa – Boa Viagem (exemplo)",
+  "tipo": "Casa",
+  "modalidade": "Judicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Recife",
+  "uf": "PE",
+  "bairro": "Boa Viagem",
+  "lat": -8.127,
+  "lng": -34.902,
+  "avaliacao": 700000,
+  "area": 65,
+  "quartos": 1,
+  "vagas": 2,
+  "pracas": [
+   {
+    "data": "2027-01-20",
+    "valor": 700000
+   },
+   {
+    "data": "2027-02-06",
+    "valor": 350000
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": true,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-11",
+  "exemplo": true,
+  "titulo": "Galpão – Cinco (exemplo)",
+  "tipo": "Galpão",
+  "modalidade": "Extrajudicial",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Contagem",
+  "uf": "MG",
+  "bairro": "Cinco",
+  "lat": -19.939,
+  "lng": -44.061,
+  "avaliacao": 1500000,
+  "area": 82,
+  "quartos": null,
+  "vagas": 1,
+  "pracas": [
+   {
+    "data": "2027-02-03",
+    "valor": 1350000
+   },
+   {
+    "data": "2027-02-17",
+    "valor": 825000
+   }
+  ],
+  "financiavel": true,
+  "fgts": false,
+  "ocupado": false,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ },
+ {
+  "id": "exemplo-12",
+  "exemplo": true,
+  "titulo": "Apartamento – Meireles (exemplo)",
+  "tipo": "Apartamento",
+  "modalidade": "Venda direta",
+  "leiloeiro": "Leiloeiro Exemplo",
+  "cidade": "Fortaleza",
+  "uf": "CE",
+  "bairro": "Meireles",
+  "lat": -3.728,
+  "lng": -38.495,
+  "avaliacao": 420000,
+  "area": 250,
+  "quartos": 1,
+  "vagas": 2,
+  "pracas": [
+   {
+    "data": "2026-12-18",
+    "valor": 243600
+   }
+  ],
+  "financiavel": false,
+  "fgts": false,
+  "ocupado": null,
+  "obs": "Registro fictício para demonstrar a ferramenta.",
+  "adicionado": "2026-11-27"
+ }
+]
