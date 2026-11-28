@@ -5,7 +5,7 @@
 import json, os, subprocess, sys, glob, shutil, tempfile
 AQUI = os.path.dirname(os.path.abspath(__file__)); RAIZ = os.path.abspath(os.path.join(AQUI, '..', '..'))
 AJ = os.path.join(AQUI, 'ajuste.json')
-CONFIGS = [(2, 18), (2, 16), (2, 14), (2, 12), (2, 10), (2, 8), (1, 14), (1, 12), (1, 10), (1, 8), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (0, 4), (0, 2)]
+CONFIGS = [(2, 18, 1), (2, 14, 1), (2, 10, 1), (1, 14, 1), (1, 12, 1), (1, 10, 1), (1, 8, 1), (0, 10, 1), (0, 8, 1), (0, 8, 0), (0, 6, 0), (1, 4, 0), (0, 4, 0), (0, 3, 0), (0, 2, 0), (0, 1, 0)]
 aj = json.load(open(AJ)) if os.path.exists(AJ) else {}
 dados = json.load(open(os.path.join(RAIZ, 'dados', 'encontros-portugues.json'), encoding='utf-8'))
 todos = [e['n'] for e in dados['encontros']]
@@ -16,7 +16,7 @@ else: alvo = todos
 tmp = tempfile.mkdtemp()
 def gerar():
     json.dump(aj, open(AJ, 'w'), indent=0, sort_keys=True)
-    subprocess.run(['node', os.path.join(AQUI, 'gerar_word.js'), 'so-folhas'], check=True, env=dict(os.environ, NODE_PATH='/opt/node-tools/node_modules'), stdout=subprocess.DEVNULL)
+    subprocess.run(['node', os.path.join(AQUI, 'gerar_word.js'), 'so-folhas'], check=True, env=dict(os.environ, NODE_PATH='/opt/node-tools/node_modules', FOLGA='3'), stdout=subprocess.DEVNULL)
 def paginas(ns):
     fs = [os.path.join(RAIZ, 'encontros', 'encontro-%02d.docx' % n) for n in ns]
     for i in range(0, len(fs), 30):
@@ -27,17 +27,18 @@ def paginas(ns):
         r[n] = int([l for l in out.splitlines() if l.startswith('Pages')][0].split()[1])
     return r
 idx = {n: 0 for n in alvo}
-for n in alvo: aj[str(n)] = {'extra': CONFIGS[0][0], 'prod': CONFIGS[0][1]}
+for n in alvo: aj[str(n)] = {'extra': CONFIGS[0][0], 'prod': CONFIGS[0][1], 'auto': CONFIGS[0][2]}
 pend = list(alvo); rodada = 0
 while pend:
     gerar(); p = paginas(pend); rodada += 1
     pend = []
     for n, k in p.items():
         if k > 2 and idx[n] + 1 < len(CONFIGS):
-            idx[n] += 1; aj[str(n)] = {'extra': CONFIGS[idx[n]][0], 'prod': CONFIGS[idx[n]][1]}; pend.append(n)
+            idx[n] += 1; c = CONFIGS[idx[n]]; aj[str(n)] = {'extra': c[0], 'prod': c[1], 'auto': c[2]}; pend.append(n)
         elif k > 2: print('não coube em 2 páginas:', n)
     print('rodada', rodada, 'ainda ajustando:', pend or 'nenhum')
 gerar()
-final = paginas(alvo)
-print('páginas:', {n: k for n, k in final.items() if k != 2} or 'todas com 2 páginas')
+final = paginas(alvo)   # medido com 3 linhas de folga
+print('páginas (com folga):', {n: k for n, k in final.items() if k != 2} or 'todas com 2 páginas')
+subprocess.run(['node', os.path.join(AQUI, 'gerar_word.js'), 'so-folhas'], check=True, env=dict(os.environ, NODE_PATH='/opt/node-tools/node_modules'), stdout=subprocess.DEVNULL)
 shutil.rmtree(tmp)

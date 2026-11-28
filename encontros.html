@@ -61,6 +61,13 @@
   .tb .ft{font-size:13px;color:#4a5a78;text-align:right;font-style:italic}
   .q .itens{color:#4a5a78;font-size:15px;margin:2px 0 0 10px}
   .q .banco{display:inline-block;border:1px solid #c6d3ea;border-radius:8px;padding:2px 10px;font-size:14px;color:#1f3a68;margin-top:3px}
+  .bncc{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0}
+  .bncc .cod{display:inline-block;background:#e8f5ee;color:#135d2e;border-radius:8px;padding:3px 9px;font-weight:bold;font-size:14px;cursor:help}
+  .bncc-lista p{margin:4px 0;font-size:15px;line-height:1.35}
+  table.tb-bncc{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+  table.tb-bncc th,table.tb-bncc td{border-bottom:1px solid #e3e9f4;padding:7px 9px;text-align:left;vertical-align:top;font-size:15px}
+  table.tb-bncc th{background:#dce6f5;color:#1f3a68}
+  table.tb-bncc td a{color:#1f3a68;font-weight:bold;text-decoration:none;margin-right:4px}
   .provas{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
   .prova{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 2px 8px rgba(20,33,61,.07)}
   .prova b{color:#1f3a68}
@@ -88,8 +95,8 @@
       '<a class="bt claro" href="encontros/folha-de-redacao.docx" download>✍️ Folha de redação (30 linhas + grade)</a></div>';
   }
   function abas(sel){
-    var l = [['', '🗂️ Todos'], ['1', '📘 Parte 1: ortografia à sintaxe'], ['2', '✍️ Parte 2: leitura, conectivos e redação'], ['p', '📝 Provas']];
-    return '<div class="abas">' + l.map(function(a){ var href = a[0] === 'p' ? '?provas=1' : a[0] ? '?parte=' + a[0] : '?'; return '<a href="' + href + '"' + (a[0] === sel ? ' class="on"' : '') + '>' + a[1] + '</a>'; }).join('') + '</div>';
+    var l = [['', '🗂️ Todos'], ['1', '📘 Parte 1: ortografia à sintaxe'], ['2', '✍️ Parte 2: leitura, conectivos e redação'], ['p', '📝 Provas'], ['b', '📐 BNCC']];
+    return '<div class="abas">' + l.map(function(a){ var href = a[0] === 'p' ? '?provas=1' : a[0] === 'b' ? '?bncc=1' : a[0] ? '?parte=' + a[0] : '?'; return '<a href="' + href + '"' + (a[0] === sel ? ' class="on"' : '') + '>' + a[1] + '</a>'; }).join('') + '</div>';
   }
 
   function visaoGeral(parte, soRedacao){
@@ -119,6 +126,17 @@
     $('app').innerHTML = h;
   }
 
+  function telaBncc(){
+    var h = '<h1>📐 BNCC nos encontros</h1><p class="sub">Habilidades de Língua Portuguesa da BNCC trabalhadas em cada encontro: <b>EF</b> = anos finais do Ensino Fundamental (EF67 = 6º e 7º; EF89 = 8º e 9º; EF69 = 6º ao 9º; EF06 a EF09 = um ano); <b>EM13LP</b> = Ensino Médio (EJA médio e ENEM). Os textos abaixo são resumos; o texto integral está no documento oficial da BNCC.</p>';
+    h += botoesGerais() + abas('b');
+    h += '<table class="tb-bncc"><tr><th>Código</th><th>Habilidade (resumo)</th><th>Encontros</th></tr>';
+    Object.keys(D.bncc || {}).forEach(function(c){
+      var ens = D.encontros.filter(function(e){ return (e.bncc || []).some(function(b){ return b.codigo === c; }); });
+      h += '<tr><td><b>' + esc(c) + '</b></td><td>' + esc(D.bncc[c]) + '</td><td>' + ens.map(function(e){ return '<a href="?n=' + e.n + '" title="' + esc(e.titulo) + '">' + dois(e.n) + '</a>'; }).join(' ') + '</td></tr>';
+    });
+    $('app').innerHTML = h + '</table>';
+  }
+
   function linhaQuestao(q, num){
     var h = '<div class="q"><div class="enun">' + num + '. ' + esc(q.enunciado) + '</div>';
     if (q.opcoes) h += '<div class="ops">' + q.opcoes.map(function(o, k){ return 'abcd'.charAt(k) + ') ' + esc(o); }).join('   •   ') + '</div>';
@@ -139,6 +157,7 @@
       (ehRedacao(e) ? '<a class="bt" href="encontros/folha-de-redacao.docx" download>✍️ Folha de redação</a>' : '') +
       '<a class="bt claro" href="encontros/guia-do-professor.docx" download>📘 Guia do professor</a>' +
       (pv ? '<a class="bt claro" href="?provas=1">📝 Prova ' + pv.n + ' (encontros ' + pv.de + ' a ' + pv.ate + ')</a>' : '') + '</div>';
+    if (e.bncc && e.bncc.length) h += '<div class="cartao"><h2>📐 Habilidades da BNCC</h2><div class="bncc-lista">' + e.bncc.map(function(b){ return '<p><span class="bncc"><span class="cod">' + esc(b.codigo) + '</span></span> ' + esc(b.descricao) + '</p>'; }).join('') + '</div></div>';
     var plano = e.plano || D.plano;
     h += '<div class="cartao"><h2>⏱️ Plano das duas aulas <span id="relogio"></span></h2><div class="plano">';
     plano.forEach(function(p, i){
@@ -204,7 +223,7 @@
     if (x.readyState !== 4) return;
     try { D = JSON.parse(x.responseText); } catch (e) { $('app').innerHTML = '<p>Não consegui abrir os encontros.</p>'; return; }
     var n = +param('n'), parte = +param('parte');
-    if (n >= 1 && n <= total()) encontro(n); else if (param('provas')) telaProvas(); else visaoGeral(parte === 1 || parte === 2 ? parte : 0, param('bloco') === 'redacao');
+    if (n >= 1 && n <= total()) encontro(n); else if (param('provas')) telaProvas(); else if (param('bncc')) telaBncc(); else visaoGeral(parte === 1 || parte === 2 ? parte : 0, param('bloco') === 'redacao');
   };
   x.send();
   window.ENCONTROS = {dados: function(){ return D; }, atual: function(){ return atual; }, ajustar: ajustarQuadro, maiorLetra: maiorLetra};

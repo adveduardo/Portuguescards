@@ -9,6 +9,7 @@ I = '                '
 def op(v, txt): return f'{I}<option value="{v}">{esc(txt)}</option>\n'
 g1 = f'            <optgroup label="📘 Português › {N} encontros (1–30): da ortografia à sintaxe">\n'
 g1 += op('encontros.html', f'🗂️ Os {N} encontros: visão geral, folhas em Word (cara de prova), guia e provas')
+g1 += op('encontros.html?bncc=1', '📐 BNCC: habilidades trabalhadas em cada encontro (6º ao 9º e Ensino Médio)')
 g1 += ''.join(op(f'encontros.html?n={e["n"]}', f'📄 Encontro {e["n"]:02d} ({e["bloco"]}): {e["titulo"]}') for e in enc if e['n'] <= 30)
 g1 += '            </optgroup>\n'
 g2 = ''

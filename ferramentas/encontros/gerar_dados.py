@@ -1,7 +1,7 @@
 # Gera dados/encontros-portugues.json a partir das partes (1 a 30: parte1-3; 31 a 90: parte4-9).
 import importlib, json, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
-import base, quadro_extra
+import base, quadro_extra, bncc
 PARTES = ['parte1', 'parte2', 'parte3', 'parte4', 'parte5', 'parte6', 'parte7', 'parte8', 'parte9']
 for p in PARTES:
     if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), p + '.py')): importlib.import_module(p)
@@ -21,6 +21,23 @@ for e in enc:
             grupo = TEXTOS[n]; base._arrumar_alternativas(500 + n, grupo); e['questoes'] = e['questoes'] + grupo
             assert len([q for q in e['questoes'] if q['tipo'] != 'texto']) <= 20, n
     e['parte'] = 1 if n <= 30 else 2
+    bncc.aplicar(e)
+# questões tiradas para a folha caber em uma folha frente e verso (o mesmo conteúdo é treinado em outras questões do encontro)
+CORTES = {33: ['Texto: “Em algumas cidades, o transporte público gratuito', 'Texto: “Algumas praias do litoral'],
+          54: ['Qual repertório NÃO é pertinente ao tema “Desafios para a valorização da herança africana'],
+          60: ['Tema: “Desafios para o enfrentamento da invisibilidade do trabalho de cuidado'], 84: ['Complete a proposta com o MEIO/MODO'], 73: ['Complete a proposta com a FINALIDADE'], 74: ['Complete a proposta com o MEIO/MODO'],
+          76: ['Complete a proposta com a AÇÃO'], 77: ['Complete a proposta com um DETALHAMENTO'], 79: ['Complete a proposta com a FINALIDADE'],
+          81: ['Complete a proposta com a AÇÃO'], 82: ['Complete a proposta com a FINALIDADE'],
+          90: ['Em uma redação bem estruturada, um parágrafo de desenvolvimento', 'Escreva uma proposta de intervenção completa']}
+for e in enc:
+    for prefixo in CORTES.get(e['n'], []):
+        qs = e['questoes']; i = next(k for k, q in enumerate(qs) if q['tipo'] != 'texto' and q['enunciado'].startswith(prefixo))
+        for k in range(i - 1, -1, -1):          # se a questão era de um texto-base, o texto passa a valer para uma questão a menos
+            if qs[k]['tipo'] == 'texto':
+                if i - k <= qs[k]['para']: qs[k]['para'] -= 1
+                break
+        del qs[i]
+    assert 15 <= len([q for q in e['questoes'] if q['tipo'] != 'texto']) <= 20, e['n']
 ns = [e['n'] for e in enc]
 assert ns == list(range(1, len(enc) + 1)), ('encontros fora de ordem ou faltando', ns)
 plano = [
@@ -52,7 +69,8 @@ PROVAS = [
 provas = [p for p in PROVAS if p['ate'] <= len(enc)]
 d = {'titulo': f'Português em {len(enc)} encontros: da ortografia à redação', 'duracao': '2 aulas de 50 minutos',
      'partes': [{'n': 1, 'titulo': 'Encontros 1 a 30: da ortografia à sintaxe'}, {'n': 2, 'titulo': 'Encontros 31 a 90: leitura, conectivos, argumentação e redação'}],
-     'plano': plano, 'provas': provas, 'encontros': enc}
+     'plano': plano, 'provas': provas, 'encontros': enc,
+     'bncc': {c: bncc.HAB[c] for c in sorted({b['codigo'] for e in enc for b in e['bncc']})}}
 json.dump(d, open(os.path.join(raiz, 'dados', 'encontros-portugues.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 # as questões de múltipla escolha também vão para o Banco de Questões (Montar prova, PortuguêsCards), uma lista por prova
 ind_p = os.path.join(raiz, 'dados', 'indice.json'); ind = json.load(open(ind_p, encoding='utf-8'))

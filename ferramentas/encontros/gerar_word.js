@@ -4,19 +4,20 @@
 const fs = require('fs'), path = require('path');
 const {Document, Packer, Paragraph, TextRun, Tab, TabStopType, LeaderType, AlignmentType, BorderStyle,
   Table, TableRow, TableCell, WidthType, ShadingType, PageBreak, HeadingLevel, Footer, PageNumber,
-  HeightRule, VerticalAlign} = require('docx');
+  HeightRule, VerticalAlign, LineRuleType} = require('docx');
 const RAIZ = path.resolve(__dirname, '..', '..');
 const dados = JSON.parse(fs.readFileSync(path.join(RAIZ, 'dados', 'encontros-portugues.json'), 'utf8'));
 const SAIDA = path.join(RAIZ, 'encontros');
 const SO_FOLHAS = process.argv.includes('so-folhas');
+const FOLGA = +process.env.FOLGA || 0;
 // ajuste.json: linhas a mais nas respostas e linhas da produção, por encontro (para fechar a folha frente e verso)
 const AJ = fs.existsSync(path.join(__dirname, 'ajuste.json')) ? JSON.parse(fs.readFileSync(path.join(__dirname, 'ajuste.json'), 'utf8')) : {};
 fs.mkdirSync(SAIDA, {recursive: true});
 const TOTAL = dados.encontros.length;
-const LARG = 11906 - 2 * 1080;   // A4 com margens de 0,75"
+const LARG = 11906 - 2 * 900;   // A4 com margens laterais de 1,6 cm
 const FONTE = 'Arial', AZUL = '1F3A68', CINZA = '6B7280';
-const pagina = {page: {size: {width: 11906, height: 16838}, margin: {top: 900, bottom: 900, left: 1080, right: 1080, footer: 400}}};
-const estilos = {default: {document: {run: {font: FONTE, size: 22}},
+const pagina = {page: {size: {width: 11906, height: 16838}, margin: {top: 760, bottom: 760, left: 900, right: 900, footer: 340}}};
+const estilos = {default: {document: {run: {font: FONTE, size: 20}},
   heading1: {run: {font: FONTE, size: 30, bold: true, color: AZUL}, paragraph: {spacing: {before: 0, after: 100}, keepNext: true}},
   heading2: {run: {font: FONTE, size: 24, bold: true, color: AZUL}, paragraph: {spacing: {before: 200, after: 80}, keepNext: true}}}};
 const dois = n => String(n).padStart(2, '0');
@@ -27,8 +28,8 @@ const corridos = (txt, o) => String(txt).split('\n').map((p, i) => new TextRun(O
 const SEM = {style: BorderStyle.NONE, size: 0, color: 'FFFFFF'};
 const FINA = {style: BorderStyle.SINGLE, size: 6, color: '8A94A6'};
 const semBordas = {top: SEM, bottom: SEM, left: SEM, right: SEM, insideHorizontal: SEM, insideVertical: SEM};
-const linhaResposta = () => new Paragraph({spacing: {before: 130, after: 0}, tabStops: [{type: TabStopType.RIGHT, position: LARG, leader: LeaderType.UNDERSCORE}], children: [tab()]});
-const linhaRotulo = rot => new Paragraph({spacing: {before: 130, after: 0}, tabStops: [{type: TabStopType.RIGHT, position: LARG, leader: LeaderType.UNDERSCORE}], children: [t(rot + ' ', {bold: true, size: 20}), tab()]});
+const linhaResposta = () => new Paragraph({spacing: {before: 125, after: 0}, tabStops: [{type: TabStopType.RIGHT, position: LARG, leader: LeaderType.UNDERSCORE}], children: [tab()]});
+const linhaRotulo = rot => new Paragraph({spacing: {before: 125, after: 0}, tabStops: [{type: TabStopType.RIGHT, position: LARG, leader: LeaderType.UNDERSCORE}], children: [t(rot + ' ', {bold: true, size: 20}), tab()]});
 const rodape = txt => ({default: new Footer({children: [new Paragraph({alignment: AlignmentType.CENTER, children: [
   t(txt + ' • página ', {size: 16, color: '777777'}), new TextRun({children: [PageNumber.CURRENT], size: 16, color: '777777'}),
   t(' de ', {size: 16, color: '777777'}), new TextRun({children: [PageNumber.TOTAL_PAGES], size: 16, color: '777777'})]})]})});
@@ -41,44 +42,46 @@ function celulaCab(partes, larg, span){
     children: [new Paragraph({children: partes.map(([txt, neg]) => t(txt, {bold: !!neg, size: 19}))})]});
 }
 function cabecalho(){
-  const c1 = Math.round(LARG * 0.66), c2 = LARG - c1;
-  const linha = (a, b) => new TableRow({height: {value: 390, rule: HeightRule.ATLEAST}, children: [celulaCab(a, c1), celulaCab(b, c2)]});
+  const c1 = Math.round(LARG * 0.62), c2 = LARG - c1;
+  const linha = (a, b) => new TableRow({height: {value: 340, rule: HeightRule.ATLEAST}, children: [celulaCab(a, c1), celulaCab(b, c2)]});
   return new Table({width: {size: LARG, type: WidthType.DXA}, columnWidths: [c1, c2], rows: [
-    linha([['Escola: ', 1]], [['Data: ', 1], ['____/____/______']]),
-    linha([['Aluno(a): ', 1]], [['Turma: ', 1], ['_______  '], ['Nº: ', 1], ['_____']]),
-    linha([['Professor(a): ', 1]], [['Nota: ', 1]])]});
+    linha([['Escola: ', 1]], [['Professor(a): ', 1]]),
+    linha([['Aluno(a): ', 1]], [['Turma: ', 1], ['______ '], ['Nº: ', 1], ['____ '], ['Data: ', 1], ['___/___ '], ['Nota: ', 1]])]});
 }
 function faixa(txt){
-  return new Paragraph({spacing: {before: 140, after: 40}, children: [t(txt.toUpperCase(), {bold: true, size: 17, color: AZUL, characterSpacing: 10})]});
+  return new Paragraph({spacing: {before: 90, after: 20}, children: [t(txt.toUpperCase(), {bold: true, size: 17, color: AZUL, characterSpacing: 10})]});
 }
-function titulo(txt){
-  return new Paragraph({heading: HeadingLevel.HEADING_1, border: {bottom: {style: BorderStyle.SINGLE, size: 10, color: AZUL, space: 3}}, children: [t(txt, {font: FONTE, size: 28, bold: true, color: AZUL})]});
+function titulo(txt, novaPagina){
+  return new Paragraph({heading: HeadingLevel.HEADING_1, pageBreakBefore: !!novaPagina, border: {bottom: {style: BorderStyle.SINGLE, size: 10, color: AZUL, space: 3}}, children: [t(txt, {font: FONTE, size: 26, bold: true, color: AZUL})]});
 }
 function instrucao(txt){
-  return new Paragraph({spacing: {before: 60, after: 80}, children: [t(txt, {italics: true, size: 18, color: '444444'})]});
+  return new Paragraph({spacing: {before: 30, after: 50}, children: [t(txt, {italics: true, size: 18, color: '444444'})]});
 }
 
 // ---------- tipos de questão ----------
 function opcoes(op, letras){
   const rot = op.map((o, i) => (letras || 'abcd')[i] + ') ' + o);
   const soma = rot.reduce((s, r) => s + r.length, 0), maior = Math.max(...rot.map(r => r.length));
-  const P = (itens, colunas) => new Paragraph({spacing: {before: 20, after: 20}, indent: {left: 300}, keepLines: true,
+  const P = (itens, colunas) => new Paragraph({spacing: {before: 10, after: 0}, indent: {left: 300}, keepLines: true,
     tabStops: colunas.map(c => ({type: TabStopType.LEFT, position: c})), children: itens.flatMap((r, i) => i ? [tab(), t('( ) ' + r)] : [t('( ) ' + r)])});
-  if (soma <= 72 && maior <= 20) return [P(rot, [LARG / 4, LARG / 2, 3 * LARG / 4].map(Math.round))];
-  if (maior <= 42) return [P(rot.slice(0, 2), [Math.round(LARG / 2)]), P(rot.slice(2), [Math.round(LARG / 2)])];
+  if (soma <= 80 && maior <= 22) return [P(rot, [LARG / 4, LARG / 2, 3 * LARG / 4].map(Math.round))];
+  if (maior <= 46) return [P(rot.slice(0, 2), [Math.round(LARG / 2)]), P(rot.slice(2), [Math.round(LARG / 2)])];
   return rot.map(r => P([r], []));
 }
-function caixaTexto(q, de, ate){
-  const aviso = q.para > 1 ? `Leia o texto para responder às questões ${de} a ${ate}.` : `Leia o texto para responder à questão ${de}.`;
+function caixaTexto(q, de, ate, pequeno, semAviso){
+  // o aviso "questões X a Y" fica na mesma linha do título, dentro da caixa (economiza espaço na folha)
+  const aviso = semAviso ? '' : (q.para > 1 ? `questões ${de} a ${ate}` : `questão ${de}`);
   const dentro = [];
-  if (q.titulo) dentro.push(new Paragraph({alignment: AlignmentType.CENTER, spacing: {after: 60}, children: [t(q.titulo, {bold: true, size: 21})]}));
-  String(q.texto).split('\n').filter(p => p.trim()).forEach(p => dentro.push(new Paragraph({alignment: AlignmentType.JUSTIFIED, spacing: {after: 50, line: 264}, children: [t(p.trim(), {size: 20})]})));
-  if (q.fonte) dentro.push(new Paragraph({alignment: AlignmentType.RIGHT, spacing: {before: 30}, children: [t(q.fonte, {italics: true, size: 16, color: '555555'})]}));
+  const cab = [];
+  if (q.titulo) cab.push(t(q.titulo, {bold: true, size: 20}));
+  if (aviso) cab.push(t((q.titulo ? '   •   ' : '') + (q.titulo ? 'para as ' : 'Leia o texto para responder às ') + aviso, {bold: !q.titulo, size: q.titulo ? 17 : 19, color: AZUL}));
+  if (cab.length) dentro.push(new Paragraph({alignment: AlignmentType.CENTER, spacing: {after: 30}, keepNext: true, children: cab}));
+  String(q.texto).split('\n').filter(p => p.trim()).forEach(p => dentro.push(new Paragraph({alignment: AlignmentType.JUSTIFIED, spacing: {after: 30, line: 240}, children: [t(p.trim(), {size: pequeno ? 18 : 19})]})));
+  if (q.fonte) dentro.push(new Paragraph({alignment: AlignmentType.RIGHT, spacing: {before: 20}, children: [t(q.fonte, {italics: true, size: 15, color: '555555'})]}));
   return [
-    new Paragraph({spacing: {before: 160, after: 50}, keepNext: true, children: [t(aviso, {bold: true, size: 20, color: AZUL})]}),
     new Table({width: {size: LARG, type: WidthType.DXA}, columnWidths: [LARG], rows: [new TableRow({cantSplit: true, children: [new TableCell({
       width: {size: LARG, type: WidthType.DXA}, shading: {type: ShadingType.CLEAR, fill: 'F2F5FA', color: 'auto'},
-      margins: {top: 90, bottom: 90, left: 170, right: 170},
+      margins: {top: 60, bottom: 60, left: 160, right: 160},
       borders: {top: SEM, bottom: SEM, right: SEM, left: {style: BorderStyle.SINGLE, size: 24, color: AZUL}}, children: dentro})]})]})];
 }
 function bancoPalavras(lista){
@@ -88,16 +91,16 @@ function bancoPalavras(lista){
 function colunas(q){
   const metade = Math.round(LARG / 2), n = Math.max(q.esquerda.length, q.direita.length);
   const cel = (txt, larg) => new TableCell({width: {size: larg, type: WidthType.DXA}, borders: {top: SEM, bottom: SEM, left: SEM, right: SEM},
-    margins: {top: 20, bottom: 20, left: 80, right: 80}, children: [new Paragraph({children: [t(txt, {size: 21})]})]});
+    margins: {top: 10, bottom: 10, left: 80, right: 80}, children: [new Paragraph({children: [t(txt, {size: 20})]})]});
   return new Table({width: {size: LARG, type: WidthType.DXA}, columnWidths: [metade, LARG - metade], borders: semBordas, rows:
     Array.from({length: n}, (_, i) => new TableRow({cantSplit: true, children: [
       cel(q.esquerda[i] ? `(${i + 1}) ${q.esquerda[i]}` : '', metade), cel(q.direita[i] ? `(     ) ${q.direita[i]}` : '', LARG - metade)]}))});
 }
 // devolve os parágrafos de uma questão (num = número impresso)
 function questao(q, num, extra, letras){
-  const out = [new Paragraph({spacing: {before: 130, after: 40}, keepNext: true, children: [t(num + '. ', {bold: true}), ...corridos(q.enunciado)]})];
+  const out = [new Paragraph({spacing: {before: 75, after: 20}, keepNext: true, children: [t(num + '. ', {bold: true}), ...corridos(q.enunciado)]})];
   if (q.tipo === 'me') out.push(...opcoes(q.opcoes, letras));
-  else if (q.tipo === 'vf') q.itens.forEach(it => out.push(new Paragraph({spacing: {before: 20, after: 20}, indent: {left: 300, hanging: 0}, keepLines: true, children: [t('(     )  '), t(it)]})));
+  else if (q.tipo === 'vf') q.itens.forEach(it => out.push(new Paragraph({spacing: {before: 10, after: 0}, indent: {left: 300, hanging: 0}, keepLines: true, children: [t('(     )  '), t(it)]})));
   else if (q.tipo === 'colunas') out.push(colunas(q));
   else {
     if (q.banco) out.push(bancoPalavras(q.banco));
@@ -118,23 +121,21 @@ function numerar(lista){
 function folha(e){
   const aj = Object.assign({extra: 1, prod: 8}, AJ[e.n] || {});
   const filhos = [cabecalho(), faixa(`Língua Portuguesa  •  Encontro ${dois(e.n)}  •  ${e.bloco}`), titulo(e.titulo),
-    instrucao('Leia com atenção e consulte o que você copiou do quadro. Nas questões de múltipla escolha, marque um X em uma só alternativa; nas outras, responda nas linhas, com letra legível.')];
+    instrucao('Consulte o que você copiou do quadro. Marque um X em uma só alternativa; nas outras questões, responda nas linhas.')];
   const nums = numerar(e.questoes);
-  nums.forEach(({q, num, de, ate}) => { if (q.tipo === 'texto') filhos.push(...caixaTexto(q, de, ate)); else filhos.push(...questao(q, num, aj.extra)); });
+  const pequeno = ehRedacao(e) || aj.auto === 0;
+  nums.forEach(({q, num, de, ate}) => { if (q.tipo === 'texto') filhos.push(...caixaTexto(q, de, ate, pequeno)); else filhos.push(...questao(q, num, aj.extra)); });
   const np = nums.filter(x => x.num).length + 1;
   if (ehRedacao(e)){
-    filhos.push(new Paragraph({spacing: {before: 200, after: 40}, keepNext: true, children: [t(np + '. ✍️ Planejamento da redação: ', {bold: true}), t(e.producao + ' Antes de escrever, planeje aqui:')]}));
-    const k = Math.max(1, Math.round(aj.prod / 4));
-    [['Tese (seu ponto de vista):'], ['Argumento 1 + repertório:'], ['Argumento 2 + repertório:'], ['Proposta (agente, ação, meio, finalidade, detalhamento):']].forEach(([r]) => {
-      filhos.push(linhaRotulo(r)); for (let i = 1; i < k; i++) filhos.push(linhaResposta());
-    });
+    filhos.push(new Paragraph({spacing: {before: 140, after: 0}, children: [t(np + '. ✍️ Redação: ', {bold: true}), t('na Folha de redação, escreva um texto dissertativo-argumentativo sobre o tema deste encontro (20 a 30 linhas), com proposta de intervenção que respeite os direitos humanos. Planeje no verso da folha.')]}));
   } else {
-    filhos.push(new Paragraph({spacing: {before: 200, after: 40}, keepNext: true, children: [t(np + '. ✍️ Produção: ', {bold: true}), t(e.producao)]}));
+    filhos.push(new Paragraph({spacing: {before: 160, after: 40}, keepNext: true, children: [t(np + '. ✍️ Produção: ', {bold: true}), t(e.producao + (aj.prod < 6 ? ' (Se precisar, continue no caderno.)' : ''))]}));
     for (let k = 0; k < aj.prod; k++) filhos.push(linhaResposta());
   }
-  filhos.push(new Paragraph({spacing: {before: 160}, children: [t('Como me saí nesta folha:   (   ) entendi tudo     (   ) tenho algumas dúvidas     (   ) preciso de ajuda', {size: 17, color: '555555'})]}));
+  for (let k = 0; k < FOLGA; k++) filhos.push(linhaResposta());   // só na medição (ajustar.py): garante folga para o Word
+  if (aj.auto !== 0) filhos.push(new Paragraph({spacing: {before: 140}, children: [t('Como me saí nesta folha:   (   ) entendi tudo     (   ) tenho algumas dúvidas     (   ) preciso de ajuda', {size: 17, color: '555555'})]}));
   return new Document({creator: 'Painel de Aula', title: 'Encontro ' + dois(e.n) + ': ' + e.titulo, styles: estilos,
-    sections: [{properties: pagina, footers: rodape(`Português em ${TOTAL} encontros • Encontro ${dois(e.n)}`), children: filhos}]});
+    sections: [{properties: pagina, footers: rodape(`Português em ${TOTAL} encontros • Encontro ${dois(e.n)}` + (e.bncc && e.bncc.length ? ' • BNCC: ' + e.bncc.slice(0, 4).map(b => b.codigo).join(', ') + (e.bncc.length > 4 ? '…' : '') : '')), children: filhos}]});
 }
 
 // ---------- guia do professor ----------
@@ -154,11 +155,23 @@ function guia(){
     new Paragraph({heading: HeadingLevel.HEADING_1, children: [t('Guia do professor: ' + dados.titulo)]}),
     new Paragraph({spacing: {after: 120}, children: [t('Cada encontro tem ' + dados.duracao + '. Para cada um: o plano das duas aulas, o aquecimento, o que passar no quadro e o gabarito da folha de atividade. As provas por bloco e o gabarito delas estão em arquivos separados (prova-N-A.docx, prova-N-B.docx e gabarito-das-provas.docx).')]}),
   ];
+  if (dados.bncc){
+    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('BNCC: habilidades trabalhadas e em quais encontros')]}));
+    filhos.push(new Paragraph({spacing: {after: 80}, children: [t('Resumo das habilidades de Língua Portuguesa (EF = anos finais do Ensino Fundamental; EM13LP = Ensino Médio, útil para a EJA e o ENEM). O texto integral está no documento oficial da BNCC.', {italics: true, size: 19})]}));
+    const cb = [1300, LARG - 1300 - 1700, 1700];
+    filhos.push(new Table({width: {size: LARG, type: WidthType.DXA}, columnWidths: cb, rows: [
+      new TableRow({tableHeader: true, children: [celula('Código', cb[0], true), celula('Habilidade (resumo)', cb[1], true), celula('Encontros', cb[2], true)]}),
+      ...Object.keys(dados.bncc).map(c => new TableRow({cantSplit: true, children: [celula(c, cb[0]), celula(dados.bncc[c], cb[1]),
+        celula(dados.encontros.filter(e => (e.bncc || []).some(b => b.codigo === c)).map(e => e.n).join(', '), cb[2])]}))]}));
+  }
   dados.encontros.forEach((e, idx) => {
-    if (idx) filhos.push(new Paragraph({children: [new PageBreak()]}));
     const nums = numerar(e.questoes), nq = nums.filter(x => x.num).length;
-    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_1, children: [t('Encontro ' + dois(e.n) + ' • ' + e.titulo)]}));
+    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_1, pageBreakBefore: !!(idx || dados.bncc), children: [t('Encontro ' + dois(e.n) + ' • ' + e.titulo)]}));
     filhos.push(new Paragraph({children: [t('Bloco: ', {bold: true}), t(e.bloco + '   •   ' + nq + ' questões na folha')]}));
+    if (e.bncc && e.bncc.length){
+      filhos.push(new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Habilidades da BNCC')]}));
+      e.bncc.forEach(b => filhos.push(new Paragraph({indent: {left: 300}, spacing: {after: 30}, children: [t(b.codigo + ': ', {bold: true, size: 20}), t(b.descricao, {size: 20})]})));
+    }
     filhos.push(new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Plano das duas aulas')]}));
     const plano = e.plano || dados.plano;
     filhos.push(new Table({width: {size: LARG, type: WidthType.DXA}, columnWidths: cols, rows: [
@@ -216,13 +229,18 @@ function paginaRedacao(tema){
     linhasNumeradas(30)];
 }
 function paginaGrade(){
-  return [new Paragraph({children: [new PageBreak()]}), titulo('Grade de correção e revisão'),
-    instrucao('O professor (ou um colega, na correção em dupla) dá a nota de cada competência. Antes de entregar, confira o checklist.'),
+  return [titulo('Planejamento, grade de correção e revisão', true),
+    new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Planejamento (antes de escrever)')]}),
+    linhaRotulo('Tese (seu ponto de vista):'), linhaResposta(),
+    linhaRotulo('Argumento 1 + repertório:'), linhaResposta(),
+    linhaRotulo('Argumento 2 + repertório:'), linhaResposta(),
+    linhaRotulo('Proposta (agente, ação, meio, finalidade, detalhamento):'), linhaResposta(),
+    new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Grade de correção (ENEM)')]}),
     gradeCorrecao(),
     new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Checklist antes de entregar')]}),
-    ...CHECKLIST.map(c => new Paragraph({spacing: {before: 50, after: 30}, children: [t('☐  ', {size: 24}), t(c, {size: 20})]})),
+    ...CHECKLIST.map(c => new Paragraph({spacing: {before: 30, after: 0}, children: [t('☐  ', {size: 22}), t(c, {size: 19})]})),
     new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Comentários do professor')]}),
-    ...Array.from({length: 6}, linhaResposta)];
+    ...Array.from({length: 3}, linhaResposta)];
 }
 function folhaRedacao(){
   return new Document({creator: 'Painel de Aula', title: 'Folha de redação', styles: estilos,
@@ -308,13 +326,13 @@ function prova(p, letra, sel){
   if (simulado) filhos.push(new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Parte 1: questões objetivas')]}));
   nums.forEach(({q, num, de, ate}) => { if (q.tipo === 'texto') filhos.push(...caixaTexto(q, de, ate)); else filhos.push(...questao(q, num, 1)); });
   if (simulado){
-    filhos.push(new Paragraph({children: [new PageBreak()]}), new Paragraph({heading: HeadingLevel.HEADING_2, children: [t('Parte 2: proposta de redação')]}));
-    SIMULADO.textos.forEach(x => filhos.push(...caixaTexto(Object.assign({para: 1}, x), 0, 0).slice(1), new Paragraph({spacing: {after: 60}})));
+    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_2, pageBreakBefore: true, children: [t('Parte 2: proposta de redação')]}));
+    SIMULADO.textos.forEach(x => filhos.push(...caixaTexto(Object.assign({para: 1}, x), 0, 0, false, true), new Paragraph({spacing: {after: 60}})));
     filhos.push(new Paragraph({spacing: {before: 80, after: 80}, alignment: AlignmentType.JUSTIFIED, border: {top: FINA, bottom: FINA, left: FINA, right: FINA},
       children: [t('Proposta: ', {bold: true}), t(SIMULADO.instrucao)]}));
     filhos.push(new Paragraph({children: [t('Use o espaço abaixo como rascunho e passe a limpo na Folha de redação (página seguinte).', {italics: true, size: 18})]}));
     for (let i = 0; i < 6; i++) filhos.push(linhaResposta());
-    filhos.push(new Paragraph({children: [new PageBreak()]}), ...paginaRedacao(SIMULADO.tema));
+    filhos.push(new Paragraph({pageBreakBefore: true, spacing: {before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT}, children: [t('', {size: 2})]}), ...paginaRedacao(SIMULADO.tema));
   }
   return {doc: new Document({creator: 'Painel de Aula', title: `Prova ${p.n} (versão ${letra}): ${p.titulo}`, styles: estilos,
     sections: [{properties: pagina, footers: rodape(`Prova ${p.n} • Versão ${letra} • Português em ${TOTAL} encontros`), children: filhos}]}), nums};
@@ -323,8 +341,7 @@ function gabaritoProvas(resultados){
   const filhos = [new Paragraph({heading: HeadingLevel.HEADING_1, children: [t('Gabarito das provas • Português em ' + TOTAL + ' encontros')]}),
     instrucao('Cada prova tem duas versões com as mesmas questões em outra ordem e com as alternativas trocadas. Confira a versão escrita no alto da folha do aluno.')];
   resultados.forEach(({p, A, B}, i) => {
-    if (i) filhos.push(new Paragraph({children: [new PageBreak()]}));
-    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_1, children: [t(`Prova ${p.n}: ${p.titulo} (encontros ${p.de} a ${p.ate})`)]}));
+    filhos.push(new Paragraph({heading: HeadingLevel.HEADING_1, pageBreakBefore: i > 0, children: [t(`Prova ${p.n}: ${p.titulo} (encontros ${p.de} a ${p.ate})`)]}));
     const meA = A.filter(x => x.num && x.q.tipo === 'me'), meB = B.filter(x => x.num && x.q.tipo === 'me');
     const c = [1400, 1800, 1800];
     filhos.push(new Table({width: {size: c[0] + c[1] + c[2], type: WidthType.DXA}, columnWidths: c, rows: [
