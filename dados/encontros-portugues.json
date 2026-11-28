@@ -1,6 +1,16 @@
 {
- "titulo": "Português em 30 encontros: da ortografia à sintaxe",
+ "titulo": "Português em 30 encontros: da ortografia à redação",
  "duracao": "2 aulas de 50 minutos",
+ "partes": [
+  {
+   "n": 1,
+   "titulo": "Encontros 1 a 30: da ortografia à sintaxe"
+  },
+  {
+   "n": 2,
+   "titulo": "Encontros 31 a 90: leitura, conectivos, argumentação e redação"
+  }
+ ],
  "plano": [
   {
    "aula": 1,
@@ -36,6 +46,26 @@
    "fim": 100,
    "etapa": "Correção",
    "como": "Correção coletiva com o gabarito no projetor (painel) ou no guia do professor."
+  }
+ ],
+ "provas": [
+  {
+   "n": 1,
+   "titulo": "Fonologia, ortografia, acentuação e pontuação",
+   "de": 1,
+   "ate": 10
+  },
+  {
+   "n": 2,
+   "titulo": "Morfologia: as classes de palavras",
+   "de": 11,
+   "ate": 21
+  },
+  {
+   "n": 3,
+   "titulo": "Sintaxe",
+   "de": 22,
+   "ate": 30
   }
  ],
  "encontros": [
@@ -78,67 +108,67 @@
      "tipo": "me",
      "enunciado": "Qual palavra tem MAIS fonemas do que letras?",
      "opcoes": [
-      "táxi",
       "casa",
       "carro",
+      "táxi",
       "pato"
      ],
-     "resposta": "a) táxi"
+     "resposta": "c) táxi"
     },
     {
      "tipo": "me",
      "enunciado": "Em qual palavra há dígrafo?",
      "opcoes": [
-      "prato",
       "blusa",
-      "ninho",
-      "planta"
+      "prato",
+      "planta",
+      "ninho"
      ],
-     "resposta": "c) ninho"
+     "resposta": "d) ninho"
     },
     {
      "tipo": "me",
      "enunciado": "Em qual palavra há encontro consonantal?",
      "opcoes": [
-      "chuva",
-      "galho",
       "braço",
+      "galho",
+      "chuva",
       "massa"
      ],
-     "resposta": "c) braço"
+     "resposta": "a) braço"
     },
     {
      "tipo": "me",
      "enunciado": "Em “guerra” há:",
      "opcoes": [
-      "um dígrafo",
-      "dois dígrafos (gu e rr)",
+      "nenhum dígrafo",
       "encontro consonantal",
-      "nenhum dígrafo"
+      "dois dígrafos (gu e rr)",
+      "um dígrafo"
      ],
-     "resposta": "b) dois dígrafos (gu e rr)"
+     "resposta": "c) dois dígrafos (gu e rr)"
     },
     {
      "tipo": "me",
      "enunciado": "Em qual palavra o U é pronunciado (não forma dígrafo)?",
      "opcoes": [
-      "queijo",
       "guitarra",
       "aguentar",
+      "queijo",
       "foguete"
      ],
-     "resposta": "c) aguentar"
+     "resposta": "b) aguentar"
     },
     {
      "tipo": "me",
      "enunciado": "Troque uma letra e forme outra palavra: “pato” → “bato”. Isso mostra que P e B são:",
      "opcoes": [
-      "letras iguais",
       "fonemas diferentes",
       "dígrafos",
+      "letras iguais",
       "sílabas"
      ],
-     "resposta": "b) fonemas diferentes"
+     "resposta": "a) fonemas diferentes"
     },
     {
      "tipo": "escrita",
@@ -195,7 +225,8 @@
      "resposta": "Ex.: bala/fala; medo; fila/pila."
     }
    ],
-   "producao": "Escreva 4 frases usando palavras com dígrafos (ch, lh, nh, rr, ss, qu). Sublinhe os dígrafos."
+   "producao": "Escreva 4 frases usando palavras com dígrafos (ch, lh, nh, rr, ss, qu). Sublinhe os dígrafos.",
+   "parte": 1
   },
   {
    "n": 2,
@@ -224,12 +255,12 @@
      "tipo": "me",
      "enunciado": "Qual palavra tem ditongo?",
      "opcoes": [
-      "saúde",
       "país",
       "pai",
-      "poeta"
+      "poeta",
+      "saúde"
      ],
-     "resposta": "c) pai"
+     "resposta": "b) pai"
     },
     {
      "tipo": "me",
@@ -247,8 +278,8 @@
      "enunciado": "Qual palavra tem tritongo?",
      "opcoes": [
       "Uruguai",
-      "dia",
       "baú",
+      "dia",
       "rei"
      ],
      "resposta": "a) Uruguai"
@@ -257,56 +288,56 @@
      "tipo": "me",
      "enunciado": "Qual é a divisão correta de “pássaro”?",
      "opcoes": [
-      "pá-ssa-ro",
-      "pás-sa-ro",
       "páss-a-ro",
-      "pá-ss-a-ro"
+      "pá-ss-a-ro",
+      "pá-ssa-ro",
+      "pás-sa-ro"
      ],
-     "resposta": "b) pás-sa-ro"
+     "resposta": "d) pás-sa-ro"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é a divisão correta de “carroça”?",
      "opcoes": [
-      "ca-rro-ça",
       "car-ro-ça",
+      "ca-rr-o-ça",
       "carr-o-ça",
-      "ca-rr-o-ça"
+      "ca-rro-ça"
      ],
-     "resposta": "b) car-ro-ça"
+     "resposta": "a) car-ro-ça"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é a divisão correta de “filho”?",
      "opcoes": [
-      "fil-ho",
-      "fi-lho",
       "f-ilho",
-      "fi-l-ho"
+      "fi-l-ho",
+      "fi-lho",
+      "fil-ho"
      ],
-     "resposta": "b) fi-lho"
+     "resposta": "c) fi-lho"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é a divisão correta de “nascer”?",
      "opcoes": [
-      "na-scer",
-      "nas-cer",
       "nasc-er",
-      "n-as-cer"
+      "na-scer",
+      "n-as-cer",
+      "nas-cer"
      ],
-     "resposta": "b) nas-cer"
+     "resposta": "d) nas-cer"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra está dividida corretamente?",
      "opcoes": [
-      "ad-vo-ga-do",
       "a-dvo-ga-do",
-      "adv-o-ga-do",
-      "a-d-vo-ga-do"
+      "ad-vo-ga-do",
+      "a-d-vo-ga-do",
+      "adv-o-ga-do"
      ],
-     "resposta": "a) ad-vo-ga-do"
+     "resposta": "b) ad-vo-ga-do"
     },
     {
      "tipo": "escrita",
@@ -357,7 +388,8 @@
      "resposta": "sub-so-lo; rit-mo; ál-co-ol."
     }
    ],
-   "producao": "Escreva um pequeno texto sobre a sua rua. Depois, separe as sílabas de três palavras do seu texto."
+   "producao": "Escreva um pequeno texto sobre a sua rua. Depois, separe as sílabas de três palavras do seu texto.",
+   "parte": 1
   },
   {
    "n": 3,
@@ -388,21 +420,21 @@
      "tipo": "me",
      "enunciado": "Em “jacaré”, a sílaba tônica é:",
      "opcoes": [
-      "ja",
-      "ca",
       "ré",
-      "nenhuma"
+      "ja",
+      "nenhuma",
+      "ca"
      ],
-     "resposta": "c) ré"
+     "resposta": "a) ré"
     },
     {
      "tipo": "me",
      "enunciado": "“Mesa” é uma palavra:",
      "opcoes": [
-      "oxítona",
+      "monossílaba átona",
       "paroxítona",
-      "proparoxítona",
-      "monossílaba átona"
+      "oxítona",
+      "proparoxítona"
      ],
      "resposta": "b) paroxítona"
     },
@@ -411,55 +443,55 @@
      "enunciado": "Qual palavra é proparoxítona?",
      "opcoes": [
       "café",
-      "lâmpada",
       "caderno",
+      "lâmpada",
       "amor"
      ],
-     "resposta": "b) lâmpada"
+     "resposta": "c) lâmpada"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra é oxítona?",
      "opcoes": [
-      "livro",
+      "árvore",
       "fácil",
-      "sofá",
-      "árvore"
+      "livro",
+      "sofá"
      ],
-     "resposta": "c) sofá"
+     "resposta": "d) sofá"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra é paroxítona?",
      "opcoes": [
-      "médico",
       "útil",
+      "médico",
       "você",
       "Paraná"
      ],
-     "resposta": "b) útil"
+     "resposta": "a) útil"
     },
     {
      "tipo": "me",
      "enunciado": "Em “sabiá”, “sábia” e “sabia”, o que muda é:",
      "opcoes": [
-      "a sílaba tônica",
-      "o número de letras",
       "as vogais",
-      "nada"
+      "o número de letras",
+      "nada",
+      "a sílaba tônica"
      ],
-     "resposta": "a) a sílaba tônica"
+     "resposta": "d) a sílaba tônica"
     },
     {
      "tipo": "me",
      "enunciado": "Qual grupo tem só proparoxítonas?",
      "opcoes": [
-      "pássaro, música, último",
       "café, sofá, você",
-      "casa, bola, mesa",
-      "fácil, lápis, útil"
+      "fácil, lápis, útil",
+      "pássaro, música, último",
+      "casa, bola, mesa"
      ],
-     "resposta": "a) pássaro, música, último"
+     "resposta": "c) pássaro, música, último"
     },
     {
      "tipo": "escrita",
@@ -516,7 +548,8 @@
      "resposta": "Oxítona: Brasil, tatu. Paroxítona: janela, carro. Proparoxítona: mágico, sílaba."
     }
    ],
-   "producao": "Escreva 5 frases sobre o seu dia, cada uma com uma palavra proparoxítona. Sublinhe essas palavras."
+   "producao": "Escreva 5 frases sobre o seu dia, cada uma com uma palavra proparoxítona. Sublinhe essas palavras.",
+   "parte": 1
   },
   {
    "n": 4,
@@ -548,9 +581,9 @@
      "tipo": "me",
      "enunciado": "Complete: pá___aro",
      "opcoes": [
-      "s",
-      "ss",
       "ç",
+      "ss",
+      "s",
       "c"
      ],
      "resposta": "b) ss"
@@ -570,43 +603,43 @@
      "tipo": "me",
      "enunciado": "Complete: ___ebola",
      "opcoes": [
-      "s",
+      "c",
       "ss",
       "ç",
-      "c"
+      "s"
      ],
-     "resposta": "d) c"
+     "resposta": "a) c"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: na___er",
      "opcoes": [
-      "s",
       "ss",
-      "sc",
-      "ç"
+      "s",
+      "ç",
+      "sc"
      ],
-     "resposta": "c) sc"
+     "resposta": "d) sc"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: rapide___",
      "opcoes": [
-      "s",
-      "z",
       "ç",
-      "ss"
+      "ss",
+      "z",
+      "s"
      ],
-     "resposta": "b) z"
+     "resposta": "c) z"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: portugue___",
      "opcoes": [
       "s",
-      "z",
       "ç",
-      "ss"
+      "ss",
+      "z"
      ],
      "resposta": "a) s"
     },
@@ -614,23 +647,23 @@
      "tipo": "me",
      "enunciado": "Qual palavra está escrita corretamente?",
      "opcoes": [
-      "çapato",
-      "sapato",
+      "capato",
       "ssapato",
-      "capato"
+      "çapato",
+      "sapato"
      ],
-     "resposta": "b) sapato"
+     "resposta": "d) sapato"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra está escrita corretamente?",
      "opcoes": [
-      "piscina",
       "pissina",
-      "picina",
-      "piçina"
+      "piscina",
+      "piçina",
+      "picina"
      ],
-     "resposta": "a) piscina"
+     "resposta": "b) piscina"
     },
     {
      "tipo": "escrita",
@@ -687,7 +720,8 @@
      "resposta": "assento (ou acento); rosa; caçador; crescer."
     }
    ],
-   "producao": "Escreva um bilhete para um colega usando pelo menos 6 palavras com S, SS, Ç, SC ou Z. Circule-as."
+   "producao": "Escreva um bilhete para um colega usando pelo menos 6 palavras com S, SS, Ç, SC ou Z. Circule-as.",
+   "parte": 1
   },
   {
    "n": 5,
@@ -721,9 +755,9 @@
      "enunciado": "Complete: via___em (substantivo)",
      "opcoes": [
       "g",
+      "ch",
       "j",
-      "x",
-      "ch"
+      "x"
      ],
      "resposta": "a) g"
     },
@@ -732,77 +766,77 @@
      "enunciado": "Complete: Espero que eles via___em amanhã. (verbo)",
      "opcoes": [
       "g",
-      "j",
       "x",
+      "j",
       "ch"
      ],
-     "resposta": "b) j"
+     "resposta": "c) j"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: pei___e",
      "opcoes": [
+      "z",
       "x",
       "ch",
-      "s",
-      "z"
+      "s"
      ],
-     "resposta": "a) x"
+     "resposta": "b) x"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: en___ada",
      "opcoes": [
-      "x",
-      "ch",
       "s",
-      "j"
+      "j",
+      "ch",
+      "x"
      ],
-     "resposta": "a) x"
+     "resposta": "d) x"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra NÃO tem H?",
      "opcoes": [
+      "homem",
       "hoje",
       "hora",
-      "ontem",
-      "homem"
+      "ontem"
      ],
-     "resposta": "c) ontem"
+     "resposta": "d) ontem"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: ca___po",
      "opcoes": [
-      "n",
       "m",
-      "nn",
-      "mm"
+      "n",
+      "mm",
+      "nn"
      ],
-     "resposta": "b) m"
+     "resposta": "a) m"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: hon___a",
      "opcoes": [
+      "nenhuma letra",
       "r",
-      "rr",
       "h",
-      "nenhuma letra"
+      "rr"
      ],
-     "resposta": "a) r"
+     "resposta": "b) r"
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "ferrujem",
-      "ferrugem",
       "feruge",
-      "ferrujen"
+      "ferrujen",
+      "ferrugem",
+      "ferrujem"
      ],
-     "resposta": "b) ferrugem"
+     "resposta": "c) ferrugem"
     },
     {
      "tipo": "escrita",
@@ -853,7 +887,8 @@
      "resposta": "Ontem o homem enxugou o carro na garagem."
     }
    ],
-   "producao": "Escreva uma pequena receita usando palavras com G/J, X/CH e M antes de P e B. Circule essas palavras."
+   "producao": "Escreva uma pequena receita usando palavras com G/J, X/CH e M antes de P e B. Circule essas palavras.",
+   "parte": 1
   },
   {
    "n": 6,
@@ -885,76 +920,76 @@
      "tipo": "me",
      "enunciado": "___ você chegou atrasado?",
      "opcoes": [
+      "Porquê",
       "Por que",
-      "Porque",
       "Por quê",
-      "Porquê"
+      "Porque"
      ],
-     "resposta": "a) Por que"
+     "resposta": "b) Por que"
     },
     {
      "tipo": "me",
      "enunciado": "Cheguei atrasado ___ perdi o ônibus.",
      "opcoes": [
-      "por que",
-      "porque",
       "por quê",
-      "porquê"
+      "por que",
+      "porquê",
+      "porque"
      ],
-     "resposta": "b) porque"
+     "resposta": "d) porque"
     },
     {
      "tipo": "me",
      "enunciado": "Você não veio ___?",
      "opcoes": [
-      "por que",
-      "porque",
       "por quê",
+      "porque",
+      "por que",
       "porquê"
      ],
-     "resposta": "c) por quê"
+     "resposta": "a) por quê"
     },
     {
      "tipo": "me",
      "enunciado": "Ninguém entendeu o ___ da briga.",
      "opcoes": [
-      "por que",
-      "porque",
       "por quê",
-      "porquê"
+      "por que",
+      "porquê",
+      "porque"
      ],
-     "resposta": "d) porquê"
+     "resposta": "c) porquê"
     },
     {
      "tipo": "me",
      "enunciado": "Queria ir, ___ choveu.",
      "opcoes": [
+      "mau",
       "mas",
       "mais",
-      "más",
-      "mau"
+      "más"
      ],
-     "resposta": "a) mas"
+     "resposta": "b) mas"
     },
     {
      "tipo": "me",
      "enunciado": "Ele é um ___ aluno? Não, é ótimo!",
      "opcoes": [
+      "mas",
       "mal",
       "mau",
-      "mais",
-      "mas"
+      "mais"
      ],
-     "resposta": "b) mau"
+     "resposta": "c) mau"
     },
     {
      "tipo": "me",
      "enunciado": "Ela dormiu ___ esta noite.",
      "opcoes": [
       "mal",
+      "mais",
       "mau",
-      "mas",
-      "mais"
+      "mas"
      ],
      "resposta": "a) mal"
     },
@@ -962,21 +997,21 @@
      "tipo": "me",
      "enunciado": "Moro aqui ___ cinco anos.",
      "opcoes": [
-      "a",
-      "há",
+      "ah",
       "à",
-      "ah"
+      "a",
+      "há"
      ],
-     "resposta": "b) há"
+     "resposta": "d) há"
     },
     {
      "tipo": "me",
      "enunciado": "___ você vai com tanta pressa?",
      "opcoes": [
-      "Onde",
+      "Ande",
       "Aonde",
-      "Donde",
-      "Ande"
+      "Onde",
+      "Donde"
      ],
      "resposta": "b) Aonde"
     },
@@ -1029,7 +1064,8 @@
      "resposta": "Quando é substantivo (o motivo), acompanhado de artigo: o porquê."
     }
    ],
-   "producao": "Escreva um diálogo de 4 falas usando “por que”, “porque”, “mas” e “mais”."
+   "producao": "Escreva um diálogo de 4 falas usando “por que”, “porque”, “mas” e “mais”.",
+   "parte": 1
   },
   {
    "n": 7,
@@ -1060,10 +1096,10 @@
      "tipo": "me",
      "enunciado": "Qual palavra está acentuada corretamente?",
      "opcoes": [
-      "tatú",
-      "café",
       "cajú",
-      "caquí"
+      "café",
+      "caquí",
+      "tatú"
      ],
      "resposta": "b) café"
     },
@@ -1071,42 +1107,42 @@
      "tipo": "me",
      "enunciado": "Por que “lâmpada” tem acento?",
      "opcoes": [
-      "é oxítona",
-      "é proparoxítona",
       "termina em A",
-      "tem til"
+      "é oxítona",
+      "tem til",
+      "é proparoxítona"
      ],
-     "resposta": "b) é proparoxítona"
+     "resposta": "d) é proparoxítona"
     },
     {
      "tipo": "me",
      "enunciado": "Qual monossílabo deve ser acentuado?",
      "opcoes": [
+      "sol",
       "mel",
       "pé",
-      "sol",
       "mar"
      ],
-     "resposta": "b) pé"
+     "resposta": "c) pé"
     },
     {
      "tipo": "me",
      "enunciado": "Qual oxítona NÃO leva acento?",
      "opcoes": [
-      "sofá",
-      "você",
       "tatu",
-      "também"
+      "sofá",
+      "também",
+      "você"
      ],
-     "resposta": "c) tatu"
+     "resposta": "a) tatu"
     },
     {
      "tipo": "me",
      "enunciado": "Eles ___ dois cachorros.",
      "opcoes": [
-      "tem",
-      "têm",
       "tém",
+      "têm",
+      "tem",
       "tẽm"
      ],
      "resposta": "b) têm"
@@ -1115,23 +1151,23 @@
      "tipo": "me",
      "enunciado": "Ontem ele não ___ sair.",
      "opcoes": [
-      "pode",
       "pôde",
+      "podé",
       "pôdê",
-      "podé"
+      "pode"
      ],
-     "resposta": "b) pôde"
+     "resposta": "a) pôde"
     },
     {
      "tipo": "me",
      "enunciado": "Vou ___ a mesa para o jantar.",
      "opcoes": [
-      "por",
-      "pôr",
       "pór",
-      "porr"
+      "porr",
+      "por",
+      "pôr"
      ],
-     "resposta": "b) pôr"
+     "resposta": "d) pôr"
     },
     {
      "tipo": "escrita",
@@ -1188,7 +1224,8 @@
      "resposta": "O bebê da vovó comeu café com pão no sábado."
     }
    ],
-   "producao": "Monte o cardápio de uma lanchonete com 6 itens que tenham palavras acentuadas (ex.: café, pão de queijo)."
+   "producao": "Monte o cardápio de uma lanchonete com 6 itens que tenham palavras acentuadas (ex.: café, pão de queijo).",
+   "parte": 1
   },
   {
    "n": 8,
@@ -1219,31 +1256,31 @@
      "tipo": "me",
      "enunciado": "Qual paroxítona deve ser acentuada?",
      "opcoes": [
+      "bolo",
       "mesa",
       "facil",
-      "bolo",
       "casa"
      ],
-     "resposta": "b) facil"
+     "resposta": "c) facil"
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta segundo o Novo Acordo?",
      "opcoes": [
-      "idéia",
       "ideia",
+      "idéia",
       "idéiá",
       "idêia"
      ],
-     "resposta": "b) ideia"
+     "resposta": "a) ideia"
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "vôo",
-      "voo",
       "vóo",
+      "voo",
+      "vôo",
       "vo"
      ],
      "resposta": "b) voo"
@@ -1253,44 +1290,44 @@
      "enunciado": "Por que “saúde” tem acento?",
      "opcoes": [
       "é proparoxítona",
-      "tem hiato com U tônico",
       "é oxítona",
-      "termina em E"
+      "termina em E",
+      "tem hiato com U tônico"
      ],
-     "resposta": "b) tem hiato com U tônico"
+     "resposta": "d) tem hiato com U tônico"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra continua com acento no ditongo aberto?",
      "opcoes": [
+      "assembleia",
       "herói",
       "jiboia",
-      "ideia",
-      "assembleia"
+      "ideia"
      ],
-     "resposta": "a) herói"
+     "resposta": "b) herói"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra está correta?",
      "opcoes": [
+      "lingũiça",
       "lingüiça",
       "linguiça",
-      "linguíça",
-      "lingũiça"
+      "linguíça"
      ],
-     "resposta": "b) linguiça"
+     "resposta": "c) linguiça"
     },
     {
      "tipo": "me",
      "enunciado": "Qual paroxítona termina em ditongo e é acentuada?",
      "opcoes": [
-      "história",
-      "casa",
       "janela",
-      "pente"
+      "casa",
+      "pente",
+      "história"
      ],
-     "resposta": "a) história"
+     "resposta": "d) história"
     },
     {
      "tipo": "escrita",
@@ -1347,7 +1384,8 @@
      "resposta": "O herói leu a história do órfão no ônibus."
     }
    ],
-   "producao": "Copie 5 palavras acentuadas de um livro ou texto e explique a regra do acento de cada uma."
+   "producao": "Copie 5 palavras acentuadas de um livro ou texto e explique a regra do acento de cada uma.",
+   "parte": 1
   },
   {
    "n": 9,
@@ -1380,43 +1418,43 @@
      "tipo": "me",
      "enunciado": "Qual frase deve terminar com ponto de interrogação?",
      "opcoes": [
-      "Que dia lindo",
-      "Você já almoçou",
       "Hoje está frio",
-      "Pare agora"
+      "Pare agora",
+      "Você já almoçou",
+      "Que dia lindo"
      ],
-     "resposta": "b) Você já almoçou"
+     "resposta": "c) Você já almoçou"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase expressa surpresa?",
      "opcoes": [
-      "Que susto!",
-      "Vou à escola.",
+      "Comprei pão.",
       "Onde você mora?",
-      "Comprei pão."
+      "Vou à escola.",
+      "Que susto!"
      ],
-     "resposta": "a) Que susto!"
+     "resposta": "d) Que susto!"
     },
     {
      "tipo": "me",
      "enunciado": "As reticências em “Eu pensei que...” indicam:",
      "opcoes": [
-      "pergunta",
       "pensamento interrompido",
       "ordem",
-      "fim de lista"
+      "fim de lista",
+      "pergunta"
      ],
-     "resposta": "b) pensamento interrompido"
+     "resposta": "a) pensamento interrompido"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase está pontuada corretamente?",
      "opcoes": [
-      "João venha cá.",
-      "João, venha cá.",
       "João venha, cá.",
-      "João venha cá,"
+      "João, venha cá.",
+      "João venha cá,",
+      "João venha cá."
      ],
      "resposta": "b) João, venha cá."
     },
@@ -1424,12 +1462,12 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Comprei maçã, pera, e uva.",
-      "Comprei maçã, pera e uva.",
       "Comprei, maçã pera e uva.",
-      "Comprei maçã pera, e uva."
+      "Comprei maçã, pera, e uva.",
+      "Comprei maçã pera, e uva.",
+      "Comprei maçã, pera e uva."
      ],
-     "resposta": "b) Comprei maçã, pera e uva."
+     "resposta": "d) Comprei maçã, pera e uva."
     },
     {
      "tipo": "me",
@@ -1503,7 +1541,8 @@
      "resposta": "Ex.: Preciso comprar arroz, feijão, óleo e café."
     }
    ],
-   "producao": "Escreva um relato curto de um passeio usando ponto final, vírgula, interrogação e exclamação."
+   "producao": "Escreva um relato curto de um passeio usando ponto final, vírgula, interrogação e exclamação.",
+   "parte": 1
   },
   {
    "n": 10,
@@ -1535,43 +1574,43 @@
      "tipo": "me",
      "enunciado": "Qual frase está correta?",
      "opcoes": [
-      "Os alunos, chegaram cedo.",
-      "Os alunos chegaram cedo.",
       "Os, alunos chegaram cedo.",
-      "Os alunos chegaram, cedo."
+      "Os alunos chegaram, cedo.",
+      "Os alunos, chegaram cedo.",
+      "Os alunos chegaram cedo."
      ],
-     "resposta": "b) Os alunos chegaram cedo."
+     "resposta": "d) Os alunos chegaram cedo."
     },
     {
      "tipo": "me",
      "enunciado": "Em “Salvador, capital da Bahia, é linda”, as vírgulas isolam:",
      "opcoes": [
-      "o vocativo",
       "o aposto",
-      "o sujeito",
-      "o verbo"
+      "o verbo",
+      "o vocativo",
+      "o sujeito"
      ],
-     "resposta": "b) o aposto"
+     "resposta": "a) o aposto"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase está pontuada corretamente?",
      "opcoes": [
-      "Estudei muito mas, errei.",
-      "Estudei muito, mas errei.",
+      "Estudei muito mas errei,",
       "Estudei, muito mas errei.",
-      "Estudei muito mas errei,"
+      "Estudei muito, mas errei.",
+      "Estudei muito mas, errei."
      ],
-     "resposta": "b) Estudei muito, mas errei."
+     "resposta": "c) Estudei muito, mas errei."
     },
     {
      "tipo": "me",
      "enunciado": "No diálogo, a fala do personagem costuma vir depois de:",
      "opcoes": [
-      "parênteses",
+      "vírgula",
       "travessão",
-      "reticências",
-      "vírgula"
+      "parênteses",
+      "reticências"
      ],
      "resposta": "b) travessão"
     },
@@ -1579,23 +1618,23 @@
      "tipo": "me",
      "enunciado": "Os dois-pontos em “Comprei três frutas: maçã, uva e pera” anunciam:",
      "opcoes": [
-      "uma fala",
       "uma enumeração",
-      "uma pergunta",
-      "uma data"
+      "uma fala",
+      "uma data",
+      "uma pergunta"
      ],
-     "resposta": "b) uma enumeração"
+     "resposta": "a) uma enumeração"
     },
     {
      "tipo": "me",
      "enunciado": "Em: Que “ótimo”, perdi o ônibus! — as aspas indicam:",
      "opcoes": [
       "citação",
-      "ironia",
       "pergunta",
+      "ironia",
       "lista"
      ],
-     "resposta": "b) ironia"
+     "resposta": "c) ironia"
     },
     {
      "tipo": "escrita",
@@ -1658,7 +1697,8 @@
      "resposta": "Queria viajar, porém não tinha dinheiro."
     }
    ],
-   "producao": "Escreva um diálogo entre dois personagens usando travessão, dois-pontos e vírgula."
+   "producao": "Escreva um diálogo entre dois personagens usando travessão, dois-pontos e vírgula.",
+   "parte": 1
   },
   {
    "n": 11,
@@ -1688,32 +1728,32 @@
      "tipo": "me",
      "enunciado": "Qual é o radical de “pedreiro”?",
      "opcoes": [
-      "pedr",
       "eiro",
+      "iro",
       "pedre",
-      "iro"
+      "pedr"
      ],
-     "resposta": "a) pedr"
+     "resposta": "d) pedr"
     },
     {
      "tipo": "me",
      "enunciado": "Em “infeliz”, o elemento IN- é:",
      "opcoes": [
+      "prefixo",
       "radical",
       "sufixo",
-      "prefixo",
       "desinência"
      ],
-     "resposta": "c) prefixo"
+     "resposta": "a) prefixo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “felizmente”, -MENTE é:",
      "opcoes": [
-      "prefixo",
-      "sufixo",
       "radical",
-      "vogal temática"
+      "sufixo",
+      "vogal temática",
+      "prefixo"
      ],
      "resposta": "b) sufixo"
     },
@@ -1722,42 +1762,42 @@
      "enunciado": "“Girassol” é formada por:",
      "opcoes": [
       "derivação sufixal",
+      "derivação regressiva",
       "composição por justaposição",
-      "composição por aglutinação",
-      "derivação regressiva"
+      "composição por aglutinação"
      ],
-     "resposta": "b) composição por justaposição"
+     "resposta": "c) composição por justaposição"
     },
     {
      "tipo": "me",
      "enunciado": "“Planalto” (plano + alto) é formada por:",
      "opcoes": [
       "justaposição",
-      "aglutinação",
       "derivação prefixal",
+      "aglutinação",
       "abreviação"
      ],
-     "resposta": "b) aglutinação"
+     "resposta": "c) aglutinação"
     },
     {
      "tipo": "me",
      "enunciado": "“Entardecer” é formada por derivação:",
      "opcoes": [
-      "prefixal",
       "sufixal",
       "parassintética",
+      "prefixal",
       "imprópria"
      ],
-     "resposta": "c) parassintética"
+     "resposta": "b) parassintética"
     },
     {
      "tipo": "me",
      "enunciado": "Em “O jantar está pronto”, a palavra “jantar” foi formada por derivação:",
      "opcoes": [
       "imprópria",
+      "sufixal",
       "prefixal",
-      "parassintética",
-      "sufixal"
+      "parassintética"
      ],
      "resposta": "a) imprópria"
     },
@@ -1765,12 +1805,12 @@
      "tipo": "me",
      "enunciado": "“O choro” (de chorar) é exemplo de derivação:",
      "opcoes": [
-      "regressiva",
-      "prefixal",
+      "parassintética",
       "sufixal",
-      "parassintética"
+      "prefixal",
+      "regressiva"
      ],
-     "resposta": "a) regressiva"
+     "resposta": "d) regressiva"
     },
     {
      "tipo": "escrita",
@@ -1827,7 +1867,8 @@
      "resposta": "“Sim” (advérbio) virou substantivo: derivação imprópria."
     }
    ],
-   "producao": "Invente 3 palavras novas por derivação ou composição e explique o significado de cada uma."
+   "producao": "Invente 3 palavras novas por derivação ou composição e explique o significado de cada uma.",
+   "parte": 1
   },
   {
    "n": 12,
@@ -1854,40 +1895,40 @@
      "enunciado": "Qual é substantivo próprio?",
      "opcoes": [
       "cidade",
-      "rio",
       "Amazonas",
-      "menino"
+      "menino",
+      "rio"
      ],
-     "resposta": "c) Amazonas"
+     "resposta": "b) Amazonas"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é substantivo abstrato?",
      "opcoes": [
       "mesa",
-      "saudade",
       "fada",
-      "pedra"
+      "pedra",
+      "saudade"
      ],
-     "resposta": "b) saudade"
+     "resposta": "d) saudade"
     },
     {
      "tipo": "me",
      "enunciado": "“Fada” é um substantivo:",
      "opcoes": [
-      "abstrato",
       "concreto",
       "coletivo",
+      "abstrato",
       "composto"
      ],
-     "resposta": "b) concreto"
+     "resposta": "a) concreto"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é substantivo composto?",
      "opcoes": [
-      "flor",
       "floricultura",
+      "flor",
       "couve-flor",
       "florzinha"
      ],
@@ -1899,8 +1940,8 @@
      "opcoes": [
       "primitivo",
       "derivado",
-      "próprio",
-      "coletivo"
+      "coletivo",
+      "próprio"
      ],
      "resposta": "b) derivado"
     },
@@ -1908,21 +1949,21 @@
      "tipo": "me",
      "enunciado": "Coletivo de peixes:",
      "opcoes": [
-      "enxame",
-      "cardume",
+      "manada",
       "alcateia",
-      "manada"
+      "cardume",
+      "enxame"
      ],
-     "resposta": "b) cardume"
+     "resposta": "c) cardume"
     },
     {
      "tipo": "me",
      "enunciado": "Coletivo de lobos:",
      "opcoes": [
       "alcateia",
+      "cardume",
       "rebanho",
-      "matilha",
-      "cardume"
+      "matilha"
      ],
      "resposta": "a) alcateia"
     },
@@ -1930,12 +1971,12 @@
      "tipo": "me",
      "enunciado": "“Multidão” é coletivo de:",
      "opcoes": [
+      "livros",
       "estrelas",
-      "pessoas",
       "ilhas",
-      "livros"
+      "pessoas"
      ],
-     "resposta": "b) pessoas"
+     "resposta": "d) pessoas"
     },
     {
      "tipo": "escrita",
@@ -1992,7 +2033,8 @@
      "resposta": "guarda-chuva: composto; chuva: primitivo (e simples)."
     }
    ],
-   "producao": "Escreva uma notícia curta sobre a escola. Circule 3 substantivos próprios e sublinhe 3 comuns."
+   "producao": "Escreva uma notícia curta sobre a escola. Circule 3 substantivos próprios e sublinhe 3 comuns.",
+   "parte": 1
   },
   {
    "n": 13,
@@ -2022,23 +2064,23 @@
      "tipo": "me",
      "enunciado": "Feminino de “ator”:",
      "opcoes": [
+      "atresa",
       "atora",
       "atriz",
-      "atoria",
-      "atresa"
+      "atoria"
      ],
-     "resposta": "b) atriz"
+     "resposta": "c) atriz"
     },
     {
      "tipo": "me",
      "enunciado": "Feminino de “boi”:",
      "opcoes": [
-      "boia",
       "vaca",
-      "boa",
-      "boieira"
+      "boieira",
+      "boia",
+      "boa"
      ],
-     "resposta": "b) vaca"
+     "resposta": "a) vaca"
     },
     {
      "tipo": "me",
@@ -2055,12 +2097,12 @@
      "tipo": "me",
      "enunciado": "“O/A estudante” é um substantivo:",
      "opcoes": [
-      "comum de dois gêneros",
-      "sobrecomum",
+      "heterônimo",
       "epiceno",
-      "heterônimo"
+      "sobrecomum",
+      "comum de dois gêneros"
      ],
-     "resposta": "a) comum de dois gêneros"
+     "resposta": "d) comum de dois gêneros"
     },
     {
      "tipo": "me",
@@ -2077,34 +2119,34 @@
      "tipo": "me",
      "enunciado": "Plural de “animal”:",
      "opcoes": [
-      "animals",
-      "animais",
       "animales",
-      "animaes"
+      "animaes",
+      "animals",
+      "animais"
      ],
-     "resposta": "b) animais"
+     "resposta": "d) animais"
     },
     {
      "tipo": "me",
      "enunciado": "Plural de “mão”:",
      "opcoes": [
       "mães",
-      "mões",
       "mãos",
-      "mãoes"
+      "mãoes",
+      "mões"
      ],
-     "resposta": "c) mãos"
+     "resposta": "b) mãos"
     },
     {
      "tipo": "me",
      "enunciado": "Aumentativo de “casa”:",
      "opcoes": [
-      "casinha",
       "casarão",
       "casebre",
+      "casinha",
       "casota"
      ],
-     "resposta": "b) casarão"
+     "resposta": "a) casarão"
     },
     {
      "tipo": "escrita",
@@ -2155,7 +2197,8 @@
      "resposta": "Os cidadãos compraram uns pães e uns anéis."
     }
    ],
-   "producao": "Escreva 3 frases e depois reescreva-as trocando o gênero ou o número dos substantivos."
+   "producao": "Escreva 3 frases e depois reescreva-as trocando o gênero ou o número dos substantivos.",
+   "parte": 1
   },
   {
    "n": 14,
@@ -2186,12 +2229,12 @@
      "tipo": "me",
      "enunciado": "Em “O cachorro latiu”, “o” é artigo:",
      "opcoes": [
+      "numeral",
       "indefinido",
       "definido",
-      "numeral",
       "pronome"
      ],
-     "resposta": "b) definido"
+     "resposta": "c) definido"
     },
     {
      "tipo": "me",
@@ -2199,8 +2242,8 @@
      "opcoes": [
       "A menina chegou.",
       "Uma menina chegou.",
-      "As meninas chegaram.",
-      "Os meninos saíram."
+      "Os meninos saíram.",
+      "As meninas chegaram."
      ],
      "resposta": "b) Uma menina chegou."
     },
@@ -2208,54 +2251,54 @@
      "tipo": "me",
      "enunciado": "“No” (em “no parque”) é a junção de:",
      "opcoes": [
-      "em + o",
       "de + o",
+      "a + o",
       "por + o",
-      "a + o"
+      "em + o"
      ],
-     "resposta": "a) em + o"
+     "resposta": "d) em + o"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Comprei duas canetas”, “duas” é numeral:",
      "opcoes": [
-      "ordinal",
       "cardinal",
+      "ordinal",
       "multiplicativo",
       "fracionário"
      ],
-     "resposta": "b) cardinal"
+     "resposta": "a) cardinal"
     },
     {
      "tipo": "me",
      "enunciado": "“Triplo” é numeral:",
      "opcoes": [
-      "cardinal",
       "ordinal",
-      "multiplicativo",
-      "fracionário"
+      "fracionário",
+      "cardinal",
+      "multiplicativo"
      ],
-     "resposta": "c) multiplicativo"
+     "resposta": "d) multiplicativo"
     },
     {
      "tipo": "me",
      "enunciado": "“Metade” é numeral:",
      "opcoes": [
-      "fracionário",
-      "ordinal",
       "cardinal",
-      "multiplicativo"
+      "multiplicativo",
+      "fracionário",
+      "ordinal"
      ],
-     "resposta": "a) fracionário"
+     "resposta": "c) fracionário"
     },
     {
      "tipo": "me",
      "enunciado": "“Século XXI” se lê:",
      "opcoes": [
-      "século vigésimo primeiro",
-      "século vinte e um",
       "século dois mil",
-      "século vinte e primeiro"
+      "século vinte e um",
+      "século vinte e primeiro",
+      "século vigésimo primeiro"
      ],
      "resposta": "b) século vinte e um"
     },
@@ -2314,7 +2357,8 @@
      "resposta": "Ex.: A escola abriu. Um aluno chegou."
     }
    ],
-   "producao": "Escreva as regras de um jogo usando numerais ordinais (primeiro, segundo, terceiro…)."
+   "producao": "Escreva as regras de um jogo usando numerais ordinais (primeiro, segundo, terceiro…).",
+   "parte": 1
   },
   {
    "n": 15,
@@ -2345,30 +2389,30 @@
      "enunciado": "Em “O cachorro bravo latiu”, o adjetivo é:",
      "opcoes": [
       "cachorro",
-      "bravo",
       "latiu",
-      "o"
+      "o",
+      "bravo"
      ],
-     "resposta": "b) bravo"
+     "resposta": "d) bravo"
     },
     {
      "tipo": "me",
      "enunciado": "Quem nasce em Salvador é:",
      "opcoes": [
+      "baianense",
       "salvadorense",
       "soteropolitano",
-      "salvadoriano",
-      "baianense"
+      "salvadoriano"
      ],
-     "resposta": "b) soteropolitano"
+     "resposta": "c) soteropolitano"
     },
     {
      "tipo": "me",
      "enunciado": "“Amor de mãe” equivale a:",
      "opcoes": [
-      "amor paterno",
-      "amor materno",
       "amor fraterno",
+      "amor materno",
+      "amor paterno",
       "amor urbano"
      ],
      "resposta": "b) amor materno"
@@ -2377,45 +2421,45 @@
      "tipo": "me",
      "enunciado": "“Água da chuva” equivale a:",
      "opcoes": [
-      "água fluvial",
       "água pluvial",
-      "água marinha",
-      "água rural"
+      "água fluvial",
+      "água rural",
+      "água marinha"
      ],
-     "resposta": "b) água pluvial"
+     "resposta": "a) água pluvial"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ana é mais alta que Bia”, o grau é:",
      "opcoes": [
-      "comparativo de igualdade",
       "comparativo de superioridade",
-      "superlativo absoluto",
-      "superlativo relativo"
+      "comparativo de igualdade",
+      "superlativo relativo",
+      "superlativo absoluto"
      ],
-     "resposta": "b) comparativo de superioridade"
+     "resposta": "a) comparativo de superioridade"
     },
     {
      "tipo": "me",
      "enunciado": "“Felicíssimo” está no grau:",
      "opcoes": [
+      "superlativo absoluto analítico",
       "comparativo",
       "superlativo absoluto sintético",
-      "superlativo absoluto analítico",
       "normal"
      ],
-     "resposta": "b) superlativo absoluto sintético"
+     "resposta": "c) superlativo absoluto sintético"
     },
     {
      "tipo": "me",
      "enunciado": "O superlativo absoluto sintético de “bom” é:",
      "opcoes": [
+      "mais bom",
       "boníssimo ou ótimo",
       "melhor",
-      "mais bom",
       "muito bom"
      ],
-     "resposta": "a) boníssimo ou ótimo"
+     "resposta": "b) boníssimo ou ótimo"
     },
     {
      "tipo": "escrita",
@@ -2472,7 +2516,8 @@
      "resposta": "Resposta pessoal com quatro adjetivos."
     }
    ],
-   "producao": "Descreva um lugar da sua cidade usando adjetivos e pelo menos uma comparação."
+   "producao": "Descreva um lugar da sua cidade usando adjetivos e pelo menos uma comparação.",
+   "parte": 1
   },
   {
    "n": 16,
@@ -2501,45 +2546,45 @@
      "tipo": "me",
      "enunciado": "Qual é um pronome pessoal do caso reto?",
      "opcoes": [
-      "me",
       "nós",
       "lhe",
+      "me",
       "comigo"
      ],
-     "resposta": "b) nós"
+     "resposta": "a) nós"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é um pronome oblíquo átono?",
      "opcoes": [
       "eu",
-      "ele",
       "te",
-      "nós"
+      "nós",
+      "ele"
      ],
-     "resposta": "c) te"
+     "resposta": "b) te"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase está correta?",
      "opcoes": [
-      "Isso é para mim fazer.",
-      "Isso é para eu fazer.",
+      "Isso é para eu.",
       "Isso é para mim faço.",
-      "Isso é para eu."
+      "Isso é para mim fazer.",
+      "Isso é para eu fazer."
      ],
-     "resposta": "b) Isso é para eu fazer."
+     "resposta": "d) Isso é para eu fazer."
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase está correta?",
      "opcoes": [
       "Entre eu e você não há segredos.",
-      "Entre mim e você não há segredos.",
       "Entre me e você não há segredos.",
+      "Entre mim e você não há segredos.",
       "Entre eu e tu não há segredos."
      ],
-     "resposta": "b) Entre mim e você não há segredos."
+     "resposta": "c) Entre mim e você não há segredos."
     },
     {
      "tipo": "me",
@@ -2556,23 +2601,23 @@
      "tipo": "me",
      "enunciado": "Para falar com o presidente da República usa-se:",
      "opcoes": [
-      "Vossa Majestade",
       "Vossa Excelência",
       "Vossa Santidade",
+      "Vossa Majestade",
       "você"
      ],
-     "resposta": "b) Vossa Excelência"
+     "resposta": "a) Vossa Excelência"
     },
     {
      "tipo": "me",
      "enunciado": "Para se dirigir ao papa usa-se:",
      "opcoes": [
       "Vossa Excelência",
-      "Vossa Santidade",
       "Vossa Alteza",
-      "Vossa Senhoria"
+      "Vossa Senhoria",
+      "Vossa Santidade"
      ],
-     "resposta": "b) Vossa Santidade"
+     "resposta": "d) Vossa Santidade"
     },
     {
      "tipo": "escrita",
@@ -2629,7 +2674,8 @@
      "resposta": "Eu a vi na rua e disse-lhe que ia ligar para ela."
     }
    ],
-   "producao": "Escreva um pequeno e-mail formal ao diretor da escola usando o pronome de tratamento adequado."
+   "producao": "Escreva um pequeno e-mail formal ao diretor da escola usando o pronome de tratamento adequado.",
+   "parte": 1
   },
   {
    "n": 17,
@@ -2657,78 +2703,78 @@
      "tipo": "me",
      "enunciado": "Em “Nosso time venceu”, “nosso” é pronome:",
      "opcoes": [
-      "demonstrativo",
       "possessivo",
-      "indefinido",
-      "relativo"
+      "relativo",
+      "demonstrativo",
+      "indefinido"
      ],
-     "resposta": "b) possessivo"
+     "resposta": "a) possessivo"
     },
     {
      "tipo": "me",
      "enunciado": "Para algo perto de quem fala usamos:",
      "opcoes": [
-      "este",
       "esse",
-      "aquele",
-      "cujo"
+      "este",
+      "cujo",
+      "aquele"
      ],
-     "resposta": "a) este"
+     "resposta": "b) este"
     },
     {
      "tipo": "me",
      "enunciado": "“Ninguém faltou hoje.” “Ninguém” é pronome:",
      "opcoes": [
-      "interrogativo",
-      "indefinido",
+      "possessivo",
       "relativo",
-      "possessivo"
+      "indefinido",
+      "interrogativo"
      ],
-     "resposta": "b) indefinido"
+     "resposta": "c) indefinido"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Quem quebrou o vaso?”, “quem” é pronome:",
      "opcoes": [
       "relativo",
-      "interrogativo",
+      "demonstrativo",
       "indefinido",
-      "demonstrativo"
+      "interrogativo"
      ],
-     "resposta": "b) interrogativo"
+     "resposta": "d) interrogativo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “O livro que li é ótimo”, “que” é pronome:",
      "opcoes": [
       "interrogativo",
-      "relativo",
       "indefinido",
+      "relativo",
       "possessivo"
      ],
-     "resposta": "b) relativo"
+     "resposta": "c) relativo"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: A cidade ___ nasci é pequena.",
      "opcoes": [
-      "onde",
       "aonde",
       "cujo",
-      "quem"
+      "quem",
+      "onde"
      ],
-     "resposta": "a) onde"
+     "resposta": "d) onde"
     },
     {
      "tipo": "me",
      "enunciado": "Complete: O aluno ___ caderno sumiu procurou a direção.",
      "opcoes": [
-      "que",
       "cujo",
-      "onde",
-      "qual"
+      "que",
+      "qual",
+      "onde"
      ],
-     "resposta": "b) cujo"
+     "resposta": "a) cujo"
     },
     {
      "tipo": "escrita",
@@ -2785,7 +2831,8 @@
      "resposta": "Este ano: o atual. Aquele ano: um ano passado, distante."
     }
    ],
-   "producao": "Escreva 4 frases sobre objetos da sala usando “este”, “esse”, “aquele” e um pronome relativo."
+   "producao": "Escreva 4 frases sobre objetos da sala usando “este”, “esse”, “aquele” e um pronome relativo.",
+   "parte": 1
   },
   {
    "n": 18,
@@ -2816,21 +2863,21 @@
      "tipo": "me",
      "enunciado": "Qual verbo indica fenômeno da natureza?",
      "opcoes": [
-      "correr",
       "chover",
+      "correr",
       "ser",
       "estudar"
      ],
-     "resposta": "b) chover"
+     "resposta": "a) chover"
     },
     {
      "tipo": "me",
      "enunciado": "Qual verbo é de ligação (estado)?",
      "opcoes": [
-      "pular",
-      "estar",
       "ventar",
-      "escrever"
+      "estar",
+      "escrever",
+      "pular"
      ],
      "resposta": "b) estar"
     },
@@ -2839,53 +2886,53 @@
      "enunciado": "“Vender” pertence à:",
      "opcoes": [
       "1ª conjugação",
-      "2ª conjugação",
       "3ª conjugação",
+      "2ª conjugação",
       "nenhuma"
      ],
-     "resposta": "b) 2ª conjugação"
+     "resposta": "c) 2ª conjugação"
     },
     {
      "tipo": "me",
      "enunciado": "O verbo “pôr” pertence à:",
      "opcoes": [
-      "1ª conjugação",
-      "2ª conjugação",
       "3ª conjugação",
-      "4ª conjugação"
+      "4ª conjugação",
+      "1ª conjugação",
+      "2ª conjugação"
      ],
-     "resposta": "b) 2ª conjugação"
+     "resposta": "d) 2ª conjugação"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Nós cantamos”, o verbo está na:",
      "opcoes": [
-      "1ª pessoa do plural",
       "3ª pessoa do plural",
+      "1ª pessoa do plural",
       "1ª pessoa do singular",
       "2ª pessoa do plural"
      ],
-     "resposta": "a) 1ª pessoa do plural"
+     "resposta": "b) 1ª pessoa do plural"
     },
     {
      "tipo": "me",
      "enunciado": "“Que eu estude mais” está no modo:",
      "opcoes": [
-      "indicativo",
-      "subjuntivo",
       "imperativo",
-      "infinitivo"
+      "indicativo",
+      "infinitivo",
+      "subjuntivo"
      ],
-     "resposta": "b) subjuntivo"
+     "resposta": "d) subjuntivo"
     },
     {
      "tipo": "me",
      "enunciado": "“Estude!” está no modo:",
      "opcoes": [
-      "indicativo",
+      "gerúndio",
       "subjuntivo",
       "imperativo",
-      "gerúndio"
+      "indicativo"
      ],
      "resposta": "c) imperativo"
     },
@@ -2893,12 +2940,12 @@
      "tipo": "me",
      "enunciado": "“Cantando” é:",
      "opcoes": [
-      "infinitivo",
       "gerúndio",
+      "imperativo",
       "particípio",
-      "imperativo"
+      "infinitivo"
      ],
-     "resposta": "b) gerúndio"
+     "resposta": "a) gerúndio"
     },
     {
      "tipo": "escrita",
@@ -2949,7 +2996,8 @@
      "resposta": "Indicativo expressa certeza; subjuntivo expressa dúvida, hipótese ou desejo."
     }
    ],
-   "producao": "Conte o que você fez ontem, o que faz hoje e o que fará amanhã (uma frase para cada tempo)."
+   "producao": "Conte o que você fez ontem, o que faz hoje e o que fará amanhã (uma frase para cada tempo).",
+   "parte": 1
   },
   {
    "n": 19,
@@ -2978,23 +3026,23 @@
      "tipo": "me",
      "enunciado": "“Eu brincava na rua todos os dias” está no:",
      "opcoes": [
+      "futuro do presente",
       "pretérito perfeito",
       "pretérito imperfeito",
-      "futuro do presente",
       "presente"
      ],
-     "resposta": "b) pretérito imperfeito"
+     "resposta": "c) pretérito imperfeito"
     },
     {
      "tipo": "me",
      "enunciado": "“Ontem eu terminei o trabalho” está no:",
      "opcoes": [
-      "pretérito perfeito",
       "pretérito imperfeito",
+      "futuro",
       "mais-que-perfeito",
-      "futuro"
+      "pretérito perfeito"
      ],
-     "resposta": "a) pretérito perfeito"
+     "resposta": "d) pretérito perfeito"
     },
     {
      "tipo": "me",
@@ -3002,8 +3050,8 @@
      "opcoes": [
       "futuro do presente",
       "futuro do pretérito",
-      "presente",
-      "pretérito perfeito"
+      "pretérito perfeito",
+      "presente"
      ],
      "resposta": "b) futuro do pretérito"
     },
@@ -3012,9 +3060,9 @@
      "enunciado": "“Amanhã eu estudarei.” O verbo está no:",
      "opcoes": [
       "futuro do presente",
+      "presente",
       "futuro do pretérito",
-      "pretérito imperfeito",
-      "presente"
+      "pretérito imperfeito"
      ],
      "resposta": "a) futuro do presente"
     },
@@ -3022,12 +3070,12 @@
      "tipo": "me",
      "enunciado": "Qual é uma locução verbal?",
      "opcoes": [
-      "vou estudar",
+      "de repente",
       "muito bem",
-      "casa grande",
-      "de repente"
+      "vou estudar",
+      "casa grande"
      ],
-     "resposta": "a) vou estudar"
+     "resposta": "c) vou estudar"
     },
     {
      "tipo": "me",
@@ -3044,12 +3092,12 @@
      "tipo": "me",
      "enunciado": "Qual frase está correta?",
      "opcoes": [
+      "Houvemos problemas.",
       "Houveram muitos problemas.",
-      "Houve muitos problemas.",
       "Houveram muito problema.",
-      "Houvemos problemas."
+      "Houve muitos problemas."
      ],
-     "resposta": "b) Houve muitos problemas."
+     "resposta": "d) Houve muitos problemas."
     },
     {
      "tipo": "escrita",
@@ -3106,7 +3154,8 @@
      "resposta": "Faz três semanas que houve as provas."
     }
    ],
-   "producao": "Escreva o que você faria se ganhasse um prêmio, usando o futuro do pretérito e o subjuntivo."
+   "producao": "Escreva o que você faria se ganhasse um prêmio, usando o futuro do pretérito e o subjuntivo.",
+   "parte": 1
   },
   {
    "n": 20,
@@ -3138,45 +3187,45 @@
      "tipo": "me",
      "enunciado": "Em “Ela chegou cedo”, “cedo” indica:",
      "opcoes": [
+      "intensidade",
       "lugar",
       "tempo",
-      "modo",
-      "intensidade"
+      "modo"
      ],
-     "resposta": "b) tempo"
+     "resposta": "c) tempo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ele mora longe”, “longe” indica:",
      "opcoes": [
-      "lugar",
       "tempo",
+      "lugar",
       "dúvida",
       "modo"
      ],
-     "resposta": "a) lugar"
+     "resposta": "b) lugar"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Fale calmamente”, o advérbio indica:",
      "opcoes": [
       "tempo",
-      "modo",
+      "negação",
       "lugar",
-      "negação"
+      "modo"
      ],
-     "resposta": "b) modo"
+     "resposta": "d) modo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ela é muito alta”, “muito” modifica:",
      "opcoes": [
-      "um verbo",
       "um adjetivo",
+      "um verbo",
       "um substantivo",
       "um pronome"
      ],
-     "resposta": "b) um adjetivo"
+     "resposta": "a) um adjetivo"
     },
     {
      "tipo": "me",
@@ -3184,8 +3233,8 @@
      "opcoes": [
       "afirmação",
       "dúvida",
-      "negação",
-      "tempo"
+      "tempo",
+      "negação"
      ],
      "resposta": "b) dúvida"
     },
@@ -3194,9 +3243,9 @@
      "enunciado": "Qual é uma locução adverbial?",
      "opcoes": [
       "às pressas",
-      "casa grande",
+      "meu livro",
       "o menino",
-      "meu livro"
+      "casa grande"
      ],
      "resposta": "a) às pressas"
     },
@@ -3204,12 +3253,12 @@
      "tipo": "me",
      "enunciado": "Qual frase está correta?",
      "opcoes": [
-      "Elas ficaram meias tristes.",
-      "Elas ficaram meio tristes.",
       "Elas ficaram meia triste.",
-      "Elas ficaram meias triste."
+      "Elas ficaram meias triste.",
+      "Elas ficaram meio tristes.",
+      "Elas ficaram meias tristes."
      ],
-     "resposta": "b) Elas ficaram meio tristes."
+     "resposta": "c) Elas ficaram meio tristes."
     },
     {
      "tipo": "escrita",
@@ -3266,7 +3315,8 @@
      "resposta": "calmamente; certamente; silenciosamente."
     }
    ],
-   "producao": "Escreva instruções para chegar à sua casa usando advérbios de lugar, de tempo e de modo."
+   "producao": "Escreva instruções para chegar à sua casa usando advérbios de lugar, de tempo e de modo.",
+   "parte": 1
   },
   {
    "n": 21,
@@ -3296,42 +3346,42 @@
      "enunciado": "Em “Livro de Ana”, a preposição “de” indica:",
      "opcoes": [
       "lugar",
-      "posse",
       "meio",
-      "companhia"
+      "companhia",
+      "posse"
      ],
-     "resposta": "b) posse"
+     "resposta": "d) posse"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Fui de ônibus”, “de” indica:",
      "opcoes": [
-      "posse",
       "meio",
+      "posse",
       "tempo",
       "causa"
      ],
-     "resposta": "b) meio"
+     "resposta": "a) meio"
     },
     {
      "tipo": "me",
      "enunciado": "“Mas” é conjunção:",
      "opcoes": [
+      "alternativa",
       "aditiva",
       "adversativa",
-      "conclusiva",
-      "alternativa"
+      "conclusiva"
      ],
-     "resposta": "b) adversativa"
+     "resposta": "c) adversativa"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Estudou, logo passou”, “logo” é conjunção:",
      "opcoes": [
-      "explicativa",
+      "aditiva",
       "conclusiva",
       "adversativa",
-      "aditiva"
+      "explicativa"
      ],
      "resposta": "b) conclusiva"
     },
@@ -3340,9 +3390,9 @@
      "enunciado": "Em “Se chover, não sairei”, “se” é conjunção:",
      "opcoes": [
       "condicional",
+      "final",
       "causal",
-      "concessiva",
-      "final"
+      "concessiva"
      ],
      "resposta": "a) condicional"
     },
@@ -3350,10 +3400,10 @@
      "tipo": "me",
      "enunciado": "Em “Embora cansado, ele trabalhou”, “embora” indica:",
      "opcoes": [
-      "condição",
+      "causa",
       "concessão",
-      "tempo",
-      "causa"
+      "condição",
+      "tempo"
      ],
      "resposta": "b) concessão"
     },
@@ -3361,12 +3411,12 @@
      "tipo": "me",
      "enunciado": "“Ufa!” expressa:",
      "opcoes": [
+      "medo",
       "dor",
-      "alívio",
       "silêncio",
-      "medo"
+      "alívio"
      ],
-     "resposta": "b) alívio"
+     "resposta": "d) alívio"
     },
     {
      "tipo": "escrita",
@@ -3423,7 +3473,8 @@
      "resposta": "A preposição liga palavras; a conjunção liga orações (ou termos de mesma função)."
     }
    ],
-   "producao": "Escreva um texto curto com 3 conjunções diferentes e 2 interjeições. Sublinhe-as."
+   "producao": "Escreva um texto curto com 3 conjunções diferentes e 2 interjeições. Sublinhe-as.",
+   "parte": 1
   },
   {
    "n": 22,
@@ -3464,10 +3515,10 @@
      "tipo": "me",
      "enunciado": "“Abram o caderno.” é uma frase:",
      "opcoes": [
-      "declarativa",
+      "exclamativa",
       "interrogativa",
       "imperativa",
-      "exclamativa"
+      "declarativa"
      ],
      "resposta": "c) imperativa"
     },
@@ -3475,23 +3526,23 @@
      "tipo": "me",
      "enunciado": "Quantas orações há em “Cheguei, sentei e estudei”?",
      "opcoes": [
-      "uma",
+      "quatro",
       "duas",
-      "três",
-      "quatro"
+      "uma",
+      "três"
      ],
-     "resposta": "c) três"
+     "resposta": "d) três"
     },
     {
      "tipo": "me",
      "enunciado": "“Choveu muito ontem” é um período:",
      "opcoes": [
-      "simples",
       "composto",
-      "nominal",
-      "sem oração"
+      "simples",
+      "sem oração",
+      "nominal"
      ],
-     "resposta": "a) simples"
+     "resposta": "b) simples"
     },
     {
      "tipo": "me",
@@ -3508,23 +3559,23 @@
      "tipo": "me",
      "enunciado": "Toda oração tem:",
      "opcoes": [
+      "adjetivo",
       "sujeito",
-      "verbo",
       "vírgula",
-      "adjetivo"
+      "verbo"
      ],
-     "resposta": "b) verbo"
+     "resposta": "d) verbo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Vou estudar à noite”, quantas orações há?",
      "opcoes": [
+      "nenhuma",
       "uma (locução verbal)",
-      "duas",
       "três",
-      "nenhuma"
+      "duas"
      ],
-     "resposta": "a) uma (locução verbal)"
+     "resposta": "b) uma (locução verbal)"
     },
     {
      "tipo": "escrita",
@@ -3581,7 +3632,8 @@
      "resposta": "Frase é todo enunciado com sentido; oração é o enunciado que tem verbo."
     }
    ],
-   "producao": "Escreva um parágrafo com um período simples e um período composto. Identifique cada um."
+   "producao": "Escreva um parágrafo com um período simples e um período composto. Identifique cada um.",
+   "parte": 1
   },
   {
    "n": 23,
@@ -3612,12 +3664,12 @@
      "tipo": "me",
      "enunciado": "Em “O cachorro latiu a noite toda”, o sujeito é:",
      "opcoes": [
-      "latiu",
       "o cachorro",
-      "a noite toda",
-      "toda"
+      "toda",
+      "latiu",
+      "a noite toda"
      ],
-     "resposta": "b) o cachorro"
+     "resposta": "a) o cachorro"
     },
     {
      "tipo": "me",
@@ -3635,42 +3687,42 @@
      "enunciado": "Em “Estudamos para a prova”, o sujeito é:",
      "opcoes": [
       "indeterminado",
+      "inexistente",
       "oculto (nós)",
-      "composto",
-      "inexistente"
+      "composto"
      ],
-     "resposta": "b) oculto (nós)"
+     "resposta": "c) oculto (nós)"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Roubaram minha bicicleta”, o sujeito é:",
      "opcoes": [
       "oculto",
-      "indeterminado",
+      "composto",
       "simples",
-      "composto"
+      "indeterminado"
      ],
-     "resposta": "b) indeterminado"
+     "resposta": "d) indeterminado"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é uma oração sem sujeito?",
      "opcoes": [
-      "Choveu muito.",
       "Eles saíram.",
-      "Maria cantou.",
-      "Saímos cedo."
+      "Saímos cedo.",
+      "Choveu muito.",
+      "Maria cantou."
      ],
-     "resposta": "a) Choveu muito."
+     "resposta": "c) Choveu muito."
     },
     {
      "tipo": "me",
      "enunciado": "Em “Há muitos alunos na sala”, o verbo haver significa “existir”, então a oração é:",
      "opcoes": [
-      "com sujeito simples",
+      "com sujeito oculto",
       "sem sujeito",
       "com sujeito composto",
-      "com sujeito oculto"
+      "com sujeito simples"
      ],
      "resposta": "b) sem sujeito"
     },
@@ -3678,12 +3730,12 @@
      "tipo": "me",
      "enunciado": "O núcleo do sujeito em “Os alunos da escola nova chegaram” é:",
      "opcoes": [
-      "escola",
       "alunos",
-      "nova",
-      "chegaram"
+      "chegaram",
+      "escola",
+      "nova"
      ],
-     "resposta": "b) alunos"
+     "resposta": "a) alunos"
     },
     {
      "tipo": "escrita",
@@ -3740,7 +3792,8 @@
      "resposta": "Perguntar ao verbo “quem?” ou “o que?”; o sujeito concorda com o verbo."
     }
    ],
-   "producao": "Escreva 4 orações, cada uma com um tipo de sujeito diferente, e classifique o sujeito."
+   "producao": "Escreva 4 orações, cada uma com um tipo de sujeito diferente, e classifique o sujeito.",
+   "parte": 1
   },
   {
    "n": 24,
@@ -3772,31 +3825,31 @@
      "enunciado": "Qual é verbo de ligação em “Ela parece cansada”?",
      "opcoes": [
       "ela",
-      "parece",
+      "nenhum",
       "cansada",
-      "nenhum"
+      "parece"
      ],
-     "resposta": "b) parece"
+     "resposta": "d) parece"
     },
     {
      "tipo": "me",
      "enunciado": "Em “O céu está azul”, “azul” é:",
      "opcoes": [
       "objeto direto",
-      "predicativo do sujeito",
       "sujeito",
+      "predicativo do sujeito",
       "adjunto adverbial"
      ],
-     "resposta": "b) predicativo do sujeito"
+     "resposta": "c) predicativo do sujeito"
     },
     {
      "tipo": "me",
      "enunciado": "“O dia está lindo” tem predicado:",
      "opcoes": [
-      "verbal",
+      "sem predicado",
       "nominal",
-      "verbo-nominal",
-      "sem predicado"
+      "verbal",
+      "verbo-nominal"
      ],
      "resposta": "b) nominal"
     },
@@ -3805,8 +3858,8 @@
      "enunciado": "“Os alunos estudaram muito” tem predicado:",
      "opcoes": [
       "verbal",
-      "nominal",
       "verbo-nominal",
+      "nominal",
       "nenhum"
      ],
      "resposta": "a) verbal"
@@ -3815,34 +3868,34 @@
      "tipo": "me",
      "enunciado": "“As crianças voltaram cansadas” tem predicado:",
      "opcoes": [
-      "verbal",
-      "nominal",
+      "nenhum",
       "verbo-nominal",
-      "nenhum"
+      "verbal",
+      "nominal"
      ],
-     "resposta": "c) verbo-nominal"
+     "resposta": "b) verbo-nominal"
     },
     {
      "tipo": "me",
      "enunciado": "No predicado nominal, o núcleo é:",
      "opcoes": [
-      "o verbo",
       "o predicativo",
-      "o sujeito",
-      "o objeto"
+      "o objeto",
+      "o verbo",
+      "o sujeito"
      ],
-     "resposta": "b) o predicativo"
+     "resposta": "a) o predicativo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ele ficou em casa”, o predicado é verbal porque:",
      "opcoes": [
-      "“ficar” indica lugar, não característica",
       "tem sujeito",
+      "é imperativo",
       "tem vírgula",
-      "é imperativo"
+      "“ficar” indica lugar, não característica"
      ],
-     "resposta": "a) “ficar” indica lugar, não característica"
+     "resposta": "d) “ficar” indica lugar, não característica"
     },
     {
      "tipo": "escrita",
@@ -3899,7 +3952,8 @@
      "resposta": "Na 1ª “estar” liga uma característica (nominal); na 2ª indica lugar (verbal)."
     }
    ],
-   "producao": "Escreva 3 frases sobre você: uma com predicado nominal, uma com verbal e uma com verbo-nominal."
+   "producao": "Escreva 3 frases sobre você: uma com predicado nominal, uma com verbal e uma com verbo-nominal.",
+   "parte": 1
   },
   {
    "n": 25,
@@ -3931,78 +3985,78 @@
      "tipo": "me",
      "enunciado": "Em “O bebê dormiu”, o verbo é:",
      "opcoes": [
-      "intransitivo",
-      "transitivo direto",
       "transitivo indireto",
-      "de ligação"
+      "transitivo direto",
+      "de ligação",
+      "intransitivo"
      ],
-     "resposta": "a) intransitivo"
+     "resposta": "d) intransitivo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Comprei um caderno”, “um caderno” é:",
      "opcoes": [
       "objeto indireto",
+      "predicativo",
       "objeto direto",
-      "sujeito",
-      "predicativo"
+      "sujeito"
      ],
-     "resposta": "b) objeto direto"
+     "resposta": "c) objeto direto"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Gosto de chocolate”, “de chocolate” é:",
      "opcoes": [
-      "objeto direto",
       "objeto indireto",
-      "adjunto adverbial",
-      "sujeito"
+      "objeto direto",
+      "sujeito",
+      "adjunto adverbial"
      ],
-     "resposta": "b) objeto indireto"
+     "resposta": "a) objeto indireto"
     },
     {
      "tipo": "me",
      "enunciado": "“Entreguei o presente à minha mãe.” O verbo é:",
      "opcoes": [
-      "VI",
-      "VTD",
       "VTI",
-      "VTDI"
+      "VTDI",
+      "VTD",
+      "VI"
      ],
-     "resposta": "d) VTDI"
+     "resposta": "b) VTDI"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Obedeça aos sinais”, o verbo é:",
      "opcoes": [
+      "VI",
       "VTD",
       "VTI",
-      "VI",
       "VL"
      ],
-     "resposta": "b) VTI"
+     "resposta": "c) VTI"
     },
     {
      "tipo": "me",
      "enunciado": "Qual pronome funciona como objeto indireto?",
      "opcoes": [
-      "o",
-      "a",
       "lhe",
+      "a",
+      "o",
       "os"
      ],
-     "resposta": "c) lhe"
+     "resposta": "a) lhe"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ela chegou cedo”, o verbo “chegar” é:",
      "opcoes": [
-      "intransitivo",
+      "de ligação",
       "transitivo direto",
       "transitivo indireto",
-      "de ligação"
+      "intransitivo"
      ],
-     "resposta": "a) intransitivo"
+     "resposta": "d) intransitivo"
     },
     {
      "tipo": "escrita",
@@ -4059,7 +4113,8 @@
      "resposta": "OD liga-se ao verbo sem preposição; OI, com preposição."
     }
    ],
-   "producao": "Escreva 4 orações com verbos VI, VTD, VTI e VTDI e indique os objetos."
+   "producao": "Escreva 4 orações com verbos VI, VTD, VTI e VTDI e indique os objetos.",
+   "parte": 1
   },
   {
    "n": 26,
@@ -4087,65 +4142,65 @@
      "tipo": "me",
      "enunciado": "Em “O menino esperto correu”, “esperto” é:",
      "opcoes": [
-      "adjunto adverbial",
-      "adjunto adnominal",
+      "objeto direto",
       "complemento nominal",
-      "objeto direto"
+      "adjunto adverbial",
+      "adjunto adnominal"
      ],
-     "resposta": "b) adjunto adnominal"
+     "resposta": "d) adjunto adnominal"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Chegamos ontem”, “ontem” é adjunto adverbial de:",
      "opcoes": [
       "lugar",
+      "causa",
       "tempo",
-      "modo",
-      "causa"
+      "modo"
      ],
-     "resposta": "b) tempo"
+     "resposta": "c) tempo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Ela fala calmamente”, “calmamente” é adjunto adverbial de:",
      "opcoes": [
+      "lugar",
       "modo",
       "tempo",
-      "lugar",
       "intensidade"
      ],
-     "resposta": "a) modo"
+     "resposta": "b) modo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Tenho medo de escuro”, “de escuro” é:",
      "opcoes": [
-      "adjunto adnominal",
       "complemento nominal",
+      "adjunto adverbial",
       "objeto indireto",
-      "adjunto adverbial"
+      "adjunto adnominal"
      ],
-     "resposta": "b) complemento nominal"
+     "resposta": "a) complemento nominal"
     },
     {
      "tipo": "me",
      "enunciado": "Em “A casa de Ana é bonita”, “de Ana” é:",
      "opcoes": [
-      "complemento nominal",
       "adjunto adnominal (posse)",
+      "complemento nominal",
       "objeto indireto",
       "sujeito"
      ],
-     "resposta": "b) adjunto adnominal (posse)"
+     "resposta": "a) adjunto adnominal (posse)"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Morreu de fome”, “de fome” indica:",
      "opcoes": [
-      "tempo",
+      "modo",
       "causa",
-      "lugar",
-      "modo"
+      "tempo",
+      "lugar"
      ],
      "resposta": "b) causa"
     },
@@ -4154,11 +4209,11 @@
      "enunciado": "O complemento nominal completa o sentido de:",
      "opcoes": [
       "um verbo",
-      "um nome (substantivo, adjetivo ou advérbio)",
       "um artigo",
+      "um nome (substantivo, adjetivo ou advérbio)",
       "uma conjunção"
      ],
-     "resposta": "b) um nome (substantivo, adjetivo ou advérbio)"
+     "resposta": "c) um nome (substantivo, adjetivo ou advérbio)"
     },
     {
      "tipo": "escrita",
@@ -4215,7 +4270,8 @@
      "resposta": "“do aluno”: adjunto adnominal (o aluno respondeu); “à carta”: complemento nominal (a carta é respondida)."
     }
    ],
-   "producao": "Escreva o anúncio de venda de um objeto usando adjuntos adnominais e adverbiais."
+   "producao": "Escreva o anúncio de venda de um objeto usando adjuntos adnominais e adverbiais.",
+   "parte": 1
   },
   {
    "n": 27,
@@ -4247,66 +4303,66 @@
      "enunciado": "Em “Ana, traga o livro”, “Ana” é:",
      "opcoes": [
       "sujeito",
-      "aposto",
       "vocativo",
+      "aposto",
       "objeto"
      ],
-     "resposta": "c) vocativo"
+     "resposta": "b) vocativo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Pelé, o rei do futebol, nasceu em Minas”, “o rei do futebol” é:",
      "opcoes": [
+      "sujeito",
       "vocativo",
       "aposto",
-      "sujeito",
       "predicativo"
      ],
-     "resposta": "b) aposto"
+     "resposta": "c) aposto"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase tem vocativo?",
      "opcoes": [
-      "Meu amigo chegou.",
-      "Meu amigo, venha aqui!",
       "Comprei um amigo.",
-      "O amigo de João saiu."
+      "Meu amigo chegou.",
+      "O amigo de João saiu.",
+      "Meu amigo, venha aqui!"
      ],
-     "resposta": "b) Meu amigo, venha aqui!"
+     "resposta": "d) Meu amigo, venha aqui!"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Comprei duas coisas: pão e leite”, “pão e leite” é aposto:",
      "opcoes": [
-      "explicativo",
       "enumerativo",
+      "explicativo",
       "resumitivo",
       "especificativo"
      ],
-     "resposta": "b) enumerativo"
+     "resposta": "a) enumerativo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “A cidade de Recife é bonita”, “Recife” é aposto:",
      "opcoes": [
       "explicativo",
-      "enumerativo",
       "especificativo",
-      "resumitivo"
+      "resumitivo",
+      "enumerativo"
      ],
-     "resposta": "c) especificativo"
+     "resposta": "b) especificativo"
     },
     {
      "tipo": "me",
      "enunciado": "Qual é a pontuação correta?",
      "opcoes": [
+      "Professora a, prova é hoje?",
       "Professora a prova é hoje?",
       "Professora, a prova é hoje?",
-      "Professora a prova, é hoje?",
-      "Professora a, prova é hoje?"
+      "Professora a prova, é hoje?"
      ],
-     "resposta": "b) Professora, a prova é hoje?"
+     "resposta": "c) Professora, a prova é hoje?"
     },
     {
      "tipo": "escrita",
@@ -4369,7 +4425,8 @@
      "resposta": "Ex.: Lucas, amanhã a professora Ana, nossa coordenadora, vem à sala."
     }
    ],
-   "producao": "Escreva um convite para uma festa usando um vocativo e um aposto."
+   "producao": "Escreva um convite para uma festa usando um vocativo e um aposto.",
+   "parte": 1
   },
   {
    "n": 28,
@@ -4402,21 +4459,21 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Os menino chegou.",
       "Os meninos chegaram.",
-      "Os meninos chegou.",
-      "O meninos chegaram."
+      "Os menino chegou.",
+      "O meninos chegaram.",
+      "Os meninos chegou."
      ],
-     "resposta": "b) Os meninos chegaram."
+     "resposta": "a) Os meninos chegaram."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Haviam muitas pessoas.",
-      "Havia muitas pessoas.",
       "Havia muitas pessoa.",
-      "Houveram muitas pessoas."
+      "Havia muitas pessoas.",
+      "Houveram muitas pessoas.",
+      "Haviam muitas pessoas."
      ],
      "resposta": "b) Havia muitas pessoas."
     },
@@ -4424,43 +4481,43 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Chegou os convidados.",
-      "Chegaram os convidados.",
       "Chegaram o convidados.",
-      "Chegou o convidados."
+      "Chegou o convidados.",
+      "Chegaram os convidados.",
+      "Chegou os convidados."
      ],
-     "resposta": "b) Chegaram os convidados."
+     "resposta": "c) Chegaram os convidados."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Ela está meia cansada.",
-      "Ela está meio cansada.",
       "Ela está meios cansada.",
-      "Ela está meias cansada."
+      "Ela está meia cansada.",
+      "Ela está meias cansada.",
+      "Ela está meio cansada."
      ],
-     "resposta": "b) Ela está meio cansada."
+     "resposta": "d) Ela está meio cansada."
     },
     {
      "tipo": "me",
      "enunciado": "Uma mulher agradece dizendo:",
      "opcoes": [
-      "Obrigado.",
-      "Obrigada.",
       "Obrigados.",
-      "Obrigadas."
+      "Obrigadas.",
+      "Obrigado.",
+      "Obrigada."
      ],
-     "resposta": "b) Obrigada."
+     "resposta": "d) Obrigada."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Seguem anexo as fotos.",
-      "Seguem anexas as fotos.",
       "Segue anexas as fotos.",
-      "Seguem anexa as fotos."
+      "Seguem anexas as fotos.",
+      "Seguem anexa as fotos.",
+      "Seguem anexo as fotos."
      ],
      "resposta": "b) Seguem anexas as fotos."
     },
@@ -4468,12 +4525,12 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "É proibido a entrada.",
       "É proibida a entrada.",
-      "É proibidos a entrada.",
-      "São proibida a entrada."
+      "São proibida a entrada.",
+      "É proibido a entrada.",
+      "É proibidos a entrada."
      ],
-     "resposta": "b) É proibida a entrada."
+     "resposta": "a) É proibida a entrada."
     },
     {
      "tipo": "escrita",
@@ -4530,7 +4587,8 @@
      "resposta": "Ex.: Ana e Bia chegaram cedo."
     }
    ],
-   "producao": "Escreva um aviso para o mural da escola, com atenção à concordância verbal e nominal."
+   "producao": "Escreva um aviso para o mural da escola, com atenção à concordância verbal e nominal.",
+   "parte": 1
   },
   {
    "n": 29,
@@ -4561,10 +4619,10 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Assisti o filme.",
+      "Assisti do filme.",
       "Assisti ao filme.",
-      "Assisti no filme.",
-      "Assisti do filme."
+      "Assisti o filme.",
+      "Assisti no filme."
      ],
      "resposta": "b) Assisti ao filme."
     },
@@ -4572,65 +4630,65 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Fui na praia.",
       "Fui à praia.",
-      "Fui a praia ontem a tarde.",
-      "Fui em a praia."
+      "Fui na praia.",
+      "Fui em a praia.",
+      "Fui a praia ontem a tarde."
      ],
-     "resposta": "b) Fui à praia."
+     "resposta": "a) Fui à praia."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
       "Prefiro suco do que refrigerante.",
-      "Prefiro suco a refrigerante.",
+      "Prefiro suco de refrigerante.",
       "Prefiro mais suco que refrigerante.",
-      "Prefiro suco de refrigerante."
+      "Prefiro suco a refrigerante."
      ],
-     "resposta": "b) Prefiro suco a refrigerante."
+     "resposta": "d) Prefiro suco a refrigerante."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
       "Ela namora com Pedro.",
-      "Ela namora Pedro.",
       "Ela namora a Pedro.",
+      "Ela namora Pedro.",
       "Ela namora de Pedro."
      ],
-     "resposta": "b) Ela namora Pedro."
+     "resposta": "c) Ela namora Pedro."
     },
     {
      "tipo": "me",
      "enunciado": "Em qual frase há crase?",
      "opcoes": [
-      "Fui a pé.",
       "Cheguei às 8 horas.",
-      "Comecei a estudar.",
-      "Fiquei cara a cara."
+      "Fui a pé.",
+      "Fiquei cara a cara.",
+      "Comecei a estudar."
      ],
-     "resposta": "b) Cheguei às 8 horas."
+     "resposta": "a) Cheguei às 8 horas."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Vou a Salvador amanhã.",
-      "Entreguei o livro à ele.",
       "Saí à pé.",
+      "Entreguei o livro à ele.",
+      "Vou a Salvador amanhã.",
       "Andei à cavalo."
      ],
-     "resposta": "a) Vou a Salvador amanhã."
+     "resposta": "c) Vou a Salvador amanhã."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Obedeça os pais.",
+      "Obedeça nos pais.",
       "Obedeça aos pais.",
-      "Obedeça dos pais.",
-      "Obedeça nos pais."
+      "Obedeça os pais.",
+      "Obedeça dos pais."
      ],
      "resposta": "b) Obedeça aos pais."
     },
@@ -4689,7 +4747,8 @@
      "resposta": "Entreguei a tarefa a você e fui embora às pressas."
     }
    ],
-   "producao": "Escreva o roteiro de um passeio no fim de semana usando “à”, “às”, “ao” e os verbos ir e chegar."
+   "producao": "Escreva o roteiro de um passeio no fim de semana usando “à”, “às”, “ao” e os verbos ir e chegar.",
+   "parte": 1
   },
   {
    "n": 30,
@@ -4720,87 +4779,87 @@
      "tipo": "me",
      "enunciado": "Qual palavra tem dígrafo?",
      "opcoes": [
-      "prato",
-      "carro",
       "blusa",
-      "flor"
+      "flor",
+      "carro",
+      "prato"
      ],
-     "resposta": "b) carro"
+     "resposta": "c) carro"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra está escrita corretamente?",
      "opcoes": [
-      "excessão",
-      "exceção",
       "esceção",
-      "eccessão"
+      "excessão",
+      "eccessão",
+      "exceção"
      ],
-     "resposta": "b) exceção"
+     "resposta": "d) exceção"
     },
     {
      "tipo": "me",
      "enunciado": "Qual palavra está acentuada corretamente?",
      "opcoes": [
-      "ideia",
-      "idéia",
       "heroi",
-      "vôo"
+      "ideia",
+      "vôo",
+      "idéia"
      ],
-     "resposta": "a) ideia"
+     "resposta": "b) ideia"
     },
     {
      "tipo": "me",
      "enunciado": "___ você faltou? ___ estava doente.",
      "opcoes": [
-      "Porque / Por que",
       "Por que / Porque",
-      "Por quê / Porquê",
-      "Porquê / Por que"
+      "Porque / Por que",
+      "Porquê / Por que",
+      "Por quê / Porquê"
      ],
-     "resposta": "b) Por que / Porque"
+     "resposta": "a) Por que / Porque"
     },
     {
      "tipo": "me",
      "enunciado": "Qual frase está pontuada corretamente?",
      "opcoes": [
-      "Os alunos, saíram cedo.",
       "Pedro, feche a janela.",
-      "Comprei, pão e leite.",
-      "A menina estudou, muito."
+      "Os alunos, saíram cedo.",
+      "A menina estudou, muito.",
+      "Comprei, pão e leite."
      ],
-     "resposta": "b) Pedro, feche a janela."
+     "resposta": "a) Pedro, feche a janela."
     },
     {
      "tipo": "me",
      "enunciado": "Em “A menina inteligente resolveu o problema”, “inteligente” é:",
      "opcoes": [
+      "verbo",
       "substantivo",
       "adjetivo",
-      "advérbio",
-      "verbo"
+      "advérbio"
      ],
-     "resposta": "b) adjetivo"
+     "resposta": "c) adjetivo"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Choveu muito”, o sujeito é:",
      "opcoes": [
       "muito",
-      "inexistente (oração sem sujeito)",
       "oculto",
-      "indeterminado"
+      "indeterminado",
+      "inexistente (oração sem sujeito)"
      ],
-     "resposta": "b) inexistente (oração sem sujeito)"
+     "resposta": "d) inexistente (oração sem sujeito)"
     },
     {
      "tipo": "me",
      "enunciado": "Em “Os alunos ficaram felizes”, o predicado é:",
      "opcoes": [
-      "verbal",
+      "nenhum",
       "nominal",
-      "verbo-nominal",
-      "nenhum"
+      "verbal",
+      "verbo-nominal"
      ],
      "resposta": "b) nominal"
     },
@@ -4808,23 +4867,23 @@
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Haviam dez alunos.",
-      "Havia dez alunos.",
       "Houveram dez alunos.",
-      "Haviam dez aluno."
+      "Haviam dez aluno.",
+      "Havia dez alunos.",
+      "Haviam dez alunos."
      ],
-     "resposta": "b) Havia dez alunos."
+     "resposta": "c) Havia dez alunos."
     },
     {
      "tipo": "me",
      "enunciado": "Qual está correta?",
      "opcoes": [
-      "Vou à pé.",
-      "Vou a pé.",
+      "Vou ao pé.",
       "Vou á pé.",
-      "Vou ao pé."
+      "Vou à pé.",
+      "Vou a pé."
      ],
-     "resposta": "b) Vou a pé."
+     "resposta": "d) Vou a pé."
     },
     {
      "tipo": "escrita",
@@ -4869,7 +4928,8 @@
      "resposta": "Resposta pessoal (avaliar pontuação, acentuação, concordância)."
     }
    ],
-   "producao": "Escreva um texto contando o que você mais aprendeu nos 30 encontros, revisando ortografia, acentuação e pontuação."
+   "producao": "Escreva um texto contando o que você mais aprendeu nos 30 encontros, revisando ortografia, acentuação e pontuação.",
+   "parte": 1
   }
  ]
 }

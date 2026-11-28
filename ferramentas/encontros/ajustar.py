@@ -1,38 +1,43 @@
 # Ajusta as linhas de resposta para cada folha fechar em 2 páginas (frente e verso). Precisa do LibreOffice.
+# Para cada encontro tenta, da mais folgada para a mais apertada, as configurações de CONFIGS
+# (linhas a mais em cada resposta escrita, linhas da produção) e fica com a primeira que cabe em 2 páginas.
+# Uso: python3 ferramentas/encontros/ajustar.py [n1 n2 ...]   (sem números: todos; com "novos": só os que não estão no ajuste.json)
 import json, os, subprocess, sys, glob, shutil, tempfile
 AQUI = os.path.dirname(os.path.abspath(__file__)); RAIZ = os.path.abspath(os.path.join(AQUI, '..', '..'))
 AJ = os.path.join(AQUI, 'ajuste.json')
+CONFIGS = [(2, 18), (2, 16), (2, 14), (2, 12), (2, 10), (2, 8), (1, 14), (1, 12), (1, 10), (1, 8), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (0, 4), (0, 2)]
 aj = json.load(open(AJ)) if os.path.exists(AJ) else {}
+dados = json.load(open(os.path.join(RAIZ, 'dados', 'encontros-portugues.json'), encoding='utf-8'))
+todos = [e['n'] for e in dados['encontros']]
+args = sys.argv[1:]
+if args == ['novos']: alvo = [n for n in todos if str(n) not in aj]
+elif args: alvo = [int(a) for a in args]
+else: alvo = todos
 tmp = tempfile.mkdtemp()
-def paginas():
-    subprocess.run(['node', os.path.join(AQUI, 'gerar_word.js')], check=True, env=dict(os.environ, NODE_PATH='/opt/node-tools/node_modules'), stdout=subprocess.DEVNULL)
-    fs = sorted(glob.glob(os.path.join(RAIZ, 'encontros', 'encontro-*.docx')))
-    subprocess.run(['soffice', '--headless', '--convert-to', 'pdf', '--outdir', tmp] + fs, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=900)
+def gerar():
+    json.dump(aj, open(AJ, 'w'), indent=0, sort_keys=True)
+    subprocess.run(['node', os.path.join(AQUI, 'gerar_word.js'), 'so-folhas'], check=True, env=dict(os.environ, NODE_PATH='/opt/node-tools/node_modules'), stdout=subprocess.DEVNULL)
+def paginas(ns):
+    fs = [os.path.join(RAIZ, 'encontros', 'encontro-%02d.docx' % n) for n in ns]
+    for i in range(0, len(fs), 30):
+        subprocess.run(['soffice', '--headless', '--convert-to', 'pdf', '--outdir', tmp] + fs[i:i + 30], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=1200)
     r = {}
-    for f in fs:
-        n = int(os.path.basename(f)[9:11]); pdf = os.path.join(tmp, os.path.basename(f)[:-5] + '.pdf')
-        out = subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout
+    for n in ns:
+        out = subprocess.run(['pdfinfo', os.path.join(tmp, 'encontro-%02d.pdf' % n)], capture_output=True, text=True).stdout
         r[n] = int([l for l in out.splitlines() if l.startswith('Pages')][0].split()[1])
     return r
-for rodada in range(12):
-    p = paginas(); mudou = False
+idx = {n: 0 for n in alvo}
+for n in alvo: aj[str(n)] = {'extra': CONFIGS[0][0], 'prod': CONFIGS[0][1]}
+pend = list(alvo); rodada = 0
+while pend:
+    gerar(); p = paginas(pend); rodada += 1
+    pend = []
     for n, k in p.items():
-        a = aj.setdefault(str(n), {'extra': 1, 'prod': 8})
-        if k > 2:
-            if a['prod'] > 6: a['prod'] -= 2
-            elif a['extra'] > 1: a['extra'] -= 1; a['prod'] = 14
-            elif a['prod'] > 3: a['prod'] -= 1
-            else: continue
-            mudou = True
-
-    print('rodada', rodada, {n: k for n, k in p.items() if k != 2} or 'todas com 2 páginas')
-    json.dump(aj, open(AJ, 'w'), indent=0, sort_keys=True)
-    if not mudou: break
-# se alguma passou de 2 páginas na última subida, desce e trava
-p = paginas()
-for n, k in p.items():
-    while k > 2 and aj[str(n)]['prod'] > 2:
-        aj[str(n)]['prod'] -= 2; aj[str(n)]['subir'] = False
-        json.dump(aj, open(AJ, 'w'), indent=0, sort_keys=True); k = paginas()[n]
-print('final', {n: k for n, k in paginas().items()})
+        if k > 2 and idx[n] + 1 < len(CONFIGS):
+            idx[n] += 1; aj[str(n)] = {'extra': CONFIGS[idx[n]][0], 'prod': CONFIGS[idx[n]][1]}; pend.append(n)
+        elif k > 2: print('não coube em 2 páginas:', n)
+    print('rodada', rodada, 'ainda ajustando:', pend or 'nenhum')
+gerar()
+final = paginas(alvo)
+print('páginas:', {n: k for n, k in final.items() if k != 2} or 'todas com 2 páginas')
 shutil.rmtree(tmp)

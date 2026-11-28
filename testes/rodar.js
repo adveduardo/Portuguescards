@@ -38,6 +38,20 @@ valores.forEach(v => {
   if (m && !fs.existsSync(path.join(RAIZ, 'dados', decodeURIComponent(m[1])))) quebradosMenu.push(v + ' (conteúdo não existe)');
 });
 ok(!quebradosMenu.length, 'Menu: toda opção abre uma página e um conteúdo que existem', quebradosMenu);
+// encontros: cada um tem a folha em Word; cada prova tem as versões A e B; gabarito, folha de redação e .zip existem
+{
+  const enc = JSON.parse(ler('dados/encontros-portugues.json')), faltam = [], dois = n => String(n).padStart(2, '0');
+  enc.encontros.forEach((e, i) => {
+    if (e.n !== i + 1) faltam.push('encontro fora de ordem: ' + e.n);
+    if (!fs.existsSync(path.join(RAIZ, 'encontros', 'encontro-' + dois(e.n) + '.docx'))) faltam.push('encontros/encontro-' + dois(e.n) + '.docx');
+    const qs = e.questoes.filter(q => q.tipo !== 'texto');
+    if (qs.length < 15 || qs.length > 20) faltam.push(`encontro ${e.n}: ${qs.length} questões`);
+    qs.forEach((q, k) => { if (!String(q.resposta || '').trim()) faltam.push(`encontro ${e.n}, questão ${k + 1}: sem gabarito`); });
+  });
+  (enc.provas || []).forEach(p => ['A', 'B'].forEach(v => { if (!fs.existsSync(path.join(RAIZ, 'encontros', `prova-${p.n}-${v}.docx`))) faltam.push(`encontros/prova-${p.n}-${v}.docx`); }));
+  ['gabarito-das-provas.docx', 'folha-de-redacao.docx', 'guia-do-professor.docx', 'todas-as-folhas.zip', 'todas-as-provas.zip'].forEach(f => { if (!fs.existsSync(path.join(RAIZ, 'encontros', f))) faltam.push('encontros/' + f); });
+  ok(!faltam.length, `Encontros: ${enc.encontros.length} encontros com folha em Word e gabarito, ${(enc.provas || []).length} provas (A e B), folha de redação e .zip`, faltam);
+}
 
 // ---------- 3) iPads antigos ----------
 let acorn = null; try { acorn = require('acorn'); } catch (e) {}
