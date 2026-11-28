@@ -1,2 +1,5 @@
 # ferramentas dos testes automáticos (instaladas pelo npm, não vão para o site)
 testes/node_modules/
+
+# cache do Python dos geradores
+__pycache__/
